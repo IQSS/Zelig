@@ -1,0 +1,25 @@
+Package: Zelig5
+Maintainer: James Honaker <zelig-zee@iq.harvard.edu>
+License: GPL (>=2)
+Title: Everyone's Statistical Software
+Author: Who wrote it
+Description: Zelig is an easy-to-use program that can estimate, and
+    help interpret the results of, an enormous range of statistical
+    models. It literally is ``everyone's statistical software'' because
+    Zelig's simple unified framework incorporates everyone else's (R)
+    code. We also hope it will become ``everyone's statistical
+    software'' for applications and teaching, and so have designed
+    Zelig so that anyone can easily use it or add their programs to it.
+    Zelig also comes with infrastructure that facilitates the use of
+    any existing method, such as by allowing multiply imputed data for
+    any model, and mimicking the program Clarify (for Stata) that takes
+    the raw output of existing statistical procedures and translates
+    them into quantities of direct interest.
+Version: 0.1
+Date: 2014-03-15
+Depends: methods, MASS, VGAM, rjson
+Collate: utils.R model-zelig.R model-ls.R model-glm.R model-binchoice.R
+        model-logit.R model-probit.R model-poisson.R model-normal.R
+        model-gamma.R model-negbinom.R model-bbinchoice.R
+        model-blogit.R model-bprobit.R wrappers.R
+Packaged: 2014-03-15 21:19:17 UTC; cchoirat

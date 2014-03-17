@@ -1,0 +1,10 @@
+# source("model-zelig.R")
+# source("model-ls.R")
+# source("utils.R")
+# source("wrappers.R")
+
+z.out <- zeligw(dist ~ speed, model="ls", data=cars)
+print(z.out)
+x.out <- setxw(z.out, speed=30)
+s.out <- simw(z.out, x.out)
+summaryw(s.out)
