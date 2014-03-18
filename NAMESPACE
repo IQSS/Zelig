@@ -2,7 +2,7 @@ import(methods, MASS, VGAM, rjson)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
-    "Zelig",
+     "Zelig",
      "Zelig-ls",
      "Zelig-glm",
      "Zelig-binchoice",
@@ -14,7 +14,9 @@ exportClasses(
      "Zelig-poisson",
      "Zelig-bbinchoice",
      "Zelig-blogit",
-     "Zelig-bprobit"
+     "Zelig-bprobit",
+     "Zelig-poisson-bayes",
+     "Zelig-poisson-gee"
 )
 
 importFrom(methods,setRefClass)
