@@ -1,7 +1,7 @@
-# source("model-zelig.R")
-# source("model-ls.R")
-# source("utils.R")
-# source("wrappers.R")
+source(file.path("..", "R", "utils.R"))
+source(file.path("..", "R", "model-zelig.R"))
+source(file.path("..", "R", "model-ls.R"))
+source(file.path("..", "R", "wrappers.R"))
 
 z.out <- zeligw(dist ~ speed, model="ls", data=cars)
 print(z.out)

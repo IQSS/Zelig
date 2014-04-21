@@ -1,4 +1,4 @@
-import(methods, MASS, VGAM, rjson)
+import(methods, Formula, MASS, VGAM, rjson, MCMCpack, gee)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
@@ -16,7 +16,8 @@ exportClasses(
      "Zelig-blogit",
      "Zelig-bprobit",
      "Zelig-poisson-bayes",
-     "Zelig-poisson-gee"
+     "Zelig-poisson-gee",
+     "Zelig-lognorm"
 )
 
-importFrom(methods,setRefClass)
+importFrom(methods, setRefClass)

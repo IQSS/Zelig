@@ -35,7 +35,7 @@ zgamma$methods(
     for (i in 1:nrow(ev))
       pr[i, ] <- rgamma(ncol(ev), shape=.self$simalpha[i], scale = theta[i, ] / .self$simalpha[i])
     return(list("Expected Values: E(Y|X)"  = ev,
-            "Predicted Values: Y|X" = pr))
+                "Predicted Values: Y|X" = pr))
   }
 )
 

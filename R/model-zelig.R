@@ -72,12 +72,14 @@ z$methods(
           ldata[names(s)[i]] <- s[i][[1]]
       }
     }
-    .self$setx.out <- model.matrix(.self$formula, ldata)
+    f <- Formula(formula(.self$zelig.out))
+    .self$setx.out <- model.matrix(f, lhs = 1, ldata)
+#     .self$setx.out <- model.matrix(.self$formula, ldata)
   }
 )
 
 z$methods(
-  sim = function(x, num = 1000) {
+  sim = function(num = 1000) {
     .self$num <- num
     .self$param(num=.self$num)
     .self$sim.out <- .self$qi(x=.self$setx.out)

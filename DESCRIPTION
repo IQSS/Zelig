@@ -17,7 +17,7 @@ Description: Zelig is an easy-to-use program that can estimate, and
     them into quantities of direct interest.
 Version: 0.1
 Date: 2014-03-15
-Depends: methods, MASS, VGAM, rjson
+Depends: methods, Formula, MASS, VGAM, rjson, MCMCpack, gee
 Collate: utils.R model-zelig.R model-ls.R model-glm.R model-binchoice.R
         model-logit.R model-probit.R model-poisson.R model-normal.R
         model-gamma.R model-negbinom.R model-bbinchoice.R
