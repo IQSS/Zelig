@@ -22,5 +22,6 @@ Collate: utils.R model-zelig.R model-ls.R model-glm.R model-binchoice.R
         model-logit.R model-probit.R model-poisson.R model-normal.R
         model-gamma.R model-negbinom.R model-bbinchoice.R
         model-blogit.R model-bprobit.R model-poissonbayes.R
-        model-poissongee.R wrappers.R
+        model-poissongee.R model-exp.R model-lognorm.R
+        wrappers.R
 Packaged: 2014-03-15 21:19:17 UTC; cchoirat
