@@ -1,0 +1,34 @@
+#+TODO: TODO(t) STARTED(s) | DONE(d) CANCELED(c)
+
+* Zelig  5 models
+
+** DONE exp.R
+** TODO factor.bayes.R
+** TODO gamma.gee.R
+** DONE gamma.R
+** TODO gamma.survey.R
+** TODO logit.bayes.R
+** TODO logit.gee.R
+** DONE logit.R
+** TODO logit.survey.R
+** DONE lognorm.R
+** DONE ls.R
+** TODO mlogit.bayes.R
+** STARTED negbinom.R
+** TODO normal.bayes.R
+** TODO normal.gee.R
+** DONE normal.R
+** TODO normal.survey.R
+** TODO oprobit.bayes.R
+** DONE poisson.bayes.R
+** DONE poisson.gee.R
+** TODO poisson.R
+** TODO poisson.survey.R
+** TODO probit.bayes.R
+** TODO probit.gee.R
+** DONE probit.R
+** TODO probit.survey.R
+** STARTED relogit.R
+** STARTED tobit.R
+** TODO twosls.R
+   

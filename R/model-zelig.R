@@ -1,4 +1,4 @@
-z <- setRefClass("Zelig", fields = list(fn = "call", # R function to wrap
+z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to wrap, was "call"
                                         formula = "formula", # Zelig formula
                                         weights = "numeric", 
                                         model = "character", # name of the Zelig model
