@@ -11,7 +11,7 @@ zlognorm$methods(
     .self$year <- 2007
     .self$text = "Log-Normal Regression for Duration Dependent Variables"
     .self$fn <- quote(survival::survreg)
-    .self$linkinv = survreg.distributions[["lognormal"]]$itrans
+    .self$linkinv <- survreg.distributions[["lognormal"]]$itrans
   }
 )
 

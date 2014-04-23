@@ -1,4 +1,4 @@
-zexp <- setRefClass("Zelig-lognorm",
+zexp <- setRefClass("Zelig-exp",
                         contains="Zelig",
                         fields = list(simalpha = "matrix",
                                       linkinv = "function"))
@@ -11,7 +11,7 @@ zexp$methods(
     .self$year <- 2011
     .self$text = "Exponential Regression for Duration Dependent Variables"
     .self$fn <- quote(survival::survreg)
-    .self$linkinv = survreg.distributions[["exponential"]]$itrans
+    .self$linkinv <- survreg.distributions[["exponential"]]$itrans
   }
 )
 
