@@ -1,0 +1,182 @@
+{"zeligmodels":[
+{
+  "-name": "gamma",
+  "-label": "Models for Continous Bounded Dependent Variables",
+  "description": "Gamma Regression for Continuous, Positive Dependent Variables",
+  "helpLink": { "-url": "http://gking.harvard.edu/zelig/doc/gamma.pdf" },
+  "packageDependency": {
+    "-name": "stats",
+    "-version": "0.1"
+  },
+  "formula": {
+    "-minEquations": "1",
+    "-maxEquations": "1",
+    "-simulEq": "0",
+    "equation": {
+      "-name": "lambda",
+      "outcome": { "modelingType": "continuous" },
+      "explanatory": {
+        "-minVar": "1",
+        "modelingType": [
+          "continuous",
+          "discrete",
+          "nominal",
+          "ordinal",
+          "binary"
+          ]
+      }
+    }
+  },
+  "setx": { "-maxSetx": "2" }
+},
+{
+  "-name": "logit",
+  "-label": "Models for Dichotomous Dependent Variables",
+  "description": "Logistic Regression for Dichotomous Dependent Variables",
+  "helpLink": { "-url": "http://gking.harvard.edu/zelig/doc/logit.pdf" },
+  "packageDependency": {
+    "-name": "stats",
+    "-version": "0.1"
+  },
+  "formula": {
+    "-minEquations": "1",
+    "-maxEquations": "1",
+    "-simulEq": "0",
+    "equation": {
+      "-name": "pi",
+      "outcome": { "modelingType": "binary" },
+      "explanatory": {
+        "-minVar": "1",
+        "modelingType": [
+          "continuous",
+          "discrete",
+          "nominal",
+          "ordinal",
+          "binary"
+          ]
+      }
+    }
+  },
+  "setx": { "-maxSetx": "2" }
+},
+{
+  "-name": "ls",
+  "-label": "Models for Continuous Dependent Variables",
+  "description": "Least Squares Regression for Continuous Dependent Variables",
+  "helpLink": { "-url": "http://gking.harvard.edu/zelig/doc/ls.pdf" },
+  "packageDependency": {
+    "-name": "stats",
+    "-version": "0.1"
+  },
+  "formula": {
+    "-minEquations": "1",
+    "-maxEquations": "1",
+    "-simulEq": "0",
+    "equation": {
+      "-name": "mu",
+      "outcome": { "modelingType": "continuous" },
+      "explanatory": {
+        "-minVar": "1",
+        "modelingType": [
+          "continuous",
+          "discrete",
+          "nominal",
+          "ordinal",
+          "binary"
+          ]
+      }
+    }
+  },
+  "setx": { "-maxSetx": "2" }
+},
+{
+  "-name": "negbin",
+  "-label": "Event Count Models",
+  "description": "Negative Binomial Regression for Event Count Dependent Variables",
+  "helpLink": { "-url": "http://gking.harvard.edu/zelig/doc/negbin.pdf" },
+  "packageDependency": {
+    "-name": "MASS",
+    "-version": "0.1"
+  },
+  "formula": {
+    "-minEquations": "1",
+    "-maxEquations": "1",
+    "-simulEq": "0",
+    "equation": {
+      "-name": "mu",
+      "outcome": { "modelingType": "discrete" },
+      "explanatory": {
+        "-minVar": "1",
+        "modelingType": [
+          "continuous",
+          "discrete",
+          "nominal",
+          "ordinal",
+          "binary"
+          ]
+      }
+    }
+  },
+  "setx": { "-maxSetx": "2" }
+},
+{
+  "-name": "poisson",
+  "-label": "Event Count Models",
+  "description": "Poisson Regression for Event Count Dependent Variables",
+  "helpLink": { "-url": "http://gking.harvard.edu/zelig/doc/poisson.pdf" },
+  "packageDependency": {
+    "-name": "stats",
+    "-version": "0.1"
+  },
+  "formula": {
+    "-minEquations": "1",
+    "-maxEquations": "1",
+    "-simulEq": "0",
+    "equation": {
+      "-name": "lambda",
+      "outcome": { "modelingType": "discrete" },
+      "explanatory": {
+        "-minVar": "1",
+        "modelingType": [
+          "continuous",
+          "discrete",
+          "nominal",
+          "ordinal",
+          "binary"
+          ]
+      }
+    }
+  },
+  "setx": { "-maxSetx": "2" }
+},
+{
+  "-name": "probit",
+  "-label": "Models for Dichotomous Dependent Variables",
+  "description": "Probit Regression for Dichotomous Dependent Variables",
+  "helpLink": { "-url": "http://gking.harvard.edu/zelig/doc/probit.pdf" },
+  "packageDependency": {
+    "-name": "stats",
+    "-version": "0.1"
+  },
+  "formula": {
+    "-minEquations": "1",
+    "-maxEquations": "1",
+    "-simulEq": "0",
+    "equation": {
+      "-name": "mu",
+      "outcome": { "modelingType": "binary" },
+      "explanatory": {
+        "-minVar": "1",
+        "modelingType": [
+          "continuous",
+          "discrete",
+          "nominal",
+          "ordinal",
+          "binary"
+          ]
+      }
+    }
+  },
+  "setx": { "-maxSetx": "2" }
+}
+]}

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Statistical Commands &mdash; Zelig 5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Zelig 5.0 documentation" href="index.html" />
+    <link rel="prev" title="Data Analysis Commands" href="3_data_analysis.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="1_introduction.html#what-zelig-and-r-do">What Zelig and R do</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_introduction.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_introduction.html#how-to-cite-zelig">How to Cite Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2_install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#if-you-are-new-to-r">If You Are New to R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#if-you-know-r">If You Know R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#windows">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#installing-r">Installing R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#updating-zelig">Updating Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#mac-os-x">Mac OS X</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#id1">Installing R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#installing-zelig">Installing Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#version-compatibility">Version Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#unix-and-linux">UNIX and Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#id3">Installing R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#id5">Installing Zelig</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3_data_analysis.html">Data Analysis Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="3_data_analysis.html#command-syntax">Command Syntax</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_data_analysis.html#getting-started">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_data_analysis.html#details">Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_data_analysis.html#loading-data">Loading Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_data_analysis.html#saving-data">Saving Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3_data_analysis.html#variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_data_analysis.html#classes-of-variables">Classes of Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_data_analysis.html#recoding-variables">Recoding Variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Statistical Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-commands">Zelig Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#quick-overview">Quick Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Statistical Commands</a><ul>
+<li><a class="reference internal" href="#zelig-commands">Zelig Commands</a><ul>
+<li><a class="reference internal" href="#quick-overview">Quick Overview</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="3_data_analysis.html" title="Previous Chapter: Data Analysis Commands"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Data Analysis Co...</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/4_statistical_commands.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="statistical-commands">
+<h1>Statistical Commands<a class="headerlink" href="#statistical-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="zelig-commands">
+<h2>Zelig Commands<a class="headerlink" href="#zelig-commands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="quick-overview">
+<h3>Quick Overview<a class="headerlink" href="#quick-overview" title="Permalink to this headline">¶</a></h3>
+<p>For any statistical model, Zelig does its work with a combination of three commands.</p>
+<img alt="_images/main_commands.png" src="_images/main_commands.png" />
+<p>1. Use <tt class="docutils literal"><span class="pre">zelig()</span></tt> to run the chosen statistical model on a given data set, with a specific
+set of variables. For standard likelihood models, for example, this step estimates the
+coefficients, other model parameters, and a variance-covariance matrix. In addition,
+you may choose from a variety of options:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Pre-process data: Prior to calling <tt class="docutils literal"><span class="pre">zelig()</span></tt>, you may choose from a variety of
+data pre-processing commands (matching or multiple imputation, for example)
+to make your statistical inferences more accurate.</li>
+<li>Summarize model: After calling <tt class="docutils literal"><span class="pre">zelig()</span></tt>, you may summarize the fitted model
+output using <tt class="docutils literal"><span class="pre">summary()</span></tt>.</li>
+<li>Validate model: After calling <tt class="docutils literal"><span class="pre">zelig()</span></tt>, you may choose to validate the fitted model.
+This can be done, for example, by using cross-validation procedures and diagnostics tools.</li>
+</ul>
+</div></blockquote>
+<p>2. Use <tt class="docutils literal"><span class="pre">setx()</span></tt> to set each of the explanatory variables to chosen (actual or counterfactual)
+values in preparation for calculating quantities of interest. After calling <tt class="docutils literal"><span class="pre">setx()</span></tt>,
+you may use <tt class="docutils literal"><span class="pre">WhatIf</span></tt> to evaluate these choices by determining whether they involve
+interpolation (i.e., are inside the convex hull of the observed data) or extrapolation,
+as well as how far these counterfactuals are from the data. Counterfactuals chosen in
+<tt class="docutils literal"><span class="pre">setx()</span></tt> that involve extrapolation far from the data can generate considerably more
+model dependence (see (37), (39), (48)).</p>
+<p>3. Use <tt class="docutils literal"><span class="pre">sim()</span></tt> to draw simulations of your quantity of interest (such as a predicted value,
+predicted probability, risk ratio, or first difference) from the model. (These simulations
+may be drawn using an asymptotic normal approximation (the default), bootstrapping,
+or other methods when available, such as directly from a Bayesian posterior.) After
+calling <tt class="docutils literal"><span class="pre">sim()</span></tt>, use any of the following to summarize the simulations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">summary()</span></tt> function gives a numerical display. For multiple <tt class="docutils literal"><span class="pre">setx()</span></tt> values,
+<tt class="docutils literal"><span class="pre">summary()</span></tt> lets you summarize simulations by choosing one or a subset of observations.</li>
+<li>If the <tt class="docutils literal"><span class="pre">setx()</span></tt> values consist of only one observation, <tt class="docutils literal"><span class="pre">plot()</span></tt> produces density
+plots for each quantity of interest.</li>
+</ul>
+</div></blockquote>
+<p>Whenever possible, we use <tt class="docutils literal"><span class="pre">z.out</span></tt> as the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object, <tt class="docutils literal"><span class="pre">x.out</span></tt> as the <tt class="docutils literal"><span class="pre">setx()</span></tt> output
+object, and <tt class="docutils literal"><span class="pre">s.out</span></tt> as the <tt class="docutils literal"><span class="pre">sim()</span></tt> output object, but you may choose other names.</p>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Use the turnout data set included with Zelig to estimate a logit model of an individual’s
+probability of voting as function of race and age. Simulate the predicted probability of
+voting for a white individual, with age held at its mean:</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>turnout<span class="p">)</span>
+z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> age<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> race <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Compute a first difference and risk ratio, changing education from 12 to 16 years, with
+other variables held at their means in the data:</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>turnout<span class="p">)</span>
+z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> educate <span class="o">=</span> <span class="m">12</span><span class="p">)</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> educate <span class="o">=</span> <span class="m">16</span><span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
+summary<span class="p">(</span>s.out<span class="p">)</span>
+<span class="c1"># Numerical summary.</span>
+plot<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Calculate expected values for every observation in your data set:</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>turnout<span class="p">)</span>
+z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> fn <span class="o">=</span> <span class="kc">NULL</span><span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Use five multiply imputed data sets from (47) in an ordered logit model:</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>immi1<span class="p">,</span> immi2<span class="p">,</span> immi3<span class="p">,</span> immi4<span class="p">,</span> immi5<span class="p">)</span>
+z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>as.factor<span class="p">(</span>ipip<span class="p">)</span> <span class="o">~</span> wage1992 <span class="o">+</span> prtyid <span class="o">+</span> ideol<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ologit&quot;</span><span class="p">,</span>
+    data <span class="o">=</span> mi<span class="p">(</span>immi1<span class="p">,</span> immi2<span class="p">,</span> immi3<span class="p">,</span> immi4<span class="p">,</span> immi5<span class="p">))</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Use the nearest propensity score matching via MatchIt package, and then calculate the
+conditional average treatment effect of the job training program based on the linear
+regression model:</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>library<span class="p">(</span>MatchIt<span class="p">)</span>
+data<span class="p">(</span>lalonde<span class="p">)</span>
+m.out <span class="o">&lt;-</span> matchit<span class="p">(</span>treat <span class="o">~</span> re74 <span class="o">+</span> re75 <span class="o">+</span> educ <span class="o">+</span> black <span class="o">+</span> hispan <span class="o">+</span> age<span class="p">,</span> data <span class="o">=</span> lalonde<span class="p">,</span>
+    method <span class="o">=</span> <span class="s">&quot;nearest&quot;</span><span class="p">)</span>
+m.data <span class="o">&lt;-</span> match.data<span class="p">(</span>m.out<span class="p">)</span>
+z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>re78 <span class="o">~</span> treat <span class="o">+</span> distance <span class="o">+</span> re74 <span class="o">+</span> re75 <span class="o">+</span> educ <span class="o">+</span> black <span class="o">+</span> hispan <span class="o">+</span>
+    age<span class="p">,</span> data <span class="o">=</span> m.data<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">)</span>
+x.out0 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> fn <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> treat <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
+x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> fn <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> treat <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out0<span class="p">,</span> x1 <span class="o">=</span> x.out1<span class="p">)</span>
+summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Validate the fitted model using the leave-one-out cross validation procedure and calculating
+the average squared prediction error via <tt class="docutils literal"><span class="pre">boot</span></tt> package. For example:</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>library<span class="p">(</span>boot<span class="p">)</span>
+data<span class="p">(</span>turnout<span class="p">)</span>
+z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">,</span> cite <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span>
+cv.out <span class="o">&lt;-</span> cv.glm<span class="p">(</span>z.out<span class="p">,</span> data <span class="o">=</span> turnout<span class="p">,</span> k <span class="o">=</span> <span class="m">11</span><span class="p">)</span>
+print<span class="p">(</span>cv.out<span class="o">$</span>delta<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="details">
+<h3>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(formula,</span> <span class="pre">model,</span> <span class="pre">data,</span> <span class="pre">by</span> <span class="pre">=</span> <span class="pre">NULL,</span> <span class="pre">...)</span></tt></li>
+</ol>
+<p>The <tt class="docutils literal"><span class="pre">zelig()</span></tt> command estimates a selected statistical model given the specified data.
+You may name the output object (<tt class="docutils literal"><span class="pre">z.out</span></tt> above) anything you desire. You must include
+three required arguments, in the following order:</p>
+<blockquote>
+<div><ol class="loweralpha">
+<li><p class="first"><tt class="docutils literal"><span class="pre">formula</span></tt> takes the form <tt class="docutils literal"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span></tt>, where <tt class="docutils literal"><span class="pre">y</span></tt> is the dependent variable and <tt class="docutils literal"><span class="pre">x1</span></tt>
+and <tt class="docutils literal"><span class="pre">x2</span></tt> are the explanatory variables, and <tt class="docutils literal"><span class="pre">y</span></tt>, <tt class="docutils literal"><span class="pre">x1</span></tt>, and <tt class="docutils literal"><span class="pre">x2</span></tt> are contained in the
+same dataset. The <tt class="docutils literal"><span class="pre">+</span></tt> symbol means “inclusion” not “addition.” You may include
+interaction terms in the form of <tt class="docutils literal"><span class="pre">x1*x2</span></tt> without having to compute them in prior
+steps or include the main effects separately. For example, R treats the formula <tt class="docutils literal"><span class="pre">y</span>
+<span class="pre">~</span> <span class="pre">x1*x2</span></tt> as <tt class="docutils literal"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span> <span class="pre">+</span> <span class="pre">x1*x2</span></tt>. To prevent R from automatically including
+the separate main effect terms, use the <tt class="docutils literal"><span class="pre">I()</span></tt> function, thus: <tt class="docutils literal"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">I(x1</span> <span class="pre">*</span> <span class="pre">x2)</span></tt>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">model</span></tt> lets you choose which statistical model to run. You must put the name
+of the model in quotation marks, in the form <tt class="docutils literal"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">&quot;ls&quot;</span></tt>, for example. See
+Section ??4.3?? for a list of currently supported models.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">data</span></tt> specifies the data frame containing the variables called in the formula, in the
+form <tt class="docutils literal"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">mydata</span></tt>. Alternatively, you may input multiply imputed datasets in
+the form <tt class="docutils literal"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">mi(data1,</span> <span class="pre">data2,</span> <span class="pre">...)</span></tt>. <a class="footnote-reference" href="#id2" id="id1">[1]</a> If you are working with matched
+data created using <tt class="docutils literal"><span class="pre">MatchIt</span></tt>, you may create a data frame within the <tt class="docutils literal"><span class="pre">zelig()</span></tt>
+statement by using <tt class="docutils literal"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">match.data(...)</span></tt>. In all cases, the data frame or
+MatchIt object must have been previously loaded into the working memory.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><p class="first last">Multiple imputation is a method of dealing with missing values in your data which is more powerful
+than the usual list-wise deletion approach. You can create multiply imputed datasets with a program such
+as Amelia; see King, Honaker, Joseph, Scheve (2000).</p>
+</td></tr>
+</tbody>
+</table>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">by</span></tt> (an optional argument which is by default <tt class="docutils literal"><span class="pre">NULL</span></tt>) allows you to choose a factor
+variable (see Section ??2??) in the data frame as a subsetting variable. For each of
+the unique strata defined in the by variable, <tt class="docutils literal"><span class="pre">zelig()</span></tt> does a separate run of the
+specified model. The variable chosen should not be in the formula, because there
+will be no variance in the by variable in the subsets. If you have one data set for
+all 191 countries in the UN, for example, you may use the by option to run the
+same model 191 times, once on each country, all with a single <tt class="docutils literal"><span class="pre">zelig()</span></tt> statement.
+You may also use the <tt class="docutils literal"><span class="pre">by</span></tt> option to run models on <tt class="docutils literal"><span class="pre">MatchIt</span></tt> subclasses.</p>
+</li>
+<li><p class="first">The output object, <tt class="docutils literal"><span class="pre">z.out</span></tt>, contains all of the options chosen, including the name of
+the data set. Because data sets may be large, Zelig does not store the full data set,
+but only the name of the dataset. Every time you use a Zelig function, it looks for
+the dataset with the appropriate name in working memory. (Thus, it is critical
+that you do not change the name of your data set, or perform any additional
+operations on your selected variables between calling <tt class="docutils literal"><span class="pre">zelig()</span></tt> and <tt class="docutils literal"><span class="pre">setx()</span></tt>, or
+between <tt class="docutils literal"><span class="pre">setx()</span></tt> and <tt class="docutils literal"><span class="pre">sim()</span></tt>.)</p>
+</li>
+<li><p class="first">If you would like to view the regression output at this intermediate step, type
+<tt class="docutils literal"><span class="pre">summary(z.out)</span></tt> to return the coefficients, standard errors, t-statistics and p-
+values. We recommend instead that you calculate quantities of interest; creating
+<tt class="docutils literal"><span class="pre">z.out</span></tt> is only the first of three steps in this task.</p>
+</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><tt class="docutils literal"><span class="pre">x.out</span> <span class="pre">&lt;-</span> <span class="pre">setx(z.out,</span> <span class="pre">fn</span> <span class="pre">=</span> <span class="pre">list(numeric</span> <span class="pre">=</span> <span class="pre">mean,</span> <span class="pre">ordered</span> <span class="pre">=</span> <span class="pre">median,</span> <span class="pre">others</span> <span class="pre">=</span> <span class="pre">mode),</span> <span class="pre">data</span> <span class="pre">=</span> <span class="pre">NULL,</span> <span class="pre">cond</span> <span class="pre">=</span> <span class="pre">FALSE,</span> <span class="pre">...)</span></tt></li>
+</ol>
+<blockquote>
+<div><p>The <tt class="docutils literal"><span class="pre">setx()</span></tt> command lets you choose values for the explanatory variables, with which
+<tt class="docutils literal"><span class="pre">sim()</span></tt> will simulate quantities of interest. There are two types of <tt class="docutils literal"><span class="pre">setx()</span></tt> procedures:</p>
+<blockquote>
+<div><ul class="simple">
+<li>You may perform the usual unconditional prediction (by default, <tt class="docutils literal"><span class="pre">cond</span> <span class="pre">=</span> <span class="pre">FALSE</span></tt>),</li>
+</ul>
+<blockquote>
+<div>by explicitly choosing the values of each explanatory variable yourself or letting
+<tt class="docutils literal"><span class="pre">setx()</span></tt> compute them, either from the data used to create <tt class="docutils literal"><span class="pre">z.out</span></tt> or from a new
+data set specified in the optional data argument. You may also compute predictions
+for all observed values of your explanatory variables using <tt class="docutils literal"><span class="pre">fn</span> <span class="pre">=</span> <span class="pre">NULL</span></tt>.</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li>Alternatively, for advanced uses, you may perform conditional prediction (<tt class="docutils literal"><span class="pre">cond</span> <span class="pre">=</span> <span class="pre">TRUE</span></tt>),</li>
+</ul>
+<blockquote>
+<div><p>which predicts certain quantities of interest by conditioning on the observed value of the dependent variable.
+In a simple linear regression model, this
+procedure is not particularly interesting, since the conditional prediction is merely
+the observed value of the dependent variable for that observation. However, conditional prediction
+is extremely useful for other models and methods, including
+the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>In a matched sampling design, the sample average treatment effect for the
+treated can be estimated by computing the difference between the observed
+dependent variable for the treated group and their expected or predicted
+values of the dependent variable under no treatment (16).</li>
+<li>With censored data, conditional prediction will ensure that all predicted values
+are greater than the censored observed values (28).</li>
+<li>In ecological inference models, conditional prediction guarantees that the predicted values are on the tomography line and
+thus``.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

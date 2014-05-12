@@ -1,0 +1,211 @@
+Installation
+============
+
+To use Zelig, you must install the statistical program R (if it is not already installed), the Zelig package, and some R libraries (coda, MCMCpack, sandwich, VGAM, and zoo).
+
+Note: In this document, > denotes the R prompt.
+
+
+If You Are New to R
+-------------------
+
+If you are new to R, we recommend that you read the following section on installation procedures as well as the overview of R syntax and usage in \Sref{a:R}.
+
+This distribution works on a variety of platforms, including Windows (see Section [ss:win]), MacOSX (see Section [ss:osx]), and Linux (see Section [ss:unix]). Alternatively, you may access R from your PC using a terminal window or an X-windows tunnel to a Linux or Unix server (see Section [ss:unix]). Most servers have R installed; if not, contact your network administrator.
+
+There are advantages and disadvantages to each type of installation. On a personal computer, R is easier to install and launch. Using R remotely on a server requires a bit more set-up, but does not tie up your local CPU, and allows you to take advantage of the server's speed.
+
+If You Know R
+-------------
+
+We recommend that you launch R and type
+
+
+.. sourcecode:: r
+    
+
+    install.packages("Zelig")
+
+
+
+then proceed to ??\Sref{overview}??. For Windows R, you may edit the Rprofile file to load Zelig automatically at launch (after which you will no longer need to type library(Zelig) at startup). Simply add the line:
+
+
+.. sourcecode:: r
+    
+
+    options(defaultPackages = c(getOption("defaultPackages"), "Zelig"))
+
+
+
+Windows
+-------
+
+Installing R
+############
+
+Go to the Comprehensive R Archive Network website (http://www.r-project.org) and download the latest `installer <http://cran.us.r-project.org/bin/windows/base/>`_ for Windows at http://cran.us.r-project.org/bin/windows/base/ Double-click the .exe file to launch the R installer. We recommend that you accept the default installation options if this your first installation.
+
+Installing Zelig
+
+Once R is installed, you must install the Zelig package:
+
+
+.. sourcecode:: r
+    
+
+    install.packages("Zelig")
+
+
+
+Zelig will load the optional libraries whenever their functions are needed; it is not necessary to load any package other than Zelig at startup.
+
+1. Alternatively, you may use the drop down menus to install Zelig.
+
+(a)  Download the latest release of Zelig from `CRAN <http://cran.r-project.org/web/packages/Zelig/index.html>`_. Store the .zip files in your R program directory. For example, the default R program directory is C:\Program Files\R\R-rvers\ .Note that when updating R to the latest release, the installer does not delete previous versions from your C:\Program Files\R\ directory. In this example, the subdirectory \R-rvers\ stores R version fullvers. Thus, if you have a different version of R installed, you should change the last part of the R program directory file path accordingly. 
+
+(b) Start R. From the drop-down menus, select the “Packages” menu and then the “Install Files from Local Zip Files” option. 
+
+(c) A window will pop up, allowing you to select one of the downloaded files for installation. There is no need to unzip the files prior to installation. Repeat and select the other downloaded file for installation. 
+
+(d) At the R prompt, type library(Zelig) to load the functionality described in this manual. Note that Zelig will automatically load the other libraries as necessary. 
+
+(e) An additional recommended but optional step is to set up R to load Zelig automatically at launch. (If you skip this step, you must type library(Zelig) at the beginning of every R session.) To automate this process, edit the Rprofile file located in the R program subdirectory (in our example). Using a text editor such as Windows notepad, add the following line to the Rprofile file: 
+
+
+.. sourcecode:: r
+    
+
+    options(defaultPackages = c(getOption("defaultPackages"), "Zelig"))
+
+
+
+Zelig is distributed under the `GNU General Public License <http://www.gnu.org/licenses/gpl.txt>`_. After installation, the source code is located in your R library directory, which is by default C:\Program Files\R\R-rvers\library\Zelig\.
+
+Updating Zelig
+##############
+
+There are two ways to update Zelig.
+
+1. We recommend that you periodically update Zelig at the R prompt by typing:
+
+
+.. sourcecode:: r
+    
+
+    update.packages()
+
+
+
+2. Alternatively, you may use the procedure outlined in [win.zelig] to periodically update Zelig. Simply download the latest .zip file and follow the steps.
+
+Mac OS X
+--------
+
+Installing R
+############
+
+If you are using MacOS X, you may install the latest version of R (fullvers at this time) from the CRAN website http://cran.us.r-project.org/bin/macosx/.
+
+Installing Zelig
+################
+
+Once R is installed, you must install the Zelig package:
+
+
+.. sourcecode:: r
+    
+
+    install.packages("Zelig")
+
+
+
+Alternatively, you may use the drop down menus to install Zelig.
+
+1. Download the latest release of Zelig from `CRAN <http://cran.us.r-project.org/bin/windows/base/>`_. Save the .tgz files in a convenient place. 
+
+2. Start R. From the drop-down menus, select the “Packages” menu and then the “Install Files from Local Files” option. 
+
+3. A window will pop up, allowing you to select the downloaded file for installation. There is no need to unzip the file prior to installation.
+
+Version Compatibility
+---------------------
+
+In addition to R itself, Zelig also depends on several R packages maintained by other development teams. Although we make every effort to keep the latest version of Zelig up-to-date with the latest version of those packages, there may occasionally be incompatibilities. See [table.compat] in the Appendix for a list of packages tested to be compatibile with a given Zelig release. You may obtain older versions of most packages at http://www.r-project.org. 
+
+UNIX and Linux
+--------------
+
+Installing R
+############
+
+Type R at the terminal prompt (which we denote as % in this section) to see if R is available. (Typing q() will enable you to quit.) If it is installed, proceed to the next section. If it is not installed and you are not the administrator, contact that individual, kindly request that they install R on the server, and continue to the next section. If you have administrator privileges, you may download the latest release at the `CRAN <http://cran.r-project.org/>`_ website. Although installation varies according to your Linux distribution, we provide an example for Red Hat Linux 9.0 as a guide.
+
+1. Log in as root.
+
+2. Download the appropriate binary file for Red Hat 9 from CRAN.
+
+3. Type the following command at the terminal prompt:
+
+Installing Zelig
+################
+
+Before installing Zelig, you need to create a local R library directory. If you have done so already, you can skip to Section [unix.zelig]. If not, you must do so before proceeding because most users do not have authorization to install programs globally. Suppose we want the directory to be ~/.R/library. At the terminal prompt in your home directory, type::
+
+  mkdir ~/.R ~/.R/library
+
+Now you are ready to install Zelig.
+
+There are two ways to proceed.
+
+1. Recommended procedure: 
+
+(a) Open the ~/.Renviron file (or create it if it does not exist) and add the following line::
+
+  RLIBS = " /.R/library"
+
+You only need to perform this step once. 
+
+(a) Start R. At the R prompt, type:
+
+
+.. sourcecode:: r
+    
+
+    install.packages("Zelig")
+
+
+
+(b) Finally, create a .Rprofile file in your home directory, containing the line:
+
+
+.. sourcecode:: r
+    
+
+    library(Zelig)
+
+
+
+This will load Zelig every time you start R. 
+
+After installation, the source code is located in your R library directory. If you followed the example above, this is  /.R/library/Zelig/.
+
+Updating Zelig
+
+There are two ways to update Zelig.
+
+(a) We recommend that you start R and, at the R prompt, type:
+
+
+.. sourcecode:: r
+    
+
+    update.packages()
+
+
+
+(b) Alternatively, you may remove an old version by command by typing::
+
+ R CMD REMOVE Zelig
+
+Now you are ready to install Zelig.

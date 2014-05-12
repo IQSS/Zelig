@@ -31,3 +31,24 @@ set.seed(42)
 z5$sim(num=1000)
 z5$summarize()
 z5$cite()
+
+# Example 2
+data(turnout)
+z.out <- zelig(vote ~ race + educate,
+               data = turnout,
+               model = "logit")
+summary(z.out)
+x.out <- setx(z.out, educate = 12)
+set.seed(42)
+s.out <- sim(z.out, x = x.out, num = 1000)
+summary(s.out)
+
+z5 <- zlogit$new()
+z5$zelig(vote ~ race + educate,
+         data = turnout)
+z5$show()
+z5$setx(educate = 12)
+set.seed(42)
+z5$sim(num = 1000)
+z5$summarize()
+

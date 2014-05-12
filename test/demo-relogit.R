@@ -8,6 +8,7 @@ source(file.path("..", "R", "model-relogit.R"))
 ## Example 1
 
 # Zelig 4 code:
+library(Zelig)
 data(mid)
 z.out1 <- zelig(conflict ~ major + contig + power + maxdem
                 + mindem + years, data = mid, model = "relogit", tau = 1042/303772)
@@ -22,7 +23,8 @@ z5 <- zrelogit$new()
 z5$zelig(conflict ~ major + contig + power + maxdem
          + mindem + years, data = mid, tau = 1042/303772)
 z5
-z5$setx()
+z5$setx(mindem=342, contig = 12, sjch=8, sajhbsja=98, mindem=343)
+z5$setx.out
 set.seed(42)
 z5$sim(num=1000)
 z5$summarize()

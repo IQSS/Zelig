@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data Analysis Commands &mdash; Zelig 5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Zelig 5.0 documentation" href="index.html" />
+    <link rel="next" title="Statistical Commands" href="4_statistical_commands.html" />
+    <link rel="prev" title="Installation" href="2_install.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="1_introduction.html#what-zelig-and-r-do">What Zelig and R do</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_introduction.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_introduction.html#how-to-cite-zelig">How to Cite Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2_install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#if-you-are-new-to-r">If You Are New to R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#if-you-know-r">If You Know R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#windows">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#installing-r">Installing R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#updating-zelig">Updating Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#mac-os-x">Mac OS X</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#id1">Installing R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#installing-zelig">Installing Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#version-compatibility">Version Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_install.html#unix-and-linux">UNIX and Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#id3">Installing R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2_install.html#id5">Installing Zelig</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Data Analysis Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#command-syntax">Command Syntax</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details">Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-data">Loading Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-data">Saving Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes-of-variables">Classes of Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recoding-variables">Recoding Variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="4_statistical_commands.html">Statistical Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="4_statistical_commands.html#zelig-commands">Zelig Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="4_statistical_commands.html#quick-overview">Quick Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4_statistical_commands.html#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4_statistical_commands.html#details">Details</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Data Analysis Commands</a><ul>
+<li><a class="reference internal" href="#command-syntax">Command Syntax</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#details">Details</a></li>
+<li><a class="reference internal" href="#loading-data">Loading Data</a></li>
+<li><a class="reference internal" href="#saving-data">Saving Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#variables">Variables</a><ul>
+<li><a class="reference internal" href="#classes-of-variables">Classes of Variables</a></li>
+<li><a class="reference internal" href="#recoding-variables">Recoding Variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="2_install.html" title="Previous Chapter: Installation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Installation</span>
+    </a>
+  </li>
+  <li>
+    <a href="4_statistical_commands.html" title="Next Chapter: Statistical Commands"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Statistical Comm... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/3_data_analysis.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="data-analysis-commands">
+<h1>Data Analysis Commands<a class="headerlink" href="#data-analysis-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="command-syntax">
+<h2>Command Syntax<a class="headerlink" href="#command-syntax" title="Permalink to this headline">¶</a></h2>
+<p>Once R is installed, you only need to know a few basic elements to get started. It&#8217;s important to remember that R, like any spoken language, has rules for proper syntax. Unlike English, however, the rules for intelligible R are small in number and quite precise (see Section [s:syntax]).</p>
+<div class="section" id="getting-started">
+<h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>To start R under Linux or Unix, type R at the terminal prompt or M-x R under ESS.</li>
+<li>The R prompt is <tt class="docutils literal"><span class="pre">&gt;</span></tt>.</li>
+<li>Type commands and hit enter to execute. (No additional characters, such as semicolons or commas, are necessary at the end of lines.)</li>
+<li>To quit from R, type <tt class="docutils literal"><span class="pre">q()</span></tt> and press enter.</li>
+<li>The <tt class="docutils literal"><span class="pre">#</span></tt> character makes R ignore the rest of the line, and is used in this document to comment R code.</li>
+<li>We highly recommend that you make a separate working directory or folder for each project.</li>
+<li>Each R session has a workspace, or working memory, to store the objects that you create or input. These objects may be:</li>
+</ol>
+<ol class="loweralpha simple">
+<li>values, which include numerical, integer, character, and logical values;</li>
+<li>data structures made up of variables (vectors), matrices, and data frames; or</li>
+<li>functions that perform the desired tasks on user-specified values or data structures.</li>
+</ol>
+<p>After starting R, you may at any time use Zelig&#8217;s built-in help function to access on-line help for any command. To see help for all Zelig commands, type help.zelig(command), which will take you to the help page for all Zelig commands. For help with a specific Zelig or R command substitute the name of the command for the generic command. For example, type help.zelig(logit) to view help for the logit model.</p>
+</div>
+<div class="section" id="details">
+<h3>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h3>
+<p>Zelig uses the syntax of R, which has several essential elements:</p>
+<ol class="arabic simple">
+<li>R is case sensitive. Zelig, the package or library, is not the same as zelig, the command.</li>
+<li>R functions accept user-defined arguments: while some arguments are required, other optional arguments modify the function&#8217;s default behavior. Enclose arguments in parentheses and separate multiple arguments with commas. For example, <tt class="docutils literal"><span class="pre">print(x)</span></tt> or <tt class="docutils literal"><span class="pre">print(x,</span> <span class="pre">digits</span> <span class="pre">=</span> <span class="pre">2)</span></tt> prints the contents of the object x using the default number of digits or rounds to two digits to the right of the decimal point, respectively. You may nest commands as long as each has its own set of parentheses: <tt class="docutils literal"><span class="pre">log(sqrt(5))</span></tt> takes the square root of 5 and then takes the natural log.</li>
+<li>The &lt;- operator takes the output of the function on the right and saves them in the named object on the left. For example, <tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(\dots)</span></tt> stores the output from <tt class="docutils literal"><span class="pre">zelig()</span></tt> as the object z.out in your working memory. You may use z.out as an argument in other functions, view the output by typing z.out at the R prompt, or save z.out to a file using the procedures described in Section <a class="reference internal" href="#saving-data">Saving Data</a>.</li>
+<li>You may name your objects anything, within a few constraints:</li>
+</ol>
+<ul class="simple">
+<li>You may only use letters (in upper or lower case) and periods to punctuate your variable names.</li>
+<li>You may not use any special characters (aside from the period) or spaces to punctuate your variable names.</li>
+<li>Names cannot begin with numbers. For example, R will not let you save an object as 1997.election but will let you save election.1997.</li>
+</ul>
+<ol class="arabic simple" start="5">
+<li>Use the <tt class="docutils literal"><span class="pre">names()</span></tt> command to see the contents of R objects, and the $ operator to extract elements from R objects. For example:</li>
+</ol>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># Run least squares regression and save the output in working memory:</span>
+z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x1 <span class="o">+</span> x2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+<span class="c1"># See what&#39;s in the R object:</span>
+names<span class="p">(</span>z.out<span class="p">)</span>
+<span class="c1">## [1] &#39;coefficients&#39; &#39;residuals&#39; &#39;effects&#39; &#39;rank&#39; Extract and display the</span>
+<span class="c1">## coefficients in z.out:</span>
+z.out<span class="o">$</span>coefficients
+</pre></div>
+</div>
+<p>6. a frame is a rectangular matrix with n rows and k
+columns. Each column represents a variable and each row an observation. Each variable may have a different class. (See Section ??variable.classes?? for a list of classes.)
+You may refer to specific variables from a data frame using, for example, <tt class="docutils literal"><span class="pre">data$variable</span></tt>.</p>
+<ol class="arabic simple" start="7">
+<li>A list is a combination of different data structures. For example, <tt class="docutils literal"><span class="pre">z.out</span></tt> contains both coefficients (a vector) and data (a data frame). Use <tt class="docutils literal"><span class="pre">names()</span></tt> to view the elements available within a list, and the <tt class="docutils literal"><span class="pre">$</span></tt> operator to refer to an element in a list.</li>
+</ol>
+<p>For a more comprehensive introduction, including ways to manipulate these data structures, please refer to Chapter [a:R].</p>
+</div>
+<div class="section" id="loading-data">
+<h3>Loading Data<a class="headerlink" href="#loading-data" title="Permalink to this headline">¶</a></h3>
+<p>Datasets in Zelig are stored in “data frames.” In this section, we explain the standard ways to load data from disk into memory, how to handle special cases, and how to verify that the data you loaded is what you think it is.</p>
+<p>Standard Ways to Load Data</p>
+<p>Make sure that the data file is saved in your working directory. You can check to see what your working directory is by starting R, and typing getwd(). If you wish to use a different directory as your starting directory, use setwd(&#8220;dirpath&#8221;), where &#8220;dirpath&#8221; is the full directory path of the directory you would like to use as your working directory.</p>
+<p>After setting your working directory, load data using one of the following methods:</p>
+<ol class="arabic simple">
+<li>If your dataset is in a tab- or space-delimited .txt file, use read.table(&#8220;mydata.txt&#8221;)</li>
+</ol>
+<ol class="loweralpha simple">
+<li>If your dataset is a comma separated table, use read.csv(&#8220;mydata.csv&#8221;).</li>
+<li>To import SPSS, Stata, and other data files, use the foreign package, which automatically preserves field characteristics for each variable. Thus, variables classed as dates in Stata are automatically translated into values in the date class for R. For example:</li>
+</ol>
+<div class="highlight-r"><div class="highlight"><pre>library<span class="p">(</span>foreign<span class="p">)</span>  <span class="c1"># Load the foreign package.</span>
+stata.data <span class="o">&lt;-</span> read.dta<span class="p">(</span><span class="s">&quot;mydata.dta&quot;</span><span class="p">)</span>  <span class="c1"># For Stata data.</span>
+spss.data <span class="o">&lt;-</span> read.spss<span class="p">(</span><span class="s">&quot;mydata.sav&quot;</span><span class="p">,</span> to.data.frame <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>  <span class="c1"># For SPSS.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>To load data in R format, use load(&#8220;mydata.RData&#8221;).</li>
+</ol>
+<ol class="loweralpha simple">
+<li>For sample data sets included with R packages such as Zelig, you may use the data() command, which is a shortcut for loading data from the sample data directories. Because the locations of these directories vary by installation, it is extremely difficult to locate sample data sets and use one of the three preceding methods; data() searches all of the currently used packages and loads sample data automatically. For example:</li>
+</ol>
+<div class="highlight-r"><div class="highlight"><pre>library<span class="p">(</span>Zelig<span class="p">)</span>  <span class="c1"># Loads the Zelig library.</span>
+data<span class="p">(</span>turnout<span class="p">)</span>  <span class="c1"># Loads the turnout data.</span>
+</pre></div>
+</div>
+<p>Special Cases When Loading Data</p>
+<p>These procedures apply to any of the above read commands:</p>
+<ol class="arabic simple">
+<li>If your file uses the first row to identify variable names, you should use the option header = TRUE to import those field names. For example,</li>
+</ol>
+<div class="highlight-r"><div class="highlight"><pre>read.csv<span class="p">(</span><span class="s">&quot;mydata.csv&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will read the words in the first row as the variable names and the subsequent rows (each with the same number of values as the first) as observations for each of those variables. If you have additional characters on the last line of the file or fewer values in one of the rows, you need to edit the file before attempting to read the data.</p>
+<ol class="arabic simple" start="2">
+<li>The R missing value code is NA. If this value is in your data, R will recognize your missing values as such. If you have instead used a place-holder value (such as -9) to represent missing data, you need to tell R this on loading the data:</li>
+</ol>
+<div class="highlight-r"><div class="highlight"><pre>read.table<span class="p">(</span><span class="s">&quot;mydata.tab&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> na.strings <span class="o">=</span> <span class="s">&quot;-9&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note: You must enclose your place holder values in quotes.</p>
+<ol class="arabic simple" start="3">
+<li>Unlike Windows, the file extension in R does not determine the default method for dealing with the file. For example, if your data is tab-delimited, but saved as a .sav file, read.table(&#8220;mydata.sav&#8221;) will load your data into R.</li>
+</ol>
+<p>Verifying You Loaded The Data Correctly</p>
+<p>Whichever method you use, try the names(), dim(), and summary() commands to verify that the data was properly loaded. For example,</p>
+<div class="highlight-r"><div class="highlight"><pre>data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;mydata.csv&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>  <span class="c1"># Read the data.</span>
+dim<span class="p">(</span>data<span class="p">)</span>  <span class="c1"># Displays the dimensions of the data frame</span>
+<span class="c1">## [1] 16000 8 # in rows then columns.</span>
+data<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> <span class="p">]</span>  <span class="c1"># Display rows 1-10 and all columns.</span>
+names<span class="p">(</span>data<span class="p">)</span>  <span class="c1"># Check the variable names.</span>
+<span class="c1">## [1] &#39;V1&#39; &#39;V2&#39; &#39;V3&#39; These values indicate that the variables weren&#39;t named,</span>
+<span class="c1">## and took default values.</span>
+names<span class="p">(</span>data<span class="p">)</span> <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;income&quot;</span><span class="p">,</span> <span class="s">&quot;educate&quot;</span><span class="p">,</span> <span class="s">&quot;year&quot;</span><span class="p">)</span>  <span class="c1"># Assign variable names.</span>
+summary<span class="p">(</span>data<span class="p">)</span>  <span class="c1"># Returning a summary for each variable.</span>
+</pre></div>
+</div>
+<p>In this case, the summary() command will return the maximum, minimum, mean, median, first and third quartiles, as well as the number of missing values for each variable.</p>
+</div>
+<div class="section" id="saving-data">
+<h3>Saving Data<a class="headerlink" href="#saving-data" title="Permalink to this headline">¶</a></h3>
+<p>Use save() to write data or any object to a file in your working directory. For example,</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1">## Saves `mydata&#39; to `mydata.RData&#39; in your working directory.</span>
+save<span class="p">(</span>mydata<span class="p">,</span> file <span class="o">=</span> <span class="s">&quot;mydata.RData&quot;</span><span class="p">)</span>
+<span class="c1">## Saves your entire workspace to the default `.RData&#39; file.</span>
+save.image<span class="p">()</span>
+</pre></div>
+</div>
+<p>R will also prompt you to save your workspace when you use the q() command to quit. When you start R again, it will load the previously saved workspace. Restarting R will not, however, load previously used packages. You must remember to load Zelig at the beginning of every R session.</p>
+<p>Alternatively, you can recall individually saved objects from .RData files using the load() command. For example,</p>
+<div class="highlight-r"><div class="highlight"><pre>load<span class="p">(</span><span class="s">&quot;mydata.RData&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>loads the objects saved in the mydata.RData file. You may save a data frame, a data frame and associated functions, or other R objects to file.</p>
+</div>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes-of-variables">
+<h3>Classes of Variables<a class="headerlink" href="#classes-of-variables" title="Permalink to this headline">¶</a></h3>
+<p>R variables come in several types. Certain Zelig models require dependent variables of a certain class of variable. (These are documented under the manual pages for each model.) Use class(variable) to determine the class of a variable or class(data$variable) for a variable within a data frame.</p>
+<p>Types of Variables</p>
+<p>For all types of variable (vectors), you may use the c() command to “concatenate” elements into a vector, the : operator to generate a sequence of integer values, the seq() command to generate a sequence of non-integer values, or the rep() function to repeat a value to a specified length. In addition, you may use the &lt;- operator to save variables (or any other objects) to the workspace. For example:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1">## Creates &#39;logic&#39; (5 T/F values).</span>
+logic <span class="o">&lt;-</span> c<span class="p">(</span><span class="kc">TRUE</span><span class="p">,</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="c1">## All integers between 10 and 20.</span>
+var1 <span class="o">&lt;-</span> <span class="m">10</span><span class="o">:</span><span class="m">20</span>
+<span class="c1">## Sequence from 5 to 10 by intervals of 0.5.</span>
+var2 <span class="o">&lt;-</span> seq<span class="p">(</span>from <span class="o">=</span> <span class="m">5</span><span class="p">,</span> to <span class="o">=</span> <span class="m">10</span><span class="p">,</span> by <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span>
+<span class="c1">## 20 &#39;NA&#39; values.</span>
+var3 <span class="o">&lt;-</span> rep<span class="p">(</span><span class="kc">NA</span><span class="p">,</span> length <span class="o">=</span> <span class="m">20</span><span class="p">)</span>
+<span class="c1">## 15 &#39;1&#39;s followed by 15 &#39;0&#39;s.</span>
+var4 <span class="o">&lt;-</span> c<span class="p">(</span>rep<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">15</span><span class="p">),</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">15</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>For the seq() command, you may alternatively specify length instead of by to create a variable with a specific number (denoted by the length argument) of evenly spaced elements.</p>
+<ol class="arabic simple">
+<li>Numeric variables are real numbers and the default variable class for most dataset values. You can perform any type of math or logical operation on numeric values. If var1 and var2 are numeric variables, we can compute</li>
+</ol>
+<div class="highlight-r"><div class="highlight"><pre>var3 <span class="o">&lt;-</span> log<span class="p">(</span>var2<span class="p">)</span> <span class="o">-</span> <span class="m">2</span> <span class="o">*</span> var1  <span class="c1"># Create &#39;var3&#39; using math operations.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Inf (infinity), -Inf (negative infinity), NA (missing value), and NaN (not a number) are special numeric values on which most math operations will fail. (Logical operations will work, however.) Use as.numeric() to transform variables into numeric variables. Integers are a special class of numeric variable.</li>
+<li>Logical variables contain values of either TRUE or FALSE. R supports the following logical operators: ==, exactly equals; &gt;, greater than; &lt;, less than; &gt;=, greater than or equals; &lt;=, less than or equals; and !=, not equals. The = symbol is not a logical operator. Refer to Section ??logical?? for more detail on logical operators. If var1 and var2 both have n observations, commands such as</li>
+</ol>
+<div class="highlight-r"><div class="highlight"><pre>var3 <span class="o">&lt;-</span> var1 <span class="o">&lt;</span> var2
+var3 <span class="o">&lt;-</span> var1 <span class="o">==</span> var2
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>create n</dt>
+<dd><blockquote class="first">
+<div>TRUE/FALSE observations such that the i</div></blockquote>
+<p class="last">th observation in var3 evaluates whether the logical statement is true for the i
+th value of var1 with respect to the i
+th value of var2. Logical variables should usually be converted to integer values prior to analysis; use the as.integer() command.</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="4">
+<li>Character variables are sets of text strings. Note that text strings are always enclosed in quotes to denote that the string is a value, not an object in the workspace or an argument for a function (neither of which take quotes). Variables of class character are not normally used in data analysis, but used as descriptive fields. If a character variable is used in a statistical operation, it must first be transformed into a factored variable.</li>
+<li>Factor variables may contain values consisting of either integers or character strings. Use factor() or as.factor() to convert character or integer variables into factor variables. Factor variables separate unique values into levels. These levels may either be ordered or unordered. In practice, this means that including a factor variable among the explanatory variables is equivalent to creating dummy variables for each level. In addition, some models (ordinal logit, ordinal probit, and multinomial logit), require that the dependent variable be a factor variable.</li>
+</ol>
+</div>
+<div class="section" id="recoding-variables">
+<h3>Recoding Variables<a class="headerlink" href="#recoding-variables" title="Permalink to this headline">¶</a></h3>
+<p>Researchers spend a significant amount of time cleaning and recoding data prior to beginning their analyses. R has several procedures to facilitate the process.</p>
+<p>Extracting, Replacing, and Generating New Variables</p>
+<p>While it is not difficult to recode variables, the process is prone to human error. Thus, we recommend that before altering the data, you save your existing data frame using the procedures described in Section ??s:save??, that you only recode one variable at a time, and that you recode the variable outside the data frame and then return it to the data frame.</p>
+<p>To extract the variable you wish to recode, type:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1">## Copies &#39;var1&#39; from &#39;data&#39;, creating &#39;var&#39;.</span>
+var <span class="o">&lt;-</span> data<span class="o">$</span>var1
+</pre></div>
+</div>
+<p>Do not sort the extracted variable or delete observations from it. If you do, the ith observation in var will no longer match the ith observation in data. To replace the variable or generate a new variable in the data frame, type:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1">## Replace &#39;var1&#39; in `data&#39; with &#39;var&#39;.</span>
+data<span class="o">$</span>var1 <span class="o">&lt;-</span> var
+<span class="c1">## Generate &#39;new.var&#39; in &#39;data&#39; using &#39;var&#39;.</span>
+data<span class="o">$</span>new.var <span class="o">&lt;-</span> var
+</pre></div>
+</div>
+<p>To remove a variable from a data frame (rather than replacing one variable with another):</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="o">$</span>var1 <span class="o">&lt;-</span> <span class="kc">NULL</span>
+</pre></div>
+</div>
+<p>Alternatively, rather than recoding just specific values in variables, you may calculate new variables from existing variables. For example,</p>
+<div class="highlight-r"><div class="highlight"><pre>var3 <span class="o">&lt;-</span> var1 <span class="o">+</span> <span class="m">2</span> <span class="o">*</span> var2
+var3 <span class="o">&lt;-</span> log<span class="p">(</span>var1<span class="p">)</span>
+</pre></div>
+</div>
+<p>After generating the new variables, use the assignment mechanism &lt;- to insert the new variable into the data frame.</p>
+<dl class="docutils">
+<dt>In addition to generating vectors of dummy variables, you may transform a vector into a matrix of dummy indicator variables. For example, see Section ??dummy?? to transform a vector of k</dt>
+<dd>unique values (with n
+observations in the complete vector) into a ntimes k
+matrix.</dd>
+</dl>
+<p>Missing Data</p>
+<p>To deal with missing values in some of your variables:</p>
+<p>1. You may generate multiply imputed datasets using <a class="reference external" href="http://gking.harvard.edu/amelia/">Amelia</a> (or other programs).</p>
+<ol class="arabic simple" start="2">
+<li>You may omit missing values. Zelig models automatically apply list-wise deletion, so no action is required to run a model. To obtain the total number of observations or produce other summary statistics using the analytic dataset, you may manually omit incomplete observations. To do so, first create a data frame containing only the variables in your analysis. For example:</li>
+</ol>
+<div class="highlight-r"><div class="highlight"><pre>new.data <span class="o">&lt;-</span> cbind<span class="p">(</span>data<span class="o">$</span>dep.var<span class="p">,</span> data<span class="o">$</span>var1<span class="p">,</span> data<span class="o">$</span>var2<span class="p">,</span> data<span class="o">$</span>var3<span class="p">)</span>
+</pre></div>
+</div>
+<p>The cbind() command “column binds” variables into a data frame. (A similar command rbind() “row binds” observations with the same number of variables into a data frame.) To omit missing values from this new data frame:</p>
+<div class="highlight-r"><div class="highlight"><pre>new.data <span class="o">&lt;-</span> na.omit<span class="p">(</span>new.data<span class="p">)</span>
+</pre></div>
+</div>
+<p>If you perform na.omit() on the full data frame, you risk deleting observations that are fully observed in your experimental variables, but missing values in other variables. Creating a new data frame containing only your experimental variables usually increases the number of observations retained after na.omit().</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

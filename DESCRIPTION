@@ -16,12 +16,12 @@ Description: Zelig is an easy-to-use program that can estimate, and
     the raw output of existing statistical procedures and translates
     them into quantities of direct interest.
 Version: 0.1
-Date: 2014-04-23
-Depends: methods, Formula, MASS, VGAM, rjson, MCMCpack, gee
+Date: 2014-04-24
+Depends: methods, MASS, VGAM, rjson, MCMCpack, gee
 Collate: utils.R model-zelig.R model-ls.R model-glm.R model-binchoice.R
         model-logit.R model-probit.R model-poisson.R model-normal.R
         model-gamma.R model-negbinom.R model-bbinchoice.R
         model-blogit.R model-bprobit.R model-poissonbayes.R
-        model-poissongee.R model-exp.R model-lognorm.R model-tobit
+        model-poissongee.R model-exp.R model-lognorm.R model-tobit.R
         wrappers.R
 Packaged: 2014-03-15 21:19:17 UTC; cchoirat

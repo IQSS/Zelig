@@ -50,6 +50,15 @@ table.levels <- function (x, levels, ...) {
   }
 }
 
+avg <- function(val) {
+  if (is.numeric(val))
+    mean(val)
+  else if (is.ordered(val))
+    Median(val)
+  else
+    Mode(val)
+}
+
 statmat <- function(qi){
   m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm=TRUE))
   n <- matrix(apply(qi, 2, mean, na.rm=TRUE))

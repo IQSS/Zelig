@@ -1,0 +1,350 @@
+Data Analysis Commands
+=======================
+
+Command Syntax
+--------------
+
+Once R is installed, you only need to know a few basic elements to get started. It's important to remember that R, like any spoken language, has rules for proper syntax. Unlike English, however, the rules for intelligible R are small in number and quite precise (see Section [s:syntax]).
+
+Getting Started
+###############
+
+1. To start R under Linux or Unix, type R at the terminal prompt or M-x R under ESS. 
+
+2. The R prompt is ``>``. 
+
+3. Type commands and hit enter to execute. (No additional characters, such as semicolons or commas, are necessary at the end of lines.) 
+
+4. To quit from R, type ``q()`` and press enter. 
+
+5. The ``#`` character makes R ignore the rest of the line, and is used in this document to comment R code. 
+
+6. We highly recommend that you make a separate working directory or folder for each project. 
+
+7. Each R session has a workspace, or working memory, to store the objects that you create or input. These objects may be: 
+
+(a) values, which include numerical, integer, character, and logical values; 
+
+(b) data structures made up of variables (vectors), matrices, and data frames; or 
+
+(c) functions that perform the desired tasks on user-specified values or data structures. 
+
+After starting R, you may at any time use Zelig's built-in help function to access on-line help for any command. To see help for all Zelig commands, type help.zelig(command), which will take you to the help page for all Zelig commands. For help with a specific Zelig or R command substitute the name of the command for the generic command. For example, type help.zelig(logit) to view help for the logit model.
+
+Details
+#######
+
+Zelig uses the syntax of R, which has several essential elements: 
+
+1. R is case sensitive. Zelig, the package or library, is not the same as zelig, the command.
+
+2. R functions accept user-defined arguments: while some arguments are required, other optional arguments modify the function's default behavior. Enclose arguments in parentheses and separate multiple arguments with commas. For example, ``print(x)`` or ``print(x, digits = 2)`` prints the contents of the object x using the default number of digits or rounds to two digits to the right of the decimal point, respectively. You may nest commands as long as each has its own set of parentheses: ``log(sqrt(5))`` takes the square root of 5 and then takes the natural log.
+
+3. The <- operator takes the output of the function on the right and saves them in the named object on the left. For example, ``z.out <- zelig(\dots)`` stores the output from ``zelig()`` as the object z.out in your working memory. You may use z.out as an argument in other functions, view the output by typing z.out at the R prompt, or save z.out to a file using the procedures described in Section `Saving Data`_.
+
+4. You may name your objects anything, within a few constraints: 
+
+• You may only use letters (in upper or lower case) and periods to punctuate your variable names. 
+
+• You may not use any special characters (aside from the period) or spaces to punctuate your variable names. 
+
+• Names cannot begin with numbers. For example, R will not let you save an object as 1997.election but will let you save election.1997. 
+
+5. Use the ``names()`` command to see the contents of R objects, and the $ operator to extract elements from R objects. For example: 
+
+
+.. sourcecode:: r
+    
+
+    # Run least squares regression and save the output in working memory:
+    z.out <- zelig(y ~ x1 + x2, model = "ls", data = mydata)
+    # See what's in the R object:
+    names(z.out)
+    ## [1] 'coefficients' 'residuals' 'effects' 'rank' Extract and display the
+    ## coefficients in z.out:
+    z.out$coefficients
+
+
+
+6. a frame is a rectangular matrix with n rows and k
+columns. Each column represents a variable and each row an observation. Each variable may have a different class. (See Section ??variable.classes?? for a list of classes.) 
+You may refer to specific variables from a data frame using, for example, ``data$variable``. 
+
+7. A list is a combination of different data structures. For example, ``z.out`` contains both coefficients (a vector) and data (a data frame). Use ``names()`` to view the elements available within a list, and the ``$`` operator to refer to an element in a list. 
+
+For a more comprehensive introduction, including ways to manipulate these data structures, please refer to Chapter [a:R].
+
+Loading Data
+############
+
+Datasets in Zelig are stored in “data frames.” In this section, we explain the standard ways to load data from disk into memory, how to handle special cases, and how to verify that the data you loaded is what you think it is.
+
+Standard Ways to Load Data
+
+Make sure that the data file is saved in your working directory. You can check to see what your working directory is by starting R, and typing getwd(). If you wish to use a different directory as your starting directory, use setwd("dirpath"), where "dirpath" is the full directory path of the directory you would like to use as your working directory.
+
+After setting your working directory, load data using one of the following methods:
+
+1. If your dataset is in a tab- or space-delimited .txt file, use read.table("mydata.txt") 
+
+(a) If your dataset is a comma separated table, use read.csv("mydata.csv"). 
+
+(b) To import SPSS, Stata, and other data files, use the foreign package, which automatically preserves field characteristics for each variable. Thus, variables classed as dates in Stata are automatically translated into values in the date class for R. For example: 
+
+
+.. sourcecode:: r
+    
+
+    library(foreign)  # Load the foreign package.
+    stata.data <- read.dta("mydata.dta")  # For Stata data.
+    spss.data <- read.spss("mydata.sav", to.data.frame = TRUE)  # For SPSS. 
+
+
+
+2. To load data in R format, use load("mydata.RData"). 
+
+(a) For sample data sets included with R packages such as Zelig, you may use the data() command, which is a shortcut for loading data from the sample data directories. Because the locations of these directories vary by installation, it is extremely difficult to locate sample data sets and use one of the three preceding methods; data() searches all of the currently used packages and loads sample data automatically. For example: 
+
+
+.. sourcecode:: r
+    
+
+    library(Zelig)  # Loads the Zelig library.
+    data(turnout)  # Loads the turnout data. 
+
+
+
+Special Cases When Loading Data
+
+These procedures apply to any of the above read commands: 
+
+1. If your file uses the first row to identify variable names, you should use the option header = TRUE to import those field names. For example,
+
+
+.. sourcecode:: r
+    
+
+    read.csv("mydata.csv", header = TRUE)
+
+
+
+will read the words in the first row as the variable names and the subsequent rows (each with the same number of values as the first) as observations for each of those variables. If you have additional characters on the last line of the file or fewer values in one of the rows, you need to edit the file before attempting to read the data. 
+
+2. The R missing value code is NA. If this value is in your data, R will recognize your missing values as such. If you have instead used a place-holder value (such as -9) to represent missing data, you need to tell R this on loading the data: 
+
+
+.. sourcecode:: r
+    
+
+    read.table("mydata.tab", header = TRUE, na.strings = "-9")
+
+
+
+Note: You must enclose your place holder values in quotes. 
+
+3. Unlike Windows, the file extension in R does not determine the default method for dealing with the file. For example, if your data is tab-delimited, but saved as a .sav file, read.table("mydata.sav") will load your data into R. 
+
+Verifying You Loaded The Data Correctly
+
+Whichever method you use, try the names(), dim(), and summary() commands to verify that the data was properly loaded. For example,
+
+
+.. sourcecode:: r
+    
+
+    data <- read.csv("mydata.csv", header = TRUE)  # Read the data.
+    dim(data)  # Displays the dimensions of the data frame
+    ## [1] 16000 8 # in rows then columns.
+    data[1:10, ]  # Display rows 1-10 and all columns.
+    names(data)  # Check the variable names.
+    ## [1] 'V1' 'V2' 'V3' These values indicate that the variables weren't named,
+    ## and took default values.
+    names(data) <- c("income", "educate", "year")  # Assign variable names.
+    summary(data)  # Returning a summary for each variable.
+
+
+
+In this case, the summary() command will return the maximum, minimum, mean, median, first and third quartiles, as well as the number of missing values for each variable.
+
+Saving Data
+###########
+
+Use save() to write data or any object to a file in your working directory. For example, 
+
+
+.. sourcecode:: r
+    
+
+    ## Saves `mydata' to `mydata.RData' in your working directory.
+    save(mydata, file = "mydata.RData")
+    ## Saves your entire workspace to the default `.RData' file.
+    save.image()
+
+
+
+R will also prompt you to save your workspace when you use the q() command to quit. When you start R again, it will load the previously saved workspace. Restarting R will not, however, load previously used packages. You must remember to load Zelig at the beginning of every R session.
+
+Alternatively, you can recall individually saved objects from .RData files using the load() command. For example,
+
+
+.. sourcecode:: r
+    
+
+    load("mydata.RData")
+
+
+
+loads the objects saved in the mydata.RData file. You may save a data frame, a data frame and associated functions, or other R objects to file.
+
+Variables
+---------
+
+Classes of Variables
+####################
+
+R variables come in several types. Certain Zelig models require dependent variables of a certain class of variable. (These are documented under the manual pages for each model.) Use class(variable) to determine the class of a variable or class(data$variable) for a variable within a data frame.
+
+Types of Variables
+
+For all types of variable (vectors), you may use the c() command to “concatenate” elements into a vector, the : operator to generate a sequence of integer values, the seq() command to generate a sequence of non-integer values, or the rep() function to repeat a value to a specified length. In addition, you may use the <- operator to save variables (or any other objects) to the workspace. For example: 
+
+
+.. sourcecode:: r
+    
+
+    ## Creates 'logic' (5 T/F values).
+    logic <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
+    ## All integers between 10 and 20.
+    var1 <- 10:20
+    ## Sequence from 5 to 10 by intervals of 0.5.
+    var2 <- seq(from = 5, to = 10, by = 0.5)
+    ## 20 'NA' values.
+    var3 <- rep(NA, length = 20)
+    ## 15 '1's followed by 15 '0's.
+    var4 <- c(rep(1, 15), rep(0, 15))
+
+
+For the seq() command, you may alternatively specify length instead of by to create a variable with a specific number (denoted by the length argument) of evenly spaced elements.
+
+1. Numeric variables are real numbers and the default variable class for most dataset values. You can perform any type of math or logical operation on numeric values. If var1 and var2 are numeric variables, we can compute
+
+
+.. sourcecode:: r
+    
+
+    var3 <- log(var2) - 2 * var1  # Create 'var3' using math operations.
+
+
+
+2. Inf (infinity), -Inf (negative infinity), NA (missing value), and NaN (not a number) are special numeric values on which most math operations will fail. (Logical operations will work, however.) Use as.numeric() to transform variables into numeric variables. Integers are a special class of numeric variable.
+
+3. Logical variables contain values of either TRUE or FALSE. R supports the following logical operators: ==, exactly equals; >, greater than; <, less than; >=, greater than or equals; <=, less than or equals; and !=, not equals. The = symbol is not a logical operator. Refer to Section ??logical?? for more detail on logical operators. If var1 and var2 both have n observations, commands such as 
+
+
+.. sourcecode:: r
+    
+
+    var3 <- var1 < var2
+    var3 <- var1 == var2
+
+
+
+create n
+  TRUE/FALSE observations such that the i
+ th observation in var3 evaluates whether the logical statement is true for the i
+ th value of var1 with respect to the i
+ th value of var2. Logical variables should usually be converted to integer values prior to analysis; use the as.integer() command.
+
+4. Character variables are sets of text strings. Note that text strings are always enclosed in quotes to denote that the string is a value, not an object in the workspace or an argument for a function (neither of which take quotes). Variables of class character are not normally used in data analysis, but used as descriptive fields. If a character variable is used in a statistical operation, it must first be transformed into a factored variable.
+
+5. Factor variables may contain values consisting of either integers or character strings. Use factor() or as.factor() to convert character or integer variables into factor variables. Factor variables separate unique values into levels. These levels may either be ordered or unordered. In practice, this means that including a factor variable among the explanatory variables is equivalent to creating dummy variables for each level. In addition, some models (ordinal logit, ordinal probit, and multinomial logit), require that the dependent variable be a factor variable. 
+
+Recoding Variables
+##################
+
+Researchers spend a significant amount of time cleaning and recoding data prior to beginning their analyses. R has several procedures to facilitate the process.
+
+Extracting, Replacing, and Generating New Variables
+
+While it is not difficult to recode variables, the process is prone to human error. Thus, we recommend that before altering the data, you save your existing data frame using the procedures described in Section ??s:save??, that you only recode one variable at a time, and that you recode the variable outside the data frame and then return it to the data frame.
+
+To extract the variable you wish to recode, type: 
+
+
+.. sourcecode:: r
+    
+
+    ## Copies 'var1' from 'data', creating 'var'.
+    var <- data$var1
+
+
+
+Do not sort the extracted variable or delete observations from it. If you do, the ith observation in var will no longer match the ith observation in data. To replace the variable or generate a new variable in the data frame, type: 
+
+
+.. sourcecode:: r
+    
+
+    ## Replace 'var1' in `data' with 'var'.
+    data$var1 <- var
+    ## Generate 'new.var' in 'data' using 'var'.
+    data$new.var <- var
+
+
+
+To remove a variable from a data frame (rather than replacing one variable with another): 
+
+
+.. sourcecode:: r
+    
+
+    data$var1 <- NULL
+
+
+
+Alternatively, rather than recoding just specific values in variables, you may calculate new variables from existing variables. For example, 
+
+
+.. sourcecode:: r
+    
+
+    var3 <- var1 + 2 * var2
+    var3 <- log(var1)
+
+
+
+After generating the new variables, use the assignment mechanism <- to insert the new variable into the data frame.
+
+In addition to generating vectors of dummy variables, you may transform a vector into a matrix of dummy indicator variables. For example, see Section ??dummy?? to transform a vector of k
+  unique values (with n
+  observations in the complete vector) into a n\times k
+  matrix.
+
+Missing Data
+
+To deal with missing values in some of your variables: 
+
+1. You may generate multiply imputed datasets using `Amelia
+<http://gking.harvard.edu/amelia/>`_ (or other programs). 
+
+2. You may omit missing values. Zelig models automatically apply list-wise deletion, so no action is required to run a model. To obtain the total number of observations or produce other summary statistics using the analytic dataset, you may manually omit incomplete observations. To do so, first create a data frame containing only the variables in your analysis. For example: 
+
+
+.. sourcecode:: r
+    
+
+    new.data <- cbind(data$dep.var, data$var1, data$var2, data$var3)
+
+
+
+The cbind() command “column binds” variables into a data frame. (A similar command rbind() “row binds” observations with the same number of variables into a data frame.) To omit missing values from this new data frame: 
+
+
+.. sourcecode:: r
+    
+
+    new.data <- na.omit(new.data)
+
+
+
+If you perform na.omit() on the full data frame, you risk deleting observations that are fully observed in your experimental variables, but missing values in other variables. Creating a new data frame containing only your experimental variables usually increases the number of observations retained after na.omit(). 

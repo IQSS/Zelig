@@ -51,30 +51,23 @@ z$methods(
 
 z$methods(
   setx = function(...) {
-    avg <- function(val) {
-      if (is.numeric(val))
-        mean(val)
-      else if (is.ordered(val))
-        Median(val)
-      else
-        Mode(val)
+    n <<- all.vars(.self$formula[[3]], .self$data)
+    s <<- list(...)
+    m <<- match(names(s), n)
+    ma <<- m[!is.na(m)]
+    if (!all(complete.cases(m))) {
+      w <- paste("Variable", names(s[is.na(m)]), "not in data set.\n")
+      warning(w)
     }
-    n <- all.vars(.self$formula[[3]], .self$data)
-    ldata <- lapply(.self$data, avg)
-    s <- list(...)
-    if (length(s) >= 1) {
-      for (i in 1:length(s)) {
-        if (!names(s)[i] %in% n) {
-          w <- paste("Variable '", names(s)[[i]], "' not in data set.", sep="")
-          warning(w)
-        }
-        else
-          ldata[names(s)[i]] <- s[i][[1]]
-      }
+    if (is.na(m)) {
+      print("here")
+      ldata <- lapply(.self$data, avg)
+    } else {
+      ldata <- lapply(.self$data[n[-ma]], avg)
+      ldata[n[ma]] <- s[n[ma]]
     }
-    f <- Formula(formula(.self$zelig.out))
-    .self$setx.out <- model.matrix(f, lhs = 1, ldata)
-#     .self$setx.out <- model.matrix(.self$formula, ldata)
+    f <- update(formula(.self$zelig.out), 1 ~ .)
+    .self$setx.out <- model.matrix(f, ldata)
   }
 )
 
@@ -117,9 +110,16 @@ z$methods(
 
 z$methods(
   toJSON = function() {
-    .self$json$"-name" <- .self$model
-    .self$json$"-label" <- .self$text
-    .self$json <- rjson::toJSON(.self$json)
+    .self$json$"name" <- .self$model
+    .self$json$"description" <- .self$text
+    .self$json <- toJSON(.self$json, pretty = TRUE)
   }
 )
+
+# z$methods(
+#   toJSON = function() {
+#     json <- list("-name" = .self$model, "-label" = .self$text)
+#     .self$json <- jsonlite::toJSON(json, pretty = TRUE)
+#   }
+# )
 

@@ -1,4 +1,4 @@
-import(methods, Formula, MASS, VGAM, rjson, MCMCpack, gee)
+import(methods, MASS, VGAM, rjson, MCMCpack, gee)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(

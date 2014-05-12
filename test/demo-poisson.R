@@ -11,6 +11,8 @@ p <- within(p, {
 })
 head(p)
 
+library(MASS)
+
 w <- runif(200)
 
 # Zelig 4 code:
