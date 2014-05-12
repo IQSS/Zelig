@@ -1,7 +1,7 @@
 zbinchoice <- setRefClass("Zelig-bbinchoice",
-                          contains="Zelig",
-                          field=list(family = "ANY",
-                                     linkinv = "function"
+                          contains = "Zelig",
+                          field = list(family = "ANY",
+                                       linkinv = "function"
                           ))
 
 zbinchoice$methods(
@@ -15,9 +15,9 @@ zbinchoice$methods(
 )
 
 zbinchoice$methods(
-  zelig = function(formula, data, ..., weights=NULL) {
+  zelig = function(formula, data, ..., weights = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    callSuper(formula=formula, data=data, ..., weights=NULL)
+    callSuper(formula = formula, data = data, ..., weights = NULL)
     .self$model.call$family <- .self$family
     .self$zelig.out <- eval(.self$model.call)
   }
@@ -25,8 +25,8 @@ zbinchoice$methods(
 
 zbinchoice$methods(
   param = function(num, ...) {
-    .self$simparam <- mvrnorm(n=num, mu=coef(.self$zelig.out),
-                              Sigma=vcov(.self$zelig.out))
+    .self$simparam <- mvrnorm(n = num, mu = coef(.self$zelig.out),
+                              Sigma = vcov(.self$zelig.out))
   }
 )
 

@@ -1,5 +1,5 @@
 ztobit <- setRefClass("Zelig-tobit",
-                      contains="Zelig",
+                      contains = "Zelig",
                       fields = list(simalpha = "matrix",
                                     linkinv = "function"))
 
@@ -26,7 +26,7 @@ ztobit$methods(
     # Make surv demands that the model 
     formula <- make.surv(formula, below, above)
     formula <- cluster.formula(formula, cluster)
-    callSuper(formula=formula, data=data, ..., robust=robust, cluster=cluster)
+    callSuper(formula = formula, data = data, ..., robust = robust, cluster = cluster)
     .self$model.call$dist <- "gaussian"
     .self$model.call$model <- FALSE
     .self$model.call$formula <- formula

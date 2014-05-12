@@ -1,5 +1,5 @@
 zlognorm <- setRefClass("Zelig-lognorm",
-                        contains="Zelig",
+                        contains ="Zelig",
                         fields = list(simalpha = "matrix",
                                       linkinv = "function"))
 
@@ -23,7 +23,7 @@ zlognorm$methods(
     # Add cluster term
     if (robust || !is.null(cluster))
       formula <- cluster.formula(formula, cluster)
-    callSuper(formula=formula, data=data, ..., robust=robust, cluster=cluster)
+    callSuper(formula = formula, data = data, ..., robust = robust, cluster = cluster)
     .self$model.call$dist <- "lognormal"
     .self$model.call$model <- FALSE
     .self$zelig.out <- eval(.self$model.call)
@@ -35,7 +35,7 @@ zlognorm$methods(
     coef <- coef(.self$zelig.out)
     mu <- c(coef, log(.self$zelig.out$scale))
     cov <- vcov(.self$zelig.out)
-    simulations <- mvrnorm(num, mu=mu, Sigma=cov)
+    simulations <- mvrnorm(num, mu = mu, Sigma = cov)
     .self$simparam = as.matrix(simulations[, 1:length(coef)])
     .self$simalpha = as.matrix(simulations[, -(1:length(coef))])
   }

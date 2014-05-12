@@ -1,5 +1,5 @@
 zglm <- setRefClass("Zelig-glm",
-                    contains="Zelig",
+                    contains = "Zelig",
                     fields = list(family = "character",
                                   link = "character",
                                   linkinv = "function"))
@@ -14,7 +14,7 @@ zglm$methods(
 zglm$methods(
   zelig = function(formula, data, ..., weights=NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    callSuper(formula=formula, data=data, ..., weights=NULL)
+    callSuper(formula = formula, data = data, ..., weights = NULL)
     .self$model.call$family <- call(.self$family, .self$link)
     .self$zelig.out <- eval(.self$model.call)
   }

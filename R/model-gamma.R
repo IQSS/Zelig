@@ -1,6 +1,6 @@
 zgamma <- setRefClass("Zelig-gamma",
-                      contains="Zelig-glm",
-                      field=list(simalpha = "numeric" # ancillary parameters
+                      contains = "Zelig-glm",
+                      field = list(simalpha = "numeric" # ancillary parameters
                       ))
 
 zgamma$methods(
@@ -19,9 +19,9 @@ zgamma$methods(
 zgamma$methods(
   param = function(num, ...) {
     shape <- gamma.shape(.self$zelig.out)
-    .self$simalpha <- rnorm(n=num, mean=shape$alpha, sd=shape$SE)
-    .self$simparam <- mvrnorm(n=num, mu=coef(.self$zelig.out),
-                              Sigma=vcov(.self$zelig.out))
+    .self$simalpha <- rnorm(n = num, mean = shape$alpha, sd = shape$SE)
+    .self$simparam <- mvrnorm(n = num, mu = coef(.self$zelig.out),
+                              Sigma = vcov(.self$zelig.out))
   }
 )
 
@@ -33,7 +33,8 @@ zgamma$methods(
     ev <- theta
     pr <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (i in 1:nrow(ev))
-      pr[i, ] <- rgamma(ncol(ev), shape=.self$simalpha[i], scale = theta[i, ] / .self$simalpha[i])
+      pr[i, ] <- rgamma(ncol(ev), shape=.self$simalpha[i], 
+                        scale = theta[i, ] / .self$simalpha[i])
     return(list("Expected Values: E(Y|X)"  = ev,
                 "Predicted Values: Y|X" = pr))
   }

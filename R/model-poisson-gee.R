@@ -1,4 +1,4 @@
-zpoissongee <- setRefClass("Zelig-poisson-gee", contains="Zelig")
+zpoissongee <- setRefClass("Zelig-poisson-gee", contains = "Zelig")
 
 zpoissongee$methods(
   initialize = function() {

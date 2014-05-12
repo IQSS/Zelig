@@ -1,5 +1,5 @@
 zprobit <- setRefClass("Zelig-probit",
-                       contains="Zelig-binchoice")
+                       contains = "Zelig-binchoice")
 
 zprobit$methods(
   initialize = function() {

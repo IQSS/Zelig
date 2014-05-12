@@ -22,7 +22,7 @@ zrelogit$methods(
     #   cbind(y, 1-y) ~ x1 + x2 + x3 + ... + xN
     # Where y is the response.
     form <- update(formula, cbind(., 1 - .) ~ .)
-    callSuper(formula=formula, data=data, ..., weights=NULL)
+    callSuper(formula = formula, data = data, ..., weights = NULL)
     .self$model.call[[1]] <- quote(relogit)
     .self$model.call$formula <- form
     .self$model.call$case.control <- case.control
@@ -59,7 +59,7 @@ relogit <- function(formula,
     weighting <- FALSE
   if (length(tau) > 2)
     stop("tau must be a vector of length less than or equal to 2")
-  else if (length(tau)==2) {
+  else if (length(tau) == 2) {
     mf[[1]] <- relogit
     res <- list()
     mf$tau <- min(tau)
@@ -72,7 +72,7 @@ relogit <- function(formula,
   }
   else {
     mf[[1]] <- glm
-    mf$family <- binomial(link="logit")
+    mf$family <- binomial(link = "logit")
     y2 <- model.response(model.frame(mf$formula, data))
     if (is.matrix(y2))
       y <- y2[,1]
@@ -80,9 +80,9 @@ relogit <- function(formula,
       y <- y2
     ybar <- mean(y)
     if (weighting) {
-      w1 <- tau/ybar
-      w0 <- (1-tau)/(1-ybar)
-      wi <- w1*y + w0*(1-y)
+      w1 <- tau / ybar
+      w0 <- (1-tau) / (1-ybar)
+      wi <- w1 * y + w0 * (1 - y)
       mf$weights <- wi
     }
     res <- eval(as.call(mf))
@@ -98,19 +98,19 @@ relogit <- function(formula,
         res$weighting <- TRUE
       else {
         w1 <- tau/ybar
-        w0 <- (1-tau)/(1-ybar)
-        wi <- w1*y + w0*(1-y)
+        w0 <- (1 - tau) / (1 - ybar)
+        wi <- w1 * y + w0 * (1 - y)
         res$weighting <- FALSE
       }
       W <- pihat * (1 - pihat) * wi
       ##Qdiag <- diag(X%*%solve(t(X)%*%diag(W)%*%X)%*%t(X))
-      Qdiag <- lm.influence(lm(y ~ X-1, weights=W))$hat/W
+      Qdiag <- lm.influence(lm(y ~ X - 1, weights = W))$hat / W
       if (is.null(tau)) # w_1=1 since tau=ybar
-        xi <- 0.5 * Qdiag * (2*pihat - 1)
+        xi <- 0.5 * Qdiag * (2 * pihat - 1)
       else
-        xi <- 0.5 * Qdiag * ((1+w0)*pihat-w0)
+        xi <- 0.5 * Qdiag * ((1 + w0) * pihat - w0)
       res$coefficients <- res$coefficients -
-        lm(xi ~ X - 1, weights=W)$coefficients
+        lm(xi ~ X - 1, weights = W)$coefficients
       res$bias.correct <- TRUE
     }
     else
@@ -120,7 +120,7 @@ relogit <- function(formula,
       if (tau <= 0 || tau >= 1) 
         stop("\ntau needs to be between 0 and 1.\n") 
       res$coefficients["(Intercept)"] <- res$coefficients["(Intercept)"] - 
-        log(((1-tau)/tau) * (ybar/(1-ybar)))
+        log(((1 - tau) / tau) * (ybar / (1 - ybar)))
       res$prior.correct <- TRUE
       res$weighting <- FALSE
     }
@@ -130,7 +130,7 @@ relogit <- function(formula,
       res$weighting <- FALSE
     
     res$linear.predictors <- t(res$coefficients) %*% t(X) 
-    res$fitted.values <- 1/(1+exp(-res$linear.predictors))
+    res$fitted.values <- 1 / (1 + exp(-res$linear.predictors))
     res$zelig <- "Relogit"
     class(res) <- c("Relogit", "glm")
     return(res)

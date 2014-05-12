@@ -1,5 +1,5 @@
 zpoisson <- setRefClass("Zelig-poisson",
-                        contains="Zelig-glm")
+                        contains = "Zelig-glm")
 
 zpoisson$methods(
   initialize = function() {
@@ -16,12 +16,12 @@ zpoisson$methods(
 )
 
 zpoisson$methods(
-  qi = function(x=NULL, y=NULL, num=1000, param=NULL) {
+  qi = function(x = NULL, y = NULL, num = 1000, param = NULL) {
     coef <- .self$simparam
     eta <- coef %*% t(x)
     theta <- matrix(.self$linkinv(eta), nrow = nrow(coef))
     ev <- theta
-    pr <- matrix(NA, nrow=nrow(theta), ncol=ncol(theta))
+    pr <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (i in 1:ncol(ev))
       pr[, i] <- rpois(nrow(ev), lambda = ev[, i])
     return(list("Expected Values: E(Y|X)"  = ev,

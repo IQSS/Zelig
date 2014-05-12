@@ -1,5 +1,5 @@
 zexp <- setRefClass("Zelig-exp",
-                        contains="Zelig",
+                        contains = "Zelig",
                         fields = list(simalpha = "matrix",
                                       linkinv = "function"))
 
@@ -23,7 +23,7 @@ zexp$methods(
     # Add cluster term
     if (robust || !is.null(cluster))
       formula <- cluster.formula(formula, cluster)
-    callSuper(formula=formula, data=data, ..., robust=robust, cluster=cluster)
+    callSuper(formula = formula, data = data, ..., robust = robust, cluster = cluster)
     .self$model.call$dist <- "exponential"
     .self$model.call$model <- FALSE
     .self$zelig.out <- eval(.self$model.call)
@@ -32,9 +32,8 @@ zexp$methods(
 
 zexp$methods(
   param = function(num) {
-    mu <- coef(.self$zelig.out)
-    cov <- vcov(.self$zelig.out)
-    .self$simparam = mvrnorm(num, mu=mu, Sigma=cov)
+    .self$simparam = mvrnorm(num, mu = coef(.self$zelig.out),
+                             Sigma = vcov(.self$zelig.out))
   }
 )
 

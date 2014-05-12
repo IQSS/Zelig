@@ -1,6 +1,6 @@
 znormal <- setRefClass("Zelig-normal",
-                       contains="Zelig-glm",
-                       field="simalpha")
+                       contains = "Zelig-glm",
+                       field = "simalpha")
 
 znormal$methods(
   initialize = function() {
@@ -19,7 +19,9 @@ znormal$methods(
   param = function(num, ...) {
     degrees.freedom <- .self$zelig.out$df.residual
     sig2 <- base::summary(.self$zelig.out)$dispersion # not to call class summary method
-    .self$simparam <- mvrnorm(n=num, mu=coef(.self$zelig.out), Sigma=vcov(.self$zelig.out))
+    .self$simparam <- mvrnorm(n = num,
+                              mu = coef(.self$zelig.out),
+                              Sigma = vcov(.self$zelig.out))
     .self$simalpha <- sqrt(degrees.freedom * sig2 / rchisq(num, degrees.freedom))
   }
 )
@@ -33,9 +35,9 @@ znormal$methods(
     # theta = eta, because inverse of 
     # normal models' link function is
     # the identity
-    theta <- matrix(coef %*% t(x), nrow=nrow(coef))
+    theta <- matrix(coef %*% t(x), nrow = nrow(coef))
     #
-    pr <- matrix(NA, nrow=nrow(theta), ncol=ncol(theta))
+    pr <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     #
     ev <- theta
     ev1 <- pr1 <- fd <- NA

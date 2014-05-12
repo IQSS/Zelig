@@ -1,4 +1,4 @@
-zblogit <- setRefClass("Zelig-blogit", contains="Zelig-bbinchoice")
+zblogit <- setRefClass("Zelig-blogit", contains = "Zelig-bbinchoice")
 
 zblogit$methods(
   initialize = function() {

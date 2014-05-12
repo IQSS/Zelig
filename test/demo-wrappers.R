@@ -3,8 +3,11 @@ source(file.path("..", "R", "model-zelig.R"))
 source(file.path("..", "R", "model-ls.R"))
 source(file.path("..", "R", "wrappers.R"))
 
-z.out <- zeligw(dist ~ speed, model="ls", data=cars)
+library(MASS)
+
+z.out <- zeligw(dist ~ speed, model = "ls", data = cars)
 print(z.out)
 x.out <- setxw(z.out, speed=30)
-s.out <- simw(z.out, x.out)
+s.out <- simw(z.out, x.out, num = 1000)
 summaryw(s.out)
+

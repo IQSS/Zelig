@@ -35,16 +35,16 @@ z$methods(
         .self$authors, ". ", .self$year, ".\n  ", title,
         "\n  in Kosuke Imai, Gary King, and Olivia Lau, ",
         "\"Zelig: Everyone's Statistical Software,\"",
-        "\n  ", .self$url, "\n", sep="")
+        "\n  ", .self$url, "\n", sep = "")
   }
 )
 
 z$methods(
-  zelig = function(formula, data, ..., weights=NULL) {
+  zelig = function(formula, data, ..., weights = NULL) {
     .self$formula <- formula
     .self$data <- data
     .self$model.call <- match.call(expand.dots = TRUE,
-                                   call=sys.call(sys.parent(n=1)))
+                                   call = sys.call(sys.parent(n=1)))
     .self$model.call[[1]] <- .self$fn
   }
 )
@@ -74,8 +74,8 @@ z$methods(
 z$methods(
   sim = function(num = 1000) {
     .self$num <- num
-    .self$param(num=.self$num)
-    .self$sim.out <- .self$qi(x=.self$setx.out)
+    .self$param(num = .self$num)
+    .self$sim.out <- .self$qi(x = .self$setx.out)
   }
 )
 

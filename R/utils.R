@@ -7,15 +7,12 @@
 Mode <- function (x) {
   # build a table of values of x
   tab <- table(as.factor(x))
-  
   # find the mode, then if there's more than one, select one randomly
   v <- sample(names(which(tab == max(tab))), size=1)
-  
   # if it came in as a factor, we need to re-cast it
   # as a factor, with the same exact levels
   if (is.factor(x))
-    return(factor(v, levels=levels(x)))
-  
+    return(factor(v, levels = levels(x)))
   # re-cast as any other data-type
   as(v, class(x))
 }
@@ -60,10 +57,10 @@ avg <- function(val) {
 }
 
 statmat <- function(qi){
-  m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm=TRUE))
-  n <- matrix(apply(qi, 2, mean, na.rm=TRUE))
+  m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm = TRUE))
+  n <- matrix(apply(qi, 2, mean, na.rm = TRUE))
   colnames(n) <- "mean"
-  o <- matrix(apply(qi, 2, sd, na.rm=TRUE))
+  o <- matrix(apply(qi, 2, sd, na.rm = TRUE))
   colnames(o) <- "sd"
   p <- cbind(n, o, m)
   return(p)
@@ -86,6 +83,6 @@ cluster.formula <- function (formula, cluster) {
   else
     # Otherwise we trust user input
     sprintf("cluster(%s)", cluster)
-  update(formula, paste(". ~ .", cluster.part, sep=" + "))
+  update(formula, paste(". ~ .", cluster.part, sep = " + "))
 }
 

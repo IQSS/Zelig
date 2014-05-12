@@ -1,5 +1,5 @@
 zlogit <- setRefClass("Zelig-logit",
-                      contains="Zelig-binchoice")
+                      contains = "Zelig-binchoice")
   
 zlogit$methods(
   initialize = function() {

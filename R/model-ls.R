@@ -1,4 +1,4 @@
-zls <- setRefClass("Zelig-ls", contains="Zelig")
+zls <- setRefClass("Zelig-ls", contains = "Zelig")
 
 zls$methods(
   initialize = function() {
@@ -14,16 +14,19 @@ zls$methods(
 zls$methods(
   zelig = function(formula, data, ..., weights=NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    callSuper(formula=formula, data=data, ...,
-              weights=NULL)
+    callSuper(formula = formula, data = data, ...,
+              weights = NULL)
+    .self$zelig.out <- eval(.self$model.call, envir = parent.frame(1))
+#     .self$zelig.out <- eval(.self$model.call, envir = .self$envir)
     .self$zelig.out <- eval(.self$model.call)
   }
 )
 
 zls$methods(
   param = function(num) {
-    .self$simparam <- mvrnorm(n=num, mu=coef(.self$zelig.out),
-                              Sigma=vcov(.self$zelig.out))
+    .self$simparam <- mvrnorm(n = num,
+                              mu = coef(.self$zelig.out),
+                              Sigma = vcov(.self$zelig.out))
   }
 )
 
@@ -42,5 +45,3 @@ zls$methods(
     callSuper()
   }
 )
-
-
