@@ -44,7 +44,7 @@ z$methods(
     .self$formula <- formula
     .self$data <- data
     .self$model.call <- match.call(expand.dots = TRUE,
-                                   call = sys.call(sys.parent(n=1)))
+                                   call = sys.call(sys.parent(n = )))
     .self$model.call[[1]] <- .self$fn
   }
 )

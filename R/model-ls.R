@@ -18,7 +18,7 @@ zls$methods(
               weights = NULL)
     .self$zelig.out <- eval(.self$model.call, envir = parent.frame(1))
 #     .self$zelig.out <- eval(.self$model.call, envir = .self$envir)
-    .self$zelig.out <- eval(.self$model.call)
+#     .self$zelig.out <- eval(.self$model.call)
   }
 )
 

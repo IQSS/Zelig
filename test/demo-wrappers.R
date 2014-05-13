@@ -11,3 +11,22 @@ x.out <- setxw(z.out, speed=30)
 s.out <- simw(z.out, x.out, num = 1000)
 summaryw(s.out)
 
+f <- function(form = dist ~ speed, model = "ls", data = cars) {
+  zz.out <- zeligw(formula = form, model = model, data = data)
+  print(zz.out)
+  xx.out <- setxw2(zz.out, speed=30)
+  ss.out <- simw2(zz.out, xx.out, num = 1000)
+  ss.out$summarize()
+}
+
+f()
+
+FF <- function(form = dist ~ speed, data = cars) {
+  Z <- zls$new()
+  Z$zelig(formula = form, data = data)
+  print(Z)
+  Z$setx(speed = 3)
+  return(Z)
+}
+
+ZZ <- FF()
