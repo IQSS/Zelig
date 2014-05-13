@@ -41,7 +41,7 @@ zeligw <- function(formula, data, model,..., by = NULL, cite = FALSE, genv = TRU
   mf[[1]] <- quote(z5$zelig)
   mf <- try(eval(mf, environment()))
   if (class(mf) == "try-error")
-    z5$zelig(formula=formula, data=data, ...)
+    z5$zelig(formula = formula, data = data, ...)
   return(z5)
 }
 

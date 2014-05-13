@@ -51,16 +51,16 @@ z$methods(
 
 z$methods(
   setx = function(...) {
-    n <<- all.vars(.self$formula[[3]], .self$data)
-    s <<- list(...)
-    m <<- match(names(s), n)
-    ma <<- m[!is.na(m)]
+    n <- all.vars(.self$formula[[3]], .self$data)
+    s <- list(...)
+    m <- match(names(s), n)
+    ma <- m[!is.na(m)]
     if (!all(complete.cases(m))) {
-      w <- paste("Variable", names(s[is.na(m)]), "not in data set.\n")
+      w <- paste("Variable '", names(s[is.na(m)]),
+                 "' not in data set.\n", sep = "")
       warning(w)
     }
-    if (is.na(m)) {
-      print("here")
+    if (!all(complete.cases(m)) || length(m) == 0) {
       ldata <- lapply(.self$data, avg)
     } else {
       ldata <- lapply(.self$data[n[-ma]], avg)

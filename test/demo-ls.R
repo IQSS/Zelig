@@ -23,6 +23,8 @@ z5$zelig.call
 z5$setx(sascxasx = 9879, speed = 30, sdjchbsdc =87, kcsbc = 8787)
 z5$setx(sascxasx = 9879)
 z5$setx(speed = 30)
+z5$setx()
+z5$setx.out
 set.seed(42)
 z5$sim(num=100)
 z5$summarize()
