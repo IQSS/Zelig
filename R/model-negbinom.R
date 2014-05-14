@@ -12,6 +12,8 @@ znegbinom$methods(
     .self$year <- 2008
     .self$category <- "count"
     .self$text <- "Negative Binomial Regression for Event Count Dependent Variables"
+    # JSON
+    .self$outcome <- "discrete"
   }
 )
 

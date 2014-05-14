@@ -12,6 +12,8 @@ zlognorm$methods(
     .self$text = "Log-Normal Regression for Duration Dependent Variables"
     .self$fn <- quote(survival::survreg)
     .self$linkinv <- survreg.distributions[["lognormal"]]$itrans
+    # JSON
+    .self$outcome <- "discrete"
   }
 )
 

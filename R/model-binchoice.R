@@ -8,6 +8,8 @@ zbinchoice$methods(
     .self$year <- 2007
     .self$category <- "dichotomous"
     .self$family <- "binomial"
+    # JSON
+    .self$outcome <- "binary"
   }
 )
 

@@ -12,6 +12,8 @@ zpoisson$methods(
     .self$year <- 2007
     .self$category <- "count"
     .self$text <- "Poisson Regression for Event Count Dependent Variables"
+    # JSON
+    .self$outcome <- "discrete"
   }
 )
 
@@ -27,5 +29,13 @@ zpoisson$methods(
     return(list("Expected Values: E(Y|X)"  = ev,
                 "Predicted Values: Y|X"    = as.factor(pr))
     )
+  }
+)
+
+zpoisson$methods(
+  toJSON = function() {
+    .self$json <- list()
+    callSuper()
+
   }
 )

@@ -13,6 +13,8 @@ zgamma$methods(
     .self$year <- 2007
     .self$category <- "bounded"
     .self$text <- "Gamma Regression for Continuous, Positive Dependent Variables"
+    # JSON
+    .self$outcome <- "continous"
   }
 )
 

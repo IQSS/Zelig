@@ -8,6 +8,8 @@ zls$methods(
     .self$category <- "continuous"
     .self$text = "Least Squares Regression for Continuous Dependent Variables"
     .self$fn <- quote(stats::lm)
+    # JSON
+    .self$outcome <- "continous"
   }
 )
 
@@ -38,10 +40,10 @@ zls$methods(
   }
 )
 
-zls$methods(
-  toJSON = function() {
-    .self$json <- list()
-    .self$json$"description" <- "Least Squares Regression for Continuous Dependent Variables"
-    callSuper()
-  }
-)
+# zls$methods(
+#   toJSON = function() {
+#     .self$json <- list()
+#     .self$json$"outcome" <- list(modelingType = .self$category)
+#     callSuper()
+#   }
+# )

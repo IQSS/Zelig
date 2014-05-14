@@ -12,6 +12,8 @@ znormal$methods(
     .self$year <- 2008
     .self$category <- "continuous"
     .self$text <- "Normal Regression for Continuous Dependent Variables"
+    # JSON
+    .self$outcome <- "continuous"
   }
 )
 

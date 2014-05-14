@@ -12,6 +12,8 @@ ztobit$methods(
     .self$text = "Linear regression for Left-Censored Dependent Variable"
     .self$fn <- quote(survival::survreg)
 #     .self$linkinv <- survreg.distributions[["gaussian"]]$itrans
+    # JSON
+    .self$outcome <- "continous"
   }
 )
 

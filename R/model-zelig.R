@@ -17,7 +17,10 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to wrap, was "c
                                         url = "character",
                                         category = "character",
                                         
-                                        json = "ANY" # JSON export
+                                        json = "ANY", # JSON export
+                                        ljson = "ANY",
+                                        outcome = "ANY",
+                                        explanatory = "ANY"
                                         ))
 
 z$methods(
@@ -25,6 +28,13 @@ z$methods(
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://gking.harvard.edu/zelig"
+    # JSON
+    .self$explanatory <- c("continuous",
+                           "discrete",
+                           "nominal",
+                           "ordinal",
+                           "binary")
+    .self$outcome <- ""
   }
 )
 
@@ -110,9 +120,15 @@ z$methods(
 
 z$methods(
   toJSON = function() {
+    if (!is.list(.self$json))
+      .self$json <- list()
     .self$json$"name" <- .self$model
     .self$json$"description" <- .self$text
-    .self$json <- toJSON(.self$json, pretty = TRUE)
+    .self$json$"outcome" <- list(modelingType = .self$outcome)
+    .self$json$"explanatory" <- list(modelingType = .self$explanatory)
+    .self$ljson <- .self$json
+    .self$json <- jsonlite::toJSON(json, pretty = TRUE)
+    return(.self$json)
   }
 )
 
