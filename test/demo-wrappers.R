@@ -17,17 +17,28 @@ source(file.path("..", "R", "wrappers.R"))
 
 library(MASS)
 
+## Zelig 5
 z.out <- zeligw(dist ~ speed, model = "ls", data = cars)
 print(z.out)
 x.out <- setxw(z.out, speed=30)
-x1.out <- setxw(z.out, speed=40)
+x1.out <- setxw(z.out, speed = 10)
 s.out <- simw(z.out, x.out, x1.out, num = 1000)
 summaryw(s.out)
+
+library(Zelig)
+
+## Zelig 4
+z.out <- zelig(dist ~ speed, model = "ls", data = cars)
+print(z.out)
+x.out <- setx(z.out, speed=30)
+x1.out <- setx(z.out, speed = 10)
+s.out <- sim(z.out, x.out, x1.out, num = 1000)
+summary(s.out)
 
 f <- function(form = dist ~ speed, model = "ls", data = cars) {
   zz.out <- zeligw(formula = form, model = model, data = data)
   print(zz.out)
-  xx.out <- setxw2(zz.out, speed=30)
+  xx.out <- setxw2(zz.out, speed = 30)
   ss.out <- simw2(zz.out, xx.out, num = 1000)
   ss.out$summarize()
 }
