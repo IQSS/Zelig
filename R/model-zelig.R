@@ -1,12 +1,17 @@
-z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to wrap, was "call"
+z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         formula = "formula", # Zelig formula
                                         weights = "numeric", 
                                         model = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix
+                                        
                                         zelig.call = "call", # Zelig function call
                                         model.call = "call", # wrapped function call
                                         zelig.out = "ANY", # estimated zelig model
-                                        setx.out = "matrix", # setx model matrix
+                                        
+                                        qi.out = "list",
+                                        setx.out = "list", # set values
+                                        setx.labels = "list",
+                                        
                                         sim.out = "list", # simulated qi's
                                         simparam = "matrix", # simulated parameters
                                         num = "numeric", # nb of simulations
@@ -28,6 +33,13 @@ z$methods(
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://gking.harvard.edu/zelig"
+    .self$qi.out <- list()
+    .self$setx.out <- list()
+    .self$setx.labels <- list(ev = "Expected Values: E(Y|X)",
+                              ev1 = "Expected Values: E(Y|X1)",
+                              pv = "Predicted Values: Y|X",
+                              pv1 = "Predicted Values: Y|X1",
+                              fd = "First Differences: E(Y|X1) - E(Y|X)")
     # JSON
     .self$explanatory <- c("continuous",
                            "discrete",
@@ -60,7 +72,7 @@ z$methods(
 )
 
 z$methods(
-  setx = function(...) {
+  set = function(...) {
     n <- all.vars(.self$formula[[3]], .self$data)
     s <- list(...)
     m <- match(names(s), n)
@@ -70,14 +82,37 @@ z$methods(
                  "' not in data set.\n", sep = "")
       warning(w)
     }
-    if (!all(complete.cases(m)) || length(m) == 0) {
+    if (!all(complete.cases(m)) & length(m) == 0) {
+      ldata <- list()
+      ldata[n[ma]] <- s[n[ma]]
+    } else if (all(is.na(m))) {
       ldata <- lapply(.self$data, avg)
     } else {
       ldata <- lapply(.self$data[n[-ma]], avg)
       ldata[n[ma]] <- s[n[ma]]
     }
     f <- update(formula(.self$zelig.out), 1 ~ .)
-    .self$setx.out <- model.matrix(f, ldata)
+    return(model.matrix(f, ldata))
+#     .self$setx.out <- model.matrix(f, ldata)
+  }
+)
+
+z$methods(
+  setx = function(...) {
+    .self$setx.out$x <- .self$set(...)
+  }
+)
+
+z$methods(
+  setx1 = function(...) {
+    .self$setx.out$x1 <- .self$set(...)
+  }
+)
+
+z$methods(
+  qi = function(...) {
+    idx <- match(names(.self$setx.labels), names(.self$qi.out), nomatch = 0) 
+    names(.self$qi.out)[idx] <- .self$setx.labels[idx != 0]
   }
 )
 
@@ -85,7 +120,8 @@ z$methods(
   sim = function(num = 1000) {
     .self$num <- num
     .self$param(num = .self$num)
-    .self$sim.out <- .self$qi(x = .self$setx.out)
+    .self$qi()
+    .self$sim.out <- .self$qi.out
   }
 )
 

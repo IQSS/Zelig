@@ -41,8 +41,7 @@ zexp$methods(
 
 zexp$methods(
   qi = function(x) {
-    coef <- .self$simparam
-    eta <- coef %*% t(x)
+    eta <- .self$simparam %*% t(x)
     ev <- as.matrix(apply(eta, 2, linkinv))
     pv <- as.matrix(rexp(length(ev), rate = 1 / ev))
     return(list("Expected Values: E(Y|X)"  = ev,

@@ -33,17 +33,12 @@ zls$methods(
 )
 
 zls$methods(
-  qi = function(x) {
-    ev <- .self$simparam %*% t(x)
-    return(list("Expected Values: E(Y|X)"  = ev,
-                "Predicted Values: Y|X"    = ev))
+  qi = function() {
+    .self$qi.out$ev <- .self$simparam %*% t(.self$setx.out$x)
+    if (!is.null(.self$setx.out$x1)) {
+      .self$qi.out$ev1 <- .self$simparam %*% t(.self$setx.out$x1)
+      .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
+    }
+    callSuper()
   }
 )
-
-# zls$methods(
-#   toJSON = function() {
-#     .self$json <- list()
-#     .self$json$"outcome" <- list(modelingType = .self$category)
-#     callSuper()
-#   }
-# )
