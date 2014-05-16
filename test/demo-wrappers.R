@@ -20,7 +20,8 @@ library(MASS)
 z.out <- zeligw(dist ~ speed, model = "ls", data = cars)
 print(z.out)
 x.out <- setxw(z.out, speed=30)
-s.out <- simw(z.out, x.out, num = 1000)
+x1.out <- setxw(z.out, speed=40)
+s.out <- simw(z.out, x.out, x1.out, num = 1000)
 summaryw(s.out)
 
 f <- function(form = dist ~ speed, model = "ls", data = cars) {

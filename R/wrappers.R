@@ -50,8 +50,12 @@ setxw <- function(z5, ...) {
   return(x5)
 }
 
-simw <- function(z5, x5, num) {
+simw <- function(z5, x5, x15 = NULL, num) {
   s5 <- x5$copy()
+  if (!is.null(x15)) {
+    s15 <- x15$copy()
+    s5$setx.out$x1 <- s15$setx.out$x
+  }
   s5$sim(num = num)
   return(s5)
 }
