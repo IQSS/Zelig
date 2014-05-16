@@ -110,6 +110,18 @@ z$methods(
 )
 
 z$methods(
+  ev = function(...) {
+    return()
+  }
+)
+
+z$methods(
+  pv = function(...) {
+    return()
+  }
+)
+
+z$methods(
   qi = function(...) {
     idx <- match(names(.self$setx.labels), names(.self$qi.out), nomatch = 0) 
     names(.self$qi.out)[idx] <- .self$setx.labels[idx != 0]

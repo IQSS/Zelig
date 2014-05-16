@@ -32,11 +32,25 @@ zls$methods(
   }
 )
 
+# zls$methods(
+#   ev = function(...) {
+#     .self$qi.out$ev <- .self$simparam %*% t(.self$setx.out$x)
+#   }
+# )
+# 
+# zls$methods(
+#   pv = function(...) {
+#     .self$qi.out$pv <- .self$simparam %*% t(.self$setx.out$x)
+#   }
+# )
+
 zls$methods(
   qi = function() {
     .self$qi.out$ev <- .self$simparam %*% t(.self$setx.out$x)
+    .self$qi.out$epv <- .self$qi.out$ev
     if (!is.null(.self$setx.out$x1)) {
       .self$qi.out$ev1 <- .self$simparam %*% t(.self$setx.out$x1)
+      .self$qi.out$pv1 <- .self$qi.out$pv
       .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
     }
     callSuper()
