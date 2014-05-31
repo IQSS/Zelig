@@ -14,7 +14,7 @@ zls$methods(
 )
 
 zls$methods(
-  zelig = function(formula, data, ..., weights=NULL) {
+  zelig = function(formula, data, ..., weights = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     callSuper(formula = formula, data = data, ...,
               weights = NULL)
@@ -32,27 +32,41 @@ zls$methods(
   }
 )
 
-# zls$methods(
-#   ev = function(...) {
-#     .self$qi.out$ev <- .self$simparam %*% t(.self$setx.out$x)
-#   }
-# )
-# 
-# zls$methods(
-#   pv = function(...) {
-#     .self$qi.out$pv <- .self$simparam %*% t(.self$setx.out$x)
-#   }
-# )
-
 zls$methods(
-  qi = function() {
-    .self$qi.out$ev <- .self$simparam %*% t(.self$setx.out$x)
-    .self$qi.out$epv <- .self$qi.out$ev
-    if (!is.null(.self$setx.out$x1)) {
-      .self$qi.out$ev1 <- .self$simparam %*% t(.self$setx.out$x1)
-      .self$qi.out$pv1 <- .self$qi.out$pv
-      .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
+  ev = function(which) {
+    if (which %in% c("x", "x1"))
+      res <- .self$simparam %*% t(.self$setx.out[[which]])
+    else if (which == "range") {
+      res <- list()
+      for (i in seq(.self$setx.out$range))
+        res[[i]] <- .self$simparam %*% t(.self$setx.out$range[[i]])
     }
-    callSuper()
+    return(res)
   }
 )
+
+zls$methods(
+  pv = function(which) {
+    if (which %in% c("x", "x1"))
+      res <- .self$simparam %*% t(.self$setx.out[[which]])
+    else if (which == "range") {
+      res <- list()
+      for (i in seq(.self$setx.out$range))
+        res[[i]] <- .self$simparam %*% t(.self$setx.out$range[[i]])
+    }
+    return(res)
+  }
+)
+
+# zls$methods(
+#   qi = function() {
+# #     .self$qi.out$ev <- .self$simparam %*% t(.self$setx.out$x)
+# #     .self$qi.out$pv <- .self$qi.out$ev
+# #     if (!is.null(.self$setx.out$x1)) {
+# #       .self$qi.out$ev1 <- .self$simparam %*% t(.self$setx.out$x1)
+# #       .self$qi.out$pv1 <- .self$qi.out$pv
+# #       .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
+# #     }
+#     callSuper()
+#   }
+# )

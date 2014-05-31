@@ -20,9 +20,9 @@ library(Zelig)
 z.out <- zelig(num_awards ~ prog + math, data=p, model="poisson",
                weights=w)
 summary(z.out)
-x.out <- setx(z.out, math=40)
+x.out <- setx(z.out, math = 40)
 set.seed(42)
-s.out <- sim(z.out, x = x.out, num=1000)
+s.out <- sim(z.out, x = x.out, num = 1000)
 summary(s.out)
 
 # Zelig 5 code:
@@ -32,9 +32,9 @@ z5$zelig(num_awards ~ prog + math, data=p,
 z5
 z5$zelig.call
 z5$model.call
-z5$setx(math=40)
+z5$setx(math = 40)
 set.seed(42)
-z5$sim(num=100)
+z5$sim(num = 1000)
 z5$summarize()
 z5$cite()
 

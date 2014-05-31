@@ -73,8 +73,20 @@ z$methods(
 
 z$methods(
   set = function(...) {
-    n <- all.vars(.self$formula[[3]], .self$data)
-    s <- list(...)
+#     n <- all.vars(.self$formula[[3]], .self$data)
+#     n <- attr(model.matrix(.self$zelig.out), "dimnames")[[2]]
+#     n <- names(model.frame(.self$zelig.out))
+#     n <- intersect(names(.self$data), names(model.frame(.self$zelig.out)))
+#     n <- c(intersect(names(.self$data), names(model.frame(.self$zelig.out))),
+#            all.vars(.self$formula[[3]]))
+    pred <- terms(.self$zelig.out, "predvars")
+    n <- intersect(as.character(attr(pred, "predvars"))[-1],
+                   names(.self$data))
+    s <-list(...)
+    print(s)
+    if (is.list(s[[1]]))
+      s <- s[[1]]
+    print(s)
     m <- match(names(s), n)
     ma <- m[!is.na(m)]
     if (!all(complete.cases(m))) {
@@ -91,9 +103,17 @@ z$methods(
       ldata <- lapply(.self$data[n[-ma]], avg)
       ldata[n[ma]] <- s[n[ma]]
     }
+    cc <- attr(pred, "dataClasses")
+    nn <- names(ldata)
+    for (i in seq(nn))
+      if (cc[nn[i]] == "factor") {
+        ldata[[nn[i]]] <- factor(ldata[[nn[i]]],
+                                 levels = levels(.self$data[[nn[i]]]))
+      }
     f <- update(formula(.self$zelig.out), 1 ~ .)
+#     f <- formula(as.Formula(f), rhs = 1)
+#     f[[2]] <- 1
     return(model.matrix(f, ldata))
-#     .self$setx.out <- model.matrix(f, ldata)
   }
 )
 
@@ -110,19 +130,35 @@ z$methods(
 )
 
 z$methods(
-  ev = function(...) {
-    return()
-  }
-)
-
-z$methods(
-  pv = function(...) {
-    return()
+  setrange = function(...) {
+    .self$setx.out$range <- list()
+    s <- list(...)
+    m <- expand.grid(s)
+    for (i in 1:nrow(m))
+      .self$setx.out$range[[i]] <- .self$set(as.list(m[i, ]))
   }
 )
 
 z$methods(
   qi = function(...) {
+    if (!is.null(.self$setx.out$x)) {
+      .self$qi.out$ev <- .self$ev("x")
+      .self$qi.out$pv <- .self$pv("x")
+      if (!is.null(.self$setx.out$x1)) {
+        .self$qi.out$ev1 <- .self$ev("x1")
+        .self$qi.out$pv1 <- .self$pv("x1")
+        .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
+      }
+    }
+    else if (!is.null(.self$setx.out$range)) {
+      print("range")
+      .self$qi.out$ev <- .self$ev("range")
+      .self$qi.out$pv <- .self$pv("range")
+#       for (i in seq(.self$setx.out$range)) {
+#         .self$qi.out$ev[[i]] <- .self$ev("range", i)
+#         .self$qi.out$pv[[i]] <- .self$pv("x")
+#       }
+    }
     idx <- match(names(.self$setx.labels), names(.self$qi.out), nomatch = 0) 
     names(.self$qi.out)[idx] <- .self$setx.labels[idx != 0]
   }
@@ -132,6 +168,7 @@ z$methods(
   sim = function(num = 1000) {
     .self$num <- num
     .self$param(num = .self$num)
+    .self$qi.out <- list()
     .self$qi()
     .self$sim.out <- .self$qi.out
   }
@@ -142,22 +179,47 @@ z$methods(
     cat("Model: ", .self$model, "\n")
     cat("Number of simulations:", .self$num, "\n")
     cat("\nValues of X\n")
-    print(.self$setx.out)
-    lqi <- .self$sim.out
-    labqi <- names(lqi)
-    for (i in 1:length(lqi)) {
-      qi <- lqi[[i]]
-      if (length(qi) == 1 & is.na(qi[1]))
-        next
-      else if (length(qi) >= 1) {
-        cat("\n", labqi[i], "\n", sep="")
-        if (is.null(attr(qi, "levels")))
-          print(statmat(qi))
-        else
-          print(statlevel(qi, .self$num))
+    if (!is.null(.self$setx.out$x)) {
+      print(.self$setx.out)
+      lqi <- .self$sim.out
+      labqi <- names(lqi)
+      for (i in 1:length(lqi)) {
+        qi <- lqi[[i]]
+        if (length(qi) == 1 & is.na(qi[1]))
+          next
+        else if (length(qi) >= 1) {
+          cat("\n", labqi[i], "\n", sep="")
+          if (is.null(attr(qi, "levels")))
+            print(statmat(qi))
+          else
+            print(statlevel(qi, .self$num))
+        }
+      }
+    } else {
+      print("range")
+      for (i in seq(.self$setx.out$range)) {
+        print(i)
+        print(.self$setx.out$range[[i]])
+        lqi <- .self$sim.out
+        labqi <- names(lqi)
+        for (i in 1:length(lqi)) {
+          qi <- lqi[[i]]
+          if (length(qi) == 1 & is.na(qi[1]))
+            next
+          else if ((l <- length(qi)) >= 1) {
+            for (j in i:l) {
+            cat("\n", labqi[i], "\n", sep="")
+            if (is.null(attr(qi, "levels")))
+              print(statmat(qi[[j]]))
+            else
+              print(statlevel(qi[[j]], .self$num))
+            }
+          }
+        }
+      }
+      
       }
     }
-  }
 )
 
 z$methods(
