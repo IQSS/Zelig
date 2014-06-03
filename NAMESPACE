@@ -18,7 +18,6 @@ exportClasses(
      "Zelig-bprobit",
      "Zelig-poisson-bayes",
      "Zelig-poisson-gee",
-     "Zelig-expnorm",
      "Zelig-lognorm",
      "Zelig-tobit"
 )

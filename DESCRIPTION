@@ -21,7 +21,7 @@ Depends: methods, MASS, VGAM, jsonlite, MCMCpack, gee
 Collate: utils.R model-zelig.R model-ls.R model-glm.R model-binchoice.R
         model-logit.R model-probit.R model-poisson.R model-normal.R
         model-gamma.R model-exp.R model-negbinom.R model-bbinchoice.R
-        model-blogit.R model-bprobit.R model-poissonbayes.R
-        model-poissongee.R model-exp.R model-lognorm.R model-tobit.R
-        wrappers.R
+        model-blogit.R model-bprobit.R model-poisson-bayes.R
+        model-poisson-gee.R model-lognorm.R model-tobit.R
+        wrappers.R create-json.R model-relogit.R model-zip.R
 Packaged: 2014-03-15 21:19:17 UTC; cchoirat
