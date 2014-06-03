@@ -16,8 +16,6 @@ exportClasses(
      "Zelig-bbinchoice",
      "Zelig-blogit",
      "Zelig-bprobit",
-     "Zelig-poisson-bayes",
-     "Zelig-poisson-gee",
      "Zelig-lognorm",
      "Zelig-tobit"
 )

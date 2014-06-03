@@ -17,42 +17,42 @@ library(survival)
 library(jsonlite)
 
 z5ls <- zls$new()
-cat(z5ls$toJSON())
+z5ls$toJSON()
 
 z5logit <- zlogit$new()
-cat(z5logit$toJSON())
+z5logit$toJSON()
 
 z5probit <- zprobit$new()
-cat(z5probit$toJSON())
+z5probit$toJSON()
 
 z5poisson <- zpoisson$new()
-cat(z5poisson$toJSON())
+z5poisson$toJSON()
 
 z5normal <- znormal$new()
-cat(z5normal$toJSON())
+z5normal$toJSON()
 
 z5gamma <- zgamma$new()
-cat(z5gamma$toJSON())
+z5gamma$toJSON()
 
 z5negbinom <- znegbinom$new()
-cat(z5negbinom$toJSON())
+z5negbinom$toJSON()
 
 z5negbinom <- znegbinom$new()
-cat(z5negbinom$toJSON())
+z5negbinom$toJSON()
 
 z5negbinom <- znegbinom$new()
-cat(z5negbinom$toJSON())
+z5negbinom$toJSON()
 
 z5exp <- zexp$new()
-cat(z5exp$toJSON())
+z5exp$toJSON()
 
 z5lognorm <- zlognorm$new()
-cat(z5lognorm$toJSON())
+z5lognorm$toJSON()
 
 z5tobit <- ztobit$new()
-cat(z5tobit$toJSON())
+z5tobit$toJSON()
 
-zeligmodels <- list(zeligmodels = list("ls" = z5ls$ljson,
+zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "logit" = z5logit$ljson,
                     "probit" = z5probit$ljson,
                     "poisson" = z5poisson$ljson,
@@ -74,8 +74,9 @@ zeligmodels <- list(zeligmodels = list("ls" = z5ls$ljson,
 #                                        z5lognorm$ljson,
 #                                        z5tobit$ljson))
 
-cat(toJSON(zeligmodels, pretty = TRUE))
+# cat(toJSON(zeligmodels, pretty = TRUE))
 
-cat(toJSON(zeligmodels, pretty = TRUE), file = "zelig5modelsnames.json")
+cat(toJSON(zeligmodels, pretty = TRUE),
+    file = file.path("JSON", "zelig5models.json"))
 
-j <- fromJSON(txt="zelig5modelsnames.json")
+# j <- fromJSON(txt = file.path("JSON", "zelig5models.json"))
