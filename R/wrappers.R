@@ -1,4 +1,4 @@
-zeligw <- function(formula, data, model,..., by = NULL, cite = FALSE, genv = TRUE) {
+zeligw <- function(formula, data, model,..., by = NULL, cite = FALSE) {
   # Begin: Zelig 5 models
   if (model == "ls")
     z5 <- zls$new()
