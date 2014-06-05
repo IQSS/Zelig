@@ -1,3 +1,12 @@
+##' sum
+##' gives the sum
+##' @param x X
+##' @param y Y
+##' @return sum1 returns x+y
+##' @examples
+##' sum1(3,4)
+##' @rdname funs
+##' @export
 zeligw <- function(formula, data, model,..., by = NULL, cite = FALSE) {
   # Begin: Zelig 5 models
   if (model == "ls")

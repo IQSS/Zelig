@@ -1,3 +1,4 @@
+#' @include model-zelig.R
 znegbinom <- setRefClass("Zelig-negbinom",
                          contains="Zelig",
                          field=list(simalpha = "numeric" # ancillary parameters
@@ -28,13 +29,13 @@ znegbinom$methods(
 znegbinom$methods(
   param = function(num, ...) {
     .self$simalpha <- .self$zelig.out$theta
-    .self$simparam <- mvrnorm(n=num, mu=coef(.self$zelig.out),
-                              Sigma=vcov(.self$zelig.out))
+    .self$simparam <- mvrnorm(n = num, mu = coef(.self$zelig.out),
+                              Sigma = vcov(.self$zelig.out))
   }
 )
 
 znegbinom$methods(
-  qi = function(x=NULL, y=NULL, num=1000, param=NULL) {
+  qi = function(x = NULL, y = NULL, num = 1000, param = NULL) {
     coef <- .self$simparam
     alpha <- .self$simalpha
     inverse <- family(.self$zelig.out)$linkinv

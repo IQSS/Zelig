@@ -1,3 +1,5 @@
+#' @include model-zelig.R
+#' @include model-glm.R
 zgamma <- setRefClass("Zelig-gamma",
                       contains = "Zelig-glm",
                       field = list(simalpha = "numeric" # ancillary parameters
@@ -28,7 +30,7 @@ zgamma$methods(
 )
 
 zgamma$methods(
-  qi = function(x=NULL, y=NULL, param=NULL) {
+  qi = function(x = NULL, y = NULL, param = NULL) {
     coef <- .self$simparam
     eta <- coef %*% t(x)
     theta <- matrix(1 / eta, nrow = nrow(coef))

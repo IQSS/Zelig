@@ -1,3 +1,4 @@
+#' @include model-zelig.R
 zls <- setRefClass("Zelig-ls", contains = "Zelig")
 
 zls$methods(
@@ -32,41 +33,59 @@ zls$methods(
   }
 )
 
-zls$methods(
-  ev = function(which) {
-    if (which %in% c("x", "x1"))
-      res <- .self$simparam %*% t(.self$setx.out[[which]])
-    else if (which == "range") {
-      res <- list()
-      for (i in seq(.self$setx.out$range))
-        res[[i]] <- .self$simparam %*% t(.self$setx.out$range[[i]])
-    }
-    return(res)
-  }
-)
+# zls$methods(
+#   ev = function(what) {
+#     if (what %in% c("x", "x1"))
+#       res <- .self$simparam %*% t(.self$setx.out[[what]])
+#     else if (what == "range") {
+#       res <- list()
+#       for (i in seq(.self$setx.out$range))
+#         res[[i]] <- .self$simparam %*% t(.self$setx.out$range[[i]])
+#     }
+#     return(res)
+#   }
+# )
+# 
+# zls$methods(
+#   pv = function(what) {
+#     if (what %in% c("x", "x1"))
+#       res <- .self$simparam %*% t(.self$setx.out[[what]])
+#     else if (what == "range") {
+#       res <- list()
+#       for (i in seq(.self$setx.out$range))
+#         res[[i]] <- .self$simparam %*% t(.self$setx.out$range[[i]])
+#     }
+#     return(res)
+#   }
+# )
+
+# zls$methods(
+#   qi = function() {
+#     .self$qi.out$ev <- .self$simparam %*% t(.self$setx.out$x)
+#     .self$qi.out$pv <- .self$qi.out$ev
+#     if (!is.null(.self$setx.out$x1)) {
+#       .self$qi.out$ev1 <- .self$simparam %*% t(.self$setx.out$x1)
+#       .self$qi.out$pv1 <- .self$qi.out$pv
+#       .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
+#     }
+# #     callSuper()
+#   }
+# )
 
 zls$methods(
-  pv = function(which) {
-    if (which %in% c("x", "x1"))
-      res <- .self$simparam %*% t(.self$setx.out[[which]])
-    else if (which == "range") {
-      res <- list()
-      for (i in seq(.self$setx.out$range))
-        res[[i]] <- .self$simparam %*% t(.self$setx.out$range[[i]])
-    }
-    return(res)
+  qi = function(simparam, x) {
+    ev <- simparam %*% t(x)
+    pv <- ev
+    return(list(ev = ev, pv = pv))
+    #     callSuper()
   }
 )
 
 # zls$methods(
 #   qi = function() {
-# #     .self$qi.out$ev <- .self$simparam %*% t(.self$setx.out$x)
-# #     .self$qi.out$pv <- .self$qi.out$ev
-# #     if (!is.null(.self$setx.out$x1)) {
-# #       .self$qi.out$ev1 <- .self$simparam %*% t(.self$setx.out$x1)
-# #       .self$qi.out$pv1 <- .self$qi.out$pv
-# #       .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
-# #     }
-#     callSuper()
+#     ev <- .self$simparam %*% t(.self$setx.out$x)
+#     pv <- ev
+#     return(list("Expected Values: E(Y|X)"  = ev,
+#                 "Predicted Values: Y|X"    = pv))
 #   }
 # )

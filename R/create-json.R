@@ -1,17 +1,17 @@
-# source("utils.R")
-# source("model-zelig.R")
-# source("model-ls.R")
-# source("model-glm.R")
-# source("model-binchoice.R")
-# source("model-logit.R")
-# source("model-probit.R")
-# source("model-poisson.R")
-# source("model-normal.R")
-# source("model-gamma.R")
-# source("model-negbinom.R")
-# source("model-exp.R")
-# source("model-lognorm.R")
-# source("model-tobit.R")
+#' @include utils.R
+#' @include model-zelig.R
+#' @include model-ls.R
+#' @include model-glm.R
+#' @include model-binchoice.R
+#' @include model-logit.R
+#' @include model-probit.R
+#' @include model-poisson.R
+#' @include model-normal.R
+#' @include model-gamma.R
+#' @include model-negbinom.R
+#' @include model-exp.R
+#' @include model-lognorm.R
+#' @include model-tobit.R
 
 library(survival)
 library(jsonlite)

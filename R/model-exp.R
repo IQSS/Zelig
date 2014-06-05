@@ -1,3 +1,4 @@
+#' @include model-zelig.R
 zexp <- setRefClass("Zelig-exp",
                         contains = "Zelig",
                         fields = list(simalpha = "matrix",

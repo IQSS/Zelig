@@ -1,34 +1,74 @@
 #+TODO: TODO(t) STARTED(s) | DONE(d) CANCELED(c)
 
-* Zelig  5 models
+* Zelig  5 Core models
 
 ** DONE exp.R
-** TODO factor.bayes.R
-** TODO gamma.gee.R
-** DONE gamma.R
-** TODO gamma.survey.R
-** TODO logit.bayes.R
-** TODO logit.gee.R
-** DONE logit.R
-** TODO logit.survey.R
-** DONE lognorm.R
+*** zelig
+*** param
+*** qi
 ** DONE ls.R
-** TODO mlogit.bayes.R
-** STARTED negbinom.R
-** TODO normal.bayes.R
-** TODO normal.gee.R
-** DONE normal.R
-** TODO normal.survey.R
-** TODO oprobit.bayes.R
-** DONE poisson.bayes.R
-** DONE poisson.gee.R
-** TODO poisson.R
-** TODO poisson.survey.R
-** TODO probit.bayes.R
-** TODO probit.gee.R
+*** zelig
+*** param
+*** qi
+** DONE gamma.R
+*** zelig
+*** param
+*** qi
+** DONE logit.R
+*** zelig
+*** param
+*** qi
 ** DONE probit.R
-** TODO probit.survey.R
+*** zelig
+*** param
+*** qi
+** DONE lognorm.R
+*** zelig
+*** param
+*** qi
+** DONE normal.R
+*** zelig
+*** param
+*** qi
+** STARTED poisson.R
+*** zelig
+*** param
+*** qi
+** STARTED negbinom.R
+*** zelig
+*** param
+*** qi
 ** STARTED relogit.R
+*** zelig
+*** param
+*** qi
 ** STARTED tobit.R
+*** zelig
+*** param
+*** qi
+
+
+* Zelig 4 models (to be ported in Zelig 5.1 and Zelig 5.2)
+
+** TODO gamma.survey.R
+** TODO logit.survey.R
+** TODO poisson.survey.R
+** TODO normal.survey.R
+** TODO probit.survey.R
+
+** TODO logit.bayes.R
+** TODO factor.bayes.R
+** STARTED poisson.bayes.R
+** TODO normal.bayes.R
+** TODO mlogit.bayes.R
+** TODO oprobit.bayes.R
+** TODO probit.bayes.R
+
+** TODO logit.gee.R
+** TODO gamma.gee.R
+** STARTED poisson.gee.R
+** TODO normal.gee.R
+** TODO probit.gee.R
+
 ** TODO twosls.R
    

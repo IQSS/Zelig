@@ -1,3 +1,4 @@
+#' @include model-zelig.R
 zlognorm <- setRefClass("Zelig-lognorm",
                         contains ="Zelig",
                         fields = list(simalpha = "matrix",

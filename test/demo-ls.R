@@ -1,9 +1,9 @@
 library(MASS)
 data(cars)
 
-source(file.path("..", "R", "utils.R"))
-source(file.path("..", "R", "model-zelig.R"))
-source(file.path("..", "R", "model-ls.R"))
+# source(file.path("..", "R", "utils.R"))
+# source(file.path("..", "R", "model-zelig.R"))
+# source(file.path("..", "R", "model-ls.R"))
 
 # Zelig 4 code:
 library(Zelig)
@@ -22,13 +22,21 @@ z5$model.call
 z5$zelig.call
 z5$setx(sascxasx = 9879, speed = 30, sdjchbsdc = 87, kcsbc = 8787)
 z5$setx(sascxasx = 9879)
-z5$setx(speed = 30)
+z5$setx1(speed = 30)
 z5$setx()
 z5$setx.out
 set.seed(42)
-z5$sim(num=100)
-.self <- z5
+z5$sim(num=3)
+z5$sim.out
+# .self <- z5
 # z5$ev
 # z5$ev("x")
 z5$summarize()
 z5$cite()
+
+z5$setrange(speed = 30:32,speed = 30:32)
+z5$setx.out
+set.seed(42)
+z5$sim(num=3)
+z5$sim.out
+z5$summarize()

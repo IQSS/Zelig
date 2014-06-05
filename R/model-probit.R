@@ -1,3 +1,6 @@
+#' @include model-zelig.R
+#' @include model-glm.R
+#' @include model-binchoice.R
 zprobit <- setRefClass("Zelig-probit",
                        contains = "Zelig-binchoice")
 

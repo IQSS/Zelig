@@ -1,3 +1,5 @@
+#' @include model-zelig.R
+#' @include model-glm.R
 znormal <- setRefClass("Zelig-normal",
                        contains = "Zelig-glm",
                        field = "simalpha")

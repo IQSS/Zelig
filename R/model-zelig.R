@@ -83,10 +83,10 @@ z$methods(
     n <- intersect(as.character(attr(pred, "predvars"))[-1],
                    names(.self$data))
     s <-list(...)
-    print(s)
-    if (is.list(s[[1]]))
+#     print(s)
+    if (length(s) > 0 && is.list(s[[1]]))
       s <- s[[1]]
-    print(s)
+#     print(s)
     m <- match(names(s), n)
     ma <- m[!is.na(m)]
     if (!all(complete.cases(m))) {
@@ -107,10 +107,17 @@ z$methods(
     nn <- names(ldata)
     for (i in seq(nn))
       if (cc[nn[i]] == "factor") {
-        ldata[[nn[i]]] <- factor(ldata[[nn[i]]],
-                                 levels = levels(.self$data[[nn[i]]]))
+        if (!(ldata[[nn[i]]] %in% levels(.self$data[[nn[i]]]))) {
+          w <- paste("Factor variable '", nn[i],
+                     "' has no level '", ldata[[nn[i]]], "'.\n", sep = "")
+          warning(w)
+          ldata[[nn[i]]] <- avg(.self$data[[nn[i]]])
+        } else {
+          ldata[[nn[i]]] <- factor(ldata[[nn[i]]],
+                                   levels = levels(.self$data[[nn[i]]]))
+        }
       }
-    f <- update(formula(.self$zelig.out), 1 ~ .)
+      f <- update(formula(.self$zelig.out), 1 ~ .)
 #     f <- formula(as.Formula(f), rhs = 1)
 #     f[[2]] <- 1
     return(model.matrix(f, ldata))
@@ -139,38 +146,57 @@ z$methods(
   }
 )
 
-z$methods(
-  qi = function(...) {
-    if (!is.null(.self$setx.out$x)) {
-      .self$qi.out$ev <- .self$ev("x")
-      .self$qi.out$pv <- .self$pv("x")
-      if (!is.null(.self$setx.out$x1)) {
-        .self$qi.out$ev1 <- .self$ev("x1")
-        .self$qi.out$pv1 <- .self$pv("x1")
-        .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
-      }
-    }
-    else if (!is.null(.self$setx.out$range)) {
-      print("range")
-      .self$qi.out$ev <- .self$ev("range")
-      .self$qi.out$pv <- .self$pv("range")
-#       for (i in seq(.self$setx.out$range)) {
-#         .self$qi.out$ev[[i]] <- .self$ev("range", i)
-#         .self$qi.out$pv[[i]] <- .self$pv("x")
+# z$methods(
+#   qi = function(...) {
+#     if (!is.null(.self$setx.out$x)) {
+#       .self$qi.out$ev <- .self$ev("x")
+#       .self$qi.out$pv <- .self$pv("x")
+#       if (!is.null(.self$setx.out$x1)) {
+#         .self$qi.out$ev1 <- .self$ev("x1")
+#         .self$qi.out$pv1 <- .self$pv("x1")
+#         .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
 #       }
-    }
-    idx <- match(names(.self$setx.labels), names(.self$qi.out), nomatch = 0) 
-    names(.self$qi.out)[idx] <- .self$setx.labels[idx != 0]
-  }
-)
+#     }
+#     else if (!is.null(.self$setx.out$range)) {
+#       print("range")
+#       .self$qi.out$ev <- .self$ev("range")
+#       .self$qi.out$pv <- .self$pv("range")
+# #       for (i in seq(.self$setx.out$range)) {
+# #         .self$qi.out$ev[[i]] <- .self$ev("range", i)
+# #         .self$qi.out$pv[[i]] <- .self$pv("x")
+# #       }
+#     }
+#     idx <- match(names(.self$setx.labels), names(.self$qi.out), nomatch = 0) 
+#     names(.self$qi.out)[idx] <- .self$setx.labels[idx != 0]
+#   }
+# )
 
 z$methods(
   sim = function(num = 1000) {
     .self$num <- num
     .self$param(num = .self$num)
     .self$qi.out <- list()
-    .self$qi()
-    .self$sim.out <- .self$qi.out
+    if (!is.null(.self$setx.out$x)) {
+      l1 <- .self$qi(.self$simparam, .self$setx.out$x)
+      .self$sim.out$ev <- l1[[1]]
+      .self$sim.out$pv <- l1[[2]]
+      if (!is.null(.self$setx.out$x1)) {
+        l2 <- .self$qi(.self$simparam, .self$setx.out$x1)
+        .self$sim.out$ev1 <- l2[[1]]
+        .self$sim.out$pv1 <- l2[[2]]
+        .self$sim.out$fd <- .self$sim.out$ev1 - .self$sim.out$ev
+      }
+    } else if (!is.null(.self$setx.out$range)) {
+      .self$sim.out$range <- list()
+      for (i in seq(.self$setx.out$range)) {
+        .self$sim.out$range[[i]] <- list()
+        lr <- .self$qi(.self$simparam, .self$setx.out$range[[i]])
+        .self$sim.out$range[[i]]$ev <- lr[[1]]
+        .self$sim.out$range[[i]]$pv <- lr[[2]]
+      }
+    }
+    idx <- match(names(.self$setx.labels), names(.self$sim.out), nomatch = 0) 
+    names(.self$sim.out)[idx] <- .self$setx.labels[idx != 0]
   }
 )
 
@@ -217,9 +243,14 @@ z$methods(
           }
         }
       }
-      
-      }
     }
+  }
+)
+
+z$methods(
+  summarise = function() {
+    .self$summarize()
+  }
 )
 
 z$methods(
@@ -242,10 +273,4 @@ z$methods(
   }
 )
 
-# z$methods(
-#   toJSON = function() {
-#     json <- list("-name" = .self$model, "-label" = .self$text)
-#     .self$json <- jsonlite::toJSON(json, pretty = TRUE)
-#   }
-# )
 

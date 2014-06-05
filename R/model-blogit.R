@@ -1,3 +1,5 @@
+#' @include model-zelig.R
+#' @include model-bbinchoice.R
 zblogit <- setRefClass("Zelig-blogit", contains = "Zelig-bbinchoice")
 
 zblogit$methods(

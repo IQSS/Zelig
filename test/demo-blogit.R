@@ -1,9 +1,9 @@
-library(VGAM)
+# library(VGAM)
 
-source(file.path("..", "R", "utils.R"))
-source(file.path("..", "R", "model-zelig.R"))
-source(file.path("..", "R", "model-bbinchoice.R"))
-source(file.path("..", "R", "model-blogit.R"))
+# source(file.path("..", "R", "utils.R"))
+# source(file.path("..", "R", "model-zelig.R"))
+# source(file.path("..", "R", "model-bbinchoice.R"))
+# source(file.path("..", "R", "model-blogit.R"))
 
 # Zelig 4 code:
 library(Zelig)

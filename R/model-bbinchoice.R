@@ -1,3 +1,4 @@
+#' @include model-zelig.R
 zbinchoice <- setRefClass("Zelig-bbinchoice",
                           contains = "Zelig",
                           field = list(family = "ANY",

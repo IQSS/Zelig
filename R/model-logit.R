@@ -1,3 +1,6 @@
+#' @include model-zelig.R
+#' @include model-glm.R
+#' @include model-binchoice.R
 zlogit <- setRefClass("Zelig-logit",
                       contains = "Zelig-binchoice")
   

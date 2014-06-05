@@ -1,4 +1,4 @@
-import(methods, MASS, VGAM, jsonlite, MCMCpack, gee)
+import(methods, MASS, VGAM, jsonlite)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(

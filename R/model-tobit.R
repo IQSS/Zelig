@@ -1,3 +1,4 @@
+#' @include model-zelig.R
 ztobit <- setRefClass("Zelig-tobit",
                       contains = "Zelig",
                       fields = list(simalpha = "matrix",

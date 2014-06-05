@@ -1,3 +1,5 @@
+#' @include model-zelig.R
+#' @include model-glm.R
 zpoisson <- setRefClass("Zelig-poisson",
                         contains = "Zelig-glm",
                         fields = list(theta = "ANY"))

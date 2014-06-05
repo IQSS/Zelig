@@ -1,3 +1,4 @@
+#' @include model-zelig.R
 zglm <- setRefClass("Zelig-glm",
                     contains = "Zelig",
                     fields = list(family = "character",

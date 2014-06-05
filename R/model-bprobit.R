@@ -1,3 +1,5 @@
+#' @include model-zelig.R
+#' @include model-bbinchoice.R
 zbprobit <- setRefClass("Zelig-bprobit", contains = "Zelig-bbinchoice")
 
 zbprobit$methods(
