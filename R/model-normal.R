@@ -7,13 +7,13 @@ znormal <- setRefClass("Zelig-normal",
 znormal$methods(
   initialize = function() {
     callSuper()
-    .self$model <- "normal"
+    .self$name <- "normal"
     .self$family <- "gaussian"
     .self$link <- "identity"
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
     .self$year <- 2008
     .self$category <- "continuous"
-    .self$text <- "Normal Regression for Continuous Dependent Variables"
+    .self$description <- "Normal Regression for Continuous Dependent Variables"
     # JSON
     .self$outcome <- "continuous"
   }

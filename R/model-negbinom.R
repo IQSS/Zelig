@@ -8,11 +8,11 @@ znegbinom$methods(
   initialize = function() {
     callSuper()
     .self$fn <- quote(MASS::glm.nb)
-    .self$model <- "negbinom"
+    .self$name <- "negbinom"
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
     .self$year <- 2008
     .self$category <- "count"
-    .self$text <- "Negative Binomial Regression for Event Count Dependent Variables"
+    .self$description <- "Negative Binomial Regression for Event Count Dependent Variables"
     # JSON
     .self$outcome <- "discrete"
   }

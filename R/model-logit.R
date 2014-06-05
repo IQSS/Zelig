@@ -7,9 +7,9 @@ zlogit <- setRefClass("Zelig-logit",
 zlogit$methods(
   initialize = function() {
     callSuper()
-    .self$model <- "logit"
+    .self$name <- "logit"
     .self$link <- "logit"
-    .self$text = "Logistic Regression for Dichotomous Dependent Variables"
+    .self$description = "Logistic Regression for Dichotomous Dependent Variables"
   }
 )
 

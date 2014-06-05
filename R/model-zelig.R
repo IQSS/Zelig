@@ -1,7 +1,7 @@
 z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         formula = "formula", # Zelig formula
                                         weights = "numeric", 
-                                        model = "character", # name of the Zelig model
+                                        name = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix
                                         
                                         zelig.call = "call", # Zelig function call
@@ -18,7 +18,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         
                                         authors = "character", # Zelig model description
                                         year = "numeric",
-                                        text = "character",
+                                        description = "character",
                                         url = "character",
                                         category = "character",
                                         
@@ -52,7 +52,7 @@ z$methods(
 
 z$methods(
   cite = function() {
-    title <- paste(.self$model, ": ", .self$text, sep="")
+    title <- paste(.self$name, ": ", .self$description, sep="")
     cat("How to cite this model in Zelig:\n  ",
         .self$authors, ". ", .self$year, ".\n  ", title,
         "\n  in Kosuke Imai, Gary King, and Olivia Lau, ",
@@ -73,12 +73,6 @@ z$methods(
 
 z$methods(
   set = function(...) {
-#     n <- all.vars(.self$formula[[3]], .self$data)
-#     n <- attr(model.matrix(.self$zelig.out), "dimnames")[[2]]
-#     n <- names(model.frame(.self$zelig.out))
-#     n <- intersect(names(.self$data), names(model.frame(.self$zelig.out)))
-#     n <- c(intersect(names(.self$data), names(model.frame(.self$zelig.out))),
-#            all.vars(.self$formula[[3]]))
     pred <- terms(.self$zelig.out, "predvars")
     n <- intersect(as.character(attr(pred, "predvars"))[-1],
                    names(.self$data))
@@ -146,31 +140,6 @@ z$methods(
   }
 )
 
-# z$methods(
-#   qi = function(...) {
-#     if (!is.null(.self$setx.out$x)) {
-#       .self$qi.out$ev <- .self$ev("x")
-#       .self$qi.out$pv <- .self$pv("x")
-#       if (!is.null(.self$setx.out$x1)) {
-#         .self$qi.out$ev1 <- .self$ev("x1")
-#         .self$qi.out$pv1 <- .self$pv("x1")
-#         .self$qi.out$fd <- .self$qi.out$ev1 - .self$qi.out$ev
-#       }
-#     }
-#     else if (!is.null(.self$setx.out$range)) {
-#       print("range")
-#       .self$qi.out$ev <- .self$ev("range")
-#       .self$qi.out$pv <- .self$pv("range")
-# #       for (i in seq(.self$setx.out$range)) {
-# #         .self$qi.out$ev[[i]] <- .self$ev("range", i)
-# #         .self$qi.out$pv[[i]] <- .self$pv("x")
-# #       }
-#     }
-#     idx <- match(names(.self$setx.labels), names(.self$qi.out), nomatch = 0) 
-#     names(.self$qi.out)[idx] <- .self$setx.labels[idx != 0]
-#   }
-# )
-
 z$methods(
   sim = function(num = 1000) {
     .self$num <- num
@@ -202,7 +171,7 @@ z$methods(
 
 z$methods(
   summarize = function() {
-    cat("Model: ", .self$model, "\n")
+    cat("Model: ", .self$name, "\n")
     cat("Number of simulations:", .self$num, "\n")
     cat("\nValues of X\n")
     if (!is.null(.self$setx.out$x)) {
@@ -263,8 +232,8 @@ z$methods(
   toJSON = function() {
     if (!is.list(.self$json))
       .self$json <- list()
-    .self$json$"name" <- .self$model
-    .self$json$"description" <- .self$text
+    .self$json$"name" <- .self$name
+    .self$json$"description" <- .self$description
     .self$json$"outcome" <- list(modelingType = .self$outcome)
     .self$json$"explanatory" <- list(modelingType = .self$explanatory)
     .self$ljson <- .self$json

@@ -7,10 +7,10 @@ zexp <- setRefClass("Zelig-exp",
 zexp$methods(
   initialize = function() {
     callSuper()
-    .self$model <- "exp"
+    .self$name <- "exp"
     .self$authors <- "Olivia Lau, Kosuke Imai, Gary King"
     .self$year <- 2011
-    .self$text = "Exponential Regression for Duration Dependent Variables"
+    .self$description <- "Exponential Regression for Duration Dependent Variables"
     .self$fn <- quote(survival::survreg)
     .self$linkinv <- survreg.distributions[["exponential"]]$itrans
     # JSON

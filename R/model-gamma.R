@@ -8,13 +8,13 @@ zgamma <- setRefClass("Zelig-gamma",
 zgamma$methods(
   initialize = function() {
     callSuper()
-    .self$model <- "gamma"
+    .self$name <- "gamma"
     .self$family <- "Gamma"
     .self$link <- "inverse"
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
     .self$year <- 2007
     .self$category <- "bounded"
-    .self$text <- "Gamma Regression for Continuous, Positive Dependent Variables"
+    .self$description <- "Gamma Regression for Continuous, Positive Dependent Variables"
     # JSON
     .self$outcome <- "continous"
   }

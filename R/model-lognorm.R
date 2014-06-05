@@ -7,10 +7,10 @@ zlognorm <- setRefClass("Zelig-lognorm",
 zlognorm$methods(
   initialize = function() {
     callSuper()
-    .self$model <- "lognorm"
+    .self$name <- "lognorm"
     .self$authors <- "Matthew Owen, Olivia Lau, Kosuke Imai, Gary King"
     .self$year <- 2007
-    .self$text = "Log-Normal Regression for Duration Dependent Variables"
+    .self$description <- "Log-Normal Regression for Duration Dependent Variables"
     .self$fn <- quote(survival::survreg)
     .self$linkinv <- survreg.distributions[["lognormal"]]$itrans
     # JSON

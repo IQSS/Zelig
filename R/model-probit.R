@@ -7,9 +7,9 @@ zprobit <- setRefClass("Zelig-probit",
 zprobit$methods(
   initialize = function() {
     callSuper()
-    .self$model <- "probit"
+    .self$name <- "probit"
     .self$link <- "probit"
-    .self$text = "Probit Regression for Dichotomous Dependent Variables"
+    .self$description = "Probit Regression for Dichotomous Dependent Variables"
   }
 )
 
