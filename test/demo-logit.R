@@ -2,12 +2,6 @@ library(MASS)
 mydata <- read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
 mydata$rank <- factor(mydata$rank)
 
-source(file.path("..", "R", "utils.R"))
-source(file.path("..", "R", "model-zelig.R"))
-source(file.path("..", "R", "model-glm.R"))
-source(file.path("..", "R", "model-binchoice.R"))
-source(file.path("..", "R", "model-logit.R"))
-
 # Zelig 4 code:
 library(Zelig)
 # epsilon does not seem to be taken into account

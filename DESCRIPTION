@@ -19,6 +19,7 @@ Version: 5.0
 Depends:
     methods,
     MASS,
+    survival,
     VGAM,
     jsonlite
 Suggests:

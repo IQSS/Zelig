@@ -8,9 +8,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         model.call = "call", # wrapped function call
                                         zelig.out = "ANY", # estimated zelig model
                                         
-                                        qi.out = "list",
                                         setx.out = "list", # set values
-                                        setx.labels = "list",
+                                        setx.labels = "list", # pretty-print qi
                                         
                                         sim.out = "list", # simulated qi's
                                         simparam = "matrix", # simulated parameters
@@ -25,21 +24,19 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         json = "ANY", # JSON export
                                         ljson = "ANY",
                                         outcome = "ANY",
-                                        explanatory = "ANY"
-                                        ))
+                                        explanatory = "ANY"))
 
 z$methods(
   initialize = function() { 
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
-    .self$url <- "http://gking.harvard.edu/zelig"
-    .self$qi.out <- list()
+    .self$url <- "http://datascience.iq.harvard.edu/zelig"
     .self$setx.out <- list()
-    .self$setx.labels <- list(ev = "Expected Values: E(Y|X)",
+    .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
                               ev1 = "Expected Values: E(Y|X1)",
-                              pv = "Predicted Values: Y|X",
+                              pv  = "Predicted Values: Y|X",
                               pv1 = "Predicted Values: Y|X1",
-                              fd = "First Differences: E(Y|X1) - E(Y|X)")
+                              fd  = "First Differences: E(Y|X1) - E(Y|X)")
     # JSON
     .self$explanatory <- c("continuous",
                            "discrete",
@@ -62,7 +59,7 @@ z$methods(
 )
 
 z$methods(
-  zelig = function(formula, data, ..., weights = NULL) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
     .self$formula <- formula
     .self$data <- data
     .self$model.call <- match.call(expand.dots = TRUE,
@@ -77,10 +74,12 @@ z$methods(
     n <- intersect(as.character(attr(pred, "predvars"))[-1],
                    names(.self$data))
     s <-list(...)
-#     print(s)
+    print("before")
+    print(s)
     if (length(s) > 0 && is.list(s[[1]]))
       s <- s[[1]]
-#     print(s)
+    print("after")
+    print(s)
     m <- match(names(s), n)
     ma <- m[!is.na(m)]
     if (!all(complete.cases(m))) {
@@ -135,8 +134,11 @@ z$methods(
     .self$setx.out$range <- list()
     s <- list(...)
     m <- expand.grid(s)
-    for (i in 1:nrow(m))
-      .self$setx.out$range[[i]] <- .self$set(as.list(m[i, ]))
+    for (i in 1:nrow(m)) {
+      l <- as.list(as.list(m[i, ]))
+      names(l) <- names(m)
+      .self$setx.out$range[[i]] <- .self$set(l)
+    }
   }
 )
 
@@ -144,13 +146,12 @@ z$methods(
   sim = function(num = 1000) {
     .self$num <- num
     .self$param(num = .self$num)
-    .self$qi.out <- list()
     if (!is.null(.self$setx.out$x)) {
-      l1 <- .self$qi(.self$simparam, .self$setx.out$x)
+      l1 <- .self$qi(.self$setx.out$x)
       .self$sim.out$ev <- l1[[1]]
       .self$sim.out$pv <- l1[[2]]
       if (!is.null(.self$setx.out$x1)) {
-        l2 <- .self$qi(.self$simparam, .self$setx.out$x1)
+        l2 <- .self$qi(.self$setx.out$x1)
         .self$sim.out$ev1 <- l2[[1]]
         .self$sim.out$pv1 <- l2[[2]]
         .self$sim.out$fd <- .self$sim.out$ev1 - .self$sim.out$ev
@@ -159,7 +160,7 @@ z$methods(
       .self$sim.out$range <- list()
       for (i in seq(.self$setx.out$range)) {
         .self$sim.out$range[[i]] <- list()
-        lr <- .self$qi(.self$simparam, .self$setx.out$range[[i]])
+        lr <- .self$qi(.self$setx.out$range[[i]])
         .self$sim.out$range[[i]]$ev <- lr[[1]]
         .self$sim.out$range[[i]]$pv <- lr[[2]]
       }

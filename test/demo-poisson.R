@@ -1,8 +1,3 @@
-# source(file.path("..", "R", "utils.R"))
-# source(file.path("..", "R", "model-zelig.R"))
-# source(file.path("..", "R", "model-glm.R"))
-# source(file.path("..", "R", "model-poisson.R"))
-
 p <- read.csv("http://www.ats.ucla.edu/stat/data/poisson_sim.csv")
 p <- within(p, {
   prog <- factor(prog, levels = 1:3,

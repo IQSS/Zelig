@@ -30,17 +30,16 @@ zgamma$methods(
 )
 
 zgamma$methods(
-  qi = function(x = NULL, y = NULL, param = NULL) {
-    coef <- .self$simparam
-    eta <- coef %*% t(x)
-    theta <- matrix(1 / eta, nrow = nrow(coef))
+  qi = function(x) {
+    coeff <- .self$simparam
+    eta <- coeff %*% t(x)
+    theta <- matrix(1 / eta, nrow = nrow(coeff))
     ev <- theta
-    pr <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
+    pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (i in 1:nrow(ev))
-      pr[i, ] <- rgamma(ncol(ev), shape=.self$simalpha[i], 
+      pv[i, ] <- rgamma(ncol(ev), shape=.self$simalpha[i], 
                         scale = theta[i, ] / .self$simalpha[i])
-    return(list("Expected Values: E(Y|X)"  = ev,
-                "Predicted Values: Y|X" = pr))
+    return(list(ev = ev, pv = pv))
   }
 )
 

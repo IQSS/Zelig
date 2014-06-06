@@ -31,23 +31,13 @@ znormal$methods(
 )
 
 znormal$methods(
-  qi = function(x=NULL, num=1000, param=NULL) {
+  qi = function(x) {
     .self$linkinv <- eval(call("binomial", "probit"))$linkinv
-    # get `num` samples from the underlying distribution
-    coef <- .self$simparam
-    alpha <- .self$simalpha
-    # theta = eta, because inverse of 
-    # normal models' link function is
-    # the identity
-    theta <- matrix(coef %*% t(x), nrow = nrow(coef))
-    #
-    pr <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
-    #
+    theta <- matrix(.self$simparam %*% t(x), nrow = nrow(.self$simparam))
     ev <- theta
-    ev1 <- pr1 <- fd <- NA
+    pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (i in 1:nrow(ev))
-      pr[i,] <- rnorm(ncol(ev), mean = ev[i,], sd = .self$simalpha[i])
-    return(list("Expected Values: E(Y|X)"  = ev,
-                "Predicted Values: Y|X"    = pr))
+      pv[i,] <- rnorm(ncol(ev), mean = ev[i,], sd = .self$simalpha[i])
+    return(list(ev = ev, pv = pv))
   }
 )

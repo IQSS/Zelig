@@ -35,12 +35,12 @@ zlognorm$methods(
 
 zlognorm$methods(
   param = function(num) {
-    coef <- coef(.self$zelig.out)
-    mu <- c(coef, log(.self$zelig.out$scale))
+    coeff<- coef(.self$zelig.out)
+    mu <- c(coeff, log(.self$zelig.out$scale))
     cov <- vcov(.self$zelig.out)
     simulations <- mvrnorm(num, mu = mu, Sigma = cov)
-    .self$simparam = as.matrix(simulations[, 1:length(coef)])
-    .self$simalpha = as.matrix(simulations[, -(1:length(coef))])
+    .self$simparam = as.matrix(simulations[, 1:length(coeff)])
+    .self$simalpha = as.matrix(simulations[, -(1:length(coeff))])
   }
 )
 
@@ -53,7 +53,6 @@ zlognorm$methods(
     theta <- as.matrix(apply(eta, 2, linkinv))
     ev <- exp(log(theta) + 0.5 * (exp(alpha))^2)
     dimnames(ev) <- dimnames(theta)
-    return(list("Expected Values: E(Y|X)"  = ev))
-#                 "Predicted Values: Y|X"    = ev))
+    return(list(ev = ev, pv = NA))
   }
 )

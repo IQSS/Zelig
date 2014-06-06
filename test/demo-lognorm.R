@@ -24,3 +24,4 @@ set.seed(42)
 z5$sim(num=10)
 z5$summarize()
 z5$cite()
+

@@ -1,10 +1,6 @@
 library(MASS)
 data(cars)
 
-# source(file.path("..", "R", "utils.R"))
-# source(file.path("..", "R", "model-zelig.R"))
-# source(file.path("..", "R", "model-ls.R"))
-
 # Zelig 4 code:
 library(Zelig)
 z.out <- zelig(dist ~ speed, cars, model = "ls")

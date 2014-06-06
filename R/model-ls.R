@@ -32,8 +32,8 @@ zls$methods(
 )
 
 zls$methods(
-  qi = function(simparam, x) {
-    ev <- simparam %*% t(x)
+  qi = function(x) {
+    ev <- .self$simparam %*% t(x)
     pv <- ev
     return(list(ev = ev, pv = pv))
   }

@@ -1,12 +1,6 @@
 library(Zelig)
 
 data(turnout)
-# source(file.path("..", "R", "utils.R"))
-# source(file.path("..", "R", "model-zelig.R"))
-# source(file.path("..", "R", "model-ls.R"))
-# source(file.path("..", "R", "model-glm.R"))
-# source(file.path("..", "R", "model-binchoice.R"))
-# source(file.path("..", "R", "model-logit.R"))
 
 z.out <- zelig(vote ~ race + educate + age + I(age^2) + income,
                model = "ls", data = turnout)
@@ -44,14 +38,20 @@ z5$summarize()
 z5 <- zls$new()
 z5$zelig(vote ~ race + educate + age + I(age^2) + income, data = turnout)
 z5
-z5$setrange(educate = 12:13, age = 18, race = c("white", "others"))
+z5$setrange(educate = 12:13, age = 18)
 z5$setx.out
 set.seed(42)
 z5$sim(num = 5)
 z5$summarize()
 
+z5$setrange(educate = 12:13)
+z5$setx.out
 
+s <- list(educate = c(10, 15))
+expand.grid(s)
 
+z5$setrange(educate = c(10, 15), age = c(10, 18))
 
-
+s <- list(educate = 12:13, age = 18)
+expand.grid(s)
 

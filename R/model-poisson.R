@@ -21,10 +21,9 @@ zpoisson$methods(
 )
 
 zpoisson$methods(
-  qi = function(simparam, x) {
-    coef <- simparam
-    eta <- coef %*% t(x)
-    theta <- matrix(.self$linkinv(eta), nrow = nrow(coef))
+  qi = function(x) {
+    eta <- .self$simparam %*% t(x)
+    theta <- matrix(.self$linkinv(eta), nrow = nrow(.self$simparam))
     ev <- theta
     pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (i in 1:ncol(theta))

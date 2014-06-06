@@ -1,16 +1,16 @@
 #+TODO: TODO(t) STARTED(s) | DONE(d) CANCELED(c)
 
+* Features
+** TODO strata
+** STARTED summarize
+** STARTED Sphinx
+
+* Documentation
+** TODO Port model vignettes
+
 * Zelig  5 Core models
 
-** DONE exp.R
-*** zelig
-*** param
-*** qi
 ** DONE ls.R
-*** zelig
-*** param
-*** qi
-** DONE gamma.R
 *** zelig
 *** param
 *** qi
@@ -22,7 +22,11 @@
 *** zelig
 *** param
 *** qi
-** DONE lognorm.R
+** DONE exp.R
+*** zelig
+*** param
+*** qi
+** DONE gamma.R
 *** zelig
 *** param
 *** qi
@@ -34,6 +38,12 @@
 *** zelig
 *** param
 *** qi
+** STARTED lognorm.R
+*** DONE zelig
+*** DONE param
+*** STARTED qi
+**** DONE ev
+**** TODO pv
 ** STARTED negbinom.R
 *** zelig
 *** param

@@ -15,24 +15,17 @@ zbinchoice$methods(
 )
 
 zbinchoice$methods(
-  qi = function(x = NULL, y = NULL, num = 1000, param = NULL) {
+  qi = function(x) {
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
-    compute.ev <- function(x = NULL, num, param = NULL) {
-      if (is.null(x))
-        return(NA)
-      coef <- .self$simparam
-      eta <- coef %*% t(x)
-      eta <- Filter(function (y) !is.na(y), eta)
-      theta <- matrix(.self$linkinv(eta), nrow = nrow(coef))
-      ev <- matrix(.self$linkinv(eta), ncol = ncol(theta))
-      return(ev)
-    }
-    ev <- compute.ev(x, num, param)
-    pr <- matrix(nrow = nrow(ev), ncol = ncol(ev))
+    coeff <- .self$simparam
+    eta <- coeff %*% t(x)
+    eta <- Filter(function (y) !is.na(y), eta)
+    theta <- matrix(.self$linkinv(eta), nrow = nrow(coeff))
+    ev <- matrix(.self$linkinv(eta), ncol = ncol(theta))
+    pv <- matrix(nrow = nrow(ev), ncol = ncol(ev))
     for (i in 1:ncol(ev))
-      pr[, i] <- rbinom(length(ev[, i]), 1, prob = ev[, i])
-    levels(pr) <- c(0, 1)
-    return(list("Expected Values: E(Y|X)"  = ev,
-                "Predicted Values: Y|X"    = pr))
+      pv[, i] <- rbinom(length(ev[, i]), 1, prob = ev[, i])
+    levels(pv) <- c(0, 1)
+    return(list(ev = ev, pv = pv))
   }
 )
