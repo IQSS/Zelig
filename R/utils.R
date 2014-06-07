@@ -17,7 +17,6 @@ Mode <- function (x) {
   as(v, class(x))
 }
 
-
 #' Compute the Statistical Median of a Vector
 #' @param x a vector of numeric or ordered values
 #' @param na.rm ignored
@@ -55,6 +54,26 @@ avg <- function(val) {
   else
     Mode(val)
 }
+
+setfactor <- function (fv, v) {
+  lev <- levels(fv)
+  if (!v %in% lev)
+    stop("Wrong factor")
+  return(factor(v, levels = lev))
+}
+
+set <- function(val, newval) {
+  if (is.numeric(val))
+    newval
+  else if (is.ordered(val))
+    newval
+  else {
+    lev <- levels(val)
+    if (!newval %in% lev)
+      stop("Wrong factor")
+    return(factor(newval, levels = lev))
+  }
+} 
 
 statmat <- function(qi){
   m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm = TRUE))

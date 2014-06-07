@@ -1,9 +1,3 @@
-library(MASS)
-
-source(file.path("..", "R", "utils.R"))
-source(file.path("..", "R", "model-zelig.R"))
-source(file.path("..", "R", "model-ls.R"))
-
 data(cars)
 
 z5 <- zls$new()

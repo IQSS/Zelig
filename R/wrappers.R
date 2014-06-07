@@ -1,12 +1,21 @@
-##' sum
-##' gives the sum
-##' @param x X
-##' @param y Y
-##' @return sum1 returns x+y
-##' @examples
-##' sum1(3,4)
-##' @rdname funs
-##' @export
+#' @include utils.R
+#' @include model-zelig.R
+#' @include model-tobit.R
+#' @include model-glm.R
+#' @include model-binchoice.R
+#' @include model-probit.R
+#' @include model-poisson.R
+#' @include model-normal.R
+#' @include model-negbinom.R
+#' @include model-ls.R
+#' @include model-lognorm.R
+#' @include model-logit.R
+#' @include model-gamma.R
+#' @include model-exp.R
+#' @include model-bbinchoice.R
+#' @include model-blogit.R
+#' @include model-bprobit.R
+#' @include model-relogit.R
 zeligw <- function(formula, data, model,..., by = NULL, cite = FALSE) {
   # Begin: Zelig 5 models
   if (model == "ls")

@@ -15,7 +15,7 @@ zls$methods(
 )
 
 zls$methods(
-  zelig = function(formula, data, ..., weights = NULL) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     callSuper(formula = formula, data = data, ...,
               weights = NULL)
