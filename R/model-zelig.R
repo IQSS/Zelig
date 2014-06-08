@@ -70,9 +70,8 @@ z$methods(
     .self$model.call[[1]] <- .self$fn
     .self$by <- !is.null(by)
     .self$model.call$by <- NULL
-    if (!.self$by)
-      .self$zelig.out <- eval(.self$model.call, envir = parent.frame(1))
-    else {
+    .self$zelig.out <- eval(.self$model.call, envir = parent.frame(1))
+    if (.self$by) {
       .self$data.by <- split(.self$data, factor(.self$data[[by]]))
       .self$zelig.out.by <- list()
       for (i in seq(.self$data.by)) {
@@ -88,57 +87,67 @@ z$methods(
 z$methods(
   set = function(...) {
     s <-list(...)
-    ldata <- lapply(.self$data, avg)
-    if (length(s) > 0) {
-      pred <- terms(.self$zelig.out, "predvars")
-      n <- intersect(as.character(attr(pred, "predvars"))[-1],
-                     names(.self$data))
-      if (is.list(s[[1]]))
-        s <- s[[1]]
-      m <- match(names(s), n)
-      ma <- m[!is.na(m)]
-      if (!all(complete.cases(m))) {
-        w <- paste("Variable '", names(s[is.na(m)]),
-                   "' not in data set.\n", sep = "")
-        warning(w)
+    reduce <- function(dataset) {
+      ldata <- lapply(dataset, avg)
+      if (length(s) > 0) {
+        pred <- terms(.self$zelig.out, "predvars")
+        n <- intersect(as.character(attr(pred, "predvars"))[-1],
+                       names(dataset))
+        if (is.list(s[[1]]))
+          s <- s[[1]]
+        m <- match(names(s), n)
+        ma <- m[!is.na(m)]
+        if (!all(complete.cases(m))) {
+          w <- paste("Variable '", names(s[is.na(m)]),
+                     "' not in data set.\n", sep = "")
+          warning(w)
+        }
+        for (i in seq(n[ma]))
+          ldata[n[ma]][i][[1]] <- setval(dataset[n[ma]][i][[1]],
+                                         s[n[ma]][i][[1]])
       }
-      for (i in seq(n[ma]))
-        ldata[n[ma]][i][[1]] <- setval(ldata[n[ma]][i][[1]],
-                                       s[n[ma]][i][[1]])
+      return(ldata)
     }
     f <- update(formula(.self$zelig.out), 1 ~ .)
-    return(model.matrix(f, ldata))
+    if (!.self$by) {
+      ldata <- reduce(.self$data)
+      return(model.matrix(f, ldata))
+    } else {
+      mm <- list()
+      for (i in seq(.self$data.by)) {
+        ldata <- reduce(.self$data.by[[i]])
+        mm[[i]] <- model.matrix(f, ldata)
+      }
+      names(mm) <- names(.self$data.by)
+      return(mm)
+    }
   }
 )
 
 z$methods(
   setx = function(...) {
-    if (!.self$by)
-      .self$setx.out$x <- .self$set(...)
-    else {
-      for (i in seq(.self$data.by)) {
-        .self$setx.out.by[[i]] <- list()
-        .self$setx.out.by[[i]]$x <- .self$set(...)
-      }
-    }
+    what <- ifelse(!.self$by, "setx.out", "setx.out.by")
+    .self[[what]]$x <- .self$set(...)
   }
 )
 
 z$methods(
   setx1 = function(...) {
-    .self$setx.out$x1 <- .self$set(...)
+    what <- ifelse(!.self$by, "setx.out", "setx.out.by")
+    .self[[what]]$x1 <- .self$set(...)
   }
 )
 
 z$methods(
   setrange = function(...) {
-    .self$setx.out$range <- list()
+    what <- ifelse(!.self$by, "setx.out", "setx.out.by")
+    .self[[what]]$range <- list()
     s <- list(...)
     m <- expand.grid(s)
     for (i in 1:nrow(m)) {
       l <- as.list(as.list(m[i, ]))
       names(l) <- names(m)
-      .self$setx.out$range[[i]] <- .self$set(l)
+      .self[[what]]$range[[i]] <- .self$set(l)
     }
   }
 )
@@ -147,31 +156,50 @@ z$methods(
   sim = function(num = 1000) {
     .self$num <- num
     .self$param(num = .self$num)
-    if (!is.null(.self$setx.out$x)) {
-      l1 <- .self$qi(.self$setx.out$x)
-      .self$sim.out$ev <- l1[[1]]
-      .self$sim.out$pv <- l1[[2]]
-      if (!is.null(.self$setx.out$x1)) {
-        l2 <- .self$qi(.self$setx.out$x1)
-        .self$sim.out$ev1 <- l2[[1]]
-        .self$sim.out$pv1 <- l2[[2]]
-        .self$sim.out$fd <- .self$sim.out$ev1 - .self$sim.out$ev
+    if (!.self$by) {
+      if (!is.null(.self$setx.out$x)) {
+        l1 <- .self$qi(.self$setx.out$x)
+        .self$sim.out$ev <- l1[[1]]
+        .self$sim.out$pv <- l1[[2]]
+        if (!is.null(.self$setx.out$x1)) {
+          l2 <- .self$qi(.self$setx.out$x1)
+          .self$sim.out$ev1 <- l2[[1]]
+          .self$sim.out$pv1 <- l2[[2]]
+          .self$sim.out$fd <- .self$sim.out$ev1 - .self$sim.out$ev
+        }
+      } else if (!is.null(.self$setx.out$range)) {
+        .self$sim.out$range <- list()
+        for (i in seq(.self$setx.out$range)) {
+          .self$sim.out$range[[i]] <- list()
+          lr <- .self$qi(.self$setx.out$range[[i]])
+          .self$sim.out$range[[i]]$ev <- lr[[1]]
+          .self$sim.out$range[[i]]$pv <- lr[[2]]
+        }
       }
+      idx <- match(names(.self$setx.labels),
+                   names(.self$sim.out),
+                   nomatch = 0) 
+      names(.self$sim.out)[idx] <- .self$setx.labels[idx != 0]
+    }
+  } else {
+    if (!is.null(.self$setx.out.by$x))
+      .self$sim.out.by$x <- lapply(.self$setx.out.by$x, .self$qi)
+    if (!is.null(.self$setx.out.by$x)) 
+      .self$sim.out.by$x1 <- lapply(.self$setx.out.by$x1, .self$qi)
     } else if (!is.null(.self$setx.out$range)) {
-      .self$sim.out$range <- list()
-      for (i in seq(.self$setx.out$range)) {
-        .self$sim.out$range[[i]] <- list()
-        lr <- .self$qi(.self$setx.out$range[[i]])
-        .self$sim.out$range[[i]]$ev <- lr[[1]]
-        .self$sim.out$range[[i]]$pv <- lr[[2]]
+      .self$sim.out.by$range <- list()
+      for (i in seq(.self$data.by)) {
+        .self$sim.out.by$range[[i]] <- lapply(.self$setx.out.by$range[[i]],
+                                              .self$qi)
       }
     }
-    idx <- match(names(.self$setx.labels),
-                 names(.self$sim.out),
-                 nomatch = 0) 
-    names(.self$sim.out)[idx] <- .self$setx.labels[idx != 0]
   }
 )
+
+# for (i in seq(.self$data.by)) {
+#   .self$sim.out.by$x[[i]] <- lapply(.self$setx.out.by$x, .self$qi)
+#   .self$sim.out.by$range[[i]] <- lapply(.self$setx.out.by$range[[i]], .self$qi)
+# }
 
 z$methods(
   summarize = function() {
