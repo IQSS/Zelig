@@ -1,20 +1,3 @@
-# source(file.path("..", "R", "utils.R"))
-# source(file.path("..", "R", "model-zelig.R"))
-# source(file.path("..", "R", "model-ls.R"))
-# source(file.path("..", "R", "model-glm.R"))
-# source(file.path("..", "R", "model-binchoice.R"))
-# source(file.path("..", "R", "model-logit.R"))
-# source(file.path("..", "R", "model-probit.R"))
-# source(file.path("..", "R", "model-poisson.R"))
-# source(file.path("..", "R", "model-normal.R"))
-# source(file.path("..", "R", "model-gamma.R"))
-# source(file.path("..", "R", "model-negbinom.R"))
-# source(file.path("..", "R", "model-exp.R"))
-# source(file.path("..", "R", "model-lognorm.R"))
-# source(file.path("..", "R", "model-tobit.R"))
-
-# source(file.path("..", "R", "wrappers.R"))
-
 library(MASS)
 
 ## Zelig 5

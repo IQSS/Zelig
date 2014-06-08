@@ -21,8 +21,8 @@ znegbinom$methods(
 znegbinom$methods(
   zelig = function(formula, data, ..., weights=NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
+    .self$model.call <- match.call(expand.dots = TRUE)
     callSuper(formula=formula, data=data, ..., weights=NULL)
-    .self$zelig.out <- eval(.self$model.call)
   }
 )
 

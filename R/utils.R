@@ -62,7 +62,7 @@ setfactor <- function (fv, v) {
   return(factor(v, levels = lev))
 }
 
-set <- function(val, newval) {
+setval <- function(val, newval) {
   if (is.numeric(val))
     newval
   else if (is.ordered(val))
@@ -74,6 +74,7 @@ set <- function(val, newval) {
     return(factor(newval, levels = lev))
   }
 } 
+
 
 statmat <- function(qi){
   m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm = TRUE))

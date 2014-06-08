@@ -1,91 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>zelig5</title>
-<!-- 2014-06-06 Fri 14:27 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Christine Choirat" />
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="zelig5"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-06-08T12:39-0400"/>
+<meta name="author" content="Christine Choirat"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
   .title  { text-align: center; }
-  .todo   { font-family: monospace; color: red; }
+  .todo   { color: red; }
   .done   { color: green; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
   }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.right  { text-align: center;  }
-  th.left   { text-align: center;   }
-  th.center { text-align: center; }
-  td.right  { text-align: right;  }
-  td.left   { text-align: left;   }
-  td.center { text-align: center; }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
   dt { font-weight: bold; }
-  .footpara:nth-child(2) { display: inline; }
-  .footpara { display: block; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
     background: #ffffcc;
   }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
   /*]]>*/-->
 </style>
 <script type="text/javascript">
@@ -134,340 +106,724 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+
 </head>
 <body>
+
+<div id="preamble">
+
+</div>
+
 <div id="content">
 <h1 class="title">zelig5</h1>
+
+
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Zelig  5 Core models</a>
+<li><a href="#sec-1">1 Features</a>
 <ul>
-<li><a href="#sec-1-1">1.1. <span class="done DONE">DONE</span> ls.R</a>
-<ul>
-<li><a href="#sec-1-1-1">1.1.1. zelig</a></li>
-<li><a href="#sec-1-1-2">1.1.2. param</a></li>
-<li><a href="#sec-1-1-3">1.1.3. qi</a></li>
+<li><a href="#sec-1-1">1.1 strata</a></li>
+<li><a href="#sec-1-2">1.2 summarize</a></li>
+<li><a href="#sec-1-3">1.3 Sphinx</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">1.2. <span class="done DONE">DONE</span> logit.R</a>
+<li><a href="#sec-2">2 Documentation</a>
 <ul>
-<li><a href="#sec-1-2-1">1.2.1. zelig</a></li>
-<li><a href="#sec-1-2-2">1.2.2. param</a></li>
-<li><a href="#sec-1-2-3">1.2.3. qi</a></li>
+<li><a href="#sec-2-1">2.1 Port model vignettes</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-3">1.3. <span class="done DONE">DONE</span> probit.R</a>
+<li><a href="#sec-3">3 Zelig  5 Core models</a>
 <ul>
-<li><a href="#sec-1-3-1">1.3.1. zelig</a></li>
-<li><a href="#sec-1-3-2">1.3.2. param</a></li>
-<li><a href="#sec-1-3-3">1.3.3. qi</a></li>
+<li><a href="#sec-3-1">3.1 ls.R</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1 zelig</a></li>
+<li><a href="#sec-3-1-2">3.1.2 param</a></li>
+<li><a href="#sec-3-1-3">3.1.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-4">1.4. <span class="done DONE">DONE</span> exp.R</a>
+<li><a href="#sec-3-2">3.2 logit.R</a>
 <ul>
-<li><a href="#sec-1-4-1">1.4.1. zelig</a></li>
-<li><a href="#sec-1-4-2">1.4.2. param</a></li>
-<li><a href="#sec-1-4-3">1.4.3. qi</a></li>
+<li><a href="#sec-3-2-1">3.2.1 zelig</a></li>
+<li><a href="#sec-3-2-2">3.2.2 param</a></li>
+<li><a href="#sec-3-2-3">3.2.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-5">1.5. <span class="done DONE">DONE</span> gamma.R</a>
+<li><a href="#sec-3-3">3.3 probit.R</a>
 <ul>
-<li><a href="#sec-1-5-1">1.5.1. zelig</a></li>
-<li><a href="#sec-1-5-2">1.5.2. param</a></li>
-<li><a href="#sec-1-5-3">1.5.3. qi</a></li>
+<li><a href="#sec-3-3-1">3.3.1 zelig</a></li>
+<li><a href="#sec-3-3-2">3.3.2 param</a></li>
+<li><a href="#sec-3-3-3">3.3.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-6">1.6. <span class="done DONE">DONE</span> normal.R</a>
+<li><a href="#sec-3-4">3.4 exp.R</a>
 <ul>
-<li><a href="#sec-1-6-1">1.6.1. zelig</a></li>
-<li><a href="#sec-1-6-2">1.6.2. param</a></li>
-<li><a href="#sec-1-6-3">1.6.3. qi</a></li>
+<li><a href="#sec-3-4-1">3.4.1 zelig</a></li>
+<li><a href="#sec-3-4-2">3.4.2 param</a></li>
+<li><a href="#sec-3-4-3">3.4.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-7">1.7. <span class="todo STARTED">STARTED</span> poisson.R</a>
+<li><a href="#sec-3-5">3.5 gamma.R</a>
 <ul>
-<li><a href="#sec-1-7-1">1.7.1. zelig</a></li>
-<li><a href="#sec-1-7-2">1.7.2. param</a></li>
-<li><a href="#sec-1-7-3">1.7.3. qi</a></li>
+<li><a href="#sec-3-5-1">3.5.1 zelig</a></li>
+<li><a href="#sec-3-5-2">3.5.2 param</a></li>
+<li><a href="#sec-3-5-3">3.5.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-8">1.8. <span class="todo STARTED">STARTED</span> lognorm.R</a>
+<li><a href="#sec-3-6">3.6 normal.R</a>
 <ul>
-<li><a href="#sec-1-8-1">1.8.1. <span class="done DONE">DONE</span> zelig</a></li>
-<li><a href="#sec-1-8-2">1.8.2. <span class="done DONE">DONE</span> param</a></li>
-<li><a href="#sec-1-8-3">1.8.3. <span class="todo STARTED">STARTED</span> qi</a></li>
+<li><a href="#sec-3-6-1">3.6.1 zelig</a></li>
+<li><a href="#sec-3-6-2">3.6.2 param</a></li>
+<li><a href="#sec-3-6-3">3.6.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-9">1.9. <span class="todo STARTED">STARTED</span> negbinom.R</a>
+<li><a href="#sec-3-7">3.7 poisson.R</a>
 <ul>
-<li><a href="#sec-1-9-1">1.9.1. zelig</a></li>
-<li><a href="#sec-1-9-2">1.9.2. param</a></li>
-<li><a href="#sec-1-9-3">1.9.3. qi</a></li>
+<li><a href="#sec-3-7-1">3.7.1 zelig</a></li>
+<li><a href="#sec-3-7-2">3.7.2 param</a></li>
+<li><a href="#sec-3-7-3">3.7.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-10">1.10. <span class="todo STARTED">STARTED</span> relogit.R</a>
+<li><a href="#sec-3-8">3.8 lognorm.R</a>
 <ul>
-<li><a href="#sec-1-10-1">1.10.1. zelig</a></li>
-<li><a href="#sec-1-10-2">1.10.2. param</a></li>
-<li><a href="#sec-1-10-3">1.10.3. qi</a></li>
+<li><a href="#sec-3-8-1">3.8.1 zelig</a></li>
+<li><a href="#sec-3-8-2">3.8.2 param</a></li>
+<li><a href="#sec-3-8-3">3.8.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-11">1.11. <span class="todo STARTED">STARTED</span> tobit.R</a>
+<li><a href="#sec-3-9">3.9 negbinom.R</a>
 <ul>
-<li><a href="#sec-1-11-1">1.11.1. zelig</a></li>
-<li><a href="#sec-1-11-2">1.11.2. param</a></li>
-<li><a href="#sec-1-11-3">1.11.3. qi</a></li>
+<li><a href="#sec-3-9-1">3.9.1 zelig</a></li>
+<li><a href="#sec-3-9-2">3.9.2 param</a></li>
+<li><a href="#sec-3-9-3">3.9.3 qi</a></li>
 </ul>
 </li>
+<li><a href="#sec-3-10">3.10 relogit.R</a>
+<ul>
+<li><a href="#sec-3-10-1">3.10.1 zelig</a></li>
+<li><a href="#sec-3-10-2">3.10.2 param</a></li>
+<li><a href="#sec-3-10-3">3.10.3 qi</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">2. Zelig 4 models (to be ported in Zelig 5.1 and Zelig 5.2)</a>
+<li><a href="#sec-3-11">3.11 tobit.R</a>
 <ul>
-<li><a href="#sec-2-1">2.1. <span class="todo TODO">TODO</span> gamma.survey.R</a></li>
-<li><a href="#sec-2-2">2.2. <span class="todo TODO">TODO</span> logit.survey.R</a></li>
-<li><a href="#sec-2-3">2.3. <span class="todo TODO">TODO</span> poisson.survey.R</a></li>
-<li><a href="#sec-2-4">2.4. <span class="todo TODO">TODO</span> normal.survey.R</a></li>
-<li><a href="#sec-2-5">2.5. <span class="todo TODO">TODO</span> probit.survey.R</a></li>
-<li><a href="#sec-2-6">2.6. <span class="todo TODO">TODO</span> logit.bayes.R</a></li>
-<li><a href="#sec-2-7">2.7. <span class="todo TODO">TODO</span> factor.bayes.R</a></li>
-<li><a href="#sec-2-8">2.8. <span class="todo STARTED">STARTED</span> poisson.bayes.R</a></li>
-<li><a href="#sec-2-9">2.9. <span class="todo TODO">TODO</span> normal.bayes.R</a></li>
-<li><a href="#sec-2-10">2.10. <span class="todo TODO">TODO</span> mlogit.bayes.R</a></li>
-<li><a href="#sec-2-11">2.11. <span class="todo TODO">TODO</span> oprobit.bayes.R</a></li>
-<li><a href="#sec-2-12">2.12. <span class="todo TODO">TODO</span> probit.bayes.R</a></li>
-<li><a href="#sec-2-13">2.13. <span class="todo TODO">TODO</span> logit.gee.R</a></li>
-<li><a href="#sec-2-14">2.14. <span class="todo TODO">TODO</span> gamma.gee.R</a></li>
-<li><a href="#sec-2-15">2.15. <span class="todo STARTED">STARTED</span> poisson.gee.R</a></li>
-<li><a href="#sec-2-16">2.16. <span class="todo TODO">TODO</span> normal.gee.R</a></li>
-<li><a href="#sec-2-17">2.17. <span class="todo TODO">TODO</span> probit.gee.R</a></li>
-<li><a href="#sec-2-18">2.18. <span class="todo TODO">TODO</span> twosls.R</a></li>
+<li><a href="#sec-3-11-1">3.11.1 zelig</a></li>
+<li><a href="#sec-3-11-2">3.11.2 param</a></li>
+<li><a href="#sec-3-11-3">3.11.3 qi</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 Zelig 4 models (to be ported in Zelig 5.1 and Zelig 5.2)</a>
+<ul>
+<li><a href="#sec-4-1">4.1 gamma.survey.R</a></li>
+<li><a href="#sec-4-2">4.2 logit.survey.R</a></li>
+<li><a href="#sec-4-3">4.3 poisson.survey.R</a></li>
+<li><a href="#sec-4-4">4.4 normal.survey.R</a></li>
+<li><a href="#sec-4-5">4.5 probit.survey.R</a></li>
+<li><a href="#sec-4-6">4.6 logit.bayes.R</a></li>
+<li><a href="#sec-4-7">4.7 factor.bayes.R</a></li>
+<li><a href="#sec-4-8">4.8 poisson.bayes.R</a></li>
+<li><a href="#sec-4-9">4.9 normal.bayes.R</a></li>
+<li><a href="#sec-4-10">4.10 mlogit.bayes.R</a></li>
+<li><a href="#sec-4-11">4.11 oprobit.bayes.R</a></li>
+<li><a href="#sec-4-12">4.12 probit.bayes.R</a></li>
+<li><a href="#sec-4-13">4.13 logit.gee.R</a></li>
+<li><a href="#sec-4-14">4.14 gamma.gee.R</a></li>
+<li><a href="#sec-4-15">4.15 poisson.gee.R</a></li>
+<li><a href="#sec-4-16">4.16 normal.gee.R</a></li>
+<li><a href="#sec-4-17">4.17 probit.gee.R</a></li>
+<li><a href="#sec-4-18">4.18 twosls.R</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Zelig  5 Core models</h2>
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Features</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> <span class="done DONE">DONE</span> ls.R</h3>
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> <span class="todo TODO">TODO</span> strata</h3>
 <div class="outline-text-3" id="text-1-1">
-</div><div id="outline-container-sec-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> zelig</h4>
+
 </div>
-<div id="outline-container-sec-1-1-2" class="outline-4">
-<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> param</h4>
+
 </div>
-<div id="outline-container-sec-1-1-3" class="outline-4">
-<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> <span class="done DONE">DONE</span> logit.R</h3>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> <span class="todo STARTED">STARTED</span> summarize</h3>
 <div class="outline-text-3" id="text-1-2">
-</div><div id="outline-container-sec-1-2-1" class="outline-4">
-<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> zelig</h4>
+
 </div>
-<div id="outline-container-sec-1-2-2" class="outline-4">
-<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> param</h4>
+
 </div>
-<div id="outline-container-sec-1-2-3" class="outline-4">
-<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> <span class="done DONE">DONE</span> probit.R</h3>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> <span class="todo STARTED">STARTED</span> Sphinx</h3>
 <div class="outline-text-3" id="text-1-3">
-</div><div id="outline-container-sec-1-3-1" class="outline-4">
-<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-3-2" class="outline-4">
-<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> param</h4>
-</div>
-<div id="outline-container-sec-1-3-3" class="outline-4">
-<h4 id="sec-1-3-3"><span class="section-number-4">1.3.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> <span class="done DONE">DONE</span> exp.R</h3>
-<div class="outline-text-3" id="text-1-4">
-</div><div id="outline-container-sec-1-4-1" class="outline-4">
-<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-4-2" class="outline-4">
-<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> param</h4>
-</div>
-<div id="outline-container-sec-1-4-3" class="outline-4">
-<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> <span class="done DONE">DONE</span> gamma.R</h3>
-<div class="outline-text-3" id="text-1-5">
-</div><div id="outline-container-sec-1-5-1" class="outline-4">
-<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-5-2" class="outline-4">
-<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> param</h4>
-</div>
-<div id="outline-container-sec-1-5-3" class="outline-4">
-<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6"><span class="section-number-3">1.6</span> <span class="done DONE">DONE</span> normal.R</h3>
-<div class="outline-text-3" id="text-1-6">
-</div><div id="outline-container-sec-1-6-1" class="outline-4">
-<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-6-2" class="outline-4">
-<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> param</h4>
-</div>
-<div id="outline-container-sec-1-6-3" class="outline-4">
-<h4 id="sec-1-6-3"><span class="section-number-4">1.6.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-7" class="outline-3">
-<h3 id="sec-1-7"><span class="section-number-3">1.7</span> <span class="todo STARTED">STARTED</span> poisson.R</h3>
-<div class="outline-text-3" id="text-1-7">
-</div><div id="outline-container-sec-1-7-1" class="outline-4">
-<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-7-2" class="outline-4">
-<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> param</h4>
-</div>
-<div id="outline-container-sec-1-7-3" class="outline-4">
-<h4 id="sec-1-7-3"><span class="section-number-4">1.7.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-8" class="outline-3">
-<h3 id="sec-1-8"><span class="section-number-3">1.8</span> <span class="todo STARTED">STARTED</span> lognorm.R</h3>
-<div class="outline-text-3" id="text-1-8">
-</div><div id="outline-container-sec-1-8-1" class="outline-4">
-<h4 id="sec-1-8-1"><span class="section-number-4">1.8.1</span> <span class="done DONE">DONE</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-8-2" class="outline-4">
-<h4 id="sec-1-8-2"><span class="section-number-4">1.8.2</span> <span class="done DONE">DONE</span> param</h4>
-</div>
-<div id="outline-container-sec-1-8-3" class="outline-4">
-<h4 id="sec-1-8-3"><span class="section-number-4">1.8.3</span> <span class="todo STARTED">STARTED</span> qi</h4>
-<div class="outline-text-4" id="text-1-8-3">
-</div><ol class="org-ol"><li><span class="done DONE">DONE</span> ev<br  /></li>
-<li><span class="todo TODO">TODO</span> pv<br  /></li></ol>
-</div>
-</div>
-<div id="outline-container-sec-1-9" class="outline-3">
-<h3 id="sec-1-9"><span class="section-number-3">1.9</span> <span class="todo STARTED">STARTED</span> negbinom.R</h3>
-<div class="outline-text-3" id="text-1-9">
-</div><div id="outline-container-sec-1-9-1" class="outline-4">
-<h4 id="sec-1-9-1"><span class="section-number-4">1.9.1</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-9-2" class="outline-4">
-<h4 id="sec-1-9-2"><span class="section-number-4">1.9.2</span> param</h4>
-</div>
-<div id="outline-container-sec-1-9-3" class="outline-4">
-<h4 id="sec-1-9-3"><span class="section-number-4">1.9.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-10" class="outline-3">
-<h3 id="sec-1-10"><span class="section-number-3">1.10</span> <span class="todo STARTED">STARTED</span> relogit.R</h3>
-<div class="outline-text-3" id="text-1-10">
-</div><div id="outline-container-sec-1-10-1" class="outline-4">
-<h4 id="sec-1-10-1"><span class="section-number-4">1.10.1</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-10-2" class="outline-4">
-<h4 id="sec-1-10-2"><span class="section-number-4">1.10.2</span> param</h4>
-</div>
-<div id="outline-container-sec-1-10-3" class="outline-4">
-<h4 id="sec-1-10-3"><span class="section-number-4">1.10.3</span> qi</h4>
-</div>
-</div>
-<div id="outline-container-sec-1-11" class="outline-3">
-<h3 id="sec-1-11"><span class="section-number-3">1.11</span> <span class="todo STARTED">STARTED</span> tobit.R</h3>
-<div class="outline-text-3" id="text-1-11">
-</div><div id="outline-container-sec-1-11-1" class="outline-4">
-<h4 id="sec-1-11-1"><span class="section-number-4">1.11.1</span> zelig</h4>
-</div>
-<div id="outline-container-sec-1-11-2" class="outline-4">
-<h4 id="sec-1-11-2"><span class="section-number-4">1.11.2</span> param</h4>
-</div>
-<div id="outline-container-sec-1-11-3" class="outline-4">
-<h4 id="sec-1-11-3"><span class="section-number-4">1.11.3</span> qi</h4>
-</div>
+
+
 </div>
 </div>
 
+</div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Zelig 4 models (to be ported in Zelig 5.1 and Zelig 5.2)</h2>
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Documentation</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> <span class="todo TODO">TODO</span> gamma.survey.R</h3>
-</div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> <span class="todo TODO">TODO</span> logit.survey.R</h3>
-</div>
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> <span class="todo TODO">TODO</span> poisson.survey.R</h3>
-</div>
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> <span class="todo TODO">TODO</span> normal.survey.R</h3>
-</div>
-<div id="outline-container-sec-2-5" class="outline-3">
-<h3 id="sec-2-5"><span class="section-number-3">2.5</span> <span class="todo TODO">TODO</span> probit.survey.R</h3>
+
+
 </div>
 
-<div id="outline-container-sec-2-6" class="outline-3">
-<h3 id="sec-2-6"><span class="section-number-3">2.6</span> <span class="todo TODO">TODO</span> logit.bayes.R</h3>
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> <span class="todo TODO">TODO</span> Port model vignettes</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
 </div>
-<div id="outline-container-sec-2-7" class="outline-3">
-<h3 id="sec-2-7"><span class="section-number-3">2.7</span> <span class="todo TODO">TODO</span> factor.bayes.R</h3>
-</div>
-<div id="outline-container-sec-2-8" class="outline-3">
-<h3 id="sec-2-8"><span class="section-number-3">2.8</span> <span class="todo STARTED">STARTED</span> poisson.bayes.R</h3>
-</div>
-<div id="outline-container-sec-2-9" class="outline-3">
-<h3 id="sec-2-9"><span class="section-number-3">2.9</span> <span class="todo TODO">TODO</span> normal.bayes.R</h3>
-</div>
-<div id="outline-container-sec-2-10" class="outline-3">
-<h3 id="sec-2-10"><span class="section-number-3">2.10</span> <span class="todo TODO">TODO</span> mlogit.bayes.R</h3>
-</div>
-<div id="outline-container-sec-2-11" class="outline-3">
-<h3 id="sec-2-11"><span class="section-number-3">2.11</span> <span class="todo TODO">TODO</span> oprobit.bayes.R</h3>
-</div>
-<div id="outline-container-sec-2-12" class="outline-3">
-<h3 id="sec-2-12"><span class="section-number-3">2.12</span> <span class="todo TODO">TODO</span> probit.bayes.R</h3>
 </div>
 
-<div id="outline-container-sec-2-13" class="outline-3">
-<h3 id="sec-2-13"><span class="section-number-3">2.13</span> <span class="todo TODO">TODO</span> logit.gee.R</h3>
-</div>
-<div id="outline-container-sec-2-14" class="outline-3">
-<h3 id="sec-2-14"><span class="section-number-3">2.14</span> <span class="todo TODO">TODO</span> gamma.gee.R</h3>
-</div>
-<div id="outline-container-sec-2-15" class="outline-3">
-<h3 id="sec-2-15"><span class="section-number-3">2.15</span> <span class="todo STARTED">STARTED</span> poisson.gee.R</h3>
-</div>
-<div id="outline-container-sec-2-16" class="outline-3">
-<h3 id="sec-2-16"><span class="section-number-3">2.16</span> <span class="todo TODO">TODO</span> normal.gee.R</h3>
-</div>
-<div id="outline-container-sec-2-17" class="outline-3">
-<h3 id="sec-2-17"><span class="section-number-3">2.17</span> <span class="todo TODO">TODO</span> probit.gee.R</h3>
 </div>
 
-<div id="outline-container-sec-2-18" class="outline-3">
-<h3 id="sec-2-18"><span class="section-number-3">2.18</span> <span class="todo TODO">TODO</span> twosls.R</h3>
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Zelig  5 Core models</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> <span class="done DONE">DONE</span> ls.R</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+</div>
+
+<div id="outline-container-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-1-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> param</h4>
+<div class="outline-text-4" id="text-3-1-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-1-3" class="outline-4">
+<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-1-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> <span class="done DONE">DONE</span> logit.R</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+</div>
+
+<div id="outline-container-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-2-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> param</h4>
+<div class="outline-text-4" id="text-3-2-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-2-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> <span class="done DONE">DONE</span> probit.R</h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+</div>
+
+<div id="outline-container-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-3-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> param</h4>
+<div class="outline-text-4" id="text-3-3-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3-3" class="outline-4">
+<h4 id="sec-3-3-3"><span class="section-number-4">3.3.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-3-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> <span class="done DONE">DONE</span> exp.R</h3>
+<div class="outline-text-3" id="text-3-4">
+
+
+</div>
+
+<div id="outline-container-3-4-1" class="outline-4">
+<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-4-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-4-2" class="outline-4">
+<h4 id="sec-3-4-2"><span class="section-number-4">3.4.2</span> param</h4>
+<div class="outline-text-4" id="text-3-4-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-4-3" class="outline-4">
+<h4 id="sec-3-4-3"><span class="section-number-4">3.4.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-4-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> <span class="done DONE">DONE</span> gamma.R</h3>
+<div class="outline-text-3" id="text-3-5">
+
+
+</div>
+
+<div id="outline-container-3-5-1" class="outline-4">
+<h4 id="sec-3-5-1"><span class="section-number-4">3.5.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-5-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-5-2" class="outline-4">
+<h4 id="sec-3-5-2"><span class="section-number-4">3.5.2</span> param</h4>
+<div class="outline-text-4" id="text-3-5-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-5-3" class="outline-4">
+<h4 id="sec-3-5-3"><span class="section-number-4">3.5.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-5-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> <span class="done DONE">DONE</span> normal.R</h3>
+<div class="outline-text-3" id="text-3-6">
+
+
+</div>
+
+<div id="outline-container-3-6-1" class="outline-4">
+<h4 id="sec-3-6-1"><span class="section-number-4">3.6.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-6-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-6-2" class="outline-4">
+<h4 id="sec-3-6-2"><span class="section-number-4">3.6.2</span> param</h4>
+<div class="outline-text-4" id="text-3-6-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-6-3" class="outline-4">
+<h4 id="sec-3-6-3"><span class="section-number-4">3.6.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-6-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> <span class="todo STARTED">STARTED</span> poisson.R</h3>
+<div class="outline-text-3" id="text-3-7">
+
+
+</div>
+
+<div id="outline-container-3-7-1" class="outline-4">
+<h4 id="sec-3-7-1"><span class="section-number-4">3.7.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-7-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-7-2" class="outline-4">
+<h4 id="sec-3-7-2"><span class="section-number-4">3.7.2</span> param</h4>
+<div class="outline-text-4" id="text-3-7-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-7-3" class="outline-4">
+<h4 id="sec-3-7-3"><span class="section-number-4">3.7.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-7-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-8" class="outline-3">
+<h3 id="sec-3-8"><span class="section-number-3">3.8</span> <span class="todo STARTED">STARTED</span> lognorm.R</h3>
+<div class="outline-text-3" id="text-3-8">
+
+
+</div>
+
+<div id="outline-container-3-8-1" class="outline-4">
+<h4 id="sec-3-8-1"><span class="section-number-4">3.8.1</span> <span class="done DONE">DONE</span> zelig</h4>
+<div class="outline-text-4" id="text-3-8-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-8-2" class="outline-4">
+<h4 id="sec-3-8-2"><span class="section-number-4">3.8.2</span> <span class="done DONE">DONE</span> param</h4>
+<div class="outline-text-4" id="text-3-8-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-8-3" class="outline-4">
+<h4 id="sec-3-8-3"><span class="section-number-4">3.8.3</span> <span class="todo STARTED">STARTED</span> qi</h4>
+<div class="outline-text-4" id="text-3-8-3">
+
+<ul>
+<li id="sec-3-8-3-1"><span class="done DONE">DONE</span> ev<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-3-8-3-2"><span class="todo TODO">TODO</span> pv<br/>
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-9" class="outline-3">
+<h3 id="sec-3-9"><span class="section-number-3">3.9</span> <span class="todo STARTED">STARTED</span> negbinom.R</h3>
+<div class="outline-text-3" id="text-3-9">
+
+
+</div>
+
+<div id="outline-container-3-9-1" class="outline-4">
+<h4 id="sec-3-9-1"><span class="section-number-4">3.9.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-9-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-9-2" class="outline-4">
+<h4 id="sec-3-9-2"><span class="section-number-4">3.9.2</span> param</h4>
+<div class="outline-text-4" id="text-3-9-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-9-3" class="outline-4">
+<h4 id="sec-3-9-3"><span class="section-number-4">3.9.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-9-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-10" class="outline-3">
+<h3 id="sec-3-10"><span class="section-number-3">3.10</span> <span class="todo STARTED">STARTED</span> relogit.R</h3>
+<div class="outline-text-3" id="text-3-10">
+
+
+</div>
+
+<div id="outline-container-3-10-1" class="outline-4">
+<h4 id="sec-3-10-1"><span class="section-number-4">3.10.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-10-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-10-2" class="outline-4">
+<h4 id="sec-3-10-2"><span class="section-number-4">3.10.2</span> param</h4>
+<div class="outline-text-4" id="text-3-10-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-10-3" class="outline-4">
+<h4 id="sec-3-10-3"><span class="section-number-4">3.10.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-10-3">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-11" class="outline-3">
+<h3 id="sec-3-11"><span class="section-number-3">3.11</span> <span class="todo STARTED">STARTED</span> tobit.R</h3>
+<div class="outline-text-3" id="text-3-11">
+
+
+</div>
+
+<div id="outline-container-3-11-1" class="outline-4">
+<h4 id="sec-3-11-1"><span class="section-number-4">3.11.1</span> zelig</h4>
+<div class="outline-text-4" id="text-3-11-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-11-2" class="outline-4">
+<h4 id="sec-3-11-2"><span class="section-number-4">3.11.2</span> param</h4>
+<div class="outline-text-4" id="text-3-11-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-11-3" class="outline-4">
+<h4 id="sec-3-11-3"><span class="section-number-4">3.11.3</span> qi</h4>
+<div class="outline-text-4" id="text-3-11-3">
+
+
+
 </div>
 </div>
 </div>
-<div id="postamble" class="status">
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Zelig 4 models (to be ported in Zelig 5.1 and Zelig 5.2)</h2>
+<div class="outline-text-2" id="text-4">
+
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> <span class="todo TODO">TODO</span> gamma.survey.R</h3>
+<div class="outline-text-3" id="text-4-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> <span class="todo TODO">TODO</span> logit.survey.R</h3>
+<div class="outline-text-3" id="text-4-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> <span class="todo TODO">TODO</span> poisson.survey.R</h3>
+<div class="outline-text-3" id="text-4-3">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> <span class="todo TODO">TODO</span> normal.survey.R</h3>
+<div class="outline-text-3" id="text-4-4">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> <span class="todo TODO">TODO</span> probit.survey.R</h3>
+<div class="outline-text-3" id="text-4-5">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> <span class="todo TODO">TODO</span> logit.bayes.R</h3>
+<div class="outline-text-3" id="text-4-6">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> <span class="todo TODO">TODO</span> factor.bayes.R</h3>
+<div class="outline-text-3" id="text-4-7">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> <span class="todo STARTED">STARTED</span> poisson.bayes.R</h3>
+<div class="outline-text-3" id="text-4-8">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-9" class="outline-3">
+<h3 id="sec-4-9"><span class="section-number-3">4.9</span> <span class="todo TODO">TODO</span> normal.bayes.R</h3>
+<div class="outline-text-3" id="text-4-9">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-10" class="outline-3">
+<h3 id="sec-4-10"><span class="section-number-3">4.10</span> <span class="todo TODO">TODO</span> mlogit.bayes.R</h3>
+<div class="outline-text-3" id="text-4-10">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-11" class="outline-3">
+<h3 id="sec-4-11"><span class="section-number-3">4.11</span> <span class="todo TODO">TODO</span> oprobit.bayes.R</h3>
+<div class="outline-text-3" id="text-4-11">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-12" class="outline-3">
+<h3 id="sec-4-12"><span class="section-number-3">4.12</span> <span class="todo TODO">TODO</span> probit.bayes.R</h3>
+<div class="outline-text-3" id="text-4-12">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-13" class="outline-3">
+<h3 id="sec-4-13"><span class="section-number-3">4.13</span> <span class="todo TODO">TODO</span> logit.gee.R</h3>
+<div class="outline-text-3" id="text-4-13">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-14" class="outline-3">
+<h3 id="sec-4-14"><span class="section-number-3">4.14</span> <span class="todo TODO">TODO</span> gamma.gee.R</h3>
+<div class="outline-text-3" id="text-4-14">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-15" class="outline-3">
+<h3 id="sec-4-15"><span class="section-number-3">4.15</span> <span class="todo STARTED">STARTED</span> poisson.gee.R</h3>
+<div class="outline-text-3" id="text-4-15">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-16" class="outline-3">
+<h3 id="sec-4-16"><span class="section-number-3">4.16</span> <span class="todo TODO">TODO</span> normal.gee.R</h3>
+<div class="outline-text-3" id="text-4-16">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-17" class="outline-3">
+<h3 id="sec-4-17"><span class="section-number-3">4.17</span> <span class="todo TODO">TODO</span> probit.gee.R</h3>
+<div class="outline-text-3" id="text-4-17">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-18" class="outline-3">
+<h3 id="sec-4-18"><span class="section-number-3">4.18</span> <span class="todo TODO">TODO</span> twosls.R</h3>
+<div class="outline-text-3" id="text-4-18">
+
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-06-08T12:39-0400</p>
 <p class="author">Author: Christine Choirat</p>
-<p class="date">Created: 2014-06-06 Fri 14:27</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.50.2 (<a href="http://orgmode.org">Org</a> mode 8.2.6)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
 </div>
 </body>
 </html>

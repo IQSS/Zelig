@@ -1,16 +1,33 @@
 library(Zelig)
+data(turnout)
 
 z.out <- zelig(vote ~ age , data = turnout, model = "ls",
                by = "race")
 summary(z.out)
-x.out <- setx(z.out)
+x.out <- setx(z.out, age = 18)
 s.out <- sim(z.out, x.out)
 summary(s.out)
 
-data(turnout)
+
 r <- split(turnout, factor(turnout$race))
 r[[1]]
 r[[2]]
+
+z5 <- zls$new()
+z5$zelig(vote ~ age , data = turnout, by = "race")
+z5$zelig.out
+z5$zelig.out.by
+z5
+z5$setx(age = 18)
+z5$sim()
+z5$summarize()
+
+z5 <- zls$new()
+z5$zelig(vote ~ age , data = turnout)
+z5$zelig.out
+z5$setx(age = 18)
+z5$sim()
+z5$summarize()
 
 data(turnout)
 sturnout <- split(turnout, factor(turnout$race))
@@ -35,5 +52,5 @@ z.out <- by(turnout,  factor(turnout$race),
 by(turnout,  factor(turnout$race),
    function(x) {
      z.out <<- zeligw(vote ~ age , data = x, model = "ls")
-     s.out <<- setxw(z.out)
+     s.out <<- setxw(z.out, age = 30)
      })

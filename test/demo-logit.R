@@ -16,7 +16,8 @@ summary(s.out)
 # Zelig 5 code:
 z5 <- zlogit$new()
 z5$zelig(admit ~ gre + gpa, data = mydata,
-         epsilon=.0001)
+         epsilon=1)
+z5
 # removed epsilon to compare with Zelig 4
 z5$zelig(admit ~ gre + gpa, data = mydata)
 z5

@@ -4,6 +4,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         name = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix
                                         data.by = "ANY", # data frame or matrix
+                                        by = "logical",
                                         
                                         zelig.call = "call", # Zelig function call
                                         model.call = "call", # wrapped function call
@@ -63,27 +64,26 @@ z$methods(
 )
 
 z$methods(
-  zelig = function(formula, data, ..., weights = NULL) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
     .self$formula <- formula
     .self$data <- data
-    .self$model.call <- match.call(expand.dots = TRUE,
-                                   call = sys.call(sys.parent(n = 1)))
     .self$model.call[[1]] <- .self$fn
+    .self$by <- !is.null(by)
+    .self$model.call$by <- NULL
+    if (!.self$by)
+      .self$zelig.out <- eval(.self$model.call, envir = parent.frame(1))
+    else {
+      .self$data.by <- split(.self$data, factor(.self$data[[by]]))
+      .self$zelig.out.by <- list()
+      for (i in seq(.self$data.by)) {
+        model.call.by <- .self$model.call
+        model.call.by$data <- quote(.self$data.by[[i]]) # names(z5$data.by)
+        .self$zelig.out.by[[i]] <- eval(model.call.by)
+        .self$zelig.out.by[[i]]$call <- names(z5$data.by)[i]
+      }
+    }
   }
 )
-
-setval <- function(val, newval) {
-  if (is.numeric(val))
-    newval
-  else if (is.ordered(val))
-    newval
-  else {
-    lev <- levels(val)
-    if (!newval %in% lev)
-      stop("Wrong factor")
-    return(factor(newval, levels = lev))
-  }
-} 
 
 z$methods(
   set = function(...) {
@@ -103,110 +103,24 @@ z$methods(
         warning(w)
       }
       for (i in seq(n[ma]))
-        ldata[n[ma]][i][[1]] <- setval(ldata[n[ma]][i][[1]], s[n[ma]][i][[1]])
+        ldata[n[ma]][i][[1]] <- setval(ldata[n[ma]][i][[1]],
+                                       s[n[ma]][i][[1]])
     }
     f <- update(formula(.self$zelig.out), 1 ~ .)
     return(model.matrix(f, ldata))
   }
 )
 
-# z$methods(
-#   set = function(...) {
-#     pred <- terms(.self$zelig.out, "predvars")
-#     n <- intersect(as.character(attr(pred, "predvars"))[-1],
-#                    names(.self$data))
-#     s <-list(...)
-#     if (length(s) > 0 && is.list(s[[1]]))
-#       s <- s[[1]]
-#     m <- match(names(s), n)
-#     ma <- m[!is.na(m)]
-#     if (!all(complete.cases(m))) {
-#       w <- paste("Variable '", names(s[is.na(m)]),
-#                  "' not in data set.\n", sep = "")
-#       warning(w)
-#     }
-#     if (!all(complete.cases(m)) & length(m) == 0) {
-#       ldata <- list()
-#       ldata[n[ma]] <- lapply(.self$data[n[-ma]], set, s[n[-ma]])
-#     } else if (all(is.na(m))) {
-#       ldata <- lapply(.self$data, avg)
-#     } else {
-#       ldata <- lapply(.self$data[n[-ma]], avg)
-#       ldata[n[ma]] <- s[n[ma]]
-#     }
-#     if (length(s > 0)) {
-#       cc <- attr(pred, "dataClasses")
-#       nn <- names(ldata)
-#       for (i in seq(nn))
-#         if (cc[nn[i]] == "factor") {
-#           if (!(ldata[[nn[i]]] %in% levels(.self$data[[nn[i]]]))) {
-#             w <- paste("Factor variable '", nn[i],
-#                        "' has no level '", ldata[[nn[i]]], "'.\n", sep = "")
-#             warning(w)
-#             ldata[[nn[i]]] <- avg(.self$data[[nn[i]]])
-#           } else {
-#             ldata[[nn[i]]] <- factor(ldata[[nn[i]]],
-#                                      levels = levels(.self$data[[nn[i]]]))
-#           }
-#         }
-#     }
-#     f <- update(formula(.self$zelig.out), 1 ~ .)
-#     #     f <- formula(as.Formula(f), rhs = 1)
-#     #     f[[2]] <- 1
-#     return(model.matrix(f, ldata))
-#   }
-# )
-
-# z$methods(
-#   set = function(...) {
-#     pred <- terms(.self$zelig.out, "predvars")
-#     n <- intersect(as.character(attr(pred, "predvars"))[-1],
-#                    names(.self$data))
-#     s <-list(...)
-#     if (length(s) > 0 && is.list(s[[1]]))
-#       s <- s[[1]]
-#     m <- match(names(s), n)
-#     ma <- m[!is.na(m)]
-#     if (!all(complete.cases(m))) {
-#       w <- paste("Variable '", names(s[is.na(m)]),
-#                  "' not in data set.\n", sep = "")
-#       warning(w)
-#     }
-#     if (!all(complete.cases(m)) & length(m) == 0) {
-#       ldata <- list()
-#       ldata[n[ma]] <- s[n[ma]]
-#     } else if (all(is.na(m))) {
-#       ldata <- lapply(.self$data, avg)
-#     } else {
-#       ldata <- lapply(.self$data[n[-ma]], avg)
-#       ldata[n[ma]] <- s[n[ma]]
-#     }
-#     if (length(s > 0)) {
-#       cc <- attr(pred, "dataClasses")
-#       nn <- names(ldata)
-#       for (i in seq(nn))
-#         if (cc[nn[i]] == "factor") {
-#           if (!(ldata[[nn[i]]] %in% levels(.self$data[[nn[i]]]))) {
-#             w <- paste("Factor variable '", nn[i],
-#                        "' has no level '", ldata[[nn[i]]], "'.\n", sep = "")
-#             warning(w)
-#             ldata[[nn[i]]] <- avg(.self$data[[nn[i]]])
-#           } else {
-#             ldata[[nn[i]]] <- factor(ldata[[nn[i]]],
-#                                      levels = levels(.self$data[[nn[i]]]))
-#           }
-#         }
-#     }
-#       f <- update(formula(.self$zelig.out), 1 ~ .)
-# #     f <- formula(as.Formula(f), rhs = 1)
-# #     f[[2]] <- 1
-#     return(model.matrix(f, ldata))
-#   }
-# )
-
 z$methods(
   setx = function(...) {
-    .self$setx.out$x <- .self$set(...)
+    if (!.self$by)
+      .self$setx.out$x <- .self$set(...)
+    else {
+      for (i in seq(.self$data.by)) {
+        .self$setx.out.by[[i]] <- list()
+        .self$setx.out.by[[i]]$x <- .self$set(...)
+      }
+    }
   }
 )
 
@@ -252,7 +166,9 @@ z$methods(
         .self$sim.out$range[[i]]$pv <- lr[[2]]
       }
     }
-    idx <- match(names(.self$setx.labels), names(.self$sim.out), nomatch = 0) 
+    idx <- match(names(.self$setx.labels),
+                 names(.self$sim.out),
+                 nomatch = 0) 
     names(.self$sim.out)[idx] <- .self$setx.labels[idx != 0]
   }
 )
@@ -312,7 +228,10 @@ z$methods(
 
 z$methods(
   show = function() {
-    print(summary(.self$zelig.out))
+    if (!.self$by)
+      print(summary(.self$zelig.out))
+    else
+      lapply(z5$zelig.out.by, function(x) print(summary(x)))
   }
 )
 

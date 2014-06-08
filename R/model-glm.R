@@ -15,11 +15,20 @@ zglm$methods(
 zglm$methods(
   zelig = function(formula, data, ..., weights=NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    callSuper(formula = formula, data = data, ..., weights = NULL)
+    .self$model.call <- match.call(expand.dots = TRUE)
     .self$model.call$family <- call(.self$family, .self$link)
-    .self$zelig.out <- eval(.self$model.call)
+    callSuper(formula = formula, data = data, ..., weights = NULL)
   }
 )
+
+# zglm$methods(
+#   zelig = function(formula, data, ..., weights=NULL) {
+#     .self$zelig.call <- match.call(expand.dots = TRUE)
+#     callSuper(formula = formula, data = data, ..., weights = NULL)
+#     .self$model.call$family <- call(.self$family, .self$link)
+#     .self$zelig.out <- eval(.self$model.call)
+#   }
+# )
 
 zglm$methods(
   param = function(num, ...) {
