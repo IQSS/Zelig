@@ -24,17 +24,16 @@ zls$methods(
 )
 
 zls$methods(
-  param = function(num, z.out) {
-#     .self$simparam <- mvrnorm(n = num,
-#                               mu = coef(.self$zelig.out),
-#                               Sigma = vcov(.self$zelig.out))
-    return(mvrnorm(n = num, mu = coef(z.out), Sigma = vcov(z.out)))
+  param = function(i) {
+    .self$simparam[[i]] <- mvrnorm(n = .self$num,
+                                   mu = coef(.self$zelig.out[[i]]),
+                                   Sigma = vcov(.self$zelig.out[[i]]))
   }
 )
 
 zls$methods(
-  qi = function(simparam, x) {
-    ev <- simparam %*% t(x)
+  qi = function(i, x) {
+    ev <- .self$simparam[[i]] %*% t(x)
     pv <- ev
     return(list(ev = ev, pv = pv))
   }

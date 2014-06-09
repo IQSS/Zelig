@@ -15,30 +15,31 @@ r[[1]]
 r[[2]]
 
 z5 <- zls$new()
-z5$zelig(vote ~ age , data = turnout, by = "race")
+z5$zelig(vote ~ age + income, data = turnout, by = "race")
 z5$zelig.out
-z5$zelig.out.by
 z5
 z5$setx(age = 18)
 z5$setx1(age=20)
 z5$setrange(age = 18:20)
-z5$setx.out.by
-z5$sim(3)
-z5$sim.out.by
+z5$setx.out
+z5$sim(10)
+z5$sim.out
 z5$summarize()
 .self <- z5
 
 z5 <- zls$new()
-z5$zelig(vote ~ age , data = turnout)
+z5$zelig(vote ~ age + income , data = turnout)
 z5$zelig.out
+z5
 z5$setx(age = 18)
 z5$setx1(age = 20)
 z5$setrange(age = 18:20)
 z5$setx.out
-z5$setx.out.by
 z5$sim(10)
 z5$sim.out
 z5$summarize()
+.self <- z5
+.self$num <- 10
 
 data(turnout)
 sturnout <- split(turnout, factor(turnout$race))
