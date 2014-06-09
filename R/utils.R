@@ -75,8 +75,7 @@ setval <- function(val, newval) {
   }
 } 
 
-
-statmat <- function(qi){
+statmat <- function(qi) {
   m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm = TRUE))
   n <- matrix(apply(qi, 2, mean, na.rm = TRUE))
   colnames(n) <- "mean"
@@ -86,12 +85,19 @@ statmat <- function(qi){
   return(p)
 }
 
-statlevel <- function(qi, num){
+statlevel <- function(qi, num) {
   if (is.matrix(qi))
     m <- t(apply(qi, 2, table)) / num
   else
     m <- table(qi) / num
   return(m)
+}
+
+stat <- function(qi, num) {
+  if (is.null(attr(qi, "levels")))
+    return(statmat(qi))
+  else
+    return(statlevel(qi, num))
 }
 
 cluster.formula <- function (formula, cluster) { 

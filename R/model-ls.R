@@ -23,38 +23,18 @@ zls$methods(
   }
 )
 
-# zls$methods(
-#   zelig = function(formula, data, ..., weights = NULL) {
-#     .self$zelig.call <- match.call(expand.dots = TRUE)
-#     .self$formula <- formula
-#     .self$data <- data
-#     .self$model.call <- match.call(expand.dots = TRUE)
-#     .self$model.call[[1]] <- .self$fn
-#     .self$model.call$by <- NULL
-#     .self$zelig.out <- eval(.self$model.call)
-#     if (!is.null(by)) {
-#       .self$data.by <- split(.self$data, factor(.self$data[[by]]))
-#       .self$zelig.out.by <- list()
-#       for (i in seq(.self$data.by)) {
-#         model.call.by <- .self$model.call
-#         model.call.by$data <- quote(.self$data.by[[i]]) # names(z5$data.by)
-#         .self$zelig.out.by[[i]] <- eval(model.call.by)
-#       }
-#     }
-#   }
-# )
-
 zls$methods(
-  param = function(num) {
-    .self$simparam <- mvrnorm(n = num,
-                              mu = coef(.self$zelig.out),
-                              Sigma = vcov(.self$zelig.out))
+  param = function(num, z.out) {
+#     .self$simparam <- mvrnorm(n = num,
+#                               mu = coef(.self$zelig.out),
+#                               Sigma = vcov(.self$zelig.out))
+    return(mvrnorm(n = num, mu = coef(z.out), Sigma = vcov(z.out)))
   }
 )
 
 zls$methods(
-  qi = function(x) {
-    ev <- .self$simparam %*% t(x)
+  qi = function(simparam, x) {
+    ev <- simparam %*% t(x)
     pv <- ev
     return(list(ev = ev, pv = pv))
   }

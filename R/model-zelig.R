@@ -19,6 +19,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         simparam = "matrix", # simulated parameters
                                         num = "numeric", # nb of simulations
                                         sim.out.by = "list", # list of simulated qi's
+                                        simparam.by = "list", # list of simulated parameters
                                         
                                         authors = "character", # Zelig model description
                                         year = "numeric",
@@ -155,98 +156,139 @@ z$methods(
 z$methods(
   sim = function(num = 1000) {
     .self$num <- num
-    .self$param(num = .self$num)
     if (!.self$by) {
+      .self$simparam <- .self$param(num = .self$num, z.out = .self$zelig.out)
       if (!is.null(.self$setx.out$x)) {
-        l1 <- .self$qi(.self$setx.out$x)
-        .self$sim.out$ev <- l1[[1]]
-        .self$sim.out$pv <- l1[[2]]
+        .self$sim.out$x <- .self$qi(.self$setx.out$x)
         if (!is.null(.self$setx.out$x1)) {
-          l2 <- .self$qi(.self$setx.out$x1)
-          .self$sim.out$ev1 <- l2[[1]]
-          .self$sim.out$pv1 <- l2[[2]]
-          .self$sim.out$fd <- .self$sim.out$ev1 - .self$sim.out$ev
+          .self$sim.out$x1 <- .self$qi(.self$setx.out$x1)
+          .self$sim.out$fd <- .self$sim.out$x1$ev - .self$sim.out$x$ev
         }
       } else if (!is.null(.self$setx.out$range)) {
         .self$sim.out$range <- list()
         for (i in seq(.self$setx.out$range)) {
-          .self$sim.out$range[[i]] <- list()
-          lr <- .self$qi(.self$setx.out$range[[i]])
-          .self$sim.out$range[[i]]$ev <- lr[[1]]
-          .self$sim.out$range[[i]]$pv <- lr[[2]]
-        }
-      }
-      idx <- match(names(.self$setx.labels),
-                   names(.self$sim.out),
-                   nomatch = 0) 
-      names(.self$sim.out)[idx] <- .self$setx.labels[idx != 0]
-    }
-  } else {
-    if (!is.null(.self$setx.out.by$x))
-      .self$sim.out.by$x <- lapply(.self$setx.out.by$x, .self$qi)
-    if (!is.null(.self$setx.out.by$x)) 
-      .self$sim.out.by$x1 <- lapply(.self$setx.out.by$x1, .self$qi)
-    } else if (!is.null(.self$setx.out$range)) {
-      .self$sim.out.by$range <- list()
-      for (i in seq(.self$data.by)) {
-        .self$sim.out.by$range[[i]] <- lapply(.self$setx.out.by$range[[i]],
-                                              .self$qi)
-      }
-    }
-  }
-)
-
-# for (i in seq(.self$data.by)) {
-#   .self$sim.out.by$x[[i]] <- lapply(.self$setx.out.by$x, .self$qi)
-#   .self$sim.out.by$range[[i]] <- lapply(.self$setx.out.by$range[[i]], .self$qi)
-# }
-
-z$methods(
-  summarize = function() {
-    cat("Model: ", .self$name, "\n")
-    cat("Number of simulations:", .self$num, "\n")
-    cat("\nValues of X\n")
-    if (!is.null(.self$setx.out$x)) {
-      print(.self$setx.out)
-      lqi <- .self$sim.out
-      labqi <- names(lqi)
-      for (i in 1:length(lqi)) {
-        qi <- lqi[[i]]
-        if (length(qi) == 1 & is.na(qi[1]))
-          next
-        else if (length(qi) >= 1) {
-          cat("\n", labqi[i], "\n", sep="")
-          if (is.null(attr(qi, "levels")))
-            print(statmat(qi))
-          else
-            print(statlevel(qi, .self$num))
+          .self$sim.out$range[[i]] <- .self$qi(.self$setx.out$range[[i]])
         }
       }
     } else {
-      print("range")
-      for (i in seq(.self$setx.out$range)) {
-        print(i)
-        print(.self$setx.out$range[[i]])
-        lqi <- .self$sim.out
-        labqi <- names(lqi)
-        for (i in 1:length(lqi)) {
-          qi <- lqi[[i]]
-          if (length(qi) == 1 & is.na(qi[1]))
-            next
-          else if ((l <- length(qi)) >= 1) {
-            for (j in i:l) {
-            cat("\n", labqi[i], "\n", sep="")
-            if (is.null(attr(qi, "levels")))
-              print(statmat(qi[[j]]))
-            else
-              print(statlevel(qi[[j]], .self$num))
-            }
+      for (i in seq(.self$data.by)) {
+        .self$simparam.by[[i]] <- .self$param(num = .self$num, z.out = .self$zelig.out.by[[i]])
+        if (!is.null(.self$setx.out.by$x[[i]]))
+          .self$sim.out.by$x[[i]] <- .self$qi(.self$simparam.by[[i]], .self$setx.out.by$x[[i]])
+        if (!is.null(.self$setx.out.by$x1[[i]])) {
+          .self$sim.out.by$x1[[i]] <- .self$qi(.self$simparam.by[[i]], .self$setx.out.by$x1[[i]])
+          #           for (i in seq(.self$data.by))
+          #             .self$sim.out.by$fd[[i]] <- .self$sim.out.by$x1[[i]]$ev - .self$sim.out.by$x[[i]]$ev
+          #           names(.self$sim.out.by$fd) <- names(.self$data.by)
+        }
+        else if (!is.null(.self$setx.out.by$range)) {
+          i.self$sim.out.by$range <- list()
+          for (i in seq(.self$data.by)) {
+            .self$sim.out.by$range[[i]] <- lapply(.self$setx.out.by$range[[i]],
+                                                  .self$qi)
           }
         }
       }
     }
   }
 )
+
+z$methods(
+  summarize = function() {
+    cat("Model: ", .self$name, "\n")
+    cat("Number of simulations:", .self$num, "\n")
+    cat("\nValues of X\n")
+    if (!.self$by) {
+      if (!is.null(.self$setx.out$x)) {
+        print("X")
+        print(.self$setx.out$x)
+        print(lapply(.self$sim.out$x, stat))
+        if (!is.null(.self$setx.out$x1)) {
+          print("X1")
+          print(.self$setx.out$x1)
+          print(lapply(.self$sim.out$x1, stat))
+          statmat(.self$sim.out$fd)
+        }
+      } else if (!is.null(.self$setx.out$range)) {
+        print("Range")
+        for (i in seq(.self$setx.out$range)) {
+          print(.self$setx.out$range[[i]])
+          print(lapply(.self$sim.out$range[[i]], stat))
+        }
+      }
+    } else {
+      print("by")
+      if (!is.null(.self$setx.out.by$x)) {
+        for (i in seq(.self$data.by)) {
+          print(names(.self$data.by)[[i]])
+          print(.self$setx.out.by$x[[i]])
+          print(lapply(.self$sim.out.by$x[[i]], stat))
+          if (!is.null(.self$setx.out.by$x1[[i]])) {
+            print(.self$setx.out.by$x1[[i]])
+            print(lapply(.self$sim.out.by$x1[[i]], stat))
+          }
+        }
+      } else if (!is.null(.self$setx.out.by$range)) {
+        print("Range")
+        for (i in seq(.self$setx.out.by$range)) {
+          lapply(.self$sim.out.by$range[[i]], stat)
+        }
+      }
+    }
+  }
+)
+
+# .self$sim.out.by$x1
+# names(.self$sim.out.by$x1)
+# .self$sim.out.by$x1[[1]][[1]]
+# .self$sim.out.by$x1[[2]][[1]]
+
+# z$methods(
+#   summarize = function() {
+#     cat("Model: ", .self$name, "\n")
+#     cat("Number of simulations:", .self$num, "\n")
+#     cat("\nValues of X\n")
+#     if (!is.null(.self$setx.out$x)) {
+#       print(.self$setx.out)
+#       lqi <- .self$sim.out
+#       labqi <- names(lqi)
+#       for (i in 1:length(lqi)) {
+#         qi <- lqi[[i]]
+#         if (length(qi) == 1 & is.na(qi[1]))
+#           next
+#         else if (length(qi) >= 1) {
+#           cat("\n", labqi[i], "\n", sep="")
+#           if (is.null(attr(qi, "levels")))
+#             print(statmat(qi))
+#           else
+#             print(statlevel(qi, .self$num))
+#         }
+#       }
+#     } else {
+#       print("range")
+#       for (i in seq(.self$setx.out$range)) {
+#         print(i)
+#         print(.self$setx.out$range[[i]])
+#         lqi <- .self$sim.out
+#         labqi <- names(lqi)
+#         for (i in 1:length(lqi)) {
+#           qi <- lqi[[i]]
+#           if (length(qi) == 1 & is.na(qi[1]))
+#             next
+#           else if ((l <- length(qi)) >= 1) {
+#             for (j in i:l) {
+#             cat("\n", labqi[i], "\n", sep="")
+#             if (is.null(attr(qi, "levels")))
+#               print(statmat(qi[[j]]))
+#             else
+#               print(statlevel(qi[[j]], .self$num))
+#             }
+#           }
+#         }
+#       }
+#     }
+#   }
+# )
 
 z$methods(
   summarise = function() {
@@ -277,38 +319,7 @@ z$methods(
   }
 )
 
-# z$methods(
-#   zeligby = function(formula, data, ..., weights = NULL, by = NULL) {
-#     .self$data <- data
-#     .self$data.by <- split(.self$data, factor(.self$data[[by]]))
-#     .self$zelig.out.by <- list()
-#     for (i in seq(.self$data.by)) {
-#       .self$zelig.out.by[[i]] <- .self$zelig(formula = formula, data = .self$data.by[[i]])
-#     }
-#   }
-# )
-# 
-# z$methods(
-#   setxby = function() {
-#     .self$setx.out.by <- list()
-#     for (i in seq(.self$data.by)) {
-#       .self$setx.out.by[[i]] <- .self$setx()
-#     }
-#   }
-# )
-# 
-# z$methods(
-#   simby = function(num = 1000) {
-#     for (i in seq(.self$data.by)) {
-#       .self$zelig.out.by[[i]] <- .self$sim(num = 1000)
-#     }
-#   }
-# )
-# 
-# z$methods(
-#   summarizeby = function(formula, data, ..., weights = NULL, by = NULL) {
-#     for (i in seq(.self$zelig.out.by) {
-#       .self$summarize[[i]] <- .self$zelig(formula = formula, data = s[[i]])
-#     }
-#   }
-# )
+#       idx <- match(names(.self$setx.labels),
+#                    names(.self$sim.out),
+#                    nomatch = 0) 
+#       names(.self$sim.out)[idx] <- .self$setx.labels[idx != 0]
