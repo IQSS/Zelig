@@ -18,22 +18,22 @@ zbinchoice$methods(
 zbinchoice$methods(
   zelig = function(formula, data, ..., weights = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    callSuper(formula = formula, data = data, ..., weights = NULL)
+    .self$model.call <- match.call(expand.dots = TRUE)
     .self$model.call$family <- .self$family
-    .self$zelig.out <- eval(.self$model.call)
+    callSuper(formula = formula, data = data, ..., weights = NULL)
   }
 )
 
 zbinchoice$methods(
-  param = function(num, ...) {
-    .self$simparam <- mvrnorm(n = num, mu = coef(.self$zelig.out),
-                              Sigma = vcov(.self$zelig.out))
+  param = function(i) {
+    .self$simparam[[i]] <- mvrnorm(n = .self$num, mu = coef(.self$zelig.out[[i]]),
+                              Sigma = vcov(.self$zelig.out[[i]]))
   }
 )
 
 zbinchoice$methods(
   # From Zelig 4
-  qi = function(x=NULL, param=NULL) {
+  qi = function(i, x) {
     .pp <- function(object, constr, all.coef, x) {
       xm <- list()
       xm <- rep(list(NULL), 3)
@@ -101,8 +101,8 @@ zbinchoice$methods(
       return(pr)
     }
     all.coef <- NULL
-    coefs <- .self$simparam
-    cm <- constraints(.self$zelig.out)
+    coefs <- .self$simparam[[i]]
+    cm <- constraints(.self$zelig.out[[i]])
     v <- vector("list", 3)
     for (i in 1:length(cm)) {
       if (ncol(cm[[i]]) == 1){
@@ -123,17 +123,23 @@ zbinchoice$methods(
                    "Pr(Y1=1, Y2=0)",
                    "Pr(Y1=1, Y2=1)"
     )
-    ev <- .pp(.self$zelig.out, cm, all.coef, as.matrix(x))
-    pr <- .pr(ev)
-    levels(pr) <- c(0, 1)
+    ev <- .pp(.self$zelig.out[[i]], cm, all.coef, as.matrix(x))
+    pv <- .pr(ev)
+    levels(pv) <- c(0, 1)
     return(list("Predicted Probabilities: Pr(Y1=k|X)" = ev,
-                "Predicted Values: Y=k|X" = pr))
+                "Predicted Values: Y=k|X" = pv))
   }
 )
 
 zbinchoice$methods(
-  show = function(...) {
-    print(VGAM::summary(.self$zelig.out, ...))
+  show = function() {
+    lapply(.self$zelig.out, function(x) print(VGAM::summary(x)))
   }
 )
+
+# zbinchoice$methods(
+#   show = function(...) {
+#     print(VGAM::summary(.self$zelig.out, ...))
+#   }
+# )
 

@@ -1,8 +1,3 @@
-source(file.path("..", "R", "utils.R"))
-source(file.path("..", "R", "model-zelig.R"))
-source(file.path("..", "R", "model-glm.R"))
-source(file.path("..", "R", "model-normal.R"))
-
 # Zelig 4 code:
 library(Zelig)
 data(macro)

@@ -1,7 +1,7 @@
 #' @include model-zelig.R
 znegbinom <- setRefClass("Zelig-negbinom",
                          contains="Zelig",
-                         field=list(simalpha = "numeric" # ancillary parameters
+                         field=list(simalpha = "list" # ancillary parameters
                          ))
 
 znegbinom$methods(
@@ -27,18 +27,18 @@ znegbinom$methods(
 )
 
 znegbinom$methods(
-  param = function(num, ...) {
-    .self$simalpha <- .self$zelig.out$theta
-    .self$simparam <- mvrnorm(n = num, mu = coef(.self$zelig.out),
-                              Sigma = vcov(.self$zelig.out))
+  param = function(i) {
+    .self$simalpha[[i]] <- .self$zelig.out[[i]]$theta
+    .self$simparam[[i]] <- mvrnorm(n = .self$num, mu = coef(.self$zelig.out[[i]]),
+                                   Sigma = vcov(.self$zelig.out[[i]]))
   }
 )
 
 znegbinom$methods(
-  qi = function(x = NULL, y = NULL, num = 1000, param = NULL) {
-    coef <- .self$simparam
-    alpha <- .self$simalpha
-    inverse <- family(.self$zelig.out)$linkinv
+  qi = function(i, x) {
+    coef <- .self$simparam[[i]]
+    alpha <- .self$simalpha[[i]]
+    inverse <- family(.self$zelig.out[[i]])$linkinv
     eta <- coef %*% t(x)
     theta <- matrix(inverse(eta), nrow=nrow(coef))
     ev <- theta

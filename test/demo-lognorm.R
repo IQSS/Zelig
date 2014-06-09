@@ -1,7 +1,3 @@
-source(file.path("..", "R", "utils.R"))
-source(file.path("..", "R", "model-zelig.R"))
-source(file.path("..", "R", "model-lognorm.R"))
-
 # Zelig 4 code:
 library(Zelig)
 data(coalition)
@@ -22,6 +18,7 @@ z5
 z5$setx(numst2 = 0)
 set.seed(42)
 z5$sim(num=10)
+z5$sim.out
 z5$summarize()
 z5$cite()
 

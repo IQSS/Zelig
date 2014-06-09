@@ -21,18 +21,9 @@ zglm$methods(
   }
 )
 
-# zglm$methods(
-#   zelig = function(formula, data, ..., weights=NULL) {
-#     .self$zelig.call <- match.call(expand.dots = TRUE)
-#     callSuper(formula = formula, data = data, ..., weights = NULL)
-#     .self$model.call$family <- call(.self$family, .self$link)
-#     .self$zelig.out <- eval(.self$model.call)
-#   }
-# )
-
 zglm$methods(
-  param = function(num, ...) {
-    .self$simparam <- mvrnorm(n=num, mu=coef(.self$zelig.out),
-                              Sigma=vcov(.self$zelig.out))
+  param = function(i) {
+    .self$simparam[[i]] <- mvrnorm(n=.self$num, mu=coef(.self$zelig.out[[i]]),
+                                   Sigma=vcov(.self$zelig.out[[i]]))
   }
 )

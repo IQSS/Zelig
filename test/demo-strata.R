@@ -6,6 +6,7 @@ z.out <- zelig(vote ~ age , data = turnout, model = "ls",
 summary(z.out)
 x.out <- setx(z.out, age = 18)
 x1.out <- setx(z.out, age = 20)
+set.seed(42)
 s.out <- sim(z.out, x.out, x1.out)
 summary(s.out)
 
@@ -51,6 +52,14 @@ for (i in seq(sturnout)) {
   z5[[i]]$setx(car = 3)
   z5[[i]]$summarize()
 }
+
+
+z.outw <- zeligw(vote ~ age , data = turnout, model = "ls", by = "race")
+x.outw <- setxw(z.outw, age = 18)
+x1.outw <- setxw(z.outw, age = 20)
+s.outw <- simw(z.outw, x.outw, x1.outw, num = 1000)
+summaryw(s.outw)
+
 
 by(turnout,  factor(turnout$race),
    function(x) lm(vote ~ age , data = x))

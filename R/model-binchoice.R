@@ -15,9 +15,9 @@ zbinchoice$methods(
 )
 
 zbinchoice$methods(
-  qi = function(x) {
+  qi = function(i, x) {
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
-    coeff <- .self$simparam
+    coeff <- .self$simparam[[i]]
     eta <- coeff %*% t(x)
     eta <- Filter(function (y) !is.na(y), eta)
     theta <- matrix(.self$linkinv(eta), nrow = nrow(coeff))

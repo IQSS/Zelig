@@ -19,3 +19,4 @@ z5$setx()
 set.seed(42)
 z5$sim(num=100)
 z5$summarize()
+

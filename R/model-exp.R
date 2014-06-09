@@ -1,7 +1,7 @@
 #' @include model-zelig.R
 zexp <- setRefClass("Zelig-exp",
                         contains = "Zelig",
-                        fields = list(simalpha = "matrix",
+                        fields = list(simalpha = "list",
                                       linkinv = "function"))
 
 zexp$methods(
@@ -21,28 +21,28 @@ zexp$methods(
 zexp$methods(
   zelig = function(formula, ..., robust = FALSE, cluster = NULL, data) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
+    .self$model.call <- match.call(expand.dots = TRUE)
     if (!(is.null(cluster) || robust))
       stop("If cluster is specified, then `robust` must be TRUE")
     # Add cluster term
     if (robust || !is.null(cluster))
       formula <- cluster.formula(formula, cluster)
-    callSuper(formula = formula, data = data, ..., robust = robust, cluster = cluster)
     .self$model.call$dist <- "exponential"
     .self$model.call$model <- FALSE
-    .self$zelig.out <- eval(.self$model.call)
+    callSuper(formula = formula, data = data, ..., robust = robust, cluster = cluster)
   }
 )
 
 zexp$methods(
-  param = function(num) {
-    .self$simparam = mvrnorm(num, mu = coef(.self$zelig.out),
-                             Sigma = vcov(.self$zelig.out))
+  param = function(i) {
+    .self$simparam[[i]] = mvrnorm(.self$num, mu = coef(.self$zelig.out[[i]]),
+                                  Sigma = vcov(.self$zelig.out[[i]]))
   }
 )
 
 zexp$methods(
-  qi = function(x) {
-    eta <- .self$simparam %*% t(x)
+  qi = function(i, x) {
+    eta <- .self$simparam[[i]] %*% t(x)
     ev <- as.matrix(apply(eta, 2, linkinv))
     pv <- as.matrix(rexp(length(ev), rate = 1 / ev))
     return(list(ev = ev, pv = pv))
