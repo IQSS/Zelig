@@ -3,7 +3,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         weights = "numeric", 
                                         name = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix
-                                        data.by = "list", # data frame or matrix
+                                        data.by = "ANY", # data frame or matrix
                                         by = "logical",
                                         idx = "ANY", # model index
                                         
@@ -69,12 +69,21 @@ z$methods(
     .self$by <- !is.null(by)
     .self$model.call$by <- NULL
     .self$idx <- 1
-    .self$data.by[[1]] <- .self$data
-    .self$zelig.out[[.self$idx]] <- eval(.self$model.call,
-                                         envir = parent.frame(1))
     if (.self$by) {
       .self$data.by <- split(.self$data, factor(.self$data[[by]]))
       .self$idx <- seq(.self$data.by)
+    } else if (class(.self$data) == "amelia") {
+      .self$data.by <- .self$data$imputations
+      .self$by <- TRUE
+      .self$idx <- seq(.self$data.by)
+    } else {
+      .self$data.by[[1]] <- .self$data
+      .self$zelig.out[[.self$idx]] <- eval(.self$model.call,
+                                           envir = parent.frame(1))
+    }
+    if (.self$by) {
+#       .self$data.by <- split(.self$data, factor(.self$data[[by]]))
+#       .self$idx <- seq(.self$data.by)
       for (i in .self$idx) {
         model.call.by <- .self$model.call
         model.call.by$data <- quote(.self$data.by[[i]]) # names(z5$data.by)
@@ -196,7 +205,7 @@ z$methods(
         for (j in seq(.self$setx.out$range)) {
           cat(paste("\nValues of X: range", j, "\n"))
           for (i in .self$idx) {
-            cat("factor: ", names(.self$data.by)[i], "\n")
+            cat("subset: ", names(.self$data.by)[i], "\n")
             print(.self$setx.out$range[[j]][[i]])
             print(lapply(.self$sim.out$range[[j]][[i]], stat, num = .self$num))
           }
