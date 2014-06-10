@@ -12,7 +12,7 @@ summary(s.out)
 
 # Zelig 5 code:
 z5 <- zls$new()
-z5$zelig(dist ~ ., data = cars)
+z5$zelig(dist ~ speed, data = cars)
 z5
 z5$model.call
 z5$zelig.call

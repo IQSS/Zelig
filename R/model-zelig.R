@@ -77,6 +77,7 @@ z$methods(
       .self$by <- TRUE
       .self$idx <- seq(.self$data.by)
     } else {
+      .self$data.by <- list()
       .self$data.by[[1]] <- .self$data
       .self$zelig.out[[.self$idx]] <- eval(.self$model.call,
                                            envir = parent.frame(1))
