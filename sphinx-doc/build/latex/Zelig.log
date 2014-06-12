@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  12 JUN 2014 10:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  12 JUN 2014 10:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -796,7 +796,7 @@ Package: hypcap 2011/02/16 v1.11 Adjusting the anchors of captions (HO)
 
 
 Writing index file Zelig.idx
-No file Zelig.aux.
+(./Zelig.aux)
 \openout1 = `Zelig.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
@@ -814,7 +814,7 @@ LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 117.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 117.
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 117.
@@ -867,6 +867,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 117.
 LaTeX Info: Redefining \pageref on input line 117.
 LaTeX Info: Redefining \nameref on input line 117.
+
+(./Zelig.out) (./Zelig.out)
 \@outlinefile=\write6
 \openout6 = `Zelig.out'.
 
@@ -893,17 +895,18 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 
-]
+] (./Zelig.toc
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 2.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 71.
+ [1
+
+])
 \tf@toc=\write7
 \openout7 = `Zelig.toc'.
 
-
-Adding blank page after the table of contents.
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 120.
-[1
-
-] [2] [1
+ [2] [1
 
 ] [2
 
@@ -925,10 +928,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 313.
 [5
 
-] [6]
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 460.
- [7] [8] [9] [10] [11] [12
+] [6] [7] [8] [9] [10] [11] [12
 
 ]
 Chapter 3.
@@ -953,50 +953,81 @@ Chapter 4.
                                       {eu}{12} \UseTips \xymatrix @!C{\quad ...
 l.1530 \end{gather}
                    \begin{enumerate}
-? 
+? r
+OK, entering \nonstopmode...
 ! Undefined control sequence.
 <argument> ...split}\SelectTips {eu}{12} \UseTips 
                                                   \xymatrix @!C{\quad {\rm I...
 l.1530 \end{gather}
                    \begin{enumerate}
-? 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 ! Undefined control sequence.
 <argument> ...ectTips {eu}{12} \UseTips \xymatrix 
                                                   @!C{\quad {\rm Imputation}...
 l.1530 \end{gather}
                    \begin{enumerate}
-? 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 ! Undefined control sequence.
 <argument> ...trix @!C{\quad {\rm Imputation} \ar 
                                                   @{-->}[dr] & & {\rm Matchi...
 l.1530 \end{gather}
                    \begin{enumerate}
-? 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 ! Missing } inserted.
 <inserted text> 
                 }
 l.1530 \end{gather}
                    \begin{enumerate}
-? 
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
 ! Extra alignment tab has been changed to \cr.
 <template> }$\hfill \endtemplate 
                                  
 l.1530 \end{gather}
                    \begin{enumerate}
-? 
+You have given more \span or & marks than there were
+in the preamble to the \halign or \valign now in progress.
+So I'll assume that you meant to type \cr instead.
+
 ! Undefined control sequence.
 <argument> ...r @{-->}[dr] & & {\rm Matching} \ar 
                                                   @{-->}[dl] \\ {\rm Validat...
 l.1530 \end{gather}
                    \begin{enumerate}
-? 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 ! Undefined control sequence.
 <argument> ...@{-->}[dl] \\ {\rm Validation } \ar 
                                                   @{<--}[r] & *+[F-:<10pt>]{...
 l.1530 \end{gather}
                    \begin{enumerate}
-? r
-OK, entering \nonstopmode...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 <<ot1tt.cmap>>
 ! Undefined control sequence.
 <argument> ... & *+[F-:<10pt>]{{\tt zelig()}} \ar 
@@ -1690,28 +1721,18 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 5321.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5321.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5321.
 
-
-
-Package rerunfilecheck Warning: File `Zelig.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Zelig.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  CC74A2FCE5C5998F976FAF71BBB7B12A;3053.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+Package rerunfilecheck Info: File `Zelig.out' has not changed.
+(rerunfilecheck)             Checksum: CC74A2FCE5C5998F976FAF71BBB7B12A;3053.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5321.
  ) 
 Here is how much of TeX's memory you used:
- 9666 strings out of 493315
- 135490 string characters out of 6137904
- 230781 words of memory out of 5000000
- 12405 multiletter control sequences out of 15000+600000
+ 9723 strings out of 493315
+ 136244 string characters out of 6137904
+ 237331 words of memory out of 5000000
+ 12454 multiletter control sequences out of 15000+600000
  77125 words of font info for 94 fonts, out of 8000000 for 9000
  958 hyphenation exceptions out of 8191
- 36i,29n,45p,493b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,29n,51p,493b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -1733,10 +1754,10 @@ uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr
 /local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/tex
 live/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Zelig.pdf (77 pages, 438244 bytes).
+Output written on Zelig.pdf (77 pages, 446351 bytes).
 PDF statistics:
- 865 PDF objects out of 1000 (max. 8388607)
- 751 compressed objects within 8 object streams
+ 1060 PDF objects out of 1200 (max. 8388607)
+ 944 compressed objects within 10 object streams
  413 named destinations out of 1000 (max. 500000)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 409 words of extra memory for PDF output out of 10000 (max. 10000000)
 
