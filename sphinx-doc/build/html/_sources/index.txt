@@ -16,6 +16,11 @@ Contents:
    3_data_analysis
    4_statistical_commands
    5_graphing_commands
+   6_R_objects
+   7_programming_statements
+   8_writing_new_models
+   9_adding_models_and_methods
+   10_faq
 
 
 
