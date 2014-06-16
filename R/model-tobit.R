@@ -1,8 +1,9 @@
 #' @include model-zelig.R
 ztobit <- setRefClass("Zelig-tobit",
                       contains = "Zelig",
-                      fields = list(simalpha = "matrix",
-                                    linkinv = "function"))
+                      fields = list(simalpha = "list",
+                                    above = "numeric",
+                                    below = "numeric"))
 
 ztobit$methods(
   initialize = function() {
@@ -11,73 +12,49 @@ ztobit$methods(
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
     .self$year <- 2011
     .self$description = "Linear regression for Left-Censored Dependent Variable"
-    .self$fn <- quote(survival::survreg)
-#     .self$linkinv <- survreg.distributions[["gaussian"]]$itrans
+    .self$fn <- quote(AER::tobit)
     # JSON
     .self$outcome <- "continous"
   }
 )
 
 ztobit$methods(
-  zelig = function(formula, ..., below = 0, above = Inf, robust = FALSE, cluster = NULL, data) {
+  zelig = function(formula, ..., below = 0, above = Inf, robust = FALSE, data) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    if (!(is.null(cluster) || robust))
-      stop("If cluster is specified, then `robust` must be TRUE")
-    # Add cluster term
-    if (robust || !is.null(cluster))
-      formula <- cluster.formula(formula, cluster)
-    # Make surv demands that the model 
-    formula <- make.surv(formula, below, above)
-    formula <- cluster.formula(formula, cluster)
-    callSuper(formula = formula, data = data, ..., robust = robust, cluster = cluster)
-    .self$model.call$dist <- "gaussian"
-    .self$model.call$model <- FALSE
-    .self$model.call$formula <- formula
-    .self$zelig.out <- eval(.self$model.call)
+    .self$model.call <- match.call(expand.dots = TRUE)
+    .self$below <- below
+    .self$above <- above
+    .self$model.call$below <- NULL
+    .self$model.call$above <- NULL
+    .self$model.call$left <- below
+    .self$model.call$right <- above
+    callSuper(formula = formula, data = data, ...)
   }
 )
 
 ztobit$methods(
-  param = function(num) {
-    mu <- c(coef(.self$zelig.out), log(.self$zelig.out$scale))
-    cov <- vcov(.self$zelig.out)
-    .self$simparam = mvrnorm(num, mu=mu, Sigma=cov)
+  param = function(i) {
+    mu <- c(coef(.self$zelig.out[[i]]), log(.self$zelig.out[[i]]$scale))
+    simfull <- mvrnorm(n = .self$num, mu = mu,
+                       Sigma = vcov(.self$zelig.out[[i]]))
+    .self$simparam[[i]] <- as.matrix(simfull[, -ncol(simfull)])
+    .self$simalpha[[i]] <- exp(as.matrix(simfull[, ncol(simfull)]))
   }
 )
 
 ztobit$methods(
-  qi = function(x) {
-    # This needs to be fixed.
-    ev <- pr <- NA
-    return(list("Expected Values: E(Y|X)"  = ev,
-                "Predicted Values: Y|X"    = pr)
-    )
+  qi = function(i, x) {
+    Coeff <- .self$simparam[[i]] %*% t(x)
+    SD <- .self$simalpha[[i]]
+    alpha <- .self$simalpha[[i]]
+    lambda <- dnorm(Coeff / SD) / (pnorm(Coeff / SD))
+    ev <- pnorm(Coeff / SD) * (Coeff + SD * lambda)
+    pv <- ev
+    pv <- matrix(nrow = nrow(ev), ncol = ncol(ev))
+    for (j in 1:ncol(ev)) {
+      pv[, j] <- rnorm(nrow(ev), mean = ev[i, ], sd = SD)
+      pv[, j] <- pmin(pmax(pv[, j], .self$below), .self$above)
+    }
+    return(list(ev = ev, pv = pv))
   }
 )
-
-make.surv <- function (formula, below, above) {
-  lhs <- formula[[2]]
-  if (grepl("Surv", as.character(lhs)))
-    return(formula)
-  if (!(is.numeric(below) && is.numeric(above))) {
-    warning("`below` and `above` must be numeric; ",
-            "returning the original formula")
-    return(formula)
-  }
-  if (above == Inf) {
-    # Empty?
-    # This seems like a mistake inherited from old code
-  }
-  else if (below == -Inf && above == Inf)
-    stop("This model does not support censoring. Try the \"normal\" model")
-  else if (below == -Inf && above != Inf)
-    stop("This model does not support right-censored data")
-  else if (is.finite(below) && is.finite(above))
-    stop("This model does not support interval-censored data")
-  # That is, this model only supports left-censored data
-  # Surv( <outcome> , <below> < <outcomes> )
-  lhs <- call("Surv", lhs, call("<", below, lhs), type="left")
-  # Place back within formula
-  formula[[2]] <- lhs
-  return(formula)
-}

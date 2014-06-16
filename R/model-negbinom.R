@@ -42,12 +42,11 @@ znegbinom$methods(
     eta <- coef %*% t(x)
     theta <- matrix(inverse(eta), nrow=nrow(coef))
     ev <- theta
-    pr <- matrix(NA, nrow=nrow(theta), ncol=ncol(theta))
+    pv <- matrix(NA, nrow=nrow(theta), ncol=ncol(theta))
     #
     for (i in 1:ncol(ev))
-      pr[, i] <- rnegbin(nrow(ev), mu = ev[i, ], theta = alpha[i])
-    return(list("Expected Values: E(Y|X)"  = ev,
-                "Predicted Values: Y|X"    = as.factor(pr)))
+      pv[, i] <- rnegbin(nrow(ev), mu = ev[i, ], theta = alpha[i])
+    return(list(ev  = ev, pv = as.factor(pv)))
   }
 )
 

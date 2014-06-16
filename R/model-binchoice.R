@@ -23,8 +23,8 @@ zbinchoice$methods(
     theta <- matrix(.self$linkinv(eta), nrow = nrow(coeff))
     ev <- matrix(.self$linkinv(eta), ncol = ncol(theta))
     pv <- matrix(nrow = nrow(ev), ncol = ncol(ev))
-    for (i in 1:ncol(ev))
-      pv[, i] <- rbinom(length(ev[, i]), 1, prob = ev[, i])
+    for (j in 1:ncol(ev))
+      pv[, j] <- rbinom(length(ev[, j]), 1, prob = ev[, j])
     levels(pv) <- c(0, 1)
     return(list(ev = ev, pv = pv))
   }
