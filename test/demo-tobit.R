@@ -11,11 +11,11 @@ summary(s.out1)
 # Zelig 5 code:
 data(tobin)
 z5 <- ztobit$new()
-z5$zelig(durable ~ age + quant, data = tobin, below = 1, above = 2)
+z5$zelig(durable ~ age + quant, data = tobin, below = 1, above = 20)
 z5
 z5$setx()
 set.seed(42)
-z5$sim(num=1000)
+z5$sim(num=100)
 z5$summarize()
 z5$cite()
 

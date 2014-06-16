@@ -52,7 +52,7 @@ ztobit$methods(
     pv <- ev
     pv <- matrix(nrow = nrow(ev), ncol = ncol(ev))
     for (j in 1:ncol(ev)) {
-      pv[, j] <- rnorm(nrow(ev), mean = ev[i, ], sd = SD)
+      pv[, j] <- rnorm(nrow(ev), mean = ev[, j], sd = SD)
       pv[, j] <- pmin(pmax(pv[, j], .self$below), .self$above)
     }
     return(list(ev = ev, pv = pv))
