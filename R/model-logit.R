@@ -12,4 +12,3 @@ zlogit$methods(
     .self$description = "Logistic Regression for Dichotomous Dependent Variables"
   }
 )
-

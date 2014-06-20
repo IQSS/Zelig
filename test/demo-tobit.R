@@ -19,7 +19,7 @@ z5$sim(num=100)
 z5$summarize()
 z5$cite()
 
-# library(AER)
+# library(AER)  
 # fit <- tobit(durable ~ age + quant, data = tobin, left = 1, right = 2)
 # summary(fit)
 # fit$coefficients

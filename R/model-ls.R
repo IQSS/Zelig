@@ -38,3 +38,10 @@ zls$methods(
     return(list(ev = ev, pv = pv))
   }
 )
+
+zls$methods(
+  help = function() {
+    vignette("ls")
+  }
+)
+

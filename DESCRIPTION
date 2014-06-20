@@ -24,7 +24,8 @@ Depends:
     jsonlite,
     AER
 Suggests:
-    testthat
+    testthat,
+    knitr
 Collate:
     'utils.R'
     'model-zelig.R'
@@ -46,3 +47,5 @@ Collate:
     'model-bprobit.R'
     'model-relogit.R'
     'wrappers.R'
+VignetteBuilder: knitr
+

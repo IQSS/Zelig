@@ -63,20 +63,9 @@ zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "lognorm" = z5lognorm$ljson,
                     "tobit" = z5tobit$ljson))
 
-# zeligmodels <- list(zeligmodels = list(z5ls$ljson,
-#                                        z5logit$ljson,
-#                                        z5probit$ljson,
-#                                        z5poisson$ljson,
-#                                        z5normal$ljson,
-#                                        z5gamma$ljson,
-#                                        z5negbinom$ljson,
-#                                        z5exp$ljson,
-#                                        z5lognorm$ljson,
-#                                        z5tobit$ljson))
-
 # cat(toJSON(zeligmodels, pretty = TRUE))
 
-cat(toJSON(zeligmodels, pretty = TRUE),
-    file = file.path("JSON", "zelig5models.json"))
+# cat(toJSON(zeligmodels, pretty = TRUE),
+#     file = file.path("JSON", "zelig5models.json"))
 
 # j <- fromJSON(txt = file.path("JSON", "zelig5models.json"))
