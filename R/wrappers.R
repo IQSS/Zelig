@@ -63,7 +63,7 @@ zelig <- function(formula, data, model,..., by = NULL, cite = TRUE) {
   return(z4)
 }
 
-setx.z4 <- function(z4, ...) {
+setx <- function(z4, ...) {
 #   .Deprecated("\nz$new() \nz$zelig(...) \nz$setx() or z$setx1 or z$setrange")
   x4 <- list()
   x4$z5 <- z4$z5$copy()
@@ -72,7 +72,7 @@ setx.z4 <- function(z4, ...) {
   return(x4)
 }
 
-sim.z4 <- function(z4, x, x1 = NULL, num = 1000) {
+sim <- function(z4, x, x1 = NULL, num = 1000) {
 #   .Deprecated("\nz$new() \n[...] \nz$sim(...)")
   s4 <- list()
   s4$z5 <- x$z5$copy()
@@ -86,6 +86,6 @@ sim.z4 <- function(z4, x, x1 = NULL, num = 1000) {
   return(s4)
 }
 
-summary.z4 <- function(s4) {
+summary <- function(s4) {
   s4$z5$summarize()
 }
