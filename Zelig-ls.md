@@ -7,6 +7,9 @@ output:
 bibliography: zelig5.bib
 ---
 
+  html_document:
+
+
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Model: Zelig-ls}
@@ -19,7 +22,8 @@ predictor for the specified dependent variables.
 
 ## Syntax
 
-```{r, eval = FALSE}
+
+```r
 z.out <- zelig(Y ~ X1 + X2, model = "ls", data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
@@ -71,37 +75,54 @@ following additional options for least squares regression:
 
 Attach sample data:
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-suppressPackageStartupMessages(library(Zelig5, quietly = TRUE))
-data(macro)
-```
 
-```{r}
+
+
+```r
 data(macro)
 ```
 
 Estimate model:
 
-```{r}
+
+```r
 z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
+```
+
+```
+## How to cite this model in Zelig:
+##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
+##   ls: Least Squares Regression for Continuous Dependent Variables
+##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+##   http://datascience.iq.harvard.edu/zelig
 ```
 
 Summarize regression coefficients:
 
-```{r}
+
+```r
 summary(z.out1)
+```
+
+```
+## Model:  ls 
+## Number of simulations:  
+## 
+## Values of X
 ```
 
 Set explanatory variables to their default (mean/mode) values, with high (80th percentile) and low (20th percentile) values for the trade variable:
 
-```{r}
+
+```r
 x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
 x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
 ```
 
 Generate first differences for the effect of high versus low trade on GDP:
 
-```{r}
+
+```r
 s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 ```
 
@@ -112,12 +133,34 @@ with dummy variables). Note that you do not need to create dummy
 variables, as the program will automatically parse the unique values
 in the selected variable into discrete levels.
 
-```{r}
+
+```r
 z.out2 <- zelig(unem ~ gdp + trade + capmob + country,
                 model = "ls", data = macro)
+```
 
+```
+## How to cite this model in Zelig:
+##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
+##   ls: Least Squares Regression for Continuous Dependent Variables
+##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+##   http://datascience.iq.harvard.edu/zelig
+```
+
+```r
 z.out3 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
                 model = "ls", data = macro)
+```
+
+```
+## How to cite this model in Zelig:
+##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
+##   ls: Least Squares Regression for Continuous Dependent Variables
+##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+##   http://datascience.iq.harvard.edu/zelig
+```
+
+```r
 x.US <- setx(z.out3, country = "United States")
 ```
 
@@ -125,14 +168,16 @@ Set values for the explanatory variables, using the default
 mean/mode values, with country set to the United States and Japan,
 respectively:
 
-```{r}
+
+```r
 x.US <- setx(z.out2, country = "United States")
 x.Japan <- setx(z.out2, country = "Japan")
 ```
 
 Simulate quantities of interest:
 
-```{r}
+
+```r
 s.out2 <- sim(z.out2, x.US, x.Japan)
 ```
 
