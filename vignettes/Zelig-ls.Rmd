@@ -3,6 +3,7 @@ title: "Zelig-ls"
 output:
   html_document:
     toc: true
+    number_sections: true
 ---
 
 <!--
@@ -10,9 +11,9 @@ output:
 %\VignetteIndexEntry{Model: Zelig-ls}
 -->
 
-## Least Squares Regression for Continuous Dependent Variables
+# Least Squares Regression for Continuous Dependent Variables
 
-### Syntax
+## Syntax
 
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "ls", data = mydata)
@@ -20,14 +21,14 @@ x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 ```
     
-### Examples
+## Examples
 
-#### Basic Example with First Differences
+### Basic Example with First Differences
 
 Attach sample data:
 
-```{r echo = FALSE}
-suppressPackageStartupMessages(library(Zelig5))
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+suppressPackageStartupMessages(library(Zelig5, quietly = TRUE))
 data(macro)
 ```
 
@@ -63,7 +64,7 @@ s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 summary(s.out1)
 ```
 
-#### Using Dummy Variables
+### Using Dummy Variables
 
 Estimate a model with fixed effects for each country. Note that you do not need to create dummy variables, as the program will automatically parse the unique values in the selected variable into discrete levels.
 
@@ -89,7 +90,7 @@ Simulate quantities of interest:
 s.out2 <- sim(z.out2, x.US, x.Japan)
 ```
 
-### Model
+## Model
 
 - The _stochastic component_ is described by a density with mean $\mu_i$ and the common variance $\sigma^2$
   $$Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).$$
@@ -100,9 +101,9 @@ s.out2 <- sim(z.out2, x.US, x.Japan)
 
  The least squares estimator is the best linear predictor of a dependent variable given $x_i$, and minimizes the sum of squared residuals, $\sum_{i=1}^n (Y_i-x_i \beta)^2$.
 
-### Quantities of Interest
+## Quantities of Interest
 
-The expected value (`qi\$ev`) is the mean of simulations
+The expected value `qi\$ev` is the mean of simulations
   from the stochastic component,  
 $$ E(Y) = x_i \beta,$$
 given a draw of $\beta$ from its sampling distribution. 

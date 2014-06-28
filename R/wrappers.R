@@ -35,8 +35,6 @@ zelig <- function(formula, data, model,..., by = NULL, cite = TRUE) {
     z5 <- znormal$new()
   else if (model == "poisson")
     z5 <- zpoisson$new()
-  else if (model == "bbinchoice")
-    z5 <- zbbinchoice$new()
   else if (model == "blogit")
     z5 <- zblogit$new()
   else if (model == "bprobit")
@@ -52,11 +50,13 @@ zelig <- function(formula, data, model,..., by = NULL, cite = TRUE) {
   ## End: Zelig 5 models
   mf <- match.call()
   mf$model <- NULL
+  mf$cite <- NULL
   mf[[1]] <- quote(z5$zelig)
   mf <- try(eval(mf, environment()))
   if (class(mf) == "try-error")
     z5$zelig(formula = formula, data = data, ...)
-#   return(z5)
+  if (cite)
+    z5$cite()
   z4 <- list()
   z4$z5 <- z5
   class(z4) <- "z4"
@@ -86,6 +86,6 @@ sim <- function(z4, x, x1 = NULL, num = 1000) {
   return(s4)
 }
 
-summary <- function(s4) {
+summary.z4 <- function(s4) {
   s4$z5$summarize()
 }
