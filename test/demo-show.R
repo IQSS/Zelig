@@ -1,0 +1,8 @@
+z5 <- zls$new()
+print(z5)
+z5$zelig(dist ~ speed, data = cars)
+print(z5)
+z5$setx()
+print(z5)
+z5$sim()
+print(z5)

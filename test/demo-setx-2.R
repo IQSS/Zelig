@@ -34,3 +34,15 @@ z5$summarize()
 z5$zelig(unem ~ ., data = macro)
 z5
 
+z5 <- zls$new()
+z5$zelig(unem ~ gdp + exp(trade) + capmob +
+           as.factor(country), data = macro)
+z5$zelig.out
+# model.matrix(z5$zelig.out)
+z5$setx(country = "United States", unem = 2)
+z5$setx.out
+
+fit <- lm(unem ~ gdp + exp(trade) + capmob +
+           as.factor(country), data = macro)
+fit
+model.matrix(fit)

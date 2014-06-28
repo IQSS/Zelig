@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Zelig-ls"
 output:
   html_document:
     toc: true
@@ -7,13 +7,8 @@ output:
 
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Model: ls}
+%\VignetteIndexEntry{Model: Zelig-ls}
 -->
-
-```{r, eval = TRUE, echo = FALSE}
-print(1:10)
-```
-
 
 ## Least Squares Regression for Continuous Dependent Variables
 
@@ -24,20 +19,6 @@ z.out <- zelig(Y ~ X1 + X2, model = "ls", data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 ```
-
-### Additional Inputs
-
-In addition to the standard inputs, zelig() takes the following additional op- tions for least squares regression:
-
-- robust: defaults to FALSE. If TRUE is selected, zelig() computes robust standard errors based on sandwich estimators (see [16], [2], and [15]). The default type of robust standard error is heteroskedastic consistent (HC), not heteroskedastic and autocorrelation consistent (HAC).
-  In addition, robust may be a list with the following options:
-    - method: choose from
-        - "vcovHC": (the default if robust = TRUE), HC standard errors.
-        - "vcovHAC": HAC standard errors without weights.
-        - "kernHAC": HAC standard errors using the weights given in [1].
-        - "weave": HAC standard errors using the weights given in [11].
-    - order.by: only applies to the HAC methods above. Defaults to NULL (the     observations are chronologically ordered as in the original data). Optionally, you may specify a time index (either as order.by = z, where z exists outside the data frame; or as order.by = ~z, where z is a variable in the data frame). The observations are chronologically ordered by the size of z.
-    - ...: additional options passed to the functions specified in method. See the sandwich library and [16] for more options.
     
 ### Examples
 
@@ -45,15 +26,21 @@ In addition to the standard inputs, zelig() takes the following additional op- t
 
 Attach sample data:
 
-```{r}
-library(Zelig)
+```{r echo = FALSE}
+suppressPackageStartupMessages(library(Zelig5))
+data(macro)
+```
+
+
+```{r eval = FALSE}
+library(Zelig5)
 data(macro)
 ```
 
 Estimate model:
 
 ```{r}
- z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
 ```
 
 Summarize regression coefficients:
@@ -81,8 +68,12 @@ summary(s.out1)
 Estimate a model with fixed effects for each country. Note that you do not need to create dummy variables, as the program will automatically parse the unique values in the selected variable into discrete levels.
 
 ```{r}
-z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
+z.out2 <- zelig(unem ~ gdp + trade + capmob + country,
                 model = "ls", data = macro)
+
+z.out3 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
+                model = "ls", data = macro)
+x.US <- setx(z.out3, country = "United States")
 ```
 
 Set values for the explanatory variables, using the default mean/mode values, with country set to the United States and Japan, respectively:
@@ -95,7 +86,7 @@ x.Japan <- setx(z.out2, country = "Japan")
 Simulate quantities of interest:
 
 ```{r}
-s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
+s.out2 <- sim(z.out2, x.US, x.Japan)
 ```
 
 ### Model
@@ -111,7 +102,7 @@ s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
 
 ### Quantities of Interest
 
-The expected value (qi\$ev) is the mean of simulations
+The expected value (`qi\$ev`) is the mean of simulations
   from the stochastic component,  
 $$ E(Y) = x_i \beta,$$
 given a draw of $\beta$ from its sampling distribution. 

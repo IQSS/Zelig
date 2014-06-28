@@ -68,4 +68,4 @@ zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
 # cat(toJSON(zeligmodels, pretty = TRUE),
 #     file = file.path("JSON", "zelig5models.json"))
 
-# j <- fromJSON(txt = file.path("JSON", "zelig5models.json"))
+# j <- jsonlite::fromJSON(txt = readLines(file.path("..", "/JSON", "/zelig5models.json")))

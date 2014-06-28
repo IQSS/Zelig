@@ -102,7 +102,7 @@ z$methods(
       ldata <- lapply(dataset, avg)
       if (length(s) > 0) {
         pred <- terms(.self$zelig.out[[1]], "predvars")
-        n <- intersect(as.character(attr(pred, "predvars"))[-1],
+        n <- union(as.character(attr(pred, "predvars"))[-1],
                        names(dataset))
         if (is.list(s[[1]]))
           s <- s[[1]]
@@ -224,7 +224,12 @@ z$methods(
 
 z$methods(
   show = function() {
-    lapply(.self$zelig.out, function(x) print(summary(x)))
+    if (length(.self$zelig.out) == 0)
+      print("Use 'zelig' method")
+    else if (length(.self$setx.out) == 0)
+      print("Use 'setx' method")
+    else
+      lapply(.self$zelig.out, function(x) print(summary(x)))
   }
 )
 
@@ -236,6 +241,8 @@ z$methods(
     .self$json$"description" <- .self$description
     .self$json$"outcome" <- list(modelingType = .self$outcome)
     .self$json$"explanatory" <- list(modelingType = .self$explanatory)
+    .self$json$tree <- c(class(.self)[1],
+                         head(.self$.refClassDef@refSuperClasses, -1))
     .self$ljson <- .self$json
     .self$json <- jsonlite::toJSON(json, pretty = TRUE)
     return(.self$json)

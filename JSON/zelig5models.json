@@ -20,7 +20,11 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-ls",
+				"Zelig"
+			]
 		},
 		"logit" : {
 			"name" : [
@@ -42,7 +46,13 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-logit",
+				"Zelig-binchoice",
+				"Zelig-glm",
+				"Zelig"
+			]
 		},
 		"probit" : {
 			"name" : [
@@ -64,7 +74,13 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-probit",
+				"Zelig-binchoice",
+				"Zelig-glm",
+				"Zelig"
+			]
 		},
 		"poisson" : {
 			"name" : [
@@ -86,7 +102,12 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-poisson",
+				"Zelig-glm",
+				"Zelig"
+			]
 		},
 		"normal" : {
 			"name" : [
@@ -108,7 +129,12 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-normal",
+				"Zelig-glm",
+				"Zelig"
+			]
 		},
 		"gamma" : {
 			"name" : [
@@ -130,7 +156,12 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-gamma",
+				"Zelig-glm",
+				"Zelig"
+			]
 		},
 		"negbinom" : {
 			"name" : [
@@ -152,7 +183,11 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-negbinom",
+				"Zelig"
+			]
 		},
 		"exp" : {
 			"name" : [
@@ -174,7 +209,11 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-exp",
+				"Zelig"
+			]
 		},
 		"lognorm" : {
 			"name" : [
@@ -196,7 +235,11 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-lognorm",
+				"Zelig"
+			]
 		},
 		"tobit" : {
 			"name" : [
@@ -218,7 +261,11 @@
 					"ordinal",
 					"binary"
 				]
-			}
+			},
+			"tree" : [
+				"Zelig-tobit",
+				"Zelig"
+			]
 		}
 	}
 }

@@ -16,7 +16,8 @@
 #' @include model-blogit.R
 #' @include model-bprobit.R
 #' @include model-relogit.R
-zeligw <- function(formula, data, model,..., by = NULL, cite = FALSE) {
+zelig <- function(formula, data, model,..., by = NULL, cite = TRUE) {
+#   .Deprecated("\nz$new() \nz$zelig(...)")
   # Begin: Zelig 5 models
   if (model == "ls")
     z5 <- zls$new()
@@ -55,25 +56,36 @@ zeligw <- function(formula, data, model,..., by = NULL, cite = FALSE) {
   mf <- try(eval(mf, environment()))
   if (class(mf) == "try-error")
     z5$zelig(formula = formula, data = data, ...)
-  return(z5)
+#   return(z5)
+  z4 <- list()
+  z4$z5 <- z5
+  class(z4) <- "z4"
+  return(z4)
 }
 
-setxw <- function(z5, ...) {
-  x5 <- z5$copy()
-  x5$setx(...)
-  return(x5)
+setx.z4 <- function(z4, ...) {
+#   .Deprecated("\nz$new() \nz$zelig(...) \nz$setx() or z$setx1 or z$setrange")
+  x4 <- list()
+  x4$z5 <- z4$z5$copy()
+  x4$z5$setx(...)
+  class(x4) <- "z4"
+  return(x4)
 }
 
-simw <- function(z5, x5, x15 = NULL, num) {
-  s5 <- x5$copy()
-  if (!is.null(x15)) {
-    s15 <- x15$copy()
-    s5$setx.out$x1 <- s15$setx.out$x
+sim.z4 <- function(z4, x, x1 = NULL, num = 1000) {
+#   .Deprecated("\nz$new() \n[...] \nz$sim(...)")
+  s4 <- list()
+  s4$z5 <- x$z5$copy()
+  if (!is.null(x1)) {
+    s14 <- list()
+    s14$z5 <- x1$z5$copy()
+    s4$z5$setx.out$x1 <- s14$z5$setx.out$x
   }
-  s5$sim(num = num)
-  return(s5)
+  s4$z5$sim(num = num)
+  class(s4) <- "z4"
+  return(s4)
 }
 
-summaryw <- function(s5) {
-  s5$summarize()
+summary.z4 <- function(s4) {
+  s4$z5$summarize()
 }
