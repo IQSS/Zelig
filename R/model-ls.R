@@ -39,9 +39,4 @@ zls$methods(
   }
 )
 
-zls$methods(
-  help = function() {
-    vignette("ls")
-  }
-)
 

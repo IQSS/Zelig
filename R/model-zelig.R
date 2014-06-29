@@ -249,6 +249,12 @@ z$methods(
   }
 )
 
+z$methods(
+  help = function() {
+    vignette(class(.self)[1])
+  }
+)
+
 # 
 #       idx <- match(names(.self$setx.labels),
 #                    names(.self$sim.out),
