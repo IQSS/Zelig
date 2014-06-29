@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  12 JUN 2014 10:50
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  29 JUN 2014 14:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -953,59 +953,38 @@ Chapter 4.
                                       {eu}{12} \UseTips \xymatrix @!C{\quad ...
 l.1530 \end{gather}
                    \begin{enumerate}
-? r
-OK, entering \nonstopmode...
+? 
 ! Undefined control sequence.
 <argument> ...split}\SelectTips {eu}{12} \UseTips 
                                                   \xymatrix @!C{\quad {\rm I...
 l.1530 \end{gather}
                    \begin{enumerate}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
+? 
 ! Undefined control sequence.
 <argument> ...ectTips {eu}{12} \UseTips \xymatrix 
                                                   @!C{\quad {\rm Imputation}...
 l.1530 \end{gather}
                    \begin{enumerate}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
+? 
 ! Undefined control sequence.
 <argument> ...trix @!C{\quad {\rm Imputation} \ar 
                                                   @{-->}[dr] & & {\rm Matchi...
 l.1530 \end{gather}
                    \begin{enumerate}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
+? 
 ! Missing } inserted.
 <inserted text> 
                 }
 l.1530 \end{gather}
                    \begin{enumerate}
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
+? 
 ! Extra alignment tab has been changed to \cr.
 <template> }$\hfill \endtemplate 
                                  
 l.1530 \end{gather}
                    \begin{enumerate}
-You have given more \span or & marks than there were
-in the preamble to the \halign or \valign now in progress.
-So I'll assume that you meant to type \cr instead.
-
+? r
+OK, entering \nonstopmode...
 ! Undefined control sequence.
 <argument> ...r @{-->}[dr] & & {\rm Matching} \ar 
                                                   @{-->}[dl] \\ {\rm Validat...
@@ -1754,7 +1733,7 @@ uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr
 /local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/tex
 live/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Zelig.pdf (77 pages, 446351 bytes).
+Output written on Zelig.pdf (77 pages, 446349 bytes).
 PDF statistics:
  1060 PDF objects out of 1200 (max. 8388607)
  944 compressed objects within 10 object streams
