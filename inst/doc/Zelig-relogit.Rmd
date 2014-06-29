@@ -1,0 +1,402 @@
+<span>relogit</span>: Rare Events Logistic Regression for Dichotomous Dependent Variables {#relogit}
+=========================================================================================
+
+The <span>relogit</span> procedure estimates the same model as standard
+logistic regression (appropriate when you have a dichotomous dependent
+variable and a set of explanatory variables; see ), but the estimates
+are corrected for the bias that occurs when the sample is small or the
+observed events are rare (i.e., if the dependent variable has many more
+1s than 0s or the reverse). The <span>relogit</span> procedure also
+optionally uses prior correction for case-control sampling designs.
+
+### Syntax
+
+    > z.out <- zelig(Y ~ X1 + X2, model = "relogit", tau = NULL,
+                     case.control = c("prior", "weighting"), 
+                     bias.correct = TRUE, robust = FALSE, 
+                     data = mydata, ...)
+    > x.out <- setx(z.out)
+    > s.out <- sim(z.out, x = x.out)
+
+### Arguments
+
+The <span>relogit</span> procedure supports four optional arguments in
+addition to the standard arguments for <span>zelig()</span>. You may
+additionally use:
+
+-   <span>tau</span>: a vector containing either one or two values for
+    $\tau$, the true population fraction of ones. Use, for example,
+    <span>tau = c(0.05, 0.1)</span> to specify that the lower bound on
+    <span>tau</span> is 0.05 and the upper bound is 0.1. If left
+    unspecified, only finite-sample bias correction is performed, not
+    case-control correction.
+
+-   <span>case.control</span>: if <span>tau</span> is specified, choose
+    a method to correct for case-control sampling design:
+    <span>“prior”</span> (default) or <span>“weighting”</span>.
+
+-   <span>bias.correct</span>: a logical value of <span>TRUE</span>
+    (default) or <span>FALSE</span> indicating whether the intercept
+    should be corrected for finite sample (rare events) bias.
+
+-   <span>robust</span>: defaults to <span>FALSE</span> (except when
+    <span>case.control = “weighting”</span>; the default in this case
+    becomes <span>robust = TRUE</span>). If <span>TRUE</span> is
+    selected, <span>zelig()</span> computes robust standard errors via
+    the <span>sandwich</span> package (see @Zeileis04). The default type
+    of robust standard error is heteroskedastic and autocorrelation
+    consistent (HAC), and assumes that observations are ordered by time
+    index.
+
+    In addition, <span>robust</span> may be a list with the following
+    options:
+
+    -   <span>method</span>: Choose from
+
+        -   <span>“vcovHAC”</span>: (default if <span>robust =
+            TRUE</span>) HAC standard errors.
+
+        -   <span>“kernHAC”</span>: HAC standard errors using the
+            weights given in @Andrews91.
+
+        -   <span>“weave”</span>: HAC standard errors using the weights
+            given in @LumHea99.
+
+    -   <span>order.by</span>: defaults to <span>NULL</span> (the
+        observations are chronologically ordered as in the original
+        data). Optionally, you may specify a vector of weights (either
+        as <span>order.by = z</span>, where <span>z</span> exists
+        outside the data frame; or as <span>order.by = \~z</span>, where
+        <span>z</span> is a variable in the data frame) The observations
+        are chronologically ordered by the size of <span>z</span>.
+
+    -   <span>…</span>: additional options passed to the functions
+        specified in <span>method</span>. See the <span>sandwich</span>
+        library and @Zeileis04 for more options.
+
+Note that if <span>tau = NULL, bias.correct = FALSE, robust =
+FALSE</span>, the <span>relogit</span> procedure performs a standard
+logistic regression without any correction.
+
+### Example 1: One Tau with Prior Correction and Bias Correction {#example-1-one-tau-with-prior-correction-and-bias-correction .unnumbered}
+
+Due to memory and space considerations, the data used here are a sample
+drawn from the full data set used in King and Zeng, 2001, The proportion
+of militarized interstate conflicts to the absence of disputes is
+$\tau = 1,042 / 303,772
+\approx 0.00343$. To estimate the model,
+
+RRR\> data(mid)
+
+RRR\> z.out1 \<- zelig(conflict   major + contig + power + maxdem +
+mindem + years, + data = mid, model = “relogit”, tau = 1042/303772)
+
+Summarize the model output:
+
+RRR\> summary(z.out1)
+
+Set the explanatory variables to their means:
+
+RRR\> x.out1 \<- setx(z.out1)
+
+Simulate quantities of interest:
+
+RRR\> s.out1 \<- sim(z.out1, x = x.out1) RRR\> summary(s.out1)
+
+RRR\> plot(s.out1)
+
+![image](vigpics/relogit-Example1Plot)
+
+### Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction {#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction .unnumbered}
+
+Suppose that we wish to perform case control correction using weighting
+(rather than the default prior correction). To estimate the model:
+
+RRR\> z.out2 \<- zelig(conflict   major + contig + power + maxdem +
+mindem + years, + data = mid, model = “relogit”, tau = 1042/303772, +
+case.control = “weighting”, robust = TRUE)
+
+Summarize the model output:
+
+RRR\> summary(z.out2)
+
+Set the explanatory variables to their means:
+
+RRR\> x.out2 \<- setx(z.out2)
+
+Simulate quantities of interest:
+
+RRR\> s.out2 \<- sim(z.out2, x = x.out2) RRR\> summary(s.out2)
+
+### Example 3: Two Taus with Bias Correction and Prior Correction {#example-3-two-taus-with-bias-correction-and-prior-correction .unnumbered}
+
+Suppose that we did not know that $\tau \approx 0.00343$, but only that
+it was somewhere between $(0.002, 0.005)$. To estimate a model with a
+range of feasible estimates for $\tau$ (using the default prior
+correction method for case control correction):
+
+RRR\> z.out2 \<- zelig(conflict   major + contig + power + maxdem +
+mindem + + years, data = mid, model = “relogit”, + tau = c(0.002,
+0.005))
+
+Summarize the model output:
+
+RRR\> summary(z.out2)
+
+Set the explanatory variables to their means:
+
+RRR\> x.out2 \<- setx(z.out2)
+
+Simulate quantities of interest:
+
+RRR\> s.out \<- sim(z.out2, x = x.out2)
+
+RRR\> summary(s.out2)
+
+RRR\> plot(s.out2)
+
+![image](vigpics/relogit-Example3Plot)
+
+The cost of giving a range of values for $\tau$ is that point estimates
+are not available for quantities of interest. Instead, quantities are
+presented as confidence intervals with significance less than or equal
+to a specified level (e.g., at least 95% of the simulations are
+contained in the nominal 95% confidence interval).
+
+### Model
+
+-   Like the standard logistic regression, the *stochastic component*
+    for the rare events logistic regression is:
+
+    $$Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),$$
+
+    where $Y_i$ is the binary dependent variable, and takes a value of
+    either 0 or 1.
+
+-   The *systematic component* is:
+
+    $$\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.$$
+
+-   If the sample is generated via a case-control (or choice-based)
+    design, such as when drawing all events (or “cases”) and a sample
+    from the non-events (or “controls”) and going backwards to collect
+    the explanatory variables, you must correct for selecting on the
+    dependent variable. While the slope coefficients are approximately
+    unbiased, the constant term may be significantly biased. Zelig has
+    two methods for case control correction:
+
+    1.  The “prior correction” method adjusts the intercept term. Let
+        $\tau$ be the true population fraction of events, $\bar{y}$ the
+        fraction of events in the sample, and $\hat{\beta_0}$ the
+        uncorrected intercept term. The corrected intercept $\beta_0$
+        is:
+
+        $$\beta =  \hat{\beta_0} - \ln \left[ \bigg( \frac{1 - \tau}{\tau}
+          \bigg) \bigg( \frac{\bar{y}}{1 - \bar{y}} \bigg) \right].$$
+
+    2.  The “weighting” method performs a weighted logistic regression
+        to correct for a case-control sampling design. Let the 1
+        subscript denote observations for which the dependent variable
+        is observed as a 1, and the 0 subscript denote observations for
+        which the dependent variable is observed as a 0. Then the vector
+        of weights $w_i$
+
+        $$\begin{aligned}
+        w_1 &=& \frac{\tau}{\bar{y}} \\
+        w_0 &=& \frac{(1 - \tau)}{(1 - \bar{y})} \\
+        w_i &=& w_1 Y_i + w_0 (1 - Y_i)\end{aligned}$$
+
+    If $\tau$ is unknown, you may alternatively specify an upper and
+    lower bound for the possible range of $\tau$. In this case, the
+    <span>relogit</span> procedure uses “robust Bayesian” methods to
+    generate a confidence interval (rather than a point estimate) for
+    each quantity of interest. The nominal coverage of the confidence
+    interval is at least as great as the actual coverage.
+
+-   By default, estimates of the the coefficients $\beta$ are
+    bias-corrected to account for finite sample or rare events bias. In
+    addition, quantities of interest, such as predicted probabilities,
+    are also corrected of rare-events bias. If $\widehat{\beta}$ are the
+    uncorrected logit coefficients and bias($\widehat{\beta}$) is the
+    bias term, the corrected coefficients $\tilde{\beta}$ are
+
+    $$\widehat{\beta} - \textrm{bias}(\widehat{\beta}) = \tilde{\beta}$$
+
+    The bias term is
+
+    $$\textrm{bias}(\widehat{\beta}) = (X'WX)^{-1} X'W \xi$$
+
+    where
+
+    $$\begin{aligned}
+    \xi_i &=& 0.5 Q_{ii} \Big( (1 + w-1)\widehat{\pi}_i - w_1 \Big) \\
+    Q &=& X(X'WX)^{-1} X' \\
+    W = \textrm{diag}\{\widehat{\pi}_i (1 - \widehat{\pi}_i) w_i\}\end{aligned}$$
+
+    where $w_i$ and $w_1$ are given in the “weighting” section above.
+
+### Quantities of Interest
+
+-   For either one or no $\tau$:
+
+    -   The expected values (<span>qi\$ev</span>) for the rare events
+        logit are simulations of the predicted probability
+        $$E(Y) = \pi_i =
+            \frac{1}{1 + \exp(-x_i \beta)},$$ given draws of $\beta$
+        from its posterior.
+
+    -   The predicted value (<span>qi\$pr</span>) is a draw from a
+        binomial distribution with mean equal to the simulated $\pi_i$.
+
+    -   The first difference (<span>qi\$fd</span>) is defined as
+
+        $$\textrm{FD} = \Pr(Y = 1 \mid x_1, \tau) - \Pr(Y = 1 \mid x, \tau).$$
+
+    -   The risk ratio (<span>qi\$rr</span>) is defined as
+
+        $$\textrm{RR} = \Pr(Y = 1 \mid x_1, \tau) \ / \ \Pr(Y = 1 \mid x, \tau).$$
+
+-   For a range of $\tau$ defined by $[\tau_1, \tau_2]$, each of the
+    quantities of interest are $n \times 2$ matrices, which report the
+    lower and upper bounds, respectively, for a confidence interval with
+    nominal coverage at least as great as the actual coverage. At worst,
+    these bounds are conservative estimates for the likely range for
+    each quantity of interest. Please refer to for the specific method
+    of calculating bounded quantities of interest.
+
+-   In conditional prediction models, the average expected treatment
+    effect (<span>att.ev</span>) for the treatment group is
+
+    $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+          E[Y_i(t_i=0)] \right\},$$
+
+    where $t_i$ is a binary explanatory variable defining the treatment
+    ($t_i=1$) and control ($t_i=0$) groups. Variation in the simulations
+    are due to uncertainty in simulating $E[Y_i(t_i=0)]$, the
+    counterfactual expected value of $Y_i$ for observations in the
+    treatment group, under the assumption that everything stays the same
+    except that the treatment indicator is switched to $t_i=0$.
+
+-   In conditional prediction models, the average predicted treatment
+    effect (<span>att.pr</span>) for the treatment group is
+
+    $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+          \widehat{Y_i(t_i=0)} \right\},$$
+
+    where $t_i$ is a binary explanatory variable defining the treatment
+    ($t_i=1$) and control ($t_i=0$) groups. Variation in the simulations
+    are due to uncertainty in simulating $\widehat{Y_i(t_i=0)}$, the
+    counterfactual predicted value of $Y_i$ for observations in the
+    treatment group, under the assumption that everything stays the same
+    except that the treatment indicator is switched to $t_i=0$.
+
+### Output Values
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+`z.out <- zelig(y ~ x, model = relogit, data)`, then you may examine the
+available information in `z.out` by using `names(z.out)`, see the
+<span>coefficients</span> by using <span>z.out\$coefficients</span>, and
+a default summary of information through `summary(z.out)`. Other
+elements available through the <span>\$</span> operator are listed
+below.
+
+-   From the <span>zelig()</span> output object <span>z.out</span>, you
+    may extract:
+
+    -   <span>coefficients</span>: parameter estimates for the
+        explanatory variables.
+
+    -   <span>bias.correct</span>: <span>TRUE</span> if bias correction
+        was selected, else <span>FALSE</span>.
+
+    -   <span>prior.correct</span>: <span>TRUE</span> if prior
+        correction was selected, else <span>FALSE</span>.
+
+    -   <span>weighting</span>: <span>TRUE</span> if weighting was
+        selected, else <span>FALSE</span>.
+
+    -   <span>tau</span>: the value of <span>tau</span> for which case
+        control correction was implemented.
+
+    -   <span>residuals</span>: the working residuals in the final
+        iteration of the IWLS fit.
+
+    -   <span>fitted.values</span>: the vector of fitted values for the
+        systemic component, $\pi_i$.
+
+    -   <span>linear.predictors</span>: the vector of $x_{i} \beta$
+
+    -   <span>aic</span>: Akaike’s Information Criterion (minus twice
+        the maximized log-likelihood plus twice the number of
+        coefficients).
+
+    -   <span>df.residual</span>: the residual degrees of freedom.
+
+    -   <span>df.null</span>: the residual degrees of freedom for the
+        null model.
+
+    -   <span>zelig.data</span>: the input data frame if <span>save.data
+        = TRUE</span>.
+
+    Note that for a range of $\tau$, each of the above items may be
+    extracted from the <span>“lower.estimate”</span> and
+    <span>“upper.estimate”</span> objects in your <span>zelig</span>
+    output. Use <span>lower \<- z.out\$lower.estimate</span>, and then
+    <span>lower\$coefficients</span> to extract the coefficients for the
+    empirical estimate generated for the smaller of the two $\tau$.
+
+-   From <span>summary(z.out)</span>, you may extract:
+
+    -   <span>coefficients</span>: the parameter estimates with their
+        associated standard errors, $p$-values, and $t$-statistics.
+
+    -   <span>cov.scaled</span>: a $k \times k$ matrix of scaled
+        covariances.
+
+    -   <span>cov.unscaled</span>: a $k \times k$ matrix of unscaled
+        covariances.
+
+-   From the <span>sim()</span> output object <span>s.out</span>, you
+    may extract quantities of interest arranged as matrices indexed by
+    simulation $\times$ <span>x</span>-observation (for more than one
+    <span>x</span>-observation). Available quantities are:
+
+    -   <span>qi\$ev</span>: the simulated expected values, or predicted
+        probabilities, for the specified values of <span>x</span>.
+
+    -   <span>qi\$pr</span>: the simulated predicted values drawn from
+        Binomial distributions given the predicted probabilities.
+
+    -   <span>qi\$fd</span>: the simulated first difference in the
+        predicted probabilities for the values specified in
+        <span>x</span> and <span>x1</span>.
+
+    -   <span>qi\$rr</span>: the simulated risk ratio for the predicted
+        probabilities simulated from <span>x</span> and <span>x1</span>.
+
+    -   <span>qi\$att.ev</span>: the simulated average expected
+        treatment effect for the treated from conditional prediction
+        models.
+
+    -   <span>qi\$att.pr</span>: the simulated average predicted
+        treatment effect for the treated from conditional prediction
+        models.
+
+### Differences with Stata Version
+
+The Stata version of ReLogit and the R implementation differ slightly in
+their coefficient estimates due to differences in the matrix inversion
+routines implemented in R and Stata. Zelig uses orthogonal-triangular
+decomposition (through <span>lm.influence()</span>) to compute the bias
+term, which is more numerically stable than standard matrix
+calculations.
+
+How to Cite {#how-to-cite .unnumbered}
+-----------
+
+See also {#see-also .unnumbered}
+--------
+
+For more information see @KinZen01b,@KinZen01,@KinZen02b. Sample data
+are from @KinZen01b.
