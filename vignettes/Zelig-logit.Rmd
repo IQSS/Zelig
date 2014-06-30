@@ -1,105 +1,123 @@
-<span>logit</span>: Logistic Regression for Dichotomous Dependent Variables {#logit}
-===========================================================================
+---
+title: "Zelig-logit"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+bibliography: zelig5.bib
+---
+
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Model: Zelig-logit}
+-->
+
+# Logistic Regression for Dichotomous Dependent Variables
 
 Logistic regression specifies a dichotomous dependent variable as a
 function of a set of explanatory variables.
 
-### Syntax
+## Syntax
 
-    > z.out <- zelig(Y ~ X1 + X2, model = "logit", data = mydata)
-    > x.out <- setx(z.out)
-    > s.out <- sim(z.out, x = x.out, x1 = NULL)
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "logit", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+```
 
-### Additional Inputs
+## Additional Inputs
 
-In addition to the standard inputs, <span>zelig()</span> takes the
+In addition to the standard inputs, `zelig()` takes the
 following additional options for logistic regression:
 
--   <span>robust</span>: defaults to <span>FALSE</span>. If
-    <span>TRUE</span> is selected, <span>zelig()</span> computes robust
-    standard errors via the <span>sandwich</span> package (see
+-   `robust`: defaults to `FALSE`. If
+    `TRUE` is selected, `zelig()` computes robust
+    standard errors via the `sandwich` package (see
     @Zeileis04). The default type of robust standard error is
     heteroskedastic and autocorrelation consistent (HAC), and assumes
     that observations are ordered by time index.
 
-    In addition, <span>robust</span> may be a list with the following
+    In addition, `robust` may be a list with the following
     options:
 
-    -   <span>method</span>: Choose from
+    -   `method`: Choose from
 
-        -   <span>“vcovHAC”</span>: (default if <span>robust =
-            TRUE</span>) HAC standard errors.
+        -   `“vcovHAC”`: (default if `robust =
+            TRUE`) HAC standard errors.
 
-        -   <span>“kernHAC”</span>: HAC standard errors using the
+        -   `“kernHAC”`: HAC standard errors using the
             weights given in @Andrews91.
 
-        -   <span>“weave”</span>: HAC standard errors using the weights
+        -   `“weave”`: HAC standard errors using the weights
             given in @LumHea99.
 
-    -   <span>order.by</span>: defaults to <span>NULL</span> (the
+    -   `order.by`: defaults to `NULL` (the
         observations are chronologically ordered as in the original
         data). Optionally, you may specify a vector of weights (either
-        as <span>order.by = z</span>, where <span>z</span> exists
-        outside the data frame; or as <span>order.by = \~z</span>, where
-        <span>z</span> is a variable in the data frame) The observations
-        are chronologically ordered by the size of <span>z</span>.
+        as `order.by = z`, where `z` exists
+        outside the data frame; or as `order.by = \~z`, where
+        `z` is a variable in the data frame) The observations
+        are chronologically ordered by the size of `z`.
 
-    -   <span>…</span>: additional options passed to the functions
-        specified in <span>method</span>. See the <span>sandwich</span>
+    -   `…`: additional options passed to the functions
+        specified in `method`. See the `sandwich`
         library and @Zeileis04 for more options.
 
-### Examples
+## Examples
 
-1.  <span>Basic Example</span>
+1.  `Basic Example`
 
-    Attaching the sample turnout dataset:
+Attaching the sample turnout dataset:
 
-    \> data(turnout)
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+suppressPackageStartupMessages(library(Zelig5, quietly = TRUE))
+data(turnout)
+```
 
-    Estimating parameter values for the logistic regression:
+```{r}
+data(turnout)
+```
 
-    \> z.out1 \<- zelig(vote   age + race, model = “logit”, data =
-    turnout) \>
+Estimating parameter values for the logistic regression:
 
-    Setting values for the explanatory variables:
+```{r}
+z.out1 <- zelig(vote ~ age + race, model = "logit", data = turnout)
+```
 
-    \> x.out1 \<- setx(z.out1, age = 36, race = “white”)
+Setting values for the explanatory variables:
 
-    Simulating quantities of interest from the posterior distribution.
+```{r}
+x.out1 <- setx(z.out1, age = 36, race = "white")
+```
 
-    \> s.out1 \<- sim(z.out1, x = x.out1)
+Simulating quantities of interest from the posterior distribution.
 
-    \> summary(s.out1)
+```{r}
+s.out1 <- sim(z.out1, x = x.out1)
+summary(s.out1)
+# plot(s.out1)
+```
 
-    \> plot(s.out1)
+2.  `Simulating First Differences`
 
-    ![image](logit-ExamplePlot)
+Estimating the risk difference (and risk ratio) between low
+education (25th percentile) and high education (75th percentile)
+while all the other variables held at their default values.
 
-2.  <span>Simulating First Differences</span>
+```{r}
+z.out2 <- zelig(vote ~ race + educate, model = "logit", data = turnout)
+x.high <- setx(z.out2, educate = quantile(turnout$educate, probs = 0.75))
+x.low <- setx(z.out2, educate = quantile(turnout$educate, probs = 0.25))
+s.out2 <- sim(z.out2, x = x.high, x1 = x.low)
+summary(s.out2)
+# plot(s.out2)
+```
 
-    Estimating the risk difference (and risk ratio) between low
-    education (25th percentile) and high education (75th percentile)
-    while all the other variables held at their default values.
+3.  `Presenting Results: An ROC Plot` [ROC]
 
-    \> z.out2 \<- zelig(vote   race + educate, model = “logit”, data =
-    turnout) \> x.high \<- setx(z.out2, educate =
-    quantile(turnout$educate, prob = 0.75))
-    >  x.low <- setx(z.out2, educate = quantile(turnout$educate, prob =
-    0.25))
-
-    \> s.out2 \<- sim(z.out2, x = x.high, x1 = x.low)
-
-    \> summary(s.out2)
-
-    \> plot(s.out2)
-
-    ![image](logit-FirstDifferencesPlot)
-
-3.  <span>Presenting Results: An ROC Plot</span> [ROC]
-
-    One can use an ROC plot to evaluate the fit of alternative model
-    specifications. (Use <span>demo(roc)</span> to view this example, or
-    see King and Zeng (2002).)
+One can use an ROC plot to evaluate the fit of alternative model
+specifications. (Use `demo(roc)` to view this example, or
+see @KinZen02b.)
 
     \> z.out1 \<- zelig(vote   race + educate + age, model = “logit”, +
     data = turnout) \> z.out2 \<- zelig(vote   race + educate, model =
@@ -131,26 +149,26 @@ takes the value of either 0 or 1.
 
 ### Quantities of Interest
 
--   The expected values (<span>qi\$ev</span>) for the logit model are
+-   The expected values (`qi$ev`) for the logit model are
     simulations of the predicted probability of a success: $$E(Y) =
       \pi_i= \frac{1}{1 + \exp(-x_i \beta)},$$ given draws of $\beta$
     from its sampling distribution.
 
--   The predicted values (<span>qi\$pr</span>) are draws from the
+-   The predicted values (`qi$pr`) are draws from the
     Binomial distribution with mean equal to the simulated expected
     value $\pi_i$.
 
--   The first difference (<span>qi\$fd</span>) for the logit model is
+-   The first difference (`qi$fd`) for the logit model is
     defined as
 
     $$\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).$$
 
--   The risk ratio (<span>qi\$rr</span>) is defined as
+-   The risk ratio (`qi$rr`) is defined as
 
     $$\textrm{RR} = \Pr(Y = 1 \mid x_1) \ / \ \Pr(Y = 1 \mid x).$$
 
 -   In conditional prediction models, the average expected treatment
-    effect (<span>att.ev</span>) for the treatment group is
+    effect (`att.ev`) for the treatment group is
 
     $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
           E[Y_i(t_i=0)] \right\},$$
@@ -163,7 +181,7 @@ takes the value of either 0 or 1.
     except that the treatment indicator is switched to $t_i=0$.
 
 -   In conditional prediction models, the average predicted treatment
-    effect (<span>att.pr</span>) for the treatment group is
+    effect (`att.pr`) for the treatment group is
 
     $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
           \widehat{Y_i(t_i=0)}\right\},$$
@@ -181,70 +199,70 @@ The output of each Zelig command contains useful information which you
 may view. For example, if you run
 `z.out <- zelig(y ~ x, model = logit, data)`, then you may examine the
 available information in `z.out` by using `names(z.out)`, see the
-<span>coefficients</span> by using <span>z.out\$coefficients</span>, and
+`coefficients` by using `z.out$coefficients`, and
 a default summary of information through `summary(z.out)`. Other
-elements available through the <span>\$</span> operator are listed
+elements available through the `$` operator are listed
 below.
 
--   From the <span>zelig()</span> output object <span>z.out</span>, you
+-   From the `zelig()` output object `z.out`, you
     may extract:
 
-    -   <span>coefficients</span>: parameter estimates for the
+    -   `coefficients`: parameter estimates for the
         explanatory variables.
 
-    -   <span>residuals</span>: the working residuals in the final
+    -   `residuals`: the working residuals in the final
         iteration of the IWLS fit.
 
-    -   <span>fitted.values</span>: the vector of fitted values for the
+    -   `fitted.values`: the vector of fitted values for the
         systemic component, $\pi_i$.
 
-    -   <span>linear.predictors</span>: the vector of $x_{i}\beta$
+    -   `linear.predictors`: the vector of $x_{i}\beta$
 
-    -   <span>aic</span>: Akaike’s Information Criterion (minus twice
+    -   `aic`: Akaike’s Information Criterion (minus twice
         the maximized log-likelihood plus twice the number of
         coefficients).
 
-    -   <span>df.residual</span>: the residual degrees of freedom.
+    -   `df.residual`: the residual degrees of freedom.
 
-    -   <span>df.null</span>: the residual degrees of freedom for the
+    -   `df.null`: the residual degrees of freedom for the
         null model.
 
-    -   <span>data</span>: the name of the input data frame.
+    -   `data`: the name of the input data frame.
 
--   From <span>summary(z.out)</span>, you may extract:
+-   From `summary(z.out)`, you may extract:
 
-    -   <span>coefficients</span>: the parameter estimates with their
+    -   `coefficients`: the parameter estimates with their
         associated standard errors, $p$-values, and $t$-statistics.
 
-    -   <span>cov.scaled</span>: a $k \times k$ matrix of scaled
+    -   `cov.scaled`: a $k \times k$ matrix of scaled
         covariances.
 
-    -   <span>cov.unscaled</span>: a $k \times k$ matrix of unscaled
+    -   `cov.unscaled`: a $k \times k$ matrix of unscaled
         covariances.
 
--   From the <span>sim()</span> output object <span>s.out</span>, you
+-   From the `sim()` output object `s.out`, you
     may extract quantities of interest arranged as matrices indexed by
-    simulation $\times$ <span>x</span>-observation (for more than one
-    <span>x</span>-observation). Available quantities are:
+    simulation $\times$ `x`-observation (for more than one
+    `x`-observation). Available quantities are:
 
-    -   <span>qi\$ev</span>: the simulated expected probabilities for
-        the specified values of <span>x</span>.
+    -   `qi$ev`: the simulated expected probabilities for
+        the specified values of `x`.
 
-    -   <span>qi\$pr</span>: the simulated predicted values for the
-        specified values of <span>x</span>.
+    -   `qi$pr`: the simulated predicted values for the
+        specified values of `x`.
 
-    -   <span>qi\$fd</span>: the simulated first difference in the
+    -   `qi$fd`: the simulated first difference in the
         expected probabilities for the values specified in
-        <span>x</span> and <span>x1</span>.
+        `x` and `x1`.
 
-    -   <span>qi\$rr</span>: the simulated risk ratio for the expected
-        probabilities simulated from <span>x</span> and <span>x1</span>.
+    -   `qi$rr`: the simulated risk ratio for the expected
+        probabilities simulated from `x` and `x1`.
 
-    -   <span>qi\$att.ev</span>: the simulated average expected
+    -   `qi$att.ev`: the simulated average expected
         treatment effect for the treated from conditional prediction
         models.
 
-    -   <span>qi\$att.pr</span>: the simulated average predicted
+    -   `qi$att.pr`: the simulated average predicted
         treatment effect for the treated from conditional prediction
         models.
 
