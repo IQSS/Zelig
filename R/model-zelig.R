@@ -1,11 +1,16 @@
-
-z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
+#' A class description
+#'
+#' @import methods
+#' @export Zelig
+#' @exportClass Zelig
+z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         formula = "formula", # Zelig formula
                                         weights = "numeric", 
                                         name = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix
                                         data.by = "ANY", # data frame or matrix
                                         by = "logical",
+                                        
                                         idx = "ANY", # model index
                                         
                                         zelig.call = "call", # Zelig function call
@@ -256,7 +261,12 @@ z$methods(
   }
 )
 
-# 
+setMethod('summary', "Zelig",
+          function(object, ...) {
+            object$summarize()
+          }          
+)
+
 #       idx <- match(names(.self$setx.labels),
 #                    names(.self$sim.out),
 #                    nomatch = 0) 

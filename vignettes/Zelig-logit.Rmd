@@ -119,15 +119,15 @@ One can use an ROC plot to evaluate the fit of alternative model
 specifications. (Use `demo(roc)` to view this example, or
 see @KinZen02b.)
 
-    \> z.out1 \<- zelig(vote   race + educate + age, model = “logit”, +
-    data = turnout) \> z.out2 \<- zelig(vote   race + educate, model =
-    “logit”, data = turnout)
+```{r, eval = FALSE}
+z.out1 <- zelig(vote ~ race + educate + age, model = "logit",
+                data = turnout)
+z.out2 <- zelig(vote ~ race + educate, model = "logit",
+                data = turnout)
+rocplot(z.out1$y, z.out2$y, fitted(z.out1), fitted(z.out2))
+```
 
-    \> rocplot(z.out1$y, z.out2$y, fitted(z.out1), fitted(z.out2))
-
-    ![image](logit-ROCPlot)
-
-### Model
+## Model
 
 Let $Y_i$ be the binary dependent variable for observation $i$ which
 takes the value of either 0 or 1.
@@ -147,7 +147,7 @@ takes the value of either 0 or 1.
     where $x_i$ is the vector of $k$ explanatory variables for
     observation $i$ and $\beta$ is the vector of coefficients.
 
-### Quantities of Interest
+## Quantities of Interest
 
 -   The expected values (`qi$ev`) for the logit model are
     simulations of the predicted probability of a success: $$E(Y) =
@@ -193,7 +193,7 @@ takes the value of either 0 or 1.
     treatment group, under the assumption that everything stays the same
     except that the treatment indicator is switched to $t_i=0$.
 
-### Output Values
+## Output Values
 
 The output of each Zelig command contains useful information which you
 may view. For example, if you run

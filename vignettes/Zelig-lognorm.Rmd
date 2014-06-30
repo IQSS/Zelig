@@ -1,88 +1,116 @@
-<span>lognorm</span>: Log-Normal Regression for Duration Dependent Variables {#lognorm}
-============================================================================
+---
+title: "Zelig-lognorm"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+bibliography: zelig5.bib
+---
+
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Model: Zelig-lognorm}
+-->
+
+# Log-Normal Regression for Duration Dependent Variables {#lognorm}
 
 The log-normal model describes an event’s duration, the dependent
 variable, as a function of a set of explanatory variables. The
 log-normal model may take time censored dependent variables, and allows
 the hazard rate to increase and decrease.
 
-### Syntax
+## Syntax
 
-    > z.out <- zelig(Surv(Y, C) ~ X, model = "lognorm", data = mydata)
-    > x.out <- setx(z.out)
-    > s.out <- sim(z.out, x = x.out)
+```{r, eval = FALSE}
+z.out <- zelig(Surv(Y, C) ~ X, model = "lognorm", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
 
 Log-normal models require that the dependent variable be in the form
-<span>Surv(Y, C)</span>, where <span>Y</span> and <span>C</span> are
+`Surv(Y, C)`, where `Y` and `C` are
 vectors of length $n$. For each observation $i$ in 1, …, $n$, the value
 $y_i$ is the duration (lifetime, for example) of each subject, and the
 associated $c_i$ is a binary variable such that $c_i = 1$ if the
-duration is not censored (<span>*e.g.*</span>, the subject dies during
+duration is not censored (`*e.g.*`, the subject dies during
 the study) or $c_i = 0$ if the duration is censored
-(<span>*e.g.*</span>, the subject is still alive at the end of the
+(`*e.g.*`, the subject is still alive at the end of the
 study). If $c_i$ is omitted, all Y are assumed to be completed; that is,
 time defaults to 1 for all observations.
 
-### Input Values
+## Input Values
 
-In addition to the standard inputs, <span>zelig()</span> takes the
+In addition to the standard inputs, `zelig()` takes the
 following additional options for lognormal regression:
 
--   <span>robust</span>: defaults to <span>FALSE</span>. If
-    <span>TRUE</span>, <span>zelig()</span> computes robust standard
+-   `robust`: defaults to `FALSE`. If
+    `TRUE`, `zelig()` computes robust standard
     errors based on sandwich estimators (see @Huber81 and @White80)
-    based on the options in <span>cluster</span>.
+    based on the options in `cluster`.
 
--   <span>cluster</span>: if <span>robust = TRUE</span>, you may select
+-   `cluster`: if `robust = TRUE`, you may select
     a variable to define groups of correlated observations. Let
-    <span>x3</span> be a variable that consists of either discrete
+    `x3` be a variable that consists of either discrete
     numeric values, character strings, or factors that define strata.
     Then
-
-        > z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
-                         model = "exp", data = mydata)
+```{r, eval=FALSE}
+z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
+               model = "exp", data = mydata)
+```
 
     means that the observations can be correlated within the strata
-    defined by the variable <span>x3</span>, and that robust standard
+    defined by the variable `x3`, and that robust standard
     errors should be calculated according to those clusters. If
-    <span>robust = TRUE</span> but <span>cluster</span> is not
-    specified, <span>zelig()</span> assumes that each observation falls
+    `robust = TRUE` but `cluster` is not
+    specified, `zelig()` assumes that each observation falls
     into its own cluster.
 
-### Example
+## Example
 
 Attach the sample data:
 
-RRR\> data(coalition)
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+suppressPackageStartupMessages(library(Zelig5, quietly = TRUE))
+data(coalition)
+```
+
+```{r}
+data(coalition)
+```
 
 Estimate the model:
 
-RRR\> z.out \<- zelig(Surv(duration, ciep12)   fract + numst2, model =
-“lognorm”, + data = coalition)
+```{r}
+z.out <-zelig(Surv(duration, ciep12) ~ fract + numst2, model = "lognorm",
+              data = coalition)
+```
 
 View the regression output:
 
-RRR\> summary(z.out)
+```{r}
+summary(z.out)
+```
 
 Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:
 
-RRR\> x.low \<- setx(z.out, numst2 = 0) RRR\> x.high \<- setx(z.out,
-numst2 = 1)
+```{r}
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2 = 1)
+```
 
-Simulate expected values (<span>qi\$ev</span>) and first differences
-(<span>qi\$fd</span>):
 
-RRR\> s.out \<- sim(z.out, x = x.low, x1 = x.high)
+Simulate expected values (`qi$ev`) and first differences
+(`qi$fd`):
 
-RRR\> summary(s.out)
+```{r}
+s.out <- sim(z.out, x = x.low, x1 = x.high)
+summary(s.out)
+# plot(s.out)
+```
 
-RRR\> plot(s.out)
-
-![image](vigpics/lognormal-ExamplePlot)
-
-### Model
+## Model
 
 Let $Y_i^*$ be the survival time for observation $i$ with the density
 function $f(y)$ and the corresponding distribution function
@@ -105,7 +133,7 @@ $$Y_i = \left\{ \begin{array}{ll}
 
     where the parameters $\mu_i$ and $\sigma^2$ are the mean and
     variance of the Normal distribution. (Note that the output from
-    <span>zelig()</span> parameterizes <span>scale</span>$ = \sigma$.)
+    `zelig()` parameterizes `scale`$ = \sigma$.)
 
     In addition, survival models like the lognormal have three
     additional properties. The hazard function $h(t)$ measures the
@@ -131,9 +159,9 @@ $$Y_i = \left\{ \begin{array}{ll}
 
     $$\mu_i = x_i \beta .$$
 
-### Quantities of Interest
+## Quantities of Interest
 
--   The expected values (<span>qi\$ev</span>) for the lognormal model
+-   The expected values (`qi$ev`) for the lognormal model
     are simulations of the expected duration:
 
     $$E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),$$
@@ -144,12 +172,12 @@ $$Y_i = \left\{ \begin{array}{ll}
 -   The predicted value is a draw from the log-normal distribution given
     simulations of the parameters $(\lambda_i, \sigma)$.
 
--   The first difference (<span>qi\$fd</span>) is
+-   The first difference (`qi$fd`) is
 
     $$\textrm{FD} = E(Y \mid x_1) - E(Y \mid x).$$
 
 -   In conditional prediction models, the average expected treatment
-    effect (<span>att.ev</span>) for the treatment group is
+    effect (`att.ev`) for the treatment group is
 
     $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},$$
 
@@ -165,7 +193,7 @@ $$Y_i = \left\{ \begin{array}{ll}
     is switched to $t_i=0$.
 
 -   In conditional prediction models, the average predicted treatment
-    effect (<span>att.pr</span>) for the treatment group is
+    effect (`att.pr`) for the treatment group is
 
     $$\frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
     \widehat{Y_i(t_i=0)} \},$$
@@ -181,68 +209,68 @@ $$Y_i = \left\{ \begin{array}{ll}
     assumption that everything stays the same except that the treatment
     indicator is switched to $t_i=0$.
 
-### Output Values
+## Output Values
 
 The output of each Zelig command contains useful information which you
 may view. For example, if you run
 `z.out <- zelig(Surv(Y, C) ~ X, model = lognorm, data)`, then you may
 examine the available information in `z.out` by using `names(z.out)`,
-see the <span>coefficients</span> by using
-<span>z.out\$coefficients</span>, and a default summary of information
+see the `coefficients` by using
+`z.out$coefficients`, and a default summary of information
 through `summary(z.out)`. Other elements available through the
-<span>\$</span> operator are listed below.
+`$` operator are listed below.
 
--   From the <span>zelig()</span> output object <span>z.out</span>, you
+-   From the `zelig()` output object `z.out`, you
     may extract:
 
-    -   <span>coefficients</span>: parameter estimates for the
+    -   `coefficients`: parameter estimates for the
         explanatory variables.
 
-    -   <span>icoef</span>: parameter estimates for the intercept and
+    -   `icoef`: parameter estimates for the intercept and
         $\sigma$.
 
-    -   <span>var</span>: Variance-covariance matrix.
+    -   `var`: Variance-covariance matrix.
 
-    -   <span>loglik</span>: Vector containing the log-likelihood for
+    -   `loglik`: Vector containing the log-likelihood for
         the model and intercept only (respectively).
 
-    -   <span>linear.predictors</span>: the vector of $x_{i}\beta$.
+    -   `linear.predictors`: the vector of $x_{i}\beta$.
 
-    -   <span>df.residual</span>: the residual degrees of freedom.
+    -   `df.residual`: the residual degrees of freedom.
 
-    -   <span>df.null</span>: the residual degrees of freedom for the
+    -   `df.null`: the residual degrees of freedom for the
         null model.
 
-    -   <span>zelig.data</span>: the input data frame if <span>save.data
-        = TRUE</span>.
+    -   `zelig.data`: the input data frame if `save.data
+        = TRUE`.
 
 -   Most of this may be conveniently summarized using
-    <span>summary(z.out)</span>. From <span>summary(z.out)</span>, you
+    `summary(z.out)`. From `summary(z.out)`, you
     may additionally extract:
 
-    -   <span>table</span>: the parameter estimates with their
+    -   `table`: the parameter estimates with their
         associated standard errors, $p$-values, and $t$-statistics.
 
--   From the <span>sim()</span> output object <span>s.out</span>, you
+-   From the `sim()` output object `s.out`, you
     may extract quantities of interest arranged as matrices indexed by
-    simulation $\times$ <span>x</span>-observation (for more than one
-    <span>x</span>-observation). Available quantities are:
+    simulation $\times$ `x`-observation (for more than one
+    `x`-observation). Available quantities are:
 
-    -   <span>qi\$ev</span>: the simulated expected values for the
-        specified values of <span>x</span>.
+    -   `qi$ev`: the simulated expected values for the
+        specified values of `x`.
 
-    -   <span>qi\$pr</span>: the simulated predicted values drawn from
+    -   `qi$pr`: the simulated predicted values drawn from
         the distribution defined by $(\lambda_i, \sigma)$.
 
-    -   <span>qi\$fd</span>: the simulated first differences between the
-        simulated expected values for <span>x</span> and
-        <span>x1</span>.
+    -   `qi$fd`: the simulated first differences between the
+        simulated expected values for `x` and
+        `x1`.
 
-    -   <span>qi\$att.ev</span>: the simulated average expected
+    -   `qi$att.ev`: the simulated average expected
         treatment effect for the treated from conditional prediction
         models.
 
-    -   <span>qi\$att.pr</span>: the simulated average predicted
+    -   `qi$att.pr`: the simulated average predicted
         treatment effect for the treated from conditional prediction
         models.
 
@@ -254,5 +282,5 @@ See also {#see-also .unnumbered}
 
 The exponential function is part of the survival library by by Terry
 Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
-to `help(survfit)` in the survival library, and @VenRip02.Sample data
+to `help(survfit)` in the survival library, and @VenRip02. Sample data
 are from @KinAltBur90.
