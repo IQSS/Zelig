@@ -48,4 +48,3 @@ Collate:
     'model-relogit.R'
     'wrappers.R'
 VignetteBuilder: knitr
-
