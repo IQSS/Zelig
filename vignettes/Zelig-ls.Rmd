@@ -61,7 +61,7 @@ following additional options for least squares regression:
         variable in the data frame). The observations are
         chronologically ordered by the size of `z`.
 
-    -   `…`: additional options passed to the functions
+    -   `...`: additional options passed to the functions
         specified in `method`. See the `sandwich`
         library and @Zeileis04 for more options.
 

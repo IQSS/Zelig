@@ -1,5 +1,18 @@
-<span>gamma</span>: Gamma Regression for Continuous, Positive Dependent Variables {#gamma}
-=================================================================================
+---
+title: "Zelig-gamma"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+bibliography: zelig5.bib
+---
+
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Model: Zelig-gamma}
+-->
+
+# Gamma Regression for Continuous, Positive Dependent Variables
 
 Use the gamma regression model if you have a positive-valued dependent
 variable such as the number of years a parliamentary cabinet endures, or
@@ -7,85 +20,97 @@ the seconds you can stay airborne while jumping. The gamma distribution
 assumes that all waiting times are complete by the end of the study
 (censoring is not allowed).
 
-### Syntax
+## Syntax
 
-    > z.out <- zelig(Y ~ X1 + X2, model = "gamma", data = mydata)
-    > x.out <- setx(z.out)
-    > s.out <- sim(z.out, x = x.out, x1 = NULL)
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "gamma", data = mydata)
+x.out <- setx(z.out)
+s.out
+```
 
-### Additional Inputs
+## Additional Inputs
 
-In addition to the standard inputs, <span>zelig()</span> takes the
+In addition to the standard inputs, `zelig()` takes the
 following additional options for gamma regression:
 
--   <span>robust</span>: defaults to <span>FALSE</span>. If
-    <span>TRUE</span> is selected, <span>zelig()</span> computes robust
-    standard errors via the <span>sandwich</span> package (see
+-   `robust`: defaults to `FALSE`. If
+    `TRUE` is selected, `zelig()` computes robust
+    standard errors via the `sandwich` package (see
     @Zeileis04). The default type of robust standard error is
     heteroskedastic and autocorrelation consistent (HAC), and assumes
     that observations are ordered by time index.
 
-    In addition, <span>robust</span> may be a list with the following
+    In addition, `robust` may be a list with the following
     options:
 
-    -   <span>method</span>: Choose from
+    -   `method`: Choose from
 
-        -   <span>“vcovHAC”</span>: (default if <span>robust =
-            TRUE</span>) HAC standard errors.
+        -   `“vcovHAC”`: (default if `robust =
+            TRUE`) HAC standard errors.
 
-        -   <span>“kernHAC”</span>: HAC standard errors using the
+        -   `“kernHAC”`: HAC standard errors using the
             weights given in @Andrews91.
 
-        -   <span>“weave”</span>: HAC standard errors using the weights
+        -   `“weave”`: HAC standard errors using the weights
             given in @LumHea99.
 
-    -   <span>order.by</span>: defaults to <span>NULL</span> (the
+    -   `order.by`: defaults to `NULL` (the
         observations are chronologically ordered as in the original
         data). Optionally, you may specify a vector of weights (either
-        as <span>order.by = z</span>, where <span>z</span> exists
-        outside the data frame; or as <span>order.by = \~z</span>, where
-        <span>z</span> is a variable in the data frame). The
+        as `order.by = z`, where `z` exists
+        outside the data frame; or as `order.by = \~z`, where
+        `z` is a variable in the data frame). The
         observations are chronologically ordered by the size of
-        <span>z</span>.
+        `z`.
 
-    -   <span>…</span>: additional options passed to the functions
-        specified in <span>method</span>. See the <span>sandwich</span>
+    -   `...`: additional options passed to the functions
+        specified in `method`. See the `sandwich`
         library and @Zeileis04 for more options.
 
-### Example
+## Example
 
 Attach the sample data:
 
-RRR\> data(coalition)
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+suppressPackageStartupMessages(library(Zelig5, quietly = TRUE))
+data(coalition)
+```
+
+```{r}
+data(coalition)
+```
 
 Estimate the model:
 
-RRR\> z.out \<- zelig(duration   fract + numst2, model = “gamma”, data =
-coalition)
+```{r}
+z.out <- zelig(duration ~ fract + numst2, model = 'gamma', data = coalition)
+```
 
 View the regression output:
 
-RRR\> summary(z.out)
+```{r}
+summary(z.out)
+```
 
 Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:
 
-RRR\> x.low \<- setx(z.out, numst2 = 0) RRR\> x.high \<- setx(z.out,
-numst2 = 1)
+```{r}
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2 = 1)
+```
 
-Simulate expected values (<span>qi\$ev</span>) and first differences
-(<span>qi\$fd</span>):
+Simulate expected values (`qi$ev`) and first differences
+(`qi$fd`):
 
-RRR\> s.out \<- sim(z.out, x = x.low, x1 = x.high)
+```{r}
+s.out <- sim(z.out, x = x.low, x1 = x.high)
+summary(s.out)
+# plot(s.out)
+```
 
-RRR\> summary(s.out)
-
-RRR\> plot(s.out)
-
-![image](vigpics/gamma-ExamplePlot)
-
-### Model
+## Model
 
 -   The Gamma distribution with scale parameter $\alpha$ has a
     *stochastic component*:
@@ -101,22 +126,22 @@ RRR\> plot(s.out)
 
     $$\lambda_i = \frac{1}{x_i \beta}$$
 
-### Quantities of Interest
+## Quantities of Interest
 
--   The expected values (<span>qi\$ev</span>) are simulations of the
+-   The expected values (`qi$ev`) are simulations of the
     mean of the stochastic component given draws of $\alpha$ and $\beta$
     from their posteriors: $$E(Y) = \alpha \lambda_i.$$
 
--   The predicted values (<span>qi\$pr</span>) are draws from the gamma
+-   The predicted values (`qi$pr`) are draws from the gamma
     distribution for each given set of parameters $(\alpha, \lambda_i)$.
 
--   If <span>x1</span> is specified, <span>sim()</span> also returns the
-    differences in the expected values (<span>qi\$fd</span>),
+-   If `x1` is specified, `sim()` also returns the
+    differences in the expected values (`qi$fd`),
     $$E(Y \mid x_1) -
       E(Y \mid x)$$.
 
 -   In conditional prediction models, the average expected treatment
-    effect (<span>att.ev</span>) for the treatment group is
+    effect (`att.ev`) for the treatment group is
 
     $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
           E[Y_i(t_i=0)] \right\},$$
@@ -129,7 +154,7 @@ RRR\> plot(s.out)
     except that the treatment indicator is switched to $t_i=0$.
 
 -   In conditional prediction models, the average predicted treatment
-    effect (<span>att.pr</span>) for the treatment group is
+    effect (`att.pr`) for the treatment group is
 
     $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
           \widehat{Y_i(t_i=0)} \right\},$$
@@ -141,73 +166,73 @@ RRR\> plot(s.out)
     treatment group, under the assumption that everything stays the same
     except that the treatment indicator is switched to $t_i=0$.
 
-### Output Values
+## Output Values
 
 The output of each Zelig command contains useful information which you
 may view. For example, if you run
 `z.out <- zelig(y ~ x, model = gamma, data)`, then you may examine the
 available information in `z.out` by using `names(z.out)`, see the
-<span>coefficients</span> by using <span>z.out\$coefficients</span>, and
+`coefficients` by using `z.out$coefficients`, and
 a default summary of information through `summary(z.out)`. Other
-elements available through the <span>\$</span> operator are listed
+elements available through the `$` operator are listed
 below.
 
--   From the <span>zelig()</span> output object <span>z.out</span>, you
+-   From the `zelig()` output object `z.out`, you
     may extract:
 
-    -   <span>coefficients</span>: parameter estimates for the
+    -   `coefficients`: parameter estimates for the
         explanatory variables.
 
-    -   <span>residuals</span>: the working residuals in the final
+    -   `residuals`: the working residuals in the final
         iteration of the IWLS fit.
 
-    -   <span>fitted.values</span>: the vector of fitted values.
+    -   `fitted.values`: the vector of fitted values.
 
-    -   <span>linear.predictors</span>: the vector of $x_{i}\beta$.
+    -   `linear.predictors`: the vector of $x_{i}\beta$.
 
-    -   <span>aic</span>: Akaike’s Information Criterion (minus twice
+    -   `aic`: Akaike’s Information Criterion (minus twice
         the maximized log-likelihood plus twice the number of
         coefficients).
 
-    -   <span>df.residual</span>: the residual degrees of freedom.
+    -   `df.residual`: the residual degrees of freedom.
 
-    -   <span>df.null</span>: the residual degrees of freedom for the
+    -   `df.null`: the residual degrees of freedom for the
         null model.
 
-    -   <span>zelig.data</span>: the input data frame if <span>save.data
-        = TRUE</span>.
+    -   `zelig.data`: the input data frame if `save.data
+        = TRUE`.
 
--   From <span>summary(z.out)</span>, you may extract:
+-   From `summary(z.out)`, you may extract:
 
-    -   <span>coefficients</span>: the parameter estimates with their
+    -   `coefficients`: the parameter estimates with their
         associated standard errors, $p$-values, and $t$-statistics.
 
-    -   <span>cov.scaled</span>: a $k \times k$ matrix of scaled
+    -   `cov.scaled`: a $k \times k$ matrix of scaled
         covariances.
 
-    -   <span>cov.unscaled</span>: a $k \times k$ matrix of unscaled
+    -   `cov.unscaled`: a $k \times k$ matrix of unscaled
         covariances.
 
--   From the <span>sim()</span> output object <span>s.out</span>, you
+-   From the `sim()` output object `s.out`, you
     may extract quantities of interest arranged as matrices indexed by
-    simulation $\times$ <span>x</span>-observation (for more than one
-    <span>x</span>-observation). Available quantities are:
+    simulation $\times$ `x`-observation (for more than one
+    `x`-observation). Available quantities are:
 
-    -   <span>qi\$ev</span>: the simulated expected values for the
-        specified values of <span>x</span>.
+    -   `qi$ev`: the simulated expected values for the
+        specified values of `x`.
 
-    -   <span>qi\$pr</span>: the simulated predicted values drawn from a
+    -   `qi$pr`: the simulated predicted values drawn from a
         distribution defined by $(\alpha, \lambda_i)$.
 
-    -   <span>qi\$fd</span>: the simulated first difference in the
-        expected values for the specified values in <span>x</span> and
-        <span>x1</span>.
+    -   `qi$fd`: the simulated first difference in the
+        expected values for the specified values in `x` and
+        `x1`.
 
-    -   <span>qi\$att.ev</span>: the simulated average expected
+    -   `qi$att.ev`: the simulated average expected
         treatment effect for the treated from conditional prediction
         models.
 
-    -   <span>qi\$att.pr</span>: the simulated average predicted
+    -   `qi$att.pr`: the simulated average predicted
         treatment effect for the treated from conditional prediction
         models.
 

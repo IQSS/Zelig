@@ -1,3 +1,4 @@
+
 z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call
                                         formula = "formula", # Zelig formula
                                         weights = "numeric", 

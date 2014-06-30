@@ -2,7 +2,7 @@
 #' @include model-glm.R
 zgamma <- setRefClass("Zelig-gamma",
                       contains = "Zelig-glm",
-                      field = list(simalpha = "numeric" # ancillary parameters
+                      field = list(simalpha = "list" # ancillary parameters
                       ))
 
 zgamma$methods(
@@ -21,24 +21,24 @@ zgamma$methods(
 )
 
 zgamma$methods(
-  param = function(num, ...) {
-    shape <- gamma.shape(.self$zelig.out)
-    .self$simalpha <- rnorm(n = num, mean = shape$alpha, sd = shape$SE)
-    .self$simparam <- mvrnorm(n = num, mu = coef(.self$zelig.out),
-                              Sigma = vcov(.self$zelig.out))
+  param = function(i) {
+    shape <- gamma.shape(.self$zelig.out[[i]])
+    .self$simalpha[[i]] <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
+    .self$simparam[[i]] <- mvrnorm(n = .self$num, mu = coef(.self$zelig.out[[i]]),
+                                   Sigma = vcov(.self$zelig.out[[i]]))
   }
 )
 
 zgamma$methods(
-  qi = function(x) {
-    coeff <- .self$simparam
+  qi = function(i, x) {
+    coeff <- .self$simparam[[i]]
     eta <- coeff %*% t(x)
     theta <- matrix(1 / eta, nrow = nrow(coeff))
     ev <- theta
     pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
-    for (i in 1:nrow(ev))
-      pv[i, ] <- rgamma(ncol(ev), shape=.self$simalpha[i], 
-                        scale = theta[i, ] / .self$simalpha[i])
+    for (ii in 1:nrow(ev))
+      pv[ii, ] <- rgamma(ncol(ev), shape = .self$simalpha[[i]][ii], 
+                         scale = theta[ii] / .self$simalpha[[i]][ii])
     return(list(ev = ev, pv = pv))
   }
 )
