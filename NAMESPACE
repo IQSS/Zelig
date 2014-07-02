@@ -1,4 +1,4 @@
-import(methods, MASS, survival, VGAM, jsonlite, AER)
+import(methods, MASS, survival, VGAM, jsonlite, AER, quantreg)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
@@ -13,11 +13,9 @@ exportClasses(
      "Zelig-negbinom",
      "Zelig-normal",
      "Zelig-poisson",
-     "Zelig-bbinchoice",
-     "Zelig-blogit",
-     "Zelig-bprobit",
      "Zelig-lognorm",
-     "Zelig-tobit"
+     "Zelig-tobit",
+     "Zelig-quantile"
 )
 
 importFrom(methods, setRefClass)

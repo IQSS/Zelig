@@ -22,7 +22,8 @@ Depends:
     survival,
     VGAM,
     jsonlite,
-    AER
+    AER,
+    quantreg
 Suggests:
     testthat,
     knitr
@@ -40,11 +41,9 @@ Collate:
     'model-lognorm.R'
     'model-logit.R'
     'model-gamma.R'
-    'model-exp.R'
+    'model-exp.R',
+    'model-quantile.R',
     'create-json.R'
-    'model-bbinchoice.R'
-    'model-blogit.R'
-    'model-bprobit.R'
     'model-relogit.R'
     'wrappers.R'
 VignetteBuilder: knitr

@@ -1,7 +1,3 @@
-source(file.path("..", "R", "utils.R"))
-source(file.path("..", "R", "model-zelig.R"))
-source(file.path("..", "R", "model-exp.R"))
-
 # Zelig 4 code:
 library(Zelig)
 data(coalition)
