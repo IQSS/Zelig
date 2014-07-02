@@ -1,7 +1,7 @@
 library(quantreg)
 
 #' @include model-zelig.R
-zquantile <- setRefClass("Zelig-zquantile",
+zquantile <- setRefClass("Zelig-quantile",
                          contains="Zelig",
                          field=list(tau = "ANY"
                          ))

@@ -41,8 +41,8 @@ Collate:
     'model-lognorm.R'
     'model-logit.R'
     'model-gamma.R'
-    'model-exp.R',
-    'model-quantile.R',
+    'model-exp.R'
+    'model-quantile.R'
     'create-json.R'
     'model-relogit.R'
     'wrappers.R'
