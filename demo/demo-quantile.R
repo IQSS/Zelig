@@ -36,6 +36,7 @@ plot(summary(z.out3$zelig.out[[1]]))
 z.out3$setx(income = quantile(engel$income, 0.25))
 z.out3$setx1(income = quantile(engel$income, 0.75))
 
-# z.out3$sim()
-# fit <- rq(foodexp ~ income, tau = seq(0.1, 0.9, by = 0.1), data = engel)
-# plot(summary(fit))
+z.out3$sim()
+
+fit <- rq(foodexp ~ income, tau = seq(0.1, 0.9, by = 0.1), data = engel)
+plot(summary(fit))
