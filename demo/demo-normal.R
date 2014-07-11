@@ -17,5 +17,7 @@ z5
 z5$setx(trade = 50)
 set.seed(42)
 z5$sim(num=1000)
+statmat(z5$sim.out$x$ev[[1]])
+statmat(z5$sim.out$x$pv[[1]])
 z5$summarize()
 z5$cite()

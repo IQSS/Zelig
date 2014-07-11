@@ -21,8 +21,8 @@ zpoisson$methods(
 )
 
 zpoisson$methods(
-  qi = function(i, x) {
-    eta <- .self$simparam[[i]] %*% t(x)
+  qi = function(simparam, mm) {
+    eta <- .simparam %*% t(mm)
     theta <- matrix(.self$linkinv(eta), nrow = nrow(.self$simparam[[i]]))
     ev <- theta
     pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))

@@ -13,17 +13,17 @@ zglm$methods(
 )
 
 zglm$methods(
-  zelig = function(formula, data, ..., weights=NULL) {
+  zelig = function(formula, data, ..., weights=NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
     .self$model.call$family <- call(.self$family, .self$link)
-    callSuper(formula = formula, data = data, ..., weights = NULL)
+    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
   }
 )
 
 zglm$methods(
-  param = function(i) {
-    .self$simparam[[i]] <- mvrnorm(n=.self$num, mu=coef(.self$zelig.out[[i]]),
-                                   Sigma=vcov(.self$zelig.out[[i]]))
+  param = function(z.out) {
+    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
   }
 )
+

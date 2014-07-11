@@ -1,8 +1,7 @@
 #' @include model-zelig.R
 #' @include model-glm.R
 znormal <- setRefClass("Zelig-normal",
-                       contains = "Zelig-glm",
-                       field = list("simalpha" = "list"))
+                       contains = "Zelig-glm")
 
 znormal$methods(
   initialize = function() {
@@ -20,24 +19,27 @@ znormal$methods(
 )
 
 znormal$methods(
-  param = function(i) {
-    degrees.freedom <- .self$zelig.out[[i]]$df.residual
-    sig2 <- base::summary(.self$zelig.out[[i]])$dispersion # not to call class summary method
-    .self$simparam[[i]] <- mvrnorm(n = .self$num,
-                              mu = coef(.self$zelig.out[[i]]),
-                              Sigma = vcov(.self$zelig.out[[i]]))
-    .self$simalpha[[i]] <- sqrt(degrees.freedom * sig2 / rchisq(.self$num, degrees.freedom))
+  param = function(z.out) {
+    degrees.freedom <- z.out$df.residual
+    sig2 <- base::summary(z.out)$dispersion # not to call class summary method
+    simparam <- mvrnorm(n = .self$num,
+                              mu = coef(z.out),
+                              Sigma = vcov(z.out))
+    simalpha <- sqrt(degrees.freedom * sig2 
+                     / rchisq(.self$num, degrees.freedom))
+    simparam <- list(simparam = simparam, simalpha = simalpha)
+    return(simparam)
   }
 )
 
 znormal$methods(
-  qi = function(i, x) {
+  qi = function(simparam, mm) {
     .self$linkinv <- eval(call("binomial", "probit"))$linkinv
-    theta <- matrix(.self$simparam[[i]] %*% t(x), nrow = nrow(.self$simparam[[i]]))
+    theta <- matrix(simparam$simparam %*% t(mm), nrow = nrow(simparam$simparam))
     ev <- theta
     pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (j in 1:nrow(ev))
-      pv[j, ] <- rnorm(ncol(ev), mean = ev[j, ], sd = .self$simalpha[[i]][j])
+      pv[j, ] <- rnorm(ncol(ev), mean = ev[j, ], sd = simparam$simalpha[j])
     return(list(ev = ev, pv = pv))
   }
 )

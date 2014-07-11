@@ -19,28 +19,30 @@ znegbinom$methods(
 )
 
 znegbinom$methods(
-  zelig = function(formula, data, ..., weights=NULL) {
+  zelig = function(formula, data, ..., weights=NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
-    callSuper(formula=formula, data=data, ..., weights=NULL)
+    callSuper(formula=formula, data=data, ..., weights=NULL, by = by)
   }
 )
 
 znegbinom$methods(
-  param = function(i) {
-    .self$simalpha[[i]] <- .self$zelig.out[[i]]$theta
-    .self$simparam[[i]] <- mvrnorm(n = .self$num, mu = coef(.self$zelig.out[[i]]),
-                                   Sigma = vcov(.self$zelig.out[[i]]))
+  param = function(z.out) {
+    simalpha <- z.out$theta
+    simparam <- mvrnorm(n = .self$num, mu = coef(z.out),
+                        Sigma = vcov(z.out))
+    simparam <- list(simparam = simparam, simalpha = simalpha)
+    return(simparam)
   }
 )
 
 znegbinom$methods(
-  qi = function(i, x) {
-    coef <- .self$simparam[[i]]
-    alpha <- .self$simalpha[[i]]
-    inverse <- family(.self$zelig.out[[i]])$linkinv
-    eta <- coef %*% t(x)
-    theta <- matrix(inverse(eta), nrow=nrow(coef))
+  qi = function(simparam, mm) {
+    coeff <- simparam$simparam
+    alpha <- simparam$simalpha
+    inverse <- family(.self$zelig.out$z.out[[1]])$linkinv
+    eta <- coeff %*% t(mm)
+    theta <- matrix(inverse(eta), nrow=nrow(coeff))
     ev <- theta
     pv <- matrix(NA, nrow=nrow(theta), ncol=ncol(theta))
     #

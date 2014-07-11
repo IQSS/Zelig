@@ -15,9 +15,11 @@ z5 <- zlognorm$new()
 z5$zelig(Surv(duration, ciep12) ~ fract + numst2, model = "lognorm",
          data = coalition)
 z5
+z5$zelig.out
 z5$setx(numst2 = 0)
 set.seed(42)
 z5$sim(num=10)
 z5$sim.out
+mean(z5$sim.out$x$ev[[1]])
 z5$summarize()
 z5$cite()

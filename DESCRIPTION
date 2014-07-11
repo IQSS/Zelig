@@ -23,7 +23,9 @@ Depends:
     VGAM,
     jsonlite,
     AER,
-    quantreg
+    quantreg,
+    dplyr,
+    plyr
 Suggests:
     testthat,
     knitr

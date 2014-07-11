@@ -1,3 +1,4 @@
+library(survival)
 # Zelig 4 code:
 library(Zelig)
 data(coalition)
@@ -15,6 +16,7 @@ z5 <- zexp$new()
 z5$zelig(Surv(duration, ciep12) ~ fract + numst2, model = "exp",
          data = coalition)
 z5
+z5$zelig.out
 z5$setx(numst2 = 0)
 set.seed(42)
 z5$sim(num=10)
