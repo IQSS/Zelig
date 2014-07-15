@@ -7,7 +7,7 @@ library(plyr)
 #' @export Zelig
 #' @exportClass Zelig
 z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
-                                        formula = "formula", # Zelig formula
+                                        formula = "ANY", # Zelig formula
                                         weights = "numeric", 
                                         name = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix,
@@ -104,7 +104,7 @@ z$methods(
 z$methods(
   set = function(...) {
     s <-list(...)
-    f <- update(formula(.self$zelig.out$z.out[[1]]), 1 ~ .)
+    f <- update(.self$formula, 1 ~ .)
     update <- .self$data %>% 
       regroup(lapply(.self$by, as.symbol)) %>% 
       do(mm = model.matrix(f, reduce(dataset = ., s, 

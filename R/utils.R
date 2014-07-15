@@ -112,13 +112,54 @@ cluster.formula <- function (formula, cluster) {
   update(formula, paste(". ~ .", cluster.part, sep = " + "))
 }
 
+dataset <- z5$data
+s <- list(rprice = 3)
+model <- z5$zelig.out$z.out[[1]]
+
+library(Formula)
+FF <- as.Formula(z5$formula)
+FF
+ldata
+model.matrix(z5$formula, ldata)
+
+# reduce <- function(dataset, s, model = zelig.out$model[[1]]) {
+#   dataset <- as.data.frame(dataset)
+#   ldata <- lapply(dataset, avg)
+#   if (length(s) > 0) {
+# #     pred <- terms(model, "predvars")
+#     pred <- terms(model, "regressors")
+# #     n <- union(as.character(attr(pred, "predvars"))[-1],
+# #                names(dataset))
+#     n <- union(as.character(attr(pred, "variables"))[-1],
+#                names(dataset))
+#     if (is.list(s[[1]]))
+#       s <- s[[1]]
+#     m <- match(names(s), n)
+#     ma <- m[!is.na(m)]
+#     if (!all(complete.cases(m))) {
+#       w <- paste("Variable '", names(s[is.na(m)]),
+#                  "' not in data set.\n", sep = "")
+#       warning(w)
+#     }
+#     for (i in seq(n[ma]))
+#       ldata[n[ma]][i][[1]] <- setval(dataset[n[ma]][i][[1]],
+#                                      s[n[ma]][i][[1]])
+#   }
+#   return(ldata)
+# }
+
 reduce <- function(dataset, s, model = zelig.out$model[[1]]) {
   dataset <- as.data.frame(dataset)
   ldata <- lapply(dataset, avg)
   if (length(s) > 0) {
-    pred <- terms(model, "predvars")
-    n <- union(as.character(attr(pred, "predvars"))[-1],
+    #     pred <- terms(model, "predvars")
+    pred1 <- terms(model, "regressors")
+    n1 <- union(as.character(attr(pred, "variables"))[-1],
                names(dataset))
+    pred2 <- terms(model, "instruments")
+    n2 <- union(as.character(attr(pred, "variables"))[-1],
+                names(dataset))
+    n <- union(n1, n2)
     if (is.list(s[[1]]))
       s <- s[[1]]
     m <- match(names(s), n)
