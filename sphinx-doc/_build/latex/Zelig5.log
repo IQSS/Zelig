@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  17 JUL 2014 23:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  18 JUL 2014 00:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -955,7 +955,8 @@ Type  H <return>  for immediate help.
                                                   
 l.2486 \includegraphics{docs/figs/vertci}
                                          
-? 
+? r
+OK, entering \nonstopmode...
 
 ! LaTeX Error: File `docs/figs/vertci' not found.
 
@@ -965,8 +966,11 @@ Type  H <return>  for immediate help.
                                                   
 l.2486 \includegraphics{docs/figs/vertci}
                                          
-? r
-OK, entering \nonstopmode...
+I could not locate the file with any of these extensions:
+.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 [26]
 
 ! LaTeX Error: File `docs/figs/vertci' not found.

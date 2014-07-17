@@ -1,6 +1,7 @@
-
 Welcome to Zelig
 ================
+
+.. image:: http://datascience.iq.harvard.edu/files/styles/os_slideshow_3%3A1_980/public/datascience/files/data-science-banner_0.png?itok=-1gIkjv3
 
 .. _about:
 
