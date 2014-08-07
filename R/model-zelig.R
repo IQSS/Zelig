@@ -1,4 +1,4 @@
-chrlibrary(dplyr)
+library(dplyr)
 library(plyr)
 
 #' A class description
