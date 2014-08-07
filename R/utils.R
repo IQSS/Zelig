@@ -112,15 +112,15 @@ cluster.formula <- function (formula, cluster) {
   update(formula, paste(". ~ .", cluster.part, sep = " + "))
 }
 
-dataset <- z5$data
-s <- list(rprice = 3)
-model <- z5$zelig.out$z.out[[1]]
-
-library(Formula)
-FF <- as.Formula(z5$formula)
-FF
-ldata
-model.matrix(z5$formula, ldata)
+# dataset <- z5$data
+# s <- list(rprice = 3)
+# model <- z5$zelig.out$z.out[[1]]
+# 
+# library(Formula)
+# FF <- as.Formula(z5$formula)
+# FF
+# ldata
+# model.matrix(z5$formula, ldata)
 
 # reduce <- function(dataset, s, model = zelig.out$model[[1]]) {
 #   dataset <- as.data.frame(dataset)
