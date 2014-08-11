@@ -6,7 +6,7 @@
 Project page and publications available at: 
 http://datascience.iq.harvard.edu/zelig
 
-<br><br>
+<br>
 
 ![Example Page](images/gr1.png)
 ![Example Page](images/gr3.png)
