@@ -33,9 +33,10 @@ z5$sim.out
 z5$summarize()
 z5$cite()
 
-z5$setrange(speed = 30:32,speed = 30:32)
+z5$setrange(speed = 30:32,speed = 19:23)
 z5$setx.out
 set.seed(42)
 z5$sim(num=3)
 z5$sim.out
 z5$summarize()
+z5
