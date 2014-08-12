@@ -32,7 +32,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         simparam = "ANY", # simulated parameters
                                         num = "numeric", # nb of simulations
                                         
-                                        summary.out = "list", # summary of estimated models
+                                        # summary.out = "list", # summary of estimated models
                                         
                                         authors = "character", # Zelig model description
                                         year = "numeric",
@@ -176,6 +176,10 @@ z$methods(
     .self$sim.out$x1 <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm)) %>%
       do(ev = .$qi$ev, pv = .$qi$pv)
+    d <- mutate(.self$sim.out$x1, ev0 = .self$sim.out$x$ev)
+    d <- d %>%
+      do(fd = .$ev - .$ev0)
+    .self$sim.out$x1 <- mutate(.self$sim.out$x1, fd = d$fd)
   }
 )
 
@@ -202,25 +206,37 @@ z$methods(
                    cat(unlist(.[.self$by]))
                    print(.$z.out)})
       cat("Next step: Use 'setx' method")
-    }
-    else { # sim.out
-      pstat <- function(s.out, what = "setx") {
+    } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
+      cat("setx:\n")
+      print(.self$setx.out$x$mm)
+      cat("setx1:\n")
+      print(.self$setx.out$x1$mm)
+      cat("setrange:\n")
+      print(.self$setx.out$range$mm)
+      cat("Next step: Use 'sim' method")
+    } else { # sim.out
+      pstat <- function(s.out, what = "sim x") {
         simu <- s.out %>%
-          do(simu = {cat(what, ":\n")
-                     cat("-----\n")
+          do(simu = {cat("\n", what, ":\n")
+                     cat(" -----\n")
                      cat("ev\n")
                      print(stat(.$ev, .self$num))
                      cat("pv\n")
-                     print(stat(.$pv, .self$num))})
+                     print(stat(.$pv, .self$num))
+                     if (!is.null(.$fd)) {
+                       cat("fd\n")
+                       print(stat(.$fd, .self$num))}
+                       }
+                     )
       }
       pstat(.self$sim.out$x)
-      pstat(.self$sim.out$x1, "setx1")
+      pstat(.self$sim.out$x1, "sim x1")
       if (!is.null(.self$setx.out$range)) {
         for (i in seq(.self$sim.out$range)) {
           cat("\n")
           print(.self$range[i, ])
           cat("\n")
-          pstat(.self$sim.out$range[[i]], "setrange")
+          pstat(.self$sim.out$range[[i]], "sim range")
           cat("\n")
         }
       }
