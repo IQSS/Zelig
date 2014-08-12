@@ -45,7 +45,7 @@ Collate:
     'model-gamma.R'
     'model-exp.R'
     'model-quantile.R'
-    'create-json.R'
     'model-relogit.R'
+    'create-json.R'
     'wrappers.R'
 VignetteBuilder: knitr
