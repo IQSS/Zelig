@@ -13,3 +13,8 @@ Developer Guide
 
 .. _devguide_adding_models_and_methods:
 .. include:: devguide/adding_models_and_methods.rst
+
+.. _devguide_contributing:
+.. include:: devguide/contributing.rst
+
+.. include:: devguide/release_notes.rst

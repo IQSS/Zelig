@@ -4,5 +4,52 @@
 Installation
 ============
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+To use Zelig, you are going to need to install the R statistical program, the Zelig package, and some R libraries (e.g., coda, MCMCpack, sandwich, VGAM, and zoo):
 
+------------
+
+Installing R
+------------
+To install R, go to the `r-project website <www.r-project.org>`_ and select the ``CRAN`` option on the left-hand menu. Select a CRAN mirror mirror closest to your current location and donwload R for Linux, (Mac) OS X, or Windows. 
+
+------------
+
+Installing Zelig
+----------------
+Once R is installed, you must install the Zelig and VGAM packages. There are three ways to do this.
+
+1. We recommend that you start R and install Zelig and related dependencies by typing:
+::
+	> source("http://gking.harvard.edu/zelig/install.R")
+	> library(Zelig)
+
+2. Alternatively, you may install each component package individually:
+::
+	> install.packages("Zelig")
+	> install.packages("zoo")
+	> install.packages("sandwich")
+	> install.packages("MCMCpack")
+	> install.packages("coda")
+	> install.packages("lattice")
+	> install.packages("mvtnorm")
+	> install.packages("VGAM")
+	> install.packages("sna")
+	> install.packages("systemfit")
+	> install.packages("nnet")
+	> install.packages("gee")
+	> install.packages("mgcv")
+
+Loading Zelig by typing ``library(Zelig)`` into the R command line will also load the optional libaries just installed. Therefore, it is not necessary to load any package other than ``Zelig`` at startup.
+
+------------
+
+Updating Zelig
+--------------
+There are two ways to update your Zelig installation to the latest release:
+
+1. Via the R command line:
+::
+	> update.packages()
+
+2. You can also remove an old version by typing ``R CMD REMOVE Zelig`` at the terminal prompt and manually downloading and reinstalling the latest package release following the instructions outlined above.
+::

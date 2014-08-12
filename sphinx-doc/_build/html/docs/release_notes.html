@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release Notes &mdash; Zelig 5.0 documentation</title>
+    <title>&lt;no title&gt; &mdash; Zelig 5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -33,7 +33,6 @@
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/zelig-small.ico"/>
     <link rel="top" title="Zelig 5.0 documentation" href="../index.html" />
-    <link rel="prev" title="Frequently Asked Questions" href="faq.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -75,12 +74,19 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#todo">TODO</a></li>
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-r">Installing R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-zelig">Installing Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#updating-zelig">Updating Zelig</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide.html#data-analysis-commands">Data Analysis Commands</a></li>
@@ -95,14 +101,14 @@
 <li class="toctree-l2"><a class="reference internal" href="dev_guide.html#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#for-all-zelig-users">For All Zelig Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#for-zelig-contributors">For Zelig Contributors</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Release Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#v-5-0-jul-2014">v 5.0 (Jul 2014)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Zelig History and Name</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -117,11 +123,7 @@
      href="#">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"
       role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Release Notes</a><ul>
-<li><a class="reference internal" href="#v-5-0-jul-2014">v 5.0 (Jul 2014)</a></li>
-</ul>
-</li>
+      aria-labelledby="dLabelLocalToc"><ul class="simple">
 </ul>
 </ul>
 </li>
@@ -130,10 +132,6 @@
             
               
                 
-  <li>
-    <a href="faq.html" title="Previous Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Frequently Asked...</span>
-    </a>
-  </li>
               
             
             
@@ -159,17 +157,13 @@
 <div class="container">
   <div class="row">
       <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Release Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#v-5-0-jul-2014">v 5.0 (Jul 2014)</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Zelig History and Name</a></li>
 </ul>
 
 <div id="sourcelink">
@@ -187,14 +181,7 @@
       </div>
     <div class="col-md-9">
       
-  <div class="section" id="release-notes">
-<span id="id1"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="v-5-0-jul-2014">
-<h2>v 5.0 (Jul 2014)<a class="headerlink" href="#v-5-0-jul-2014" title="Permalink to this headline">¶</a></h2>
-<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-</div>
-</div>
-
+  
 
     </div>
       

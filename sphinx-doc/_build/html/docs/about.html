@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Quickstart Guide &mdash; Zelig 5.0 documentation</title>
+    <title>Zelig History and Name &mdash; Zelig 5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -33,8 +33,7 @@
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/zelig-small.ico"/>
     <link rel="top" title="Zelig 5.0 documentation" href="../index.html" />
-    <link rel="next" title="User Guide" href="user_guide.html" />
-    <link rel="prev" title="Installation" href="installation.html" />
+    <link rel="prev" title="Frequently Asked Questions" href="faq.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -83,10 +82,10 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#updating-zelig">Updating Zelig</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Quickstart Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#loading-zelig">Loading Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-models">Running Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig5-model-reference">Zelig5 Model Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a><ul>
@@ -101,12 +100,16 @@
 <li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dev_guide.html#writing-new-models">Writing New Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dev_guide.html#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#contributing">Contributing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#for-all-zelig-users">For All Zelig Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#for-zelig-contributors">For Zelig Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Zelig History and Name</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-notes">Release Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -122,10 +125,9 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Quickstart Guide</a><ul>
-<li><a class="reference internal" href="#loading-zelig">Loading Zelig</a></li>
-<li><a class="reference internal" href="#running-models">Running Models</a></li>
-<li><a class="reference internal" href="#zelig5-model-reference">Zelig5 Model Reference</a></li>
+<li><a class="reference internal" href="#">Zelig History and Name</a><ul>
+<li><a class="reference internal" href="#technical-vision">Technical Vision</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -137,11 +139,7 @@
               
                 
   <li>
-    <a href="installation.html" title="Previous Chapter: Installation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Installation</span>
-    </a>
-  </li>
-  <li>
-    <a href="user_guide.html" title="Next Chapter: User Guide"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">User Guide &raquo;</span>
+    <a href="faq.html" title="Previous Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Frequently Asked...</span>
     </a>
   </li>
               
@@ -171,19 +169,19 @@
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Quickstart Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#loading-zelig">Loading Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-models">Running Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig5-model-reference">Zelig5 Model Reference</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Zelig History and Name</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-notes">Release Notes</a></li>
+</ul>
+</li>
 </ul>
 
 <div id="sourcelink">
-  <a href="../_sources/docs/quickstart.txt"
+  <a href="../_sources/docs/about.txt"
      rel="nofollow">Source</a>
 </div>
 <form action="../search.html" method="get">
@@ -197,68 +195,40 @@
       </div>
     <div class="col-md-9">
       
-  <div class="section" id="quickstart-guide">
-<span id="quickstart"></span><h1>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h1>
-<p>Zelig5 is the latest version of the Zelig framework for interfacing with a wide range of statistical models and analytic methods in a common way by translating estimates into quantities of interest as well as implementing other features (e.g., dealing with missingness by combining multiply imputed data sets, automating statistical bootstrapping) through a simple call structure.</p>
-<p>This is a quick start guide for getting you up and running with Zelig5. Source code can be found at at <a class="reference external" href="https://github.com/IQSS/Zelig5">https://github.com/IQSS/Zelig5</a>.</p>
-<hr class="docutils" />
-<div class="section" id="loading-zelig">
-<h2>Loading Zelig<a class="headerlink" href="#loading-zelig" title="Permalink to this headline">¶</a></h2>
-<p>After installing R and Zelig (instructions can be found on <em class="xref std std-ref">installation:</em>). Once installed, Zelig can be loaded like any other R package:</p>
-<div class="highlight-python"><div class="highlight"><pre>&gt; library(Zelig5)
-</pre></div>
-</div>
-<p>Additionally, some Zelig models require add-on packages which can be installed using <tt class="docutils literal"><span class="pre">install.packages()</span></tt>:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;ZeligChoice&quot;</span><span class="p">)</span> <span class="c1">#install ZeligChoice add-on package</span>
-<span class="o">&gt;</span> libarry<span class="p">(</span>ZeligChoice<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="running-models">
-<h2>Running Models<a class="headerlink" href="#running-models" title="Permalink to this headline">¶</a></h2>
-<p>Each Zelig process consists of three component methods:</p>
-<ol class="arabic simple">
-<li>Specify statistical model and estimate parameters: <tt class="docutils literal"><span class="pre">$zelig</span></tt></li>
-<li>Set explanatory variables to chosen (actual or counterfactual) values for calculating quantities of interest: <tt class="docutils literal"><span class="pre">$setx</span></tt></li>
-<li>Draw simulations of quantity of interest from statistical model: <tt class="docutils literal"><span class="pre">$sim</span></tt></li>
-</ol>
-<p>For example, to implement a least squares regression:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> data<span class="p">(</span>cars<span class="p">)</span>                            <span class="c1">#load toy dataset</span>
-<span class="o">&gt;</span> z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>                       <span class="c1">#initialize Zelig5 least squares object</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>   <span class="c1">#estimate ls model</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>                   <span class="c1">#set speed to 30 (all other covariates set to means)</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span> <span class="m">1000</span><span class="p">)</span>                    <span class="c1">#run 1000 simulations and estiamte quantities of interest</span>
-</pre></div>
-</div>
-<p>The same model can also be implemented using the <tt class="docutils literal"><span class="pre">zelig()</span></tt>, <tt class="docutils literal"><span class="pre">setx()</span></tt>, and <tt class="docutils literal"><span class="pre">sim()</span></tt> functions:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
-<span class="o">&gt;</span> x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
-<span class="o">&gt;</span> s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">,</span> num <span class="o">=</span> <span class="m">1000</span><span class="p">)</span>
-</pre></div>
-</div>
-<hr class="docutils" />
-<p id="qis"><strong>Quantities of Interest</strong></p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> summary<span class="p">(</span>sim.out<span class="p">)</span> <span class="c1">#or</span>
-<span class="o">&gt;</span> summary<span class="p">(</span>s.out<span class="p">)</span>
-</pre></div>
-</div>
-<hr class="docutils" />
-<p id="plots"><strong>Plots</strong></p>
-<p><em>Coming Soon!</em></p>
-<hr class="docutils" />
-</div>
-<div class="section" id="zelig5-model-reference">
-<span id="modelreference"></span><h2>Zelig5 Model Reference<a class="headerlink" href="#zelig5-model-reference" title="Permalink to this headline">¶</a></h2>
-<p>At present, the following models have been tested and implemented in Zelig5:</p>
+  <div class="section" id="zelig-history-and-name">
+<span id="about"></span><h1>Zelig History and Name<a class="headerlink" href="#zelig-history-and-name" title="Permalink to this headline">¶</a></h1>
+<p>Zelig is an open source project development and maintained by the Data Science group at the <a class="reference external" href="http://datascience.iq.harvard.edu/">Data Science group</a> at Harvard&#8217;s Institute for Quantative Social Science (IQSS). It was originally concieved and created by Kosuke Imai, Gary King, and Olivia Lau in 2007. The name is borrowed from Woody Allen&#8217;s movie with the same name, Zelig. Leonard Zelig is a fictional character who takes on the characteristics of any strong personality around. Likewise, the Zelig statistical software easily adapts to any statistical model written in R, and in essence, takes the characteristics of any model.</p>
+<p>It leverages (R) code from many researchers and is designed to allow anyone to contribute their methods to it. Hence, we often refer to Zelig as &#8220;everyone&#8217;s statistical software&#8221; and our aim is to make it, as well as the models it wraps, as accessible as possible. As such, Zelig comes with self-contained documentation that minimizes startup costs, automates model summaries and graphics, and bridges existing R implementations through an intelligble call structure.</p>
+<p><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (≥ 2)]</p>
+<p><strong>Contact:</strong> For questions, please join the Zelig mailing list:
+<a class="reference external" href="https://groups.google.com/forum/#!forum/zelig-statistical-software">https://groups.google.com/forum/#!forum/zelig-statistical-software</a></p>
+<p><strong>The Zelig Team:</strong></p>
 <ul class="simple">
-<li>Least Squares Regression: <tt class="docutils literal"><span class="pre">zls$new()</span></tt> or <tt class="docutils literal"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">&quot;ls&quot;</span></tt></li>
-<li>Logistic Regression: <tt class="docutils literal"><span class="pre">zlogit$new()</span></tt> or <tt class="docutils literal"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">&quot;logit&quot;</span></tt></li>
+<li>Gary King <em>(Principle Investigator)</em></li>
+<li>James Honaker <em>(Project Lead)</em></li>
+<li>Christine Choirat <em>(Lead Author)</em></li>
+<li>Kosku Imai</li>
+<li>Olivia Lau</li>
 </ul>
-<p>The following models have been implemented <strong>but have not been unit-tested</strong>:</p>
+<hr class="docutils" />
+<div class="section" id="technical-vision">
+<h2>Technical Vision<a class="headerlink" href="#technical-vision" title="Permalink to this headline">¶</a></h2>
+<p>Zelig is a framework for interfacing a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, Zelig adds considerable infrastructure to existing heterogenous R implementations by translating hard-to-interpret coefficients into quanities of interest (e.g., expected and predicted values) through a simple call structure. This includes many specific methods, based on likelihood, frequentist, Bayesian, robust Bayesian and nonparametric theories of inference. Developers are encouraged to add their R packages to the Zelig toolkit by writing a few simple bridge functions.</p>
+<p>Additional features include:</p>
 <ul class="simple">
-<li>Tobit Regression:</li>
+<li>Dealing with missing data by combining multiply imputed datasets</li>
+<li>Automating statistical bootstrapping</li>
+<li>Improving parametric procedures by leveraging nonparametric matching methods</li>
+<li>Evaluating counterfactuals</li>
+<li>Allowing condtional population and super population inferences</li>
+<li>Automating the creation of replication data files</li>
 </ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h2>
+<p><strong>v 5.0 (Jul 2014)</strong></p>
+<p>TBA</p>
 </div>
 </div>
 
@@ -276,7 +246,7 @@
         <br/>
         
 <div id="sourcelink">
-  <a href="../_sources/docs/quickstart.txt"
+  <a href="../_sources/docs/about.txt"
      rel="nofollow">Source</a>
 </div>
       

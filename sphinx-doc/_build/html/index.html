@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to Zelig &mdash; Zelig 5.0 documentation</title>
+    <title>Welcome to Zelig! &mdash; Zelig 5.0 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -33,7 +33,7 @@
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="_static/zelig-small.ico"/>
     <link rel="top" title="Zelig 5.0 documentation" href="#" />
-    <link rel="next" title="Quickstart" href="docs/quickstart.html" />
+    <link rel="next" title="Installation" href="docs/installation.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -76,11 +76,18 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="docs/quickstart.html">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/quickstart.html#todo">TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/installation.html#installing-r">Installing R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/installation.html#installing-zelig">Installing Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/installation.html#updating-zelig">Updating Zelig</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="docs/user_guide.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/user_guide.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/user_guide.html#data-analysis-commands">Data Analysis Commands</a></li>
@@ -93,16 +100,18 @@
 <li class="toctree-l1"><a class="reference internal" href="docs/dev_guide.html">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/dev_guide.html#writing-new-models">Writing New Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/dev_guide.html#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/dev_guide.html#contributing-code">Contributing Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/dev_guide.html#release-notes">Release Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/faq.html">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/faq.html#for-all-zelig-users">For All Zelig Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/faq.html#for-zelig-contributors">For Zelig Contributors</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/release_notes.html">Release Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/release_notes.html#v-5-0-jul-2014">v 5.0 (Jul 2014)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/about.html">Zelig History and Name</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/about.html#release-notes">Release Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -118,13 +127,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Welcome to Zelig</a><ul>
-<li><a class="reference internal" href="#contents">Contents</a></li>
-<li><a class="reference internal" href="#technical-vision">Technical Vision</a></li>
-<li><a class="reference internal" href="#contact">Contact</a></li>
-<li><a class="reference internal" href="#license">License</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Welcome to Zelig!</a></li>
 </ul>
 </ul>
 </li>
@@ -134,7 +137,7 @@
               
                 
   <li>
-    <a href="docs/quickstart.html" title="Next Chapter: Quickstart"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Quickstart &raquo;</span>
+    <a href="docs/installation.html" title="Next Chapter: Installation"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Installation &raquo;</span>
     </a>
   </li>
               
@@ -163,13 +166,12 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li class="toctree-l1"><a class="reference internal" href="docs/quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/quickstart.html">Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/dev_guide.html">Developer Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/about.html">Zelig History and Name</a></li>
 </ul>
 
 <div id="sourcelink">
@@ -188,81 +190,15 @@
     <div class="col-md-9">
       
   <div class="section" id="welcome-to-zelig">
-<h1>Welcome to Zelig<a class="headerlink" href="#welcome-to-zelig" title="Permalink to this headline">¶</a></h1>
-<img alt="http://datascience.iq.harvard.edu/files/styles/os_slideshow_3%3A1_980/public/datascience/files/data-science-banner_0.png?itok=-1gIkjv3" src="http://datascience.iq.harvard.edu/files/styles/os_slideshow_3%3A1_980/public/datascience/files/data-science-banner_0.png?itok=-1gIkjv3" />
-<p id="about">Zelig is a single, easy-to-use program that can estimate, help interpret, and present the results of a large range of statistical methods. It literally is &#8220;everyone&#8217;s statistical software&#8221; because Zelig uses (R) code from many researchers. We also hope it will become &#8220;everyone&#8217;s statistical software&#8221; for applications, and we have designed it so that anyone can use it or add their methods to it. Zelig comes with detailed, self-contained documentation that minimizes startup costs for Zelig and R (with all methods described in exactly the same notation, syntax, and style), automates graphics and summaries for all models, and, with only three simple required commands, makes the power of R accessible for all users. Zelig also works well for teaching, and is designed so that scholars can use the same program with students that they use for their research.</p>
-<p>For more information about the goals and direction of the project, please
-see the <a class="reference internal" href="#technicalvision"><em>Technical Vision</em></a>.</p>
-<p>To get started quickly, follow the <a class="reference internal" href="docs/quickstart.html#quickstart"><em>Quickstart</em></a>.</p>
-<p>Visit the source repository: <a class="reference external" href="https://github.com/IQSS/Zelig5">https://github.com/IQSS/Zelig5</a></p>
-<p>Be sure to follow us on Twitter <a class="reference external" href="https://twitter.com/IQSS">&#64;IQSS</a>!</p>
+<h1>Welcome to Zelig!<a class="headerlink" href="#welcome-to-zelig" title="Permalink to this headline">¶</a></h1>
+<p><strong>Zelig</strong> is a framework for interfacing with a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, Zelig adds considerable infrastructure to existing heterogenous R implementations by translating coefficients into interpretable quantities of interest and automating statistical procedures (e.g., bootstrapping) though an intelligible call structure.</p>
+<p>For more information about the software including goals and direction of the project, please see the <a class="reference internal" href="docs/about.html#about"><em>Zelig History and Name</em></a> page. To get started, we recommend following the <a class="reference internal" href="docs/quickstart.html#quickstart"><em>Quickstart Guide</em></a> and checking out the <a class="reference internal" href="docs/user_guide.html#userguide"><em>User Guide</em></a>.</p>
+<p>To view the codebase visit the source repository: <a class="reference external" href="https://github.com/IQSS/Zelig5">https://github.com/IQSS/Zelig5</a>. For regular updates on releases be sure to follow us on twitter <a class="reference external" href="https://twitter.com/IQSS">&#64;IQSS</a>.</p>
+<hr class="docutils" />
+<p><strong>Zelig Models Inheritance Tree</strong></p>
 <div style="margin-top:10px;">
-  <iframe width="560" height="315" src="http://www.youtube.com/embed/_EjisXtMy_Y" frameborder="0" allowfullscreen></iframe>
-</div><div style="margin-top:10px;">
-  <iframe width="560" height="315" src="http://bl.ocks.org/mbostock/raw/4061502/0a200ddf998aa75dfdb1ff32e16b680a15e5cb01/" marginwidth="0" marginheight="0" scrolling="no"></iframe>
-</div><div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="docs/quickstart.html">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/quickstart.html#todo">TODO</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="docs/installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/user_guide.html">User Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/user_guide.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/user_guide.html#data-analysis-commands">Data Analysis Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/user_guide.html#statistical-commands">Statistical Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/user_guide.html#graphing-commands">Graphing Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/user_guide.html#r-objects">R Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/user_guide.html#programming-statements">Programming Statements</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="docs/dev_guide.html">Developer Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/dev_guide.html#writing-new-models">Writing New Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/dev_guide.html#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="docs/contributing.html">Contributing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/faq.html">Frequently Asked Questions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/faq.html#for-all-zelig-users">For All Zelig Users</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/faq.html#for-zelig-contributors">For Zelig Contributors</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="docs/release_notes.html">Release Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/release_notes.html#v-5-0-jul-2014">v 5.0 (Jul 2014)</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="technical-vision">
-<span id="technicalvision"></span><h2>Technical Vision<a class="headerlink" href="#technical-vision" title="Permalink to this headline">¶</a></h2>
-<p>Zelig adds considerable infrastructure to improve the use of existing
-methods. It generalizes the program Clarify (for Stata), which
-translates hard-to-interpret coefficients into quantities of interest;
-combines multiply imputed data sets (such as output from Amelia) to
-deal with missing data; automates bootstrapping for all models; uses
-sophisticated nonparametric matching commands which improve parametric
-procedures (via MatchIt); allows one-line commands to run analyses in
-all designated strata; automates the creation of replication data
-files so that you (or, if you wish, anyone else) can replicate the
-results of your analyses (hence satisfying the replication standard);
-makes it easy to evaluate counterfactuals (via WhatIf); and allows
-conditional population and superpopulation inferences. Zelig includes
-many specific methods, based on likelihood, frequentist, Bayesian,
-robust Bayesian, and nonparametric theories of inference.  Developers
-make their R packages usable from Zelig by writing a few simple bridge
-functions.</p>
-</div>
-<div class="section" id="contact">
-<span id="id1"></span><h2>Contact<a class="headerlink" href="#contact" title="Permalink to this headline">¶</a></h2>
-<p>For questions, please join the Zelig mailing list:
-<a class="reference external" href="https://groups.google.com/forum/#!forum/zelig-statistical-software">https://groups.google.com/forum/#!forum/zelig-statistical-software</a></p>
-</div>
-<div class="section" id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
-<p>GPL-2 | GPL-3 [expanded from: GPL (≥ 2)]</p>
+  <iframe width="835" height="500" src="http://bl.ocks.org/myi100/raw/1ca9ba696aa0bb462415/" marginwidth="0" marginheight="0" scrolling="no" frameBorder="0"></iframe>
+</div><div class="toctree-wrapper compound">
 </div>
 </div>
 

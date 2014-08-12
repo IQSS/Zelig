@@ -33,7 +33,7 @@
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../_static/zelig-small.ico"/>
     <link rel="top" title="Zelig 5.0 documentation" href="../index.html" />
-    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
     <link rel="prev" title="User Guide" href="user_guide.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -77,11 +77,18 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#todo">TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-r">Installing R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-zelig">Installing Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#updating-zelig">Updating Zelig</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide.html#data-analysis-commands">Data Analysis Commands</a></li>
@@ -94,16 +101,18 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#writing-new-models">Writing New Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-code">Contributing Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-notes">Release Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#for-all-zelig-users">For All Zelig Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#for-zelig-contributors">For Zelig Contributors</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="release_notes.html#v-5-0-jul-2014">v 5.0 (Jul 2014)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Zelig History and Name</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -142,6 +151,8 @@
 <li><a class="reference internal" href="#formatting-reference-manual-pages">Formatting Reference Manual Pages</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#contributing-code">Contributing Code</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -157,7 +168,7 @@
     </a>
   </li>
   <li>
-    <a href="contributing.html" title="Next Chapter: Contributing"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Contributing &raquo;</span>
+    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
     </a>
   </li>
               
@@ -186,17 +197,18 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#writing-new-models">Writing New Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-code">Contributing Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-notes">Release Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Zelig History and Name</a></li>
 </ul>
 
 <div id="sourcelink">
@@ -229,6 +241,8 @@
 <li><a class="reference internal" href="#formatting-reference-manual-pages" id="id9">Formatting Reference Manual Pages</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#contributing-code" id="id10">Contributing Code</a></li>
+<li><a class="reference internal" href="#release-notes" id="id11">Release Notes</a></li>
 </ul>
 </div>
 <div class="section" id="writing-new-models">
@@ -1155,6 +1169,36 @@ contrib specify the new model.</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="section" id="contributing-code">
+<span id="contributing"></span><span id="devguide-contributing"></span><h2><a class="toc-backref" href="#id10">Contributing Code</a><a class="headerlink" href="#contributing-code" title="Permalink to this headline">¶</a></h2>
+<p>Zelig is an open source project, so we are always looking for contributors. The latest Zelig code-base can be found in our github repo, <a class="reference external" href="https://github.com/IQSS/Zelig5/">IQSSZelig5</a>, and can be cloned locally using git:</p>
+<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/IQSS/Zelig5.git
+</pre></div>
+</div>
+<p>To contribute code first fork the repo and create a branch:</p>
+<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/YOUR_USERNAME/Zelig5.git
+git checkout -b my_feature
+</pre></div>
+</div>
+<p>Then add edited code, push edited code to your fork and submit a pull request to the IQSS repo (i.e., upstream repo):</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>git add... # stage the files you modified or added
+git commit... # commit the modified or added files
+git push origin my_feature</dd>
+</dl>
+<p>To keep your branch up-to-date with changes in the upstream repo, set an upstream remote, pull changes from the upstream repo and reabase against the desired branch:</p>
+<div class="highlight-python"><div class="highlight"><pre>git remote add upstream https://github.com/eventdata/phoenix_piepline.git
+git fetch upstream
+git rebase upstream/development
+</pre></div>
+</div>
+<p><strong>Note: You should always issue pull requests to the development branch</strong>. Be sure to also include detailed commit messages with your pull request. For more information on git see <a class="reference external" href="http://git-scm.com/documentation">git
+documentation</a>. Github tutorials can be found via simple google search.</p>
+</div>
+<div class="section" id="release-notes">
+<h2><a class="toc-backref" href="#id11">Release Notes</a><a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
