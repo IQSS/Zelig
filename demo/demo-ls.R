@@ -14,6 +14,7 @@ summary(s.out)
 z5 <- zls$new()
 z5$zelig(dist ~ speed, data = cars)
 z5
+z5$zelig.out
 z5$model.call
 z5$zelig.call
 z5$setx(sascxasx = 9879, speed = 30, sdjchbsdc = 87, kcsbc = 8787)
@@ -21,18 +22,21 @@ z5$setx(sascxasx = 9879)
 z5$setx1(speed = 30)
 z5$setx()
 z5$setx.out
+# .self <- z5
 set.seed(42)
 z5$sim(num=3)
 z5$sim.out
+.self <- z5
 # .self <- z5
 # z5$ev
 # z5$ev("x")
 z5$summarize()
 z5$cite()
 
-z5$setrange(speed = 30:32,speed = 30:32)
+z5$setrange(speed = 30:32,speed = 19:23)
 z5$setx.out
 set.seed(42)
 z5$sim(num=3)
 z5$sim.out
 z5$summarize()
+z5

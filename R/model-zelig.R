@@ -32,6 +32,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         simparam = "ANY", # simulated parameters
                                         num = "numeric", # nb of simulations
                                         
+                                        summary.out = "list", # summary of estimated models
+                                        
                                         authors = "character", # Zelig model description
                                         year = "numeric",
                                         description = "character",
@@ -117,9 +119,6 @@ z$methods(
   setx = function(...) {
     .self$bsetx <- TRUE
     .self$setx.out$x  <- .self$set(...)
-#     names(x)[names(x) == "mm"] <- "mmx"
-#     .self$setx.out <- x
-#     .self$zelig.out <- mutate(.self$zelig.out, mmx = .self$setx.out$mmx)
   }
 )
 
@@ -127,9 +126,6 @@ z$methods(
   setx1 = function(...) {
     .self$bsetx1 <- TRUE
     .self$setx.out$x1 <- .self$set(...)
-#     names(x1)[names(x1) == "mm"] <- "mmx1"
-#     .self$setx.out <- inner_join(.self$setx.out, x1)
-#     .self$zelig.out <- mutate(.self$zelig.out, mmx1 = .self$setx.out$mmx1)
   }
 )
 
@@ -144,13 +140,7 @@ z$methods(
     for (i in 1:nrow(m)) {
       l <- as.list(as.list(m[i, ]))
       names(l) <- names(m)
-#       x <- .self$set(l)
-#       names(x)[names(x) == "mm"] <- paste("mmr", i, sep = "")
       .self$setx.out$range[[i]] <- .self$set(l)
-#       if (i == 1)
-#         .self$setx.out <- x
-#       else
-#         .self$setx.out <- inner_join(.self$setx.out, x)
     }
   }
 )
@@ -160,8 +150,6 @@ z$methods(
     .self$num <- num
     .self$simparam <- .self$zelig.out %>%
       do(simparam = .self$param(.$z.out))
-#     .self$zelig.out <- mutate(.self$zelig.out,
-#                               simparam =.self$simparam$simparam)
     if (.self$bsetx)
       .self$simx()
     if (.self$bsetx1)
@@ -173,8 +161,8 @@ z$methods(
 
 z$methods(
   simx = function() {
-    d <- mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-    d <- mutate(d, mm = .self$setx.out$x$mm)
+    d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
+    d <- plyr::mutate(d, mm = .self$setx.out$x$mm)
     .self$sim.out$x <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm)) %>%
       do(ev = .$qi$ev, pv = .$qi$pv)
@@ -183,14 +171,11 @@ z$methods(
 
 z$methods(
   simx1 = function() {
-    d <- mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-    d <- mutate(d, mm = .self$setx.out$x1$mm)
+    d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
+    d <- plyr::mutate(d, mm = .self$setx.out$x1$mm)
     .self$sim.out$x1 <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm)) %>%
       do(ev = .$qi$ev, pv = .$qi$pv)
-#     .self$zelig.out <- mutate(.self$zelig.out, ev1 = .self$sim.out$ev1)
-#     .self$zelig.out <- mutate(.self$zelig.out, pv1 = .self$sim.out$pv1)
-#     .self$zelig.out <- mutate(.self$zelig.out, fd = .self$sim.out$fd)
   }
 )
 
@@ -198,8 +183,8 @@ z$methods(
   simrange = function() {
     .self$sim.out$range <- list()
     for (i in 1:nrow(.self$range)) {
-      d <- mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-      d <- mutate(d, mm = .self$setx.out$range[[i]]$mm)
+      d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
+      d <- plyr::mutate(d, mm = .self$setx.out$range[[i]]$mm)
       .self$sim.out$range[[i]] <-  d %>%
         do(qi = .self$qi(.$simparam, .$mm)) %>%
         do(ev = .$qi$ev, pv = .$qi$pv)
@@ -209,14 +194,36 @@ z$methods(
 
 z$methods(
   show = function() {
-    if (length(.self$zelig.out) == 0)
-      print("Use 'zelig' method")
-    else if (length(.self$setx.out) == 0)
-      print("Use 'setx' method")
-    else {
+    if ("uninitializedField" %in% class(.self$zelig.out))
+      cat("Next step: Use 'zelig' method")
+    else if (length(.self$setx.out) == 0) {
       summ <- .self$zelig.out %>%
-        do(summ = summary(.$z.out))
-      .self$zelig.out <- mutate(.self$zelig.out, summ = summ$summ)
+        do(summ = {cat("Model: ")
+                   cat(unlist(.[.self$by]))
+                   print(.$z.out)})
+      cat("Next step: Use 'setx' method")
+    }
+    else { # sim.out
+      pstat <- function(s.out, what = "setx") {
+        simu <- s.out %>%
+          do(simu = {cat(what, ":\n")
+                     cat("-----\n")
+                     cat("ev\n")
+                     print(stat(.$ev, .self$num))
+                     cat("pv\n")
+                     print(stat(.$pv, .self$num))})
+      }
+      pstat(.self$sim.out$x)
+      pstat(.self$sim.out$x1, "setx1")
+      if (!is.null(.self$setx.out$range)) {
+        for (i in seq(.self$sim.out$range)) {
+          cat("\n")
+          print(.self$range[i, ])
+          cat("\n")
+          pstat(.self$sim.out$range[[i]], "setrange")
+          cat("\n")
+        }
+      }
     }
   }
 )

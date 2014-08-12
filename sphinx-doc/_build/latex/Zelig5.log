@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  18 JUL 2014 00:02
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  8 AUG 2014 10:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -796,7 +796,7 @@ Package: hypcap 2011/02/16 v1.11 Adjusting the anchors of captions (HO)
 
 
 Writing index file Zelig5.idx
-(./Zelig5.aux)
+No file Zelig5.aux.
 \openout1 = `Zelig5.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
@@ -814,7 +814,7 @@ LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 117.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 117.
 
- (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 117.
@@ -867,8 +867,6 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 117.
 LaTeX Info: Redefining \pageref on input line 117.
 LaTeX Info: Redefining \nameref on input line 117.
-
-(./Zelig5.out) (./Zelig5.out)
 \@outlinefile=\write6
 \openout6 = `Zelig5.out'.
 
@@ -895,10 +893,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 
-] (./Zelig5.toc
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 2.
-)
+]
 \tf@toc=\write7
 \openout7 = `Zelig5.toc'.
 
@@ -908,7 +903,16 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 120.
 [1
 
-] [2] [1
+] [2]
+
+LaTeX Warning: Hyper reference `index:technicalvision' on page 1 undefined on i
+nput line 127.
+
+
+LaTeX Warning: Hyper reference `docs/quickstart:quickstart' on page 1 undefined
+ on input line 129.
+
+[1
 
 ] [2
 
@@ -927,6 +931,105 @@ LaTeX Font Info:    Try loading font information for TS1+ptm on input line 156.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
+
+LaTeX Warning: Hyper reference `docs/user_guide:introduction' on page 3 undefin
+ed on input line 157.
+
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 159.
+
+LaTeX Warning: Hyper reference `docs/user_guide:what-r-and-zelig-do' on page 3 
+undefined on input line 160.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:getting-help' on page 3 undefin
+ed on input line 163.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:how-to-cite-zelig' on page 3 un
+defined on input line 166.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:data-analysis-commands' on page
+ 3 undefined on input line 171.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:command-syntax' on page 3 undef
+ined on input line 174.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:variables' on page 3 undefined 
+on input line 177.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:statistical-commands' on page 3
+ undefined on input line 182.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:zelig-commands' on page 3 undef
+ined on input line 185.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:describe-a-models-systematic-an
+d-stochastic-parameters' on page 3 undefined on input line 188.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:supported-models' on page 3 und
+efined on input line 191.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:replication-procedures' on page
+ 3 undefined on input line 194.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:graphing-commands' on page 3 un
+defined on input line 199.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:drawing-plots' on page 3 undefi
+ned on input line 202.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:adding-points-lines-and-legends
+-to-existing-plots' on page 3 undefined on input line 205.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:saving-graphs-to-files' on page
+ 3 undefined on input line 208.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:id17' on page 3 undefined on in
+put line 211.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:r-objects' on page 3 undefined 
+on input line 216.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:scalar-values' on page 3 undefi
+ned on input line 219.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:id18' on page 3 undefined on in
+put line 222.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:programming-statements' on page
+ 3 undefined on input line 227.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:functions' on page 3 undefined 
+on input line 230.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:if-statements' on page 3 undefi
+ned on input line 233.
+
+
+LaTeX Warning: Hyper reference `docs/user_guide:for-loops' on page 3 undefined 
+on input line 236.
+
+
 Overfull \hbox (14.79999pt too wide) in paragraph at lines 242--242
  [] 
  []
@@ -1085,6 +1188,35 @@ Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 [27] [28] [29] [30] [31] [32] [33] [34]
+
+LaTeX Warning: Hyper reference `docs/dev_guide:writing-new-models' on page 35 u
+ndefined on input line 3226.
+
+
+LaTeX Warning: Hyper reference `docs/dev_guide:managing-statistical-model-input
+s' on page 35 undefined on input line 3229.
+
+
+LaTeX Warning: Hyper reference `docs/dev_guide:easy-ways-to-manage-matrices' on
+ page 35 undefined on input line 3232.
+
+
+LaTeX Warning: Hyper reference `docs/dev_guide:adding-models-and-methods-to-zel
+ig' on page 35 undefined on input line 3237.
+
+
+LaTeX Warning: Hyper reference `docs/dev_guide:making-the-model-compatible-with
+-zelig' on page 35 undefined on input line 3240.
+
+
+LaTeX Warning: Hyper reference `docs/dev_guide:getting-ready-for-the-gui' on pa
+ge 35 undefined on input line 3243.
+
+
+LaTeX Warning: Hyper reference `docs/dev_guide:formatting-reference-manual-page
+s' on page 35 undefined on input line 3246.
+
+
 Overfull \hbox (14.79999pt too wide) in paragraph at lines 3252--3252
  [] 
  []
@@ -1096,6 +1228,67 @@ Underfull \hbox (badness 10000) in paragraph at lines 3909--3911
  []
 
 [42] [43] [44] [45] [46] [47] [48]
+
+LaTeX Warning: Hyper reference `docs/faq:for-all-zelig-users' on page 49 undefi
+ned on input line 4470.
+
+
+LaTeX Warning: Hyper reference `docs/faq:how-do-i-cite-zelig' on page 49 undefi
+ned on input line 4473.
+
+
+LaTeX Warning: Hyper reference `docs/faq:why-cant-i-install-zelig' on page 49 u
+ndefined on input line 4476.
+
+
+LaTeX Warning: Hyper reference `docs/faq:why-cant-i-install-r' on page 49 undef
+ined on input line 4479.
+
+
+LaTeX Warning: Hyper reference `docs/faq:why-cant-i-load-data' on page 49 undef
+ined on input line 4482.
+
+
+LaTeX Warning: Hyper reference `docs/faq:where-can-i-find-old-versions-of-zelig
+' on page 49 undefined on input line 4485.
+
+
+LaTeX Warning: Hyper reference `docs/faq:some-zelig-functions-dont-work-for-me'
+ on page 49 undefined on input line 4488.
+
+
+LaTeX Warning: Hyper reference `docs/faq:who-can-i-ask-for-help-how-do-i-report
+-bugs' on page 49 undefined on input line 4491.
+
+
+LaTeX Warning: Hyper reference `docs/faq:how-do-i-increase-the-memory-for-r' on
+ page 49 undefined on input line 4494.
+
+
+LaTeX Warning: Hyper reference `docs/faq:why-doesnt-the-pdf-print-properly' on 
+page 49 undefined on input line 4497.
+
+
+LaTeX Warning: Hyper reference `docs/faq:r-is-neat-how-can-i-find-out-more' on 
+page 49 undefined on input line 4500.
+
+
+LaTeX Warning: Hyper reference `docs/faq:for-zelig-contributors' on page 49 und
+efined on input line 4505.
+
+
+LaTeX Warning: Hyper reference `docs/faq:where-can-i-find-the-source-code-for-z
+elig' on page 49 undefined on input line 4508.
+
+
+LaTeX Warning: Hyper reference `docs/faq:how-can-i-make-my-r-programs-run-faste
+r' on page 49 undefined on input line 4511.
+
+
+LaTeX Warning: Hyper reference `docs/faq:which-compilers-can-i-use-with-r-and-z
+elig' on page 49 undefined on input line 4514.
+
+
 Overfull \hbox (14.79999pt too wide) in paragraph at lines 4520--4520
  [] 
  []
@@ -1162,15 +1355,28 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 4867.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4867.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4867.
 
-Package rerunfilecheck Info: File `Zelig5.out' has not changed.
-(rerunfilecheck)             Checksum: 51EBB099BE472B8B7F4AB5DFCA4A7C53;600.
+
+
+Package rerunfilecheck Warning: File `Zelig5.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Zelig5.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  51EBB099BE472B8B7F4AB5DFCA4A7C53;600.
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4867.
  ) 
 Here is how much of TeX's memory you used:
- 9591 strings out of 493315
- 134580 string characters out of 6137904
- 236195 words of memory out of 5000000
- 12413 multiletter control sequences out of 15000+600000
+ 9571 strings out of 493315
+ 134328 string characters out of 6137904
+ 228784 words of memory out of 5000000
+ 12401 multiletter control sequences out of 15000+600000
  77559 words of font info for 86 fonts, out of 8000000 for 9000
  958 hyphenation exceptions out of 8191
  36i,12n,45p,878b,555s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1183,10 +1389,10 @@ ype1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/u
 rw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/u
 tmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb
 >
-Output written on Zelig5.pdf (63 pages, 289570 bytes).
+Output written on Zelig5.pdf (63 pages, 285690 bytes).
 PDF statistics:
- 765 PDF objects out of 1000 (max. 8388607)
- 680 compressed objects within 7 object streams
+ 671 PDF objects out of 1000 (max. 8388607)
+ 587 compressed objects within 6 object streams
  338 named destinations out of 1000 (max. 500000)
- 109 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
