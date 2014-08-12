@@ -1,7 +1,8 @@
+data(CPS1988)
 z5 <- zquantile$new()
 z5$zelig(log(wage) ~ experience + I(experience^2) + education, data = CPS1988, tau = 0.75)
 z5
-z5$zelig.out[[1]]
+z5$zelig.out
 z5$setx(education = 15)
 z5$setx1(education = 10)
 z5$sim(num = 1000)

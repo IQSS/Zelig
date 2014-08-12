@@ -21,30 +21,37 @@ zquantile$methods(
 )
 
 zquantile$methods(
-  zelig = function(formula, data, ..., weights=NULL) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
     if (!is.null(.self$model.call$tau))
       .self$tau <- .self$model.call$tau
     else 
       .self$tau <- 0.5
-    callSuper(formula=formula, data=data, ..., weights=NULL)
+    callSuper(formula=formula, data=data, ..., weights = NULL, by = by)
   }
 )
 
 zquantile$methods(
-  param = function(i) {
-    object <- .self$zelig.out[[i]]
+  param = function(z.out) {
+    object <- z.out
     rq.sum <- summary.rq(object, cov = TRUE, se = object$se)
-    .self$simparam[[i]] <- mvrnorm(n = .self$num, mu = object$coef,
-                                   Sigma = rq.sum$cov)
+    return(mvrnorm(n = .self$num, mu = object$coef, Sigma = rq.sum$cov))
+  }
+)
+
+zls$methods(
+  qi = function(simparam, mm) {
+    ev <- simparam %*% t(mm)
+    pv <- ev
+    return(list(ev = ev, pv = pv))
   }
 )
 
 zquantile$methods(
-  qi = function(i, x) {
+  qi = function(simparam, mm) {
     object <- .self$zelig.out[[i]]
-    coeff <- .self$simparam[[i]]
+    coeff <- simparam
     ev <- coeff %*% t(x)
     pv <- ev
     n <- nrow(.self$data)
