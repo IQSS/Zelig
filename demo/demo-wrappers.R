@@ -2,9 +2,11 @@
 library(Zelig5)
 z.out5 <- zelig(dist ~ speed, model = "ls", data = cars)
 print(z.out5)
+summary(z.out5)
 x.out5 <- Zelig5::setx(z.out5, speed=30)
 x1.out5 <- Zelig5::setx(z.out5, speed = 50)
 s.out5 <- Zelig5::sim(z.out5, x.out5, x1.out5, num = 1000)
+print(s.out5)
 summary(s.out5)
 
 ## Zelig 4

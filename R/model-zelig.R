@@ -176,7 +176,7 @@ z$methods(
     .self$sim.out$x1 <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm)) %>%
       do(ev = .$qi$ev, pv = .$qi$pv)
-    d <- mutate(.self$sim.out$x1, ev0 = .self$sim.out$x$ev)
+    d <- plyr::mutate(.self$sim.out$x1, ev0 = .self$sim.out$x$ev)
     d <- d %>%
       do(fd = .$ev - .$ev0)
     .self$sim.out$x1 <- mutate(.self$sim.out$x1, fd = d$fd)
@@ -261,12 +261,24 @@ z$methods(
 )
 
 z$methods(
+  summarize = function(...) {
+    show(...)
+  }
+)
+
+z$methods(
+  summarise = function(...) {
+    summarize(...)
+  }
+)
+
+z$methods(
   help = function() {
     vignette(class(.self)[1])
   }
 )
 
-setMethod('summary', "Zelig",
+setMethod("summary", "Zelig",
           function(object, ...) {
             object$summarize()
           }
