@@ -40,14 +40,6 @@ zquantile$methods(
   }
 )
 
-zls$methods(
-  qi = function(simparam, mm) {
-    ev <- simparam %*% t(mm)
-    pv <- ev
-    return(list(ev = ev, pv = pv))
-  }
-)
-
 zquantile$methods(
   qi = function(simparam, mm) {
     object <- .self$zelig.out[[i]]
