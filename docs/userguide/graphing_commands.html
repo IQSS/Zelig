@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Graphing Commands &mdash; Zelig 5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../static/zelig-small.ico"/>
+    <link rel="top" title="Zelig 5.0 documentation" href="../../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a>
+        <a class="navbar-brand" href="../../index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installing-r">Installing R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installing-zelig">Installing Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#updating-zelig">Updating Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#data-analysis-commands">Data Analysis Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#statistical-commands">Statistical Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#graphing-commands">Graphing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#r-objects">R Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#programming-statements">Programming Statements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_guide.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev_guide.html#writing-new-models">Writing New Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_guide.html#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_guide.html#contributing-code">Contributing Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_guide.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#for-all-zelig-users">For All Zelig Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#for-zelig-contributors">For Zelig Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">Zelig History and Name</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Graphing Commands</a><ul>
+<li><a class="reference internal" href="#drawing-plots">Drawing Plots</a></li>
+<li><a class="reference internal" href="#adding-points-lines-and-legends-to-existing-plots">Adding Points, Lines, and Legends to Existing Plots</a></li>
+<li><a class="reference internal" href="#saving-graphs-to-files">Saving Graphs to Files</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#descriptive-plots-box-plots">Descriptive Plots: Box-plots</a></li>
+<li><a class="reference internal" href="#density-plots-a-histogram">Density Plots: A Histogram</a></li>
+<li><a class="reference internal" href="#advanced-examples">Advanced Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">Zelig History and Name</a></li>
+</ul>
+
+<div id="sourcelink">
+  <a href="../../sources/docs/userguide/graphing_commands.txt"
+     rel="nofollow">Source</a>
+</div>
+<form action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="graphing-commands">
+<h1>Graphing Commands<a class="headerlink" href="#graphing-commands" title="Permalink to this headline">¶</a></h1>
+<p>R, and thus Zelig, can produce exceptionally beautiful plots. Many
+built-in plotting functions exist, including scatter plots, line charts,
+histograms, bar charts, pie charts, ternary diagrams, contour plots, and
+a variety of three-dimensional graphs. If you desire, you can exercise a
+high degree of control to generate just the right graphic. Zelig
+includes several default plots for one-observation simulations for each
+model. To view these plots on-screen, simply type plot(s.out), where
+s.out is the output from sim(). Depending on the model chosen, plot()
+will return different plots.</p>
+<p>If you wish to create your own plots, this section reviews the most
+basic procedures for creating and saving two-dimensional plots. R plots
+material in two steps:</p>
+<ol class="arabic simple">
+<li>You must call an output device (discussed in ), select a type of
+plot, draw a plotting region, draw axes, and plot the given data. At
+this stage, you may also define axes labels, the plot title, and
+colors for the plotted data. Step one is described in below.</li>
+<li>Optionally, you may add points, lines, text, or a legend to the
+existing plot. These commands are described in .</li>
+</ol>
+<div class="section" id="drawing-plots">
+<h2>Drawing Plots<a class="headerlink" href="#drawing-plots" title="Permalink to this headline">¶</a></h2>
+<p>The most generic plotting command is <tt class="docutils literal"><span class="pre">plot()</span></tt>, which automatically
+recognizes the type of R object(s) you are trying to plot and selects
+the best type of plot. The most common graphs returned by <tt class="docutils literal"><span class="pre">plot()</span></tt> are
+as follows:</p>
+<ol class="arabic simple">
+<li>If <tt class="docutils literal"><span class="pre">X</span></tt> is a variable of length , <tt class="docutils literal"><span class="pre">plot(X)</span></tt> returns a
+scatter plot of  for . If X is
+unsorted, this procedure produces a messy graph. Use
+<tt class="docutils literal"><span class="pre">plot(sort(X))</span></tt> to arrange the plotted values of 
+from smallest to largest.</li>
+<li>With two numeric vectors <tt class="docutils literal"><span class="pre">X</span></tt> and <tt class="docutils literal"><span class="pre">Y</span></tt>, both of length ,
+<tt class="docutils literal"><span class="pre">plot(X,</span> <span class="pre">Y)</span></tt> plots a scatter plot of each point 
+for . Alternatively, if Z is an object with two
+vectors, <tt class="docutils literal"><span class="pre">plot(Z)</span></tt> also creates a scatter plot.</li>
+</ol>
+<p>Optional arguments specific to <tt class="docutils literal"><span class="pre">plot</span></tt> include:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">main</span></tt> creates a title for the graph, and <tt class="docutils literal"><span class="pre">xlab</span></tt> and <tt class="docutils literal"><span class="pre">ylab</span></tt>
+label the x and y axes, respectively. For example,</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;My Lovely Plot&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;Explanatory Variable&quot;</span><span class="p">,</span>
+     <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;Dependent Variable&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">type</span></tt> controls the type of plot you request. The default is
+<tt class="docutils literal"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">p)</span></tt>, but you may choose among the following
+types:</p>
+<p>[!h]</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>“p”</td>
+<td>points</td>
+</tr>
+<tr class="row-even"><td>“l”</td>
+<td>lines</td>
+</tr>
+<tr class="row-odd"><td>“b”</td>
+<td>both points and lines</td>
+</tr>
+<tr class="row-even"><td>“c”</td>
+<td>lines drawn up to but not including the points</td>
+</tr>
+<tr class="row-odd"><td>“h”</td>
+<td>histogram</td>
+</tr>
+<tr class="row-even"><td>“s”</td>
+<td>a step function</td>
+</tr>
+<tr class="row-odd"><td>“n”</td>
+<td>a blank plotting region ( with the axes specified)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">If you choose type = “p”, R plots open circles by default. You can
+change the type of point by specifying the pch argument. For example,
+<tt class="docutils literal"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">p,</span> <span class="pre">pch</span> <span class="pre">=</span> <span class="pre">19)</span></tt> creates a scatter-plot of filled
+circles. Other options for pch include:</p>
+<p>[!h]</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>19</td>
+<td>solid circle (a disk)</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>smaller solid circle</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>circle</td>
+</tr>
+<tr class="row-even"><td>22</td>
+<td>square</td>
+</tr>
+<tr class="row-odd"><td>23</td>
+<td>diamond</td>
+</tr>
+<tr class="row-even"><td>24</td>
+<td>triangle pointed up</td>
+</tr>
+<tr class="row-odd"><td>25</td>
+<td>triangle pointed down</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>In addition, you can specify your own symbols by using, for example,
+pch = “*” or pch = “.”.</p>
+</li>
+<li><p class="first">If you choose type = “l”, R plots solid lines by default. Use the
+optional lty argument to set the line type. For example, plot(x, y,
+type = “l”, lty = “dashed”) plots a dashed line. Other options are
+dotted, dotdash, longdash, and twodash.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">col</span></tt> sets the color of the points, lines, or bars. For example,
+<tt class="docutils literal"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">b,</span> <span class="pre">pch</span> <span class="pre">=</span> <span class="pre">20,</span> <span class="pre">lty</span> <span class="pre">=</span> <span class="pre">dotted,</span> <span class="pre">col</span> <span class="pre">=</span> <span class="pre">violet)</span></tt> plots
+small circles connected by a dotted line, both of which are violet.
+(The axes and labels remain black.) Use <tt class="docutils literal"><span class="pre">colors()</span></tt> to see the full
+list of available colors.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">xlim</span></tt> and ylim set the limits to the -axis and
+-axis. For example,
+<tt class="docutils literal"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">xlim</span> <span class="pre">=</span> <span class="pre">c(0,</span> <span class="pre">25),</span> <span class="pre">ylim</span> <span class="pre">=</span> <span class="pre">c(-15,</span> <span class="pre">5))</span></tt> sets range of the
+-axis to [0, 25] and the range of the -axis to
+.</p>
+</li>
+</ul>
+<p>For additional plotting options, refer to help(par).</p>
+</div>
+<div class="section" id="adding-points-lines-and-legends-to-existing-plots">
+<h2>Adding Points, Lines, and Legends to Existing Plots<a class="headerlink" href="#adding-points-lines-and-legends-to-existing-plots" title="Permalink to this headline">¶</a></h2>
+<p>Once you have created a plot, you can <em>add</em> points, lines, text, or a
+legend. To place each of these elements, R uses coordinates defined in
+terms of the x-axes and y-axes of the plot area, not coordinates defined
+in terms of the the plotting window or device. For example, if your plot
+has an x-axis with values between , and a y-axis with values between , you may add a
+point at .</p>
+<ul class="simple">
+<li><strong>points()</strong> plots one or more sets of points. Use <tt class="docutils literal"><span class="pre">pch</span></tt> with
+<tt class="docutils literal"><span class="pre">points</span></tt> to add points to an existing plot. For example,
+<tt class="docutils literal"><span class="pre">points(P,</span> <span class="pre">Q,</span> <span class="pre">pch</span> <span class="pre">=</span> <span class="pre">.,</span> <span class="pre">col</span> <span class="pre">=</span> <span class="pre">forest</span> <span class="pre">green)</span></tt> plots each
+ as tiny green dots.</li>
+<li><strong>lines()</strong> joins the specified points with line segments. The
+arguments <tt class="docutils literal"><span class="pre">col</span></tt> and <tt class="docutils literal"><span class="pre">lty</span></tt> may also be used. For example,
+<tt class="docutils literal"><span class="pre">lines(X,</span> <span class="pre">Y,</span> <span class="pre">col</span> <span class="pre">=</span> <span class="pre">blue,</span> <span class="pre">lty</span> <span class="pre">=</span> <span class="pre">dotted)</span></tt> draws a blue dotted line
+from each set of points  to the next.
+Alternatively, <tt class="docutils literal"><span class="pre">lines</span></tt> also takes command output which specifies
+ coordinates. For example, <tt class="docutils literal"><span class="pre">density(Z)</span></tt> creates a
+vector of  and a vector of , and plot(density(Z))
+draws the kernel density function.</li>
+<li><strong>text()</strong> adds a character string at the specified set of
+ coordinates. For example, text(5, 5, labels = “Key
+Point”) adds the label “Key Point” at the plot location
+. You may also choose the font using the font option,
+the size of the font relative to the axis labels using the cex
+option, and choose a color using the col option. The full list of
+options may be accessed using help(text).</li>
+<li><strong>legend()</strong> places a legend at a specified set of 
+coordinates. Type demo(vertci) to see an example for legend().</li>
+</ul>
+</div>
+<div class="section" id="saving-graphs-to-files">
+<h2>Saving Graphs to Files<a class="headerlink" href="#saving-graphs-to-files" title="Permalink to this headline">¶</a></h2>
+<p>By default, R displays graphs in a window on your screen. To save R
+plots to file (to include them in a paper, for example), preface your
+plotting commands with:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> ps.options<span class="p">(</span>family <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;Times&quot;</span><span class="p">),</span> pointsize <span class="o">=</span> <span class="m">12</span><span class="p">)</span>
+<span class="o">&gt;</span> postscript<span class="p">(</span>file <span class="o">=</span> <span class="s">&quot;mygraph.eps&quot;</span><span class="p">,</span> horizontal <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> paper <span class="o">=</span> <span class="s">&quot;special&quot;</span><span class="p">,</span>
+             width <span class="o">=</span> <span class="m">6.25</span><span class="p">,</span> height <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where the <tt class="docutils literal"><span class="pre">ps.options()</span></tt> command sets the font type and size in the
+output file, and the <tt class="docutils literal"><span class="pre">postscript</span></tt> command allows you to specify the
+name of the file as well as several additional options. Using paper =
+special allows you to specify the width and height of the encapsulated
+postscript region in inches (6.25 inches long and 4 inches high, in this
+case), and the statement <tt class="docutils literal"><span class="pre">horizontal</span> <span class="pre">=</span> <span class="pre">FALSE</span></tt> suppresses R’s default
+landscape orientation. Alternatively, you may use pdf() instead of
+postscript(). If you wish to select postscript options for .pdf output,
+you may do so using options in pdf(). For example:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> pdf<span class="p">(</span>file <span class="o">=</span> <span class="s">&quot;mygraph.pdf&quot;</span><span class="p">,</span> width <span class="o">=</span> <span class="m">6.25</span><span class="p">,</span> height <span class="o">=</span> <span class="m">4</span><span class="p">,</span> family <span class="o">=</span> <span class="s">&quot;Times&quot;</span><span class="p">,</span>
+<span class="o">+</span>     pointsize <span class="o">=</span> <span class="m">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>At the end of every plot, you should close your output device. The
+command <tt class="docutils literal"><span class="pre">dev.off()</span></tt> stops writing and saves the <tt class="docutils literal"><span class="pre">.eps</span></tt> or .pdf file
+to your working directory. If you forget to close the file, you will
+write all subsequent plots to the same file, overwriting previous plots.
+You may also use <tt class="docutils literal"><span class="pre">dev.off()</span></tt> to close on-screen plot windows.</p>
+<p>To write multiple plots to the same file, you can use the following
+options:</p>
+<ul>
+<li><p class="first">For plots on separate pages in the same .pdf document, use</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> pdf<span class="p">(</span>file <span class="o">=</span> <span class="s">&quot;mygraph.pdf&quot;</span><span class="p">,</span> width <span class="o">=</span> <span class="m">6.25</span><span class="p">,</span> height <span class="o">=</span> <span class="m">4</span><span class="p">,</span> family <span class="o">=</span> <span class="s">&quot;Times&quot;</span><span class="p">,</span>
+<span class="o">+</span>     pointsize <span class="o">=</span> <span class="m">12</span><span class="p">,</span> onefile <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For multiple plots on one page, initialize either a .pdf or .eps
+file, then (before any plotting commands) type:</p>
+<div class="highlight-r"><div class="highlight"><pre>par<span class="p">(</span>mfrow <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This creates a grid that has two rows and four columns. Your plot
+statements will populate the grid going across the first row, then
+the second row, from left to right.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="descriptive-plots-box-plots">
+<h3>Descriptive Plots: Box-plots<a class="headerlink" href="#descriptive-plots-box-plots" title="Permalink to this headline">¶</a></h3>
+<p><img alt="image" src="docs/userguide/figs/vertci" /></p>
+<p>Using the sample <tt class="docutils literal"><span class="pre">turnout</span></tt> data set included with Zelig, the following
+commands will produce the graph above.</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> library<span class="p">(</span>Zelig<span class="p">)</span>                             <span class="c1"># Loads the Zelig package.</span>
+<span class="o">&gt;</span> data <span class="p">(</span>turnout<span class="p">)</span>                             <span class="c1"># Loads the sample data.</span>
+<span class="o">&gt;</span> boxplot<span class="p">(</span>income <span class="o">~</span> educate<span class="p">,</span>                  <span class="c1"># Creates a boxplot with income</span>
+<span class="o">+</span>  data <span class="o">=</span> turnout<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;grey&quot;</span><span class="p">,</span> pch <span class="o">=</span> <span class="s">&quot;.&quot;</span><span class="p">,</span>  <span class="c1">#  as a function of education.</span>
+<span class="o">+</span>  main <span class="o">=</span> <span class="s">&quot;Income as a Function of Years of Education&quot;</span><span class="p">,</span>
+<span class="o">+</span>  xlab <span class="o">=</span> <span class="s">&quot;Education in Years&quot;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&quot;Income in \$10,000s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="density-plots-a-histogram">
+<h3>Density Plots: A Histogram<a class="headerlink" href="#density-plots-a-histogram" title="Permalink to this headline">¶</a></h3>
+<p>Histograms are easy ways to evaluate the density of a quantity of
+interest.</p>
+<p><img alt="image" src="docs/userguide/figs/vertci" /></p>
+<p>Here’s the code to create this graph:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> library<span class="p">(</span>Zelig<span class="p">)</span>                              <span class="c1"># Loads the Zelig package.</span>
+<span class="o">&gt;</span> data<span class="p">(</span>turnout<span class="p">)</span>                               <span class="c1"># Loads the sample data set.</span>
+<span class="o">&gt;</span> truehist<span class="p">(</span>turnout<span class="o">$</span>income<span class="p">,</span>  col <span class="o">=</span> <span class="s">&quot;wheat1&quot;</span><span class="p">,</span>   <span class="c1"># Calls the main plot, with</span>
+<span class="o">+</span>      xlab <span class="o">=</span> <span class="s">&quot;Annual Income in $10,000s&quot;</span><span class="p">,</span>    <span class="c1">#  options.</span>
+<span class="o">+</span>      main <span class="o">=</span> <span class="s">&quot;Histogram of Income&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span> lines<span class="p">(</span>density<span class="p">(</span>turnout<span class="o">$</span>income<span class="p">))</span>              <span class="c1"># Adds the kernel density line.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="advanced-examples">
+<h3>Advanced Examples<a class="headerlink" href="#advanced-examples" title="Permalink to this headline">¶</a></h3>
+<p>The examples above are simple examples which only skim the surface of
+R’s plotting potential. We include more advanced, model-specific plots
+in the Zelig demo scripts, and have created functions that automate some
+of these plots, including:</p>
+<ol class="arabic">
+<li><p class="first"><strong>Ternary Diagrams</strong> describe the predicted probability of a
+categorical dependent variable that has three observed outcomes. You
+may choose to use this plot with the multinomial logit, the ordinal
+logit, or the ordinal probit models (Katz and King, 1999). See for
+the sample code, type demo(mlogit) at the R prompt to run the
+example, and refer to Section [ternary] to add points to a ternary
+diagram.</p>
+<p><img alt="image" src="docs/userguide/figs/vertci" /></p>
+</li>
+<li><p class="first"><strong>ROC Plots</strong> summarize how well models for binary dependent
+variables (logit, probit, and relogit) fit the data. The ROC plot
+evaluates the fraction of 0’s and 1’s correctly predicted for every
+possible threshold value at which the continuous
+Prob may be realized as a dichotomous prediction.
+The closer the ROC curve is to the upper right corner of the plot,
+the better the fit of the model specification (King and Zeng,
+2002<em>b</em>). See Section [ROC] for the sample code, and type demo(roc)
+at the R prompt to run the example.</p>
+<p><img alt="image" src="docs/userguide/figs/vertci" /></p>
+</li>
+<li><p class="first"><strong>Vertical Confidence Intervals</strong> may be used for almost any model,
+and describe simulated confidence intervals for any quantity of
+interest while allowing one of the explanatory variables to vary over
+a given range of values (King, Tomz and Wittenberg, 2000). Type
+demo(vertci) at the R prompt to run the example, and
+help.zelig(plot.ci) for the manual page.</p>
+<p><img alt="image" src="docs/userguide/figs/vertci" /> [plot.vertci]</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../../sources/docs/userguide/graphing_commands.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'pydata.org');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

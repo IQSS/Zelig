@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Frequently Asked Questions &mdash; Zelig 5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="../static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../static/zelig-small.ico"/>
+    <link rel="top" title="Zelig 5.0 documentation" href="../index.html" />
+    <link rel="next" title="Zelig History and Name" href="about.html" />
+    <link rel="prev" title="Developer Guide" href="dev_guide.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a>
+        <a class="navbar-brand" href="../index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-r">Installing R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-zelig">Installing Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#updating-zelig">Updating Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#data-analysis-commands">Data Analysis Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#statistical-commands">Statistical Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#graphing-commands">Graphing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#r-objects">R Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#programming-statements">Programming Statements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#writing-new-models">Writing New Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#contributing-code">Contributing Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#for-all-zelig-users">For All Zelig Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#for-zelig-contributors">For Zelig Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Zelig History and Name</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#for-all-zelig-users">For All Zelig Users</a><ul>
+<li><a class="reference internal" href="#how-do-i-cite-zelig">How do I cite Zelig?</a></li>
+<li><a class="reference internal" href="#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li><a class="reference internal" href="#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li><a class="reference internal" href="#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li><a class="reference internal" href="#where-can-i-find-old-versions-of-zelig">Where can I find old versions of Zelig?</a></li>
+<li><a class="reference internal" href="#some-zelig-functions-dont-work-for-me">Some Zelig functions don’t work for me!</a></li>
+<li><a class="reference internal" href="#who-can-i-ask-for-help-how-do-i-report-bugs">Who can I ask for help? How do I report bugs?</a></li>
+<li><a class="reference internal" href="#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li><a class="reference internal" href="#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li><a class="reference internal" href="#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#for-zelig-contributors">For Zelig Contributors</a><ul>
+<li><a class="reference internal" href="#where-can-i-find-the-source-code-for-zelig">Where can I find the source code for Zelig?</a></li>
+<li><a class="reference internal" href="#how-can-i-make-my-r-programs-run-faster">How can I make my R programs run faster?</a></li>
+<li><a class="reference internal" href="#which-compilers-can-i-use-with-r-and-zelig">Which compilers can I use with R and Zelig?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="dev_guide.html" title="Previous Chapter: Developer Guide"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Developer Guide</span>
+    </a>
+  </li>
+  <li>
+    <a href="about.html" title="Next Chapter: Zelig History and Name"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Zelig History an... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#for-all-zelig-users">For All Zelig Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#for-zelig-contributors">For Zelig Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Zelig History and Name</a></li>
+</ul>
+
+<div id="sourcelink">
+  <a href="../sources/docs/faq.txt"
+     rel="nofollow">Source</a>
+</div>
+<form action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="frequently-asked-questions">
+<span id="faq"></span><h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#for-all-zelig-users" id="id3">For All Zelig Users</a><ul>
+<li><a class="reference internal" href="#how-do-i-cite-zelig" id="id4">How do I cite Zelig?</a></li>
+<li><a class="reference internal" href="#why-cant-i-install-zelig" id="id5">Why can’t I install Zelig?</a></li>
+<li><a class="reference internal" href="#why-cant-i-install-r" id="id6">Why can’t I install R?</a></li>
+<li><a class="reference internal" href="#why-cant-i-load-data" id="id7">Why can’t I load data?</a></li>
+<li><a class="reference internal" href="#where-can-i-find-old-versions-of-zelig" id="id8">Where can I find old versions of Zelig?</a></li>
+<li><a class="reference internal" href="#some-zelig-functions-dont-work-for-me" id="id9">Some Zelig functions don’t work for me!</a></li>
+<li><a class="reference internal" href="#who-can-i-ask-for-help-how-do-i-report-bugs" id="id10">Who can I ask for help? How do I report bugs?</a></li>
+<li><a class="reference internal" href="#how-do-i-increase-the-memory-for-r" id="id11">How do I increase the memory for R?</a></li>
+<li><a class="reference internal" href="#why-doesnt-the-pdf-print-properly" id="id12">Why doesn’t the pdf print properly?</a></li>
+<li><a class="reference internal" href="#r-is-neat-how-can-i-find-out-more" id="id13">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#for-zelig-contributors" id="id14">For Zelig Contributors</a><ul>
+<li><a class="reference internal" href="#where-can-i-find-the-source-code-for-zelig" id="id15">Where can I find the source code for Zelig?</a></li>
+<li><a class="reference internal" href="#how-can-i-make-my-r-programs-run-faster" id="id16">How can I make my R programs run faster?</a></li>
+<li><a class="reference internal" href="#which-compilers-can-i-use-with-r-and-zelig" id="id17">Which compilers can I use with R and Zelig?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="for-all-zelig-users">
+<h2>For All Zelig Users<a class="headerlink" href="#for-all-zelig-users" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-do-i-cite-zelig">
+<h3>How do I cite Zelig?<a class="headerlink" href="#how-do-i-cite-zelig" title="Permalink to this headline">¶</a></h3>
+<p>We would appreciate if you would cite Zelig as:</p>
+<blockquote>
+<div>Imai, Kosuke, Gary King and Olivia Lau. 2006. “Zelig: Everyone’s
+Statistical Software,” <a class="reference external" href="http://GKing.Harvard.Edu/zelig">http://GKing.Harvard.Edu/zelig</a>.</div></blockquote>
+<p>Please also cite the contributors for the models or methods you are using. These citations can be found in the contributors section of each model or command page.</p>
+</div>
+<div class="section" id="why-cant-i-install-zelig">
+<h3>Why can’t I install Zelig?<a class="headerlink" href="#why-cant-i-install-zelig" title="Permalink to this headline">¶</a></h3>
+<p>You must be connected to the internet to install packages from web depositories. In addition, there are a few platform-specific reasons why you may have installation problems:</p>
+<ul>
+<li><p class="first"><strong>On Windows</strong>: If you are using the very latest version of R, you may not be able to install Zelig until we update Zelig to work on the latest release of R. If you wish to install Zelig in the interim, check the Zelig release notes () and download the appropriate version of R to work with the last release of Zelig. You may have to manually download and install Zelig.</p>
+</li>
+<li><p class="first"><strong>On Mac</strong>: If the latest version of Zelig is not yet available at CRAN but you would like to install it on your Mac, try typing the following at your R prompt:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;Zelig&quot;</span><span class="p">,</span> repos <span class="o">=</span> <span class="s">&quot;http://gking.harvard.edu&quot;</span><span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;source&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>On Mac or Linux systems</strong>: If you get the following warning message at the end of your installation:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> Installation of package VGAM had non<span class="o">-</span>zero exit status <span class="kr">in</span> <span class="kc">...</span>
+</pre></div>
+</div>
+<p>this means that you were not able to install VGAM properly. Make sure that you have the g77 Fortran compiler. For PowerPC Macs, download g77 from ). For Intel Macs, download the Apple developer tools. After installation, try to install Zelig again.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="why-cant-i-install-r">
+<h3>Why can’t I install R?<a class="headerlink" href="#why-cant-i-install-r" title="Permalink to this headline">¶</a></h3>
+<p>If you have problems installing R (rather than Zelig), you should check the for your platform. If you still have problems, you can search the for the R help mailing list, or email the list directly at .</p>
+</div>
+<div class="section" id="why-cant-i-load-data">
+<h3>Why can’t I load data?<a class="headerlink" href="#why-cant-i-load-data" title="Permalink to this headline">¶</a></h3>
+<p>When you start R, you need to specify your working directory. In linux R, this is done pretty much automatically when you start R, whether within ESS or in a terminal window. In Windows R, you may wish to specify a working directory so that you may load data without typing in long directory paths to your data files, and it is important to remember that <em>Windows</em> R uses the <em>Linux</em> directory delimiter. That is, if you right click and select the “Properties” link on a Windows file, the slashes are backslashes (), but Windows R uses forward slashes (/) in directory paths. Thus, the Windows link may be C:Program FilesR, but you would type C:/Program Files/R// in Windows R.</p>
+<p>When you start R in Windows, the working directory is by default the directory in which the R executible is located.</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># Print your current working directory.</span>
+<span class="o">&gt;</span> getwd<span class="p">()</span>
+
+<span class="c1"># To read data not located in your working directory.</span>
+<span class="o">&gt;</span> data <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;C:/Program Files/R/newwork/mydata.tab&quot;</span><span class="p">)</span>
+
+<span class="c1"># To change your working directory.</span>
+<span class="o">&gt;</span> setwd<span class="p">(</span><span class="s">&quot;C:/Program Files/R/newwork&quot;</span><span class="p">)</span>
+
+<span class="c1"># Reading data in your working directory.</span>
+<span class="o">&gt;</span> data <span class="o">&lt;-</span> read.data<span class="p">(</span><span class="s">&quot;mydata.tab&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once you have set the working directory, you no longer need to type the entire directory path.</p>
+</div>
+<div class="section" id="where-can-i-find-old-versions-of-zelig">
+<h3>Where can I find old versions of Zelig?<a class="headerlink" href="#where-can-i-find-old-versions-of-zelig" title="Permalink to this headline">¶</a></h3>
+<p>For some replications, you may require older versions of Zelig.</p>
+<ul class="simple">
+<li><strong>Windows</strong> users may find old binaries at <a class="reference external" href="http://gking.harvard.edu/bin/windows/contrib/">http://gking.harvard.edu/bin/windows/contrib/</a> and selecting the
+appropriate version of R.</li>
+<li><strong>Linux</strong> and <strong>MacOSX</strong> users may find source files at <a class="reference external" href="http://gking.harvard.edu/src/contrib/">http://gking.harvard.edu/src/contrib/</a></li>
+</ul>
+<p>If you want an older version of Zelig because you are using an older version of R, we strongly suggest that you update R and install the latest version of Zelig.</p>
+</div>
+<div class="section" id="some-zelig-functions-dont-work-for-me">
+<h3>Some Zelig functions don’t work for me!<a class="headerlink" href="#some-zelig-functions-dont-work-for-me" title="Permalink to this headline">¶</a></h3>
+<p>If this is a new phenomenon, there may be functions in your namespace that are overwriting Zelig functions. In particular, if you have a function called zelig, setx, or sim in your workspace, the corresponding functions in Zelig will not work. Rather than deleting things that you need, R will tell you the following when you load the Zelig library:</p>
+<div class="highlight-r"><div class="highlight"><pre>Attaching package<span class="o">:</span> <span class="s">&#39;Zelig&#39;</span>
+        The following object<span class="p">(</span>s<span class="p">)</span> are masked _by_ .GlobalEnv <span class="o">:</span>
+         sim
+</pre></div>
+</div>
+<p>In this case, simply rename your sim function to something else and load Zelig again:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> mysim <span class="o">&lt;-</span> sim
+<span class="o">&gt;</span> detach<span class="p">(</span>package<span class="o">:</span>Zelig<span class="p">)</span>
+<span class="o">&gt;</span> library<span class="p">(</span>Zelig<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="who-can-i-ask-for-help-how-do-i-report-bugs">
+<h3>Who can I ask for help? How do I report bugs?<a class="headerlink" href="#who-can-i-ask-for-help-how-do-i-report-bugs" title="Permalink to this headline">¶</a></h3>
+<p>If you find a bug, or cannot figure something out, please follow these steps: (1) Reread the relevant section of . (2) if you don’t have the current version. (3) Rerun the same code and see if the bug has been fixed. (4) Check our list of . (5) to find a discussion of your issue on the zelig listserv.</p>
+<p>If none of these work, then if you haven’t already, please (6) and (7) send your question to the listserv at <tt class="docutils literal"><span class="pre">https://groups.google.com/forum/#!forum/zelig-statistical-software</span></tt>. Please explain exactly what you did and include the full error message, including the traceback(). You should get an answer from the developers or another user in short order.</p>
+</div>
+<div class="section" id="how-do-i-increase-the-memory-for-r">
+<h3>How do I increase the memory for R?<a class="headerlink" href="#how-do-i-increase-the-memory-for-r" title="Permalink to this headline">¶</a></h3>
+<p>Windows users may get the error that R has run out of memory.</p>
+<p>If you have R already installed and subsequently install more RAM, you may have to reinstall R in order to take advantage of the additional capacity.</p>
+<p>You may also set the amount of available memory manually. Close R, then right-click on your R program icon (the icon on your desktop or in your programs directory). Select “Properties”, and then select the “Shortcut” tab. Look for the “Target” field and after the closing quotes around the location of the R executible, add</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">--</span>max<span class="o">-</span>mem<span class="o">-</span>size<span class="o">=</span><span class="m">500</span>M
+</pre></div>
+</div>
+<p>as shown in the figure below. You may increase this value up to 2GB or the maximum amount of physical RAM you have installed.</p>
+<p><img alt="image" src="docs/figs/increase" /></p>
+<p>If you get the error that R cannot allocate a vector of length x, close out of R and add the following line to the “Target” field:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">--</span>max<span class="o">-</span>vsize<span class="o">=</span><span class="m">500</span>M
+</pre></div>
+</div>
+<p>or as appropriate.</p>
+<p>You can always check to see how much memory R has available by typing at the R prompt</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> round<span class="p">(</span>memory.limit<span class="p">()</span><span class="o">/</span><span class="m">2</span><span class="o">^</span><span class="m">20</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which gives you the amount of available memory in MB.</p>
+</div>
+<div class="section" id="why-doesnt-the-pdf-print-properly">
+<h3>Why doesn’t the pdf print properly?<a class="headerlink" href="#why-doesnt-the-pdf-print-properly" title="Permalink to this headline">¶</a></h3>
+<p>Zelig uses several special LaTeX environments. If the pdf looks right on the screen, there are two possible reasons why it’s not printing properly:</p>
+<ul class="simple">
+<li>Adobe Acrobat isn’t cleaning up the document. Updating to Acrobat
+Reader 6.0.1 or higher should solve this problem.</li>
+<li>Your printer doesn’t support PostScript Type 3 fonts. Updating your
+print driver should take care of this problem.</li>
+</ul>
+</div>
+<div class="section" id="r-is-neat-how-can-i-find-out-more">
+<h3>R is neat. How can I find out more?<a class="headerlink" href="#r-is-neat-how-can-i-find-out-more" title="Permalink to this headline">¶</a></h3>
+<p>R is a collective project with contributors from all over the world. Their website () has more information on the R project, R packages, conferences, and other learning material.</p>
+<p>In addition, there are several canonical references which you may wish to peruse:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Venables, W.N. and B.D. Ripley. 2002. <a href="#id1"><span class="problematic" id="id2">*</span></a>Modern Applied Statistics</div>
+</div>
+<p>with S.* 4th Ed. Springer-Verlag.
+| Venables, W.N. and B.D. Ripley. 2000. <em>S Programming.</em>
+Springer-Verlag.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="for-zelig-contributors">
+<h2>For Zelig Contributors<a class="headerlink" href="#for-zelig-contributors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="where-can-i-find-the-source-code-for-zelig">
+<h3>Where can I find the source code for Zelig?<a class="headerlink" href="#where-can-i-find-the-source-code-for-zelig" title="Permalink to this headline">¶</a></h3>
+<p>Zelig is distributed under the . After installation, the source code is located in your R library directory. For Linux users who have followed our installation example, this is ~/.R/library/Zelig/. For Windows users under R , this is by default C:Program FilesRlibraryZelig. For Macintosh users, this is ~/Library/R/library/Zelig/.</p>
+<p>In addition, you may download the latest Zelig source code as a tarball’ed directory from . (This makes it easier to distinguish functions which are run together during installation.)</p>
+</div>
+<div class="section" id="how-can-i-make-my-r-programs-run-faster">
+<h3>How can I make my R programs run faster?<a class="headerlink" href="#how-can-i-make-my-r-programs-run-faster" title="Permalink to this headline">¶</a></h3>
+<p>Unlike most commercial statistics programs which rely on precompiled and pre-packaged routines, R allows users to program functions and run them in the same environment. If you notice a perceptible lag when running your R code, you may improve the performance of your programs by taking the following steps:</p>
+<ul class="simple">
+<li>Reduce the number of loops. If it is absolutely necessary to run loops in loops, the inside loop should have the most number of cycles because it runs faster than the outside loop. Frequently, you can eliminate loops by using vectors rather than scalars. Most R functions deal with vectors in an efficient and mathematically intuitive manner.</li>
+<li>Do away with loops altogether. You can vectorize functions using the apply, mapply(), sapply(), lapply(), and replicate() functions. If you specify the function passed to the above apply() functions properly, the R consensus is that they should run significantly faster than loops in general.</li>
+<li>You can compile your code using C or Fortran. R is not compiled, but can use bits of precompiled code in C or Fortran, and calls that code seamlessly from within R wrapper functions (which pass input from the R function to the C code and back to R). Thus, almost every regression package includes C or Fortran algorithms, which are locally compiled in the case of Linux systems or precompiled in the case of Windows distributions. The recommended Linux compilers are gcc for C and g77 for Fortran, so you should make sure that your code is compatible with those standards to achieve the widest possible distribution.</li>
+</ul>
+</div>
+<div class="section" id="which-compilers-can-i-use-with-r-and-zelig">
+<h3>Which compilers can I use with R and Zelig?<a class="headerlink" href="#which-compilers-can-i-use-with-r-and-zelig" title="Permalink to this headline">¶</a></h3>
+<p>In general, the C or Fortran algorithms in your package should compile for any platform. While Windows R packages are distributed as compiled binaries, Linux R compiles packages locally during installation. Thus, to ensure the widest possible audience for your package, you should make sure that your code will compile on gcc (for C and C++), or on g77 (for Fortran).</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../sources/docs/faq.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'pydata.org');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

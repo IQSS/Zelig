@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Zelig 5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../../static/zelig-small.ico"/>
+    <link rel="top" title="Zelig 5.0 documentation" href="../../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a>
+        <a class="navbar-brand" href="../../index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installing-r">Installing R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installing-zelig">Installing Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#updating-zelig">Updating Zelig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#data-analysis-commands">Data Analysis Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#statistical-commands">Statistical Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#graphing-commands">Graphing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#r-objects">R Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide.html#programming-statements">Programming Statements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_guide.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev_guide.html#writing-new-models">Writing New Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_guide.html#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_guide.html#contributing-code">Contributing Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_guide.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#for-all-zelig-users">For All Zelig Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#for-zelig-contributors">For Zelig Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">Zelig History and Name</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#what-r-and-zelig-do">What R and Zelig do</a></li>
+<li><a class="reference internal" href="#getting-help">Getting Help</a></li>
+<li><a class="reference internal" href="#how-to-cite-zelig">How to Cite Zelig</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">Zelig History and Name</a></li>
+</ul>
+
+<div id="sourcelink">
+  <a href="../../sources/docs/userguide/introduction.txt"
+     rel="nofollow">Source</a>
+</div>
+<form action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-r-and-zelig-do">
+<h2>What R and Zelig do<a class="headerlink" href="#what-r-and-zelig-do" title="Permalink to this headline">¶</a></h2>
+<p>Zelig <a class="footnote-reference" href="#id3" id="id1">[1]</a> is an easy-to-use program that can estimate and help
+interpret the results of an enormous and growing range of statistical
+models. It literally <em>is</em> “everyone’s statistical software” because
+Zelig’s unified framework incorporates everyone else’s (R) code. We also
+hope it will <em>become</em> “everyone’s statistical software” for
+applications, and we have designed Zelig so that anyone can use it or
+add their models to it.</p>
+<p>When you are using Zelig, you are also using , a powerful statistical
+software language. You do not need to learn R separately, however, since
+this manual introduces you to R through Zelig, which simplifies R and
+reduces the amount of programming knowledge you need to get started.
+Because so many individuals contribute different packages to R (each
+with their own syntax and documentation), estimating a statistical model
+can be a frustrating experience. Users need to know which package
+contains the model, find the modeling command within the package, and
+refer to the manual page for the model-specific arguments. In contrast,
+Zelig users can skip these start-up costs and move directly to data
+analyses. Using Zelig’s unified command syntax, you gain the convenience
+of a packaged program, without losing any of the power of R’s underlying
+statistical procedures.</p>
+<p>In addition to generalizing R packages and making existing methods
+easier to use, Zelig includes infrastructure that can improve all
+existing methods and R programs. Even if you know R, using Zelig greatly
+simplifies your work. It mimics the popular program for Stata (and thus
+the suggestions of ) by translating the raw output of existing
+statistical procedures into quantities that are of direct interest to
+researchers. Instead of trying to interpret coefficients parameterized
+for modeling convenience, Zelig makes it easy to compute quantities of
+real interest: probabilities, predicted values, expected values, first
+differences, and risk ratios, along with confidence intervals, standard
+errors, or full posterior (or sampling) densities for all quantities.
+Zelig extends Clarify by seamlessly integrating an option for
+bootstrapping into the simulation of quantities of interest. It also
+integrates a full suite of nonparametric matching methods as a
+preprocessing step to improve the performance of any parametric model
+for causal inference (see ). For missing data, Zelig accepts multiply
+imputed datasets created by (see ) and other programs, allowing users to
+analyze them as if they were a single, fully observed dataset. Zelig
+outputs replication data sets so that you (and if you wish, anyone else)
+will always be able to replicate the results of your analyses (see ).
+Several powerful Zelig commands also make running multiple analyses and
+recoding variables simple.</p>
+<p>Using R in combination with Zelig has several advantages over commercial
+statistical software. R and Zelig are part of the open source movement,
+which is roughly based on the principles of science. That is, anyone who
+adds functionality to open source software or wishes to redistribute it
+(legally) must provide the software accompanied by its source free of
+charge. <a class="footnote-reference" href="#id4" id="id2">[2]</a> If you find a bug in open source software and post a note
+to the appropriate mailing list, a solution you can use will likely be
+posted quickly by one of the thousands of people using the program all
+over the world. Since you can see the source code, you might even be
+able to fix it yourself. In contrast, if something goes wrong with
+commercial software, you have to wait for the programmers at the company
+to fix it (and speaking with them is probably out of the question), and
+wait for a new version to be released.</p>
+<p>We find that Zelig makes students and colleagues more amenable to using
+R, since the startup costs are lower, and since the manual and software
+are relatively self-contained. This manual even includes an appendix
+devoted to the basics of advanced R programming, although you will not
+need it to run most procedures in Zelig. A large and growing fraction of
+the world’s quantitative methodologists and statisticians are moving to
+R, and the base of programs available for R is quickly surpassing all
+alternatives. In addition to built-in functions, R is a complete
+programming language, which allows you to design new functions to suit
+your needs. R has the dual advantage that you do not need to understand
+how to program to use it, but if it turns out that you want to do
+something more complicated, you do not need to learn another program. In
+addition, methodologists all over the world add new functions all the
+time, so if the function you need wasn’t there yesterday, it may be
+available today.</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Zelig is named after a Woody Allen movie about a man who had the
+strange ability to become the physical reflection of anyone he met —
+Scottish, African-American, Indian, Chinese, thin, obese, medical
+doctor, Hassidic rabbi, anything — and thus to fit well in any
+situation.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>As specified in the <a class="reference external" href="http://www.gnu.org/copyleft">http://www.gnu.org/copyleft</a>.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<p>You may find documentation for Zelig on-line (and hence must be on-line
+to access it). If you are unable to connect to the Internet, we
+recommend that you print the pdf version of this document for your
+reference.</p>
+<p>If you are on-line, you may access comprehensive help files for Zelig
+commands and for each of the models. For example, load the Zelig library
+and then type at the R prompt:</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt; help.zelig(command)                # For help with all zelig commands.
+&gt; help.zelig(logit)                  # For help with the logit model.
+</pre></div>
+</div>
+<p>[Rhelp]In addition, help.zelig() searches the manual pages for R in
+addition to the Zelig specific pages. On certain rare occasions, the
+name of the help topic in Zelig and in R are identical. In these cases,
+help.zelig() will return the Zelig help page by default. If you wish to
+access the R help page, you should use help(topic).</p>
+<p>In addition, built-in examples with sample data and plots are available
+for each model. For example, type demo(logit) to view the demo for the
+logit model. Commented code for each model is available under the
+examples section of each model reference page.</p>
+<p>Please direct inquiries and problems about Zelig to our listserv at . We
+suggest you subscribe to this mailing list while learning and using
+Zelig: go to . (You can choose to receive email in digest form, so that
+you will never receive more than one message per day.) You can also
+browse or search our of previous messages before posting your query.</p>
+</div>
+<div class="section" id="how-to-cite-zelig">
+<h2>How to Cite Zelig<a class="headerlink" href="#how-to-cite-zelig" title="Permalink to this headline">¶</a></h2>
+<p>To cite Zelig as a whole, please reference these two sources:</p>
+<blockquote>
+<div><p>Kosuke Imai, Gary King, and Olivia Lau. 2007. “Zelig: Everyone’s
+Statistical Software,” <a class="reference external" href="http://GKing.harvard.edu/zelig">http://GKing.harvard.edu/zelig</a>.</p>
+<p>Imai, Kosuke, Gary King, and Olivia Lau. (2008). “Toward A Common
+Framework for Statistical Analysis and Development.” Journal of
+Computational and Graphical Statistics, Vol. 17, No. 4 (December),
+pp. 892-913.</p>
+</div></blockquote>
+<p>To refer to a particular Zelig model, please refer to the “how to cite”
+portion at the end of each model documentation section.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../../sources/docs/userguide/introduction.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'pydata.org');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>
