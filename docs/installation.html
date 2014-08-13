@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &mdash; Zelig 5.0 documentation</title>
+    <title>Installation &amp; Quickstart &mdash; Zelig 5.0 documentation</title>
     
     <link rel="stylesheet" href="../static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -33,7 +33,7 @@
     <script type="text/javascript" src="../static/bootstrap-sphinx.js"></script>
     <link rel="shortcut icon" href="../static/zelig-small.ico"/>
     <link rel="top" title="Zelig 5.0 documentation" href="../index.html" />
-    <link rel="next" title="Quickstart Guide" href="quickstart.html" />
+    <link rel="next" title="User Guide" href="user_guide.html" />
     <link rel="prev" title="Welcome to Zelig!" href="../index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -77,32 +77,15 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-r">Installing R</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-zelig">Installing Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#updating-zelig">Updating Zelig</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-models">Running Models</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_guide.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide.html#data-analysis-commands">Data Analysis Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide.html#statistical-commands">Statistical Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide.html#graphing-commands">Graphing Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide.html#r-objects">R Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide.html#programming-statements">Programming Statements</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#writing-new-models">Writing New Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#adding-models-and-methods-to-zelig">Adding Models and Methods to Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#contributing-code">Contributing Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev_guide.html#release-notes">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#installation-quickstart">Installation &amp; Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#zelig-model-reference">Zelig Model Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -110,7 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#for-zelig-contributors">For Zelig Contributors</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">Zelig History and Name</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
@@ -128,10 +111,10 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#installing-r">Installing R</a></li>
-<li><a class="reference internal" href="#installing-zelig">Installing Zelig</a></li>
-<li><a class="reference internal" href="#updating-zelig">Updating Zelig</a></li>
+<li><a class="reference internal" href="#">Installation &amp; Quickstart</a><ul>
+<li><a class="reference internal" href="#id1">Installation</a></li>
+<li><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li><a class="reference internal" href="#running-models">Running Models</a></li>
 </ul>
 </li>
 </ul>
@@ -147,7 +130,7 @@
     </a>
   </li>
   <li>
-    <a href="quickstart.html" title="Next Chapter: Quickstart Guide"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Quickstart Guide &raquo;</span>
+    <a href="user_guide.html" title="Next Chapter: User Guide"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">User Guide &raquo;</span>
     </a>
   </li>
               
@@ -176,17 +159,15 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-r">Installing R</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-zelig">Installing Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#updating-zelig">Updating Zelig</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-models">Running Models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">Zelig History and Name</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
 </ul>
 
 <div id="sourcelink">
@@ -204,50 +185,78 @@
       </div>
     <div class="col-md-9">
       
-  <div class="section" id="installation">
-<span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>To use Zelig, you are going to need to install the R statistical program, the Zelig package, and some R libraries (e.g., coda, MCMCpack, sandwich, VGAM, and zoo):</p>
+  <div class="section" id="installation-quickstart">
+<span id="installation"></span><h1>Installation &amp; Quickstart<a class="headerlink" href="#installation-quickstart" title="Permalink to this headline">¶</a></h1>
+<p>Zelig 5.0 is the latest version of the Zelig framework for interfacing with a wide range of statistical models and analytic methods in the R statistical programming enviornment. This release expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture.</p>
+<p>This guide is designed to get you up and running with the current <em>alpha</em> release, Zelig 5.0.1. For more detailed tutorials see individual model vignettes in the <a class="reference internal" href="user_guide.html#userguide"><em>User Guide</em></a>.</p>
 <hr class="docutils" />
-<div class="section" id="installing-r">
-<h2>Installing R<a class="headerlink" href="#installing-r" title="Permalink to this headline">¶</a></h2>
-<p>To install R, go to the <a class="reference external" href="www.r-project.org">r-project website</a> and select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option on the left-hand menu. Select a CRAN mirror mirror closest to your current location and donwload R for Linux, (Mac) OS X, or Windows.</p>
-</div>
+<div class="section" id="id1">
+<h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>To use Zelig, you will need to install the R statistical program and the Zelig package:</p>
+<p><strong>Installing R</strong></p>
+<p>To install R, go to <a class="reference external" href="http://www.r-project.org/">http://www.r-project.org/</a> and select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu. Select a CRAN mirror closest to your current geographic location and follow the instructions for donwloading R for Linux, (Mac) OS X, or Windows.</p>
 <hr class="docutils" />
-<div class="section" id="installing-zelig">
-<h2>Installing Zelig<a class="headerlink" href="#installing-zelig" title="Permalink to this headline">¶</a></h2>
-<p>Once R is installed, you must install the Zelig and VGAM packages. There are three ways to do this.</p>
-<p>1. We recommend that you start R and install Zelig and related dependencies by typing:</p>
-<div class="highlight-python"><div class="highlight"><pre>&gt; source(&quot;http://gking.harvard.edu/zelig/install.R&quot;)
-&gt; library(Zelig)
+<p><strong>Installing Zelig</strong></p>
+<p>Becuase Zelig 5.0.1 is still in <em>alpha</em> and is not yet available on <tt class="docutils literal"><span class="pre">CRAN</span></tt>, it must be downloaded from Github using the <tt class="docutils literal"><span class="pre">devtools</span></tt> package. Once R is installed, open the terminal and type in the following commands:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span> <span class="c1"># Install devtools package, if not already installed</span>
+<span class="o">&gt;</span> library<span class="p">(</span>devtools<span class="p">)</span> <span class="c1"># Load devtools</span>
+<span class="o">&gt;</span> install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig5&#39;</span><span class="p">)</span> <span class="c1"># Download Zelig 5.0.1 from the IQSS Github repo</span>
 </pre></div>
 </div>
-<p>2. Alternatively, you may install each component package individually:</p>
-<div class="highlight-python"><div class="highlight"><pre>&gt; install.packages(&quot;Zelig&quot;)
-&gt; install.packages(&quot;zoo&quot;)
-&gt; install.packages(&quot;sandwich&quot;)
-&gt; install.packages(&quot;MCMCpack&quot;)
-&gt; install.packages(&quot;coda&quot;)
-&gt; install.packages(&quot;lattice&quot;)
-&gt; install.packages(&quot;mvtnorm&quot;)
-&gt; install.packages(&quot;VGAM&quot;)
-&gt; install.packages(&quot;sna&quot;)
-&gt; install.packages(&quot;systemfit&quot;)
-&gt; install.packages(&quot;nnet&quot;)
-&gt; install.packages(&quot;gee&quot;)
-&gt; install.packages(&quot;mgcv&quot;)
-</pre></div>
-</div>
-<p>Loading Zelig by typing <tt class="docutils literal"><span class="pre">library(Zelig)</span></tt> into the R command line will also load the optional libaries just installed. Therefore, it is not necessary to load any package other than <tt class="docutils literal"><span class="pre">Zelig</span></tt> at startup.</p>
+<p>Loading Zelig, by typing <tt class="docutils literal"><span class="pre">library(Zelig)</span></tt> into the R command line, will also load optional libaries and (for the most part) install required dependencies. Therefore, it is not necessary to load any package other than <tt class="docutils literal"><span class="pre">Zelig</span></tt> at startup.</p>
+<hr class="docutils" />
+<p><strong>Updating Zelig</strong></p>
+<p>To update your Zelig installation to the latest release use the <tt class="docutils literal"><span class="pre">updated.packages()</span></tt> function.</p>
 </div>
 <hr class="docutils" />
-<div class="section" id="updating-zelig">
-<h2>Updating Zelig<a class="headerlink" href="#updating-zelig" title="Permalink to this headline">¶</a></h2>
-<p>There are two ways to update your Zelig installation to the latest release:</p>
-<p>1. Via the R command line:</p>
-<div class="highlight-python"><div class="highlight"><pre>&gt; update.packages()
+<div class="section" id="quickstart-guide">
+<h2>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h2>
+<p><strong>Loading Zelig</strong></p>
+<p>After installing both R and Zelig, Zelig can be loaded like any other R package:</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt; library(Zelig5)
 </pre></div>
 </div>
-<p>2. You can also remove an old version by typing <tt class="docutils literal"><span class="pre">R</span> <span class="pre">CMD</span> <span class="pre">REMOVE</span> <span class="pre">Zelig</span></tt> at the terminal prompt and manually downloading and reinstalling the latest package release following the instructions outlined above.</p>
+<p>Additionally, some Zelig models require add-on packages/modules which can be installed using <tt class="docutils literal"><span class="pre">install.packages()</span></tt>:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;ZeligChoice&quot;</span><span class="p">)</span> <span class="c1">#install ZeligChoice add-on package</span>
+<span class="o">&gt;</span> library<span class="p">(</span>ZeligChoice<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="running-models">
+<h2>Running Models<a class="headerlink" href="#running-models" title="Permalink to this headline">¶</a></h2>
+<p>Each Zelig process consists of three methods:</p>
+<ol class="arabic simple">
+<li>Specify statistical model and estimate parameters: <tt class="docutils literal"><span class="pre">$zelig</span></tt></li>
+<li>Set explanatory variables to chosen (actual or counterfactual) values for calculating quantities of interest: <tt class="docutils literal"><span class="pre">$setx</span></tt></li>
+<li>Draw simulations of quantity of interest from statistical model: <tt class="docutils literal"><span class="pre">$sim</span></tt></li>
+</ol>
+<p>For example, to implement a least squares regression:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> data<span class="p">(</span>cars<span class="p">)</span>                            <span class="c1">#load toy dataset</span>
+<span class="o">&gt;</span> z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>                       <span class="c1">#initialize Zelig5 least squares object</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>   <span class="c1">#estimate ls model</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>                   <span class="c1">#set speed to 30 (all other covariates set to means)</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span> <span class="m">1000</span><span class="p">)</span>                    <span class="c1">#run 1000 simulations and estiamte quantities of interest</span>
+</pre></div>
+</div>
+<p>The same model can also be implemented using the <tt class="docutils literal"><span class="pre">zelig()</span></tt>, <tt class="docutils literal"><span class="pre">setx()</span></tt>, and <tt class="docutils literal"><span class="pre">sim()</span></tt> functions, as was the case in previous versions of Zelig:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
+<span class="o">&gt;</span> x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+<span class="o">&gt;</span> s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">,</span> num <span class="o">=</span> <span class="m">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For a complete listing of all supported models, including links to tutorials, see the Zelig model reference.
+see the zelig model reference which includes links to model implementation</p>
+<hr class="docutils" />
+<p><strong>Quantities of Interest</strong></p>
+<p>A major feature of Zelig is the translation of model estimates into interpretable quantities of interest (qi&#8217;s). These qi&#8217;s, which include expected and predicted values as well as first differences, can be accessed via the <tt class="docutils literal"><span class="pre">$sim.out</span></tt> method:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z5<span class="o">$</span>sim.out <span class="c1">#or</span>
+<span class="o">&gt;</span> summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Plots</strong></p>
+<p>A second major Zelig feature is that the software makes presenting qi&#8217;s easy. Using the <tt class="docutils literal"><span class="pre">plot()</span></tt> function with the Zelig model object (e.g., <tt class="docutils literal"><span class="pre">z5</span></tt> or <tt class="docutils literal"><span class="pre">s.out</span></tt> objects above) will produce ready-to-use plots with labels and confidence intervals:</p>
 </div>
 </div>
 
