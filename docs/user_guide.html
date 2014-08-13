@@ -113,7 +113,7 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">User Guide</a><ul>
 <li><a class="reference internal" href="#installation-quickstart">Installation &amp; Quickstart</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#id1">Installation</a></li>
 <li><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
 <li><a class="reference internal" href="#running-models">Running Models</a></li>
 </ul>
@@ -190,23 +190,22 @@
       
   <div class="section" id="user-guide">
 <span id="userguide"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
-<p>Blah Blah Blah</p>
-<div class="section" id="installation-quickstart">
-<h2>Installation &amp; Quickstart<a class="headerlink" href="#installation-quickstart" title="Permalink to this headline">¶</a></h2>
 <p>Zelig 5.0 is the latest version of the Zelig framework for interfacing with a wide range of statistical models and analytic methods in the R statistical programming enviornment. This release expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture.</p>
-<p>This guide is designed to get you up and running with Zelig 5.0. For more detailed tutorials see individual model vignettes in the <a class="reference internal" href="#userguide"><em>User Guide</em></a>.</p>
+<div class="section" id="installation-quickstart">
+<span id="installation"></span><span id="devguide-writing-new-models"></span><h2>Installation &amp; Quickstart<a class="headerlink" href="#installation-quickstart" title="Permalink to this headline">¶</a></h2>
+<p>This guide is designed to get you up and running with the current <em>alpha</em> release, Zelig 5.0.1. For more detailed tutorials see individual model vignettes.</p>
 <hr class="docutils" />
-<div class="section" id="installation">
-<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>To use Zelig, you will need to install the R statistical program and the Zelig package:</p>
 <p><strong>Installing R</strong></p>
-<p>To install R, go to <a class="reference external" href="http://www.r-project.org/">http://www.r-project.org/</a> and select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu. Select a CRAN mirror closest to your current geographic location and follow the instrictuins for donwloading R for Linux, (Mac) OS X, or Windows.</p>
+<p>To install R, go to <a class="reference external" href="http://www.r-project.org/">http://www.r-project.org/</a> and select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu. Select a CRAN mirror closest to your current geographic location and follow the instructions for donwloading R for Linux, (Mac) OS X, or Windows.</p>
 <hr class="docutils" />
 <p><strong>Installing Zelig</strong></p>
-<p>Becuase Zelig 5.0 is still in alpha and is not yet on <tt class="docutils literal"><span class="pre">CRAN</span></tt>, it must be downloaded from Github using the <tt class="docutils literal"><span class="pre">devtools</span></tt> package. Once R is installed, open the terminal and type in the following commands:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span> <span class="c1"># Install devtools package if not already installed</span>
+<p>Becuase Zelig 5.0.1 is still in <em>alpha</em> and is not yet available on <tt class="docutils literal"><span class="pre">CRAN</span></tt>, it must be downloaded from Github using the <tt class="docutils literal"><span class="pre">devtools</span></tt> package. Once R is installed, open the terminal and type in the following commands:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span> <span class="c1"># Install devtools package, if not already installed</span>
 <span class="o">&gt;</span> library<span class="p">(</span>devtools<span class="p">)</span> <span class="c1"># Load devtools</span>
-<span class="o">&gt;</span> install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig5&#39;</span><span class="p">)</span> <span class="c1"># Download latest Zelig 5.0 R source from the IQSS github repo</span>
+<span class="o">&gt;</span> install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig5&#39;</span><span class="p">)</span> <span class="c1"># Download Zelig 5.0.1 from the IQSS Github repo</span>
 </pre></div>
 </div>
 <p>Loading Zelig, by typing <tt class="docutils literal"><span class="pre">library(Zelig)</span></tt> into the R command line, will also load optional libaries and (for the most part) install required dependencies. Therefore, it is not necessary to load any package other than <tt class="docutils literal"><span class="pre">Zelig</span></tt> at startup.</p>
@@ -262,7 +261,12 @@ see the zelig model reference which includes links to model implementation</p>
 </div>
 <hr class="docutils" />
 <p><strong>Plots</strong></p>
-<p>A second major Zelig feature is that the software makes presenting qi&#8217;s easy. Using the <tt class="docutils literal"><span class="pre">plot()</span></tt> function with the Zelig model object (e.g., <tt class="docutils literal"><span class="pre">z5</span></tt> or <tt class="docutils literal"><span class="pre">s.out</span></tt> objects above) will produce ready-to-use plots with labels and confidence intervals:</p>
+<p>A second major Zelig feature is that the software makes presenting qi&#8217;s easy. Using the <tt class="docutils literal"><span class="pre">plot()</span></tt> function with the Zelig model object (e.g., <tt class="docutils literal"><span class="pre">z5</span></tt> or <tt class="docutils literal"><span class="pre">s.out</span></tt> objects above) will produce ready-to-use plots with labels and confidence intervals.</p>
+<p><em>Plots of qi&#8217;s from binary choice model:</em></p>
+<img alt="../images/gr1.png" src="../images/gr1.png" />
+<hr class="docutils" />
+<p><em>Plot of expected values across range of simulations:</em></p>
+<img alt="../images/gr3.png" src="../images/gr3.png" />
 </div>
 </div>
 <hr class="docutils" />
