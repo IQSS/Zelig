@@ -3,15 +3,16 @@
 Quickstart Guide
 ----------------
 
-Zelig5 is the latest version of the Zelig framework for interfacing with a wide range of statistical models and analytic methods in a common way by translating estimates into quantities of interest as well as implementing other features (e.g., dealing with missingness by combining multiply imputed data sets, automating statistical bootstrapping) through a simple call structure. 
+Zelig 5.0 is the latest version of the Zelig framework for interfacing with a wide range of statistical models and analytic methods in the R statistical programming enviornment. This release expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture.
 
-This is a quick start guide for getting you up and running with Zelig5. Source code can be found at at `https://github.com/IQSS/Zelig5 <https://github.com/IQSS/Zelig5>`_.
+
+This quickstart guide is designed to get you up and running with Zelig 5.0. For more detailed tutorials see individual model vignettes in the :ref:`userguide`.
 
 ------------
 
 Loading Zelig
 ~~~~~~~~~~~~~
-After installing R and Zelig (instructions can be found on :ref:`installation:`). Once installed, Zelig can be loaded like any other R package:
+After installing R and Zelig (see :ref:`installation` page). Once installed, Zelig can be loaded like any other R package:
 ::
 	> library(Zelig5)
 

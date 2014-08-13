@@ -1,16 +1,19 @@
 
 Welcome to Zelig!
 =================
-**Zelig** is a framework for interfacing with a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, Zelig adds considerable infrastructure to existing heterogenous R implementations by translating coefficients into interpretable quantities of interest and automating statistical procedures (e.g., bootstrapping) though an intelligible call structure.
+*Zelig* is a framework for interfacing with a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, Zelig adds considerable infrastructure to existing heterogenous R implementations by translating coefficient estimates into interpretable quantities of interest and automating statistical procedures (e.g., bootstrapping) though an intelligible call structure.
 
-For more information about the software including goals and direction of the project, please see the :ref:`about` page. To get started, we recommend following the :ref:`quickstart` and checking out the :ref:`userguide`. 
+For more information about the software including goals and direction of the project, please see the :ref:`about` page. 
 
+To get started, we recommend following the :ref:`installation` guide. Additional information about supported models, including tutorials, can be found in the :ref:`userguide`. 
 
-To view the codebase visit the source repository: `https://github.com/IQSS/Zelig5 <https://github.com/IQSS/Zelig5>`_. For regular updates on releases be sure to follow us on twitter `@IQSS <https://twitter.com/IQSS>`_.
+To view the codebase, visit the source repository at `https://github.com/IQSS/Zelig5 <https://github.com/IQSS/Zelig5>`_ and for regular updates on releases be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_.
 
 ------------
 
-**Zelig Models Inheritance Tree**
+**Implemented Models in Zelig 5.0.1**
+
+*Inheritance Tree*
 
 .. raw:: html
 
@@ -22,9 +25,7 @@ To view the codebase visit the source repository: `https://github.com/IQSS/Zelig
    :hidden:
 
    docs/installation.rst
-   docs/quickstart.rst
    docs/user_guide.rst
-   docs/dev_guide.rst
    docs/faq.rst
    docs/about.rst
 
