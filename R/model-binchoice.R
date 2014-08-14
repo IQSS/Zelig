@@ -15,10 +15,10 @@ zbinchoice$methods(
 )
 
 zbinchoice$methods(
-  qi = function(i, x) {
+  qi = function(simparam, mm) {
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
-    coeff <- .self$simparam[[i]]
-    eta <- coeff %*% t(x)
+    coeff <- .self$simparam
+    eta <- coeff %*% t(m)
     eta <- Filter(function (y) !is.na(y), eta)
     theta <- matrix(.self$linkinv(eta), nrow = nrow(coeff))
     ev <- matrix(.self$linkinv(eta), ncol = ncol(theta))

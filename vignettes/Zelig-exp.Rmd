@@ -2,7 +2,8 @@
 title: "Zelig-exp"
 output:
   html_document:
-    number_sections: yes
+    theme: null
+    css: mystyle.css
     toc: yes
 bibliography: zelig5.bib
 ---

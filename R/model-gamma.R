@@ -1,9 +1,7 @@
 #' @include model-zelig.R
 #' @include model-glm.R
 zgamma <- setRefClass("Zelig-gamma",
-                      contains = "Zelig-glm",
-                      field = list(simalpha = "list" # ancillary parameters
-                      ))
+                      contains = "Zelig-glm")
 
 zgamma$methods(
   initialize = function() {
@@ -21,24 +19,26 @@ zgamma$methods(
 )
 
 zgamma$methods(
-  param = function(i) {
-    shape <- gamma.shape(.self$zelig.out[[i]])
-    .self$simalpha[[i]] <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
-    .self$simparam[[i]] <- mvrnorm(n = .self$num, mu = coef(.self$zelig.out[[i]]),
-                                   Sigma = vcov(.self$zelig.out[[i]]))
+  param = function(z.out) {
+    shape <- gamma.shape(z.out)
+    simalpha <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
+    simparam <- mvrnorm(n = .self$num, mu = coef(z.out),
+                                   Sigma = vcov(z.out))
+    simparam <- list(simparam = simparam, simalpha = simalpha)
+    return(simparam)
   }
 )
 
 zgamma$methods(
-  qi = function(i, x) {
-    coeff <- .self$simparam[[i]]
-    eta <- coeff %*% t(x)
+  qi = function(simparam, mm) {
+    coeff <- simparam$simparam
+    eta <- coeff %*% t(mm)
     theta <- matrix(1 / eta, nrow = nrow(coeff))
     ev <- theta
     pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (ii in 1:nrow(ev))
-      pv[ii, ] <- rgamma(ncol(ev), shape = .self$simalpha[[i]][ii], 
-                         scale = theta[ii] / .self$simalpha[[i]][ii])
+      pv[ii, ] <- rgamma(ncol(ev), shape = simparam$simalpha[ii], 
+                         scale = theta[ii] / simparam$simalpha[ii])
     return(list(ev = ev, pv = pv))
   }
 )

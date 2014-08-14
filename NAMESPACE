@@ -1,4 +1,4 @@
-import(methods, MASS, survival, VGAM, jsonlite, AER, quantreg)
+import(methods, MASS, survival, VGAM, jsonlite, AER, quantreg, plyr, dplyr)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(

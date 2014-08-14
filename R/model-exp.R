@@ -19,7 +19,7 @@ zexp$methods(
 )
 
 zexp$methods(
-  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data) {
+  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
     if (!(is.null(cluster) || robust))
@@ -29,20 +29,20 @@ zexp$methods(
       formula <- cluster.formula(formula, cluster)
     .self$model.call$dist <- "exponential"
     .self$model.call$model <- FALSE
-    callSuper(formula = formula, data = data, ..., robust = robust, cluster = cluster)
+    callSuper(formula = formula, data = data, ..., robust = robust,
+              cluster = cluster,  by = by)
   }
 )
 
 zexp$methods(
-  param = function(i) {
-    .self$simparam[[i]] = mvrnorm(.self$num, mu = coef(.self$zelig.out[[i]]),
-                                  Sigma = vcov(.self$zelig.out[[i]]))
+  param = function(z.out) {
+    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
   }
 )
 
 zexp$methods(
-  qi = function(i, x) {
-    eta <- .self$simparam[[i]] %*% t(x)
+  qi = function(simparam, mm) {
+    eta <- simparam %*% t(mm)
     ev <- as.matrix(apply(eta, 2, linkinv))
     pv <- as.matrix(rexp(length(ev), rate = 1 / ev))
     return(list(ev = ev, pv = pv))

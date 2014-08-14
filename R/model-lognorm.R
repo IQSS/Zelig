@@ -1,8 +1,7 @@
 #' @include model-zelig.R
 zlognorm <- setRefClass("Zelig-lognorm",
                         contains ="Zelig",
-                        fields = list(simalpha = "list",
-                                      linkinv = "function"))
+                        fields = list(linkinv = "function"))
 
 zlognorm$methods(
   initialize = function() {
@@ -19,7 +18,7 @@ zlognorm$methods(
 )
 
 zlognorm$methods(
-  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data) {
+  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
     if (!(is.null(cluster) || robust))
@@ -29,27 +28,30 @@ zlognorm$methods(
       formula <- cluster.formula(formula, cluster)
     .self$model.call$dist <- "lognormal"
     .self$model.call$model <- FALSE
-    callSuper(formula = formula, data = data, ..., robust = robust, cluster = cluster)
+    callSuper(formula = formula, data = data, ..., robust = robust,
+              cluster = cluster, by = by)
   }
 )
 
 zlognorm$methods(
-  param = function(i) {
-    coeff <- coef(.self$zelig.out[[i]])
-    mu <- c(coeff, log(.self$zelig.out[[i]]$scale))
-    cov <- vcov(.self$zelig.out[[i]])
+  param = function(z.out) {
+    coeff <- coef(z.out)
+    mu <- c(coeff, log(z.out$scale))
+    cov <- vcov(z.out)
     simulations <- mvrnorm(.self$num, mu = mu, Sigma = cov)
-    .self$simparam[[i]] = as.matrix(simulations[, 1:length(coeff)])
-    .self$simalpha[[i]] = as.matrix(simulations[, -(1:length(coeff))])
+    simparam <- as.matrix(simulations[, 1:length(coeff)])
+    simalpha <- as.matrix(simulations[, -(1:length(coeff))])
+    simparam <- list(simparam = simparam, simalpha = simalpha)
+    return(simparam)
   }
 )
 
 zlognorm$methods(
-  qi = function(i, x) {
-    alpha <- .self$simalpha[[i]]
-    beta <- .self$simparam[[i]]
-    coeff <- .self$simparam[[i]]
-    eta <- coeff %*% t(x)
+  qi = function(simparam, mm) {
+    alpha <- simparam$simalpha
+    beta <- simparam$simparam
+    coeff <- simparam$simparam
+    eta <- coeff %*% t(mm)
     theta <- as.matrix(apply(eta, 2, linkinv))
     ev <- exp(log(theta) + 0.5 * (exp(alpha))^2)
     dimnames(ev) <- dimnames(theta)

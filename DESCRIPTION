@@ -23,7 +23,9 @@ Depends:
     VGAM,
     jsonlite,
     AER,
-    quantreg
+    quantreg,
+    dplyr,
+    plyr
 Suggests:
     testthat,
     knitr
@@ -43,7 +45,7 @@ Collate:
     'model-gamma.R'
     'model-exp.R'
     'model-quantile.R'
-    'create-json.R'
     'model-relogit.R'
+    'create-json.R'
     'wrappers.R'
 VignetteBuilder: knitr

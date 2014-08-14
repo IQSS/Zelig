@@ -1,8 +1,9 @@
 library(Zelig)
 data(turnout)
+turnout$dedu <- ifelse(turnout$educate > 15, 1, 0)
 
 z.out <- zelig(vote ~ age , data = turnout, model = "ls",
-               by = "race")
+               by = c("race", "dedu"))
 summary(z.out)
 x.out <- setx(z.out, age = 18)
 x1.out <- setx(z.out, age = 20)
@@ -16,7 +17,7 @@ r[[1]]
 r[[2]]
 
 z5 <- zls$new()
-z5$zelig(vote ~ age + income, data = turnout, by = "race")
+z5$zelig(vote ~ age , data = turnout, ID = c("race", "dedu"))
 z5$zelig.out
 z5
 z5$setx(age = 18)

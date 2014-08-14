@@ -22,11 +22,25 @@ summary(s.out)
 
 # Zelig 5 code:
 z5 <- zpoisson$new()
-z5$zelig(num_awards ~ prog + math, data=p,
-         weights=w)
+z5$zelig(num_awards ~ prog + math, data = p,
+         weights = w)
 z5
 z5$zelig.call
 z5$model.call
+z5$zelig.out$z.out
+z5$setx(math = 40)
+set.seed(42)
+z5$sim(num = 1000)
+z5$summarize()
+z5$cite()
+
+z5 <- zpoisson$new()
+z5$zelig(num_awards ~ + math, data = p, by = c("prog", "num_awards"))
+z5
+z5$zelig.call
+z5$model.call
+z5$zelig.out
+z5$zelig.out$z.out
 z5$setx(math = 40)
 set.seed(42)
 z5$sim(num = 1000)

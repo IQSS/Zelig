@@ -18,5 +18,7 @@ z5
 z5$setx()
 set.seed(42)
 z5$sim(num=100)
+statmat(z5$sim.out$x$ev[[1]])
+statlevel(z5$sim.out$x$pv[[1]], 100)
 z5$summarize()
 

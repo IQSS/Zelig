@@ -2,6 +2,7 @@ library(Amelia)
 data(africa)
 df <- head(africa, 100)
 imp <- amelia(x = df , cs = "country", m = 5) 
+imp2 <- imp$imputations
 
 # Zelig 4 code:
 library(Zelig)
@@ -13,10 +14,13 @@ s.out <- sim(z.out, x.out, num = 100)
 summary(s.out)
 
 # Zelig 5 code:
-
+library(data.table)
+library(Amelia)
 z5 <- zls$new()
-z5$zelig(infl ~ trade + civlib, data = imp)
+z5$zelig(gdp.pc ~ tariff, data = imp)
 z5
+z5$zelig.out
+z5$zelig.out$mods
 .self <- z5
 z5$model.call
 z5$zelig.call
@@ -35,3 +39,8 @@ set.seed(42)
 z5$sim(num=3)
 z5$sim.out
 z5$summarize()
+
+data(freetrade)
+df <- head(freetrade, 1000)
+imp <- amelia(x = df , cs = "country", m = 10) 
+imp2 <- imp$imputations

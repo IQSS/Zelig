@@ -12,9 +12,6 @@
 #' @include model-logit.R
 #' @include model-gamma.R
 #' @include model-exp.R
-#' @include model-bbinchoice.R
-#' @include model-blogit.R
-#' @include model-bprobit.R
 #' @include model-relogit.R
 
 zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
@@ -36,10 +33,6 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
     z5 <- znormal$new()
   else if (model == "poisson")
     z5 <- zpoisson$new()
-  else if (model == "blogit")
-    z5 <- zblogit$new()
-  else if (model == "bprobit")
-    z5 <- zbprobit$new()
   else if (model == "expnorm")
     z5 <- zexpnorm$new()
   else if (model == "lognorm")
@@ -48,13 +41,13 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
     z5 <- ztobit$new()
   else
     stop("Model '", model,"' not found")
-  ## End: Zelig 5 models
+  ## End: Zelig 5 models (more to be linked from, e.g, Zelig5Choice)
   mf <- match.call()
   mf$model <- NULL
   mf$cite <- NULL
   mf[[1]] <- quote(z5$zelig)
   mf <- try(eval(mf, environment()))
-  if (class(mf) == "try-error")
+  if ("try-error" %in% class(mf))
     z5$zelig(formula = formula, data = data, ...)
   if (cite)
     z5$cite()
