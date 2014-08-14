@@ -86,6 +86,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation-quickstart">Installation &amp; Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-model-reference">Zelig Model Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-model-vignettes">Zelig Model Vignettes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -119,6 +120,10 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#zelig-model-reference">Zelig Model Reference</a></li>
+<li><a class="reference internal" href="#zelig-model-vignettes">Zelig Model Vignettes</a><ul>
+<li><a class="reference internal" href="#exponential-regression-for-duration-dependent-variables">Exponential Regression for Duration Dependent Variables</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -167,6 +172,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation-quickstart">Installation &amp; Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-model-reference">Zelig Model Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-model-vignettes">Zelig Model Vignettes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -287,6 +293,27 @@ see the zelig model reference which includes links to model implementation</p>
 <li>Rare Events Logistic Regression: <tt class="docutils literal"><span class="pre">zrelogit$new()</span></tt></li>
 <li>Tobit Regression: <tt class="docutils literal"><span class="pre">ztobit$new()</span></tt></li>
 </ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="zelig-model-vignettes">
+<h2>Zelig Model Vignettes<a class="headerlink" href="#zelig-model-vignettes" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="section" id="exponential-regression-for-duration-dependent-variables">
+<h3>Exponential Regression for Duration Dependent Variables<a class="headerlink" href="#exponential-regression-for-duration-dependent-variables" title="Permalink to this headline">¶</a></h3>
+<p>Use the exponential duration regression model if you have a dependent variable representing a duration (time until an event). The model assumes a constant hazard rate for all events. The dependent variable may be censored (for observations have not yet been completed when data were collected).</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+<span class="o">&gt;</span> x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+<span class="o">&gt;</span> s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Exponential models require that the dependent variable be in the form <tt class="docutils literal"><span class="pre">Surv(Y,</span> <span class="pre">C)</span></tt>, where <tt class="docutils literal"><span class="pre">Y</span></tt> and <tt class="docutils literal"><span class="pre">C</span></tt> are vectors of length <tt class="docutils literal"><span class="pre">n</span></tt>. For each observation <tt class="docutils literal"><span class="pre">i</span></tt> in 1, …, <tt class="docutils literal"><span class="pre">n</span></tt>, the value $y_i$ is the duration (lifetime, for example), and the associated $c_i$ is a binary variable such that $c_i = 1$ if the duration is not censored (<cite>*e.g.*</cite>, the subject dies during the study) or $c_i = 0$ if the duration is censored (<cite>*e.g.*</cite>, the subject is still alive at the end of the study and is know to live at least as long as $y_i$). If $c_i$ is omitted, all Y are assumed to be completed; that is, time defaults to 1 for all observations.</p>
+<p><strong>Input Values</strong></p>
+<p>In addition to the standard inputs, <cite>zelig()</cite> takes the following additional options for exponential regression:</p>
+<ul class="simple">
+<li><cite>robust</cite>: defaults to <cite>FALSE</cite>. If <cite>TRUE</cite>, <cite>zelig()</cite> computes robust standard errors based on sandwich estimators (see &#64;Huber81 and &#64;White80) and the options selected in <cite>cluster</cite>.</li>
+</ul>
+</div>
 </div>
 </div>
 
