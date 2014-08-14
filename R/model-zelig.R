@@ -1,5 +1,5 @@
-library(dplyr)
-library(plyr)
+# library(dplyr)
+# library(plyr)
 
 #' A class description
 #'

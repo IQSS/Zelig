@@ -13,6 +13,7 @@ set.seed(42)
 s.out <- sim(z.out, x = x.out, num=1000)
 summary(s.out)
 
+
 # Zelig 5 code:
 z5 <- zlogit$new()
 z5$zelig(admit ~ gre + gpa, data = mydata,
