@@ -68,6 +68,7 @@ sim <- function(obj, x = NULL, x1 = NULL, y = NULL, num = 1000, bootstrap = F,
   if (!is.null(x1)) {
     s15 <- x1$copy()
     s5$setx.out$x1 <- s15$setx.out$x
+    s5$bsetx1<-TRUE              #JH
   }
   s5$sim(num = num)
   return(s5)

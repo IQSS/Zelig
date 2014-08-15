@@ -179,7 +179,7 @@ z$methods(
     d <- plyr::mutate(.self$sim.out$x1, ev0 = .self$sim.out$x$ev)
     d <- d %>%
       do(fd = .$ev - .$ev0)
-    .self$sim.out$x1 <- mutate(.self$sim.out$x1, fd = d$fd)
+    .self$sim.out$x1 <- plyr::mutate(.self$sim.out$x1, fd = d$fd) #JH
   }
 )
 
