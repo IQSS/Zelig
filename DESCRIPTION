@@ -48,4 +48,5 @@ Collate:
     'model-relogit.R'
     'create-json.R'
     'wrappers.R'
+    'plots.R'
 VignetteBuilder: knitr
