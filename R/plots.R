@@ -136,3 +136,121 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
 
 
 
+
+#' Default Plot Design For Zelig Model QI's
+#'
+#' @author James Honaker with panel layouts from Matt Owen
+
+qi.plot <- function (obj, ...) {
+    # Save old state
+    old.par <- par(no.readonly=T)
+
+    # Determine whether two "Expected Values" qi's exist
+         both.ev.exist <- (length(obj$sim.out$x$ev)>0) & (length(obj$sim.out$x1$ev)>0)
+    # Determine whether two "Predicted Values" qi's exist
+         both.pv.exist <- (length(obj$sim.out$x$pv)>0) & (length(obj$sim.out$x1$pv)>0)
+
+    color.x <- rgb(242, 122, 94, maxColorValue=255)
+    color.x1 <- rgb(100, 149, 237, maxColorValue=255)
+    # Interpolation of the above colors in rgb color space:
+    color.mixed <- rgb(t(round((col2rgb(color.x) + col2rgb(color.x1))/2)), maxColorValue=255)
+    
+    if (! ("x" %in% names(obj$sim.out))) {
+        return(par(old.par))
+    } else if (! ("x1" %in% names(obj$sim.out))) {
+
+
+    panels <- matrix(1:2, 2, 1)
+        
+        # The plotting device:
+        #
+        # +-----------+
+        # |     1     |
+        # +-----------+
+        # |     2     |
+        # +-----------+
+    } else {
+        panels <- matrix(c(1:5, 5), ncol=2, nrow=3, byrow = TRUE)
+        
+        # the plotting device:
+        #
+        # +-----+-----+
+        # |  1  |  2  |
+        # +-----+-----+
+        # |  3  |  4  |
+        # +-----+-----+
+        # |     5     |
+        # +-----------+
+        
+        panels <- if (xor(both.ev.exist, both.pv.exist))
+        rbind(panels, c(6, 6))
+        
+        # the plotting device:
+        #
+        # +-----+-----+
+        # |  1  |  2  |
+        # +-----+-----+
+        # |  3  |  4  |
+        # +-----+-----+
+        # |     5     |
+        # +-----------+
+        # |     6     |
+        # +-----------+
+        
+        else if (both.ev.exist && both.pv.exist)
+        rbind(panels, c(6, 7))
+        else
+        panels
+        
+        # the plotting device:
+        #
+        # +-----+-----+
+        # |  1  |  2  |
+        # +-----+-----+
+        # |  3  |  4  |
+        # +-----+-----+
+        # |     5     |
+        # +-----+-----+
+        # |  6  |  7  |
+        # +-----+-----+
+    }
+    
+    layout(panels)
+    
+    titles <- obj$setx.labels
+    
+    # Plot each simulation
+    if(length(obj$sim.out$x$pv)>0)
+        simulations.plot(obj$sim.out$x$pv[[1]], main = titles$pv, col = color.x, line.col = "black")
+    
+    if(length(obj$sim.out$x1$pv)>0)
+        simulations.plot(obj$sim.out$x1$pv[[1]], main = titles$pv1, col = color.x1, line.col = "black")
+        
+    if(length(obj$sim.out$x$ev)>0)
+        simulations.plot(obj$sim.out$x$ev[[1]], main = titles$ev, col = color.x, line.col = "black")
+
+    if(length(obj$sim.out$x1$ev)>0)
+        simulations.plot(obj$sim.out$x1$ev[[1]], main = titles$ev1, col = color.x1, line.col = "black")
+
+    if(length(obj$sim.out$x1$fd)>0)
+        simulations.plot(obj$sim.out$x1$fd[[1]], main = titles$fd, col = color.mixed, line.col = "black")
+    
+    if(both.pv.exist)
+        simulations.plot(y=obj$sim.out$x$pv[[1]], y1=obj$sim.out$x1$pv[[1]], main = "Comparison of Y|X and Y|X1", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
+        
+    if(both.ev.exist)
+        simulations.plot(y=obj$sim.out$x$ev[[1]], y1=obj$sim.out$x1$ev[[1]], main = "Comparison of E(Y|X) and E(Y|X1)", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
+
+    
+    # Restore old state
+    par(old.par)
+    
+    # Return old parameter invisibly
+    invisible(old.par)
+}
+
+
+
+
+
+
