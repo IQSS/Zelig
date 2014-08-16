@@ -197,6 +197,12 @@ z$methods(
 )
 
 z$methods(
+  plot = function() {
+    qi.plot(.self)
+  }
+)
+
+z$methods(
   show = function() {
     if ("uninitializedField" %in% class(.self$zelig.out))
       cat("Next step: Use 'zelig' method")
