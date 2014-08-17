@@ -26,8 +26,10 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         bsetx = "logical",
                                         bsetx1 = "logical",
                                         bsetrange = "logical",
+                                        bsetrange1 = "logical",
                                         range = "ANY",
-                                        
+                                        range1 = "ANY",
+
                                         sim.out = "list", # simulated qi's
                                         simparam = "ANY", # simulated parameters
                                         num = "numeric", # nb of simulations
@@ -59,6 +61,7 @@ z$methods(
     .self$bsetx <- FALSE
     .self$bsetx1 <- FALSE
     .self$bsetrange <- FALSE
+    .self$bsetrange1 <- FALSE
     # JSON
     .self$explanatory <- c("continuous",
                            "discrete",
@@ -146,6 +149,22 @@ z$methods(
 )
 
 z$methods(
+setrange1 = function(...) {
+  .self$bsetrange1 <- TRUE
+    rng <- list()
+    s <- list(...)
+    m <- expand.grid(s)
+    .self$range1 <- m
+    .self$setx.out$range1 <- list()
+    for (i in 1:nrow(m)) {
+        l <- as.list(as.list(m[i, ]))
+        names(l) <- names(m)
+        .self$setx.out$range1[[i]] <- .self$set(l)
+    }
+  }
+)
+
+z$methods(
   sim = function(num = 1000) {
     .self$num <- num
     .self$simparam <- .self$zelig.out %>%
@@ -156,6 +175,8 @@ z$methods(
       .self$simx1()
     if (.self$bsetrange)
       .self$simrange()
+    if (.self$bsetrange1)
+      .self$simrange1()
   }
 )
 
@@ -197,6 +218,20 @@ z$methods(
 )
 
 z$methods(
+simrange1 = function() {
+    .self$sim.out$range1 <- list()
+    for (i in 1:nrow(.self$range1)) {
+        d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
+        d <- plyr::mutate(d, mm = .self$setx.out$range1[[i]]$mm)
+        .self$sim.out$range1[[i]] <-  d %>%
+        do(qi = .self$qi(.$simparam, .$mm)) %>%
+        do(ev = .$qi$ev, pv = .$qi$pv)
+    }
+  }
+)
+
+
+z$methods(
   plot = function() {
     qi.plot(.self)
   }
@@ -219,6 +254,8 @@ z$methods(
       print(.self$setx.out$x1$mm)
       cat("setrange:\n")
       print(.self$setx.out$range[[1]]$mm)
+      cat("setrange1:\n")
+      print(.self$setx.out$range1[[1]]$mm)
       cat("Next step: Use 'sim' method")
     } else { # sim.out
       pstat <- function(s.out, what = "sim x") {
@@ -245,6 +282,15 @@ z$methods(
           pstat(.self$sim.out$range[[i]], "sim range")
           cat("\n")
         }
+      }
+      if (!is.null(.self$setx.out$range1)) {
+          for (i in seq(.self$sim.out$range1)) {
+              cat("\n")
+              print(.self$range1[i, ])
+              cat("\n")
+              pstat(.self$sim.out$range1[[i]], "sim range")
+              cat("\n")
+          }
       }
     }
   }

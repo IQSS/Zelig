@@ -70,11 +70,9 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
   }
 
   if( max(hold)>1 ){
-      print("a")
     x5$setrange(...)
   } else {
-      print("b")
-      x5$setx(...)
+    x5$setx(...)
   }
   return(x5)
 }
@@ -93,9 +91,6 @@ sim <- function(obj, x = NULL, x1 = NULL, y = NULL, num = 1000, bootstrap = F,
     }
   }
   s5$sim(num = num)
-  if (!is.null(s5$setx.out$range)){
-    s5$simrange()
-  }
   return(s5)
 }
 
