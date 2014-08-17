@@ -352,7 +352,7 @@ plot.ci <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
     }
     position<-min(position)
     xseq<-xmatrix[,position]
-    xname<-xvarnames[position] #"There is no name presently"  #names(x[[1]]$x$data[position])
+    xname<-xvarnames[position] 
     
     # Use "qi" argument to select quantities of interest and set labels
     ev1<-NULL

@@ -57,7 +57,25 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #   .Deprecated("\nz$new() \nz$zelig(...) \nz$setx() or z$setx1 or z$setrange")
   x5 <- obj$copy()
-  x5$setx(...)
+  
+  # This is the length of each argument in '...'s
+  s <- list(...)
+  if(length(s)>0){
+    hold<-rep(1,length(s))
+    for(i in 1:length(s)){
+      hold[i]<-length(s[i][[1]])
+    }
+  }else{
+    hold<-1
+  }
+
+  if( max(hold)>1 ){
+      print("a")
+    x5$setrange(...)
+  } else {
+      print("b")
+      x5$setx(...)
+  }
   return(x5)
 }
 
@@ -69,7 +87,15 @@ sim <- function(obj, x = NULL, x1 = NULL, y = NULL, num = 1000, bootstrap = F,
     s15 <- x1$copy()
     s5$setx.out$x1 <- s15$setx.out$x
     s5$bsetx1<-TRUE              #JH
+    if (!is.null(s15$setx.out$range)){
+        s5$setx.out$range1 <- s15$setx.out$range
+        s5$bsetxrange1<-TRUE
+    }
   }
   s5$sim(num = num)
+  if (!is.null(s5$setx.out$range)){
+    s5$simrange()
+  }
   return(s5)
 }
+
