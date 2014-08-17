@@ -251,6 +251,309 @@ qi.plot <- function (obj, ...) {
 
 
 
+#' Method for plotting qi simulations across a range within a variable, with confidence intervals
+#'
+#' @param x A reference class zelig5 object
+#' @param qi a character-string specifying the quantity of interest to plot
+#' @param var The variable to be used on the x-axis. Default is the variable
+#' across all the chosen values with smallest nonzero variance
+#' @param ... Parameters to be passed to the `truehist' function which is
+#' implicitly called for numeric simulations
+#' @param main a character-string specifying the main heading of the plot
+#' @param sub a character-string specifying the sub heading of the plot
+#' @param xlab a character-string specifying the label for the x-axis
+#' @param ylab a character-string specifying the label for the y-axis
+#' @param legcol ``legend color'', an valid color used for plotting the line
+#' colors in the legend
+#' @param col a valid vector of colors of at least length 3 to use to color the
+#' confidence intervals
+#' @param leg ``legend position'', an integer from 1 to 4, specifying the
+#' position of the legend. 1 to 4 correspond to ``SE'', ``SW'', ``NW'', and
+#' ``NE'' respectively
+#' @param legpos ``legend type'', exact coordinates and sizes for legend.
+#' Overrides argment ``leg.type''
+#' @return the current graphical parameters. This is subject to change in future
+#' implementations of Zelig
+#' @author James Honaker
+#' @export plot.ci
+#' @usage \method{plot}{ci}(obj, qi="ev", var=NULL, ..., legcol="gray20", col=NULL, leg=1, legpos=NULL)
+plot.ci <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL, legcol="gray20", col=NULL, leg=1, legpos=NULL, ci=c(80,95,99.9)) {
+    
+    if(length(ci)<3){
+        ci<-rep(ci,3)
+    }
+    if(length(ci)>3){
+        ci<-ci[1:3]
+    }
+    ci<-sort(ci)
+    
+    d<-length(obj$sim.out$range)
+    
+    if (d<1) {
+        return()  # Should add warning
+    }
+    
+    xmatrix<-matrix(NA,nrow=d, ncol=length( obj$setx.out$range[[1]]$mm[[1]] ))    # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+    
+    for(i in 1:d){
+        xmatrix[i,]<-as.matrix( obj$setx.out$range[[i]]$mm[[1]] )   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+    }
+    
+    if (d == 1 && is.null(var)) {
+        warning("Must specify the `var` parameter when plotting the confidence interval of an unvarying model. Plotting nothing.")
+        return(invisible(FALSE))
+    }
+    
+    xvarnames<-names(as.data.frame(sb.out$setx.out$range[[1]]$mm[[1]]))  # MUST BE A BETTER WAY/PATH TO GET NAMES
+    
+    if(is.character(var)){
+        if( !(var %in% xvarnames   ) ){
+            warning("Specified variable for confidence interval plot is not in estimated model.  Plotting nothing.")
+            return(invisible(FALSE))
+        }
+    }
+    
+    # Define function to cycle over range list and extract correct qi's
+    extract.sims<-function(obj,qi){
+        d<-length(obj$sim.out$range)
+        k<-length(obj$sim.out$range[[1]][qi][[1]][[1]])   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        hold<-matrix(NA,nrow=k, ncol=d)
+        for(i in 1:d){
+            hold[,i]<-obj$sim.out$range[[i]][qi][[1]][[1]]  # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        }
+        return(hold)
+    }
+    
+    # Define functions to compute confidence intervals
+    ci.upper <- function (x, alpha) {
+        pos <- max(round((1-(alpha/100))*length(x)), 1)
+        return(sort(x)[pos])
+    }
+    
+    ci.lower <- function (x, alpha) {
+        pos<-max(round((alpha/100)*length(x)), 1)
+        return(sort(x)[pos])
+    }
+    
+    
+    
+    if (is.null(var)) {
+        each.var <- apply(xmatrix,2,sd)
+        flag <- each.var>0
+        min.var<-min(each.var[flag])
+        var.seq<-1:ncol(xmatrix)
+        position<-var.seq[each.var==min.var]
+    } else {
+        if(is.numeric(var)){
+            position<-var
+        }else if(is.character(var)){
+           position<-grep(var,xvarnames )
+        }
+    }
+    position<-min(position)
+    xseq<-xmatrix[,position]
+    xname<-xvarnames[position] #"There is no name presently"  #names(x[[1]]$x$data[position])
+    
+    # Use "qi" argument to select quantities of interest and set labels
+    ev1<-NULL
+    if(qi=="pv"){    # Note: nothing done for qi="fd"
+        if(!is.null(obj$sim.out$range$pv1)){
+            ev1<-extract.sims(obj,qi=qi)
+        }
+    } else if(qi=="ev") {
+        if(!is.null(obj$sim.out$range$ev1)){
+            ev1<-extract.sims(obj,qi=qi)
+        }
+    }
+    ev<-extract.sims(obj,qi=qi)
+    if (is.null(ylab)){
+        ylab <- as.character(obj$setx.labels[qi])
+    }
+    
+    #
+    k<-ncol(ev)
+    n<-nrow(ev)
+    
+    #
+    if(is.null(col)){
+        myblue1<-rgb( 100, 149, 237, alpha=50, maxColorValue=255)
+        myblue2<-rgb( 152, 245, 255, alpha=50, maxColorValue=255)
+        myblue3<-rgb( 191, 239, 255, alpha=70, maxColorValue=255)
+        myred1 <-rgb( 237, 149, 100, alpha=50, maxColorValue=255)
+        myred2 <-rgb( 255, 245, 152, alpha=50, maxColorValue=255)
+        myred3 <-rgb( 255, 239, 191, alpha=70, maxColorValue=255)
+        
+        col<-c(myblue1,myblue2,myblue3,myred1,myred2,myred3)
+    }else{
+        if(length(col)<6){
+            col<-rep(col,6)[1:6]
+        }
+    }
+    
+    # Define function to numerically extract summaries of distributions from set of all simulated qi's
+    form.history <- function (k,xseq,results,ci=c(80,95,99.9)){
+        
+        history<-matrix(NA, nrow=k,ncol=8)
+        for (i in 1:k) {
+            v <- c(
+            xseq[i],
+            median(results[,i]),
+            
+            ci.upper(results[,i],ci[1]),
+            ci.lower(results[,i],ci[1]),
+            
+            ci.upper(results[,i],ci[2]),
+            ci.lower(results[,i],ci[2]),
+            
+            ci.upper(results[,i],ci[3]),
+            ci.lower(results[,i],ci[3])
+            )
+            
+            history[i, ] <- v
+        }
+        if (k == 1) {
+            left <- c(
+            xseq[1]-.5,
+            median(results[,1]),
+            
+            ci.upper(results[,1],ci[1]),
+            ci.lower(results[,1],ci[1]),
+            
+            ci.upper(results[,1],ci[2]),
+            ci.lower(results[,1],ci[2]),
+            
+            ci.upper(results[,1],ci[3]),
+            ci.lower(results[,1],ci[3])
+            )
+            right <- c(
+            xseq[1]+.5,
+            median(results[,1]),
+            
+            ci.upper(results[,1],ci[1]),
+            ci.lower(results[,1],ci[1]),
+            
+            ci.upper(results[,1],ci[2]),
+            ci.lower(results[,1],ci[2]),
+            
+            ci.upper(results[,1],ci[3]),
+            ci.lower(results[,1],ci[3])
+            )
+            v <- c(
+            xseq[1],
+            median(results[,1]),
+            
+            ci.upper(results[,1],ci[1]),
+            ci.lower(results[,1],ci[1]),
+            
+            ci.upper(results[,1],ci[2]),
+            ci.lower(results[,1],ci[2]),
+            
+            ci.upper(results[,1],ci[3]),
+            ci.lower(results[,1],ci[3])
+            )
+            history <- rbind(left, v, right)
+        }
+        
+        return(history)
+    }
+
+    history<-  form.history(k,xseq,ev,ci)
+    if(!is.null(ev1)){
+        history1<- form.history(k,xseq,ev1,ci)
+    }else{
+        history1<-NULL
+    }
+    
+    # This is for small sets that have been duplicated so as to have observable volume
+    if(k==1){
+        k<-3
+    }
+   
+    # Specify x-axis length
+    all.xlim <- if (is.null(xlim))
+    c(min(c(history[, 1],history1[, 1])),max(c(history[, 1],history1[, 1])))
+    else
+    xlim
+    
+    
+    # Specify y-axis length
+    all.ylim <-if (is.null(ylim))
+    c(min(c(history[, -1],history1[, -1])),max(c(history[, -1],history1[, -1])))
+    else
+    ylim
+    
+    
+    # Define xlabel
+    if (is.null(xlab))
+    xlab <- paste("Range of",xname)
+    
+    if (is.null(ylab))
+    ylab <- "Expected Values: E(Y|X)"
+    
+    ## This is the plot
+    
+    par(bty="n")
+    plot(x=history[, 1], y=history[, 2], type="l", xlim=all.xlim, ylim=all.ylim, main = main, sub = sub, xlab=xlab, ylab=ylab)
+
+    polygon(c(history[,1],history[k:1,1]),c(history[,7],history[k:1,8]),col=col[3],border="white")
+    polygon(c(history[,1],history[k:1,1]),c(history[,5],history[k:1,6]),col=col[2],border="gray90")
+    polygon(c(history[,1],history[k:1,1]),c(history[,3],history[k:1,4]),col=col[1],border="gray60")
+    polygon(c(history[,1],history[k:1,1]),c(history[,7],history[k:1,8]),col=NA,border="white")
+
+  
+    if(!is.null(ev1)){
+        lines(x=history1[, 1], y=history1[, 2], type="l")
+        
+        polygon(c(history1[,1],history1[k:1,1]),c(history1[,7],history1[k:1,8]),col=col[6],border="white")
+        polygon(c(history1[,1],history1[k:1,1]),c(history1[,5],history1[k:1,6]),col=col[5],border="gray90")
+        polygon(c(history1[,1],history1[k:1,1]),c(history1[,3],history1[k:1,4]),col=col[4],border="gray60")
+        polygon(c(history1[,1],history1[k:1,1]),c(history1[,7],history1[k:1,8]),col=NA,border="white")
+        
+    }
+
+   
+    
+    ## This is the legend
+    
+    if(is.null(legpos)){
+        if(leg==1){
+            legpos<-c(.91,.04,.2,.05)
+        }else if(leg==2){
+            legpos<-c(.09,.04,.2,.05)
+        }else if(leg==3){
+            legpos<-c(.09,.04,.8,.05)
+        }else{
+            legpos<-c(.91,.04,.8,.05)
+        }
+    }
+    
+    lx<-min(all.xlim)+ legpos[1]*(max(all.xlim)- min(all.xlim))
+    hx<-min(all.xlim)+ (legpos[1]+legpos[2])*(max(all.xlim)- min(all.xlim))
+    
+    deltax<-(hx-lx)*.1
+    
+    my<-min(all.ylim) +legpos[3]*min(max(all.ylim) - min(all.ylim))
+    dy<-legpos[4]*(max(all.ylim) - min(all.ylim))
+    
+    
+    lines(c(hx+deltax,hx+2*deltax,hx+2*deltax,hx+deltax),c(my+3*dy,my+3*dy,my-3*dy,my-3*dy),col=legcol)
+    lines(c(hx+3*deltax,hx+4*deltax,hx+4*deltax,hx+3*deltax),c(my+1*dy,my+1*dy,my-1*dy,my-1*dy),col=legcol)
+    lines(c(lx-deltax,lx-2*deltax,lx-2*deltax,lx-deltax),c(my+2*dy,my+2*dy,my-2*dy,my-2*dy),col=legcol)
+    lines(c(lx-5*deltax,lx),c(my,my),col="white",lwd=3)
+    lines(c(lx-5*deltax,lx),c(my,my),col=legcol)
+    lines(c(lx,hx),c(my,my))
+    
+    polygon(c(lx,lx,hx,hx),c(my-3*dy,my+3*dy,my+3*dy,my-3*dy),col=col[3],border="white")
+    polygon(c(lx,lx,hx,hx),c(my-2*dy,my+2*dy,my+2*dy,my-2*dy),col=col[2],border="gray90")
+    polygon(c(lx,lx,hx,hx),c(my-1*dy,my+1*dy,my+1*dy,my-1*dy),col=col[1],border="gray60")
+    polygon(c(lx,lx,hx,hx),c(my-3*dy,my+3*dy,my+3*dy,my-3*dy),col=NA,border="white")
+    
+    text(lx,my,labels="median",pos=2,cex=0.5,col=legcol)
+    text(lx,my+2*dy,labels=paste("ci",ci[2],sep=""),pos=2,cex=0.5,col=legcol)
+    text(hx,my+1*dy,labels=paste("ci",ci[1],sep=""),pos=4,cex=0.5,col=legcol)
+    text(hx,my+3*dy,labels=paste("ci",ci[3],sep=""),pos=4,cex=0.5,col=legcol)
+}
+
 
 
 
