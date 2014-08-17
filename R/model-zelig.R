@@ -218,7 +218,7 @@ z$methods(
       cat("setx1:\n")
       print(.self$setx.out$x1$mm)
       cat("setrange:\n")
-      print(.self$setx.out$range$mm)
+      print(.self$setx.out$range[[1]]$mm)
       cat("Next step: Use 'sim' method")
     } else { # sim.out
       pstat <- function(s.out, what = "sim x") {
