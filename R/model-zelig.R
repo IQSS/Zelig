@@ -233,7 +233,7 @@ simrange1 = function() {
 
 z$methods(
   plot = function() {
-    qi.plot(.self)
+    plot.qi(.self)
   }
 )
 

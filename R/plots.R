@@ -141,7 +141,7 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
 #'
 #' @author James Honaker with panel layouts from Matt Owen
 
-qi.plot <- function (obj, ...) {
+plot.qi <- function (obj, ...) {
     # Save old state
     old.par <- par(no.readonly=T)
 
@@ -323,7 +323,18 @@ plot.ci <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         }
         return(hold)
     }
-    
+
+    extract.sims1<-function(obj,qi){    #Should find better architecture for alternate range sims
+        d<-length(obj$sim.out$range1)
+        k<-length(obj$sim.out$range1[[1]][qi][[1]][[1]])   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        hold<-matrix(NA,nrow=k, ncol=d)
+        for(i in 1:d){
+            hold[,i]<-obj$sim.out$range1[[i]][qi][[1]][[1]]  # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        }
+        return(hold)
+    }
+
+
     # Define functions to compute confidence intervals
     ci.upper <- function (x, alpha) {
         pos <- max(round((1-(alpha/100))*length(x)), 1)
@@ -356,14 +367,8 @@ plot.ci <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
     
     # Use "qi" argument to select quantities of interest and set labels
     ev1<-NULL
-    if(qi=="pv"){    # Note: nothing done for qi="fd"
-        if(!is.null(obj$sim.out$range$pv1)){
-            ev1<-extract.sims(obj,qi=qi)
-        }
-    } else if(qi=="ev") {
-        if(!is.null(obj$sim.out$range$ev1)){
-            ev1<-extract.sims(obj,qi=qi)
-        }
+    if(!is.null(obj$sim.out$range1)){
+        ev1<-extract.sims1(obj,qi=qi)
     }
     ev<-extract.sims(obj,qi=qi)
     if (is.null(ylab)){

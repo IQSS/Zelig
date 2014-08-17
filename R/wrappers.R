@@ -83,14 +83,18 @@ sim <- function(obj, x = NULL, x1 = NULL, y = NULL, num = 1000, bootstrap = F,
   s5 <- x$copy()
   if (!is.null(x1)) {
     s15 <- x1$copy()
-    s5$setx.out$x1 <- s15$setx.out$x
-    s5$bsetx1<-TRUE              #JH
+    if (!is.null(s15$setx.out$x)){
+        s5$setx.out$x1 <- s15$setx.out$x
+        s5$bsetx1<-TRUE
+    }
     if (!is.null(s15$setx.out$range)){
+        s5$range1<-s15$range
         s5$setx.out$range1 <- s15$setx.out$range
-        s5$bsetxrange1<-TRUE
+        s5$bsetrange1<-TRUE
     }
   }
   s5$sim(num = num)
-  return(s5)
+
+return(s5)
 }
 
