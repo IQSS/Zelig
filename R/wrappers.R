@@ -39,6 +39,8 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
     z5 <- zlognorm$new()
   else if (model == "tobit")
     z5 <- ztobit$new()
+  else if (model == "relogit")
+    z5 <- zrelogit$new()
   else
     stop("Model '", model,"' not found")
   ## End: Zelig 5 models (more to be linked from, e.g, Zelig5Choice)
