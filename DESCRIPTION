@@ -24,8 +24,8 @@ Depends:
     jsonlite,
     AER,
     quantreg,
-    dplyr,
-    plyr
+    plyr,
+    dplyr
 Suggests:
     testthat,
     knitr
