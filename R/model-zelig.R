@@ -29,7 +29,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         bsetrange1 = "logical",
                                         range = "ANY",
                                         range1 = "ANY",
-
+                                        
                                         sim.out = "list", # simulated qi's
                                         simparam = "ANY", # simulated parameters
                                         num = "numeric", # nb of simulations
@@ -113,7 +113,7 @@ z$methods(
     update <- .self$data %>% 
       regroup(lapply(.self$by, as.symbol)) %>% 
       do(mm = model.matrix(f, reduce(dataset = ., s, 
-                       model = .self$zelig.out$z.out[[1]])))
+                                     model = .self$zelig.out$z.out[[1]])))
     return(update)
   }
 )
@@ -149,17 +149,17 @@ z$methods(
 )
 
 z$methods(
-setrange1 = function(...) {
-  .self$bsetrange1 <- TRUE
+  setrange1 = function(...) {
+    .self$bsetrange1 <- TRUE
     rng <- list()
     s <- list(...)
     m <- expand.grid(s)
     .self$range1 <- m
     .self$setx.out$range1 <- list()
     for (i in 1:nrow(m)) {
-        l <- as.list(as.list(m[i, ]))
-        names(l) <- names(m)
-        .self$setx.out$range1[[i]] <- .self$set(l)
+      l <- as.list(as.list(m[i, ]))
+      names(l) <- names(m)
+      .self$setx.out$range1[[i]] <- .self$set(l)
     }
   }
 )
@@ -218,12 +218,12 @@ z$methods(
 )
 
 z$methods(
-simrange1 = function() {
+  simrange1 = function() {
     .self$sim.out$range1 <- list()
     for (i in 1:nrow(.self$range1)) {
-        d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-        d <- plyr::mutate(d, mm = .self$setx.out$range1[[i]]$mm)
-        .self$sim.out$range1[[i]] <-  d %>%
+      d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
+      d <- plyr::mutate(d, mm = .self$setx.out$range1[[i]]$mm)
+      .self$sim.out$range1[[i]] <-  d %>%
         do(qi = .self$qi(.$simparam, .$mm)) %>%
         do(ev = .$qi$ev, pv = .$qi$pv)
     }
@@ -269,8 +269,8 @@ z$methods(
                      if (!is.null(.$fd)) {
                        cat("fd\n")
                        print(stat(.$fd, .self$num))}
-                       }
-                     )
+          }
+          )
       }
       pstat(.self$sim.out$x)
       pstat(.self$sim.out$x1, "sim x1")
@@ -284,13 +284,13 @@ z$methods(
         }
       }
       if (!is.null(.self$setx.out$range1)) {
-          for (i in seq(.self$sim.out$range1)) {
-              cat("\n")
-              print(.self$range1[i, ])
-              cat("\n")
-              pstat(.self$sim.out$range1[[i]], "sim range")
-              cat("\n")
-          }
+        for (i in seq(.self$sim.out$range1)) {
+          cat("\n")
+          print(.self$range1[i, ])
+          cat("\n")
+          pstat(.self$sim.out$range1[[i]], "sim range")
+          cat("\n")
+        }
       }
     }
   }
