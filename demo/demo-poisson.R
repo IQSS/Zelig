@@ -6,8 +6,6 @@ p <- within(p, {
 })
 head(p)
 
-library(MASS)
-
 w <- runif(200)
 
 # Zelig 4 code:
@@ -35,7 +33,7 @@ z5$summarize()
 z5$cite()
 
 z5 <- zpoisson$new()
-z5$zelig(num_awards ~ + math, data = p, by = c("prog", "num_awards"))
+z5$zelig(num_awards ~ + math, data = p, by = c("prog"))
 z5
 z5$zelig.call
 z5$model.call
@@ -43,8 +41,13 @@ z5$zelig.out
 z5$zelig.out$z.out
 z5$setx(math = 40)
 set.seed(42)
+.self <- z5
 z5$sim(num = 1000)
 z5$summarize()
 z5$cite()
 
+.self$simparam <- .self$zelig.out %>%
+  do(simparam = .self$param(.$z.out))
 
+.self$simparam <- .self$zelig.out %>%
+  do(x = .$z.out)
