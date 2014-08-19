@@ -41,9 +41,6 @@ by(turnout,  factor(turnout$race),
 by(turnout,  factor(turnout$race),
    function(x) zelig(vote ~ age , data = x, model = "ls"))
 
-z.out <- by(turnout,  factor(turnout$race),
-   function(x) zeligw(vote ~ age , data = x, model = "ls"))
-
 by(turnout,  factor(turnout$race),
    function(x) {
      z.out <<- zelig(vote ~ age , data = x, model = "ls")

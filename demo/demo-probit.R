@@ -1,11 +1,3 @@
-source(file.path("..", "R", "utils.R"))
-source(file.path("..", "R", "model-zelig.R"))
-source(file.path("..", "R", "model-glm.R"))
-source(file.path("..", "R", "model-binchoice.R"))
-source(file.path("..", "R", "model-probit.R"))
-
-library(MASS)
-
 mydata <- read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
 mydata$rank <- factor(mydata$rank)
 
