@@ -13,11 +13,6 @@ summary(s.out1)
 
 # Zelig 5 code:
 z5 <- zrelogit$new()
-
-r <- relogit(conflict ~ major + contig + power + maxdem + mindem + years,
-             data = mid, tau = 1042/303772)
-r
-
 z5$zelig(conflict ~ major + contig + power + maxdem
          + mindem + years, data = mid, tau = 1042/303772)
 z5
@@ -27,6 +22,8 @@ set.seed(42)
 z5$sim(num=1000)
 z5$summarize()
 z5$cite()
+z5$plotting()
+plot(z5)
 
 ## Example 2
 
@@ -81,3 +78,7 @@ z5$cite()
 # z5$sim(num=1000)
 # z5$summarize()
 # z5$cite()
+
+# r <- relogit(conflict ~ major + contig + power + maxdem + mindem + years,
+#              data = mid, tau = 1042/303772)
+# rs

@@ -230,13 +230,6 @@ z$methods(
   }
 )
 
-
-z$methods(
-  plot = function() {
-    plot.qi(.self)
-  }
-)
-
 z$methods(
   show = function() {
     if ("uninitializedField" %in% class(.self$zelig.out))
@@ -313,6 +306,12 @@ z$methods(
 )
 
 z$methods(
+  graph = function() {
+    plot.qi(.self)
+  }
+)
+
+z$methods(
   summarize = function(...) {
     show(...)
   }
@@ -333,6 +332,12 @@ z$methods(
 setMethod("summary", "Zelig",
           function(object, ...) {
             object$summarize()
+          }
+)
+
+setMethod("plot", "Zelig",
+          function(x, ...) {
+            x$graph()
           }
 )
 
