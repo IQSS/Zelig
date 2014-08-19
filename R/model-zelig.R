@@ -246,7 +246,7 @@ z$methods(
         do(summ = {cat("Model: ")
                    cat(unlist(.[.self$by]))
                    print(.$z.out)})
-      cat("Next step: Use 'setx' method")
+      cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
       cat("setx:\n")
       print(.self$setx.out$x$mm)
@@ -256,7 +256,7 @@ z$methods(
       print(.self$setx.out$range[[1]]$mm)
       cat("setrange1:\n")
       print(.self$setx.out$range1[[1]]$mm)
-      cat("Next step: Use 'sim' method")
+      cat("Next step: Use 'sim' method\n")
     } else { # sim.out
       pstat <- function(s.out, what = "sim x") {
         simu <- s.out %>%
