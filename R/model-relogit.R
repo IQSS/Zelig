@@ -3,19 +3,26 @@
 #' @include model-binchoice.R
 #' @include model-logit.R
 zrelogit <- setRefClass("Zelig-relogit",
-                      contains="Zelig-logit")
+                      contains = "Zelig",
+                      fields = list(family = "character",
+                                    link = "character",
+                                    linkinv = "function"))
 
 zrelogit$methods(
   initialize = function() {
     callSuper()
-    .self$model <- "relogit"
-    .self$text <- "Rare Events Logistic Regression for Dichotomous Dependent Variables"
+    .self$name <- "relogit"
+    .self$description <- "Rare Events Logistic Regression for Dichotomous Dependent Variables"
+    .self$fn <- quote(relogit)
+    .self$family <- "binomial"
+    .self$link <- "logit"
   }
 )
 
 zrelogit$methods(
-  zelig = function(formula, ..., tau = NULL, bias.correct = NULL, case.control = NULL, data) {
+  zelig = function(formula, ..., tau = NULL, bias.correct = NULL, case.control = NULL, data, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
+    .self$model.call <- match.call(expand.dots = TRUE)
     # Catch NULL case.control
     if (is.null(case.control))
       case.control <- "prior"
@@ -26,14 +33,33 @@ zrelogit$methods(
     #   cbind(y, 1-y) ~ x1 + x2 + x3 + ... + xN
     # Where y is the response.
     form <- update(formula, cbind(., 1 - .) ~ .)
-    callSuper(formula = formula, data = data, ..., weights = NULL)
-    .self$model.call[[1]] <- quote(relogit)
     .self$model.call$formula <- form
     .self$model.call$case.control <- case.control
     .self$model.call$bias.correct <- bias.correct
     .self$model.call$tau <- tau
-    .self$fn <- relogit
-    .self$zelig.out <- eval(.self$model.call)
+    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
+  }
+)
+
+zrelogit$methods(
+  param = function(z.out) {
+    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
+  }
+)
+
+zrelogit$methods(
+  qi = function(simparam, mm) {
+    .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
+    coeff <- simparam
+    eta <- simparam %*% t(mm)
+    eta <- Filter(function (y) !is.na(y), eta)
+    theta <- matrix(.self$linkinv(eta), nrow = nrow(coeff))
+    ev <- matrix(.self$linkinv(eta), ncol = ncol(theta))
+    pv <- matrix(nrow = nrow(ev), ncol = ncol(ev))
+    for (j in 1:ncol(ev))
+      pv[, j] <- rbinom(length(ev[, j]), 1, prob = ev[, j])
+    levels(pv) <- c(0, 1)
+    return(list(ev = ev, pv = pv))
   }
 )
 
@@ -67,9 +93,9 @@ relogit <- function(formula,
     mf[[1]] <- relogit
     res <- list()
     mf$tau <- min(tau)
-    res$lower.estimate <- eval(as.call(mf))
+    res$lower.estimate <- eval(as.call(mf), parent.frame())
     mf$tau <- max(tau)
-    res$upper.estimate <- eval(as.call(mf))
+    res$upper.estimate <- eval(as.call(mf), parent.frame())
     res$formula <- formula
     class(res) <- c("Relogit2", "Relogit")
     return(res)
@@ -89,7 +115,7 @@ relogit <- function(formula,
       wi <- w1 * y + w0 * (1 - y)
       mf$weights <- wi
     }
-    res <- eval(as.call(mf))
+    res <- eval(as.call(mf), parent.frame())
     res$call <- match.call(expand.dots = TRUE)
     res$tau <- tau
     X <- model.matrix(res)

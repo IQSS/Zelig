@@ -13,7 +13,7 @@ zglm$methods(
 )
 
 zglm$methods(
-  zelig = function(formula, data, ..., weights=NULL, by = NULL) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
     .self$model.call$family <- call(.self$family, .self$link)
