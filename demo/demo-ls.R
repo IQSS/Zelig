@@ -23,15 +23,10 @@ z5$setx1(speed = 30)
 z5$setx()
 z5$setx.out
 z5
-# .self <- z5
 set.seed(42)
 z5$sim(num=3)
 z5$sim.out
 z5
-.self <- z5
-# .self <- z5
-# z5$ev
-# z5$ev("x")
 z5$summarize()
 z5$cite()
 
