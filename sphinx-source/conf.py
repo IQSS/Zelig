@@ -280,5 +280,5 @@ man_pages = [
 #texinfo_show_urls = 'footnote'
 
 # Extensions
-sys.path.append(os.path.abspath('exts'))
-extensions = ['sphinxtogithub']
+# sys.path.append(os.path.abspath('exts'))
+# extensions = ['sphinxtogithub']
