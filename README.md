@@ -4,7 +4,7 @@
 
 
 Project page and publications available at: 
-http://datascience.iq.harvard.edu/zelig
+http://zeligproject.org
 
 <br>
 
