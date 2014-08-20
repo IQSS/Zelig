@@ -14,8 +14,7 @@ exportClasses(
      "Zelig-normal",
      "Zelig-poisson",
      "Zelig-lognorm",
-     "Zelig-tobit",
-     "Zelig-quantile"
+     "Zelig-tobit"
 )
 
 importFrom(methods, setRefClass)

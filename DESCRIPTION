@@ -23,7 +23,6 @@ Depends:
     VGAM,
     jsonlite,
     AER,
-    quantreg,
     plyr,
     dplyr
 Suggests:
@@ -44,7 +43,6 @@ Collate:
     'model-logit.R'
     'model-gamma.R'
     'model-exp.R'
-    'model-quantile.R'
     'model-relogit.R'
     'create-json.R'
     'wrappers.R'
