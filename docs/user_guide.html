@@ -80,12 +80,14 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#id1">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#running-models">Running Models</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation-quickstart">Installation &amp; Quickstart</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-models">Running Models</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-model-reference">Zelig Model Reference</a></li>
@@ -101,6 +103,9 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
@@ -125,6 +130,7 @@
 <li><a class="reference internal" href="#installation-quickstart">Installation &amp; Quickstart</a><ul>
 <li><a class="reference internal" href="#id1">Installation</a></li>
 <li><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li><a class="reference internal" href="#running-models">Running Models</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#zelig-model-reference">Zelig Model Reference</a></li>
@@ -186,6 +192,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation-quickstart">Installation &amp; Quickstart</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-models">Running Models</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-model-reference">Zelig Model Reference</a></li>
@@ -216,77 +223,124 @@
 <p>Zelig 5.0 is the latest version of the Zelig framework for interfacing with a wide range of statistical models and analytic methods in the R statistical programming enviornment. This release expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture.</p>
 <div class="section" id="installation-quickstart">
 <span id="installation"></span><span id="devguide-writing-new-models"></span><h2>Installation &amp; Quickstart<a class="headerlink" href="#installation-quickstart" title="Permalink to this headline">¶</a></h2>
-<p>This guide is designed to get you up and running with the current <em>alpha</em> release, Zelig 5.0.1. For more detailed tutorials see individual model vignettes.  COMMENT- NEED MORE INFO HERE ABOUT TUTORIALS - OR THIS MIGHT NOT BE BEST PLACE FOR THIS - MOVE LOWER WITH MODELS.</p>
+<p>This guide is designed to get you up and running with the current <em>alpha</em> release of Zelig 5.</p>
+<p>Note: In code snippets,``&gt;`` refers to an R terminal prompt and anything after <tt class="docutils literal"><span class="pre">#</span></tt> is a comment meant to describe what the code is doing.</p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h3>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Before using Zelig, you will need to download and install both the R statistical program and the Zelig package:</p>
 <p><strong>Installing R</strong></p>
-<p>To install R, go to www.r-project.org/  Select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Select a CRAN mirror closest to your current geographic location (A CRAN mirror is a location NEED_INFO).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows.</p>
+<p>To install R, go to www.r-project.org/  Select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Select a CRAN mirror closest to your current geographic location (there are multiple mirrors of this database in various locations, selecting the one closest to you will be sure to maximize your downloading speeds).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows.</p>
 <hr class="docutils" />
 <p><strong>Installing Zelig</strong></p>
-<p>Becuase Zelig 5.0.1 is still an <em>alpha</em> release and is not yet available on <tt class="docutils literal"><span class="pre">CRAN</span></tt>, it must be downloaded from Github using the <tt class="docutils literal"><span class="pre">devtools</span></tt> package.
-Open R after it has been successfully installed.  At the terminal prompt (&gt;), type in the following commands verbatim:
-(Note that the wording after the # sign is just a note to help you know what the command is doing.)
-.. sourcecode:: r</p>
-<blockquote>
-<div>&gt; install.packages(&#8220;devtools&#8221;)          # This installs devtools package, if not already installed
-&gt; library(devtools)                     # This loads devtools
-&gt; install_github(&#8216;IQSS/Zelig5&#8217;)         # This downloads Zelig 5.0.1 from the IQSS Github repo</div></blockquote>
-<p>Once you have successfully typed these commands, you will see a message <a href="#id2"><span class="problematic" id="id3">*</span></a>DONE (Zelig5)</p>
-<p>COMMENT- THIS SECTION WAS A BIT CONFUSING, BECAUSE YOU HAVE ME LOADING THE ZELIG LIBRARY BELOW.  DO I NEED TO DO THIS TWICE?  IS THERE A DIFFERENCE BETWEEN THE ZELIG AND ZELIG5 LIBRARY?  IF I DO NEED TO DO TWICE, I WOULD REORGANIZE AND GROUP TOGETHER.  Loading Zelig, by typing <tt class="docutils literal"><span class="pre">library(Zelig)</span></tt> into the R command line, will also load optional libaries and (for the most part) install required dependencies. Therefore, it is not necessary to load any package other than <tt class="docutils literal"><span class="pre">Zelig</span></tt> at startup.  COMMENT- SHOULD ALL OF THESE SAY ZELIG5??</p>
-<hr class="docutils" />
-<p><strong>Updating Zelig</strong></p>
-<p>To update your Zelig installation to the latest release use the <tt class="docutils literal"><span class="pre">updated.packages()</span></tt> function.  COMMENT- I TRIED THIS NOTHING HAPPENED.  WASN&#8217;T SURE IF I NEED ADDITIONAL INFO TO INCLUDE IN COMMAND LINE?  OR MAYBE THIS IS JUST BECAUSE IT IS THE ALPHA VERSION?rst version.</p>
+<p>Becuase Zelig 5.0.1 is still an <em>alpha</em> release and is not yet available on <tt class="docutils literal"><span class="pre">CRAN</span></tt> (with other R software packages), it must be downloaded from Github using the <tt class="docutils literal"><span class="pre">devtools</span></tt> package.</p>
+<p>Once you&#8217;ve successfully installed R, open it, and at the terminal prompt, type in the following commands verbatim:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># This installs devtools package, if not already installed</span>
+<span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
+<span class="c1"># This loads devtools</span>
+<span class="o">&gt;</span> library<span class="p">(</span>devtools<span class="p">)</span>
+<span class="c1"># This downloads Zelig 5.0.1 from the IQSS Github repo</span>
+<span class="o">&gt;</span> install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once you have successfully typed these commands, you will see a the following message: <em>&#8220;DONE (Zelig5)&#8221;</em>.</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="quickstart-guide">
 <h3>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h3>
 <p><strong>Loading Zelig</strong></p>
-<p>After installing both R and Zelig, Zelig can be loaded like any other R package:  COMMENT-THIS SOUNDS LIKE IT ASSUMES PREVIOUS USE/FAMILIARITY WITH R.  ALSO - MIGHT BE HELPFUL TO ADD A BRIEF PARENTHETICAL COMMENT ABOVE ABOUT &#8220;PACKAGE&#8221;. above about &#8220;package&#8221;.</p>
-<div class="highlight-python"><div class="highlight"><pre>&gt; library(Zelig5)
+<p>After installing both R and Zelig, Zelig can be loaded by using the <tt class="docutils literal"><span class="pre">library()</span></tt> function:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> library<span class="p">(</span>Zelig5<span class="p">)</span>
 </pre></div>
 </div>
-<p>Some Zelig models require add-on packages/modules which can be installed using <tt class="docutils literal"><span class="pre">install.packages()</span></tt>:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;ZeligChoice&quot;</span><span class="p">)</span> <span class="c1">#install ZeligChoice add-on package</span>
-<span class="o">&gt;</span> library<span class="p">(</span>ZeligChoice<span class="p">)</span>  COMMENT<span class="o">-</span> WOULD HAVE BEEN HELPFUL TO KNOW WHAT TO EXPECT.  SEEMED LIKE NOTHING HAPPENED TO CONFIRM.  EVEN INDICATING THAT THE TERMINAL PROMPT WILL APPEAR IS HELPFUL.
-</pre></div>
 </div>
 <hr class="docutils" />
-<p>Running Models  COMMENT- THIS SECTION WAS THE MOST CONFUSING TO ME.  BUT IT MAY BE BECAUSE NOTHING SEEMED TO BE WORKING WITH THE MODEL.  IT SEEMS LIKE YOU ARE TRYING TO SHOW ME SOMETHING THAT ZELID CAN DO BETTER THAN R ITSELF, BUT IF YOU ARE ASSUMING USER HASN&#8217;T USED R (BECAUSE YOU ARE HELPING THEM DOWNLOAD) - I&#8217;M NOT SURE YOU NEED TO DO THIS.  THE STEPS LISTED BELOW DID NOT LEAD TO SAME OUTPUT AS WEBPAGE.  I TRIED IT TWICE.  ):  IT MAY BE HELPFUL TO GIVE A BRIEF SCENARIO TO GIVE SOME CONTEXT FOR THE DATA.  I STARTED WRITING A SENTENCE TO THIS EFFECT...</p>
+<div class="section" id="running-models">
+<h3>Running Models<a class="headerlink" href="#running-models" title="Permalink to this headline">¶</a></h3>
+<p>Imagine a scenario in which you want to predict how the distance a car can travel given it&#8217;s speed. If we were to model this relationship using a least squares regression within Zelig we need to follow three steps:</p>
 <ol class="arabic simple">
-<li>Specify statistical model and estimate parameters: <tt class="docutils literal"><span class="pre">$zelig</span></tt></li>
-<li>Set explanatory variables to chosen (actual or counterfactual) values for calculating quantities of interest: <tt class="docutils literal"><span class="pre">$setx</span></tt></li>
-<li>Draw simulations of quantity of interest from statistical model: <tt class="docutils literal"><span class="pre">$sim</span></tt></li>
+<li>First, we are going to want to specify our model, given a dataset on cars including distance and speed, and estimate the effect of speed on distance. This is done using the <tt class="docutils literal"><span class="pre">$zelig()</span></tt> method in the code snippet below.</li>
+<li>Second, we want to translate our estimates into intepretable quanities of interest, so we can answer intuitive questions about the effect of speed on distance. For example, we may be interested into understanding how a change of speed from 10 to 20 mph affects distance versus a change from 50 to 60 mph. To do this we have to set explanatory variables in our model (i.e., speed) to simulate quantities of interest. This is done using the <tt class="docutils literal"><span class="pre">$setx()</span></tt> or <tt class="docutils literal"><span class="pre">$setrange()</span></tt> method.</li>
+<li>Finally, we want to draw simualtions of quantieis of interest from our statistical model using the <tt class="docutils literal"><span class="pre">$sim()</span></tt> method.</li>
 </ol>
-<p>Imagine a scenario where you want to estimate the distance cars travel, given a specific speed........For example, to implement a least squares regression:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> data<span class="p">(</span>cars<span class="p">)</span>                            <span class="c1">#load toy dataset</span>
-<span class="o">&gt;</span> z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>                       <span class="c1">#initialize Zelig5 least squares object</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>   <span class="c1">#estimate ls model</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>                   <span class="c1">#set speed to 30 (all other covariates set to means)</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span> <span class="m">1000</span><span class="p">)</span>                    <span class="c1">#run 1000 simulations and estiamte quantities of interest</span>
+<p>The following code snippet loads a data set of cars data including speed and distance (When you install R, example datasets are also installed), and regressing distance on speed. We then go on to set speed (our main explanatory variable) and simulate quantities of interest.</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1">#load toy dataset</span>
+<span class="o">&gt;</span> data<span class="p">(</span>cars<span class="p">)</span>
+<span class="c1">#initialize Zelig5 least squares object</span>
+<span class="o">&gt;</span> z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
+<span class="c1">#estimate ls model</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
+
+<span class="c1">#set speed to 30 (all other covariates set to means)</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+<span class="c1">#or, simulate over a range of speed between 55 and 80</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>setrange<span class="p">(</span>speed <span class="o">=</span> <span class="m">55</span><span class="o">:</span><span class="m">80</span><span class="p">)</span>
+
+<span class="c1">#run 1000 simulations and estiamte quantities of interest</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+
+<span class="c1">#print model estimates</span>
+<span class="o">&gt;</span> z5
+
+Call<span class="o">:</span>
+stats<span class="o">::</span>lm<span class="p">(</span>formula <span class="o">=</span> dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
+
+Residuals<span class="o">:</span>
+Min      <span class="m">1</span>Q  Median      <span class="m">3</span>Q     Max
+<span class="m">-29.069</span>  <span class="m">-9.525</span>  <span class="m">-2.272</span>   <span class="m">9.215</span>  <span class="m">43.201</span>
+
+Coefficients<span class="o">:</span>
+        Estimate Std. Error t value Pr<span class="p">(</span><span class="o">&gt;|</span>t<span class="o">|</span><span class="p">)</span>
+<span class="p">(</span>Intercept<span class="p">)</span> <span class="m">-17.5791</span>     <span class="m">6.7584</span>  <span class="m">-2.601</span>   <span class="m">0.0123</span> <span class="o">*</span>
+speed         <span class="m">3.9324</span>     <span class="m">0.4155</span>   <span class="m">9.464</span> <span class="m">1.49e-12</span> <span class="o">***</span>
+<span class="o">---</span>
+Signif. codes<span class="o">:</span>  <span class="m">0</span> ‘<span class="o">***</span>’ <span class="m">0.001</span> ‘<span class="o">**</span>’ <span class="m">0.01</span> ‘<span class="o">*</span>’ <span class="m">0.05</span> ‘.’ <span class="m">0.1</span> ‘ ’ <span class="m">1</span>
+
+Residual standard error<span class="o">:</span> <span class="m">15.38</span> on <span class="m">48</span> degrees of freedom
+Multiple R<span class="o">-</span>squared<span class="o">:</span>  <span class="m">0.6511</span><span class="p">,</span>    Adjusted R<span class="o">-</span>squared<span class="o">:</span>  <span class="m">0.6438</span>
+<span class="k-Variable">F</span><span class="o">-</span>statistic<span class="o">:</span> <span class="m">89.57</span> on <span class="m">1</span> and <span class="m">48</span> DF<span class="p">,</span>  p<span class="o">-</span>value<span class="o">:</span> <span class="m">1.49e-12</span>
+<span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>The same model can also be implemented using the <tt class="docutils literal"><span class="pre">zelig()</span></tt>, <tt class="docutils literal"><span class="pre">setx()</span></tt>, and <tt class="docutils literal"><span class="pre">sim()</span></tt> functions, as was the case in previous versions of Zelig:  COMMENT- IF THIS IS QUICKSTART GUIDE AND YOU ARE HELPING THEM INSTALL FROM SCRATCH - LIKELY WON&#8217;T HAVE FOLKS WHO ALREADY USED ZELIG.  MAYBE HAVE A PAGE FOR PREVIOUS ZELIG USERS?  OR - CREATE NESTED SECTIONS/DIFFERENT FONT/COLOR/ITALICS WHEN YOU ARE GIVING COMMENTS TO ADVANCED USERS??</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
-<span class="o">&gt;</span> x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
-<span class="o">&gt;</span> s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">,</span> num <span class="o">=</span> <span class="m">1000</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>COMMENT- THIS ALSO DID NOT YIELD ANYTHING MEANINGFUL.  I WOULD INCLUDE A SAMPLE OF WHAT THE EXPECTED OUTPUT IS.</p>
-<p>See the Zelig Model Reference for a complete listing of all supported models, including links to tutorials and model implementation.</p>
 <hr class="docutils" />
 <p><strong>Quantities of Interest</strong></p>
-<p>A major feature of Zelig is the translation of model parameter estimates into interpretable quantities of interest (QIs). These QIs, which include expected and predicted values as well as first differences COMMENT- NOT SURE WHAT &#8220;FIRST DIFFERENCES&#8221; IS, can be accessed via the <tt class="docutils literal"><span class="pre">$sim.out</span></tt> method:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z5<span class="o">$</span>sim.out <span class="c1">#or</span>
-<span class="o">&gt;</span> summary<span class="p">(</span>s.out<span class="p">)</span>
+<p>A major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g. expected and predicted values) can be accessed via the <tt class="docutils literal"><span class="pre">$sim.out</span></tt> method:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z5<span class="o">$</span>sim.out
+<span class="o">$</span>range
+<span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]]</span>
+<span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]]</span><span class="o">$</span>ev
+             <span class="m">1</span>
+ <span class="p">[</span><span class="m">1</span><span class="p">,]</span> <span class="m">201.2214</span>
+ <span class="p">[</span><span class="m">2</span><span class="p">,]</span> <span class="m">186.4815</span>
+ <span class="p">[</span><span class="m">3</span><span class="p">,]</span> <span class="m">187.1505</span>
+ <span class="p">[</span><span class="m">4</span><span class="p">,]</span> <span class="m">175.2489</span>
+ <span class="p">[</span><span class="m">5</span><span class="p">,]</span> <span class="m">187.9555</span>
+ <span class="p">[</span><span class="m">6</span><span class="p">,]</span> <span class="m">197.8107</span>
+ <span class="p">[</span><span class="m">7</span><span class="p">,]</span> <span class="m">199.0940</span>
+ <span class="p">[</span><span class="m">8</span><span class="p">,]</span> <span class="m">168.2691</span>
+ <span class="p">[</span><span class="m">9</span><span class="p">,]</span> <span class="m">195.7094</span>
+<span class="p">[</span><span class="m">10</span><span class="p">,]</span> <span class="m">222.0503</span>
+
+<span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]]</span><span class="o">$</span>pv
+             <span class="m">1</span>
+ <span class="p">[</span><span class="m">1</span><span class="p">,]</span> <span class="m">201.2214</span>
+ <span class="p">[</span><span class="m">2</span><span class="p">,]</span> <span class="m">186.4815</span>
+ <span class="p">[</span><span class="m">3</span><span class="p">,]</span> <span class="m">187.1505</span>
+ <span class="p">[</span><span class="m">4</span><span class="p">,]</span> <span class="m">175.2489</span>
+ <span class="p">[</span><span class="m">5</span><span class="p">,]</span> <span class="m">187.9555</span>
+ <span class="p">[</span><span class="m">6</span><span class="p">,]</span> <span class="m">197.8107</span>
+ <span class="p">[</span><span class="m">7</span><span class="p">,]</span> <span class="m">199.0940</span>
+ <span class="p">[</span><span class="m">8</span><span class="p">,]</span> <span class="m">168.2691</span>
+ <span class="p">[</span><span class="m">9</span><span class="p">,]</span> <span class="m">195.7094</span>
+<span class="p">[</span><span class="m">10</span><span class="p">,]</span> <span class="m">222.0503</span>
+<span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>COMMENT- THIS CODE GAVE ME SOMETHING THAT DID NOT MAKE SENSE.</p>
 <hr class="docutils" />
 <p><strong>Plots</strong></p>
-<p>A second major Zelig feature is the ease of graphically presenting QIs. Using the <tt class="docutils literal"><span class="pre">plot()</span></tt> function with the Zelig model object (e.g., <tt class="docutils literal"><span class="pre">z5</span></tt> or <tt class="docutils literal"><span class="pre">s.out</span></tt> objects above) will produce ready-to-use plots with labels and confidence intervals.  COMMENT- THIS DID NOT WORK.  I DID NOT GET ANY PLOTS.  I TRIED A FEW COMBINATIONS THINKING I WAS USING THE WRONG OBJECT - BUT NOTHING WORKED.  I COULDN&#8217;T REPLICATE GRAPHS.</p>
-<p><em>Plots of qi&#8217;s from binary choice model:</em>  COMMENT- I FOUND THE LOWERCASE QI&#8217;S TO NOT &#8220;POP&#8221; ENOUGH - NOT SURE IF THESE ARE STANDARD LINGO IF FIELD.  IF NOT - MAYBE QIS.</p>
+<p>A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an artcle. Using the <tt class="docutils literal"><span class="pre">plot()</span></tt> function on the <tt class="docutils literal"><span class="pre">z5$s.out</span></tt> will produce ready-to-use plots with labels and confidence intervals.</p>
+<p><em>Plots of QI&#8217;s from binary choice model:</em></p>
 <img alt="../_images/gr1.png" src="../_images/gr1.png" />
 <hr class="docutils" />
 <p><em>Plot of expected values across range of simulations:</em></p>
@@ -296,7 +350,7 @@ Open R after it has been successfully installed.  At the terminal prompt (&gt;),
 <hr class="docutils" />
 <div class="section" id="zelig-model-reference">
 <h2>Zelig Model Reference<a class="headerlink" href="#zelig-model-reference" title="Permalink to this headline">¶</a></h2>
-<p>The following models hare currenlty supported in Zelig 5.0:</p>
+<p>The following models hare currently supported in Zelig 5.0:</p>
 <ul class="simple">
 <li>Exponential Regression: <tt class="docutils literal"><span class="pre">zexp$new()</span></tt></li>
 <li>Gamma Regression: <tt class="docutils literal"><span class="pre">zgamma()</span></tt></li>

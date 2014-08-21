@@ -4,7 +4,9 @@
 Installation & Quickstart
 =========================
 
-This guide is designed to get you up and running with the current *alpha* release, Zelig 5.0.1. For more detailed tutorials see individual model vignettes.  COMMENT- NEED MORE INFO HERE ABOUT TUTORIALS - OR THIS MIGHT NOT BE BEST PLACE FOR THIS - MOVE LOWER WITH MODELS.
+This guide is designed to get you up and running with the current *alpha* release of Zelig 5. 
+
+Note: In code snippets,``>`` refers to an R terminal prompt and anything after ``#`` is a comment meant to describe what the code is doing.
 
 ------------
 
@@ -15,31 +17,26 @@ Before using Zelig, you will need to download and install both the R statistical
 
 **Installing R**
 
-To install R, go to www.r-project.org/  Select the ``CRAN`` option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Select a CRAN mirror closest to your current geographic location (A CRAN mirror is a location NEED_INFO).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows. 
+To install R, go to www.r-project.org/  Select the ``CRAN`` option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Select a CRAN mirror closest to your current geographic location (there are multiple mirrors of this database in various locations, selecting the one closest to you will be sure to maximize your downloading speeds).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows. 
 
 ------------
 
 **Installing Zelig**
 
-Becuase Zelig 5.0.1 is still an *alpha* release and is not yet available on ``CRAN``, it must be downloaded from Github using the ``devtools`` package. 
-Open R after it has been successfully installed.  At the terminal prompt (>), type in the following commands verbatim:
-(Note that the wording after the # sign is just a note to help you know what the command is doing.)
+Becuase Zelig 5.0.1 is still an *alpha* release and is not yet available on ``CRAN`` (with other R software packages), it must be downloaded from Github using the ``devtools`` package.
+
+Once you've successfully installed R, open it, and at the terminal prompt, type in the following commands verbatim:
+
 .. sourcecode:: r
-  
-	> install.packages("devtools")   	# This installs devtools package, if not already installed
-	> library(devtools)   			# This loads devtools
-	> install_github('IQSS/Zelig5')   	# This downloads Zelig 5.0.1 from the IQSS Github repo
 
-Once you have successfully typed these commands, you will see a message *DONE (Zelig5)
+  	# This installs devtools package, if not already installed
+	> install.packages("devtools")
+	# This loads devtools   	
+	> library(devtools)
+	# This downloads Zelig 5.0.1 from the IQSS Github repo
+	> install_github('IQSS/Zelig5')   	
 
-COMMENT- THIS SECTION WAS A BIT CONFUSING, BECAUSE YOU HAVE ME LOADING THE ZELIG LIBRARY BELOW.  DO I NEED TO DO THIS TWICE?  IS THERE A DIFFERENCE BETWEEN THE ZELIG AND ZELIG5 LIBRARY?  IF I DO NEED TO DO TWICE, I WOULD REORGANIZE AND GROUP TOGETHER.  Loading Zelig, by typing ``library(Zelig)`` into the R command line, will also load optional libaries and (for the most part) install required dependencies. Therefore, it is not necessary to load any package other than ``Zelig`` at startup.  COMMENT- SHOULD ALL OF THESE SAY ZELIG5??
-
-------------
-
-**Updating Zelig**
-
-To update your Zelig installation to the latest release use the ``updated.packages()`` function.  COMMENT- I TRIED THIS NOTHING HAPPENED.  WASN'T SURE IF I NEED ADDITIONAL INFO TO INCLUDE IN COMMAND LINE?  OR MAYBE THIS IS JUST BECAUSE IT IS THE ALPHA VERSION?rst version.
-
+Once you have successfully typed these commands, you will see a the following message: *"DONE (Zelig5)"*.
 
 ------------
 
@@ -48,72 +45,109 @@ Quickstart Guide
 
 **Loading Zelig**
 
-After installing both R and Zelig, Zelig can be loaded like any other R package:  COMMENT-THIS SOUNDS LIKE IT ASSUMES PREVIOUS USE/FAMILIARITY WITH R.  ALSO - MIGHT BE HELPFUL TO ADD A BRIEF PARENTHETICAL COMMENT ABOVE ABOUT "PACKAGE". above about "package".
-::
-	> library(Zelig5)
-
-Some Zelig models require add-on packages/modules which can be installed using ``install.packages()``:
+After installing both R and Zelig, Zelig can be loaded by using the ``library()`` function:
 
 .. sourcecode:: r
-  
-	> install.packages("ZeligChoice") #install ZeligChoice add-on package
-	> library(ZeligChoice)  COMMENT- WOULD HAVE BEEN HELPFUL TO KNOW WHAT TO EXPECT.  SEEMED LIKE NOTHING HAPPENED TO CONFIRM.  EVEN INDICATING THAT THE TERMINAL PROMPT WILL APPEAR IS HELPFUL.
+	
+	> library(Zelig5)
 
 ------------
 
-Running Models  COMMENT- THIS SECTION WAS THE MOST CONFUSING TO ME.  BUT IT MAY BE BECAUSE NOTHING SEEMED TO BE WORKING WITH THE MODEL.  IT SEEMS LIKE YOU ARE TRYING TO SHOW ME SOMETHING THAT ZELID CAN DO BETTER THAN R ITSELF, BUT IF YOU ARE ASSUMING USER HASN'T USED R (BECAUSE YOU ARE HELPING THEM DOWNLOAD) - I'M NOT SURE YOU NEED TO DO THIS.  THE STEPS LISTED BELOW DID NOT LEAD TO SAME OUTPUT AS WEBPAGE.  I TRIED IT TWICE.  ):  IT MAY BE HELPFUL TO GIVE A BRIEF SCENARIO TO GIVE SOME CONTEXT FOR THE DATA.  I STARTED WRITING A SENTENCE TO THIS EFFECT...
-
+Running Models
 ~~~~~~~~~~~~~~
-Each Zelig process consists of three methods:  COMMENT- ARE THESE METHODS OR STEPS.  METHOD SOUNDS LIKE ANY CAN BE DONE.  STEPS IMPLIES THAT THEY MUST ALL BE DONE IN SEQUENCE.
+Imagine a scenario in which you want to predict how the distance a car can travel given it's speed. If we were to model this relationship using a least squares regression within Zelig we need to follow three steps:
 
-1. Specify statistical model and estimate parameters: ``$zelig``
-2. Set explanatory variables to chosen (actual or counterfactual) values for calculating quantities of interest: ``$setx``
-3. Draw simulations of quantity of interest from statistical model: ``$sim`` 
+1. First, we are going to want to specify our model, given a dataset on cars including distance and speed, and estimate the effect of speed on distance. This is done using the ``$zelig()`` method in the code snippet below.
 
-Imagine a scenario where you want to estimate the distance cars travel, given a specific speed........For example, to implement a least squares regression:
+2. Second, we want to translate our estimates into intepretable quanities of interest, so we can answer intuitive questions about the effect of speed on distance. For example, we may be interested into understanding how a change of speed from 10 to 20 mph affects distance versus a change from 50 to 60 mph. To do this we have to set explanatory variables in our model (i.e., speed) to simulate quantities of interest. This is done using the ``$setx()`` or ``$setrange()`` method.
 
-.. sourcecode:: r
+3. Finally, we want to draw simualtions of quantieis of interest from our statistical model using the ``$sim()`` method.
 
-	> data(cars)                            #load toy dataset
-	> z5 <- zls$new()                       #initialize Zelig5 least squares object
-	> z5$zelig(dist ~ speed, data = cars)   #estimate ls model
-	> z5$setx(speed = 30)                   #set speed to 30 (all other covariates set to means)
-	> z5$sim(num = 1000)                    #run 1000 simulations and estiamte quantities of interest
-
-
-The same model can also be implemented using the ``zelig()``, ``setx()``, and ``sim()`` functions, as was the case in previous versions of Zelig:  COMMENT- IF THIS IS QUICKSTART GUIDE AND YOU ARE HELPING THEM INSTALL FROM SCRATCH - LIKELY WON'T HAVE FOLKS WHO ALREADY USED ZELIG.  MAYBE HAVE A PAGE FOR PREVIOUS ZELIG USERS?  OR - CREATE NESTED SECTIONS/DIFFERENT FONT/COLOR/ITALICS WHEN YOU ARE GIVING COMMENTS TO ADVANCED USERS??
-
-
+The following code snippet loads a data set of cars data including speed and distance (When you install R, example datasets are also installed), and regressing distance on speed. We then go on to set speed (our main explanatory variable) and simulate quantities of interest.
 
 .. sourcecode:: r
 
-	> z.out <- zelig(dist ~ speed, model = "ls", data = cars)
-	> x.out <- setx(z.out, speed = 30)
-	> s.out <- sim(z.out, x = x.out, num = 1000)
-COMMENT- THIS ALSO DID NOT YIELD ANYTHING MEANINGFUL.  I WOULD INCLUDE A SAMPLE OF WHAT THE EXPECTED OUTPUT IS.
+	#load toy dataset
+	> data(cars)
+	#initialize Zelig5 least squares object                            
+	> z5 <- zls$new()  
+	#estimate ls model                     
+	> z5$zelig(dist ~ speed, data = cars)   
+	
+	#set speed to 30 (all other covariates set to means)
+	> z5$setx(speed = 30)   
+	#or, simulate over a range of speed between 55 and 80
+	> z5$setrange(speed = 55:80)                 
+	
+	#run 1000 simulations and estiamte quantities of interest
+	> z5$sim(num = 10)
 
-See the Zelig Model Reference for a complete listing of all supported models, including links to tutorials and model implementation. 
+	#print model estimates
+	> z5
 
+	Call:
+	stats::lm(formula = dist ~ speed, data = cars)
+
+	Residuals:
+    	Min      1Q  Median      3Q     Max 
+	-29.069  -9.525  -2.272   9.215  43.201 
+
+	Coefficients:
+    	        Estimate Std. Error t value Pr(>|t|)    
+	(Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+	speed         3.9324     0.4155   9.464 1.49e-12 ***
+	---
+	Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+	Residual standard error: 15.38 on 48 degrees of freedom
+	Multiple R-squared:  0.6511,	Adjusted R-squared:  0.6438 
+	F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12
+	>        
 ------------
 
 **Quantities of Interest**
 
-A major feature of Zelig is the translation of model parameter estimates into interpretable quantities of interest (QIs). These QIs, which include expected and predicted values as well as first differences COMMENT- NOT SURE WHAT "FIRST DIFFERENCES" IS, can be accessed via the ``$sim.out`` method:
+A major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g. expected and predicted values) can be accessed via the ``$sim.out`` method:
 
 .. sourcecode:: r
 	
-	> z5$sim.out #or
-	> summary(s.out)
-	
-COMMENT- THIS CODE GAVE ME SOMETHING THAT DID NOT MAKE SENSE.
+	> z5$sim.out
+	$range
+	$range[[1]]
+	$range[[1]][[1]]
+	$range[[1]][[1]]$ev
+	             1
+	 [1,] 201.2214
+	 [2,] 186.4815
+	 [3,] 187.1505
+	 [4,] 175.2489
+	 [5,] 187.9555
+	 [6,] 197.8107
+	 [7,] 199.0940
+	 [8,] 168.2691
+	 [9,] 195.7094
+	[10,] 222.0503
 
+	$range[[1]][[1]]$pv
+	             1
+	 [1,] 201.2214
+	 [2,] 186.4815
+	 [3,] 187.1505
+	 [4,] 175.2489
+	 [5,] 187.9555
+	 [6,] 197.8107
+	 [7,] 199.0940
+	 [8,] 168.2691
+	 [9,] 195.7094
+	[10,] 222.0503     
+	>  
 ------------
 
 **Plots**
 
-A second major Zelig feature is the ease of graphically presenting QIs. Using the ``plot()`` function with the Zelig model object (e.g., ``z5`` or ``s.out`` objects above) will produce ready-to-use plots with labels and confidence intervals.  COMMENT- THIS DID NOT WORK.  I DID NOT GET ANY PLOTS.  I TRIED A FEW COMBINATIONS THINKING I WAS USING THE WRONG OBJECT - BUT NOTHING WORKED.  I COULDN'T REPLICATE GRAPHS.
+A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an artcle. Using the ``plot()`` function on the ``z5$s.out`` will produce ready-to-use plots with labels and confidence intervals.
 
-*Plots of qi's from binary choice model:*  COMMENT- I FOUND THE LOWERCASE QI'S TO NOT "POP" ENOUGH - NOT SURE IF THESE ARE STANDARD LINGO IF FIELD.  IF NOT - MAYBE QIS.
+*Plots of QI's from binary choice model:*  
 
 .. image:: gr1.png
 
@@ -122,18 +156,3 @@ A second major Zelig feature is the ease of graphically presenting QIs. Using th
 *Plot of expected values across range of simulations:*
 
 .. image:: gr3.png
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

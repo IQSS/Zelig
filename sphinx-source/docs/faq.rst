@@ -1,12 +1,9 @@
 .. _faq:
-##########################
-Frequently Asked Questions
-##########################
 
-.. contents::
-    :local:
-    :depth: 2
-    :backlinks: none
+Frequently Asked Questions
+==========================
+
+If you find a bug, or cannot figure something out after reading the frequently asked questions below, please send your question to the Zelig listserv at ``https://groups.google.com/forum/#!forum/zelig-statistical-software``. Please explain exactly what you did and include the full error message, including the traceback(). You should get an answer from the developers or another user in short order.
 
 --------
 
@@ -53,5 +50,50 @@ It is likely that the reason you are unable to load data because you have not sp
     > setwd("path/to/Documents")
 
 File paths can be found by right clicking the workign directory folder in any file browser and clicking "Get Info" (on Mac) or "Properties" (on Windows). Black-slashes (\\) in file paths copied from the "Properties" link on Windows machines must be replace with forward-slashes (/). For example, the Windows path: ``C:\Program Files\R``, would be typed as ``C:/Program Files/R``.
- 
+
+--------
+
+How do I increase the memory for R?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Windows users may get the error that R has run out of memory. If you've installed more memory on your machine, you may have to reinstall R in order to take advantage of the additional capacity.
+
+You may also set the amount of available memory manually. Close R, then right-click on your R program icon (the icon on your desktop or in your programs directory). Select “Properties”, and then select the “Shortcut” tab. Look for the “Target” field and after the closing quotes around the location of the R executible, add
+
+.. sourcecode:: r
+
+    --max-mem-size=500M
+
+You may increase this value up to 2GB or the maximum amount of physical RAM you have installed. If you get the error that R cannot allocate a vector of length x, close out of R and add the following line to the “Target” field:
+
+.. sourcecode:: r
+
+    --max-vsize=500M
+
+or as appropriate.
+
+You can always check to see how much memory R has available by typing at the R prompt
+
+.. sourcecode:: r
+
+    > round(memory.limit()/2^20, 2)
+
+which gives you the amount of available memory in MB.
+
+--------
+
+Why doesn’t the pdf print properly?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zelig uses several special LaTeX environments. If the pdf looks right on the screen, there are two possible reasons why it’s not printing properly:
+
+-  Adobe Acrobat isn’t cleaning up the document. Updating to Acrobat
+   Reader 6.0.1 or higher should solve this problem.
+
+-  Your printer doesn’t support PostScript Type 3 fonts. Updating your
+   print driver should take care of this problem.
+
+--------
+
+R is neat. How can I find out more?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R is a collective project with contributors from all over the world. Their website (`r-project.org <https://r-project.org>`_.) has more information on the R project, R packages, conferences, and other learning material.
 

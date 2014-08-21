@@ -80,12 +80,14 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#id1">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#running-models">Running Models</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide.html#installation-quickstart">Installation &amp; Quickstart</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="user_guide.html#id1">Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="user_guide.html#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_guide.html#running-models">Running Models</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide.html#zelig-model-reference">Zelig Model Reference</a></li>
@@ -101,6 +103,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-cant-i-install-r">Why can’t I install R?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
@@ -126,6 +131,9 @@
 <li><a class="reference internal" href="#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
 <li><a class="reference internal" href="#why-cant-i-install-r">Why can’t I install R?</a></li>
 <li><a class="reference internal" href="#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li><a class="reference internal" href="#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li><a class="reference internal" href="#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li><a class="reference internal" href="#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
 </ul>
@@ -178,6 +186,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-cant-i-install-r">Why can’t I install R?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
@@ -195,15 +206,8 @@
     <div class="col-md-9">
       
   <div class="section" id="frequently-asked-questions">
-<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
-<div class="contents local topic" id="contents">
-<ul class="simple">
-<li><a class="reference internal" href="#how-do-i-cite-zelig" id="id2">How do I cite Zelig?</a></li>
-<li><a class="reference internal" href="#why-cant-i-install-zelig" id="id3">Why can’t I install Zelig?</a></li>
-<li><a class="reference internal" href="#why-cant-i-install-r" id="id4">Why can’t I install R?</a></li>
-<li><a class="reference internal" href="#why-cant-i-load-data" id="id5">Why can’t I load data?</a></li>
-</ul>
-</div>
+<span id="faq"></span><h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<p>If you find a bug, or cannot figure something out after reading the frequently asked questions below, please send your question to the Zelig listserv at <tt class="docutils literal"><span class="pre">https://groups.google.com/forum/#!forum/zelig-statistical-software</span></tt>. Please explain exactly what you did and include the full error message, including the traceback(). You should get an answer from the developers or another user in short order.</p>
 <hr class="docutils" />
 <div class="section" id="how-do-i-cite-zelig">
 <h2>How do I cite Zelig?<a class="headerlink" href="#how-do-i-cite-zelig" title="Permalink to this headline">¶</a></h2>
@@ -241,6 +245,41 @@
 </pre></div>
 </div>
 <p>File paths can be found by right clicking the workign directory folder in any file browser and clicking &#8220;Get Info&#8221; (on Mac) or &#8220;Properties&#8221; (on Windows). Black-slashes (\) in file paths copied from the &#8220;Properties&#8221; link on Windows machines must be replace with forward-slashes (/). For example, the Windows path: <tt class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\R</span></tt>, would be typed as <tt class="docutils literal"><span class="pre">C:/Program</span> <span class="pre">Files/R</span></tt>.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="how-do-i-increase-the-memory-for-r">
+<h2>How do I increase the memory for R?<a class="headerlink" href="#how-do-i-increase-the-memory-for-r" title="Permalink to this headline">¶</a></h2>
+<p>Windows users may get the error that R has run out of memory. If you&#8217;ve installed more memory on your machine, you may have to reinstall R in order to take advantage of the additional capacity.</p>
+<p>You may also set the amount of available memory manually. Close R, then right-click on your R program icon (the icon on your desktop or in your programs directory). Select “Properties”, and then select the “Shortcut” tab. Look for the “Target” field and after the closing quotes around the location of the R executible, add</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">--</span>max<span class="o">-</span>mem<span class="o">-</span>size<span class="o">=</span><span class="m">500</span>M
+</pre></div>
+</div>
+<p>You may increase this value up to 2GB or the maximum amount of physical RAM you have installed. If you get the error that R cannot allocate a vector of length x, close out of R and add the following line to the “Target” field:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">--</span>max<span class="o">-</span>vsize<span class="o">=</span><span class="m">500</span>M
+</pre></div>
+</div>
+<p>or as appropriate.</p>
+<p>You can always check to see how much memory R has available by typing at the R prompt</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> round<span class="p">(</span>memory.limit<span class="p">()</span><span class="o">/</span><span class="m">2</span><span class="o">^</span><span class="m">20</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which gives you the amount of available memory in MB.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="why-doesnt-the-pdf-print-properly">
+<h2>Why doesn’t the pdf print properly?<a class="headerlink" href="#why-doesnt-the-pdf-print-properly" title="Permalink to this headline">¶</a></h2>
+<p>Zelig uses several special LaTeX environments. If the pdf looks right on the screen, there are two possible reasons why it’s not printing properly:</p>
+<ul class="simple">
+<li>Adobe Acrobat isn’t cleaning up the document. Updating to Acrobat
+Reader 6.0.1 or higher should solve this problem.</li>
+<li>Your printer doesn’t support PostScript Type 3 fonts. Updating your
+print driver should take care of this problem.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="r-is-neat-how-can-i-find-out-more">
+<h2>R is neat. How can I find out more?<a class="headerlink" href="#r-is-neat-how-can-i-find-out-more" title="Permalink to this headline">¶</a></h2>
+<p>R is a collective project with contributors from all over the world. Their website (<a class="reference external" href="https://r-project.org">r-project.org</a>.) has more information on the R project, R packages, conferences, and other learning material.</p>
 </div>
 </div>
 

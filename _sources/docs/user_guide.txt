@@ -14,7 +14,7 @@ Zelig 5.0 is the latest version of the Zelig framework for interfacing with a wi
 Zelig Model Reference
 ======================
 
-The following models hare currenlty supported in Zelig 5.0:
+The following models hare currently supported in Zelig 5.0:
 
 - Exponential Regression: ``zexp$new()``
 - Gamma Regression: ``zgamma()``
