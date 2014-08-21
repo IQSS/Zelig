@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation &amp; Quickstart &mdash; Zelig 5.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="prev" title="Quickstart Guide" href="quickstart.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-models">Running Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-cite-zelig">How do I cite Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">Zelig-ls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id25">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id26">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id27">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id28">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id29">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id30">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id31">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id32">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id33">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id34">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id35">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id36">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id37">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id38">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id39">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id40">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id41">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id42">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id43">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#arguments">Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id44">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id45">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id46">Output Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#differences-with-stata-version">Differences with Stata Version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id47">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id48">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id49">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id50">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id51">Output Values</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Installation &amp; Quickstart</a><ul>
+<li><a class="reference internal" href="#id1">Installation</a></li>
+<li><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li><a class="reference internal" href="#running-models">Running Models</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="quickstart.html" title="Previous Chapter: Quickstart Guide"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Quickstart Guide</span>
+    </a>
+  </li>
+  <li>
+    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-models">Running Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a></li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="installation-quickstart">
+<span id="installation"></span><h1>Installation &amp; Quickstart<a class="headerlink" href="#installation-quickstart" title="Permalink to this headline">¶</a></h1>
+<p>This guide is designed to get you up and running with the current <em>alpha</em> release of Zelig 5.</p>
+<p>Note: In code snippets,``&gt;`` refers to an R terminal prompt and anything after <tt class="docutils literal"><span class="pre">#</span></tt> is a comment meant to describe what the code is doing.</p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Before using Zelig, you will need to download and install both the R statistical program and the Zelig package:</p>
+<p><strong>Installing R</strong></p>
+<p>To install R, go to www.r-project.org/  Select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Select a CRAN mirror closest to your current geographic location (there are multiple mirrors of this database in various locations, selecting the one closest to you will be sure to maximize your downloading speeds).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows.</p>
+<hr class="docutils" />
+<p><strong>Installing Zelig</strong></p>
+<p>Becuase Zelig 5.0.1 is still an <em>alpha</em> release and is not yet available on <tt class="docutils literal"><span class="pre">CRAN</span></tt> (with other R software packages), it must be downloaded from Github using the <tt class="docutils literal"><span class="pre">devtools</span></tt> package.</p>
+<p>Once you&#8217;ve successfully installed R, open it, and at the terminal prompt, type in the following commands verbatim:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># This installs devtools package, if not already installed</span>
+<span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
+<span class="c1"># This loads devtools</span>
+<span class="o">&gt;</span> library<span class="p">(</span>devtools<span class="p">)</span>
+<span class="c1"># This downloads Zelig 5.0.1 from the IQSS Github repo</span>
+<span class="o">&gt;</span> install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once you have successfully typed these commands, you will see a the following message: <em>&#8220;DONE (Zelig5)&#8221;</em>.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="quickstart-guide">
+<h2>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h2>
+<p><strong>Loading Zelig</strong></p>
+<p>After installing both R and Zelig, Zelig can be loaded by using the <tt class="docutils literal"><span class="pre">library()</span></tt> function:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> library<span class="p">(</span>Zelig5<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="running-models">
+<h2>Running Models<a class="headerlink" href="#running-models" title="Permalink to this headline">¶</a></h2>
+<p>Imagine a scenario in which you want to predict how the distance a car can travel given it&#8217;s speed. If we were to model this relationship using a least squares regression within Zelig we need to follow three steps:</p>
+<ol class="arabic simple">
+<li>First, we are going to want to specify our model, given a dataset on cars including distance and speed, and estimate the effect of speed on distance. This is done using the <tt class="docutils literal"><span class="pre">$zelig()</span></tt> method in the code snippet below.</li>
+<li>Second, we want to translate our estimates into intepretable quanities of interest, so we can answer intuitive questions about the effect of speed on distance. For example, we may be interested into understanding how a change of speed from 10 to 20 mph affects distance versus a change from 50 to 60 mph. To do this we have to set explanatory variables in our model (i.e., speed) to simulate quantities of interest. This is done using the <tt class="docutils literal"><span class="pre">$setx()</span></tt> or <tt class="docutils literal"><span class="pre">$setrange()</span></tt> method.</li>
+<li>Finally, we want to draw simualtions of quantieis of interest from our statistical model using the <tt class="docutils literal"><span class="pre">$sim()</span></tt> method.</li>
+</ol>
+<p>The following code snippet loads a data set of cars data including speed and distance (When you install R, example datasets are also installed), and regressing distance on speed. We then go on to set speed (our main explanatory variable) and simulate quantities of interest.</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1">#load toy dataset</span>
+<span class="o">&gt;</span> data<span class="p">(</span>cars<span class="p">)</span>
+<span class="c1">#initialize Zelig5 least squares object</span>
+<span class="o">&gt;</span> z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
+<span class="c1">#estimate ls model</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
+
+<span class="c1">#set speed to 30 (all other covariates set to means)</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+<span class="c1">#or, simulate over a range of speed between 55 and 80</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>setrange<span class="p">(</span>speed <span class="o">=</span> <span class="m">55</span><span class="o">:</span><span class="m">80</span><span class="p">)</span>
+
+<span class="c1">#run 1000 simulations and estiamte quantities of interest</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+
+<span class="c1">#print model estimates</span>
+<span class="o">&gt;</span> z5
+
+Call<span class="o">:</span>
+stats<span class="o">::</span>lm<span class="p">(</span>formula <span class="o">=</span> dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
+
+Residuals<span class="o">:</span>
+Min      <span class="m">1</span>Q  Median      <span class="m">3</span>Q     Max
+<span class="m">-29.069</span>  <span class="m">-9.525</span>  <span class="m">-2.272</span>   <span class="m">9.215</span>  <span class="m">43.201</span>
+
+Coefficients<span class="o">:</span>
+        Estimate Std. Error t value Pr<span class="p">(</span><span class="o">&gt;|</span>t<span class="o">|</span><span class="p">)</span>
+<span class="p">(</span>Intercept<span class="p">)</span> <span class="m">-17.5791</span>     <span class="m">6.7584</span>  <span class="m">-2.601</span>   <span class="m">0.0123</span> <span class="o">*</span>
+speed         <span class="m">3.9324</span>     <span class="m">0.4155</span>   <span class="m">9.464</span> <span class="m">1.49e-12</span> <span class="o">***</span>
+<span class="o">---</span>
+Signif. codes<span class="o">:</span>  <span class="m">0</span> ‘<span class="o">***</span>’ <span class="m">0.001</span> ‘<span class="o">**</span>’ <span class="m">0.01</span> ‘<span class="o">*</span>’ <span class="m">0.05</span> ‘.’ <span class="m">0.1</span> ‘ ’ <span class="m">1</span>
+
+Residual standard error<span class="o">:</span> <span class="m">15.38</span> on <span class="m">48</span> degrees of freedom
+Multiple R<span class="o">-</span>squared<span class="o">:</span>  <span class="m">0.6511</span><span class="p">,</span>    Adjusted R<span class="o">-</span>squared<span class="o">:</span>  <span class="m">0.6438</span>
+<span class="k-Variable">F</span><span class="o">-</span>statistic<span class="o">:</span> <span class="m">89.57</span> on <span class="m">1</span> and <span class="m">48</span> DF<span class="p">,</span>  p<span class="o">-</span>value<span class="o">:</span> <span class="m">1.49e-12</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Quantities of Interest</strong></p>
+<p>A major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g. expected and predicted values) can be accessed via the <tt class="docutils literal"><span class="pre">$sim.out</span></tt> method:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z5<span class="o">$</span>sim.out
+<span class="o">$</span>range
+<span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]]</span>
+<span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]]</span><span class="o">$</span>ev
+             <span class="m">1</span>
+ <span class="p">[</span><span class="m">1</span><span class="p">,]</span> <span class="m">201.2214</span>
+ <span class="p">[</span><span class="m">2</span><span class="p">,]</span> <span class="m">186.4815</span>
+ <span class="p">[</span><span class="m">3</span><span class="p">,]</span> <span class="m">187.1505</span>
+ <span class="p">[</span><span class="m">4</span><span class="p">,]</span> <span class="m">175.2489</span>
+ <span class="p">[</span><span class="m">5</span><span class="p">,]</span> <span class="m">187.9555</span>
+ <span class="p">[</span><span class="m">6</span><span class="p">,]</span> <span class="m">197.8107</span>
+ <span class="p">[</span><span class="m">7</span><span class="p">,]</span> <span class="m">199.0940</span>
+ <span class="p">[</span><span class="m">8</span><span class="p">,]</span> <span class="m">168.2691</span>
+ <span class="p">[</span><span class="m">9</span><span class="p">,]</span> <span class="m">195.7094</span>
+<span class="p">[</span><span class="m">10</span><span class="p">,]</span> <span class="m">222.0503</span>
+
+<span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]]</span><span class="o">$</span>pv
+             <span class="m">1</span>
+ <span class="p">[</span><span class="m">1</span><span class="p">,]</span> <span class="m">201.2214</span>
+ <span class="p">[</span><span class="m">2</span><span class="p">,]</span> <span class="m">186.4815</span>
+ <span class="p">[</span><span class="m">3</span><span class="p">,]</span> <span class="m">187.1505</span>
+ <span class="p">[</span><span class="m">4</span><span class="p">,]</span> <span class="m">175.2489</span>
+ <span class="p">[</span><span class="m">5</span><span class="p">,]</span> <span class="m">187.9555</span>
+ <span class="p">[</span><span class="m">6</span><span class="p">,]</span> <span class="m">197.8107</span>
+ <span class="p">[</span><span class="m">7</span><span class="p">,]</span> <span class="m">199.0940</span>
+ <span class="p">[</span><span class="m">8</span><span class="p">,]</span> <span class="m">168.2691</span>
+ <span class="p">[</span><span class="m">9</span><span class="p">,]</span> <span class="m">195.7094</span>
+<span class="p">[</span><span class="m">10</span><span class="p">,]</span> <span class="m">222.0503</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Plots</strong></p>
+<p>A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an artcle. Using the <tt class="docutils literal"><span class="pre">plot()</span></tt> function on the <tt class="docutils literal"><span class="pre">z5$s.out</span></tt> will produce ready-to-use plots with labels and confidence intervals.</p>
+<p><em>Plots of QI&#8217;s from binary choice model:</em></p>
+<img alt="gr1.png" src="gr1.png" />
+<hr class="docutils" />
+<p><em>Plot of expected values across range of simulations:</em></p>
+<img alt="gr3.png" src="gr3.png" />
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/installation.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'pydata.org');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

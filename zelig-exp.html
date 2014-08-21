@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to Zelig! &mdash; Zelig 5.0.1 documentation</title>
+    <title>zelig-exp &mdash; Zelig 5.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -33,8 +33,7 @@
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
-    <link rel="top" title="Zelig 5.0.1 documentation" href="#" />
-    <link rel="next" title="Quickstart Guide" href="quickstart.html" />
+    <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -58,7 +57,7 @@
         </button>
 
         <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
-        <a class="navbar-brand" href="#">Zelig</a>
+        <a class="navbar-brand" href="index.html">Zelig</a>
         <span class="navbar-text navbar-version pull-left"><b>5</b></span>
       </div>
         <div class="collapse navbar-collapse nav-collapse">
@@ -73,7 +72,7 @@
      id="dLabelGlobalToc"
      data-toggle="dropdown"
      data-target="#"
-     href="#">Site <b class="caret"></b></a>
+     href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
@@ -173,7 +172,16 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Welcome to Zelig!</a></li>
+<li><a class="reference internal" href="#">zelig-exp</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#input-values">Input Values</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -182,10 +190,6 @@
             
               
                 
-  <li>
-    <a href="quickstart.html" title="Next Chapter: Quickstart Guide"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Quickstart Guide &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -235,18 +239,210 @@
       </div>
     <div class="col-md-9">
       
-  <div class="section" id="welcome-to-zelig">
-<h1>Welcome to Zelig!<a class="headerlink" href="#welcome-to-zelig" title="Permalink to this headline">¶</a></h1>
-<p><em>Zelig</em> is a framework for interfacing with a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, Zelig adds considerable infrastructure to existing heterogenous R implementations by translating coefficient estimates into interpretable quantities of interest and automating statistical procedures (e.g., bootstrapping) though an intelligible call structure.</p>
-<p>For more information about the software including goals and direction of the project, please see the <a class="reference internal" href="about.html#about"><em>About Zelig</em></a> page.</p>
-<p>To get started, we recommend following the <a class="reference internal" href="user_guide.html#installation"><em>Installation &amp; Quickstart</em></a> guide. Additional information about supported models, including tutorials, can be found in the <a class="reference internal" href="user_guide.html#userguide"><em>User Guide</em></a>.</p>
-<p>To view the codebase, visit the source repository at <a class="reference external" href="https://github.com/IQSS/Zelig5">https://github.com/IQSS/Zelig5</a> and for regular updates on releases be sure to follow us on twitter at <a class="reference external" href="https://twitter.com/IQSS">&#64;IQSS</a>.</p>
-<hr class="docutils" />
-<p><strong>Implemented Models in Zelig 5.0.1</strong></p>
-<p><em>Inheritance Tree</em></p>
-<div style="margin-top:10px;">
-  <iframe width="835" height="500" src="http://bl.ocks.org/myi100/raw/1ca9ba696aa0bb462415/" marginwidth="0" marginheight="0" scrolling="no" frameBorder="0"></iframe>
-</div><div class="toctree-wrapper compound">
+  <div class="section" id="zelig-exp">
+<h1>zelig-exp<a class="headerlink" href="#zelig-exp" title="Permalink to this headline">¶</a></h1>
+<p>Exponential Regression for Duration Dependent Variables</p>
+<p>Use the exponential duration regression model if you have a dependent
+variable representing a duration (time until an event). The model
+assumes a constant hazard rate for all events. The dependent variable
+may be censored (for observations have not yet been completed when data
+were collected).</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+<span class="o">&gt;</span> x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+<span class="o">&gt;</span> s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Exponential models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length <span class="math">\(n\)</span>. For each
+observation <span class="math">\(i\)</span> in 1, …, <span class="math">\(n\)</span>, the value <span class="math">\(y_i\)</span> is the
+duration (lifetime, for example), and the associated <span class="math">\(c_i\)</span> is a
+binary variable such that <span class="math">\(c_i = 1\)</span> if the duration is not
+censored (<em>e.g.</em>, the subject dies during the study) or <span class="math">\(c_i = 0\)</span>
+if the duration is censored (<em>e.g.</em>, the subject is still alive at the
+end of the study and is know to live at least as long as <span class="math">\(y_i\)</span>).
+If <span class="math">\(c_i\)</span> is omitted, all Y are assumed to be completed; that is,
+time defaults to 1 for all observations.</p>
+</div>
+<div class="section" id="input-values">
+<h2>Input Values<a class="headerlink" href="#input-values" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for exponential regression:</p>
+<ul>
+<li><p class="first">robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) and the options
+selected in cluster.</p>
+</li>
+<li><p class="first">cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(y ~ x1 + x2, robust = TRUE, cluster = &quot;x3&quot;,
+                 model = &quot;exp&quot;, data = mydata)
+</pre></div>
+</div>
+<p>means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Attach the sample data:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>coalition<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimate the model:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span>   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> “exp”<span class="p">,</span> <span class="o">+</span> data <span class="o">=</span> coalition<span class="p">)</span>
+
+
+View the regression output<span class="o">:</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
+</pre></div>
+</div>
+<p>Summarize quantities of interest and produce some plots:</p>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math">\(Y_i^*\)</span> be the survival time for observation <span class="math">\(i\)</span>. This
+variable might be censored for some observations at a fixed time
+<span class="math">\(y_c\)</span> such that the fully observed dependent variable,
+<span class="math">\(Y_i\)</span>, is defined as</p>
+<div class="math">
+\[\begin{split}Y_i = \left\{ \begin{array}{ll}
+      Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
+      y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
+    \end{array} \right.\end{split}\]</div>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is described by the distribution of the
+partially observed variable <span class="math">\(Y^*\)</span>. We assume <span class="math">\(Y_i^*\)</span>
+follows the exponential distribution whose density function is given
+by</p>
+<div class="math">
+\[f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)\]</div>
+<p>for <span class="math">\(y_i^*\ge 0\)</span> and <span class="math">\(\lambda_i&gt;0\)</span>. The mean of this
+distribution is <span class="math">\(\lambda_i\)</span>.</p>
+<p>In addition, survival models like the exponential have three
+additional properties. The hazard function <span class="math">\(h(t)\)</span> measures the
+probability of not surviving past time <span class="math">\(t\)</span> given survival up to
+<span class="math">\(t\)</span>. In general, the hazard function is equal to
+<span class="math">\(f(t)/S(t)\)</span> where the survival function
+<span class="math">\(S(t) = 1 - \int_{0}^t f(s) ds\)</span> represents the fraction still
+surviving at time <span class="math">\(t\)</span>. The cumulative hazard function
+<span class="math">\(H(t)\)</span> describes the probability of dying before time
+<span class="math">\(t\)</span>. In general,
+<span class="math">\(H(t)= \int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the
+exponential model,</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+h(t) &amp;=&amp; \frac{1}{\lambda_i} \\
+S(t) &amp;=&amp; \exp\left( -\frac{t}{\lambda_i} \right) \\
+H(t) &amp;=&amp; \frac{t}{\lambda_i}\end{aligned}\end{split}\]</div>
+<p>For the exponential model, the hazard function <span class="math">\(h(t)\)</span> is
+constant over time. The Weibull model and lognormal models allow the
+hazard function to vary as a function of elapsed time (see and
+respectively).</p>
+</li>
+<li><p class="first">The <em>systematic component</em> <span class="math">\(\lambda_i\)</span> is modeled as</p>
+<div class="math">
+\[\lambda_i = \exp(x_i \beta),\]</div>
+<p>where <span class="math">\(x_i\)</span> is the vector of explanatory variables, and
+<span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected values (qi$ev) for the exponential model are simulations
+of the expected duration given <span class="math">\(x_i\)</span> and draws of <span class="math">\(\beta\)</span>
+from its posterior,</p>
+<div class="math">
+\[E(Y) = \lambda_i = \exp(x_i \beta).\]</div>
+</li>
+<li><p class="first">The predicted values (qi$pr) are draws from the exponential
+distribution with rate equal to the expected value.</p>
+</li>
+<li><p class="first">The first difference (or difference in expected values, qi$ev.diff),
+is</p>
+<div class="math">
+\[\textrm{FD} \; = \; E(Y \mid x_1) - E(Y \mid x),\]</div>
+<p>where <span class="math">\(x\)</span> and <span class="math">\(x_1\)</span> are different vectors of values for
+the explanatory variables.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) - E[Y_i(t_i=0)]
+  \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
+<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+<span class="math">\(y_i^*\)</span> and uncertainty in simulating <span class="math">\(E[Y_i(t_i=0)]\)</span>,
+the counterfactual expected value of <span class="math">\(Y_i\)</span> for observations in
+the treatment group, under the assumption that everything stays the
+same except that the treatment indicator is switched to
+<span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+  \widehat{Y_i(t_i=0)} \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
+<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+<span class="math">\(y_i^*\)</span> and uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(Surv(Y,</span> <span class="pre">C)</span> <span class="pre">~</span> <span class="pre">X,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">exp,</span> <span class="pre">data)</span></tt>, then you may
+examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
+elements available through the $ operator are listed below.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>The exponential function is part of the survival library by Terry
+Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
+to <tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library.</p>
 </div>
 </div>
 
@@ -264,7 +460,7 @@
         <br/>
         
 <div id="sourcelink">
-  <a href="_sources/index.txt"
+  <a href="_sources/zelig-exp.txt"
      rel="nofollow">Source</a>
 </div>
       

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Search &mdash; Zelig 5.0.1 documentation</title>
+    <title>zelig-logit &mdash; Zelig 5.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -28,24 +28,16 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/searchtools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
-  
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-
 
   </head>
   <body>
@@ -179,7 +171,19 @@
      href="#">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"
       role="menu"
-      aria-labelledby="dLabelLocalToc"></ul>
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">zelig-logit</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</ul>
 </li>
               
             
@@ -195,6 +199,13 @@
 
           
             
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
           
 
         </div>
@@ -217,39 +228,206 @@
 <li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a></li>
 </ul>
 
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
         </div>
       </div>
     <div class="col-md-9">
       
-  <h1 id="search-documentation">Search</h1>
-  <div id="fallback" class="admonition warning">
-  <script type="text/javascript">$('#fallback').hide();</script>
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  <p>
-    From here you can search these documents. Enter your search
-    words into the box below and click "search". Note that the search
-    function will automatically search for all of the words. Pages
-    containing fewer words won't appear in the result list.
-  </p>
+  <div class="section" id="zelig-logit">
+<h1>zelig-logit<a class="headerlink" href="#zelig-logit" title="Permalink to this headline">¶</a></h1>
+<p>Logistic Regression for Dichotomous Dependent Variables</p>
+<p>Logistic regression specifies a dichotomous dependent variable as a
+function of a set of explanatory variables.</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">,</span> x1 <span class="o">=</span> <span class="kc">NULL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-inputs">
+<h2>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for logistic regression:</p>
+<ul>
+<li><p class="first">robust: defaults to FALSE. If TRUE is selected, zelig() computes
+robust standard errors via the sandwich package (see ). The default
+type of robust standard error is heteroskedastic and autocorrelation
+consistent (HAC), and assumes that observations are ordered by time
+index.</p>
+<p>In addition, robust may be a list with the following options:</p>
+<ul class="simple">
+<li>method: Choose from<ul>
+<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
+<li>“kernHAC”: HAC standard errors using the weights given in .</li>
+<li>“weave”: HAC standard errors using the weights given in .</li>
+</ul>
+</li>
+<li>order.by: defaults to NULL (the observations are chronologically
+ordered as in the original data). Optionally, you may specify a
+vector of weights (either as order.by = z, where z exists outside
+the data frame; or as order.by = ~z, where z is a variable in the
+data frame) The observations are chronologically ordered by the
+size of z.</li>
+<li>…: additional options passed to the functions specified in method.
+See the sandwich library and for more options.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Basic Example</li>
+</ol>
+<p>Attaching the sample turnout dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>turnout<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimating parameter values for the logistic regression:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   age <span class="o">+</span> race<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+</pre></div>
+</div>
+<p>Setting values for the explanatory variables:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> age <span class="o">=</span> <span class="m">36</span><span class="p">,</span> race <span class="o">=</span> “white”<span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulating quantities of interest from the posterior distribution.</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>Simulating First Differences</li>
+</ol>
+<p>Estimating the risk difference (and risk ratio) between low education
+(25th percentile) and high education (75th percentile) while all the
+other variables held at their default values.</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> data <span class="o">=</span>
+turnout<span class="p">)</span> <span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout\ <span class="o">:</span>math<span class="o">:</span>`educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout`\ educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
 
-  
-  <form class="form-inline" action="" method="get">
-    <div class="form-group">
-      <input type="text" class="form-control" name="q" value="" />
-    </div>
-    <input type="submit" class="btn btn-default" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>  
-  
-  
-  
-  <div id="search-results">
-  
-  </div>
+s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+
+summary<span class="p">(</span>s.out2<span class="p">)</span>
+
+plot<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>Presenting Results: An ROC Plot [ROC]</li>
+</ol>
+<p>One can use an ROC plot to evaluate the fit of alternative model
+specifications. (Use demo(roc) to view this example, or see King and
+Zeng (2002).)</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate <span class="o">+</span> age<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> <span class="o">+</span>
+   data <span class="o">=</span> turnout<span class="p">)</span> <span class="o">&gt;</span> z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span>
+   “logit”<span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>rocplot<span class="p">(</span>z.out1\ <span class="o">:</span>math<span class="o">:</span><span class="sb">`y, z.out2`</span>\ y<span class="p">,</span> fitted<span class="p">(</span>z.out1<span class="p">),</span>
+   fitted<span class="p">(</span>z.out2<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math">\(Y_i\)</span> be the binary dependent variable for observation
+<span class="math">\(i\)</span> which takes the value of either 0 or 1.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+Y_i &amp;\sim&amp; \textrm{Bernoulli}(y_i \mid \pi_i) \\
+    &amp;=&amp; \pi_i^{y_i} (1-\pi_i)^{1-y_i}\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(\pi_i=\Pr(Y_i=1)\)</span>.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by:</p>
+<div class="math">
+\[\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\]</div>
+<p>where <span class="math">\(x_i\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
+for observation <span class="math">\(i\)</span> and <span class="math">\(\beta\)</span> is the vector of
+coefficients.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected values (qi$ev) for the logit model are simulations of
+the predicted probability of a success:</p>
+<div class="math">
+\[E(Y) =
+  \pi_i= \frac{1}{1 + \exp(-x_i \beta)},\]</div>
+<p>given draws of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+</li>
+<li><p class="first">The predicted values (qi$pr) are draws from the Binomial distribution
+with mean equal to the simulated expected value <span class="math">\(\pi_i\)</span>.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) for the logit model is defined as</p>
+<div class="math">
+\[\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\]</div>
+</li>
+<li><p class="first">The risk ratio (qi$rr) is defined as</p>
+<div class="math">
+\[\textrm{RR} = \Pr(Y = 1 \mid x_1) \ / \ \Pr(Y = 1 \mid x).\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)}\right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">logit,</span> <span class="pre">data)</span></tt>, then you may examine the
+available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the
+coefficients by using z.out$coefficients, and a default summary of
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>The logit model is part of the stats package. Advanced users may
+wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
+</div>
+</div>
+
 
     </div>
       
@@ -263,6 +441,10 @@
       
         <br/>
         
+<div id="sourcelink">
+  <a href="_sources/zelig-logit.txt"
+     rel="nofollow">Source</a>
+</div>
       
     </p>
     <p>

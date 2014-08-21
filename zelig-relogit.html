@@ -1,0 +1,626 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables &mdash; Zelig 5.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#running-models">Running Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-cite-zelig">How do I cite Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">Zelig-ls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id25">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id26">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id27">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id28">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id29">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id30">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id31">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id32">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id33">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id34">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id35">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id36">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id37">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id38">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id39">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id40">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id41">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id42">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id43">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#arguments">Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id44">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id45">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id46">Output Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#differences-with-stata-version">Differences with Stata Version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id47">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id48">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id49">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id50">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id51">Output Values</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+<li><a class="reference internal" href="#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
+<li><a class="reference internal" href="#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
+<li><a class="reference internal" href="#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+<li><a class="reference internal" href="#differences-with-stata-version">Differences with Stata Version</a><ul>
+<li><a class="reference internal" href="#how-to-cite">How to Cite</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a></li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">
+<h1>relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables<a class="headerlink" href="#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables" title="Permalink to this headline">¶</a></h1>
+<p>The relogit procedure estimates the same model as standard logistic
+regression (appropriate when you have a dichotomous dependent variable
+and a set of explanatory variables; see ), but the estimates are
+corrected for the bias that occurs when the sample is small or the
+observed events are rare (i.e., if the dependent variable has many more
+1s than 0s or the reverse). The relogit procedure also optionally uses
+prior correction for case-control sampling designs.</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, model = &quot;relogit&quot;, tau = NULL,
+                 case.control = c(&quot;prior&quot;, &quot;weighting&quot;),
+                 bias.correct = TRUE, robust = FALSE,
+                 data = mydata, ...)
+&gt; x.out &lt;- setx(z.out)
+&gt; s.out &lt;- sim(z.out, x = x.out)
+</pre></div>
+</div>
+</div>
+<div class="section" id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h2>
+<p>The relogit procedure supports four optional arguments in addition to
+the standard arguments for zelig(). You may additionally use:</p>
+<ul>
+<li><p class="first">tau: a vector containing either one or two values for <span class="math">\(\tau\)</span>,
+the true population fraction of ones. Use, for example, tau = c(0.05,
+0.1) to specify that the lower bound on tau is 0.05 and the upper
+bound is 0.1. If left unspecified, only finite-sample bias correction
+is performed, not case-control correction.</p>
+</li>
+<li><p class="first">case.control: if tau is specified, choose a method to correct for
+case-control sampling design: “prior” (default) or “weighting”.</p>
+</li>
+<li><p class="first">bias.correct: a logical value of TRUE (default) or FALSE indicating
+whether the intercept should be corrected for finite sample (rare
+events) bias.</p>
+</li>
+<li><p class="first">robust: defaults to FALSE (except when case.control = “weighting”;
+the default in this case becomes robust = TRUE). If TRUE is selected,
+zelig() computes robust standard errors via the sandwich package (see
+). The default type of robust standard error is heteroskedastic and
+autocorrelation consistent (HAC), and assumes that observations are
+ordered by time index.</p>
+<p>In addition, robust may be a list with the following options:</p>
+<ul class="simple">
+<li>method: Choose from<ul>
+<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
+<li>“kernHAC”: HAC standard errors using the weights given in .</li>
+<li>“weave”: HAC standard errors using the weights given in .</li>
+</ul>
+</li>
+<li>order.by: defaults to NULL (the observations are chronologically
+ordered as in the original data). Optionally, you may specify a
+vector of weights (either as order.by = z, where z exists outside
+the data frame; or as order.by = ~z, where z is a variable in the
+data frame) The observations are chronologically ordered by the
+size of z.</li>
+<li>…: additional options passed to the functions specified in method.
+See the sandwich library and for more options.</li>
+</ul>
+</li>
+</ul>
+<p>Note that if tau = NULL, bias.correct = FALSE, robust = FALSE, the
+relogit procedure performs a standard logistic regression without any
+correction.</p>
+</div>
+<div class="section" id="example-1-one-tau-with-prior-correction-and-bias-correction">
+<h2>Example 1: One Tau with Prior Correction and Bias Correction<a class="headerlink" href="#example-1-one-tau-with-prior-correction-and-bias-correction" title="Permalink to this headline">¶</a></h2>
+<p>Due to memory and space considerations, the data used here are a sample
+drawn from the full data set used in King and Zeng, 2001, The proportion
+of militarized interstate conflicts to the absence of disputes is
+<span class="math">\(\tau = 1,042 / 303,772
+\approx 0.00343\)</span>. To estimate the model,</p>
+<p>RRR&gt; data(mid)</p>
+<p>RRR&gt; z.out1 &lt;- zelig(conflict &nbsp; major + contig + power + maxdem + mindem
++ years, + data = mid, model = “relogit”, tau = 1042/303772)</p>
+<p>Summarize the model output:</p>
+<p>RRR&gt; summary(z.out1)</p>
+<p>Set the explanatory variables to their means:</p>
+<p>RRR&gt; x.out1 &lt;- setx(z.out1)</p>
+<p>Simulate quantities of interest:</p>
+<p>RRR&gt; s.out1 &lt;- sim(z.out1, x = x.out1) RRR&gt; summary(s.out1)</p>
+<p>RRR&gt; plot(s.out1)</p>
+<p><img alt="image" src="vigpics/relogit-Example3Plot" /></p>
+</div>
+<div class="section" id="example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">
+<h2>Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction<a class="headerlink" href="#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that we wish to perform case control correction using weighting
+(rather than the default prior correction). To estimate the model:</p>
+<p>RRR&gt; z.out2 &lt;- zelig(conflict &nbsp; major + contig + power + maxdem + mindem
++ years, + data = mid, model = “relogit”, tau = 1042/303772, +
+case.control = “weighting”, robust = TRUE)</p>
+<p>Summarize the model output:</p>
+<p>RRR&gt; summary(z.out2)</p>
+<p>Set the explanatory variables to their means:</p>
+<p>RRR&gt; x.out2 &lt;- setx(z.out2)</p>
+<p>Simulate quantities of interest:</p>
+<p>RRR&gt; s.out2 &lt;- sim(z.out2, x = x.out2) RRR&gt; summary(s.out2)</p>
+</div>
+<div class="section" id="example-3-two-taus-with-bias-correction-and-prior-correction">
+<h2>Example 3: Two Taus with Bias Correction and Prior Correction<a class="headerlink" href="#example-3-two-taus-with-bias-correction-and-prior-correction" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that we did not know that <span class="math">\(\tau \approx 0.00343\)</span>, but only
+that it was somewhere between <span class="math">\((0.002, 0.005)\)</span>. To estimate a
+model with a range of feasible estimates for <span class="math">\(\tau\)</span> (using the
+default prior correction method for case control correction):</p>
+<p>RRR&gt; z.out2 &lt;- zelig(conflict &nbsp; major + contig + power + maxdem + mindem
++ + years, data = mid, model = “relogit”, + tau = c(0.002, 0.005))</p>
+<p>Summarize the model output:</p>
+<p>RRR&gt; summary(z.out2)</p>
+<p>Set the explanatory variables to their means:</p>
+<p>RRR&gt; x.out2 &lt;- setx(z.out2)</p>
+<p>Simulate quantities of interest:</p>
+<p>RRR&gt; s.out &lt;- sim(z.out2, x = x.out2)</p>
+<p>RRR&gt; summary(s.out2)</p>
+<p>RRR&gt; plot(s.out2)</p>
+<p><img alt="image" src="vigpics/relogit-Example3Plot" /></p>
+<p>The cost of giving a range of values for <span class="math">\(\tau\)</span> is that point
+estimates are not available for quantities of interest. Instead,
+quantities are presented as confidence intervals with significance less
+than or equal to a specified level (e.g., at least 95% of the
+simulations are contained in the nominal 95% confidence interval).</p>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Like the standard logistic regression, the <em>stochastic component</em> for
+the rare events logistic regression is:</p>
+<div class="math">
+\[Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\]</div>
+<p>where <span class="math">\(Y_i\)</span> is the binary dependent variable, and takes a value
+of either 0 or 1.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is:</p>
+<div class="math">
+\[\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\]</div>
+</li>
+<li><p class="first">If the sample is generated via a case-control (or choice-based)
+design, such as when drawing all events (or “cases”) and a sample
+from the non-events (or “controls”) and going backwards to collect
+the explanatory variables, you must correct for selecting on the
+dependent variable. While the slope coefficients are approximately
+unbiased, the constant term may be significantly biased. Zelig has
+two methods for case control correction:</p>
+<ol class="arabic">
+<li><p class="first">The “prior correction” method adjusts the intercept term. Let
+<span class="math">\(\tau\)</span> be the true population fraction of events,
+<span class="math">\(\bar{y}\)</span> the fraction of events in the sample, and
+<span class="math">\(\hat{\beta_0}\)</span> the uncorrected intercept term. The
+corrected intercept <span class="math">\(\beta_0\)</span> is:</p>
+<div class="math">
+\[\beta =  \hat{\beta_0} - \ln \left[ \bigg( \frac{1 - \tau}{\tau}
+  \bigg) \bigg( \frac{\bar{y}}{1 - \bar{y}} \bigg) \right].\]</div>
+</li>
+<li><p class="first">The “weighting” method performs a weighted logistic regression to
+correct for a case-control sampling design. Let the 1 subscript
+denote observations for which the dependent variable is observed
+as a 1, and the 0 subscript denote observations for which the
+dependent variable is observed as a 0. Then the vector of weights
+<span class="math">\(w_i\)</span></p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+w_1 &amp;=&amp; \frac{\tau}{\bar{y}} \\
+w_0 &amp;=&amp; \frac{(1 - \tau)}{(1 - \bar{y})} \\
+w_i &amp;=&amp; w_1 Y_i + w_0 (1 - Y_i)\end{aligned}\end{split}\]</div>
+</li>
+</ol>
+<p>If <span class="math">\(\tau\)</span> is unknown, you may alternatively specify an upper
+and lower bound for the possible range of <span class="math">\(\tau\)</span>. In this case,
+the relogit procedure uses “robust Bayesian” methods to generate a
+confidence interval (rather than a point estimate) for each quantity
+of interest. The nominal coverage of the confidence interval is at
+least as great as the actual coverage.</p>
+</li>
+<li><p class="first">By default, estimates of the the coefficients <span class="math">\(\beta\)</span> are
+bias-corrected to account for finite sample or rare events bias. In
+addition, quantities of interest, such as predicted probabilities,
+are also corrected of rare-events bias. If <span class="math">\(\widehat{\beta}\)</span>
+are the uncorrected logit coefficients and
+bias(<span class="math">\(\widehat{\beta}\)</span>) is the bias term, the corrected
+coefficients <span class="math">\(\tilde{\beta}\)</span> are</p>
+<div class="math">
+\[\widehat{\beta} - \textrm{bias}(\widehat{\beta}) = \tilde{\beta}\]</div>
+<p>The bias term is</p>
+<div class="math">
+\[\textrm{bias}(\widehat{\beta}) = (X'WX)^{-1} X'W \xi\]</div>
+<p>where</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+\xi_i &amp;=&amp; 0.5 Q_{ii} \Big( (1 + w-1)\widehat{\pi}_i - w_1 \Big) \\
+Q &amp;=&amp; X(X'WX)^{-1} X' \\
+W = \textrm{diag}\{\widehat{\pi}_i (1 - \widehat{\pi}_i) w_i\}\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(w_i\)</span> and <span class="math">\(w_1\)</span> are given in the “weighting”
+section above.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">For either one or no <span class="math">\(\tau\)</span>:</p>
+<ul>
+<li><p class="first">The expected values (qi$ev) for the rare events logit are
+simulations of the predicted probability</p>
+<div class="math">
+\[E(Y) = \pi_i =
+    \frac{1}{1 + \exp(-x_i \beta)},\]</div>
+<p>given draws of <span class="math">\(\beta\)</span> from its posterior.</p>
+</li>
+<li><p class="first">The predicted value (qi$pr) is a draw from a binomial distribution
+with mean equal to the simulated <span class="math">\(\pi_i\)</span>.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) is defined as</p>
+<div class="math">
+\[\textrm{FD} = \Pr(Y = 1 \mid x_1, \tau) - \Pr(Y = 1 \mid x, \tau).\]</div>
+</li>
+<li><p class="first">The risk ratio (qi$rr) is defined as</p>
+<div class="math">
+\[\textrm{RR} = \Pr(Y = 1 \mid x_1, \tau) \ / \ \Pr(Y = 1 \mid x, \tau).\]</div>
+</li>
+</ul>
+</li>
+<li><p class="first">For a range of <span class="math">\(\tau\)</span> defined by <span class="math">\([\tau_1, \tau_2]\)</span>, each
+of the quantities of interest are <span class="math">\(n \times 2\)</span> matrices, which
+report the lower and upper bounds, respectively, for a confidence
+interval with nominal coverage at least as great as the actual
+coverage. At worst, these bounds are conservative estimates for the
+likely range for each quantity of interest. Please refer to for the
+specific method of calculating bounded quantities of interest.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">relogit,</span> <span class="pre">data)</span></tt>, then you may examine
+the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see
+the coefficients by using z.out$coefficients, and a default summary of
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements available through
+the $ operator are listed below.</p>
+<ul>
+<li><p class="first">From the zelig() output object z.out, you may extract:</p>
+<ul class="simple">
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>bias.correct: TRUE if bias correction was selected, else FALSE.</li>
+<li>prior.correct: TRUE if prior correction was selected, else FALSE.</li>
+<li>weighting: TRUE if weighting was selected, else FALSE.</li>
+<li>tau: the value of tau for which case control correction was
+implemented.</li>
+<li>residuals: the working residuals in the final iteration of the
+IWLS fit.</li>
+<li>fitted.values: the vector of fitted values for the systemic
+component, <span class="math">\(\pi_i\)</span>.</li>
+<li>linear.predictors: the vector of <span class="math">\(x_{i} \beta\)</span></li>
+<li>aic: Akaike’s Information Criterion (minus twice the maximized
+log-likelihood plus twice the number of coefficients).</li>
+<li>df.residual: the residual degrees of freedom.</li>
+<li>df.null: the residual degrees of freedom for the null model.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+</ul>
+<p>Note that for a range of <span class="math">\(\tau\)</span>, each of the above items may be
+extracted from the “lower.estimate” and “upper.estimate” objects in
+your zelig output. Use lower &lt;- z.out$lower.estimate, and then
+lower$coefficients to extract the coefficients for the empirical
+estimate generated for the smaller of the two <span class="math">\(\tau\)</span>.</p>
+</li>
+<li><p class="first">From summary(z.out), you may extract:</p>
+<ul class="simple">
+<li>coefficients: the parameter estimates with their associated
+standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+<li>cov.scaled: a <span class="math">\(k \times k\)</span> matrix of scaled covariances.</li>
+<li>cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</li>
+</ul>
+</li>
+<li><p class="first">From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+x-observation (for more than one x-observation). Available quantities
+are:</p>
+<ul class="simple">
+<li>qi$ev: the simulated expected values, or predicted probabilities,
+for the specified values of x.</li>
+<li>qi$pr: the simulated predicted values drawn from Binomial
+distributions given the predicted probabilities.</li>
+<li>qi$fd: the simulated first difference in the predicted
+probabilities for the values specified in x and x1.</li>
+<li>qi$rr: the simulated risk ratio for the predicted probabilities
+simulated from x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+<li>qi$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="differences-with-stata-version">
+<h2>Differences with Stata Version<a class="headerlink" href="#differences-with-stata-version" title="Permalink to this headline">¶</a></h2>
+<p>The Stata version of ReLogit and the R implementation differ slightly in
+their coefficient estimates due to differences in the matrix inversion
+routines implemented in R and Stata. Zelig uses orthogonal-triangular
+decomposition (through lm.influence()) to compute the bias term, which
+is more numerically stable than standard matrix calculations.</p>
+<div class="section" id="how-to-cite">
+<h3>How to Cite<a class="headerlink" href="#how-to-cite" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="see-also">
+<h3>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
+<p>For more information see ,,. Sample data are from .</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/zelig-relogit.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'pydata.org');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

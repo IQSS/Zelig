@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tobit: Linear Regression for a Left-Censored Dependent Variable &mdash; Zelig 5.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#running-models">Running Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-cite-zelig">How do I cite Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id2">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id5">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#lognorm-log-normal-regression-for-duration-dependent-variables">lognorm: Log-Normal Regression for Duration Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id7">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id8">Input Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id9">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id10">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id13">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id14">Output Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">Zelig-ls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id19">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#additional-inputs">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id20">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id21">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id22">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id23">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id24">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id25">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id26">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id27">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id28">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id29">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id30">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id31">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id32">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id33">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id34">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id35">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#arguments">Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id36">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id37">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id38">Output Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#differences-with-stata-version">Differences with Stata Version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id39">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id40">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id41">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id42">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id43">Output Values</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#inputs">Inputs</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a><ul>
+<li><a class="reference internal" href="#how-to-cite">How to Cite</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#lognorm-log-normal-regression-for-duration-dependent-variables">lognorm: Log-Normal Regression for Duration Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a></li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="tobit-linear-regression-for-a-left-censored-dependent-variable">
+<h1><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable<a class="headerlink" href="#tobit-linear-regression-for-a-left-censored-dependent-variable" title="Permalink to this headline">¶</a></h1>
+<p>Tobit regression estimates a linear regression model for a left-censored
+dependent variable, where the dependent variable is censored from below.
+While the classical tobit model has values censored at 0, you may select
+another censoring point. For other linear regression models with fully
+observed dependent variables, see Bayesian regression (), maximum
+likelihood normal regression (), or least squares ().</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, below = 0, above = Inf,
+                  model = &quot;tobit&quot;, data = mydata)
+&gt; x.out &lt;- setx(z.out)
+&gt; s.out &lt;- sim(z.out, x = x.out)
+</pre></div>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>zelig() accepts the following arguments to specify how the dependent
+variable is censored.</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">below</span></tt>: (defaults to 0) The point at which the dependent variable
+is censored from below. If any values in the dependent variable are
+observed to be less than the censoring point, it is assumed that that
+particular observation is censored from below at the observed value.
+(See for a Bayesian implementation that supports both left and right
+censoring.)</p>
+</li>
+<li><p class="first">robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) and the options
+selected in cluster.</p>
+</li>
+<li><p class="first">cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(y ~ x1 + x2, robust = TRUE, cluster = &quot;x3&quot;,
+                 model = &quot;tobit&quot;, data = mydata)
+</pre></div>
+</div>
+<p>means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.</p>
+</li>
+</ul>
+<p>Zelig users may wish to refer to <tt class="docutils literal"><span class="pre">help(survreg)</span></tt> for more information.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><div class="first line-block">
+<div class="line">Basic Example</div>
+<div class="line">Attaching the sample dataset:</div>
+</div>
+<p>RRR&gt; data(tobin)</p>
+<p>Estimating linear regression using <tt class="docutils literal"><span class="pre">tobit</span></tt>:</p>
+<p>RRR&gt; z.out &lt;- zelig(durable &nbsp; age + quant, model = “tobit”, data =
+tobin)</p>
+<p>Setting values for the explanatory variables to their sample
+averages:</p>
+<p>RRR&gt; x.out &lt;- setx(z.out)</p>
+<p>Simulating quantities of interest from the posterior distribution
+given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
+<p>RRR&gt; s.out1 &lt;- sim(z.out, x = x.out)</p>
+<p>RRR&gt; summary(s.out1)</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Simulating First Differences</div>
+<div class="line">Set explanatory variables to their default(mean/mode) values, with</div>
+</div>
+<p>high (80th percentile) and low (20th percentile) liquidity ratio
+(<tt class="docutils literal"><span class="pre">quant</span></tt>):</p>
+<p>RRR&gt; x.high &lt;- setx(z.out, quant =
+quantile(tobin<span class="math">\(quant, prob = 0.8))
+RRR&gt;  x.low &lt;- setx(z.out, quant = quantile(tobin\)</span>quant, prob =
+0.2))</p>
+<p>Estimating the first difference for the effect of high versus low
+liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durable</span></tt>):</p>
+<p>RRR&gt; s.out2 &lt;- sim(z.out, x = x.high, x1 = x.low)</p>
+<p>RRR&gt; summary(s.out2)</p>
+</li>
+</ol>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Let <span class="math">\(Y_i^*\)</span> be a latent dependent variable which is distributed
+with <em>stochastic</em> component</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+Y_i^* &amp; \sim &amp; \textrm{Normal}(\mu_i, \sigma^2) \\\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(\mu_i\)</span> is a vector means and <span class="math">\(\sigma^2\)</span> is a
+scalar variance parameter. <span class="math">\(Y_i^*\)</span> is not directly observed,
+however. Rather we observed <span class="math">\(Y_i\)</span> which is defined as:</p>
+<div class="math">
+\[\begin{split}Y_i = \left\{
+\begin{array}{lcl}
+Y_i^*  &amp;\textrm{if} &amp; c &lt;Y_i^* \\
+c    &amp;\textrm{if} &amp; c \ge Y_i^*
+\end{array}\right.\end{split}\]</div>
+<p>where <span class="math">\(c\)</span> is the lower bound below which <span class="math">\(Y_i^*\)</span> is
+censored.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+\mu_{i} &amp;=&amp; x_{i} \beta,\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(x_{i}\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
+for observation <span class="math">\(i\)</span> and <span class="math">\(\beta\)</span> is the vector of
+coefficients.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected values (<tt class="docutils literal"><span class="pre">qi$ev</span></tt>) for the tobit regression model are
+the same as the expected value of <span class="math">\(Y*\)</span>:</p>
+<div class="math">
+\[E(Y^* | X) = \mu_{i} = x_{i} \beta\]</div>
+</li>
+<li><p class="first">The first difference (<tt class="docutils literal"><span class="pre">qi$fd</span></tt>) for the tobit regression model is
+defined as</p>
+<div class="math">
+\[\begin{aligned}
+\text{FD}=E(Y^* \mid x_{1}) - E(Y^* \mid x).\end{aligned}\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>) for the treatment group is</p>
+<div class="math">
+\[\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[E[Y^*_{i}(t_{i}=1)]-E[Y^*_{i}(t_{i}=0)]],\end{aligned}\]</div>
+<p>where <span class="math">\(t_{i}\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_{i}=1\)</span>) and control (<span class="math">\(t_{i}=0\)</span>) groups.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run:</p>
+<div class="highlight-python"><div class="highlight"><pre>z.out &lt;- zelig(y ~ x, model = &quot;tobit.bayes&quot;, data)
+</pre></div>
+</div>
+<p>then you may examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the draws from the posterior distribution of the
+<tt class="docutils literal"><span class="pre">coefficients</span></tt> by using <tt class="docutils literal"><span class="pre">z.out$coefficients</span></tt>, and view a default
+summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements
+available through the <tt class="docutils literal"><span class="pre">$</span></tt> operator are listed below.</p>
+<ul class="simple">
+<li>From the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object <tt class="docutils literal"><span class="pre">z.out</span></tt>, you may extract:<ul>
+<li><tt class="docutils literal"><span class="pre">coefficients</span></tt>: draws from the posterior distributions of the
+estimated parameters. The first <span class="math">\(k\)</span> columns contain the
+posterior draws of the coefficients <span class="math">\(\beta\)</span>, and the last
+column contains the posterior draws of the variance
+<span class="math">\(\sigma^2\)</span>.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: the random seed used in the model.</li>
+</ul>
+</li>
+<li>From the <tt class="docutils literal"><span class="pre">sim()</span></tt> output object <tt class="docutils literal"><span class="pre">s.out</span></tt>:<ul>
+<li><tt class="docutils literal"><span class="pre">qi$ev</span></tt>: the simulated expected value for the specified values
+of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$fd</span></tt>: the simulated first difference in the expected values
+given the values specified in <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">x1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>: the simulated average expected treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="how-to-cite">
+<h3>How to Cite<a class="headerlink" href="#how-to-cite" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="see-also">
+<h3>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
+<p>The tobit function is part of the survival library by Terry Therneau,
+ported to R by Thomas Lumley. Advanced users may wish to refer to
+<tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library and .Sample data are from .</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/zelig-tobit.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'pydata.org');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

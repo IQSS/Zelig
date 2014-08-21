@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>zelig-lognorm &mdash; Zelig 5.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#running-models">Running Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-cite-zelig">How do I cite Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">Zelig-ls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id25">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id26">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id27">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id28">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id29">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id30">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id31">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id32">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id33">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id34">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id35">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id36">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id37">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id38">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id39">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id40">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id41">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id42">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id43">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#arguments">Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id44">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id45">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id46">Output Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#differences-with-stata-version">Differences with Stata Version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id47">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id48">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id49">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id50">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#id51">Output Values</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">zelig-lognorm</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#input-values">Input Values</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a></li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="zelig-lognorm">
+<h1>zelig-lognorm<a class="headerlink" href="#zelig-lognorm" title="Permalink to this headline">¶</a></h1>
+<p>Log-Normal Regression for Duration Dependent Variables</p>
+<p>The log-normal model describes an event’s duration, the dependent
+variable, as a function of a set of explanatory variables. The
+log-normal model may take time censored dependent variables, and allows
+the hazard rate to increase and decrease.</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;lognorm&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Log-normal models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length <span class="math">\(n\)</span>. For each
+observation <span class="math">\(i\)</span> in 1, …, <span class="math">\(n\)</span>, the value <span class="math">\(y_i\)</span> is the
+duration (lifetime, for example) of each subject, and the associated
+<span class="math">\(c_i\)</span> is a binary variable such that <span class="math">\(c_i = 1\)</span> if the
+duration is not censored (<em>e.g.</em>, the subject dies during the study) or
+<span class="math">\(c_i = 0\)</span> if the duration is censored (<em>e.g.</em>, the subject is
+still alive at the end of the study). If <span class="math">\(c_i\)</span> is omitted, all Y
+are assumed to be completed; that is, time defaults to 1 for all
+observations.</p>
+</div>
+<div class="section" id="input-values">
+<h2>Input Values<a class="headerlink" href="#input-values" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for lognormal regression:</p>
+<ul class="simple">
+<li>robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) based on the options
+in cluster.</li>
+<li>cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x1 <span class="o">+</span> x2<span class="p">,</span> robust <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> cluster <span class="o">=</span> <span class="s">&quot;x3&quot;</span><span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+</pre></div>
+</div>
+<p>means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Attach the sample data:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>coalition<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimate the model:</p>
+<div class="highlight-r"><div class="highlight"><pre>RRR<span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span>   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span>
+“lognorm”<span class="p">,</span> <span class="o">+</span> data <span class="o">=</span> coalition<span class="p">)</span>
+</pre></div>
+</div>
+<p>View the regression output:</p>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2
+<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math">\(Y_i^*\)</span> be the survival time for observation <span class="math">\(i\)</span> with
+the density function <span class="math">\(f(y)\)</span> and the corresponding distribution
+function <span class="math">\(F(t)=\int_{0}^t f(y) dy\)</span>. This variable might be
+censored for some observations at a fixed time <span class="math">\(y_c\)</span> such that the
+fully observed dependent variable, <span class="math">\(Y_i\)</span>, is defined as</p>
+<div class="math">
+\[\begin{split}Y_i = \left\{ \begin{array}{ll}
+      Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
+      y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
+    \end{array} \right.\end{split}\]</div>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is described by the distribution of the
+partially observed variable, <span class="math">\(Y^*\)</span>. For the lognormal model,
+there are two equivalent representations:</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+    Y_i^* \; \sim \; \textrm{LogNormal}(\mu_i, \sigma^2) &amp; \textrm{ or
+} &amp; \log(Y_i^*) \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)\end{aligned}\end{split}\]</div>
+<p>where the parameters <span class="math">\(\mu_i\)</span> and <span class="math">\(\sigma^2\)</span> are the mean
+and variance of the Normal distribution. (Note that the output from
+zelig() parameterizes scale:math:` = sigma`.)</p>
+<p>In addition, survival models like the lognormal have three additional
+properties. The hazard function <span class="math">\(h(t)\)</span> measures the probability
+of not surviving past time <span class="math">\(t\)</span> given survival up to <span class="math">\(t\)</span>.
+In general, the hazard function is equal to <span class="math">\(f(t)/S(t)\)</span> where
+the survival function :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>S(t) =</p>
+<blockquote>
+<div><p>1 - int_{0}^t f(s) ds` represents the fraction still surviving at</p>
+</div></blockquote>
+<p>time <span class="math">\(t\)</span>. The cumulative hazard function <span class="math">\(H(t)\)</span> describes
+the probability of dying before time <span class="math">\(t\)</span>. In general,
+<span class="math">\(H(t)=
+\int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the lognormal
+model,</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+h(t) &amp;=&amp; \frac{1}{\sqrt{2 \pi} \, \sigma t \, S(t)}
+\exp\left\{-\frac{1}{2 \sigma^2} (\log \lambda t)^2\right\} \\
+S(t) &amp;=&amp; 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \\
+H(t) &amp;=&amp; -\log \left\{ 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \right\}\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(\Phi(\cdot)\)</span> is the cumulative density function for the
+Normal distribution.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is described as:</p>
+<div class="math">
+\[\mu_i = x_i \beta .\]</div>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected values (qi$ev) for the lognormal model are simulations
+of the expected duration:</p>
+<div class="math">
+\[E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),\]</div>
+<p>given draws of <span class="math">\(\beta\)</span> and <span class="math">\(\sigma\)</span> from their sampling
+distributions.</p>
+</li>
+<li><p class="first">The predicted value is a draw from the log-normal distribution given
+simulations of the parameters <span class="math">\((\lambda_i, \sigma)\)</span>.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) is</p>
+<div class="math">
+\[\textrm{FD} = E(Y \mid x_1) - E(Y \mid x).\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
+<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+<span class="math">\(y_i^*\)</span> and uncertainty in simulating <span class="math">\(E[Y_i(t_i=0)]\)</span>,
+the counterfactual expected value of <span class="math">\(Y_i\)</span> for observations in
+the treatment group, under the assumption that everything stays the
+same except that the treatment indicator is switched to
+<span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
+\widehat{Y_i(t_i=0)} \},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
+<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations are due to two
+factors: uncertainty in the imputation process for censored
+<span class="math">\(y_i^*\)</span> and uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(Surv(Y,</span> <span class="pre">C)</span> <span class="pre">~</span> <span class="pre">X,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">lognorm,</span> <span class="pre">data)</span></tt>, then you may
+examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
+elements available through the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>icoef: parameter estimates for the intercept and <span class="math">\(\sigma\)</span>.</li>
+<li>var: Variance-covariance matrix.</li>
+<li>loglik: Vector containing the log-likelihood for the model and
+intercept only (respectively).</li>
+<li>linear.predictors: the vector of <span class="math">\(x_{i}\beta\)</span>.</li>
+<li>df.residual: the residual degrees of freedom.</li>
+<li>df.null: the residual degrees of freedom for the null model.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+</ul>
+</li>
+<li>Most of this may be conveniently summarized using summary(z.out).
+From summary(z.out), you may additionally extract:<ul>
+<li>table: the parameter estimates with their associated standard
+errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected values for the specified values of
+x.</li>
+<li>qi$pr: the simulated predicted values drawn from the distribution
+defined by <span class="math">\((\lambda_i, \sigma)\)</span>.</li>
+<li>qi$fd: the simulated first differences between the simulated
+expected values for x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+<li>qi$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>The exponential function is part of the survival library by by Terry
+Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
+to <tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/zelig-lognorm.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'pydata.org');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,2540 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Model vignettes &mdash; Zelig 5.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
+    <link rel="prev" title="About Zelig" href="about.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#quickstart-guide">Quickstart Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#running-models">Running Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-cite-zelig">How do I cite Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Model vignettes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-ls">Zelig-ls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id25">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id26">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id27">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id28">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id29">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id30">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id31">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id32">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id33">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id34">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id35">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id36">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id37">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id38">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id39">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id40">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id41">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id42">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id43">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id44">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id45">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id46">Output Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differences-with-stata-version">Differences with Stata Version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id47">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id48">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id49">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id50">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id51">Output Values</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Model vignettes</a><ul>
+<li><a class="reference internal" href="#zelig-exp">zelig-exp</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#input-values">Input Values</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#zelig-gamma">zelig-gamma</a><ul>
+<li><a class="reference internal" href="#id1">Syntax</a></li>
+<li><a class="reference internal" href="#id2">Example</a></li>
+<li><a class="reference internal" href="#id3">Model</a></li>
+<li><a class="reference internal" href="#id4">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id5">Output Values</a></li>
+<li><a class="reference internal" href="#id6">See also</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#zelig-logit">zelig-logit</a><ul>
+<li><a class="reference internal" href="#id7">Syntax</a></li>
+<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#id8">Model</a></li>
+<li><a class="reference internal" href="#id9">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id10">Output Values</a></li>
+<li><a class="reference internal" href="#id11">See also</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#zelig-lognorm">zelig-lognorm</a><ul>
+<li><a class="reference internal" href="#id12">Syntax</a></li>
+<li><a class="reference internal" href="#id13">Input Values</a></li>
+<li><a class="reference internal" href="#id14">Example</a></li>
+<li><a class="reference internal" href="#id15">Model</a></li>
+<li><a class="reference internal" href="#id18">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id19">Output Values</a></li>
+<li><a class="reference internal" href="#id20">See also</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#zelig-ls">Zelig-ls</a><ul>
+<li><a class="reference internal" href="#basic-example-with-first-differences">Basic Example with First Differences</a></li>
+<li><a class="reference internal" href="#using-dummy-variables">Using Dummy Variables</a><ul>
+<li><a class="reference internal" href="#id21">Model</a></li>
+<li><a class="reference internal" href="#id22">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id23">Output Values</a></li>
+<li><a class="reference internal" href="#id24">See also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a><ul>
+<li><a class="reference internal" href="#id25">Syntax</a></li>
+<li><a class="reference internal" href="#id26">Additional Inputs</a></li>
+<li><a class="reference internal" href="#id27">Examples</a></li>
+<li><a class="reference internal" href="#id28">Model</a></li>
+<li><a class="reference internal" href="#id29">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id30">Output Values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a><ul>
+<li><a class="reference internal" href="#id31">Syntax</a></li>
+<li><a class="reference internal" href="#id32">Additional Inputs</a></li>
+<li><a class="reference internal" href="#id33">Example</a></li>
+<li><a class="reference internal" href="#id34">Model</a></li>
+<li><a class="reference internal" href="#id35">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id36">Output Values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a><ul>
+<li><a class="reference internal" href="#id37">Syntax</a></li>
+<li><a class="reference internal" href="#id38">Additional Inputs</a></li>
+<li><a class="reference internal" href="#id39">Examples</a></li>
+<li><a class="reference internal" href="#id40">Model</a></li>
+<li><a class="reference internal" href="#id41">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id42">Output Values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
+<li><a class="reference internal" href="#id43">Syntax</a></li>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+<li><a class="reference internal" href="#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
+<li><a class="reference internal" href="#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
+<li><a class="reference internal" href="#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
+<li><a class="reference internal" href="#id44">Model</a></li>
+<li><a class="reference internal" href="#id45">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id46">Output Values</a></li>
+<li><a class="reference internal" href="#differences-with-stata-version">Differences with Stata Version</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
+<li><a class="reference internal" href="#id47">Syntax</a></li>
+<li><a class="reference internal" href="#inputs">Inputs</a></li>
+<li><a class="reference internal" href="#id48">Examples</a></li>
+<li><a class="reference internal" href="#id49">Model</a></li>
+<li><a class="reference internal" href="#id50">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id51">Output Values</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="about.html" title="Previous Chapter: About Zelig"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; About Zelig</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Model vignettes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-ls">Zelig-ls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id25">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id26">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id27">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id28">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id29">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id30">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id31">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id32">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id33">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id34">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id35">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id36">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id37">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id38">Additional Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id39">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id40">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id41">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id42">Output Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id43">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id44">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id45">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id46">Output Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differences-with-stata-version">Differences with Stata Version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id47">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id48">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id49">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id50">Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id51">Output Values</a></li>
+</ul>
+</li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="model-vignettes">
+<span id="vignettes"></span><h1>Model vignettes<a class="headerlink" href="#model-vignettes" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="zelig-exp">
+<h2>zelig-exp<a class="headerlink" href="#zelig-exp" title="Permalink to this headline">¶</a></h2>
+<p>Exponential Regression for Duration Dependent Variables</p>
+<p>Use the exponential duration regression model if you have a dependent
+variable representing a duration (time until an event). The model
+assumes a constant hazard rate for all events. The dependent variable
+may be censored (for observations have not yet been completed when data
+were collected).</p>
+<div class="section" id="syntax">
+<h3>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+<span class="o">&gt;</span> x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+<span class="o">&gt;</span> s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Exponential models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length <span class="math">\(n\)</span>. For each
+observation <span class="math">\(i\)</span> in 1, …, <span class="math">\(n\)</span>, the value <span class="math">\(y_i\)</span> is the
+duration (lifetime, for example), and the associated <span class="math">\(c_i\)</span> is a
+binary variable such that <span class="math">\(c_i = 1\)</span> if the duration is not
+censored (<em>e.g.</em>, the subject dies during the study) or <span class="math">\(c_i = 0\)</span>
+if the duration is censored (<em>e.g.</em>, the subject is still alive at the
+end of the study and is know to live at least as long as <span class="math">\(y_i\)</span>).
+If <span class="math">\(c_i\)</span> is omitted, all Y are assumed to be completed; that is,
+time defaults to 1 for all observations.</p>
+</div>
+<div class="section" id="input-values">
+<h3>Input Values<a class="headerlink" href="#input-values" title="Permalink to this headline">¶</a></h3>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for exponential regression:</p>
+<ul>
+<li><p class="first">robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) and the options
+selected in cluster.</p>
+</li>
+<li><p class="first">cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(y ~ x1 + x2, robust = TRUE, cluster = &quot;x3&quot;,
+                 model = &quot;exp&quot;, data = mydata)
+</pre></div>
+</div>
+<p>means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Attach the sample data:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>coalition<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimate the model:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span>   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> “exp”<span class="p">,</span> <span class="o">+</span> data <span class="o">=</span> coalition<span class="p">)</span>
+
+
+View the regression output<span class="o">:</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
+</pre></div>
+</div>
+<p>Summarize quantities of interest and produce some plots:</p>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<p>Let <span class="math">\(Y_i^*\)</span> be the survival time for observation <span class="math">\(i\)</span>. This
+variable might be censored for some observations at a fixed time
+<span class="math">\(y_c\)</span> such that the fully observed dependent variable,
+<span class="math">\(Y_i\)</span>, is defined as</p>
+<div class="math">
+\[\begin{split}Y_i = \left\{ \begin{array}{ll}
+      Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
+      y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
+    \end{array} \right.\end{split}\]</div>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is described by the distribution of the
+partially observed variable <span class="math">\(Y^*\)</span>. We assume <span class="math">\(Y_i^*\)</span>
+follows the exponential distribution whose density function is given
+by</p>
+<div class="math">
+\[f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)\]</div>
+<p>for <span class="math">\(y_i^*\ge 0\)</span> and <span class="math">\(\lambda_i&gt;0\)</span>. The mean of this
+distribution is <span class="math">\(\lambda_i\)</span>.</p>
+<p>In addition, survival models like the exponential have three
+additional properties. The hazard function <span class="math">\(h(t)\)</span> measures the
+probability of not surviving past time <span class="math">\(t\)</span> given survival up to
+<span class="math">\(t\)</span>. In general, the hazard function is equal to
+<span class="math">\(f(t)/S(t)\)</span> where the survival function
+<span class="math">\(S(t) = 1 - \int_{0}^t f(s) ds\)</span> represents the fraction still
+surviving at time <span class="math">\(t\)</span>. The cumulative hazard function
+<span class="math">\(H(t)\)</span> describes the probability of dying before time
+<span class="math">\(t\)</span>. In general,
+<span class="math">\(H(t)= \int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the
+exponential model,</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+h(t) &amp;=&amp; \frac{1}{\lambda_i} \\
+S(t) &amp;=&amp; \exp\left( -\frac{t}{\lambda_i} \right) \\
+H(t) &amp;=&amp; \frac{t}{\lambda_i}\end{aligned}\end{split}\]</div>
+<p>For the exponential model, the hazard function <span class="math">\(h(t)\)</span> is
+constant over time. The Weibull model and lognormal models allow the
+hazard function to vary as a function of elapsed time (see and
+respectively).</p>
+</li>
+<li><p class="first">The <em>systematic component</em> <span class="math">\(\lambda_i\)</span> is modeled as</p>
+<div class="math">
+\[\lambda_i = \exp(x_i \beta),\]</div>
+<p>where <span class="math">\(x_i\)</span> is the vector of explanatory variables, and
+<span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h3>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">The expected values (qi$ev) for the exponential model are simulations
+of the expected duration given <span class="math">\(x_i\)</span> and draws of <span class="math">\(\beta\)</span>
+from its posterior,</p>
+<div class="math">
+\[E(Y) = \lambda_i = \exp(x_i \beta).\]</div>
+</li>
+<li><p class="first">The predicted values (qi$pr) are draws from the exponential
+distribution with rate equal to the expected value.</p>
+</li>
+<li><p class="first">The first difference (or difference in expected values, qi$ev.diff),
+is</p>
+<div class="math">
+\[\textrm{FD} \; = \; E(Y \mid x_1) - E(Y \mid x),\]</div>
+<p>where <span class="math">\(x\)</span> and <span class="math">\(x_1\)</span> are different vectors of values for
+the explanatory variables.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) - E[Y_i(t_i=0)]
+  \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
+<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+<span class="math">\(y_i^*\)</span> and uncertainty in simulating <span class="math">\(E[Y_i(t_i=0)]\)</span>,
+the counterfactual expected value of <span class="math">\(Y_i\)</span> for observations in
+the treatment group, under the assumption that everything stays the
+same except that the treatment indicator is switched to
+<span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+  \widehat{Y_i(t_i=0)} \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
+<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+<span class="math">\(y_i^*\)</span> and uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h3>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(Surv(Y,</span> <span class="pre">C)</span> <span class="pre">~</span> <span class="pre">X,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">exp,</span> <span class="pre">data)</span></tt>, then you may
+examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
+elements available through the $ operator are listed below.</p>
+</div>
+<div class="section" id="see-also">
+<h3>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
+<p>The exponential function is part of the survival library by Terry
+Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
+to <tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library.</p>
+</div>
+</div>
+<div class="section" id="zelig-gamma">
+<h2>zelig-gamma<a class="headerlink" href="#zelig-gamma" title="Permalink to this headline">¶</a></h2>
+<p>Gamma Regression for Continuous, Positive Dependent Variables</p>
+<p>Use the gamma regression model if you have a positive-valued dependent
+variable such as the number of years a parliamentary cabinet endures, or
+the seconds you can stay airborne while jumping. The gamma distribution
+assumes that all waiting times are complete by the end of the study
+(censoring is not allowed).</p>
+<div class="section" id="id1">
+<h3>Syntax<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">,</span> x1 <span class="o">=</span> <span class="kc">NULL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Attach the sample data:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>coalition<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimate the model:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>duration   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> “gamma”<span class="p">,</span> data <span class="o">=</span>
+coalition<span class="p">)</span>
+</pre></div>
+</div>
+<p>View the regression output:</p>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2
+<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Model<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">The Gamma distribution with scale parameter <span class="math">\(\alpha\)</span> has a
+<em>stochastic component</em>:</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+Y &amp;\sim&amp; \textrm{Gamma}(y_i \mid \lambda_i, \alpha) \\
+f(y)  &amp;=&amp; \frac{1}{\alpha^{\lambda_i} \, \Gamma \lambda_i} \, y_i^{\lambda_i
+  - 1} \exp -\left\{ \frac{y_i}{\alpha} \right\}\end{aligned}\end{split}\]</div>
+<div class="line-block">
+<div class="line">for <span class="math">\(\alpha, \lambda_i, y_i &gt; 0\)</span>.</div>
+</div>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+\[\lambda_i = \frac{1}{x_i \beta}\]</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Quantities of Interest<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">The expected values (qi$ev) are simulations of the mean of the
+stochastic component given draws of <span class="math">\(\alpha\)</span> and <span class="math">\(\beta\)</span>
+from their posteriors:</p>
+<div class="math">
+\[E(Y) = \alpha \lambda_i.\]</div>
+</li>
+<li><p class="first">The predicted values (qi$pr) are draws from the gamma distribution
+for each given set of parameters <span class="math">\((\alpha, \lambda_i)\)</span>.</p>
+</li>
+<li><p class="first">If x1 is specified, sim() also returns the differences in the
+expected values (qi$fd),</p>
+<div class="math">
+\[E(Y \mid x_1) -
+  E(Y \mid x)\]</div>
+<p>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3>Output Values<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">gamma,</span> <span class="pre">data)</span></tt>, then you may examine the
+available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the
+coefficients by using z.out$coefficients, and a default summary of
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements available through
+the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>residuals: the working residuals in the final iteration of the
+IWLS fit.</li>
+<li>fitted.values: the vector of fitted values.</li>
+<li>linear.predictors: the vector of <span class="math">\(x_{i}\beta\)</span>.</li>
+<li>aic: Akaike’s Information Criterion (minus twice the maximized
+log-likelihood plus twice the number of coefficients).</li>
+<li>df.residual: the residual degrees of freedom.</li>
+<li>df.null: the residual degrees of freedom for the null model.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+</ul>
+</li>
+<li>From summary(z.out), you may extract:<ul>
+<li>coefficients: the parameter estimates with their associated
+standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+<li>cov.scaled: a <span class="math">\(k \times k\)</span> matrix of scaled covariances.</li>
+<li>cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected values for the specified values of
+x.</li>
+<li>qi$pr: the simulated predicted values drawn from a distribution
+defined by <span class="math">\((\alpha, \lambda_i)\)</span>.</li>
+<li>qi$fd: the simulated first difference in the expected values for
+the specified values in x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+<li>qi$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>See also<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>The gamma model is part of the stats package by . Advanced users may
+wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="zelig-logit">
+<h2>zelig-logit<a class="headerlink" href="#zelig-logit" title="Permalink to this headline">¶</a></h2>
+<p>Logistic Regression for Dichotomous Dependent Variables</p>
+<p>Logistic regression specifies a dichotomous dependent variable as a
+function of a set of explanatory variables.</p>
+<div class="section" id="id7">
+<h3>Syntax<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">,</span> x1 <span class="o">=</span> <span class="kc">NULL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-inputs">
+<h3>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h3>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for logistic regression:</p>
+<ul>
+<li><p class="first">robust: defaults to FALSE. If TRUE is selected, zelig() computes
+robust standard errors via the sandwich package (see ). The default
+type of robust standard error is heteroskedastic and autocorrelation
+consistent (HAC), and assumes that observations are ordered by time
+index.</p>
+<p>In addition, robust may be a list with the following options:</p>
+<ul class="simple">
+<li>method: Choose from<ul>
+<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
+<li>“kernHAC”: HAC standard errors using the weights given in .</li>
+<li>“weave”: HAC standard errors using the weights given in .</li>
+</ul>
+</li>
+<li>order.by: defaults to NULL (the observations are chronologically
+ordered as in the original data). Optionally, you may specify a
+vector of weights (either as order.by = z, where z exists outside
+the data frame; or as order.by = ~z, where z is a variable in the
+data frame) The observations are chronologically ordered by the
+size of z.</li>
+<li>…: additional options passed to the functions specified in method.
+See the sandwich library and for more options.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Basic Example</li>
+</ol>
+<p>Attaching the sample turnout dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>turnout<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimating parameter values for the logistic regression:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   age <span class="o">+</span> race<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+</pre></div>
+</div>
+<p>Setting values for the explanatory variables:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> age <span class="o">=</span> <span class="m">36</span><span class="p">,</span> race <span class="o">=</span> “white”<span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulating quantities of interest from the posterior distribution.</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>Simulating First Differences</li>
+</ol>
+<p>Estimating the risk difference (and risk ratio) between low education
+(25th percentile) and high education (75th percentile) while all the
+other variables held at their default values.</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> data <span class="o">=</span>
+turnout<span class="p">)</span> <span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout\ <span class="o">:</span>math<span class="o">:</span>`educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout`\ educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+
+s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+
+summary<span class="p">(</span>s.out2<span class="p">)</span>
+
+plot<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>Presenting Results: An ROC Plot [ROC]</li>
+</ol>
+<p>One can use an ROC plot to evaluate the fit of alternative model
+specifications. (Use demo(roc) to view this example, or see King and
+Zeng (2002).)</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate <span class="o">+</span> age<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> <span class="o">+</span>
+   data <span class="o">=</span> turnout<span class="p">)</span> <span class="o">&gt;</span> z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span>
+   “logit”<span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>rocplot<span class="p">(</span>z.out1\ <span class="o">:</span>math<span class="o">:</span><span class="sb">`y, z.out2`</span>\ y<span class="p">,</span> fitted<span class="p">(</span>z.out1<span class="p">),</span>
+   fitted<span class="p">(</span>z.out2<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>Model<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>Let <span class="math">\(Y_i\)</span> be the binary dependent variable for observation
+<span class="math">\(i\)</span> which takes the value of either 0 or 1.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+Y_i &amp;\sim&amp; \textrm{Bernoulli}(y_i \mid \pi_i) \\
+    &amp;=&amp; \pi_i^{y_i} (1-\pi_i)^{1-y_i}\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(\pi_i=\Pr(Y_i=1)\)</span>.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by:</p>
+<div class="math">
+\[\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\]</div>
+<p>where <span class="math">\(x_i\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
+for observation <span class="math">\(i\)</span> and <span class="math">\(\beta\)</span> is the vector of
+coefficients.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>Quantities of Interest<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">The expected values (qi$ev) for the logit model are simulations of
+the predicted probability of a success:</p>
+<div class="math">
+\[E(Y) =
+  \pi_i= \frac{1}{1 + \exp(-x_i \beta)},\]</div>
+<p>given draws of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+</li>
+<li><p class="first">The predicted values (qi$pr) are draws from the Binomial distribution
+with mean equal to the simulated expected value <span class="math">\(\pi_i\)</span>.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) for the logit model is defined as</p>
+<div class="math">
+\[\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\]</div>
+</li>
+<li><p class="first">The risk ratio (qi$rr) is defined as</p>
+<div class="math">
+\[\textrm{RR} = \Pr(Y = 1 \mid x_1) \ / \ \Pr(Y = 1 \mid x).\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)}\right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>Output Values<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">logit,</span> <span class="pre">data)</span></tt>, then you may examine the
+available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the
+coefficients by using z.out$coefficients, and a default summary of
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>.</p>
+</div>
+<div class="section" id="id11">
+<h3>See also<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>The logit model is part of the stats package. Advanced users may
+wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="zelig-lognorm">
+<h2>zelig-lognorm<a class="headerlink" href="#zelig-lognorm" title="Permalink to this headline">¶</a></h2>
+<p>Log-Normal Regression for Duration Dependent Variables</p>
+<p>The log-normal model describes an event’s duration, the dependent
+variable, as a function of a set of explanatory variables. The
+log-normal model may take time censored dependent variables, and allows
+the hazard rate to increase and decrease.</p>
+<div class="section" id="id12">
+<h3>Syntax<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;lognorm&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Log-normal models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length <span class="math">\(n\)</span>. For each
+observation <span class="math">\(i\)</span> in 1, …, <span class="math">\(n\)</span>, the value <span class="math">\(y_i\)</span> is the
+duration (lifetime, for example) of each subject, and the associated
+<span class="math">\(c_i\)</span> is a binary variable such that <span class="math">\(c_i = 1\)</span> if the
+duration is not censored (<em>e.g.</em>, the subject dies during the study) or
+<span class="math">\(c_i = 0\)</span> if the duration is censored (<em>e.g.</em>, the subject is
+still alive at the end of the study). If <span class="math">\(c_i\)</span> is omitted, all Y
+are assumed to be completed; that is, time defaults to 1 for all
+observations.</p>
+</div>
+<div class="section" id="id13">
+<h3>Input Values<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for lognormal regression:</p>
+<ul class="simple">
+<li>robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) based on the options
+in cluster.</li>
+<li>cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x1 <span class="o">+</span> x2<span class="p">,</span> robust <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> cluster <span class="o">=</span> <span class="s">&quot;x3&quot;</span><span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+</pre></div>
+</div>
+<p>means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.</p>
+</div>
+<div class="section" id="id14">
+<h3>Example<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<p>Attach the sample data:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>coalition<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimate the model:</p>
+<div class="highlight-r"><div class="highlight"><pre>RRR<span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span>   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span>
+“lognorm”<span class="p">,</span> <span class="o">+</span> data <span class="o">=</span> coalition<span class="p">)</span>
+</pre></div>
+</div>
+<p>View the regression output:</p>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2
+<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>Model<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>Let <span class="math">\(Y_i^*\)</span> be the survival time for observation <span class="math">\(i\)</span> with
+the density function <span class="math">\(f(y)\)</span> and the corresponding distribution
+function <span class="math">\(F(t)=\int_{0}^t f(y) dy\)</span>. This variable might be
+censored for some observations at a fixed time <span class="math">\(y_c\)</span> such that the
+fully observed dependent variable, <span class="math">\(Y_i\)</span>, is defined as</p>
+<div class="math">
+\[\begin{split}Y_i = \left\{ \begin{array}{ll}
+      Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
+      y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
+    \end{array} \right.\end{split}\]</div>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is described by the distribution of the
+partially observed variable, <span class="math">\(Y^*\)</span>. For the lognormal model,
+there are two equivalent representations:</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+    Y_i^* \; \sim \; \textrm{LogNormal}(\mu_i, \sigma^2) &amp; \textrm{ or
+} &amp; \log(Y_i^*) \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)\end{aligned}\end{split}\]</div>
+<p>where the parameters <span class="math">\(\mu_i\)</span> and <span class="math">\(\sigma^2\)</span> are the mean
+and variance of the Normal distribution. (Note that the output from
+zelig() parameterizes scale:math:` = sigma`.)</p>
+<p>In addition, survival models like the lognormal have three additional
+properties. The hazard function <span class="math">\(h(t)\)</span> measures the probability
+of not surviving past time <span class="math">\(t\)</span> given survival up to <span class="math">\(t\)</span>.
+In general, the hazard function is equal to <span class="math">\(f(t)/S(t)\)</span> where
+the survival function :math:<a href="#id16"><span class="problematic" id="id17">`</span></a>S(t) =</p>
+<blockquote>
+<div><p>1 - int_{0}^t f(s) ds` represents the fraction still surviving at</p>
+</div></blockquote>
+<p>time <span class="math">\(t\)</span>. The cumulative hazard function <span class="math">\(H(t)\)</span> describes
+the probability of dying before time <span class="math">\(t\)</span>. In general,
+<span class="math">\(H(t)=
+\int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the lognormal
+model,</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+h(t) &amp;=&amp; \frac{1}{\sqrt{2 \pi} \, \sigma t \, S(t)}
+\exp\left\{-\frac{1}{2 \sigma^2} (\log \lambda t)^2\right\} \\
+S(t) &amp;=&amp; 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \\
+H(t) &amp;=&amp; -\log \left\{ 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \right\}\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(\Phi(\cdot)\)</span> is the cumulative density function for the
+Normal distribution.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is described as:</p>
+<div class="math">
+\[\mu_i = x_i \beta .\]</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id18">
+<h3>Quantities of Interest<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">The expected values (qi$ev) for the lognormal model are simulations
+of the expected duration:</p>
+<div class="math">
+\[E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),\]</div>
+<p>given draws of <span class="math">\(\beta\)</span> and <span class="math">\(\sigma\)</span> from their sampling
+distributions.</p>
+</li>
+<li><p class="first">The predicted value is a draw from the log-normal distribution given
+simulations of the parameters <span class="math">\((\lambda_i, \sigma)\)</span>.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) is</p>
+<div class="math">
+\[\textrm{FD} = E(Y \mid x_1) - E(Y \mid x).\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
+<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+<span class="math">\(y_i^*\)</span> and uncertainty in simulating <span class="math">\(E[Y_i(t_i=0)]\)</span>,
+the counterfactual expected value of <span class="math">\(Y_i\)</span> for observations in
+the treatment group, under the assumption that everything stays the
+same except that the treatment indicator is switched to
+<span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
+\widehat{Y_i(t_i=0)} \},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
+<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations are due to two
+factors: uncertainty in the imputation process for censored
+<span class="math">\(y_i^*\)</span> and uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id19">
+<h3>Output Values<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(Surv(Y,</span> <span class="pre">C)</span> <span class="pre">~</span> <span class="pre">X,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">lognorm,</span> <span class="pre">data)</span></tt>, then you may
+examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
+elements available through the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>icoef: parameter estimates for the intercept and <span class="math">\(\sigma\)</span>.</li>
+<li>var: Variance-covariance matrix.</li>
+<li>loglik: Vector containing the log-likelihood for the model and
+intercept only (respectively).</li>
+<li>linear.predictors: the vector of <span class="math">\(x_{i}\beta\)</span>.</li>
+<li>df.residual: the residual degrees of freedom.</li>
+<li>df.null: the residual degrees of freedom for the null model.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+</ul>
+</li>
+<li>Most of this may be conveniently summarized using summary(z.out).
+From summary(z.out), you may additionally extract:<ul>
+<li>table: the parameter estimates with their associated standard
+errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected values for the specified values of
+x.</li>
+<li>qi$pr: the simulated predicted values drawn from the distribution
+defined by <span class="math">\((\lambda_i, \sigma)\)</span>.</li>
+<li>qi$fd: the simulated first differences between the simulated
+expected values for x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+<li>qi$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h3>See also<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<p>The exponential function is part of the survival library by by Terry
+Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
+to <tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library.</p>
+</div>
+</div>
+<div class="section" id="zelig-ls">
+<h2>Zelig-ls<a class="headerlink" href="#zelig-ls" title="Permalink to this headline">¶</a></h2>
+<p>Least Squares Regression for Continuous Dependent Variables</p>
+<p>Use least squares regression analysis to estimate the best linear
+predictor for the specified dependent variables.</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="basic-example-with-first-differences">
+<h3>Basic Example with First Differences<a class="headerlink" href="#basic-example-with-first-differences" title="Permalink to this headline">¶</a></h3>
+<p>Attach sample data:</p>
+<div class="highlight-r"><div class="highlight"><pre>library<span class="p">(</span>Zelig5<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Loading required package: methods</span>
+<span class="c">## Loading required package: MASS</span>
+<span class="c">## Loading required package: survival</span>
+<span class="c">## Loading required package: splines</span>
+<span class="c">## Loading required package: VGAM</span>
+<span class="c">## Loading required package: stats4</span>
+<span class="c">## Loading required package: jsonlite</span>
+<span class="c">##</span>
+<span class="c">## Attaching package: &#39;jsonlite&#39;</span>
+<span class="c">##</span>
+<span class="c">## The following object is masked from &#39;package:utils&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     View</span>
+<span class="c">##</span>
+<span class="c">## Loading required package: AER</span>
+<span class="c">## Loading required package: car</span>
+<span class="c">##</span>
+<span class="c">## Attaching package: &#39;car&#39;</span>
+<span class="c">##</span>
+<span class="c">## The following object is masked from &#39;package:VGAM&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     logit</span>
+<span class="c">##</span>
+<span class="c">## Loading required package: lmtest</span>
+<span class="c">## Loading required package: zoo</span>
+<span class="c">##</span>
+<span class="c">## Attaching package: &#39;zoo&#39;</span>
+<span class="c">##</span>
+<span class="c">## The following objects are masked from &#39;package:base&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     as.Date, as.Date.numeric</span>
+<span class="c">##</span>
+<span class="c">##</span>
+<span class="c">## Attaching package: &#39;lmtest&#39;</span>
+<span class="c">##</span>
+<span class="c">## The following object is masked from &#39;package:VGAM&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     lrtest</span>
+<span class="c">##</span>
+<span class="c">## Loading required package: sandwich</span>
+<span class="c">##</span>
+<span class="c">## Attaching package: &#39;AER&#39;</span>
+<span class="c">##</span>
+<span class="c">## The following object is masked from &#39;package:VGAM&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     tobit</span>
+<span class="c">##</span>
+<span class="c">## Loading required package: plyr</span>
+<span class="c">## Loading required package: dplyr</span>
+<span class="c">##</span>
+<span class="c">## Attaching package: &#39;dplyr&#39;</span>
+<span class="c">##</span>
+<span class="c">## The following objects are masked from &#39;package:plyr&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     arrange, desc, failwith, id, mutate, summarise, summarize</span>
+<span class="c">##</span>
+<span class="c">## The following object is masked from &#39;package:MASS&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     select</span>
+<span class="c">##</span>
+<span class="c">## The following objects are masked from &#39;package:stats&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     filter, lag</span>
+<span class="c">##</span>
+<span class="c">## The following objects are masked from &#39;package:base&#39;:</span>
+<span class="c">##</span>
+<span class="c">##     intersect, setdiff, setequal, union</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: replacing previous import by &#39;VGAM::show&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;AER::tobit&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;quantreg::untangle.specials&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;dplyr::arrange&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;dplyr::desc&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;dplyr::failwith&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;dplyr::id&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;dplyr::mutate&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;dplyr::select&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;dplyr::summarise&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;dplyr::summarize&#39; when loading &#39;Zelig5&#39;</span>
+<span class="c">## Warning: replacing previous import by &#39;methods::setRefClass&#39; when loading &#39;Zelig5&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>macro<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimate model:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
+<span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+</pre></div>
+</div>
+<p>Summarize regression coefficients:</p>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<span class="c">## Call:</span>
+<span class="c">## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)          gdp       capmob        trade</span>
+<span class="c">##      6.1813      -0.3236       1.4219       0.0199</span>
+<span class="c">##</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
+</pre></div>
+</div>
+<p>Set explanatory variables to their default (mean/mode) values, with high (80th percentile) and low (20th percentile) values for the trade variable:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Generate first differences for the effect of high versus low trade on GDP:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-dummy-variables">
+<h3>Using Dummy Variables<a class="headerlink" href="#using-dummy-variables" title="Permalink to this headline">¶</a></h3>
+<p>Estimate a model with fixed effects for each country (see for help
+with dummy variables). Note that you do not need to create dummy
+variables, as the program will automatically parse the unique values
+in the selected variable into discrete levels.</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> trade <span class="o">+</span> capmob <span class="o">+</span> country<span class="p">,</span>
+                model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
+<span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>z.out3 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> trade <span class="o">+</span> capmob <span class="o">+</span> as.factor<span class="p">(</span>country<span class="p">),</span>
+                model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
+<span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.US <span class="o">&lt;-</span> setx<span class="p">(</span>z.out3<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;United States&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Set values for the explanatory variables, using the default
+mean/mode values, with country set to the United States and Japan,
+respectively:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.US <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;United States&quot;</span><span class="p">)</span>
+x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;Japan&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulate quantities of interest:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x.US<span class="p">,</span> x.Japan<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="plot of chunk unnamed-chunk-12" src="_images/unnamed-chunk-12.png" />
+<p class="caption">plot of chunk unnamed-chunk-12</p>
+</div>
+<div class="section" id="id21">
+<h4>Model<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>The <em>stochastic component</em> is described by a density with mean
+$mu_i$ and the common variance <span class="math">\(\sigma^2\)</span></li>
+</ul>
+<div class="math">
+</div>
+<p>Y_i ; sim ; f(y_i mid mu_i, sigma^2).</p>
+<ul>
+<li><p class="first">The <em>systematic component</em> models the conditional mean as</p>
+<p>$$mu_i =  x_i beta$$</p>
+<p>where $x_i$ is the vector of covariates, and $beta$ is the vector
+of coefficients.</p>
+<p>The least squares estimator is the best linear predictor of a
+dependent variable given $x_i$, and minimizes the sum of squared
+residuals, $sum_{i=1}^n (Y_i-x_i beta)^2$.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id22">
+<h4>Quantities of Interest<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">The expected value (<cite>qi$ev</cite>) is the mean of simulations
+from the stochastic component,</p>
+<p>$$E(Y) = x_i beta,$$</p>
+<p>given a draw of $beta$ from its sampling distribution.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (<cite>att.ev</cite>) for the treatment group is</p>
+<dl class="docutils">
+<dt>$$frac{1}{sum_{i=1}^n t_i}sum_{i:t_i=1}^n left{ Y_i(t_i=1) -</dt>
+<dd><p class="first last">E[Y_i(t_i=0)] right},$$</p>
+</dd>
+</dl>
+<p>where $t_i$ is a binary explanatory variable defining the treatment
+($t_i=1$) and control ($t_i=0$) groups. Variation in the simulations
+are due to uncertainty in simulating $E[Y_i(t_i=0)]$, the
+counterfactual expected value of $Y_i$ for observations in the
+treatment group, under the assumption that everything stays the same
+except that the treatment indicator is switched to $t_i=0$.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id23">
+<h4>Output Values<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<cite>z.out &lt;- zelig(y ~ x, model = ls, data)</cite>, then you may examine the
+available information in <cite>z.out</cite> by using <cite>names(z.out)</cite>, see the
+<cite>coefficients</cite> by using <cite>z.out$coefficients</cite>, and
+a default summary of information through <cite>summary(z.out)</cite>. Other
+elements available through the <cite>$</cite> operator are listed
+below.</p>
+</div>
+<div class="section" id="id24">
+<h4>See also<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
+<p>The least squares regression is part of the stats package by William N.
+Venables and Brian D. Ripley [&#64;VenRip02]. In addition, advanced users may
+wish to refer to <cite>help(lm)</cite> and <cite>help(lm.fit)</cite>. Robust standard errors
+are implemented via the sandwich package by Achim Zeileis
+[&#64;Zeileis04]. Sample data are from &#64;KinTomWit00.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="normal-normal-regression-for-continuous-dependent-variables">
+<h1>normal: Normal Regression for Continuous Dependent Variables<a class="headerlink" href="#normal-normal-regression-for-continuous-dependent-variables" title="Permalink to this headline">¶</a></h1>
+<p>The Normal regression model is a close variant of the more standard
+least squares regression model (see ). Both models specify a continuous
+dependent variable as a linear function of a set of explanatory
+variables. The Normal model reports maximum likelihood (rather than
+least squares) estimates. The two models differ only in their estimate
+for the stochastic parameter <span class="math">\(\sigma\)</span>.</p>
+<div class="section" id="id25">
+<h2>Syntax<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, model = &quot;normal&quot;, data = mydata)
+&gt; x.out &lt;- setx(z.out)
+&gt; s.out &lt;- sim(z.out, x = x.out)
+</pre></div>
+</div>
+</div>
+<div class="section" id="id26">
+<h2>Additional Inputs<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for normal regression:</p>
+<ul>
+<li><p class="first">robust: defaults to FALSE. If TRUE is selected, zelig() computes
+robust standard errors via the sandwich package (see ). The default
+type of robust standard error is heteroskedastic and autocorrelation
+consistent (HAC), and assumes that observations are ordered by time
+index.</p>
+<p>In addition, robust may be a list with the following options:</p>
+<ul class="simple">
+<li>method: Choose from<ul>
+<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
+<li>“kernHAC”: HAC standard errors using the weights given in .</li>
+<li>“weave”: HAC standard errors using the weights given in .</li>
+</ul>
+</li>
+<li>order.by: defaults to NULL (the observations are chronologically
+ordered as in the original data). Optionally, you may specify a
+vector of weights (either as order.by = z, where z exists outside
+the data frame; or as order.by = ~z, where z is a variable in the
+data frame). The observations are chronologically ordered by the
+size of z.</li>
+<li>…: additional options passed to the functions specified in method.
+See the sandwich library and for more options.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id27">
+<h2>Examples<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Basic Example with First Differences</p>
+<p>Attach sample data:</p>
+<p>RRR&gt; data(macro)</p>
+<p>Estimate model:</p>
+<p>RRR&gt; z.out1 &lt;- zelig(unem &nbsp; gdp + capmob + trade, model = “normal”, +
+data = macro)</p>
+<p>Summarize of regression coefficients:</p>
+<p>RRR&gt; summary(z.out1)</p>
+<p>Set explanatory variables to their default (mean/mode) values, with
+high (80th percentile) and low (20th percentile) values for trade:</p>
+<p>RRR&gt; x.high &lt;- setx(z.out1, trade =
+quantile(macro<span class="math">\(trade, 0.8))
+RRR&gt;  x.low &lt;- setx(z.out1, trade = quantile(macro\)</span>trade, 0.2))</p>
+<p>Generate first differences for the effect of high versus low trade on
+GDP:</p>
+<p>RRR&gt; s.out1 &lt;- sim(z.out1, x = x.high, x1 = x.low)</p>
+<p>RRR&gt; summary(s.out1)</p>
+<p>A visual summary of quantities of interest:</p>
+<p>RRR&gt; plot(s.out1)</p>
+<p><img alt="image" src="vigpics/relogit-Example3Plot" /></p>
+</li>
+</ol>
+</div>
+<div class="section" id="id28">
+<h2>Model<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math">\(Y_i\)</span> be the continuous dependent variable for observation
+<span class="math">\(i\)</span>.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is described by a univariate normal model
+with a vector of means <span class="math">\(\mu_i\)</span> and scalar variance
+<span class="math">\(\sigma^2\)</span>:</p>
+<div class="math">
+\[Y_i \; \sim \; \textrm{Normal}(\mu_i, \sigma^2).\]</div>
+</li>
+<li><p class="first">The <em>systematic component</em> is</p>
+<div class="math">
+\[\mu_i \;= \; x_i \beta,\]</div>
+<p>where <span class="math">\(x_i\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
+and <span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id29">
+<h2>Quantities of Interest<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected value (qi$ev) is the mean of simulations from the the
+stochastic component,</p>
+<div class="math">
+\[E(Y) = \mu_i = x_i \beta,\]</div>
+<p>given a draw of <span class="math">\(\beta\)</span> from its posterior.</p>
+</li>
+<li><p class="first">The predicted value (qi$pr) is drawn from the distribution defined by
+the set of parameters <span class="math">\((\mu_i, \sigma)\)</span>.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) is:</p>
+<div class="math">
+\[\textrm{FD}\; = \;E(Y \mid x_1) -  E(Y \mid x)\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id30">
+<h2>Output Values<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">normal,</span> <span class="pre">data)</span></tt>, then you may examine
+the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see
+the coefficients by using z.out$coefficients, and a default summary of
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements available through
+the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>residuals: the working residuals in the final iteration of the
+IWLS fit.</li>
+<li>fitted.values: fitted values. For the normal model, these are
+identical to the linear predictors.</li>
+<li>linear.predictors: fitted values. For the normal model, these are
+identical to fitted.values.</li>
+<li>aic: Akaike’s Information Criterion (minus twice the maximized
+log-likelihood plus twice the number of coefficients).</li>
+<li>df.residual: the residual degrees of freedom.</li>
+<li>df.null: the residual degrees of freedom for the null model.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+</ul>
+</li>
+<li>From summary(z.out), you may extract:<ul>
+<li>coefficients: the parameter estimates with their associated
+standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+<li>cov.scaled: a <span class="math">\(k \times k\)</span> matrix of scaled covariances.</li>
+<li>cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected values for the specified values of
+x.</li>
+<li>qi$pr: the simulated predicted values drawn from the distribution
+defined by <span class="math">\((\mu_i, \sigma)\)</span>.</li>
+<li>qi$fd: the simulated first difference in the simulated expected
+values for the values specified in x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+<li>qi$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+<p>The normal model is part of the stats package by . Advanced users may
+wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>, as well as . Robust
+standard errors are implemented via the sandwich package by . Sample
+data are from .</p>
+</div>
+</div>
+<div class="section" id="poisson-poisson-regression-for-event-count-dependent-variables">
+<h1>poisson: Poisson Regression for Event Count Dependent Variables<a class="headerlink" href="#poisson-poisson-regression-for-event-count-dependent-variables" title="Permalink to this headline">¶</a></h1>
+<p>Use the Poisson regression model if the observations of your dependent
+variable represents the number of independent events that occur during a
+fixed period of time (see the negative binomial model, , for
+over-dispersed event counts.) For a Bayesian implementation of this
+model, see .</p>
+<div class="section" id="id31">
+<h2>Syntax<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, model = &quot;poisson&quot;, data = mydata)
+&gt; x.out &lt;- setx(z.out)
+&gt; s.out &lt;- sim(z.out, x = x.out)
+</pre></div>
+</div>
+</div>
+<div class="section" id="id32">
+<h2>Additional Inputs<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for poisson regression:</p>
+<ul>
+<li><p class="first">robust: defaults to FALSE. If TRUE is selected, zelig() computes
+robust standard errors via the sandwich package (see ). The default
+type of robust standard error is heteroskedastic and autocorrelation
+consistent (HAC), and assumes that observations are ordered by time
+index.</p>
+<p>In addition, robust may be a list with the following options:</p>
+<ul class="simple">
+<li>method: Choose from<ul>
+<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
+<li>“kernHAC”: HAC standard errors using the weights given in .</li>
+<li>“weave”: HAC standard errors using the weights given in .</li>
+</ul>
+</li>
+<li>order.by: defaults to NULL (the observations are chronologically
+ordered as in the original data). Optionally, you may specify a
+vector of weights (either as order.by = z, where z exists outside
+the data frame; or as order.by = ~z, where z is a variable in the
+data frame). The observations are chronologically ordered by the
+size of z.</li>
+<li>…: additional options passed to the functions specified in method.
+See the sandwich library and for more options.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id33">
+<h2>Example<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h2>
+<p>Load sample data:</p>
+<p>RRR&gt; data(sanction)</p>
+<p>Estimate Poisson model:</p>
+<p>RRR&gt; z.out &lt;- zelig(num &nbsp; target + coop, model = “poisson”, data =
+sanction)</p>
+<p>RRR&gt; summary(z.out)</p>
+<p>Set values for the explanatory variables to their default mean values:</p>
+<p>RRR&gt; x.out &lt;- setx(z.out)</p>
+<p>Simulate fitted values:</p>
+<p>RRR&gt; s.out &lt;- sim(z.out, x = x.out)</p>
+<p>RRR&gt; summary(s.out)</p>
+<p>RRR&gt; plot(s.out)</p>
+<p><img alt="image" src="vigpics/relogit-Example3Plot" /></p>
+</div>
+<div class="section" id="id34">
+<h2>Model<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math">\(Y_i\)</span> be the number of independent events that occur during a
+fixed time period. This variable can take any non-negative integer.</p>
+<ul>
+<li><p class="first">The Poisson distribution has <em>stochastic component</em></p>
+<div class="math">
+\[Y_i \; \sim \; \textrm{Poisson}(\lambda_i),\]</div>
+<p>where <span class="math">\(\lambda_i\)</span> is the mean and variance parameter.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is</p>
+<div class="math">
+\[\lambda_i \; = \; \exp(x_i \beta),\]</div>
+<p>where <span class="math">\(x_i\)</span> is the vector of explanatory variables, and
+<span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id35">
+<h2>Quantities of Interest<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected value (qi$ev) is the mean of simulations from the
+stochastic component,</p>
+<div class="math">
+\[E(Y) = \lambda_i =  \exp(x_i
+  \beta),\]</div>
+<p>given draws of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+</li>
+<li><p class="first">The predicted value (qi$pr) is a random draw from the poisson
+distribution defined by mean <span class="math">\(\lambda_i\)</span>.</p>
+</li>
+<li><p class="first">The first difference in the expected values (qi$fd) is given by:</p>
+<div class="math">
+\[\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id36">
+<h2>Output Values<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">poisson,</span> <span class="pre">data)</span></tt>, then you may examine
+the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see
+the coefficients by using z.out$coefficients, and a default summary of
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements available through
+the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>residuals: the working residuals in the final iteration of the
+IWLS fit.</li>
+<li>fitted.values: a vector of the fitted values for the systemic
+component <span class="math">\(\lambda\)</span>.</li>
+<li>linear.predictors: a vector of <span class="math">\(x_{i}\beta\)</span>.</li>
+<li>aic: Akaike’s Information Criterion (minus twice the maximized
+log-likelihood plus twice the number of coefficients).</li>
+<li>df.residual: the residual degrees of freedom.</li>
+<li>df.null: the residual degrees of freedom for the null model.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+</ul>
+</li>
+<li>From summary(z.out), you may extract:<ul>
+<li>coefficients: the parameter estimates with their associated
+standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+<li>cov.scaled: a <span class="math">\(k \times k\)</span> matrix of scaled covariances.</li>
+<li>cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected values given the specified values of
+x.</li>
+<li>qi$pr: the simulated predicted values drawn from the distributions
+defined by <span class="math">\(\lambda_i\)</span>.</li>
+<li>qi$fd: the simulated first differences in the expected values
+given the specified values of x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+<li>qi$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+<p>The poisson model is part of the stats package by . Advanced users may
+wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>, as well as . Robust
+standard errors are implemented via the sandwich package by . Sample
+data are from .</p>
+</div>
+</div>
+<div class="section" id="probit-probit-regression-for-dichotomous-dependent-variables">
+<h1>probit: Probit Regression for Dichotomous Dependent Variables<a class="headerlink" href="#probit-probit-regression-for-dichotomous-dependent-variables" title="Permalink to this headline">¶</a></h1>
+<p>Use probit regression to model binary dependent variables specified as a
+function of a set of explanatory variables.</p>
+<div class="section" id="id37">
+<h2>Syntax<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, model = &quot;probit&quot;, data = mydata)
+&gt; x.out &lt;- setx(z.out)
+&gt; s.out &lt;- sim(z.out, x = x.out, x1 = NULL)
+</pre></div>
+</div>
+</div>
+<div class="section" id="id38">
+<h2>Additional Inputs<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the standard inputs, zelig() takes the following
+additional options for probit regression:</p>
+<ul>
+<li><p class="first">robust: defaults to FALSE. If TRUE is selected, zelig() computes
+robust standard errors via the sandwich package (see ). The default
+type of robust standard error is heteroskedastic and autocorrelation
+consistent (HAC), and assumes that observations are ordered by time
+index.</p>
+<p>In addition, robust may be a list with the following options:</p>
+<ul class="simple">
+<li>method: Choose from<ul>
+<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
+<li>“kernHAC”: HAC standard errors using the weights given in .</li>
+<li>“weave”: HAC standard errors using the weights given in .</li>
+</ul>
+</li>
+<li>order.by: defaults to NULL (the observations are chronologically
+ordered as in the original data). Optionally, you may specify a
+vector of weights (either as order.by = z, where z exists outside
+the data frame; or as order.by = ~z, where z is a variable in the
+data frame). The observations are chronologically ordered by the
+size of z.</li>
+<li>…: additional options passed to the functions specified in method.
+See the sandwich library and for more options.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id39">
+<h2>Examples<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h2>
+<p>Attach the sample turnout dataset:</p>
+<p>&gt; data(turnout)</p>
+<p>Estimate parameter values for the probit regression:</p>
+<p>&gt; z.out &lt;- zelig(vote &nbsp; race + educate, model = “probit”, data =
+turnout)</p>
+<p>&gt; summary(z.out)</p>
+<p>Set values for the explanatory variables to their default values.</p>
+<p>&gt; x.out &lt;- setx(z.out)</p>
+<p>Simulate quantities of interest from the posterior distribution.</p>
+<p>&gt; s.out &lt;- sim(z.out, x = x.out)</p>
+<p>&gt; summary(s.out)</p>
+</div>
+<div class="section" id="id40">
+<h2>Model<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math">\(Y_i\)</span> be the observed binary dependent variable for
+observation <span class="math">\(i\)</span> which takes the value of either 0 or 1.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by</p>
+<div class="math">
+\[Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\]</div>
+<p>where <span class="math">\(\pi_i=\Pr(Y_i=1)\)</span>.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is</p>
+<div class="math">
+\[\pi_i \; = \; \Phi (x_i \beta)\]</div>
+<p>where <span class="math">\(\Phi(\mu)\)</span> is the cumulative distribution function of
+the Normal distribution with mean 0 and unit variance.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id41">
+<h2>Quantities of Interest<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected value (qi$ev) is a simulation of predicted probability
+of success</p>
+<div class="math">
+\[E(Y) = \pi_i = \Phi(x_i
+  \beta),\]</div>
+<p>given a draw of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+</li>
+<li><p class="first">The predicted value (qi$pr) is a draw from a Bernoulli distribution
+with mean <span class="math">\(\pi_i\)</span>.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) in expected values is defined as</p>
+<div class="math">
+\[\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\]</div>
+</li>
+<li><p class="first">The risk ratio (qi$rr) is defined as</p>
+<div class="math">
+\[\textrm{RR} = \Pr(Y = 1 \mid x_1) / \Pr(Y = 1 \mid x).\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id42">
+<h2>Output Values<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">probit,</span> <span class="pre">data)</span></tt>, then you may examine
+the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see
+the coefficients by using z.out$coefficients, and a default summary of
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements available through
+the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>residuals: the working residuals in the final iteration of the
+IWLS fit.</li>
+<li>fitted.values: a vector of the in-sample fitted values.</li>
+<li>linear.predictors: a vector of <span class="math">\(x_{i}\beta\)</span>.</li>
+<li>aic: Akaike’s Information Criterion (minus twice the maximized
+log-likelihood plus twice the number of coefficients).</li>
+<li>df.residual: the residual degrees of freedom.</li>
+<li>df.null: the residual degrees of freedom for the null model.</li>
+<li>data: the name of the input data frame.</li>
+</ul>
+</li>
+<li>From summary(z.out), you may extract:<ul>
+<li>coefficients: the parameter estimates with their associated
+standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+<li>cov.scaled: a <span class="math">\(k \times k\)</span> matrix of scaled covariances.</li>
+<li>cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected values, or predicted probabilities,
+for the specified values of x.</li>
+<li>qi$pr: the simulated predicted values drawn from the distributions
+defined by the predicted probabilities.</li>
+<li>qi$fd: the simulated first differences in the predicted
+probabilities for the values specified in x and x1.</li>
+<li>qi$rr: the simulated risk ratio for the predicted probabilities
+simulated from x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+<li>qi$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+<p>The probit model is part of the stats package by . Advanced users may
+wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>, as well as . Robust
+standard errors are implemented via the sandwich package by . Sample
+data are from .</p>
+</div>
+</div>
+<div class="section" id="relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">
+<h1>relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables<a class="headerlink" href="#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables" title="Permalink to this headline">¶</a></h1>
+<p>The relogit procedure estimates the same model as standard logistic
+regression (appropriate when you have a dichotomous dependent variable
+and a set of explanatory variables; see ), but the estimates are
+corrected for the bias that occurs when the sample is small or the
+observed events are rare (i.e., if the dependent variable has many more
+1s than 0s or the reverse). The relogit procedure also optionally uses
+prior correction for case-control sampling designs.</p>
+<div class="section" id="id43">
+<h2>Syntax<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, model = &quot;relogit&quot;, tau = NULL,
+                 case.control = c(&quot;prior&quot;, &quot;weighting&quot;),
+                 bias.correct = TRUE, robust = FALSE,
+                 data = mydata, ...)
+&gt; x.out &lt;- setx(z.out)
+&gt; s.out &lt;- sim(z.out, x = x.out)
+</pre></div>
+</div>
+</div>
+<div class="section" id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h2>
+<p>The relogit procedure supports four optional arguments in addition to
+the standard arguments for zelig(). You may additionally use:</p>
+<ul>
+<li><p class="first">tau: a vector containing either one or two values for <span class="math">\(\tau\)</span>,
+the true population fraction of ones. Use, for example, tau = c(0.05,
+0.1) to specify that the lower bound on tau is 0.05 and the upper
+bound is 0.1. If left unspecified, only finite-sample bias correction
+is performed, not case-control correction.</p>
+</li>
+<li><p class="first">case.control: if tau is specified, choose a method to correct for
+case-control sampling design: “prior” (default) or “weighting”.</p>
+</li>
+<li><p class="first">bias.correct: a logical value of TRUE (default) or FALSE indicating
+whether the intercept should be corrected for finite sample (rare
+events) bias.</p>
+</li>
+<li><p class="first">robust: defaults to FALSE (except when case.control = “weighting”;
+the default in this case becomes robust = TRUE). If TRUE is selected,
+zelig() computes robust standard errors via the sandwich package (see
+). The default type of robust standard error is heteroskedastic and
+autocorrelation consistent (HAC), and assumes that observations are
+ordered by time index.</p>
+<p>In addition, robust may be a list with the following options:</p>
+<ul class="simple">
+<li>method: Choose from<ul>
+<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
+<li>“kernHAC”: HAC standard errors using the weights given in .</li>
+<li>“weave”: HAC standard errors using the weights given in .</li>
+</ul>
+</li>
+<li>order.by: defaults to NULL (the observations are chronologically
+ordered as in the original data). Optionally, you may specify a
+vector of weights (either as order.by = z, where z exists outside
+the data frame; or as order.by = ~z, where z is a variable in the
+data frame) The observations are chronologically ordered by the
+size of z.</li>
+<li>…: additional options passed to the functions specified in method.
+See the sandwich library and for more options.</li>
+</ul>
+</li>
+</ul>
+<p>Note that if tau = NULL, bias.correct = FALSE, robust = FALSE, the
+relogit procedure performs a standard logistic regression without any
+correction.</p>
+</div>
+<div class="section" id="example-1-one-tau-with-prior-correction-and-bias-correction">
+<h2>Example 1: One Tau with Prior Correction and Bias Correction<a class="headerlink" href="#example-1-one-tau-with-prior-correction-and-bias-correction" title="Permalink to this headline">¶</a></h2>
+<p>Due to memory and space considerations, the data used here are a sample
+drawn from the full data set used in King and Zeng, 2001, The proportion
+of militarized interstate conflicts to the absence of disputes is
+<span class="math">\(\tau = 1,042 / 303,772
+\approx 0.00343\)</span>. To estimate the model,</p>
+<p>RRR&gt; data(mid)</p>
+<p>RRR&gt; z.out1 &lt;- zelig(conflict &nbsp; major + contig + power + maxdem + mindem
++ years, + data = mid, model = “relogit”, tau = 1042/303772)</p>
+<p>Summarize the model output:</p>
+<p>RRR&gt; summary(z.out1)</p>
+<p>Set the explanatory variables to their means:</p>
+<p>RRR&gt; x.out1 &lt;- setx(z.out1)</p>
+<p>Simulate quantities of interest:</p>
+<p>RRR&gt; s.out1 &lt;- sim(z.out1, x = x.out1) RRR&gt; summary(s.out1)</p>
+<p>RRR&gt; plot(s.out1)</p>
+<p><img alt="image" src="vigpics/relogit-Example3Plot" /></p>
+</div>
+<div class="section" id="example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">
+<h2>Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction<a class="headerlink" href="#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that we wish to perform case control correction using weighting
+(rather than the default prior correction). To estimate the model:</p>
+<p>RRR&gt; z.out2 &lt;- zelig(conflict &nbsp; major + contig + power + maxdem + mindem
++ years, + data = mid, model = “relogit”, tau = 1042/303772, +
+case.control = “weighting”, robust = TRUE)</p>
+<p>Summarize the model output:</p>
+<p>RRR&gt; summary(z.out2)</p>
+<p>Set the explanatory variables to their means:</p>
+<p>RRR&gt; x.out2 &lt;- setx(z.out2)</p>
+<p>Simulate quantities of interest:</p>
+<p>RRR&gt; s.out2 &lt;- sim(z.out2, x = x.out2) RRR&gt; summary(s.out2)</p>
+</div>
+<div class="section" id="example-3-two-taus-with-bias-correction-and-prior-correction">
+<h2>Example 3: Two Taus with Bias Correction and Prior Correction<a class="headerlink" href="#example-3-two-taus-with-bias-correction-and-prior-correction" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that we did not know that <span class="math">\(\tau \approx 0.00343\)</span>, but only
+that it was somewhere between <span class="math">\((0.002, 0.005)\)</span>. To estimate a
+model with a range of feasible estimates for <span class="math">\(\tau\)</span> (using the
+default prior correction method for case control correction):</p>
+<p>RRR&gt; z.out2 &lt;- zelig(conflict &nbsp; major + contig + power + maxdem + mindem
++ + years, data = mid, model = “relogit”, + tau = c(0.002, 0.005))</p>
+<p>Summarize the model output:</p>
+<p>RRR&gt; summary(z.out2)</p>
+<p>Set the explanatory variables to their means:</p>
+<p>RRR&gt; x.out2 &lt;- setx(z.out2)</p>
+<p>Simulate quantities of interest:</p>
+<p>RRR&gt; s.out &lt;- sim(z.out2, x = x.out2)</p>
+<p>RRR&gt; summary(s.out2)</p>
+<p>RRR&gt; plot(s.out2)</p>
+<p><img alt="image" src="vigpics/relogit-Example3Plot" /></p>
+<p>The cost of giving a range of values for <span class="math">\(\tau\)</span> is that point
+estimates are not available for quantities of interest. Instead,
+quantities are presented as confidence intervals with significance less
+than or equal to a specified level (e.g., at least 95% of the
+simulations are contained in the nominal 95% confidence interval).</p>
+</div>
+<div class="section" id="id44">
+<h2>Model<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Like the standard logistic regression, the <em>stochastic component</em> for
+the rare events logistic regression is:</p>
+<div class="math">
+\[Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\]</div>
+<p>where <span class="math">\(Y_i\)</span> is the binary dependent variable, and takes a value
+of either 0 or 1.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is:</p>
+<div class="math">
+\[\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\]</div>
+</li>
+<li><p class="first">If the sample is generated via a case-control (or choice-based)
+design, such as when drawing all events (or “cases”) and a sample
+from the non-events (or “controls”) and going backwards to collect
+the explanatory variables, you must correct for selecting on the
+dependent variable. While the slope coefficients are approximately
+unbiased, the constant term may be significantly biased. Zelig has
+two methods for case control correction:</p>
+<ol class="arabic">
+<li><p class="first">The “prior correction” method adjusts the intercept term. Let
+<span class="math">\(\tau\)</span> be the true population fraction of events,
+<span class="math">\(\bar{y}\)</span> the fraction of events in the sample, and
+<span class="math">\(\hat{\beta_0}\)</span> the uncorrected intercept term. The
+corrected intercept <span class="math">\(\beta_0\)</span> is:</p>
+<div class="math">
+\[\beta =  \hat{\beta_0} - \ln \left[ \bigg( \frac{1 - \tau}{\tau}
+  \bigg) \bigg( \frac{\bar{y}}{1 - \bar{y}} \bigg) \right].\]</div>
+</li>
+<li><p class="first">The “weighting” method performs a weighted logistic regression to
+correct for a case-control sampling design. Let the 1 subscript
+denote observations for which the dependent variable is observed
+as a 1, and the 0 subscript denote observations for which the
+dependent variable is observed as a 0. Then the vector of weights
+<span class="math">\(w_i\)</span></p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+w_1 &amp;=&amp; \frac{\tau}{\bar{y}} \\
+w_0 &amp;=&amp; \frac{(1 - \tau)}{(1 - \bar{y})} \\
+w_i &amp;=&amp; w_1 Y_i + w_0 (1 - Y_i)\end{aligned}\end{split}\]</div>
+</li>
+</ol>
+<p>If <span class="math">\(\tau\)</span> is unknown, you may alternatively specify an upper
+and lower bound for the possible range of <span class="math">\(\tau\)</span>. In this case,
+the relogit procedure uses “robust Bayesian” methods to generate a
+confidence interval (rather than a point estimate) for each quantity
+of interest. The nominal coverage of the confidence interval is at
+least as great as the actual coverage.</p>
+</li>
+<li><p class="first">By default, estimates of the the coefficients <span class="math">\(\beta\)</span> are
+bias-corrected to account for finite sample or rare events bias. In
+addition, quantities of interest, such as predicted probabilities,
+are also corrected of rare-events bias. If <span class="math">\(\widehat{\beta}\)</span>
+are the uncorrected logit coefficients and
+bias(<span class="math">\(\widehat{\beta}\)</span>) is the bias term, the corrected
+coefficients <span class="math">\(\tilde{\beta}\)</span> are</p>
+<div class="math">
+\[\widehat{\beta} - \textrm{bias}(\widehat{\beta}) = \tilde{\beta}\]</div>
+<p>The bias term is</p>
+<div class="math">
+\[\textrm{bias}(\widehat{\beta}) = (X'WX)^{-1} X'W \xi\]</div>
+<p>where</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+\xi_i &amp;=&amp; 0.5 Q_{ii} \Big( (1 + w-1)\widehat{\pi}_i - w_1 \Big) \\
+Q &amp;=&amp; X(X'WX)^{-1} X' \\
+W = \textrm{diag}\{\widehat{\pi}_i (1 - \widehat{\pi}_i) w_i\}\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(w_i\)</span> and <span class="math">\(w_1\)</span> are given in the “weighting”
+section above.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id45">
+<h2>Quantities of Interest<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">For either one or no <span class="math">\(\tau\)</span>:</p>
+<ul>
+<li><p class="first">The expected values (qi$ev) for the rare events logit are
+simulations of the predicted probability</p>
+<div class="math">
+\[E(Y) = \pi_i =
+    \frac{1}{1 + \exp(-x_i \beta)},\]</div>
+<p>given draws of <span class="math">\(\beta\)</span> from its posterior.</p>
+</li>
+<li><p class="first">The predicted value (qi$pr) is a draw from a binomial distribution
+with mean equal to the simulated <span class="math">\(\pi_i\)</span>.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) is defined as</p>
+<div class="math">
+\[\textrm{FD} = \Pr(Y = 1 \mid x_1, \tau) - \Pr(Y = 1 \mid x, \tau).\]</div>
+</li>
+<li><p class="first">The risk ratio (qi$rr) is defined as</p>
+<div class="math">
+\[\textrm{RR} = \Pr(Y = 1 \mid x_1, \tau) \ / \ \Pr(Y = 1 \mid x, \tau).\]</div>
+</li>
+</ul>
+</li>
+<li><p class="first">For a range of <span class="math">\(\tau\)</span> defined by <span class="math">\([\tau_1, \tau_2]\)</span>, each
+of the quantities of interest are <span class="math">\(n \times 2\)</span> matrices, which
+report the lower and upper bounds, respectively, for a confidence
+interval with nominal coverage at least as great as the actual
+coverage. At worst, these bounds are conservative estimates for the
+likely range for each quantity of interest. Please refer to for the
+specific method of calculating bounded quantities of interest.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is</p>
+<div class="math">
+\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\]</div>
+<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
+<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id46">
+<h2>Output Values<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">relogit,</span> <span class="pre">data)</span></tt>, then you may examine
+the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see
+the coefficients by using z.out$coefficients, and a default summary of
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements available through
+the $ operator are listed below.</p>
+<ul>
+<li><p class="first">From the zelig() output object z.out, you may extract:</p>
+<ul class="simple">
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>bias.correct: TRUE if bias correction was selected, else FALSE.</li>
+<li>prior.correct: TRUE if prior correction was selected, else FALSE.</li>
+<li>weighting: TRUE if weighting was selected, else FALSE.</li>
+<li>tau: the value of tau for which case control correction was
+implemented.</li>
+<li>residuals: the working residuals in the final iteration of the
+IWLS fit.</li>
+<li>fitted.values: the vector of fitted values for the systemic
+component, <span class="math">\(\pi_i\)</span>.</li>
+<li>linear.predictors: the vector of <span class="math">\(x_{i} \beta\)</span></li>
+<li>aic: Akaike’s Information Criterion (minus twice the maximized
+log-likelihood plus twice the number of coefficients).</li>
+<li>df.residual: the residual degrees of freedom.</li>
+<li>df.null: the residual degrees of freedom for the null model.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+</ul>
+<p>Note that for a range of <span class="math">\(\tau\)</span>, each of the above items may be
+extracted from the “lower.estimate” and “upper.estimate” objects in
+your zelig output. Use lower &lt;- z.out$lower.estimate, and then
+lower$coefficients to extract the coefficients for the empirical
+estimate generated for the smaller of the two <span class="math">\(\tau\)</span>.</p>
+</li>
+<li><p class="first">From summary(z.out), you may extract:</p>
+<ul class="simple">
+<li>coefficients: the parameter estimates with their associated
+standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+<li>cov.scaled: a <span class="math">\(k \times k\)</span> matrix of scaled covariances.</li>
+<li>cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</li>
+</ul>
+</li>
+<li><p class="first">From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+x-observation (for more than one x-observation). Available quantities
+are:</p>
+<ul class="simple">
+<li>qi$ev: the simulated expected values, or predicted probabilities,
+for the specified values of x.</li>
+<li>qi$pr: the simulated predicted values drawn from Binomial
+distributions given the predicted probabilities.</li>
+<li>qi$fd: the simulated first difference in the predicted
+probabilities for the values specified in x and x1.</li>
+<li>qi$rr: the simulated risk ratio for the predicted probabilities
+simulated from x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+<li>qi$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="differences-with-stata-version">
+<h2>Differences with Stata Version<a class="headerlink" href="#differences-with-stata-version" title="Permalink to this headline">¶</a></h2>
+<p>The Stata version of ReLogit and the R implementation differ slightly in
+their coefficient estimates due to differences in the matrix inversion
+routines implemented in R and Stata. Zelig uses orthogonal-triangular
+decomposition (through lm.influence()) to compute the bias term, which
+is more numerically stable than standard matrix calculations.</p>
+<p>For more information see ,,. Sample data are from .</p>
+</div>
+</div>
+<div class="section" id="tobit-linear-regression-for-a-left-censored-dependent-variable">
+<h1><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable<a class="headerlink" href="#tobit-linear-regression-for-a-left-censored-dependent-variable" title="Permalink to this headline">¶</a></h1>
+<p>Tobit regression estimates a linear regression model for a left-censored
+dependent variable, where the dependent variable is censored from below.
+While the classical tobit model has values censored at 0, you may select
+another censoring point. For other linear regression models with fully
+observed dependent variables, see Bayesian regression (), maximum
+likelihood normal regression (), or least squares ().</p>
+<div class="section" id="id47">
+<h2>Syntax<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, below = 0, above = Inf,
+                  model = &quot;tobit&quot;, data = mydata)
+&gt; x.out &lt;- setx(z.out)
+&gt; s.out &lt;- sim(z.out, x = x.out)
+</pre></div>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>zelig() accepts the following arguments to specify how the dependent
+variable is censored.</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">below</span></tt>: (defaults to 0) The point at which the dependent variable
+is censored from below. If any values in the dependent variable are
+observed to be less than the censoring point, it is assumed that that
+particular observation is censored from below at the observed value.
+(See for a Bayesian implementation that supports both left and right
+censoring.)</p>
+</li>
+<li><p class="first">robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) and the options
+selected in cluster.</p>
+</li>
+<li><p class="first">cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(y ~ x1 + x2, robust = TRUE, cluster = &quot;x3&quot;,
+                 model = &quot;tobit&quot;, data = mydata)
+</pre></div>
+</div>
+<p>means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.</p>
+</li>
+</ul>
+<p>Zelig users may wish to refer to <tt class="docutils literal"><span class="pre">help(survreg)</span></tt> for more information.</p>
+</div>
+<div class="section" id="id48">
+<h2>Examples<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><div class="first line-block">
+<div class="line">Basic Example</div>
+<div class="line">Attaching the sample dataset:</div>
+</div>
+<p>RRR&gt; data(tobin)</p>
+<p>Estimating linear regression using <tt class="docutils literal"><span class="pre">tobit</span></tt>:</p>
+<p>RRR&gt; z.out &lt;- zelig(durable &nbsp; age + quant, model = “tobit”, data =
+tobin)</p>
+<p>Setting values for the explanatory variables to their sample
+averages:</p>
+<p>RRR&gt; x.out &lt;- setx(z.out)</p>
+<p>Simulating quantities of interest from the posterior distribution
+given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
+<p>RRR&gt; s.out1 &lt;- sim(z.out, x = x.out)</p>
+<p>RRR&gt; summary(s.out1)</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Simulating First Differences</div>
+<div class="line">Set explanatory variables to their default(mean/mode) values, with</div>
+</div>
+<p>high (80th percentile) and low (20th percentile) liquidity ratio
+(<tt class="docutils literal"><span class="pre">quant</span></tt>):</p>
+<p>RRR&gt; x.high &lt;- setx(z.out, quant =
+quantile(tobin<span class="math">\(quant, prob = 0.8))
+RRR&gt;  x.low &lt;- setx(z.out, quant = quantile(tobin\)</span>quant, prob =
+0.2))</p>
+<p>Estimating the first difference for the effect of high versus low
+liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durable</span></tt>):</p>
+<p>RRR&gt; s.out2 &lt;- sim(z.out, x = x.high, x1 = x.low)</p>
+<p>RRR&gt; summary(s.out2)</p>
+</li>
+</ol>
+</div>
+<div class="section" id="id49">
+<h2>Model<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Let <span class="math">\(Y_i^*\)</span> be a latent dependent variable which is distributed
+with <em>stochastic</em> component</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+Y_i^* &amp; \sim &amp; \textrm{Normal}(\mu_i, \sigma^2) \\\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(\mu_i\)</span> is a vector means and <span class="math">\(\sigma^2\)</span> is a
+scalar variance parameter. <span class="math">\(Y_i^*\)</span> is not directly observed,
+however. Rather we observed <span class="math">\(Y_i\)</span> which is defined as:</p>
+<div class="math">
+\[\begin{split}Y_i = \left\{
+\begin{array}{lcl}
+Y_i^*  &amp;\textrm{if} &amp; c &lt;Y_i^* \\
+c    &amp;\textrm{if} &amp; c \ge Y_i^*
+\end{array}\right.\end{split}\]</div>
+<p>where <span class="math">\(c\)</span> is the lower bound below which <span class="math">\(Y_i^*\)</span> is
+censored.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+\mu_{i} &amp;=&amp; x_{i} \beta,\end{aligned}\end{split}\]</div>
+<p>where <span class="math">\(x_{i}\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
+for observation <span class="math">\(i\)</span> and <span class="math">\(\beta\)</span> is the vector of
+coefficients.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id50">
+<h2>Quantities of Interest<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected values (<tt class="docutils literal"><span class="pre">qi$ev</span></tt>) for the tobit regression model are
+the same as the expected value of <span class="math">\(Y*\)</span>:</p>
+<div class="math">
+\[E(Y^* | X) = \mu_{i} = x_{i} \beta\]</div>
+</li>
+<li><p class="first">The first difference (<tt class="docutils literal"><span class="pre">qi$fd</span></tt>) for the tobit regression model is
+defined as</p>
+<div class="math">
+\[\begin{aligned}
+\text{FD}=E(Y^* \mid x_{1}) - E(Y^* \mid x).\end{aligned}\]</div>
+</li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>) for the treatment group is</p>
+<div class="math">
+\[\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[E[Y^*_{i}(t_{i}=1)]-E[Y^*_{i}(t_{i}=0)]],\end{aligned}\]</div>
+<p>where <span class="math">\(t_{i}\)</span> is a binary explanatory variable defining the
+treatment (<span class="math">\(t_{i}=1\)</span>) and control (<span class="math">\(t_{i}=0\)</span>) groups.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id51">
+<h2>Output Values<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run:</p>
+<div class="highlight-python"><div class="highlight"><pre>z.out &lt;- zelig(y ~ x, model = &quot;tobit.bayes&quot;, data)
+</pre></div>
+</div>
+<p>then you may examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the draws from the posterior distribution of the
+<tt class="docutils literal"><span class="pre">coefficients</span></tt> by using <tt class="docutils literal"><span class="pre">z.out$coefficients</span></tt>, and view a default
+summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements
+available through the <tt class="docutils literal"><span class="pre">$</span></tt> operator are listed below.</p>
+<ul class="simple">
+<li>From the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object <tt class="docutils literal"><span class="pre">z.out</span></tt>, you may extract:<ul>
+<li><tt class="docutils literal"><span class="pre">coefficients</span></tt>: draws from the posterior distributions of the
+estimated parameters. The first <span class="math">\(k\)</span> columns contain the
+posterior draws of the coefficients <span class="math">\(\beta\)</span>, and the last
+column contains the posterior draws of the variance
+<span class="math">\(\sigma^2\)</span>.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: the random seed used in the model.</li>
+</ul>
+</li>
+<li>From the <tt class="docutils literal"><span class="pre">sim()</span></tt> output object <tt class="docutils literal"><span class="pre">s.out</span></tt>:<ul>
+<li><tt class="docutils literal"><span class="pre">qi$ev</span></tt>: the simulated expected value for the specified values
+of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$fd</span></tt>: the simulated first difference in the expected values
+given the values specified in <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">x1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>: the simulated average expected treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+<p>The tobit function is part of the survival library by Terry Therneau,
+ported to R by Thomas Lumley. Advanced users may wish to refer to
+<tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library and .Sample data are from .</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/vignette.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'pydata.org');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

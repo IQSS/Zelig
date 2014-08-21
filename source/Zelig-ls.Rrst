@@ -1,0 +1,163 @@
+Zelig-ls
+~~~~~~~~~~~~~~~~
+
+Least Squares Regression for Continuous Dependent Variables
+
+Use least squares regression analysis to estimate the best linear
+predictor for the specified dependent variables.
+
+Syntax
+______
+
+
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "ls", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
+
+
+Examples
+______
+
+Basic Example with First Differences
++++++
+
+Attach sample data:
+
+.. {r, eval = TRUE}
+library(Zelig5)
+data(macro)
+.. ..
+
+Estimate model:
+
+.. {r, eval = TRUE}
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
+.. ..
+
+Summarize regression coefficients:
+
+.. {r, eval = TRUE}
+summary(z.out1)
+.. ..
+
+Set explanatory variables to their default (mean/mode) values, with high (80th percentile) and low (20th percentile) values for the trade variable:
+
+.. {r, eval = TRUE}
+x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
+.. ..
+
+Generate first differences for the effect of high versus low trade on GDP:
+
+.. {r, eval = TRUE}
+s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+.. ..
+
+Using Dummy Variables
++++++
+
+Estimate a model with fixed effects for each country (see for help
+with dummy variables). Note that you do not need to create dummy
+variables, as the program will automatically parse the unique values
+in the selected variable into discrete levels.
+
+.. {r, eval = TRUE}
+z.out2 <- zelig(unem ~ gdp + trade + capmob + country,
+                model = "ls", data = macro)
+.. ..
+
+.. {r, eval = TRUE}
+z.out3 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
+                model = "ls", data = macro)
+.. ..
+
+.. {r, eval = TRUE}
+x.US <- setx(z.out3, country = "United States")
+.. ..
+
+Set values for the explanatory variables, using the default
+mean/mode values, with country set to the United States and Japan,
+respectively:
+
+
+.. {r, eval = TRUE}
+x.US <- setx(z.out2, country = "United States")
+x.Japan <- setx(z.out2, country = "Japan")
+.. ..
+
+Simulate quantities of interest:
+
+.. {r, eval = TRUE}
+s.out2 <- sim(z.out2, x.US, x.Japan)
+.. ..
+
+.. {r, dev=c("png", "pdf"), eval = TRUE}
+plot(s.out2)
+.. ..
+
+Model
+____
+
+-   The *stochastic component* is described by a density with mean
+    $\mu_i$ and the common variance :math:`\sigma^2`
+
+.. math::
+Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).
+
+-   The *systematic component* models the conditional mean as
+
+    $$\mu_i =  x_i \beta$$
+
+    where $x_i$ is the vector of covariates, and $\beta$ is the vector
+    of coefficients.
+
+    The least squares estimator is the best linear predictor of a
+    dependent variable given $x_i$, and minimizes the sum of squared
+    residuals, $\sum_{i=1}^n (Y_i-x_i \beta)^2$.
+
+Quantities of Interest
+_____
+
+-   The expected value (`qi$ev`) is the mean of simulations
+    from the stochastic component,
+
+    $$E(Y) = x_i \beta,$$
+
+    given a draw of $\beta$ from its sampling distribution.
+
+-   In conditional prediction models, the average expected treatment
+    effect (`att.ev`) for the treatment group is
+
+    $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+          E[Y_i(t_i=0)] \right\},$$
+
+    where $t_i$ is a binary explanatory variable defining the treatment
+    ($t_i=1$) and control ($t_i=0$) groups. Variation in the simulations
+    are due to uncertainty in simulating $E[Y_i(t_i=0)]$, the
+    counterfactual expected value of $Y_i$ for observations in the
+    treatment group, under the assumption that everything stays the same
+    except that the treatment indicator is switched to $t_i=0$.
+
+Output Values
+_____
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+`z.out <- zelig(y ~ x, model = ls, data)`, then you may examine the
+available information in `z.out` by using `names(z.out)`, see the
+`coefficients` by using `z.out$coefficients`, and
+a default summary of information through `summary(z.out)`. Other
+elements available through the `$` operator are listed
+below.
+
+See also
+_____
+
+The least squares regression is part of the stats package by William N.
+Venables and Brian D. Ripley [@VenRip02]. In addition, advanced users may
+wish to refer to `help(lm)` and `help(lm.fit)`. Robust standard errors
+are implemented via the sandwich package by Achim Zeileis
+[@Zeileis04]. Sample data are from @KinTomWit00.
+

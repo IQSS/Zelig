@@ -1,0 +1,261 @@
+zelig-exp
+~~~~~~
+
+Exponential Regression for Duration Dependent Variables
+
+Use the exponential duration regression model if you have a dependent
+variable representing a duration (time until an event). The model
+assumes a constant hazard rate for all events. The dependent variable
+may be censored (for observations have not yet been completed when data
+were collected).
+
+Syntax
++++++
+
+
+.. sourcecode:: r
+    
+
+        > z.out <- zelig(Surv(Y, C) ~ X, model = "exp", data = mydata)
+        > x.out <- setx(z.out)
+        > s.out <- sim(z.out, x = x.out)
+
+
+Exponential models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length :math:`n`. For each
+observation :math:`i` in 1, …, :math:`n`, the value :math:`y_i` is the
+duration (lifetime, for example), and the associated :math:`c_i` is a
+binary variable such that :math:`c_i = 1` if the duration is not
+censored (*e.g.*, the subject dies during the study) or :math:`c_i = 0`
+if the duration is censored (*e.g.*, the subject is still alive at the
+end of the study and is know to live at least as long as :math:`y_i`).
+If :math:`c_i` is omitted, all Y are assumed to be completed; that is,
+time defaults to 1 for all observations.
+
+Input Values
++++++
+
+In addition to the standard inputs, zelig() takes the following
+additional options for exponential regression:
+
+-  robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+   errors based on sandwich estimators (see and ) and the options
+   selected in cluster.
+
+-  cluster: if robust = TRUE, you may select a variable to define groups
+   of correlated observations. Let x3 be a variable that consists of
+   either discrete numeric values, character strings, or factors that
+   define strata. Then
+
+   ::
+
+       > z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
+                        model = "exp", data = mydata)
+
+   means that the observations can be correlated within the strata
+   defined by the variable x3, and that robust standard errors should be
+   calculated according to those clusters. If robust = TRUE but cluster
+   is not specified, zelig() assumes that each observation falls into
+   its own cluster.
+
+Example
++++++
+
+Attach the sample data:
+
+
+.. sourcecode:: r
+    
+
+    data(coalition)
+
+
+Estimate the model:
+
+
+.. sourcecode:: r
+    
+
+    z.out <- zelig(Surv(duration, ciep12)   fract + numst2, model = “exp”, + data = coalition)
+    
+    
+    View the regression output:
+
+
+.. sourcecode:: r
+    
+
+    summary(z.out)
+
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+
+.. sourcecode:: r
+    
+
+    x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2 = 1)
+
+
+Simulate expected values (qi$ev) and first differences (qi$fd):
+
+
+.. sourcecode:: r
+    
+
+    s.out <- sim(z.out, x = x.low, x1 = x.high)
+
+
+Summarize quantities of interest and produce some plots:
+
+
+.. sourcecode:: r
+    
+
+    summary(s.out)
+
+
+
+.. sourcecode:: r
+    
+
+    plot(s.out)
+
+
+
+Model
++++++
+
+Let :math:`Y_i^*` be the survival time for observation :math:`i`. This
+variable might be censored for some observations at a fixed time
+:math:`y_c` such that the fully observed dependent variable,
+:math:`Y_i`, is defined as
+
+.. math::
+
+   Y_i = \left\{ \begin{array}{ll}
+         Y_i^* & \textrm{if }Y_i^* \leq y_c \\
+         y_c & \textrm{if }Y_i^* > y_c \\
+       \end{array} \right.
+
+-  The *stochastic component* is described by the distribution of the
+   partially observed variable :math:`Y^*`. We assume :math:`Y_i^*`
+   follows the exponential distribution whose density function is given
+   by
+
+   .. math:: f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)
+
+   for :math:`y_i^*\ge 0` and :math:`\lambda_i>0`. The mean of this
+   distribution is :math:`\lambda_i`.
+
+   In addition, survival models like the exponential have three
+   additional properties. The hazard function :math:`h(t)` measures the
+   probability of not surviving past time :math:`t` given survival up to
+   :math:`t`. In general, the hazard function is equal to
+   :math:`f(t)/S(t)` where the survival function
+   :math:`S(t) = 1 - \int_{0}^t f(s) ds` represents the fraction still
+   surviving at time :math:`t`. The cumulative hazard function
+   :math:`H(t)` describes the probability of dying before time
+   :math:`t`. In general,
+   :math:`H(t)= \int_{0}^{t} h(s) ds = -\log S(t)`. In the case of the
+   exponential model,
+
+   .. math::
+
+      \begin{aligned}
+      h(t) &=& \frac{1}{\lambda_i} \\
+      S(t) &=& \exp\left( -\frac{t}{\lambda_i} \right) \\
+      H(t) &=& \frac{t}{\lambda_i}\end{aligned}
+
+   For the exponential model, the hazard function :math:`h(t)` is
+   constant over time. The Weibull model and lognormal models allow the
+   hazard function to vary as a function of elapsed time (see and
+   respectively).
+
+-  The *systematic component* :math:`\lambda_i` is modeled as
+
+   .. math:: \lambda_i = \exp(x_i \beta),
+
+   where :math:`x_i` is the vector of explanatory variables, and
+   :math:`\beta` is the vector of coefficients.
+
+Quantities of Interest
++++++
+
+-  The expected values (qi$ev) for the exponential model are simulations
+   of the expected duration given :math:`x_i` and draws of :math:`\beta`
+   from its posterior,
+
+   .. math:: E(Y) = \lambda_i = \exp(x_i \beta).
+
+-  The predicted values (qi$pr) are draws from the exponential
+   distribution with rate equal to the expected value.
+
+-  The first difference (or difference in expected values, qi$ev.diff),
+   is
+
+   .. math:: \textrm{FD} \; = \; E(Y \mid x_1) - E(Y \mid x),
+
+   where :math:`x` and :math:`x_1` are different vectors of values for
+   the explanatory variables.
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+   .. math::
+
+      \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) - E[Y_i(t_i=0)]
+        \right\},
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups. When
+   :math:`Y_i(t_i=1)` is censored rather than observed, we replace it
+   with a simulation from the model given available knowledge of the
+   censoring process. Variation in the simulations is due to two
+   factors: uncertainty in the imputation process for censored
+   :math:`y_i^*` and uncertainty in simulating :math:`E[Y_i(t_i=0)]`,
+   the counterfactual expected value of :math:`Y_i` for observations in
+   the treatment group, under the assumption that everything stays the
+   same except that the treatment indicator is switched to
+   :math:`t_i=0`.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+   .. math::
+
+      \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups. When
+   :math:`Y_i(t_i=1)` is censored rather than observed, we replace it
+   with a simulation from the model given available knowledge of the
+   censoring process. Variation in the simulations is due to two
+   factors: uncertainty in the imputation process for censored
+   :math:`y_i^*` and uncertainty in simulating
+   :math:`\widehat{Y_i(t_i=0)}`, the counterfactual predicted value of
+   :math:`Y_i` for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math:`t_i=0`.
+
+Output Values
++++++
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+``z.out <- zelig(Surv(Y, C) ~ X, model = exp, data)``, then you may
+examine the available information in ``z.out`` by using
+``names(z.out)``, see the coefficients by using z.out$coefficients, and
+a default summary of information through ``summary(z.out)``. Other
+elements available through the $ operator are listed below.
+
+
+See also
++++++
+
+The exponential function is part of the survival library by Terry
+Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
+to ``help(survfit)`` in the survival library.
