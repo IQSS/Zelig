@@ -27,7 +27,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
@@ -93,7 +92,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -214,7 +213,7 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <p>The relogit procedure supports four optional arguments in addition to
 the standard arguments for zelig(). You may additionally use:</p>
 <ul class="simple">
-<li>tau: a vector containing either one or two values for <span class="math">\(\tau\)</span>,
+<li>tau: a vector containing either one or two values for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/>,
 the true population fraction of ones. Use, for example, tau = c(0.05,
 0.1) to specify that the lower bound on tau is 0.05 and the upper
 bound is 0.1. If left unspecified, only finite-sample bias correction
@@ -240,8 +239,8 @@ correction.</p>
 <p>Due to memory and space considerations, the data used here are a sample
 drawn from the full data set used in King and Zeng, 2001, The proportion
 of militarized interstate conflicts to the absence of disputes is
-<span class="math">\(\tau = 1,042 / 303,772
-\approx 0.00343\)</span>. To estimate the model,</p>
+<img class="math" src="_images/math/0476daae6e85154c40577131b46dfc345e403b50.png" alt="\tau = 1,042 / 303,772
+\approx 0.00343"/>. To estimate the model,</p>
 <div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>mid<span class="p">)</span>
 </pre></div>
 </div>
@@ -289,9 +288,9 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 </div>
 <div class="section" id="example-3-two-taus-with-bias-correction-and-prior-correction">
 <h2>Example 3: Two Taus with Bias Correction and Prior Correction<a class="headerlink" href="#example-3-two-taus-with-bias-correction-and-prior-correction" title="Permalink to this headline">¶</a></h2>
-<p>Suppose that we did not know that <span class="math">\(\tau \approx 0.00343\)</span>, but only
-that it was somewhere between <span class="math">\((0.002, 0.005)\)</span>. To estimate a
-model with a range of feasible estimates for <span class="math">\(\tau\)</span> (using the
+<p>Suppose that we did not know that <img class="math" src="_images/math/3ea6d30492110055362e739a5b4776f93c6f1814.png" alt="\tau \approx 0.00343"/>, but only
+that it was somewhere between <img class="math" src="_images/math/501e197d9ac2263e0c31dbecb1a332a39f7f0c84.png" alt="(0.002, 0.005)"/>. To estimate a
+model with a range of feasible estimates for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> (using the
 default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict   major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem
 <span class="o">+</span> <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> “relogit”<span class="p">,</span> <span class="o">+</span> tau <span class="o">=</span> c<span class="p">(</span><span class="m">0.002</span><span class="p">,</span> <span class="m">0.005</span><span class="p">))</span>
@@ -315,7 +314,7 @@ default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<p>The cost of giving a range of values for <span class="math">\(\tau\)</span> is that point
+<p>The cost of giving a range of values for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> is that point
 estimates are not available for quantities of interest. Instead,
 quantities are presented as confidence intervals with significance less
 than or equal to a specified level (e.g., at least 95% of the
@@ -327,14 +326,14 @@ simulations are contained in the nominal 95% confidence interval).</p>
 <li><p class="first">Like the standard logistic regression, the <em>stochastic component</em> for
 the rare events logistic regression is:</p>
 <div class="math">
-\[Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\]</div>
-<p>where <span class="math">\(Y_i\)</span> is the binary dependent variable, and takes a value
+<p><img src="_images/math/e6ab2177225a79f988ab416b0353405999e15789.png" alt="Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),"/></p>
+</div><p>where <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> is the binary dependent variable, and takes a value
 of either 0 or 1.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is:</p>
 <div class="math">
-\[\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\]</div>
-</li>
+<p><img src="_images/math/59cf11e927045c99a310cdaa15d32bc7cfacb160.png" alt="\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}."/></p>
+</div></li>
 <li><p class="first">If the sample is generated via a case-control (or choice-based)
 design, such as when drawing all events (or “cases”) and a sample
 from the non-events (or “controls”) and going backwards to collect
@@ -344,53 +343,53 @@ unbiased, the constant term may be significantly biased. Zelig has
 two methods for case control correction:</p>
 <ol class="arabic">
 <li><p class="first">The “prior correction” method adjusts the intercept term. Let
-<span class="math">\(\tau\)</span> be the true population fraction of events,
-<span class="math">\(\bar{y}\)</span> the fraction of events in the sample, and
-<span class="math">\(\hat{\beta_0}\)</span> the uncorrected intercept term. The
-corrected intercept <span class="math">\(\beta_0\)</span> is:</p>
+<img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> be the true population fraction of events,
+<img class="math" src="_images/math/eff822074d94619ea86dcccd9f1e410360a711c3.png" alt="\bar{y}"/> the fraction of events in the sample, and
+<img class="math" src="_images/math/7f7c57d3dd82a0c7d00c82f510f14400a1cc4435.png" alt="\hat{\beta_0}"/> the uncorrected intercept term. The
+corrected intercept <img class="math" src="_images/math/90acdaf850915294d7ef3bdc540005ee22197903.png" alt="\beta_0"/> is:</p>
 <div class="math">
-\[\beta =  \hat{\beta_0} - \ln \left[ \bigg( \frac{1 - \tau}{\tau}
-  \bigg) \bigg( \frac{\bar{y}}{1 - \bar{y}} \bigg) \right].\]</div>
-</li>
+<p><img src="_images/math/b3f4429515a74871c61649fe2b350bfe49da7123.png" alt="\beta =  \hat{\beta_0} - \ln \left[ \bigg( \frac{1 - \tau}{\tau}
+  \bigg) \bigg( \frac{\bar{y}}{1 - \bar{y}} \bigg) \right]."/></p>
+</div></li>
 <li><p class="first">The “weighting” method performs a weighted logistic regression to
 correct for a case-control sampling design. Let the 1 subscript
 denote observations for which the dependent variable is observed
 as a 1, and the 0 subscript denote observations for which the
 dependent variable is observed as a 0. Then the vector of weights
-<span class="math">\(w_i\)</span></p>
+<img class="math" src="_images/math/b4e1bc8e2dfd2c26158273aef285b08a816f960a.png" alt="w_i"/></p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/50c4c6190b58f44612c516cb9e9ac3e6420f5b9c.png" alt="\begin{aligned}
 w_1 &amp;=&amp; \frac{\tau}{\bar{y}} \\
 w_0 &amp;=&amp; \frac{(1 - \tau)}{(1 - \bar{y})} \\
-w_i &amp;=&amp; w_1 Y_i + w_0 (1 - Y_i)\end{aligned}\end{split}\]</div>
-</li>
+w_i &amp;=&amp; w_1 Y_i + w_0 (1 - Y_i)\end{aligned}"/></p>
+</div></li>
 </ol>
-<p>If <span class="math">\(\tau\)</span> is unknown, you may alternatively specify an upper
-and lower bound for the possible range of <span class="math">\(\tau\)</span>. In this case,
+<p>If <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> is unknown, you may alternatively specify an upper
+and lower bound for the possible range of <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/>. In this case,
 the relogit procedure uses “robust Bayesian” methods to generate a
 confidence interval (rather than a point estimate) for each quantity
 of interest. The nominal coverage of the confidence interval is at
 least as great as the actual coverage.</p>
 </li>
-<li><p class="first">By default, estimates of the the coefficients <span class="math">\(\beta\)</span> are
+<li><p class="first">By default, estimates of the the coefficients <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> are
 bias-corrected to account for finite sample or rare events bias. In
 addition, quantities of interest, such as predicted probabilities,
-are also corrected of rare-events bias. If <span class="math">\(\widehat{\beta}\)</span>
+are also corrected of rare-events bias. If <img class="math" src="_images/math/d8af2dda6c66ca3f8936a4c3f429636ab9950ddc.png" alt="\widehat{\beta}"/>
 are the uncorrected logit coefficients and
-bias(<span class="math">\(\widehat{\beta}\)</span>) is the bias term, the corrected
-coefficients <span class="math">\(\tilde{\beta}\)</span> are</p>
+bias(<img class="math" src="_images/math/d8af2dda6c66ca3f8936a4c3f429636ab9950ddc.png" alt="\widehat{\beta}"/>) is the bias term, the corrected
+coefficients <img class="math" src="_images/math/4024b5e1e832a4e71c716cc1f7383be57826b0b0.png" alt="\tilde{\beta}"/> are</p>
 <div class="math">
-\[\widehat{\beta} - \textrm{bias}(\widehat{\beta}) = \tilde{\beta}\]</div>
-<p>The bias term is</p>
+<p><img src="_images/math/321de0f40e0675fea03bff2a20ea559cb463d6ea.png" alt="\widehat{\beta} - \textrm{bias}(\widehat{\beta}) = \tilde{\beta}"/></p>
+</div><p>The bias term is</p>
 <div class="math">
-\[\textrm{bias}(\widehat{\beta}) = (X'WX)^{-1} X'W \xi\]</div>
-<p>where</p>
+<p><img src="_images/math/b0553d525251be7ec5507573c00d1e00eee0e435.png" alt="\textrm{bias}(\widehat{\beta}) = (X'WX)^{-1} X'W \xi"/></p>
+</div><p>where</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/ffeae8f68e041844fe15a30663badb58587cb67d.png" alt="\begin{aligned}
 \xi_i &amp;=&amp; 0.5 Q_{ii} \Big( (1 + w-1)\widehat{\pi}_i - w_1 \Big) \\
 Q &amp;=&amp; X(X'WX)^{-1} X' \\
-W = \textrm{diag}\{\widehat{\pi}_i (1 - \widehat{\pi}_i) w_i\}\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(w_i\)</span> and <span class="math">\(w_1\)</span> are given in the “weighting”
+W = \textrm{diag}\{\widehat{\pi}_i (1 - \widehat{\pi}_i) w_i\}\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/b4e1bc8e2dfd2c26158273aef285b08a816f960a.png" alt="w_i"/> and <img class="math" src="_images/math/ee71d9a60992887aa4b7a1e010886633661a7ada.png" alt="w_1"/> are given in the “weighting”
 section above.</p>
 </li>
 </ul>
@@ -398,30 +397,30 @@ section above.</p>
 <div class="section" id="quantities-of-interest">
 <h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">For either one or no <span class="math">\(\tau\)</span>:</p>
+<li><p class="first">For either one or no <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/>:</p>
 <ul>
 <li><p class="first">The expected values (qi$ev) for the rare events logit are
 simulations of the predicted probability</p>
 <div class="math">
-\[E(Y) = \pi_i =
-    \frac{1}{1 + \exp(-x_i \beta)},\]</div>
-<p>given draws of <span class="math">\(\beta\)</span> from its posterior.</p>
+<p><img src="_images/math/fd2856bc7fec152ef785c927c85393b0f70596ac.png" alt="E(Y) = \pi_i =
+    \frac{1}{1 + \exp(-x_i \beta)},"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its posterior.</p>
 </li>
 <li><p class="first">The predicted value (qi$pr) is a draw from a binomial distribution
-with mean equal to the simulated <span class="math">\(\pi_i\)</span>.</p>
+with mean equal to the simulated <img class="math" src="_images/math/916754f7e7de4247fa27c52f610948b4055311fe.png" alt="\pi_i"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) is defined as</p>
 <div class="math">
-\[\textrm{FD} = \Pr(Y = 1 \mid x_1, \tau) - \Pr(Y = 1 \mid x, \tau).\]</div>
-</li>
+<p><img src="_images/math/9b4dec5fa18c43963e1e8ce022f3dce869dc2403.png" alt="\textrm{FD} = \Pr(Y = 1 \mid x_1, \tau) - \Pr(Y = 1 \mid x, \tau)."/></p>
+</div></li>
 <li><p class="first">The risk ratio (qi$rr) is defined as</p>
 <div class="math">
-\[\textrm{RR} = \Pr(Y = 1 \mid x_1, \tau) \ / \ \Pr(Y = 1 \mid x, \tau).\]</div>
-</li>
+<p><img src="_images/math/840169782526b263d8745f139e906c4cbb6be812.png" alt="\textrm{RR} = \Pr(Y = 1 \mid x_1, \tau) \ / \ \Pr(Y = 1 \mid x, \tau)."/></p>
+</div></li>
 </ul>
 </li>
-<li><p class="first">For a range of <span class="math">\(\tau\)</span> defined by <span class="math">\([\tau_1, \tau_2]\)</span>, each
-of the quantities of interest are <span class="math">\(n \times 2\)</span> matrices, which
+<li><p class="first">For a range of <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> defined by <img class="math" src="_images/math/9c8d376f26cfc87ab8a0956d91e826558ef973d6.png" alt="[\tau_1, \tau_2]"/>, each
+of the quantities of interest are <img class="math" src="_images/math/4f7a2e44ef1042deffae3520085171846386e918.png" alt="n \times 2"/> matrices, which
 report the lower and upper bounds, respectively, for a confidence
 interval with nominal coverage at least as great as the actual
 coverage. At worst, these bounds are conservative estimates for the
@@ -431,28 +430,28 @@ specific method of calculating bounded quantities of interest.</p>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>

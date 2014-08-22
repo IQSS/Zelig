@@ -27,7 +27,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
@@ -93,7 +92,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -195,37 +194,45 @@ may be censored (for observations have not yet been completed when data
 were collected).</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
-<span class="o">&gt;</span> x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
-<span class="o">&gt;</span> s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zexp<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 </pre></div>
 </div>
 <p>Exponential models require that the dependent variable be in the form
-Surv(Y, C), where Y and C are vectors of length <span class="math">\(n\)</span>. For each
-observation <span class="math">\(i\)</span> in 1, …, <span class="math">\(n\)</span>, the value <span class="math">\(y_i\)</span> is the
-duration (lifetime, for example), and the associated <span class="math">\(c_i\)</span> is a
-binary variable such that <span class="math">\(c_i = 1\)</span> if the duration is not
-censored (<em>e.g.</em>, the subject dies during the study) or <span class="math">\(c_i = 0\)</span>
+Surv(Y, C), where Y and C are vectors of length <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/>. For each
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> in 1, …, <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/>, the value <img class="math" src="_images/math/410a65f64e2a609a2a7f544ed72f0982b719807a.png" alt="y_i"/> is the
+duration (lifetime, for example), and the associated <img class="math" src="_images/math/496867ca68c428fa123f26f0f73997632e61e116.png" alt="c_i"/> is a
+binary variable such that <img class="math" src="_images/math/45bd383d229a85e1c894b645ee5ce5cfad178bdf.png" alt="c_i = 1"/> if the duration is not
+censored (<em>e.g.</em>, the subject dies during the study) or <img class="math" src="_images/math/839e310a40128c2d71f158db2ee1ff3a1a40b81b.png" alt="c_i = 0"/>
 if the duration is censored (<em>e.g.</em>, the subject is still alive at the
-end of the study and is know to live at least as long as <span class="math">\(y_i\)</span>).
-If <span class="math">\(c_i\)</span> is omitted, all Y are assumed to be completed; that is,
+end of the study and is know to live at least as long as <img class="math" src="_images/math/410a65f64e2a609a2a7f544ed72f0982b719807a.png" alt="y_i"/>).
+If <img class="math" src="_images/math/496867ca68c428fa123f26f0f73997632e61e116.png" alt="c_i"/> is omitted, all Y are assumed to be completed; that is,
 time defaults to 1 for all observations.</p>
 </div>
 <div class="section" id="input-values">
 <h2>Input Values<a class="headerlink" href="#input-values" title="Permalink to this headline">¶</a></h2>
 <p>In addition to the standard inputs, zelig() takes the following
 additional options for exponential regression:</p>
-<ul>
-<li><p class="first">robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+<ul class="simple">
+<li>robust: defaults to FALSE. If TRUE, zelig() computes robust standard
 errors based on sandwich estimators (see and ) and the options
-selected in cluster.</p>
-</li>
-<li><p class="first">cluster: if robust = TRUE, you may select a variable to define groups
+selected in cluster.</li>
+<li>cluster: if robust = TRUE, you may select a variable to define groups
 of correlated observations. Let x3 be a variable that consists of
 either discrete numeric values, character strings, or factors that
-define strata. Then</p>
-<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(y ~ x1 + x2, robust = TRUE, cluster = &quot;x3&quot;,
-                 model = &quot;exp&quot;, data = mydata)
+define strata. Then</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x1 <span class="o">+</span> x2<span class="p">,</span> robust <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> cluster <span class="o">=</span> <span class="s">&quot;x3&quot;</span><span class="p">,</span>
+                        model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
 </pre></div>
 </div>
 <p>means that the observations can be correlated within the strata
@@ -233,8 +240,6 @@ defined by the variable x3, and that robust standard errors should be
 calculated according to those clusters. If robust = TRUE but cluster
 is not specified, zelig() assumes that each observation falls into
 its own cluster.</p>
-</li>
-</ul>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -243,22 +248,44 @@ its own cluster.</p>
 </pre></div>
 </div>
 <p>Estimate the model:</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span>   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> “exp”<span class="p">,</span> <span class="o">+</span> data <span class="o">=</span> coalition<span class="p">)</span>
-
-
-View the regression output<span class="o">:</span>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Olivia Lau, Kosuke Imai, Gary King. 2011.</span>
+<span class="c">##   exp: Exponential Regression for Duration Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+</pre></div>
+</div>
+<p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
+<span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
+<span class="c">##     numst2, data = ., dist = &quot;exponential&quot;, model = FALSE)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)       fract      numst2</span>
+<span class="c">##    5.535873   -0.003909    0.461179</span>
+<span class="c">##</span>
+<span class="c">## Scale fixed at 1</span>
+<span class="c">##</span>
+<span class="c">## Loglik(model)= -1077   Loglik(intercept only)= -1101</span>
+<span class="c">##  Chisq= 46.66 on 2 degrees of freedom, p= 7.4e-11</span>
+<span class="c">## n= 314</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
+<p>Simulate expected values and first differences:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
@@ -266,56 +293,82 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 15.27 1.425 15.21 12.62 18.03</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd  50%   2.5% 97.5%</span>
+<span class="c">## [1,] 15.44 15.56 10.8 0.4354 59.31</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 24.34 1.948 24.31 20.73 28.07</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## [1,] 24.59 25.87 16.51 0.5998 93.27</span>
+<span class="c">## fd</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 9.068 2.333 9.021 4.967 13.53</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
+</div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-11.png" />
 </div>
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>Let <span class="math">\(Y_i^*\)</span> be the survival time for observation <span class="math">\(i\)</span>. This
+<p>Let <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> be the survival time for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>. This
 variable might be censored for some observations at a fixed time
-<span class="math">\(y_c\)</span> such that the fully observed dependent variable,
-<span class="math">\(Y_i\)</span>, is defined as</p>
+<img class="math" src="_images/math/86ef86313546967dcb442753dcc6f50484dc244b.png" alt="y_c"/> such that the fully observed dependent variable,
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/>, is defined as</p>
 <div class="math">
-\[\begin{split}Y_i = \left\{ \begin{array}{ll}
+<p><img src="_images/math/080eb82277537c413153c5a513d4df9309471caf.png" alt="Y_i = \left\{ \begin{array}{ll}
       Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
       y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
-    \end{array} \right.\end{split}\]</div>
-<ul>
+    \end{array} \right."/></p>
+</div><ul>
 <li><p class="first">The <em>stochastic component</em> is described by the distribution of the
-partially observed variable <span class="math">\(Y^*\)</span>. We assume <span class="math">\(Y_i^*\)</span>
+partially observed variable <img class="math" src="_images/math/e4b82f5d0d0b135c68864771e045dc913778a223.png" alt="Y^*"/>. We assume <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/>
 follows the exponential distribution whose density function is given
 by</p>
 <div class="math">
-\[f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)\]</div>
-<p>for <span class="math">\(y_i^*\ge 0\)</span> and <span class="math">\(\lambda_i&gt;0\)</span>. The mean of this
-distribution is <span class="math">\(\lambda_i\)</span>.</p>
+<p><img src="_images/math/67e1264b7f56ebc4a97823f66b518116f44c057a.png" alt="f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)"/></p>
+</div><p>for <img class="math" src="_images/math/aee03fa2ac369970345e3f13ba80325460b429e3.png" alt="y_i^*\ge 0"/> and <img class="math" src="_images/math/7d72a5d0f43da45d3d7a997a9971becc5f8832c8.png" alt="\lambda_i&gt;0"/>. The mean of this
+distribution is <img class="math" src="_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/>.</p>
 <p>In addition, survival models like the exponential have three
-additional properties. The hazard function <span class="math">\(h(t)\)</span> measures the
-probability of not surviving past time <span class="math">\(t\)</span> given survival up to
-<span class="math">\(t\)</span>. In general, the hazard function is equal to
-<span class="math">\(f(t)/S(t)\)</span> where the survival function
-<span class="math">\(S(t) = 1 - \int_{0}^t f(s) ds\)</span> represents the fraction still
-surviving at time <span class="math">\(t\)</span>. The cumulative hazard function
-<span class="math">\(H(t)\)</span> describes the probability of dying before time
-<span class="math">\(t\)</span>. In general,
-<span class="math">\(H(t)= \int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the
+additional properties. The hazard function <img class="math" src="_images/math/8f59c002cacf4a159c9d1b7ccfa141d30d5dc65c.png" alt="h(t)"/> measures the
+probability of not surviving past time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> given survival up to
+<img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. In general, the hazard function is equal to
+<img class="math" src="_images/math/89ae40bbb08f26a2d7a02d4d5af4526f1a20c029.png" alt="f(t)/S(t)"/> where the survival function
+<img class="math" src="_images/math/cc2e13874b1a2ecf7f79657e6c3a29960829dcc3.png" alt="S(t) = 1 - \int_{0}^t f(s) ds"/> represents the fraction still
+surviving at time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. The cumulative hazard function
+<img class="math" src="_images/math/30319a828ec4029a092aefb503bd693e5776e59b.png" alt="H(t)"/> describes the probability of dying before time
+<img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. In general,
+<img class="math" src="_images/math/17b2212e68f15f537abbafa6fa716bb8369f7372.png" alt="H(t)= \int_{0}^{t} h(s) ds = -\log S(t)"/>. In the case of the
 exponential model,</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/01d104152a44c6ad669dfd89c7f40028ab4a15e8.png" alt="\begin{aligned}
 h(t) &amp;=&amp; \frac{1}{\lambda_i} \\
 S(t) &amp;=&amp; \exp\left( -\frac{t}{\lambda_i} \right) \\
-H(t) &amp;=&amp; \frac{t}{\lambda_i}\end{aligned}\end{split}\]</div>
-<p>For the exponential model, the hazard function <span class="math">\(h(t)\)</span> is
+H(t) &amp;=&amp; \frac{t}{\lambda_i}\end{aligned}"/></p>
+</div><p>For the exponential model, the hazard function <img class="math" src="_images/math/8f59c002cacf4a159c9d1b7ccfa141d30d5dc65c.png" alt="h(t)"/> is
 constant over time. The Weibull model and lognormal models allow the
 hazard function to vary as a function of elapsed time (see and
 respectively).</p>
 </li>
-<li><p class="first">The <em>systematic component</em> <span class="math">\(\lambda_i\)</span> is modeled as</p>
+<li><p class="first">The <em>systematic component</em> <img class="math" src="_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/> is modeled as</p>
 <div class="math">
-\[\lambda_i = \exp(x_i \beta),\]</div>
-<p>where <span class="math">\(x_i\)</span> is the vector of explanatory variables, and
-<span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+<p><img src="_images/math/2ef3e09dc6e0d4710d1d8455992bbb32d072fbb7.png" alt="\lambda_i = \exp(x_i \beta),"/></p>
+</div><p>where <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> is the vector of explanatory variables, and
+<img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of coefficients.</p>
 </li>
 </ul>
 </div>
@@ -323,54 +376,54 @@ respectively).</p>
 <h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">The expected values (qi$ev) for the exponential model are simulations
-of the expected duration given <span class="math">\(x_i\)</span> and draws of <span class="math">\(\beta\)</span>
+of the expected duration given <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> and draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/>
 from its posterior,</p>
 <div class="math">
-\[E(Y) = \lambda_i = \exp(x_i \beta).\]</div>
-</li>
+<p><img src="_images/math/ad77ed06fe3262275ae476c64b6707e4aee6e543.png" alt="E(Y) = \lambda_i = \exp(x_i \beta)."/></p>
+</div></li>
 <li><p class="first">The predicted values (qi$pr) are draws from the exponential
 distribution with rate equal to the expected value.</p>
 </li>
 <li><p class="first">The first difference (or difference in expected values, qi$ev.diff),
 is</p>
 <div class="math">
-\[\textrm{FD} \; = \; E(Y \mid x_1) - E(Y \mid x),\]</div>
-<p>where <span class="math">\(x\)</span> and <span class="math">\(x_1\)</span> are different vectors of values for
+<p><img src="_images/math/7631b945385f93d17fe8b3a5bf6e15c8143b2b49.png" alt="\textrm{FD} \; = \; E(Y \mid x_1) - E(Y \mid x),"/></p>
+</div><p>where <img class="math" src="_images/math/188c175aac0a8a9c22499336711b5d7256407254.png" alt="x"/> and <img class="math" src="_images/math/b31b1ea8e4fe3f618dedfb0e2d8c69a3df7a391d.png" alt="x_1"/> are different vectors of values for
 the explanatory variables.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) - E[Y_i(t_i=0)]
-  \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
-<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+<p><img src="_images/math/c086d795134e74f3fe435647603c4583f4d1dac3.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) - E[Y_i(t_i=0)]
+  \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups. When
+<img class="math" src="_images/math/3574cfcb10f1bd84fea967193a6ae17c6855de01.png" alt="Y_i(t_i=1)"/> is censored rather than observed, we replace it
 with a simulation from the model given available knowledge of the
 censoring process. Variation in the simulations is due to two
 factors: uncertainty in the imputation process for censored
-<span class="math">\(y_i^*\)</span> and uncertainty in simulating <span class="math">\(E[Y_i(t_i=0)]\)</span>,
-the counterfactual expected value of <span class="math">\(Y_i\)</span> for observations in
+<img class="math" src="_images/math/9c2fbff8ba260029bc65603e6a06944c5746ad65.png" alt="y_i^*"/> and uncertainty in simulating <img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>,
+the counterfactual expected value of <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in
 the treatment group, under the assumption that everything stays the
 same except that the treatment indicator is switched to
-<span class="math">\(t_i=0\)</span>.</p>
+<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-  \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
-<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+<p><img src="_images/math/df8a385ab7b219b2fed30372b1381df5163a900e.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+  \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups. When
+<img class="math" src="_images/math/3574cfcb10f1bd84fea967193a6ae17c6855de01.png" alt="Y_i(t_i=1)"/> is censored rather than observed, we replace it
 with a simulation from the model given available knowledge of the
 censoring process. Variation in the simulations is due to two
 factors: uncertainty in the imputation process for censored
-<span class="math">\(y_i^*\)</span> and uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/9c2fbff8ba260029bc65603e6a06944c5746ad65.png" alt="y_i^*"/> and uncertainty in simulating
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>

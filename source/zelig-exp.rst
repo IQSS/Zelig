@@ -12,13 +12,27 @@ were collected).
 Syntax
 +++++
 
+With reference classes:
+
 
 .. sourcecode:: r
     
 
-        > z.out <- zelig(Surv(Y, C) ~ X, model = "exp", data = mydata)
-        > x.out <- setx(z.out)
-        > s.out <- sim(z.out, x = x.out)
+    z5 <- zexp$new()
+    z5$zelig(Surv(Y, C) ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
+
+.. sourcecode:: r
+    
+
+    z.out <- zelig(Surv(Y, C) ~ X, model = "exp", data = mydata)
+    x.out <- setx(z.out)
+    s.out <- sim(z.out, x = x.out)
 
 
 Exponential models require that the dependent variable be in the form
@@ -47,19 +61,24 @@ additional options for exponential regression:
    either discrete numeric values, character strings, or factors that
    define strata. Then
 
-   ::
 
-       > z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
-                        model = "exp", data = mydata)
+.. sourcecode:: r
+    
 
-   means that the observations can be correlated within the strata
-   defined by the variable x3, and that robust standard errors should be
-   calculated according to those clusters. If robust = TRUE but cluster
-   is not specified, zelig() assumes that each observation falls into
-   its own cluster.
+    z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
+                            model = "exp", data = mydata)
+
+
+means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.
 
 Example
 +++++
+
+
 
 Attach the sample data:
 
@@ -76,16 +95,45 @@ Estimate the model:
 .. sourcecode:: r
     
 
-    z.out <- zelig(Surv(duration, ciep12)   fract + numst2, model = “exp”, + data = coalition)
-    
-    
-    View the regression output:
+    z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model = "exp", data = coalition)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Olivia Lau, Kosuke Imai, Gary King. 2011.
+    ##   exp: Exponential Regression for Duration Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
+
+
+View the regression output:
 
 
 .. sourcecode:: r
     
 
     summary(z.out)
+
+
+::
+
+    ## Model: 1Call:
+    ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
+    ##     numst2, data = ., dist = "exponential", model = FALSE)
+    ## 
+    ## Coefficients:
+    ## (Intercept)       fract      numst2 
+    ##    5.535873   -0.003909    0.461179 
+    ## 
+    ## Scale fixed at 1 
+    ## 
+    ## Loglik(model)= -1077   Loglik(intercept only)= -1101
+    ## 	Chisq= 46.66 on 2 degrees of freedom, p= 7.4e-11 
+    ## n= 314 
+    ## Next step: Use 'setx' method
+
 
 
 Set the baseline values (with the ruling coalition in the minority) and
@@ -96,10 +144,11 @@ X:
 .. sourcecode:: r
     
 
-    x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2 = 1)
+    x.low <- setx(z.out, numst2 = 0)
+    x.high <- setx(z.out, numst2 = 1)
 
 
-Simulate expected values (qi$ev) and first differences (qi$fd):
+Simulate expected values and first differences:
 
 
 .. sourcecode:: r
@@ -117,13 +166,42 @@ Summarize quantities of interest and produce some plots:
     summary(s.out)
 
 
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 15.27 1.425 15.21 12.62 18.03
+    ## pv
+    ##       mean    sd  50%   2.5% 97.5%
+    ## [1,] 15.44 15.56 10.8 0.4354 59.31
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 24.34 1.948 24.31 20.73 28.07
+    ## pv
+    ##       mean    sd   50%   2.5% 97.5%
+    ## [1,] 24.59 25.87 16.51 0.5998 93.27
+    ## fd
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 9.068 2.333 9.021 4.967 13.53
+
+
+
 
 .. sourcecode:: r
     
 
     plot(s.out)
 
+.. figure:: figure/unnamed-chunk-11.png
+    :alt: 
 
+    
 
 Model
 +++++

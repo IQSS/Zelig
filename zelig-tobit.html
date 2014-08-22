@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>zelg-tobit &mdash; Zelig 5.0.1 documentation</title>
+    <title>zelig-tobit &mdash; Zelig 5.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,7 +27,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
@@ -93,7 +92,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -124,7 +123,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">zelg-tobit</a><ul>
+<li><a class="reference internal" href="#">zelig-tobit</a><ul>
 <li><a class="reference internal" href="#syntax">Syntax</a></li>
 <li><a class="reference internal" href="#inputs">Inputs</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
@@ -185,8 +184,8 @@
       </div>
     <div class="col-md-9">
       
-  <div class="section" id="zelg-tobit">
-<h1>zelg-tobit<a class="headerlink" href="#zelg-tobit" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="zelig-tobit">
+<h1>zelig-tobit<a class="headerlink" href="#zelig-tobit" title="Permalink to this headline">¶</a></h1>
 <p>Linear Regression for a Left-Censored Dependent Variable</p>
 <p>Tobit regression estimates a linear regression model for a left-censored
 dependent variable, where the dependent variable is censored from below.
@@ -288,29 +287,29 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Let <span class="math">\(Y_i^*\)</span> be a latent dependent variable which is distributed
+<li><p class="first">Let <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> be a latent dependent variable which is distributed
 with <em>stochastic</em> component</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
-Y_i^* &amp; \sim &amp; \textrm{Normal}(\mu_i, \sigma^2) \\\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(\mu_i\)</span> is a vector means and <span class="math">\(\sigma^2\)</span> is a
-scalar variance parameter. <span class="math">\(Y_i^*\)</span> is not directly observed,
-however. Rather we observed <span class="math">\(Y_i\)</span> which is defined as:</p>
+<p><img src="_images/math/f04da308df2549fd3f3ddac6d6294d0fe68c7536.png" alt="\begin{aligned}
+Y_i^* &amp; \sim &amp; \textrm{Normal}(\mu_i, \sigma^2) \\\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> is a vector means and <img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/> is a
+scalar variance parameter. <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> is not directly observed,
+however. Rather we observed <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> which is defined as:</p>
 <div class="math">
-\[\begin{split}Y_i = \left\{
+<p><img src="_images/math/c02c4c1f67cbb07aff7eef9e34f1779d12f26ae4.png" alt="Y_i = \left\{
 \begin{array}{lcl}
 Y_i^*  &amp;\textrm{if} &amp; c &lt;Y_i^* \\
 c    &amp;\textrm{if} &amp; c \ge Y_i^*
-\end{array}\right.\end{split}\]</div>
-<p>where <span class="math">\(c\)</span> is the lower bound below which <span class="math">\(Y_i^*\)</span> is
+\end{array}\right."/></p>
+</div><p>where <img class="math" src="_images/math/65868d23a5bfe5b3b2d819386b19c14fa36af134.png" alt="c"/> is the lower bound below which <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> is
 censored.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is given by</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
-\mu_{i} &amp;=&amp; x_{i} \beta,\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(x_{i}\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
-for observation <span class="math">\(i\)</span> and <span class="math">\(\beta\)</span> is the vector of
+<p><img src="_images/math/bf760b1377dc29b5986cdb3a1ea4bc3174dcb094.png" alt="\begin{aligned}
+\mu_{i} &amp;=&amp; x_{i} \beta,\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/c223a5391d7bfd7e7c68274c104fc7418944376e.png" alt="x_{i}"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of
 coefficients.</p>
 </li>
 </ul>
@@ -319,23 +318,23 @@ coefficients.</p>
 <h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">The expected values (<tt class="docutils literal"><span class="pre">qi$ev</span></tt>) for the tobit regression model are
-the same as the expected value of <span class="math">\(Y*\)</span>:</p>
+the same as the expected value of <img class="math" src="_images/math/e5acb8ce977a9706090eb708ea2ae8ab001207b8.png" alt="Y*"/>:</p>
 <div class="math">
-\[E(Y^* | X) = \mu_{i} = x_{i} \beta\]</div>
-</li>
+<p><img src="_images/math/9ae22946494ae2cba96f0b452f7f93e671f63d93.png" alt="E(Y^* | X) = \mu_{i} = x_{i} \beta"/></p>
+</div></li>
 <li><p class="first">The first difference (<tt class="docutils literal"><span class="pre">qi$fd</span></tt>) for the tobit regression model is
 defined as</p>
 <div class="math">
-\[\begin{aligned}
-\text{FD}=E(Y^* \mid x_{1}) - E(Y^* \mid x).\end{aligned}\]</div>
-</li>
+<p><img src="_images/math/3552382628dce9e0b3aa47fe65f61406a39686f1.png" alt="\begin{aligned}
+\text{FD}=E(Y^* \mid x_{1}) - E(Y^* \mid x).\end{aligned}"/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (<tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>) for the treatment group is</p>
 <div class="math">
-\[\begin{aligned}
-\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[E[Y^*_{i}(t_{i}=1)]-E[Y^*_{i}(t_{i}=0)]],\end{aligned}\]</div>
-<p>where <span class="math">\(t_{i}\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_{i}=1\)</span>) and control (<span class="math">\(t_{i}=0\)</span>) groups.</p>
+<p><img src="_images/math/fd39d2da6c33f4ce8a5109998fdcc63ae68141dc.png" alt="\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[E[Y^*_{i}(t_{i}=1)]-E[Y^*_{i}(t_{i}=0)]],\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups.</p>
 </li>
 </ul>
 </div>

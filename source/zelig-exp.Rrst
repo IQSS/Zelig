@@ -12,11 +12,21 @@ were collected).
 Syntax
 +++++
 
-.. {r, eval = FALSE}
+With reference classes:
 
-    > z.out <- zelig(Surv(Y, C) ~ X, model = "exp", data = mydata)
-    > x.out <- setx(z.out)
-    > s.out <- sim(z.out, x = x.out)
+.. {r, eval = FALSE}
+z5 <- zexp$new()
+z5$zelig(Surv(Y, C) ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
+.. {r, eval = FALSE}
+z.out <- zelig(Surv(Y, C) ~ X, model = "exp", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
 .. ..
 
 Exponential models require that the dependent variable be in the form
@@ -45,35 +55,39 @@ additional options for exponential regression:
    either discrete numeric values, character strings, or factors that
    define strata. Then
 
-   ::
-
-       > z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
+.. {r, eval = FALSE}
+z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
                         model = "exp", data = mydata)
+.. ..
 
-   means that the observations can be correlated within the strata
-   defined by the variable x3, and that robust standard errors should be
-   calculated according to those clusters. If robust = TRUE but cluster
-   is not specified, zelig() assumes that each observation falls into
-   its own cluster.
+means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.
 
 Example
 +++++
 
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. .. 
+
 Attach the sample data:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(coalition)
 .. ..
 
 Estimate the model:
 
-.. {r, eval = FALSE}
-z.out <- zelig(Surv(duration, ciep12)   fract + numst2, model = “exp”, + data = coalition)
-..
+.. {r, eval = TRUE}
+z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model = "exp", data = coalition)
+.. ..
 
 View the regression output:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
@@ -81,26 +95,26 @@ Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:
 
-.. {r, eval = FALSE}
-x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2 = 1)
+.. {r, eval = TRUE}
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2 = 1)
 .. ..
 
-Simulate expected values (qi$ev) and first differences (qi$fd):
+Simulate expected values and first differences:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out <- sim(z.out, x = x.low, x1 = x.high)
 .. ..
 
 Summarize quantities of interest and produce some plots:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out)
 .. ..
-
 
 Model
 +++++
@@ -226,8 +240,7 @@ may view. For example, if you run
 ``z.out <- zelig(Surv(Y, C) ~ X, model = exp, data)``, then you may
 examine the available information in ``z.out`` by using
 ``names(z.out)``, see the coefficients by using z.out$coefficients, and
-a default summary of information through ``summary(z.out)``. Other
-elements available through the $ operator are listed below.
+a default summary of information through ``summary(z.out)``.
 
 
 See also

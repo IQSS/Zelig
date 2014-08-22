@@ -27,7 +27,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
@@ -93,7 +92,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -228,36 +227,36 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>Let <span class="math">\(Y_i\)</span> be the number of independent events that occur during a
+<p>Let <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> be the number of independent events that occur during a
 fixed time period. This variable can take any non-negative integer
 value.</p>
 <ul>
 <li><p class="first">The negative binomial distribution is derived by letting the mean of
 the Poisson distribution vary according to a fixed parameter
-<span class="math">\(\zeta\)</span> given by the Gamma distribution. The <em>stochastic
+<img class="math" src="_images/math/1a534f73d7999c523b01512801d3bda18adee3b7.png" alt="\zeta"/> given by the Gamma distribution. The <em>stochastic
 component</em> is given by</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/bd08836a98d9156598663d31c4c76c26581aab11.png" alt="\begin{aligned}
      Y_i \mid \zeta_i &amp; \sim &amp; \textrm{Poisson}(\zeta_i \mu_i),\\
      \zeta_i &amp; \sim &amp; \frac{1}{\theta}\textrm{Gamma}(\theta).
-   \end{aligned}\end{split}\]</div>
-<p>The marginal distribution of <span class="math">\(Y_i\)</span> is then the negative
-binomial with mean <span class="math">\(\mu_i\)</span> and variance
-<span class="math">\(\mu_i + \mu_i^2/\theta\)</span>:</p>
+   \end{aligned}"/></p>
+</div><p>The marginal distribution of <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> is then the negative
+binomial with mean <img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> and variance
+<img class="math" src="_images/math/4b5943fd01fbda26432b4db9936abed9fb52cc64.png" alt="\mu_i + \mu_i^2/\theta"/>:</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/bfcce2bd73058487e73f11f41d0a02f9837e2ec3.png" alt="\begin{aligned}
    Y_i &amp; \sim &amp; \textrm{NegBin}(\mu_i, \theta), \\
        &amp; = &amp; \frac{\Gamma (\theta + y_i)}{y! \, \Gamma(\theta)}
              \frac{\mu_i^{y_i} \, \theta^{\theta}}{(\mu_i + \theta)^{\theta + y_i}},
-   \end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(\theta\)</span> is the systematic parameter of the Gamma
-distribution modeling <span class="math">\(\zeta_i\)</span>.</p>
+   \end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/a9cfbeb8ebee1f365919e147a79e242dcb67ee5d.png" alt="\theta"/> is the systematic parameter of the Gamma
+distribution modeling <img class="math" src="_images/math/b2c74aae8f9d0cb0072e974b47723f2e5521b401.png" alt="\zeta_i"/>.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is given by</p>
 <div class="math">
-\[\mu_i = \exp(x_i \beta)\]</div>
-<p>where <span class="math">\(x_i\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
-and <span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+<p><img src="_images/math/81474e43896f32f2f86670eec250ff10b8653b09.png" alt="\mu_i = \exp(x_i \beta)"/></p>
+</div><p>where <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of coefficients.</p>
 </li>
 </ul>
 </div>
@@ -267,42 +266,42 @@ and <span class="math">\(\beta\)</span> is the vector of coefficients.</p>
 <li><p class="first">The expected values (qi$ev) are simulations of the mean of the
 stochastic component. Thus,</p>
 <div class="math">
-\[E(Y) = \mu_i = \exp(x_i
-  \beta),\]</div>
-<p>given simulations of <span class="math">\(\beta\)</span>.</p>
+<p><img src="_images/math/ed68ddf7d6e8d78ed9fb9a9bb55febcf8f71d49e.png" alt="E(Y) = \mu_i = \exp(x_i
+  \beta),"/></p>
+</div><p>given simulations of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/>.</p>
 </li>
 <li><p class="first">The predicted value (qi$pr) drawn from the distribution defined by
-the set of parameters <span class="math">\((\mu_i, \theta)\)</span>.</p>
+the set of parameters <img class="math" src="_images/math/9054fec1d747aca9cfcaa9d679834cf2fd26b899.png" alt="(\mu_i, \theta)"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) is</p>
 <div class="math">
-\[\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)\]</div>
-</li>
+<p><img src="_images/math/82a49121147fab5307d7df11a6b69165b3f6794c.png" alt="\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)"/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>

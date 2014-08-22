@@ -27,7 +27,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
@@ -95,7 +94,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -225,7 +224,7 @@
 <li><a class="reference internal" href="#id57">See also</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#zelg-tobit">zelg-tobit</a><ul>
+<li><a class="reference internal" href="#zelig-tobit">zelig-tobit</a><ul>
 <li><a class="reference internal" href="#id58">Syntax</a></li>
 <li><a class="reference internal" href="#inputs">Inputs</a></li>
 <li><a class="reference internal" href="#id59">Examples</a></li>
@@ -292,7 +291,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -343,37 +342,45 @@ may be censored (for observations have not yet been completed when data
 were collected).</p>
 <div class="section" id="syntax">
 <h3>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
-<span class="o">&gt;</span> x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
-<span class="o">&gt;</span> s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zexp<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 </pre></div>
 </div>
 <p>Exponential models require that the dependent variable be in the form
-Surv(Y, C), where Y and C are vectors of length <span class="math">\(n\)</span>. For each
-observation <span class="math">\(i\)</span> in 1, …, <span class="math">\(n\)</span>, the value <span class="math">\(y_i\)</span> is the
-duration (lifetime, for example), and the associated <span class="math">\(c_i\)</span> is a
-binary variable such that <span class="math">\(c_i = 1\)</span> if the duration is not
-censored (<em>e.g.</em>, the subject dies during the study) or <span class="math">\(c_i = 0\)</span>
+Surv(Y, C), where Y and C are vectors of length <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/>. For each
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> in 1, …, <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/>, the value <img class="math" src="_images/math/410a65f64e2a609a2a7f544ed72f0982b719807a.png" alt="y_i"/> is the
+duration (lifetime, for example), and the associated <img class="math" src="_images/math/496867ca68c428fa123f26f0f73997632e61e116.png" alt="c_i"/> is a
+binary variable such that <img class="math" src="_images/math/45bd383d229a85e1c894b645ee5ce5cfad178bdf.png" alt="c_i = 1"/> if the duration is not
+censored (<em>e.g.</em>, the subject dies during the study) or <img class="math" src="_images/math/839e310a40128c2d71f158db2ee1ff3a1a40b81b.png" alt="c_i = 0"/>
 if the duration is censored (<em>e.g.</em>, the subject is still alive at the
-end of the study and is know to live at least as long as <span class="math">\(y_i\)</span>).
-If <span class="math">\(c_i\)</span> is omitted, all Y are assumed to be completed; that is,
+end of the study and is know to live at least as long as <img class="math" src="_images/math/410a65f64e2a609a2a7f544ed72f0982b719807a.png" alt="y_i"/>).
+If <img class="math" src="_images/math/496867ca68c428fa123f26f0f73997632e61e116.png" alt="c_i"/> is omitted, all Y are assumed to be completed; that is,
 time defaults to 1 for all observations.</p>
 </div>
 <div class="section" id="input-values">
 <h3>Input Values<a class="headerlink" href="#input-values" title="Permalink to this headline">¶</a></h3>
 <p>In addition to the standard inputs, zelig() takes the following
 additional options for exponential regression:</p>
-<ul>
-<li><p class="first">robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+<ul class="simple">
+<li>robust: defaults to FALSE. If TRUE, zelig() computes robust standard
 errors based on sandwich estimators (see and ) and the options
-selected in cluster.</p>
-</li>
-<li><p class="first">cluster: if robust = TRUE, you may select a variable to define groups
+selected in cluster.</li>
+<li>cluster: if robust = TRUE, you may select a variable to define groups
 of correlated observations. Let x3 be a variable that consists of
 either discrete numeric values, character strings, or factors that
-define strata. Then</p>
-<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(y ~ x1 + x2, robust = TRUE, cluster = &quot;x3&quot;,
-                 model = &quot;exp&quot;, data = mydata)
+define strata. Then</li>
+</ul>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x1 <span class="o">+</span> x2<span class="p">,</span> robust <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> cluster <span class="o">=</span> <span class="s">&quot;x3&quot;</span><span class="p">,</span>
+                        model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
 </pre></div>
 </div>
 <p>means that the observations can be correlated within the strata
@@ -381,8 +388,6 @@ defined by the variable x3, and that robust standard errors should be
 calculated according to those clusters. If robust = TRUE but cluster
 is not specified, zelig() assumes that each observation falls into
 its own cluster.</p>
-</li>
-</ul>
 </div>
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
@@ -391,22 +396,44 @@ its own cluster.</p>
 </pre></div>
 </div>
 <p>Estimate the model:</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span>   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> “exp”<span class="p">,</span> <span class="o">+</span> data <span class="o">=</span> coalition<span class="p">)</span>
-
-
-View the regression output<span class="o">:</span>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Olivia Lau, Kosuke Imai, Gary King. 2011.</span>
+<span class="c">##   exp: Exponential Regression for Duration Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+</pre></div>
+</div>
+<p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
+<span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
+<span class="c">##     numst2, data = ., dist = &quot;exponential&quot;, model = FALSE)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)       fract      numst2</span>
+<span class="c">##    5.535873   -0.003909    0.461179</span>
+<span class="c">##</span>
+<span class="c">## Scale fixed at 1</span>
+<span class="c">##</span>
+<span class="c">## Loglik(model)= -1077   Loglik(intercept only)= -1101</span>
+<span class="c">##  Chisq= 46.66 on 2 degrees of freedom, p= 7.4e-11</span>
+<span class="c">## n= 314</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
+<p>Simulate expected values and first differences:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
@@ -414,56 +441,82 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 15.27 1.425 15.21 12.62 18.03</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd  50%   2.5% 97.5%</span>
+<span class="c">## [1,] 15.44 15.56 10.8 0.4354 59.31</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 24.34 1.948 24.31 20.73 28.07</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## [1,] 24.59 25.87 16.51 0.5998 93.27</span>
+<span class="c">## fd</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 9.068 2.333 9.021 4.967 13.53</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
+</div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-11.png" />
 </div>
 </div>
 <div class="section" id="model">
 <h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
-<p>Let <span class="math">\(Y_i^*\)</span> be the survival time for observation <span class="math">\(i\)</span>. This
+<p>Let <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> be the survival time for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>. This
 variable might be censored for some observations at a fixed time
-<span class="math">\(y_c\)</span> such that the fully observed dependent variable,
-<span class="math">\(Y_i\)</span>, is defined as</p>
+<img class="math" src="_images/math/86ef86313546967dcb442753dcc6f50484dc244b.png" alt="y_c"/> such that the fully observed dependent variable,
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/>, is defined as</p>
 <div class="math">
-\[\begin{split}Y_i = \left\{ \begin{array}{ll}
+<p><img src="_images/math/080eb82277537c413153c5a513d4df9309471caf.png" alt="Y_i = \left\{ \begin{array}{ll}
       Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
       y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
-    \end{array} \right.\end{split}\]</div>
-<ul>
+    \end{array} \right."/></p>
+</div><ul>
 <li><p class="first">The <em>stochastic component</em> is described by the distribution of the
-partially observed variable <span class="math">\(Y^*\)</span>. We assume <span class="math">\(Y_i^*\)</span>
+partially observed variable <img class="math" src="_images/math/e4b82f5d0d0b135c68864771e045dc913778a223.png" alt="Y^*"/>. We assume <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/>
 follows the exponential distribution whose density function is given
 by</p>
 <div class="math">
-\[f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)\]</div>
-<p>for <span class="math">\(y_i^*\ge 0\)</span> and <span class="math">\(\lambda_i&gt;0\)</span>. The mean of this
-distribution is <span class="math">\(\lambda_i\)</span>.</p>
+<p><img src="_images/math/67e1264b7f56ebc4a97823f66b518116f44c057a.png" alt="f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)"/></p>
+</div><p>for <img class="math" src="_images/math/aee03fa2ac369970345e3f13ba80325460b429e3.png" alt="y_i^*\ge 0"/> and <img class="math" src="_images/math/7d72a5d0f43da45d3d7a997a9971becc5f8832c8.png" alt="\lambda_i&gt;0"/>. The mean of this
+distribution is <img class="math" src="_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/>.</p>
 <p>In addition, survival models like the exponential have three
-additional properties. The hazard function <span class="math">\(h(t)\)</span> measures the
-probability of not surviving past time <span class="math">\(t\)</span> given survival up to
-<span class="math">\(t\)</span>. In general, the hazard function is equal to
-<span class="math">\(f(t)/S(t)\)</span> where the survival function
-<span class="math">\(S(t) = 1 - \int_{0}^t f(s) ds\)</span> represents the fraction still
-surviving at time <span class="math">\(t\)</span>. The cumulative hazard function
-<span class="math">\(H(t)\)</span> describes the probability of dying before time
-<span class="math">\(t\)</span>. In general,
-<span class="math">\(H(t)= \int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the
+additional properties. The hazard function <img class="math" src="_images/math/8f59c002cacf4a159c9d1b7ccfa141d30d5dc65c.png" alt="h(t)"/> measures the
+probability of not surviving past time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> given survival up to
+<img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. In general, the hazard function is equal to
+<img class="math" src="_images/math/89ae40bbb08f26a2d7a02d4d5af4526f1a20c029.png" alt="f(t)/S(t)"/> where the survival function
+<img class="math" src="_images/math/cc2e13874b1a2ecf7f79657e6c3a29960829dcc3.png" alt="S(t) = 1 - \int_{0}^t f(s) ds"/> represents the fraction still
+surviving at time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. The cumulative hazard function
+<img class="math" src="_images/math/30319a828ec4029a092aefb503bd693e5776e59b.png" alt="H(t)"/> describes the probability of dying before time
+<img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. In general,
+<img class="math" src="_images/math/17b2212e68f15f537abbafa6fa716bb8369f7372.png" alt="H(t)= \int_{0}^{t} h(s) ds = -\log S(t)"/>. In the case of the
 exponential model,</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/01d104152a44c6ad669dfd89c7f40028ab4a15e8.png" alt="\begin{aligned}
 h(t) &amp;=&amp; \frac{1}{\lambda_i} \\
 S(t) &amp;=&amp; \exp\left( -\frac{t}{\lambda_i} \right) \\
-H(t) &amp;=&amp; \frac{t}{\lambda_i}\end{aligned}\end{split}\]</div>
-<p>For the exponential model, the hazard function <span class="math">\(h(t)\)</span> is
+H(t) &amp;=&amp; \frac{t}{\lambda_i}\end{aligned}"/></p>
+</div><p>For the exponential model, the hazard function <img class="math" src="_images/math/8f59c002cacf4a159c9d1b7ccfa141d30d5dc65c.png" alt="h(t)"/> is
 constant over time. The Weibull model and lognormal models allow the
 hazard function to vary as a function of elapsed time (see and
 respectively).</p>
 </li>
-<li><p class="first">The <em>systematic component</em> <span class="math">\(\lambda_i\)</span> is modeled as</p>
+<li><p class="first">The <em>systematic component</em> <img class="math" src="_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/> is modeled as</p>
 <div class="math">
-\[\lambda_i = \exp(x_i \beta),\]</div>
-<p>where <span class="math">\(x_i\)</span> is the vector of explanatory variables, and
-<span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+<p><img src="_images/math/2ef3e09dc6e0d4710d1d8455992bbb32d072fbb7.png" alt="\lambda_i = \exp(x_i \beta),"/></p>
+</div><p>where <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> is the vector of explanatory variables, and
+<img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of coefficients.</p>
 </li>
 </ul>
 </div>
@@ -471,54 +524,54 @@ respectively).</p>
 <h3>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">The expected values (qi$ev) for the exponential model are simulations
-of the expected duration given <span class="math">\(x_i\)</span> and draws of <span class="math">\(\beta\)</span>
+of the expected duration given <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> and draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/>
 from its posterior,</p>
 <div class="math">
-\[E(Y) = \lambda_i = \exp(x_i \beta).\]</div>
-</li>
+<p><img src="_images/math/ad77ed06fe3262275ae476c64b6707e4aee6e543.png" alt="E(Y) = \lambda_i = \exp(x_i \beta)."/></p>
+</div></li>
 <li><p class="first">The predicted values (qi$pr) are draws from the exponential
 distribution with rate equal to the expected value.</p>
 </li>
 <li><p class="first">The first difference (or difference in expected values, qi$ev.diff),
 is</p>
 <div class="math">
-\[\textrm{FD} \; = \; E(Y \mid x_1) - E(Y \mid x),\]</div>
-<p>where <span class="math">\(x\)</span> and <span class="math">\(x_1\)</span> are different vectors of values for
+<p><img src="_images/math/7631b945385f93d17fe8b3a5bf6e15c8143b2b49.png" alt="\textrm{FD} \; = \; E(Y \mid x_1) - E(Y \mid x),"/></p>
+</div><p>where <img class="math" src="_images/math/188c175aac0a8a9c22499336711b5d7256407254.png" alt="x"/> and <img class="math" src="_images/math/b31b1ea8e4fe3f618dedfb0e2d8c69a3df7a391d.png" alt="x_1"/> are different vectors of values for
 the explanatory variables.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) - E[Y_i(t_i=0)]
-  \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
-<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+<p><img src="_images/math/c086d795134e74f3fe435647603c4583f4d1dac3.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) - E[Y_i(t_i=0)]
+  \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups. When
+<img class="math" src="_images/math/3574cfcb10f1bd84fea967193a6ae17c6855de01.png" alt="Y_i(t_i=1)"/> is censored rather than observed, we replace it
 with a simulation from the model given available knowledge of the
 censoring process. Variation in the simulations is due to two
 factors: uncertainty in the imputation process for censored
-<span class="math">\(y_i^*\)</span> and uncertainty in simulating <span class="math">\(E[Y_i(t_i=0)]\)</span>,
-the counterfactual expected value of <span class="math">\(Y_i\)</span> for observations in
+<img class="math" src="_images/math/9c2fbff8ba260029bc65603e6a06944c5746ad65.png" alt="y_i^*"/> and uncertainty in simulating <img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>,
+the counterfactual expected value of <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in
 the treatment group, under the assumption that everything stays the
 same except that the treatment indicator is switched to
-<span class="math">\(t_i=0\)</span>.</p>
+<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-  \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
-<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+<p><img src="_images/math/df8a385ab7b219b2fed30372b1381df5163a900e.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+  \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups. When
+<img class="math" src="_images/math/3574cfcb10f1bd84fea967193a6ae17c6855de01.png" alt="Y_i(t_i=1)"/> is censored rather than observed, we replace it
 with a simulation from the model given available knowledge of the
 censoring process. Variation in the simulations is due to two
 factors: uncertainty in the imputation process for censored
-<span class="math">\(y_i^*\)</span> and uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/9c2fbff8ba260029bc65603e6a06944c5746ad65.png" alt="y_i^*"/> and uncertainty in simulating
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -592,67 +645,67 @@ X:</p>
 <div class="section" id="id3">
 <h3>Model<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">The Gamma distribution with scale parameter <span class="math">\(\alpha\)</span> has a
+<li><p class="first">The Gamma distribution with scale parameter <img class="math" src="_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> has a
 <em>stochastic component</em>:</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/05d44853b67b61aea8416dec47c4bb271c39feee.png" alt="\begin{aligned}
 Y &amp;\sim&amp; \textrm{Gamma}(y_i \mid \lambda_i, \alpha) \\
 f(y)  &amp;=&amp; \frac{1}{\alpha^{\lambda_i} \, \Gamma \lambda_i} \, y_i^{\lambda_i
-  - 1} \exp -\left\{ \frac{y_i}{\alpha} \right\}\end{aligned}\end{split}\]</div>
-<div class="line-block">
-<div class="line">for <span class="math">\(\alpha, \lambda_i, y_i &gt; 0\)</span>.</div>
+  - 1} \exp -\left\{ \frac{y_i}{\alpha} \right\}\end{aligned}"/></p>
+</div><div class="line-block">
+<div class="line">for <img class="math" src="_images/math/d4a2907c3d8ac12950c8e344f35236de63f31929.png" alt="\alpha, \lambda_i, y_i &gt; 0"/>.</div>
 </div>
 </li>
 <li><p class="first">The <em>systematic component</em> is given by</p>
 <div class="math">
-\[\lambda_i = \frac{1}{x_i \beta}\]</div>
-</li>
+<p><img src="_images/math/d89022e0c4ea97317e8099dc27fd004602d759b8.png" alt="\lambda_i = \frac{1}{x_i \beta}"/></p>
+</div></li>
 </ul>
 </div>
 <div class="section" id="id4">
 <h3>Quantities of Interest<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">The expected values (qi$ev) are simulations of the mean of the
-stochastic component given draws of <span class="math">\(\alpha\)</span> and <span class="math">\(\beta\)</span>
+stochastic component given draws of <img class="math" src="_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/>
 from their posteriors:</p>
 <div class="math">
-\[E(Y) = \alpha \lambda_i.\]</div>
-</li>
+<p><img src="_images/math/c59d39819f033b5ae240c27b97121ccceb2b3a82.png" alt="E(Y) = \alpha \lambda_i."/></p>
+</div></li>
 <li><p class="first">The predicted values (qi$pr) are draws from the gamma distribution
-for each given set of parameters <span class="math">\((\alpha, \lambda_i)\)</span>.</p>
+for each given set of parameters <img class="math" src="_images/math/d625e4d40861475147286b5a40866be5ac03ff8c.png" alt="(\alpha, \lambda_i)"/>.</p>
 </li>
 <li><p class="first">If x1 is specified, sim() also returns the differences in the
 expected values (qi$fd),</p>
 <div class="math">
-\[E(Y \mid x_1) -
-  E(Y \mid x)\]</div>
-<p>.</p>
+<p><img src="_images/math/15f1a5b5e19ffd4d3b304de7da740b451173e4f9.png" alt="E(Y \mid x_1) -
+  E(Y \mid x)"/></p>
+</div><p>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -671,7 +724,7 @@ the $ operator are listed below.</p>
 <li>residuals: the working residuals in the final iteration of the
 IWLS fit.</li>
 <li>fitted.values: the vector of fitted values.</li>
-<li>linear.predictors: the vector of <span class="math">\(x_{i}\beta\)</span>.</li>
+<li>linear.predictors: the vector of <img class="math" src="_images/math/f8237c9c4a91083105a2650415195fa49fe0bafc.png" alt="x_{i}\beta"/>.</li>
 <li>aic: Akaike’s Information Criterion (minus twice the maximized
 log-likelihood plus twice the number of coefficients).</li>
 <li>df.residual: the residual degrees of freedom.</li>
@@ -681,19 +734,19 @@ log-likelihood plus twice the number of coefficients).</li>
 </li>
 <li>From summary(z.out), you may extract:<ul>
 <li>coefficients: the parameter estimates with their associated
-standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
-<li>cov.scaled: a <span class="math">\(k \times k\)</span> matrix of scaled covariances.</li>
-<li>cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</li>
+standard errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>-statistics.</li>
+<li>cov.scaled: a <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/> matrix of scaled covariances.</li>
+<li>cov.unscaled: a <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/> matrix of unscaled covariances.</li>
 </ul>
 </li>
 <li>From the sim() output object s.out, you may extract quantities of
-interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
 x-observation (for more than one x-observation). Available quantities
 are:<ul>
 <li>qi$ev: the simulated expected values for the specified values of
 x.</li>
 <li>qi$pr: the simulated predicted values drawn from a distribution
-defined by <span class="math">\((\alpha, \lambda_i)\)</span>.</li>
+defined by <img class="math" src="_images/math/d625e4d40861475147286b5a40866be5ac03ff8c.png" alt="(\alpha, \lambda_i)"/>.</li>
 <li>qi$fd: the simulated first difference in the expected values for
 the specified values in x and x1.</li>
 <li>qi$att.ev: the simulated average expected treatment effect for the
@@ -816,21 +869,21 @@ Zeng (2002).)</p>
 </div>
 <div class="section" id="id8">
 <h3>Model<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<p>Let <span class="math">\(Y_i\)</span> be the binary dependent variable for observation
-<span class="math">\(i\)</span> which takes the value of either 0 or 1.</p>
+<p>Let <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> be the binary dependent variable for observation
+<img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> which takes the value of either 0 or 1.</p>
 <ul>
 <li><p class="first">The <em>stochastic component</em> is given by</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/beb30650790678aa2d5315baf665f9effc8ac3ad.png" alt="\begin{aligned}
 Y_i &amp;\sim&amp; \textrm{Bernoulli}(y_i \mid \pi_i) \\
-    &amp;=&amp; \pi_i^{y_i} (1-\pi_i)^{1-y_i}\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(\pi_i=\Pr(Y_i=1)\)</span>.</p>
+    &amp;=&amp; \pi_i^{y_i} (1-\pi_i)^{1-y_i}\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/204ad227887156eca0ea3882997e3c5d0703174b.png" alt="\pi_i=\Pr(Y_i=1)"/>.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is given by:</p>
 <div class="math">
-\[\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\]</div>
-<p>where <span class="math">\(x_i\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
-for observation <span class="math">\(i\)</span> and <span class="math">\(\beta\)</span> is the vector of
+<p><img src="_images/math/59cf11e927045c99a310cdaa15d32bc7cfacb160.png" alt="\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}."/></p>
+</div><p>where <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of
 coefficients.</p>
 </li>
 </ul>
@@ -841,46 +894,46 @@ coefficients.</p>
 <li><p class="first">The expected values (qi$ev) for the logit model are simulations of
 the predicted probability of a success:</p>
 <div class="math">
-\[E(Y) =
-  \pi_i= \frac{1}{1 + \exp(-x_i \beta)},\]</div>
-<p>given draws of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+<p><img src="_images/math/bd411b566ef1222a52b2c10e6eca8f7f994040d4.png" alt="E(Y) =
+  \pi_i= \frac{1}{1 + \exp(-x_i \beta)},"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its sampling distribution.</p>
 </li>
 <li><p class="first">The predicted values (qi$pr) are draws from the Binomial distribution
-with mean equal to the simulated expected value <span class="math">\(\pi_i\)</span>.</p>
+with mean equal to the simulated expected value <img class="math" src="_images/math/916754f7e7de4247fa27c52f610948b4055311fe.png" alt="\pi_i"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) for the logit model is defined as</p>
 <div class="math">
-\[\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\]</div>
-</li>
+<p><img src="_images/math/8f669920018c72d7f23a4ba843925381c4703f17.png" alt="\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x)."/></p>
+</div></li>
 <li><p class="first">The risk ratio (qi$rr) is defined as</p>
 <div class="math">
-\[\textrm{RR} = \Pr(Y = 1 \mid x_1) \ / \ \Pr(Y = 1 \mid x).\]</div>
-</li>
+<p><img src="_images/math/8540cd3e413420e1eceaa11af2b8fc70ef717f37.png" alt="\textrm{RR} = \Pr(Y = 1 \mid x_1) \ / \ \Pr(Y = 1 \mid x)."/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)}\right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/77d8002d68a309fc60d4b182880a2dbe1cde6c81.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)}\right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -915,13 +968,13 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </pre></div>
 </div>
 <p>Log-normal models require that the dependent variable be in the form
-Surv(Y, C), where Y and C are vectors of length <span class="math">\(n\)</span>. For each
-observation <span class="math">\(i\)</span> in 1, …, <span class="math">\(n\)</span>, the value <span class="math">\(y_i\)</span> is the
+Surv(Y, C), where Y and C are vectors of length <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/>. For each
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> in 1, …, <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/>, the value <img class="math" src="_images/math/410a65f64e2a609a2a7f544ed72f0982b719807a.png" alt="y_i"/> is the
 duration (lifetime, for example) of each subject, and the associated
-<span class="math">\(c_i\)</span> is a binary variable such that <span class="math">\(c_i = 1\)</span> if the
+<img class="math" src="_images/math/496867ca68c428fa123f26f0f73997632e61e116.png" alt="c_i"/> is a binary variable such that <img class="math" src="_images/math/45bd383d229a85e1c894b645ee5ce5cfad178bdf.png" alt="c_i = 1"/> if the
 duration is not censored (<em>e.g.</em>, the subject dies during the study) or
-<span class="math">\(c_i = 0\)</span> if the duration is censored (<em>e.g.</em>, the subject is
-still alive at the end of the study). If <span class="math">\(c_i\)</span> is omitted, all Y
+<img class="math" src="_images/math/839e310a40128c2d71f158db2ee1ff3a1a40b81b.png" alt="c_i = 0"/> if the duration is censored (<em>e.g.</em>, the subject is
+still alive at the end of the study). If <img class="math" src="_images/math/496867ca68c428fa123f26f0f73997632e61e116.png" alt="c_i"/> is omitted, all Y
 are assumed to be completed; that is, time defaults to 1 for all
 observations.</p>
 </div>
@@ -982,53 +1035,53 @@ X:</p>
 </div>
 <div class="section" id="id15">
 <h3>Model<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
-<p>Let <span class="math">\(Y_i^*\)</span> be the survival time for observation <span class="math">\(i\)</span> with
-the density function <span class="math">\(f(y)\)</span> and the corresponding distribution
-function <span class="math">\(F(t)=\int_{0}^t f(y) dy\)</span>. This variable might be
-censored for some observations at a fixed time <span class="math">\(y_c\)</span> such that the
-fully observed dependent variable, <span class="math">\(Y_i\)</span>, is defined as</p>
+<p>Let <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> be the survival time for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> with
+the density function <img class="math" src="_images/math/c52f3efaf426aaf75ff6fea4bb823873865b1303.png" alt="f(y)"/> and the corresponding distribution
+function <img class="math" src="_images/math/39c3fab3abd2a55f823cd0336db679ce1b36eead.png" alt="F(t)=\int_{0}^t f(y) dy"/>. This variable might be
+censored for some observations at a fixed time <img class="math" src="_images/math/86ef86313546967dcb442753dcc6f50484dc244b.png" alt="y_c"/> such that the
+fully observed dependent variable, <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/>, is defined as</p>
 <div class="math">
-\[\begin{split}Y_i = \left\{ \begin{array}{ll}
+<p><img src="_images/math/080eb82277537c413153c5a513d4df9309471caf.png" alt="Y_i = \left\{ \begin{array}{ll}
       Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
       y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
-    \end{array} \right.\end{split}\]</div>
-<ul>
+    \end{array} \right."/></p>
+</div><ul>
 <li><p class="first">The <em>stochastic component</em> is described by the distribution of the
-partially observed variable, <span class="math">\(Y^*\)</span>. For the lognormal model,
+partially observed variable, <img class="math" src="_images/math/e4b82f5d0d0b135c68864771e045dc913778a223.png" alt="Y^*"/>. For the lognormal model,
 there are two equivalent representations:</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/2d2f0134ef7cd6c7d89866a45b1771b6a1fde79b.png" alt="\begin{aligned}
     Y_i^* \; \sim \; \textrm{LogNormal}(\mu_i, \sigma^2) &amp; \textrm{ or
-} &amp; \log(Y_i^*) \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)\end{aligned}\end{split}\]</div>
-<p>where the parameters <span class="math">\(\mu_i\)</span> and <span class="math">\(\sigma^2\)</span> are the mean
+} &amp; \log(Y_i^*) \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)\end{aligned}"/></p>
+</div><p>where the parameters <img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> and <img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/> are the mean
 and variance of the Normal distribution. (Note that the output from
 zelig() parameterizes scale:math:` = sigma`.)</p>
 <p>In addition, survival models like the lognormal have three additional
-properties. The hazard function <span class="math">\(h(t)\)</span> measures the probability
-of not surviving past time <span class="math">\(t\)</span> given survival up to <span class="math">\(t\)</span>.
-In general, the hazard function is equal to <span class="math">\(f(t)/S(t)\)</span> where
+properties. The hazard function <img class="math" src="_images/math/8f59c002cacf4a159c9d1b7ccfa141d30d5dc65c.png" alt="h(t)"/> measures the probability
+of not surviving past time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> given survival up to <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>.
+In general, the hazard function is equal to <img class="math" src="_images/math/89ae40bbb08f26a2d7a02d4d5af4526f1a20c029.png" alt="f(t)/S(t)"/> where
 the survival function :math:<a href="#id16"><span class="problematic" id="id17">`</span></a>S(t) =</p>
 <blockquote>
 <div><p>1 - int_{0}^t f(s) ds` represents the fraction still surviving at</p>
 </div></blockquote>
-<p>time <span class="math">\(t\)</span>. The cumulative hazard function <span class="math">\(H(t)\)</span> describes
-the probability of dying before time <span class="math">\(t\)</span>. In general,
-<span class="math">\(H(t)=
-\int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the lognormal
+<p>time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. The cumulative hazard function <img class="math" src="_images/math/30319a828ec4029a092aefb503bd693e5776e59b.png" alt="H(t)"/> describes
+the probability of dying before time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. In general,
+<img class="math" src="_images/math/a951cf862eec77b95758fc88815c3addfff6ba11.png" alt="H(t)=
+\int_{0}^{t} h(s) ds = -\log S(t)"/>. In the case of the lognormal
 model,</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/deea3408797487ffda9af0b8e8b0ea0b87db7ef5.png" alt="\begin{aligned}
 h(t) &amp;=&amp; \frac{1}{\sqrt{2 \pi} \, \sigma t \, S(t)}
 \exp\left\{-\frac{1}{2 \sigma^2} (\log \lambda t)^2\right\} \\
 S(t) &amp;=&amp; 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \\
-H(t) &amp;=&amp; -\log \left\{ 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \right\}\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(\Phi(\cdot)\)</span> is the cumulative density function for the
+H(t) &amp;=&amp; -\log \left\{ 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \right\}\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/262565daee431ce18fed8cbe6ff35db082bb6a9b.png" alt="\Phi(\cdot)"/> is the cumulative density function for the
 Normal distribution.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is described as:</p>
 <div class="math">
-\[\mu_i = x_i \beta .\]</div>
-</li>
+<p><img src="_images/math/41364463bbef7e4f118743532ee95c3ebf4ba7a3.png" alt="\mu_i = x_i \beta ."/></p>
+</div></li>
 </ul>
 </div>
 <div class="section" id="id18">
@@ -1037,49 +1090,49 @@ Normal distribution.</p>
 <li><p class="first">The expected values (qi$ev) for the lognormal model are simulations
 of the expected duration:</p>
 <div class="math">
-\[E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),\]</div>
-<p>given draws of <span class="math">\(\beta\)</span> and <span class="math">\(\sigma\)</span> from their sampling
+<p><img src="_images/math/31ea238b8fad5a97c190036baed367c1644d71d9.png" alt="E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> and <img class="math" src="_images/math/2298cf1485084afe72757a9c8483af49a138d81f.png" alt="\sigma"/> from their sampling
 distributions.</p>
 </li>
 <li><p class="first">The predicted value is a draw from the log-normal distribution given
-simulations of the parameters <span class="math">\((\lambda_i, \sigma)\)</span>.</p>
+simulations of the parameters <img class="math" src="_images/math/212bf4406b9299a69a57ea55bc3cf9ccdb9489ad.png" alt="(\lambda_i, \sigma)"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) is</p>
 <div class="math">
-\[\textrm{FD} = E(Y \mid x_1) - E(Y \mid x).\]</div>
-</li>
+<p><img src="_images/math/47e62bb3ada6780d6fd2b247bf221d015d2207d2.png" alt="\textrm{FD} = E(Y \mid x_1) - E(Y \mid x)."/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
-<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+<p><img src="_images/math/a42073a06e5f64918f546d89584110fe35c0e21d.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups. When
+<img class="math" src="_images/math/3574cfcb10f1bd84fea967193a6ae17c6855de01.png" alt="Y_i(t_i=1)"/> is censored rather than observed, we replace it
 with a simulation from the model given available knowledge of the
 censoring process. Variation in the simulations is due to two
 factors: uncertainty in the imputation process for censored
-<span class="math">\(y_i^*\)</span> and uncertainty in simulating <span class="math">\(E[Y_i(t_i=0)]\)</span>,
-the counterfactual expected value of <span class="math">\(Y_i\)</span> for observations in
+<img class="math" src="_images/math/9c2fbff8ba260029bc65603e6a06944c5746ad65.png" alt="y_i^*"/> and uncertainty in simulating <img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>,
+the counterfactual expected value of <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in
 the treatment group, under the assumption that everything stays the
 same except that the treatment indicator is switched to
-<span class="math">\(t_i=0\)</span>.</p>
+<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
-\widehat{Y_i(t_i=0)} \},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
-<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+<p><img src="_images/math/db43e079e29b09aa583b792c735eafc894037a2a.png" alt="\frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
+\widehat{Y_i(t_i=0)} \},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups. When
+<img class="math" src="_images/math/3574cfcb10f1bd84fea967193a6ae17c6855de01.png" alt="Y_i(t_i=1)"/> is censored rather than observed, we replace it
 with a simulation from the model given available knowledge of the
 censoring process. Variation in the simulations are due to two
 factors: uncertainty in the imputation process for censored
-<span class="math">\(y_i^*\)</span> and uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/9c2fbff8ba260029bc65603e6a06944c5746ad65.png" alt="y_i^*"/> and uncertainty in simulating
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -1095,11 +1148,11 @@ elements available through the $ operator are listed below.</p>
 <ul class="simple">
 <li>From the zelig() output object z.out, you may extract:<ul>
 <li>coefficients: parameter estimates for the explanatory variables.</li>
-<li>icoef: parameter estimates for the intercept and <span class="math">\(\sigma\)</span>.</li>
+<li>icoef: parameter estimates for the intercept and <img class="math" src="_images/math/2298cf1485084afe72757a9c8483af49a138d81f.png" alt="\sigma"/>.</li>
 <li>var: Variance-covariance matrix.</li>
 <li>loglik: Vector containing the log-likelihood for the model and
 intercept only (respectively).</li>
-<li>linear.predictors: the vector of <span class="math">\(x_{i}\beta\)</span>.</li>
+<li>linear.predictors: the vector of <img class="math" src="_images/math/f8237c9c4a91083105a2650415195fa49fe0bafc.png" alt="x_{i}\beta"/>.</li>
 <li>df.residual: the residual degrees of freedom.</li>
 <li>df.null: the residual degrees of freedom for the null model.</li>
 <li>zelig.data: the input data frame if save.data = TRUE.</li>
@@ -1108,17 +1161,17 @@ intercept only (respectively).</li>
 <li>Most of this may be conveniently summarized using summary(z.out).
 From summary(z.out), you may additionally extract:<ul>
 <li>table: the parameter estimates with their associated standard
-errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>-statistics.</li>
 </ul>
 </li>
 <li>From the sim() output object s.out, you may extract quantities of
-interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
 x-observation (for more than one x-observation). Available quantities
 are:<ul>
 <li>qi$ev: the simulated expected values for the specified values of
 x.</li>
 <li>qi$pr: the simulated predicted values drawn from the distribution
-defined by <span class="math">\((\lambda_i, \sigma)\)</span>.</li>
+defined by <img class="math" src="_images/math/212bf4406b9299a69a57ea55bc3cf9ccdb9489ad.png" alt="(\lambda_i, \sigma)"/>.</li>
 <li>qi$fd: the simulated first differences between the simulated
 expected values for x and x1.</li>
 <li>qi$att.ev: the simulated average expected treatment effect for the
@@ -1215,18 +1268,18 @@ x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span cla
 <h3>Model<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">The <em>stochastic component</em> is described by a density with mean
-<span class="math">\(\mu_i\)</span> and the common variance <span class="math">\(\sigma^2\)</span></p>
+<img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> and the common variance <img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/></p>
 <div class="math">
-\[Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).\]</div>
-</li>
+<p><img src="_images/math/34d94a6f5d061597bbcec0b62d41637f1106c37d.png" alt="Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2)."/></p>
+</div></li>
 <li><p class="first">The <em>systematic component</em> models the conditional mean as</p>
 <div class="math">
-\[\mu_i =  x_i \beta\]</div>
-<p>where <span class="math">\(x_i\)</span> is the vector of covariates, and <span class="math">\(\beta\)</span> is
+<p><img src="_images/math/e9096bd766e29271a33d6f06c16ab7464b39dd16.png" alt="\mu_i =  x_i \beta"/></p>
+</div><p>where <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> is the vector of covariates, and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is
 the vector of coefficients.</p>
 <p>The least squares estimator is the best linear predictor of a
-dependent variable given <span class="math">\(x_i\)</span>, and minimizes the sum of
-squared residuals, <span class="math">\(\sum_{i=1}^n (Y_i-x_i \beta)^2\)</span>.</p>
+dependent variable given <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/>, and minimizes the sum of
+squared residuals, <img class="math" src="_images/math/26c72a7cbda08b0d6d18fbed4a88be6d712a98bc.png" alt="\sum_{i=1}^n (Y_i-x_i \beta)^2"/>.</p>
 </li>
 </ul>
 </div>
@@ -1236,21 +1289,21 @@ squared residuals, <span class="math">\(\sum_{i=1}^n (Y_i-x_i \beta)^2\)</span>.
 <li><p class="first">The expected value (qi$ev) is the mean of simulations from the
 stochastic component,</p>
 <div class="math">
-\[E(Y) = x_i \beta,\]</div>
-<p>given a draw of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+<p><img src="_images/math/6742e8f4c9da4bc790debe293a4448142af6d624.png" alt="E(Y) = x_i \beta,"/></p>
+</div><p>given a draw of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its sampling distribution.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -1277,29 +1330,29 @@ IWLS fit.</li>
 <li><p class="first">From summary(z.out), you may extract:</p>
 <ul>
 <li><p class="first">coefficients: the parameter estimates with their associated
-standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</p>
+standard errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>-statistics.</p>
 <div class="math">
-\[\hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i\]</div>
-</li>
+<p><img src="_images/math/e58a382501917d62fae84d66164159e3f1b6c2ee.png" alt="\hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i"/></p>
+</div></li>
 <li><p class="first">sigma: the square root of the estimate variance of the random
-error <span class="math">\(e\)</span>:</p>
+error <img class="math" src="_images/math/630e3a780577ea7921e81ee2ac5237dd1802ec8d.png" alt="e"/>:</p>
 <div class="math">
-\[\hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}\]</div>
-</li>
+<p><img src="_images/math/ffc81e7e9c9aac1ae3fdf35621486649779a8ed9.png" alt="\hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}"/></p>
+</div></li>
 <li><p class="first">r.squared: the fraction of the variance explained by the model.</p>
 <div class="math">
-\[R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
-         \bar{y})^2}\]</div>
-</li>
-<li><p class="first">adj.r.squared: the above <span class="math">\(R^2\)</span> statistic, penalizing for an
+<p><img src="_images/math/00412d048f95c80e8dd72b1e864c6bda22059802.png" alt="R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
+         \bar{y})^2}"/></p>
+</div></li>
+<li><p class="first">adj.r.squared: the above <img class="math" src="_images/math/4f58a3b2897df3c0b9d53a442ae896516ecdeaa0.png" alt="R^2"/> statistic, penalizing for an
 increased number of explanatory variables.</p>
 </li>
-<li><p class="first">cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</p>
+<li><p class="first">cov.unscaled: a <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/> matrix of unscaled covariances.</p>
 </li>
 </ul>
 </li>
 <li><p class="first">From the sim() output object s.out, you may extract quantities of
-interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
 x-observation (for more than one x-observation). Available quantities
 are:</p>
 <ul class="simple">
@@ -1365,36 +1418,36 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </div>
 <div class="section" id="id29">
 <h3>Model<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
-<p>Let <span class="math">\(Y_i\)</span> be the number of independent events that occur during a
+<p>Let <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> be the number of independent events that occur during a
 fixed time period. This variable can take any non-negative integer
 value.</p>
 <ul>
 <li><p class="first">The negative binomial distribution is derived by letting the mean of
 the Poisson distribution vary according to a fixed parameter
-<span class="math">\(\zeta\)</span> given by the Gamma distribution. The <em>stochastic
+<img class="math" src="_images/math/1a534f73d7999c523b01512801d3bda18adee3b7.png" alt="\zeta"/> given by the Gamma distribution. The <em>stochastic
 component</em> is given by</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/bd08836a98d9156598663d31c4c76c26581aab11.png" alt="\begin{aligned}
      Y_i \mid \zeta_i &amp; \sim &amp; \textrm{Poisson}(\zeta_i \mu_i),\\
      \zeta_i &amp; \sim &amp; \frac{1}{\theta}\textrm{Gamma}(\theta).
-   \end{aligned}\end{split}\]</div>
-<p>The marginal distribution of <span class="math">\(Y_i\)</span> is then the negative
-binomial with mean <span class="math">\(\mu_i\)</span> and variance
-<span class="math">\(\mu_i + \mu_i^2/\theta\)</span>:</p>
+   \end{aligned}"/></p>
+</div><p>The marginal distribution of <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> is then the negative
+binomial with mean <img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> and variance
+<img class="math" src="_images/math/4b5943fd01fbda26432b4db9936abed9fb52cc64.png" alt="\mu_i + \mu_i^2/\theta"/>:</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/bfcce2bd73058487e73f11f41d0a02f9837e2ec3.png" alt="\begin{aligned}
    Y_i &amp; \sim &amp; \textrm{NegBin}(\mu_i, \theta), \\
        &amp; = &amp; \frac{\Gamma (\theta + y_i)}{y! \, \Gamma(\theta)}
              \frac{\mu_i^{y_i} \, \theta^{\theta}}{(\mu_i + \theta)^{\theta + y_i}},
-   \end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(\theta\)</span> is the systematic parameter of the Gamma
-distribution modeling <span class="math">\(\zeta_i\)</span>.</p>
+   \end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/a9cfbeb8ebee1f365919e147a79e242dcb67ee5d.png" alt="\theta"/> is the systematic parameter of the Gamma
+distribution modeling <img class="math" src="_images/math/b2c74aae8f9d0cb0072e974b47723f2e5521b401.png" alt="\zeta_i"/>.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is given by</p>
 <div class="math">
-\[\mu_i = \exp(x_i \beta)\]</div>
-<p>where <span class="math">\(x_i\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
-and <span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+<p><img src="_images/math/81474e43896f32f2f86670eec250ff10b8653b09.png" alt="\mu_i = \exp(x_i \beta)"/></p>
+</div><p>where <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of coefficients.</p>
 </li>
 </ul>
 </div>
@@ -1404,42 +1457,42 @@ and <span class="math">\(\beta\)</span> is the vector of coefficients.</p>
 <li><p class="first">The expected values (qi$ev) are simulations of the mean of the
 stochastic component. Thus,</p>
 <div class="math">
-\[E(Y) = \mu_i = \exp(x_i
-  \beta),\]</div>
-<p>given simulations of <span class="math">\(\beta\)</span>.</p>
+<p><img src="_images/math/ed68ddf7d6e8d78ed9fb9a9bb55febcf8f71d49e.png" alt="E(Y) = \mu_i = \exp(x_i
+  \beta),"/></p>
+</div><p>given simulations of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/>.</p>
 </li>
 <li><p class="first">The predicted value (qi$pr) drawn from the distribution defined by
-the set of parameters <span class="math">\((\mu_i, \theta)\)</span>.</p>
+the set of parameters <img class="math" src="_images/math/9054fec1d747aca9cfcaa9d679834cf2fd26b899.png" alt="(\mu_i, \theta)"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) is</p>
 <div class="math">
-\[\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)\]</div>
-</li>
+<p><img src="_images/math/82a49121147fab5307d7df11a6b69165b3f6794c.png" alt="\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)"/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -1468,7 +1521,7 @@ least squares regression model (see ). Both models specify a continuous
 dependent variable as a linear function of a set of explanatory
 variables. The Normal model reports maximum likelihood (rather than
 least squares) estimates. The two models differ only in their estimate
-for the stochastic parameter <span class="math">\(\sigma\)</span>.</p>
+for the stochastic parameter <img class="math" src="_images/math/2298cf1485084afe72757a9c8483af49a138d81f.png" alt="\sigma"/>.</p>
 <div class="section" id="id35">
 <h3>Syntax<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;normal&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
@@ -1515,20 +1568,20 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 </div>
 <div class="section" id="id37">
 <h3>Model<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
-<p>Let <span class="math">\(Y_i\)</span> be the continuous dependent variable for observation
-<span class="math">\(i\)</span>.</p>
+<p>Let <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> be the continuous dependent variable for observation
+<img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>.</p>
 <ul>
 <li><p class="first">The <em>stochastic component</em> is described by a univariate normal model
-with a vector of means <span class="math">\(\mu_i\)</span> and scalar variance
-<span class="math">\(\sigma^2\)</span>:</p>
+with a vector of means <img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> and scalar variance
+<img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/>:</p>
 <div class="math">
-\[Y_i \; \sim \; \textrm{Normal}(\mu_i, \sigma^2).\]</div>
-</li>
+<p><img src="_images/math/92cca0a95579bbd947f5e2566bdf78a2027f3f9b.png" alt="Y_i \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)."/></p>
+</div></li>
 <li><p class="first">The <em>systematic component</em> is</p>
 <div class="math">
-\[\mu_i \;= \; x_i \beta,\]</div>
-<p>where <span class="math">\(x_i\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
-and <span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+<p><img src="_images/math/e2582c2521dff40fd1d1a9e277d397dccf4919cb.png" alt="\mu_i \;= \; x_i \beta,"/></p>
+</div><p>where <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of coefficients.</p>
 </li>
 </ul>
 </div>
@@ -1538,41 +1591,41 @@ and <span class="math">\(\beta\)</span> is the vector of coefficients.</p>
 <li><p class="first">The expected value (qi$ev) is the mean of simulations from the the
 stochastic component,</p>
 <div class="math">
-\[E(Y) = \mu_i = x_i \beta,\]</div>
-<p>given a draw of <span class="math">\(\beta\)</span> from its posterior.</p>
+<p><img src="_images/math/4c7424be232769f740891d7a55f7aef33f47572f.png" alt="E(Y) = \mu_i = x_i \beta,"/></p>
+</div><p>given a draw of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its posterior.</p>
 </li>
 <li><p class="first">The predicted value (qi$pr) is drawn from the distribution defined by
-the set of parameters <span class="math">\((\mu_i, \sigma)\)</span>.</p>
+the set of parameters <img class="math" src="_images/math/26ce59f07ba5807f8bb61216cbf3188c6cb18c80.png" alt="(\mu_i, \sigma)"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) is:</p>
 <div class="math">
-\[\textrm{FD}\; = \;E(Y \mid x_1) -  E(Y \mid x)\]</div>
-</li>
+<p><img src="_images/math/5eb5fe9153bef31d3b9734bb97e106810e590906.png" alt="\textrm{FD}\; = \;E(Y \mid x_1) -  E(Y \mid x)"/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -1635,19 +1688,19 @@ plot<span class="p">(</span>s.out<span class="p">)</span>
 </div>
 <div class="section" id="id43">
 <h3>Model<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h3>
-<p>Let <span class="math">\(Y_i\)</span> be the number of independent events that occur during a
+<p>Let <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> be the number of independent events that occur during a
 fixed time period. This variable can take any non-negative integer.</p>
 <ul>
 <li><p class="first">The Poisson distribution has <em>stochastic component</em></p>
 <div class="math">
-\[Y_i \; \sim \; \textrm{Poisson}(\lambda_i),\]</div>
-<p>where <span class="math">\(\lambda_i\)</span> is the mean and variance parameter.</p>
+<p><img src="_images/math/5540ca84e8f5169523335a479866020c89dcb8e1.png" alt="Y_i \; \sim \; \textrm{Poisson}(\lambda_i),"/></p>
+</div><p>where <img class="math" src="_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/> is the mean and variance parameter.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is</p>
 <div class="math">
-\[\lambda_i \; = \; \exp(x_i \beta),\]</div>
-<p>where <span class="math">\(x_i\)</span> is the vector of explanatory variables, and
-<span class="math">\(\beta\)</span> is the vector of coefficients.</p>
+<p><img src="_images/math/2340a2662ddcb518d4617bd57234f976b60fc74d.png" alt="\lambda_i \; = \; \exp(x_i \beta),"/></p>
+</div><p>where <img class="math" src="_images/math/33dfc32d00ebd5c5791c824010a155d9e5630b6f.png" alt="x_i"/> is the vector of explanatory variables, and
+<img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of coefficients.</p>
 </li>
 </ul>
 </div>
@@ -1657,42 +1710,42 @@ fixed time period. This variable can take any non-negative integer.</p>
 <li><p class="first">The expected value (qi$ev) is the mean of simulations from the
 stochastic component,</p>
 <div class="math">
-\[E(Y) = \lambda_i =  \exp(x_i
-  \beta),\]</div>
-<p>given draws of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+<p><img src="_images/math/df22f703cd62d9dfefbd0f0a3b9972af7ca4e507.png" alt="E(Y) = \lambda_i =  \exp(x_i
+  \beta),"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its sampling distribution.</p>
 </li>
 <li><p class="first">The predicted value (qi$pr) is a random draw from the poisson
-distribution defined by mean <span class="math">\(\lambda_i\)</span>.</p>
+distribution defined by mean <img class="math" src="_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/>.</p>
 </li>
 <li><p class="first">The first difference in the expected values (qi$fd) is given by:</p>
 <div class="math">
-\[\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)\]</div>
-</li>
+<p><img src="_images/math/82a49121147fab5307d7df11a6b69165b3f6794c.png" alt="\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)"/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -1753,18 +1806,18 @@ turnout<span class="p">)</span>
 </div>
 <div class="section" id="id49">
 <h3>Model<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h3>
-<p>Let <span class="math">\(Y_i\)</span> be the observed binary dependent variable for
-observation <span class="math">\(i\)</span> which takes the value of either 0 or 1.</p>
+<p>Let <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> be the observed binary dependent variable for
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> which takes the value of either 0 or 1.</p>
 <ul>
 <li><p class="first">The <em>stochastic component</em> is given by</p>
 <div class="math">
-\[Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\]</div>
-<p>where <span class="math">\(\pi_i=\Pr(Y_i=1)\)</span>.</p>
+<p><img src="_images/math/e6ab2177225a79f988ab416b0353405999e15789.png" alt="Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),"/></p>
+</div><p>where <img class="math" src="_images/math/204ad227887156eca0ea3882997e3c5d0703174b.png" alt="\pi_i=\Pr(Y_i=1)"/>.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is</p>
 <div class="math">
-\[\pi_i \; = \; \Phi (x_i \beta)\]</div>
-<p>where <span class="math">\(\Phi(\mu)\)</span> is the cumulative distribution function of
+<p><img src="_images/math/a8bd29a343890834661f63d7510931e96651bc8d.png" alt="\pi_i \; = \; \Phi (x_i \beta)"/></p>
+</div><p>where <img class="math" src="_images/math/e4f08b55c6f99b472e0a295b96ff6487d545dfd0.png" alt="\Phi(\mu)"/> is the cumulative distribution function of
 the Normal distribution with mean 0 and unit variance.</p>
 </li>
 </ul>
@@ -1775,46 +1828,46 @@ the Normal distribution with mean 0 and unit variance.</p>
 <li><p class="first">The expected value (qi$ev) is a simulation of predicted probability
 of success</p>
 <div class="math">
-\[E(Y) = \pi_i = \Phi(x_i
-  \beta),\]</div>
-<p>given a draw of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+<p><img src="_images/math/28b543f2a46c190d6f10c93b07f717ac6d15a5b4.png" alt="E(Y) = \pi_i = \Phi(x_i
+  \beta),"/></p>
+</div><p>given a draw of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its sampling distribution.</p>
 </li>
 <li><p class="first">The predicted value (qi$pr) is a draw from a Bernoulli distribution
-with mean <span class="math">\(\pi_i\)</span>.</p>
+with mean <img class="math" src="_images/math/916754f7e7de4247fa27c52f610948b4055311fe.png" alt="\pi_i"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) in expected values is defined as</p>
 <div class="math">
-\[\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\]</div>
-</li>
+<p><img src="_images/math/8f669920018c72d7f23a4ba843925381c4703f17.png" alt="\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x)."/></p>
+</div></li>
 <li><p class="first">The risk ratio (qi$rr) is defined as</p>
 <div class="math">
-\[\textrm{RR} = \Pr(Y = 1 \mid x_1) / \Pr(Y = 1 \mid x).\]</div>
-</li>
+<p><img src="_images/math/6a3b874e942e65340c5fd207b718ea58c330392c.png" alt="\textrm{RR} = \Pr(Y = 1 \mid x_1) / \Pr(Y = 1 \mid x)."/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -1860,7 +1913,7 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <p>The relogit procedure supports four optional arguments in addition to
 the standard arguments for zelig(). You may additionally use:</p>
 <ul class="simple">
-<li>tau: a vector containing either one or two values for <span class="math">\(\tau\)</span>,
+<li>tau: a vector containing either one or two values for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/>,
 the true population fraction of ones. Use, for example, tau = c(0.05,
 0.1) to specify that the lower bound on tau is 0.05 and the upper
 bound is 0.1. If left unspecified, only finite-sample bias correction
@@ -1886,8 +1939,8 @@ correction.</p>
 <p>Due to memory and space considerations, the data used here are a sample
 drawn from the full data set used in King and Zeng, 2001, The proportion
 of militarized interstate conflicts to the absence of disputes is
-<span class="math">\(\tau = 1,042 / 303,772
-\approx 0.00343\)</span>. To estimate the model,</p>
+<img class="math" src="_images/math/0476daae6e85154c40577131b46dfc345e403b50.png" alt="\tau = 1,042 / 303,772
+\approx 0.00343"/>. To estimate the model,</p>
 <div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>mid<span class="p">)</span>
 </pre></div>
 </div>
@@ -1935,9 +1988,9 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 </div>
 <div class="section" id="example-3-two-taus-with-bias-correction-and-prior-correction">
 <h3>Example 3: Two Taus with Bias Correction and Prior Correction<a class="headerlink" href="#example-3-two-taus-with-bias-correction-and-prior-correction" title="Permalink to this headline">¶</a></h3>
-<p>Suppose that we did not know that <span class="math">\(\tau \approx 0.00343\)</span>, but only
-that it was somewhere between <span class="math">\((0.002, 0.005)\)</span>. To estimate a
-model with a range of feasible estimates for <span class="math">\(\tau\)</span> (using the
+<p>Suppose that we did not know that <img class="math" src="_images/math/3ea6d30492110055362e739a5b4776f93c6f1814.png" alt="\tau \approx 0.00343"/>, but only
+that it was somewhere between <img class="math" src="_images/math/501e197d9ac2263e0c31dbecb1a332a39f7f0c84.png" alt="(0.002, 0.005)"/>. To estimate a
+model with a range of feasible estimates for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> (using the
 default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict   major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem
 <span class="o">+</span> <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> “relogit”<span class="p">,</span> <span class="o">+</span> tau <span class="o">=</span> c<span class="p">(</span><span class="m">0.002</span><span class="p">,</span> <span class="m">0.005</span><span class="p">))</span>
@@ -1961,7 +2014,7 @@ default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<p>The cost of giving a range of values for <span class="math">\(\tau\)</span> is that point
+<p>The cost of giving a range of values for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> is that point
 estimates are not available for quantities of interest. Instead,
 quantities are presented as confidence intervals with significance less
 than or equal to a specified level (e.g., at least 95% of the
@@ -1973,14 +2026,14 @@ simulations are contained in the nominal 95% confidence interval).</p>
 <li><p class="first">Like the standard logistic regression, the <em>stochastic component</em> for
 the rare events logistic regression is:</p>
 <div class="math">
-\[Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\]</div>
-<p>where <span class="math">\(Y_i\)</span> is the binary dependent variable, and takes a value
+<p><img src="_images/math/e6ab2177225a79f988ab416b0353405999e15789.png" alt="Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),"/></p>
+</div><p>where <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> is the binary dependent variable, and takes a value
 of either 0 or 1.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is:</p>
 <div class="math">
-\[\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\]</div>
-</li>
+<p><img src="_images/math/59cf11e927045c99a310cdaa15d32bc7cfacb160.png" alt="\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}."/></p>
+</div></li>
 <li><p class="first">If the sample is generated via a case-control (or choice-based)
 design, such as when drawing all events (or “cases”) and a sample
 from the non-events (or “controls”) and going backwards to collect
@@ -1990,53 +2043,53 @@ unbiased, the constant term may be significantly biased. Zelig has
 two methods for case control correction:</p>
 <ol class="arabic">
 <li><p class="first">The “prior correction” method adjusts the intercept term. Let
-<span class="math">\(\tau\)</span> be the true population fraction of events,
-<span class="math">\(\bar{y}\)</span> the fraction of events in the sample, and
-<span class="math">\(\hat{\beta_0}\)</span> the uncorrected intercept term. The
-corrected intercept <span class="math">\(\beta_0\)</span> is:</p>
+<img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> be the true population fraction of events,
+<img class="math" src="_images/math/eff822074d94619ea86dcccd9f1e410360a711c3.png" alt="\bar{y}"/> the fraction of events in the sample, and
+<img class="math" src="_images/math/7f7c57d3dd82a0c7d00c82f510f14400a1cc4435.png" alt="\hat{\beta_0}"/> the uncorrected intercept term. The
+corrected intercept <img class="math" src="_images/math/90acdaf850915294d7ef3bdc540005ee22197903.png" alt="\beta_0"/> is:</p>
 <div class="math">
-\[\beta =  \hat{\beta_0} - \ln \left[ \bigg( \frac{1 - \tau}{\tau}
-  \bigg) \bigg( \frac{\bar{y}}{1 - \bar{y}} \bigg) \right].\]</div>
-</li>
+<p><img src="_images/math/b3f4429515a74871c61649fe2b350bfe49da7123.png" alt="\beta =  \hat{\beta_0} - \ln \left[ \bigg( \frac{1 - \tau}{\tau}
+  \bigg) \bigg( \frac{\bar{y}}{1 - \bar{y}} \bigg) \right]."/></p>
+</div></li>
 <li><p class="first">The “weighting” method performs a weighted logistic regression to
 correct for a case-control sampling design. Let the 1 subscript
 denote observations for which the dependent variable is observed
 as a 1, and the 0 subscript denote observations for which the
 dependent variable is observed as a 0. Then the vector of weights
-<span class="math">\(w_i\)</span></p>
+<img class="math" src="_images/math/b4e1bc8e2dfd2c26158273aef285b08a816f960a.png" alt="w_i"/></p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/50c4c6190b58f44612c516cb9e9ac3e6420f5b9c.png" alt="\begin{aligned}
 w_1 &amp;=&amp; \frac{\tau}{\bar{y}} \\
 w_0 &amp;=&amp; \frac{(1 - \tau)}{(1 - \bar{y})} \\
-w_i &amp;=&amp; w_1 Y_i + w_0 (1 - Y_i)\end{aligned}\end{split}\]</div>
-</li>
+w_i &amp;=&amp; w_1 Y_i + w_0 (1 - Y_i)\end{aligned}"/></p>
+</div></li>
 </ol>
-<p>If <span class="math">\(\tau\)</span> is unknown, you may alternatively specify an upper
-and lower bound for the possible range of <span class="math">\(\tau\)</span>. In this case,
+<p>If <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> is unknown, you may alternatively specify an upper
+and lower bound for the possible range of <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/>. In this case,
 the relogit procedure uses “robust Bayesian” methods to generate a
 confidence interval (rather than a point estimate) for each quantity
 of interest. The nominal coverage of the confidence interval is at
 least as great as the actual coverage.</p>
 </li>
-<li><p class="first">By default, estimates of the the coefficients <span class="math">\(\beta\)</span> are
+<li><p class="first">By default, estimates of the the coefficients <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> are
 bias-corrected to account for finite sample or rare events bias. In
 addition, quantities of interest, such as predicted probabilities,
-are also corrected of rare-events bias. If <span class="math">\(\widehat{\beta}\)</span>
+are also corrected of rare-events bias. If <img class="math" src="_images/math/d8af2dda6c66ca3f8936a4c3f429636ab9950ddc.png" alt="\widehat{\beta}"/>
 are the uncorrected logit coefficients and
-bias(<span class="math">\(\widehat{\beta}\)</span>) is the bias term, the corrected
-coefficients <span class="math">\(\tilde{\beta}\)</span> are</p>
+bias(<img class="math" src="_images/math/d8af2dda6c66ca3f8936a4c3f429636ab9950ddc.png" alt="\widehat{\beta}"/>) is the bias term, the corrected
+coefficients <img class="math" src="_images/math/4024b5e1e832a4e71c716cc1f7383be57826b0b0.png" alt="\tilde{\beta}"/> are</p>
 <div class="math">
-\[\widehat{\beta} - \textrm{bias}(\widehat{\beta}) = \tilde{\beta}\]</div>
-<p>The bias term is</p>
+<p><img src="_images/math/321de0f40e0675fea03bff2a20ea559cb463d6ea.png" alt="\widehat{\beta} - \textrm{bias}(\widehat{\beta}) = \tilde{\beta}"/></p>
+</div><p>The bias term is</p>
 <div class="math">
-\[\textrm{bias}(\widehat{\beta}) = (X'WX)^{-1} X'W \xi\]</div>
-<p>where</p>
+<p><img src="_images/math/b0553d525251be7ec5507573c00d1e00eee0e435.png" alt="\textrm{bias}(\widehat{\beta}) = (X'WX)^{-1} X'W \xi"/></p>
+</div><p>where</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/ffeae8f68e041844fe15a30663badb58587cb67d.png" alt="\begin{aligned}
 \xi_i &amp;=&amp; 0.5 Q_{ii} \Big( (1 + w-1)\widehat{\pi}_i - w_1 \Big) \\
 Q &amp;=&amp; X(X'WX)^{-1} X' \\
-W = \textrm{diag}\{\widehat{\pi}_i (1 - \widehat{\pi}_i) w_i\}\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(w_i\)</span> and <span class="math">\(w_1\)</span> are given in the “weighting”
+W = \textrm{diag}\{\widehat{\pi}_i (1 - \widehat{\pi}_i) w_i\}\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/b4e1bc8e2dfd2c26158273aef285b08a816f960a.png" alt="w_i"/> and <img class="math" src="_images/math/ee71d9a60992887aa4b7a1e010886633661a7ada.png" alt="w_1"/> are given in the “weighting”
 section above.</p>
 </li>
 </ul>
@@ -2044,30 +2097,30 @@ section above.</p>
 <div class="section" id="id55">
 <h3>Quantities of Interest<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">For either one or no <span class="math">\(\tau\)</span>:</p>
+<li><p class="first">For either one or no <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/>:</p>
 <ul>
 <li><p class="first">The expected values (qi$ev) for the rare events logit are
 simulations of the predicted probability</p>
 <div class="math">
-\[E(Y) = \pi_i =
-    \frac{1}{1 + \exp(-x_i \beta)},\]</div>
-<p>given draws of <span class="math">\(\beta\)</span> from its posterior.</p>
+<p><img src="_images/math/fd2856bc7fec152ef785c927c85393b0f70596ac.png" alt="E(Y) = \pi_i =
+    \frac{1}{1 + \exp(-x_i \beta)},"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its posterior.</p>
 </li>
 <li><p class="first">The predicted value (qi$pr) is a draw from a binomial distribution
-with mean equal to the simulated <span class="math">\(\pi_i\)</span>.</p>
+with mean equal to the simulated <img class="math" src="_images/math/916754f7e7de4247fa27c52f610948b4055311fe.png" alt="\pi_i"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) is defined as</p>
 <div class="math">
-\[\textrm{FD} = \Pr(Y = 1 \mid x_1, \tau) - \Pr(Y = 1 \mid x, \tau).\]</div>
-</li>
+<p><img src="_images/math/9b4dec5fa18c43963e1e8ce022f3dce869dc2403.png" alt="\textrm{FD} = \Pr(Y = 1 \mid x_1, \tau) - \Pr(Y = 1 \mid x, \tau)."/></p>
+</div></li>
 <li><p class="first">The risk ratio (qi$rr) is defined as</p>
 <div class="math">
-\[\textrm{RR} = \Pr(Y = 1 \mid x_1, \tau) \ / \ \Pr(Y = 1 \mid x, \tau).\]</div>
-</li>
+<p><img src="_images/math/840169782526b263d8745f139e906c4cbb6be812.png" alt="\textrm{RR} = \Pr(Y = 1 \mid x_1, \tau) \ / \ \Pr(Y = 1 \mid x, \tau)."/></p>
+</div></li>
 </ul>
 </li>
-<li><p class="first">For a range of <span class="math">\(\tau\)</span> defined by <span class="math">\([\tau_1, \tau_2]\)</span>, each
-of the quantities of interest are <span class="math">\(n \times 2\)</span> matrices, which
+<li><p class="first">For a range of <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> defined by <img class="math" src="_images/math/9c8d376f26cfc87ab8a0956d91e826558ef973d6.png" alt="[\tau_1, \tau_2]"/>, each
+of the quantities of interest are <img class="math" src="_images/math/4f7a2e44ef1042deffae3520085171846386e918.png" alt="n \times 2"/> matrices, which
 report the lower and upper bounds, respectively, for a confidence
 interval with nominal coverage at least as great as the actual
 coverage. At worst, these bounds are conservative estimates for the
@@ -2077,28 +2130,28 @@ specific method of calculating bounded quantities of interest.</p>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -2124,8 +2177,8 @@ is more numerically stable than standard matrix calculations.</p>
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="zelg-tobit">
-<h2>zelg-tobit<a class="headerlink" href="#zelg-tobit" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="zelig-tobit">
+<h2>zelig-tobit<a class="headerlink" href="#zelig-tobit" title="Permalink to this headline">¶</a></h2>
 <p>Linear Regression for a Left-Censored Dependent Variable</p>
 <p>Tobit regression estimates a linear regression model for a left-censored
 dependent variable, where the dependent variable is censored from below.
@@ -2227,29 +2280,29 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <div class="section" id="id60">
 <h3>Model<a class="headerlink" href="#id60" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">Let <span class="math">\(Y_i^*\)</span> be a latent dependent variable which is distributed
+<li><p class="first">Let <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> be a latent dependent variable which is distributed
 with <em>stochastic</em> component</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
-Y_i^* &amp; \sim &amp; \textrm{Normal}(\mu_i, \sigma^2) \\\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(\mu_i\)</span> is a vector means and <span class="math">\(\sigma^2\)</span> is a
-scalar variance parameter. <span class="math">\(Y_i^*\)</span> is not directly observed,
-however. Rather we observed <span class="math">\(Y_i\)</span> which is defined as:</p>
+<p><img src="_images/math/f04da308df2549fd3f3ddac6d6294d0fe68c7536.png" alt="\begin{aligned}
+Y_i^* &amp; \sim &amp; \textrm{Normal}(\mu_i, \sigma^2) \\\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> is a vector means and <img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/> is a
+scalar variance parameter. <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> is not directly observed,
+however. Rather we observed <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> which is defined as:</p>
 <div class="math">
-\[\begin{split}Y_i = \left\{
+<p><img src="_images/math/c02c4c1f67cbb07aff7eef9e34f1779d12f26ae4.png" alt="Y_i = \left\{
 \begin{array}{lcl}
 Y_i^*  &amp;\textrm{if} &amp; c &lt;Y_i^* \\
 c    &amp;\textrm{if} &amp; c \ge Y_i^*
-\end{array}\right.\end{split}\]</div>
-<p>where <span class="math">\(c\)</span> is the lower bound below which <span class="math">\(Y_i^*\)</span> is
+\end{array}\right."/></p>
+</div><p>where <img class="math" src="_images/math/65868d23a5bfe5b3b2d819386b19c14fa36af134.png" alt="c"/> is the lower bound below which <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> is
 censored.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is given by</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
-\mu_{i} &amp;=&amp; x_{i} \beta,\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(x_{i}\)</span> is the vector of <span class="math">\(k\)</span> explanatory variables
-for observation <span class="math">\(i\)</span> and <span class="math">\(\beta\)</span> is the vector of
+<p><img src="_images/math/bf760b1377dc29b5986cdb3a1ea4bc3174dcb094.png" alt="\begin{aligned}
+\mu_{i} &amp;=&amp; x_{i} \beta,\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/c223a5391d7bfd7e7c68274c104fc7418944376e.png" alt="x_{i}"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of
 coefficients.</p>
 </li>
 </ul>
@@ -2258,23 +2311,23 @@ coefficients.</p>
 <h3>Quantities of Interest<a class="headerlink" href="#id61" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">The expected values (<tt class="docutils literal"><span class="pre">qi$ev</span></tt>) for the tobit regression model are
-the same as the expected value of <span class="math">\(Y*\)</span>:</p>
+the same as the expected value of <img class="math" src="_images/math/e5acb8ce977a9706090eb708ea2ae8ab001207b8.png" alt="Y*"/>:</p>
 <div class="math">
-\[E(Y^* | X) = \mu_{i} = x_{i} \beta\]</div>
-</li>
+<p><img src="_images/math/9ae22946494ae2cba96f0b452f7f93e671f63d93.png" alt="E(Y^* | X) = \mu_{i} = x_{i} \beta"/></p>
+</div></li>
 <li><p class="first">The first difference (<tt class="docutils literal"><span class="pre">qi$fd</span></tt>) for the tobit regression model is
 defined as</p>
 <div class="math">
-\[\begin{aligned}
-\text{FD}=E(Y^* \mid x_{1}) - E(Y^* \mid x).\end{aligned}\]</div>
-</li>
+<p><img src="_images/math/3552382628dce9e0b3aa47fe65f61406a39686f1.png" alt="\begin{aligned}
+\text{FD}=E(Y^* \mid x_{1}) - E(Y^* \mid x).\end{aligned}"/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (<tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>) for the treatment group is</p>
 <div class="math">
-\[\begin{aligned}
-\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[E[Y^*_{i}(t_{i}=1)]-E[Y^*_{i}(t_{i}=0)]],\end{aligned}\]</div>
-<p>where <span class="math">\(t_{i}\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_{i}=1\)</span>) and control (<span class="math">\(t_{i}=0\)</span>) groups.</p>
+<p><img src="_images/math/fd39d2da6c33f4ce8a5109998fdcc63ae68141dc.png" alt="\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[E[Y^*_{i}(t_{i}=1)]-E[Y^*_{i}(t_{i}=0)]],\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups.</p>
 </li>
 </ul>
 </div>

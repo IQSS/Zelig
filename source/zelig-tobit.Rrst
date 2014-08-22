@@ -1,4 +1,4 @@
-zelg-tobit
+zelig-tobit
 ~~~~~~
 Linear Regression for a Left-Censored Dependent Variable
 

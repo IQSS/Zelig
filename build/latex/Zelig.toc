@@ -1,29 +1,103 @@
 \select@language {english}
-\contentsline {chapter}{\numberline {1}Quickstart Guide}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Loading Zelig}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}Running Models}{3}{section.1.2}
-\contentsline {section}{\numberline {1.3}Zelig5 Model Reference}{4}{section.1.3}
-\contentsline {chapter}{\numberline {2}Installation \& Quickstart}{5}{chapter.2}
-\contentsline {section}{\numberline {2.1}Installation}{5}{section.2.1}
-\contentsline {section}{\numberline {2.2}Quickstart Guide}{5}{section.2.2}
-\contentsline {section}{\numberline {2.3}Running Models}{6}{section.2.3}
-\contentsline {chapter}{\numberline {3}Frequently Asked Questions}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}How do I cite Zelig?}{9}{section.3.1}
-\contentsline {section}{\numberline {3.2}Why can\IeC {\textquoteright }t I install Zelig?}{9}{section.3.2}
-\contentsline {section}{\numberline {3.3}Why can\IeC {\textquoteright }t I install R?}{10}{section.3.3}
-\contentsline {section}{\numberline {3.4}Why can\IeC {\textquoteright }t I load data?}{10}{section.3.4}
-\contentsline {section}{\numberline {3.5}How do I increase the memory for R?}{10}{section.3.5}
-\contentsline {section}{\numberline {3.6}Why doesn\IeC {\textquoteright }t the pdf print properly?}{11}{section.3.6}
-\contentsline {section}{\numberline {3.7}R is neat. How can I find out more?}{11}{section.3.7}
-\contentsline {chapter}{\numberline {4}About Zelig}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Technical Vision}{13}{section.4.1}
-\contentsline {chapter}{\numberline {5}Model vignettes}{15}{chapter.5}
-\contentsline {section}{\numberline {5.1}Zelig-ls}{15}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Syntax}{15}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Examples}{15}{subsection.5.1.2}
-\contentsline {subsubsection}{Basic Example with First Differences}{15}{subsubsection*.5}
-\contentsline {subsubsection}{Using Dummy Variables}{17}{subsubsection*.6}
-\contentsline {subsection}{\numberline {5.1.3}Model}{18}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Quantities of Interest}{18}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}Output Values}{18}{subsection.5.1.5}
-\contentsline {subsection}{\numberline {5.1.6}See also}{20}{subsection.5.1.6}
+\contentsline {chapter}{\numberline {1}Implemented Models in Zelig 5.0.1}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Installation \& Quickstart}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Installing R \& Zelig}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Quickstart Guide}{4}{subsection.1.1.2}
+\contentsline {section}{\numberline {1.2}Model Reference and Vignettes}{6}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Reference}{8}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}zelig-exp}{8}{subsection.1.2.2}
+\contentsline {subsubsection}{Syntax}{8}{subsubsection*.3}
+\contentsline {subsubsection}{Input Values}{9}{subsubsection*.4}
+\contentsline {subsubsection}{Example}{9}{subsubsection*.5}
+\contentsline {subsubsection}{Model}{10}{subsubsection*.6}
+\contentsline {subsubsection}{Quantities of Interest}{12}{subsubsection*.7}
+\contentsline {subsubsection}{Output Values}{12}{subsubsection*.8}
+\contentsline {subsubsection}{See also}{13}{subsubsection*.9}
+\contentsline {subsection}{\numberline {1.2.3}zelig-gamma}{13}{subsection.1.2.3}
+\contentsline {subsubsection}{Syntax}{13}{subsubsection*.10}
+\contentsline {subsubsection}{Example}{13}{subsubsection*.11}
+\contentsline {subsubsection}{Model}{14}{subsubsection*.12}
+\contentsline {subsubsection}{Quantities of Interest}{14}{subsubsection*.13}
+\contentsline {subsubsection}{Output Values}{14}{subsubsection*.14}
+\contentsline {subsubsection}{See also}{15}{subsubsection*.15}
+\contentsline {subsection}{\numberline {1.2.4}zelig-logit}{15}{subsection.1.2.4}
+\contentsline {subsubsection}{Syntax}{15}{subsubsection*.16}
+\contentsline {subsubsection}{Additional Inputs}{16}{subsubsection*.17}
+\contentsline {subsubsection}{Examples}{16}{subsubsection*.18}
+\contentsline {subsubsection}{Model}{17}{subsubsection*.19}
+\contentsline {subsubsection}{Quantities of Interest}{17}{subsubsection*.20}
+\contentsline {subsubsection}{Output Values}{18}{subsubsection*.21}
+\contentsline {subsubsection}{See also}{18}{subsubsection*.22}
+\contentsline {subsection}{\numberline {1.2.5}zelig-lognorm}{18}{subsection.1.2.5}
+\contentsline {subsubsection}{Syntax}{18}{subsubsection*.23}
+\contentsline {subsubsection}{Input Values}{19}{subsubsection*.24}
+\contentsline {subsubsection}{Example}{19}{subsubsection*.25}
+\contentsline {subsubsection}{Model}{19}{subsubsection*.26}
+\contentsline {subsubsection}{Quantities of Interest}{20}{subsubsection*.27}
+\contentsline {subsubsection}{Output Values}{21}{subsubsection*.28}
+\contentsline {subsubsection}{See also}{21}{subsubsection*.29}
+\contentsline {subsection}{\numberline {1.2.6}zelig-ls}{22}{subsection.1.2.6}
+\contentsline {subsubsection}{Syntax}{22}{subsubsection*.30}
+\contentsline {subsubsection}{Examples}{22}{subsubsection*.31}
+\contentsline {subsubsection}{Model}{23}{subsubsection*.32}
+\contentsline {subsubsection}{Quantities of Interest}{23}{subsubsection*.33}
+\contentsline {subsubsection}{Output Values}{23}{subsubsection*.34}
+\contentsline {subsubsection}{See also}{24}{subsubsection*.35}
+\contentsline {subsection}{\numberline {1.2.7}zelig-negbin}{24}{subsection.1.2.7}
+\contentsline {subsubsection}{Syntax}{24}{subsubsection*.36}
+\contentsline {subsubsection}{Example}{25}{subsubsection*.37}
+\contentsline {subsubsection}{Model}{25}{subsubsection*.38}
+\contentsline {subsubsection}{Quantities of Interest}{25}{subsubsection*.39}
+\contentsline {subsubsection}{Output Values}{26}{subsubsection*.40}
+\contentsline {subsubsection}{See also}{26}{subsubsection*.41}
+\contentsline {subsection}{\numberline {1.2.8}zelig-normal}{26}{subsection.1.2.8}
+\contentsline {subsubsection}{Syntax}{26}{subsubsection*.42}
+\contentsline {subsubsection}{Examples}{27}{subsubsection*.43}
+\contentsline {subsubsection}{Model}{27}{subsubsection*.44}
+\contentsline {subsubsection}{Quantities of Interest}{27}{subsubsection*.45}
+\contentsline {subsubsection}{Output Values}{28}{subsubsection*.46}
+\contentsline {subsubsection}{See also}{28}{subsubsection*.47}
+\contentsline {subsection}{\numberline {1.2.9}zelig-poisson}{28}{subsection.1.2.9}
+\contentsline {subsubsection}{Syntax}{28}{subsubsection*.48}
+\contentsline {subsubsection}{Example}{29}{subsubsection*.49}
+\contentsline {subsubsection}{Model}{29}{subsubsection*.50}
+\contentsline {subsubsection}{Quantities of Interest}{29}{subsubsection*.51}
+\contentsline {subsubsection}{Output Values}{30}{subsubsection*.52}
+\contentsline {subsubsection}{See also}{30}{subsubsection*.53}
+\contentsline {subsection}{\numberline {1.2.10}zelig-probit}{30}{subsection.1.2.10}
+\contentsline {subsubsection}{Syntax}{30}{subsubsection*.54}
+\contentsline {subsubsection}{Example}{30}{subsubsection*.55}
+\contentsline {subsubsection}{Model}{31}{subsubsection*.56}
+\contentsline {subsubsection}{Quantities of Interest}{31}{subsubsection*.57}
+\contentsline {subsubsection}{Output Values}{32}{subsubsection*.58}
+\contentsline {subsubsection}{See also}{32}{subsubsection*.59}
+\contentsline {subsection}{\numberline {1.2.11}zelig-relogit}{32}{subsection.1.2.11}
+\contentsline {subsubsection}{Syntax}{32}{subsubsection*.60}
+\contentsline {subsubsection}{Arguments}{32}{subsubsection*.61}
+\contentsline {subsubsection}{Example 1: One Tau with Prior Correction and Bias Correction}{33}{subsubsection*.62}
+\contentsline {subsubsection}{Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction}{33}{subsubsection*.63}
+\contentsline {subsubsection}{Example 3: Two Taus with Bias Correction and Prior Correction}{34}{subsubsection*.64}
+\contentsline {subsubsection}{Model}{34}{subsubsection*.65}
+\contentsline {subsubsection}{Quantities of Interest}{35}{subsubsection*.66}
+\contentsline {subsubsection}{Output Values}{36}{subsubsection*.67}
+\contentsline {subsubsection}{Differences with Stata Version}{36}{subsubsection*.68}
+\contentsline {subsubsection}{See also}{36}{subsubsection*.69}
+\contentsline {subsection}{\numberline {1.2.12}zelig-tobit}{36}{subsection.1.2.12}
+\contentsline {subsubsection}{Syntax}{37}{subsubsection*.70}
+\contentsline {subsubsection}{Inputs}{37}{subsubsection*.71}
+\contentsline {subsubsection}{Examples}{37}{subsubsection*.72}
+\contentsline {subsubsection}{Model}{38}{subsubsection*.73}
+\contentsline {subsubsection}{Quantities of Interest}{38}{subsubsection*.74}
+\contentsline {subsubsection}{Output Values}{38}{subsubsection*.75}
+\contentsline {subsubsection}{See also}{39}{subsubsection*.76}
+\contentsline {section}{\numberline {1.3}Frequently Asked Questions}{39}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}How do I cite Zelig?}{39}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Why can\IeC {\textquoteright }t I install Zelig?}{39}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Why can\IeC {\textquoteright }t I install R?}{39}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Why can\IeC {\textquoteright }t I load data?}{40}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}How do I increase the memory for R?}{40}{subsection.1.3.5}
+\contentsline {subsection}{\numberline {1.3.6}Why doesn\IeC {\textquoteright }t the pdf print properly?}{40}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {1.3.7}R is neat. How can I find out more?}{40}{subsection.1.3.7}
+\contentsline {section}{\numberline {1.4}About Zelig}{41}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Technical Vision}{41}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Release Notes}{42}{subsection.1.4.2}

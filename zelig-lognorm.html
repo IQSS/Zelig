@@ -27,7 +27,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
@@ -93,7 +92,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -200,13 +199,13 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </pre></div>
 </div>
 <p>Log-normal models require that the dependent variable be in the form
-Surv(Y, C), where Y and C are vectors of length <span class="math">\(n\)</span>. For each
-observation <span class="math">\(i\)</span> in 1, …, <span class="math">\(n\)</span>, the value <span class="math">\(y_i\)</span> is the
+Surv(Y, C), where Y and C are vectors of length <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/>. For each
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> in 1, …, <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/>, the value <img class="math" src="_images/math/410a65f64e2a609a2a7f544ed72f0982b719807a.png" alt="y_i"/> is the
 duration (lifetime, for example) of each subject, and the associated
-<span class="math">\(c_i\)</span> is a binary variable such that <span class="math">\(c_i = 1\)</span> if the
+<img class="math" src="_images/math/496867ca68c428fa123f26f0f73997632e61e116.png" alt="c_i"/> is a binary variable such that <img class="math" src="_images/math/45bd383d229a85e1c894b645ee5ce5cfad178bdf.png" alt="c_i = 1"/> if the
 duration is not censored (<em>e.g.</em>, the subject dies during the study) or
-<span class="math">\(c_i = 0\)</span> if the duration is censored (<em>e.g.</em>, the subject is
-still alive at the end of the study). If <span class="math">\(c_i\)</span> is omitted, all Y
+<img class="math" src="_images/math/839e310a40128c2d71f158db2ee1ff3a1a40b81b.png" alt="c_i = 0"/> if the duration is censored (<em>e.g.</em>, the subject is
+still alive at the end of the study). If <img class="math" src="_images/math/496867ca68c428fa123f26f0f73997632e61e116.png" alt="c_i"/> is omitted, all Y
 are assumed to be completed; that is, time defaults to 1 for all
 observations.</p>
 </div>
@@ -267,53 +266,53 @@ X:</p>
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>Let <span class="math">\(Y_i^*\)</span> be the survival time for observation <span class="math">\(i\)</span> with
-the density function <span class="math">\(f(y)\)</span> and the corresponding distribution
-function <span class="math">\(F(t)=\int_{0}^t f(y) dy\)</span>. This variable might be
-censored for some observations at a fixed time <span class="math">\(y_c\)</span> such that the
-fully observed dependent variable, <span class="math">\(Y_i\)</span>, is defined as</p>
+<p>Let <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> be the survival time for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> with
+the density function <img class="math" src="_images/math/c52f3efaf426aaf75ff6fea4bb823873865b1303.png" alt="f(y)"/> and the corresponding distribution
+function <img class="math" src="_images/math/39c3fab3abd2a55f823cd0336db679ce1b36eead.png" alt="F(t)=\int_{0}^t f(y) dy"/>. This variable might be
+censored for some observations at a fixed time <img class="math" src="_images/math/86ef86313546967dcb442753dcc6f50484dc244b.png" alt="y_c"/> such that the
+fully observed dependent variable, <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/>, is defined as</p>
 <div class="math">
-\[\begin{split}Y_i = \left\{ \begin{array}{ll}
+<p><img src="_images/math/080eb82277537c413153c5a513d4df9309471caf.png" alt="Y_i = \left\{ \begin{array}{ll}
       Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
       y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
-    \end{array} \right.\end{split}\]</div>
-<ul>
+    \end{array} \right."/></p>
+</div><ul>
 <li><p class="first">The <em>stochastic component</em> is described by the distribution of the
-partially observed variable, <span class="math">\(Y^*\)</span>. For the lognormal model,
+partially observed variable, <img class="math" src="_images/math/e4b82f5d0d0b135c68864771e045dc913778a223.png" alt="Y^*"/>. For the lognormal model,
 there are two equivalent representations:</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/2d2f0134ef7cd6c7d89866a45b1771b6a1fde79b.png" alt="\begin{aligned}
     Y_i^* \; \sim \; \textrm{LogNormal}(\mu_i, \sigma^2) &amp; \textrm{ or
-} &amp; \log(Y_i^*) \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)\end{aligned}\end{split}\]</div>
-<p>where the parameters <span class="math">\(\mu_i\)</span> and <span class="math">\(\sigma^2\)</span> are the mean
+} &amp; \log(Y_i^*) \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)\end{aligned}"/></p>
+</div><p>where the parameters <img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> and <img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/> are the mean
 and variance of the Normal distribution. (Note that the output from
 zelig() parameterizes scale:math:` = sigma`.)</p>
 <p>In addition, survival models like the lognormal have three additional
-properties. The hazard function <span class="math">\(h(t)\)</span> measures the probability
-of not surviving past time <span class="math">\(t\)</span> given survival up to <span class="math">\(t\)</span>.
-In general, the hazard function is equal to <span class="math">\(f(t)/S(t)\)</span> where
+properties. The hazard function <img class="math" src="_images/math/8f59c002cacf4a159c9d1b7ccfa141d30d5dc65c.png" alt="h(t)"/> measures the probability
+of not surviving past time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> given survival up to <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>.
+In general, the hazard function is equal to <img class="math" src="_images/math/89ae40bbb08f26a2d7a02d4d5af4526f1a20c029.png" alt="f(t)/S(t)"/> where
 the survival function :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>S(t) =</p>
 <blockquote>
 <div><p>1 - int_{0}^t f(s) ds` represents the fraction still surviving at</p>
 </div></blockquote>
-<p>time <span class="math">\(t\)</span>. The cumulative hazard function <span class="math">\(H(t)\)</span> describes
-the probability of dying before time <span class="math">\(t\)</span>. In general,
-<span class="math">\(H(t)=
-\int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the lognormal
+<p>time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. The cumulative hazard function <img class="math" src="_images/math/30319a828ec4029a092aefb503bd693e5776e59b.png" alt="H(t)"/> describes
+the probability of dying before time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. In general,
+<img class="math" src="_images/math/a951cf862eec77b95758fc88815c3addfff6ba11.png" alt="H(t)=
+\int_{0}^{t} h(s) ds = -\log S(t)"/>. In the case of the lognormal
 model,</p>
 <div class="math">
-\[\begin{split}\begin{aligned}
+<p><img src="_images/math/deea3408797487ffda9af0b8e8b0ea0b87db7ef5.png" alt="\begin{aligned}
 h(t) &amp;=&amp; \frac{1}{\sqrt{2 \pi} \, \sigma t \, S(t)}
 \exp\left\{-\frac{1}{2 \sigma^2} (\log \lambda t)^2\right\} \\
 S(t) &amp;=&amp; 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \\
-H(t) &amp;=&amp; -\log \left\{ 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \right\}\end{aligned}\end{split}\]</div>
-<p>where <span class="math">\(\Phi(\cdot)\)</span> is the cumulative density function for the
+H(t) &amp;=&amp; -\log \left\{ 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \right\}\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/262565daee431ce18fed8cbe6ff35db082bb6a9b.png" alt="\Phi(\cdot)"/> is the cumulative density function for the
 Normal distribution.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is described as:</p>
 <div class="math">
-\[\mu_i = x_i \beta .\]</div>
-</li>
+<p><img src="_images/math/41364463bbef7e4f118743532ee95c3ebf4ba7a3.png" alt="\mu_i = x_i \beta ."/></p>
+</div></li>
 </ul>
 </div>
 <div class="section" id="quantities-of-interest">
@@ -322,49 +321,49 @@ Normal distribution.</p>
 <li><p class="first">The expected values (qi$ev) for the lognormal model are simulations
 of the expected duration:</p>
 <div class="math">
-\[E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),\]</div>
-<p>given draws of <span class="math">\(\beta\)</span> and <span class="math">\(\sigma\)</span> from their sampling
+<p><img src="_images/math/31ea238b8fad5a97c190036baed367c1644d71d9.png" alt="E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> and <img class="math" src="_images/math/2298cf1485084afe72757a9c8483af49a138d81f.png" alt="\sigma"/> from their sampling
 distributions.</p>
 </li>
 <li><p class="first">The predicted value is a draw from the log-normal distribution given
-simulations of the parameters <span class="math">\((\lambda_i, \sigma)\)</span>.</p>
+simulations of the parameters <img class="math" src="_images/math/212bf4406b9299a69a57ea55bc3cf9ccdb9489ad.png" alt="(\lambda_i, \sigma)"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) is</p>
 <div class="math">
-\[\textrm{FD} = E(Y \mid x_1) - E(Y \mid x).\]</div>
-</li>
+<p><img src="_images/math/47e62bb3ada6780d6fd2b247bf221d015d2207d2.png" alt="\textrm{FD} = E(Y \mid x_1) - E(Y \mid x)."/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
-<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+<p><img src="_images/math/a42073a06e5f64918f546d89584110fe35c0e21d.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups. When
+<img class="math" src="_images/math/3574cfcb10f1bd84fea967193a6ae17c6855de01.png" alt="Y_i(t_i=1)"/> is censored rather than observed, we replace it
 with a simulation from the model given available knowledge of the
 censoring process. Variation in the simulations is due to two
 factors: uncertainty in the imputation process for censored
-<span class="math">\(y_i^*\)</span> and uncertainty in simulating <span class="math">\(E[Y_i(t_i=0)]\)</span>,
-the counterfactual expected value of <span class="math">\(Y_i\)</span> for observations in
+<img class="math" src="_images/math/9c2fbff8ba260029bc65603e6a06944c5746ad65.png" alt="y_i^*"/> and uncertainty in simulating <img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>,
+the counterfactual expected value of <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in
 the treatment group, under the assumption that everything stays the
 same except that the treatment indicator is switched to
-<span class="math">\(t_i=0\)</span>.</p>
+<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
-\widehat{Y_i(t_i=0)} \},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups. When
-<span class="math">\(Y_i(t_i=1)\)</span> is censored rather than observed, we replace it
+<p><img src="_images/math/db43e079e29b09aa583b792c735eafc894037a2a.png" alt="\frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
+\widehat{Y_i(t_i=0)} \},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups. When
+<img class="math" src="_images/math/3574cfcb10f1bd84fea967193a6ae17c6855de01.png" alt="Y_i(t_i=1)"/> is censored rather than observed, we replace it
 with a simulation from the model given available knowledge of the
 censoring process. Variation in the simulations are due to two
 factors: uncertainty in the imputation process for censored
-<span class="math">\(y_i^*\)</span> and uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/9c2fbff8ba260029bc65603e6a06944c5746ad65.png" alt="y_i^*"/> and uncertainty in simulating
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>
@@ -380,11 +379,11 @@ elements available through the $ operator are listed below.</p>
 <ul class="simple">
 <li>From the zelig() output object z.out, you may extract:<ul>
 <li>coefficients: parameter estimates for the explanatory variables.</li>
-<li>icoef: parameter estimates for the intercept and <span class="math">\(\sigma\)</span>.</li>
+<li>icoef: parameter estimates for the intercept and <img class="math" src="_images/math/2298cf1485084afe72757a9c8483af49a138d81f.png" alt="\sigma"/>.</li>
 <li>var: Variance-covariance matrix.</li>
 <li>loglik: Vector containing the log-likelihood for the model and
 intercept only (respectively).</li>
-<li>linear.predictors: the vector of <span class="math">\(x_{i}\beta\)</span>.</li>
+<li>linear.predictors: the vector of <img class="math" src="_images/math/f8237c9c4a91083105a2650415195fa49fe0bafc.png" alt="x_{i}\beta"/>.</li>
 <li>df.residual: the residual degrees of freedom.</li>
 <li>df.null: the residual degrees of freedom for the null model.</li>
 <li>zelig.data: the input data frame if save.data = TRUE.</li>
@@ -393,17 +392,17 @@ intercept only (respectively).</li>
 <li>Most of this may be conveniently summarized using summary(z.out).
 From summary(z.out), you may additionally extract:<ul>
 <li>table: the parameter estimates with their associated standard
-errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
+errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>-statistics.</li>
 </ul>
 </li>
 <li>From the sim() output object s.out, you may extract quantities of
-interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
+interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
 x-observation (for more than one x-observation). Available quantities
 are:<ul>
 <li>qi$ev: the simulated expected values for the specified values of
 x.</li>
 <li>qi$pr: the simulated predicted values drawn from the distribution
-defined by <span class="math">\((\lambda_i, \sigma)\)</span>.</li>
+defined by <img class="math" src="_images/math/212bf4406b9299a69a57ea55bc3cf9ccdb9489ad.png" alt="(\lambda_i, \sigma)"/>.</li>
 <li>qi$fd: the simulated first differences between the simulated
 expected values for x and x1.</li>
 <li>qi$att.ev: the simulated average expected treatment effect for the

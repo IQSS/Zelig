@@ -27,7 +27,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
@@ -93,7 +92,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -225,18 +224,18 @@ turnout<span class="p">)</span>
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>Let <span class="math">\(Y_i\)</span> be the observed binary dependent variable for
-observation <span class="math">\(i\)</span> which takes the value of either 0 or 1.</p>
+<p>Let <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> be the observed binary dependent variable for
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> which takes the value of either 0 or 1.</p>
 <ul>
 <li><p class="first">The <em>stochastic component</em> is given by</p>
 <div class="math">
-\[Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\]</div>
-<p>where <span class="math">\(\pi_i=\Pr(Y_i=1)\)</span>.</p>
+<p><img src="_images/math/e6ab2177225a79f988ab416b0353405999e15789.png" alt="Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),"/></p>
+</div><p>where <img class="math" src="_images/math/204ad227887156eca0ea3882997e3c5d0703174b.png" alt="\pi_i=\Pr(Y_i=1)"/>.</p>
 </li>
 <li><p class="first">The <em>systematic component</em> is</p>
 <div class="math">
-\[\pi_i \; = \; \Phi (x_i \beta)\]</div>
-<p>where <span class="math">\(\Phi(\mu)\)</span> is the cumulative distribution function of
+<p><img src="_images/math/a8bd29a343890834661f63d7510931e96651bc8d.png" alt="\pi_i \; = \; \Phi (x_i \beta)"/></p>
+</div><p>where <img class="math" src="_images/math/e4f08b55c6f99b472e0a295b96ff6487d545dfd0.png" alt="\Phi(\mu)"/> is the cumulative distribution function of
 the Normal distribution with mean 0 and unit variance.</p>
 </li>
 </ul>
@@ -247,46 +246,46 @@ the Normal distribution with mean 0 and unit variance.</p>
 <li><p class="first">The expected value (qi$ev) is a simulation of predicted probability
 of success</p>
 <div class="math">
-\[E(Y) = \pi_i = \Phi(x_i
-  \beta),\]</div>
-<p>given a draw of <span class="math">\(\beta\)</span> from its sampling distribution.</p>
+<p><img src="_images/math/28b543f2a46c190d6f10c93b07f717ac6d15a5b4.png" alt="E(Y) = \pi_i = \Phi(x_i
+  \beta),"/></p>
+</div><p>given a draw of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its sampling distribution.</p>
 </li>
 <li><p class="first">The predicted value (qi$pr) is a draw from a Bernoulli distribution
-with mean <span class="math">\(\pi_i\)</span>.</p>
+with mean <img class="math" src="_images/math/916754f7e7de4247fa27c52f610948b4055311fe.png" alt="\pi_i"/>.</p>
 </li>
 <li><p class="first">The first difference (qi$fd) in expected values is defined as</p>
 <div class="math">
-\[\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\]</div>
-</li>
+<p><img src="_images/math/8f669920018c72d7f23a4ba843925381c4703f17.png" alt="\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x)."/></p>
+</div></li>
 <li><p class="first">The risk ratio (qi$rr) is defined as</p>
 <div class="math">
-\[\textrm{RR} = \Pr(Y = 1 \mid x_1) / \Pr(Y = 1 \mid x).\]</div>
-</li>
+<p><img src="_images/math/6a3b874e942e65340c5fd207b718ea58c330392c.png" alt="\textrm{RR} = \Pr(Y = 1 \mid x_1) / \Pr(Y = 1 \mid x)."/></p>
+</div></li>
 <li><p class="first">In conditional prediction models, the average expected treatment
 effect (att.ev) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      E[Y_i(t_i=0)] \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/f120915a77efb3200aab141647a59f51df9b4611.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/f658a3cf4cf830cd65eab505c530fb4796fea0ed.png" alt="E[Y_i(t_i=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 <li><p class="first">In conditional prediction models, the average predicted treatment
 effect (att.pr) for the treatment group is</p>
 <div class="math">
-\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-      \widehat{Y_i(t_i=0)} \right\},\]</div>
-<p>where <span class="math">\(t_i\)</span> is a binary explanatory variable defining the
-treatment (<span class="math">\(t_i=1\)</span>) and control (<span class="math">\(t_i=0\)</span>) groups.
+<p><img src="_images/math/da7e72f6d651b92ad0874d3b40cd633ac38f5663.png" alt="\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/64283d3d8caf93093b91aba9a61dbe26b5c18562.png" alt="t_i"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/cc6ccc003db65691c9d0aebb91b2001e0d752d18.png" alt="t_i=1"/>) and control (<img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>) groups.
 Variation in the simulations are due to uncertainty in simulating
-<span class="math">\(\widehat{Y_i(t_i=0)}\)</span>, the counterfactual predicted value of
-<span class="math">\(Y_i\)</span> for observations in the treatment group, under the
+<img class="math" src="_images/math/8056bf28681ea8573bf29bfeb3c72dffa40a2fa7.png" alt="\widehat{Y_i(t_i=0)}"/>, the counterfactual predicted value of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> for observations in the treatment group, under the
 assumption that everything stays the same except that the treatment
-indicator is switched to <span class="math">\(t_i=0\)</span>.</p>
+indicator is switched to <img class="math" src="_images/math/906dfa4d36ff6837226de6ec10a5e18d37c41bc0.png" alt="t_i=0"/>.</p>
 </li>
 </ul>
 </div>

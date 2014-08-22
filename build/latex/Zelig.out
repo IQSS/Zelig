@@ -1,20 +1,5 @@
-\BOOKMARK [0][-]{chapter.1}{Quickstart Guide}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Loading Zelig}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{Running Models}{chapter.1}% 3
-\BOOKMARK [1][-]{section.1.3}{Zelig5 Model Reference}{chapter.1}% 4
-\BOOKMARK [0][-]{chapter.2}{Installation \046 Quickstart}{}% 5
-\BOOKMARK [1][-]{section.2.1}{Installation}{chapter.2}% 6
-\BOOKMARK [1][-]{section.2.2}{Quickstart Guide}{chapter.2}% 7
-\BOOKMARK [1][-]{section.2.3}{Running Models}{chapter.2}% 8
-\BOOKMARK [0][-]{chapter.3}{Frequently Asked Questions}{}% 9
-\BOOKMARK [1][-]{section.3.1}{How do I cite Zelig?}{chapter.3}% 10
-\BOOKMARK [1][-]{section.3.2}{Why can\220t I install Zelig?}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.3}{Why can\220t I install R?}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.4}{Why can\220t I load data?}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.5}{How do I increase the memory for R?}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.6}{Why doesn\220t the pdf print properly?}{chapter.3}% 15
-\BOOKMARK [1][-]{section.3.7}{R is neat. How can I find out more?}{chapter.3}% 16
-\BOOKMARK [0][-]{chapter.4}{About Zelig}{}% 17
-\BOOKMARK [1][-]{section.4.1}{Technical Vision}{chapter.4}% 18
-\BOOKMARK [0][-]{chapter.5}{Model vignettes}{}% 19
-\BOOKMARK [1][-]{section.5.1}{Zelig-ls}{chapter.5}% 20
+\BOOKMARK [0][-]{chapter.1}{Implemented Models in Zelig 5.0.1}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Installation \046 Quickstart}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Model Reference and Vignettes}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Frequently Asked Questions}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{About Zelig}{chapter.1}% 5
