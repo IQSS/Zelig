@@ -10,7 +10,7 @@ Model vignettes
 .. include:: zelig-logit.rst
 .. include:: zelig-lognorm.rst
 .. include:: zelig-ls.rst
-.. include:: zelig-negbinom.rst
+.. include:: zelig-negbin.rst
 .. include:: zelig-normal.rst
 .. include:: zelig-poisson.rst
 .. include:: zelig-probit.rst

@@ -9,68 +9,47 @@ function of a set of explanatory variables.
 Syntax
 +++++
 
-
-.. sourcecode:: r
-    
-
-    z.out <- zelig(Y ~ X1 + X2, model = "probit", data = mydata)
-    x.out <- setx(z.out)
-    s.out <- sim(z.out, x = x.out, x1 = NULL)
-
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "probit", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+.. ..
 
 Example
 +++++
 
 Attach the sample turnout dataset:
 
-
-.. sourcecode:: r
-    
-
-    data(turnout)
-
+.. {r, eval = FALSE}
+data(turnout)
+.. ..
 
 Estimate parameter values for the probit regression:
 
+.. {r, eval = FALSE}
+z.out <- zelig(vote   race + educate, model = “probit”, data =
+turnout)
+.. ..
 
-.. sourcecode:: r
-    
-
-    z.out <- zelig(vote   race + educate, model = “probit”, data =
-    turnout)
-
-
-
-.. sourcecode:: r
-    
-
-    summary(z.out)
-
+.. {r, eval = FALSE}
+summary(z.out)
+.. ..
 
 Set values for the explanatory variables to their default values.
 
-
-.. sourcecode:: r
-    
-
-    x.out <- setx(z.out)
-
+.. {r, eval = FALSE}
+x.out <- setx(z.out)
+.. ..
 
 Simulate quantities of interest from the posterior distribution.
 
+.. {r, eval = FALSE}
+s.out <- sim(z.out, x = x.out)
+.. ..
 
-.. sourcecode:: r
-    
-
-    s.out <- sim(z.out, x = x.out)
-
-
-
-.. sourcecode:: r
-    
-
-    summary(s.out)
-
+.. {r, eval = FALSE}
+summary(s.out)
+.. ..
 
 Model
 +++++

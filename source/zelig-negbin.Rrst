@@ -10,14 +10,11 @@ is frequently used to estimate over-dispersed event count models.
 Syntax
 +++++
 
-
-.. sourcecode:: r
-    
-
-    z.out <- zelig(Y ~ X1 + X2, model = "negbin", data = mydata)
-    x.out <- setx(z.out)
-    s.out <- sim(z.out, x = x.out)
-
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "negbin", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
 
 
 Example
@@ -25,60 +22,39 @@ Example
 
 Load sample data:
 
-
-.. sourcecode:: r
-    
-
-    data(sanction)
-
+.. {r, eval = FALSE}
+data(sanction)
+.. ..
 
 Estimate the model:
 
+.. {r, eval = FALSE}
+z.out <- zelig(num   target + coop, model = “negbin”, data = sanction)
+.. ..
 
-.. sourcecode:: r
-    
-
-    z.out <- zelig(num   target + coop, model = “negbin”, data = sanction)
-
-
-
-.. sourcecode:: r
-    
-
-    summary(z.out)
-
+.. {r, eval = FALSE}
+summary(z.out)
+.. ..
 
 Set values for the explanatory variables to their default mean values:
 
-
-.. sourcecode:: r
-    
-
-    x.out <- setx(z.out)
-
+.. {r, eval = FALSE}
+x.out <- setx(z.out)
+.. ..
 
 Simulate fitted values:
 
+.. {r, eval = FALSE}
+s.out <- sim(z.out, x = x.out)
+.. ..
 
-.. sourcecode:: r
-    
+.. {r, eval = FALSE}
+summary(s.out)
+.. ..
 
-    s.out <- sim(z.out, x = x.out)
-
-
-
-.. sourcecode:: r
-    
-
-    summary(s.out)
-
-
-
-.. sourcecode:: r
-    
-
-    plot(s.out)
-
+.. {r, eval = FALSE}
+plot(s.out)
+.. ..
 
 
 Model

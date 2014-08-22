@@ -7,7 +7,7 @@ For more information about the software including goals and direction of the pro
 
 To get started, we recommend following the :ref:`installation` guide. Additional information about supported models, including tutorials, can be found in the :ref:`userguide`. 
 
-To view the codebase, visit the source repository at `https://github.com/IQSS/Zelig5 <https://github.com/IQSS/Zelig5>`_ and for regular updates on releases be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_.
+To view the codebase, visit the source repository at `https://github.com/IQSS/Zelig5 <https://github.com/IQSS/Zelig>`_ and for regular updates on releases be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_.
 
 ------------
 

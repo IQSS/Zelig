@@ -1,5 +1,7 @@
-relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables
-============================================================================
+zelig-relogit
+~~~~~~
+
+Rare Events Logistic Regression for Dichotomous Dependent Variables
 
 The relogit procedure estimates the same model as standard logistic
 regression (appropriate when you have a dichotomous dependent variable
@@ -10,19 +12,22 @@ observed events are rare (i.e., if the dependent variable has many more
 prior correction for case-control sampling designs.
 
 Syntax
-~~~~~~
++++++
 
-::
 
-    > z.out <- zelig(Y ~ X1 + X2, model = "relogit", tau = NULL,
-                     case.control = c("prior", "weighting"), 
-                     bias.correct = TRUE, robust = FALSE, 
-                     data = mydata, ...)
-    > x.out <- setx(z.out)
-    > s.out <- sim(z.out, x = x.out)
+.. sourcecode:: r
+    
+
+    z.out <- zelig(Y ~ X1 + X2, model = "relogit", tau = NULL,
+                           case.control = c("prior", "weighting"), 
+                           bias.correct = TRUE, robust = FALSE, 
+                           data = mydata, ...)
+    x.out <- setx(z.out)
+    s.out <- sim(z.out, x = x.out)
+
 
 Arguments
-~~~~~~~~~
++++++
 
 The relogit procedure supports four optional arguments in addition to
 the standard arguments for zelig(). You may additionally use:
@@ -47,32 +52,12 @@ the standard arguments for zelig(). You may additionally use:
    autocorrelation consistent (HAC), and assumes that observations are
    ordered by time index.
 
-   In addition, robust may be a list with the following options:
-
-   -  method: Choose from
-
-      -  “vcovHAC”: (default if robust = TRUE) HAC standard errors.
-
-      -  “kernHAC”: HAC standard errors using the weights given in .
-
-      -  “weave”: HAC standard errors using the weights given in .
-
-   -  order.by: defaults to NULL (the observations are chronologically
-      ordered as in the original data). Optionally, you may specify a
-      vector of weights (either as order.by = z, where z exists outside
-      the data frame; or as order.by = ~z, where z is a variable in the
-      data frame) The observations are chronologically ordered by the
-      size of z.
-
-   -  …: additional options passed to the functions specified in method.
-      See the sandwich library and for more options.
-
-Note that if tau = NULL, bias.correct = FALSE, robust = FALSE, the
+Note that if tau = NULL, bias.correct = FALSE, the
 relogit procedure performs a standard logistic regression without any
 correction.
 
 Example 1: One Tau with Prior Correction and Bias Correction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++
 
 Due to memory and space considerations, the data used here are a sample
 drawn from the full data set used in King and Zeng, 2001, The proportion
@@ -80,77 +65,152 @@ of militarized interstate conflicts to the absence of disputes is
 :math:`\tau = 1,042 / 303,772
 \approx 0.00343`. To estimate the model,
 
-RRR> data(mid)
 
-RRR> z.out1 <- zelig(conflict   major + contig + power + maxdem + mindem
-+ years, + data = mid, model = “relogit”, tau = 1042/303772)
+.. sourcecode:: r
+    
+
+    data(mid)
+
+
+
+.. sourcecode:: r
+    
+
+    z.out1 <- zelig(conflict   major + contig + power + maxdem + mindem + years, + data = mid, model = “relogit”, tau = 1042/303772)
+
 
 Summarize the model output:
 
-RRR> summary(z.out1)
+
+.. sourcecode:: r
+    
+
+    summary(z.out1)
 
 Set the explanatory variables to their means:
 
-RRR> x.out1 <- setx(z.out1)
+
+.. sourcecode:: r
+    
+
+    x.out1 <- setx(z.out1)
+
 
 Simulate quantities of interest:
 
-RRR> s.out1 <- sim(z.out1, x = x.out1) RRR> summary(s.out1)
 
-RRR> plot(s.out1)
+.. sourcecode:: r
+    
 
-|image|
+    s.out1 <- sim(z.out1, x = x.out1) RRR> summary(s.out1)
+
+
+
+.. sourcecode:: r
+    
+
+    plot(s.out1)
+
 
 Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++
 
 Suppose that we wish to perform case control correction using weighting
 (rather than the default prior correction). To estimate the model:
 
-RRR> z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
-+ years, + data = mid, model = “relogit”, tau = 1042/303772, +
-case.control = “weighting”, robust = TRUE)
+
+.. sourcecode:: r
+    
+
+    z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
+    + years, + data = mid, model = “relogit”, tau = 1042/303772, +
+    case.control = “weighting”, robust = TRUE)
+
 
 Summarize the model output:
 
-RRR> summary(z.out2)
+
+.. sourcecode:: r
+    
+
+    summary(z.out2)
+
 
 Set the explanatory variables to their means:
 
-RRR> x.out2 <- setx(z.out2)
+
+.. sourcecode:: r
+    
+
+    x.out2 <- setx(z.out2)
+
 
 Simulate quantities of interest:
 
-RRR> s.out2 <- sim(z.out2, x = x.out2) RRR> summary(s.out2)
+
+.. sourcecode:: r
+    
+
+    s.out2 <- sim(z.out2, x = x.out2)
+    summary(s.out2)
+
 
 Example 3: Two Taus with Bias Correction and Prior Correction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++
 
 Suppose that we did not know that :math:`\tau \approx 0.00343`, but only
 that it was somewhere between :math:`(0.002, 0.005)`. To estimate a
 model with a range of feasible estimates for :math:`\tau` (using the
 default prior correction method for case control correction):
 
-RRR> z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
-+ + years, data = mid, model = “relogit”, + tau = c(0.002, 0.005))
+
+.. sourcecode:: r
+    
+
+    z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
+    + + years, data = mid, model = “relogit”, + tau = c(0.002, 0.005))
+
 
 Summarize the model output:
 
-RRR> summary(z.out2)
+
+.. sourcecode:: r
+    
+
+    summary(z.out2)
+
 
 Set the explanatory variables to their means:
 
-RRR> x.out2 <- setx(z.out2)
+
+.. sourcecode:: r
+    
+
+    x.out2 <- setx(z.out2)
+
 
 Simulate quantities of interest:
 
-RRR> s.out <- sim(z.out2, x = x.out2)
 
-RRR> summary(s.out2)
+.. sourcecode:: r
+    
 
-RRR> plot(s.out2)
+    s.out <- sim(z.out2, x = x.out2)
 
-|image|
+
+
+.. sourcecode:: r
+    
+
+    summary(s.out2)
+
+
+
+.. sourcecode:: r
+    
+
+    plot(s.out2)
+
 
 The cost of giving a range of values for :math:`\tau` is that point
 estimates are not available for quantities of interest. Instead,
@@ -159,7 +219,7 @@ than or equal to a specified level (e.g., at least 95% of the
 simulations are contained in the nominal 95% confidence interval).
 
 Model
-~~~~~
++++++
 
 -  Like the standard logistic regression, the *stochastic component* for
    the rare events logistic regression is:
@@ -240,7 +300,7 @@ Model
    section above.
 
 Quantities of Interest
-~~~~~~~~~~~~~~~~~~~~~~
++++++
 
 -  For either one or no :math:`\tau`:
 
@@ -306,86 +366,17 @@ Quantities of Interest
    indicator is switched to :math:`t_i=0`.
 
 Output Values
-~~~~~~~~~~~~~
++++++
 
 The output of each Zelig command contains useful information which you
 may view. For example, if you run
 ``z.out <- zelig(y ~ x, model = relogit, data)``, then you may examine
 the available information in ``z.out`` by using ``names(z.out)``, see
 the coefficients by using z.out$coefficients, and a default summary of
-information through ``summary(z.out)``. Other elements available through
-the $ operator are listed below.
-
--  From the zelig() output object z.out, you may extract:
-
-   -  coefficients: parameter estimates for the explanatory variables.
-
-   -  bias.correct: TRUE if bias correction was selected, else FALSE.
-
-   -  prior.correct: TRUE if prior correction was selected, else FALSE.
-
-   -  weighting: TRUE if weighting was selected, else FALSE.
-
-   -  tau: the value of tau for which case control correction was
-      implemented.
-
-   -  residuals: the working residuals in the final iteration of the
-      IWLS fit.
-
-   -  fitted.values: the vector of fitted values for the systemic
-      component, :math:`\pi_i`.
-
-   -  linear.predictors: the vector of :math:`x_{i} \beta`
-
-   -  aic: Akaike’s Information Criterion (minus twice the maximized
-      log-likelihood plus twice the number of coefficients).
-
-   -  df.residual: the residual degrees of freedom.
-
-   -  df.null: the residual degrees of freedom for the null model.
-
-   -  zelig.data: the input data frame if save.data = TRUE.
-
-   Note that for a range of :math:`\tau`, each of the above items may be
-   extracted from the “lower.estimate” and “upper.estimate” objects in
-   your zelig output. Use lower <- z.out$lower.estimate, and then
-   lower$coefficients to extract the coefficients for the empirical
-   estimate generated for the smaller of the two :math:`\tau`.
-
--  From summary(z.out), you may extract:
-
-   -  coefficients: the parameter estimates with their associated
-      standard errors, :math:`p`-values, and :math:`t`-statistics.
-
-   -  cov.scaled: a :math:`k \times k` matrix of scaled covariances.
-
-   -  cov.unscaled: a :math:`k \times k` matrix of unscaled covariances.
-
--  From the sim() output object s.out, you may extract quantities of
-   interest arranged as matrices indexed by simulation :math:`\times`
-   x-observation (for more than one x-observation). Available quantities
-   are:
-
-   -  qi$ev: the simulated expected values, or predicted probabilities,
-      for the specified values of x.
-
-   -  qi$pr: the simulated predicted values drawn from Binomial
-      distributions given the predicted probabilities.
-
-   -  qi$fd: the simulated first difference in the predicted
-      probabilities for the values specified in x and x1.
-
-   -  qi$rr: the simulated risk ratio for the predicted probabilities
-      simulated from x and x1.
-
-   -  qi$att.ev: the simulated average expected treatment effect for the
-      treated from conditional prediction models.
-
-   -  qi$att.pr: the simulated average predicted treatment effect for
-      the treated from conditional prediction models.
+information through ``summary(z.out)``.
 
 Differences with Stata Version
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++
 
 The Stata version of ReLogit and the R implementation differ slightly in
 their coefficient estimates due to differences in the matrix inversion
@@ -393,13 +384,6 @@ routines implemented in R and Stata. Zelig uses orthogonal-triangular
 decomposition (through lm.influence()) to compute the bias term, which
 is more numerically stable than standard matrix calculations.
 
-How to Cite
------------
-
 See also
---------
++++++
 
-For more information see ,,. Sample data are from .
-
-.. |image| image:: vigpics/relogit-Example1Plot
-.. |image| image:: vigpics/relogit-Example3Plot

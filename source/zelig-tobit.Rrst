@@ -60,76 +60,52 @@ Examples
 #. | Basic Example
    | Attaching the sample dataset:
 
-
-.. sourcecode:: r
-    
-
-    data(tobin)
-
+.. {r, eval = FALSE}
+data(tobin)
+.. ..
 
 Estimating linear regression using ``tobit``:
 
-
-.. sourcecode:: r
-    
-
-    z.out <- zelig(durable   age + quant, model = “tobit”, data = tobin)
-
+.. {r, eval = FALSE}
+z.out <- zelig(durable   age + quant, model = “tobit”, data = tobin)
+.. ..
 
 Setting values for the explanatory variables to their sample averages:
 
-
-.. sourcecode:: r
-    
-
-    x.out <- setx(z.out)
-
+.. {r, eval = FALSE}
+x.out <- setx(z.out)
+.. ..
 
 Simulating quantities of interest from the posterior distribution given ``x.out``.
 
+.. {r, eval = FALSE}
+s.out1 <- sim(z.out, x = x.out)
+.. ..
 
-.. sourcecode:: r
-    
-
-    s.out1 <- sim(z.out, x = x.out)
-
-
-
-.. sourcecode:: r
-    
-
-    summary(s.out1)
-
+.. {r, eval = FALSE}
+summary(s.out1)
+.. ..
 
 #. | Simulating First Differences
    | Set explanatory variables to their default(mean/mode) values, with
    high (80th percentile) and low (20th percentile) liquidity ratio
    (``quant``):
 
-
-.. sourcecode:: r
-    
-
-    x.high <- setx(z.out, quant = quantile(tobin\ :math:`quant, prob = 0.8))
-    x.low <- setx(z.out, quant = quantile(tobin`\ quant, prob = 0.2))
-
+.. {r, eval = FALSE}
+x.high <- setx(z.out, quant = quantile(tobin\ :math:`quant, prob = 0.8))
+x.low <- setx(z.out, quant = quantile(tobin`\ quant, prob = 0.2))
+.. ..
 
 Estimating the first difference for the effect of high versus low
 liquidity ratio on duration(\ ``durable``):
 
+.. {r, eval = FALSE}
+s.out2 <- sim(z.out, x = x.high, x1 = x.low)
+.. ..
 
-.. sourcecode:: r
-    
-
-    s.out2 <- sim(z.out, x = x.high, x1 = x.low)
-
-
-
-.. sourcecode:: r
-    
-
-    summary(s.out2)
-
+.. {r, eval = FALSE}
+summary(s.out2)
+.. ..
 
 Model
 +++++
@@ -201,12 +177,9 @@ Output Values
 The output of each Zelig command contains useful information which you
 may view. For example, if you run:
 
-
-.. sourcecode:: r
-    
-
-    z.out <- zelig(y ~ x, model = "tobit", data)
-
+.. {r, eval = FALSE}
+z.out <- zelig(y ~ x, model = "tobit", data)
+.. ..
 
 then you may examine the available information in ``z.out`.
 

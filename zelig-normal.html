@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>normal: Normal Regression for Continuous Dependent Variables &mdash; Zelig 5.0.1 documentation</title>
+    <title>zelig-normal &mdash; Zelig 5.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -42,7 +42,7 @@
   </head>
   <body>
 
-<a href="https://github.com/IQSS/Zelig5"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<a href="https://github.com/IQSS/Zelig"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
 <div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
 
     <div class="container">
@@ -100,7 +100,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
-<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a><ul>
@@ -108,55 +107,13 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">Zelig-ls</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id25">Syntax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id26">Additional Inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id27">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id28">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id29">Quantities of Interest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id30">Output Values</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id31">Syntax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id32">Additional Inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id33">Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id34">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id35">Quantities of Interest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id36">Output Values</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id37">Syntax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id38">Additional Inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id39">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id40">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id41">Quantities of Interest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id42">Output Values</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id43">Syntax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#arguments">Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-1-one-tau-with-prior-correction-and-bias-correction">Example 1: One Tau with Prior Correction and Bias Correction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#example-3-two-taus-with-bias-correction-and-prior-correction">Example 3: Two Taus with Bias Correction and Prior Correction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id44">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id45">Quantities of Interest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id46">Output Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#differences-with-stata-version">Differences with Stata Version</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id47">Syntax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#inputs">Inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id48">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id49">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id50">Quantities of Interest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#id51">Output Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelg-tobit">zelg-tobit</a></li>
 </ul>
 </li>
 </ul>
@@ -172,17 +129,13 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">normal: Normal Regression for Continuous Dependent Variables</a><ul>
+<li><a class="reference internal" href="#">zelig-normal</a><ul>
 <li><a class="reference internal" href="#syntax">Syntax</a></li>
-<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 <li><a class="reference internal" href="#model">Model</a></li>
 <li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
-<li><a class="reference internal" href="#output-values">Output Values</a><ul>
-<li><a class="reference internal" href="#how-to-cite">How to Cite</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
 <li><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -224,11 +177,6 @@
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vignette.html">Model vignettes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#normal-normal-regression-for-continuous-dependent-variables">normal: Normal Regression for Continuous Dependent Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#poisson-poisson-regression-for-event-count-dependent-variables">poisson: Poisson Regression for Event Count Dependent Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#probit-probit-regression-for-dichotomous-dependent-variables">probit: Probit Regression for Dichotomous Dependent Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#relogit-rare-events-logistic-regression-for-dichotomous-dependent-variables">relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html#tobit-linear-regression-for-a-left-censored-dependent-variable"><tt class="docutils literal"><span class="pre">tobit</span></tt>: Linear Regression for a Left-Censored Dependent Variable</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -242,8 +190,9 @@
       </div>
     <div class="col-md-9">
       
-  <div class="section" id="normal-normal-regression-for-continuous-dependent-variables">
-<h1>normal: Normal Regression for Continuous Dependent Variables<a class="headerlink" href="#normal-normal-regression-for-continuous-dependent-variables" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="zelig-normal">
+<h1>zelig-normal<a class="headerlink" href="#zelig-normal" title="Permalink to this headline">¶</a></h1>
+<p>Normal Regression for Continuous Dependent Variables</p>
 <p>The Normal regression model is a close variant of the more standard
 least squares regression model (see ). Both models specify a continuous
 dependent variable as a linear function of a set of explanatory
@@ -252,67 +201,47 @@ least squares) estimates. The two models differ only in their estimate
 for the stochastic parameter <span class="math">\(\sigma\)</span>.</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, model = &quot;normal&quot;, data = mydata)
-&gt; x.out &lt;- setx(z.out)
-&gt; s.out &lt;- sim(z.out, x = x.out)
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;normal&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="additional-inputs">
-<h2>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
-<p>In addition to the standard inputs, zelig() takes the following
-additional options for normal regression:</p>
-<ul>
-<li><p class="first">robust: defaults to FALSE. If TRUE is selected, zelig() computes
-robust standard errors via the sandwich package (see ). The default
-type of robust standard error is heteroskedastic and autocorrelation
-consistent (HAC), and assumes that observations are ordered by time
-index.</p>
-<p>In addition, robust may be a list with the following options:</p>
-<ul class="simple">
-<li>method: Choose from<ul>
-<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
-<li>“kernHAC”: HAC standard errors using the weights given in .</li>
-<li>“weave”: HAC standard errors using the weights given in .</li>
-</ul>
-</li>
-<li>order.by: defaults to NULL (the observations are chronologically
-ordered as in the original data). Optionally, you may specify a
-vector of weights (either as order.by = z, where z exists outside
-the data frame; or as order.by = ~z, where z is a variable in the
-data frame). The observations are chronologically ordered by the
-size of z.</li>
-<li>…: additional options passed to the functions specified in method.
-See the sandwich library and for more options.</li>
-</ul>
-</li>
-</ul>
-</div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p class="first">Basic Example with First Differences</p>
+<ol class="arabic simple">
+<li>Basic Example with First Differences</li>
+</ol>
 <p>Attach sample data:</p>
-<p>RRR&gt; data(macro)</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>macro<span class="p">)</span>
+</pre></div>
+</div>
 <p>Estimate model:</p>
-<p>RRR&gt; z.out1 &lt;- zelig(unem &nbsp; gdp + capmob + trade, model = “normal”, +
-data = macro)</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem   gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> “normal”<span class="p">,</span> <span class="o">+</span> data
+<span class="o">=</span> macro<span class="p">)</span>
+</pre></div>
+</div>
 <p>Summarize of regression coefficients:</p>
-<p>RRR&gt; summary(z.out1)</p>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
+</pre></div>
+</div>
 <p>Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for trade:</p>
-<p>RRR&gt; x.high &lt;- setx(z.out1, trade =
-quantile(macro<span class="math">\(trade, 0.8))
-RRR&gt;  x.low &lt;- setx(z.out1, trade = quantile(macro\)</span>trade, 0.2))</p>
-<p>Generate first differences for the effect of high versus low trade on
-GDP:</p>
-<p>RRR&gt; s.out1 &lt;- sim(z.out1, x = x.high, x1 = x.low)</p>
-<p>RRR&gt; summary(s.out1)</p>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro\ <span class="o">:</span>math<span class="o">:</span>`trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro`\ trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Generate first differences for the effect of high versus low trade on GDP:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
 <p>A visual summary of quantities of interest:</p>
-<p>RRR&gt; plot(s.out1)</p>
-<p><img alt="image" src="vigpics/normal-ExamplesPlot" /></p>
-</li>
-</ol>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
@@ -384,58 +313,12 @@ may view. For example, if you run
 <tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">normal,</span> <span class="pre">data)</span></tt>, then you may examine
 the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see
 the coefficients by using z.out$coefficients, and a default summary of
-information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements available through
-the $ operator are listed below.</p>
-<ul class="simple">
-<li>From the zelig() output object z.out, you may extract:<ul>
-<li>coefficients: parameter estimates for the explanatory variables.</li>
-<li>residuals: the working residuals in the final iteration of the
-IWLS fit.</li>
-<li>fitted.values: fitted values. For the normal model, these are
-identical to the linear predictors.</li>
-<li>linear.predictors: fitted values. For the normal model, these are
-identical to fitted.values.</li>
-<li>aic: Akaike’s Information Criterion (minus twice the maximized
-log-likelihood plus twice the number of coefficients).</li>
-<li>df.residual: the residual degrees of freedom.</li>
-<li>df.null: the residual degrees of freedom for the null model.</li>
-<li>zelig.data: the input data frame if save.data = TRUE.</li>
-</ul>
-</li>
-<li>From summary(z.out), you may extract:<ul>
-<li>coefficients: the parameter estimates with their associated
-standard errors, <span class="math">\(p\)</span>-values, and <span class="math">\(t\)</span>-statistics.</li>
-<li>cov.scaled: a <span class="math">\(k \times k\)</span> matrix of scaled covariances.</li>
-<li>cov.unscaled: a <span class="math">\(k \times k\)</span> matrix of unscaled covariances.</li>
-</ul>
-</li>
-<li>From the sim() output object s.out, you may extract quantities of
-interest arranged as matrices indexed by simulation <span class="math">\(\times\)</span>
-x-observation (for more than one x-observation). Available quantities
-are:<ul>
-<li>qi$ev: the simulated expected values for the specified values of
-x.</li>
-<li>qi$pr: the simulated predicted values drawn from the distribution
-defined by <span class="math">\((\mu_i, \sigma)\)</span>.</li>
-<li>qi$fd: the simulated first difference in the simulated expected
-values for the values specified in x and x1.</li>
-<li>qi$att.ev: the simulated average expected treatment effect for the
-treated from conditional prediction models.</li>
-<li>qi$att.pr: the simulated average predicted treatment effect for
-the treated from conditional prediction models.</li>
-</ul>
-</li>
-</ul>
-<div class="section" id="how-to-cite">
-<h3>How to Cite<a class="headerlink" href="#how-to-cite" title="Permalink to this headline">¶</a></h3>
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>.</p>
 </div>
 <div class="section" id="see-also">
-<h3>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <p>The normal model is part of the stats package by . Advanced users may
-wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>, as well as . Robust
-standard errors are implemented via the sandwich package by . Sample
-data are from .</p>
-</div>
+wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 </div>
 </div>
 

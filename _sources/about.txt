@@ -34,11 +34,3 @@ Additional features include:
 - Allowing condtional population and super population inferences
 - Automating the creation of replication data files
 
-------------
-
-Release Notes
-~~~~~~~~~~~~~
-
-**v 5.0 (Jul 2014)**
-
-TBA

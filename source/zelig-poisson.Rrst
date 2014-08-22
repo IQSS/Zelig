@@ -12,63 +12,45 @@ model, see .
 Syntax
 +++++
 
-
-.. sourcecode:: r
-    
-
-    z.out <- zelig(Y ~ X1 + X2, model = "poisson", data = mydata)
-    x.out <- setx(z.out)
-    s.out <- sim(z.out, x = x.out)
-
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "poisson", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
 
 Example
 +++++
 
 Load sample data:
 
-
-.. sourcecode:: r
-    
-
-    data(sanction)
-
+.. {r, eval = FALSE}
+data(sanction)
+.. ..
 
 Estimate Poisson model:
 
+.. {r, eval = FALSE}
+z.out <- zelig(num   target + coop, model = “poisson”, data =
+sanction)
+.. ..
 
-.. sourcecode:: r
-    
-
-    z.out <- zelig(num   target + coop, model = “poisson”, data =
-    sanction)
-
-
-
-.. sourcecode:: r
-    
-
-    summary(z.out)
-
+.. {r, eval = FALSE}
+summary(z.out)
+.. ..
 
 Set values for the explanatory variables to their default mean values:
 
-
-.. sourcecode:: r
-    
-
-    x.out <- setx(z.out)
-
+.. {r, eval = FALSE}
+x.out <- setx(z.out)
+.. ..
 
 Simulate fitted values:
 
-
-.. sourcecode:: r
-    
-
-    s.out <- sim(z.out, x = x.out)
-    summary(s.out)
-    plot(s.out)
-
+.. {r, eval = FALSE}
+s.out <- sim(z.out, x = x.out)
+summary(s.out)
+plot(s.out)
+.. ..
 
 Model
 +++++

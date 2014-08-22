@@ -14,17 +14,14 @@ prior correction for case-control sampling designs.
 Syntax
 +++++
 
-
-.. sourcecode:: r
-    
-
-    z.out <- zelig(Y ~ X1 + X2, model = "relogit", tau = NULL,
-                           case.control = c("prior", "weighting"), 
-                           bias.correct = TRUE, robust = FALSE, 
-                           data = mydata, ...)
-    x.out <- setx(z.out)
-    s.out <- sim(z.out, x = x.out)
-
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "relogit", tau = NULL,
+                       case.control = c("prior", "weighting"), 
+                       bias.correct = TRUE, robust = FALSE, 
+                       data = mydata, ...)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
 
 Arguments
 +++++
@@ -65,52 +62,34 @@ of militarized interstate conflicts to the absence of disputes is
 :math:`\tau = 1,042 / 303,772
 \approx 0.00343`. To estimate the model,
 
+.. {r, eval = FALSE}
+data(mid)
+.. ..
 
-.. sourcecode:: r
-    
-
-    data(mid)
-
-
-
-.. sourcecode:: r
-    
-
-    z.out1 <- zelig(conflict   major + contig + power + maxdem + mindem + years, + data = mid, model = “relogit”, tau = 1042/303772)
-
+.. {r, eval = FALSE}
+z.out1 <- zelig(conflict   major + contig + power + maxdem + mindem + years, + data = mid, model = “relogit”, tau = 1042/303772)
+.. ..
 
 Summarize the model output:
 
-
-.. sourcecode:: r
-    
-
-    summary(z.out1)
-
+.. {r, eval = FALSE}
+summary(z.out1)
+.. ..
 Set the explanatory variables to their means:
 
-
-.. sourcecode:: r
-    
-
-    x.out1 <- setx(z.out1)
-
+.. {r, eval = FALSE}
+x.out1 <- setx(z.out1)
+.. ..
 
 Simulate quantities of interest:
 
+.. {r, eval = FALSE}
+s.out1 <- sim(z.out1, x = x.out1) RRR> summary(s.out1)
+.. ..
 
-.. sourcecode:: r
-    
-
-    s.out1 <- sim(z.out1, x = x.out1) RRR> summary(s.out1)
-
-
-
-.. sourcecode:: r
-    
-
-    plot(s.out1)
-
+.. {r, eval = FALSE}
+plot(s.out1)
+.. ..
 
 Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction
 +++++
@@ -118,42 +97,30 @@ Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction
 Suppose that we wish to perform case control correction using weighting
 (rather than the default prior correction). To estimate the model:
 
-
-.. sourcecode:: r
-    
-
-    z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
-    + years, + data = mid, model = “relogit”, tau = 1042/303772, +
-    case.control = “weighting”, robust = TRUE)
-
+.. {r, eval = FALSE}
+z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
++ years, + data = mid, model = “relogit”, tau = 1042/303772, +
+case.control = “weighting”, robust = TRUE)
+.. ..
 
 Summarize the model output:
 
-
-.. sourcecode:: r
-    
-
-    summary(z.out2)
-
+.. {r, eval = FALSE}
+summary(z.out2)
+.. ..
 
 Set the explanatory variables to their means:
 
-
-.. sourcecode:: r
-    
-
-    x.out2 <- setx(z.out2)
-
+.. {r, eval = FALSE}
+x.out2 <- setx(z.out2)
+.. ..
 
 Simulate quantities of interest:
 
-
-.. sourcecode:: r
-    
-
-    s.out2 <- sim(z.out2, x = x.out2)
-    summary(s.out2)
-
+.. {r, eval = FALSE}
+s.out2 <- sim(z.out2, x = x.out2)
+summary(s.out2)
+.. ..
 
 Example 3: Two Taus with Bias Correction and Prior Correction
 +++++
@@ -163,54 +130,36 @@ that it was somewhere between :math:`(0.002, 0.005)`. To estimate a
 model with a range of feasible estimates for :math:`\tau` (using the
 default prior correction method for case control correction):
 
-
-.. sourcecode:: r
-    
-
-    z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
-    + + years, data = mid, model = “relogit”, + tau = c(0.002, 0.005))
-
+.. {r, eval = FALSE}
+z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
++ + years, data = mid, model = “relogit”, + tau = c(0.002, 0.005))
+.. ..
 
 Summarize the model output:
 
-
-.. sourcecode:: r
-    
-
-    summary(z.out2)
-
+.. {r, eval = FALSE}
+summary(z.out2)
+.. ..
 
 Set the explanatory variables to their means:
 
-
-.. sourcecode:: r
-    
-
-    x.out2 <- setx(z.out2)
-
+.. {r, eval = FALSE}
+x.out2 <- setx(z.out2)
+.. ..
 
 Simulate quantities of interest:
 
+.. {r, eval = FALSE}
+s.out <- sim(z.out2, x = x.out2)
+.. ..
 
-.. sourcecode:: r
-    
+.. {r, eval = FALSE}
+summary(s.out2)
+.. ..
 
-    s.out <- sim(z.out2, x = x.out2)
-
-
-
-.. sourcecode:: r
-    
-
-    summary(s.out2)
-
-
-
-.. sourcecode:: r
-    
-
-    plot(s.out2)
-
+.. {r, eval = FALSE}
+plot(s.out2)
+.. ..
 
 The cost of giving a range of values for :math:`\tau` is that point
 estimates are not available for quantities of interest. Instead,

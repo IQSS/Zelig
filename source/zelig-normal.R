@@ -1,17 +1,17 @@
 
 ## ----, eval = FALSE------------------------------------------------------
-## z.out <- zelig(Y ~ X1 + X2, model = "ls", data = mydata)
+## z.out <- zelig(Y ~ X1 + X2, model = "normal", data = mydata)
 ## x.out <- setx(z.out)
 ## s.out <- sim(z.out, x = x.out)
 
 
 ## ----, eval = FALSE------------------------------------------------------
-##  data(macro)
+## data(macro)
 
 
 ## ----, eval = FALSE------------------------------------------------------
-## z.out1 <- zelig(unem   gdp + capmob + trade, model = “ls”, data =
-## macro)
+## z.out1 <- zelig(unem   gdp + capmob + trade, model = “normal”, + data
+## = macro)
 
 
 ## ----, eval = FALSE------------------------------------------------------
@@ -33,23 +33,5 @@
 
 ## ----, eval = FALSE------------------------------------------------------
 ## plot(s.out1)
-
-
-## ----, eval = FALSE------------------------------------------------------
-## z.out2 <- zelig(unem   gdp + trade + capmob + as.factor(country), +
-## model = “ls”, data = macro)
-
-
-## ----, eval = FALSE------------------------------------------------------
-## x.US <- setx(z.out2, country = “United States”)
-## x.Japan <- setx(z.out2, country = “Japan”)
-
-
-## ----, eval = FALSE------------------------------------------------------
-## s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
-
-
-## ----, eval = FALSE------------------------------------------------------
-## plot(s.out2)
 
 

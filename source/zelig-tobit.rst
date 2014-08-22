@@ -1,5 +1,6 @@
-``tobit``: Linear Regression for a Left-Censored Dependent Variable
-===================================================================
+zelg-tobit
+~~~~~~
+Linear Regression for a Left-Censored Dependent Variable
 
 Tobit regression estimates a linear regression model for a left-censored
 dependent variable, where the dependent variable is censored from below.
@@ -9,7 +10,7 @@ observed dependent variables, see Bayesian regression (), maximum
 likelihood normal regression (), or least squares ().
 
 Syntax
-~~~~~~
++++++
 
 ::
 
@@ -19,7 +20,7 @@ Syntax
     > s.out <- sim(z.out, x = x.out)
 
 Inputs
-~~~~~~
++++++
 
 zelig() accepts the following arguments to specify how the dependent
 variable is censored.
@@ -54,49 +55,84 @@ variable is censored.
 Zelig users may wish to refer to ``help(survreg)`` for more information.
 
 Examples
-~~~~~~~~
++++++
 
 #. | Basic Example
    | Attaching the sample dataset:
 
-   RRR> data(tobin)
 
-   Estimating linear regression using ``tobit``:
+.. sourcecode:: r
+    
 
-   RRR> z.out <- zelig(durable   age + quant, model = “tobit”, data =
-   tobin)
+    data(tobin)
 
-   Setting values for the explanatory variables to their sample
-   averages:
 
-   RRR> x.out <- setx(z.out)
+Estimating linear regression using ``tobit``:
 
-   Simulating quantities of interest from the posterior distribution
-   given ``x.out``.
 
-   RRR> s.out1 <- sim(z.out, x = x.out)
+.. sourcecode:: r
+    
 
-   RRR> summary(s.out1)
+    z.out <- zelig(durable   age + quant, model = “tobit”, data = tobin)
+
+
+Setting values for the explanatory variables to their sample averages:
+
+
+.. sourcecode:: r
+    
+
+    x.out <- setx(z.out)
+
+
+Simulating quantities of interest from the posterior distribution given ``x.out``.
+
+
+.. sourcecode:: r
+    
+
+    s.out1 <- sim(z.out, x = x.out)
+
+
+
+.. sourcecode:: r
+    
+
+    summary(s.out1)
+
 
 #. | Simulating First Differences
    | Set explanatory variables to their default(mean/mode) values, with
    high (80th percentile) and low (20th percentile) liquidity ratio
    (``quant``):
 
-   RRR> x.high <- setx(z.out, quant =
-   quantile(tobin\ :math:`quant, prob = 0.8))
-   RRR>  x.low <- setx(z.out, quant = quantile(tobin`\ quant, prob =
-   0.2))
 
-   Estimating the first difference for the effect of high versus low
-   liquidity ratio on duration(\ ``durable``):
+.. sourcecode:: r
+    
 
-   RRR> s.out2 <- sim(z.out, x = x.high, x1 = x.low)
+    x.high <- setx(z.out, quant = quantile(tobin\ :math:`quant, prob = 0.8))
+    x.low <- setx(z.out, quant = quantile(tobin`\ quant, prob = 0.2))
 
-   RRR> summary(s.out2)
+
+Estimating the first difference for the effect of high versus low
+liquidity ratio on duration(\ ``durable``):
+
+
+.. sourcecode:: r
+    
+
+    s.out2 <- sim(z.out, x = x.high, x1 = x.low)
+
+
+
+.. sourcecode:: r
+    
+
+    summary(s.out2)
+
 
 Model
-~~~~~
++++++
 
 -  Let :math:`Y_i^*` be a latent dependent variable which is distributed
    with *stochastic* component
@@ -133,7 +169,7 @@ Model
    coefficients.
 
 Quantities of Interest
-~~~~~~~~~~~~~~~~~~~~~~
++++++
 
 -  The expected values (``qi$ev``) for the tobit regression model are
    the same as the expected value of :math:`Y*`:
@@ -160,50 +196,23 @@ Quantities of Interest
    treatment (:math:`t_{i}=1`) and control (:math:`t_{i}=0`) groups.
 
 Output Values
-~~~~~~~~~~~~~
++++++
 
 The output of each Zelig command contains useful information which you
 may view. For example, if you run:
 
-::
 
-    z.out <- zelig(y ~ x, model = "tobit.bayes", data)
+.. sourcecode:: r
+    
 
-then you may examine the available information in ``z.out`` by using
-``names(z.out)``, see the draws from the posterior distribution of the
-``coefficients`` by using ``z.out$coefficients``, and view a default
-summary of information through ``summary(z.out)``. Other elements
-available through the ``$`` operator are listed below.
+    z.out <- zelig(y ~ x, model = "tobit", data)
 
--  From the ``zelig()`` output object ``z.out``, you may extract:
 
-   -  ``coefficients``: draws from the posterior distributions of the
-      estimated parameters. The first :math:`k` columns contain the
-      posterior draws of the coefficients :math:`\beta`, and the last
-      column contains the posterior draws of the variance
-      :math:`\sigma^2`.
-
-   -  zelig.data: the input data frame if save.data = TRUE.
-
-   -  ``seed``: the random seed used in the model.
-
--  From the ``sim()`` output object ``s.out``:
-
-   -  ``qi$ev``: the simulated expected value for the specified values
-      of ``x``.
-
-   -  ``qi$fd``: the simulated first difference in the expected values
-      given the values specified in ``x`` and ``x1``.
-
-   -  ``qi$att.ev``: the simulated average expected treatment effect for
-      the treated from conditional prediction models.
-
-How to Cite
------------
+then you may examine the available information in ``z.out`.
 
 See also
---------
++++++
 
 The tobit function is part of the survival library by Terry Therneau,
 ported to R by Thomas Lumley. Advanced users may wish to refer to
-``help(survfit)`` in the survival library and .Sample data are from .
+``help(survfit)`` in the survival library.
