@@ -193,6 +193,14 @@ assumes that all waiting times are complete by the end of the study
 (censoring is not allowed).</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zgamma<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X <span class="o">~</span> X<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
 x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">,</span> x1 <span class="o">=</span> <span class="kc">NULL</span><span class="p">)</span>
@@ -206,19 +214,39 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </pre></div>
 </div>
 <p>Estimate the model:</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>duration   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> “gamma”<span class="p">,</span> data <span class="o">=</span>
-coalition<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>duration <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
+<span class="c">##   gamma: Gamma Regression for Continuous, Positive Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<span class="c">## Call:  stats::glm(formula = duration ~ fract + numst2, family = Gamma(&quot;inverse&quot;),</span>
+<span class="c">##     data = .)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)        fract       numst2</span>
+<span class="c">##   -0.012960     0.000115    -0.017387</span>
+<span class="c">##</span>
+<span class="c">## Degrees of Freedom: 313 Total (i.e. Null);  311 Residual</span>
+<span class="c">## Null Deviance:       301</span>
+<span class="c">## Residual Deviance: 272   AIC: 2430</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
+</pre></div>
+</div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2
-<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
@@ -228,8 +256,34 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 14.48 1.101 14.43 12.48 16.83</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## [1,] 14.84 13.25 11.25 0.9802 49.45</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##      mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 19.2 1.091 19.15 17.17 21.45</span>
+<span class="c">## pv</span>
+<span class="c">##      mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## [1,] 19.8 18.47 14.61 0.9829 65.75</span>
+<span class="c">## fd</span>
+<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 4.713 1.532 4.717 1.801 7.671</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
+</div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-10.png" />
 </div>
 </div>
 <div class="section" id="model">
@@ -306,46 +360,7 @@ may view. For example, if you run
 <tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">gamma,</span> <span class="pre">data)</span></tt>, then you may examine the
 available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the
 coefficients by using z.out$coefficients, and a default summary of
-information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements available through
-the $ operator are listed below.</p>
-<ul class="simple">
-<li>From the zelig() output object z.out, you may extract:<ul>
-<li>coefficients: parameter estimates for the explanatory variables.</li>
-<li>residuals: the working residuals in the final iteration of the
-IWLS fit.</li>
-<li>fitted.values: the vector of fitted values.</li>
-<li>linear.predictors: the vector of <img class="math" src="_images/math/f8237c9c4a91083105a2650415195fa49fe0bafc.png" alt="x_{i}\beta"/>.</li>
-<li>aic: Akaike’s Information Criterion (minus twice the maximized
-log-likelihood plus twice the number of coefficients).</li>
-<li>df.residual: the residual degrees of freedom.</li>
-<li>df.null: the residual degrees of freedom for the null model.</li>
-<li>zelig.data: the input data frame if save.data = TRUE.</li>
-</ul>
-</li>
-<li>From summary(z.out), you may extract:<ul>
-<li>coefficients: the parameter estimates with their associated
-standard errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>-statistics.</li>
-<li>cov.scaled: a <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/> matrix of scaled covariances.</li>
-<li>cov.unscaled: a <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/> matrix of unscaled covariances.</li>
-</ul>
-</li>
-<li>From the sim() output object s.out, you may extract quantities of
-interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
-x-observation (for more than one x-observation). Available quantities
-are:<ul>
-<li>qi$ev: the simulated expected values for the specified values of
-x.</li>
-<li>qi$pr: the simulated predicted values drawn from a distribution
-defined by <img class="math" src="_images/math/d625e4d40861475147286b5a40866be5ac03ff8c.png" alt="(\alpha, \lambda_i)"/>.</li>
-<li>qi$fd: the simulated first difference in the expected values for
-the specified values in x and x1.</li>
-<li>qi$att.ev: the simulated average expected treatment effect for the
-treated from conditional prediction models.</li>
-<li>qi$att.pr: the simulated average predicted treatment effect for
-the treated from conditional prediction models.</li>
-</ul>
-</li>
-</ul>
+information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>.</p>
 </div>
 <div class="section" id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>

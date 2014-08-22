@@ -11,6 +11,26 @@ the hazard rate to increase and decrease.
 Syntax
 +++++
 
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zlognorm$new()
+z5$zelig(Surv(Y, C) ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zlognorm$new()
+z5$zelig(Surv(Y, C) ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
 .. {r, eval = FALSE}
 z.out <- zelig(Surv(Y, C) ~ X, model = "lognorm", data = mydata)
 x.out <- setx(z.out)
@@ -56,22 +76,25 @@ its own cluster.
 Example
 +++++
 
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. .. 
+
 Attach the sample data:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(coalition)
 .. ..
 
 Estimate the model:
 
-.. {r, eval = FALSE}
-RRR> z.out <- zelig(Surv(duration, ciep12)   fract + numst2, model =
-“lognorm”, + data = coalition)
+.. {r, eval = TRUE}
+z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model ="lognorm",  data = coalition)
 .. ..
 
 View the regression output:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
@@ -79,22 +102,22 @@ Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:
 
-.. {r, eval = FALSE}
-x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2
-= 1)
+.. {r, eval = TRUE}
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2= 1)
 .. ..
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out <- sim(z.out, x = x.low, x1 = x.high)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out)
 .. ..
 
@@ -132,8 +155,7 @@ fully observed dependent variable, :math:`Y_i`, is defined as
    properties. The hazard function :math:`h(t)` measures the probability
    of not surviving past time :math:`t` given survival up to :math:`t`.
    In general, the hazard function is equal to :math:`f(t)/S(t)` where
-   the survival function :math:`S(t) =
-     1 - \int_{0}^t f(s) ds` represents the fraction still surviving at
+   the survival function :math:`S(t) =1 - \int_{0}^t f(s) ds` represents the fraction still surviving at
    time :math:`t`. The cumulative hazard function :math:`H(t)` describes
    the probability of dying before time :math:`t`. In general,
    :math:`H(t)=
@@ -218,54 +240,7 @@ may view. For example, if you run
 ``z.out <- zelig(Surv(Y, C) ~ X, model = lognorm, data)``, then you may
 examine the available information in ``z.out`` by using
 ``names(z.out)``, see the coefficients by using z.out$coefficients, and
-a default summary of information through ``summary(z.out)``. Other
-elements available through the $ operator are listed below.
-
--  From the zelig() output object z.out, you may extract:
-
-   -  coefficients: parameter estimates for the explanatory variables.
-
-   -  icoef: parameter estimates for the intercept and :math:`\sigma`.
-
-   -  var: Variance-covariance matrix.
-
-   -  loglik: Vector containing the log-likelihood for the model and
-      intercept only (respectively).
-
-   -  linear.predictors: the vector of :math:`x_{i}\beta`.
-
-   -  df.residual: the residual degrees of freedom.
-
-   -  df.null: the residual degrees of freedom for the null model.
-
-   -  zelig.data: the input data frame if save.data = TRUE.
-
--  Most of this may be conveniently summarized using summary(z.out).
-   From summary(z.out), you may additionally extract:
-
-   -  table: the parameter estimates with their associated standard
-      errors, :math:`p`-values, and :math:`t`-statistics.
-
--  From the sim() output object s.out, you may extract quantities of
-   interest arranged as matrices indexed by simulation :math:`\times`
-   x-observation (for more than one x-observation). Available quantities
-   are:
-
-   -  qi$ev: the simulated expected values for the specified values of
-      x.
-
-   -  qi$pr: the simulated predicted values drawn from the distribution
-      defined by :math:`(\lambda_i, \sigma)`.
-
-   -  qi$fd: the simulated first differences between the simulated
-      expected values for x and x1.
-
-   -  qi$att.ev: the simulated average expected treatment effect for the
-      treated from conditional prediction models.
-
-   -  qi$att.pr: the simulated average predicted treatment effect for
-      the treated from conditional prediction models.
-
+a default summary of information through ``summary(z.out)``.
 
 See also
 +++++

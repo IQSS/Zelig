@@ -125,8 +125,11 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">zelig-logit</a><ul>
 <li><a class="reference internal" href="#syntax">Syntax</a></li>
-<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#basic-example">Basic Example</a></li>
+<li><a class="reference internal" href="#simulating-first-differences">Simulating First Differences</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#model">Model</a></li>
 <li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
 <li><a class="reference internal" href="#output-values">Output Values</a></li>
@@ -191,57 +194,41 @@
 function of a set of explanatory variables.</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zlogit<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X <span class="o">~</span> X<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
 x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">,</span> x1 <span class="o">=</span> <span class="kc">NULL</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="additional-inputs">
-<h2>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
-<p>In addition to the standard inputs, zelig() takes the following
-additional options for logistic regression:</p>
-<ul>
-<li><p class="first">robust: defaults to FALSE. If TRUE is selected, zelig() computes
-robust standard errors via the sandwich package (see ). The default
-type of robust standard error is heteroskedastic and autocorrelation
-consistent (HAC), and assumes that observations are ordered by time
-index.</p>
-<p>In addition, robust may be a list with the following options:</p>
-<ul class="simple">
-<li>method: Choose from<ul>
-<li>“vcovHAC”: (default if robust = TRUE) HAC standard errors.</li>
-<li>“kernHAC”: HAC standard errors using the weights given in .</li>
-<li>“weave”: HAC standard errors using the weights given in .</li>
-</ul>
-</li>
-<li>order.by: defaults to NULL (the observations are chronologically
-ordered as in the original data). Optionally, you may specify a
-vector of weights (either as order.by = z, where z exists outside
-the data frame; or as order.by = ~z, where z is a variable in the
-data frame) The observations are chronologically ordered by the
-size of z.</li>
-<li>…: additional options passed to the functions specified in method.
-See the sandwich library and for more options.</li>
-</ul>
-</li>
-</ul>
-</div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Basic Example</li>
-</ol>
+<div class="section" id="basic-example">
+<h3>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h3>
 <p>Attaching the sample turnout dataset:</p>
 <div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>turnout<span class="p">)</span>
 </pre></div>
 </div>
 <p>Estimating parameter values for the logistic regression:</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   age <span class="o">+</span> race<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> age <span class="o">+</span> race<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
+<span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables:</p>
-<div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> age <span class="o">=</span> <span class="m">36</span><span class="p">,</span> race <span class="o">=</span> “white”<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> age <span class="o">=</span> <span class="m">36</span><span class="p">,</span> race <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulating quantities of interest from the posterior distribution.</p>
@@ -251,40 +238,74 @@ See the sandwich library and for more options.</li>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.7484 0.01155 0.7492 0.7253 0.7714</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.254 0.746</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li>Simulating First Differences</li>
-</ol>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-9.png" />
+</div>
+</div>
+<div class="section" id="simulating-first-differences">
+<h3>Simulating First Differences<a class="headerlink" href="#simulating-first-differences" title="Permalink to this headline">¶</a></h3>
 <p>Estimating the risk difference (and risk ratio) between low education
 (25th percentile) and high education (75th percentile) while all the
 other variables held at their default values.</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> data <span class="o">=</span>
-turnout<span class="p">)</span> <span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout\ <span class="o">:</span>math<span class="o">:</span>`educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
-x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout`\ educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
-
+<div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
+<span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
 s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
-
 summary<span class="p">(</span>s.out2<span class="p">)</span>
-
-plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li>Presenting Results: An ROC Plot [ROC]</li>
-</ol>
-<p>One can use an ROC plot to evaluate the fit of alternative model
-specifications. (Use demo(roc) to view this example, or see King and
-Zeng (2002).)</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate <span class="o">+</span> age<span class="p">,</span> model <span class="o">=</span> “logit”<span class="p">,</span> <span class="o">+</span>
-   data <span class="o">=</span> turnout<span class="p">)</span> <span class="o">&gt;</span> z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote   race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span>
-   “logit”<span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.8226 0.01039 0.8231 0.8003 0.8408</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.191 0.809</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.7084 0.01322 0.7091 0.6822 0.7331</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.286 0.714</span>
+<span class="c">## fd</span>
+<span class="c">##         mean      sd     50%    2.5%    97.5%</span>
+<span class="c">## [1,] -0.1142 0.01149 -0.1141 -0.1364 -0.09189</span>
 </pre></div>
 </div>
-<div class="highlight-r"><div class="highlight"><pre>rocplot<span class="p">(</span>z.out1\ <span class="o">:</span>math<span class="o">:</span><span class="sb">`y, z.out2`</span>\ y<span class="p">,</span> fitted<span class="p">(</span>z.out1<span class="p">),</span>
-   fitted<span class="p">(</span>z.out2<span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
+</div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-11.png" />
+</div>
 </div>
 </div>
 <div class="section" id="model">

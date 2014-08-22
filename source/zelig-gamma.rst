@@ -12,6 +12,20 @@ assumes that all waiting times are complete by the end of the study
 Syntax
 +++++
 
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zgamma$new()
+    z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
 
 .. sourcecode:: r
     
@@ -27,6 +41,8 @@ Example
 Attach the sample data:
 
 
+
+
 .. sourcecode:: r
     
 
@@ -39,8 +55,17 @@ Estimate the model:
 .. sourcecode:: r
     
 
-    z.out <- zelig(duration   fract + numst2, model = “gamma”, data =
-    coalition)
+    z.out <- zelig(duration ~ fract + numst2, model = "gamma", data = coalition)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
+    ##   gamma: Gamma Regression for Continuous, Positive Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 View the regression output:
@@ -52,6 +77,23 @@ View the regression output:
     summary(z.out)
 
 
+::
+
+    ## Model: 1
+    ## Call:  stats::glm(formula = duration ~ fract + numst2, family = Gamma("inverse"), 
+    ##     data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)        fract       numst2  
+    ##   -0.012960     0.000115    -0.017387  
+    ## 
+    ## Degrees of Freedom: 313 Total (i.e. Null);  311 Residual
+    ## Null Deviance:	    301 
+    ## Residual Deviance: 272 	AIC: 2430
+    ## Next step: Use 'setx' method
+
+
+
 Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:
@@ -60,8 +102,8 @@ X:
 .. sourcecode:: r
     
 
-    x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2
-    = 1)
+    x.low <- setx(z.out, numst2 = 0)
+    x.high <- setx(z.out, numst2 = 1)
 
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
@@ -80,12 +122,42 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     summary(s.out)
 
 
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean    sd   50%  2.5% 97.5%
+    ## [1,] 14.48 1.101 14.43 12.48 16.83
+    ## pv
+    ##       mean    sd   50%   2.5% 97.5%
+    ## [1,] 14.84 13.25 11.25 0.9802 49.45
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##      mean    sd   50%  2.5% 97.5%
+    ## [1,] 19.2 1.091 19.15 17.17 21.45
+    ## pv
+    ##      mean    sd   50%   2.5% 97.5%
+    ## [1,] 19.8 18.47 14.61 0.9829 65.75
+    ## fd
+    ##       mean    sd   50%  2.5% 97.5%
+    ## [1,] 4.713 1.532 4.717 1.801 7.671
+
+
+
 
 .. sourcecode:: r
     
 
     plot(s.out)
 
+.. figure:: figure/unnamed-chunk-10.png
+    :alt: 
+
+    
 
 Model
 +++++
@@ -168,58 +240,7 @@ may view. For example, if you run
 ``z.out <- zelig(y ~ x, model = gamma, data)``, then you may examine the
 available information in ``z.out`` by using ``names(z.out)``, see the
 coefficients by using z.out$coefficients, and a default summary of
-information through ``summary(z.out)``. Other elements available through
-the $ operator are listed below.
-
--  From the zelig() output object z.out, you may extract:
-
-   -  coefficients: parameter estimates for the explanatory variables.
-
-   -  residuals: the working residuals in the final iteration of the
-      IWLS fit.
-
-   -  fitted.values: the vector of fitted values.
-
-   -  linear.predictors: the vector of :math:`x_{i}\beta`.
-
-   -  aic: Akaike’s Information Criterion (minus twice the maximized
-      log-likelihood plus twice the number of coefficients).
-
-   -  df.residual: the residual degrees of freedom.
-
-   -  df.null: the residual degrees of freedom for the null model.
-
-   -  zelig.data: the input data frame if save.data = TRUE.
-
--  From summary(z.out), you may extract:
-
-   -  coefficients: the parameter estimates with their associated
-      standard errors, :math:`p`-values, and :math:`t`-statistics.
-
-   -  cov.scaled: a :math:`k \times k` matrix of scaled covariances.
-
-   -  cov.unscaled: a :math:`k \times k` matrix of unscaled covariances.
-
--  From the sim() output object s.out, you may extract quantities of
-   interest arranged as matrices indexed by simulation :math:`\times`
-   x-observation (for more than one x-observation). Available quantities
-   are:
-
-   -  qi$ev: the simulated expected values for the specified values of
-      x.
-
-   -  qi$pr: the simulated predicted values drawn from a distribution
-      defined by :math:`(\alpha, \lambda_i)`.
-
-   -  qi$fd: the simulated first difference in the expected values for
-      the specified values in x and x1.
-
-   -  qi$att.ev: the simulated average expected treatment effect for the
-      treated from conditional prediction models.
-
-   -  qi$att.pr: the simulated average predicted treatment effect for
-      the treated from conditional prediction models.
-
+information through ``summary(z.out)``.
 
 See also
 +++++

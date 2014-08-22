@@ -9,6 +9,20 @@ predictor for the specified dependent variables.
 Syntax
 +++++
 
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zls$new()
+    z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
 
 .. sourcecode:: r
     
@@ -21,7 +35,10 @@ Syntax
 Examples
 +++++
 
-#. Basic Example with First Differences
+
+
+Basic Example with First Differences
+!!!!!
 
 Attach sample data:
 
@@ -38,8 +55,17 @@ Estimate model:
 .. sourcecode:: r
     
 
-    z.out1 <- zelig(unem   gdp + capmob + trade, model = “ls”, data =
-    macro)
+    z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
+    ##   ls: Least Squares Regression for Continuous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 Summarize regression coefficients:
@@ -51,6 +77,20 @@ Summarize regression coefficients:
     summary(z.out1)
 
 
+::
+
+    ## Model: 1
+    ## Call:
+    ## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)          gdp       capmob        trade  
+    ##      6.1813      -0.3236       1.4219       0.0199  
+    ## 
+    ## Next step: Use 'setx' method
+
+
+
 Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for the trade
 variable:
@@ -59,8 +99,8 @@ variable:
 .. sourcecode:: r
     
 
-    x.high <- setx(z.out1, trade = quantile(macro\ :math:`trade, 0.8))
-    x.low <- setx(z.out1, trade = quantile(macro`\ trade, 0.2))
+    x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+    x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
 
 
 Generate first differences for the effect of high versus low trade on GDP:
@@ -79,14 +119,45 @@ Generate first differences for the effect of high versus low trade on GDP:
     summary(s.out1)
 
 
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean     sd  50%  2.5% 97.5%
+    ## 1 5.431 0.1851 5.43 5.079 5.784
+    ## pv
+    ##    mean     sd  50%  2.5% 97.5%
+    ## 1 5.431 0.1851 5.43 5.079 5.784
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 4.596 0.1835 4.593 4.254  4.95
+    ## pv
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 4.596 0.1835 4.593 4.254  4.95
+    ## fd
+    ##      mean     sd     50%  2.5%   97.5%
+    ## 1 -0.8351 0.2274 -0.8348 -1.26 -0.3668
+
+
+
 
 .. sourcecode:: r
     
 
     plot(s.out1)
 
+.. figure:: figure/unnamed-chunk-10.png
+    :alt: 
 
-#. Using Dummy Variables
+    
+
+Using Dummy Variables
+!!!!!
 
 Estimate a model with fixed effects for each country (see for help
 with dummy variables). Note that you do not need to create dummy
@@ -97,8 +168,17 @@ in the selected variable into discrete levels.
 .. sourcecode:: r
     
 
-    z.out2 <- zelig(unem   gdp + trade + capmob + as.factor(country), +
-    model = “ls”, data = macro)
+    z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country), model = "ls", data = macro)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
+    ##   ls: Least Squares Regression for Continuous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 Set values for the explanatory variables, using the default mean/mode
@@ -109,8 +189,8 @@ respectively:
 .. sourcecode:: r
     
 
-    x.US <- setx(z.out2, country = “United States”)
-    x.Japan <- setx(z.out2, country = “Japan”)
+    x.US <- setx(z.out2, country = "United States")
+    x.Japan <- setx(z.out2, country = "Japan")
 
    
 Simulate quantities of interest:
@@ -128,6 +208,10 @@ Simulate quantities of interest:
 
     plot(s.out2)
 
+.. figure:: figure/unnamed-chunk-14.png
+    :alt: 
+
+    
 
 Model
 +++++
@@ -221,21 +305,6 @@ the $ operator are listed below.
       increased number of explanatory variables.
 
    -  cov.unscaled: a :math:`k \times k` matrix of unscaled covariances.
-
--  From the sim() output object s.out, you may extract quantities of
-   interest arranged as matrices indexed by simulation :math:`\times`
-   x-observation (for more than one x-observation). Available quantities
-   are:
-
-   -  qi$ev: the simulated expected values for the specified values of
-      x.
-
-   -  qi$fd: the simulated first differences (or differences in expected
-      values) for the specified values of x and x1.
-
-   -  qi$att.ev: the simulated average expected treatment effect for the
-      treated from conditional prediction models.
-
 
 See also
 +++++

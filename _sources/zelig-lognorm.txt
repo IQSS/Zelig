@@ -11,6 +11,32 @@ the hazard rate to increase and decrease.
 Syntax
 +++++
 
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zlognorm$new()
+    z5$zelig(Surv(Y, C) ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zlognorm$new()
+    z5$zelig(Surv(Y, C) ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
 
 .. sourcecode:: r
     
@@ -62,6 +88,8 @@ its own cluster.
 Example
 +++++
 
+
+
 Attach the sample data:
 
 
@@ -77,8 +105,17 @@ Estimate the model:
 .. sourcecode:: r
     
 
-    RRR> z.out <- zelig(Surv(duration, ciep12)   fract + numst2, model =
-    “lognorm”, + data = coalition)
+    z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model ="lognorm",  data = coalition)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.
+    ##   lognorm: Log-Normal Regression for Duration Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 View the regression output:
@@ -90,6 +127,25 @@ View the regression output:
     summary(z.out)
 
 
+::
+
+    ## Model: 1Call:
+    ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
+    ##     numst2, data = ., dist = "lognormal", model = FALSE)
+    ## 
+    ## Coefficients:
+    ## (Intercept)       fract      numst2 
+    ##    5.366670   -0.004438    0.559833 
+    ## 
+    ## Scale= 1.2 
+    ## 
+    ## Loglik(model)= -1078   Loglik(intercept only)= -1101
+    ## 	Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11 
+    ## n= 314 
+    ## Next step: Use 'setx' method
+
+
+
 Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:
@@ -98,8 +154,8 @@ X:
 .. sourcecode:: r
     
 
-    x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2
-    = 1)
+    x.low <- setx(z.out, numst2 = 0)
+    x.high <- setx(z.out, numst2= 1)
 
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
@@ -118,12 +174,42 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     summary(s.out)
 
 
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 18.35 2.414 18.14 14.15 23.44
+    ## pv
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 18.35 2.414 18.14 14.15 23.44
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##    mean   sd 50%  2.5% 97.5%
+    ## 1 32.05 3.49  32 25.94 39.12
+    ## pv
+    ##    mean   sd 50%  2.5% 97.5%
+    ## 1 32.05 3.49  32 25.94 39.12
+    ## fd
+    ##   mean    sd   50%  2.5% 97.5%
+    ## 1 13.7 3.543 13.59 7.207 20.86
+
+
+
 
 .. sourcecode:: r
     
 
     plot(s.out)
 
+.. figure:: figure/unnamed-chunk-12.png
+    :alt: 
+
+    
 
 Model
 +++++
@@ -159,8 +245,7 @@ fully observed dependent variable, :math:`Y_i`, is defined as
    properties. The hazard function :math:`h(t)` measures the probability
    of not surviving past time :math:`t` given survival up to :math:`t`.
    In general, the hazard function is equal to :math:`f(t)/S(t)` where
-   the survival function :math:`S(t) =
-     1 - \int_{0}^t f(s) ds` represents the fraction still surviving at
+   the survival function :math:`S(t) =1 - \int_{0}^t f(s) ds` represents the fraction still surviving at
    time :math:`t`. The cumulative hazard function :math:`H(t)` describes
    the probability of dying before time :math:`t`. In general,
    :math:`H(t)=
@@ -245,54 +330,7 @@ may view. For example, if you run
 ``z.out <- zelig(Surv(Y, C) ~ X, model = lognorm, data)``, then you may
 examine the available information in ``z.out`` by using
 ``names(z.out)``, see the coefficients by using z.out$coefficients, and
-a default summary of information through ``summary(z.out)``. Other
-elements available through the $ operator are listed below.
-
--  From the zelig() output object z.out, you may extract:
-
-   -  coefficients: parameter estimates for the explanatory variables.
-
-   -  icoef: parameter estimates for the intercept and :math:`\sigma`.
-
-   -  var: Variance-covariance matrix.
-
-   -  loglik: Vector containing the log-likelihood for the model and
-      intercept only (respectively).
-
-   -  linear.predictors: the vector of :math:`x_{i}\beta`.
-
-   -  df.residual: the residual degrees of freedom.
-
-   -  df.null: the residual degrees of freedom for the null model.
-
-   -  zelig.data: the input data frame if save.data = TRUE.
-
--  Most of this may be conveniently summarized using summary(z.out).
-   From summary(z.out), you may additionally extract:
-
-   -  table: the parameter estimates with their associated standard
-      errors, :math:`p`-values, and :math:`t`-statistics.
-
--  From the sim() output object s.out, you may extract quantities of
-   interest arranged as matrices indexed by simulation :math:`\times`
-   x-observation (for more than one x-observation). Available quantities
-   are:
-
-   -  qi$ev: the simulated expected values for the specified values of
-      x.
-
-   -  qi$pr: the simulated predicted values drawn from the distribution
-      defined by :math:`(\lambda_i, \sigma)`.
-
-   -  qi$fd: the simulated first differences between the simulated
-      expected values for x and x1.
-
-   -  qi$att.ev: the simulated average expected treatment effect for the
-      treated from conditional prediction models.
-
-   -  qi$att.pr: the simulated average predicted treatment effect for
-      the treated from conditional prediction models.
-
+a default summary of information through ``summary(z.out)``.
 
 See also
 +++++

@@ -125,7 +125,11 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">zelig-ls</a><ul>
 <li><a class="reference internal" href="#syntax">Syntax</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#basic-example-with-first-differences">Basic Example with First Differences</a></li>
+<li><a class="reference internal" href="#using-dummy-variables">Using Dummy Variables</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#model">Model</a></li>
 <li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
 <li><a class="reference internal" href="#output-values">Output Values</a></li>
@@ -190,6 +194,14 @@
 predictor for the specified dependent variables.</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X <span class="o">~</span> X<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
 x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
@@ -198,27 +210,43 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Basic Example with First Differences</li>
-</ol>
+<div class="section" id="basic-example-with-first-differences">
+<h3>Basic Example with First Differences<a class="headerlink" href="#basic-example-with-first-differences" title="Permalink to this headline">¶</a></h3>
 <p>Attach sample data:</p>
 <div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>macro<span class="p">)</span>
 </pre></div>
 </div>
 <p>Estimate model:</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem   gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> “ls”<span class="p">,</span> data <span class="o">=</span>
-macro<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
+<span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>Summarize regression coefficients:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<span class="c">## Call:</span>
+<span class="c">## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)          gdp       capmob        trade</span>
+<span class="c">##      6.1813      -0.3236       1.4219       0.0199</span>
+<span class="c">##</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
+</pre></div>
+</div>
 <p>Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for the trade
 variable:</p>
-<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro\ <span class="o">:</span>math<span class="o">:</span>`trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
-x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro`\ trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Generate first differences for the effect of high versus low trade on GDP:</p>
@@ -228,25 +256,57 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 5.431 0.1851 5.43 5.079 5.784</span>
+<span class="c">## pv</span>
+<span class="c">##    mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 5.431 0.1851 5.43 5.079 5.784</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 4.596 0.1835 4.593 4.254  4.95</span>
+<span class="c">## pv</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 4.596 0.1835 4.593 4.254  4.95</span>
+<span class="c">## fd</span>
+<span class="c">##      mean     sd     50%  2.5%   97.5%</span>
+<span class="c">## 1 -0.8351 0.2274 -0.8348 -1.26 -0.3668</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li>Using Dummy Variables</li>
-</ol>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-10.png" />
+</div>
+</div>
+<div class="section" id="using-dummy-variables">
+<h3>Using Dummy Variables<a class="headerlink" href="#using-dummy-variables" title="Permalink to this headline">¶</a></h3>
 <p>Estimate a model with fixed effects for each country (see for help
 with dummy variables). Note that you do not need to create dummy
 variables, as the program will automatically parse the unique values
 in the selected variable into discrete levels.</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem   gdp <span class="o">+</span> trade <span class="o">+</span> capmob <span class="o">+</span> as.factor<span class="p">(</span>country<span class="p">),</span> <span class="o">+</span>
-model <span class="o">=</span> “ls”<span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> trade <span class="o">+</span> capmob <span class="o">+</span> as.factor<span class="p">(</span>country<span class="p">),</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
+<span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>Set values for the explanatory variables, using the default mean/mode
 values, with country set to the United States and Japan,
 respectively:</p>
-<div class="highlight-r"><div class="highlight"><pre>x.US <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> “United States”<span class="p">)</span>
-x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> “Japan”<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>x.US <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;United States&quot;</span><span class="p">)</span>
+x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;Japan&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulate quantities of interest:</p>
@@ -255,6 +315,10 @@ x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span cla
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
+</div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-14.png" />
+</div>
 </div>
 </div>
 <div class="section" id="model">
@@ -342,19 +406,6 @@ increased number of explanatory variables.</p>
 </li>
 <li><p class="first">cov.unscaled: a <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/> matrix of unscaled covariances.</p>
 </li>
-</ul>
-</li>
-<li><p class="first">From the sim() output object s.out, you may extract quantities of
-interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
-x-observation (for more than one x-observation). Available quantities
-are:</p>
-<ul class="simple">
-<li>qi$ev: the simulated expected values for the specified values of
-x.</li>
-<li>qi$fd: the simulated first differences (or differences in expected
-values) for the specified values of x and x1.</li>
-<li>qi$att.ev: the simulated average expected treatment effect for the
-treated from conditional prediction models.</li>
 </ul>
 </li>
 </ul>

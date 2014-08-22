@@ -100,7 +100,11 @@ Estimate the model:
 
 ::
 
-    ## Error: could not find function "zelig"
+    ## How to cite this model in Zelig:
+    ##   Olivia Lau, Kosuke Imai, Gary King. 2011.
+    ##   exp: Exponential Regression for Duration Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
 
 
 
@@ -115,7 +119,20 @@ View the regression output:
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out' not found
+    ## Model: 1Call:
+    ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
+    ##     numst2, data = ., dist = "exponential", model = FALSE)
+    ## 
+    ## Coefficients:
+    ## (Intercept)       fract      numst2 
+    ##    5.535873   -0.003909    0.461179 
+    ## 
+    ## Scale fixed at 1 
+    ## 
+    ## Loglik(model)= -1077   Loglik(intercept only)= -1101
+    ## 	Chisq= 46.66 on 2 degrees of freedom, p= 7.4e-11 
+    ## n= 314 
+    ## Next step: Use 'setx' method
 
 
 
@@ -128,23 +145,7 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
-
-
-::
-
-    ## Error: could not find function "setx"
-
-
-.. sourcecode:: r
-    
-
     x.high <- setx(z.out, numst2 = 1)
-
-
-::
-
-    ## Error: could not find function "setx"
-
 
 
 Simulate expected values and first differences:
@@ -154,12 +155,6 @@ Simulate expected values and first differences:
     
 
     s.out <- sim(z.out, x = x.low, x1 = x.high)
-
-
-::
-
-    ## Error: could not find function "sim"
-
 
 
 Summarize quantities of interest and produce some plots:
@@ -173,7 +168,27 @@ Summarize quantities of interest and produce some plots:
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 15.32 1.452 15.27 12.65 18.32
+    ## pv
+    ##       mean   sd   50%   2.5% 97.5%
+    ## [1,] 15.17 15.1 10.73 0.4027 57.75
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 24.29 1.966 24.09 20.66 28.39
+    ## pv
+    ##       mean    sd   50%  2.5% 97.5%
+    ## [1,] 25.16 24.65 17.62 0.539 92.56
+    ## fd
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 8.975 2.387 8.927 4.557 14.01
 
 
 
@@ -183,12 +198,10 @@ Summarize quantities of interest and produce some plots:
 
     plot(s.out)
 
+.. figure:: figure/unnamed-chunk-11.png
+    :alt: 
 
-::
-
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
-
-
+    
 
 Model
 +++++

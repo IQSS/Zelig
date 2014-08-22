@@ -1,35 +1,46 @@
 
 ## ----, eval = FALSE------------------------------------------------------
+## z5 <- znegbinom$new()
+## z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+## z5$setx()
+## z5$sim()
+
+
+## ----, eval = FALSE------------------------------------------------------
 ## z.out <- zelig(Y ~ X1 + X2, model = "negbin", data = mydata)
 ## x.out <- setx(z.out)
 ## s.out <- sim(z.out, x = x.out)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## data(sanction)
+## ----, eval = TRUE, echo = FALSE-----------------------------------------
+suppressWarnings(suppressMessages(library(Zelig5)))
 
 
-## ----, eval = FALSE------------------------------------------------------
-## z.out <- zelig(num   target + coop, model = “negbin”, data = sanction)
+## ----, eval = TRUE-------------------------------------------------------
+data(sanction)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(z.out)
+## ----, eval = TRUE-------------------------------------------------------
+z.out <- zelig(num ~ target + coop, model = "negbinom", data = sanction)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## x.out <- setx(z.out)
+## ----, eval = TRUE-------------------------------------------------------
+summary(z.out)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## s.out <- sim(z.out, x = x.out)
+## ----, eval = TRUE-------------------------------------------------------
+x.out <- setx(z.out)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(s.out)
+## ----, eval = TRUE-------------------------------------------------------
+s.out <- sim(z.out, x = x.out)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## plot(s.out)
+## ----, eval = TRUE-------------------------------------------------------
+summary(s.out)
+
+
+## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+plot(s.out)
 
 

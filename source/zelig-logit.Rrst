@@ -9,116 +9,83 @@ function of a set of explanatory variables.
 Syntax
 +++++
 
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zlogit$new()
+z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "logit", data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out, x1 = NULL)
 .. ..
 
-Additional Inputs
-+++++
-
-In addition to the standard inputs, zelig() takes the following
-additional options for logistic regression:
-
--  robust: defaults to FALSE. If TRUE is selected, zelig() computes
-   robust standard errors via the sandwich package (see ). The default
-   type of robust standard error is heteroskedastic and autocorrelation
-   consistent (HAC), and assumes that observations are ordered by time
-   index.
-
-   In addition, robust may be a list with the following options:
-
-   -  method: Choose from
-
-      -  “vcovHAC”: (default if robust = TRUE) HAC standard errors.
-
-      -  “kernHAC”: HAC standard errors using the weights given in .
-
-      -  “weave”: HAC standard errors using the weights given in .
-
-   -  order.by: defaults to NULL (the observations are chronologically
-      ordered as in the original data). Optionally, you may specify a
-      vector of weights (either as order.by = z, where z exists outside
-      the data frame; or as order.by = ~z, where z is a variable in the
-      data frame) The observations are chronologically ordered by the
-      size of z.
-
-   -  …: additional options passed to the functions specified in method.
-      See the sandwich library and for more options.
-
 Examples
 +++++
 
-#. Basic Example
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. .. 
+
+Basic Example
+!!!!!
 
 Attaching the sample turnout dataset:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(turnout)
 .. ..
 
 Estimating parameter values for the logistic regression:
 
-.. {r, eval = FALSE}
-z.out1 <- zelig(vote   age + race, model = “logit”, data = turnout)
+.. {r, eval = TRUE}
+z.out1 <- zelig(vote ~ age + race, model = "logit", data = turnout)
 .. ..
 
 Setting values for the explanatory variables:
 
-.. {r, eval = FALSE}
-x.out1 <- setx(z.out1, age = 36, race = “white”)
+.. {r, eval = TRUE}
+x.out1 <- setx(z.out1, age = 36, race = "white")
 .. ..
 
 Simulating quantities of interest from the posterior distribution.
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out1 <- sim(z.out1, x = x.out1)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out1)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out1)
 .. ..
 
-#. Simulating First Differences
+Simulating First Differences
+!!!!!
 
 Estimating the risk difference (and risk ratio) between low education
 (25th percentile) and high education (75th percentile) while all the
 other variables held at their default values.
 
-.. {r, eval = FALSE}
-z.out2 <- zelig(vote   race + educate, model = “logit”, data =
-turnout) > x.high <- setx(z.out2, educate = quantile(turnout\ :math:`educate, prob = 0.75))
-x.low <- setx(z.out2, educate = quantile(turnout`\ educate, prob = 0.25))
-
+.. {r, eval = TRUE}
+z.out2 <- zelig(vote ~ race + educate, model = "logit", data = turnout)
+x.high <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.75))
+x.low <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.25))
 s.out2 <- sim(z.out2, x = x.high, x1 = x.low)
-
 summary(s.out2)
+.. ..
 
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out2)
 .. ..
-
-#. Presenting Results: An ROC Plot [ROC]
-
-One can use an ROC plot to evaluate the fit of alternative model
-specifications. (Use demo(roc) to view this example, or see King and
-Zeng (2002).)
-
-.. {r, eval = FALSE}
-z.out1 <- zelig(vote   race + educate + age, model = “logit”, +
-   data = turnout) > z.out2 <- zelig(vote   race + educate, model =
-   “logit”, data = turnout)
-.. ..
-
-.. {r, eval = FALSE}
-rocplot(z.out1\ :math:`y, z.out2`\ y, fitted(z.out1),
-   fitted(z.out2))
-.. ..
-
 
 Model
 +++++

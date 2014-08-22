@@ -193,6 +193,21 @@ log-normal model may take time censored dependent variables, and allows
 the hazard rate to increase and decrease.</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zlognorm<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zlognorm<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>Y<span class="p">,</span> C<span class="p">)</span> <span class="o">~</span> X<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;lognorm&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
 x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
@@ -238,19 +253,41 @@ its own cluster.</p>
 </pre></div>
 </div>
 <p>Estimate the model:</p>
-<div class="highlight-r"><div class="highlight"><pre>RRR<span class="o">&gt;</span> z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span>   fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span>
-“lognorm”<span class="p">,</span> <span class="o">+</span> data <span class="o">=</span> coalition<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span><span class="s">&quot;lognorm&quot;</span><span class="p">,</span>  data <span class="o">=</span> coalition<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.</span>
+<span class="c">##   lognorm: Log-Normal Regression for Duration Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
+<span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
+<span class="c">##     numst2, data = ., dist = &quot;lognormal&quot;, model = FALSE)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)       fract      numst2</span>
+<span class="c">##    5.366670   -0.004438    0.559833</span>
+<span class="c">##</span>
+<span class="c">## Scale= 1.2</span>
+<span class="c">##</span>
+<span class="c">## Loglik(model)= -1078   Loglik(intercept only)= -1101</span>
+<span class="c">##  Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11</span>
+<span class="c">## n= 314</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
+</pre></div>
+</div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span> RRR<span class="o">&gt;</span> x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2
-<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
@@ -260,8 +297,34 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 18.35 2.414 18.14 14.15 23.44</span>
+<span class="c">## pv</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 18.35 2.414 18.14 14.15 23.44</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean   sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 32.05 3.49  32 25.94 39.12</span>
+<span class="c">## pv</span>
+<span class="c">##    mean   sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 32.05 3.49  32 25.94 39.12</span>
+<span class="c">## fd</span>
+<span class="c">##   mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 13.7 3.543 13.59 7.207 20.86</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
+</div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-12.png" />
 </div>
 </div>
 <div class="section" id="model">
@@ -291,11 +354,8 @@ zelig() parameterizes scale:math:` = sigma`.)</p>
 properties. The hazard function <img class="math" src="_images/math/8f59c002cacf4a159c9d1b7ccfa141d30d5dc65c.png" alt="h(t)"/> measures the probability
 of not surviving past time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> given survival up to <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>.
 In general, the hazard function is equal to <img class="math" src="_images/math/89ae40bbb08f26a2d7a02d4d5af4526f1a20c029.png" alt="f(t)/S(t)"/> where
-the survival function :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>S(t) =</p>
-<blockquote>
-<div><p>1 - int_{0}^t f(s) ds` represents the fraction still surviving at</p>
-</div></blockquote>
-<p>time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. The cumulative hazard function <img class="math" src="_images/math/30319a828ec4029a092aefb503bd693e5776e59b.png" alt="H(t)"/> describes
+the survival function <img class="math" src="_images/math/967eb1670359684fab112e11f3a002670dbbff45.png" alt="S(t) =1 - \int_{0}^t f(s) ds"/> represents the fraction still surviving at
+time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. The cumulative hazard function <img class="math" src="_images/math/30319a828ec4029a092aefb503bd693e5776e59b.png" alt="H(t)"/> describes
 the probability of dying before time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. In general,
 <img class="math" src="_images/math/a951cf862eec77b95758fc88815c3addfff6ba11.png" alt="H(t)=
 \int_{0}^{t} h(s) ds = -\log S(t)"/>. In the case of the lognormal
@@ -374,44 +434,7 @@ may view. For example, if you run
 <tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(Surv(Y,</span> <span class="pre">C)</span> <span class="pre">~</span> <span class="pre">X,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">lognorm,</span> <span class="pre">data)</span></tt>, then you may
 examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
 <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
-a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
-elements available through the $ operator are listed below.</p>
-<ul class="simple">
-<li>From the zelig() output object z.out, you may extract:<ul>
-<li>coefficients: parameter estimates for the explanatory variables.</li>
-<li>icoef: parameter estimates for the intercept and <img class="math" src="_images/math/2298cf1485084afe72757a9c8483af49a138d81f.png" alt="\sigma"/>.</li>
-<li>var: Variance-covariance matrix.</li>
-<li>loglik: Vector containing the log-likelihood for the model and
-intercept only (respectively).</li>
-<li>linear.predictors: the vector of <img class="math" src="_images/math/f8237c9c4a91083105a2650415195fa49fe0bafc.png" alt="x_{i}\beta"/>.</li>
-<li>df.residual: the residual degrees of freedom.</li>
-<li>df.null: the residual degrees of freedom for the null model.</li>
-<li>zelig.data: the input data frame if save.data = TRUE.</li>
-</ul>
-</li>
-<li>Most of this may be conveniently summarized using summary(z.out).
-From summary(z.out), you may additionally extract:<ul>
-<li>table: the parameter estimates with their associated standard
-errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>-statistics.</li>
-</ul>
-</li>
-<li>From the sim() output object s.out, you may extract quantities of
-interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
-x-observation (for more than one x-observation). Available quantities
-are:<ul>
-<li>qi$ev: the simulated expected values for the specified values of
-x.</li>
-<li>qi$pr: the simulated predicted values drawn from the distribution
-defined by <img class="math" src="_images/math/212bf4406b9299a69a57ea55bc3cf9ccdb9489ad.png" alt="(\lambda_i, \sigma)"/>.</li>
-<li>qi$fd: the simulated first differences between the simulated
-expected values for x and x1.</li>
-<li>qi$att.ev: the simulated average expected treatment effect for the
-treated from conditional prediction models.</li>
-<li>qi$att.pr: the simulated average predicted treatment effect for
-the treated from conditional prediction models.</li>
-</ul>
-</li>
-</ul>
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>.</p>
 </div>
 <div class="section" id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>

@@ -1,55 +1,64 @@
 
 ## ----, eval = FALSE------------------------------------------------------
+## z5 <- zls$new()
+## z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+## z5$setx()
+## z5$sim()
+
+
+## ----, eval = FALSE------------------------------------------------------
 ## z.out <- zelig(Y ~ X1 + X2, model = "ls", data = mydata)
 ## x.out <- setx(z.out)
 ## s.out <- sim(z.out, x = x.out)
 
 
-## ----, eval = FALSE------------------------------------------------------
-##  data(macro)
+## ----, eval = TRUE, echo = FALSE-----------------------------------------
+suppressWarnings(suppressMessages(library(Zelig5)))
 
 
-## ----, eval = FALSE------------------------------------------------------
-## z.out1 <- zelig(unem   gdp + capmob + trade, model = “ls”, data =
-## macro)
+## ----, eval = TRUE-------------------------------------------------------
+ data(macro)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(z.out1)
+## ----, eval = TRUE-------------------------------------------------------
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## x.high <- setx(z.out1, trade = quantile(macro\ :math:`trade, 0.8))
-## x.low <- setx(z.out1, trade = quantile(macro`\ trade, 0.2))
+## ----, eval = TRUE-------------------------------------------------------
+summary(z.out1)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+## ----, eval = TRUE-------------------------------------------------------
+x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(s.out1)
+## ----, eval = TRUE-------------------------------------------------------
+s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## plot(s.out1)
+## ----, eval = TRUE-------------------------------------------------------
+summary(s.out1)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## z.out2 <- zelig(unem   gdp + trade + capmob + as.factor(country), +
-## model = “ls”, data = macro)
+## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+plot(s.out1)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## x.US <- setx(z.out2, country = “United States”)
-## x.Japan <- setx(z.out2, country = “Japan”)
+## ----, eval = TRUE-------------------------------------------------------
+z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country), model = "ls", data = macro)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
+## ----, eval = TRUE-------------------------------------------------------
+x.US <- setx(z.out2, country = "United States")
+x.Japan <- setx(z.out2, country = "Japan")
 
 
-## ----, eval = FALSE------------------------------------------------------
-## plot(s.out2)
+## ----, eval = TRUE-------------------------------------------------------
+s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
+
+
+## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+plot(s.out2)
 
 

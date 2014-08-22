@@ -9,6 +9,20 @@ function of a set of explanatory variables.
 Syntax
 +++++
 
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zlogit$new()
+    z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
 
 .. sourcecode:: r
     
@@ -18,42 +32,13 @@ Syntax
     s.out <- sim(z.out, x = x.out, x1 = NULL)
 
 
-Additional Inputs
-+++++
-
-In addition to the standard inputs, zelig() takes the following
-additional options for logistic regression:
-
--  robust: defaults to FALSE. If TRUE is selected, zelig() computes
-   robust standard errors via the sandwich package (see ). The default
-   type of robust standard error is heteroskedastic and autocorrelation
-   consistent (HAC), and assumes that observations are ordered by time
-   index.
-
-   In addition, robust may be a list with the following options:
-
-   -  method: Choose from
-
-      -  “vcovHAC”: (default if robust = TRUE) HAC standard errors.
-
-      -  “kernHAC”: HAC standard errors using the weights given in .
-
-      -  “weave”: HAC standard errors using the weights given in .
-
-   -  order.by: defaults to NULL (the observations are chronologically
-      ordered as in the original data). Optionally, you may specify a
-      vector of weights (either as order.by = z, where z exists outside
-      the data frame; or as order.by = ~z, where z is a variable in the
-      data frame) The observations are chronologically ordered by the
-      size of z.
-
-   -  …: additional options passed to the functions specified in method.
-      See the sandwich library and for more options.
-
 Examples
 +++++
 
-#. Basic Example
+
+
+Basic Example
+!!!!!
 
 Attaching the sample turnout dataset:
 
@@ -70,7 +55,17 @@ Estimating parameter values for the logistic regression:
 .. sourcecode:: r
     
 
-    z.out1 <- zelig(vote   age + race, model = “logit”, data = turnout)
+    z.out1 <- zelig(vote ~ age + race, model = "logit", data = turnout)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
+    ##   logit: Logistic Regression for Dichotomous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 Setting values for the explanatory variables:
@@ -79,7 +74,7 @@ Setting values for the explanatory variables:
 .. sourcecode:: r
     
 
-    x.out1 <- setx(z.out1, age = 36, race = “white”)
+    x.out1 <- setx(z.out1, age = 36, race = "white")
 
 
 Simulating quantities of interest from the posterior distribution.
@@ -98,14 +93,33 @@ Simulating quantities of interest from the posterior distribution.
     summary(s.out1)
 
 
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##        mean      sd    50%   2.5%  97.5%
+    ## [1,] 0.7484 0.01155 0.7492 0.7253 0.7714
+    ## pv
+    ##          0     1
+    ## [1,] 0.254 0.746
+
+
+
 
 .. sourcecode:: r
     
 
     plot(s.out1)
 
+.. figure:: figure/unnamed-chunk-9.png
+    :alt: 
 
-#. Simulating First Differences
+    
+
+Simulating First Differences
+!!!!!
 
 Estimating the risk difference (and risk ratio) between low education
 (25th percentile) and high education (75th percentile) while all the
@@ -115,40 +129,63 @@ other variables held at their default values.
 .. sourcecode:: r
     
 
-    z.out2 <- zelig(vote   race + educate, model = “logit”, data =
-    turnout) > x.high <- setx(z.out2, educate = quantile(turnout\ :math:`educate, prob = 0.75))
-    x.low <- setx(z.out2, educate = quantile(turnout`\ educate, prob = 0.25))
+    z.out2 <- zelig(vote ~ race + educate, model = "logit", data = turnout)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
+    ##   logit: Logistic Regression for Dichotomous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
+
+.. sourcecode:: r
     
+
+    x.high <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.75))
+    x.low <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.25))
     s.out2 <- sim(z.out2, x = x.high, x1 = x.low)
-    
     summary(s.out2)
+
+
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##        mean      sd    50%   2.5%  97.5%
+    ## [1,] 0.8226 0.01039 0.8231 0.8003 0.8408
+    ## pv
+    ##          0     1
+    ## [1,] 0.191 0.809
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##        mean      sd    50%   2.5%  97.5%
+    ## [1,] 0.7084 0.01322 0.7091 0.6822 0.7331
+    ## pv
+    ##          0     1
+    ## [1,] 0.286 0.714
+    ## fd
+    ##         mean      sd     50%    2.5%    97.5%
+    ## [1,] -0.1142 0.01149 -0.1141 -0.1364 -0.09189
+
+
+
+
+.. sourcecode:: r
     
+
     plot(s.out2)
 
+.. figure:: figure/unnamed-chunk-11.png
+    :alt: 
 
-#. Presenting Results: An ROC Plot [ROC]
-
-One can use an ROC plot to evaluate the fit of alternative model
-specifications. (Use demo(roc) to view this example, or see King and
-Zeng (2002).)
-
-
-.. sourcecode:: r
     
-
-    z.out1 <- zelig(vote   race + educate + age, model = “logit”, +
-       data = turnout) > z.out2 <- zelig(vote   race + educate, model =
-       “logit”, data = turnout)
-
-
-
-.. sourcecode:: r
-    
-
-    rocplot(z.out1\ :math:`y, z.out2`\ y, fitted(z.out1),
-       fitted(z.out2))
-
-
 
 Model
 +++++

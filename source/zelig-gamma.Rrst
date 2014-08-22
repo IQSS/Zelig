@@ -12,6 +12,17 @@ assumes that all waiting times are complete by the end of the study
 Syntax
 +++++
 
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zgamma$new()
+z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "gamma", data = mydata)
 x.out <- setx(z.out)
@@ -23,20 +34,23 @@ Example
 
 Attach the sample data:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. .. 
+
+.. {r, eval = TRUE}
 data(coalition)
 .. ..
 
 Estimate the model:
 
-.. {r, eval = FALSE}
-z.out <- zelig(duration   fract + numst2, model = “gamma”, data =
-coalition)
+.. {r, eval = TRUE}
+z.out <- zelig(duration ~ fract + numst2, model = "gamma", data = coalition)
 .. ..
 
 View the regression output:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
@@ -44,22 +58,22 @@ Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:
 
-.. {r, eval = FALSE}
-x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2
-= 1)
+.. {r, eval = TRUE}
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2 = 1)
 .. ..
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out <- sim(z.out, x = x.low, x1 = x.high)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out)
 .. ..
 
@@ -144,58 +158,7 @@ may view. For example, if you run
 ``z.out <- zelig(y ~ x, model = gamma, data)``, then you may examine the
 available information in ``z.out`` by using ``names(z.out)``, see the
 coefficients by using z.out$coefficients, and a default summary of
-information through ``summary(z.out)``. Other elements available through
-the $ operator are listed below.
-
--  From the zelig() output object z.out, you may extract:
-
-   -  coefficients: parameter estimates for the explanatory variables.
-
-   -  residuals: the working residuals in the final iteration of the
-      IWLS fit.
-
-   -  fitted.values: the vector of fitted values.
-
-   -  linear.predictors: the vector of :math:`x_{i}\beta`.
-
-   -  aic: Akaike’s Information Criterion (minus twice the maximized
-      log-likelihood plus twice the number of coefficients).
-
-   -  df.residual: the residual degrees of freedom.
-
-   -  df.null: the residual degrees of freedom for the null model.
-
-   -  zelig.data: the input data frame if save.data = TRUE.
-
--  From summary(z.out), you may extract:
-
-   -  coefficients: the parameter estimates with their associated
-      standard errors, :math:`p`-values, and :math:`t`-statistics.
-
-   -  cov.scaled: a :math:`k \times k` matrix of scaled covariances.
-
-   -  cov.unscaled: a :math:`k \times k` matrix of unscaled covariances.
-
--  From the sim() output object s.out, you may extract quantities of
-   interest arranged as matrices indexed by simulation :math:`\times`
-   x-observation (for more than one x-observation). Available quantities
-   are:
-
-   -  qi$ev: the simulated expected values for the specified values of
-      x.
-
-   -  qi$pr: the simulated predicted values drawn from a distribution
-      defined by :math:`(\alpha, \lambda_i)`.
-
-   -  qi$fd: the simulated first difference in the expected values for
-      the specified values in x and x1.
-
-   -  qi$att.ev: the simulated average expected treatment effect for the
-      treated from conditional prediction models.
-
-   -  qi$att.pr: the simulated average predicted treatment effect for
-      the treated from conditional prediction models.
-
+information through ``summary(z.out)``.
 
 See also
 +++++

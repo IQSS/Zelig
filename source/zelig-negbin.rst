@@ -10,6 +10,20 @@ is frequently used to estimate over-dispersed event count models.
 Syntax
 +++++
 
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- znegbinom$new()
+    z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
 
 .. sourcecode:: r
     
@@ -22,6 +36,8 @@ Syntax
 
 Example
 +++++
+
+
 
 Load sample data:
 
@@ -38,7 +54,17 @@ Estimate the model:
 .. sourcecode:: r
     
 
-    z.out <- zelig(num   target + coop, model = “negbin”, data = sanction)
+    z.out <- zelig(num ~ target + coop, model = "negbinom", data = sanction)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
+    ##   negbinom: Negative Binomial Regression for Event Count Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 
@@ -46,6 +72,23 @@ Estimate the model:
     
 
     summary(z.out)
+
+
+::
+
+    ## Model: 1
+    ## Call:  MASS::glm.nb(formula = num ~ target + coop, data = ., init.theta = 1.841603403, 
+    ##     link = log)
+    ## 
+    ## Coefficients:
+    ## (Intercept)       target         coop  
+    ##      -1.564        0.151        1.286  
+    ## 
+    ## Degrees of Freedom: 77 Total (i.e. Null);  75 Residual
+    ## Null Deviance:	    237 
+    ## Residual Deviance: 56.5 	AIC: 360
+    ## Next step: Use 'setx' method
+
 
 
 Set values for the explanatory variables to their default mean values:
@@ -73,12 +116,33 @@ Simulate fitted values:
     summary(s.out)
 
 
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean    sd   50%  2.5% 97.5%
+    ## [1,] 2.963 0.365 2.946 2.322   3.8
+    ## pv
+    ## qi
+    ##     0     1     2     3     4     5     6     7     8     9    10    11 
+    ## 0.116 0.173 0.188 0.121 0.097 0.090 0.056 0.048 0.033 0.019 0.020 0.017 
+    ##    12    13    14    16    18    23 
+    ## 0.006 0.008 0.004 0.002 0.001 0.001
+
+
+
 
 .. sourcecode:: r
     
 
     plot(s.out)
 
+.. figure:: figure/unnamed-chunk-10.png
+    :alt: 
+
+    
 
 
 Model

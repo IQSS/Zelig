@@ -1,37 +1,47 @@
 
 ## ----, eval = FALSE------------------------------------------------------
+## z5 <- zgamma$new()
+## z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+## z5$setx()
+## z5$sim()
+
+
+## ----, eval = FALSE------------------------------------------------------
 ## z.out <- zelig(Y ~ X1 + X2, model = "gamma", data = mydata)
 ## x.out <- setx(z.out)
 ## s.out <- sim(z.out, x = x.out, x1 = NULL)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## data(coalition)
+## ----, eval = TRUE, echo = FALSE-----------------------------------------
+suppressWarnings(suppressMessages(library(Zelig5)))
 
 
-## ----, eval = FALSE------------------------------------------------------
-## z.out <- zelig(duration   fract + numst2, model = “gamma”, data =
-## coalition)
+## ----, eval = TRUE-------------------------------------------------------
+data(coalition)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(z.out)
+## ----, eval = TRUE-------------------------------------------------------
+z.out <- zelig(duration ~ fract + numst2, model = "gamma", data = coalition)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2
-## = 1)
+## ----, eval = TRUE-------------------------------------------------------
+summary(z.out)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## s.out <- sim(z.out, x = x.low, x1 = x.high)
+## ----, eval = TRUE-------------------------------------------------------
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2 = 1)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(s.out)
+## ----, eval = TRUE-------------------------------------------------------
+s.out <- sim(z.out, x = x.low, x1 = x.high)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## plot(s.out)
+## ----, eval = TRUE-------------------------------------------------------
+summary(s.out)
+
+
+## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+plot(s.out)
 
 

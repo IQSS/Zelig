@@ -1,5 +1,19 @@
 
 ## ----, eval = FALSE------------------------------------------------------
+## z5 <- zlognorm$new()
+## z5$zelig(Surv(Y, C) ~ X, data = mydata)
+## z5$setx()
+## z5$sim()
+
+
+## ----, eval = FALSE------------------------------------------------------
+## z5 <- zlognorm$new()
+## z5$zelig(Surv(Y, C) ~ X, data = mydata)
+## z5$setx()
+## z5$sim()
+
+
+## ----, eval = FALSE------------------------------------------------------
 ## z.out <- zelig(Surv(Y, C) ~ X, model = "lognorm", data = mydata)
 ## x.out <- setx(z.out)
 ## s.out <- sim(z.out, x = x.out)
@@ -9,33 +23,36 @@
 ## z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", model = "exp", data = mydata)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## data(coalition)
+## ----, eval = TRUE, echo = FALSE-----------------------------------------
+suppressWarnings(suppressMessages(library(Zelig5)))
 
 
-## ----, eval = FALSE------------------------------------------------------
-## RRR> z.out <- zelig(Surv(duration, ciep12)   fract + numst2, model =
-## “lognorm”, + data = coalition)
+## ----, eval = TRUE-------------------------------------------------------
+data(coalition)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(z.out)
+## ----, eval = TRUE-------------------------------------------------------
+z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model ="lognorm",  data = coalition)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## x.low <- setx(z.out, numst2 = 0) RRR> x.high <- setx(z.out, numst2
-## = 1)
+## ----, eval = TRUE-------------------------------------------------------
+summary(z.out)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## s.out <- sim(z.out, x = x.low, x1 = x.high)
+## ----, eval = TRUE-------------------------------------------------------
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2= 1)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(s.out)
+## ----, eval = TRUE-------------------------------------------------------
+s.out <- sim(z.out, x = x.low, x1 = x.high)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## plot(s.out)
+## ----, eval = TRUE-------------------------------------------------------
+summary(s.out)
+
+
+## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+plot(s.out)
 
 
