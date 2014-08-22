@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>User Guide &mdash; Zelig 5.0.1 documentation</title>
+    <title>Installation &amp; Quickstart &mdash; Zelig 5.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -34,6 +34,8 @@
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
+    <link rel="next" title="Model Reference and Vignettes" href="vignette.html" />
+    <link rel="prev" title="Welcome to Zelig!" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -75,10 +77,10 @@
      href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation &amp; Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-zelig">Installing R &amp; Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-r-zelig">Installing R &amp; Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul>
@@ -124,15 +126,9 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">User Guide</a><ul>
-<li><a class="reference internal" href="#installation-quickstart">Installation &amp; Quickstart</a><ul>
-<li><a class="reference internal" href="#id1">Installation</a></li>
+<li><a class="reference internal" href="#">Installation &amp; Quickstart</a><ul>
+<li><a class="reference internal" href="#installing-r-zelig">Installing R &amp; Zelig</a></li>
 <li><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
-<li><a class="reference internal" href="#running-models">Running Models</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#zelig-model-reference">Zelig Model Reference</a></li>
-<li><a class="reference internal" href="#zelig-model-vignettes">Zelig Model Vignettes</a></li>
 </ul>
 </li>
 </ul>
@@ -143,6 +139,14 @@
             
               
                 
+  <li>
+    <a href="index.html" title="Previous Chapter: Welcome to Zelig!"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Welcome to Zelig...</span>
+    </a>
+  </li>
+  <li>
+    <a href="vignette.html" title="Next Chapter: Model Reference and Vignettes"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Model Reference ... &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -168,8 +172,12 @@
 <div class="container">
   <div class="row">
       <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation &amp; Quickstart</a></li>
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-r-zelig">Installing R &amp; Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart-guide">Quickstart Guide</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
@@ -186,68 +194,52 @@
       </div>
     <div class="col-md-9">
       
-  <div class="section" id="user-guide">
-<span id="userguide"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
-<p>Zelig 5.0 is the latest version of the Zelig framework for interfacing with a wide range of statistical models and analytic methods in the R statistical programming enviornment. This release expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture.</p>
-<div class="section" id="installation-quickstart">
-<span id="installation"></span><span id="devguide-writing-new-models"></span><h2>Installation &amp; Quickstart<a class="headerlink" href="#installation-quickstart" title="Permalink to this headline">¶</a></h2>
-<p>This guide is designed to get you up and running with the current <em>alpha</em> release of Zelig 5.</p>
-<p>Note: In code snippets,``&gt;`` refers to an R terminal prompt and anything after <tt class="docutils literal"><span class="pre">#</span></tt> is a comment meant to describe what the code is doing.</p>
+  <div class="section" id="installation-quickstart">
+<span id="id1"></span><h1>Installation &amp; Quickstart<a class="headerlink" href="#installation-quickstart" title="Permalink to this headline">¶</a></h1>
+<p>This guide is designed to get you up and running with the current <em>alpha</em> release of Zelig (5.0.1).</p>
+<p><tt class="docutils literal"><span class="pre">Note:</span> <span class="pre">In</span> <span class="pre">code</span> <span class="pre">snippets,&quot;&gt;&quot;</span> <span class="pre">refers</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">R</span> <span class="pre">terminal</span> <span class="pre">prompt</span> <span class="pre">and</span> <span class="pre">anything</span> <span class="pre">after</span> <span class="pre">&quot;#&quot;</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">comment</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">meant</span> <span class="pre">to</span> <span class="pre">describe</span> <span class="pre">what</span> <span class="pre">the</span> <span class="pre">code</span> <span class="pre">is</span> <span class="pre">doing.</span></tt></p>
 <hr class="docutils" />
-<div class="section" id="id1">
-<h3>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="installing-r-zelig">
+<h2>Installing R &amp; Zelig<a class="headerlink" href="#installing-r-zelig" title="Permalink to this headline">¶</a></h2>
 <p>Before using Zelig, you will need to download and install both the R statistical program and the Zelig package:</p>
 <p><strong>Installing R</strong></p>
-<p>To install R, go to www.r-project.org/  Select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Select a CRAN mirror closest to your current geographic location (there are multiple mirrors of this database in various locations, selecting the one closest to you will be sure to maximize your downloading speeds).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows.</p>
+<p>To install R, go to <a class="reference external" href="http://www.r-project.org/">http://www.r-project.org/</a>  Select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Pick a CRAN mirror closest to your current geographic location (there are multiple mirrors of this database in various locations, selecting the one closest to you will be sure to maximize your the speed of your download).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows.</p>
 <hr class="docutils" />
 <p><strong>Installing Zelig</strong></p>
-<p>Becuase Zelig 5.0.1 is still an <em>alpha</em> release and is not yet available on <tt class="docutils literal"><span class="pre">CRAN</span></tt> (with other R software packages), it must be downloaded from Github using the <tt class="docutils literal"><span class="pre">devtools</span></tt> package.</p>
+<p>Because Zelig 5 is still an <em>alpha</em> release and is not yet available on <tt class="docutils literal"><span class="pre">CRAN</span></tt> (with other R software packages), it must be downloaded from Github using the <tt class="docutils literal"><span class="pre">devtools</span></tt> package.</p>
 <p>Once you&#8217;ve successfully installed R, open it, and at the terminal prompt, type in the following commands verbatim:</p>
 <div class="highlight-r"><div class="highlight"><pre><span class="c1"># This installs devtools package, if not already installed</span>
 <span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
 <span class="c1"># This loads devtools</span>
 <span class="o">&gt;</span> library<span class="p">(</span>devtools<span class="p">)</span>
 <span class="c1"># This downloads Zelig 5.0.1 from the IQSS Github repo</span>
-<span class="o">&gt;</span> install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig5&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Once you have successfully typed these commands, you will see a the following message: <em>&#8220;DONE (Zelig5)&#8221;</em>.</p>
+<p>If you have successfully installed the program, you will see a the following message: <em>&#8220;DONE (Zelig5)&#8221;</em>.</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="quickstart-guide">
-<h3>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h3>
+<h2>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car has traveled given it&#8217;s speed and you have a dataset of cars, distance and speed. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig.</p>
 <p><strong>Loading Zelig</strong></p>
-<p>After installing both R and Zelig, Zelig can be loaded by using the <tt class="docutils literal"><span class="pre">library()</span></tt> function:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> library<span class="p">(</span>Zelig5<span class="p">)</span>
+<p>First, we have to load Zelig into R. After installing both R and Zelig, open R. type:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># remember the `&gt;` is not code</span>
+<span class="o">&gt;</span> library<span class="p">(</span>Zelig5<span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <hr class="docutils" />
-<div class="section" id="running-models">
-<h3>Running Models<a class="headerlink" href="#running-models" title="Permalink to this headline">¶</a></h3>
-<p>Imagine a scenario in which you want to predict how the distance a car can travel given it&#8217;s speed. If we were to model this relationship using a least squares regression within Zelig we need to follow three steps:</p>
-<ol class="arabic simple">
-<li>First, we are going to want to specify our model, given a dataset on cars including distance and speed, and estimate the effect of speed on distance. This is done using the <tt class="docutils literal"><span class="pre">$zelig()</span></tt> method in the code snippet below.</li>
-<li>Second, we want to translate our estimates into intepretable quanities of interest, so we can answer intuitive questions about the effect of speed on distance. For example, we may be interested into understanding how a change of speed from 10 to 20 mph affects distance versus a change from 50 to 60 mph. To do this we have to set explanatory variables in our model (i.e., speed) to simulate quantities of interest. This is done using the <tt class="docutils literal"><span class="pre">$setx()</span></tt> or <tt class="docutils literal"><span class="pre">$setrange()</span></tt> method.</li>
-<li>Finally, we want to draw simualtions of quantieis of interest from our statistical model using the <tt class="docutils literal"><span class="pre">$sim()</span></tt> method.</li>
-</ol>
-<p>The following code snippet loads a data set of cars data including speed and distance (When you install R, example datasets are also installed), and regressing distance on speed. We then go on to set speed (our main explanatory variable) and simulate quantities of interest.</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="c1">#load toy dataset</span>
+<p><strong>Building Models</strong></p>
+<p>Now, lets build a statistical model that captures the relationship a cars distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. Given that distance (the DV) is a continuous variable, we should use a least squares regression.</p>
+<p>To do so, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># load toy dataset (when you install R, example datasets are also installed)</span>
 <span class="o">&gt;</span> data<span class="p">(</span>cars<span class="p">)</span>
-<span class="c1">#initialize Zelig5 least squares object</span>
+<span class="c1"># initialize Zelig5 least squares object</span>
 <span class="o">&gt;</span> z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
-<span class="c1">#estimate ls model</span>
+<span class="c1"># estimate ls model</span>
 <span class="o">&gt;</span> z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
-
-<span class="c1">#set speed to 30 (all other covariates set to means)</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
-<span class="c1">#or, simulate over a range of speed between 55 and 80</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>setrange<span class="p">(</span>speed <span class="o">=</span> <span class="m">55</span><span class="o">:</span><span class="m">80</span><span class="p">)</span>
-
-<span class="c1">#run 1000 simulations and estiamte quantities of interest</span>
-<span class="o">&gt;</span> z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
-
-<span class="c1">#print model estimates</span>
+<span class="c1"># you can now get model summary estimates</span>
 <span class="o">&gt;</span> z5
 
 Call<span class="o">:</span>
@@ -270,9 +262,26 @@ Multiple R<span class="o">-</span>squared<span class="o">:</span>  <span class="
 <span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>So what do our model estimates tell us? First, off we can see that the positive 3.93 estimate for speed suggests a positive relationship between speed and distance. In particular, we would interpret this coefficient as a one unit increase in speed (e.g., mph) leads to a 3 unit increase in distance (e.g., miles). This interpretation is not very intuitive. Perhaps, we want to know how the distance a car can travel changes over a range of speed (e.g., 10 to 20 mph).</p>
+<p>Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the <tt class="docutils literal"><span class="pre">$setx()</span></tt> or <tt class="docutils literal"><span class="pre">$setrange()</span></tt> method:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># simulate over a range of speed between 10 and 20 mph</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>setrange<span class="p">(</span>speed <span class="o">=</span> <span class="m">10</span><span class="o">:</span><span class="m">20</span><span class="p">)</span>
+
+<span class="c1"># you can also set covariates at particular value using $setx()</span>
+<span class="o">&gt;</span> z4<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now that we&#8217;ve set our variables, all we have to do is run our simulations:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1">#run 10 simulations and estimate quantities of interest</span>
+<span class="o">&gt;</span> z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+
+<span class="c1">#default is 1,000 simulations</span>
+</pre></div>
+</div>
+<p>Now we&#8217;ve estimated a model and calculated interpretable estimates across a range of speed (e.g., 10 - 20 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.</p>
 <hr class="docutils" />
 <p><strong>Quantities of Interest</strong></p>
-<p>A major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g. expected and predicted values) can be accessed via the <tt class="docutils literal"><span class="pre">$sim.out</span></tt> method:</p>
+<p>As mentioned earlier, a major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g. expected and predicted values) can be accessed via the <tt class="docutils literal"><span class="pre">$sim.out</span></tt> method:</p>
 <div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> z5<span class="o">$</span>sim.out
 <span class="o">$</span>range
 <span class="o">$</span>range<span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
@@ -309,34 +318,10 @@ Multiple R<span class="o">-</span>squared<span class="o">:</span>  <span class="
 <p><strong>Plots</strong></p>
 <p>A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an artcle. Using the <tt class="docutils literal"><span class="pre">plot()</span></tt> function on the <tt class="docutils literal"><span class="pre">z5$s.out</span></tt> will produce ready-to-use plots with labels and confidence intervals.</p>
 <p><em>Plots of QI&#8217;s from binary choice model:</em></p>
-<img alt="gr1.png" src="gr1.png" />
+<img alt="images/gr1.png" src="images/gr1.png" />
 <hr class="docutils" />
 <p><em>Plot of expected values across range of simulations:</em></p>
-<img alt="gr3.png" src="gr3.png" />
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="zelig-model-reference">
-<h2>Zelig Model Reference<a class="headerlink" href="#zelig-model-reference" title="Permalink to this headline">¶</a></h2>
-<p>The following models hare currently supported in Zelig 5.0:</p>
-<ul class="simple">
-<li>Exponential Regression: <tt class="docutils literal"><span class="pre">zexp$new()</span></tt></li>
-<li>Gamma Regression: <tt class="docutils literal"><span class="pre">zgamma()</span></tt></li>
-<li>Logistic Regression: <tt class="docutils literal"><span class="pre">zlogit$new()</span></tt></li>
-<li>Log-Normal Regression: <tt class="docutils literal"><span class="pre">zlognorm$new()</span></tt></li>
-<li>Least Squares Regression: <tt class="docutils literal"><span class="pre">zls$new()</span></tt></li>
-<li>Negative Binomial Regression: <tt class="docutils literal"><span class="pre">zbinom$new()</span></tt></li>
-<li>Normal Regression: <tt class="docutils literal"><span class="pre">znormal$new()</span></tt></li>
-<li>Poisson Regression: <tt class="docutils literal"><span class="pre">zpoisson$new()</span></tt></li>
-<li>Probit Regression: <tt class="docutils literal"><span class="pre">zprobit$new()</span></tt></li>
-<li>Quantile Regression: <tt class="docutils literal"><span class="pre">zquantile$new()</span></tt></li>
-<li>Rare Events Logistic Regression: <tt class="docutils literal"><span class="pre">zrelogit$new()</span></tt></li>
-<li>Tobit Regression: <tt class="docutils literal"><span class="pre">ztobit$new()</span></tt></li>
-</ul>
-</div>
-<hr class="docutils" />
-<div class="section" id="zelig-model-vignettes">
-<h2>Zelig Model Vignettes<a class="headerlink" href="#zelig-model-vignettes" title="Permalink to this headline">¶</a></h2>
+<img alt="images/gr3.png" src="images/gr3.png" />
 </div>
 </div>
 
@@ -354,7 +339,7 @@ Multiple R<span class="o">-</span>squared<span class="o">:</span>  <span class="
         <br/>
         
 <div id="sourcelink">
-  <a href="_sources/user_guide.txt"
+  <a href="_sources/installation_quickstart.txt"
      rel="nofollow">Source</a>
 </div>
       

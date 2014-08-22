@@ -3,7 +3,7 @@
 Frequently Asked Questions
 ==========================
 
-If you find a bug, or cannot figure something out after reading the frequently asked questions below, please send your question to the Zelig listserv at ``https://groups.google.com/forum/#!forum/zelig-statistical-software``. Please explain exactly what you did and include the full error message, including the traceback(). You should get an answer from the developers or another user in short order.
+If you find a bug, or cannot figure something out after reading through the FAQs below, please send your question to the Zelig listserv at: `https://groups.google.com/forum/#!forum/zelig-statistical-software <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_. Please explain exactly what you did and include the full error message, including the traceback(). You should get an answer from the developers or another user in short order.
 
 --------
 
@@ -13,7 +13,7 @@ We would appreciate if you would cite Zelig as:
 
   Imai, Kosuke, Gary King and Olivia Lau. 2006. “Zelig: Everyone’s Statistical Software,” http://GKing.Harvard.Edu/zelig.
 
-Please also cite the contributors for the models or methods you are using. These citations can be found in each individual model's vignette which can be found in the the :ref:`userguide`.
+Please also cite the contributors for the models or methods you are using. These citations can be found in each individual model's vignette which can be found in the the :ref:`vignettes:`.
 
 --------
 
@@ -43,13 +43,13 @@ If you have problems installing R, you should search the internet for the R help
 
 Why can’t I load data?
 ~~~~~~~~~~~~~~~~~~~~~~
-It is likely that the reason you are unable to load data because you have not specfied the correct working directory (e.g., the location of the data you are trying to load). You should specify you working directory use the ``setwd()`` function in which you will include the the file path to your working director. For example, if I wanted to load a file that is my *Documents* folder, I must first:
+It is likely that the reason you are unable to load data because you have not specified the correct working directory (e.g., the location of the data you are trying to load). You should specify you working directory use the ``setwd()`` function in which you will include the the file path to your working director. For example, if I wanted to load a file that is my *Documents* folder, I must first:
 
 .. sourcecode:: r
 
     > setwd("path/to/Documents")
 
-File paths can be found by right clicking the workign directory folder in any file browser and clicking "Get Info" (on Mac) or "Properties" (on Windows). Black-slashes (\\) in file paths copied from the "Properties" link on Windows machines must be replace with forward-slashes (/). For example, the Windows path: ``C:\Program Files\R``, would be typed as ``C:/Program Files/R``.
+File paths can be found by right clicking the working directory folder in any file browser and clicking "Get Info" (on Mac) or "Properties" (on Windows). Black-slashes (\\) in file paths copied from the "Properties" link on Windows machines must be replace with forward-slashes (/). For example, the Windows path: ``C:\Program Files\R``, would be typed as ``C:/Program Files/R``.
 
 --------
 
@@ -57,7 +57,7 @@ How do I increase the memory for R?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Windows users may get the error that R has run out of memory. If you've installed more memory on your machine, you may have to reinstall R in order to take advantage of the additional capacity.
 
-You may also set the amount of available memory manually. Close R, then right-click on your R program icon (the icon on your desktop or in your programs directory). Select “Properties”, and then select the “Shortcut” tab. Look for the “Target” field and after the closing quotes around the location of the R executible, add
+You may also set the amount of available memory manually. Close R, then right-click on your R program icon (the icon on your desktop or in your programs directory). Select “Properties”, and then select the “Shortcut” tab. Look for the “Target” field and after the closing quotes around the location of the R executable, add
 
 .. sourcecode:: r
 

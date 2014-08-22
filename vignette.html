@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Model vignettes &mdash; Zelig 5.0.1 documentation</title>
+    <title>Model Reference and Vignettes &mdash; Zelig 5.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -34,7 +34,8 @@
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
-    <link rel="prev" title="About Zelig" href="about.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="prev" title="Installation &amp; Quickstart" href="installation_quickstart.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -77,16 +78,24 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#loading-zelig">Loading Zelig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-models">Running Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#zelig5-model-reference">Zelig5 Model Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation &amp; Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-zelig">Installing R &amp; Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#id1">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#quickstart-guide">Quickstart Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#running-models">Running Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Model Reference and Vignettes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelg-tobit">zelg-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -101,20 +110,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Model vignettes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-exp">zelig-exp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-gamma">zelig-gamma</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-logit">zelig-logit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-lognorm">zelig-lognorm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-ls">zelig-ls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-negbin">zelig-negbin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-normal">zelig-normal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-poisson">zelig-poisson</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-probit">zelig-probit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zelg-tobit">zelg-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -130,7 +126,8 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Model vignettes</a><ul>
+<li><a class="reference internal" href="#">Model Reference and Vignettes</a><ul>
+<li><a class="reference internal" href="#reference">Reference</a></li>
 <li><a class="reference internal" href="#zelig-exp">zelig-exp</a><ul>
 <li><a class="reference internal" href="#syntax">Syntax</a></li>
 <li><a class="reference internal" href="#input-values">Input Values</a></li>
@@ -249,7 +246,11 @@
               
                 
   <li>
-    <a href="about.html" title="Previous Chapter: About Zelig"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; About Zelig</span>
+    <a href="installation_quickstart.html" title="Previous Chapter: Installation & Quickstart"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Installation & Q...</span>
+    </a>
+  </li>
+  <li>
+    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
     </a>
   </li>
               
@@ -278,11 +279,9 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Model vignettes</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation &amp; Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Model Reference and Vignettes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reference">Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-exp">zelig-exp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-gamma">zelig-gamma</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-logit">zelig-logit</a></li>
@@ -296,6 +295,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelg-tobit">zelg-tobit</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -309,8 +310,28 @@
       </div>
     <div class="col-md-9">
       
-  <div class="section" id="model-vignettes">
-<span id="vignettes"></span><h1>Model vignettes<a class="headerlink" href="#model-vignettes" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="model-reference-and-vignettes">
+<span id="vignettes"></span><h1>Model Reference and Vignettes<a class="headerlink" href="#model-reference-and-vignettes" title="Permalink to this headline">¶</a></h1>
+<p>This section includes technical information on the models currently implemented in Zelig (5.0.1). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.</p>
+<hr class="docutils" />
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<p>The following models hare currently supported in Zelig 5:</p>
+<ul class="simple">
+<li>Exponential Regression: <tt class="docutils literal"><span class="pre">zexp$new()</span></tt></li>
+<li>Gamma Regression: <tt class="docutils literal"><span class="pre">zgamma()</span></tt></li>
+<li>Logistic Regression: <tt class="docutils literal"><span class="pre">zlogit$new()</span></tt></li>
+<li>Log-Normal Regression: <tt class="docutils literal"><span class="pre">zlognorm$new()</span></tt></li>
+<li>Least Squares Regression: <tt class="docutils literal"><span class="pre">zls$new()</span></tt></li>
+<li>Negative Binomial Regression: <tt class="docutils literal"><span class="pre">zbinom$new()</span></tt></li>
+<li>Normal Regression: <tt class="docutils literal"><span class="pre">znormal$new()</span></tt></li>
+<li>Poisson Regression: <tt class="docutils literal"><span class="pre">zpoisson$new()</span></tt></li>
+<li>Probit Regression: <tt class="docutils literal"><span class="pre">zprobit$new()</span></tt></li>
+<li>Quantile Regression: <tt class="docutils literal"><span class="pre">zquantile$new()</span></tt></li>
+<li>Rare Events Logistic Regression: <tt class="docutils literal"><span class="pre">zrelogit$new()</span></tt></li>
+<li>Tobit Regression: <tt class="docutils literal"><span class="pre">ztobit$new()</span></tt></li>
+</ul>
+</div>
 <hr class="docutils" />
 <div class="section" id="zelig-exp">
 <h2>zelig-exp<a class="headerlink" href="#zelig-exp" title="Permalink to this headline">¶</a></h2>
@@ -518,6 +539,7 @@ Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
 to <tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-gamma">
 <h2>zelig-gamma<a class="headerlink" href="#zelig-gamma" title="Permalink to this headline">¶</a></h2>
 <p>Gamma Regression for Continuous, Positive Dependent Variables</p>
@@ -688,6 +710,7 @@ the treated from conditional prediction models.</li>
 wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-logit">
 <h2>zelig-logit<a class="headerlink" href="#zelig-logit" title="Permalink to this headline">¶</a></h2>
 <p>Logistic Regression for Dichotomous Dependent Variables</p>
@@ -876,6 +899,7 @@ information through <tt class="docutils literal"><span class="pre">summary(z.out
 wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-lognorm">
 <h2>zelig-lognorm<a class="headerlink" href="#zelig-lognorm" title="Permalink to this headline">¶</a></h2>
 <p>Log-Normal Regression for Duration Dependent Variables</p>
@@ -1112,6 +1136,7 @@ Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
 to <tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-ls">
 <h2>zelig-ls<a class="headerlink" href="#zelig-ls" title="Permalink to this headline">¶</a></h2>
 <p>Least Squares Regression for Continuous Dependent Variables</p>
@@ -1295,6 +1320,7 @@ Venables and Brian D. Ripley .In addition, advanced users may wish to
 refer to <tt class="docutils literal"><span class="pre">help(lm)</span></tt> and <tt class="docutils literal"><span class="pre">help(lm.fit)</span></tt>.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-negbin">
 <h2>zelig-negbin<a class="headerlink" href="#zelig-negbin" title="Permalink to this headline">¶</a></h2>
 <p>Negative Binomial Regression for Event Count Dependent Variables</p>
@@ -1433,6 +1459,7 @@ Venable and Brian D. Ripley . Advanced users may wish to refer to
 <a href="#id33"><span class="problematic" id="id34">``</span></a>help(glm.nb)`.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-normal">
 <h2>zelig-normal<a class="headerlink" href="#zelig-normal" title="Permalink to this headline">¶</a></h2>
 <p>Normal Regression for Continuous Dependent Variables</p>
@@ -1564,6 +1591,7 @@ information through <tt class="docutils literal"><span class="pre">summary(z.out
 wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-poisson">
 <h2>zelig-poisson<a class="headerlink" href="#zelig-poisson" title="Permalink to this headline">¶</a></h2>
 <p>Poisson Regression for Event Count Dependent Variables</p>
@@ -1683,6 +1711,7 @@ information through <tt class="docutils literal"><span class="pre">summary(z.out
 wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-probit">
 <h2>zelig-probit<a class="headerlink" href="#zelig-probit" title="Permalink to this headline">¶</a></h2>
 <p>Probit Regression for Dichotomous Dependent Variables</p>
@@ -1804,6 +1833,7 @@ information through <tt class="docutils literal"><span class="pre">summary(z.out
 wish to refer to <tt class="docutils literal"><span class="pre">help(glm)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelig-relogit">
 <h2>zelig-relogit<a class="headerlink" href="#zelig-relogit" title="Permalink to this headline">¶</a></h2>
 <p>Rare Events Logistic Regression for Dichotomous Dependent Variables</p>
@@ -2093,6 +2123,7 @@ is more numerically stable than standard matrix calculations.</p>
 <h3>See also<a class="headerlink" href="#id57" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="zelg-tobit">
 <h2>zelg-tobit<a class="headerlink" href="#zelg-tobit" title="Permalink to this headline">¶</a></h2>
 <p>Linear Regression for a Left-Censored Dependent Variable</p>

@@ -1,21 +1,25 @@
 
 Welcome to Zelig!
 =================
-*Zelig* is a framework for interfacing with a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, Zelig adds considerable infrastructure to existing heterogenous R implementations by translating coefficient estimates into interpretable quantities of interest and automating statistical procedures (e.g., bootstrapping) though an intelligible call structure.
 
-For more information about the software including goals and direction of the project, please see the :ref:`about` page. 
+**Zelig** is a framework for interfacing with a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, it adds considerable infrastructure to existing heterogeneous R implementations by translating coefficient estimates into interpretable quantities of interest and automating statistical procedures (e.g., bootstrapping) though an intelligible call structure.
 
-To get started, we recommend following the :ref:`installation` guide. Additional information about supported models, including tutorials, can be found in the :ref:`userguide`. 
 
-To view the codebase, visit the source repository at `https://github.com/IQSS/Zelig5 <https://github.com/IQSS/Zelig>`_ and for regular updates on releases be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_.
+To get started, we recommend following the :ref:`installation_quickstart` guide. More information about the software, including our technical vision and goals for the project, can be found at the :ref:`about` page. 
+
+
+To view the code-base, visit the source repository at `https://github.com/IQSS/Zelig <https://github.com/IQSS/Zelig>`_ and for regular updates  and release information be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_. We also recommend joining the `Zelig Google Group <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_, where we are encouraging users to ask questions, report bugs, and help others.
 
 ------------
 
-**Implemented Models in Zelig 5.0.1**
+Implemented Models in Zelig 5.0.1
+~~~~~~~~~~~~~~
 
 *Inheritance Tree*
 
 .. raw:: html
+
+	<button onclick="location.href = 'http://zeligproject.org/index.html#implemented-models-in-zelig-5-0-1';" id="myButton" class="float-left submit-button" >Back to Tree</button>
 
     <div style="margin-top:10px;">
       <iframe width="835" height="500" src="http://bl.ocks.org/myi100/raw/1ca9ba696aa0bb462415/" marginwidth="0" marginheight="0" scrolling="no" frameBorder="0"></iframe>
@@ -24,9 +28,8 @@ To view the codebase, visit the source repository at `https://github.com/IQSS/Ze
 .. toctree::
    :hidden:
 
-   quickstart.rst
-   installation.rst
+   installation_quickstart.rst
+   vignette.rst
    faq.rst
    about.rst
-   vignette.rst
 
