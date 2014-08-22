@@ -1,14 +1,14 @@
 
 .. _installation_quickstart:
 
-Installation & Quickstart
+Installation and Quickstart
 =========================
 
 This guide is designed to get you up and running with the current *beta* release of Zelig (5.0.1). 
 
 ------------
 
-Installing R & Zelig
+Installing R and Zelig
 ~~~~~~~~~~~~~~~~~~~~
 
 Before using Zelig, you will need to download and install both the R statistical program and the Zelig package:

@@ -75,8 +75,8 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation &amp; Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-zelig">Installing R &amp; Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-and-zelig">Installing R and Zelig</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
 </ul>
 </li>
@@ -166,7 +166,7 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation &amp; Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
@@ -192,7 +192,7 @@ is frequently used to estimate over-dispersed event count models.</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <p>With reference classes:</p>
-<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> znegbinom<span class="o">$</span>new<span class="p">()</span>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> znegbin<span class="o">$</span>new<span class="p">()</span>
 z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X <span class="o">~</span> X<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
 z5<span class="o">$</span>setx<span class="p">()</span>
 z5<span class="o">$</span>sim<span class="p">()</span>
@@ -254,14 +254,14 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 2.963 0.365 2.946 2.322   3.8</span>
+<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 2.971 0.3436 2.946 2.378 3.709</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##     0     1     2     3     4     5     6     7     8     9    10    11</span>
-<span class="c">## 0.116 0.173 0.188 0.121 0.097 0.090 0.056 0.048 0.033 0.019 0.020 0.017</span>
-<span class="c">##    12    13    14    16    18    23</span>
-<span class="c">## 0.006 0.008 0.004 0.002 0.001 0.001</span>
+<span class="c">## 0.161 0.183 0.184 0.126 0.102 0.065 0.066 0.042 0.022 0.015 0.009 0.012</span>
+<span class="c">##    12    13    14    15    17    38</span>
+<span class="c">## 0.002 0.003 0.004 0.001 0.002 0.001</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>

@@ -1,32 +1,46 @@
 
 ## ----, eval = FALSE------------------------------------------------------
+## z5 <- zprobit$new()
+## z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+## z5$setx()
+## z5$sim()
+
+
+## ----, eval = FALSE------------------------------------------------------
 ## z.out <- zelig(Y ~ X1 + X2, model = "probit", data = mydata)
 ## x.out <- setx(z.out)
 ## s.out <- sim(z.out, x = x.out, x1 = NULL)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## data(turnout)
+## ----, eval = TRUE, echo = FALSE-----------------------------------------
+suppressWarnings(suppressMessages(library(Zelig5)))
 
 
-## ----, eval = FALSE------------------------------------------------------
-## z.out <- zelig(vote   race + educate, model = “probit”, data =
-## turnout)
+## ----, eval = TRUE-------------------------------------------------------
+data(turnout)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## summary(z.out)
+## ----, eval = TRUE-------------------------------------------------------
+z.out <- zelig(vote ~ race + educate, model = "probit", data = turnout)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## x.out <- setx(z.out)
+## ----, eval = TRUE-------------------------------------------------------
+summary(z.out)
 
 
-## ----, eval = FALSE------------------------------------------------------
-## s.out <- sim(z.out, x = x.out)
+## ----, eval = TRUE-------------------------------------------------------
+x.out <- setx(z.out)
+
+
+## ----, eval = TRUE-------------------------------------------------------
+s.out <- sim(z.out, x = x.out)
 
 
 ## ----, eval = FALSE------------------------------------------------------
 ## summary(s.out)
+
+
+## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+plot(s.out1)
 
 

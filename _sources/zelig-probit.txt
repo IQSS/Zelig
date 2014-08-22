@@ -9,6 +9,20 @@ function of a set of explanatory variables.
 Syntax
 +++++
 
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zprobit$new()
+    z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
 
 .. sourcecode:: r
     
@@ -20,6 +34,8 @@ Syntax
 
 Example
 +++++
+
+
 
 Attach the sample turnout dataset:
 
@@ -36,8 +52,17 @@ Estimate parameter values for the probit regression:
 .. sourcecode:: r
     
 
-    z.out <- zelig(vote   race + educate, model = “probit”, data =
-    turnout)
+    z.out <- zelig(vote ~ race + educate, model = "probit", data = turnout)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
+    ##   probit: Probit Regression for Dichotomous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 
@@ -45,6 +70,23 @@ Estimate parameter values for the probit regression:
     
 
     summary(z.out)
+
+
+::
+
+    ## Model: 1
+    ## Call:  stats::glm(formula = vote ~ race + educate, family = binomial("probit"), 
+    ##     data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)    racewhite      educate  
+    ##     -0.7259       0.2991       0.0971  
+    ## 
+    ## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual
+    ## Null Deviance:	    2270 
+    ## Residual Deviance: 2140 	AIC: 2140
+    ## Next step: Use 'setx' method
+
 
 
 Set values for the explanatory variables to their default values.
@@ -70,6 +112,18 @@ Simulate quantities of interest from the posterior distribution.
     
 
     summary(s.out)
+
+
+
+.. sourcecode:: r
+    
+
+    plot(s.out1)
+
+.. figure:: figure/unnamed-chunk-10.png
+    :alt: 
+
+    
 
 
 Model

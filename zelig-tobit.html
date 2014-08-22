@@ -75,8 +75,8 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation &amp; Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-zelig">Installing R &amp; Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-and-zelig">Installing R and Zelig</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
 </ul>
 </li>
@@ -126,7 +126,11 @@
 <li><a class="reference internal" href="#">zelig-tobit</a><ul>
 <li><a class="reference internal" href="#syntax">Syntax</a></li>
 <li><a class="reference internal" href="#inputs">Inputs</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#basic-example">Basic Example</a></li>
+<li><a class="reference internal" href="#simulating-first-differences">Simulating First Differences</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#model">Model</a></li>
 <li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
 <li><a class="reference internal" href="#output-values">Output Values</a></li>
@@ -167,7 +171,7 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation &amp; Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
@@ -195,10 +199,16 @@ observed dependent variables, see Bayesian regression (), maximum
 likelihood normal regression (), or least squares ().</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>&gt; z.out &lt;- zelig(Y ~ X1 + X2, below = 0, above = Inf,
-                  model = &quot;tobit&quot;, data = mydata)
-&gt; x.out &lt;- setx(z.out)
-&gt; s.out &lt;- sim(z.out, x = x.out)
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> ztobit<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> below <span class="o">=</span> <span class="m">0</span><span class="p">,</span> above <span class="o">=</span> <span class="kc">Inf</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> below <span class="o">=</span> <span class="m">0</span><span class="p">,</span> above <span class="o">=</span> <span class="kc">Inf</span><span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;tobit&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -237,18 +247,21 @@ its own cluster.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><div class="first line-block">
-<div class="line">Basic Example</div>
-<div class="line">Attaching the sample dataset:</div>
-</div>
-</li>
-</ol>
+<div class="section" id="basic-example">
+<h3>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h3>
+<p>Attaching the sample dataset:</p>
 <div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>tobin<span class="p">)</span>
 </pre></div>
 </div>
 <p>Estimating linear regression using <tt class="docutils literal"><span class="pre">tobit</span></tt>:</p>
-<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>durable   age <span class="o">+</span> quant<span class="p">,</span> model <span class="o">=</span> “tobit”<span class="p">,</span> data <span class="o">=</span> tobin<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>durable <span class="o">~</span> age <span class="o">+</span> quant<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;tobit&quot;</span><span class="p">,</span> data <span class="o">=</span> tobin<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2011.</span>
+<span class="c">##   tobit: Linear regression for Left-Censored Dependent Variable</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables to their sample averages:</p>
@@ -262,17 +275,25 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<ol class="arabic">
-<li><div class="first line-block">
-<div class="line">Simulating First Differences</div>
-<div class="line">Set explanatory variables to their default(mean/mode) values, with</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 1.535 0.6137 1.502 0.5065 2.804</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.295 4.377 1.472    0 14.88</span>
+</pre></div>
 </div>
-<p>high (80th percentile) and low (20th percentile) liquidity ratio
+</div>
+<div class="section" id="simulating-first-differences">
+<h3>Simulating First Differences<a class="headerlink" href="#simulating-first-differences" title="Permalink to this headline">¶</a></h3>
+<p>Set explanatory variables to their default(mean/mode) values, with
+high (80th percentile) and low (20th percentile) liquidity ratio
 (<tt class="docutils literal"><span class="pre">quant</span></tt>):</p>
-</li>
-</ol>
-<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin\ <span class="o">:</span>math<span class="o">:</span>`quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.8</span><span class="p">))</span>
-x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin`\ quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.8</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Estimating the first difference for the effect of high versus low
@@ -282,6 +303,36 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean     sd  50%   2.5% 97.5%</span>
+<span class="c">## 1 1.184 0.7726 1.03 0.1544 3.091</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.208 4.363 1.233    0 15.31</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 2.056 0.9908 1.928 0.5381 4.263</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.556 4.544 1.984    0 14.85</span>
+<span class="c">## fd</span>
+<span class="c">##     mean    sd    50%  2.5% 97.5%</span>
+<span class="c">## 1 0.8721 1.171 0.7944 -1.31 3.291</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-12.png" />
+</div>
 </div>
 </div>
 <div class="section" id="model">

@@ -12,12 +12,20 @@ likelihood normal regression (), or least squares ().
 Syntax
 +++++
 
-::
+.. {r, eval = FALSE}
+z5 <- ztobit$new()
+z5$zelig(Y ~ X1 + X2, below = 0, above = Inf, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
 
-    > z.out <- zelig(Y ~ X1 + X2, below = 0, above = Inf, 
-                      model = "tobit", data = mydata)
-    > x.out <- setx(z.out)
-    > s.out <- sim(z.out, x = x.out)
+With the Zelig 4 compatibility wrappers:
+
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, below = 0, above = Inf, model = "tobit", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
 
 Inputs
 +++++
@@ -57,54 +65,66 @@ Zelig users may wish to refer to ``help(survreg)`` for more information.
 Examples
 +++++
 
-#. | Basic Example
-   | Attaching the sample dataset:
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. ..
 
-.. {r, eval = FALSE}
+Basic Example
+!!!!!
+
+Attaching the sample dataset:
+
+.. {r, eval = TRUE}
 data(tobin)
 .. ..
 
 Estimating linear regression using ``tobit``:
 
-.. {r, eval = FALSE}
-z.out <- zelig(durable   age + quant, model = “tobit”, data = tobin)
+.. {r, eval = TRUE}
+z.out <- zelig(durable ~ age + quant, model = "tobit", data = tobin)
 .. ..
 
 Setting values for the explanatory variables to their sample averages:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.out <- setx(z.out)
 .. ..
 
 Simulating quantities of interest from the posterior distribution given ``x.out``.
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out1 <- sim(z.out, x = x.out)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out1)
 .. ..
 
-#. | Simulating First Differences
-   | Set explanatory variables to their default(mean/mode) values, with
-   high (80th percentile) and low (20th percentile) liquidity ratio
-   (``quant``):
+Simulating First Differences
+!!!!!
 
-.. {r, eval = FALSE}
-x.high <- setx(z.out, quant = quantile(tobin\ :math:`quant, prob = 0.8))
-x.low <- setx(z.out, quant = quantile(tobin`\ quant, prob = 0.2))
+Set explanatory variables to their default(mean/mode) values, with
+high (80th percentile) and low (20th percentile) liquidity ratio
+(``quant``):
+
+.. {r, eval = TRUE}
+x.high <- setx(z.out, quant = quantile(tobin$quant, prob = 0.8))
+x.low <- setx(z.out, quant = quantile(tobin$quant, prob = 0.2))
 .. ..
 
 Estimating the first difference for the effect of high versus low
 liquidity ratio on duration(\ ``durable``):
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out2 <- sim(z.out, x = x.high, x1 = x.low)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out2)
+.. ..
+
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
+plot(s.out1)
 .. ..
 
 Model

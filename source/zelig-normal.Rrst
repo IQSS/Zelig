@@ -13,6 +13,17 @@ for the stochastic parameter :math:`\sigma`.
 Syntax
 +++++
 
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- znormal$new()
+z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "normal", data = mydata)
 x.out <- setx(z.out)
@@ -23,48 +34,52 @@ s.out <- sim(z.out, x = x.out)
 Examples
 +++++
 
-#. Basic Example with First Differences
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. .. 
+
+Basic Example with First Differences
+!!!!!
 
 Attach sample data:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(macro)
 .. ..
 
 Estimate model:
 
-.. {r, eval = FALSE}
-z.out1 <- zelig(unem   gdp + capmob + trade, model = “normal”, + data
-= macro)
+.. {r, eval = TRUE}
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "normal", data = macro)
 .. ..
 
 Summarize of regression coefficients:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out1)
 .. ..
 
 Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for trade:
 
-.. {r, eval = FALSE}
-x.high <- setx(z.out1, trade = quantile(macro\ :math:`trade, 0.8))
-x.low <- setx(z.out1, trade = quantile(macro`\ trade, 0.2))
+.. {r, eval = TRUE}
+x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
 .. ..
    
 Generate first differences for the effect of high versus low trade on GDP:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out1)
 .. ..
 
 A visual summary of quantities of interest:
 
-.. {r, eval = FALSE}
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out1)
 .. ..
 

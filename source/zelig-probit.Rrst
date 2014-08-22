@@ -9,6 +9,17 @@ function of a set of explanatory variables.
 Syntax
 +++++
 
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zprobit$new()
+z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "probit", data = mydata)
 x.out <- setx(z.out)
@@ -18,38 +29,46 @@ s.out <- sim(z.out, x = x.out, x1 = NULL)
 Example
 +++++
 
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. .. 
+
 Attach the sample turnout dataset:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(turnout)
 .. ..
 
 Estimate parameter values for the probit regression:
 
-.. {r, eval = FALSE}
-z.out <- zelig(vote   race + educate, model = “probit”, data =
-turnout)
+.. {r, eval = TRUE}
+z.out <- zelig(vote ~ race + educate, model = "probit", data = turnout)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
 Set values for the explanatory variables to their default values.
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.out <- setx(z.out)
 .. ..
 
 Simulate quantities of interest from the posterior distribution.
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out <- sim(z.out, x = x.out)
 .. ..
 
 .. {r, eval = FALSE}
 summary(s.out)
 .. ..
+
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
+plot(s.out1)
+.. ..
+
 
 Model
 +++++

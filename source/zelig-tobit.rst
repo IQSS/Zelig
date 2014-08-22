@@ -12,12 +12,26 @@ likelihood normal regression (), or least squares ().
 Syntax
 +++++
 
-::
 
-    > z.out <- zelig(Y ~ X1 + X2, below = 0, above = Inf, 
-                      model = "tobit", data = mydata)
-    > x.out <- setx(z.out)
-    > s.out <- sim(z.out, x = x.out)
+.. sourcecode:: r
+    
+
+    z5 <- ztobit$new()
+    z5$zelig(Y ~ X1 + X2, below = 0, above = Inf, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
+
+.. sourcecode:: r
+    
+
+    z.out <- zelig(Y ~ X1 + X2, below = 0, above = Inf, model = "tobit", data = mydata)
+    x.out <- setx(z.out)
+    s.out <- sim(z.out, x = x.out)
+
 
 Inputs
 +++++
@@ -57,8 +71,12 @@ Zelig users may wish to refer to ``help(survreg)`` for more information.
 Examples
 +++++
 
-#. | Basic Example
-   | Attaching the sample dataset:
+
+
+Basic Example
+!!!!!
+
+Attaching the sample dataset:
 
 
 .. sourcecode:: r
@@ -73,7 +91,17 @@ Estimating linear regression using ``tobit``:
 .. sourcecode:: r
     
 
-    z.out <- zelig(durable   age + quant, model = “tobit”, data = tobin)
+    z.out <- zelig(durable ~ age + quant, model = "tobit", data = tobin)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2011.
+    ##   tobit: Linear regression for Left-Censored Dependent Variable
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 Setting values for the explanatory variables to their sample averages:
@@ -101,17 +129,33 @@ Simulating quantities of interest from the posterior distribution given ``x.out`
     summary(s.out1)
 
 
-#. | Simulating First Differences
-   | Set explanatory variables to their default(mean/mode) values, with
-   high (80th percentile) and low (20th percentile) liquidity ratio
-   (``quant``):
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 1.535 0.6137 1.502 0.5065 2.804
+    ## pv
+    ##       mean    sd   50% 2.5% 97.5%
+    ## [1,] 3.295 4.377 1.472    0 14.88
+
+
+
+Simulating First Differences
+!!!!!
+
+Set explanatory variables to their default(mean/mode) values, with
+high (80th percentile) and low (20th percentile) liquidity ratio
+(``quant``):
 
 
 .. sourcecode:: r
     
 
-    x.high <- setx(z.out, quant = quantile(tobin\ :math:`quant, prob = 0.8))
-    x.low <- setx(z.out, quant = quantile(tobin`\ quant, prob = 0.2))
+    x.high <- setx(z.out, quant = quantile(tobin$quant, prob = 0.8))
+    x.low <- setx(z.out, quant = quantile(tobin$quant, prob = 0.2))
 
 
 Estimating the first difference for the effect of high versus low
@@ -130,6 +174,43 @@ liquidity ratio on duration(\ ``durable``):
 
     summary(s.out2)
 
+
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean     sd  50%   2.5% 97.5%
+    ## 1 1.184 0.7726 1.03 0.1544 3.091
+    ## pv
+    ##       mean    sd   50% 2.5% 97.5%
+    ## [1,] 3.208 4.363 1.233    0 15.31
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 2.056 0.9908 1.928 0.5381 4.263
+    ## pv
+    ##       mean    sd   50% 2.5% 97.5%
+    ## [1,] 3.556 4.544 1.984    0 14.85
+    ## fd
+    ##     mean    sd    50%  2.5% 97.5%
+    ## 1 0.8721 1.171 0.7944 -1.31 3.291
+
+
+
+
+.. sourcecode:: r
+    
+
+    plot(s.out1)
+
+.. figure:: figure/unnamed-chunk-12.png
+    :alt: 
+
+    
 
 Model
 +++++

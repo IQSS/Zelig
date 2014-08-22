@@ -13,6 +13,20 @@ for the stochastic parameter :math:`\sigma`.
 Syntax
 +++++
 
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- znormal$new()
+    z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
 
 .. sourcecode:: r
     
@@ -26,7 +40,10 @@ Syntax
 Examples
 +++++
 
-#. Basic Example with First Differences
+
+
+Basic Example with First Differences
+!!!!!
 
 Attach sample data:
 
@@ -43,8 +60,17 @@ Estimate model:
 .. sourcecode:: r
     
 
-    z.out1 <- zelig(unem   gdp + capmob + trade, model = “normal”, + data
-    = macro)
+    z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "normal", data = macro)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
+    ##   normal: Normal Regression for Continuous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 Summarize of regression coefficients:
@@ -56,6 +82,23 @@ Summarize of regression coefficients:
     summary(z.out1)
 
 
+::
+
+    ## Model: 1
+    ## Call:  stats::glm(formula = unem ~ gdp + capmob + trade, family = gaussian("identity"), 
+    ##     data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)          gdp       capmob        trade  
+    ##      6.1813      -0.3236       1.4219       0.0199  
+    ## 
+    ## Degrees of Freedom: 349 Total (i.e. Null);  346 Residual
+    ## Null Deviance:	    3660 
+    ## Residual Deviance: 2610 	AIC: 1710
+    ## Next step: Use 'setx' method
+
+
+
 Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for trade:
 
@@ -63,8 +106,8 @@ high (80th percentile) and low (20th percentile) values for trade:
 .. sourcecode:: r
     
 
-    x.high <- setx(z.out1, trade = quantile(macro\ :math:`trade, 0.8))
-    x.low <- setx(z.out1, trade = quantile(macro`\ trade, 0.2))
+    x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+    x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
 
    
 Generate first differences for the effect of high versus low trade on GDP:
@@ -83,6 +126,32 @@ Generate first differences for the effect of high versus low trade on GDP:
     summary(s.out1)
 
 
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean    sd   50% 2.5% 97.5%
+    ## [1,] 5.444 0.191 5.437 5.09 5.841
+    ## pv
+    ##       mean    sd   50%    2.5% 97.5%
+    ## [1,] 5.575 2.754 5.679 -0.1635 10.61
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##       mean     sd   50%  2.5% 97.5%
+    ## [1,] 4.614 0.1847 4.611 4.246 4.979
+    ## pv
+    ##       mean    sd   50%    2.5% 97.5%
+    ## [1,] 4.589 2.723 4.631 -0.6589 9.678
+    ## fd
+    ##         mean    sd     50%  2.5%   97.5%
+    ## [1,] -0.8302 0.229 -0.8278 -1.27 -0.3811
+
+
+
 A visual summary of quantities of interest:
 
 
@@ -91,6 +160,10 @@ A visual summary of quantities of interest:
 
     plot(s.out1)
 
+.. figure:: figure/unnamed-chunk-10.png
+    :alt: 
+
+    
 
 Model
 +++++

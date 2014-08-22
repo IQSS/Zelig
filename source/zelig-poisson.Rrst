@@ -12,6 +12,17 @@ model, see .
 Syntax
 +++++
 
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zpoisson$new()
+z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "poisson", data = mydata)
 x.out <- setx(z.out)
@@ -21,34 +32,40 @@ s.out <- sim(z.out, x = x.out)
 Example
 +++++
 
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. .. 
+
 Load sample data:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(sanction)
 .. ..
 
 Estimate Poisson model:
 
-.. {r, eval = FALSE}
-z.out <- zelig(num   target + coop, model = “poisson”, data =
-sanction)
+.. {r, eval = TRUE}
+z.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
 Set values for the explanatory variables to their default mean values:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.out <- setx(z.out)
 .. ..
 
 Simulate fitted values:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out <- sim(z.out, x = x.out)
 summary(s.out)
+.. ..
+
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out)
 .. ..
 

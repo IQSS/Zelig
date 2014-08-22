@@ -10,7 +10,7 @@ This section includes technical information on the models currently implemented 
 Reference
 ~~~~~~~~~
 
-The following models hare currently supported in Zelig 5:
+The following models are currently supported in Zelig 5:
 
 - Exponential Regression: ``zexp$new()``
 - Gamma Regression: ``zgamma()``

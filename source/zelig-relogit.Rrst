@@ -14,6 +14,20 @@ prior correction for case-control sampling designs.
 Syntax
 +++++
 
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zrelogit$new()
+z5$zelig(Y ~ X1 + X2, tau = NULL,
+                       case.control = c("prior", "weighting"), 
+                       bias.correct = TRUE, robust = FALSE, 
+                       data = mydata, ...)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "relogit", tau = NULL,
                        case.control = c("prior", "weighting"), 
@@ -42,13 +56,6 @@ the standard arguments for zelig(). You may additionally use:
    whether the intercept should be corrected for finite sample (rare
    events) bias.
 
--  robust: defaults to FALSE (except when case.control = “weighting”;
-   the default in this case becomes robust = TRUE). If TRUE is selected,
-   zelig() computes robust standard errors via the sandwich package (see
-   ). The default type of robust standard error is heteroskedastic and
-   autocorrelation consistent (HAC), and assumes that observations are
-   ordered by time index.
-
 Note that if tau = NULL, bias.correct = FALSE, the
 relogit procedure performs a standard logistic regression without any
 correction.
@@ -56,38 +63,44 @@ correction.
 Example 1: One Tau with Prior Correction and Bias Correction
 +++++
 
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
+.. .. 
+
 Due to memory and space considerations, the data used here are a sample
 drawn from the full data set used in King and Zeng, 2001, The proportion
 of militarized interstate conflicts to the absence of disputes is
 :math:`\tau = 1,042 / 303,772
 \approx 0.00343`. To estimate the model,
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(mid)
 .. ..
 
-.. {r, eval = FALSE}
-z.out1 <- zelig(conflict   major + contig + power + maxdem + mindem + years, + data = mid, model = “relogit”, tau = 1042/303772)
+.. {r, eval = TRUE}
+z.out1 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years, data = mid, model = "relogit", tau = 1042/303772)
 .. ..
 
 Summarize the model output:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out1)
 .. ..
+
 Set the explanatory variables to their means:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.out1 <- setx(z.out1)
 .. ..
 
 Simulate quantities of interest:
 
-.. {r, eval = FALSE}
-s.out1 <- sim(z.out1, x = x.out1) RRR> summary(s.out1)
+.. {r, eval = TRUE}
+s.out1 <- sim(z.out1, x = x.out1)
+summary(s.out1)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out1)
 .. ..
 
@@ -97,27 +110,25 @@ Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction
 Suppose that we wish to perform case control correction using weighting
 (rather than the default prior correction). To estimate the model:
 
-.. {r, eval = FALSE}
-z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
-+ years, + data = mid, model = “relogit”, tau = 1042/303772, +
-case.control = “weighting”, robust = TRUE)
+.. {r, eval = TRUE}
+z.out2 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years, data = mid, model = "relogit", tau = 1042/303772, case.control = "weighting", robust = TRUE)
 .. ..
 
 Summarize the model output:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out2)
 .. ..
 
 Set the explanatory variables to their means:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.out2 <- setx(z.out2)
 .. ..
 
 Simulate quantities of interest:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out2 <- sim(z.out2, x = x.out2)
 summary(s.out2)
 .. ..
@@ -130,34 +141,33 @@ that it was somewhere between :math:`(0.002, 0.005)`. To estimate a
 model with a range of feasible estimates for :math:`\tau` (using the
 default prior correction method for case control correction):
 
-.. {r, eval = FALSE}
-z.out2 <- zelig(conflict   major + contig + power + maxdem + mindem
-+ + years, data = mid, model = “relogit”, + tau = c(0.002, 0.005))
+.. {r, eval = TRUE}
+z.out2 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years, data = mid, model = "relogit", tau = c(0.002, 0.005))
 .. ..
 
 Summarize the model output:
 
-.. {r, eval = FALSE}
-summary(z.out2)
+.. {r, eval = TRUE}
+z.out2
 .. ..
 
 Set the explanatory variables to their means:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.out2 <- setx(z.out2)
 .. ..
 
 Simulate quantities of interest:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out <- sim(z.out2, x = x.out2)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out2)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
 plot(s.out2)
 .. ..
 

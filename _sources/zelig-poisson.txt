@@ -12,6 +12,20 @@ model, see .
 Syntax
 +++++
 
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zpoisson$new()
+    z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
 
 .. sourcecode:: r
     
@@ -23,6 +37,8 @@ Syntax
 
 Example
 +++++
+
+
 
 Load sample data:
 
@@ -39,8 +55,17 @@ Estimate Poisson model:
 .. sourcecode:: r
     
 
-    z.out <- zelig(num   target + coop, model = “poisson”, data =
-    sanction)
+    z.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
+    ##   poisson: Poisson Regression for Event Count Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
+
 
 
 
@@ -48,6 +73,23 @@ Estimate Poisson model:
     
 
     summary(z.out)
+
+
+::
+
+    ## Model: 1
+    ## Call:  stats::glm(formula = num ~ target + coop, family = poisson("log"), 
+    ##     data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)       target         coop  
+    ##      -0.968       -0.021        1.211  
+    ## 
+    ## Degrees of Freedom: 77 Total (i.e. Null);  75 Residual
+    ## Null Deviance:	    1580 
+    ## Residual Deviance: 721 	AIC: 944
+    ## Next step: Use 'setx' method
+
 
 
 Set values for the explanatory variables to their default mean values:
@@ -67,8 +109,32 @@ Simulate fitted values:
 
     s.out <- sim(z.out, x = x.out)
     summary(s.out)
+
+
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean     sd   50%  2.5% 97.5%
+    ## [1,] 3.242 0.2335 3.238 2.803 3.673
+    ## pv
+    ##       mean    sd 50% 2.5% 97.5%
+    ## [1,] 3.111 1.706   3    0     7
+
+
+
+
+.. sourcecode:: r
+    
+
     plot(s.out)
 
+.. figure:: figure/unnamed-chunk-9.png
+    :alt: 
+
+    
 
 Model
 +++++
