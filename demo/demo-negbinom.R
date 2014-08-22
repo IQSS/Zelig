@@ -12,7 +12,7 @@ summary(s.out)
 
 # Zelig 5 code:
 data(sanction)
-z5 <- znegbinom$new()
+z5 <- znegbin$new()
 z5$zelig(num ~ target + coop, data = sanction)
 z5
 z5$setx()

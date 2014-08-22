@@ -1,10 +1,10 @@
 #' @include model-zelig.R
-znegbinom <- setRefClass("Zelig-negbinom",
+znegbin <- setRefClass("Zelig-negbin",
                          contains="Zelig",
                          field=list(simalpha = "list" # ancillary parameters
                          ))
 
-znegbinom$methods(
+znegbin$methods(
   initialize = function() {
     callSuper()
     .self$fn <- quote(MASS::glm.nb)
@@ -18,7 +18,7 @@ znegbinom$methods(
   }
 )
 
-znegbinom$methods(
+znegbin$methods(
   zelig = function(formula, data, ..., weights=NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
@@ -26,7 +26,7 @@ znegbinom$methods(
   }
 )
 
-znegbinom$methods(
+znegbin$methods(
   param = function(z.out) {
     simalpha <- z.out$theta
     simparam <- mvrnorm(n = .self$num, mu = coef(z.out),
@@ -36,7 +36,7 @@ znegbinom$methods(
   }
 )
 
-znegbinom$methods(
+znegbin$methods(
   qi = function(simparam, mm) {
     coeff <- simparam$simparam
     alpha <- simparam$simalpha
