@@ -251,76 +251,50 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Olivia Lau, Kosuke Imai, Gary King. 2011.</span>
-<span class="c">##   exp: Exponential Regression for Duration Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
-<span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
-<span class="c">##     numst2, data = ., dist = &quot;exponential&quot;, model = FALSE)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)       fract      numst2</span>
-<span class="c">##    5.535873   -0.003909    0.461179</span>
-<span class="c">##</span>
-<span class="c">## Scale fixed at 1</span>
-<span class="c">##</span>
-<span class="c">## Loglik(model)= -1077   Loglik(intercept only)= -1101</span>
-<span class="c">##  Chisq= 46.66 on 2 degrees of freedom, p= 7.4e-11</span>
-<span class="c">## n= 314</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Simulate expected values and first differences:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <p>Summarize quantities of interest and produce some plots:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 15.27 1.425 15.21 12.62 18.03</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd  50%   2.5% 97.5%</span>
-<span class="c">## [1,] 15.44 15.56 10.8 0.4354 59.31</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 24.34 1.948 24.31 20.73 28.07</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 24.59 25.87 16.51 0.5998 93.27</span>
-<span class="c">## fd</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 9.068 2.333 9.021 4.967 13.53</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-11.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="model">
@@ -434,8 +408,7 @@ may view. For example, if you run
 <tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(Surv(Y,</span> <span class="pre">C)</span> <span class="pre">~</span> <span class="pre">X,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">exp,</span> <span class="pre">data)</span></tt>, then you may
 examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
 <tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
-a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
-elements available through the $ operator are listed below.</p>
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>.</p>
 </div>
 <div class="section" id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>

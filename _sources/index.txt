@@ -12,19 +12,20 @@ To view the code-base, visit the source repository at `https://github.com/IQSS/Z
 
 ------------
 
-Implemented Models in Zelig 5.0.1
-~~~~~~~~~~~~~~
+**Implemented Models in Zelig 5.0.1**
 
 *Inheritance Tree*
 
 .. raw:: html
 
-	<button onclick="location.href = 'http://zeligproject.org/index.html#implemented-models-in-zelig-5-0-1';" id="myButton" class="float-left submit-button" >Back to Tree</button>
-
     <div style="margin-top:10px;">
-      <iframe width="835" height="500" src="http://bl.ocks.org/myi100/raw/1ca9ba696aa0bb462415/" marginwidth="0" marginheight="0" scrolling="no" frameBorder="0"></iframe>
+      <iframe width="835" height="500" src="http://bl.ocks.org/myi100/raw/1ca9ba696aa0bb462415/" marginwidth="0" marginheight="0" scrolling="yes" frameBorder="0"></iframe>
     </div>
 
+	<button onclick="location.href = 'http://zeligproject.org';" id="myButton" class="float-left submit-button" >Back to Tree</button>
+
+
+ 
 .. toctree::
    :hidden:
 

@@ -100,11 +100,7 @@ Estimate the model:
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Olivia Lau, Kosuke Imai, Gary King. 2011.
-    ##   exp: Exponential Regression for Duration Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -119,20 +115,7 @@ View the regression output:
 
 ::
 
-    ## Model: 1Call:
-    ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
-    ##     numst2, data = ., dist = "exponential", model = FALSE)
-    ## 
-    ## Coefficients:
-    ## (Intercept)       fract      numst2 
-    ##    5.535873   -0.003909    0.461179 
-    ## 
-    ## Scale fixed at 1 
-    ## 
-    ## Loglik(model)= -1077   Loglik(intercept only)= -1101
-    ## 	Chisq= 46.66 on 2 degrees of freedom, p= 7.4e-11 
-    ## n= 314 
-    ## Next step: Use 'setx' method
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out' not found
 
 
 
@@ -145,7 +128,23 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
+
+
+::
+
+    ## Error: could not find function "setx"
+
+
+.. sourcecode:: r
+    
+
     x.high <- setx(z.out, numst2 = 1)
+
+
+::
+
+    ## Error: could not find function "setx"
+
 
 
 Simulate expected values and first differences:
@@ -155,6 +154,12 @@ Simulate expected values and first differences:
     
 
     s.out <- sim(z.out, x = x.low, x1 = x.high)
+
+
+::
+
+    ## Error: could not find function "sim"
+
 
 
 Summarize quantities of interest and produce some plots:
@@ -168,27 +173,7 @@ Summarize quantities of interest and produce some plots:
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 15.27 1.425 15.21 12.62 18.03
-    ## pv
-    ##       mean    sd  50%   2.5% 97.5%
-    ## [1,] 15.44 15.56 10.8 0.4354 59.31
-    ## 
-    ##  sim x1 :
-    ##  -----
-    ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 24.34 1.948 24.31 20.73 28.07
-    ## pv
-    ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 24.59 25.87 16.51 0.5998 93.27
-    ## fd
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 9.068 2.333 9.021 4.967 13.53
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
 
 
 
@@ -198,10 +183,12 @@ Summarize quantities of interest and produce some plots:
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-11.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
+
+
 
 Model
 +++++
@@ -327,8 +314,7 @@ may view. For example, if you run
 ``z.out <- zelig(Surv(Y, C) ~ X, model = exp, data)``, then you may
 examine the available information in ``z.out`` by using
 ``names(z.out)``, see the coefficients by using z.out$coefficients, and
-a default summary of information through ``summary(z.out)``. Other
-elements available through the $ operator are listed below.
+a default summary of information through ``summary(z.out)``.
 
 
 See also
