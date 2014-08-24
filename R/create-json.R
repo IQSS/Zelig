@@ -34,14 +34,8 @@ z5normal$toJSON()
 z5gamma <- zgamma$new()
 z5gamma$toJSON()
 
-z5negbinom <- znegbinom$new()
-z5negbinom$toJSON()
-
-z5negbinom <- znegbinom$new()
-z5negbinom$toJSON()
-
-z5negbinom <- znegbinom$new()
-z5negbinom$toJSON()
+z5negbin <- znegbin$new()
+z5negbin$toJSON()
 
 z5exp <- zexp$new()
 z5exp$toJSON()
@@ -58,7 +52,7 @@ zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "poisson" = z5poisson$ljson,
                     "normal" = z5normal$ljson,
                     "gamma" = z5gamma$ljson,
-                    "negbinom" = z5negbinom$ljson,
+                    "negbinom" = z5negbin$ljson,
                     "exp" = z5exp$ljson,
                     "lognorm" = z5lognorm$ljson,
                     "tobit" = z5tobit$ljson))
