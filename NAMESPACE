@@ -10,7 +10,7 @@ exportClasses(
      "Zelig-probit",
      "Zelig-gamma",
      "Zelig-exp",
-     "Zelig-negbinom",
+     "Zelig-negbin",
      "Zelig-normal",
      "Zelig-poisson",
      "Zelig-lognorm",
