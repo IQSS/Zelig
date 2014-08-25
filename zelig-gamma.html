@@ -57,13 +57,13 @@
 
         <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
         <a class="navbar-brand" href="index.html">Zelig</a>
-        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0.1</b></span>
       </div>
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+                <li><a href="http://datascience.iq.harvard.edu/zelig">Data Science at IQSS</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -217,73 +217,49 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>duration <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
-<span class="c">##   gamma: Gamma Regression for Continuous, Positive Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:  stats::glm(formula = duration ~ fract + numst2, family = Gamma(&quot;inverse&quot;),</span>
-<span class="c">##     data = .)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)        fract       numst2</span>
-<span class="c">##   -0.012960     0.000115    -0.017387</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 313 Total (i.e. Null);  311 Residual</span>
-<span class="c">## Null Deviance:       301</span>
-<span class="c">## Residual Deviance: 272   AIC: 2430</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean   sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 14.42 1.07 14.35 12.52 16.75</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 15.19 12.46 11.95 0.9515 47.57</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 19.23 1.098 19.17 17.31 21.44</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 19.06 16.32 15.41 0.8423 65.82</span>
-<span class="c">## fd</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 4.802 1.502 4.817 1.857 7.713</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-10.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="model">

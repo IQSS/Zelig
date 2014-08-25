@@ -110,11 +110,7 @@ Estimate the model:
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.
-    ##   lognorm: Log-Normal Regression for Duration Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -129,20 +125,7 @@ View the regression output:
 
 ::
 
-    ## Model: 1Call:
-    ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
-    ##     numst2, data = ., dist = "lognormal", model = FALSE)
-    ## 
-    ## Coefficients:
-    ## (Intercept)       fract      numst2 
-    ##    5.366670   -0.004438    0.559833 
-    ## 
-    ## Scale= 1.2 
-    ## 
-    ## Loglik(model)= -1078   Loglik(intercept only)= -1101
-    ## 	Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11 
-    ## n= 314 
-    ## Next step: Use 'setx' method
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out' not found
 
 
 
@@ -155,7 +138,23 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
+
+
+::
+
+    ## Error: could not find function "setx"
+
+
+.. sourcecode:: r
+    
+
     x.high <- setx(z.out, numst2= 1)
+
+
+::
+
+    ## Error: could not find function "setx"
+
 
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
@@ -167,6 +166,12 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     s.out <- sim(z.out, x = x.low, x1 = x.high)
 
 
+::
+
+    ## Error: could not find function "sim"
+
+
+
 
 .. sourcecode:: r
     
@@ -176,27 +181,7 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 18.38 2.446 18.15 14.03 23.45
-    ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 18.38 2.446 18.15 14.03 23.45
-    ## 
-    ##  sim x1 :
-    ##  -----
-    ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 31.88 3.714 31.61 25.57 39.98
-    ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 31.88 3.714 31.61 25.57 39.98
-    ## fd
-    ##    mean   sd   50%  2.5% 97.5%
-    ## 1 13.51 3.78 13.43 6.706 21.04
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
 
 
 
@@ -206,10 +191,12 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-12.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
+
+
 
 Model
 +++++

@@ -57,13 +57,13 @@
 
         <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
         <a class="navbar-brand" href="index.html">Zelig</a>
-        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0.1</b></span>
       </div>
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+                <li><a href="http://datascience.iq.harvard.edu/zelig">Data Science at IQSS</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -252,59 +252,41 @@ of militarized interstate conflicts to the absence of disputes is
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> <span class="m">1042</span><span class="o">/</span><span class="m">303772</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
-<span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:  relogit(formula = cbind(conflict, 1 - conflict) ~ major + contig +</span>
-<span class="c">##     power + maxdem + mindem + years, data = ., tau = 0.00343020423212146,</span>
-<span class="c">##     bias.correct = TRUE, case.control = &quot;prior&quot;)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -7.5084       2.4320       4.1080       1.0536       0.0480</span>
-<span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out1&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<p>Simulate quantities of interest:</p>
-<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
-summary<span class="p">(</span>s.out1<span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##        mean        sd      50%   2.5%    97.5%</span>
-<span class="c">## [1,] 0.0024 0.0001559 0.002399 0.0021 0.002694</span>
-<span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.999 0.001</span>
+<p>Simulate quantities of interest:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-9.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">
@@ -314,59 +296,34 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> <span class="m">1042</span><span class="o">/</span><span class="m">303772</span><span class="p">,</span> case.control <span class="o">=</span> <span class="s">&quot;weighting&quot;</span><span class="p">,</span> robust <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: unused argument (robust = TRUE)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:</span>
-<span class="c">## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country),</span>
-<span class="c">##     data = .)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">##                      (Intercept)                               gdp</span>
-<span class="c">##                           -5.843                            -0.110</span>
-<span class="c">##                            trade                            capmob</span>
-<span class="c">##                            0.144                             0.815</span>
-<span class="c">##        as.factor(country)Belgium          as.factor(country)Canada</span>
-<span class="c">##                           -1.599                             6.759</span>
-<span class="c">##        as.factor(country)Denmark         as.factor(country)Finland</span>
-<span class="c">##                            4.311                             4.810</span>
-<span class="c">##         as.factor(country)France           as.factor(country)Italy</span>
-<span class="c">##                            6.905                             9.290</span>
-<span class="c">##          as.factor(country)Japan     as.factor(country)Netherlands</span>
-<span class="c">##                            5.459                            -1.459</span>
-<span class="c">##         as.factor(country)Norway          as.factor(country)Sweden</span>
-<span class="c">##                           -2.754                             0.925</span>
-<span class="c">## as.factor(country)United Kingdom   as.factor(country)United States</span>
-<span class="c">##                            5.601                            10.066</span>
-<span class="c">##   as.factor(country)West Germany</span>
-<span class="c">##                            3.364</span>
-<span class="c">##</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out2&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out2 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
-<p>Simulate quantities of interest:</p>
-<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.out2<span class="p">)</span>
-summary<span class="p">(</span>s.out2<span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1  8.2 0.4228 8.21 7.393  9.02</span>
-<span class="c">## pv</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1  8.2 0.4228 8.21 7.393  9.02</span>
+<p>Simulate quantities of interest:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out2&#39; not found</span>
 </pre></div>
 </div>
 </div>
@@ -379,264 +336,41 @@ default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> c<span class="p">(</span><span class="m">0.002</span><span class="p">,</span> <span class="m">0.005</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
-<span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1$lower.estimate</span>
-<span class="c">##</span>
-<span class="c">## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,</span>
-<span class="c">##     case.control = &quot;prior&quot;, ...)</span>
-<span class="c">## {</span>
-<span class="c">##     mf &lt;- match.call()</span>
-<span class="c">##     mf$tau &lt;- mf$bias.correct &lt;- mf$case.control &lt;- NULL</span>
-<span class="c">##     if (!is.null(tau)) {</span>
-<span class="c">##         tau &lt;- unique(tau)</span>
-<span class="c">##         if (length(case.control) &gt; 1)</span>
-<span class="c">##             stop(&quot;You can only choose one option for case control correction.&quot;)</span>
-<span class="c">##         ck1 &lt;- grep(&quot;p&quot;, case.control)</span>
-<span class="c">##         ck2 &lt;- grep(&quot;w&quot;, case.control)</span>
-<span class="c">##         if (length(ck1) == 0 &amp; length(ck2) == 0)</span>
-<span class="c">##             stop(&quot;choose either case.control = \&quot;prior\&quot; &quot;, &quot;or case.control = \&quot;weighting\&quot;&quot;)</span>
-<span class="c">##         if (length(ck2) == 0)</span>
-<span class="c">##             weighting &lt;- FALSE</span>
-<span class="c">##         else weighting &lt;- TRUE</span>
-<span class="c">##     }</span>
-<span class="c">##     else weighting &lt;- FALSE</span>
-<span class="c">##     if (length(tau) &gt; 2)</span>
-<span class="c">##         stop(&quot;tau must be a vector of length less than or equal to 2&quot;)</span>
-<span class="c">##     else if (length(tau) == 2) {</span>
-<span class="c">##         mf[[1]] &lt;- relogit</span>
-<span class="c">##         res &lt;- list()</span>
-<span class="c">##         mf$tau &lt;- min(tau)</span>
-<span class="c">##         res$lower.estimate &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         mf$tau &lt;- max(tau)</span>
-<span class="c">##         res$upper.estimate &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         res$formula &lt;- formula</span>
-<span class="c">##         class(res) &lt;- c(&quot;Relogit2&quot;, &quot;Relogit&quot;)</span>
-<span class="c">##         return(res)</span>
-<span class="c">##     }</span>
-<span class="c">##     else {</span>
-<span class="c">##         mf[[1]] &lt;- glm</span>
-<span class="c">##         mf$family &lt;- binomial(link = &quot;logit&quot;)</span>
-<span class="c">##         y2 &lt;- model.response(model.frame(mf$formula, data))</span>
-<span class="c">##         if (is.matrix(y2))</span>
-<span class="c">##             y &lt;- y2[, 1]</span>
-<span class="c">##         else y &lt;- y2</span>
-<span class="c">##         ybar &lt;- mean(y)</span>
-<span class="c">##         if (weighting) {</span>
-<span class="c">##             w1 &lt;- tau/ybar</span>
-<span class="c">##             w0 &lt;- (1 - tau)/(1 - ybar)</span>
-<span class="c">##             wi &lt;- w1 * y + w0 * (1 - y)</span>
-<span class="c">##             mf$weights &lt;- wi</span>
-<span class="c">##         }</span>
-<span class="c">##         res &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         res$call &lt;- match.call(expand.dots = TRUE)</span>
-<span class="c">##         res$tau &lt;- tau</span>
-<span class="c">##         X &lt;- model.matrix(res)</span>
-<span class="c">##         if (bias.correct) {</span>
-<span class="c">##             pihat &lt;- fitted(res)</span>
-<span class="c">##             if (is.null(tau))</span>
-<span class="c">##                 wi &lt;- rep(1, length(y))</span>
-<span class="c">##             else if (weighting)</span>
-<span class="c">##                 res$weighting &lt;- TRUE</span>
-<span class="c">##             else {</span>
-<span class="c">##                 w1 &lt;- tau/ybar</span>
-<span class="c">##                 w0 &lt;- (1 - tau)/(1 - ybar)</span>
-<span class="c">##                 wi &lt;- w1 * y + w0 * (1 - y)</span>
-<span class="c">##                 res$weighting &lt;- FALSE</span>
-<span class="c">##             }</span>
-<span class="c">##             W &lt;- pihat * (1 - pihat) * wi</span>
-<span class="c">##             Qdiag &lt;- lm.influence(lm(y ~ X - 1, weights = W))$hat/W</span>
-<span class="c">##             if (is.null(tau))</span>
-<span class="c">##                 xi &lt;- 0.5 * Qdiag * (2 * pihat - 1)</span>
-<span class="c">##             else xi &lt;- 0.5 * Qdiag * ((1 + w0) * pihat - w0)</span>
-<span class="c">##             res$coefficients &lt;- res$coefficients - lm(xi ~ X -</span>
-<span class="c">##                 1, weights = W)$coefficients</span>
-<span class="c">##             res$bias.correct &lt;- TRUE</span>
-<span class="c">##         }</span>
-<span class="c">##         else res$bias.correct &lt;- FALSE</span>
-<span class="c">##         if (!is.null(tau) &amp; !weighting) {</span>
-<span class="c">##             if (tau &lt;= 0 || tau &gt;= 1)</span>
-<span class="c">##                 stop(&quot;\ntau needs to be between 0 and 1.\n&quot;)</span>
-<span class="c">##             res$coefficients[&quot;(Intercept)&quot;] &lt;- res$coefficients[&quot;(Intercept)&quot;] -</span>
-<span class="c">##                 log(((1 - tau)/tau) * (ybar/(1 - ybar)))</span>
-<span class="c">##             res$prior.correct &lt;- TRUE</span>
-<span class="c">##             res$weighting &lt;- FALSE</span>
-<span class="c">##         }</span>
-<span class="c">##         else res$prior.correct &lt;- FALSE</span>
-<span class="c">##         if (is.null(res$weighting))</span>
-<span class="c">##             res$weighting &lt;- FALSE</span>
-<span class="c">##         res$linear.predictors &lt;- t(res$coefficients) %*% t(X)</span>
-<span class="c">##         res$fitted.values &lt;- 1/(1 + exp(-res$linear.predictors))</span>
-<span class="c">##         res$zelig &lt;- &quot;Relogit&quot;</span>
-<span class="c">##         class(res) &lt;- c(&quot;Relogit&quot;, &quot;glm&quot;)</span>
-<span class="c">##         return(res)</span>
-<span class="c">##     }</span>
-<span class="c">## })(formula = cbind(conflict, 1 - conflict) ~ major + contig +</span>
-<span class="c">##     power + maxdem + mindem + years, data = ., tau = 0.002)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -8.0492       2.4320       4.1079       1.0536       0.0480</span>
-<span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
-<span class="c">##</span>
-<span class="c">## $upper.estimate</span>
-<span class="c">##</span>
-<span class="c">## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,</span>
-<span class="c">##     case.control = &quot;prior&quot;, ...)</span>
-<span class="c">## {</span>
-<span class="c">##     mf &lt;- match.call()</span>
-<span class="c">##     mf$tau &lt;- mf$bias.correct &lt;- mf$case.control &lt;- NULL</span>
-<span class="c">##     if (!is.null(tau)) {</span>
-<span class="c">##         tau &lt;- unique(tau)</span>
-<span class="c">##         if (length(case.control) &gt; 1)</span>
-<span class="c">##             stop(&quot;You can only choose one option for case control correction.&quot;)</span>
-<span class="c">##         ck1 &lt;- grep(&quot;p&quot;, case.control)</span>
-<span class="c">##         ck2 &lt;- grep(&quot;w&quot;, case.control)</span>
-<span class="c">##         if (length(ck1) == 0 &amp; length(ck2) == 0)</span>
-<span class="c">##             stop(&quot;choose either case.control = \&quot;prior\&quot; &quot;, &quot;or case.control = \&quot;weighting\&quot;&quot;)</span>
-<span class="c">##         if (length(ck2) == 0)</span>
-<span class="c">##             weighting &lt;- FALSE</span>
-<span class="c">##         else weighting &lt;- TRUE</span>
-<span class="c">##     }</span>
-<span class="c">##     else weighting &lt;- FALSE</span>
-<span class="c">##     if (length(tau) &gt; 2)</span>
-<span class="c">##         stop(&quot;tau must be a vector of length less than or equal to 2&quot;)</span>
-<span class="c">##     else if (length(tau) == 2) {</span>
-<span class="c">##         mf[[1]] &lt;- relogit</span>
-<span class="c">##         res &lt;- list()</span>
-<span class="c">##         mf$tau &lt;- min(tau)</span>
-<span class="c">##         res$lower.estimate &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         mf$tau &lt;- max(tau)</span>
-<span class="c">##         res$upper.estimate &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         res$formula &lt;- formula</span>
-<span class="c">##         class(res) &lt;- c(&quot;Relogit2&quot;, &quot;Relogit&quot;)</span>
-<span class="c">##         return(res)</span>
-<span class="c">##     }</span>
-<span class="c">##     else {</span>
-<span class="c">##         mf[[1]] &lt;- glm</span>
-<span class="c">##         mf$family &lt;- binomial(link = &quot;logit&quot;)</span>
-<span class="c">##         y2 &lt;- model.response(model.frame(mf$formula, data))</span>
-<span class="c">##         if (is.matrix(y2))</span>
-<span class="c">##             y &lt;- y2[, 1]</span>
-<span class="c">##         else y &lt;- y2</span>
-<span class="c">##         ybar &lt;- mean(y)</span>
-<span class="c">##         if (weighting) {</span>
-<span class="c">##             w1 &lt;- tau/ybar</span>
-<span class="c">##             w0 &lt;- (1 - tau)/(1 - ybar)</span>
-<span class="c">##             wi &lt;- w1 * y + w0 * (1 - y)</span>
-<span class="c">##             mf$weights &lt;- wi</span>
-<span class="c">##         }</span>
-<span class="c">##         res &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         res$call &lt;- match.call(expand.dots = TRUE)</span>
-<span class="c">##         res$tau &lt;- tau</span>
-<span class="c">##         X &lt;- model.matrix(res)</span>
-<span class="c">##         if (bias.correct) {</span>
-<span class="c">##             pihat &lt;- fitted(res)</span>
-<span class="c">##             if (is.null(tau))</span>
-<span class="c">##                 wi &lt;- rep(1, length(y))</span>
-<span class="c">##             else if (weighting)</span>
-<span class="c">##                 res$weighting &lt;- TRUE</span>
-<span class="c">##             else {</span>
-<span class="c">##                 w1 &lt;- tau/ybar</span>
-<span class="c">##                 w0 &lt;- (1 - tau)/(1 - ybar)</span>
-<span class="c">##                 wi &lt;- w1 * y + w0 * (1 - y)</span>
-<span class="c">##                 res$weighting &lt;- FALSE</span>
-<span class="c">##             }</span>
-<span class="c">##             W &lt;- pihat * (1 - pihat) * wi</span>
-<span class="c">##             Qdiag &lt;- lm.influence(lm(y ~ X - 1, weights = W))$hat/W</span>
-<span class="c">##             if (is.null(tau))</span>
-<span class="c">##                 xi &lt;- 0.5 * Qdiag * (2 * pihat - 1)</span>
-<span class="c">##             else xi &lt;- 0.5 * Qdiag * ((1 + w0) * pihat - w0)</span>
-<span class="c">##             res$coefficients &lt;- res$coefficients - lm(xi ~ X -</span>
-<span class="c">##                 1, weights = W)$coefficients</span>
-<span class="c">##             res$bias.correct &lt;- TRUE</span>
-<span class="c">##         }</span>
-<span class="c">##         else res$bias.correct &lt;- FALSE</span>
-<span class="c">##         if (!is.null(tau) &amp; !weighting) {</span>
-<span class="c">##             if (tau &lt;= 0 || tau &gt;= 1)</span>
-<span class="c">##                 stop(&quot;\ntau needs to be between 0 and 1.\n&quot;)</span>
-<span class="c">##             res$coefficients[&quot;(Intercept)&quot;] &lt;- res$coefficients[&quot;(Intercept)&quot;] -</span>
-<span class="c">##                 log(((1 - tau)/tau) * (ybar/(1 - ybar)))</span>
-<span class="c">##             res$prior.correct &lt;- TRUE</span>
-<span class="c">##             res$weighting &lt;- FALSE</span>
-<span class="c">##         }</span>
-<span class="c">##         else res$prior.correct &lt;- FALSE</span>
-<span class="c">##         if (is.null(res$weighting))</span>
-<span class="c">##             res$weighting &lt;- FALSE</span>
-<span class="c">##         res$linear.predictors &lt;- t(res$coefficients) %*% t(X)</span>
-<span class="c">##         res$fitted.values &lt;- 1/(1 + exp(-res$linear.predictors))</span>
-<span class="c">##         res$zelig &lt;- &quot;Relogit&quot;</span>
-<span class="c">##         class(res) &lt;- c(&quot;Relogit&quot;, &quot;glm&quot;)</span>
-<span class="c">##         return(res)</span>
-<span class="c">##     }</span>
-<span class="c">## })(formula = cbind(conflict, 1 - conflict) ~ major + contig +</span>
-<span class="c">##     power + maxdem + mindem + years, data = ., tau = 0.005)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -7.1300       2.4320       4.1080       1.0536       0.0480</span>
-<span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
-<span class="c">##</span>
-<span class="c">## $formula</span>
-<span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
-<span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7fa429760710&gt;</span>
-<span class="c">##</span>
-<span class="c">## attr(,&quot;class&quot;)</span>
-<span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: object &#39;z.out2&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out2 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
 <p>Simulate quantities of interest:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: no applicable method for &#39;vcov&#39; applied to an object of class</span>
-<span class="c">## &quot;c(&#39;Relogit2&#39;, &#39;Relogit&#39;)&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1  8.2 0.4228 8.21 7.393  9.02</span>
-<span class="c">## pv</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1  8.2 0.4228 8.21 7.393  9.02</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out2&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-19.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out2&#39; not found</span>
+</pre></div>
 </div>
 <p>The cost of giving a range of values for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> is that point
 estimates are not available for quantities of interest. Instead,

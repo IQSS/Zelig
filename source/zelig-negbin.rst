@@ -59,11 +59,7 @@ Estimate the model:
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
-    ##   negbinom: Negative Binomial Regression for Event Count Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -76,18 +72,7 @@ Estimate the model:
 
 ::
 
-    ## Model: 1
-    ## Call:  MASS::glm.nb(formula = num ~ target + coop, data = ., init.theta = 1.841603403, 
-    ##     link = log)
-    ## 
-    ## Coefficients:
-    ## (Intercept)       target         coop  
-    ##      -1.564        0.151        1.286  
-    ## 
-    ## Degrees of Freedom: 77 Total (i.e. Null);  75 Residual
-    ## Null Deviance:	    237 
-    ## Residual Deviance: 56.5 	AIC: 360
-    ## Next step: Use 'setx' method
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out' not found
 
 
 
@@ -100,6 +85,12 @@ Set values for the explanatory variables to their default mean values:
     x.out <- setx(z.out)
 
 
+::
+
+    ## Error: could not find function "setx"
+
+
+
 Simulate fitted values:
 
 
@@ -107,6 +98,12 @@ Simulate fitted values:
     
 
     s.out <- sim(z.out, x = x.out)
+
+
+::
+
+    ## Error: could not find function "sim"
+
 
 
 
@@ -118,18 +115,7 @@ Simulate fitted values:
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 2.971 0.3436 2.946 2.378 3.709
-    ## pv
-    ## qi
-    ##     0     1     2     3     4     5     6     7     8     9    10    11 
-    ## 0.161 0.183 0.184 0.126 0.102 0.065 0.066 0.042 0.022 0.015 0.009 0.012 
-    ##    12    13    14    15    17    38 
-    ## 0.002 0.003 0.004 0.001 0.002 0.001
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
 
 
 
@@ -139,10 +125,12 @@ Simulate fitted values:
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-10.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
+
+
 
 
 Model

@@ -60,11 +60,7 @@ Estimating parameter values for the logistic regression:
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
-    ##   logit: Logistic Regression for Dichotomous Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -77,6 +73,12 @@ Setting values for the explanatory variables:
     x.out1 <- setx(z.out1, age = 36, race = "white")
 
 
+::
+
+    ## Error: could not find function "setx"
+
+
+
 Simulating quantities of interest from the posterior distribution.
 
 
@@ -84,6 +86,12 @@ Simulating quantities of interest from the posterior distribution.
     
 
     s.out1 <- sim(z.out1, x = x.out1)
+
+
+::
+
+    ## Error: could not find function "sim"
+
 
 
 
@@ -95,15 +103,7 @@ Simulating quantities of interest from the posterior distribution.
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##       mean      sd    50%   2.5%  97.5%
-    ## [1,] 0.748 0.01141 0.7484 0.7251 0.7697
-    ## pv
-    ##         0    1
-    ## [1,] 0.25 0.75
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out1' not found
 
 
 
@@ -113,10 +113,12 @@ Simulating quantities of interest from the posterior distribution.
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-9.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out1' not found
+
+
 
 Simulating First Differences
 !!!!!
@@ -134,45 +136,51 @@ other variables held at their default values.
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
-    ##   logit: Logistic Regression for Dichotomous Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 .. sourcecode:: r
     
 
     x.high <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.75))
+
+
+::
+
+    ## Error: could not find function "setx"
+
+
+.. sourcecode:: r
+    
+
     x.low <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.25))
+
+
+::
+
+    ## Error: could not find function "setx"
+
+
+.. sourcecode:: r
+    
+
     s.out2 <- sim(z.out2, x = x.high, x1 = x.low)
+
+
+::
+
+    ## Error: could not find function "sim"
+
+
+.. sourcecode:: r
+    
+
     summary(s.out2)
 
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##        mean      sd    50%   2.5%  97.5%
-    ## [1,] 0.8228 0.01074 0.8235 0.8014 0.8426
-    ## pv
-    ##          0     1
-    ## [1,] 0.152 0.848
-    ## 
-    ##  sim x1 :
-    ##  -----
-    ## ev
-    ##        mean      sd    50%   2.5% 97.5%
-    ## [1,] 0.7092 0.01318 0.7101 0.6821 0.734
-    ## pv
-    ##          0     1
-    ## [1,] 0.281 0.719
-    ## fd
-    ##         mean      sd     50%    2.5%    97.5%
-    ## [1,] -0.1136 0.01192 -0.1134 -0.1373 -0.09196
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out2' not found
 
 
 
@@ -182,10 +190,12 @@ other variables held at their default values.
 
     plot(s.out2)
 
-.. figure:: figure/unnamed-chunk-11.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out2' not found
+
+
 
 Model
 +++++

@@ -57,11 +57,7 @@ Estimate parameter values for the probit regression:
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
-    ##   probit: Probit Regression for Dichotomous Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -74,18 +70,7 @@ Estimate parameter values for the probit regression:
 
 ::
 
-    ## Model: 1
-    ## Call:  stats::glm(formula = vote ~ race + educate, family = binomial("probit"), 
-    ##     data = .)
-    ## 
-    ## Coefficients:
-    ## (Intercept)    racewhite      educate  
-    ##     -0.7259       0.2991       0.0971  
-    ## 
-    ## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual
-    ## Null Deviance:	    2270 
-    ## Residual Deviance: 2140 	AIC: 2140
-    ## Next step: Use 'setx' method
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out' not found
 
 
 
@@ -98,6 +83,12 @@ Set values for the explanatory variables to their default values.
     x.out <- setx(z.out)
 
 
+::
+
+    ## Error: could not find function "setx"
+
+
+
 Simulate quantities of interest from the posterior distribution.
 
 
@@ -105,6 +96,12 @@ Simulate quantities of interest from the posterior distribution.
     
 
     s.out <- sim(z.out, x = x.out)
+
+
+::
+
+    ## Error: could not find function "sim"
+
 
 
 
@@ -120,10 +117,12 @@ Simulate quantities of interest from the posterior distribution.
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-10.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out1' not found
+
+
 
 
 Model

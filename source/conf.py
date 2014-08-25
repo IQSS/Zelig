@@ -50,7 +50,7 @@ copyright = u'2014, The Zelig Team'
 # built documents.
 #
 # The short X.Y version.
-version = '5'
+version = 'Version 5.0.1'
 # The full version, including alpha/beta/rc tags.
 release = '5.0.1'
 
@@ -118,7 +118,7 @@ html_theme_options = {
     #     ("Link", "http://example.com", True),
     # ],
     'navbar_links': [
-        ("Data Science at IQSS", "http://datascience.iq.harvard.edu", True),
+        ("Data Science at IQSS", "http://datascience.iq.harvard.edu/zelig", True),
     ],
     
     # Global TOC depth for "site" navbar tab. (Default: 1)

@@ -11,14 +11,17 @@ It leverages (R) code from many researchers and is designed to allow anyone to c
 **Contact:** For questions, please join the Zelig mailing list:
 `https://groups.google.com/forum/#!forum/zelig-statistical-software <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_
 
-**The Zelig Team:**
+`The Zelig Team <http://datascience.iq.harvard.edu/team>`_:
 
-- Gary King *(Principle Investigator)*
-- James Honaker *(Project Lead)*
 - Christine Choirat *(Lead Author)*
+- James Honaker *(Project Lead)*
+- Muhammed Y. Idris
+
+*Original Authors:*
+
+- `Gary King <http://gking.harvard.edu/>`_ *(Principle Investigator)*
 - Kosuke Imai
 - Olivia Lau
-- Muhammed Y. Idris
 
 ------------
 

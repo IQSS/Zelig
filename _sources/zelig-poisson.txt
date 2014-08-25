@@ -60,11 +60,7 @@ Estimate Poisson model:
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
-    ##   poisson: Poisson Regression for Event Count Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -77,18 +73,7 @@ Estimate Poisson model:
 
 ::
 
-    ## Model: 1
-    ## Call:  stats::glm(formula = num ~ target + coop, family = poisson("log"), 
-    ##     data = .)
-    ## 
-    ## Coefficients:
-    ## (Intercept)       target         coop  
-    ##      -0.968       -0.021        1.211  
-    ## 
-    ## Degrees of Freedom: 77 Total (i.e. Null);  75 Residual
-    ## Null Deviance:	    1580 
-    ## Residual Deviance: 721 	AIC: 944
-    ## Next step: Use 'setx' method
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out' not found
 
 
 
@@ -101,6 +86,12 @@ Set values for the explanatory variables to their default mean values:
     x.out <- setx(z.out)
 
 
+::
+
+    ## Error: could not find function "setx"
+
+
+
 Simulate fitted values:
 
 
@@ -108,20 +99,22 @@ Simulate fitted values:
     
 
     s.out <- sim(z.out, x = x.out)
+
+
+::
+
+    ## Error: could not find function "sim"
+
+
+.. sourcecode:: r
+    
+
     summary(s.out)
 
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 3.242 0.2335 3.238 2.803 3.673
-    ## pv
-    ##       mean    sd 50% 2.5% 97.5%
-    ## [1,] 3.111 1.706   3    0     7
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
 
 
 
@@ -131,10 +124,12 @@ Simulate fitted values:
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-9.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
+
+
 
 Model
 +++++

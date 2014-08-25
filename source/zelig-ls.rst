@@ -60,11 +60,7 @@ Estimate model:
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
-    ##   ls: Least Squares Regression for Continuous Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -79,15 +75,7 @@ Summarize regression coefficients:
 
 ::
 
-    ## Model: 1
-    ## Call:
-    ## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)
-    ## 
-    ## Coefficients:
-    ## (Intercept)          gdp       capmob        trade  
-    ##      6.1813      -0.3236       1.4219       0.0199  
-    ## 
-    ## Next step: Use 'setx' method
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out1' not found
 
 
 
@@ -100,7 +88,23 @@ variable:
     
 
     x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+
+
+::
+
+    ## Error: could not find function "setx"
+
+
+.. sourcecode:: r
+    
+
     x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
+
+
+::
+
+    ## Error: could not find function "setx"
+
 
 
 Generate first differences for the effect of high versus low trade on GDP:
@@ -112,6 +116,12 @@ Generate first differences for the effect of high versus low trade on GDP:
     s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 
 
+::
+
+    ## Error: could not find function "sim"
+
+
+
 
 .. sourcecode:: r
     
@@ -121,27 +131,7 @@ Generate first differences for the effect of high versus low trade on GDP:
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 5.428 0.1887 5.424 5.054 5.797
-    ## pv
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 5.428 0.1887 5.424 5.054 5.797
-    ## 
-    ##  sim x1 :
-    ##  -----
-    ## ev
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 4.593 0.1998 4.587 4.217 5.003
-    ## pv
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 4.593 0.1998 4.587 4.217 5.003
-    ## fd
-    ##      mean    sd     50%   2.5%   97.5%
-    ## 1 -0.8354 0.247 -0.8397 -1.317 -0.3177
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out1' not found
 
 
 
@@ -151,10 +141,12 @@ Generate first differences for the effect of high versus low trade on GDP:
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-10.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out1' not found
+
+
 
 Using Dummy Variables
 !!!!!
@@ -173,11 +165,7 @@ in the selected variable into discrete levels.
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
-    ##   ls: Least Squares Regression for Continuous Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -190,7 +178,23 @@ respectively:
     
 
     x.US <- setx(z.out2, country = "United States")
+
+
+::
+
+    ## Error: could not find function "setx"
+
+
+.. sourcecode:: r
+    
+
     x.Japan <- setx(z.out2, country = "Japan")
+
+
+::
+
+    ## Error: could not find function "setx"
+
 
    
 Simulate quantities of interest:
@@ -202,16 +206,24 @@ Simulate quantities of interest:
     s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
 
 
+::
+
+    ## Error: could not find function "sim"
+
+
+
 
 .. sourcecode:: r
     
 
     plot(s.out2)
 
-.. figure:: figure/unnamed-chunk-14.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out2' not found
+
+
 
 Model
 +++++

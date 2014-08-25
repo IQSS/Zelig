@@ -59,13 +59,13 @@
 
         <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
         <a class="navbar-brand" href="index.html">Zelig</a>
-        <span class="navbar-text navbar-version pull-left"><b>5</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0.1</b></span>
       </div>
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://datascience.iq.harvard.edu">Data Science at IQSS</a></li>
+                <li><a href="http://datascience.iq.harvard.edu/zelig">Data Science at IQSS</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -413,76 +413,50 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Olivia Lau, Kosuke Imai, Gary King. 2011.</span>
-<span class="c">##   exp: Exponential Regression for Duration Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
-<span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
-<span class="c">##     numst2, data = ., dist = &quot;exponential&quot;, model = FALSE)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)       fract      numst2</span>
-<span class="c">##    5.535873   -0.003909    0.461179</span>
-<span class="c">##</span>
-<span class="c">## Scale fixed at 1</span>
-<span class="c">##</span>
-<span class="c">## Loglik(model)= -1077   Loglik(intercept only)= -1101</span>
-<span class="c">##  Chisq= 46.66 on 2 degrees of freedom, p= 7.4e-11</span>
-<span class="c">## n= 314</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Simulate expected values and first differences:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <p>Summarize quantities of interest and produce some plots:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 15.29 1.453 15.26 12.56 18.39</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 15.38 15.62 10.76 0.5289 60.53</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 24.22 1.906 24.13 20.86 28.12</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 24.97 24.55 17.19 0.6812 91.64</span>
-<span class="c">## fd</span>
-<span class="c">##    mean   sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 8.928 2.42 8.947 4.422 13.52</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-11.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="model">
@@ -640,73 +614,49 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>duration <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
-<span class="c">##   gamma: Gamma Regression for Continuous, Positive Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:  stats::glm(formula = duration ~ fract + numst2, family = Gamma(&quot;inverse&quot;),</span>
-<span class="c">##     data = .)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)        fract       numst2</span>
-<span class="c">##   -0.012960     0.000115    -0.017387</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 313 Total (i.e. Null);  311 Residual</span>
-<span class="c">## Null Deviance:       301</span>
-<span class="c">## Residual Deviance: 272   AIC: 2430</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean   sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 14.42 1.07 14.35 12.52 16.75</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 15.19 12.46 11.95 0.9515 47.57</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 19.23 1.098 19.17 17.31 21.44</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 19.06 16.32 15.41 0.8423 65.82</span>
-<span class="c">## fd</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 4.802 1.502 4.817 1.857 7.713</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-10.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="id3">
@@ -825,40 +775,34 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> age <span class="o">+</span> race<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
-<span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> age <span class="o">=</span> <span class="m">36</span><span class="p">,</span> race <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
 <p>Simulating quantities of interest from the posterior distribution.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean      sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.748 0.01141 0.7484 0.7251 0.7697</span>
-<span class="c">## pv</span>
-<span class="c">##         0    1</span>
-<span class="c">## [1,] 0.25 0.75</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-9.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="simulating-first-differences">
@@ -869,47 +813,38 @@ other variables held at their default values.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
-<span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
-x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
-s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
-summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.8228 0.01074 0.8235 0.8014 0.8426</span>
-<span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.152 0.848</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##        mean      sd    50%   2.5% 97.5%</span>
-<span class="c">## [1,] 0.7092 0.01318 0.7101 0.6821 0.734</span>
-<span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.281 0.719</span>
-<span class="c">## fd</span>
-<span class="c">##         mean      sd     50%    2.5%    97.5%</span>
-<span class="c">## [1,] -0.1136 0.01192 -0.1134 -0.1373 -0.09196</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out2&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-11.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out2&#39; not found</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -1071,75 +1006,49 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span><span class="s">&quot;lognorm&quot;</span><span class="p">,</span>  data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.</span>
-<span class="c">##   lognorm: Log-Normal Regression for Duration Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
-<span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
-<span class="c">##     numst2, data = ., dist = &quot;lognormal&quot;, model = FALSE)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)       fract      numst2</span>
-<span class="c">##    5.366670   -0.004438    0.559833</span>
-<span class="c">##</span>
-<span class="c">## Scale= 1.2</span>
-<span class="c">##</span>
-<span class="c">## Loglik(model)= -1078   Loglik(intercept only)= -1101</span>
-<span class="c">##  Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11</span>
-<span class="c">## n= 314</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 18.38 2.446 18.15 14.03 23.45</span>
-<span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 18.38 2.446 18.15 14.03 23.45</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 31.88 3.714 31.61 25.57 39.98</span>
-<span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 31.88 3.714 31.61 25.57 39.98</span>
-<span class="c">## fd</span>
-<span class="c">##    mean   sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 13.51 3.78 13.43 6.706 21.04</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-12.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="id15">
@@ -1292,70 +1201,49 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
-<span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Summarize regression coefficients:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:</span>
-<span class="c">## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)          gdp       capmob        trade</span>
-<span class="c">##      6.1813      -0.3236       1.4219       0.0199</span>
-<span class="c">##</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out1&#39; not found</span>
 </pre></div>
 </div>
 <p>Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for the trade
 variable:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
-x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Generate first differences for the effect of high versus low trade on GDP:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.428 0.1887 5.424 5.054 5.797</span>
-<span class="c">## pv</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.428 0.1887 5.424 5.054 5.797</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 4.593 0.1998 4.587 4.217 5.003</span>
-<span class="c">## pv</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 4.593 0.1998 4.587 4.217 5.003</span>
-<span class="c">## fd</span>
-<span class="c">##      mean    sd     50%   2.5%   97.5%</span>
-<span class="c">## 1 -0.8354 0.247 -0.8397 -1.317 -0.3177</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-10.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="using-dummy-variables">
@@ -1367,29 +1255,36 @@ in the selected variable into discrete levels.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> trade <span class="o">+</span> capmob <span class="o">+</span> as.factor<span class="p">(</span>country<span class="p">),</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
-<span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Set values for the explanatory variables, using the default mean/mode
 values, with country set to the United States and Japan,
 respectively:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.US <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;United States&quot;</span><span class="p">)</span>
-x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;Japan&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;Japan&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Simulate quantities of interest:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.US<span class="p">,</span> x1 <span class="o">=</span> x.Japan<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-14.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out2&#39; not found</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -1522,60 +1417,40 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;negbinom&quot;</span><span class="p">,</span> data <span class="o">=</span> sanction<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2008.</span>
-<span class="c">##   negbinom: Negative Binomial Regression for Event Count Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:  MASS::glm.nb(formula = num ~ target + coop, data = ., init.theta = 1.841603403,</span>
-<span class="c">##     link = log)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)       target         coop</span>
-<span class="c">##      -1.564        0.151        1.286</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 77 Total (i.e. Null);  75 Residual</span>
-<span class="c">## Null Deviance:       237</span>
-<span class="c">## Residual Deviance: 56.5  AIC: 360</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
 </pre></div>
 </div>
 <p>Set values for the explanatory variables to their default mean values:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
 <p>Simulate fitted values:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 2.971 0.3436 2.946 2.378 3.709</span>
-<span class="c">## pv</span>
-<span class="c">## qi</span>
-<span class="c">##     0     1     2     3     4     5     6     7     8     9    10    11</span>
-<span class="c">## 0.161 0.183 0.184 0.126 0.102 0.065 0.066 0.042 0.022 0.015 0.009 0.012</span>
-<span class="c">##    12    13    14    15    17    38</span>
-<span class="c">## 0.002 0.003 0.004 0.001 0.002 0.001</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-10.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="id27">
@@ -1712,73 +1587,49 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;normal&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2008.</span>
-<span class="c">##   normal: Normal Regression for Continuous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Summarize of regression coefficients:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:  stats::glm(formula = unem ~ gdp + capmob + trade, family = gaussian(&quot;identity&quot;),</span>
-<span class="c">##     data = .)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)          gdp       capmob        trade</span>
-<span class="c">##      6.1813      -0.3236       1.4219       0.0199</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 349 Total (i.e. Null);  346 Residual</span>
-<span class="c">## Null Deviance:       3660</span>
-<span class="c">## Residual Deviance: 2610  AIC: 1710</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out1&#39; not found</span>
 </pre></div>
 </div>
 <p>Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for trade:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
-x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Generate first differences for the effect of high versus low trade on GDP:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 5.444 0.191 5.437 5.09 5.841</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%    2.5% 97.5%</span>
-<span class="c">## [1,] 5.575 2.754 5.679 -0.1635 10.61</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 4.614 0.1847 4.611 4.246 4.979</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50%    2.5% 97.5%</span>
-<span class="c">## [1,] 4.589 2.723 4.631 -0.6589 9.678</span>
-<span class="c">## fd</span>
-<span class="c">##         mean    sd     50%  2.5%   97.5%</span>
-<span class="c">## [1,] -0.8302 0.229 -0.8278 -1.27 -0.3811</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
 </pre></div>
 </div>
 <p>A visual summary of quantities of interest:</p>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-10.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -1895,55 +1746,40 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson&quot;</span><span class="p">,</span> data <span class="o">=</span> sanction<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
-<span class="c">##   poisson: Poisson Regression for Event Count Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:  stats::glm(formula = num ~ target + coop, family = poisson(&quot;log&quot;),</span>
-<span class="c">##     data = .)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)       target         coop</span>
-<span class="c">##      -0.968       -0.021        1.211</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 77 Total (i.e. Null);  75 Residual</span>
-<span class="c">## Null Deviance:       1580</span>
-<span class="c">## Residual Deviance: 721   AIC: 944</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
 </pre></div>
 </div>
 <p>Set values for the explanatory variables to their default mean values:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<p>Simulate fitted values:</p>
-<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
-summary<span class="p">(</span>s.out<span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 3.242 0.2335 3.238 2.803 3.673</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.111 1.706   3    0     7</span>
+<p>Simulate fitted values:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-9.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="id42">
@@ -2056,36 +1892,27 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
-<span class="c">##   probit: Probit Regression for Dichotomous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:  stats::glm(formula = vote ~ race + educate, family = binomial(&quot;probit&quot;),</span>
-<span class="c">##     data = .)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)    racewhite      educate</span>
-<span class="c">##     -0.7259       0.2991       0.0971</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual</span>
-<span class="c">## Null Deviance:       2270</span>
-<span class="c">## Residual Deviance: 2140  AIC: 2140</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
 </pre></div>
 </div>
 <p>Set values for the explanatory variables to their default values.</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
 <p>Simulate quantities of interest from the posterior distribution.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
@@ -2094,8 +1921,8 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-10.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="id48">
@@ -2246,59 +2073,41 @@ of militarized interstate conflicts to the absence of disputes is
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> <span class="m">1042</span><span class="o">/</span><span class="m">303772</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
-<span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:  relogit(formula = cbind(conflict, 1 - conflict) ~ major + contig +</span>
-<span class="c">##     power + maxdem + mindem + years, data = ., tau = 0.00343020423212146,</span>
-<span class="c">##     bias.correct = TRUE, case.control = &quot;prior&quot;)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -7.5084       2.4320       4.1080       1.0536       0.0480</span>
-<span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out1&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<p>Simulate quantities of interest:</p>
-<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
-summary<span class="p">(</span>s.out1<span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##        mean        sd      50%   2.5%    97.5%</span>
-<span class="c">## [1,] 0.0024 0.0001559 0.002399 0.0021 0.002694</span>
-<span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.999 0.001</span>
+<p>Simulate quantities of interest:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-9.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction">
@@ -2308,59 +2117,34 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> <span class="m">1042</span><span class="o">/</span><span class="m">303772</span><span class="p">,</span> case.control <span class="o">=</span> <span class="s">&quot;weighting&quot;</span><span class="p">,</span> robust <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: unused argument (robust = TRUE)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
-<span class="c">## Call:</span>
-<span class="c">## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country),</span>
-<span class="c">##     data = .)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">##                      (Intercept)                               gdp</span>
-<span class="c">##                           -5.843                            -0.110</span>
-<span class="c">##                            trade                            capmob</span>
-<span class="c">##                            0.144                             0.815</span>
-<span class="c">##        as.factor(country)Belgium          as.factor(country)Canada</span>
-<span class="c">##                           -1.599                             6.759</span>
-<span class="c">##        as.factor(country)Denmark         as.factor(country)Finland</span>
-<span class="c">##                            4.311                             4.810</span>
-<span class="c">##         as.factor(country)France           as.factor(country)Italy</span>
-<span class="c">##                            6.905                             9.290</span>
-<span class="c">##          as.factor(country)Japan     as.factor(country)Netherlands</span>
-<span class="c">##                            5.459                            -1.459</span>
-<span class="c">##         as.factor(country)Norway          as.factor(country)Sweden</span>
-<span class="c">##                           -2.754                             0.925</span>
-<span class="c">## as.factor(country)United Kingdom   as.factor(country)United States</span>
-<span class="c">##                            5.601                            10.066</span>
-<span class="c">##   as.factor(country)West Germany</span>
-<span class="c">##                            3.364</span>
-<span class="c">##</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out2&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out2 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
-<p>Simulate quantities of interest:</p>
-<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.out2<span class="p">)</span>
-summary<span class="p">(</span>s.out2<span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1  8.2 0.4228 8.21 7.393  9.02</span>
-<span class="c">## pv</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1  8.2 0.4228 8.21 7.393  9.02</span>
+<p>Simulate quantities of interest:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out2&#39; not found</span>
 </pre></div>
 </div>
 </div>
@@ -2373,264 +2157,41 @@ default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> c<span class="p">(</span><span class="m">0.002</span><span class="p">,</span> <span class="m">0.005</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
-<span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1$lower.estimate</span>
-<span class="c">##</span>
-<span class="c">## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,</span>
-<span class="c">##     case.control = &quot;prior&quot;, ...)</span>
-<span class="c">## {</span>
-<span class="c">##     mf &lt;- match.call()</span>
-<span class="c">##     mf$tau &lt;- mf$bias.correct &lt;- mf$case.control &lt;- NULL</span>
-<span class="c">##     if (!is.null(tau)) {</span>
-<span class="c">##         tau &lt;- unique(tau)</span>
-<span class="c">##         if (length(case.control) &gt; 1)</span>
-<span class="c">##             stop(&quot;You can only choose one option for case control correction.&quot;)</span>
-<span class="c">##         ck1 &lt;- grep(&quot;p&quot;, case.control)</span>
-<span class="c">##         ck2 &lt;- grep(&quot;w&quot;, case.control)</span>
-<span class="c">##         if (length(ck1) == 0 &amp; length(ck2) == 0)</span>
-<span class="c">##             stop(&quot;choose either case.control = \&quot;prior\&quot; &quot;, &quot;or case.control = \&quot;weighting\&quot;&quot;)</span>
-<span class="c">##         if (length(ck2) == 0)</span>
-<span class="c">##             weighting &lt;- FALSE</span>
-<span class="c">##         else weighting &lt;- TRUE</span>
-<span class="c">##     }</span>
-<span class="c">##     else weighting &lt;- FALSE</span>
-<span class="c">##     if (length(tau) &gt; 2)</span>
-<span class="c">##         stop(&quot;tau must be a vector of length less than or equal to 2&quot;)</span>
-<span class="c">##     else if (length(tau) == 2) {</span>
-<span class="c">##         mf[[1]] &lt;- relogit</span>
-<span class="c">##         res &lt;- list()</span>
-<span class="c">##         mf$tau &lt;- min(tau)</span>
-<span class="c">##         res$lower.estimate &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         mf$tau &lt;- max(tau)</span>
-<span class="c">##         res$upper.estimate &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         res$formula &lt;- formula</span>
-<span class="c">##         class(res) &lt;- c(&quot;Relogit2&quot;, &quot;Relogit&quot;)</span>
-<span class="c">##         return(res)</span>
-<span class="c">##     }</span>
-<span class="c">##     else {</span>
-<span class="c">##         mf[[1]] &lt;- glm</span>
-<span class="c">##         mf$family &lt;- binomial(link = &quot;logit&quot;)</span>
-<span class="c">##         y2 &lt;- model.response(model.frame(mf$formula, data))</span>
-<span class="c">##         if (is.matrix(y2))</span>
-<span class="c">##             y &lt;- y2[, 1]</span>
-<span class="c">##         else y &lt;- y2</span>
-<span class="c">##         ybar &lt;- mean(y)</span>
-<span class="c">##         if (weighting) {</span>
-<span class="c">##             w1 &lt;- tau/ybar</span>
-<span class="c">##             w0 &lt;- (1 - tau)/(1 - ybar)</span>
-<span class="c">##             wi &lt;- w1 * y + w0 * (1 - y)</span>
-<span class="c">##             mf$weights &lt;- wi</span>
-<span class="c">##         }</span>
-<span class="c">##         res &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         res$call &lt;- match.call(expand.dots = TRUE)</span>
-<span class="c">##         res$tau &lt;- tau</span>
-<span class="c">##         X &lt;- model.matrix(res)</span>
-<span class="c">##         if (bias.correct) {</span>
-<span class="c">##             pihat &lt;- fitted(res)</span>
-<span class="c">##             if (is.null(tau))</span>
-<span class="c">##                 wi &lt;- rep(1, length(y))</span>
-<span class="c">##             else if (weighting)</span>
-<span class="c">##                 res$weighting &lt;- TRUE</span>
-<span class="c">##             else {</span>
-<span class="c">##                 w1 &lt;- tau/ybar</span>
-<span class="c">##                 w0 &lt;- (1 - tau)/(1 - ybar)</span>
-<span class="c">##                 wi &lt;- w1 * y + w0 * (1 - y)</span>
-<span class="c">##                 res$weighting &lt;- FALSE</span>
-<span class="c">##             }</span>
-<span class="c">##             W &lt;- pihat * (1 - pihat) * wi</span>
-<span class="c">##             Qdiag &lt;- lm.influence(lm(y ~ X - 1, weights = W))$hat/W</span>
-<span class="c">##             if (is.null(tau))</span>
-<span class="c">##                 xi &lt;- 0.5 * Qdiag * (2 * pihat - 1)</span>
-<span class="c">##             else xi &lt;- 0.5 * Qdiag * ((1 + w0) * pihat - w0)</span>
-<span class="c">##             res$coefficients &lt;- res$coefficients - lm(xi ~ X -</span>
-<span class="c">##                 1, weights = W)$coefficients</span>
-<span class="c">##             res$bias.correct &lt;- TRUE</span>
-<span class="c">##         }</span>
-<span class="c">##         else res$bias.correct &lt;- FALSE</span>
-<span class="c">##         if (!is.null(tau) &amp; !weighting) {</span>
-<span class="c">##             if (tau &lt;= 0 || tau &gt;= 1)</span>
-<span class="c">##                 stop(&quot;\ntau needs to be between 0 and 1.\n&quot;)</span>
-<span class="c">##             res$coefficients[&quot;(Intercept)&quot;] &lt;- res$coefficients[&quot;(Intercept)&quot;] -</span>
-<span class="c">##                 log(((1 - tau)/tau) * (ybar/(1 - ybar)))</span>
-<span class="c">##             res$prior.correct &lt;- TRUE</span>
-<span class="c">##             res$weighting &lt;- FALSE</span>
-<span class="c">##         }</span>
-<span class="c">##         else res$prior.correct &lt;- FALSE</span>
-<span class="c">##         if (is.null(res$weighting))</span>
-<span class="c">##             res$weighting &lt;- FALSE</span>
-<span class="c">##         res$linear.predictors &lt;- t(res$coefficients) %*% t(X)</span>
-<span class="c">##         res$fitted.values &lt;- 1/(1 + exp(-res$linear.predictors))</span>
-<span class="c">##         res$zelig &lt;- &quot;Relogit&quot;</span>
-<span class="c">##         class(res) &lt;- c(&quot;Relogit&quot;, &quot;glm&quot;)</span>
-<span class="c">##         return(res)</span>
-<span class="c">##     }</span>
-<span class="c">## })(formula = cbind(conflict, 1 - conflict) ~ major + contig +</span>
-<span class="c">##     power + maxdem + mindem + years, data = ., tau = 0.002)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -8.0492       2.4320       4.1079       1.0536       0.0480</span>
-<span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
-<span class="c">##</span>
-<span class="c">## $upper.estimate</span>
-<span class="c">##</span>
-<span class="c">## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,</span>
-<span class="c">##     case.control = &quot;prior&quot;, ...)</span>
-<span class="c">## {</span>
-<span class="c">##     mf &lt;- match.call()</span>
-<span class="c">##     mf$tau &lt;- mf$bias.correct &lt;- mf$case.control &lt;- NULL</span>
-<span class="c">##     if (!is.null(tau)) {</span>
-<span class="c">##         tau &lt;- unique(tau)</span>
-<span class="c">##         if (length(case.control) &gt; 1)</span>
-<span class="c">##             stop(&quot;You can only choose one option for case control correction.&quot;)</span>
-<span class="c">##         ck1 &lt;- grep(&quot;p&quot;, case.control)</span>
-<span class="c">##         ck2 &lt;- grep(&quot;w&quot;, case.control)</span>
-<span class="c">##         if (length(ck1) == 0 &amp; length(ck2) == 0)</span>
-<span class="c">##             stop(&quot;choose either case.control = \&quot;prior\&quot; &quot;, &quot;or case.control = \&quot;weighting\&quot;&quot;)</span>
-<span class="c">##         if (length(ck2) == 0)</span>
-<span class="c">##             weighting &lt;- FALSE</span>
-<span class="c">##         else weighting &lt;- TRUE</span>
-<span class="c">##     }</span>
-<span class="c">##     else weighting &lt;- FALSE</span>
-<span class="c">##     if (length(tau) &gt; 2)</span>
-<span class="c">##         stop(&quot;tau must be a vector of length less than or equal to 2&quot;)</span>
-<span class="c">##     else if (length(tau) == 2) {</span>
-<span class="c">##         mf[[1]] &lt;- relogit</span>
-<span class="c">##         res &lt;- list()</span>
-<span class="c">##         mf$tau &lt;- min(tau)</span>
-<span class="c">##         res$lower.estimate &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         mf$tau &lt;- max(tau)</span>
-<span class="c">##         res$upper.estimate &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         res$formula &lt;- formula</span>
-<span class="c">##         class(res) &lt;- c(&quot;Relogit2&quot;, &quot;Relogit&quot;)</span>
-<span class="c">##         return(res)</span>
-<span class="c">##     }</span>
-<span class="c">##     else {</span>
-<span class="c">##         mf[[1]] &lt;- glm</span>
-<span class="c">##         mf$family &lt;- binomial(link = &quot;logit&quot;)</span>
-<span class="c">##         y2 &lt;- model.response(model.frame(mf$formula, data))</span>
-<span class="c">##         if (is.matrix(y2))</span>
-<span class="c">##             y &lt;- y2[, 1]</span>
-<span class="c">##         else y &lt;- y2</span>
-<span class="c">##         ybar &lt;- mean(y)</span>
-<span class="c">##         if (weighting) {</span>
-<span class="c">##             w1 &lt;- tau/ybar</span>
-<span class="c">##             w0 &lt;- (1 - tau)/(1 - ybar)</span>
-<span class="c">##             wi &lt;- w1 * y + w0 * (1 - y)</span>
-<span class="c">##             mf$weights &lt;- wi</span>
-<span class="c">##         }</span>
-<span class="c">##         res &lt;- eval(as.call(mf), parent.frame())</span>
-<span class="c">##         res$call &lt;- match.call(expand.dots = TRUE)</span>
-<span class="c">##         res$tau &lt;- tau</span>
-<span class="c">##         X &lt;- model.matrix(res)</span>
-<span class="c">##         if (bias.correct) {</span>
-<span class="c">##             pihat &lt;- fitted(res)</span>
-<span class="c">##             if (is.null(tau))</span>
-<span class="c">##                 wi &lt;- rep(1, length(y))</span>
-<span class="c">##             else if (weighting)</span>
-<span class="c">##                 res$weighting &lt;- TRUE</span>
-<span class="c">##             else {</span>
-<span class="c">##                 w1 &lt;- tau/ybar</span>
-<span class="c">##                 w0 &lt;- (1 - tau)/(1 - ybar)</span>
-<span class="c">##                 wi &lt;- w1 * y + w0 * (1 - y)</span>
-<span class="c">##                 res$weighting &lt;- FALSE</span>
-<span class="c">##             }</span>
-<span class="c">##             W &lt;- pihat * (1 - pihat) * wi</span>
-<span class="c">##             Qdiag &lt;- lm.influence(lm(y ~ X - 1, weights = W))$hat/W</span>
-<span class="c">##             if (is.null(tau))</span>
-<span class="c">##                 xi &lt;- 0.5 * Qdiag * (2 * pihat - 1)</span>
-<span class="c">##             else xi &lt;- 0.5 * Qdiag * ((1 + w0) * pihat - w0)</span>
-<span class="c">##             res$coefficients &lt;- res$coefficients - lm(xi ~ X -</span>
-<span class="c">##                 1, weights = W)$coefficients</span>
-<span class="c">##             res$bias.correct &lt;- TRUE</span>
-<span class="c">##         }</span>
-<span class="c">##         else res$bias.correct &lt;- FALSE</span>
-<span class="c">##         if (!is.null(tau) &amp; !weighting) {</span>
-<span class="c">##             if (tau &lt;= 0 || tau &gt;= 1)</span>
-<span class="c">##                 stop(&quot;\ntau needs to be between 0 and 1.\n&quot;)</span>
-<span class="c">##             res$coefficients[&quot;(Intercept)&quot;] &lt;- res$coefficients[&quot;(Intercept)&quot;] -</span>
-<span class="c">##                 log(((1 - tau)/tau) * (ybar/(1 - ybar)))</span>
-<span class="c">##             res$prior.correct &lt;- TRUE</span>
-<span class="c">##             res$weighting &lt;- FALSE</span>
-<span class="c">##         }</span>
-<span class="c">##         else res$prior.correct &lt;- FALSE</span>
-<span class="c">##         if (is.null(res$weighting))</span>
-<span class="c">##             res$weighting &lt;- FALSE</span>
-<span class="c">##         res$linear.predictors &lt;- t(res$coefficients) %*% t(X)</span>
-<span class="c">##         res$fitted.values &lt;- 1/(1 + exp(-res$linear.predictors))</span>
-<span class="c">##         res$zelig &lt;- &quot;Relogit&quot;</span>
-<span class="c">##         class(res) &lt;- c(&quot;Relogit&quot;, &quot;glm&quot;)</span>
-<span class="c">##         return(res)</span>
-<span class="c">##     }</span>
-<span class="c">## })(formula = cbind(conflict, 1 - conflict) ~ major + contig +</span>
-<span class="c">##     power + maxdem + mindem + years, data = ., tau = 0.005)</span>
-<span class="c">##</span>
-<span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -7.1300       2.4320       4.1080       1.0536       0.0480</span>
-<span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
-<span class="c">##</span>
-<span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
-<span class="c">##</span>
-<span class="c">## $formula</span>
-<span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
-<span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7fa429760710&gt;</span>
-<span class="c">##</span>
-<span class="c">## attr(,&quot;class&quot;)</span>
-<span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
-<span class="c">## Next step: Use &#39;setx&#39; method</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: object &#39;z.out2&#39; not found</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out2 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
 <p>Simulate quantities of interest:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: no applicable method for &#39;vcov&#39; applied to an object of class</span>
-<span class="c">## &quot;c(&#39;Relogit2&#39;, &#39;Relogit&#39;)&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1  8.2 0.4228 8.21 7.393  9.02</span>
-<span class="c">## pv</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1  8.2 0.4228 8.21 7.393  9.02</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out2&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-19.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out2&#39; not found</span>
+</pre></div>
 </div>
 <p>The cost of giving a range of values for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> is that point
 estimates are not available for quantities of interest. Instead,
@@ -2864,33 +2425,27 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>durable <span class="o">~</span> age <span class="o">+</span> quant<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;tobit&quot;</span><span class="p">,</span> data <span class="o">=</span> tobin<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
-<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2011.</span>
-<span class="c">##   tobit: Linear regression for Left-Censored Dependent Variable</span>
-<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables to their sample averages:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
 <p>Simulating quantities of interest from the posterior distribution given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.535 0.6137 1.502 0.5065 2.804</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.295 4.377 1.472    0 14.88</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
 </pre></div>
 </div>
 </div>
@@ -2900,7 +2455,15 @@ its own cluster.</p>
 high (80th percentile) and low (20th percentile) liquidity ratio
 (<tt class="docutils literal"><span class="pre">quant</span></tt>):</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.8</span><span class="p">))</span>
-x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
 </pre></div>
 </div>
 <p>Estimating the first difference for the effect of high versus low
@@ -2908,37 +2471,20 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
+</pre></div>
+</div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean     sd  50%   2.5% 97.5%</span>
-<span class="c">## 1 1.184 0.7726 1.03 0.1544 3.091</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.208 4.363 1.233    0 15.31</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 2.056 0.9908 1.928 0.5381 4.263</span>
-<span class="c">## pv</span>
-<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.556 4.544 1.984    0 14.85</span>
-<span class="c">## fd</span>
-<span class="c">##     mean    sd    50%  2.5% 97.5%</span>
-<span class="c">## 1 0.8721 1.171 0.7944 -1.31 3.291</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out2&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="" src="_images/unnamed-chunk-12.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
+</pre></div>
 </div>
 </div>
 </div>

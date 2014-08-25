@@ -93,11 +93,7 @@ of militarized interstate conflicts to the absence of disputes is
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, and Olivia Lau. 2014.
-    ##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -112,21 +108,7 @@ Summarize the model output:
 
 ::
 
-    ## Model: 1
-    ## Call:  relogit(formula = cbind(conflict, 1 - conflict) ~ major + contig + 
-    ##     power + maxdem + mindem + years, data = ., tau = 0.00343020423212146, 
-    ##     bias.correct = TRUE, case.control = "prior")
-    ## 
-    ## Coefficients:
-    ## (Intercept)        major       contig        power       maxdem  
-    ##     -7.5084       2.4320       4.1080       1.0536       0.0480  
-    ##      mindem        years  
-    ##     -0.0641      -0.0629  
-    ## 
-    ## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual
-    ## Null Deviance:	    3980 
-    ## Residual Deviance: 1870 	AIC: 1880
-    ## Next step: Use 'setx' method
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out1' not found
 
 
 
@@ -139,6 +121,12 @@ Set the explanatory variables to their means:
     x.out1 <- setx(z.out1)
 
 
+::
+
+    ## Error: could not find function "setx"
+
+
+
 Simulate quantities of interest:
 
 
@@ -146,20 +134,22 @@ Simulate quantities of interest:
     
 
     s.out1 <- sim(z.out1, x = x.out1)
+
+
+::
+
+    ## Error: could not find function "sim"
+
+
+.. sourcecode:: r
+    
+
     summary(s.out1)
 
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##        mean        sd      50%   2.5%    97.5%
-    ## [1,] 0.0024 0.0001559 0.002399 0.0021 0.002694
-    ## pv
-    ##          0     1
-    ## [1,] 0.999 0.001
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out1' not found
 
 
 
@@ -169,10 +159,12 @@ Simulate quantities of interest:
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-9.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out1' not found
+
+
 
 Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction
 +++++
@@ -189,7 +181,7 @@ Suppose that we wish to perform case control correction using weighting
 
 ::
 
-    ## Error: unused argument (robust = TRUE)
+    ## Error: could not find function "zelig"
 
 
 
@@ -204,32 +196,7 @@ Summarize the model output:
 
 ::
 
-    ## Model: 1
-    ## Call:
-    ## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country), 
-    ##     data = .)
-    ## 
-    ## Coefficients:
-    ##                      (Intercept)                               gdp  
-    ##                           -5.843                            -0.110  
-    ##                            trade                            capmob  
-    ##                            0.144                             0.815  
-    ##        as.factor(country)Belgium          as.factor(country)Canada  
-    ##                           -1.599                             6.759  
-    ##        as.factor(country)Denmark         as.factor(country)Finland  
-    ##                            4.311                             4.810  
-    ##         as.factor(country)France           as.factor(country)Italy  
-    ##                            6.905                             9.290  
-    ##          as.factor(country)Japan     as.factor(country)Netherlands  
-    ##                            5.459                            -1.459  
-    ##         as.factor(country)Norway          as.factor(country)Sweden  
-    ##                           -2.754                             0.925  
-    ## as.factor(country)United Kingdom   as.factor(country)United States  
-    ##                            5.601                            10.066  
-    ##   as.factor(country)West Germany  
-    ##                            3.364  
-    ## 
-    ## Next step: Use 'setx' method
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out2' not found
 
 
 
@@ -242,6 +209,12 @@ Set the explanatory variables to their means:
     x.out2 <- setx(z.out2)
 
 
+::
+
+    ## Error: could not find function "setx"
+
+
+
 Simulate quantities of interest:
 
 
@@ -249,20 +222,22 @@ Simulate quantities of interest:
     
 
     s.out2 <- sim(z.out2, x = x.out2)
+
+
+::
+
+    ## Error: could not find function "sim"
+
+
+.. sourcecode:: r
+    
+
     summary(s.out2)
 
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##   mean     sd  50%  2.5% 97.5%
-    ## 1  8.2 0.4228 8.21 7.393  9.02
-    ## pv
-    ##   mean     sd  50%  2.5% 97.5%
-    ## 1  8.2 0.4228 8.21 7.393  9.02
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out2' not found
 
 
 
@@ -283,11 +258,7 @@ default prior correction method for case control correction):
 
 ::
 
-    ## How to cite this model in Zelig:
-    ##   Kosuke Imai, Gary King, and Olivia Lau. 2014.
-    ##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables
-    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ## Error: could not find function "zelig"
 
 
 
@@ -302,220 +273,7 @@ Summarize the model output:
 
 ::
 
-    ## Model: 1$lower.estimate
-    ## 
-    ## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE, 
-    ##     case.control = "prior", ...) 
-    ## {
-    ##     mf <- match.call()
-    ##     mf$tau <- mf$bias.correct <- mf$case.control <- NULL
-    ##     if (!is.null(tau)) {
-    ##         tau <- unique(tau)
-    ##         if (length(case.control) > 1) 
-    ##             stop("You can only choose one option for case control correction.")
-    ##         ck1 <- grep("p", case.control)
-    ##         ck2 <- grep("w", case.control)
-    ##         if (length(ck1) == 0 & length(ck2) == 0) 
-    ##             stop("choose either case.control = \"prior\" ", "or case.control = \"weighting\"")
-    ##         if (length(ck2) == 0) 
-    ##             weighting <- FALSE
-    ##         else weighting <- TRUE
-    ##     }
-    ##     else weighting <- FALSE
-    ##     if (length(tau) > 2) 
-    ##         stop("tau must be a vector of length less than or equal to 2")
-    ##     else if (length(tau) == 2) {
-    ##         mf[[1]] <- relogit
-    ##         res <- list()
-    ##         mf$tau <- min(tau)
-    ##         res$lower.estimate <- eval(as.call(mf), parent.frame())
-    ##         mf$tau <- max(tau)
-    ##         res$upper.estimate <- eval(as.call(mf), parent.frame())
-    ##         res$formula <- formula
-    ##         class(res) <- c("Relogit2", "Relogit")
-    ##         return(res)
-    ##     }
-    ##     else {
-    ##         mf[[1]] <- glm
-    ##         mf$family <- binomial(link = "logit")
-    ##         y2 <- model.response(model.frame(mf$formula, data))
-    ##         if (is.matrix(y2)) 
-    ##             y <- y2[, 1]
-    ##         else y <- y2
-    ##         ybar <- mean(y)
-    ##         if (weighting) {
-    ##             w1 <- tau/ybar
-    ##             w0 <- (1 - tau)/(1 - ybar)
-    ##             wi <- w1 * y + w0 * (1 - y)
-    ##             mf$weights <- wi
-    ##         }
-    ##         res <- eval(as.call(mf), parent.frame())
-    ##         res$call <- match.call(expand.dots = TRUE)
-    ##         res$tau <- tau
-    ##         X <- model.matrix(res)
-    ##         if (bias.correct) {
-    ##             pihat <- fitted(res)
-    ##             if (is.null(tau)) 
-    ##                 wi <- rep(1, length(y))
-    ##             else if (weighting) 
-    ##                 res$weighting <- TRUE
-    ##             else {
-    ##                 w1 <- tau/ybar
-    ##                 w0 <- (1 - tau)/(1 - ybar)
-    ##                 wi <- w1 * y + w0 * (1 - y)
-    ##                 res$weighting <- FALSE
-    ##             }
-    ##             W <- pihat * (1 - pihat) * wi
-    ##             Qdiag <- lm.influence(lm(y ~ X - 1, weights = W))$hat/W
-    ##             if (is.null(tau)) 
-    ##                 xi <- 0.5 * Qdiag * (2 * pihat - 1)
-    ##             else xi <- 0.5 * Qdiag * ((1 + w0) * pihat - w0)
-    ##             res$coefficients <- res$coefficients - lm(xi ~ X - 
-    ##                 1, weights = W)$coefficients
-    ##             res$bias.correct <- TRUE
-    ##         }
-    ##         else res$bias.correct <- FALSE
-    ##         if (!is.null(tau) & !weighting) {
-    ##             if (tau <= 0 || tau >= 1) 
-    ##                 stop("\ntau needs to be between 0 and 1.\n")
-    ##             res$coefficients["(Intercept)"] <- res$coefficients["(Intercept)"] - 
-    ##                 log(((1 - tau)/tau) * (ybar/(1 - ybar)))
-    ##             res$prior.correct <- TRUE
-    ##             res$weighting <- FALSE
-    ##         }
-    ##         else res$prior.correct <- FALSE
-    ##         if (is.null(res$weighting)) 
-    ##             res$weighting <- FALSE
-    ##         res$linear.predictors <- t(res$coefficients) %*% t(X)
-    ##         res$fitted.values <- 1/(1 + exp(-res$linear.predictors))
-    ##         res$zelig <- "Relogit"
-    ##         class(res) <- c("Relogit", "glm")
-    ##         return(res)
-    ##     }
-    ## })(formula = cbind(conflict, 1 - conflict) ~ major + contig + 
-    ##     power + maxdem + mindem + years, data = ., tau = 0.002)
-    ## 
-    ## Coefficients:
-    ## (Intercept)        major       contig        power       maxdem  
-    ##     -8.0492       2.4320       4.1079       1.0536       0.0480  
-    ##      mindem        years  
-    ##     -0.0641      -0.0629  
-    ## 
-    ## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual
-    ## Null Deviance:	    3980 
-    ## Residual Deviance: 1870 	AIC: 1880
-    ## 
-    ## $upper.estimate
-    ## 
-    ## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE, 
-    ##     case.control = "prior", ...) 
-    ## {
-    ##     mf <- match.call()
-    ##     mf$tau <- mf$bias.correct <- mf$case.control <- NULL
-    ##     if (!is.null(tau)) {
-    ##         tau <- unique(tau)
-    ##         if (length(case.control) > 1) 
-    ##             stop("You can only choose one option for case control correction.")
-    ##         ck1 <- grep("p", case.control)
-    ##         ck2 <- grep("w", case.control)
-    ##         if (length(ck1) == 0 & length(ck2) == 0) 
-    ##             stop("choose either case.control = \"prior\" ", "or case.control = \"weighting\"")
-    ##         if (length(ck2) == 0) 
-    ##             weighting <- FALSE
-    ##         else weighting <- TRUE
-    ##     }
-    ##     else weighting <- FALSE
-    ##     if (length(tau) > 2) 
-    ##         stop("tau must be a vector of length less than or equal to 2")
-    ##     else if (length(tau) == 2) {
-    ##         mf[[1]] <- relogit
-    ##         res <- list()
-    ##         mf$tau <- min(tau)
-    ##         res$lower.estimate <- eval(as.call(mf), parent.frame())
-    ##         mf$tau <- max(tau)
-    ##         res$upper.estimate <- eval(as.call(mf), parent.frame())
-    ##         res$formula <- formula
-    ##         class(res) <- c("Relogit2", "Relogit")
-    ##         return(res)
-    ##     }
-    ##     else {
-    ##         mf[[1]] <- glm
-    ##         mf$family <- binomial(link = "logit")
-    ##         y2 <- model.response(model.frame(mf$formula, data))
-    ##         if (is.matrix(y2)) 
-    ##             y <- y2[, 1]
-    ##         else y <- y2
-    ##         ybar <- mean(y)
-    ##         if (weighting) {
-    ##             w1 <- tau/ybar
-    ##             w0 <- (1 - tau)/(1 - ybar)
-    ##             wi <- w1 * y + w0 * (1 - y)
-    ##             mf$weights <- wi
-    ##         }
-    ##         res <- eval(as.call(mf), parent.frame())
-    ##         res$call <- match.call(expand.dots = TRUE)
-    ##         res$tau <- tau
-    ##         X <- model.matrix(res)
-    ##         if (bias.correct) {
-    ##             pihat <- fitted(res)
-    ##             if (is.null(tau)) 
-    ##                 wi <- rep(1, length(y))
-    ##             else if (weighting) 
-    ##                 res$weighting <- TRUE
-    ##             else {
-    ##                 w1 <- tau/ybar
-    ##                 w0 <- (1 - tau)/(1 - ybar)
-    ##                 wi <- w1 * y + w0 * (1 - y)
-    ##                 res$weighting <- FALSE
-    ##             }
-    ##             W <- pihat * (1 - pihat) * wi
-    ##             Qdiag <- lm.influence(lm(y ~ X - 1, weights = W))$hat/W
-    ##             if (is.null(tau)) 
-    ##                 xi <- 0.5 * Qdiag * (2 * pihat - 1)
-    ##             else xi <- 0.5 * Qdiag * ((1 + w0) * pihat - w0)
-    ##             res$coefficients <- res$coefficients - lm(xi ~ X - 
-    ##                 1, weights = W)$coefficients
-    ##             res$bias.correct <- TRUE
-    ##         }
-    ##         else res$bias.correct <- FALSE
-    ##         if (!is.null(tau) & !weighting) {
-    ##             if (tau <= 0 || tau >= 1) 
-    ##                 stop("\ntau needs to be between 0 and 1.\n")
-    ##             res$coefficients["(Intercept)"] <- res$coefficients["(Intercept)"] - 
-    ##                 log(((1 - tau)/tau) * (ybar/(1 - ybar)))
-    ##             res$prior.correct <- TRUE
-    ##             res$weighting <- FALSE
-    ##         }
-    ##         else res$prior.correct <- FALSE
-    ##         if (is.null(res$weighting)) 
-    ##             res$weighting <- FALSE
-    ##         res$linear.predictors <- t(res$coefficients) %*% t(X)
-    ##         res$fitted.values <- 1/(1 + exp(-res$linear.predictors))
-    ##         res$zelig <- "Relogit"
-    ##         class(res) <- c("Relogit", "glm")
-    ##         return(res)
-    ##     }
-    ## })(formula = cbind(conflict, 1 - conflict) ~ major + contig + 
-    ##     power + maxdem + mindem + years, data = ., tau = 0.005)
-    ## 
-    ## Coefficients:
-    ## (Intercept)        major       contig        power       maxdem  
-    ##     -7.1300       2.4320       4.1080       1.0536       0.0480  
-    ##      mindem        years  
-    ##     -0.0641      -0.0629  
-    ## 
-    ## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual
-    ## Null Deviance:	    3980 
-    ## Residual Deviance: 1870 	AIC: 1880
-    ## 
-    ## $formula
-    ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
-    ##     mindem + years
-    ## <environment: 0x7fa429760710>
-    ## 
-    ## attr(,"class")
-    ## [1] "Relogit2" "Relogit" 
-    ## Next step: Use 'setx' method
+    ## Error: object 'z.out2' not found
 
 
 
@@ -526,6 +284,12 @@ Set the explanatory variables to their means:
     
 
     x.out2 <- setx(z.out2)
+
+
+::
+
+    ## Error: could not find function "setx"
+
 
 
 Simulate quantities of interest:
@@ -539,8 +303,7 @@ Simulate quantities of interest:
 
 ::
 
-    ## Error: no applicable method for 'vcov' applied to an object of class
-    ## "c('Relogit2', 'Relogit')"
+    ## Error: could not find function "sim"
 
 
 
@@ -553,15 +316,7 @@ Simulate quantities of interest:
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##   mean     sd  50%  2.5% 97.5%
-    ## 1  8.2 0.4228 8.21 7.393  9.02
-    ## pv
-    ##   mean     sd  50%  2.5% 97.5%
-    ## 1  8.2 0.4228 8.21 7.393  9.02
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out2' not found
 
 
 
@@ -571,10 +326,12 @@ Simulate quantities of interest:
 
     plot(s.out2)
 
-.. figure:: figure/unnamed-chunk-19.png
-    :alt: 
 
-    
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out2' not found
+
+
 
 The cost of giving a range of values for :math:`\tau` is that point
 estimates are not available for quantities of interest. Instead,
