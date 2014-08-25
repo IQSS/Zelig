@@ -100,7 +100,7 @@ z$methods(
             .self$mi <- TRUE
             imputationNumber <- rep(1,nrow(data$imputations[[1]]))
             temp<-as.data.frame(cbind(imputationNumber, data$imputations[[1]]))  # check exactly when type cast is necessary
-            names(temp)[]<- "imputationNumber"
+            names(temp)[1]<- "imputationNumber"
             for(i in 2:data$m){
                 imputationNumber<- rep(i,nrow(data$imputations[[i]]))
                 temp<-rbind(as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
