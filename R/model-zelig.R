@@ -103,7 +103,7 @@ z$methods(
             names(temp)[1]<- "imputationNumber"
             for(i in 2:data$m){
                 imputationNumber<- rep(i,nrow(data$imputations[[i]]))
-                temp<-rbind(as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
+                temp<-rbind(temp, as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
             }
             .self$by <- "imputationNumber"  # need to correct when "by" already declared.
             .self$data <- temp
