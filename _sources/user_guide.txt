@@ -16,18 +16,18 @@ Zelig Model Reference
 
 The following models hare currently supported in Zelig 5.0:
 
-- Exponential Regression: ``zexp$new()``
-- Gamma Regression: ``zgamma()``
-- Logistic Regression: ``zlogit$new()``
-- Log-Normal Regression: ``zlognorm$new()``
-- Least Squares Regression: ``zls$new()``
-- Negative Binomial Regression: ``zbinom$new()``
-- Normal Regression: ``znormal$new()``
-- Poisson Regression: ``zpoisson$new()``
-- Probit Regression: ``zprobit$new()``
-- Quantile Regression: ``zquantile$new()``
-- Rare Events Logistic Regression: ``zrelogit$new()``
-- Tobit Regression: ``ztobit$new()``
+- `Exponential Regression <http://zeligproject.org/vignette.html#zelig-exp>`_: ``zexp$new()``
+- `Gamma Regression <http://zeligproject.org/vignette.html#zelig-gamma>`_: ``zgamma()``
+- `Logistic Regression <http://zeligproject.org/vignette.html#zelig-logit>`_: ``zlogit$new()``
+- `Log Normal Regression <http://zeligproject.org/vignette.html#zelig-lognorm>`_: ``zlognorm$new()``
+- `Least Squares Regression <http://zeligproject.org/vignette.html#zelig-ls>`_: ``zls$new()``
+- `Negative Binomial Regression <http://zeligproject.org/vignette.html#zelig-exp>`_: ``zbinom$new()``
+- `Normal Regression <http://zeligproject.org/vignette.html#zelig-normal>`_: ``znormal$new()``
+- `Poisson Regression <http://zeligproject.org/vignette.html#zelig-poisson>`_: ``zpoisson$new()``
+- `Probit Regression <http://zeligproject.org/vignette.html#zelig-probit>`_: ``zprobit$new()``
+- `Quantile Regression <http://zeligproject.org/vignette.html#zelig-quantile>`_: ``zquantile$new()``
+- `Rare Events Logistic Regression <http://zeligproject.org/vignette.html#zelig-relogit>`_: ``zrelogit$new()``
+- `Tobit Regression <http://zeligproject.org/vignette.html#zelig-tobit>`_: ``ztobit$new()``
 
 
 ------------
