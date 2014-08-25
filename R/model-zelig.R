@@ -14,6 +14,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         ddata = "ANY",
                                         data.by = "ANY", # data frame or matrix
                                         by = "ANY",
+                                        mi = "logical",
                                         
                                         idx = "ANY", # model index
                                         
@@ -29,6 +30,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         bsetrange1 = "logical",
                                         range = "ANY",
                                         range1 = "ANY",
+
+                                        test.statistics = "ANY",
                                         
                                         sim.out = "list", # simulated qi's
                                         simparam = "ANY", # simulated parameters
@@ -91,7 +94,25 @@ z$methods(
     }
     .self$formula <- formula
     .self$by <- by
-    .self$data <- data
+    # MI datasets from Amelia
+    if(class(data)=="amelia"){
+        if(data$m>1){
+            .self$mi <- TRUE
+            imputationNumber <- rep(1,nrow(data$imputations[[1]]))
+            temp<-as.data.frame(cbind(imputationNumber, data$imputations[[1]]))  # check exactly when type cast is necessary
+            names(temp)[]<- "imputationNumber"
+            for(i in 2:data$m){
+                imputationNumber<- rep(i,nrow(data$imputations[[i]]))
+                temp<-rbind(as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
+            }
+            .self$by <- "imputationNumber"  # need to correct when "by" already declared.
+            .self$data <- temp
+        }else{
+            .self$data <- as.data.frame(data$imputations[[1]])
+        }
+    }else{
+      .self$data <- data
+    }
     .self$model.call[[1]] <- .self$fn
     .self$model.call$by <- NULL
     if (is.null(.self$by)) {
