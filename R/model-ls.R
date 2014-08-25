@@ -20,6 +20,8 @@ zls$methods(
     .self$model.call <- match.call(expand.dots = TRUE)
     callSuper(formula = formula, data = data, ...,
               weights = NULL, by = by)
+    rse<-llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
+    .self$test.statistics<- list(robust.se = rse)
   }
 )
 
