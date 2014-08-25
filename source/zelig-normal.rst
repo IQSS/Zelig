@@ -65,7 +65,11 @@ Estimate model:
 
 ::
 
-    ## Error: could not find function "zelig"
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
+    ##   normal: Normal Regression for Continuous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
 
 
 
@@ -80,7 +84,18 @@ Summarize of regression coefficients:
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out1' not found
+    ## Model: 1
+    ## Call:  stats::glm(formula = unem ~ gdp + capmob + trade, family = gaussian("identity"), 
+    ##     data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)          gdp       capmob        trade  
+    ##      6.1813      -0.3236       1.4219       0.0199  
+    ## 
+    ## Degrees of Freedom: 349 Total (i.e. Null);  346 Residual
+    ## Null Deviance:	    3660 
+    ## Residual Deviance: 2610 	AIC: 1710
+    ## Next step: Use 'setx' method
 
 
 
@@ -92,23 +107,7 @@ high (80th percentile) and low (20th percentile) values for trade:
     
 
     x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
-
-
-::
-
-    ## Error: could not find function "setx"
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
-
-
-::
-
-    ## Error: could not find function "setx"
-
 
    
 Generate first differences for the effect of high versus low trade on GDP:
@@ -120,12 +119,6 @@ Generate first differences for the effect of high versus low trade on GDP:
     s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 
 
-::
-
-    ## Error: could not find function "sim"
-
-
-
 
 .. sourcecode:: r
     
@@ -135,7 +128,27 @@ Generate first differences for the effect of high versus low trade on GDP:
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out1' not found
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean     sd   50% 2.5% 97.5%
+    ## [1,] 5.435 0.1917 5.438 5.06 5.815
+    ## pv
+    ##       mean    sd   50%     2.5% 97.5%
+    ## [1,] 5.398 2.695 5.349 -0.08997 10.51
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##      mean     sd   50%  2.5% 97.5%
+    ## [1,]  4.6 0.1796 4.593 4.263 4.977
+    ## pv
+    ##       mean    sd   50%    2.5% 97.5%
+    ## [1,] 4.539 2.775 4.424 -0.9173 9.767
+    ## fd
+    ##         mean     sd     50%   2.5%   97.5%
+    ## [1,] -0.8347 0.2316 -0.8436 -1.282 -0.3657
 
 
 
@@ -147,12 +160,10 @@ A visual summary of quantities of interest:
 
     plot(s.out1)
 
+.. figure:: figure/unnamed-chunk-10.png
+    :alt: 
 
-::
-
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out1' not found
-
-
+    
 
 Model
 +++++

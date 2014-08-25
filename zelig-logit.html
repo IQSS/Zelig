@@ -220,34 +220,40 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> age <span class="o">+</span> race<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
+<span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> age <span class="o">=</span> <span class="m">36</span><span class="p">,</span> race <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
-</pre></div>
-</div>
 <p>Simulating quantities of interest from the posterior distribution.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##        mean      sd   50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.7485 0.01129 0.748 0.7269 0.7703</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.271 0.729</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
-</pre></div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-9.png" />
 </div>
 </div>
 <div class="section" id="simulating-first-differences">
@@ -258,38 +264,47 @@ other variables held at their default values.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
+<span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out2&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.8225 0.01068 0.8226 0.8007 0.8425</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.172 0.828</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##        mean      sd   50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.7091 0.01343 0.709 0.6837 0.7341</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.285 0.715</span>
+<span class="c">## fd</span>
+<span class="c">##         mean      sd     50%    2.5%    97.5%</span>
+<span class="c">## [1,] -0.1133 0.01169 -0.1133 -0.1374 -0.09129</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out2&#39; not found</span>
-</pre></div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-11.png" />
 </div>
 </div>
 </div>

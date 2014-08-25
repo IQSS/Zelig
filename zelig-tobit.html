@@ -257,27 +257,33 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>durable <span class="o">~</span> age <span class="o">+</span> quant<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;tobit&quot;</span><span class="p">,</span> data <span class="o">=</span> tobin<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2011.</span>
+<span class="c">##   tobit: Linear regression for Left-Censored Dependent Variable</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables to their sample averages:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
-</pre></div>
-</div>
 <p>Simulating quantities of interest from the posterior distribution given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 1.567 0.6823 1.469 0.4872 3.097</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd  50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.323 4.309 1.77    0 13.82</span>
 </pre></div>
 </div>
 </div>
@@ -287,15 +293,7 @@ its own cluster.</p>
 high (80th percentile) and low (20th percentile) liquidity ratio
 (<tt class="docutils literal"><span class="pre">quant</span></tt>):</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.8</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Estimating the first difference for the effect of high versus low
@@ -303,20 +301,37 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
-</pre></div>
-</div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out2&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean     sd   50% 2.5% 97.5%</span>
+<span class="c">## 1 1.174 0.7409 1.054 0.17 2.888</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.051 4.002 1.266    0 13.14</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 2.039 1.004 1.925 0.4642 4.294</span>
+<span class="c">## pv</span>
+<span class="c">##      mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.42 4.273 1.744    0 14.47</span>
+<span class="c">## fd</span>
+<span class="c">##     mean   sd    50%   2.5% 97.5%</span>
+<span class="c">## 1 0.8648 1.24 0.8237 -1.502 3.385</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
-</pre></div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-12.png" />
 </div>
 </div>
 </div>

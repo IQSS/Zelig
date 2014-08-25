@@ -223,49 +223,73 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;normal&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2008.</span>
+<span class="c">##   normal: Normal Regression for Continuous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
 </pre></div>
 </div>
 <p>Summarize of regression coefficients:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out1&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<span class="c">## Call:  stats::glm(formula = unem ~ gdp + capmob + trade, family = gaussian(&quot;identity&quot;),</span>
+<span class="c">##     data = .)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)          gdp       capmob        trade</span>
+<span class="c">##      6.1813      -0.3236       1.4219       0.0199</span>
+<span class="c">##</span>
+<span class="c">## Degrees of Freedom: 349 Total (i.e. Null);  346 Residual</span>
+<span class="c">## Null Deviance:       3660</span>
+<span class="c">## Residual Deviance: 2610  AIC: 1710</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
 <p>Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for trade:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Generate first differences for the effect of high versus low trade on GDP:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
-</pre></div>
-</div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out1&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##       mean     sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 5.435 0.1917 5.438 5.06 5.815</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50%     2.5% 97.5%</span>
+<span class="c">## [1,] 5.398 2.695 5.349 -0.08997 10.51</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##      mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,]  4.6 0.1796 4.593 4.263 4.977</span>
+<span class="c">## pv</span>
+<span class="c">##       mean    sd   50%    2.5% 97.5%</span>
+<span class="c">## [1,] 4.539 2.775 4.424 -0.9173 9.767</span>
+<span class="c">## fd</span>
+<span class="c">##         mean     sd     50%   2.5%   97.5%</span>
+<span class="c">## [1,] -0.8347 0.2316 -0.8436 -1.282 -0.3657</span>
 </pre></div>
 </div>
 <p>A visual summary of quantities of interest:</p>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out1&#39; not found</span>
-</pre></div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-10.png" />
 </div>
 </div>
 </div>

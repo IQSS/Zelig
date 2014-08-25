@@ -96,7 +96,11 @@ Estimating linear regression using ``tobit``:
 
 ::
 
-    ## Error: could not find function "zelig"
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2011.
+    ##   tobit: Linear regression for Left-Censored Dependent Variable
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
 
 
 
@@ -109,12 +113,6 @@ Setting values for the explanatory variables to their sample averages:
     x.out <- setx(z.out)
 
 
-::
-
-    ## Error: could not find function "setx"
-
-
-
 Simulating quantities of interest from the posterior distribution given ``x.out``.
 
 
@@ -122,12 +120,6 @@ Simulating quantities of interest from the posterior distribution given ``x.out`
     
 
     s.out1 <- sim(z.out, x = x.out)
-
-
-::
-
-    ## Error: could not find function "sim"
-
 
 
 
@@ -139,7 +131,15 @@ Simulating quantities of interest from the posterior distribution given ``x.out`
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out1' not found
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 1.567 0.6823 1.469 0.4872 3.097
+    ## pv
+    ##       mean    sd  50% 2.5% 97.5%
+    ## [1,] 3.323 4.309 1.77    0 13.82
 
 
 
@@ -155,23 +155,7 @@ high (80th percentile) and low (20th percentile) liquidity ratio
     
 
     x.high <- setx(z.out, quant = quantile(tobin$quant, prob = 0.8))
-
-
-::
-
-    ## Error: could not find function "setx"
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out, quant = quantile(tobin$quant, prob = 0.2))
-
-
-::
-
-    ## Error: could not find function "setx"
-
 
 
 Estimating the first difference for the effect of high versus low
@@ -184,12 +168,6 @@ liquidity ratio on duration(\ ``durable``):
     s.out2 <- sim(z.out, x = x.high, x1 = x.low)
 
 
-::
-
-    ## Error: could not find function "sim"
-
-
-
 
 .. sourcecode:: r
     
@@ -199,7 +177,27 @@ liquidity ratio on duration(\ ``durable``):
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out2' not found
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean     sd   50% 2.5% 97.5%
+    ## 1 1.174 0.7409 1.054 0.17 2.888
+    ## pv
+    ##       mean    sd   50% 2.5% 97.5%
+    ## [1,] 3.051 4.002 1.266    0 13.14
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##    mean    sd   50%   2.5% 97.5%
+    ## 1 2.039 1.004 1.925 0.4642 4.294
+    ## pv
+    ##      mean    sd   50% 2.5% 97.5%
+    ## [1,] 3.42 4.273 1.744    0 14.47
+    ## fd
+    ##     mean   sd    50%   2.5% 97.5%
+    ## 1 0.8648 1.24 0.8237 -1.502 3.385
 
 
 
@@ -209,12 +207,10 @@ liquidity ratio on duration(\ ``durable``):
 
     plot(s.out1)
 
+.. figure:: figure/unnamed-chunk-12.png
+    :alt: 
 
-::
-
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out1' not found
-
-
+    
 
 Model
 +++++

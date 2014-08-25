@@ -60,7 +60,11 @@ Estimate the model:
 
 ::
 
-    ## Error: could not find function "zelig"
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
+    ##   gamma: Gamma Regression for Continuous, Positive Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://datascience.iq.harvard.edu/zelig
 
 
 
@@ -75,7 +79,18 @@ View the regression output:
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out' not found
+    ## Model: 1
+    ## Call:  stats::glm(formula = duration ~ fract + numst2, family = Gamma("inverse"), 
+    ##     data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)        fract       numst2  
+    ##   -0.012960     0.000115    -0.017387  
+    ## 
+    ## Degrees of Freedom: 313 Total (i.e. Null);  311 Residual
+    ## Null Deviance:	    301 
+    ## Residual Deviance: 272 	AIC: 2430
+    ## Next step: Use 'setx' method
 
 
 
@@ -88,23 +103,7 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
-
-
-::
-
-    ## Error: could not find function "setx"
-
-
-.. sourcecode:: r
-    
-
     x.high <- setx(z.out, numst2 = 1)
-
-
-::
-
-    ## Error: could not find function "setx"
-
 
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
@@ -116,12 +115,6 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     s.out <- sim(z.out, x = x.low, x1 = x.high)
 
 
-::
-
-    ## Error: could not find function "sim"
-
-
-
 
 .. sourcecode:: r
     
@@ -131,7 +124,27 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean    sd   50%  2.5% 97.5%
+    ## [1,] 14.42 1.049 14.35 12.52 16.78
+    ## pv
+    ##       mean    sd   50%   2.5% 97.5%
+    ## [1,] 14.35 12.35 11.28 0.8633  47.7
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##       mean    sd  50%  2.5% 97.5%
+    ## [1,] 19.21 1.094 19.2 17.28 21.48
+    ## pv
+    ##       mean    sd   50%   2.5% 97.5%
+    ## [1,] 19.77 17.78 14.83 0.8386 67.42
+    ## fd
+    ##       mean    sd   50%  2.5% 97.5%
+    ## [1,] 4.791 1.478 4.755 1.918  7.79
 
 
 
@@ -141,12 +154,10 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
 
     plot(s.out)
 
+.. figure:: figure/unnamed-chunk-10.png
+    :alt: 
 
-::
-
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
-
-
+    
 
 Model
 +++++

@@ -215,40 +215,55 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;negbinom&quot;</span><span class="p">,</span> data <span class="o">=</span> sanction<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;zelig&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: Model &#39;negbinom&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;z.out&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
+<span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
+<span class="c">##     numst2, data = ., dist = &quot;lognormal&quot;, model = FALSE)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)       fract      numst2</span>
+<span class="c">##    5.366670   -0.004438    0.559833</span>
+<span class="c">##</span>
+<span class="c">## Scale= 1.2</span>
+<span class="c">##</span>
+<span class="c">## Loglik(model)= -1078   Loglik(intercept only)= -1101</span>
+<span class="c">##  Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11</span>
+<span class="c">## n= 314</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
 <p>Set values for the explanatory variables to their default mean values:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;setx&quot;</span>
-</pre></div>
-</div>
 <p>Simulate fitted values:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: could not find function &quot;sim&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 26.02 2.632 25.79 21.28 31.92</span>
+<span class="c">## pv</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 26.02 2.632 25.79 21.28 31.92</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
-</pre></div>
+<div class="figure">
+<img alt="" src="_images/unnamed-chunk-10.png" />
 </div>
 </div>
 <div class="section" id="model">

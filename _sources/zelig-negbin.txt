@@ -59,7 +59,7 @@ Estimate the model:
 
 ::
 
-    ## Error: could not find function "zelig"
+    ## Error: Model 'negbinom' not found
 
 
 
@@ -72,7 +72,20 @@ Estimate the model:
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'z.out' not found
+    ## Model: 1Call:
+    ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
+    ##     numst2, data = ., dist = "lognormal", model = FALSE)
+    ## 
+    ## Coefficients:
+    ## (Intercept)       fract      numst2 
+    ##    5.366670   -0.004438    0.559833 
+    ## 
+    ## Scale= 1.2 
+    ## 
+    ## Loglik(model)= -1078   Loglik(intercept only)= -1101
+    ## 	Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11 
+    ## n= 314 
+    ## Next step: Use 'setx' method
 
 
 
@@ -85,12 +98,6 @@ Set values for the explanatory variables to their default mean values:
     x.out <- setx(z.out)
 
 
-::
-
-    ## Error: could not find function "setx"
-
-
-
 Simulate fitted values:
 
 
@@ -98,12 +105,6 @@ Simulate fitted values:
     
 
     s.out <- sim(z.out, x = x.out)
-
-
-::
-
-    ## Error: could not find function "sim"
-
 
 
 
@@ -115,7 +116,15 @@ Simulate fitted values:
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 26.02 2.632 25.79 21.28 31.92
+    ## pv
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 26.02 2.632 25.79 21.28 31.92
 
 
 
@@ -125,12 +134,10 @@ Simulate fitted values:
 
     plot(s.out)
 
+.. figure:: figure/unnamed-chunk-10.png
+    :alt: 
 
-::
-
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
-
-
+    
 
 
 Model
