@@ -96,12 +96,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-cite-zelig">How do I cite Zelig?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
@@ -242,11 +239,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean      sd   50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.7485 0.01129 0.748 0.7269 0.7703</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.7486 0.01167 0.7492 0.7253 0.7696</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.271 0.729</span>
+<span class="c">## [1,] 0.247 0.753</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -282,22 +279,22 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##        mean      sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.8225 0.01068 0.8226 0.8007 0.8425</span>
+<span class="c">## [1,] 0.8231 0.01033 0.8236 0.8016 0.8413</span>
 <span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.172 0.828</span>
+<span class="c">##         0    1</span>
+<span class="c">## [1,] 0.18 0.82</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean      sd   50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.7091 0.01343 0.709 0.6837 0.7341</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.7097 0.01291 0.7104 0.6837 0.7336</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.285 0.715</span>
+<span class="c">## [1,] 0.299 0.701</span>
 <span class="c">## fd</span>
 <span class="c">##         mean      sd     50%    2.5%    97.5%</span>
-<span class="c">## [1,] -0.1133 0.01169 -0.1133 -0.1374 -0.09129</span>
+<span class="c">## [1,] -0.1134 0.01119 -0.1133 -0.1356 -0.09247</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>

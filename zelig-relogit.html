@@ -96,12 +96,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-cite-zelig">How do I cite Zelig?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-increase-the-memory-for-r">How do I increase the memory for R?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#why-doesnt-the-pdf-print-properly">Why doesn’t the pdf print properly?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
@@ -293,11 +290,11 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean        sd      50%     2.5%   97.5%</span>
-<span class="c">## [1,] 0.0024 0.0001516 0.002391 0.002121 0.00271</span>
+<span class="c">##          mean        sd      50%     2.5%   97.5%</span>
+<span class="c">## [1,] 0.002399 0.0001606 0.002394 0.002101 0.00272</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.997 0.003</span>
+<span class="c">## [1,] 0.998 0.002</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -362,11 +359,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 2.235 0.3714 2.232 1.542 2.995</span>
+<span class="c">##    mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 4.665 0.3973 4.67 3.873 5.436</span>
 <span class="c">## pv</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 2.235 0.3714 2.232 1.542 2.995</span>
+<span class="c">##    mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 4.665 0.3973 4.67 3.873 5.436</span>
 </pre></div>
 </div>
 </div>
@@ -599,7 +596,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7f90fe5ea908&gt;</span>
+<span class="c">## &lt;environment: 0x7fb4a93ef7c0&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -625,11 +622,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 2.235 0.3714 2.232 1.542 2.995</span>
+<span class="c">##    mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 4.665 0.3973 4.67 3.873 5.436</span>
 <span class="c">## pv</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 2.235 0.3714 2.232 1.542 2.995</span>
+<span class="c">##    mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 4.665 0.3973 4.67 3.873 5.436</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>

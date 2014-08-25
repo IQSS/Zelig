@@ -7,16 +7,6 @@ If you find a bug, or cannot figure something out after reading through the FAQs
 
 --------
 
-How do I cite Zelig?
-~~~~~~~~~~~~~~~~~~~~
-We would appreciate if you would cite Zelig as:
-
-  Imai, Kosuke, Gary King and Olivia Lau. 2006. “Zelig: Everyone’s Statistical Software,” http://GKing.Harvard.Edu/zelig.
-
-Please also cite the contributors for the models or methods you are using. These citations can be found in each individual model's vignette which can be found in the the :ref:`vignettes:`.
-
---------
-
 Why can’t I install Zelig?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 We recommend that you first check your internet connection, as you must be connected to install packages. In addition, there are a few platform-specific reasons why you may be having installation problems:
@@ -53,47 +43,7 @@ File paths can be found by right clicking the working directory folder in any fi
 
 --------
 
-How do I increase the memory for R?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Windows users may get the error that R has run out of memory. If you've installed more memory on your machine, you may have to reinstall R in order to take advantage of the additional capacity.
-
-You may also set the amount of available memory manually. Close R, then right-click on your R program icon (the icon on your desktop or in your programs directory). Select “Properties”, and then select the “Shortcut” tab. Look for the “Target” field and after the closing quotes around the location of the R executable, add
-
-.. sourcecode:: r
-
-    --max-mem-size=500M
-
-You may increase this value up to 2GB or the maximum amount of physical RAM you have installed. If you get the error that R cannot allocate a vector of length x, close out of R and add the following line to the “Target” field:
-
-.. sourcecode:: r
-
-    --max-vsize=500M
-
-or as appropriate.
-
-You can always check to see how much memory R has available by typing at the R prompt
-
-.. sourcecode:: r
-
-    > round(memory.limit()/2^20, 2)
-
-which gives you the amount of available memory in MB.
-
---------
-
-Why doesn’t the pdf print properly?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Zelig uses several special LaTeX environments. If the pdf looks right on the screen, there are two possible reasons why it’s not printing properly:
-
--  Adobe Acrobat isn’t cleaning up the document. Updating to Acrobat
-   Reader 6.0.1 or higher should solve this problem.
-
--  Your printer doesn’t support PostScript Type 3 fonts. Updating your
-   print driver should take care of this problem.
-
---------
-
 R is neat. How can I find out more?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-R is a collective project with contributors from all over the world. Their website (`r-project.org <https://r-project.org>`_.) has more information on the R project, R packages, conferences, and other learning material.
+R is a collective project with contributors from all over the world. Their website (`http://www.r-project.org <http://www.r-project.org>`_) has more information on the R project, R packages, conferences, and other learning material.
 
