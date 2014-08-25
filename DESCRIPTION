@@ -1,4 +1,4 @@
-Package: Zelig5
+Package: Zelig
 Maintainer: James Honaker <zelig-zee@iq.harvard.edu>
 License: GPL (>=2)
 Title: Everyone's Statistical Software
@@ -15,7 +15,7 @@ Description: Zelig is an easy-to-use program that can estimate, and
     any model, and mimicking the program Clarify (for Stata) that takes
     the raw output of existing statistical procedures and translates
     them into quantities of direct interest.
-Version: 5.0
+Version: 5.0.1
 Depends:
     methods,
     MASS,
