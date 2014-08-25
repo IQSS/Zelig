@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>zelig-relogit &mdash; Zelig 5.0.1 documentation</title>
+    <title>zelig-relogit &mdash; Zelig 5.0-1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -18,7 +18,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '5.0.1',
+        VERSION:     '5.0-1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -32,7 +32,7 @@
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
-    <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
+    <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -57,7 +57,7 @@
 
         <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
         <a class="navbar-brand" href="index.html">Zelig</a>
-        <span class="navbar-text navbar-version pull-left"><b>Version 5.0.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0-1</b></span>
       </div>
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
@@ -290,11 +290,11 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 0.002397 0.000155 0.002379 0.002125 0.002724</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 0.002408 0.0001555 0.002403 0.002108 0.002713</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.999 0.001</span>
+<span class="c">## [1,] 0.996 0.004</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -360,11 +360,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 6.89 0.3838 6.88 6.173 7.663</span>
+<span class="c">##    mean     sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 6.104 0.4885 6.1 5.158 7.042</span>
 <span class="c">## pv</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 6.89 0.3838 6.88 6.173 7.663</span>
+<span class="c">##    mean     sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 6.104 0.4885 6.1 5.158 7.042</span>
 </pre></div>
 </div>
 </div>
@@ -597,7 +597,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7fceb7f5d178&gt;</span>
+<span class="c">## &lt;environment: 0x7ff65808f940&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -623,11 +623,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 6.89 0.3838 6.88 6.173 7.663</span>
+<span class="c">##    mean     sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 6.104 0.4885 6.1 5.158 7.042</span>
 <span class="c">## pv</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 6.89 0.3838 6.88 6.173 7.663</span>
+<span class="c">##    mean     sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 6.104 0.4885 6.1 5.158 7.042</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>

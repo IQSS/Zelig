@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Model Reference and Vignettes &mdash; Zelig 5.0.1 documentation</title>
+    <title>Model Reference and Vignettes &mdash; Zelig 5.0-1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -18,7 +18,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '5.0.1',
+        VERSION:     '5.0-1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -32,7 +32,7 @@
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
-    <link rel="top" title="Zelig 5.0.1 documentation" href="index.html" />
+    <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
     <link rel="next" title="Frequently Asked Questions" href="faq.html" />
     <link rel="prev" title="Installation and Quickstart" href="installation_quickstart.html" />
 <meta charset='utf-8'>
@@ -59,7 +59,7 @@
 
         <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
         <a class="navbar-brand" href="index.html">Zelig</a>
-        <span class="navbar-text navbar-version pull-left"><b>Version 5.0.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0-1</b></span>
       </div>
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
@@ -456,22 +456,22 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 15.34 1.412 15.31 12.63 18.07</span>
+<span class="c">## 1 15.36 1.431 15.23 12.79 18.31</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd  50%   2.5% 97.5%</span>
-<span class="c">## [1,] 15.38 14.82 11.3 0.3878 52.97</span>
+<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## [1,] 15.73 16.48 10.42 0.3853 60.59</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## 1 24.22 1.884 24.18 20.7 28.04</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 24.26 1.967 24.22 20.77 28.28</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 25.68 25.84 17.84 0.6851    99</span>
+<span class="c">## [1,] 25.59 24.71 19.08 0.6319 94.34</span>
 <span class="c">## fd</span>
-<span class="c">##    mean    sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 8.879 2.363 8.81 4.203 13.55</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 8.905 2.439 8.885 4.383  13.7</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -681,22 +681,22 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 14.36 1.026 14.25 12.53 16.57</span>
+<span class="c">## [1,] 14.42 1.066 14.35 12.61  16.6</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 14.15 12.55 10.36 0.8097 47.09</span>
+<span class="c">##       mean   sd   50%   2.5% 97.5%</span>
+<span class="c">## [1,] 14.81 12.8 11.21 0.8539  48.8</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 19.17 1.068 19.12 17.17 21.45</span>
+<span class="c">##      mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 19.2 1.105 19.14 17.22 21.49</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 20.07 17.84 15.34 1.186 68.17</span>
-<span class="c">## fd</span>
 <span class="c">##       mean    sd  50%  2.5% 97.5%</span>
-<span class="c">## [1,] 4.813 1.477 4.73 1.992 7.743</span>
+<span class="c">## [1,] 19.87 17.24 14.6 1.122 64.18</span>
+<span class="c">## fd</span>
+<span class="c">##       mean   sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 4.781 1.48 4.743 1.898 7.609</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -846,10 +846,10 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##        mean      sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.7477 0.01179 0.7478 0.7244 0.7699</span>
+<span class="c">## [1,] 0.7483 0.01177 0.7482 0.7245 0.7697</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.265 0.735</span>
+<span class="c">## [1,] 0.241 0.759</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -885,23 +885,23 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean      sd    50%   2.5% 97.5%</span>
-<span class="c">## [1,] 0.8233 0.01052 0.8237 0.8023 0.843</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.8226 0.01077 0.8223 0.8021 0.8443</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.171 0.829</span>
+<span class="c">## [1,] 0.172 0.828</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##        mean      sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.7095 0.01301 0.7095 0.6833 0.7363</span>
+<span class="c">## [1,] 0.7091 0.01317 0.7089 0.6835 0.7359</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.288 0.712</span>
+<span class="c">## [1,] 0.278 0.722</span>
 <span class="c">## fd</span>
-<span class="c">##         mean      sd     50%    2.5%    97.5%</span>
-<span class="c">## [1,] -0.1138 0.01146 -0.1133 -0.1362 -0.09298</span>
+<span class="c">##         mean      sd    50%    2.5%    97.5%</span>
+<span class="c">## [1,] -0.1135 0.01171 -0.114 -0.1363 -0.08909</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -1117,22 +1117,22 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 18.41 2.516 18.24 14.03 23.81</span>
+<span class="c">## 1 18.23 2.493 18.05 13.93 23.74</span>
 <span class="c">## pv</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 18.41 2.516 18.24 14.03 23.81</span>
+<span class="c">## 1 18.23 2.493 18.05 13.93 23.74</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 32.08 3.525 31.78 25.89 39.23</span>
+<span class="c">##   mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1   32 3.774 31.59 25.46 39.65</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 32.08 3.525 31.78 25.89 39.23</span>
+<span class="c">##   mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1   32 3.774 31.59 25.46 39.65</span>
 <span class="c">## fd</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 13.67 3.625 13.58 6.924 21.38</span>
+<span class="c">## 1 13.76 3.773 13.64 7.003 21.44</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1333,23 +1333,23 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.439 0.1877 5.442 5.076 5.789</span>
+<span class="c">##    mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 5.428 0.1961 5.43 5.064 5.804</span>
 <span class="c">## pv</span>
-<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.439 0.1877 5.442 5.076 5.789</span>
+<span class="c">##    mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 5.428 0.1961 5.43 5.064 5.804</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 4.598 0.1849 4.604 4.245 4.954</span>
+<span class="c">## 1 4.596 0.1864 4.591 4.245 4.972</span>
 <span class="c">## pv</span>
 <span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 4.598 0.1849 4.604 4.245 4.954</span>
+<span class="c">## 1 4.596 0.1864 4.591 4.245 4.972</span>
 <span class="c">## fd</span>
 <span class="c">##      mean     sd     50%   2.5%   97.5%</span>
-<span class="c">## 1 -0.8407 0.2349 -0.8369 -1.316 -0.3833</span>
+<span class="c">## 1 -0.8318 0.2377 -0.8318 -1.297 -0.3608</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -1560,11 +1560,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 26.01 2.581 25.84 21.46 31.32</span>
+<span class="c">##    mean    sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 26.01 2.539 25.9 22.02 31.55</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 26.01 2.581 25.84 21.46 31.32</span>
+<span class="c">##    mean    sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 26.01 2.539 25.9 22.02 31.55</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1751,23 +1751,23 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## [1,] 5.432 0.1971 5.43 5.068 5.819</span>
+<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 5.433 0.1803 5.431 5.088 5.769</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd   50%    2.5% 97.5%</span>
-<span class="c">## [1,] 5.289 2.834 5.307 -0.1152 10.81</span>
+<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## [1,] 5.457 2.758 5.413 0.1697 10.87</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean     sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 4.601 0.1783 4.614 4.23 4.934</span>
+<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 4.606 0.1848 4.601 4.265 4.966</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 4.498 2.683 4.558 -0.918 9.666</span>
+<span class="c">## [1,] 4.487 2.878 4.549 -1.026 10.07</span>
 <span class="c">## fd</span>
-<span class="c">##        mean     sd     50%  2.5%   97.5%</span>
-<span class="c">## [1,] -0.831 0.2319 -0.8215 -1.31 -0.4201</span>
+<span class="c">##         mean     sd     50%   2.5%   97.5%</span>
+<span class="c">## [1,] -0.8262 0.2232 -0.8358 -1.236 -0.3647</span>
 </pre></div>
 </div>
 <p>A visual summary of quantities of interest:</p>
@@ -1930,11 +1930,11 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 3.258 0.2267 3.248 2.844 3.719</span>
+<span class="c">##       mean     sd  50%  2.5% 97.5%</span>
+<span class="c">## [1,] 3.257 0.2407 3.25 2.799 3.738</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.216 1.802   3    0     7</span>
+<span class="c">## [1,] 3.316 1.774   3    0     7</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -2287,11 +2287,11 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 0.002397 0.000155 0.002379 0.002125 0.002724</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 0.002408 0.0001555 0.002403 0.002108 0.002713</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.999 0.001</span>
+<span class="c">## [1,] 0.996 0.004</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -2357,11 +2357,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 6.89 0.3838 6.88 6.173 7.663</span>
+<span class="c">##    mean     sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 6.104 0.4885 6.1 5.158 7.042</span>
 <span class="c">## pv</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 6.89 0.3838 6.88 6.173 7.663</span>
+<span class="c">##    mean     sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 6.104 0.4885 6.1 5.158 7.042</span>
 </pre></div>
 </div>
 </div>
@@ -2594,7 +2594,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7fceb7f5d178&gt;</span>
+<span class="c">## &lt;environment: 0x7ff65808f940&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -2620,11 +2620,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 6.89 0.3838 6.88 6.173 7.663</span>
+<span class="c">##    mean     sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 6.104 0.4885 6.1 5.158 7.042</span>
 <span class="c">## pv</span>
-<span class="c">##   mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 6.89 0.3838 6.88 6.173 7.663</span>
+<span class="c">##    mean     sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 6.104 0.4885 6.1 5.158 7.042</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -2887,11 +2887,11 @@ its own cluster.</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.535 0.6321 1.492 0.5214 2.984</span>
+<span class="c">##    mean     sd  50%   2.5% 97.5%</span>
+<span class="c">## 1 1.537 0.6211 1.46 0.5521 2.932</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.075 4.064 1.538    0 13.91</span>
+<span class="c">## [1,] 3.496 4.405 1.842    0 14.91</span>
 </pre></div>
 </div>
 </div>
@@ -2916,23 +2916,23 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.199 0.7842 1.029 0.1809 3.053</span>
+<span class="c">##    mean     sd  50%   2.5% 97.5%</span>
+<span class="c">## 1 1.167 0.7388 1.02 0.1429 2.924</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 2.994 4.074 1.172    0 13.88</span>
+<span class="c">## [1,] 2.954 4.047 1.241    0 14.02</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 2.034 0.9732 1.878 0.6093 4.379</span>
+<span class="c">##    mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 2.015 0.983 1.918 0.5531 4.397</span>
 <span class="c">## pv</span>
-<span class="c">##      mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.68 4.696 1.884    0 16.31</span>
+<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.397 4.378 1.663    0 14.64</span>
 <span class="c">## fd</span>
 <span class="c">##     mean    sd    50%   2.5% 97.5%</span>
-<span class="c">## 1 0.8355 1.195 0.8128 -1.477 3.285</span>
+<span class="c">## 1 0.8477 1.202 0.7436 -1.355  3.39</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>

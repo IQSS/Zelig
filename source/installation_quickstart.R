@@ -1,5 +1,9 @@
 
 ## ----, eval = FALSE------------------------------------------------------
+## install.packages("Zelig", type = "source", repos = "http://r.iq.harvard.edu/")
+
+
+## ----, eval = FALSE------------------------------------------------------
 ## # This installs devtools package, if not already installed
 ## install.packages("devtools")
 ## # This loads devtools   	
@@ -13,7 +17,7 @@ suppressWarnings(suppressMessages(library(Zelig5)))
 
 
 ## ----, eval = FALSE------------------------------------------------------
-## library(Zelig5)
+## library(Zelig)
 
 
 ## ----, eval = TRUE-------------------------------------------------------

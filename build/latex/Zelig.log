@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 AUG 2014 16:50
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 AUG 2014 18:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -925,214 +925,214 @@ LaTeX Font Info:    Try loading font information for T1+pcr on input line 149.
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 162.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 172.
  [3] [4] [5]
 <QIs.png, id=184, 505.89pt x 505.89pt>
 File: QIs.png Graphic file (type png)
  <use QIs.png>
-Package pdftex.def Info: QIs.png used on input line 353.
+Package pdftex.def Info: QIs.png used on input line 363.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: QIs.png Graphic file (type png)
  <use QIs.png>
-Package pdftex.def Info: QIs.png used on input line 353.
+Package pdftex.def Info: QIs.png used on input line 363.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [6] [7 <./QIs.png>] [8
 
 ]
 Chapter 2.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 376.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 386.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 427.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 437.
  [9]
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 477.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 487.
  [10]
 <Zelig-exp.png, id=227, 505.89pt x 505.89pt>
 File: Zelig-exp.png Graphic file (type png)
  <use Zelig-exp.png>
-Package pdftex.def Info: Zelig-exp.png used on input line 585.
+Package pdftex.def Info: Zelig-exp.png used on input line 595.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-exp.png Graphic file (type png)
 
 <use Zelig-exp.png>
-Package pdftex.def Info: Zelig-exp.png used on input line 585.
+Package pdftex.def Info: Zelig-exp.png used on input line 595.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [11] [12 <./Zelig-exp.png>] [13] [14] [15]
 <Zelig-gamma.png, id=262, 505.89pt x 505.89pt>
 File: Zelig-gamma.png Graphic file (type png)
  <use Zelig-gamma.png>
-Package pdftex.def Info: Zelig-gamma.png used on input line 853.
+Package pdftex.def Info: Zelig-gamma.png used on input line 863.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-gamma.png Graphic file (type png)
 
 <use Zelig-gamma.png>
-Package pdftex.def Info: Zelig-gamma.png used on input line 853.
+Package pdftex.def Info: Zelig-gamma.png used on input line 863.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [16] [17 <./Zelig-gamma.png>] [18]
 <Zelig-logit-1.png, id=282, 505.89pt x 505.89pt>
 File: Zelig-logit-1.png Graphic file (type png)
  <use Zelig-logit-1.png>
-Package pdftex.def Info: Zelig-logit-1.png used on input line 1043.
+Package pdftex.def Info: Zelig-logit-1.png used on input line 1053.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-logit-1.png Graphic file (type png)
 
 <use Zelig-logit-1.png>
-Package pdftex.def Info: Zelig-logit-1.png used on input line 1043.
+Package pdftex.def Info: Zelig-logit-1.png used on input line 1053.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [19] [20 <./Zelig-logit-1.png>]
 <Zelig-logit-2.png, id=296, 505.89pt x 505.89pt>
 File: Zelig-logit-2.png Graphic file (type png)
  <use Zelig-logit-2.png>
-Package pdftex.def Info: Zelig-logit-2.png used on input line 1103.
+Package pdftex.def Info: Zelig-logit-2.png used on input line 1113.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-logit-2.png Graphic file (type png)
 
 <use Zelig-logit-2.png>
-Package pdftex.def Info: Zelig-logit-2.png used on input line 1103.
+Package pdftex.def Info: Zelig-logit-2.png used on input line 1113.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [21] [22 <./Zelig-logit-2.png>] [23] [24]
 <Zelig-lognorm.png, id=324, 505.89pt x 505.89pt>
 File: Zelig-lognorm.png Graphic file (type png)
  <use Zelig-lognorm.png>
-Package pdftex.def Info: Zelig-lognorm.png used on input line 1385.
+Package pdftex.def Info: Zelig-lognorm.png used on input line 1395.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-lognorm.png Graphic file (type png)
 
 <use Zelig-lognorm.png>
-Package pdftex.def Info: Zelig-lognorm.png used on input line 1385.
+Package pdftex.def Info: Zelig-lognorm.png used on input line 1395.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [25] [26 <./Zelig-lognorm.png>] [27] [28] [29]
 <unnamed-chunk-10.png, id=355, 505.89pt x 505.89pt>
 File: unnamed-chunk-10.png Graphic file (type png)
  <use unnamed-chunk-10.png>
-Package pdftex.def Info: unnamed-chunk-10.png used on input line 1644.
+Package pdftex.def Info: unnamed-chunk-10.png used on input line 1654.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: unnamed-chunk-10.png Graphic file (type png)
 
 <use unnamed-chunk-10.png>
-Package pdftex.def Info: unnamed-chunk-10.png used on input line 1644.
+Package pdftex.def Info: unnamed-chunk-10.png used on input line 1654.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [30 <./unnamed-chunk-10.png>]
 <unnamed-chunk-14.png, id=362, 505.89pt x 505.89pt>
 File: unnamed-chunk-14.png Graphic file (type png)
  <use unnamed-chunk-14.png>
-Package pdftex.def Info: unnamed-chunk-14.png used on input line 1688.
+Package pdftex.def Info: unnamed-chunk-14.png used on input line 1698.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: unnamed-chunk-14.png Graphic file (type png)
 
 <use unnamed-chunk-14.png>
-Package pdftex.def Info: unnamed-chunk-14.png used on input line 1688.
+Package pdftex.def Info: unnamed-chunk-14.png used on input line 1698.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [31] [32 <./unnamed-chunk-14.png>] [33] [34]
 <Zelig-negbin.png, id=387, 505.89pt x 505.89pt>
 File: Zelig-negbin.png Graphic file (type png)
  <use Zelig-negbin.png>
-Package pdftex.def Info: Zelig-negbin.png used on input line 1921.
+Package pdftex.def Info: Zelig-negbin.png used on input line 1931.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-negbin.png Graphic file (type png)
 
 <use Zelig-negbin.png>
-Package pdftex.def Info: Zelig-negbin.png used on input line 1921.
+Package pdftex.def Info: Zelig-negbin.png used on input line 1931.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [35 <./Zelig-negbin.png>] [36] [37] [38]
 <Zelig-normal.png, id=413, 505.89pt x 505.89pt>
 File: Zelig-normal.png Graphic file (type png)
  <use Zelig-normal.png>
-Package pdftex.def Info: Zelig-normal.png used on input line 2169.
+Package pdftex.def Info: Zelig-normal.png used on input line 2179.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-normal.png Graphic file (type png)
 
 <use Zelig-normal.png>
-Package pdftex.def Info: Zelig-normal.png used on input line 2169.
+Package pdftex.def Info: Zelig-normal.png used on input line 2179.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [39 <./Zelig-normal.png>] [40] [41]
 <Zelig-poisson.png, id=436, 505.89pt x 505.89pt>
 File: Zelig-poisson.png Graphic file (type png)
  <use Zelig-poisson.png>
-Package pdftex.def Info: Zelig-poisson.png used on input line 2372.
+Package pdftex.def Info: Zelig-poisson.png used on input line 2382.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-poisson.png Graphic file (type png)
 
 <use Zelig-poisson.png>
-Package pdftex.def Info: Zelig-poisson.png used on input line 2372.
+Package pdftex.def Info: Zelig-poisson.png used on input line 2382.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [42] [43 <./Zelig-poisson.png>] [44]
 <Zelig-probit.png, id=457, 505.89pt x 505.89pt>
 File: Zelig-probit.png Graphic file (type png)
  <use Zelig-probit.png>
-Package pdftex.def Info: Zelig-probit.png used on input line 2564.
+Package pdftex.def Info: Zelig-probit.png used on input line 2574.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-probit.png Graphic file (type png)
 
 <use Zelig-probit.png>
-Package pdftex.def Info: Zelig-probit.png used on input line 2564.
+Package pdftex.def Info: Zelig-probit.png used on input line 2574.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [45] [46 <./Zelig-probit.png>] [47] [48]
 <Zelig-relogit.png, id=484, 505.89pt x 505.89pt>
 File: Zelig-relogit.png Graphic file (type png)
  <use Zelig-relogit.png>
-Package pdftex.def Info: Zelig-relogit.png used on input line 2816.
+Package pdftex.def Info: Zelig-relogit.png used on input line 2826.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-relogit.png Graphic file (type png)
 
 <use Zelig-relogit.png>
-Package pdftex.def Info: Zelig-relogit.png used on input line 2816.
+Package pdftex.def Info: Zelig-relogit.png used on input line 2826.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [49] [50 <./Zelig-relogit.png>] [51]
-Underfull \vbox (badness 10000) detected at line 3134
+Underfull \vbox (badness 10000) detected at line 3144
  []
 
 [52]
-Underfull \vbox (badness 10000) detected at line 3134
+Underfull \vbox (badness 10000) detected at line 3144
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3134
+Underfull \vbox (badness 10000) detected at line 3144
  []
 
 [53]
-Underfull \vbox (badness 10000) detected at line 3134
+Underfull \vbox (badness 10000) detected at line 3144
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3134
+Underfull \vbox (badness 10000) detected at line 3144
  []
 
 [54] [55] <unnamed-chunk-18.png, id=518, 505.89pt x 505.89pt>
 File: unnamed-chunk-18.png Graphic file (type png)
 
 <use unnamed-chunk-18.png>
-Package pdftex.def Info: unnamed-chunk-18.png used on input line 3175.
+Package pdftex.def Info: unnamed-chunk-18.png used on input line 3185.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: unnamed-chunk-18.png Graphic file (type png)
  <use unnamed-chunk-18.png>
-Package pdftex.def Info: unnamed-chunk-18.png used on input line 3175.
+Package pdftex.def Info: unnamed-chunk-18.png used on input line 3185.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [56 <./unnamed-chunk-18.png>] [57] [58] [59] [60] <Zelig-tobit.png, id=553, 50
 5.89pt x 505.89pt>
 File: Zelig-tobit.png Graphic file (type png)
 
 <use Zelig-tobit.png>
-Package pdftex.def Info: Zelig-tobit.png used on input line 3545.
+Package pdftex.def Info: Zelig-tobit.png used on input line 3555.
 (pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
 File: Zelig-tobit.png Graphic file (type png)
  <use Zelig-tobit.png>
-Package pdftex.def Info: Zelig-tobit.png used on input line 3545.
+Package pdftex.def Info: Zelig-tobit.png used on input line 3555.
 (pdftex.def)             Requested size: 469.755pt x 469.76265pt.
  [61 <./Zelig-tobit.png>] [62]
 Chapter 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 3658--3659
+Underfull \hbox (badness 10000) in paragraph at lines 3668--3669
 []\T1/ptm/m/n/10 If nei-ther so-lu-tion works, feel free email the Zelig mail-i
 ng list di-rectly at:
  []
 
 
-Underfull \hbox (badness 7869) in paragraph at lines 3667--3668
+Underfull \hbox (badness 7869) in paragraph at lines 3677--3678
 \T1/ptm/m/n/10 If you have prob-lems in-stalling R, you should search the in-te
 r-net for the R help mail-ing list,
  []
@@ -1144,16 +1144,16 @@ Chapter 4.
 [65
 
 ] (./Zelig.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3775.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3785.
  [66]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3775.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3785.
  (./Zelig.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3775.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3775.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3785.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3785.
 
 Package rerunfilecheck Info: File `Zelig.out' has not changed.
 (rerunfilecheck)             Checksum: 395C78DD14B1C25E68AFD39B66F99B7C;1486.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3775.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3785.
  ) 
 Here is how much of TeX's memory you used:
  9454 strings out of 493315
@@ -1179,7 +1179,7 @@ w/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helve
 tic/uhvbo8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8
 a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></us
 r/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Zelig.pdf (70 pages, 620948 bytes).
+Output written on Zelig.pdf (70 pages, 623411 bytes).
 PDF statistics:
  691 PDF objects out of 1000 (max. 8388607)
  562 compressed objects within 6 object streams

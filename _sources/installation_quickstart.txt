@@ -21,9 +21,22 @@ To install R, go to `http://www.r-project.org/ <http://www.r-project.org/>`_  Se
 
 **Installing Zelig**
 
-Because Zelig 5 is still a *beta* release and is not yet available on ``CRAN`` (with other R software packages), it must be downloaded from Github using the ``devtools`` package.
+Zelig 5  is not yet available on ``CRAN`` yet.
 
-Once you've successfully installed R, open it, and at the terminal prompt, type in the following commands verbatim:
+*Beta Release*
+
+Beta releases are updated with the latest fixes and newest experimental features, and generally reflect a copy currently being tested before submission to CRAN. To download this release, enter the following into an R console:
+
+
+.. sourcecode:: r
+    
+
+    install.packages("Zelig", type = "source", repos = "http://r.iq.harvard.edu/")
+
+
+*Development Release*
+
+Development versions contain the latest code in-development. This means that the development version contains the latest code which may not be fully tested. To download this release:
 
 
 .. sourcecode:: r
@@ -57,7 +70,7 @@ Zelig, open R and type:
 .. sourcecode:: r
     
 
-    library(Zelig5)
+    library(Zelig)
 
 
 ------------
