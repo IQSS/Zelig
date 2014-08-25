@@ -346,7 +346,8 @@ z$methods(
 
 z$methods(
   help = function() {
-    vignette(class(.self)[1])
+#     vignette(class(.self)[1])
+    browseURL(paste("http://zeligproject.org/", tolower(class(.self)[1]), ".html", sep = ""))
   }
 )
 
