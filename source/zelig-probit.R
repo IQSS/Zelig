@@ -40,7 +40,7 @@ s.out <- sim(z.out, x = x.out)
 ## summary(s.out)
 
 
-## ----Zelig-probit, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-probi"----
+## ----Zelig-probit, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-probit"----
 plot(s.out1)
 
 

@@ -121,9 +121,9 @@ Simulate quantities of interest from the posterior distribution.
     plot(s.out1)
 
 .. figure:: figure/Zelig-probit.png
-    :alt: Zelig-probi
+    :alt: Zelig-probit
 
-    Zelig-probi
+    Zelig-probit
 
 
 Model
