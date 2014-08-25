@@ -17,6 +17,7 @@ Description: Zelig is an easy-to-use program that can estimate, and
     them into quantities of direct interest.
 Version: 5.0.1
 Depends:
+    sandwich,
     methods,
     MASS,
     survival,
