@@ -111,11 +111,11 @@ z5$sim.out$range
 
 **Plots**
 
-A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an artcle. Using the ``plot()`` function on the ``z5$s.out`` will produce ready-to-use plots with labels and confidence intervals.
+A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an article. Using the ``plot()`` function on the ``z5$s.out`` will produce ready-to-use plots with labels and confidence intervals.
 
-*Plots of QI's from binary choice model:*  
+*Plots of QI's:*  
 
-.. {r, eval = TRUE}
+.. {r QIs, eval = TRUE, fig.cap = "QIs"}
 z5$graph()
 .. ..
 

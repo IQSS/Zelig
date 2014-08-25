@@ -17,7 +17,7 @@ suppressWarnings(suppressMessages(library(Zelig5)))
 
 
 ## ----, eval = TRUE-------------------------------------------------------
- data(macro)
+data(macro)
 
 
 ## ----, eval = TRUE-------------------------------------------------------

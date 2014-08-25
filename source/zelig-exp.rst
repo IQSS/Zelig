@@ -173,22 +173,22 @@ Summarize quantities of interest and produce some plots:
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 15.34 1.471 15.24 12.71 18.48
+    ## 1 15.32 1.451 15.26 12.74 18.47
     ## pv
-    ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 15.56 14.82 10.78 0.3532 52.37
+    ##       mean    sd   50%  2.5% 97.5%
+    ## [1,] 14.45 13.54 11.23 0.369 50.85
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##    mean    sd  50%  2.5% 97.5%
-    ## 1 24.21 1.936 24.1 20.67 28.15
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 24.29 1.883 24.27 20.77 28.19
     ## pv
     ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 24.67 26.29 16.31 0.7074 96.35
+    ## [1,] 25.29 23.86 18.05 0.6137 88.22
     ## fd
-    ##    mean   sd   50%  2.5% 97.5%
-    ## 1 8.872 2.42 8.759 4.294 13.74
+    ##    mean    sd   50% 2.5% 97.5%
+    ## 1 8.971 2.405 8.952  4.4 13.88
 
 
 
@@ -198,10 +198,10 @@ Summarize quantities of interest and produce some plots:
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-11.png
-    :alt: 
+.. figure:: figure/Zelig-exp.png
+    :alt: Zelig-exp
 
-    
+    Zelig-exp
 
 Model
 +++++

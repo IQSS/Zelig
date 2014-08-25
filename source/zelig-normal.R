@@ -41,7 +41,7 @@ s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 summary(s.out1)
 
 
-## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+## ----Zelig-normal, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-normal"----
 plot(s.out1)
 
 

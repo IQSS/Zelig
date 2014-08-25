@@ -132,23 +132,23 @@ Generate first differences for the effect of high versus low trade on GDP:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean     sd   50% 2.5% 97.5%
-    ## [1,] 5.436 0.1918 5.435 5.06 5.819
+    ##       mean     sd   50%  2.5% 97.5%
+    ## [1,] 5.427 0.1956 5.426 5.035 5.804
     ## pv
-    ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 5.423 2.731 5.264 0.2495 10.73
+    ##      mean    sd   50%   2.5% 97.5%
+    ## [1,] 5.47 2.676 5.495 0.1705  10.7
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##      mean     sd   50%  2.5% 97.5%
-    ## [1,] 4.61 0.1863 4.612 4.256 4.952
+    ##       mean     sd   50%  2.5% 97.5%
+    ## [1,] 4.602 0.1833 4.602 4.235 4.961
     ## pv
-    ##       mean    sd   50%    2.5% 97.5%
-    ## [1,] 4.468 2.799 4.505 -0.8029 9.855
+    ##       mean    sd  50%   2.5% 97.5%
+    ## [1,] 4.637 2.811 4.68 -1.085 10.22
     ## fd
-    ##        mean     sd     50%   2.5%  97.5%
-    ## [1,] -0.826 0.2261 -0.8281 -1.269 -0.392
+    ##         mean     sd     50%   2.5%   97.5%
+    ## [1,] -0.8257 0.2403 -0.8271 -1.293 -0.3501
 
 
 
@@ -160,10 +160,10 @@ A visual summary of quantities of interest:
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-10.png
-    :alt: 
+.. figure:: figure/Zelig-normal.png
+    :alt: Zelig-normal
 
-    
+    Zelig-normal
 
 Model
 +++++

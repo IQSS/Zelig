@@ -99,11 +99,11 @@ Simulating quantities of interest from the posterior distribution.
     ##  sim x :
     ##  -----
     ## ev
-    ##        mean      sd    50%   2.5%  97.5%
-    ## [1,] 0.7486 0.01167 0.7492 0.7253 0.7696
+    ##        mean      sd    50%   2.5% 97.5%
+    ## [1,] 0.7484 0.01172 0.7491 0.7249  0.77
     ## pv
     ##          0     1
-    ## [1,] 0.247 0.753
+    ## [1,] 0.225 0.775
 
 
 
@@ -113,10 +113,10 @@ Simulating quantities of interest from the posterior distribution.
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-9.png
-    :alt: 
+.. figure:: figure/Zelig-logit-1.png
+    :alt: Zelig-logit-1
 
-    
+    Zelig-logit-1
 
 Simulating First Differences
 !!!!!
@@ -156,8 +156,8 @@ other variables held at their default values.
     ##  sim x :
     ##  -----
     ## ev
-    ##        mean      sd    50%   2.5%  97.5%
-    ## [1,] 0.8231 0.01033 0.8236 0.8016 0.8413
+    ##       mean      sd    50%   2.5%  97.5%
+    ## [1,] 0.823 0.01053 0.8235 0.8011 0.8434
     ## pv
     ##         0    1
     ## [1,] 0.18 0.82
@@ -166,13 +166,13 @@ other variables held at their default values.
     ##  -----
     ## ev
     ##        mean      sd    50%   2.5%  97.5%
-    ## [1,] 0.7097 0.01291 0.7104 0.6837 0.7336
+    ## [1,] 0.7095 0.01314 0.7096 0.6836 0.7337
     ## pv
     ##          0     1
-    ## [1,] 0.299 0.701
+    ## [1,] 0.295 0.705
     ## fd
     ##         mean      sd     50%    2.5%    97.5%
-    ## [1,] -0.1134 0.01119 -0.1133 -0.1356 -0.09247
+    ## [1,] -0.1134 0.01184 -0.1139 -0.1355 -0.09111
 
 
 
@@ -182,10 +182,10 @@ other variables held at their default values.
 
     plot(s.out2)
 
-.. figure:: figure/unnamed-chunk-11.png
-    :alt: 
+.. figure:: figure/Zelig-logit-2.png
+    :alt: Zelig-logit-2
 
-    
+    Zelig-logit-2
 
 Model
 +++++

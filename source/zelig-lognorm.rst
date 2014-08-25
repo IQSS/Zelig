@@ -180,23 +180,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 18.42 2.521 18.27 13.67  23.5
+    ##    mean   sd   50%  2.5% 97.5%
+    ## 1 18.39 2.39 18.14 14.34 23.38
     ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 18.42 2.521 18.27 13.67  23.5
+    ##    mean   sd   50%  2.5% 97.5%
+    ## 1 18.39 2.39 18.14 14.34 23.38
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 32.18 3.758 31.87 25.73 40.74
+    ## 1 32.14 3.682 31.78 26.02 40.36
     ## pv
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 32.18 3.758 31.87 25.73 40.74
+    ## 1 32.14 3.682 31.78 26.02 40.36
     ## fd
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 13.76 3.786 13.61 6.745 21.98
+    ##    mean  sd   50%  2.5% 97.5%
+    ## 1 13.76 3.7 13.59 6.989 21.73
 
 
 
@@ -206,10 +206,10 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-12.png
-    :alt: 
+.. figure:: figure/Zelig-lognorm.png
+    :alt: Zelig-lognorm
 
-    
+    Zelig-lognorm
 
 Model
 +++++

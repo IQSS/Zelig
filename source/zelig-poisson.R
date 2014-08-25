@@ -37,7 +37,7 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 
 
-## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+## ----Zelig-poisson, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-poisson"----
 plot(s.out)
 
 

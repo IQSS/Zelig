@@ -39,7 +39,7 @@ Basic Example with First Differences
 Attach sample data:
 
 .. {r, eval = TRUE}
- data(macro)
+data(macro)
 .. ..
 
 Estimate model:

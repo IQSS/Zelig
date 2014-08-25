@@ -49,7 +49,7 @@ s.out2 <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out2)
 
 
-## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+## ----Zelig-tobit, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-tobit"----
 plot(s.out1)
 
 

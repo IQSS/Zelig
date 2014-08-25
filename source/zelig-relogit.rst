@@ -155,11 +155,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##          mean        sd      50%     2.5%   97.5%
-    ## [1,] 0.002399 0.0001606 0.002394 0.002101 0.00272
+    ##          mean        sd      50%     2.5%    97.5%
+    ## [1,] 0.002398 0.0001509 0.002394 0.002116 0.002693
     ## pv
     ##          0     1
-    ## [1,] 0.998 0.002
+    ## [1,] 0.997 0.003
 
 
 
@@ -169,10 +169,10 @@ Simulate quantities of interest:
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-9.png
-    :alt: 
+.. figure:: figure/Zelig-relogit.png
+    :alt: Zelig-relogit
 
-    
+    Zelig-relogit
 
 Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction
 +++++
@@ -258,11 +258,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean     sd  50%  2.5% 97.5%
-    ## 1 4.665 0.3973 4.67 3.873 5.436
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 8.049 0.4152 8.041 7.259 8.841
     ## pv
-    ##    mean     sd  50%  2.5% 97.5%
-    ## 1 4.665 0.3973 4.67 3.873 5.436
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 8.049 0.4152 8.041 7.259 8.841
 
 
 
@@ -511,7 +511,7 @@ Summarize the model output:
     ## $formula
     ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
     ##     mindem + years
-    ## <environment: 0x7fb4a93ef7c0>
+    ## <environment: 0x7f81f93cb348>
     ## 
     ## attr(,"class")
     ## [1] "Relogit2" "Relogit" 
@@ -557,11 +557,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean     sd  50%  2.5% 97.5%
-    ## 1 4.665 0.3973 4.67 3.873 5.436
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 8.049 0.4152 8.041 7.259 8.841
     ## pv
-    ##    mean     sd  50%  2.5% 97.5%
-    ## 1 4.665 0.3973 4.67 3.873 5.436
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 8.049 0.4152 8.041 7.259 8.841
 
 
 
@@ -571,7 +571,7 @@ Simulate quantities of interest:
 
     plot(s.out2)
 
-.. figure:: figure/unnamed-chunk-19.png
+.. figure:: figure/unnamed-chunk-18.png
     :alt: 
 
     

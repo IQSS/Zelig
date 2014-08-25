@@ -6,7 +6,7 @@ Zelig is an open source project development and maintained by the Data Science g
 
 It leverages (R) code from many researchers and is designed to allow anyone to contribute their methods to it. Hence, we often refer to Zelig as "everyone's statistical software" and our aim is to make it, as well as the models it wraps, as accessible as possible. As such, Zelig comes with self-contained documentation that minimizes startup costs, automates model summaries and graphics, and bridges existing R implementations through an intelligible call structure.
 
-**License:** GPL-2 | GPL-3 [expanded from: GPL (≥ 2)]
+**License:** GPL-2 | GPL-3 [expanded from: GPL (>= 2)]
 
 **Contact:** For questions, please join the Zelig mailing list:
 `https://groups.google.com/forum/#!forum/zelig-statistical-software <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_

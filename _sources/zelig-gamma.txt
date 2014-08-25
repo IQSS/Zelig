@@ -128,23 +128,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean    sd  50%  2.5% 97.5%
-    ## [1,] 14.48 1.067 14.4 12.67  16.8
+    ##       mean    sd   50%  2.5% 97.5%
+    ## [1,] 14.45 1.098 14.34 12.57 16.86
     ## pv
     ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 14.85 13.02 11.22 0.9863 50.33
+    ## [1,] 14.25 13.35 10.08 0.5954 51.44
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##      mean    sd   50% 2.5% 97.5%
-    ## [1,] 19.2 1.108 19.11 17.3 21.53
+    ##       mean    sd  50%  2.5% 97.5%
+    ## [1,] 19.26 1.123 19.2 17.24 21.58
     ## pv
-    ##       mean    sd  50%   2.5% 97.5%
-    ## [1,] 19.33 17.08 14.4 0.8013 66.88
+    ##       mean    sd   50%   2.5% 97.5%
+    ## [1,] 18.55 16.97 13.94 0.8285 65.77
     ## fd
     ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 4.721 1.491 4.664 2.022 7.623
+    ## [1,] 4.812 1.567 4.847 1.676 7.674
 
 
 
@@ -154,10 +154,10 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-10.png
-    :alt: 
+.. figure:: figure/Zelig-gamma.png
+    :alt: Zelig-gamma
 
-    
+    Zelig-gamma
 
 Model
 +++++
@@ -245,5 +245,5 @@ information through ``summary(z.out)``.
 See also
 +++++
 
-The gamma model is part of the stats package by . Advanced users may
+The gamma model is part of the stats package. Advanced users may
 wish to refer to ``help(glm)`` and ``help(family)``.

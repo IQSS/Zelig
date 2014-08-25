@@ -52,7 +52,7 @@ s.out <- sim(z.out, x = x.low, x1 = x.high)
 summary(s.out)
 
 
-## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+## ----Zelig-lognorm, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-lognorm"----
 plot(s.out)
 
 

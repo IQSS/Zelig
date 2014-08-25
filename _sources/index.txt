@@ -10,18 +10,8 @@ To get started, we recommend following the :ref:`installation_quickstart` guide.
 
 To view the code-base, visit the source repository at `https://github.com/IQSS/Zelig <https://github.com/IQSS/Zelig>`_ and for regular updates  and release information be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_. We also recommend joining the `Zelig Google Group <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_, where we are encouraging users to ask questions, report bugs, and help others.
 
-------------
-
-**Implemented Models in Zelig 5.0.1**
-
-*Inheritance Tree*
-
-.. raw:: html
-
-    <div style="margin-top:10px;">
-      <iframe width="835" height="550" src="http://bl.ocks.org/myi100/raw/1ca9ba696aa0bb462415/" marginwidth="0" marginheight="0" scrolling="yes" frameBorder="0"></iframe>
-    </div>
-
+We can also get the `PDF <http://zeligproject.org/build/latex/Zelig.pdf>`_
+of the documentation.
 
  
 .. toctree::
@@ -32,3 +22,10 @@ To view the code-base, visit the source repository at `https://github.com/IQSS/Z
    faq.rst
    about.rst
 
+*Inheritance Tree*
+
+.. raw:: html
+
+    <div style="margin-top:10px;">
+      <iframe width="835" height="550" src="http://bl.ocks.org/myi100/raw/1ca9ba696aa0bb462415/" marginwidth="0" marginheight="0" scrolling="yes" frameBorder="0"></iframe>
+    </div>

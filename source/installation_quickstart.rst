@@ -222,9 +222,9 @@ As mentioned earlier, a major feature of Zelig is the translation of model estim
 
 **Plots**
 
-A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an artcle. Using the ``plot()`` function on the ``z5$s.out`` will produce ready-to-use plots with labels and confidence intervals.
+A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an article. Using the ``plot()`` function on the ``z5$s.out`` will produce ready-to-use plots with labels and confidence intervals.
 
-*Plots of QI's from binary choice model:*  
+*Plots of QI's:*  
 
 
 .. sourcecode:: r
@@ -232,10 +232,10 @@ A second major Zelig feature is how easy it is to plot QIs for presentation in s
 
     z5$graph()
 
-.. figure:: figure/unnamed-chunk-8.png
-    :alt: plot of chunk unnamed-chunk-8
+.. figure:: figure/QIs.png
+    :alt: QIs
 
-    plot of chunk unnamed-chunk-8
+    QIs
 
 ------------
 

@@ -120,10 +120,10 @@ Simulate quantities of interest from the posterior distribution.
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-10.png
-    :alt: 
+.. figure:: figure/Zelig-probit.png
+    :alt: Zelig-probi
 
-    
+    Zelig-probi
 
 
 Model

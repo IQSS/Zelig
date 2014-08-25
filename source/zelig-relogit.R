@@ -43,7 +43,7 @@ s.out1 <- sim(z.out1, x = x.out1)
 summary(s.out1)
 
 
-## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+## ----Zelig-relogit, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-relogit"----
 plot(s.out1)
 
 

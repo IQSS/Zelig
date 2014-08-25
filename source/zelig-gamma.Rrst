@@ -73,7 +73,7 @@ s.out <- sim(z.out, x = x.low, x1 = x.high)
 summary(s.out)
 .. ..
 
-.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
+.. {r Zelig-gamma, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-gamma"}
 plot(s.out)
 .. ..
 
@@ -163,5 +163,5 @@ information through ``summary(z.out)``.
 See also
 +++++
 
-The gamma model is part of the stats package by . Advanced users may
+The gamma model is part of the stats package. Advanced users may
 wish to refer to ``help(glm)`` and ``help(family)``.

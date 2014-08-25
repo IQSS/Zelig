@@ -67,7 +67,7 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 .. ..
 
-.. {r , dev=c("png", "pdf"), eval = TRUE, fig.cap = ""}
+.. {r Zelig-negbin, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-negbin"}
 plot(s.out)
 .. ..
 

@@ -117,11 +117,11 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean     sd  50%  2.5% 97.5%
-    ## [1,] 3.243 0.2339 3.24 2.793 3.728
+    ##      mean     sd   50% 2.5% 97.5%
+    ## [1,] 3.25 0.2333 3.247 2.82 3.758
     ## pv
     ##       mean    sd 50% 2.5% 97.5%
-    ## [1,] 3.216 1.824   3    0     8
+    ## [1,] 3.259 1.843   3    0     7
 
 
 
@@ -131,10 +131,10 @@ Simulate fitted values:
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-9.png
-    :alt: 
+.. figure:: figure/Zelig-poisson.png
+    :alt: Zelig-poisson
 
-    
+    Zelig-poisson
 
 Model
 +++++

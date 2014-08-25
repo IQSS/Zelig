@@ -120,11 +120,11 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##   mean    sd   50%  2.5% 97.5%
-    ## 1   26 2.568 25.86 21.25  31.5
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 25.94 2.521 25.78 21.25 31.33
     ## pv
-    ##   mean    sd   50%  2.5% 97.5%
-    ## 1   26 2.568 25.86 21.25  31.5
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 25.94 2.521 25.78 21.25 31.33
 
 
 
@@ -134,10 +134,10 @@ Simulate fitted values:
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-10.png
-    :alt: 
+.. figure:: figure/Zelig-negbin.png
+    :alt: Zelig-negbin
 
-    
+    Zelig-negbin
 
 
 Model

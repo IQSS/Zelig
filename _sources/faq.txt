@@ -11,7 +11,7 @@ Why can’t I install Zelig?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 We recommend that you first check your internet connection, as you must be connected to install packages. In addition, there are a few platform-specific reasons why you may be having installation problems:
 
--  **On Windows**: If you are using the very latest version of R, you may not be able to install Zelig until we update Zelig to work with this latest release. Currently Zelig 5.0.1 is compatible with R(≥ 3.0.2). If you wish to install Zelig in the interim, install the appropriate version of R and try to reinstall Zelig.
+-  **On Windows**: If you are using the very latest version of R, you may not be able to install Zelig until we update Zelig to work with this latest release. Currently Zelig 5.0.1 is compatible with R(>= 3.0.2). If you wish to install Zelig in the interim, install the appropriate version of R and try to reinstall Zelig.
 
 -  **On Mac or Linux systems**: If you get the following warning message at the end of your installation:
 

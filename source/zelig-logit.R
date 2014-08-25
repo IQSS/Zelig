@@ -36,7 +36,7 @@ s.out1 <- sim(z.out1, x = x.out1)
 summary(s.out1)
 
 
-## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+## ----Zelig-logit-1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-logit-1"----
 plot(s.out1)
 
 
@@ -48,7 +48,7 @@ s.out2 <- sim(z.out2, x = x.high, x1 = x.low)
 summary(s.out2)
 
 
-## ----, dev=c("png", "pdf"), eval = TRUE, fig.cap = ""--------------------
+## ----Zelig-logit-2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-logit-2"----
 plot(s.out2)
 
 
