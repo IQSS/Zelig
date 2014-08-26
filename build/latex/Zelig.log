@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 AUG 2014 18:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  26 AUG 2014 15:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1162,7 +1162,7 @@ Here is how much of TeX's memory you used:
  12445 multiletter control sequences out of 15000+600000
  63094 words of font info for 69 fonts, out of 8000000 for 9000
  958 hyphenation exceptions out of 8191
- 36i,24n,45p,670b,425s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,24n,45p,665b,425s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -1179,10 +1179,10 @@ w/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helve
 tic/uhvbo8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8
 a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></us
 r/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Zelig.pdf (70 pages, 623411 bytes).
+Output written on Zelig.pdf (70 pages, 624737 bytes).
 PDF statistics:
- 691 PDF objects out of 1000 (max. 8388607)
- 562 compressed objects within 6 object streams
+ 693 PDF objects out of 1000 (max. 8388607)
+ 564 compressed objects within 6 object streams
  191 named destinations out of 1000 (max. 500000)
  288 words of extra memory for PDF output out of 10000 (max. 10000000)
 

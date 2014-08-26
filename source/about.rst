@@ -42,9 +42,9 @@ Additional features include:
 Release Notes
 ~~~~~~~~~~~~~
 
-**v 5.0.1**
+**v 5.0-1**
 
-This release expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture.
+This release provides a set of core models, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture.
 
 
 
