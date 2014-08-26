@@ -118,7 +118,7 @@ html_theme_options = {
     #     ("Link", "http://example.com", True),
     # ],
     'navbar_links': [
-        ("Data Science at IQSS", "http://datascience.iq.harvard.edu/zelig", True),
+        ("Roadmap", "http://54.191.56.66/milestones/milestone-roadmap/Zelig5/", True),
     ],
     
     # Global TOC depth for "site" navbar tab. (Default: 1)
