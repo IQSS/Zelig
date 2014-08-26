@@ -56,8 +56,7 @@ If you have successfully installed the program, you will see a the following mes
 
 Quickstart Guide
 ~~~~~~~~~~~~~~~~
-Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through an
- example. The scenario is a simple one: imagine you want to estimate the distance a car has traveled given it's speed and you have a dataset of cars, distance and speed. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig. 
+Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car has traveled given it's speed and you have a dataset of cars, distance and speed. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig. 
 
 
 **Loading Zelig**
