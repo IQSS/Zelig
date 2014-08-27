@@ -4,7 +4,7 @@
 Installation and Quickstart
 =========================
 
-This guide is designed to get you up and running with the current *beta* release of Zelig (5.0.1). 
+This guide is designed to get you up and running with the current *beta* release of Zelig (5.0-1). 
 
 ------------
 
@@ -21,7 +21,7 @@ To install R, go to `http://www.r-project.org/ <http://www.r-project.org/>`_  Se
 
 **Installing Zelig**
 
-Zelig 5  is not yet available on ``CRAN`` yet.
+Zelig 5 is not available on ``CRAN`` yet.
 
 *Beta Release*
 
@@ -40,7 +40,7 @@ Development versions contain the latest code in-development. This means that the
 install.packages("devtools")
 # This loads devtools   	
 library(devtools)
-# This downloads Zelig 5.0.1 from the IQSS Github repo
+# This downloads Zelig 5.0-1 from the IQSS Github repo
 install_github('IQSS/Zelig')
 .. ..	
 
@@ -50,7 +50,7 @@ If you have successfully installed the program, you will see a the following mes
 
 Quickstart Guide
 ~~~~~~~~~~~~~~~~
-Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car has traveled given it's speed and you have a dataset of cars, distance and speed. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig. 
+Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car needs to stop given it's speed and you have a dataset of spped and stopping distances of cars. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig. 
 
 
 **Loading Zelig**
@@ -58,11 +58,11 @@ Now that we have successfully downloaded and installed Zelig from Github, we wil
 First, we have to load Zelig into R. After installing both R and
 Zelig, open R and type:
 
-.. {r, eval = TRUE, echo = FALSE}	
-suppressWarnings(suppressMessages(library(Zelig5)))
+.. {r, eval = FALSE}	
+library(Zelig)
 .. .. 
 
-.. {r, eval = FALSE}	
+.. {r, include = FALSE}	
 library(Zelig)
 .. .. 
 
@@ -70,9 +70,18 @@ library(Zelig)
 
 **Building Models**
 
-Now, lets build a statistical model that captures the relationship a cars distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. Given that distance (the DV) is a continuous variable, we should use a least squares regression.
+Now, lets build a statistical model that captures the relationship a cars stopping distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. The first decision we must make is what statistical model to test for a relationship between a cars speed and distance required for it to come to a full stop. To do this, we plot the two variables in our dataset to visually inspect any potential relationship:
 
-To do so, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:
+.. {r, eval = TRUE}
+# Scatterplot of car speed and distance required for full stop	
+plot(cars$speed, cars$dist, main = "Scatterplot of Car Speed and Distance Required for Full Stop", ylab = "Distance (miles)", xlab = "Speed (miles per hour)")
+# Fit regression line to data 
+abline(lm(cars$dist ~ cars$speed), col = "firebrick")
+.. .. 
+
+Also included in the scatter plot is a "best-fit" regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous our best choice for model to use is a least squares regression. 
+
+To fit this model to our data, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:
 
 .. {r, eval = TRUE}
 # load toy dataset (when you install R, example datasets are also installed)
@@ -82,30 +91,30 @@ z5 <- zls$new()
 # estimate ls model                     
 z5$zelig(dist ~ speed, data = cars)
 # you can now get model summary estimates
-z5
+summary(z5)
 .. ..
 
-So what do our model estimates tell us? First, off we can see that the positive 3.93 estimate for speed suggests a positive relationship between speed and distance. In particular, we would interpret this coefficient as a one unit increase in speed (e.g., mph) leads to a 3 unit increase in distance (e.g., miles). This interpretation is not very intuitive. Perhaps, we want to know how the distance a car can travel changes over a range of speed (e.g., 10 to 20 mph).
+So what do our model estimates tell us? First off, we can see that the positive 3.93 estimate for speed suggests a positive relationship between speed and distance a car needs to stop. That is, the faster a car is going, the longer the distance it needs to come to a full stop. In particular, we would interpret this coefficient as a one unit increase in speed (e.g., mph) leads to a 3 unit increase in distance (e.g., miles) needed for a car to stop. This interpretation is not very intuitive, however, and we might be interested in answering a particular question such as how much more distance does a car need to stop if it traveling 30 versus 50 miles per hour.
 
-Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the ``$setx()`` or ``$setrange()`` method:
+Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the ``$setx()`` method:
 
 .. {r, eval = TRUE}
-# simulate over a range of speed between 10 and 20 mph
-z5$setrange(speed = 10:20)
-
-# you can also set covariates at particular value using $setx()
+# set speed to 30
 z5$setx(speed = 30)
+
+# set speed to 50
+z5$setx1(speed = 50)
 .. ..
 
 Now that we've set our variables, all we have to do is run our simulations:
 
 .. {r, eval = TRUE}	
-#run 10 simulations and estimate quantities of interest
-z5$sim(num = 10)
-# default is 1,000 simulations
+# run simulations and estimate quantities of interest
+z5$sim()
+z5
 .. ..
 
-Now we've estimated a model and calculated interpretable estimates across a range of speed (e.g., 10 - 20 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
+Now we've estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
 
 ------------
 
@@ -114,7 +123,7 @@ Now we've estimated a model and calculated interpretable estimates across a rang
 As mentioned earlier, a major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g., expected and predicted values) can be accessed via the ``$sim.out`` field:
 
 .. {r, eval = TRUE}	
-z5$sim.out$range
+z5$sim.out
 .. ..
 
 ------------
@@ -131,7 +140,21 @@ z5$graph()
 
 ------------
 
-*Plot of expected values across range of simulations:*
+**Help**
+
+Finally, model documentation can be accessed using the ``z5$help()`` method after a model object has been initialized:
+
+.. {r help, eval = FALSE}
+# documentation for least squares model
+z5 <- zls$new()
+z5$graph()
+
+# documentation for logitstic regression
+z5 <- zlogit$new()
+z5$graph()
+.. ..
+
+
 
 
 

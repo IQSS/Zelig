@@ -33,6 +33,9 @@
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
+    <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
+    <link rel="next" title="zelig-negbin" href="zelig-negbin.html" />
+    <link rel="prev" title="zelig-lognorm" href="zelig-lognorm.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -74,13 +77,13 @@
      href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-and-zelig">Installing R and Zelig</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
@@ -92,7 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -141,6 +144,14 @@
             
               
                 
+  <li>
+    <a href="zelig-lognorm.html" title="Previous Chapter: zelig-lognorm"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; zelig-lognorm</span>
+    </a>
+  </li>
+  <li>
+    <a href="zelig-negbin.html" title="Next Chapter: zelig-negbin"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">zelig-negbin &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -166,9 +177,23 @@
 <div class="container">
   <div class="row">
       <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
 </ul>
@@ -185,7 +210,7 @@
     <div class="col-md-9">
       
   <div class="section" id="zelig-ls">
-<h1>zelig-ls<a class="headerlink" href="#zelig-ls" title="Permalink to this headline">¶</a></h1>
+<span id="zls"></span><h1>zelig-ls<a class="headerlink" href="#zelig-ls" title="Permalink to this headline">¶</a></h1>
 <p>Least Squares Regression for Continuous Dependent Variables</p>
 <p>Use least squares regression analysis to estimate the best linear
 predictor for the specified dependent variables.</p>
@@ -207,6 +232,9 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: there is no package called &#39;Zelig5&#39;</span>
+</pre></div>
+</div>
 <div class="section" id="basic-example-with-first-differences">
 <h3>Basic Example with First Differences<a class="headerlink" href="#basic-example-with-first-differences" title="Permalink to this headline">¶</a></h3>
 <p>Attach sample data:</p>
@@ -258,22 +286,22 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.425 0.1928 5.422 5.056 5.804</span>
+<span class="c">## 1 5.419 0.1923 5.419 5.058 5.776</span>
 <span class="c">## pv</span>
 <span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.425 0.1928 5.422 5.056 5.804</span>
+<span class="c">## 1 5.419 0.1923 5.419 5.058 5.776</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 4.607 0.1781 4.61 4.268 4.946</span>
+<span class="c">## 1 4.592 0.1866 4.59 4.237  4.97</span>
 <span class="c">## pv</span>
 <span class="c">##    mean     sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 4.607 0.1781 4.61 4.268 4.946</span>
+<span class="c">## 1 4.592 0.1866 4.59 4.237  4.97</span>
 <span class="c">## fd</span>
 <span class="c">##      mean     sd     50%   2.5%   97.5%</span>
-<span class="c">## 1 -0.8185 0.2319 -0.8111 -1.295 -0.3661</span>
+<span class="c">## 1 -0.8267 0.2324 -0.8305 -1.262 -0.3638</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>

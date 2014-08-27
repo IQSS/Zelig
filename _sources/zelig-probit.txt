@@ -1,3 +1,5 @@
+.. _zprobit:
+
 zelig-probit
 ~~~~~~
 
@@ -34,6 +36,12 @@ With the Zelig 4 compatibility wrappers:
 
 Example
 +++++
+
+
+
+::
+
+    ## Error: there is no package called 'Zelig5'
 
 
 

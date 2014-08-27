@@ -10,9 +10,7 @@ To get started, we recommend following the :ref:`installation_quickstart` guide.
 
 To view the code-base, visit the source repository at `https://github.com/IQSS/Zelig <https://github.com/IQSS/Zelig>`_ and for regular updates  and release information be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_. We also recommend joining the `Zelig Google Group <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_, where we are encouraging users to ask questions, report bugs, and help others.
 
-We can also get the `PDF <http://zeligproject.org/build/latex/Zelig.pdf>`_
-of the documentation.
-
+You can also find the PDF of the documentation `here. <http://zeligproject.org/build/latex/Zelig.pdf>`_
  
 .. toctree::
    :hidden:

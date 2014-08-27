@@ -192,7 +192,7 @@
       
   <div class="section" id="installation-and-quickstart">
 <span id="installation-quickstart"></span><h1>Installation and Quickstart<a class="headerlink" href="#installation-and-quickstart" title="Permalink to this headline">¶</a></h1>
-<p>This guide is designed to get you up and running with the current <em>beta</em> release of Zelig (5.0.1).</p>
+<p>This guide is designed to get you up and running with the current <em>beta</em> release of Zelig (5.0-1).</p>
 <hr class="docutils" />
 <div class="section" id="installing-r-and-zelig">
 <h2>Installing R and Zelig<a class="headerlink" href="#installing-r-and-zelig" title="Permalink to this headline">¶</a></h2>
@@ -201,7 +201,7 @@
 <p>To install R, go to <a class="reference external" href="http://www.r-project.org/">http://www.r-project.org/</a>  Select the <tt class="docutils literal"><span class="pre">CRAN</span></tt> option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Pick a CRAN mirror closest to your current geographic location (there are multiple mirrors of this database in various locations, selecting the one closest to you will be sure to maximize your the speed of your download).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows.</p>
 <hr class="docutils" />
 <p><strong>Installing Zelig</strong></p>
-<p>Zelig 5  is not yet available on <tt class="docutils literal"><span class="pre">CRAN</span></tt> yet.</p>
+<p>Zelig 5 is not available on <tt class="docutils literal"><span class="pre">CRAN</span></tt> yet.</p>
 <p><em>Beta Release</em></p>
 <p>Beta releases are updated with the latest fixes and newest experimental features, and generally reflect a copy currently being tested before submission to CRAN. To download this release, enter the following into an R console:</p>
 <div class="highlight-r"><div class="highlight"><pre>install.packages<span class="p">(</span><span class="s">&quot;Zelig&quot;</span><span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;source&quot;</span><span class="p">,</span> repos <span class="o">=</span> <span class="s">&quot;http://r.iq.harvard.edu/&quot;</span><span class="p">)</span>
@@ -213,7 +213,7 @@
 install.packages<span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
 <span class="c1"># This loads devtools</span>
 library<span class="p">(</span>devtools<span class="p">)</span>
-<span class="c1"># This downloads Zelig 5.0.1 from the IQSS Github repo</span>
+<span class="c1"># This downloads Zelig 5.0-1 from the IQSS Github repo</span>
 install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -222,7 +222,7 @@ install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig&#39;</span
 <hr class="docutils" />
 <div class="section" id="quickstart-guide">
 <h2>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car has traveled given it&#8217;s speed and you have a dataset of cars, distance and speed. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig.</p>
+<p>Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car needs to stop given it&#8217;s speed and you have a dataset of spped and stopping distances of cars. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig.</p>
 <p><strong>Loading Zelig</strong></p>
 <p>First, we have to load Zelig into R. After installing both R and
 Zelig, open R and type:</p>
@@ -231,8 +231,19 @@ Zelig, open R and type:</p>
 </div>
 <hr class="docutils" />
 <p><strong>Building Models</strong></p>
-<p>Now, lets build a statistical model that captures the relationship a cars distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. Given that distance (the DV) is a continuous variable, we should use a least squares regression.</p>
-<p>To do so, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:</p>
+<p>Now, lets build a statistical model that captures the relationship a cars stopping distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. The first decision we must make is what statistical model to test for a relationship between a cars speed and distance required for it to come to a full stop. To do this, we plot the two variables in our dataset to visually inspect any potential relationship:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># Scatterplot of car speed and distance required for full stop</span>
+plot<span class="p">(</span>cars<span class="o">$</span>speed<span class="p">,</span> cars<span class="o">$</span>dist<span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;Scatterplot of Car Speed and Distance Required for Full Stop&quot;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&quot;Distance (miles)&quot;</span><span class="p">,</span> xlab <span class="o">=</span> <span class="s">&quot;Speed (miles per hour)&quot;</span><span class="p">)</span>
+<span class="c1"># Fit regression line to data</span>
+abline<span class="p">(</span>lm<span class="p">(</span>cars<span class="o">$</span>dist <span class="o">~</span> cars<span class="o">$</span>speed<span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;firebrick&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="plot of chunk unnamed-chunk-5" src="_images/unnamed-chunk-5.png" />
+<p class="caption">plot of chunk unnamed-chunk-5</p>
+</div>
+<p>Also included in the scatter plot is a &#8220;best-fit&#8221; regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous our best choice for model to use is a least squares regression.</p>
+<p>To fit this model to our data, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:</p>
 <div class="highlight-r"><div class="highlight"><pre><span class="c1"># load toy dataset (when you install R, example datasets are also installed)</span>
 data<span class="p">(</span>cars<span class="p">)</span>
 <span class="c1"># initialize Zelig5 least squares object</span>
@@ -240,7 +251,7 @@ z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()
 <span class="c1"># estimate ls model</span>
 z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
 <span class="c1"># you can now get model summary estimates</span>
-z5
+summary<span class="p">(</span>z5<span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
@@ -254,104 +265,64 @@ z5
 <span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
-<p>So what do our model estimates tell us? First, off we can see that the positive 3.93 estimate for speed suggests a positive relationship between speed and distance. In particular, we would interpret this coefficient as a one unit increase in speed (e.g., mph) leads to a 3 unit increase in distance (e.g., miles). This interpretation is not very intuitive. Perhaps, we want to know how the distance a car can travel changes over a range of speed (e.g., 10 to 20 mph).</p>
-<p>Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the <tt class="docutils literal"><span class="pre">$setx()</span></tt> or <tt class="docutils literal"><span class="pre">$setrange()</span></tt> method:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="c1"># simulate over a range of speed between 10 and 20 mph</span>
-z5<span class="o">$</span>setrange<span class="p">(</span>speed <span class="o">=</span> <span class="m">10</span><span class="o">:</span><span class="m">20</span><span class="p">)</span>
-
-<span class="c1"># you can also set covariates at particular value using $setx()</span>
+<p>So what do our model estimates tell us? First off, we can see that the positive 3.93 estimate for speed suggests a positive relationship between speed and distance a car needs to stop. That is, the faster a car is going, the longer the distance it needs to come to a full stop. In particular, we would interpret this coefficient as a one unit increase in speed (e.g., mph) leads to a 3 unit increase in distance (e.g., miles) needed for a car to stop. This interpretation is not very intuitive, however, and we might be interested in answering a particular question such as how much more distance does a car need to stop if it traveling 30 versus 50 miles per hour.</p>
+<p>Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the <tt class="docutils literal"><span class="pre">$setx()</span></tt> method:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># set speed to 30</span>
 z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+
+<span class="c1"># set speed to 50</span>
+z5<span class="o">$</span>setx1<span class="p">(</span>speed <span class="o">=</span> <span class="m">50</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now that we&#8217;ve set our variables, all we have to do is run our simulations:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="c1">#run 10 simulations and estimate quantities of interest</span>
-z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
-<span class="c1"># default is 1,000 simulations</span>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># run simulations and estimate quantities of interest</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+z5
 </pre></div>
 </div>
-<p>Now we&#8217;ve estimated a model and calculated interpretable estimates across a range of speed (e.g., 10 - 20 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 100.1 6.653 100 87.55 112.9</span>
+<span class="c">## pv</span>
+<span class="c">##    mean    sd 50%  2.5% 97.5%</span>
+<span class="c">## 1 100.1 6.653 100 87.55 112.9</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 178.4 15.11 178.8 149.1 207.2</span>
+<span class="c">## pv</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 178.4 15.11 178.8 149.1 207.2</span>
+<span class="c">## fd</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 78.33 8.678 78.54 61.45 95.18</span>
+</pre></div>
+</div>
+<p>Now we&#8217;ve estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.</p>
 <hr class="docutils" />
 <p><strong>Quantities of Interest</strong></p>
 <p>As mentioned earlier, a major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g., expected and predicted values) can be accessed via the <tt class="docutils literal"><span class="pre">$sim.out</span></tt> field:</p>
-<div class="highlight-r"><div class="highlight"><pre>z5<span class="o">$</span>sim.out<span class="o">$</span>range
+<div class="highlight-r"><div class="highlight"><pre>z5<span class="o">$</span>sim.out
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## [[1]]</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## $x</span>
 <span class="c">## Source: local data frame [1 x 2]</span>
 <span class="c">## Groups: &lt;by row&gt;</span>
 <span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
+<span class="c">##              ev            pv</span>
+<span class="c">## 1 &lt;dbl[1000,1]&gt; &lt;dbl[1000,1]&gt;</span>
 <span class="c">##</span>
-<span class="c">## [[2]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
+<span class="c">## $x1</span>
+<span class="c">## Source: local data frame [1 x 3]</span>
 <span class="c">## Groups: &lt;by row&gt;</span>
 <span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[3]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[4]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[5]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[6]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[7]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[8]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[9]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[10]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
-<span class="c">##</span>
-<span class="c">## [[11]]</span>
-<span class="c">## Source: local data frame [1 x 2]</span>
-<span class="c">## Groups: &lt;by row&gt;</span>
-<span class="c">##</span>
-<span class="c">##            ev          pv</span>
-<span class="c">## 1 &lt;dbl[10,1]&gt; &lt;dbl[10,1]&gt;</span>
+<span class="c">##              ev            pv            fd</span>
+<span class="c">## 1 &lt;dbl[1000,1]&gt; &lt;dbl[1000,1]&gt; &lt;dbl[1000,1]&gt;</span>
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -366,7 +337,17 @@ z5<span class="o">$</span>sim<span class="p">(</span>num <span class="o">=</span
 <p class="caption">QIs</p>
 </div>
 <hr class="docutils" />
-<p><em>Plot of expected values across range of simulations:</em></p>
+<p><strong>Help</strong></p>
+<p>Finally, model documentation can be accessed using the <tt class="docutils literal"><span class="pre">z5$help()</span></tt> method after a model object has been initialized:</p>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># documentation for least squares model</span>
+z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>graph<span class="p">()</span>
+
+<span class="c1"># documentation for logitstic regression</span>
+z5 <span class="o">&lt;-</span> zlogit<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>graph<span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 

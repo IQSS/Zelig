@@ -1,3 +1,5 @@
+.. _znegbin:
+
 zelig-negbin
 ~~~~~~
 
@@ -36,6 +38,12 @@ With the Zelig 4 compatibility wrappers:
 
 Example
 +++++
+
+
+
+::
+
+    ## Error: there is no package called 'Zelig5'
 
 
 
@@ -120,11 +128,11 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean   sd   50%  2.5% 97.5%
-    ## 1 26.08 2.52 25.92 21.56 31.33
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 25.92 2.576 25.73 21.18 31.39
     ## pv
-    ##    mean   sd   50%  2.5% 97.5%
-    ## 1 26.08 2.52 25.92 21.56 31.33
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 25.92 2.576 25.73 21.18 31.39
 
 
 

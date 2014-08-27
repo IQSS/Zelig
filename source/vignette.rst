@@ -3,26 +3,26 @@
 Model Reference and Vignettes
 =============================
 
-This section includes technical information on the models currently implemented in Zelig (5.0.1). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.
+This section includes technical information on the models currently implemented in Zelig (5.0-1). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.
 
 ------------
 
 Reference
 ~~~~~~~~~
 
-The following models are currently supported in Zelig 5.0.1:
+The following models are currently supported in Zelig 5.0-1:
 
-- `Exponential Regression <http://zeligproject.org/vignette.html#zelig-exp>`_: ``zexp$new()``
-- `Gamma Regression <http://zeligproject.org/vignette.html#zelig-gamma>`_: ``zgamma()``
-- `Logistic Regression <http://zeligproject.org/vignette.html#zelig-logit>`_: ``zlogit$new()``
-- `Log Normal Regression <http://zeligproject.org/vignette.html#zelig-lognorm>`_: ``zlognorm$new()``
-- `Least Squares Regression <http://zeligproject.org/vignette.html#zelig-ls>`_: ``zls$new()``
-- `Negative Binomial Regression <http://zeligproject.org/vignette.html#zelig-exp>`_: ``zbinom$new()``
-- `Normal Regression <http://zeligproject.org/vignette.html#zelig-normal>`_: ``znormal$new()``
-- `Poisson Regression <http://zeligproject.org/vignette.html#zelig-poisson>`_: ``zpoisson$new()``
-- `Probit Regression <http://zeligproject.org/vignette.html#zelig-probit>`_: ``zprobit$new()``
-- `Rare Events Logistic Regression <http://zeligproject.org/vignette.html#zelig-relogit>`_: ``zrelogit$new()``
-- `Tobit Regression <http://zeligproject.org/vignette.html#zelig-tobit>`_: ``ztobit$new()``
+- :ref:`Exponential Regression <zexp>`: ``zexp$new()``
+- :ref:`Gamma Regression <zgamma>`: ``zgamma()``
+- :ref:`Logistic Regression <zlogit>`: ``zlogit$new()``
+- :ref:`Log Normal Regression <zlognorm>`: ``zlognorm$new()``
+- :ref:`Least Squares Regression <zls>`: ``zls$new()``
+- :ref:`Negative Binomial Regression <znegbin>`: ``zbinom$new()``
+- :ref:`Normal Regression <znorm>`: ``znormal$new()``
+- :ref:`Poisson Regression <zpoisson>`: ``zpoisson$new()``
+- :ref:`Probit Regression <zprobit>`: ``zprobit$new()``
+- :ref:`Rare Events Logistic Regression <zrelogit>`: ``zrelogit$new()``
+- :ref:`Tobit Regression <ztobit>`: ``ztobit$new()``
 
 ------------
 
@@ -68,4 +68,17 @@ The following models are currently supported in Zelig 5.0.1:
 
 .. include:: zelig-tobit.rst
 
+.. toctree::
+   :hidden:
 
+   zelig-exp.rst
+   zelig-gamma.rst
+   zelig-logit.rst
+   zelig-lognorm.rst
+   zelig-ls.rst
+   zelig-negbin.rst
+   zelig-normal.rst
+   zelig-poisson.rst
+   zelig-probit.rst
+   zelig-relogit.rst
+   zelig-tobit.rst

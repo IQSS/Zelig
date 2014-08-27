@@ -1,3 +1,5 @@
+.. _zrelogit:
+
 zelig-relogit
 ~~~~~~
 
@@ -68,6 +70,12 @@ correction.
 
 Example 1: One Tau with Prior Correction and Bias Correction
 +++++
+
+
+
+::
+
+    ## Error: there is no package called 'Zelig5'
 
 
 
@@ -155,8 +163,8 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##          mean        sd      50%     2.5%    97.5%
-    ## [1,] 0.002396 0.0001503 0.002394 0.002126 0.002691
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 0.002399 0.000157 0.002388 0.002099 0.002709
     ## pv
     ##          0     1
     ## [1,] 0.998 0.002
@@ -258,11 +266,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 4.677 0.4141 4.672 3.839  5.49
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 1.316 0.3827 1.322 0.5811 2.107
     ## pv
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 4.677 0.4141 4.672 3.839  5.49
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 1.316 0.3827 1.322 0.5811 2.107
 
 
 
@@ -511,7 +519,7 @@ Summarize the model output:
     ## $formula
     ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
     ##     mindem + years
-    ## <environment: 0x7fcdc1468140>
+    ## <environment: 0x109780430>
     ## 
     ## attr(,"class")
     ## [1] "Relogit2" "Relogit" 
@@ -557,11 +565,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 4.677 0.4141 4.672 3.839  5.49
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 1.316 0.3827 1.322 0.5811 2.107
     ## pv
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 4.677 0.4141 4.672 3.839  5.49
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 1.316 0.3827 1.322 0.5811 2.107
 
 
 

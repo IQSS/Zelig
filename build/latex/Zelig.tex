@@ -14,7 +14,7 @@
 
 
 \title{Zelig Documentation}
-\date{August 26, 2014}
+\date{August 27, 2014}
 \release{5.0-1}
 \author{The Zelig Team}
 \newcommand{\sphinxlogo}{}
@@ -127,13 +127,12 @@ To get started, we recommend following the {\hyperref[installation_quickstart:in
 
 To view the code-base, visit the source repository at \href{https://github.com/IQSS/Zelig}{https://github.com/IQSS/Zelig} and for regular updates  and release information be sure to follow us on twitter at \href{https://twitter.com/IQSS}{@IQSS}. We also recommend joining the \href{https://groups.google.com/forum/\#!forum/zelig-statistical-software}{Zelig Google Group}, where we are encouraging users to ask questions, report bugs, and help others.
 
-We can also get the \href{http://zeligproject.org/build/latex/Zelig.pdf}{PDF}
-of the documentation.
+You can also find the PDF of the documentation \href{http://zeligproject.org/build/latex/Zelig.pdf}{here.}
 
 
 \chapter{Installation and Quickstart}
 \label{installation_quickstart::doc}\label{installation_quickstart:welcome-to-zelig}\label{installation_quickstart:installation-and-quickstart}\label{installation_quickstart:installation-quickstart}
-This guide is designed to get you up and running with the current \emph{beta} release of Zelig (5.0.1).
+This guide is designed to get you up and running with the current \emph{beta} release of Zelig (5.0-1).
 
 
 \bigskip\hrule{}\bigskip
@@ -154,7 +153,7 @@ To install R, go to \href{http://www.r-project.org/}{http://www.r-project.org/} 
 
 \textbf{Installing Zelig}
 
-Zelig 5  is not yet available on \code{CRAN} yet.
+Zelig 5 is not available on \code{CRAN} yet.
 
 \emph{Beta Release}
 
@@ -173,7 +172,7 @@ Development versions contain the latest code in-development. This means that the
 install.packages\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{devtools\PYGZdq{}}\PYG{p}{)}
 \PYG{c+c1}{\PYGZsh{} This loads devtools}
 library\PYG{p}{(}devtools\PYG{p}{)}
-\PYG{c+c1}{\PYGZsh{} This downloads Zelig 5.0.1 from the IQSS Github repo}
+\PYG{c+c1}{\PYGZsh{} This downloads Zelig 5.0\PYGZhy{}1 from the IQSS Github repo}
 install\PYGZus{}github\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{IQSS/Zelig\PYGZsq{}}\PYG{p}{)}
 \end{Verbatim}
 
@@ -186,7 +185,7 @@ If you have successfully installed the program, you will see a the following mes
 
 \section{Quickstart Guide}
 \label{installation_quickstart:quickstart-guide}
-Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car has traveled given it's speed and you have a dataset of cars, distance and speed. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig.
+Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car needs to stop given it's speed and you have a dataset of spped and stopping distances of cars. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig.
 
 \textbf{Loading Zelig}
 
@@ -203,9 +202,24 @@ library\PYG{p}{(}Zelig\PYG{p}{)}
 
 \textbf{Building Models}
 
-Now, lets build a statistical model that captures the relationship a cars distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. Given that distance (the DV) is a continuous variable, we should use a least squares regression.
+Now, lets build a statistical model that captures the relationship a cars stopping distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. The first decision we must make is what statistical model to test for a relationship between a cars speed and distance required for it to come to a full stop. To do this, we plot the two variables in our dataset to visually inspect any potential relationship:
 
-To do so, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Scatterplot of car speed and distance required for full stop}
+plot\PYG{p}{(}cars\PYG{o}{\PYGZdl{}}speed\PYG{p}{,} cars\PYG{o}{\PYGZdl{}}dist\PYG{p}{,} main \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Scatterplot of Car Speed and Distance Required for Full Stop\PYGZdq{}}\PYG{p}{,} ylab \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Distance (miles)\PYGZdq{}}\PYG{p}{,} xlab \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Speed (miles per hour)\PYGZdq{}}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} Fit regression line to data}
+abline\PYG{p}{(}lm\PYG{p}{(}cars\PYG{o}{\PYGZdl{}}dist \PYG{o}{\PYGZti{}} cars\PYG{o}{\PYGZdl{}}speed\PYG{p}{)}\PYG{p}{,} col \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{firebrick\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{unnamed-chunk-5.png}
+\caption{plot of chunk unnamed-chunk-5}\end{figure}
+
+Also included in the scatter plot is a ``best-fit'' regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous our best choice for model to use is a least squares regression.
+
+To fit this model to our data, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{} load toy dataset (when you install R, example datasets are also installed)}
@@ -215,7 +229,7 @@ z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zls\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
 \PYG{c+c1}{\PYGZsh{} estimate ls model}
 z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}dist \PYG{o}{\PYGZti{}} speed\PYG{p}{,} data \PYG{o}{=} cars\PYG{p}{)}
 \PYG{c+c1}{\PYGZsh{} you can now get model summary estimates}
-z5
+summary\PYG{p}{(}z5\PYG{p}{)}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -230,27 +244,51 @@ z5
 \PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
 \end{Verbatim}
 
-So what do our model estimates tell us? First, off we can see that the positive 3.93 estimate for speed suggests a positive relationship between speed and distance. In particular, we would interpret this coefficient as a one unit increase in speed (e.g., mph) leads to a 3 unit increase in distance (e.g., miles). This interpretation is not very intuitive. Perhaps, we want to know how the distance a car can travel changes over a range of speed (e.g., 10 to 20 mph).
+So what do our model estimates tell us? First off, we can see that the positive 3.93 estimate for speed suggests a positive relationship between speed and distance a car needs to stop. That is, the faster a car is going, the longer the distance it needs to come to a full stop. In particular, we would interpret this coefficient as a one unit increase in speed (e.g., mph) leads to a 3 unit increase in distance (e.g., miles) needed for a car to stop. This interpretation is not very intuitive, however, and we might be interested in answering a particular question such as how much more distance does a car need to stop if it traveling 30 versus 50 miles per hour.
 
-Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the \code{\$setx()} or \code{\$setrange()} method:
+Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the \code{\$setx()} method:
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{} simulate over a range of speed between 10 and 20 mph}
-z5\PYG{o}{\PYGZdl{}}setrange\PYG{p}{(}speed \PYG{o}{=} \PYG{l+m}{10}\PYG{o}{:}\PYG{l+m}{20}\PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{} you can also set covariates at particular value using \PYGZdl{}setx()}
+\PYG{c+c1}{\PYGZsh{} set speed to 30}
 z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}speed \PYG{o}{=} \PYG{l+m}{30}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} set speed to 50}
+z5\PYG{o}{\PYGZdl{}}setx1\PYG{p}{(}speed \PYG{o}{=} \PYG{l+m}{50}\PYG{p}{)}
 \end{Verbatim}
 
 Now that we've set our variables, all we have to do is run our simulations:
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{}run 10 simulations and estimate quantities of interest}
-z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}num \PYG{o}{=} \PYG{l+m}{10}\PYG{p}{)}
-\PYG{c+c1}{\PYGZsh{} default is 1,000 simulations}
+\PYG{c+c1}{\PYGZsh{} run simulations and estimate quantities of interest}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+z5
 \end{Verbatim}
 
-Now we've estimated a model and calculated interpretable estimates across a range of speed (e.g., 10 - 20 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.3 6.122 100.2 88.04 111.9}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.3 6.122 100.2 88.04 111.9}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.7 13.82 178.6 151.4 205.8}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.7 13.82 178.6 151.4 205.8}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.42 7.924 78.36 62.9 94.41}
+\end{Verbatim}
+
+Now we've estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
 
 
 \bigskip\hrule{}\bigskip
@@ -261,86 +299,23 @@ Now we've estimated a model and calculated interpretable estimates across a rang
 As mentioned earlier, a major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g., expected and predicted values) can be accessed via the \code{\$sim.out} field:
 
 \begin{Verbatim}[commandchars=\\\{\}]
-z5\PYG{o}{\PYGZdl{}}sim.out\PYG{o}{\PYGZdl{}}range
+z5\PYG{o}{\PYGZdl{}}sim.out
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[1]]}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}x}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}              ev            pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[1000,1]\PYGZgt{} \PYGZlt{}dbl[1000,1]\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[2]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}x1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 3]}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[3]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[4]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[5]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[6]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[7]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[8]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[9]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[10]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [[11]]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Source: local data frame [1 x 2]}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Groups: \PYGZlt{}by row\PYGZgt{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            ev          pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[10,1]\PYGZgt{} \PYGZlt{}dbl[10,1]\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}              ev            pv            fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZlt{}dbl[1000,1]\PYGZgt{} \PYGZlt{}dbl[1000,1]\PYGZgt{} \PYGZlt{}dbl[1000,1]\PYGZgt{}}
 \end{Verbatim}
 
 
@@ -367,12 +342,24 @@ z5\PYG{o}{\PYGZdl{}}graph\PYG{p}{(}\PYG{p}{)}
 \bigskip\hrule{}\bigskip
 
 
-\emph{Plot of expected values across range of simulations:}
+\textbf{Help}
+
+Finally, model documentation can be accessed using the \code{z5\$help()} method after a model object has been initialized:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} documentation for least squares model}
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zls\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}graph\PYG{p}{(}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} documentation for logitstic regression}
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zlogit\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}graph\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
 
 
 \chapter{Model Reference and Vignettes}
 \label{vignette:vignettes}\label{vignette:model-reference-and-vignettes}\label{vignette::doc}
-This section includes technical information on the models currently implemented in Zelig (5.0.1). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.
+This section includes technical information on the models currently implemented in Zelig (5.0-1). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.
 
 
 \bigskip\hrule{}\bigskip
@@ -381,40 +368,40 @@ This section includes technical information on the models currently implemented 
 
 \section{Reference}
 \label{vignette:reference}
-The following models are currently supported in Zelig 5.0.1:
+The following models are currently supported in Zelig 5.0-1:
 \begin{itemize}
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-exp}{Exponential Regression}: \code{zexp\$new()}
+{\hyperref[zelig-exp:zexp]{\emph{Exponential Regression}}}: \code{zexp\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-gamma}{Gamma Regression}: \code{zgamma()}
+{\hyperref[zelig-gamma:zgamma]{\emph{Gamma Regression}}}: \code{zgamma()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-logit}{Logistic Regression}: \code{zlogit\$new()}
+{\hyperref[zelig-logit:zlogit]{\emph{Logistic Regression}}}: \code{zlogit\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-lognorm}{Log Normal Regression}: \code{zlognorm\$new()}
+{\hyperref[zelig-lognorm:zlognorm]{\emph{Log Normal Regression}}}: \code{zlognorm\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-ls}{Least Squares Regression}: \code{zls\$new()}
+{\hyperref[zelig-ls:zls]{\emph{Least Squares Regression}}}: \code{zls\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-exp}{Negative Binomial Regression}: \code{zbinom\$new()}
+{\hyperref[zelig-negbin:znegbin]{\emph{Negative Binomial Regression}}}: \code{zbinom\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-normal}{Normal Regression}: \code{znormal\$new()}
+{\hyperref[zelig-normal:znorm]{\emph{Normal Regression}}}: \code{znormal\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-poisson}{Poisson Regression}: \code{zpoisson\$new()}
+{\hyperref[zelig-poisson:zpoisson]{\emph{Poisson Regression}}}: \code{zpoisson\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-probit}{Probit Regression}: \code{zprobit\$new()}
+{\hyperref[zelig-probit:zprobit]{\emph{Probit Regression}}}: \code{zprobit\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-relogit}{Rare Events Logistic Regression}: \code{zrelogit\$new()}
+{\hyperref[zelig-relogit:zrelogit]{\emph{Rare Events Logistic Regression}}}: \code{zrelogit\$new()}
 
 \item {} 
-\href{http://zeligproject.org/vignette.html\#zelig-tobit}{Tobit Regression}: \code{ztobit\$new()}
+{\hyperref[zelig-tobit:ztobit]{\emph{Tobit Regression}}}: \code{ztobit\$new()}
 
 \end{itemize}
 
@@ -424,7 +411,7 @@ The following models are currently supported in Zelig 5.0.1:
 
 
 \section{zelig-exp}
-\label{vignette:zelig-exp}
+\label{vignette:zelig-exp}\label{vignette:zexp}
 Exponential Regression for Duration Dependent Variables
 
 Use the exponential duration regression model if you have a dependent
@@ -497,6 +484,10 @@ its own cluster.
 
 \subsection{Example}
 \label{vignette:example}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 Attach the sample data:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -566,23 +557,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd  50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.37 1.493 15.3 12.69  18.5}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.42 1.439 15.32 12.81 18.37}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.32 15.31 10.88 0.3912 57.95}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.1 14.13 10.45 0.4431 49.42}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.39 1.932 24.32 21.02 28.27}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.29 1.941 24.26 20.8 28.39}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean   sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 24.22 23.8 17.16 0.4936 82.07}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 22.82 22.51 15.59 0.6725 77.25}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean   sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 9.018 2.48 8.983 4.028  14.2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 8.867 2.422 8.867 4.246 13.77}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -737,7 +728,7 @@ to \code{help(survfit)} in the survival library.
 
 
 \section{zelig-gamma}
-\label{vignette:zelig-gamma}
+\label{vignette:zgamma}\label{vignette:zelig-gamma}
 Gamma Regression for Continuous, Positive Dependent Variables
 
 Use the gamma regression model if you have a positive-valued dependent
@@ -770,6 +761,10 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 \subsection{Example}
 \label{vignette:id2}
 Attach the sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 data\PYG{p}{(}coalition\PYG{p}{)}
@@ -835,22 +830,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.47 1.102 14.39 12.56 16.79}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.47 1.135 14.36 12.58 16.99}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.95 12.89 10.81 0.7147 47.46}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.33 12.98 10.64 0.7123 48.01}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.21 1.151 19.16 17.23 21.61}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.21 1.117 19.12 17.22 21.53}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,]   19 17.09 14.45 1.187 61.95}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.15 16.69 14.29 0.88 64.36}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.74 1.588 4.737 1.671 7.974}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.735 1.549 4.761 1.743 7.825}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -963,7 +958,7 @@ wish to refer to \code{help(glm)} and \code{help(family)}.
 
 
 \section{zelig-logit}
-\label{vignette:zelig-logit}
+\label{vignette:zelig-logit}\label{vignette:zlogit}
 Logistic Regression for Dichotomous Dependent Variables
 
 Logistic regression specifies a dichotomous dependent variable as a
@@ -992,6 +987,10 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 \subsection{Examples}
 \label{vignette:examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 
 \subsubsection{Basic Example}
 \label{vignette:basic-example}
@@ -1037,10 +1036,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean      sd    50\PYGZpc{}   2.5\PYGZpc{}  97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7481 0.01144 0.7482 0.7251 0.7701}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7477 0.01178 0.7479 0.7243 0.7704}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.254 0.746}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.243 0.757}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1084,23 +1083,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean      sd    50\PYGZpc{}   2.5\PYGZpc{}  97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8224 0.01028 0.8228 0.8023 0.8415}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean     sd    50\PYGZpc{}   2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8229 0.0107 0.8228 0.8019 0.8431}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.165 0.835}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.169 0.831}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean      sd    50\PYGZpc{}   2.5\PYGZpc{}  97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7089 0.01314 0.7093 0.6816 0.7355}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean      sd    50\PYGZpc{}   2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.709 0.01281 0.7087 0.6823 0.7343}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.269 0.731}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.287 0.713}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean     sd     50\PYGZpc{}    2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1135 0.0116 \PYGZhy{}0.1136 \PYGZhy{}0.1365 \PYGZhy{}0.0917}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean      sd     50\PYGZpc{}    2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1139 0.01176 \PYGZhy{}0.1136 \PYGZhy{}0.1376 \PYGZhy{}0.0906}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1219,7 +1218,7 @@ wish to refer to \code{help(glm)} and \code{help(family)}.
 
 
 \section{zelig-lognorm}
-\label{vignette:zelig-lognorm}
+\label{vignette:zelig-lognorm}\label{vignette:zlognorm}
 Log-Normal Regression for Duration Dependent Variables
 
 The log-normal model describes an event’s duration, the dependent
@@ -1299,6 +1298,10 @@ its own cluster.
 
 \subsection{Example}
 \label{vignette:id14}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 Attach the sample data:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1367,22 +1370,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.46 2.501 18.27 14.09 23.49}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.41 2.457 18.23 14.11 23.48}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.46 2.501 18.27 14.09 23.49}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.41 2.457 18.23 14.11 23.48}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.02 3.626 31.83 26.03  40.2}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.02 3.582 31.83 25.41 39.09}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.02 3.626 31.83 26.03  40.2}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.02 3.582 31.83 25.41 39.09}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.56 3.585 13.54 6.686 21.29}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.61 3.513 13.61 7.154 20.55}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1532,7 +1535,7 @@ to \code{help(survfit)} in the survival library.
 
 
 \section{zelig-ls}
-\label{vignette:zelig-ls}
+\label{vignette:zelig-ls}\label{vignette:zls}
 Least Squares Regression for Continuous Dependent Variables
 
 Use least squares regression analysis to estimate the best linear
@@ -1561,6 +1564,10 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 \subsection{Examples}
 \label{vignette:id20}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 
 \subsubsection{Basic Example with First Differences}
 \label{vignette:basic-example-with-first-differences}
@@ -1627,22 +1634,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.421 0.1901 5.425 5.036  5.78}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.431 0.1891 5.429 5.069 5.801}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.421 0.1901 5.425 5.036  5.78}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.431 0.1891 5.429 5.069 5.801}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.609 0.1802 4.602 4.265 4.988}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.606 0.1892 4.611 4.231 4.953}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.609 0.1802 4.602 4.265 4.988}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.606 0.1892 4.611 4.231 4.953}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      mean     sd     50\PYGZpc{}   2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8118 0.2266 \PYGZhy{}0.8148 \PYGZhy{}1.241 \PYGZhy{}0.3355}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8254 0.2432 \PYGZhy{}0.8146 \PYGZhy{}1.316 \PYGZhy{}0.3742}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1826,7 +1833,7 @@ refer to \code{help(lm)} and \code{help(lm.fit)}.
 
 
 \section{zelig-negbin}
-\label{vignette:zelig-negbin}
+\label{vignette:znegbin}\label{vignette:zelig-negbin}
 Negative Binomial Regression for Event Count Dependent Variables
 
 Use the negative binomial regression if you have a count of events for
@@ -1856,6 +1863,10 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 \subsection{Example}
 \label{vignette:id26}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 Load sample data:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1914,11 +1925,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean   sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 26.08 2.52 25.92 21.56 31.33}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 25.92 2.576 25.73 21.18 31.39}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean   sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 26.08 2.52 25.92 21.56 31.33}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 25.92 2.576 25.73 21.18 31.39}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2048,7 +2059,7 @@ Venable and Brian D. Ripley . Advanced users may wish to refer to
 
 
 \section{zelig-normal}
-\label{vignette:zelig-normal}
+\label{vignette:zelig-normal}\label{vignette:znorm}
 Normal Regression for Continuous Dependent Variables
 
 The Normal regression model is a close variant of the more standard
@@ -2081,6 +2092,10 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 \subsection{Examples}
 \label{vignette:id34}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 
 \subsubsection{Basic Example with First Differences}
 \label{vignette:id35}
@@ -2148,23 +2163,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.45 0.1903 5.444 5.062 5.829}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.436 0.1918 5.443 5.076 5.792}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean   sd   50\PYGZpc{}    2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.44 2.82 5.396 \PYGZhy{}0.2746 10.65}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd  50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.458 2.847 5.43 0.4614 11.24}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.612 0.1819 4.606 4.256 4.968}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.607 0.1861 4.602 4.241 4.979}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.654 2.786 4.623 \PYGZhy{}1.135 10.07}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}    2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.628 2.763 4.694 \PYGZhy{}0.7744 10.22}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean   sd    50\PYGZpc{}   2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.838 0.23 \PYGZhy{}0.841 \PYGZhy{}1.272 \PYGZhy{}0.3906}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean     sd    50\PYGZpc{}   2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8292 0.2384 \PYGZhy{}0.828 \PYGZhy{}1.265 \PYGZhy{}0.3533}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -2276,7 +2291,7 @@ wish to refer to \code{help(glm)} and \code{help(family)}.
 
 
 \section{zelig-poisson}
-\label{vignette:zelig-poisson}
+\label{vignette:zpoisson}\label{vignette:zelig-poisson}
 Poisson Regression for Event Count Dependent Variables
 
 Use the Poisson regression model if the observations of your dependent
@@ -2308,6 +2323,10 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 \subsection{Example}
 \label{vignette:id41}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 Load sample data:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2366,10 +2385,10 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.245 0.2337 3.233 2.806 3.732}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.241 0.2432 3.239 2.797 3.723}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.228 1.753   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.238 1.769   3    0     7}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2480,7 +2499,7 @@ wish to refer to \code{help(glm)} and \code{help(family)}.
 
 
 \section{zelig-probit}
-\label{vignette:zelig-probit}
+\label{vignette:zelig-probit}\label{vignette:zprobit}
 Probit Regression for Dichotomous Dependent Variables
 
 Use probit regression to model binary dependent variables specified as a
@@ -2509,6 +2528,10 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 \subsection{Example}
 \label{vignette:id47}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 Attach the sample turnout dataset:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2677,7 +2700,7 @@ wish to refer to \code{help(glm)} and \code{help(family)}.
 
 
 \section{zelig-relogit}
-\label{vignette:zelig-relogit}
+\label{vignette:zrelogit}\label{vignette:zelig-relogit}
 Rare Events Logistic Regression for Dichotomous Dependent Variables
 
 The relogit procedure estimates the same model as standard logistic
@@ -2745,6 +2768,10 @@ correction.
 
 \subsection{Example 1: One Tau with Prior Correction and Bias Correction}
 \label{vignette:example-1-one-tau-with-prior-correction-and-bias-correction}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 Due to memory and space considerations, the data used here are a sample
 drawn from the full data set used in King and Zeng, 2001, The proportion
 of militarized interstate conflicts to the absence of disputes is
@@ -2810,7 +2837,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002396 0.0001535 0.002393 0.002112 0.002706}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002395 0.0001508 0.002391 0.002112 0.002698}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.999 0.001}
@@ -2893,11 +2920,11 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 11.38 0.6514 11.37 10.1 12.67}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 6.724 0.5227 6.733 5.722 7.715}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 11.38 0.6514 11.37 10.1 12.67}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 6.724 0.5227 6.733 5.722 7.715}
 \end{Verbatim}
 
 
@@ -3136,7 +3163,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fcb968efee0\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x109e7c6d0\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -3169,11 +3196,11 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 11.38 0.6514 11.37 10.1 12.67}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 6.724 0.5227 6.733 5.722 7.715}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 11.38 0.6514 11.37 10.1 12.67}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 6.724 0.5227 6.733 5.722 7.715}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3376,7 +3403,7 @@ is more numerically stable than standard matrix calculations.
 
 
 \section{zelig-tobit}
-\label{vignette:zelig-tobit}
+\label{vignette:zelig-tobit}\label{vignette:ztobit}
 Linear Regression for a Left-Censored Dependent Variable
 
 Tobit regression estimates a linear regression model for a left-censored
@@ -3447,6 +3474,10 @@ Zelig users may wish to refer to \code{help(survreg)} for more information.
 
 \subsection{Examples}
 \label{vignette:id58}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
 
 \subsubsection{Basic Example}
 \label{vignette:id59}
@@ -3491,11 +3522,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd 50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.554 0.6415 1.5 0.5283 2.948}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.548 0.6227 1.494 0.553 2.872}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.22 4.302 1.625    0 13.63}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.407 4.538 1.569    0 15.21}
 \end{Verbatim}
 
 
@@ -3527,22 +3558,22 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.197 0.8102 1.008 0.1573 3.171}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.215 0.7609 1.069 0.1536 2.996}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.097 4.139 1.406    0 14.01}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.955 4.142 1.006    0 14.06}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.077 1.033 1.912 0.5763 4.454}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.058 0.9321 1.978 0.5758 4.181}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd  50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.665 4.382 2.35    0 13.87}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.655 4.486 2.308    0 14.98}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mean    sd    50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8801 1.241 0.8383 \PYGZhy{}1.501 3.375}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8437 1.188 0.8049 \PYGZhy{}1.562 3.404}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3638,6 +3669,3225 @@ ported to R by Thomas Lumley. Advanced users may wish to refer to
 \code{help(survfit)} in the survival library.
 
 
+\subsubsection{zelig-exp}
+\label{zelig-exp:zelig-exp}\label{zelig-exp::doc}\label{zelig-exp:zexp}
+Exponential Regression for Duration Dependent Variables
+
+Use the exponential duration regression model if you have a dependent
+variable representing a duration (time until an event). The model
+assumes a constant hazard rate for all events. The dependent variable
+may be censored (for observations have not yet been completed when data
+were collected).
+
+
+\paragraph{Syntax}
+\label{zelig-exp:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zexp\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{exp\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+Exponential models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length \(n\). For each
+observation \(i\) in 1, …, \(n\), the value \(y_i\) is the
+duration (lifetime, for example), and the associated \(c_i\) is a
+binary variable such that \(c_i = 1\) if the duration is not
+censored (\emph{e.g.}, the subject dies during the study) or \(c_i = 0\)
+if the duration is censored (\emph{e.g.}, the subject is still alive at the
+end of the study and is know to live at least as long as \(y_i\)).
+If \(c_i\) is omitted, all Y are assumed to be completed; that is,
+time defaults to 1 for all observations.
+
+
+\paragraph{Input Values}
+\label{zelig-exp:input-values}
+In addition to the standard inputs, zelig() takes the following
+additional options for exponential regression:
+\begin{itemize}
+\item {} 
+robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) and the options
+selected in cluster.
+
+\item {} 
+cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then
+
+\end{itemize}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}y \PYG{o}{\PYGZti{}} x1 \PYG{o}{+} x2\PYG{p}{,} robust \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{,} cluster \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{x3\PYGZdq{}}\PYG{p}{,}
+                        model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{exp\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+\end{Verbatim}
+
+means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.
+
+
+\paragraph{Example}
+\label{zelig-exp:example}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+Attach the sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}coalition\PYG{p}{)}
+\end{Verbatim}
+
+Estimate the model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}duration\PYG{p}{,} ciep12\PYG{p}{)} \PYG{o}{\PYGZti{}} fract \PYG{o}{+} numst2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{exp\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} coalition\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Olivia Lau, Kosuke Imai, Gary King. 2011.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   exp: Exponential Regression for Duration Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+View the regression output:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} survival::survreg(formula = Surv(duration, ciep12) \PYGZti{} fract +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     numst2, data = ., dist = \PYGZdq{}exponential\PYGZdq{}, model = FALSE)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)       fract      numst2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    5.535873   \PYGZhy{}0.003909    0.461179}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Scale fixed at 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Loglik(model)= \PYGZhy{}1077   Loglik(intercept only)= \PYGZhy{}1101}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  Chisq= 46.66 on 2 degrees of freedom, p= 7.4e\PYGZhy{}11}
+\PYG{c}{\PYGZsh{}\PYGZsh{} n= 314}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
+\end{Verbatim}
+
+Simulate expected values and first differences:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.low\PYG{p}{,} x1 \PYG{o}{=} x.high\PYG{p}{)}
+\end{Verbatim}
+
+Summarize quantities of interest and produce some plots:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.42 1.439 15.32 12.81 18.37}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.1 14.13 10.45 0.4431 49.42}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.29 1.941 24.26 20.8 28.39}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 22.82 22.51 15.59 0.6725 77.25}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 8.867 2.422 8.867 4.246 13.77}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-exp.png}
+\caption{Zelig-exp}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-exp:model}
+Let \(Y_i^*\) be the survival time for observation \(i\). This
+variable might be censored for some observations at a fixed time
+\(y_c\) such that the fully observed dependent variable,
+\(Y_i\), is defined as
+\begin{gather}
+\begin{split}Y_i = \left\{ \begin{array}{ll}
+      Y_i^* & \textrm{if }Y_i^* \leq y_c \\
+      y_c & \textrm{if }Y_i^* > y_c \\
+    \end{array} \right.\end{split}\notag
+\end{gather}\begin{itemize}
+\item {} 
+The \emph{stochastic component} is described by the distribution of the
+partially observed variable \(Y^*\). We assume \(Y_i^*\)
+follows the exponential distribution whose density function is given
+by
+\begin{gather}
+\begin{split}f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)\end{split}\notag
+\end{gather}
+for \(y_i^*\ge 0\) and \(\lambda_i>0\). The mean of this
+distribution is \(\lambda_i\).
+
+In addition, survival models like the exponential have three
+additional properties. The hazard function \(h(t)\) measures the
+probability of not surviving past time \(t\) given survival up to
+\(t\). In general, the hazard function is equal to
+\(f(t)/S(t)\) where the survival function
+\(S(t) = 1 - \int_{0}^t f(s) ds\) represents the fraction still
+surviving at time \(t\). The cumulative hazard function
+\(H(t)\) describes the probability of dying before time
+\(t\). In general,
+\(H(t)= \int_{0}^{t} h(s) ds = -\log S(t)\). In the case of the
+exponential model,
+\begin{gather}
+\begin{split}\begin{aligned}
+h(t) &=& \frac{1}{\lambda_i} \\
+S(t) &=& \exp\left( -\frac{t}{\lambda_i} \right) \\
+H(t) &=& \frac{t}{\lambda_i}\end{aligned}\end{split}\notag
+\end{gather}
+For the exponential model, the hazard function \(h(t)\) is
+constant over time. The Weibull model and lognormal models allow the
+hazard function to vary as a function of elapsed time (see and
+respectively).
+
+\item {} 
+The \emph{systematic component} \(\lambda_i\) is modeled as
+\begin{gather}
+\begin{split}\lambda_i = \exp(x_i \beta),\end{split}\notag
+\end{gather}
+where \(x_i\) is the vector of explanatory variables, and
+\(\beta\) is the vector of coefficients.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-exp:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected values (qi\$ev) for the exponential model are simulations
+of the expected duration given \(x_i\) and draws of \(\beta\)
+from its posterior,
+\begin{gather}
+\begin{split}E(Y) = \lambda_i = \exp(x_i \beta).\end{split}\notag
+\end{gather}
+\item {} 
+The predicted values (qi\$pr) are draws from the exponential
+distribution with rate equal to the expected value.
+
+\item {} 
+The first difference (or difference in expected values, qi\$ev.diff),
+is
+\begin{gather}
+\begin{split}\textrm{FD} \; = \; E(Y \mid x_1) - E(Y \mid x),\end{split}\notag
+\end{gather}
+where \(x\) and \(x_1\) are different vectors of values for
+the explanatory variables.
+
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) - E[Y_i(t_i=0)]
+  \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups. When
+\(Y_i(t_i=1)\) is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+\(y_i^*\) and uncertainty in simulating \(E[Y_i(t_i=0)]\),
+the counterfactual expected value of \(Y_i\) for observations in
+the treatment group, under the assumption that everything stays the
+same except that the treatment indicator is switched to
+\(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+  \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups. When
+\(Y_i(t_i=1)\) is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+\(y_i^*\) and uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-exp:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(Surv(Y, C) \textasciitilde{} X, model = exp, data)}, then you may
+examine the available information in \code{z.out} by using
+\code{names(z.out)}, see the coefficients by using z.out\$coefficients, and
+a default summary of information through \code{summary(z.out)}.
+
+
+\paragraph{See also}
+\label{zelig-exp:see-also}
+The exponential function is part of the survival library by Terry
+Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
+to \code{help(survfit)} in the survival library.
+
+
+\subsubsection{zelig-gamma}
+\label{zelig-gamma:zgamma}\label{zelig-gamma::doc}\label{zelig-gamma:zelig-gamma}
+Gamma Regression for Continuous, Positive Dependent Variables
+
+Use the gamma regression model if you have a positive-valued dependent
+variable such as the number of years a parliamentary cabinet endures, or
+the seconds you can stay airborne while jumping. The gamma distribution
+assumes that all waiting times are complete by the end of the study
+(censoring is not allowed).
+
+
+\paragraph{Syntax}
+\label{zelig-gamma:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zgamma\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{gamma\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{,} x1 \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Example}
+\label{zelig-gamma:example}
+Attach the sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}coalition\PYG{p}{)}
+\end{Verbatim}
+
+Estimate the model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}duration \PYG{o}{\PYGZti{}} fract \PYG{o}{+} numst2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{gamma\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} coalition\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   gamma: Gamma Regression for Continuous, Positive Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+View the regression output:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  stats::glm(formula = duration \PYGZti{} fract + numst2, family = Gamma(\PYGZdq{}inverse\PYGZdq{}),}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     data = .)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)        fract       numst2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   \PYGZhy{}0.012960     0.000115    \PYGZhy{}0.017387}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 313 Total (i.e. Null);  311 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       301}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 272   AIC: 2430}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
+\end{Verbatim}
+
+Simulate expected values (qi\$ev) and first differences (qi\$fd):
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.low\PYG{p}{,} x1 \PYG{o}{=} x.high\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.47 1.135 14.36 12.58 16.99}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.33 12.98 10.64 0.7123 48.01}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.21 1.117 19.12 17.22 21.53}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.15 16.69 14.29 0.88 64.36}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.735 1.549 4.761 1.743 7.825}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-gamma.png}
+\caption{Zelig-gamma}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-gamma:model}\begin{itemize}
+\item {} 
+The Gamma distribution with scale parameter \(\alpha\) has a
+\emph{stochastic component}:
+\begin{gather}
+\begin{split}\begin{aligned}
+Y &\sim& \textrm{Gamma}(y_i \mid \lambda_i, \alpha) \\
+f(y)  &=& \frac{1}{\alpha^{\lambda_i} \, \Gamma \lambda_i} \, y_i^{\lambda_i
+  - 1} \exp -\left\{ \frac{y_i}{\alpha} \right\}\end{aligned}\end{split}\notag
+\end{gather}
+\begin{DUlineblock}{0em}
+\item[] for \(\alpha, \lambda_i, y_i > 0\).
+\end{DUlineblock}
+
+\item {} 
+The \emph{systematic component} is given by
+\begin{gather}
+\begin{split}\lambda_i = \frac{1}{x_i \beta}\end{split}\notag
+\end{gather}
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-gamma:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected values (qi\$ev) are simulations of the mean of the
+stochastic component given draws of \(\alpha\) and \(\beta\)
+from their posteriors:
+\begin{gather}
+\begin{split}E(Y) = \alpha \lambda_i.\end{split}\notag
+\end{gather}
+\item {} 
+The predicted values (qi\$pr) are draws from the gamma distribution
+for each given set of parameters \((\alpha, \lambda_i)\).
+
+\item {} 
+If x1 is specified, sim() also returns the differences in the
+expected values (qi\$fd),
+\begin{gather}
+\begin{split}E(Y \mid x_1) -
+  E(Y \mid x)\end{split}\notag
+\end{gather}
+.
+
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_i(t_i=0)]\), the counterfactual expected value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-gamma:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = gamma, data)}, then you may examine the
+available information in \code{z.out} by using \code{names(z.out)}, see the
+coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}.
+
+
+\paragraph{See also}
+\label{zelig-gamma:see-also}
+The gamma model is part of the stats package. Advanced users may
+wish to refer to \code{help(glm)} and \code{help(family)}.
+
+
+\subsubsection{zelig-logit}
+\label{zelig-logit:zelig-logit}\label{zelig-logit::doc}\label{zelig-logit:zlogit}
+Logistic Regression for Dichotomous Dependent Variables
+
+Logistic regression specifies a dichotomous dependent variable as a
+function of a set of explanatory variables.
+
+
+\paragraph{Syntax}
+\label{zelig-logit:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zlogit\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{logit\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{,} x1 \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Examples}
+\label{zelig-logit:examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+
+\subparagraph{Basic Example}
+\label{zelig-logit:basic-example}
+Attaching the sample turnout dataset:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}turnout\PYG{p}{)}
+\end{Verbatim}
+
+Estimating parameter values for the logistic regression:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} age \PYG{o}{+} race\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{logit\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} turnout\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   logit: Logistic Regression for Dichotomous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+Setting values for the explanatory variables:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} age \PYG{o}{=} \PYG{l+m}{36}\PYG{p}{,} race \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{white\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}
+
+Simulating quantities of interest from the posterior distribution.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out1\PYG{p}{,} x \PYG{o}{=} x.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean      sd    50\PYGZpc{}   2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7477 0.01178 0.7479 0.7243 0.7704}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.243 0.757}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-logit-1.png}
+\caption{Zelig-logit-1}\end{figure}
+
+
+\subparagraph{Simulating First Differences}
+\label{zelig-logit:simulating-first-differences}
+Estimating the risk difference (and risk ratio) between low education
+(25th percentile) and high education (75th percentile) while all the
+other variables held at their default values.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \PYG{o}{+} educate\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{logit\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} turnout\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   logit: Logistic Regression for Dichotomous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.75}\PYG{p}{)}\PYG{p}{)}
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.25}\PYG{p}{)}\PYG{p}{)}
+s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out2\PYG{p}{,} x \PYG{o}{=} x.high\PYG{p}{,} x1 \PYG{o}{=} x.low\PYG{p}{)}
+summary\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean     sd    50\PYGZpc{}   2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8229 0.0107 0.8228 0.8019 0.8431}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.169 0.831}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean      sd    50\PYGZpc{}   2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.709 0.01281 0.7087 0.6823 0.7343}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.287 0.713}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean      sd     50\PYGZpc{}    2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1139 0.01176 \PYGZhy{}0.1136 \PYGZhy{}0.1376 \PYGZhy{}0.0906}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-logit-2.png}
+\caption{Zelig-logit-2}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-logit:model}
+Let \(Y_i\) be the binary dependent variable for observation
+\(i\) which takes the value of either 0 or 1.
+\begin{itemize}
+\item {} 
+The \emph{stochastic component} is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+Y_i &\sim& \textrm{Bernoulli}(y_i \mid \pi_i) \\
+    &=& \pi_i^{y_i} (1-\pi_i)^{1-y_i}\end{aligned}\end{split}\notag
+\end{gather}
+where \(\pi_i=\Pr(Y_i=1)\).
+
+\item {} 
+The \emph{systematic component} is given by:
+\begin{gather}
+\begin{split}\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\end{split}\notag
+\end{gather}
+where \(x_i\) is the vector of \(k\) explanatory variables
+for observation \(i\) and \(\beta\) is the vector of
+coefficients.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-logit:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected values (qi\$ev) for the logit model are simulations of
+the predicted probability of a success:
+\begin{gather}
+\begin{split}E(Y) =
+  \pi_i= \frac{1}{1 + \exp(-x_i \beta)},\end{split}\notag
+\end{gather}
+given draws of \(\beta\) from its sampling distribution.
+
+\item {} 
+The predicted values (qi\$pr) are draws from the Binomial distribution
+with mean equal to the simulated expected value \(\pi_i\).
+
+\item {} 
+The first difference (qi\$fd) for the logit model is defined as
+\begin{gather}
+\begin{split}\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+The risk ratio (qi\$rr) is defined as
+\begin{gather}
+\begin{split}\textrm{RR} = \Pr(Y = 1 \mid x_1) \ / \ \Pr(Y = 1 \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_i(t_i=0)]\), the counterfactual expected value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)}\right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-logit:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = logit, data)}, then you may examine the
+available information in \code{z.out} by using \code{names(z.out)}, see the
+coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}.
+
+
+\paragraph{See also}
+\label{zelig-logit:see-also}
+The logit model is part of the stats package. Advanced users may
+wish to refer to \code{help(glm)} and \code{help(family)}.
+
+
+\subsubsection{zelig-lognorm}
+\label{zelig-lognorm:zelig-lognorm}\label{zelig-lognorm::doc}\label{zelig-lognorm:zlognorm}
+Log-Normal Regression for Duration Dependent Variables
+
+The log-normal model describes an event’s duration, the dependent
+variable, as a function of a set of explanatory variables. The
+log-normal model may take time censored dependent variables, and allows
+the hazard rate to increase and decrease.
+
+
+\paragraph{Syntax}
+\label{zelig-lognorm:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zlognorm\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zlognorm\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{lognorm\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+Log-normal models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length \(n\). For each
+observation \(i\) in 1, …, \(n\), the value \(y_i\) is the
+duration (lifetime, for example) of each subject, and the associated
+\(c_i\) is a binary variable such that \(c_i = 1\) if the
+duration is not censored (\emph{e.g.}, the subject dies during the study) or
+\(c_i = 0\) if the duration is censored (\emph{e.g.}, the subject is
+still alive at the end of the study). If \(c_i\) is omitted, all Y
+are assumed to be completed; that is, time defaults to 1 for all
+observations.
+
+
+\paragraph{Input Values}
+\label{zelig-lognorm:input-values}
+In addition to the standard inputs, zelig() takes the following
+additional options for lognormal regression:
+\begin{itemize}
+\item {} 
+robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) based on the options
+in cluster.
+
+\item {} 
+cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then
+
+\end{itemize}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}y \PYG{o}{\PYGZti{}} x1 \PYG{o}{+} x2\PYG{p}{,} robust \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{,} cluster \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{x3\PYGZdq{}}\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{exp\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+\end{Verbatim}
+
+means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.
+
+
+\paragraph{Example}
+\label{zelig-lognorm:example}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+Attach the sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}coalition\PYG{p}{)}
+\end{Verbatim}
+
+Estimate the model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}duration\PYG{p}{,} ciep12\PYG{p}{)} \PYG{o}{\PYGZti{}} fract \PYG{o}{+} numst2\PYG{p}{,} model \PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{lognorm\PYGZdq{}}\PYG{p}{,}  data \PYG{o}{=} coalition\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   lognorm: Log\PYGZhy{}Normal Regression for Duration Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+View the regression output:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} survival::survreg(formula = Surv(duration, ciep12) \PYGZti{} fract +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     numst2, data = ., dist = \PYGZdq{}lognormal\PYGZdq{}, model = FALSE)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)       fract      numst2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    5.366670   \PYGZhy{}0.004438    0.559833}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Scale= 1.2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Loglik(model)= \PYGZhy{}1078   Loglik(intercept only)= \PYGZhy{}1101}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  Chisq= 46.58 on 2 degrees of freedom, p= 7.7e\PYGZhy{}11}
+\PYG{c}{\PYGZsh{}\PYGZsh{} n= 314}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2\PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
+\end{Verbatim}
+
+Simulate expected values (qi\$ev) and first differences (qi\$fd):
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.low\PYG{p}{,} x1 \PYG{o}{=} x.high\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.41 2.457 18.23 14.11 23.48}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.41 2.457 18.23 14.11 23.48}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.02 3.582 31.83 25.41 39.09}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.02 3.582 31.83 25.41 39.09}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.61 3.513 13.61 7.154 20.55}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-lognorm.png}
+\caption{Zelig-lognorm}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-lognorm:model}
+Let \(Y_i^*\) be the survival time for observation \(i\) with
+the density function \(f(y)\) and the corresponding distribution
+function \(F(t)=\int_{0}^t f(y) dy\). This variable might be
+censored for some observations at a fixed time \(y_c\) such that the
+fully observed dependent variable, \(Y_i\), is defined as
+\begin{gather}
+\begin{split}Y_i = \left\{ \begin{array}{ll}
+      Y_i^* & \textrm{if }Y_i^* \leq y_c \\
+      y_c & \textrm{if }Y_i^* > y_c \\
+    \end{array} \right.\end{split}\notag
+\end{gather}\begin{itemize}
+\item {} 
+The \emph{stochastic component} is described by the distribution of the
+partially observed variable, \(Y^*\). For the lognormal model,
+there are two equivalent representations:
+\begin{gather}
+\begin{split}\begin{aligned}
+    Y_i^* \; \sim \; \textrm{LogNormal}(\mu_i, \sigma^2) & \textrm{ or
+} & \log(Y_i^*) \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)\end{aligned}\end{split}\notag
+\end{gather}
+where the parameters \(\mu_i\) and \(\sigma^2\) are the mean
+and variance of the Normal distribution. (Note that the output from
+zelig() parameterizes scale:math:{}` = sigma{}`.)
+
+In addition, survival models like the lognormal have three additional
+properties. The hazard function \(h(t)\) measures the probability
+of not surviving past time \(t\) given survival up to \(t\).
+In general, the hazard function is equal to \(f(t)/S(t)\) where
+the survival function \(S(t) =1 - \int_{0}^t f(s) ds\) represents the fraction still surviving at
+time \(t\). The cumulative hazard function \(H(t)\) describes
+the probability of dying before time \(t\). In general,
+\(H(t)=
+\int_{0}^{t} h(s) ds = -\log S(t)\). In the case of the lognormal
+model,
+\begin{gather}
+\begin{split}\begin{aligned}
+h(t) &=& \frac{1}{\sqrt{2 \pi} \, \sigma t \, S(t)}
+\exp\left\{-\frac{1}{2 \sigma^2} (\log \lambda t)^2\right\} \\
+S(t) &=& 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \\
+H(t) &=& -\log \left\{ 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \right\}\end{aligned}\end{split}\notag
+\end{gather}
+where \(\Phi(\cdot)\) is the cumulative density function for the
+Normal distribution.
+
+\item {} 
+The \emph{systematic component} is described as:
+\begin{gather}
+\begin{split}\mu_i = x_i \beta .\end{split}\notag
+\end{gather}
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-lognorm:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected values (qi\$ev) for the lognormal model are simulations
+of the expected duration:
+\begin{gather}
+\begin{split}E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),\end{split}\notag
+\end{gather}
+given draws of \(\beta\) and \(\sigma\) from their sampling
+distributions.
+
+\item {} 
+The predicted value is a draw from the log-normal distribution given
+simulations of the parameters \((\lambda_i, \sigma)\).
+
+\item {} 
+The first difference (qi\$fd) is
+\begin{gather}
+\begin{split}\textrm{FD} = E(Y \mid x_1) - E(Y \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups. When
+\(Y_i(t_i=1)\) is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations is due to two
+factors: uncertainty in the imputation process for censored
+\(y_i^*\) and uncertainty in simulating \(E[Y_i(t_i=0)]\),
+the counterfactual expected value of \(Y_i\) for observations in
+the treatment group, under the assumption that everything stays the
+same except that the treatment indicator is switched to
+\(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
+\widehat{Y_i(t_i=0)} \},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups. When
+\(Y_i(t_i=1)\) is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations are due to two
+factors: uncertainty in the imputation process for censored
+\(y_i^*\) and uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-lognorm:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(Surv(Y, C) \textasciitilde{} X, model = lognorm, data)}, then you may
+examine the available information in \code{z.out} by using
+\code{names(z.out)}, see the coefficients by using z.out\$coefficients, and
+a default summary of information through \code{summary(z.out)}.
+
+
+\paragraph{See also}
+\label{zelig-lognorm:see-also}
+The exponential function is part of the survival library by by Terry
+Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
+to \code{help(survfit)} in the survival library.
+
+
+\subsubsection{zelig-ls}
+\label{zelig-ls::doc}\label{zelig-ls:zelig-ls}\label{zelig-ls:zls}
+Least Squares Regression for Continuous Dependent Variables
+
+Use least squares regression analysis to estimate the best linear
+predictor for the specified dependent variables.
+
+
+\paragraph{Syntax}
+\label{zelig-ls:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zls\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{ls\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Examples}
+\label{zelig-ls:examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+
+\subparagraph{Basic Example with First Differences}
+\label{zelig-ls:basic-example-with-first-differences}
+Attach sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}macro\PYG{p}{)}
+\end{Verbatim}
+
+Estimate model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \PYG{o}{+} capmob \PYG{o}{+} trade\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{ls\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} macro\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   ls: Least Squares Regression for Continuous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+Summarize regression coefficients:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} stats::lm(formula = unem \PYGZti{} gdp + capmob + trade, data = .)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)          gdp       capmob        trade}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      6.1813      \PYGZhy{}0.3236       1.4219       0.0199}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set explanatory variables to their default (mean/mode) values, with
+high (80th percentile) and low (20th percentile) values for the trade
+variable:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
+\end{Verbatim}
+
+Generate first differences for the effect of high versus low trade on GDP:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out1\PYG{p}{,} x \PYG{o}{=} x.high\PYG{p}{,} x1 \PYG{o}{=} x.low\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.431 0.1891 5.429 5.069 5.801}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.431 0.1891 5.429 5.069 5.801}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.606 0.1892 4.611 4.231 4.953}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.606 0.1892 4.611 4.231 4.953}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean     sd     50\PYGZpc{}   2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8254 0.2432 \PYGZhy{}0.8146 \PYGZhy{}1.316 \PYGZhy{}0.3742}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+
+\includegraphics{unnamed-chunk-10.png}
+\end{figure}
+
+
+\subparagraph{Using Dummy Variables}
+\label{zelig-ls:using-dummy-variables}
+Estimate a model with fixed effects for each country (see for help
+with dummy variables). Note that you do not need to create dummy
+variables, as the program will automatically parse the unique values
+in the selected variable into discrete levels.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \PYG{o}{+} trade \PYG{o}{+} capmob \PYG{o}{+} as.factor\PYG{p}{(}country\PYG{p}{)}\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{ls\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} macro\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   ls: Least Squares Regression for Continuous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+Set values for the explanatory variables, using the default mean/mode
+values, with country set to the United States and Japan,
+respectively:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.US \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} country \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{United States\PYGZdq{}}\PYG{p}{)}
+x.Japan \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} country \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Japan\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}
+
+Simulate quantities of interest:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out2\PYG{p}{,} x \PYG{o}{=} x.US\PYG{p}{,} x1 \PYG{o}{=} x.Japan\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+
+\includegraphics{unnamed-chunk-14.png}
+\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-ls:model}\begin{itemize}
+\item {} 
+The \emph{stochastic component} is described by a density with mean
+\(\mu_i\) and the common variance \(\sigma^2\)
+\begin{gather}
+\begin{split}Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).\end{split}\notag
+\end{gather}
+\item {} 
+The \emph{systematic component} models the conditional mean as
+\begin{gather}
+\begin{split}\mu_i =  x_i \beta\end{split}\notag
+\end{gather}
+where \(x_i\) is the vector of covariates, and \(\beta\) is
+the vector of coefficients.
+
+The least squares estimator is the best linear predictor of a
+dependent variable given \(x_i\), and minimizes the sum of
+squared residuals, \(\sum_{i=1}^n (Y_i-x_i \beta)^2\).
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-ls:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected value (qi\$ev) is the mean of simulations from the
+stochastic component,
+\begin{gather}
+\begin{split}E(Y) = x_i \beta,\end{split}\notag
+\end{gather}
+given a draw of \(\beta\) from its sampling distribution.
+
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_i(t_i=0)]\), the counterfactual expected value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-ls:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = ls, data)}, then you may examine the
+available information in \code{z.out} by using \code{names(z.out)}, see the
+coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}. Other elements available through
+the \$ operator are listed below.
+\begin{itemize}
+\item {} 
+From the zelig() output object z.out, you may extract:
+\begin{itemize}
+\item {} 
+coefficients: parameter estimates for the explanatory variables.
+
+\item {} 
+residuals: the working residuals in the final iteration of the
+IWLS fit.
+
+\item {} 
+fitted.values: fitted values.
+
+\item {} 
+df.residual: the residual degrees of freedom.
+
+\item {} 
+zelig.data: the input data frame if save.data = TRUE.
+
+\end{itemize}
+
+\item {} 
+From summary(z.out), you may extract:
+\begin{itemize}
+\item {} 
+coefficients: the parameter estimates with their associated
+standard errors, \(p\)-values, and \(t\)-statistics.
+\begin{gather}
+\begin{split}\hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i\end{split}\notag
+\end{gather}
+\item {} 
+sigma: the square root of the estimate variance of the random
+error \(e\):
+\begin{gather}
+\begin{split}\hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}\end{split}\notag
+\end{gather}
+\item {} 
+r.squared: the fraction of the variance explained by the model.
+\begin{gather}
+\begin{split}R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
+         \bar{y})^2}\end{split}\notag
+\end{gather}
+\item {} 
+adj.r.squared: the above \(R^2\) statistic, penalizing for an
+increased number of explanatory variables.
+
+\item {} 
+cov.unscaled: a \(k \times k\) matrix of unscaled covariances.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\paragraph{See also}
+\label{zelig-ls:see-also}
+The least squares regression is part of the stats package by William N.
+Venables and Brian D. Ripley .In addition, advanced users may wish to
+refer to \code{help(lm)} and \code{help(lm.fit)}.
+
+
+\subsubsection{zelig-negbin}
+\label{zelig-negbin:znegbin}\label{zelig-negbin::doc}\label{zelig-negbin:zelig-negbin}
+Negative Binomial Regression for Event Count Dependent Variables
+
+Use the negative binomial regression if you have a count of events for
+each observation of your dependent variable. The negative binomial model
+is frequently used to estimate over-dispersed event count models.
+
+
+\paragraph{Syntax}
+\label{zelig-negbin:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} znegbin\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{negbin\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Example}
+\label{zelig-negbin:example}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+Load sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}sanction\PYG{p}{)}
+\end{Verbatim}
+
+Estimate the model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \PYG{o}{+} coop\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{negbinom\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} sanction\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: Model \PYGZsq{}negbinom\PYGZsq{} not found}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} survival::survreg(formula = Surv(duration, ciep12) \PYGZti{} fract +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     numst2, data = ., dist = \PYGZdq{}lognormal\PYGZdq{}, model = FALSE)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)       fract      numst2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    5.366670   \PYGZhy{}0.004438    0.559833}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Scale= 1.2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Loglik(model)= \PYGZhy{}1078   Loglik(intercept only)= \PYGZhy{}1101}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  Chisq= 46.58 on 2 degrees of freedom, p= 7.7e\PYGZhy{}11}
+\PYG{c}{\PYGZsh{}\PYGZsh{} n= 314}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set values for the explanatory variables to their default mean values:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Simulate fitted values:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 25.92 2.576 25.73 21.18 31.39}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean    sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 25.92 2.576 25.73 21.18 31.39}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-negbin.png}
+\caption{Zelig-negbin}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-negbin:model}
+Let \(Y_i\) be the number of independent events that occur during a
+fixed time period. This variable can take any non-negative integer
+value.
+\begin{itemize}
+\item {} 
+The negative binomial distribution is derived by letting the mean of
+the Poisson distribution vary according to a fixed parameter
+\(\zeta\) given by the Gamma distribution. The \emph{stochastic
+component} is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+     Y_i \mid \zeta_i & \sim & \textrm{Poisson}(\zeta_i \mu_i),\\
+     \zeta_i & \sim & \frac{1}{\theta}\textrm{Gamma}(\theta).
+   \end{aligned}\end{split}\notag
+\end{gather}
+The marginal distribution of \(Y_i\) is then the negative
+binomial with mean \(\mu_i\) and variance
+\(\mu_i + \mu_i^2/\theta\):
+\begin{gather}
+\begin{split}\begin{aligned}
+   Y_i & \sim & \textrm{NegBin}(\mu_i, \theta), \\
+       & = & \frac{\Gamma (\theta + y_i)}{y! \, \Gamma(\theta)}
+             \frac{\mu_i^{y_i} \, \theta^{\theta}}{(\mu_i + \theta)^{\theta + y_i}},
+   \end{aligned}\end{split}\notag
+\end{gather}
+where \(\theta\) is the systematic parameter of the Gamma
+distribution modeling \(\zeta_i\).
+
+\item {} 
+The \emph{systematic component} is given by
+\begin{gather}
+\begin{split}\mu_i = \exp(x_i \beta)\end{split}\notag
+\end{gather}
+where \(x_i\) is the vector of \(k\) explanatory variables
+and \(\beta\) is the vector of coefficients.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-negbin:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected values (qi\$ev) are simulations of the mean of the
+stochastic component. Thus,
+\begin{gather}
+\begin{split}E(Y) = \mu_i = \exp(x_i
+  \beta),\end{split}\notag
+\end{gather}
+given simulations of \(\beta\).
+
+\item {} 
+The predicted value (qi\$pr) drawn from the distribution defined by
+the set of parameters \((\mu_i, \theta)\).
+
+\item {} 
+The first difference (qi\$fd) is
+\begin{gather}
+\begin{split}\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_i(t_i=0)]\), the counterfactual expected value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-negbin:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = negbin, data)}, then you may examine
+the available information in \code{z.out} by using \code{names(z.out)}, see
+the coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}.
+
+
+\paragraph{See also}
+\label{zelig-negbin:see-also}
+The negative binomial model is part of the MASS package by William N.
+Venable and Brian D. Ripley . Advanced users may wish to refer to
+{\color{red}\bfseries{}{}`{}`}help(glm.nb){}`.
+
+
+\subsubsection{zelig-normal}
+\label{zelig-normal:zelig-normal}\label{zelig-normal::doc}\label{zelig-normal:znorm}
+Normal Regression for Continuous Dependent Variables
+
+The Normal regression model is a close variant of the more standard
+least squares regression model (see ). Both models specify a continuous
+dependent variable as a linear function of a set of explanatory
+variables. The Normal model reports maximum likelihood (rather than
+least squares) estimates. The two models differ only in their estimate
+for the stochastic parameter \(\sigma\).
+
+
+\paragraph{Syntax}
+\label{zelig-normal:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} znormal\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{normal\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Examples}
+\label{zelig-normal:examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+
+\subparagraph{Basic Example with First Differences}
+\label{zelig-normal:basic-example-with-first-differences}
+Attach sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}macro\PYG{p}{)}
+\end{Verbatim}
+
+Estimate model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \PYG{o}{+} capmob \PYG{o}{+} trade\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{normal\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} macro\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2008.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   normal: Normal Regression for Continuous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+Summarize of regression coefficients:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  stats::glm(formula = unem \PYGZti{} gdp + capmob + trade, family = gaussian(\PYGZdq{}identity\PYGZdq{}),}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     data = .)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)          gdp       capmob        trade}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      6.1813      \PYGZhy{}0.3236       1.4219       0.0199}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 349 Total (i.e. Null);  346 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       3660}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 2610  AIC: 1710}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set explanatory variables to their default (mean/mode) values, with
+high (80th percentile) and low (20th percentile) values for trade:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
+\end{Verbatim}
+
+Generate first differences for the effect of high versus low trade on GDP:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out1\PYG{p}{,} x \PYG{o}{=} x.high\PYG{p}{,} x1 \PYG{o}{=} x.low\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.436 0.1918 5.443 5.076 5.792}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd  50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.458 2.847 5.43 0.4614 11.24}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.607 0.1861 4.602 4.241 4.979}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{}    2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.628 2.763 4.694 \PYGZhy{}0.7744 10.22}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean     sd    50\PYGZpc{}   2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8292 0.2384 \PYGZhy{}0.828 \PYGZhy{}1.265 \PYGZhy{}0.3533}
+\end{Verbatim}
+
+A visual summary of quantities of interest:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-normal.png}
+\caption{Zelig-normal}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-normal:model}
+Let \(Y_i\) be the continuous dependent variable for observation
+\(i\).
+\begin{itemize}
+\item {} 
+The \emph{stochastic component} is described by a univariate normal model
+with a vector of means \(\mu_i\) and scalar variance
+\(\sigma^2\):
+\begin{gather}
+\begin{split}Y_i \; \sim \; \textrm{Normal}(\mu_i, \sigma^2).\end{split}\notag
+\end{gather}
+\item {} 
+The \emph{systematic component} is
+\begin{gather}
+\begin{split}\mu_i \;= \; x_i \beta,\end{split}\notag
+\end{gather}
+where \(x_i\) is the vector of \(k\) explanatory variables
+and \(\beta\) is the vector of coefficients.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-normal:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected value (qi\$ev) is the mean of simulations from the the
+stochastic component,
+\begin{gather}
+\begin{split}E(Y) = \mu_i = x_i \beta,\end{split}\notag
+\end{gather}
+given a draw of \(\beta\) from its posterior.
+
+\item {} 
+The predicted value (qi\$pr) is drawn from the distribution defined by
+the set of parameters \((\mu_i, \sigma)\).
+
+\item {} 
+The first difference (qi\$fd) is:
+\begin{gather}
+\begin{split}\textrm{FD}\; = \;E(Y \mid x_1) -  E(Y \mid x)\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_i(t_i=0)]\), the counterfactual expected value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-normal:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = normal, data)}, then you may examine
+the available information in \code{z.out} by using \code{names(z.out)}, see
+the coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}.
+
+
+\paragraph{See also}
+\label{zelig-normal:see-also}
+The normal model is part of the stats package by . Advanced users may
+wish to refer to \code{help(glm)} and \code{help(family)}.
+
+
+\subsubsection{zelig-poisson}
+\label{zelig-poisson:zpoisson}\label{zelig-poisson::doc}\label{zelig-poisson:zelig-poisson}
+Poisson Regression for Event Count Dependent Variables
+
+Use the Poisson regression model if the observations of your dependent
+variable represents the number of independent events that occur during a
+fixed period of time (see the negative binomial model, , for
+over-dispersed event counts.) For a Bayesian implementation of this
+model, see .
+
+
+\paragraph{Syntax}
+\label{zelig-poisson:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zpoisson\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{poisson\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Example}
+\label{zelig-poisson:example}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+Load sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}sanction\PYG{p}{)}
+\end{Verbatim}
+
+Estimate Poisson model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \PYG{o}{+} coop\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{poisson\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} sanction\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   poisson: Poisson Regression for Event Count Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  stats::glm(formula = num \PYGZti{} target + coop, family = poisson(\PYGZdq{}log\PYGZdq{}),}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     data = .)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)       target         coop}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      \PYGZhy{}0.968       \PYGZhy{}0.021        1.211}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 77 Total (i.e. Null);  75 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       1580}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 721   AIC: 944}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set values for the explanatory variables to their default mean values:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Simulate fitted values:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.241 0.2432 3.239 2.797 3.723}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.238 1.769   3    0     7}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-poisson.png}
+\caption{Zelig-poisson}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-poisson:model}
+Let \(Y_i\) be the number of independent events that occur during a
+fixed time period. This variable can take any non-negative integer.
+\begin{itemize}
+\item {} 
+The Poisson distribution has \emph{stochastic component}
+\begin{gather}
+\begin{split}Y_i \; \sim \; \textrm{Poisson}(\lambda_i),\end{split}\notag
+\end{gather}
+where \(\lambda_i\) is the mean and variance parameter.
+
+\item {} 
+The \emph{systematic component} is
+\begin{gather}
+\begin{split}\lambda_i \; = \; \exp(x_i \beta),\end{split}\notag
+\end{gather}
+where \(x_i\) is the vector of explanatory variables, and
+\(\beta\) is the vector of coefficients.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-poisson:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected value (qi\$ev) is the mean of simulations from the
+stochastic component,
+\begin{gather}
+\begin{split}E(Y) = \lambda_i =  \exp(x_i
+  \beta),\end{split}\notag
+\end{gather}
+given draws of \(\beta\) from its sampling distribution.
+
+\item {} 
+The predicted value (qi\$pr) is a random draw from the poisson
+distribution defined by mean \(\lambda_i\).
+
+\item {} 
+The first difference in the expected values (qi\$fd) is given by:
+\begin{gather}
+\begin{split}\textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_i(t_i=0)]\), the counterfactual expected value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-poisson:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = poisson, data)}, then you may examine
+the available information in \code{z.out} by using \code{names(z.out)}, see
+the coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}.
+
+
+\paragraph{See also}
+\label{zelig-poisson:see-also}
+The poisson model is part of the stats package by . Advanced users may
+wish to refer to \code{help(glm)} and \code{help(family)}.
+
+
+\subsubsection{zelig-probit}
+\label{zelig-probit:zelig-probit}\label{zelig-probit::doc}\label{zelig-probit:zprobit}
+Probit Regression for Dichotomous Dependent Variables
+
+Use probit regression to model binary dependent variables specified as a
+function of a set of explanatory variables.
+
+
+\paragraph{Syntax}
+\label{zelig-probit:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zprobit\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{,} x1 \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Example}
+\label{zelig-probit:example}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+Attach the sample turnout dataset:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}turnout\PYG{p}{)}
+\end{Verbatim}
+
+Estimate parameter values for the probit regression:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \PYG{o}{+} educate\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} turnout\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   probit: Probit Regression for Dichotomous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  stats::glm(formula = vote \PYGZti{} race + educate, family = binomial(\PYGZdq{}probit\PYGZdq{}),}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     data = .)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)    racewhite      educate}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}0.7259       0.2991       0.0971}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       2270}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 2140  AIC: 2140}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set values for the explanatory variables to their default values.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Simulate quantities of interest from the posterior distribution.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-probit.png}
+\caption{Zelig-probit}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-probit:model}
+Let \(Y_i\) be the observed binary dependent variable for
+observation \(i\) which takes the value of either 0 or 1.
+\begin{itemize}
+\item {} 
+The \emph{stochastic component} is given by
+\begin{gather}
+\begin{split}Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\end{split}\notag
+\end{gather}
+where \(\pi_i=\Pr(Y_i=1)\).
+
+\item {} 
+The \emph{systematic component} is
+\begin{gather}
+\begin{split}\pi_i \; = \; \Phi (x_i \beta)\end{split}\notag
+\end{gather}
+where \(\Phi(\mu)\) is the cumulative distribution function of
+the Normal distribution with mean 0 and unit variance.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-probit:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected value (qi\$ev) is a simulation of predicted probability
+of success
+\begin{gather}
+\begin{split}E(Y) = \pi_i = \Phi(x_i
+  \beta),\end{split}\notag
+\end{gather}
+given a draw of \(\beta\) from its sampling distribution.
+
+\item {} 
+The predicted value (qi\$pr) is a draw from a Bernoulli distribution
+with mean \(\pi_i\).
+
+\item {} 
+The first difference (qi\$fd) in expected values is defined as
+\begin{gather}
+\begin{split}\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+The risk ratio (qi\$rr) is defined as
+\begin{gather}
+\begin{split}\textrm{RR} = \Pr(Y = 1 \mid x_1) / \Pr(Y = 1 \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_i(t_i=0)]\), the counterfactual expected value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-probit:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = probit, data)}, then you may examine
+the available information in \code{z.out} by using \code{names(z.out)}, see
+the coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}.
+
+
+\paragraph{See also}
+\label{zelig-probit:see-also}
+The probit model is part of the stats package by . Advanced users may
+wish to refer to \code{help(glm)} and \code{help(family)}.
+
+
+\subsubsection{zelig-relogit}
+\label{zelig-relogit:zrelogit}\label{zelig-relogit::doc}\label{zelig-relogit:zelig-relogit}
+Rare Events Logistic Regression for Dichotomous Dependent Variables
+
+The relogit procedure estimates the same model as standard logistic
+regression (appropriate when you have a dichotomous dependent variable
+and a set of explanatory variables; see ), but the estimates are
+corrected for the bias that occurs when the sample is small or the
+observed events are rare (i.e., if the dependent variable has many more
+1s than 0s or the reverse). The relogit procedure also optionally uses
+prior correction for case-control sampling designs.
+
+
+\paragraph{Syntax}
+\label{zelig-relogit:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zrelogit\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} tau \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{,}
+                       case.control \PYG{o}{=} c\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{prior\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{weighting\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}
+                       bias.correct \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{,} robust \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,}
+                       data \PYG{o}{=} mydata\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{relogit\PYGZdq{}}\PYG{p}{,} tau \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{,}
+                       case.control \PYG{o}{=} c\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{prior\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{weighting\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}
+                       bias.correct \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{,} robust \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,}
+                       data \PYG{o}{=} mydata\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Arguments}
+\label{zelig-relogit:arguments}
+The relogit procedure supports four optional arguments in addition to
+the standard arguments for zelig(). You may additionally use:
+\begin{itemize}
+\item {} 
+tau: a vector containing either one or two values for \(\tau\),
+the true population fraction of ones. Use, for example, tau = c(0.05,
+0.1) to specify that the lower bound on tau is 0.05 and the upper
+bound is 0.1. If left unspecified, only finite-sample bias correction
+is performed, not case-control correction.
+
+\item {} 
+case.control: if tau is specified, choose a method to correct for
+case-control sampling design: “prior” (default) or “weighting”.
+
+\item {} 
+bias.correct: a logical value of TRUE (default) or FALSE indicating
+whether the intercept should be corrected for finite sample (rare
+events) bias.
+
+\end{itemize}
+
+Note that if tau = NULL, bias.correct = FALSE, the
+relogit procedure performs a standard logistic regression without any
+correction.
+
+
+\paragraph{Example 1: One Tau with Prior Correction and Bias Correction}
+\label{zelig-relogit:example-1-one-tau-with-prior-correction-and-bias-correction}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+Due to memory and space considerations, the data used here are a sample
+drawn from the full data set used in King and Zeng, 2001, The proportion
+of militarized interstate conflicts to the absence of disputes is
+\(\tau = 1,042 / 303,772
+\approx 0.00343\). To estimate the model,
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}mid\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} major \PYG{o}{+} contig \PYG{o}{+} power \PYG{o}{+} maxdem \PYG{o}{+} mindem \PYG{o}{+} years\PYG{p}{,} data \PYG{o}{=} mid\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{relogit\PYGZdq{}}\PYG{p}{,} tau \PYG{o}{=} \PYG{l+m}{1042}\PYG{o}{/}\PYG{l+m}{303772}\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2014.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+Summarize the model output:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  relogit(formula = cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     power + maxdem + mindem + years, data = ., tau = 0.00343020423212146,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     bias.correct = TRUE, case.control = \PYGZdq{}prior\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)        major       contig        power       maxdem}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}7.5084       2.4320       4.1080       1.0536       0.0480}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mindem        years}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}0.0641      \PYGZhy{}0.0629}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       3980}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 1870  AIC: 1880}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set the explanatory variables to their means:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{)}
+\end{Verbatim}
+
+Simulate quantities of interest:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out1\PYG{p}{,} x \PYG{o}{=} x.out1\PYG{p}{)}
+summary\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002395 0.0001508 0.002391 0.002112 0.002698}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.999 0.001}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-relogit.png}
+\caption{Zelig-relogit}\end{figure}
+
+
+\paragraph{Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction}
+\label{zelig-relogit:example-2-one-tau-with-weighting-robust-standard-errors-and-bias-correction}
+Suppose that we wish to perform case control correction using weighting
+(rather than the default prior correction). To estimate the model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} major \PYG{o}{+} contig \PYG{o}{+} power \PYG{o}{+} maxdem \PYG{o}{+} mindem \PYG{o}{+} years\PYG{p}{,} data \PYG{o}{=} mid\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{relogit\PYGZdq{}}\PYG{p}{,} tau \PYG{o}{=} \PYG{l+m}{1042}\PYG{o}{/}\PYG{l+m}{303772}\PYG{p}{,} case.control \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{weighting\PYGZdq{}}\PYG{p}{,} robust \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: unused argument (robust = TRUE)}
+\end{Verbatim}
+
+Summarize the model output:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out2\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} stats::lm(formula = unem \PYGZti{} gdp + trade + capmob + as.factor(country),}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     data = .)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                      (Intercept)                               gdp}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                           \PYGZhy{}5.843                            \PYGZhy{}0.110}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                            trade                            capmob}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                            0.144                             0.815}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        as.factor(country)Belgium          as.factor(country)Canada}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                           \PYGZhy{}1.599                             6.759}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        as.factor(country)Denmark         as.factor(country)Finland}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                            4.311                             4.810}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         as.factor(country)France           as.factor(country)Italy}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                            6.905                             9.290}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          as.factor(country)Japan     as.factor(country)Netherlands}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                            5.459                            \PYGZhy{}1.459}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         as.factor(country)Norway          as.factor(country)Sweden}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                           \PYGZhy{}2.754                             0.925}
+\PYG{c}{\PYGZsh{}\PYGZsh{} as.factor(country)United Kingdom   as.factor(country)United States}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                            5.601                            10.066}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   as.factor(country)West Germany}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                            3.364}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set the explanatory variables to their means:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{)}
+\end{Verbatim}
+
+Simulate quantities of interest:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out2\PYG{p}{,} x \PYG{o}{=} x.out2\PYG{p}{)}
+summary\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 6.724 0.5227 6.733 5.722 7.715}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 6.724 0.5227 6.733 5.722 7.715}
+\end{Verbatim}
+
+
+\paragraph{Example 3: Two Taus with Bias Correction and Prior Correction}
+\label{zelig-relogit:example-3-two-taus-with-bias-correction-and-prior-correction}
+Suppose that we did not know that \(\tau \approx 0.00343\), but only
+that it was somewhere between \((0.002, 0.005)\). To estimate a
+model with a range of feasible estimates for \(\tau\) (using the
+default prior correction method for case control correction):
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} major \PYG{o}{+} contig \PYG{o}{+} power \PYG{o}{+} maxdem \PYG{o}{+} mindem \PYG{o}{+} years\PYG{p}{,} data \PYG{o}{=} mid\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{relogit\PYGZdq{}}\PYG{p}{,} tau \PYG{o}{=} c\PYG{p}{(}\PYG{l+m}{0.002}\PYG{p}{,} \PYG{l+m}{0.005}\PYG{p}{)}\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2014.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+Summarize the model output:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out2
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model: 1\PYGZdl{}lower.estimate}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     case.control = \PYGZdq{}prior\PYGZdq{}, ...)}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     mf \PYGZlt{}\PYGZhy{} match.call()}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     mf\PYGZdl{}tau \PYGZlt{}\PYGZhy{} mf\PYGZdl{}bias.correct \PYGZlt{}\PYGZhy{} mf\PYGZdl{}case.control \PYGZlt{}\PYGZhy{} NULL}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     if (!is.null(tau)) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         tau \PYGZlt{}\PYGZhy{} unique(tau)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (length(case.control) \PYGZgt{} 1)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             stop(\PYGZdq{}You can only choose one option for case control correction.\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         ck1 \PYGZlt{}\PYGZhy{} grep(\PYGZdq{}p\PYGZdq{}, case.control)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         ck2 \PYGZlt{}\PYGZhy{} grep(\PYGZdq{}w\PYGZdq{}, case.control)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (length(ck1) == 0 \PYGZam{} length(ck2) == 0)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             stop(\PYGZdq{}choose either case.control = \PYGZbs{}\PYGZdq{}prior\PYGZbs{}\PYGZdq{} \PYGZdq{}, \PYGZdq{}or case.control = \PYGZbs{}\PYGZdq{}weighting\PYGZbs{}\PYGZdq{}\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (length(ck2) == 0)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         else weighting \PYGZlt{}\PYGZhy{} TRUE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     else weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     if (length(tau) \PYGZgt{} 2)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         stop(\PYGZdq{}tau must be a vector of length less than or equal to 2\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     else if (length(tau) == 2) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf[[1]] \PYGZlt{}\PYGZhy{} relogit}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res \PYGZlt{}\PYGZhy{} list()}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf\PYGZdl{}tau \PYGZlt{}\PYGZhy{} min(tau)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}lower.estimate \PYGZlt{}\PYGZhy{} eval(as.call(mf), parent.frame())}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf\PYGZdl{}tau \PYGZlt{}\PYGZhy{} max(tau)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}upper.estimate \PYGZlt{}\PYGZhy{} eval(as.call(mf), parent.frame())}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}formula \PYGZlt{}\PYGZhy{} formula}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         class(res) \PYGZlt{}\PYGZhy{} c(\PYGZdq{}Relogit2\PYGZdq{}, \PYGZdq{}Relogit\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         return(res)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     else \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf[[1]] \PYGZlt{}\PYGZhy{} glm}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf\PYGZdl{}family \PYGZlt{}\PYGZhy{} binomial(link = \PYGZdq{}logit\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         y2 \PYGZlt{}\PYGZhy{} model.response(model.frame(mf\PYGZdl{}formula, data))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (is.matrix(y2))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             y \PYGZlt{}\PYGZhy{} y2[, 1]}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         else y \PYGZlt{}\PYGZhy{} y2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         ybar \PYGZlt{}\PYGZhy{} mean(y)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (weighting) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             w1 \PYGZlt{}\PYGZhy{} tau/ybar}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             w0 \PYGZlt{}\PYGZhy{} (1 \PYGZhy{} tau)/(1 \PYGZhy{} ybar)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             wi \PYGZlt{}\PYGZhy{} w1 * y + w0 * (1 \PYGZhy{} y)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             mf\PYGZdl{}weights \PYGZlt{}\PYGZhy{} wi}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res \PYGZlt{}\PYGZhy{} eval(as.call(mf), parent.frame())}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}call \PYGZlt{}\PYGZhy{} match.call(expand.dots = TRUE)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}tau \PYGZlt{}\PYGZhy{} tau}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         X \PYGZlt{}\PYGZhy{} model.matrix(res)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (bias.correct) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             pihat \PYGZlt{}\PYGZhy{} fitted(res)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             if (is.null(tau))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 wi \PYGZlt{}\PYGZhy{} rep(1, length(y))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             else if (weighting)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 res\PYGZdl{}weighting \PYGZlt{}\PYGZhy{} TRUE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             else \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 w1 \PYGZlt{}\PYGZhy{} tau/ybar}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 w0 \PYGZlt{}\PYGZhy{} (1 \PYGZhy{} tau)/(1 \PYGZhy{} ybar)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 wi \PYGZlt{}\PYGZhy{} w1 * y + w0 * (1 \PYGZhy{} y)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 res\PYGZdl{}weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             W \PYGZlt{}\PYGZhy{} pihat * (1 \PYGZhy{} pihat) * wi}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             Qdiag \PYGZlt{}\PYGZhy{} lm.influence(lm(y \PYGZti{} X \PYGZhy{} 1, weights = W))\PYGZdl{}hat/W}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             if (is.null(tau))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 xi \PYGZlt{}\PYGZhy{} 0.5 * Qdiag * (2 * pihat \PYGZhy{} 1)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             else xi \PYGZlt{}\PYGZhy{} 0.5 * Qdiag * ((1 + w0) * pihat \PYGZhy{} w0)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}coefficients \PYGZlt{}\PYGZhy{} res\PYGZdl{}coefficients \PYGZhy{} lm(xi \PYGZti{} X \PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 1, weights = W)\PYGZdl{}coefficients}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}bias.correct \PYGZlt{}\PYGZhy{} TRUE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         else res\PYGZdl{}bias.correct \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (!is.null(tau) \PYGZam{} !weighting) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             if (tau \PYGZlt{}= 0 \textbar{}\textbar{} tau \PYGZgt{}= 1)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 stop(\PYGZdq{}\PYGZbs{}ntau needs to be between 0 and 1.\PYGZbs{}n\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}coefficients[\PYGZdq{}(Intercept)\PYGZdq{}] \PYGZlt{}\PYGZhy{} res\PYGZdl{}coefficients[\PYGZdq{}(Intercept)\PYGZdq{}] \PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 log(((1 \PYGZhy{} tau)/tau) * (ybar/(1 \PYGZhy{} ybar)))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}prior.correct \PYGZlt{}\PYGZhy{} TRUE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         else res\PYGZdl{}prior.correct \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (is.null(res\PYGZdl{}weighting))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}linear.predictors \PYGZlt{}\PYGZhy{} t(res\PYGZdl{}coefficients) \PYGZpc{}*\PYGZpc{} t(X)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}fitted.values \PYGZlt{}\PYGZhy{} 1/(1 + exp(\PYGZhy{}res\PYGZdl{}linear.predictors))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}zelig \PYGZlt{}\PYGZhy{} \PYGZdq{}Relogit\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         class(res) \PYGZlt{}\PYGZhy{} c(\PYGZdq{}Relogit\PYGZdq{}, \PYGZdq{}glm\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         return(res)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZcb{})(formula = cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     power + maxdem + mindem + years, data = ., tau = 0.002)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)        major       contig        power       maxdem}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}8.0492       2.4320       4.1079       1.0536       0.0480}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mindem        years}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}0.0641      \PYGZhy{}0.0629}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       3980}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 1870  AIC: 1880}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}upper.estimate}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     case.control = \PYGZdq{}prior\PYGZdq{}, ...)}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     mf \PYGZlt{}\PYGZhy{} match.call()}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     mf\PYGZdl{}tau \PYGZlt{}\PYGZhy{} mf\PYGZdl{}bias.correct \PYGZlt{}\PYGZhy{} mf\PYGZdl{}case.control \PYGZlt{}\PYGZhy{} NULL}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     if (!is.null(tau)) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         tau \PYGZlt{}\PYGZhy{} unique(tau)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (length(case.control) \PYGZgt{} 1)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             stop(\PYGZdq{}You can only choose one option for case control correction.\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         ck1 \PYGZlt{}\PYGZhy{} grep(\PYGZdq{}p\PYGZdq{}, case.control)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         ck2 \PYGZlt{}\PYGZhy{} grep(\PYGZdq{}w\PYGZdq{}, case.control)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (length(ck1) == 0 \PYGZam{} length(ck2) == 0)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             stop(\PYGZdq{}choose either case.control = \PYGZbs{}\PYGZdq{}prior\PYGZbs{}\PYGZdq{} \PYGZdq{}, \PYGZdq{}or case.control = \PYGZbs{}\PYGZdq{}weighting\PYGZbs{}\PYGZdq{}\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (length(ck2) == 0)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         else weighting \PYGZlt{}\PYGZhy{} TRUE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     else weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     if (length(tau) \PYGZgt{} 2)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         stop(\PYGZdq{}tau must be a vector of length less than or equal to 2\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     else if (length(tau) == 2) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf[[1]] \PYGZlt{}\PYGZhy{} relogit}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res \PYGZlt{}\PYGZhy{} list()}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf\PYGZdl{}tau \PYGZlt{}\PYGZhy{} min(tau)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}lower.estimate \PYGZlt{}\PYGZhy{} eval(as.call(mf), parent.frame())}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf\PYGZdl{}tau \PYGZlt{}\PYGZhy{} max(tau)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}upper.estimate \PYGZlt{}\PYGZhy{} eval(as.call(mf), parent.frame())}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}formula \PYGZlt{}\PYGZhy{} formula}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         class(res) \PYGZlt{}\PYGZhy{} c(\PYGZdq{}Relogit2\PYGZdq{}, \PYGZdq{}Relogit\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         return(res)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     else \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf[[1]] \PYGZlt{}\PYGZhy{} glm}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mf\PYGZdl{}family \PYGZlt{}\PYGZhy{} binomial(link = \PYGZdq{}logit\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         y2 \PYGZlt{}\PYGZhy{} model.response(model.frame(mf\PYGZdl{}formula, data))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (is.matrix(y2))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             y \PYGZlt{}\PYGZhy{} y2[, 1]}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         else y \PYGZlt{}\PYGZhy{} y2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         ybar \PYGZlt{}\PYGZhy{} mean(y)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (weighting) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             w1 \PYGZlt{}\PYGZhy{} tau/ybar}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             w0 \PYGZlt{}\PYGZhy{} (1 \PYGZhy{} tau)/(1 \PYGZhy{} ybar)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             wi \PYGZlt{}\PYGZhy{} w1 * y + w0 * (1 \PYGZhy{} y)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             mf\PYGZdl{}weights \PYGZlt{}\PYGZhy{} wi}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res \PYGZlt{}\PYGZhy{} eval(as.call(mf), parent.frame())}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}call \PYGZlt{}\PYGZhy{} match.call(expand.dots = TRUE)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}tau \PYGZlt{}\PYGZhy{} tau}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         X \PYGZlt{}\PYGZhy{} model.matrix(res)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (bias.correct) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             pihat \PYGZlt{}\PYGZhy{} fitted(res)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             if (is.null(tau))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 wi \PYGZlt{}\PYGZhy{} rep(1, length(y))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             else if (weighting)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 res\PYGZdl{}weighting \PYGZlt{}\PYGZhy{} TRUE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             else \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 w1 \PYGZlt{}\PYGZhy{} tau/ybar}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 w0 \PYGZlt{}\PYGZhy{} (1 \PYGZhy{} tau)/(1 \PYGZhy{} ybar)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 wi \PYGZlt{}\PYGZhy{} w1 * y + w0 * (1 \PYGZhy{} y)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 res\PYGZdl{}weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             W \PYGZlt{}\PYGZhy{} pihat * (1 \PYGZhy{} pihat) * wi}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             Qdiag \PYGZlt{}\PYGZhy{} lm.influence(lm(y \PYGZti{} X \PYGZhy{} 1, weights = W))\PYGZdl{}hat/W}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             if (is.null(tau))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 xi \PYGZlt{}\PYGZhy{} 0.5 * Qdiag * (2 * pihat \PYGZhy{} 1)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             else xi \PYGZlt{}\PYGZhy{} 0.5 * Qdiag * ((1 + w0) * pihat \PYGZhy{} w0)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}coefficients \PYGZlt{}\PYGZhy{} res\PYGZdl{}coefficients \PYGZhy{} lm(xi \PYGZti{} X \PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 1, weights = W)\PYGZdl{}coefficients}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}bias.correct \PYGZlt{}\PYGZhy{} TRUE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         else res\PYGZdl{}bias.correct \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (!is.null(tau) \PYGZam{} !weighting) \PYGZob{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             if (tau \PYGZlt{}= 0 \textbar{}\textbar{} tau \PYGZgt{}= 1)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 stop(\PYGZdq{}\PYGZbs{}ntau needs to be between 0 and 1.\PYGZbs{}n\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}coefficients[\PYGZdq{}(Intercept)\PYGZdq{}] \PYGZlt{}\PYGZhy{} res\PYGZdl{}coefficients[\PYGZdq{}(Intercept)\PYGZdq{}] \PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}                 log(((1 \PYGZhy{} tau)/tau) * (ybar/(1 \PYGZhy{} ybar)))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}prior.correct \PYGZlt{}\PYGZhy{} TRUE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         else res\PYGZdl{}prior.correct \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         if (is.null(res\PYGZdl{}weighting))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             res\PYGZdl{}weighting \PYGZlt{}\PYGZhy{} FALSE}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}linear.predictors \PYGZlt{}\PYGZhy{} t(res\PYGZdl{}coefficients) \PYGZpc{}*\PYGZpc{} t(X)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}fitted.values \PYGZlt{}\PYGZhy{} 1/(1 + exp(\PYGZhy{}res\PYGZdl{}linear.predictors))}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         res\PYGZdl{}zelig \PYGZlt{}\PYGZhy{} \PYGZdq{}Relogit\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         class(res) \PYGZlt{}\PYGZhy{} c(\PYGZdq{}Relogit\PYGZdq{}, \PYGZdq{}glm\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         return(res)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZcb{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZcb{})(formula = cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     power + maxdem + mindem + years, data = ., tau = 0.005)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)        major       contig        power       maxdem}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}7.1300       2.4320       4.1080       1.0536       0.0480}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mindem        years}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}0.0641      \PYGZhy{}0.0629}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       3980}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 1870  AIC: 1880}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
+\PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x109e7c6d0\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set the explanatory variables to their means:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{)}
+\end{Verbatim}
+
+Simulate quantities of interest:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out2\PYG{p}{,} x \PYG{o}{=} x.out2\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: no applicable method for \PYGZsq{}vcov\PYGZsq{} applied to an object of class}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdq{}c(\PYGZsq{}Relogit2\PYGZsq{}, \PYGZsq{}Relogit\PYGZsq{})\PYGZdq{}}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 6.724 0.5227 6.733 5.722 7.715}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 6.724 0.5227 6.733 5.722 7.715}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+
+\includegraphics{unnamed-chunk-18.png}
+\end{figure}
+
+The cost of giving a range of values for \(\tau\) is that point
+estimates are not available for quantities of interest. Instead,
+quantities are presented as confidence intervals with significance less
+than or equal to a specified level (e.g., at least 95\% of the
+simulations are contained in the nominal 95\% confidence interval).
+
+
+\paragraph{Model}
+\label{zelig-relogit:model}\begin{itemize}
+\item {} 
+Like the standard logistic regression, the \emph{stochastic component} for
+the rare events logistic regression is:
+\begin{gather}
+\begin{split}Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),\end{split}\notag
+\end{gather}
+where \(Y_i\) is the binary dependent variable, and takes a value
+of either 0 or 1.
+
+\item {} 
+The \emph{systematic component} is:
+\begin{gather}
+\begin{split}\pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.\end{split}\notag
+\end{gather}
+\item {} 
+If the sample is generated via a case-control (or choice-based)
+design, such as when drawing all events (or “cases”) and a sample
+from the non-events (or “controls”) and going backwards to collect
+the explanatory variables, you must correct for selecting on the
+dependent variable. While the slope coefficients are approximately
+unbiased, the constant term may be significantly biased. Zelig has
+two methods for case control correction:
+\begin{enumerate}
+\item {} 
+The “prior correction” method adjusts the intercept term. Let
+\(\tau\) be the true population fraction of events,
+\(\bar{y}\) the fraction of events in the sample, and
+\(\hat{\beta_0}\) the uncorrected intercept term. The
+corrected intercept \(\beta_0\) is:
+\begin{gather}
+\begin{split}\beta =  \hat{\beta_0} - \ln \left[ \bigg( \frac{1 - \tau}{\tau}
+  \bigg) \bigg( \frac{\bar{y}}{1 - \bar{y}} \bigg) \right].\end{split}\notag
+\end{gather}
+\item {} 
+The “weighting” method performs a weighted logistic regression to
+correct for a case-control sampling design. Let the 1 subscript
+denote observations for which the dependent variable is observed
+as a 1, and the 0 subscript denote observations for which the
+dependent variable is observed as a 0. Then the vector of weights
+\(w_i\)
+\begin{gather}
+\begin{split}\begin{aligned}
+w_1 &=& \frac{\tau}{\bar{y}} \\
+w_0 &=& \frac{(1 - \tau)}{(1 - \bar{y})} \\
+w_i &=& w_1 Y_i + w_0 (1 - Y_i)\end{aligned}\end{split}\notag
+\end{gather}
+\end{enumerate}
+
+If \(\tau\) is unknown, you may alternatively specify an upper
+and lower bound for the possible range of \(\tau\). In this case,
+the relogit procedure uses “robust Bayesian” methods to generate a
+confidence interval (rather than a point estimate) for each quantity
+of interest. The nominal coverage of the confidence interval is at
+least as great as the actual coverage.
+
+\item {} 
+By default, estimates of the the coefficients \(\beta\) are
+bias-corrected to account for finite sample or rare events bias. In
+addition, quantities of interest, such as predicted probabilities,
+are also corrected of rare-events bias. If \(\widehat{\beta}\)
+are the uncorrected logit coefficients and
+bias(\(\widehat{\beta}\)) is the bias term, the corrected
+coefficients \(\tilde{\beta}\) are
+\begin{gather}
+\begin{split}\widehat{\beta} - \textrm{bias}(\widehat{\beta}) = \tilde{\beta}\end{split}\notag
+\end{gather}
+The bias term is
+\begin{gather}
+\begin{split}\textrm{bias}(\widehat{\beta}) = (X'WX)^{-1} X'W \xi\end{split}\notag
+\end{gather}
+where
+\begin{gather}
+\begin{split}\begin{aligned}
+\xi_i &=& 0.5 Q_{ii} \Big( (1 + w-1)\widehat{\pi}_i - w_1 \Big) \\
+Q &=& X(X'WX)^{-1} X' \\
+W = \textrm{diag}\{\widehat{\pi}_i (1 - \widehat{\pi}_i) w_i\}\end{aligned}\end{split}\notag
+\end{gather}
+where \(w_i\) and \(w_1\) are given in the “weighting”
+section above.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-relogit:quantities-of-interest}\begin{itemize}
+\item {} 
+For either one or no \(\tau\):
+\begin{itemize}
+\item {} 
+The expected values (qi\$ev) for the rare events logit are
+simulations of the predicted probability
+\begin{gather}
+\begin{split}E(Y) = \pi_i =
+    \frac{1}{1 + \exp(-x_i \beta)},\end{split}\notag
+\end{gather}
+given draws of \(\beta\) from its posterior.
+
+\item {} 
+The predicted value (qi\$pr) is a draw from a binomial distribution
+with mean equal to the simulated \(\pi_i\).
+
+\item {} 
+The first difference (qi\$fd) is defined as
+\begin{gather}
+\begin{split}\textrm{FD} = \Pr(Y = 1 \mid x_1, \tau) - \Pr(Y = 1 \mid x, \tau).\end{split}\notag
+\end{gather}
+\item {} 
+The risk ratio (qi\$rr) is defined as
+\begin{gather}
+\begin{split}\textrm{RR} = \Pr(Y = 1 \mid x_1, \tau) \ / \ \Pr(Y = 1 \mid x, \tau).\end{split}\notag
+\end{gather}
+\end{itemize}
+
+\item {} 
+For a range of \(\tau\) defined by \([\tau_1, \tau_2]\), each
+of the quantities of interest are \(n \times 2\) matrices, which
+report the lower and upper bounds, respectively, for a confidence
+interval with nominal coverage at least as great as the actual
+coverage. At worst, these bounds are conservative estimates for the
+likely range for each quantity of interest. Please refer to for the
+specific method of calculating bounded quantities of interest.
+
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_i(t_i=0)]\), the counterfactual expected value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(\widehat{Y_i(t_i=0)}\), the counterfactual predicted value of
+\(Y_i\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-relogit:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = relogit, data)}, then you may examine
+the available information in \code{z.out} by using \code{names(z.out)}, see
+the coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}.
+
+
+\paragraph{Differences with Stata Version}
+\label{zelig-relogit:differences-with-stata-version}
+The Stata version of ReLogit and the R implementation differ slightly in
+their coefficient estimates due to differences in the matrix inversion
+routines implemented in R and Stata. Zelig uses orthogonal-triangular
+decomposition (through lm.influence()) to compute the bias term, which
+is more numerically stable than standard matrix calculations.
+
+
+\paragraph{See also}
+\label{zelig-relogit:see-also}
+
+\subsubsection{zelig-tobit}
+\label{zelig-tobit:ztobit}\label{zelig-tobit::doc}\label{zelig-tobit:zelig-tobit}
+Linear Regression for a Left-Censored Dependent Variable
+
+Tobit regression estimates a linear regression model for a left-censored
+dependent variable, where the dependent variable is censored from below.
+While the classical tobit model has values censored at 0, you may select
+another censoring point. For other linear regression models with fully
+observed dependent variables, see Bayesian regression (), maximum
+likelihood normal regression (), or least squares ().
+
+
+\paragraph{Syntax}
+\label{zelig-tobit:syntax}
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} ztobit\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} below \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{,} above \PYG{o}{=} \PYG{k+kc}{Inf}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} below \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{,} above \PYG{o}{=} \PYG{k+kc}{Inf}\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{tobit\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Inputs}
+\label{zelig-tobit:inputs}
+zelig() accepts the following arguments to specify how the dependent
+variable is censored.
+\begin{itemize}
+\item {} 
+\code{below}: (defaults to 0) The point at which the dependent variable
+is censored from below. If any values in the dependent variable are
+observed to be less than the censoring point, it is assumed that that
+particular observation is censored from below at the observed value.
+(See for a Bayesian implementation that supports both left and right
+censoring.)
+
+\item {} 
+robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) and the options
+selected in cluster.
+
+\item {} 
+cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZgt{} z.out \PYGZlt{}\PYGZhy{} zelig(y \PYGZti{} x1 + x2, robust = TRUE, cluster = \PYGZdq{}x3\PYGZdq{},
+                 model = \PYGZdq{}tobit\PYGZdq{}, data = mydata)
+\end{Verbatim}
+
+means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.
+
+\end{itemize}
+
+Zelig users may wish to refer to \code{help(survreg)} for more information.
+
+
+\paragraph{Examples}
+\label{zelig-tobit:examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Error: there is no package called \PYGZsq{}Zelig5\PYGZsq{}}
+\end{Verbatim}
+
+
+\subparagraph{Basic Example}
+\label{zelig-tobit:basic-example}
+Attaching the sample dataset:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}tobin\PYG{p}{)}
+\end{Verbatim}
+
+Estimating linear regression using \code{tobit}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}durable \PYG{o}{\PYGZti{}} age \PYG{o}{+} quant\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{tobit\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} tobin\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2011.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   tobit: Linear regression for Left\PYGZhy{}Censored Dependent Variable}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://datascience.iq.harvard.edu/zelig}
+\end{Verbatim}
+
+Setting values for the explanatory variables to their sample averages:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Simulating quantities of interest from the posterior distribution given \code{x.out}.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}  2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.548 0.6227 1.494 0.553 2.872}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.407 4.538 1.569    0 15.21}
+\end{Verbatim}
+
+
+\subparagraph{Simulating First Differences}
+\label{zelig-tobit:simulating-first-differences}
+Set explanatory variables to their default(mean/mode) values, with
+high (80th percentile) and low (20th percentile) liquidity ratio
+(\code{quant}):
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} quant \PYG{o}{=} quantile\PYG{p}{(}tobin\PYG{o}{\PYGZdl{}}quant\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} quant \PYG{o}{=} quantile\PYG{p}{(}tobin\PYG{o}{\PYGZdl{}}quant\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
+\end{Verbatim}
+
+Estimating the first difference for the effect of high versus low
+liquidity ratio on duration(\code{durable}):
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.high\PYG{p}{,} x1 \PYG{o}{=} x.low\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.215 0.7609 1.069 0.1536 2.996}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.955 4.142 1.006    0 14.06}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    mean     sd   50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.058 0.9321 1.978 0.5758 4.181}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean    sd   50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.655 4.486 2.308    0 14.98}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     mean    sd    50\PYGZpc{}   2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8437 1.188 0.8049 \PYGZhy{}1.562 3.404}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-tobit.png}
+\caption{Zelig-tobit}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-tobit:model}\begin{itemize}
+\item {} 
+Let \(Y_i^*\) be a latent dependent variable which is distributed
+with \emph{stochastic} component
+\begin{gather}
+\begin{split}\begin{aligned}
+Y_i^* & \sim & \textrm{Normal}(\mu_i, \sigma^2) \\\end{aligned}\end{split}\notag
+\end{gather}
+where \(\mu_i\) is a vector means and \(\sigma^2\) is a
+scalar variance parameter. \(Y_i^*\) is not directly observed,
+however. Rather we observed \(Y_i\) which is defined as:
+\begin{gather}
+\begin{split}Y_i = \left\{
+\begin{array}{lcl}
+Y_i^*  &\textrm{if} & c <Y_i^* \\
+c    &\textrm{if} & c \ge Y_i^*
+\end{array}\right.\end{split}\notag
+\end{gather}
+where \(c\) is the lower bound below which \(Y_i^*\) is
+censored.
+
+\item {} 
+The \emph{systematic component} is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+\mu_{i} &=& x_{i} \beta,\end{aligned}\end{split}\notag
+\end{gather}
+where \(x_{i}\) is the vector of \(k\) explanatory variables
+for observation \(i\) and \(\beta\) is the vector of
+coefficients.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-tobit:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected values (\code{qi\$ev}) for the tobit regression model are
+the same as the expected value of \(Y*\):
+\begin{gather}
+\begin{split}E(Y^* | X) = \mu_{i} = x_{i} \beta\end{split}\notag
+\end{gather}
+\item {} 
+The first difference (\code{qi\$fd}) for the tobit regression model is
+defined as
+\begin{gather}
+\begin{split}\begin{aligned}
+\text{FD}=E(Y^* \mid x_{1}) - E(Y^* \mid x).\end{aligned}\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (\code{qi\$att.ev}) for the treatment group is
+\begin{gather}
+\begin{split}\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[E[Y^*_{i}(t_{i}=1)]-E[Y^*_{i}(t_{i}=0)]],\end{aligned}\end{split}\notag
+\end{gather}
+where \(t_{i}\) is a binary explanatory variable defining the
+treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups.
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-tobit:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}y \PYG{o}{\PYGZti{}} x\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{tobit\PYGZdq{}}\PYG{p}{,} data\PYG{p}{)}
+\end{Verbatim}
+
+then you may examine the available information in {\color{red}\bfseries{}{}`{}`}z.out{}`.
+
+
+\paragraph{See also}
+\label{zelig-tobit:see-also}
+The tobit function is part of the survival library by Terry Therneau,
+ported to R by Thomas Lumley. Advanced users may wish to refer to
+\code{help(survfit)} in the survival library.
+
+
 \chapter{Frequently Asked Questions}
 \label{faq:faq}\label{faq::doc}\label{faq:frequently-asked-questions}
 If you find a bug, or cannot figure something out after reading through the FAQs below, please send your question to the Zelig listserv at: \href{https://groups.google.com/forum/\#!forum/zelig-statistical-software}{https://groups.google.com/forum/\#!forum/zelig-statistical-software}. Please explain exactly what you did and include the full error message, including the traceback(). You should get an answer from the developers or another user in short order.
@@ -3652,7 +6902,7 @@ If you find a bug, or cannot figure something out after reading through the FAQs
 We recommend that you first check your internet connection, as you must be connected to install packages. In addition, there are a few platform-specific reasons why you may be having installation problems:
 \begin{itemize}
 \item {} 
-\textbf{On Windows}: If you are using the very latest version of R, you may not be able to install Zelig until we update Zelig to work with this latest release. Currently Zelig 5.0.1 is compatible with R(\textgreater{}= 3.0.2). If you wish to install Zelig in the interim, install the appropriate version of R and try to reinstall Zelig.
+\textbf{On Windows}: If you are using the very latest version of R, you may not be able to install Zelig until we update Zelig to work with this latest release. Currently Zelig 5.0-1 is compatible with R (\textgreater{}= 3.0.2). If you wish to install Zelig in the interim, install the appropriate version of R and try to reinstall Zelig.
 
 \item {} 
 \textbf{On Mac or Linux systems}: If you get the following warning message at the end of your installation:
@@ -3710,20 +6960,7 @@ Zelig leverages (R) code from many researchers and is designed to allow anyone t
 \textbf{License:} GPL-2 \textbar{} GPL-3 {[}expanded from: GPL (\textgreater{}= 2){]}
 
 \textbf{Contact:} For questions, please join the Zelig mailing list:
-\href{https://groups.google.com/forum/\#!forum/zelig-statistical-software}{https://groups.google.com/forum/\#!forum/zelig-statistical-software}
-
-\href{http://datascience.iq.harvard.edu/team}{The Zelig Team}:
-\begin{itemize}
-\item {} 
-Christine Choirat \emph{(Lead Author)}
-
-\item {} 
-James Honaker \emph{(Project Lead)}
-
-\item {} 
-Muhammed Y. Idris
-
-\end{itemize}
+\href{https://groups.google.com/forum/\#!forum/zelig-statistical-software}{https://groups.google.com/forum/\#!forum/zelig-statistical-software}.
 
 \emph{Original Authors:}
 \begin{itemize}
@@ -3735,6 +6972,19 @@ Kosuke Imai
 
 \item {} 
 Olivia Lau
+
+\end{itemize}
+
+\href{http://datascience.iq.harvard.edu/team}{The Zelig Team:}
+\begin{itemize}
+\item {} 
+James Honaker \emph{(Project Lead)}
+
+\item {} 
+Christine Choirat \emph{(Lead Author)}
+
+\item {} 
+Muhammed Y. Idris
 
 \end{itemize}
 

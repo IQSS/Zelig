@@ -1,3 +1,5 @@
+.. _zpoisson:
+
 zelig-poisson
 ~~~~~~
 
@@ -37,6 +39,12 @@ With the Zelig 4 compatibility wrappers:
 
 Example
 +++++
+
+
+
+::
+
+    ## Error: there is no package called 'Zelig5'
 
 
 
@@ -118,10 +126,10 @@ Simulate fitted values:
     ##  -----
     ## ev
     ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 3.245 0.2337 3.233 2.806 3.732
+    ## [1,] 3.241 0.2432 3.239 2.797 3.723
     ## pv
     ##       mean    sd 50% 2.5% 97.5%
-    ## [1,] 3.228 1.753   3    0     7
+    ## [1,] 3.238 1.769   3    0     7
 
 
 

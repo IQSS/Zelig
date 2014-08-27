@@ -9,19 +9,21 @@ Zelig leverages (R) code from many researchers and is designed to allow anyone t
 **License:** GPL-2 | GPL-3 [expanded from: GPL (>= 2)]
 
 **Contact:** For questions, please join the Zelig mailing list:
-`https://groups.google.com/forum/#!forum/zelig-statistical-software <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_
-
-`The Zelig Team <http://datascience.iq.harvard.edu/team>`_:
-
-- Christine Choirat *(Lead Author)*
-- James Honaker *(Project Lead)*
-- Muhammed Y. Idris
+`https://groups.google.com/forum/#!forum/zelig-statistical-software <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_.
 
 *Original Authors:*
 
 - `Gary King <http://gking.harvard.edu/>`_ *(Principle Investigator)*
 - Kosuke Imai
 - Olivia Lau
+
+
+`The Zelig Team: <http://datascience.iq.harvard.edu/team>`_
+
+- James Honaker *(Project Lead)*
+- Christine Choirat *(Lead Author)*
+- Muhammed Y. Idris
+
 
 ------------
 
