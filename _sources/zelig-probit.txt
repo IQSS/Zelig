@@ -39,12 +39,6 @@ Example
 
 
 
-::
-
-    ## Error: there is no package called 'Zelig5'
-
-
-
 Attach the sample turnout dataset:
 
 

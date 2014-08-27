@@ -12,15 +12,15 @@
 ## install_github('IQSS/Zelig')
 
 
+## ----, eval = TRUE, echo = FALSE-----------------------------------------
+suppressWarnings(suppressMessages(library(Zelig5)))
+
+
 ## ----, eval = FALSE------------------------------------------------------
 ## library(Zelig)
 
 
-## ----, include = FALSE---------------------------------------------------
-library(Zelig)
-
-
-## ----, eval = TRUE-------------------------------------------------------
+## ----Scatterplot, eval = TRUE, fig.cap = "Scatterplot"-------------------
 # Scatterplot of car speed and distance required for full stop	
 plot(cars$speed, cars$dist, main = "Scatterplot of Car Speed and Distance Required for Full Stop", ylab = "Distance (miles)", xlab = "Speed (miles per hour)")
 # Fit regression line to data 

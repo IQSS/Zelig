@@ -73,12 +73,6 @@ Example 1: One Tau with Prior Correction and Bias Correction
 
 
 
-::
-
-    ## Error: there is no package called 'Zelig5'
-
-
-
 Due to memory and space considerations, the data used here are a sample
 drawn from the full data set used in King and Zeng, 2001, The proportion
 of militarized interstate conflicts to the absence of disputes is
@@ -163,11 +157,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##          mean        sd      50%     2.5%    97.5%
-    ## [1,] 0.002399 0.0001571 0.002392 0.002094 0.002706
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 0.002393 0.000155 0.002388 0.002103 0.002708
     ## pv
     ##          0     1
-    ## [1,] 0.995 0.005
+    ## [1,] 0.998 0.002
 
 
 
@@ -266,11 +260,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 8.198 0.4067 8.191 7.398  9.02
+    ##    mean     sd  50%  2.5% 97.5%
+    ## 1 10.59 0.4011 10.6 9.818  11.4
     ## pv
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 8.198 0.4067 8.191 7.398  9.02
+    ##    mean     sd  50%  2.5% 97.5%
+    ## 1 10.59 0.4011 10.6 9.818  11.4
 
 
 
@@ -519,7 +513,7 @@ Summarize the model output:
     ## $formula
     ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
     ##     mindem + years
-    ## <environment: 0x10d219aa8>
+    ## <environment: 0x7f8eccf6a9c8>
     ## 
     ## attr(,"class")
     ## [1] "Relogit2" "Relogit" 
@@ -565,11 +559,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 8.198 0.4067 8.191 7.398  9.02
+    ##    mean     sd  50%  2.5% 97.5%
+    ## 1 10.59 0.4011 10.6 9.818  11.4
     ## pv
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 8.198 0.4067 8.191 7.398  9.02
+    ##    mean     sd  50%  2.5% 97.5%
+    ## 1 10.59 0.4011 10.6 9.818  11.4
 
 
 

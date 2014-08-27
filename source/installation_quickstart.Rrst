@@ -58,11 +58,11 @@ Now that we have successfully downloaded and installed Zelig from Github, we wil
 First, we have to load Zelig into R. After installing both R and
 Zelig, open R and type:
 
-.. {r, eval = FALSE}	
-library(Zelig)
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig5)))
 .. .. 
 
-.. {r, include = FALSE}	
+.. {r, eval = FALSE}	
 library(Zelig)
 .. .. 
 
@@ -72,7 +72,7 @@ library(Zelig)
 
 Now, lets build a statistical model that captures the relationship a cars stopping distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. The first decision we must make is what statistical model to test for a relationship between a cars speed and distance required for it to come to a full stop. To do this, we plot the two variables in our dataset to visually inspect any potential relationship:
 
-.. {r, eval = TRUE}
+.. {r Scatterplot, eval = TRUE, fig.cap = "Scatterplot"}
 # Scatterplot of car speed and distance required for full stop	
 plot(cars$speed, cars$dist, main = "Scatterplot of Car Speed and Distance Required for Full Stop", ylab = "Distance (miles)", xlab = "Speed (miles per hour)")
 # Fit regression line to data 

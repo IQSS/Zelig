@@ -239,8 +239,8 @@ abline<span class="p">(</span>lm<span class="p">(</span>cars<span class="o">$</s
 </pre></div>
 </div>
 <div class="figure">
-<img alt="plot of chunk unnamed-chunk-5" src="_images/unnamed-chunk-5.png" />
-<p class="caption">plot of chunk unnamed-chunk-5</p>
+<img alt="Scatterplot" src="_images/Scatterplot.png" />
+<p class="caption">Scatterplot</p>
 </div>
 <p>Also included in the scatter plot is a &#8220;best-fit&#8221; regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous our best choice for model to use is a least squares regression.</p>
 <p>To fit this model to our data, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:</p>
@@ -285,22 +285,22 @@ z5
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 100.2 6.328 100.4 88.38 112.9</span>
+<span class="c">## 1 100.6 6.596 100.7 87.42 113.7</span>
 <span class="c">## pv</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 100.2 6.328 100.4 88.38 112.9</span>
+<span class="c">## 1 100.6 6.596 100.7 87.42 113.7</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 178.7 14.33 178.7 151.2 207.3</span>
+<span class="c">## 1 179.5 14.83 180.2 149.6 208.8</span>
 <span class="c">## pv</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 178.7 14.33 178.7 151.2 207.3</span>
+<span class="c">## 1 179.5 14.83 180.2 149.6 208.8</span>
 <span class="c">## fd</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 78.46 8.228 78.35 62.65 94.91</span>
+<span class="c">##   mean    sd  50%  2.5% 97.5%</span>
+<span class="c">## 1 78.9 8.435 79.2 62.14 95.64</span>
 </pre></div>
 </div>
 <p>Now we&#8217;ve estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.</p>

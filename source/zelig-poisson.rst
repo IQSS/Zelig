@@ -42,12 +42,6 @@ Example
 
 
 
-::
-
-    ## Error: there is no package called 'Zelig5'
-
-
-
 Load sample data:
 
 
@@ -125,11 +119,11 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 3.245 0.2393 3.239 2.801 3.709
+    ##       mean     sd  50%  2.5% 97.5%
+    ## [1,] 3.256 0.2405 3.25 2.812 3.728
     ## pv
-    ##      mean    sd 50% 2.5% 97.5%
-    ## [1,] 3.23 1.854   3    0     7
+    ##       mean    sd 50% 2.5% 97.5%
+    ## [1,] 3.206 1.878   3    0     7
 
 
 

@@ -65,12 +65,12 @@ First, we have to load Zelig into R. After installing both R and
 Zelig, open R and type:
 
 
+
+
 .. sourcecode:: r
     
 
     library(Zelig)
-
-
 
 
 ------------
@@ -88,10 +88,10 @@ Now, lets build a statistical model that captures the relationship a cars stoppi
     # Fit regression line to data 
     abline(lm(cars$dist ~ cars$speed), col = "firebrick")
 
-.. figure:: figure/unnamed-chunk-5.png
-    :alt: plot of chunk unnamed-chunk-5
+.. figure:: figure/Scatterplot.png
+    :alt: Scatterplot
 
-    plot of chunk unnamed-chunk-5
+    Scatterplot
 
 Also included in the scatter plot is a "best-fit" regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous our best choice for model to use is a least squares regression. 
 
@@ -158,22 +158,22 @@ Now that we've set our variables, all we have to do is run our simulations:
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 100.2 6.328 100.4 88.38 112.9
+    ## 1 100.6 6.596 100.7 87.42 113.7
     ## pv
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 100.2 6.328 100.4 88.38 112.9
+    ## 1 100.6 6.596 100.7 87.42 113.7
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 178.7 14.33 178.7 151.2 207.3
+    ## 1 179.5 14.83 180.2 149.6 208.8
     ## pv
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 178.7 14.33 178.7 151.2 207.3
+    ## 1 179.5 14.83 180.2 149.6 208.8
     ## fd
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 78.46 8.228 78.35 62.65 94.91
+    ##   mean    sd  50%  2.5% 97.5%
+    ## 1 78.9 8.435 79.2 62.14 95.64
 
 
 
