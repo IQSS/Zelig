@@ -63,10 +63,10 @@ z5$graph()
 ## ----help, eval = FALSE--------------------------------------------------
 ## # documentation for least squares model
 ## z5 <- zls$new()
-## z5$graph()
+## z5$help()
 ## 
 ## # documentation for logitstic regression
 ## z5 <- zlogit$new()
-## z5$graph()
+## z5$help()
 
 

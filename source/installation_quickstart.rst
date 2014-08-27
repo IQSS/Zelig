@@ -158,22 +158,22 @@ Now that we've set our variables, all we have to do is run our simulations:
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 100.3 6.122 100.2 88.04 111.9
+    ## 1 100.2 6.489 99.81 87.02 112.7
     ## pv
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 100.3 6.122 100.2 88.04 111.9
+    ## 1 100.2 6.489 99.81 87.02 112.7
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 178.7 13.82 178.6 151.4 205.8
+    ## 1 178.5 14.67 178.2 148.3 206.1
     ## pv
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 178.7 13.82 178.6 151.4 205.8
+    ## 1 178.5 14.67 178.2 148.3 206.1
     ## fd
-    ##    mean    sd   50% 2.5% 97.5%
-    ## 1 78.42 7.924 78.36 62.9 94.41
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 78.39 8.401 78.43 60.73 94.44
 
 
 
@@ -241,11 +241,11 @@ Finally, model documentation can be accessed using the ``z5$help()`` method afte
 
     # documentation for least squares model
     z5 <- zls$new()
-    z5$graph()
+    z5$help()
     
     # documentation for logitstic regression
     z5 <- zlogit$new()
-    z5$graph()
+    z5$help()
 
 
 
