@@ -32,7 +32,7 @@ Examples
 +++++
 
 .. {r, eval = TRUE, echo = FALSE}	
-suppressWarnings(suppressMessages(library(Zelig5)))
+suppressWarnings(suppressMessages(library(Zelig)))
 .. .. 
 
 Basic Example

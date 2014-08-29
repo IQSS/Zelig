@@ -217,12 +217,12 @@ library<span class="p">(</span>devtools<span class="p">)</span>
 install_github<span class="p">(</span><span class="s">&#39;IQSS/Zelig&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If you have successfully installed the program, you will see a the following message: <em>&#8220;DONE (Zelig5)&#8221;</em>.</p>
+<p>If you have successfully installed the program, you will see a the following message: <em>&#8220;DONE (Zelig)&#8221;</em>.</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="quickstart-guide">
 <h2>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car needs to stop given it&#8217;s speed and you have a dataset of spped and stopping distances of cars. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig.</p>
+<p>Now that we have successfully downloaded and installed Zelig, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car needs to stop given its speed and you have a dataset of speed and stopping distances of cars. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig.</p>
 <p><strong>Loading Zelig</strong></p>
 <p>First, we have to load Zelig into R. After installing both R and
 Zelig, open R and type:</p>
@@ -233,7 +233,7 @@ Zelig, open R and type:</p>
 <p><strong>Building Models</strong></p>
 <p>Now, lets build a statistical model that captures the relationship a cars stopping distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. The first decision we must make is what statistical model to test for a relationship between a cars speed and distance required for it to come to a full stop. To do this, we plot the two variables in our dataset to visually inspect any potential relationship:</p>
 <div class="highlight-r"><div class="highlight"><pre><span class="c1"># Scatterplot of car speed and distance required for full stop</span>
-plot<span class="p">(</span>cars<span class="o">$</span>speed<span class="p">,</span> cars<span class="o">$</span>dist<span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;Scatterplot of Car Speed and Distance Required for Full Stop&quot;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&quot;Distance (miles)&quot;</span><span class="p">,</span> xlab <span class="o">=</span> <span class="s">&quot;Speed (miles per hour)&quot;</span><span class="p">)</span>
+plot<span class="p">(</span>cars<span class="o">$</span>speed<span class="p">,</span> cars<span class="o">$</span>dist<span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;Scatterplot of car speed and distance required for full stop&quot;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&quot;Distance (feet)&quot;</span><span class="p">,</span> xlab <span class="o">=</span> <span class="s">&quot;Speed (miles per hour)&quot;</span><span class="p">)</span>
 <span class="c1"># Fit regression line to data</span>
 abline<span class="p">(</span>lm<span class="p">(</span>cars<span class="o">$</span>dist <span class="o">~</span> cars<span class="o">$</span>speed<span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;firebrick&quot;</span><span class="p">)</span>
 </pre></div>
@@ -242,9 +242,9 @@ abline<span class="p">(</span>lm<span class="p">(</span>cars<span class="o">$</s
 <img alt="Scatterplot" src="_images/Scatterplot.png" />
 <p class="caption">Scatterplot</p>
 </div>
-<p>Also included in the scatter plot is a &#8220;best-fit&#8221; regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous our best choice for model to use is a least squares regression.</p>
+<p>Also included in the scatter plot is a &#8220;best-fit&#8221; regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous suggests that an appropriate model to use is least squares regression.</p>
 <p>To fit this model to our data, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="c1"># load toy dataset (when you install R, example datasets are also installed)</span>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># load dataset (when you install R, example datasets are also installed)</span>
 data<span class="p">(</span>cars<span class="p">)</span>
 <span class="c1"># initialize Zelig5 least squares object</span>
 z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
@@ -285,22 +285,22 @@ z5
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 100.6 6.596 100.7 87.42 113.7</span>
+<span class="c">## 1 100.4 6.713 100.4 86.88   114</span>
 <span class="c">## pv</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 100.6 6.596 100.7 87.42 113.7</span>
+<span class="c">## 1 100.4 6.713 100.4 86.88   114</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 179.5 14.83 180.2 149.6 208.8</span>
+<span class="c">##    mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## 1 178.9 15.04 178.4  149 210.1</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 179.5 14.83 180.2 149.6 208.8</span>
+<span class="c">##    mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## 1 178.9 15.04 178.4  149 210.1</span>
 <span class="c">## fd</span>
-<span class="c">##   mean    sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 78.9 8.435 79.2 62.14 95.64</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 78.49 8.529 78.45 62.21 96.26</span>
 </pre></div>
 </div>
 <p>Now we&#8217;ve estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.</p>
@@ -343,7 +343,7 @@ z5
 z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
 z5<span class="o">$</span>help<span class="p">()</span>
 
-<span class="c1"># documentation for logitstic regression</span>
+<span class="c1"># documentation for logistic regression</span>
 z5 <span class="o">&lt;-</span> zlogit<span class="o">$</span>new<span class="p">()</span>
 z5<span class="o">$</span>help<span class="p">()</span>
 </pre></div>

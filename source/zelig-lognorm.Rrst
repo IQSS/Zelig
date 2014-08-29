@@ -79,7 +79,7 @@ Example
 +++++
 
 .. {r, eval = TRUE, echo = FALSE}	
-suppressWarnings(suppressMessages(library(Zelig5)))
+suppressWarnings(suppressMessages(library(Zelig)))
 .. .. 
 
 Attach the sample data:

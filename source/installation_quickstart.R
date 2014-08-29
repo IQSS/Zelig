@@ -13,7 +13,7 @@
 
 
 ## ----, eval = TRUE, echo = FALSE-----------------------------------------
-suppressWarnings(suppressMessages(library(Zelig5)))
+suppressWarnings(suppressMessages(library(Zelig)))
 
 
 ## ----, eval = FALSE------------------------------------------------------
@@ -22,16 +22,16 @@ suppressWarnings(suppressMessages(library(Zelig5)))
 
 ## ----Scatterplot, eval = TRUE, fig.cap = "Scatterplot"-------------------
 # Scatterplot of car speed and distance required for full stop	
-plot(cars$speed, cars$dist, main = "Scatterplot of Car Speed and Distance Required for Full Stop", ylab = "Distance (miles)", xlab = "Speed (miles per hour)")
+plot(cars$speed, cars$dist, main = "Scatterplot of car speed and distance required for full stop", ylab = "Distance (feet)", xlab = "Speed (miles per hour)")
 # Fit regression line to data 
 abline(lm(cars$dist ~ cars$speed), col = "firebrick")
 
 
 ## ----, eval = TRUE-------------------------------------------------------
-# load toy dataset (when you install R, example datasets are also installed)
+# load dataset (when you install R, example datasets are also installed)
 data(cars)
 # initialize Zelig5 least squares object                            
-z5 <- zls$new()  
+z5 <- zls$new()
 # estimate ls model                     
 z5$zelig(dist ~ speed, data = cars)
 # you can now get model summary estimates
@@ -65,7 +65,7 @@ z5$graph()
 ## z5 <- zls$new()
 ## z5$help()
 ## 
-## # documentation for logitstic regression
+## # documentation for logistic regression
 ## z5 <- zlogit$new()
 ## z5$help()
 

@@ -19,7 +19,7 @@
 
 
 ## ----, eval = TRUE, echo = FALSE-----------------------------------------
-suppressWarnings(suppressMessages(library(Zelig5)))
+suppressWarnings(suppressMessages(library(Zelig)))
 
 
 ## ----, eval = TRUE-------------------------------------------------------

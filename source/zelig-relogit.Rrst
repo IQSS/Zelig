@@ -66,7 +66,7 @@ Example 1: One Tau with Prior Correction and Bias Correction
 +++++
 
 .. {r, eval = TRUE, echo = FALSE}	
-suppressWarnings(suppressMessages(library(Zelig5)))
+suppressWarnings(suppressMessages(library(Zelig)))
 .. .. 
 
 Due to memory and space considerations, the data used here are a sample

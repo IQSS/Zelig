@@ -50,13 +50,13 @@ Development versions contain the latest code in-development. This means that the
     install_github('IQSS/Zelig')
 
 
-If you have successfully installed the program, you will see a the following message: *"DONE (Zelig5)"*.
+If you have successfully installed the program, you will see a the following message: *"DONE (Zelig)"*.
 
 ------------
 
 Quickstart Guide
 ~~~~~~~~~~~~~~~~
-Now that we have successfully downloaded and installed Zelig from Github, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car needs to stop given it's speed and you have a dataset of spped and stopping distances of cars. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig. 
+Now that we have successfully downloaded and installed Zelig, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car needs to stop given its speed and you have a dataset of speed and stopping distances of cars. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig. 
 
 
 **Loading Zelig**
@@ -84,7 +84,7 @@ Now, lets build a statistical model that captures the relationship a cars stoppi
     
 
     # Scatterplot of car speed and distance required for full stop	
-    plot(cars$speed, cars$dist, main = "Scatterplot of Car Speed and Distance Required for Full Stop", ylab = "Distance (miles)", xlab = "Speed (miles per hour)")
+    plot(cars$speed, cars$dist, main = "Scatterplot of car speed and distance required for full stop", ylab = "Distance (feet)", xlab = "Speed (miles per hour)")
     # Fit regression line to data 
     abline(lm(cars$dist ~ cars$speed), col = "firebrick")
 
@@ -93,7 +93,7 @@ Now, lets build a statistical model that captures the relationship a cars stoppi
 
     Scatterplot
 
-Also included in the scatter plot is a "best-fit" regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous our best choice for model to use is a least squares regression. 
+Also included in the scatter plot is a "best-fit" regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous suggests that an appropriate model to use is least squares regression. 
 
 To fit this model to our data, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:
 
@@ -101,10 +101,10 @@ To fit this model to our data, we must first create Zelig least squares object, 
 .. sourcecode:: r
     
 
-    # load toy dataset (when you install R, example datasets are also installed)
+    # load dataset (when you install R, example datasets are also installed)
     data(cars)
     # initialize Zelig5 least squares object                            
-    z5 <- zls$new()  
+    z5 <- zls$new()
     # estimate ls model                     
     z5$zelig(dist ~ speed, data = cars)
     # you can now get model summary estimates
@@ -158,22 +158,22 @@ Now that we've set our variables, all we have to do is run our simulations:
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 100.4 6.263 100.3 88.07 112.9
+    ## 1 100.7 6.321 100.9 87.84 113.1
     ## pv
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 100.4 6.263 100.3 88.07 112.9
+    ## 1 100.7 6.321 100.9 87.84 113.1
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 179.1 13.98 178.8 150.9 206.9
+    ##    mean    sd   50% 2.5% 97.5%
+    ## 1 179.8 14.26 180.2  152 207.5
     ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 179.1 13.98 178.8 150.9 206.9
+    ##    mean    sd   50% 2.5% 97.5%
+    ## 1 179.8 14.26 180.2  152 207.5
     ## fd
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 78.66 7.942 78.58 62.82 94.18
+    ## 1 79.07 8.157 79.22 63.44 94.33
 
 
 
@@ -243,7 +243,7 @@ Finally, model documentation can be accessed using the ``z5$help()`` method afte
     z5 <- zls$new()
     z5$help()
     
-    # documentation for logitstic regression
+    # documentation for logistic regression
     z5 <- zlogit$new()
     z5$help()
 
