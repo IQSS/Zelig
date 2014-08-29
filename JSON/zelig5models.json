@@ -21,6 +21,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-ls.html"
+			],
 			"tree" : [
 				"Zelig-ls",
 				"Zelig"
@@ -47,6 +50,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-logit.html"
+			],
 			"tree" : [
 				"Zelig-logit",
 				"Zelig-binchoice",
@@ -75,6 +81,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-probit.html"
+			],
 			"tree" : [
 				"Zelig-probit",
 				"Zelig-binchoice",
@@ -103,6 +112,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-poisson.html"
+			],
 			"tree" : [
 				"Zelig-poisson",
 				"Zelig-glm",
@@ -130,6 +142,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-normal.html"
+			],
 			"tree" : [
 				"Zelig-normal",
 				"Zelig-glm",
@@ -157,6 +172,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-gamma.html"
+			],
 			"tree" : [
 				"Zelig-gamma",
 				"Zelig-glm",
@@ -184,6 +202,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-negbin.html"
+			],
 			"tree" : [
 				"Zelig-negbin",
 				"Zelig"
@@ -210,6 +231,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-exp.html"
+			],
 			"tree" : [
 				"Zelig-exp",
 				"Zelig"
@@ -236,6 +260,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-lognorm.html"
+			],
 			"tree" : [
 				"Zelig-lognorm",
 				"Zelig"
@@ -262,6 +289,9 @@
 					"binary"
 				]
 			},
+			"vignette.url" : [
+				"http://zeligproject.org/zelig-tobit.html"
+			],
 			"tree" : [
 				"Zelig-tobit",
 				"Zelig"

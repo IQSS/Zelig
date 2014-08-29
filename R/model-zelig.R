@@ -45,6 +45,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         url = "character",
                                         category = "character",
                                         
+                                        vignette.url = "character",
+                                        
                                         json = "ANY", # JSON export
                                         ljson = "ANY",
                                         outcome = "ANY",
@@ -66,6 +68,8 @@ z$methods(
     .self$bsetrange <- FALSE
     .self$bsetrange1 <- FALSE
     # JSON
+    .self$vignette.url <- paste("http://zeligproject.org/",
+                                tolower(class(.self)[1]), ".html", sep = "")
     .self$explanatory <- c("continuous",
                            "discrete",
                            "nominal",
@@ -311,22 +315,6 @@ z$methods(
 )
 
 z$methods(
-  toJSON = function() {
-    if (!is.list(.self$json))
-      .self$json <- list()
-    .self$json$"name" <- .self$name
-    .self$json$"description" <- .self$description
-    .self$json$"outcome" <- list(modelingType = .self$outcome)
-    .self$json$"explanatory" <- list(modelingType = .self$explanatory)
-    .self$json$tree <- c(class(.self)[1],
-                         head(.self$.refClassDef@refSuperClasses, -1))
-    .self$ljson <- .self$json
-    .self$json <- jsonlite::toJSON(json, pretty = TRUE)
-    return(.self$json)
-  }
-)
-
-z$methods(
   graph = function() {
     plot.qi(.self)
   }
@@ -347,7 +335,24 @@ z$methods(
 z$methods(
   help = function() {
 #     vignette(class(.self)[1])
-    browseURL(paste("http://zeligproject.org/", tolower(class(.self)[1]), ".html", sep = ""))
+    browseURL(.self$vignette.url)
+  }
+)
+
+z$methods(
+  toJSON = function() {
+    if (!is.list(.self$json))
+      .self$json <- list()
+    .self$json$"name" <- .self$name
+    .self$json$"description" <- .self$description
+    .self$json$"outcome" <- list(modelingType = .self$outcome)
+    .self$json$"explanatory" <- list(modelingType = .self$explanatory)
+    .self$json$"vignette.url" <- .self$vignette.url
+    .self$json$tree <- c(class(.self)[1],
+                         head(.self$.refClassDef@refSuperClasses, -1))
+    .self$ljson <- .self$json
+    .self$json <- jsonlite::toJSON(json, pretty = TRUE)
+    return(.self$json)
   }
 )
 
