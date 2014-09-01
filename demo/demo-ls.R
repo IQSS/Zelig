@@ -2,7 +2,7 @@ library(MASS)
 data(cars)
 
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 z.out <- zelig(dist ~ speed, cars, model = "ls")
 summary(z.out)
 x.out <- setx(z.out, speed = 30)

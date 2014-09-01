@@ -22,7 +22,7 @@ zrelogit$methods(
 zrelogit$methods(
   zelig = function(formula, ..., tau = NULL, bias.correct = NULL, case.control = NULL, data, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    .self$model.call <- match.call(expand.dots = TRUE)
+    .self$model.call <- .self$zelig.call
     # Catch NULL case.control
     if (is.null(case.control))
       case.control <- "prior"

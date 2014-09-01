@@ -1,14 +1,14 @@
 ## Example 1
 
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 data(mid)
-z.out1 <- Zelig::zelig(conflict ~ major + contig + power + maxdem
+z.out1 <- Zelig4::zelig(conflict ~ major + contig + power + maxdem
                 + mindem + years, data = mid, model = "relogit", tau = 1042 / 303772)
 summary(z.out1)
-x.out1 <- Zelig::setx(z.out1)
+x.out1 <- Zelig4::setx(z.out1)
 set.seed(42)
-s.out1 <- Zelig::sim(z.out1, x = x.out1, num = 1000)
+s.out1 <- Zelig4::sim(z.out1, x = x.out1, num = 1000)
 summary(s.out1)
 
 # Zelig 5 code:

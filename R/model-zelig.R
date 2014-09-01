@@ -1,6 +1,3 @@
-# library(dplyr)
-# library(plyr)
-
 #' A class description
 #'
 #' @import methods
@@ -56,7 +53,7 @@ z$methods(
   initialize = function() { 
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
-    .self$url <- "http://datascience.iq.harvard.edu/zelig"
+    .self$url <- "http://zeligproject.org/"
     .self$setx.out <- list()
     .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
                               ev1 = "Expected Values: E(Y|X1)",
@@ -68,8 +65,7 @@ z$methods(
     .self$bsetrange <- FALSE
     .self$bsetrange1 <- FALSE
     # JSON
-    .self$vignette.url <- paste("http://zeligproject.org/",
-                                tolower(class(.self)[1]), ".html", sep = "")
+    .self$vignette.url <- paste(.self$url, tolower(class(.self)[1]), ".html", sep = "")
     .self$explanatory <- c("continuous",
                            "discrete",
                            "nominal",

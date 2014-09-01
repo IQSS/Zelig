@@ -21,7 +21,7 @@ znegbin$methods(
 znegbin$methods(
   zelig = function(formula, data, ..., weights=NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    .self$model.call <- match.call(expand.dots = TRUE)
+    .self$model.call <- .self$zelig.call
     callSuper(formula=formula, data=data, ..., weights=NULL, by = by)
   }
 )

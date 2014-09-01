@@ -1,5 +1,5 @@
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 data(macro)
 z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "normal",
                 data = macro)

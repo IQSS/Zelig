@@ -3,7 +3,7 @@ mydata <- read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
 mydata$rank <- factor(mydata$rank)
 
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 # epsilon does not seem to be taken into account
 z.out <- zelig(admit ~ gre + gpa, data = mydata, model="logit",
                epsilon=.0001)

@@ -9,7 +9,7 @@ head(p)
 w <- runif(200)
 
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 z.out <- zelig(num_awards ~ prog + math, data=p, model="poisson",
                weights=w)
 summary(z.out)
@@ -46,8 +46,3 @@ z5$sim(num = 1000)
 z5$summarize()
 z5$cite()
 
-.self$simparam <- .self$zelig.out %>%
-  do(simparam = .self$param(.$z.out))
-
-.self$simparam <- .self$zelig.out %>%
-  do(x = .$z.out)

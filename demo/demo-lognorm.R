@@ -1,5 +1,5 @@
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 data(coalition)
 z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model = "lognorm",
                data = coalition)

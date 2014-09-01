@@ -1,4 +1,4 @@
-library(Zelig)
+library(Zelig4)
 data(turnout)
 turnout$dedu <- ifelse(turnout$educate > 15, 1, 0)
 

@@ -1,7 +1,7 @@
 library(MASS)
 
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 data(sanction)
 z.out <- zelig(num ~ target + coop, model = "negbinom", data = sanction)
 summary(z.out)

@@ -1,5 +1,5 @@
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 data(coalition)
 z.out <- zelig(duration ~ fract + numst2, model = "gamma", data = coalition)
 summary(z.out)

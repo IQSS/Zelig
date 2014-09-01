@@ -21,7 +21,7 @@ ztobit$methods(
   zelig = function(formula, ..., below = 0, above = Inf,
                    robust = FALSE, data, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    .self$model.call <- match.call(expand.dots = TRUE)
+    .self$model.call <- .self$zelig.call
     .self$below <- below
     .self$above <- above
     .self$model.call$below <- NULL

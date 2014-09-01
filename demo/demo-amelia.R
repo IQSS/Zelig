@@ -5,7 +5,7 @@ imp <- amelia(x = df , cs = "country", m = 5)
 imp2 <- imp$imputations
 
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 z.out <- zelig(infl ~ trade + civlib, data = imp, model = "ls")
 summary(z.out)
 x.out <- setx(z.out, civlib = .5)

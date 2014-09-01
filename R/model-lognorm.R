@@ -20,7 +20,7 @@ zlognorm$methods(
 zlognorm$methods(
   zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
-    .self$model.call <- match.call(expand.dots = TRUE)
+    .self$model.call <- .self$zelig.call
     if (!(is.null(cluster) || robust))
       stop("If cluster is specified, then `robust` must be TRUE")
     # Add cluster term

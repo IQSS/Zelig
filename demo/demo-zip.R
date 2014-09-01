@@ -29,7 +29,7 @@ set.seed(42)
 z5$sim(num=100)
 z5$summarize()
 
-library(Zelig)
+library(Zelig4)
 z.out <- zelig(art ~ . - phd - ment, data = bioChemists, model = "ls")
 summary(z.out)
 x.out <- setx(z.out, phd = 3, ment = 8)
@@ -46,7 +46,7 @@ s.out
 
 # z5$sim()
 
-library(Zelig)
+library(Zelig4)
 z.out <- zelig(art ~ phd * ment , bioChemists, model = "ls")
 summary(z.out)
 x.out <- setx(z.out)

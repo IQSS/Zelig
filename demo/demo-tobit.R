@@ -1,5 +1,5 @@
 # Zelig 4 code:
-library(Zelig)
+library(Zelig4)
 data(tobin)
 z.out <- zelig(durable ~ age + quant, model = "tobit", data = tobin)
 summary(z.out)
