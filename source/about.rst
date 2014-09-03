@@ -13,7 +13,7 @@ Zelig leverages (R) code from many researchers and is designed to allow anyone t
 
 *Original Authors:*
 
-- `Gary King <http://gking.harvard.edu/>`_ *(Principle Investigator)*
+- `Gary King <http://gking.harvard.edu/>`_ *(Principal Investigator)*
 - Kosuke Imai
 - Olivia Lau
 
