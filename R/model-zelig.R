@@ -105,7 +105,7 @@ z$methods(
                 imputationNumber<- rep(i,nrow(data$imputations[[i]]))
                 temp<-rbind(temp, as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
             }
-            .self$by <- "imputationNumber"  # need to correct when "by" already declared.
+            .self$by <- c("imputationNumber", by)  # CC: "by" and Amelia.
             .self$data <- temp
         }else{
             .self$data <- as.data.frame(data$imputations[[1]])
@@ -257,8 +257,9 @@ z$methods(
       cat("Next step: Use 'zelig' method")
     else if (length(.self$setx.out) == 0) {
       summ <- .self$zelig.out %>%
-        do(summ = {cat("Model: ")
-                   cat(unlist(.[.self$by]))
+        do(summ = {cat("Model: \n")
+#                    print(unlist(.[.self$by]))
+                   print(.[.self$by])
                    print(.$z.out)})
       cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
