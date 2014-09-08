@@ -96,23 +96,33 @@ z$methods(
     .self$by <- by
     # MI datasets from Amelia
     if(class(data)=="amelia"){
-        if(data$m>1){
-            .self$mi <- TRUE
-            imputationNumber <- rep(1,nrow(data$imputations[[1]]))
-            temp<-as.data.frame(cbind(imputationNumber, data$imputations[[1]]))  # check exactly when type cast is necessary
-            names(temp)[1]<- "imputationNumber"
-            for(i in 2:data$m){
-                imputationNumber<- rep(i,nrow(data$imputations[[i]]))
-                temp<-rbind(temp, as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
-            }
-            .self$by <- c("imputationNumber", by)  # CC: "by" and Amelia.
-            .self$data <- temp
-        }else{
-            .self$data <- as.data.frame(data$imputations[[1]])
+      if(data$m>1){
+        .self$mi <- TRUE
+        imputationNumber <- rep(1,nrow(data$imputations[[1]]))
+        temp<-as.data.frame(cbind(imputationNumber, data$imputations[[1]]))  # check exactly when type cast is necessary
+        names(temp)[1]<- "imputationNumber"
+        for(i in 2:data$m){
+          imputationNumber<- rep(i,nrow(data$imputations[[i]]))
+          temp<-rbind(temp, as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
         }
+        .self$by <- c("imputationNumber", by)  # CC: "by" and Amelia.
+        .self$data <- temp
+      }else{
+        .self$data <- as.data.frame(data$imputations[[1]])
+      }
     }else{
       .self$data <- data
     }
+    # CC: could be rewritten as:
+#     if(class(data)=="amelia"){
+#       idata <- data$imputations
+#       .self$data <- rbind_all(lapply(seq(length(idata)),
+#                                 function(imputationNumber)
+#                                   cbind(imputationNumber, idata[[imputationNumber]])))
+#       .self$by <- c("imputationNumber", by)
+#     }else{
+#       .self$data <- data
+#     }
     .self$model.call[[1]] <- .self$fn
     .self$model.call$by <- NULL
     if (is.null(.self$by)) {

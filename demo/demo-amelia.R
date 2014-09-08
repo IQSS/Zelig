@@ -44,9 +44,7 @@ z5$summarize()
 
 data(freetrade)
 df <- head(freetrade, 1000)
-imp <- amelia(x = df , cs = "country", m = 10) 
+imp <- amelia(x = df, cs = "country", m = 10) 
 imp2 <- imp$imputations
 
-# as.data.frame(z5$zelig.out[z5$by][1, ])
-# summary(z5$zelig.out$z.out[[1]])
 
