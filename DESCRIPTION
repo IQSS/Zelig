@@ -15,7 +15,7 @@ Description: Zelig is an easy-to-use program that can estimate, and
     any model, and mimicking the program Clarify (for Stata) that takes
     the raw output of existing statistical procedures and translates
     them into quantities of direct interest.
-Version: 5.0.1
+Version: 5.0-1
 Depends:
     sandwich,
     methods,
@@ -45,6 +45,7 @@ Collate:
     'model-gamma.R'
     'model-exp.R'
     'model-relogit.R'
+    'model-quantile.R'
     'create-json.R'
     'wrappers.R'
     'plots.R'
