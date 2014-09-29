@@ -304,7 +304,7 @@ plot.ci <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         return(invisible(FALSE))
     }
     
-    xvarnames<-names(as.data.frame(sb.out$setx.out$range[[1]]$mm[[1]]))  # MUST BE A BETTER WAY/PATH TO GET NAMES
+    xvarnames<-names(as.data.frame( obj$setx.out$range[[1]]$mm[[1]]))  # MUST BE A BETTER WAY/PATH TO GET NAMES
     
     if(is.character(var)){
         if( !(var %in% xvarnames   ) ){
