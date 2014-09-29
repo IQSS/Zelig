@@ -112,16 +112,13 @@ cluster.formula <- function (formula, cluster) {
   update(formula, paste(". ~ .", cluster.part, sep = " + "))
 }
 
-reduce <- function(dataset, s, model = zelig.out$model[[1]]) {
+reduce <- function(dataset, s, formula, data) {
   dataset <- as.data.frame(dataset)
   ldata <- lapply(dataset, avg)
   if (length(s) > 0) {
-    pred <- terms(model, "predvars")
-#     pred <- terms(model, "regressors")
+    pred <- terms(lm(formula, data), "predvars")
     n <- union(as.character(attr(pred, "predvars"))[-1],
                names(dataset))
-#     n <- union(as.character(attr(pred, "variables"))[-1],
-#                names(dataset))
     if (is.list(s[[1]]))
       s <- s[[1]]
     m <- match(names(s), n)
@@ -137,3 +134,29 @@ reduce <- function(dataset, s, model = zelig.out$model[[1]]) {
   }
   return(ldata)
 }
+
+# reduce <- function(dataset, s, model = zelig.out$model[[1]]) {
+#   dataset <- as.data.frame(dataset)
+#   ldata <- lapply(dataset, avg)
+#   if (length(s) > 0) {
+#     pred <- terms(model, "predvars")
+# #     pred <- terms(model, "regressors")
+#     n <- union(as.character(attr(pred, "predvars"))[-1],
+#                names(dataset))
+# #     n <- union(as.character(attr(pred, "variables"))[-1],
+# #                names(dataset))
+#     if (is.list(s[[1]]))
+#       s <- s[[1]]
+#     m <- match(names(s), n)
+#     ma <- m[!is.na(m)]
+#     if (!all(complete.cases(m))) {
+#       w <- paste("Variable '", names(s[is.na(m)]),
+#                  "' not in data set.\n", sep = "")
+#       warning(w)
+#     }
+#     for (i in seq(n[ma]))
+#       ldata[n[ma]][i][[1]] <- setval(dataset[n[ma]][i][[1]],
+#                                      s[n[ma]][i][[1]])
+#   }
+#   return(ldata)
+# }

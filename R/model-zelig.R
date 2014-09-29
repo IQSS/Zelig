@@ -95,15 +95,31 @@ z$methods(
     .self$formula <- formula
     .self$by <- by
     # MI datasets from Amelia
+#     if(class(data)=="amelia"){
+#       if(data$m>1){
+#         .self$mi <- TRUE
+#         imputationNumber <- rep(1,nrow(data$imputations[[1]]))
+#         temp<-as.data.frame(cbind(imputationNumber, data$imputations[[1]]))  # check exactly when type cast is necessary
+#         names(temp)[1]<- "imputationNumber"
+#         for(i in 2:data$m){
+#           imputationNumber<- rep(i,nrow(data$imputations[[i]]))
+#           temp<-rbind(temp, as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
+#         }
+#         .self$by <- c("imputationNumber", by)  # CC: "by" and Amelia.
+#         .self$data <- temp
+#       }else{
+#         .self$data <- as.data.frame(data$imputations[[1]])
+#       }
+#     }else{
+#       .self$data <- data
+#     }
+    # CC: can be rewritten as:
     if(class(data)=="amelia"){
-      if(data$m>1){
-        .self$mi <- TRUE  # is a multiply imputed dataset, and needs to be treated as such
-        .self$data <- rbind_all(lapply(seq(data$m), function(imputationNumber)
-                                        cbind(imputationNumber, data$imputations[[imputationNumber]])))
-        .self$by <- c("imputationNumber", by)
-      }else{              # has been imputed, but not multiple times
-        .self$data <- as.data.frame(data$imputations[[1]])
-      }
+      idata <- data$imputations
+      .self$data <- rbind_all(lapply(seq(length(idata)),
+                                function(imputationNumber)
+                                  cbind(imputationNumber, idata[[imputationNumber]])))
+      .self$by <- c("imputationNumber", by)
     }else{
       .self$data <- data
     }
@@ -126,9 +142,12 @@ z$methods(
     s <-list(...)
     f <- update(.self$formula, 1 ~ .)
     update <- .self$data %>% 
-      regroup(lapply(.self$by, as.symbol)) %>% 
+      regroup(lapply(.self$by, as.symbol)) %>%
       do(mm = model.matrix(f, reduce(dataset = ., s, 
-                                     model = .self$zelig.out$z.out[[1]])))
+                                     formula = .self$formula,
+                                     data = .self$data)))
+#       do(mm = model.matrix(f, reduce(dataset = ., s, 
+#                                      model = .self$zelig.out$z.out[[1]])))
     return(update)
   }
 )
@@ -181,7 +200,8 @@ z$methods(
 
 z$methods(
   sim = function(num = 1000) {
-    .self$num <- num
+    if (length(.self$num) == 0) 
+      .self$num <- num
     .self$simparam <- .self$zelig.out %>%
       do(simparam = .self$param(.$z.out))
     if (.self$bsetx)
@@ -327,7 +347,7 @@ z$methods(
   help = function() {
 #     vignette(class(.self)[1])
     browseURL(.self$vignette.url)
-  }
+  } 
 )
 
 z$methods(

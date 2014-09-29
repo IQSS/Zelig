@@ -1,5 +1,3 @@
-library(quantreg)
-
 #' @include model-zelig.R
 zquantile <- setRefClass("Zelig-quantile",
                          contains = "Zelig",
@@ -24,11 +22,17 @@ zquantile$methods(
   zelig = function(formula, data, ..., weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
-    if (!is.null(.self$model.call$tau))
-      .self$tau <- .self$model.call$tau
+    if (!is.null(.self$model.call$tau)) {
+      .self$tau <- eval(.self$model.call$tau)
+      if (length(.self$tau)) {
+        data <- rbind_all(lapply(eval(.self$tau),
+                                 function(tau) cbind(tau, data)))
+        by <- cbind("tau", by)
+      }
+    }
     else 
       .self$tau <- 0.5
-    callSuper(formula=formula, data=data, ..., weights = NULL, by = by)
+    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
   }
 )
 
@@ -64,7 +68,7 @@ zquantile$methods(
     # Use asymptotic approximation of Q(tau|X,beta) distribution
     for(ii in 1:nrow(ev))
       # Asymptotic distribution as per Koenker 2005 _Quantile Regression_ p. 72
-      pv[ii, ] <- rnorm(length(ev[ii, ]), mean=ev[ii, ],
+      pv[ii, ] <- rnorm(length(ev[ii, ]), mean = ev[ii, ],
                         sqrt((.self$tau * (1 - .self$tau))) / (f * sqrt(n)))
     return(list(ev  = ev, pv = pv))
   }

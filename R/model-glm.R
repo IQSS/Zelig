@@ -1,4 +1,5 @@
 #' @include model-zelig.R
+
 zglm <- setRefClass("Zelig-glm",
                     contains = "Zelig",
                     fields = list(family = "character",
@@ -18,8 +19,8 @@ zglm$methods(
     .self$model.call <- .self$zelig.call
     .self$model.call$family <- call(.self$family, .self$link)
     callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
-    rse<-llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
-    .self$test.statistics<- list(robust.se = rse)
+    rse <- llply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
+    .self$test.statistics <- list(robust.se = rse)
   }
 )
 

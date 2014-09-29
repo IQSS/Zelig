@@ -29,7 +29,27 @@ z.out1$summarize()
 
 data(engel)
 z.out3 <- zquantile$new()
-z.out3$zelig(foodexp ~ income, tau = seq(0.1, 0.9, by = 0.1), data = engel)
+z.out3$zelig(foodexp ~ income, tau = seq(0.1, 0.3, by = 0.1), data = engel)
+z.out3$setx()
+z.out3$sim()
+
+# r <- .self$data %>% 
+#   group_by(tau) %>%
+#   do(model = rq(foodexp ~ income, data = ., tau = .$tau[1]))
+
+library(Zelig4)
+data(engel)
+z.out <- zelig(foodexp ~ income, tau = seq(0.1, 0.9, by = 0.1), data = engel, model = "rq")
+z.out3$setx()
+z.out3$sim()
+
+data(engel)
+z.out4 <- zquantile$new()
+z.out4$zelig(foodexp ~ income, data = engel, by = )
+z.out4$setx()
+z.out4$sim()
+
+
 summary(z.out3$zelig.out[[1]])
 plot(summary(z.out3$zelig.out[[1]]))
 

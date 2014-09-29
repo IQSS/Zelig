@@ -9,6 +9,7 @@ znormal$methods(
     .self$name <- "normal"
     .self$family <- "gaussian"
     .self$link <- "identity"
+    .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
     .self$year <- 2008
     .self$category <- "continuous"
@@ -34,12 +35,14 @@ znormal$methods(
 
 znormal$methods(
   qi = function(simparam, mm) {
-    .self$linkinv <- eval(call("binomial", "probit"))$linkinv
-    theta <- matrix(simparam$simparam %*% t(mm), nrow = nrow(simparam$simparam))
+    theta <- matrix(simparam$simparam %*% t(mm),
+                    nrow = nrow(simparam$simparam))
     ev <- theta
     pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (j in 1:nrow(ev))
-      pv[j, ] <- rnorm(ncol(ev), mean = ev[j, ], sd = simparam$simalpha[j])
+      pv[j, ] <- rnorm(ncol(ev),
+                       mean = ev[j, ],
+                       sd = simparam$simalpha[j])
     return(list(ev = ev, pv = pv))
   }
 )

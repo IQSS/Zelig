@@ -10,7 +10,7 @@ zpoisson$methods(
     .self$name <- "poisson"
     .self$family <- "poisson"
     .self$link <- "log"
-    .self$linkinv <- eval(call("binomial", "log"))$linkinv
+    .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
     .self$year <- 2007
     .self$category <- "count"
