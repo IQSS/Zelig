@@ -102,7 +102,7 @@ Estimating linear regression using ``tobit``:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2011.
     ##   tobit: Linear regression for Left-Censored Dependent Variable
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -138,10 +138,10 @@ Simulating quantities of interest from the posterior distribution given ``x.out`
     ##  -----
     ## ev
     ##    mean     sd   50%   2.5% 97.5%
-    ## 1 1.572 0.6871 1.499 0.5411 3.076
+    ## 1 1.568 0.6895 1.469 0.5252 3.206
     ## pv
-    ##       mean    sd  50% 2.5% 97.5%
-    ## [1,] 3.374 4.273 1.68    0  15.1
+    ##       mean    sd   50% 2.5% 97.5%
+    ## [1,] 3.184 4.252 1.617    0 15.25
 
 
 
@@ -183,23 +183,23 @@ liquidity ratio on duration(\ ``durable``):
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean    sd   50%   2.5% 97.5%
-    ## 1 1.232 0.789 1.098 0.1561 3.145
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 1.198 0.7758 1.057 0.1641 3.203
     ## pv
     ##       mean    sd   50% 2.5% 97.5%
-    ## [1,] 3.073 3.905 1.616    0 12.86
+    ## [1,] 3.098 4.137 1.445    0 13.75
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 2.036 1.032 1.902 0.516 4.433
+    ##    mean     sd   50%   2.5% 97.5%
+    ## 1 2.016 0.9488 1.875 0.5004 4.167
     ## pv
     ##       mean    sd   50% 2.5% 97.5%
-    ## [1,] 3.403 4.071 2.109    0 13.22
+    ## [1,] 3.571 4.346 2.064    0 14.93
     ## fd
-    ##     mean    sd    50%   2.5% 97.5%
-    ## 1 0.8035 1.233 0.7436 -1.368 3.527
+    ##     mean  sd    50%  2.5% 97.5%
+    ## 1 0.8181 1.2 0.7522 -1.62 3.413
 
 
 

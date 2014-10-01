@@ -106,7 +106,7 @@ Estimate the model:
     ##   Olivia Lau, Kosuke Imai, Gary King. 2011.
     ##   exp: Exponential Regression for Duration Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -121,7 +121,11 @@ View the regression output:
 
 ::
 
-    ## Model: 1Call:
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## Call:
     ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
     ##     numst2, data = ., dist = "exponential", model = FALSE)
     ## 
@@ -174,23 +178,23 @@ Summarize quantities of interest and produce some plots:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean    sd  50%  2.5% 97.5%
-    ## 1 15.33 1.436 15.3 12.62 18.47
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 15.34 1.467 15.26 12.69 18.47
     ## pv
-    ##      mean    sd   50%   2.5% 97.5%
-    ## [1,] 15.3 15.53 10.72 0.3769 52.16
+    ##       mean    sd   50%   2.5% 97.5%
+    ## [1,] 15.83 15.95 10.94 0.3697 58.23
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 24.26 1.883 24.19 20.96  28.2
+    ## 1 24.38 1.964 24.35 20.59 28.56
     ## pv
     ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 24.01 23.45 17.83 0.7343 85.99
+    ## [1,] 22.74 23.95 15.48 0.5061 84.69
     ## fd
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 8.927 2.309 8.896 4.481 13.39
+    ## 1 9.039 2.485 8.934 4.217 14.41
 
 
 

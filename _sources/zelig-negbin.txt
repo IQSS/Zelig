@@ -74,7 +74,11 @@ Estimate the model:
 
 ::
 
-    ## Model: 1Call:
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## Call:
     ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
     ##     numst2, data = ., dist = "lognormal", model = FALSE)
     ## 
@@ -122,11 +126,11 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean   sd   50%  2.5% 97.5%
-    ## 1 26.03 2.58 25.82 21.62 31.47
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 25.93 2.568 25.76 21.18 31.37
     ## pv
-    ##    mean   sd   50%  2.5% 97.5%
-    ## 1 26.03 2.58 25.82 21.62 31.47
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 25.93 2.568 25.76 21.18 31.37
 
 
 

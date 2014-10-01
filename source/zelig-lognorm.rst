@@ -116,7 +116,7 @@ Estimate the model:
     ##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.
     ##   lognorm: Log-Normal Regression for Duration Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -131,7 +131,11 @@ View the regression output:
 
 ::
 
-    ## Model: 1Call:
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## Call:
     ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
     ##     numst2, data = ., dist = "lognormal", model = FALSE)
     ## 
@@ -182,23 +186,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean    sd  50% 2.5% 97.5%
-    ## 1 18.23 2.444 18.1 13.9 23.48
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 18.26 2.409 18.08 14.36 23.89
     ## pv
-    ##    mean    sd  50% 2.5% 97.5%
-    ## 1 18.23 2.444 18.1 13.9 23.48
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 18.26 2.409 18.08 14.36 23.89
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 31.85 3.643 31.59 25.38 40.18
+    ##   mean    sd   50%  2.5% 97.5%
+    ## 1 31.9 3.662 31.53 25.88 39.74
     ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 31.85 3.643 31.59 25.38 40.18
+    ##   mean    sd   50%  2.5% 97.5%
+    ## 1 31.9 3.662 31.53 25.88 39.74
     ## fd
-    ##    mean  sd   50%  2.5% 97.5%
-    ## 1 13.62 3.7 13.43 6.345 20.98
+    ##    mean    sd   50% 2.5% 97.5%
+    ## 1 13.64 3.718 13.53 6.55 20.94
 
 
 

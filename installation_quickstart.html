@@ -65,7 +65,7 @@
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://54.191.56.66/milestones/milestone-roadmap/Zelig5/">Roadmap</a></li>
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -95,6 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -254,7 +255,11 @@ z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</s
 summary<span class="p">(</span>z5<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:</span>
 <span class="c">## stats::lm(formula = dist ~ speed, data = .)</span>
 <span class="c">##</span>
@@ -284,23 +289,23 @@ z5
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 100.5 6.569 100.4 87.81 113.6</span>
+<span class="c">##    mean   sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 100.5 6.42 100.5 88.83 112.7</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 100.5 6.569 100.4 87.81 113.6</span>
+<span class="c">##    mean   sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 100.5 6.42 100.5 88.83 112.7</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 179.3 14.72 179.4 149.7 209.3</span>
+<span class="c">## 1 179.5 14.57 179.2 152.3 207.4</span>
 <span class="c">## pv</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 179.3 14.72 179.4 149.7 209.3</span>
+<span class="c">## 1 179.5 14.57 179.2 152.3 207.4</span>
 <span class="c">## fd</span>
-<span class="c">##   mean   sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 78.8 8.36 78.85 62.36 95.99</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 78.95 8.367 78.84 63.11 95.11</span>
 </pre></div>
 </div>
 <p>Now we&#8217;ve estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.</p>

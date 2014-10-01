@@ -66,7 +66,7 @@
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://54.191.56.66/milestones/milestone-roadmap/Zelig5/">Roadmap</a></li>
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -95,7 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -187,7 +188,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -243,13 +245,17 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   poisson: Poisson Regression for Event Count Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:  stats::glm(formula = num ~ target + coop, family = poisson(&quot;log&quot;),</span>
 <span class="c">##     data = .)</span>
 <span class="c">##</span>
@@ -276,11 +282,11 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 3.252 0.242 3.238 2.802  3.73</span>
+<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 3.254 0.2296 3.246 2.833 3.754</span>
 <span class="c">## pv</span>
-<span class="c">##      mean    sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.28 1.812   3    0     7</span>
+<span class="c">##       mean    sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.261 1.925   3    0     8</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>

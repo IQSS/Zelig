@@ -66,7 +66,7 @@ Estimate model:
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
     ##   ls: Least Squares Regression for Continuous Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -81,7 +81,11 @@ Summarize regression coefficients:
 
 ::
 
-    ## Model: 1
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
     ## Call:
     ## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)
     ## 
@@ -128,22 +132,22 @@ Generate first differences for the effect of high versus low trade on GDP:
     ##  -----
     ## ev
     ##    mean     sd   50%  2.5% 97.5%
-    ## 1 5.432 0.1938 5.436 5.078 5.824
+    ## 1 5.432 0.1958 5.433 5.037 5.812
     ## pv
     ##    mean     sd   50%  2.5% 97.5%
-    ## 1 5.432 0.1938 5.436 5.078 5.824
+    ## 1 5.432 0.1958 5.433 5.037 5.812
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 4.606 0.192 4.612 4.247 5.018
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 4.608 0.1876 4.609 4.235 4.946
     ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 4.606 0.192 4.612 4.247 5.018
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 4.608 0.1876 4.609 4.235 4.946
     ## fd
-    ##      mean     sd    50%   2.5%   97.5%
-    ## 1 -0.8267 0.2416 -0.825 -1.283 -0.3601
+    ##      mean     sd     50%   2.5%   97.5%
+    ## 1 -0.8236 0.2385 -0.8297 -1.295 -0.3385
 
 
 
@@ -179,7 +183,7 @@ in the selected variable into discrete levels.
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
     ##   ls: Least Squares Regression for Continuous Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 

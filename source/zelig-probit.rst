@@ -63,7 +63,7 @@ Estimate parameter values for the probit regression:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   probit: Probit Regression for Dichotomous Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -76,7 +76,11 @@ Estimate parameter values for the probit regression:
 
 ::
 
-    ## Model: 1
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
     ## Call:  stats::glm(formula = vote ~ race + educate, family = binomial("probit"), 
     ##     data = .)
     ## 

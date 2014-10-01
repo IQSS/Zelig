@@ -113,7 +113,11 @@ To fit this model to our data, we must first create Zelig least squares object, 
 
 ::
 
-    ## Model: 1
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
     ## Call:
     ## stats::lm(formula = dist ~ speed, data = .)
     ## 
@@ -157,23 +161,23 @@ Now that we've set our variables, all we have to do is run our simulations:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 100.5 6.569 100.4 87.81 113.6
+    ##    mean   sd   50%  2.5% 97.5%
+    ## 1 100.5 6.42 100.5 88.83 112.7
     ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 100.5 6.569 100.4 87.81 113.6
+    ##    mean   sd   50%  2.5% 97.5%
+    ## 1 100.5 6.42 100.5 88.83 112.7
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 179.3 14.72 179.4 149.7 209.3
+    ## 1 179.5 14.57 179.2 152.3 207.4
     ## pv
     ##    mean    sd   50%  2.5% 97.5%
-    ## 1 179.3 14.72 179.4 149.7 209.3
+    ## 1 179.5 14.57 179.2 152.3 207.4
     ## fd
-    ##   mean   sd   50%  2.5% 97.5%
-    ## 1 78.8 8.36 78.85 62.36 95.99
+    ##    mean    sd   50%  2.5% 97.5%
+    ## 1 78.95 8.367 78.84 63.11 95.11
 
 
 

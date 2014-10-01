@@ -66,7 +66,7 @@
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://54.191.56.66/milestones/milestone-roadmap/Zelig5/">Roadmap</a></li>
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -95,7 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -191,7 +192,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -278,14 +280,18 @@ of militarized interstate conflicts to the absence of disputes is
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
 <span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:  relogit(formula = cbind(conflict, 1 - conflict) ~ major + contig +</span>
 <span class="c">##     power + maxdem + mindem + years, data = ., tau = 0.00343020423212146,</span>
 <span class="c">##     bias.correct = TRUE, case.control = &quot;prior&quot;)</span>
@@ -316,7 +322,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 0.002405 0.0001582 0.002397 0.002104 0.002732</span>
+<span class="c">## [1,] 0.002398 0.0001526 0.002394 0.002121 0.002709</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
 <span class="c">## [1,] 0.997 0.003</span>
@@ -344,7 +350,11 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:</span>
 <span class="c">## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country),</span>
 <span class="c">##     data = .)</span>
@@ -385,11 +395,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##   mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 10.6 0.3982 10.58 9.841 11.41</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 11.36 0.6621 11.37 10.09 12.62</span>
 <span class="c">## pv</span>
-<span class="c">##   mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 10.6 0.3982 10.58 9.841 11.41</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 11.36 0.6621 11.37 10.09 12.62</span>
 </pre></div>
 </div>
 </div>
@@ -406,14 +416,18 @@ default prior correction method for case control correction):</p>
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
 <span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1$lower.estimate</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">## $lower.estimate</span>
 <span class="c">##</span>
 <span class="c">## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,</span>
 <span class="c">##     case.control = &quot;prior&quot;, ...)</span>
@@ -622,7 +636,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x103be7c60&gt;</span>
+<span class="c">## &lt;environment: 0x7f8cee5d42a0&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -648,11 +662,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##   mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 10.6 0.3982 10.58 9.841 11.41</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 11.36 0.6621 11.37 10.09 12.62</span>
 <span class="c">## pv</span>
-<span class="c">##   mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 10.6 0.3982 10.58 9.841 11.41</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 11.36 0.6621 11.37 10.09 12.62</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>

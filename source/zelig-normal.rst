@@ -71,7 +71,7 @@ Estimate model:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
     ##   normal: Normal Regression for Continuous Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -86,7 +86,11 @@ Summarize of regression coefficients:
 
 ::
 
-    ## Model: 1
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
     ## Call:  stats::glm(formula = unem ~ gdp + capmob + trade, family = gaussian("identity"), 
     ##     data = .)
     ## 
@@ -134,23 +138,23 @@ Generate first differences for the effect of high versus low trade on GDP:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 5.426 0.1932 5.426 5.033 5.787
+    ##      mean     sd   50%  2.5% 97.5%
+    ## [1,] 5.42 0.1944 5.424 5.036 5.801
     ## pv
-    ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 5.421 2.731 5.371 0.3809 10.78
+    ##       mean    sd   50%    2.5% 97.5%
+    ## [1,] 5.398 2.791 5.396 -0.1768 10.79
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 4.596 0.1853 4.598 4.236 4.928
+    ## [1,] 4.594 0.1852 4.596 4.239 4.947
     ## pv
     ##       mean    sd   50%    2.5% 97.5%
-    ## [1,] 4.635 2.699 4.682 -0.4362  10.1
+    ## [1,] 4.617 2.742 4.639 -0.4333 10.09
     ## fd
-    ##         mean   sd     50%   2.5%   97.5%
-    ## [1,] -0.8303 0.23 -0.8236 -1.273 -0.4089
+    ##         mean     sd     50%   2.5%   97.5%
+    ## [1,] -0.8259 0.2434 -0.8296 -1.306 -0.3326
 
 
 

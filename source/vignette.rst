@@ -5,8 +5,6 @@ Model Reference and Vignettes
 
 This section includes technical information on the models currently implemented in Zelig (5.0-1). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.
 
-------------
-
 Reference
 ~~~~~~~~~
 
@@ -23,50 +21,57 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Probit Regression <zprobit>`: ``zprobit$new()``
 - :ref:`Rare Events Logistic Regression <zrelogit>`: ``zrelogit$new()``
 - :ref:`Tobit Regression <ztobit>`: ``ztobit$new()``
+- :ref:`Bayesian Factor Analysis <zfactorbayes>`: ``zfactorbayes$new()``
 
-------------
+--------
 
 .. include:: zelig-exp.rst
 
-------------
+--------
 
 .. include:: zelig-gamma.rst
 
-------------
+--------
 
 .. include:: zelig-logit.rst
 
-------------
+--------
 
 .. include:: zelig-lognorm.rst
 
-------------
+--------
 
 .. include:: zelig-ls.rst
 
-------------
+--------
 
 .. include:: zelig-negbin.rst
 
-------------
+--------
 
 .. include:: zelig-normal.rst
 
-------------
+--------
 
 .. include:: zelig-poisson.rst
 
-------------
+--------
 
 .. include:: zelig-probit.rst
 
-------------
+--------
 
 .. include:: zelig-relogit.rst
 
-------------
+--------
 
 .. include:: zelig-tobit.rst
+
+--------
+
+.. include:: zelig-factorbayes.rst
+
+--------
 
 .. toctree::
    :hidden:
@@ -82,3 +87,4 @@ The following models are currently supported in Zelig 5.0-1:
    zelig-probit.rst
    zelig-relogit.rst
    zelig-tobit.rst
+   zelig-factorbayes.rst

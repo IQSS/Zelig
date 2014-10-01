@@ -99,7 +99,7 @@ of militarized interstate conflicts to the absence of disputes is
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2014.
     ##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -114,7 +114,11 @@ Summarize the model output:
 
 ::
 
-    ## Model: 1
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
     ## Call:  relogit(formula = cbind(conflict, 1 - conflict) ~ major + contig + 
     ##     power + maxdem + mindem + years, data = ., tau = 0.00343020423212146, 
     ##     bias.correct = TRUE, case.control = "prior")
@@ -158,7 +162,7 @@ Simulate quantities of interest:
     ##  -----
     ## ev
     ##          mean        sd      50%     2.5%    97.5%
-    ## [1,] 0.002405 0.0001582 0.002397 0.002104 0.002732
+    ## [1,] 0.002398 0.0001526 0.002394 0.002121 0.002709
     ## pv
     ##          0     1
     ## [1,] 0.997 0.003
@@ -206,7 +210,11 @@ Summarize the model output:
 
 ::
 
-    ## Model: 1
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
     ## Call:
     ## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country), 
     ##     data = .)
@@ -260,11 +268,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##   mean     sd   50%  2.5% 97.5%
-    ## 1 10.6 0.3982 10.58 9.841 11.41
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 11.36 0.6621 11.37 10.09 12.62
     ## pv
-    ##   mean     sd   50%  2.5% 97.5%
-    ## 1 10.6 0.3982 10.58 9.841 11.41
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 11.36 0.6621 11.37 10.09 12.62
 
 
 
@@ -289,7 +297,7 @@ default prior correction method for case control correction):
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2014.
     ##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -304,7 +312,11 @@ Summarize the model output:
 
 ::
 
-    ## Model: 1$lower.estimate
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## $lower.estimate
     ## 
     ## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE, 
     ##     case.control = "prior", ...) 
@@ -513,7 +525,7 @@ Summarize the model output:
     ## $formula
     ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
     ##     mindem + years
-    ## <environment: 0x103be7c60>
+    ## <environment: 0x7f8cee5d42a0>
     ## 
     ## attr(,"class")
     ## [1] "Relogit2" "Relogit" 
@@ -559,11 +571,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##   mean     sd   50%  2.5% 97.5%
-    ## 1 10.6 0.3982 10.58 9.841 11.41
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 11.36 0.6621 11.37 10.09 12.62
     ## pv
-    ##   mean     sd   50%  2.5% 97.5%
-    ## 1 10.6 0.3982 10.58 9.841 11.41
+    ##    mean     sd   50%  2.5% 97.5%
+    ## 1 11.36 0.6621 11.37 10.09 12.62
 
 
 

@@ -66,7 +66,7 @@
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://54.191.56.66/milestones/milestone-roadmap/Zelig5/">Roadmap</a></li>
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -95,7 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -187,7 +188,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -243,14 +245,18 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   gamma: Gamma Regression for Continuous, Positive Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:  stats::glm(formula = duration ~ fract + numst2, family = Gamma(&quot;inverse&quot;),</span>
 <span class="c">##     data = .)</span>
 <span class="c">##</span>
@@ -282,23 +288,23 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 14.45 1.026 14.36 12.64 16.53</span>
+<span class="c">##      mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 14.4 1.083 14.37 12.41 16.69</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd  50%  2.5% 97.5%</span>
-<span class="c">## [1,] 15.22 13.15 11.8 0.807 48.91</span>
+<span class="c">##       mean    sd  50%   2.5% 97.5%</span>
+<span class="c">## [1,] 14.71 12.46 11.3 0.5701 48.11</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean    sd  50%  2.5% 97.5%</span>
-<span class="c">## [1,] 19.18 1.096 19.1 17.33 21.55</span>
+<span class="c">##       mean   sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 19.23 1.07 19.19 17.27 21.52</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 19.38 16.77 14.71 1.177 63.36</span>
+<span class="c">## [1,] 18.33 15.74 13.96 1.005 56.99</span>
 <span class="c">## fd</span>
 <span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 4.723 1.479 4.699 1.898 7.627</span>
+<span class="c">## [1,] 4.832 1.536 4.836 1.607 7.794</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>

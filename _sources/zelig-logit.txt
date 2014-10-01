@@ -66,7 +66,7 @@ Estimating parameter values for the logistic regression:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   logit: Logistic Regression for Dichotomous Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -101,11 +101,11 @@ Simulating quantities of interest from the posterior distribution.
     ##  sim x :
     ##  -----
     ## ev
-    ##        mean      sd    50%   2.5% 97.5%
-    ## [1,] 0.7473 0.01229 0.7476 0.7232  0.77
+    ##        mean      sd    50%   2.5%  97.5%
+    ## [1,] 0.7483 0.01193 0.7486 0.7234 0.7707
     ## pv
-    ##          0     1
-    ## [1,] 0.227 0.773
+    ##         0    1
+    ## [1,] 0.23 0.77
 
 
 
@@ -140,7 +140,7 @@ other variables held at their default values.
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   logit: Logistic Regression for Dichotomous Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 .. sourcecode:: r
@@ -159,22 +159,22 @@ other variables held at their default values.
     ##  -----
     ## ev
     ##        mean      sd    50%   2.5%  97.5%
-    ## [1,] 0.8229 0.01035 0.8228 0.8026 0.8427
+    ## [1,] 0.8229 0.01061 0.8229 0.8026 0.8441
     ## pv
     ##          0     1
-    ## [1,] 0.143 0.857
+    ## [1,] 0.191 0.809
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean     sd    50%   2.5%  97.5%
-    ## [1,] 0.709 0.0132 0.7092 0.6834 0.7333
+    ##        mean      sd    50%   2.5%  97.5%
+    ## [1,] 0.7092 0.01308 0.7096 0.6846 0.7339
     ## pv
     ##          0     1
-    ## [1,] 0.288 0.712
+    ## [1,] 0.296 0.704
     ## fd
     ##         mean      sd     50%    2.5%    97.5%
-    ## [1,] -0.1139 0.01208 -0.1137 -0.1384 -0.09122
+    ## [1,] -0.1137 0.01121 -0.1137 -0.1351 -0.09211
 
 
 

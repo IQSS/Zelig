@@ -65,7 +65,7 @@
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://54.191.56.66/milestones/milestone-roadmap/Zelig5/">Roadmap</a></li>
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -95,6 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -245,6 +246,15 @@
 <li><a class="reference internal" href="#id66">See also</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#zelig-factorbayes">zelig-factorbayes</a><ul>
+<li><a class="reference internal" href="#id67">Syntax</a></li>
+<li><a class="reference internal" href="#id68">Inputs</a></li>
+<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
+<li><a class="reference internal" href="#id69">Example</a></li>
+<li><a class="reference internal" href="#id70">Model</a></li>
+<li><a class="reference internal" href="#id71">Output Values</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -303,6 +313,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -323,7 +334,6 @@
   <div class="section" id="model-reference-and-vignettes">
 <span id="vignettes"></span><h1>Model Reference and Vignettes<a class="headerlink" href="#model-reference-and-vignettes" title="Permalink to this headline">¶</a></h1>
 <p>This section includes technical information on the models currently implemented in Zelig (5.0-1). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.</p>
-<hr class="docutils" />
 <div class="section" id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <p>The following models are currently supported in Zelig 5.0-1:</p>
@@ -339,6 +349,7 @@
 <li><a class="reference internal" href="zelig-probit.html#zprobit"><em>Probit Regression</em></a>: <tt class="docutils literal"><span class="pre">zprobit$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-relogit.html#zrelogit"><em>Rare Events Logistic Regression</em></a>: <tt class="docutils literal"><span class="pre">zrelogit$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-tobit.html#ztobit"><em>Tobit Regression</em></a>: <tt class="docutils literal"><span class="pre">ztobit$new()</span></tt></li>
+<li><a class="reference internal" href="zelig-factorbayes.html#zfactorbayes"><em>Bayesian Factor Analysis</em></a>: <tt class="docutils literal"><span class="pre">zfactorbayes$new()</span></tt></li>
 </ul>
 <hr class="docutils" />
 </div>
@@ -413,14 +424,18 @@ its own cluster.</p>
 <span class="c">##   Olivia Lau, Kosuke Imai, Gary King. 2011.</span>
 <span class="c">##   exp: Exponential Regression for Duration Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">## Call:</span>
 <span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
 <span class="c">##     numst2, data = ., dist = &quot;exponential&quot;, model = FALSE)</span>
 <span class="c">##</span>
@@ -455,23 +470,23 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd  50%  2.5% 97.5%</span>
-<span class="c">## 1 15.33 1.436 15.3 12.62 18.47</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 15.34 1.467 15.26 12.69 18.47</span>
 <span class="c">## pv</span>
-<span class="c">##      mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 15.3 15.53 10.72 0.3769 52.16</span>
+<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
+<span class="c">## [1,] 15.83 15.95 10.94 0.3697 58.23</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 24.26 1.883 24.19 20.96  28.2</span>
+<span class="c">## 1 24.38 1.964 24.35 20.59 28.56</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 24.01 23.45 17.83 0.7343 85.99</span>
+<span class="c">## [1,] 22.74 23.95 15.48 0.5061 84.69</span>
 <span class="c">## fd</span>
 <span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 8.927 2.309 8.896 4.481 13.39</span>
+<span class="c">## 1 9.039 2.485 8.934 4.217 14.41</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -641,14 +656,18 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   gamma: Gamma Regression for Continuous, Positive Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:  stats::glm(formula = duration ~ fract + numst2, family = Gamma(&quot;inverse&quot;),</span>
 <span class="c">##     data = .)</span>
 <span class="c">##</span>
@@ -680,23 +699,23 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 14.45 1.026 14.36 12.64 16.53</span>
+<span class="c">##      mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 14.4 1.083 14.37 12.41 16.69</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd  50%  2.5% 97.5%</span>
-<span class="c">## [1,] 15.22 13.15 11.8 0.807 48.91</span>
+<span class="c">##       mean    sd  50%   2.5% 97.5%</span>
+<span class="c">## [1,] 14.71 12.46 11.3 0.5701 48.11</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean    sd  50%  2.5% 97.5%</span>
-<span class="c">## [1,] 19.18 1.096 19.1 17.33 21.55</span>
+<span class="c">##       mean   sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 19.23 1.07 19.19 17.27 21.52</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 19.38 16.77 14.71 1.177 63.36</span>
+<span class="c">## [1,] 18.33 15.74 13.96 1.005 56.99</span>
 <span class="c">## fd</span>
 <span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 4.723 1.479 4.699 1.898 7.627</span>
+<span class="c">## [1,] 4.832 1.536 4.836 1.607 7.794</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -827,7 +846,7 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables:</p>
@@ -845,11 +864,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean      sd    50%   2.5% 97.5%</span>
-<span class="c">## [1,] 0.7473 0.01229 0.7476 0.7232  0.77</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.7483 0.01193 0.7486 0.7234 0.7707</span>
 <span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.227 0.773</span>
+<span class="c">##         0    1</span>
+<span class="c">## [1,] 0.23 0.77</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -872,7 +891,7 @@ other variables held at their default values.</p>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
@@ -886,22 +905,22 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##        mean      sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.8229 0.01035 0.8228 0.8026 0.8427</span>
+<span class="c">## [1,] 0.8229 0.01061 0.8229 0.8026 0.8441</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.143 0.857</span>
+<span class="c">## [1,] 0.191 0.809</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean     sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.709 0.0132 0.7092 0.6834 0.7333</span>
+<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
+<span class="c">## [1,] 0.7092 0.01308 0.7096 0.6846 0.7339</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.288 0.712</span>
+<span class="c">## [1,] 0.296 0.704</span>
 <span class="c">## fd</span>
 <span class="c">##         mean      sd     50%    2.5%    97.5%</span>
-<span class="c">## [1,] -0.1139 0.01208 -0.1137 -0.1384 -0.09122</span>
+<span class="c">## [1,] -0.1137 0.01121 -0.1137 -0.1351 -0.09211</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -1075,14 +1094,18 @@ its own cluster.</p>
 <span class="c">##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.</span>
 <span class="c">##   lognorm: Log-Normal Regression for Duration Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>View the regression output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">## Call:</span>
 <span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
 <span class="c">##     numst2, data = ., dist = &quot;lognormal&quot;, model = FALSE)</span>
 <span class="c">##</span>
@@ -1116,23 +1139,23 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd  50% 2.5% 97.5%</span>
-<span class="c">## 1 18.23 2.444 18.1 13.9 23.48</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 18.26 2.409 18.08 14.36 23.89</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd  50% 2.5% 97.5%</span>
-<span class="c">## 1 18.23 2.444 18.1 13.9 23.48</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 18.26 2.409 18.08 14.36 23.89</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 31.85 3.643 31.59 25.38 40.18</span>
+<span class="c">##   mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 31.9 3.662 31.53 25.88 39.74</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 31.85 3.643 31.59 25.38 40.18</span>
+<span class="c">##   mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 31.9 3.662 31.53 25.88 39.74</span>
 <span class="c">## fd</span>
-<span class="c">##    mean  sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 13.62 3.7 13.43 6.345 20.98</span>
+<span class="c">##    mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## 1 13.64 3.718 13.53 6.55 20.94</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1297,14 +1320,18 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
 <span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Summarize regression coefficients:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:</span>
 <span class="c">## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)</span>
 <span class="c">##</span>
@@ -1334,22 +1361,22 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.432 0.1938 5.436 5.078 5.824</span>
+<span class="c">## 1 5.432 0.1958 5.433 5.037 5.812</span>
 <span class="c">## pv</span>
 <span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.432 0.1938 5.436 5.078 5.824</span>
+<span class="c">## 1 5.432 0.1958 5.433 5.037 5.812</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 4.606 0.192 4.612 4.247 5.018</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 4.608 0.1876 4.609 4.235 4.946</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 4.606 0.192 4.612 4.247 5.018</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 4.608 0.1876 4.609 4.235 4.946</span>
 <span class="c">## fd</span>
-<span class="c">##      mean     sd    50%   2.5%   97.5%</span>
-<span class="c">## 1 -0.8267 0.2416 -0.825 -1.283 -0.3601</span>
+<span class="c">##      mean     sd     50%   2.5%   97.5%</span>
+<span class="c">## 1 -0.8236 0.2385 -0.8297 -1.295 -0.3385</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -1372,7 +1399,7 @@ in the selected variable into discrete levels.</p>
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
 <span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Set values for the explanatory variables, using the default mean/mode
@@ -1529,7 +1556,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1Call:</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">## Call:</span>
 <span class="c">## survival::survreg(formula = Surv(duration, ciep12) ~ fract +</span>
 <span class="c">##     numst2, data = ., dist = &quot;lognormal&quot;, model = FALSE)</span>
 <span class="c">##</span>
@@ -1560,11 +1591,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean   sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 26.03 2.58 25.82 21.62 31.47</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 25.93 2.568 25.76 21.18 31.37</span>
 <span class="c">## pv</span>
-<span class="c">##    mean   sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 26.03 2.58 25.82 21.62 31.47</span>
+<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 25.93 2.568 25.76 21.18 31.37</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1713,14 +1744,18 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2008.</span>
 <span class="c">##   normal: Normal Regression for Continuous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Summarize of regression coefficients:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:  stats::glm(formula = unem ~ gdp + capmob + trade, family = gaussian(&quot;identity&quot;),</span>
 <span class="c">##     data = .)</span>
 <span class="c">##</span>
@@ -1751,23 +1786,23 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 5.426 0.1932 5.426 5.033 5.787</span>
+<span class="c">##      mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 5.42 0.1944 5.424 5.036 5.801</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## [1,] 5.421 2.731 5.371 0.3809 10.78</span>
+<span class="c">##       mean    sd   50%    2.5% 97.5%</span>
+<span class="c">## [1,] 5.398 2.791 5.396 -0.1768 10.79</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 4.596 0.1853 4.598 4.236 4.928</span>
+<span class="c">## [1,] 4.594 0.1852 4.596 4.239 4.947</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50%    2.5% 97.5%</span>
-<span class="c">## [1,] 4.635 2.699 4.682 -0.4362  10.1</span>
+<span class="c">## [1,] 4.617 2.742 4.639 -0.4333 10.09</span>
 <span class="c">## fd</span>
-<span class="c">##         mean   sd     50%   2.5%   97.5%</span>
-<span class="c">## [1,] -0.8303 0.23 -0.8236 -1.273 -0.4089</span>
+<span class="c">##         mean     sd     50%   2.5%   97.5%</span>
+<span class="c">## [1,] -0.8259 0.2434 -0.8296 -1.306 -0.3326</span>
 </pre></div>
 </div>
 <p>A visual summary of quantities of interest:</p>
@@ -1897,13 +1932,17 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   poisson: Poisson Regression for Event Count Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:  stats::glm(formula = num ~ target + coop, family = poisson(&quot;log&quot;),</span>
 <span class="c">##     data = .)</span>
 <span class="c">##</span>
@@ -1930,11 +1969,11 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## [1,] 3.252 0.242 3.238 2.802  3.73</span>
+<span class="c">##       mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## [1,] 3.254 0.2296 3.246 2.833 3.754</span>
 <span class="c">## pv</span>
-<span class="c">##      mean    sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.28 1.812   3    0     7</span>
+<span class="c">##       mean    sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.261 1.925   3    0     8</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -2059,13 +2098,17 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   probit: Probit Regression for Dichotomous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:  stats::glm(formula = vote ~ race + educate, family = binomial(&quot;probit&quot;),</span>
 <span class="c">##     data = .)</span>
 <span class="c">##</span>
@@ -2250,14 +2293,18 @@ of militarized interstate conflicts to the absence of disputes is
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
 <span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:  relogit(formula = cbind(conflict, 1 - conflict) ~ major + contig +</span>
 <span class="c">##     power + maxdem + mindem + years, data = ., tau = 0.00343020423212146,</span>
 <span class="c">##     bias.correct = TRUE, case.control = &quot;prior&quot;)</span>
@@ -2288,7 +2335,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 0.002405 0.0001582 0.002397 0.002104 0.002732</span>
+<span class="c">## [1,] 0.002398 0.0001526 0.002394 0.002121 0.002709</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
 <span class="c">## [1,] 0.997 0.003</span>
@@ -2316,7 +2363,11 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:</span>
 <span class="c">## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country),</span>
 <span class="c">##     data = .)</span>
@@ -2357,11 +2408,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##   mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 10.6 0.3982 10.58 9.841 11.41</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 11.36 0.6621 11.37 10.09 12.62</span>
 <span class="c">## pv</span>
-<span class="c">##   mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 10.6 0.3982 10.58 9.841 11.41</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 11.36 0.6621 11.37 10.09 12.62</span>
 </pre></div>
 </div>
 </div>
@@ -2378,14 +2429,18 @@ default prior correction method for case control correction):</p>
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
 <span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1$lower.estimate</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">## $lower.estimate</span>
 <span class="c">##</span>
 <span class="c">## Call:  (function (formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,</span>
 <span class="c">##     case.control = &quot;prior&quot;, ...)</span>
@@ -2594,7 +2649,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x103be7c60&gt;</span>
+<span class="c">## &lt;environment: 0x7f8cee5d42a0&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -2620,11 +2675,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##   mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 10.6 0.3982 10.58 9.841 11.41</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 11.36 0.6621 11.37 10.09 12.62</span>
 <span class="c">## pv</span>
-<span class="c">##   mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 10.6 0.3982 10.58 9.841 11.41</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 11.36 0.6621 11.37 10.09 12.62</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -2869,7 +2924,7 @@ its own cluster.</p>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2011.</span>
 <span class="c">##   tobit: Linear regression for Left-Censored Dependent Variable</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables to their sample averages:</p>
@@ -2888,10 +2943,10 @@ its own cluster.</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.572 0.6871 1.499 0.5411 3.076</span>
+<span class="c">## 1 1.568 0.6895 1.469 0.5252 3.206</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd  50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.374 4.273 1.68    0  15.1</span>
+<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.184 4.252 1.617    0 15.25</span>
 </pre></div>
 </div>
 </div>
@@ -2916,23 +2971,23 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.232 0.789 1.098 0.1561 3.145</span>
+<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 1.198 0.7758 1.057 0.1641 3.203</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.073 3.905 1.616    0 12.86</span>
+<span class="c">## [1,] 3.098 4.137 1.445    0 13.75</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 2.036 1.032 1.902 0.516 4.433</span>
+<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 2.016 0.9488 1.875 0.5004 4.167</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.403 4.071 2.109    0 13.22</span>
+<span class="c">## [1,] 3.571 4.346 2.064    0 14.93</span>
 <span class="c">## fd</span>
-<span class="c">##     mean    sd    50%   2.5% 97.5%</span>
-<span class="c">## 1 0.8035 1.233 0.7436 -1.368 3.527</span>
+<span class="c">##     mean  sd    50%  2.5% 97.5%</span>
+<span class="c">## 1 0.8181 1.2 0.7522 -1.62 3.413</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -3012,6 +3067,226 @@ may view. For example, if you run:</p>
 <p>The tobit function is part of the survival library by Terry Therneau,
 ported to R by Thomas Lumley. Advanced users may wish to refer to
 <tt class="docutils literal"><span class="pre">help(survfit)</span></tt> in the survival library.</p>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="zelig-factorbayes">
+<span id="zfactorbayes"></span><h2>zelig-factorbayes<a class="headerlink" href="#zelig-factorbayes" title="Permalink to this headline">¶</a></h2>
+<p>Given some unobserved explanatory variables and observed dependent
+variables, the Normal theory factor analysis model estimates the latent
+factors. The model is implemented using a Markov Chain Monte Carlo
+algorithm (Gibbs sampling with data augmentation). For factor analysis
+with ordinal dependent variables, see ordered factor analysis (), and
+for a mix of types of dependent variables, see the mixed factor analysis
+model ().</p>
+<div class="section" id="id67">
+<h3>Syntax<a class="headerlink" href="#id67" title="Permalink to this headline">¶</a></h3>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zfactorbayes<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>cbind<span class="p">(</span>Y1 <span class="p">,</span>Y2<span class="p">,</span> Y3<span class="p">)</span> <span class="o">~</span> <span class="kc">NULL</span><span class="p">,</span> factors <span class="o">=</span> <span class="m">2</span><span class="p">,</span>
+         model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>cbind<span class="p">(</span>Y1 <span class="p">,</span>Y2<span class="p">,</span> Y3<span class="p">)</span> <span class="o">~</span> <span class="kc">NULL</span><span class="p">,</span> factors <span class="o">=</span> <span class="m">2</span><span class="p">,</span>
+               model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id68">
+<h3>Inputs<a class="headerlink" href="#id68" title="Permalink to this headline">¶</a></h3>
+<p>zelig() takes the following functions for factor.bayes:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Y1</span></tt>, <tt class="docutils literal"><span class="pre">Y2</span></tt>, and <tt class="docutils literal"><span class="pre">Y3</span></tt>: variables of interest in factor analysis
+(manifest variables), assumed to be normally distributed. The model
+requires a minimum of three manifest variables.</li>
+<li><tt class="docutils literal"><span class="pre">factors</span></tt>: number of the factors to be fitted (defaults to 2).</li>
+</ul>
+</div>
+<div class="section" id="additional-inputs">
+<h3>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h3>
+<p>In addition, zelig() accepts the following additional arguments for
+model specification:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">lambda.constraints</span></tt>: list containing the equality or inequality
+constraints on the factor loadings. Choose from one of the following
+forms:<ul>
+<li>varname = list(): by default, no constraints are imposed.</li>
+<li><tt class="docutils literal"><span class="pre">varname</span> <span class="pre">=</span> <span class="pre">list(d,</span> <span class="pre">c)</span></tt>: constrains the <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/>th loading for
+the variable named <tt class="docutils literal"><span class="pre">varname</span></tt> to be equal to <tt class="docutils literal"><span class="pre">c</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">varname</span> <span class="pre">=</span> <span class="pre">list(d,</span> <span class="pre">+)</span></tt>: constrains the <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/>th loading for
+the variable named <tt class="docutils literal"><span class="pre">varname</span></tt> to be positive;</li>
+<li><tt class="docutils literal"><span class="pre">varname</span> <span class="pre">=</span> <span class="pre">list(d,</span> <span class="pre">-)</span></tt>: constrains the <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/>th loading for
+the variable named <tt class="docutils literal"><span class="pre">varname</span></tt> to be negative.</li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">std.var</span></tt>: defaults to FALSE (manifest variables are rescaled to
+zero mean, but retain observed variance). If <tt class="docutils literal"><span class="pre">TRUE</span></tt>, the manifest
+variables are rescaled to be mean zero and unit variance.</li>
+</ul>
+<p>In addition, zelig() accepts the following additional inputs for
+bayes.factor:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">burnin</span></tt>: number of the initial MCMC iterations to be discarded
+(defaults to 1,000).</li>
+<li><tt class="docutils literal"><span class="pre">mcmc</span></tt>: number of the MCMC iterations after burnin (defaults to
+20,000).</li>
+<li><tt class="docutils literal"><span class="pre">thin</span></tt>: thinning interval for the Markov chain. Only every
+<tt class="docutils literal"><span class="pre">thin</span></tt>-th draw from the Markov chain is kept. The value of <tt class="docutils literal"><span class="pre">mcmc</span></tt>
+must be divisible by this value. The default value is 1.</li>
+<li><tt class="docutils literal"><span class="pre">verbose</span></tt>: defaults to FALSE. If <tt class="docutils literal"><span class="pre">TRUE</span></tt>, the progress of the
+sampler (every <img class="math" src="_images/math/edce6cd55e38e73a0341fc79fb72bb04c90eeca4.png" alt="10\%"/>) is printed to the screen.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: seed for the random number generator. The default is <tt class="docutils literal"><span class="pre">NA</span></tt>
+which corresponds to a random seed 12345.</li>
+<li><tt class="docutils literal"><span class="pre">Lambda.start</span></tt>: starting values of the factor loading matrix
+<img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/>, either a scalar (all unconstrained loadings are set
+to that value), or a matrix with compatible dimensions. The default
+is <tt class="docutils literal"><span class="pre">NA</span></tt>, where the start value are set to be 0 for unconstrained
+factor loadings, and 0.5 or <img class="math" src="_images/math/03e927fcb222d9b3da8313fec8a194aabd267f3c.png" alt="-"/>0.5 for constrained factor
+loadings (depending on the nature of the constraints).</li>
+<li><tt class="docutils literal"><span class="pre">Psi.start</span></tt>: starting values for the uniquenesses, either a scalar
+(the starting values for all diagonal elements of <img class="math" src="_images/math/de6f6ec55da5bff04bdf591d5bb35136eb51b579.png" alt="\Psi"/> are
+set to be this value), or a vector with length equal to the number of
+manifest variables. In the latter case, the starting values of the
+diagonal elements of <img class="math" src="_images/math/de6f6ec55da5bff04bdf591d5bb35136eb51b579.png" alt="\Psi"/> take the values of <tt class="docutils literal"><span class="pre">Psi.start</span></tt>.
+The default value is <tt class="docutils literal"><span class="pre">NA</span></tt> where the starting values of the all the
+uniquenesses are set to be 0.5.</li>
+<li><tt class="docutils literal"><span class="pre">store.lambda</span></tt>: defaults to TRUE, which stores the posterior draws
+of the factor loadings.</li>
+<li><tt class="docutils literal"><span class="pre">store.scores</span></tt>: defaults to FALSE. If TRUE, stores the posterior
+draws of the factor scores. (Storing factor scores may take large
+amount of memory for a large number of draws or observations.)</li>
+</ul>
+<p>The model also accepts the following additional arguments to specify
+prior parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">l0</span></tt>: mean of the Normal prior for the factor loadings, either a
+scalar or a matrix with the same dimensions as <img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/>. If a
+scalar value, that value will be the prior mean for all the factor
+loadings. Defaults to 0.</li>
+<li><tt class="docutils literal"><span class="pre">L0</span></tt>: precision parameter of the Normal prior for the factor
+loadings, either a scalar or a matrix with the same dimensions as
+<img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/>. If <tt class="docutils literal"><span class="pre">L0</span></tt> takes a scalar value, then the precision
+matrix will be a diagonal matrix with the diagonal elements set to
+that value. The default value is 0, which leads to an improper prior.</li>
+<li><tt class="docutils literal"><span class="pre">a0</span></tt>: the shape parameter of the Inverse Gamma prior for the
+uniquenesses is <tt class="docutils literal"><span class="pre">a0/2</span></tt>. It can take a scalar value or a vector. The
+default value is 0.001.</li>
+<li><tt class="docutils literal"><span class="pre">b0</span></tt>: the shape parameter of the Inverse Gamma prior for the
+uniquenesses is <tt class="docutils literal"><span class="pre">b0/2</span></tt>. It can take a scalar value or a vector. The
+default value is 0.001.</li>
+</ul>
+<p>Zelig users may wish to refer to <tt class="docutils literal"><span class="pre">help(MCMCfactanal)</span></tt> for more
+information.</p>
+</div>
+<div class="section" id="id69">
+<h3>Example<a class="headerlink" href="#id69" title="Permalink to this headline">¶</a></h3>
+<p>Attaching the sample dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>swiss<span class="p">)</span>
+names<span class="p">(</span>swiss<span class="p">)</span> <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;Fert&quot;</span><span class="p">,</span> <span class="s">&quot;Agr&quot;</span><span class="p">,</span> <span class="s">&quot;Exam&quot;</span><span class="p">,</span> <span class="s">&quot;Educ&quot;</span><span class="p">,</span> <span class="s">&quot;Cath&quot;</span><span class="p">,</span> <span class="s">&quot;InfMort&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Factor analysis:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>cbind<span class="p">(</span>Agr<span class="p">,</span> Exam<span class="p">,</span> Educ<span class="p">,</span> Cath<span class="p">,</span> InfMort<span class="p">)</span> <span class="o">~</span> <span class="kc">NULL</span><span class="p">,</span>
+               model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> swiss<span class="p">,</span> factors <span class="o">=</span> <span class="m">2</span><span class="p">,</span> verbose <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+               a0 <span class="o">=</span> <span class="m">1</span><span class="p">,</span> b0 <span class="o">=</span> <span class="m">0.15</span><span class="p">,</span> burnin <span class="o">=</span> <span class="m">5000</span><span class="p">,</span> mcmc <span class="o">=</span> <span class="m">50000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Checking for convergence before summarizing the estimates:</p>
+<div class="highlight-r"><div class="highlight"><pre>algor <span class="o">&lt;-</span> try<span class="p">(</span>geweke.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">),</span> silent<span class="o">=</span><span class="k-Variable">T</span><span class="p">)</span>
+<span class="kr">if</span> <span class="p">(</span>class<span class="p">(</span>algor<span class="p">)</span> <span class="o">==</span> <span class="s">&quot;try-error&quot;</span><span class="p">)</span>
+    print<span class="p">(</span>algor<span class="p">)</span>
+</pre></div>
+</div>
+<p>Since the algorithm did not converge, we now add some constraints on
+<img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/> to optimize the algorithm:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>cbind<span class="p">(</span>Agr<span class="p">,</span> Exam<span class="p">,</span> Educ<span class="p">,</span> Cath<span class="p">,</span> InfMort<span class="p">)</span> <span class="o">~</span> <span class="kc">NULL</span><span class="p">,</span>
+               model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> swiss<span class="p">,</span> factors <span class="o">=</span> <span class="m">2</span><span class="p">,</span>
+               lambda.constraints <span class="o">=</span> list<span class="p">(</span>Exam <span class="o">=</span> list<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="s">&quot;+&quot;</span><span class="p">),</span>
+                   Exam <span class="o">=</span> list<span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="s">&quot;-&quot;</span><span class="p">),</span> Educ <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span>
+                   InfMort <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+               verbose <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> a0 <span class="o">=</span> <span class="m">1</span><span class="p">,</span> b0 <span class="o">=</span> <span class="m">0.15</span><span class="p">,</span>
+               burnin <span class="o">=</span> <span class="m">5000</span><span class="p">,</span> mcmc <span class="o">=</span> <span class="m">50000</span><span class="p">)</span>
+geweke.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+heidel.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+raftery.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id70">
+<h3>Model<a class="headerlink" href="#id70" title="Permalink to this headline">¶</a></h3>
+<p>Suppose for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> we observe <img class="math" src="_images/math/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K"/> variables and
+hypothesize that there are <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/> underlying factors such that:</p>
+<div class="math">
+<p><img src="_images/math/e2ef04e9babfcd829100c089b8409a81a9095115.png" alt="\begin{aligned}
+Y_i = \Lambda \phi_i+\epsilon_i\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/0e1e069d7b701cb98cfecc70660e4e31b786db9a.png" alt="Y_{i}"/> is the vector of <img class="math" src="_images/math/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K"/> manifest variables for
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>. <img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/> is the <img class="math" src="_images/math/990c0ad210f52f294b999caf66e3ff8d0cfaec86.png" alt="K \times d"/> factor
+loading matrix and <img class="math" src="_images/math/ca5185b32984bfd8107d41af4a27499db30b7102.png" alt="\phi_i"/> is the <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/>-vector of latent
+factor scores. Both <img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/> and <img class="math" src="_images/math/10e009bdb83f96c5f47c58b34d5d4b12ef268d5b.png" alt="\phi"/> need to be
+estimated.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by:</p>
+<div class="math">
+<p><img src="_images/math/0baa7603f3ae0325e5f490e904db0fb107e08c5c.png" alt="\begin{aligned}
+\epsilon_{i}  \sim \textrm{Normal}(0, \Psi).\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/de6f6ec55da5bff04bdf591d5bb35136eb51b579.png" alt="\Psi"/> is a diagonal, positive definite matrix. The
+diagonal elements of <img class="math" src="_images/math/de6f6ec55da5bff04bdf591d5bb35136eb51b579.png" alt="\Psi"/> are referred to as uniquenesses.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/5a20aedd49dd26956cd9f786bd39a83f21cc900c.png" alt="\begin{aligned}
+\mu_i = E(Y_i) = \Lambda\phi_i\end{aligned}"/></p>
+</div></li>
+<li><p class="first">The independent conjugate <em>prior</em> for each <img class="math" src="_images/math/f19197f93cc1d1edf2411522363a0be6feb1651a.png" alt="\Lambda_{ij}"/> is
+given by</p>
+<div class="math">
+<p><img src="_images/math/20bef115cb56894e312db6c08a7101a1288528a0.png" alt="\begin{aligned}
+\Lambda_{ij} \sim \textrm{Normal}(l_{0_{ij}}, L_{0_{ij}}^{-1})
+\textrm{ for } i=1,\ldots, k; \quad j=1,\ldots, d. \end{aligned}"/></p>
+</div></li>
+<li><p class="first">The independent conjugate <em>prior</em> for each <img class="math" src="_images/math/e3722bc14e22b59a627887c08fffa161387bef20.png" alt="\Psi_{ii}"/> is given
+by</p>
+<div class="math">
+<p><img src="_images/math/183955a52e4eac8778c685478c004c6d2c001af3.png" alt="\begin{aligned}
+\Psi_{ii} \sim \textrm{InverseGamma}(\frac{a_0}{2}, \frac{b_0}{2}), \textrm{ for }
+i = 1, \ldots, k.\end{aligned}"/></p>
+</div></li>
+<li><p class="first">The <em>prior</em> for <img class="math" src="_images/math/ca5185b32984bfd8107d41af4a27499db30b7102.png" alt="\phi_i"/> is</p>
+<div class="math">
+<p><img src="_images/math/2ef6db0c88292f54d9310202c5304b0bac0707ab.png" alt="\begin{aligned}
+\phi_i &amp;\sim&amp; \textrm{Normal}(0, I_d), \textrm{ for } i = 1, \ldots, n.\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/6fcd6923eaac15a18f3b304221cfac4f64034a64.png" alt="I_d"/> is a :math:` dtimes d ` identity matrix.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id71">
+<h3>Output Values<a class="headerlink" href="#id71" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>cbind<span class="p">(</span>Y1<span class="p">,</span> Y2<span class="p">,</span> Y3<span class="p">),</span> model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data<span class="p">)</span>
+</pre></div>
+</div>
+<p>then you may examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the draws from the posterior distribution of the
+<tt class="docutils literal"><span class="pre">coefficients</span></tt> by using <tt class="docutils literal"><span class="pre">z.out$coefficients</span></tt>, and view a default
+summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements
+available through the <tt class="docutils literal"><span class="pre">$</span></tt> operator are listed below.</p>
+<ul class="simple">
+<li>From the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object <tt class="docutils literal"><span class="pre">z.out</span></tt>, you may extract:<ul>
+<li><tt class="docutils literal"><span class="pre">coefficients</span></tt>: draws from the posterior distributions of the
+estimated factor loadings and the uniquenesses. If
+<tt class="docutils literal"><span class="pre">store.scores</span> <span class="pre">=</span> <span class="pre">TRUE</span></tt>, the estimated factors scores are also
+contained in <tt class="docutils literal"><span class="pre">coefficients</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">data</span></tt>: the name of the input data frame.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: the random seed used in the model.</li>
+</ul>
+</li>
+<li>Since there are no explanatory variables, the <tt class="docutils literal"><span class="pre">sim()</span></tt> procedure is
+not applicable for factor analysis models.</li>
+</ul>
+<hr class="docutils" />
 <div class="toctree-wrapper compound">
 </div>
 </div>

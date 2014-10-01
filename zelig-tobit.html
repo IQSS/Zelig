@@ -34,7 +34,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
     <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
-    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="next" title="zelig-factorbayes" href="zelig-factorbayes.html" />
     <link rel="prev" title="zelig-relogit" href="zelig-relogit.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -66,7 +66,7 @@
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://54.191.56.66/milestones/milestone-roadmap/Zelig5/">Roadmap</a></li>
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -95,7 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -150,7 +151,7 @@
     </a>
   </li>
   <li>
-    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
+    <a href="zelig-factorbayes.html" title="Next Chapter: zelig-factorbayes"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">zelig-factorbaye... &raquo;</span>
     </a>
   </li>
               
@@ -192,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -283,7 +285,7 @@ its own cluster.</p>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2011.</span>
 <span class="c">##   tobit: Linear regression for Left-Censored Dependent Variable</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Setting values for the explanatory variables to their sample averages:</p>
@@ -302,10 +304,10 @@ its own cluster.</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.572 0.6871 1.499 0.5411 3.076</span>
+<span class="c">## 1 1.568 0.6895 1.469 0.5252 3.206</span>
 <span class="c">## pv</span>
-<span class="c">##       mean    sd  50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.374 4.273 1.68    0  15.1</span>
+<span class="c">##       mean    sd   50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.184 4.252 1.617    0 15.25</span>
 </pre></div>
 </div>
 </div>
@@ -330,23 +332,23 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.232 0.789 1.098 0.1561 3.145</span>
+<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 1.198 0.7758 1.057 0.1641 3.203</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.073 3.905 1.616    0 12.86</span>
+<span class="c">## [1,] 3.098 4.137 1.445    0 13.75</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 2.036 1.032 1.902 0.516 4.433</span>
+<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 2.016 0.9488 1.875 0.5004 4.167</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.403 4.071 2.109    0 13.22</span>
+<span class="c">## [1,] 3.571 4.346 2.064    0 14.93</span>
 <span class="c">## fd</span>
-<span class="c">##     mean    sd    50%   2.5% 97.5%</span>
-<span class="c">## 1 0.8035 1.233 0.7436 -1.368 3.527</span>
+<span class="c">##     mean  sd    50%  2.5% 97.5%</span>
+<span class="c">## 1 0.8181 1.2 0.7522 -1.62 3.413</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>

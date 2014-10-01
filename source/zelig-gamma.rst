@@ -66,7 +66,7 @@ Estimate the model:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   gamma: Gamma Regression for Continuous, Positive Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -81,7 +81,11 @@ View the regression output:
 
 ::
 
-    ## Model: 1
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
     ## Call:  stats::glm(formula = duration ~ fract + numst2, family = Gamma("inverse"), 
     ##     data = .)
     ## 
@@ -130,23 +134,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 14.45 1.026 14.36 12.64 16.53
+    ##      mean    sd   50%  2.5% 97.5%
+    ## [1,] 14.4 1.083 14.37 12.41 16.69
     ## pv
-    ##       mean    sd  50%  2.5% 97.5%
-    ## [1,] 15.22 13.15 11.8 0.807 48.91
+    ##       mean    sd  50%   2.5% 97.5%
+    ## [1,] 14.71 12.46 11.3 0.5701 48.11
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean    sd  50%  2.5% 97.5%
-    ## [1,] 19.18 1.096 19.1 17.33 21.55
+    ##       mean   sd   50%  2.5% 97.5%
+    ## [1,] 19.23 1.07 19.19 17.27 21.52
     ## pv
     ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 19.38 16.77 14.71 1.177 63.36
+    ## [1,] 18.33 15.74 13.96 1.005 56.99
     ## fd
     ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 4.723 1.479 4.699 1.898 7.627
+    ## [1,] 4.832 1.536 4.836 1.607 7.794
 
 
 

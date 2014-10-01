@@ -66,7 +66,7 @@ Estimate Poisson model:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   poisson: Poisson Regression for Event Count Dependent Variables
     ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
-    ##   http://datascience.iq.harvard.edu/zelig
+    ##   http://zeligproject.org/
 
 
 
@@ -79,7 +79,11 @@ Estimate Poisson model:
 
 ::
 
-    ## Model: 1
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
     ## Call:  stats::glm(formula = num ~ target + coop, family = poisson("log"), 
     ##     data = .)
     ## 
@@ -119,11 +123,11 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 3.252 0.242 3.238 2.802  3.73
+    ##       mean     sd   50%  2.5% 97.5%
+    ## [1,] 3.254 0.2296 3.246 2.833 3.754
     ## pv
-    ##      mean    sd 50% 2.5% 97.5%
-    ## [1,] 3.28 1.812   3    0     7
+    ##       mean    sd 50% 2.5% 97.5%
+    ## [1,] 3.261 1.925   3    0     8
 
 
 

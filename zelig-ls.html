@@ -66,7 +66,7 @@
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
             
-                <li><a href="http://54.191.56.66/milestones/milestone-roadmap/Zelig5/">Roadmap</a></li>
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -95,7 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -191,7 +192,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -246,14 +248,18 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
 <span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Summarize regression coefficients:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model: 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
 <span class="c">## Call:</span>
 <span class="c">## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)</span>
 <span class="c">##</span>
@@ -283,22 +289,22 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.432 0.1938 5.436 5.078 5.824</span>
+<span class="c">## 1 5.432 0.1958 5.433 5.037 5.812</span>
 <span class="c">## pv</span>
 <span class="c">##    mean     sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 5.432 0.1938 5.436 5.078 5.824</span>
+<span class="c">## 1 5.432 0.1958 5.433 5.037 5.812</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 4.606 0.192 4.612 4.247 5.018</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 4.608 0.1876 4.609 4.235 4.946</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 4.606 0.192 4.612 4.247 5.018</span>
+<span class="c">##    mean     sd   50%  2.5% 97.5%</span>
+<span class="c">## 1 4.608 0.1876 4.609 4.235 4.946</span>
 <span class="c">## fd</span>
-<span class="c">##      mean     sd    50%   2.5%   97.5%</span>
-<span class="c">## 1 -0.8267 0.2416 -0.825 -1.283 -0.3601</span>
+<span class="c">##      mean     sd     50%   2.5%   97.5%</span>
+<span class="c">## 1 -0.8236 0.2385 -0.8297 -1.295 -0.3385</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -321,7 +327,7 @@ in the selected variable into discrete levels.</p>
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
 <span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
 <span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
-<span class="c">##   http://datascience.iq.harvard.edu/zelig</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Set values for the explanatory variables, using the default mean/mode
