@@ -96,7 +96,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -194,7 +195,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -304,10 +306,10 @@ its own cluster.</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.568 0.6895 1.469 0.5252 3.206</span>
+<span class="c">## 1 1.547 0.6275 1.462 0.5676 2.978</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.184 4.252 1.617    0 15.25</span>
+<span class="c">## [1,] 3.291 4.331 1.637    0 13.96</span>
 </pre></div>
 </div>
 </div>
@@ -333,22 +335,22 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 1.198 0.7758 1.057 0.1641 3.203</span>
+<span class="c">## 1 1.184 0.7182 1.069 0.1974 2.957</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.098 4.137 1.445    0 13.75</span>
+<span class="c">## [1,] 3.113 4.147 1.364    0 13.46</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean     sd   50%   2.5% 97.5%</span>
-<span class="c">## 1 2.016 0.9488 1.875 0.5004 4.167</span>
+<span class="c">##    mean   sd   50%   2.5% 97.5%</span>
+<span class="c">## 1 2.103 1.05 1.954 0.5592 4.579</span>
 <span class="c">## pv</span>
 <span class="c">##       mean    sd   50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.571 4.346 2.064    0 14.93</span>
+<span class="c">## [1,] 3.759 4.338 2.412    0 14.35</span>
 <span class="c">## fd</span>
-<span class="c">##     mean  sd    50%  2.5% 97.5%</span>
-<span class="c">## 1 0.8181 1.2 0.7522 -1.62 3.413</span>
+<span class="c">##     mean    sd    50%   2.5% 97.5%</span>
+<span class="c">## 1 0.9197 1.204 0.8075 -1.227 3.563</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>

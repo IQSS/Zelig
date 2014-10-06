@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>zelig-factorbayes &mdash; Zelig 5.0-1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0-1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
+    <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
+    <link rel="next" title="zelig-mlogitbayes" href="zelig-mlogitbayes.html" />
+    <link rel="prev" title="zelig-tobit" href="zelig-tobit.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0-1</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-and-zelig">Installing R and Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">zelig-factorbayes</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#inputs">Inputs</a></li>
+<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="zelig-tobit.html" title="Previous Chapter: zelig-tobit"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; zelig-tobit</span>
+    </a>
+  </li>
+  <li>
+    <a href="zelig-mlogitbayes.html" title="Next Chapter: zelig-mlogitbayes"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">zelig-mlogitbaye... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="zelig-factorbayes">
+<span id="zfactorbayes"></span><h1>zelig-factorbayes<a class="headerlink" href="#zelig-factorbayes" title="Permalink to this headline">¶</a></h1>
+<p>Given some unobserved explanatory variables and observed dependent
+variables, the Normal theory factor analysis model estimates the latent
+factors. The model is implemented using a Markov Chain Monte Carlo
+algorithm (Gibbs sampling with data augmentation). For factor analysis
+with ordinal dependent variables, see ordered factor analysis (), and
+for a mix of types of dependent variables, see the mixed factor analysis
+model ().</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zfactorbayes<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>cbind<span class="p">(</span>Y1 <span class="p">,</span>Y2<span class="p">,</span> Y3<span class="p">)</span> <span class="o">~</span> <span class="kc">NULL</span><span class="p">,</span> factors <span class="o">=</span> <span class="m">2</span><span class="p">,</span>
+         model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>cbind<span class="p">(</span>Y1 <span class="p">,</span>Y2<span class="p">,</span> Y3<span class="p">)</span> <span class="o">~</span> <span class="kc">NULL</span><span class="p">,</span> factors <span class="o">=</span> <span class="m">2</span><span class="p">,</span>
+               model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>zelig() takes the following functions for factor.bayes:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Y1</span></tt>, <tt class="docutils literal"><span class="pre">Y2</span></tt>, and <tt class="docutils literal"><span class="pre">Y3</span></tt>: variables of interest in factor analysis
+(manifest variables), assumed to be normally distributed. The model
+requires a minimum of three manifest variables.</li>
+<li><tt class="docutils literal"><span class="pre">factors</span></tt>: number of the factors to be fitted (defaults to 2).</li>
+</ul>
+</div>
+<div class="section" id="additional-inputs">
+<h2>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
+<p>In addition, zelig() accepts the following additional arguments for
+model specification:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">lambda.constraints</span></tt>: list containing the equality or inequality
+constraints on the factor loadings. Choose from one of the following
+forms:<ul>
+<li>varname = list(): by default, no constraints are imposed.</li>
+<li><tt class="docutils literal"><span class="pre">varname</span> <span class="pre">=</span> <span class="pre">list(d,</span> <span class="pre">c)</span></tt>: constrains the <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/>th loading for
+the variable named <tt class="docutils literal"><span class="pre">varname</span></tt> to be equal to <tt class="docutils literal"><span class="pre">c</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">varname</span> <span class="pre">=</span> <span class="pre">list(d,</span> <span class="pre">+)</span></tt>: constrains the <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/>th loading for
+the variable named <tt class="docutils literal"><span class="pre">varname</span></tt> to be positive;</li>
+<li><tt class="docutils literal"><span class="pre">varname</span> <span class="pre">=</span> <span class="pre">list(d,</span> <span class="pre">-)</span></tt>: constrains the <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/>th loading for
+the variable named <tt class="docutils literal"><span class="pre">varname</span></tt> to be negative.</li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">std.var</span></tt>: defaults to FALSE (manifest variables are rescaled to
+zero mean, but retain observed variance). If <tt class="docutils literal"><span class="pre">TRUE</span></tt>, the manifest
+variables are rescaled to be mean zero and unit variance.</li>
+</ul>
+<p>In addition, zelig() accepts the following additional inputs for
+bayes.factor:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">burnin</span></tt>: number of the initial MCMC iterations to be discarded
+(defaults to 1,000).</li>
+<li><tt class="docutils literal"><span class="pre">mcmc</span></tt>: number of the MCMC iterations after burnin (defaults to
+20,000).</li>
+<li><tt class="docutils literal"><span class="pre">thin</span></tt>: thinning interval for the Markov chain. Only every
+<tt class="docutils literal"><span class="pre">thin</span></tt>-th draw from the Markov chain is kept. The value of <tt class="docutils literal"><span class="pre">mcmc</span></tt>
+must be divisible by this value. The default value is 1.</li>
+<li><tt class="docutils literal"><span class="pre">verbose</span></tt>: defaults to FALSE. If <tt class="docutils literal"><span class="pre">TRUE</span></tt>, the progress of the
+sampler (every <img class="math" src="_images/math/edce6cd55e38e73a0341fc79fb72bb04c90eeca4.png" alt="10\%"/>) is printed to the screen.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: seed for the random number generator. The default is <tt class="docutils literal"><span class="pre">NA</span></tt>
+which corresponds to a random seed 12345.</li>
+<li><tt class="docutils literal"><span class="pre">Lambda.start</span></tt>: starting values of the factor loading matrix
+<img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/>, either a scalar (all unconstrained loadings are set
+to that value), or a matrix with compatible dimensions. The default
+is <tt class="docutils literal"><span class="pre">NA</span></tt>, where the start value are set to be 0 for unconstrained
+factor loadings, and 0.5 or <img class="math" src="_images/math/03e927fcb222d9b3da8313fec8a194aabd267f3c.png" alt="-"/>0.5 for constrained factor
+loadings (depending on the nature of the constraints).</li>
+<li><tt class="docutils literal"><span class="pre">Psi.start</span></tt>: starting values for the uniquenesses, either a scalar
+(the starting values for all diagonal elements of <img class="math" src="_images/math/de6f6ec55da5bff04bdf591d5bb35136eb51b579.png" alt="\Psi"/> are
+set to be this value), or a vector with length equal to the number of
+manifest variables. In the latter case, the starting values of the
+diagonal elements of <img class="math" src="_images/math/de6f6ec55da5bff04bdf591d5bb35136eb51b579.png" alt="\Psi"/> take the values of <tt class="docutils literal"><span class="pre">Psi.start</span></tt>.
+The default value is <tt class="docutils literal"><span class="pre">NA</span></tt> where the starting values of the all the
+uniquenesses are set to be 0.5.</li>
+<li><tt class="docutils literal"><span class="pre">store.lambda</span></tt>: defaults to TRUE, which stores the posterior draws
+of the factor loadings.</li>
+<li><tt class="docutils literal"><span class="pre">store.scores</span></tt>: defaults to FALSE. If TRUE, stores the posterior
+draws of the factor scores. (Storing factor scores may take large
+amount of memory for a large number of draws or observations.)</li>
+</ul>
+<p>The model also accepts the following additional arguments to specify
+prior parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">l0</span></tt>: mean of the Normal prior for the factor loadings, either a
+scalar or a matrix with the same dimensions as <img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/>. If a
+scalar value, that value will be the prior mean for all the factor
+loadings. Defaults to 0.</li>
+<li><tt class="docutils literal"><span class="pre">L0</span></tt>: precision parameter of the Normal prior for the factor
+loadings, either a scalar or a matrix with the same dimensions as
+<img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/>. If <tt class="docutils literal"><span class="pre">L0</span></tt> takes a scalar value, then the precision
+matrix will be a diagonal matrix with the diagonal elements set to
+that value. The default value is 0, which leads to an improper prior.</li>
+<li><tt class="docutils literal"><span class="pre">a0</span></tt>: the shape parameter of the Inverse Gamma prior for the
+uniquenesses is <tt class="docutils literal"><span class="pre">a0/2</span></tt>. It can take a scalar value or a vector. The
+default value is 0.001.</li>
+<li><tt class="docutils literal"><span class="pre">b0</span></tt>: the shape parameter of the Inverse Gamma prior for the
+uniquenesses is <tt class="docutils literal"><span class="pre">b0/2</span></tt>. It can take a scalar value or a vector. The
+default value is 0.001.</li>
+</ul>
+<p>Zelig users may wish to refer to <tt class="docutils literal"><span class="pre">help(MCMCfactanal)</span></tt> for more
+information.</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Attaching the sample dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>swiss<span class="p">)</span>
+names<span class="p">(</span>swiss<span class="p">)</span> <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;Fert&quot;</span><span class="p">,</span> <span class="s">&quot;Agr&quot;</span><span class="p">,</span> <span class="s">&quot;Exam&quot;</span><span class="p">,</span> <span class="s">&quot;Educ&quot;</span><span class="p">,</span> <span class="s">&quot;Cath&quot;</span><span class="p">,</span> <span class="s">&quot;InfMort&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Factor analysis:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>cbind<span class="p">(</span>Agr<span class="p">,</span> Exam<span class="p">,</span> Educ<span class="p">,</span> Cath<span class="p">,</span> InfMort<span class="p">)</span> <span class="o">~</span> <span class="kc">NULL</span><span class="p">,</span>
+               model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> swiss<span class="p">,</span> factors <span class="o">=</span> <span class="m">2</span><span class="p">,</span> verbose <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+               a0 <span class="o">=</span> <span class="m">1</span><span class="p">,</span> b0 <span class="o">=</span> <span class="m">0.15</span><span class="p">,</span> burnin <span class="o">=</span> <span class="m">5000</span><span class="p">,</span> mcmc <span class="o">=</span> <span class="m">50000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Checking for convergence before summarizing the estimates:</p>
+<div class="highlight-r"><div class="highlight"><pre>algor <span class="o">&lt;-</span> try<span class="p">(</span>geweke.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">),</span> silent<span class="o">=</span><span class="k-Variable">T</span><span class="p">)</span>
+<span class="kr">if</span> <span class="p">(</span>class<span class="p">(</span>algor<span class="p">)</span> <span class="o">==</span> <span class="s">&quot;try-error&quot;</span><span class="p">)</span>
+    print<span class="p">(</span>algor<span class="p">)</span>
+</pre></div>
+</div>
+<p>Since the algorithm did not converge, we now add some constraints on
+<img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/> to optimize the algorithm:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>cbind<span class="p">(</span>Agr<span class="p">,</span> Exam<span class="p">,</span> Educ<span class="p">,</span> Cath<span class="p">,</span> InfMort<span class="p">)</span> <span class="o">~</span> <span class="kc">NULL</span><span class="p">,</span>
+               model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> swiss<span class="p">,</span> factors <span class="o">=</span> <span class="m">2</span><span class="p">,</span>
+               lambda.constraints <span class="o">=</span> list<span class="p">(</span>Exam <span class="o">=</span> list<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="s">&quot;+&quot;</span><span class="p">),</span>
+                   Exam <span class="o">=</span> list<span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="s">&quot;-&quot;</span><span class="p">),</span> Educ <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span>
+                   InfMort <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+               verbose <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> a0 <span class="o">=</span> <span class="m">1</span><span class="p">,</span> b0 <span class="o">=</span> <span class="m">0.15</span><span class="p">,</span>
+               burnin <span class="o">=</span> <span class="m">5000</span><span class="p">,</span> mcmc <span class="o">=</span> <span class="m">50000</span><span class="p">)</span>
+geweke.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+heidel.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+raftery.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>Suppose for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> we observe <img class="math" src="_images/math/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K"/> variables and
+hypothesize that there are <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/> underlying factors such that:</p>
+<div class="math">
+<p><img src="_images/math/e2ef04e9babfcd829100c089b8409a81a9095115.png" alt="\begin{aligned}
+Y_i = \Lambda \phi_i+\epsilon_i\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/0e1e069d7b701cb98cfecc70660e4e31b786db9a.png" alt="Y_{i}"/> is the vector of <img class="math" src="_images/math/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K"/> manifest variables for
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>. <img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/> is the <img class="math" src="_images/math/990c0ad210f52f294b999caf66e3ff8d0cfaec86.png" alt="K \times d"/> factor
+loading matrix and <img class="math" src="_images/math/ca5185b32984bfd8107d41af4a27499db30b7102.png" alt="\phi_i"/> is the <img class="math" src="_images/math/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d"/>-vector of latent
+factor scores. Both <img class="math" src="_images/math/7327d24dc2d12421147d5944f0fc23e67753f1b0.png" alt="\Lambda"/> and <img class="math" src="_images/math/10e009bdb83f96c5f47c58b34d5d4b12ef268d5b.png" alt="\phi"/> need to be
+estimated.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by:</p>
+<div class="math">
+<p><img src="_images/math/0baa7603f3ae0325e5f490e904db0fb107e08c5c.png" alt="\begin{aligned}
+\epsilon_{i}  \sim \textrm{Normal}(0, \Psi).\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/de6f6ec55da5bff04bdf591d5bb35136eb51b579.png" alt="\Psi"/> is a diagonal, positive definite matrix. The
+diagonal elements of <img class="math" src="_images/math/de6f6ec55da5bff04bdf591d5bb35136eb51b579.png" alt="\Psi"/> are referred to as uniquenesses.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/5a20aedd49dd26956cd9f786bd39a83f21cc900c.png" alt="\begin{aligned}
+\mu_i = E(Y_i) = \Lambda\phi_i\end{aligned}"/></p>
+</div></li>
+<li><p class="first">The independent conjugate <em>prior</em> for each <img class="math" src="_images/math/f19197f93cc1d1edf2411522363a0be6feb1651a.png" alt="\Lambda_{ij}"/> is
+given by</p>
+<div class="math">
+<p><img src="_images/math/20bef115cb56894e312db6c08a7101a1288528a0.png" alt="\begin{aligned}
+\Lambda_{ij} \sim \textrm{Normal}(l_{0_{ij}}, L_{0_{ij}}^{-1})
+\textrm{ for } i=1,\ldots, k; \quad j=1,\ldots, d. \end{aligned}"/></p>
+</div></li>
+<li><p class="first">The independent conjugate <em>prior</em> for each <img class="math" src="_images/math/e3722bc14e22b59a627887c08fffa161387bef20.png" alt="\Psi_{ii}"/> is given
+by</p>
+<div class="math">
+<p><img src="_images/math/183955a52e4eac8778c685478c004c6d2c001af3.png" alt="\begin{aligned}
+\Psi_{ii} \sim \textrm{InverseGamma}(\frac{a_0}{2}, \frac{b_0}{2}), \textrm{ for }
+i = 1, \ldots, k.\end{aligned}"/></p>
+</div></li>
+<li><p class="first">The <em>prior</em> for <img class="math" src="_images/math/ca5185b32984bfd8107d41af4a27499db30b7102.png" alt="\phi_i"/> is</p>
+<div class="math">
+<p><img src="_images/math/2ef6db0c88292f54d9310202c5304b0bac0707ab.png" alt="\begin{aligned}
+\phi_i &amp;\sim&amp; \textrm{Normal}(0, I_d), \textrm{ for } i = 1, \ldots, n.\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/6fcd6923eaac15a18f3b304221cfac4f64034a64.png" alt="I_d"/> is a :math:` dtimes d ` identity matrix.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>cbind<span class="p">(</span>Y1<span class="p">,</span> Y2<span class="p">,</span> Y3<span class="p">),</span> model <span class="o">=</span> <span class="s">&quot;factor.bayes&quot;</span><span class="p">,</span> data<span class="p">)</span>
+</pre></div>
+</div>
+<p>then you may examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the draws from the posterior distribution of the
+<tt class="docutils literal"><span class="pre">coefficients</span></tt> by using <tt class="docutils literal"><span class="pre">z.out$coefficients</span></tt>, and view a default
+summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements
+available through the <tt class="docutils literal"><span class="pre">$</span></tt> operator are listed below.</p>
+<ul class="simple">
+<li>From the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object <tt class="docutils literal"><span class="pre">z.out</span></tt>, you may extract:<ul>
+<li><tt class="docutils literal"><span class="pre">coefficients</span></tt>: draws from the posterior distributions of the
+estimated factor loadings and the uniquenesses. If
+<tt class="docutils literal"><span class="pre">store.scores</span> <span class="pre">=</span> <span class="pre">TRUE</span></tt>, the estimated factors scores are also
+contained in <tt class="docutils literal"><span class="pre">coefficients</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">data</span></tt>: the name of the input data frame.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: the random seed used in the model.</li>
+</ul>
+</li>
+<li>Since there are no explanatory variables, the <tt class="docutils literal"><span class="pre">sim()</span></tt> procedure is
+not applicable for factor analysis models.</li>
+</ul>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/zelig-factorbayes.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'http://zeligproject.org/');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

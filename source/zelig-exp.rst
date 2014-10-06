@@ -151,7 +151,25 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
+
+
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
+    ## Calls: lm -> lm.fit -> Ops.Surv
+
+
+.. sourcecode:: r
+    
+
     x.high <- setx(z.out, numst2 = 1)
+
+
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
+    ## Calls: lm -> lm.fit -> Ops.Surv
+
 
 
 Simulate expected values and first differences:
@@ -161,6 +179,12 @@ Simulate expected values and first differences:
     
 
     s.out <- sim(z.out, x = x.low, x1 = x.high)
+
+
+::
+
+    ## Error: object 'x.low' not found
+
 
 
 Summarize quantities of interest and produce some plots:
@@ -174,27 +198,7 @@ Summarize quantities of interest and produce some plots:
 
 ::
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 15.34 1.467 15.26 12.69 18.47
-    ## pv
-    ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 15.83 15.95 10.94 0.3697 58.23
-    ## 
-    ##  sim x1 :
-    ##  -----
-    ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 24.38 1.964 24.35 20.59 28.56
-    ## pv
-    ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 22.74 23.95 15.48 0.5061 84.69
-    ## fd
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 9.039 2.485 8.934 4.217 14.41
+    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
 
 
 
@@ -204,10 +208,12 @@ Summarize quantities of interest and produce some plots:
 
     plot(s.out)
 
-.. figure:: figure/Zelig-exp.png
-    :alt: Zelig-exp
 
-    Zelig-exp
+::
+
+    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
+
+
 
 Model
 +++++

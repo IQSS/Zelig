@@ -22,6 +22,7 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Rare Events Logistic Regression <zrelogit>`: ``zrelogit$new()``
 - :ref:`Tobit Regression <ztobit>`: ``ztobit$new()``
 - :ref:`Bayesian Factor Analysis <zfactorbayes>`: ``zfactorbayes$new()``
+- :ref:`Bayesian Multinomial Logistic Regression <zmlogitbayes>`: ``zmlogitbayes$new()``
 
 --------
 
@@ -73,6 +74,10 @@ The following models are currently supported in Zelig 5.0-1:
 
 --------
 
+.. include:: zelig-mlogitbayes.rst
+
+--------
+
 .. toctree::
    :hidden:
 
@@ -88,3 +93,4 @@ The following models are currently supported in Zelig 5.0-1:
    zelig-relogit.rst
    zelig-tobit.rst
    zelig-factorbayes.rst
+   zelig-mlogitbayes.rst

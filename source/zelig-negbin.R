@@ -21,7 +21,7 @@ data(sanction)
 
 
 ## ----, eval = TRUE-------------------------------------------------------
-z.out <- zelig(num ~ target + coop, model = "negbinom", data = sanction)
+z.out <- zelig(num ~ target + coop, model = "negbin", data = sanction)
 
 
 ## ----, eval = TRUE-------------------------------------------------------

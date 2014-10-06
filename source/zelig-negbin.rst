@@ -56,12 +56,16 @@ Estimate the model:
 .. sourcecode:: r
     
 
-    z.out <- zelig(num ~ target + coop, model = "negbinom", data = sanction)
+    z.out <- zelig(num ~ target + coop, model = "negbin", data = sanction)
 
 
 ::
 
-    ## Error: Model 'negbinom' not found
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
+    ##   negbinom: Negative Binomial Regression for Event Count Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://zeligproject.org/
 
 
 
@@ -78,19 +82,17 @@ Estimate the model:
     ## $by
     ## [1] 1
     ## 
-    ## Call:
-    ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
-    ##     numst2, data = ., dist = "lognormal", model = FALSE)
+    ## 
+    ## Call:  MASS::glm.nb(formula = num ~ target + coop, data = ., init.theta = 1.841603403, 
+    ##     link = log)
     ## 
     ## Coefficients:
-    ## (Intercept)       fract      numst2 
-    ##    5.366670   -0.004438    0.559833 
+    ## (Intercept)       target         coop  
+    ##      -1.564        0.151        1.286  
     ## 
-    ## Scale= 1.2 
-    ## 
-    ## Loglik(model)= -1078   Loglik(intercept only)= -1101
-    ## 	Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11 
-    ## n= 314 
+    ## Degrees of Freedom: 77 Total (i.e. Null);  75 Residual
+    ## Null Deviance:	    237 
+    ## Residual Deviance: 56.5 	AIC: 360
     ## Next step: Use 'setx' method
 
 
@@ -126,11 +128,14 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 25.93 2.568 25.76 21.18 31.37
+    ##       mean     sd  50%  2.5% 97.5%
+    ## [1,] 2.973 0.3545 2.95 2.313 3.705
     ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 25.93 2.568 25.76 21.18 31.37
+    ## qi
+    ##     0     1     2     3     4     5     6     7     8     9    10    11 
+    ## 0.158 0.178 0.171 0.128 0.115 0.061 0.059 0.040 0.029 0.015 0.012 0.009 
+    ##    12    13    14    16    17    27 
+    ## 0.011 0.005 0.003 0.003 0.002 0.001
 
 
 

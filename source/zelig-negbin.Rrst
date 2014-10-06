@@ -46,7 +46,7 @@ data(sanction)
 Estimate the model:
 
 .. {r, eval = TRUE}
-z.out <- zelig(num ~ target + coop, model = "negbinom", data = sanction)
+z.out <- zelig(num ~ target + coop, model = "negbin", data = sanction)
 .. ..
 
 .. {r, eval = TRUE}
