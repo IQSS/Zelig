@@ -23,6 +23,7 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Tobit Regression <ztobit>`: ``ztobit$new()``
 - :ref:`Bayesian Factor Analysis <zfactorbayes>`: ``zfactorbayes$new()``
 - :ref:`Bayesian Multinomial Logistic Regression <zmlogitbayes>`: ``zmlogitbayes$new()``
+- :ref:`Bayesian Ordered Probit Regression <zoprobitbayes>`: ``zoprobitbayes()``
 
 --------
 
