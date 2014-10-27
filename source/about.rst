@@ -14,8 +14,15 @@ Zelig leverages (R) code from many researchers and is designed to allow anyone t
 
 **Original Authors:** Kosuke Imai, Gary King, Olivia Lau
 
-**License:** GPL-2 | GPL-3 [expanded from: GPL (>= 2)]
+**Contributors:**  Christine Choirat, Matt Owen, Justin Grimmer, Jason Wittenberg, Badri Narayan Bhaskar, Skyler J. Cranmer, Ben Goodrich, Ying Lu, Patrick Lam, Nicholas Carnes, Alexander D'Amour, Delia Bailey, Ferdinand Alimadhi, Elena Villalon
 
+**To Cite Zelig,** please reference these two sources:
+
+  Kosuke Imai, Gary King, and Olivia Lau. 2007. "Zelig: Everyone's Statistical Software,"  http://zeligproject.org.
+
+  Imai, Kosuke, Gary King, and Olivia Lau. 2008. "Toward A Common Framework for Statistical Analysis and Development." Journal of Computational and Graphical Statistics, Vol. 17, No. 4 (December), pp. 892-913, http://j.mp/msE15c.
+
+**License:** GPL-2 | GPL-3 [expanded from: GPL (>= 2)]
 ------------
 
 Technical Vision
