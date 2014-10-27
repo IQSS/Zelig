@@ -12,10 +12,9 @@ Zelig leverages (R) code from many researchers and is designed to allow anyone t
 
 **Project Team Leads:** James Honaker, Christine Choirat, Muhammed Y. Idris
 
-`The Zelig Team: <http://datascience.iq.harvard.edu/team>`_
+**Original Authors:** Kosuke Imai, Gary King, Olivia Lau
 
 **License:** GPL-2 | GPL-3 [expanded from: GPL (>= 2)]
-
 
 ------------
 
