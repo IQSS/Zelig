@@ -62,6 +62,14 @@ Estimate the model:
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   gamma: Gamma Regression for Continuous, Positive Dependent Variables
@@ -91,11 +99,11 @@ View the regression output:
     ## 
     ## Coefficients:
     ## (Intercept)        fract       numst2  
-    ##   -0.012960     0.000115    -0.017387  
+    ##  -0.0129597    0.0001149   -0.0173875  
     ## 
     ## Degrees of Freedom: 313 Total (i.e. Null);  311 Residual
-    ## Null Deviance:	    301 
-    ## Residual Deviance: 272 	AIC: 2430
+    ## Null Deviance:	    300.7 
+    ## Residual Deviance: 272.2 	AIC: 2428
     ## Next step: Use 'setx' method
 
 
@@ -109,7 +117,27 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+.. sourcecode:: r
+    
+
     x.high <- setx(z.out, numst2 = 1)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
@@ -134,23 +162,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 14.46 1.043 14.38 12.65 16.72
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 14.49436 1.133461 14.42948 12.50823 16.88141
     ## pv
-    ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 14.62 12.87 11.46 0.701 48.21
+    ##          mean       sd      50%      2.5%    97.5%
+    ## [1,] 15.47088 13.97988 11.08507 0.7867524 53.69489
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##      mean    sd   50%  2.5% 97.5%
-    ## [1,] 19.2 1.138 19.13 17.14 21.59
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 19.20774 1.123939 19.19297 17.17585 21.61176
     ## pv
-    ##       mean    sd   50%   2.5% 97.5%
-    ## [1,] 19.69 16.84 15.04 0.9911  62.4
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 19.97156 16.74004 15.65463 1.065651 64.72188
     ## fd
-    ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 4.731 1.511 4.686 1.534 7.592
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 4.713388 1.613533 4.734867 1.454681 7.821281
 
 
 
@@ -160,7 +188,7 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
 
     plot(s.out)
 
-.. figure:: figure/Zelig-gamma.png
+.. figure:: figure/Zelig-gamma-1.png
     :alt: Zelig-gamma
 
     Zelig-gamma

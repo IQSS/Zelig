@@ -78,6 +78,10 @@ The following models are currently supported in Zelig 5.0-1:
 
 --------
 
+.. include:: zelig-oprobitbayes.rst
+
+--------
+
 .. toctree::
    :hidden:
 
@@ -94,3 +98,4 @@ The following models are currently supported in Zelig 5.0-1:
    zelig-tobit.rst
    zelig-factorbayes.rst
    zelig-mlogitbayes.rst
+   zelig-oprobitbayes.rst

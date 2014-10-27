@@ -102,6 +102,14 @@ Estimate the model:
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Olivia Lau, Kosuke Imai, Gary King. 2011.
     ##   exp: Exponential Regression for Duration Dependent Variables
@@ -130,12 +138,12 @@ View the regression output:
     ##     numst2, data = ., dist = "exponential", model = FALSE)
     ## 
     ## Coefficients:
-    ## (Intercept)       fract      numst2 
-    ##    5.535873   -0.003909    0.461179 
+    ##  (Intercept)        fract       numst2 
+    ##  5.535872596 -0.003908965  0.461179302 
     ## 
     ## Scale fixed at 1 
     ## 
-    ## Loglik(model)= -1077   Loglik(intercept only)= -1101
+    ## Loglik(model)= -1077.4   Loglik(intercept only)= -1100.7
     ## 	Chisq= 46.66 on 2 degrees of freedom, p= 7.4e-11 
     ## n= 314 
     ## Next step: Use 'setx' method
@@ -155,7 +163,15 @@ X:
 
 ::
 
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
+    ## Error in terms(lm(formula, data), "predvars"): error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
     ## Calls: lm -> lm.fit -> Ops.Surv
 
 
@@ -167,7 +183,15 @@ X:
 
 ::
 
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
+    ## Error in terms(lm(formula, data), "predvars"): error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
     ## Calls: lm -> lm.fit -> Ops.Surv
 
 
@@ -183,7 +207,7 @@ Simulate expected values and first differences:
 
 ::
 
-    ## Error: object 'x.low' not found
+    ## Error in sim(z.out, x = x.low, x1 = x.high): object 'x.low' not found
 
 
 
@@ -198,7 +222,7 @@ Summarize quantities of interest and produce some plots:
 
 ::
 
-    ## Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
+    ## Error in summary(s.out): error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
 
 
 
@@ -211,7 +235,7 @@ Summarize quantities of interest and produce some plots:
 
 ::
 
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
+    ## Error in plot(s.out): error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
 
 
 

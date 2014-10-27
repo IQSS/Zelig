@@ -97,7 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -107,7 +107,8 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
@@ -192,11 +193,12 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -282,6 +284,11 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span><span class="s">&quot;lognorm&quot;</span><span class="p">,</span>  data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.</span>
 <span class="c">##   lognorm: Log-Normal Regression for Duration Dependent Variables</span>
@@ -303,11 +310,11 @@ its own cluster.</p>
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
 <span class="c">## (Intercept)       fract      numst2</span>
-<span class="c">##    5.366670   -0.004438    0.559833</span>
+<span class="c">##  5.36666977 -0.00443755  0.55983251</span>
 <span class="c">##</span>
-<span class="c">## Scale= 1.2</span>
+<span class="c">## Scale= 1.20008</span>
 <span class="c">##</span>
-<span class="c">## Loglik(model)= -1078   Loglik(intercept only)= -1101</span>
+<span class="c">## Loglik(model)= -1077.9   Loglik(intercept only)= -1101.2</span>
 <span class="c">##  Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11</span>
 <span class="c">## n= 314</span>
 <span class="c">## Next step: Use &#39;setx&#39; method</span>
@@ -319,14 +326,24 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
 <span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
 <span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
 </pre></div>
 </div>
@@ -341,30 +358,30 @@ X:</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.7091 0.01293 0.7098 0.6829 0.7328</span>
+<span class="c">##           mean         sd       50%     2.5%     97.5%</span>
+<span class="c">## [1,] 0.7093374 0.01301656 0.7090911 0.683622 0.7344693</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.294 0.706</span>
+<span class="c">## [1,] 0.288 0.712</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean       sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.8224 0.009923 0.8226 0.8031 0.8417</span>
+<span class="c">##           mean        sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.8226968 0.0102796 0.8230415 0.8027372 0.8418958</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.178 0.822</span>
+<span class="c">## [1,] 0.161 0.839</span>
 <span class="c">## fd</span>
-<span class="c">##        mean      sd    50%    2.5%  97.5%</span>
-<span class="c">## [1,] 0.1134 0.01112 0.1132 0.09218 0.1363</span>
+<span class="c">##           mean         sd       50%       2.5%    97.5%</span>
+<span class="c">## [1,] 0.1133594 0.01182127 0.1131924 0.09178548 0.136596</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure">
-<img alt="Zelig-lognorm" src="_images/Zelig-lognorm.png" />
+<img alt="Zelig-lognorm" src="_images/Zelig-lognorm-1.png" />
 <p class="caption">Zelig-lognorm</p>
 </div>
 </div>

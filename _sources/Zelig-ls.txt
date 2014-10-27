@@ -62,6 +62,14 @@ Estimate model:
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
     ##   ls: Least Squares Regression for Continuous Dependent Variables
@@ -91,7 +99,7 @@ Summarize regression coefficients:
     ## 
     ## Coefficients:
     ## (Intercept)          gdp       capmob        trade  
-    ##      6.1813      -0.3236       1.4219       0.0199  
+    ##     6.18129     -0.32360      1.42194      0.01985  
     ## 
     ## Next step: Use 'setx' method
 
@@ -106,7 +114,27 @@ variable:
     
 
     x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+.. sourcecode:: r
+    
+
     x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 Generate first differences for the effect of high versus low trade on GDP:
@@ -131,23 +159,23 @@ Generate first differences for the effect of high versus low trade on GDP:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 5.434 0.1854 5.433 5.065 5.794
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 5.427399 0.1854713 5.421149 5.076452 5.778919
     ## pv
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 5.434 0.1854 5.433 5.065 5.794
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 5.427399 0.1854713 5.421149 5.076452 5.778919
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 4.591 0.1859 4.591 4.223 4.939
+    ##       mean        sd      50%    2.5%    97.5%
+    ## 1 4.604012 0.1870815 4.599499 4.22756 4.951179
     ## pv
-    ##    mean     sd   50%  2.5% 97.5%
-    ## 1 4.591 0.1859 4.591 4.223 4.939
+    ##       mean        sd      50%    2.5%    97.5%
+    ## 1 4.604012 0.1870815 4.599499 4.22756 4.951179
     ## fd
-    ##      mean     sd     50%   2.5%   97.5%
-    ## 1 -0.8432 0.2323 -0.8312 -1.321 -0.4059
+    ##         mean        sd        50%      2.5%      97.5%
+    ## 1 -0.8233864 0.2354673 -0.8204295 -1.297394 -0.3890579
 
 
 
@@ -157,7 +185,7 @@ Generate first differences for the effect of high versus low trade on GDP:
 
     plot(s.out1)
 
-.. figure:: figure/unnamed-chunk-10.png
+.. figure:: figure/unnamed-chunk-10-1.png
     :alt: 
 
     
@@ -179,6 +207,14 @@ in the selected variable into discrete levels.
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
     ##   ls: Least Squares Regression for Continuous Dependent Variables
@@ -196,7 +232,27 @@ respectively:
     
 
     x.US <- setx(z.out2, country = "United States")
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+.. sourcecode:: r
+    
+
     x.Japan <- setx(z.out2, country = "Japan")
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
    
 Simulate quantities of interest:
@@ -214,7 +270,7 @@ Simulate quantities of interest:
 
     plot(s.out2)
 
-.. figure:: figure/unnamed-chunk-14.png
+.. figure:: figure/unnamed-chunk-14-1.png
     :alt: 
 
     

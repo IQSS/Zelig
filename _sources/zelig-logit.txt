@@ -62,6 +62,14 @@ Estimating parameter values for the logistic regression:
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   logit: Logistic Regression for Dichotomous Dependent Variables
@@ -77,6 +85,14 @@ Setting values for the explanatory variables:
     
 
     x.out1 <- setx(z.out1, age = 36, race = "white")
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 Simulating quantities of interest from the posterior distribution.
@@ -101,11 +117,11 @@ Simulating quantities of interest from the posterior distribution.
     ##  sim x :
     ##  -----
     ## ev
-    ##        mean      sd    50%   2.5% 97.5%
-    ## [1,] 0.7486 0.01185 0.7486 0.7243 0.771
+    ##           mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.7482016 0.01167264 0.7484924 0.7253831 0.7705739
     ## pv
     ##          0     1
-    ## [1,] 0.255 0.745
+    ## [1,] 0.235 0.765
 
 
 
@@ -115,7 +131,7 @@ Simulating quantities of interest from the posterior distribution.
 
     plot(s.out1)
 
-.. figure:: figure/Zelig-logit-1.png
+.. figure:: figure/Zelig-logit-1-1.png
     :alt: Zelig-logit-1
 
     Zelig-logit-1
@@ -136,6 +152,14 @@ other variables held at their default values.
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   logit: Logistic Regression for Dichotomous Dependent Variables
@@ -147,7 +171,31 @@ other variables held at their default values.
     
 
     x.high <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.75))
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+.. sourcecode:: r
+    
+
     x.low <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.25))
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+.. sourcecode:: r
+    
+
     s.out2 <- sim(z.out2, x = x.high, x1 = x.low)
     summary(s.out2)
 
@@ -158,23 +206,23 @@ other variables held at their default values.
     ##  sim x :
     ##  -----
     ## ev
-    ##        mean     sd    50%   2.5%  97.5%
-    ## [1,] 0.8229 0.0102 0.8232 0.8028 0.8413
+    ##           mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.8229772 0.01057513 0.8232656 0.8020747 0.8423065
     ## pv
     ##          0     1
-    ## [1,] 0.195 0.805
+    ## [1,] 0.172 0.828
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##        mean      sd    50%   2.5%  97.5%
-    ## [1,] 0.7093 0.01318 0.7091 0.6834 0.7337
+    ##           mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.7103252 0.01311509 0.7110674 0.6840779 0.7353775
     ## pv
-    ##          0     1
-    ## [1,] 0.291 0.709
+    ##         0    1
+    ## [1,] 0.31 0.69
     ## fd
-    ##         mean      sd     50%    2.5%    97.5%
-    ## [1,] -0.1136 0.01203 -0.1135 -0.1379 -0.09082
+    ##           mean         sd        50%       2.5%       97.5%
+    ## [1,] -0.112652 0.01124223 -0.1128557 -0.1337459 -0.09155372
 
 
 
@@ -184,7 +232,7 @@ other variables held at their default values.
 
     plot(s.out2)
 
-.. figure:: figure/Zelig-logit-2.png
+.. figure:: figure/Zelig-logit-2-1.png
     :alt: Zelig-logit-2
 
     Zelig-logit-2

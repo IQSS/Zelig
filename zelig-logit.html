@@ -97,7 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -107,7 +107,8 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
@@ -195,11 +196,12 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -246,6 +248,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> age <span class="o">+</span> race<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
@@ -255,6 +262,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </div>
 <p>Setting values for the explanatory variables:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> age <span class="o">=</span> <span class="m">36</span><span class="p">,</span> race <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Simulating quantities of interest from the posterior distribution.</p>
@@ -268,18 +280,18 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean      sd    50%   2.5% 97.5%</span>
-<span class="c">## [1,] 0.7486 0.01185 0.7486 0.7243 0.771</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7482016 0.01167264 0.7484924 0.7253831 0.7705739</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.255 0.745</span>
+<span class="c">## [1,] 0.235 0.765</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure">
-<img alt="Zelig-logit-1" src="_images/Zelig-logit-1.png" />
+<img alt="Zelig-logit-1" src="_images/Zelig-logit-1-1.png" />
 <p class="caption">Zelig-logit-1</p>
 </div>
 </div>
@@ -291,6 +303,11 @@ other variables held at their default values.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
@@ -299,8 +316,22 @@ other variables held at their default values.</p>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
-x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
-s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
 summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
@@ -308,30 +339,30 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean     sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.8229 0.0102 0.8232 0.8028 0.8413</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.8229772 0.01057513 0.8232656 0.8020747 0.8423065</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.195 0.805</span>
+<span class="c">## [1,] 0.172 0.828</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##        mean      sd    50%   2.5%  97.5%</span>
-<span class="c">## [1,] 0.7093 0.01318 0.7091 0.6834 0.7337</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7103252 0.01311509 0.7110674 0.6840779 0.7353775</span>
 <span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.291 0.709</span>
+<span class="c">##         0    1</span>
+<span class="c">## [1,] 0.31 0.69</span>
 <span class="c">## fd</span>
-<span class="c">##         mean      sd     50%    2.5%    97.5%</span>
-<span class="c">## [1,] -0.1136 0.01203 -0.1135 -0.1379 -0.09082</span>
+<span class="c">##           mean         sd        50%       2.5%       97.5%</span>
+<span class="c">## [1,] -0.112652 0.01124223 -0.1128557 -0.1337459 -0.09155372</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure">
-<img alt="Zelig-logit-2" src="_images/Zelig-logit-2.png" />
+<img alt="Zelig-logit-2" src="_images/Zelig-logit-2-1.png" />
 <p class="caption">Zelig-logit-2</p>
 </div>
 </div>

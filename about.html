@@ -94,6 +94,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -103,7 +105,8 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">About Zelig</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#release-notes">Release Notes</a></li>
 </ul>
@@ -121,7 +124,8 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">About Zelig</a><ul>
+<li><a class="reference internal" href="#">About Zelig</a></li>
+<li><a class="reference internal" href="#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
 <li><a class="reference internal" href="#technical-vision">Technical Vision</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a></li>
 </ul>
@@ -167,7 +171,8 @@
 <li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">About Zelig</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#release-notes">Release Notes</a></li>
 </ul>
@@ -187,24 +192,21 @@
       
   <div class="section" id="about-zelig">
 <span id="about"></span><h1>About Zelig<a class="headerlink" href="#about-zelig" title="Permalink to this headline">¶</a></h1>
-<p>Zelig is an open-source project developed and maintained by the <a class="reference external" href="http://datascience.iq.harvard.edu/">Data Science group</a> at Harvard&#8217;s <a class="reference external" href="http://iq.harvard.edu">Institute for Quantitative Social Science</a>. It was originally conceived and created by Kosuke Imai, Gary King, and Olivia Lau in 2007. The name is borrowed from Woody Allen&#8217;s movie with the same name, Zelig. Leonard Zelig is a fictional character who takes on the characteristics of any strong personality around. Likewise, the Zelig statistical software easily adapts to any statistical model written in R, and in essence, takes the characteristics of any model.</p>
+<p>Zelig is an open-source project developed and maintained by the <a class="reference external" href="http://datascience.iq.harvard.edu/">Data Science group</a> at Harvard&#8217;s <a class="reference external" href="http://iq.harvard.edu">Institute for Quantitative Social Science</a>. It was conceived and created by Kosuke Imai, Gary King, and Olivia Lau in 2007. It is named for Leonard Zelig, a fictional character in a Woody Allen movie who takes on the personality of anyone around him, and thus fits into any situation. Likewise, Zelig software easily adapts to any statistical model and similarly fits into any situation.</p>
 <p>Zelig leverages (R) code from many researchers and is designed to allow anyone to contribute their methods to it. Hence, we often refer to Zelig as &#8220;everyone&#8217;s statistical software&#8221; and our aim is to make it, as well as the models it wraps, as accessible as possible. As such, it comes with self-contained documentation that minimizes startup costs, automates model summaries and graphics, and bridges existing R implementations through an intelligible call structure.</p>
-<p><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</p>
-<p><strong>Contact:</strong> For questions, please join the Zelig mailing list:
-<a class="reference external" href="https://groups.google.com/forum/#!forum/zelig-statistical-software">https://groups.google.com/forum/#!forum/zelig-statistical-software</a>.</p>
-<p><em>Original Authors:</em></p>
-<ul class="simple">
-<li><a class="reference external" href="http://gking.harvard.edu/">Gary King</a> <em>(Principal Investigator)</em></li>
-<li>Kosuke Imai</li>
-<li>Olivia Lau</li>
-</ul>
-<p><a class="reference external" href="http://datascience.iq.harvard.edu/team">The Zelig Team:</a></p>
-<ul class="simple">
-<li>James Honaker <em>(Project Lead)</em></li>
-<li>Christine Choirat <em>(Lead Author)</em></li>
-<li>Muhammed Y. Idris</li>
-</ul>
-<hr class="docutils" />
+<p><strong>Contact:</strong> For questions, please join the <a class="reference external" href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Zelig mailing list</a>.</p>
+<p><strong>Principal Investigator:</strong> <a class="reference external" href="http://gking.harvard.edu/">Gary King</a></p>
+<p><strong>Project Team Leads:</strong> James Honaker, Christine Choirat, Muhammed Y. Idris</p>
+<p><strong>Original Authors:</strong> Kosuke Imai, Gary King, Olivia Lau</p>
+<p><strong>Contributors:</strong>  Christine Choirat, Matt Owen, Justin Grimmer, Jason Wittenberg, Badri Narayan Bhaskar, Skyler J. Cranmer, Ben Goodrich, Ying Lu, Patrick Lam, Nicholas Carnes, Alexander D&#8217;Amour, Delia Bailey, Ferdinand Alimadhi, Elena Villalon</p>
+<p><strong>To Cite Zelig,</strong> please reference these two sources:</p>
+<blockquote>
+<div><p>Kosuke Imai, Gary King, and Olivia Lau. 2007. &#8220;Zelig: Everyone&#8217;s Statistical Software,&#8221;  <a class="reference external" href="http://zeligproject.org">http://zeligproject.org</a>.</p>
+<p>Imai, Kosuke, Gary King, and Olivia Lau. 2008. &#8220;Toward A Common Framework for Statistical Analysis and Development.&#8221; Journal of Computational and Graphical Statistics, Vol. 17, No. 4 (December), pp. 892-913, <a class="reference external" href="http://j.mp/msE15c">http://j.mp/msE15c</a>.</p>
+</div></blockquote>
+</div>
+<div class="section" id="license-gpl-2-gpl-3-expanded-from-gpl-2">
+<h1><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]<a class="headerlink" href="#license-gpl-2-gpl-3-expanded-from-gpl-2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="technical-vision">
 <h2>Technical Vision<a class="headerlink" href="#technical-vision" title="Permalink to this headline">¶</a></h2>
 <p>Zelig is a framework for interfacing a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, Zelig adds considerable infrastructure to existing heterogeneous R implementations by translating hard-to-interpret coefficients into quantities of interest (e.g., expected and predicted values) through a simple call structure. This includes many specific methods, based on likelihood, frequentist, Bayesian, robust Bayesian and nonparametric theories of inference. Developers are encouraged to add their R packages to the Zelig toolkit by writing a few simple bridge functions.</p>

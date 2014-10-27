@@ -59,6 +59,14 @@ Estimate parameter values for the probit regression:
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   probit: Probit Regression for Dichotomous Dependent Variables
@@ -86,11 +94,11 @@ Estimate parameter values for the probit regression:
     ## 
     ## Coefficients:
     ## (Intercept)    racewhite      educate  
-    ##     -0.7259       0.2991       0.0971  
+    ##    -0.72595      0.29908      0.09712  
     ## 
     ## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual
-    ## Null Deviance:	    2270 
-    ## Residual Deviance: 2140 	AIC: 2140
+    ## Null Deviance:	    2267 
+    ## Residual Deviance: 2136 	AIC: 2142
     ## Next step: Use 'setx' method
 
 
@@ -102,6 +110,14 @@ Set values for the explanatory variables to their default values.
     
 
     x.out <- setx(z.out)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 Simulate quantities of interest from the posterior distribution.
@@ -126,7 +142,7 @@ Simulate quantities of interest from the posterior distribution.
 
     plot(s.out1)
 
-.. figure:: figure/Zelig-probit.png
+.. figure:: figure/Zelig-probit-1.png
     :alt: Zelig-probit
 
     Zelig-probit

@@ -95,6 +95,14 @@ of militarized interstate conflicts to the absence of disputes is
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2014.
     ##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables
@@ -125,13 +133,13 @@ Summarize the model output:
     ## 
     ## Coefficients:
     ## (Intercept)        major       contig        power       maxdem  
-    ##     -7.5084       2.4320       4.1080       1.0536       0.0480  
+    ##    -7.50836      2.43196      4.10797      1.05358      0.04804  
     ##      mindem        years  
-    ##     -0.0641      -0.0629  
+    ##    -0.06413     -0.06293  
     ## 
     ## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual
-    ## Null Deviance:	    3980 
-    ## Residual Deviance: 1870 	AIC: 1880
+    ## Null Deviance:	    3979 
+    ## Residual Deviance: 1869 	AIC: 1883
     ## Next step: Use 'setx' method
 
 
@@ -143,6 +151,14 @@ Set the explanatory variables to their means:
     
 
     x.out1 <- setx(z.out1)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 Simulate quantities of interest:
@@ -161,11 +177,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##          mean        sd      50%     2.5%    97.5%
-    ## [1,] 0.002407 0.0001529 0.002401 0.002129 0.002723
+    ##             mean           sd         50%        2.5%       97.5%
+    ## [1,] 0.002392768 0.0001550274 0.002388439 0.002104178 0.002704971
     ## pv
     ##          0     1
-    ## [1,] 0.995 0.005
+    ## [1,] 0.998 0.002
 
 
 
@@ -175,7 +191,7 @@ Simulate quantities of interest:
 
     plot(s.out1)
 
-.. figure:: figure/Zelig-relogit.png
+.. figure:: figure/Zelig-relogit-1.png
     :alt: Zelig-relogit
 
     Zelig-relogit
@@ -195,7 +211,23 @@ Suppose that we wish to perform case control correction using weighting
 
 ::
 
-    ## Error: unused argument (robust = TRUE)
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
+    ## Error in glm.control(robust = TRUE): unused argument (robust = TRUE)
 
 
 
@@ -221,23 +253,23 @@ Summarize the model output:
     ## 
     ## Coefficients:
     ##                      (Intercept)                               gdp  
-    ##                           -5.843                            -0.110  
+    ##                          -5.8432                           -0.1102  
     ##                            trade                            capmob  
-    ##                            0.144                             0.815  
+    ##                           0.1442                            0.8147  
     ##        as.factor(country)Belgium          as.factor(country)Canada  
-    ##                           -1.599                             6.759  
+    ##                          -1.5986                            6.7594  
     ##        as.factor(country)Denmark         as.factor(country)Finland  
-    ##                            4.311                             4.810  
+    ##                           4.3107                            4.8099  
     ##         as.factor(country)France           as.factor(country)Italy  
-    ##                            6.905                             9.290  
+    ##                           6.9048                            9.2897  
     ##          as.factor(country)Japan     as.factor(country)Netherlands  
-    ##                            5.459                            -1.459  
+    ##                           5.4586                           -1.4593  
     ##         as.factor(country)Norway          as.factor(country)Sweden  
-    ##                           -2.754                             0.925  
+    ##                          -2.7537                            0.9253  
     ## as.factor(country)United Kingdom   as.factor(country)United States  
-    ##                            5.601                            10.066  
+    ##                           5.6008                           10.0662  
     ##   as.factor(country)West Germany  
-    ##                            3.364  
+    ##                           3.3636  
     ## 
     ## Next step: Use 'setx' method
 
@@ -250,6 +282,14 @@ Set the explanatory variables to their means:
     
 
     x.out2 <- setx(z.out2)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 Simulate quantities of interest:
@@ -268,11 +308,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##      mean     sd     50%   2.5%  97.5%
-    ## 1 -0.1435 0.5775 -0.1297 -1.263 0.9523
+    ##       mean        sd     50%     2.5%    97.5%
+    ## 1 8.060573 0.4212543 8.04769 7.265744 8.884354
     ## pv
-    ##      mean     sd     50%   2.5%  97.5%
-    ## 1 -0.1435 0.5775 -0.1297 -1.263 0.9523
+    ##       mean        sd     50%     2.5%    97.5%
+    ## 1 8.060573 0.4212543 8.04769 7.265744 8.884354
 
 
 
@@ -289,6 +329,14 @@ default prior correction method for case control correction):
     
 
     z.out2 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years, data = mid, model = "relogit", tau = c(0.002, 0.005))
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 ::
@@ -411,13 +459,13 @@ Summarize the model output:
     ## 
     ## Coefficients:
     ## (Intercept)        major       contig        power       maxdem  
-    ##     -8.0492       2.4320       4.1079       1.0536       0.0480  
+    ##    -8.04923      2.43196      4.10791      1.05357      0.04804  
     ##      mindem        years  
-    ##     -0.0641      -0.0629  
+    ##    -0.06412     -0.06293  
     ## 
     ## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual
-    ## Null Deviance:	    3980 
-    ## Residual Deviance: 1870 	AIC: 1880
+    ## Null Deviance:	    3979 
+    ## Residual Deviance: 1869 	AIC: 1883
     ## 
     ## $upper.estimate
     ## 
@@ -514,18 +562,18 @@ Summarize the model output:
     ## 
     ## Coefficients:
     ## (Intercept)        major       contig        power       maxdem  
-    ##     -7.1300       2.4320       4.1080       1.0536       0.0480  
+    ##    -7.13001      2.43197      4.10805      1.05358      0.04804  
     ##      mindem        years  
-    ##     -0.0641      -0.0629  
+    ##    -0.06413     -0.06294  
     ## 
     ## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual
-    ## Null Deviance:	    3980 
-    ## Residual Deviance: 1870 	AIC: 1880
+    ## Null Deviance:	    3979 
+    ## Residual Deviance: 1869 	AIC: 1883
     ## 
     ## $formula
     ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
     ##     mindem + years
-    ## <environment: 0x7fd22773ae78>
+    ## <environment: 0x7ff2976c3d08>
     ## 
     ## attr(,"class")
     ## [1] "Relogit2" "Relogit" 
@@ -542,6 +590,14 @@ Set the explanatory variables to their means:
     x.out2 <- setx(z.out2)
 
 
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
 Simulate quantities of interest:
 
 
@@ -553,8 +609,7 @@ Simulate quantities of interest:
 
 ::
 
-    ## Error: no applicable method for 'vcov' applied to an object of class
-    ## "c('Relogit2', 'Relogit')"
+    ## Error in UseMethod("vcov"): no applicable method for 'vcov' applied to an object of class "c('Relogit2', 'Relogit')"
 
 
 
@@ -571,11 +626,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##      mean     sd     50%   2.5%  97.5%
-    ## 1 -0.1435 0.5775 -0.1297 -1.263 0.9523
+    ##       mean        sd     50%     2.5%    97.5%
+    ## 1 8.060573 0.4212543 8.04769 7.265744 8.884354
     ## pv
-    ##      mean     sd     50%   2.5%  97.5%
-    ## 1 -0.1435 0.5775 -0.1297 -1.263 0.9523
+    ##       mean        sd     50%     2.5%    97.5%
+    ## 1 8.060573 0.4212543 8.04769 7.265744 8.884354
 
 
 
@@ -585,7 +640,7 @@ Simulate quantities of interest:
 
     plot(s.out2)
 
-.. figure:: figure/unnamed-chunk-18.png
+.. figure:: figure/unnamed-chunk-18-1.png
     :alt: 
 
     

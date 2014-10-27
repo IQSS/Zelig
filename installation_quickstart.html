@@ -96,7 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -106,7 +106,8 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
@@ -179,6 +180,7 @@
 <li class="toctree-l1"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -241,7 +243,7 @@ abline<span class="p">(</span>lm<span class="p">(</span>cars<span class="o">$</s
 </pre></div>
 </div>
 <div class="figure">
-<img alt="Scatterplot" src="_images/Scatterplot.png" />
+<img alt="Scatterplot" src="_images/Scatterplot-1.png" />
 <p class="caption">Scatterplot</p>
 </div>
 <p>Also included in the scatter plot is a &#8220;best-fit&#8221; regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous suggests that an appropriate model to use is least squares regression.</p>
@@ -252,7 +254,14 @@ data<span class="p">(</span>cars<span class="p">)</span>
 z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
 <span class="c1"># estimate ls model</span>
 z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
-<span class="c1"># you can now get model summary estimates</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># you can now get model summary estimates</span>
 summary<span class="p">(</span>z5<span class="p">)</span>
 </pre></div>
 </div>
@@ -266,7 +275,7 @@ summary<span class="p">(</span>z5<span class="p">)</span>
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
 <span class="c">## (Intercept)        speed</span>
-<span class="c">##      -17.58         3.93</span>
+<span class="c">##     -17.579        3.932</span>
 <span class="c">##</span>
 <span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
@@ -275,9 +284,20 @@ summary<span class="p">(</span>z5<span class="p">)</span>
 <p>Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the <tt class="docutils literal"><span class="pre">$setx()</span></tt> method:</p>
 <div class="highlight-r"><div class="highlight"><pre><span class="c1"># set speed to 30</span>
 z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
-
-<span class="c1"># set speed to 50</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre><span class="c1"># set speed to 50</span>
 z5<span class="o">$</span>setx1<span class="p">(</span>speed <span class="o">=</span> <span class="m">50</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Now that we&#8217;ve set our variables, all we have to do is run our simulations:</p>
@@ -290,23 +310,23 @@ z5
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean  sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 100.4 6.4 100.7 87.55 112.9</span>
+<span class="c">##      mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 100.013 6.245359 100.0717 87.71623 112.5833</span>
 <span class="c">## pv</span>
-<span class="c">##    mean  sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 100.4 6.4 100.7 87.55 112.9</span>
+<span class="c">##      mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 100.013 6.245359 100.0717 87.71623 112.5833</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 178.9 14.52 179.5 149.9 207.3</span>
+<span class="c">##       mean       sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 178.2154 14.03647 178.3498 151.835 205.6805</span>
 <span class="c">## pv</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 178.9 14.52 179.5 149.9 207.3</span>
+<span class="c">##       mean       sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 178.2154 14.03647 178.3498 151.835 205.6805</span>
 <span class="c">## fd</span>
-<span class="c">##    mean    sd   50%  2.5% 97.5%</span>
-<span class="c">## 1 78.56 8.318 78.77 62.09  95.3</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 78.20237 8.004692 78.45377 63.44037 93.83015</span>
 </pre></div>
 </div>
 <p>Now we&#8217;ve estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.</p>
@@ -339,7 +359,7 @@ z5
 </pre></div>
 </div>
 <div class="figure">
-<img alt="QIs" src="_images/QIs.png" />
+<img alt="QIs" src="_images/QIs-1.png" />
 <p class="caption">QIs</p>
 </div>
 <hr class="docutils" />

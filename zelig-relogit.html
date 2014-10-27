@@ -97,7 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -107,7 +107,8 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
@@ -195,11 +196,12 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -278,6 +280,11 @@ of militarized interstate conflicts to the absence of disputes is
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> <span class="m">1042</span><span class="o">/</span><span class="m">303772</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
 <span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
@@ -300,18 +307,23 @@ of militarized interstate conflicts to the absence of disputes is
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
 <span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -7.5084       2.4320       4.1080       1.0536       0.0480</span>
+<span class="c">##    -7.50836      2.43196      4.10797      1.05358      0.04804</span>
 <span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
+<span class="c">##    -0.06413     -0.06293</span>
 <span class="c">##</span>
 <span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
+<span class="c">## Null Deviance:       3979</span>
+<span class="c">## Residual Deviance: 1869  AIC: 1883</span>
 <span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Simulate quantities of interest:</p>
@@ -323,8 +335,8 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 0.002388 0.000155 0.002383 0.002104 0.002702</span>
+<span class="c">##             mean           sd         50%        2.5%       97.5%</span>
+<span class="c">## [1,] 0.002392768 0.0001550274 0.002388439 0.002104178 0.002704971</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
 <span class="c">## [1,] 0.998 0.002</span>
@@ -334,7 +346,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure">
-<img alt="Zelig-relogit" src="_images/Zelig-relogit.png" />
+<img alt="Zelig-relogit" src="_images/Zelig-relogit-1.png" />
 <p class="caption">Zelig-relogit</p>
 </div>
 </div>
@@ -345,7 +357,17 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> <span class="m">1042</span><span class="o">/</span><span class="m">303772</span><span class="p">,</span> case.control <span class="o">=</span> <span class="s">&quot;weighting&quot;</span><span class="p">,</span> robust <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: unused argument (robust = TRUE)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in glm.control(robust = TRUE): unused argument (robust = TRUE)</span>
 </pre></div>
 </div>
 <p>Summarize the model output:</p>
@@ -363,29 +385,34 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
 <span class="c">##                      (Intercept)                               gdp</span>
-<span class="c">##                           -5.843                            -0.110</span>
+<span class="c">##                          -5.8432                           -0.1102</span>
 <span class="c">##                            trade                            capmob</span>
-<span class="c">##                            0.144                             0.815</span>
+<span class="c">##                           0.1442                            0.8147</span>
 <span class="c">##        as.factor(country)Belgium          as.factor(country)Canada</span>
-<span class="c">##                           -1.599                             6.759</span>
+<span class="c">##                          -1.5986                            6.7594</span>
 <span class="c">##        as.factor(country)Denmark         as.factor(country)Finland</span>
-<span class="c">##                            4.311                             4.810</span>
+<span class="c">##                           4.3107                            4.8099</span>
 <span class="c">##         as.factor(country)France           as.factor(country)Italy</span>
-<span class="c">##                            6.905                             9.290</span>
+<span class="c">##                           6.9048                            9.2897</span>
 <span class="c">##          as.factor(country)Japan     as.factor(country)Netherlands</span>
-<span class="c">##                            5.459                            -1.459</span>
+<span class="c">##                           5.4586                           -1.4593</span>
 <span class="c">##         as.factor(country)Norway          as.factor(country)Sweden</span>
-<span class="c">##                           -2.754                             0.925</span>
+<span class="c">##                          -2.7537                            0.9253</span>
 <span class="c">## as.factor(country)United Kingdom   as.factor(country)United States</span>
-<span class="c">##                            5.601                            10.066</span>
+<span class="c">##                           5.6008                           10.0662</span>
 <span class="c">##   as.factor(country)West Germany</span>
-<span class="c">##                            3.364</span>
+<span class="c">##                           3.3636</span>
 <span class="c">##</span>
 <span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out2 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Simulate quantities of interest:</p>
@@ -397,11 +424,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##     mean     sd     50%   2.5%  97.5%</span>
-<span class="c">## 1 -0.192 0.5793 -0.1943 -1.268 0.9895</span>
+<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
+<span class="c">## 1 8.060573 0.4212543 8.04769 7.265744 8.884354</span>
 <span class="c">## pv</span>
-<span class="c">##     mean     sd     50%   2.5%  97.5%</span>
-<span class="c">## 1 -0.192 0.5793 -0.1943 -1.268 0.9895</span>
+<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
+<span class="c">## 1 8.060573 0.4212543 8.04769 7.265744 8.884354</span>
 </pre></div>
 </div>
 </div>
@@ -412,6 +439,11 @@ that it was somewhere between <img class="math" src="_images/math/501e197d9ac226
 model with a range of feasible estimates for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> (using the
 default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> c<span class="p">(</span><span class="m">0.002</span><span class="p">,</span> <span class="m">0.005</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
@@ -524,13 +556,13 @@ default prior correction method for case control correction):</p>
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
 <span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -8.0492       2.4320       4.1079       1.0536       0.0480</span>
+<span class="c">##    -8.04923      2.43196      4.10791      1.05357      0.04804</span>
 <span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
+<span class="c">##    -0.06412     -0.06293</span>
 <span class="c">##</span>
 <span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
+<span class="c">## Null Deviance:       3979</span>
+<span class="c">## Residual Deviance: 1869  AIC: 1883</span>
 <span class="c">##</span>
 <span class="c">## $upper.estimate</span>
 <span class="c">##</span>
@@ -627,18 +659,18 @@ default prior correction method for case control correction):</p>
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
 <span class="c">## (Intercept)        major       contig        power       maxdem</span>
-<span class="c">##     -7.1300       2.4320       4.1080       1.0536       0.0480</span>
+<span class="c">##    -7.13001      2.43197      4.10805      1.05358      0.04804</span>
 <span class="c">##      mindem        years</span>
-<span class="c">##     -0.0641      -0.0629</span>
+<span class="c">##    -0.06413     -0.06294</span>
 <span class="c">##</span>
 <span class="c">## Degrees of Freedom: 3125 Total (i.e. Null);  3119 Residual</span>
-<span class="c">## Null Deviance:       3980</span>
-<span class="c">## Residual Deviance: 1870  AIC: 1880</span>
+<span class="c">## Null Deviance:       3979</span>
+<span class="c">## Residual Deviance: 1869  AIC: 1883</span>
 <span class="c">##</span>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7fd4fbf8e908&gt;</span>
+<span class="c">## &lt;environment: 0x7ff2976c3d08&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -649,12 +681,16 @@ default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out2 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
 <p>Simulate quantities of interest:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.out2<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error: no applicable method for &#39;vcov&#39; applied to an object of class</span>
-<span class="c">## &quot;c(&#39;Relogit2&#39;, &#39;Relogit&#39;)&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in UseMethod(&quot;vcov&quot;): no applicable method for &#39;vcov&#39; applied to an object of class &quot;c(&#39;Relogit2&#39;, &#39;Relogit&#39;)&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
@@ -664,18 +700,18 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##     mean     sd     50%   2.5%  97.5%</span>
-<span class="c">## 1 -0.192 0.5793 -0.1943 -1.268 0.9895</span>
+<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
+<span class="c">## 1 8.060573 0.4212543 8.04769 7.265744 8.884354</span>
 <span class="c">## pv</span>
-<span class="c">##     mean     sd     50%   2.5%  97.5%</span>
-<span class="c">## 1 -0.192 0.5793 -0.1943 -1.268 0.9895</span>
+<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
+<span class="c">## 1 8.060573 0.4212543 8.04769 7.265744 8.884354</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure">
-<img alt="" src="_images/unnamed-chunk-18.png" />
+<img alt="" src="_images/unnamed-chunk-18-1.png" />
 </div>
 <p>The cost of giving a range of values for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> is that point
 estimates are not available for quantities of interest. Instead,

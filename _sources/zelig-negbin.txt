@@ -61,6 +61,14 @@ Estimate the model:
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
     ##   negbinom: Negative Binomial Regression for Event Count Dependent Variables
@@ -91,8 +99,8 @@ Estimate the model:
     ##      -1.564        0.151        1.286  
     ## 
     ## Degrees of Freedom: 77 Total (i.e. Null);  75 Residual
-    ## Null Deviance:	    237 
-    ## Residual Deviance: 56.5 	AIC: 360
+    ## Null Deviance:	    237.1 
+    ## Residual Deviance: 56.55 	AIC: 360.2
     ## Next step: Use 'setx' method
 
 
@@ -104,6 +112,14 @@ Set values for the explanatory variables to their default mean values:
     
 
     x.out <- setx(z.out)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 Simulate fitted values:
@@ -128,14 +144,14 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 2.975 0.3322 2.959 2.376 3.703
+    ##          mean        sd      50%     2.5%    97.5%
+    ## [1,] 2.970217 0.3552947 2.952402 2.319827 3.697911
     ## pv
     ## qi
     ##     0     1     2     3     4     5     6     7     8     9    10    11 
-    ## 0.147 0.184 0.157 0.120 0.112 0.084 0.068 0.039 0.029 0.013 0.020 0.012 
-    ##    12    13    14    16 
-    ## 0.009 0.003 0.001 0.002
+    ## 0.207 0.206 0.175 0.116 0.088 0.071 0.049 0.036 0.025 0.008 0.007 0.007 
+    ##    12    13    15    16 
+    ## 0.002 0.001 0.001 0.001
 
 
 
@@ -145,7 +161,7 @@ Simulate fitted values:
 
     plot(s.out)
 
-.. figure:: figure/Zelig-negbin.png
+.. figure:: figure/Zelig-negbin-1.png
     :alt: Zelig-negbin
 
     Zelig-negbin

@@ -67,6 +67,14 @@ Estimate model:
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
     ##   normal: Normal Regression for Continuous Dependent Variables
@@ -96,11 +104,11 @@ Summarize of regression coefficients:
     ## 
     ## Coefficients:
     ## (Intercept)          gdp       capmob        trade  
-    ##      6.1813      -0.3236       1.4219       0.0199  
+    ##     6.18129     -0.32360      1.42194      0.01985  
     ## 
     ## Degrees of Freedom: 349 Total (i.e. Null);  346 Residual
-    ## Null Deviance:	    3660 
-    ## Residual Deviance: 2610 	AIC: 1710
+    ## Null Deviance:	    3665 
+    ## Residual Deviance: 2610 	AIC: 1706
     ## Next step: Use 'setx' method
 
 
@@ -113,7 +121,27 @@ high (80th percentile) and low (20th percentile) values for trade:
     
 
     x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+.. sourcecode:: r
+    
+
     x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
    
 Generate first differences for the effect of high versus low trade on GDP:
@@ -138,23 +166,23 @@ Generate first differences for the effect of high versus low trade on GDP:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 5.437 0.1917 5.434 5.076 5.829
+    ##         mean        sd      50%     2.5%    97.5%
+    ## [1,] 5.42795 0.1958841 5.426117 5.043868 5.795855
     ## pv
-    ##       mean    sd   50%    2.5% 97.5%
-    ## [1,] 5.373 2.787 5.465 -0.2639  10.7
+    ##          mean       sd      50%        2.5%    97.5%
+    ## [1,] 5.377441 2.816713 5.267036 -0.02360459 10.97242
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean     sd   50%  2.5% 97.5%
-    ## [1,] 4.592 0.1782 4.593 4.263 4.945
+    ##          mean       sd     50%    2.5%    97.5%
+    ## [1,] 4.603101 0.185187 4.60726 4.23497 4.962706
     ## pv
-    ##       mean    sd   50%  2.5% 97.5%
-    ## [1,] 4.576 2.805 4.634 -0.99 9.912
+    ##         mean       sd      50%      2.5%    97.5%
+    ## [1,] 4.51321 2.773435 4.452487 -0.587452 9.733585
     ## fd
-    ##         mean     sd     50%   2.5%   97.5%
-    ## [1,] -0.8455 0.2271 -0.8456 -1.312 -0.4202
+    ##            mean        sd        50%     2.5%      97.5%
+    ## [1,] -0.8248498 0.2406915 -0.8234503 -1.30121 -0.3818588
 
 
 
@@ -166,7 +194,7 @@ A visual summary of quantities of interest:
 
     plot(s.out1)
 
-.. figure:: figure/Zelig-normal.png
+.. figure:: figure/Zelig-normal-1.png
     :alt: Zelig-normal
 
     Zelig-normal

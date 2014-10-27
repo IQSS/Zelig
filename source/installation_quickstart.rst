@@ -88,7 +88,7 @@ Now, lets build a statistical model that captures the relationship a cars stoppi
     # Fit regression line to data 
     abline(lm(cars$dist ~ cars$speed), col = "firebrick")
 
-.. figure:: figure/Scatterplot.png
+.. figure:: figure/Scatterplot-1.png
     :alt: Scatterplot
 
     Scatterplot
@@ -107,6 +107,18 @@ To fit this model to our data, we must first create Zelig least squares object, 
     z5 <- zls$new()
     # estimate ls model                     
     z5$zelig(dist ~ speed, data = cars)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+.. sourcecode:: r
+    
+
     # you can now get model summary estimates
     summary(z5)
 
@@ -123,7 +135,7 @@ To fit this model to our data, we must first create Zelig least squares object, 
     ## 
     ## Coefficients:
     ## (Intercept)        speed  
-    ##      -17.58         3.93  
+    ##     -17.579        3.932  
     ## 
     ## Next step: Use 'setx' method
 
@@ -139,9 +151,28 @@ Zelig makes this simple, by automating the translation of model estimates in int
 
     # set speed to 30
     z5$setx(speed = 30)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+.. sourcecode:: r
     
+
     # set speed to 50
     z5$setx1(speed = 50)
+
+
+::
+
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
 
 
 Now that we've set our variables, all we have to do is run our simulations:
@@ -161,23 +192,23 @@ Now that we've set our variables, all we have to do is run our simulations:
     ##  sim x :
     ##  -----
     ## ev
-    ##    mean  sd   50%  2.5% 97.5%
-    ## 1 100.5 6.4 100.4 88.33   113
+    ##      mean       sd      50%     2.5%    97.5%
+    ## 1 100.013 6.245359 100.0717 87.71623 112.5833
     ## pv
-    ##    mean  sd   50%  2.5% 97.5%
-    ## 1 100.5 6.4 100.4 88.33   113
+    ##      mean       sd      50%     2.5%    97.5%
+    ## 1 100.013 6.245359 100.0717 87.71623 112.5833
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 179.3 14.45 179.4 152.2 207.4
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 178.2154 14.03647 178.3498 151.835 205.6805
     ## pv
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 179.3 14.45 179.4 152.2 207.4
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 178.2154 14.03647 178.3498 151.835 205.6805
     ## fd
-    ##    mean    sd   50%  2.5% 97.5%
-    ## 1 78.77 8.254 78.55 62.93 94.52
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 78.20237 8.004692 78.45377 63.44037 93.83015
 
 
 
@@ -228,7 +259,7 @@ A second major Zelig feature is how easy it is to plot QIs for presentation in s
 
     z5$graph()
 
-.. figure:: figure/QIs.png
+.. figure:: figure/QIs-1.png
     :alt: QIs
 
     QIs

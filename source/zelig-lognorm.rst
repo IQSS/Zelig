@@ -112,6 +112,14 @@ Estimate the model:
 
 ::
 
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
     ## How to cite this model in Zelig:
     ##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.
     ##   lognorm: Log-Normal Regression for Duration Dependent Variables
@@ -141,11 +149,11 @@ View the regression output:
     ## 
     ## Coefficients:
     ## (Intercept)       fract      numst2 
-    ##    5.366670   -0.004438    0.559833 
+    ##  5.36666977 -0.00443755  0.55983251 
     ## 
-    ## Scale= 1.2 
+    ## Scale= 1.20008 
     ## 
-    ## Loglik(model)= -1078   Loglik(intercept only)= -1101
+    ## Loglik(model)= -1077.9   Loglik(intercept only)= -1101.2
     ## 	Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11 
     ## n= 314 
     ## Next step: Use 'setx' method
@@ -165,7 +173,15 @@ X:
 
 ::
 
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
+    ## Error in terms(lm(formula, data), "predvars"): error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
     ## Calls: lm -> lm.fit -> Ops.Surv
 
 
@@ -177,7 +193,15 @@ X:
 
 ::
 
-    ## Error: error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
+    ## Warning: 'regroup' is deprecated.
+    ## Use 'group_by_' instead.
+    ## See help("Deprecated")
+
+
+
+::
+
+    ## Error in terms(lm(formula, data), "predvars"): error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
     ## Calls: lm -> lm.fit -> Ops.Surv
 
 
@@ -204,23 +228,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean      sd    50%   2.5%  97.5%
-    ## [1,] 0.709 0.01336 0.7091 0.6836 0.7355
+    ##           mean         sd       50%     2.5%     97.5%
+    ## [1,] 0.7093374 0.01301656 0.7090911 0.683622 0.7344693
     ## pv
     ##          0     1
-    ## [1,] 0.316 0.684
+    ## [1,] 0.288 0.712
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##        mean     sd    50%   2.5%  97.5%
-    ## [1,] 0.8229 0.0107 0.8233 0.8007 0.8425
+    ##           mean        sd       50%      2.5%     97.5%
+    ## [1,] 0.8226968 0.0102796 0.8230415 0.8027372 0.8418958
     ## pv
     ##          0     1
-    ## [1,] 0.194 0.806
+    ## [1,] 0.161 0.839
     ## fd
-    ##        mean      sd    50%    2.5%  97.5%
-    ## [1,] 0.1138 0.01141 0.1142 0.09097 0.1358
+    ##           mean         sd       50%       2.5%    97.5%
+    ## [1,] 0.1133594 0.01182127 0.1131924 0.09178548 0.136596
 
 
 
@@ -230,7 +254,7 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
 
     plot(s.out)
 
-.. figure:: figure/Zelig-lognorm.png
+.. figure:: figure/Zelig-lognorm-1.png
     :alt: Zelig-lognorm
 
     Zelig-lognorm
