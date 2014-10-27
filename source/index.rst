@@ -2,15 +2,18 @@
 Welcome to Zelig!
 =================
 
-**Zelig** is a framework for interfacing with a wide range of statistical models and analytic methods in a common and simple way. Above and beyond estimation, it adds considerable infrastructure to existing heterogeneous R implementations by translating coefficient estimates into interpretable quantities of interest and automating statistical procedures (e.g., bootstrapping) though an intelligible call structure.
+**Zelig** is a framework with an easy-to-use program that can estimate, help interpret, and present the results of a large range of statistical methods. It literally is "everyone's statistical software" because Zelig uses (R) code from many researchers. We also hope it will become "everyone's statistical software" for applications, and we have designed it so that anyone can use it or add their methods to it. Zelig comes with detailed, self-contained documentation that minimizes startup costs for Zelig and R (with all methods described in exactly the same notation, syntax, and style), automates graphics and summaries for all models, and, with only three simple required commands, makes the power of R accessible for all users. Zelig also works well for teaching, and is designed so that scholars can use the same program with students that they use for their research. Zelig is built on a wide ranging `ontology of statistical methods <http://gking.harvard.edu/files/abs/z-abs.shtml>`_.
 
 
-To get started, we recommend following the :ref:`installation_quickstart` guide. More information about the software, including our technical vision and goals for the project, can be found at the :ref:`about` page. 
+Zelig adds considerable infrastructure to improve the use of existing methods. It interfaces with a wide range of statistical models through a simple and common intelligible call structure. It generalizes the program Clarify (for Stata), which translates hard-to-interpret coefficients into quantities of interest; combines multiply imputed data sets (such as output from Amelia) to deal with missing data; automates bootstrapping for all models; uses sophisticated nonparametric matching commands which improve parametric procedures (via MatchIt); allows one-line commands to run analyses in all designated strata; automates the creation of replication data files so that you (or, if you wish, anyone else) can replicate the results of your analyses (hence satisfying the replication standard); makes it easy to evaluate counterfactuals (via WhatIf); and allows conditional population and superpopulation inferences. Zelig includes many specific methods, based on likelihood, frequentist, Bayesian, robust Bayesian, and nonparametric theories of inference.  Developers make their R packages usable from Zelig by writing a few simple bridge functions.
 
 
-To view the code-base, visit the source repository at `https://github.com/IQSS/Zelig <https://github.com/IQSS/Zelig>`_ and for regular updates  and release information be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_. We also recommend joining the `Zelig Google Group <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_, where we are encouraging users to ask questions, report bugs, and help others.
+For users, see the :ref:`installation_quickstart` guide and then a full PDF of the documentation `here <http://zeligproject.org/build/latex/Zelig.pdf>`_. Please also join our `Zelig Google Group <https://groups.google.com/forum/#!forum/zelig-statistical-software>`_, where you can ask questions, report bugs, and help others.
 
-You can also find the PDF of the documentation `here. <http://zeligproject.org/build/latex/Zelig.pdf>`_
+
+For developers, to view the code-base, visit the source repository at `https://github.com/IQSS/Zelig <https://github.com/IQSS/Zelig>`_ and for regular updates  and release information be sure to follow us on twitter at `@IQSS <https://twitter.com/IQSS>`_. 
+
+You can also find the 
  
 .. toctree::
    :hidden:
