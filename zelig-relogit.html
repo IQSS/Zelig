@@ -97,6 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
@@ -196,6 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 </ul>
 </li>
@@ -336,7 +338,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##             mean           sd         50%        2.5%       97.5%</span>
-<span class="c">## [1,] 0.002392768 0.0001550274 0.002388439 0.002104178 0.002704971</span>
+<span class="c">## [1,] 0.002399039 0.0001547289 0.002391583 0.002101712 0.002704094</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
 <span class="c">## [1,] 0.998 0.002</span>
@@ -424,11 +426,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 8.060573 0.4212543 8.04769 7.265744 8.884354</span>
+<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 8.194131 0.4213458 8.191736 7.386437 8.967522</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 8.060573 0.4212543 8.04769 7.265744 8.884354</span>
+<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 8.194131 0.4213458 8.191736 7.386437 8.967522</span>
 </pre></div>
 </div>
 </div>
@@ -670,7 +672,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7ff2976c3d08&gt;</span>
+<span class="c">## &lt;environment: 0x7fe0e69a0d50&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -700,11 +702,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 8.060573 0.4212543 8.04769 7.265744 8.884354</span>
+<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 8.194131 0.4213458 8.191736 7.386437 8.967522</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 8.060573 0.4212543 8.04769 7.265744 8.884354</span>
+<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 8.194131 0.4213458 8.191736 7.386437 8.967522</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>

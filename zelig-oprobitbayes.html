@@ -1,0 +1,605 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>zelig-oprobitbayes &mdash; Zelig 5.0-1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0-1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
+    <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="prev" title="zelig-mlogitbayes" href="zelig-mlogitbayes.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0-1</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-and-zelig">Installing R and Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">zelig-oprobitbayes</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#basic-example">Basic Example</a></li>
+<li><a class="reference internal" href="#simulating-first-differences">Simulating First Differences</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="zelig-mlogitbayes.html" title="Previous Chapter: zelig-mlogitbayes"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; zelig-mlogitbaye...</span>
+    </a>
+  </li>
+  <li>
+    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a></li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="zelig-oprobitbayes">
+<span id="zoprobitbayes"></span><h1>zelig-oprobitbayes<a class="headerlink" href="#zelig-oprobitbayes" title="Permalink to this headline">¶</a></h1>
+<p>Use the ordinal probit regression model if your dependent variables are
+ordered and categorical. They may take either integer values or
+character strings. The model is estimated using a Gibbs sampler with
+data augmentation. For a maximum-likelihood implementation of this
+models, see .</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zoprobitbayes<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;oprobit.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-inputs">
+<h2>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
+<p>zelig() accepts the following arguments to monitor the Markov chain:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">burnin</span></tt>: number of the initial MCMC iterations to be discarded
+(defaults to 1,000).</li>
+<li><tt class="docutils literal"><span class="pre">mcmc</span></tt>: number of the MCMC iterations after burnin (defaults
+10,000).</li>
+<li><tt class="docutils literal"><span class="pre">thin</span></tt>: thinning interval for the Markov chain. Only every
+<tt class="docutils literal"><span class="pre">thin</span></tt>-th draw from the Markov chain is kept. The value of <tt class="docutils literal"><span class="pre">mcmc</span></tt>
+must be divisible by this value. The default value is 1.</li>
+<li><tt class="docutils literal"><span class="pre">tune</span></tt>: tuning parameter for the Metropolis-Hasting step. The
+default value is <tt class="docutils literal"><span class="pre">NA</span></tt> which corresponds to 0.05 divided by the
+number of categories in the response variable.</li>
+<li><tt class="docutils literal"><span class="pre">verbose</span></tt>: defaults to FALSE If <tt class="docutils literal"><span class="pre">TRUE</span></tt>, the progress of the
+sampler (every <img class="math" src="_images/math/edce6cd55e38e73a0341fc79fb72bb04c90eeca4.png" alt="10\%"/>) is printed to the screen.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: seed for the random number generator. The default is <tt class="docutils literal"><span class="pre">NA</span></tt>
+which corresponds to a random seed 12345.</li>
+<li><tt class="docutils literal"><span class="pre">beta.start</span></tt>: starting values for the Markov chain, either a scalar
+or vector with length equal to the number of estimated coefficients.
+The default is <tt class="docutils literal"><span class="pre">NA</span></tt>, which uses the maximum likelihood estimates as
+the starting values.</li>
+</ul>
+<p>Use the following parameters to specify the model’s priors:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">b0</span></tt>: prior mean for the coefficients, either a numeric vector or a
+scalar. If a scalar value, that value will be the prior mean for all
+the coefficients. The default is 0.</li>
+<li><tt class="docutils literal"><span class="pre">B0</span></tt>: prior precision parameter for the coefficients, either a
+square matrix (with dimensions equal to the number of coefficients)
+or a scalar. If a scalar value, that value times an identity matrix
+will be the prior precision parameter. The default is 0 which leads
+to an improper prior.</li>
+</ul>
+<p>Zelig users may wish to refer to <tt class="docutils literal"><span class="pre">help(MCMCoprobit)</span></tt> for more
+information.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="basic-example">
+<h3>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h3>
+<p>Attaching the sample dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>sanction<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimating ordered probit regression using <tt class="docutils literal"><span class="pre">oprobit.bayes</span></tt>:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>ncost <span class="o">~</span> mil <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;oprobit.bayes&quot;</span><span class="p">,</span>
+               data <span class="o">=</span> sanction<span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning in model.response(mf, &quot;numeric&quot;): using type = &quot;numeric&quot; with a</span>
+<span class="c">## factor response will be ignored</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Ben Goodrich, Ying Lu. 2013.</span>
+<span class="c">##   oprobitbayes: Bayesian Probit Regression for Dichotomous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://zeligproject.org/</span>
+</pre></div>
+</div>
+<p>Creating an ordered dependent variable:</p>
+<div class="highlight-r"><div class="highlight"><pre>sanction<span class="o">$</span>ncost <span class="o">&lt;-</span> factor<span class="p">(</span>sanction <span class="o">~</span> ncost<span class="p">,</span> ordered <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+                         levels <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;net gain&quot;</span><span class="p">,</span> <span class="s">&quot;little effect&quot;</span><span class="p">,</span> <span class="s">&quot;modest loss&quot;</span><span class="p">,</span>
+                                     <span class="s">&quot;major loss&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in as.vector(x, mode): invalid &#39;mode&#39; argument</span>
+</pre></div>
+</div>
+<p>Checking for convergence before summarizing the estimates:</p>
+<div class="highlight-r"><div class="highlight"><pre>heidel.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+raftery.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Setting values for the explanatory variables to their sample averages:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<p>Simulating quantities of interest from the posterior distribution given: <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##                     mean         sd        50%       2.5%      97.5%</span>
+<span class="c">## little effect 0.44981581 0.05601155 0.44883053 0.34151148 0.56103192</span>
+<span class="c">## major loss    0.04473004 0.02101827 0.04176495 0.01271310 0.09412959</span>
+<span class="c">## modest loss   0.12341501 0.03950140 0.11984735 0.06005967 0.22834556</span>
+<span class="c">## net gain      0.38203914 0.05548348 0.38097907 0.27602445 0.49205957</span>
+<span class="c">## pv</span>
+<span class="c">## qi</span>
+<span class="c">## little effect    major loss   modest loss      net gain</span>
+<span class="c">##        0.1868        0.2731        0.5213        0.0188</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simulating-first-differences">
+<h3>Simulating First Differences<a class="headerlink" href="#simulating-first-differences" title="Permalink to this headline">¶</a></h3>
+<p>Estimating the first difference (and risk ratio) in the probabilities
+of incurring different level of cost when there is no military action
+versus military action while all the other variables held at their default values.</p>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> mil <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> mil <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+summary<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##                     mean         sd        50%       2.5%      97.5%</span>
+<span class="c">## little effect 0.43844669 0.05843957 0.43767439 0.32758262 0.55410854</span>
+<span class="c">## major loss    0.04458012 0.02095061 0.04165022 0.01271633 0.09387773</span>
+<span class="c">## modest loss   0.12377654 0.03963082 0.12024928 0.05993637 0.22927426</span>
+<span class="c">## net gain      0.39319665 0.05795514 0.39196529 0.28336346 0.50825527</span>
+<span class="c">## pv</span>
+<span class="c">## qi</span>
+<span class="c">## little effect    major loss   modest loss      net gain</span>
+<span class="c">##        0.1491        0.2382        0.5780        0.0347</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##                    mean         sd        50%       2.5%      97.5%</span>
+<span class="c">## little effect 0.5464229 0.16109327 0.54796938 0.23474072 0.84451223</span>
+<span class="c">## major loss    0.0407613 0.01998891 0.03763614 0.01085385 0.08828575</span>
+<span class="c">## modest loss   0.1075956 0.03975880 0.10421634 0.04208043 0.20132712</span>
+<span class="c">## net gain      0.3052203 0.14485132 0.29018143 0.07362204 0.62315150</span>
+<span class="c">## pv</span>
+<span class="c">## qi</span>
+<span class="c">## little effect    major loss   modest loss      net gain</span>
+<span class="c">##        0.6116        0.0963        0.1862        0.1059</span>
+<span class="c">## fd</span>
+<span class="c">##                       mean         sd          50%        2.5%       97.5%</span>
+<span class="c">## little effect  0.107976200 0.17020693  0.111082214 -0.22740084 0.426282862</span>
+<span class="c">## major loss    -0.003818825 0.00665593 -0.001418880 -0.02253975 0.002180789</span>
+<span class="c">## modest loss   -0.016180976 0.02172754 -0.008327805 -0.07580491 0.005015329</span>
+<span class="c">## net gain      -0.087976398 0.15275950 -0.102164237 -0.34480882 0.241227653</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>Let <img class="math" src="_images/math/0e1e069d7b701cb98cfecc70660e4e31b786db9a.png" alt="Y_{i}"/> be the ordered categorical dependent variable for
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> which takes an integer value
+<img class="math" src="_images/math/de0b4bef7a011d44e3288965ca51ff93922ab47b.png" alt="j=1, \ldots, J"/>.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is described by an unobserved continuous
+variable, <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/>,</p>
+<div class="math">
+<p><img src="_images/math/eb2c30b74e11eddc163bcdb9c33adac322741da1.png" alt="\begin{aligned}
+Y_{i}^*  \sim \textrm{Normal}(\mu_i, 1).\end{aligned}"/></p>
+</div><p>Instead of <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/>, we observe categorical variable
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/>,</p>
+<div class="math">
+<p><img src="_images/math/6250ab78ef29d90efa8637f41b9d9a992aafcde9.png" alt="\begin{aligned}
+Y_i = j \quad \textrm{ if } \tau_{j-1} \le Y_i^* \le \tau_j \textrm{
+for } j=1,\ldots, J.\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/e7b7b95439d7fb629fa6216dbc718f1c0ab66e28.png" alt="\tau_j"/> for <img class="math" src="_images/math/c8676bf8368b0ab3402a9701d2e91dd5b2a206c0.png" alt="j=0,\ldots, J"/> are the threshold
+parameters with the following constraints, <img class="math" src="_images/math/9d6e77a79e113678fa61237c036ca8c526eb1dd6.png" alt="\tau_l &lt; \tau_m"/>
+for <img class="math" src="_images/math/72720f025347637106f2eb28797fe1615dd659ee.png" alt="l &lt; m"/>, and <img class="math" src="_images/math/a4db67ac47b297539e14d30e99a8483177a735c9.png" alt="\tau_0=-\infty, \tau_J=\infty"/>.</p>
+<p>The probability of observing <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> equal to category <img class="math" src="_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/>
+is,</p>
+<div class="math">
+<p><img src="_images/math/512c5c87d774360941b15fffe21cc28dfe755e24.png" alt="\begin{aligned}
+\Pr(Y_i=j) &amp;=&amp; \Phi(\tau_j \mid \mu_i)-\Phi(\tau_{j-1} \mid \mu_i)
+\textrm{ for } j=1,\ldots, J\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/7fd8c23c16a9f815d734946e572c67d59b81a799.png" alt="\Phi(\cdot \mid \mu_i)"/> is the cumulative distribution
+function of the Normal distribution with mean <img class="math" src="_images/math/fe45a709c71e4160e1a09e3b4cc03d2d36d15644.png" alt="\mu_i"/> and
+variance 1.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/289d3503884e94b40230aaa0943b7e4c9e10a13f.png" alt="\begin{aligned}
+\mu_{i}= x_i \beta,\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/c223a5391d7bfd7e7c68274c104fc7418944376e.png" alt="x_{i}"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of
+coefficients.</p>
+</li>
+<li><p class="first">The <em>prior</em> for <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is given by</p>
+<div class="math">
+<p><img src="_images/math/00da19989430e39ccd6410803f142d7652fbcf02.png" alt="\begin{aligned}
+\beta \sim \textrm{Normal}_k\left(  b_{0},B_{0}^{-1}\right)\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/9d80db7ae48caf02365282c5dff832fcbe0a74d5.png" alt="b_{0}"/> is the vector of means for the <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>
+explanatory variables and <img class="math" src="_images/math/6a119b5ae9ee269e28bcaa4d39e47a3d3de4f5e5.png" alt="B_{0}"/> is the <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/>
+precision matrix (the inverse of a variance-covariance matrix).</p>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected values (<tt class="docutils literal"><span class="pre">qi$ev</span></tt>) for the ordered probit model are the
+predicted probability of belonging to each category:</p>
+<div class="math">
+<p><img src="_images/math/432a9272c13e9a28264887d70b45726b622d46b5.png" alt="\begin{aligned}
+\Pr(Y_i=j)= \Phi(\tau_j \mid x_i \beta)-\Phi(\tau_{j-1} \mid x_i \beta),\end{aligned}"/></p>
+</div><p>given the posterior draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> and threshold parameters
+<img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> from the MCMC iterations.</p>
+</li>
+<li><p class="first">The predicted values (<tt class="docutils literal"><span class="pre">qi$pr</span></tt>) are the observed values of
+<img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> given the observation scheme and the posterior draws of
+<img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> and cut points <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> from the MCMC iterations.</p>
+</li>
+<li><p class="first">The first difference (<tt class="docutils literal"><span class="pre">qi$fd</span></tt>) in category <img class="math" src="_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/> for the
+ordered probit model is defined as</p>
+<div class="math">
+<p><img src="_images/math/f9deb29d45320bfa83051c9f7190f07cc6e133dd.png" alt="\begin{aligned}
+\text{FD}_j=\Pr(Y_i=j\mid X_{1})-\Pr(Y_i=j\mid X).\end{aligned}"/></p>
+</div></li>
+<li><p class="first">The risk ratio (<tt class="docutils literal"><span class="pre">qi$rr</span></tt>) in category <img class="math" src="_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/> is defined as</p>
+<div class="math">
+<p><img src="_images/math/a15aadb2dfb8f2a23131c8cc50962e73bd61c9d5.png" alt="\begin{aligned}
+\text{RR}_j=\Pr(Y_i=j\mid X_{1})\ /\ \Pr(Y_i=j\mid X).\end{aligned}"/></p>
+</div></li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>) for the treatment group in category <img class="math" src="_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/>
+is</p>
+<div class="math">
+<p><img src="_images/math/85fbdfa785a78d4a9e5525a49939ddda2b50746e.png" alt="\begin{aligned}
+\frac{1}{n_j}\sum_{i:t_{i}=1}^{n_j} \{
+Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)] \},\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups, and
+<img class="math" src="_images/math/f9ecb2e7f732e9a55b306c2cc3774fe8e638e978.png" alt="n_j"/> is the number of observations in the treatment group that
+belong to category <img class="math" src="_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/>.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.pr</span></tt>) for the treatment group in category <img class="math" src="_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/>
+is</p>
+<div class="math">
+<p><img src="_images/math/3b1b94dffbb72d02de751897cf05c9dfd18a7dcc.png" alt="\begin{aligned}
+\frac{1}{n_j}\sum_{i:t_{i}=1}^{n_j}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups, and
+<img class="math" src="_images/math/f9ecb2e7f732e9a55b306c2cc3774fe8e638e978.png" alt="n_j"/> is the number of observations in the treatment group that
+belong to category <img class="math" src="_images/math/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j"/>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run:</p>
+<div class="highlight-python"><div class="highlight"><pre>z.out &lt;- zelig(y ~ x, model = &quot;oprobit.bayes&quot;, data)
+</pre></div>
+</div>
+<p>then you may examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the draws from the posterior distribution of the
+<tt class="docutils literal"><span class="pre">coefficients</span></tt> by using <tt class="docutils literal"><span class="pre">z.out$coefficients</span></tt>, and view a default
+summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements
+available through the <tt class="docutils literal"><span class="pre">$</span></tt> operator are listed below.</p>
+<ul class="simple">
+<li>From the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object <tt class="docutils literal"><span class="pre">z.out</span></tt>, you may extract:<ul>
+<li><tt class="docutils literal"><span class="pre">coefficients</span></tt>: draws from the posterior distributions of the
+estimated coefficients <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> and threshold parameters
+<img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/>. Note, element <img class="math" src="_images/math/7535961332c7b400bb1f935a141711a30c82cd87.png" alt="\tau_1"/> is normalized to 0 and
+is not returned in the <tt class="docutils literal"><span class="pre">coefficients</span></tt> object.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: the random seed used in the model.</li>
+</ul>
+</li>
+<li>From the <tt class="docutils literal"><span class="pre">sim()</span></tt> output object <tt class="docutils literal"><span class="pre">s.out</span></tt>:<ul>
+<li><tt class="docutils literal"><span class="pre">qi$ev</span></tt>: the simulated expected values (probabilities) of each
+of the <img class="math" src="_images/math/372c2a0702e1e5866656215408b37a2ddb8d2d45.png" alt="J"/> categories for the specified values of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$pr</span></tt>: the simulated predicted values (observed values) for
+the specified values of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$fd</span></tt>: the simulated first difference in the expected values
+of each of the <img class="math" src="_images/math/372c2a0702e1e5866656215408b37a2ddb8d2d45.png" alt="J"/> categories for the values specified in
+<tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">x1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$rr</span></tt>: the simulated risk ratio for the expected values of
+each of the <img class="math" src="_images/math/372c2a0702e1e5866656215408b37a2ddb8d2d45.png" alt="J"/> categories simulated from <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">x1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>: the simulated average expected treatment effect for
+the treated from conditional prediction models.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.pr</span></tt>: the simulated average predicted treatment effect
+for the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>Bayesian ordinal probit regression is part of the MCMCpack library by
+Andrew D. Martin and Kevin M. Quinn . The convergence diagnostics are
+part of the CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and
+Karen Vines.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/zelig-oprobitbayes.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'http://zeligproject.org/');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>
