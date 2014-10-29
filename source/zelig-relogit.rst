@@ -177,11 +177,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##             mean           sd         50%        2.5%      97.5%
-    ## [1,] 0.002400491 0.0001580586 0.002392378 0.002100577 0.00272623
+    ##             mean           sd         50%        2.5%       97.5%
+    ## [1,] 0.002403785 0.0001519576 0.002405877 0.002106385 0.002701354
     ## pv
     ##          0     1
-    ## [1,] 0.999 0.001
+    ## [1,] 0.998 0.002
 
 
 
@@ -247,30 +247,16 @@ Summarize the model output:
     ## [1] 1
     ## 
     ## 
-    ## Call:
-    ## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country), 
+    ## Call:  stats::glm(formula = vote ~ race + educate, family = binomial("logit"), 
     ##     data = .)
     ## 
     ## Coefficients:
-    ##                      (Intercept)                               gdp  
-    ##                          -5.8432                           -0.1102  
-    ##                            trade                            capmob  
-    ##                           0.1442                            0.8147  
-    ##        as.factor(country)Belgium          as.factor(country)Canada  
-    ##                          -1.5986                            6.7594  
-    ##        as.factor(country)Denmark         as.factor(country)Finland  
-    ##                           4.3107                            4.8099  
-    ##         as.factor(country)France           as.factor(country)Italy  
-    ##                           6.9048                            9.2897  
-    ##          as.factor(country)Japan     as.factor(country)Netherlands  
-    ##                           5.4586                           -1.4593  
-    ##         as.factor(country)Norway          as.factor(country)Sweden  
-    ##                          -2.7537                            0.9253  
-    ## as.factor(country)United Kingdom   as.factor(country)United States  
-    ##                           5.6008                           10.0662  
-    ##   as.factor(country)West Germany  
-    ##                           3.3636  
+    ## (Intercept)    racewhite      educate  
+    ##     -1.2189       0.5022       0.1610  
     ## 
+    ## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual
+    ## Null Deviance:	    2267 
+    ## Residual Deviance: 2138 	AIC: 2144
     ## Next step: Use 'setx' method
 
 
@@ -308,11 +294,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##        mean        sd       50%      2.5%     97.5%
-    ## 1 -1.455467 0.5196734 -1.469009 -2.495486 -0.487639
+    ##           mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.7729134 0.01053068 0.7728625 0.7515642 0.7941928
     ## pv
-    ##        mean        sd       50%      2.5%     97.5%
-    ## 1 -1.455467 0.5196734 -1.469009 -2.495486 -0.487639
+    ##          0     1
+    ## [1,] 0.229 0.771
 
 
 
@@ -573,7 +559,7 @@ Summarize the model output:
     ## $formula
     ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
     ##     mindem + years
-    ## <environment: 0x7fcbdd28cdf8>
+    ## <environment: 0x7f9cd002be70>
     ## 
     ## attr(,"class")
     ## [1] "Relogit2" "Relogit" 
@@ -626,11 +612,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##        mean        sd       50%      2.5%     97.5%
-    ## 1 -1.455467 0.5196734 -1.469009 -2.495486 -0.487639
+    ##           mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.7729134 0.01053068 0.7728625 0.7515642 0.7941928
     ## pv
-    ##        mean        sd       50%      2.5%     97.5%
-    ## 1 -1.455467 0.5196734 -1.469009 -2.495486 -0.487639
+    ##          0     1
+    ## [1,] 0.229 0.771
 
 
 

@@ -98,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-poissonbayes">zelig-poissonbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -286,6 +287,20 @@
 <li><a class="reference internal" href="#id89">See also</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#zelig-poissonbayes">zelig-poissonbayes</a><ul>
+<li><a class="reference internal" href="#id90">Syntax</a></li>
+<li><a class="reference internal" href="#id91">Additional Inputs</a></li>
+<li><a class="reference internal" href="#id92">Examples</a><ul>
+<li><a class="reference internal" href="#id93">Basic Example</a></li>
+<li><a class="reference internal" href="#id94">Simulating First Differences</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id95">Model</a></li>
+<li><a class="reference internal" href="#id96">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id97">Output Values</a></li>
+<li><a class="reference internal" href="#id98">See also</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -347,6 +362,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-poissonbayes">zelig-poissonbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -386,6 +402,7 @@
 <li><a class="reference internal" href="zelig-factorbayes.html#zfactorbayes"><em>Bayesian Factor Analysis</em></a>: <tt class="docutils literal"><span class="pre">zfactorbayes$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-mlogitbayes.html#zmlogitbayes"><em>Bayesian Multinomial Logistic Regression</em></a>: <tt class="docutils literal"><span class="pre">zmlogitbayes$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-oprobitbayes.html#zoprobitbayes"><em>Bayesian Ordered Probit Regression</em></a>: <tt class="docutils literal"><span class="pre">zoprobitbayes()</span></tt></li>
+<li><a class="reference internal" href="zelig-poissonbayes.html#zpoissonbayes"><em>Bayesian Poisson Regression</em></a>: <tt class="docutils literal"><span class="pre">zpoissonbayes()</span></tt></li>
 </ul>
 <hr class="docutils" />
 </div>
@@ -523,21 +540,39 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in sim(z.out, x = x.low, x1 = x.high): object &#39;x.low&#39; not found</span>
-</pre></div>
-</div>
 <p>Summarize quantities of interest and produce some plots:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in summary(s.out): error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 4.614089 0.1820881 4.612107 4.25745 4.965254</span>
+<span class="c">## pv</span>
+<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 4.614089 0.1820881 4.612107 4.25745 4.965254</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 5.436715 0.1880952 5.438604 5.067961 5.815886</span>
+<span class="c">## pv</span>
+<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 5.436715 0.1880952 5.438604 5.067961 5.815886</span>
+<span class="c">## fd</span>
+<span class="c">##        mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 0.8226266 0.2302595 0.835174 0.3790788 1.232339</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in plot(s.out): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
-</pre></div>
+<div class="figure">
+<img alt="Zelig-exp" src="_images/Zelig-exp-1.png" />
+<p class="caption">Zelig-exp</p>
 </div>
 </div>
 <div class="section" id="model">
@@ -760,22 +795,22 @@ X:</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.45273 1.095496 14.37134 12.55475 16.86575</span>
+<span class="c">## [1,] 14.46201 1.094232 14.35594 12.58726 16.94167</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.93071 12.47317 11.76726 1.140847 48.34598</span>
+<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 14.10117 12.61493 10.46247 0.7167501 44.81029</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%     2.5%   97.5%</span>
-<span class="c">## [1,] 19.14142 1.108434 19.10923 17.08599 21.3422</span>
+<span class="c">##          mean      sd     50%     2.5%    97.5%</span>
+<span class="c">## [1,] 19.20462 1.09835 19.1701 17.12843 21.59379</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%     2.5% 97.5%</span>
-<span class="c">## [1,] 19.91413 17.48599 14.68881 1.118373  67.1</span>
+<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 20.12378 17.59241 14.87627 1.012285 62.58808</span>
 <span class="c">## fd</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.688692 1.568936 4.729238 1.484268 7.829232</span>
+<span class="c">## [1,] 4.742612 1.533219 4.813555 1.531028 7.603858</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -934,11 +969,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%    97.5%</span>
-<span class="c">## [1,] 0.7479283 0.01163911 0.7479471 0.7257399 0.769588</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7481281 0.01178115 0.7485494 0.7225104 0.7696713</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.247 0.753</span>
+<span class="c">## [1,] 0.259 0.741</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -993,23 +1028,23 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.823305 0.01050947 0.8235739 0.8011006 0.8432868</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.8223631 0.01069511 0.8224678 0.8011748 0.8429748</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.173 0.827</span>
+<span class="c">## [1,] 0.185 0.815</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%    2.5%     97.5%</span>
-<span class="c">## [1,] 0.7096394 0.01310179 0.7096633 0.68401 0.7335274</span>
+<span class="c">##         mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.70984 0.01273342 0.7106361 0.6850838 0.7340319</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.284 0.716</span>
+<span class="c">## [1,] 0.278 0.722</span>
 <span class="c">## fd</span>
-<span class="c">##            mean        sd        50%       2.5%       97.5%</span>
-<span class="c">## [1,] -0.1136656 0.0113512 -0.1136393 -0.1363964 -0.09212284</span>
+<span class="c">##            mean         sd        50%       2.5%       97.5%</span>
+<span class="c">## [1,] -0.1125231 0.01143884 -0.1123839 -0.1358231 -0.09090589</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -1253,23 +1288,23 @@ X:</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.709785 0.01241856 0.7099783 0.6840293 0.7335266</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7093778 0.01303831 0.7096524 0.6835171 0.7332369</span>
 <span class="c">## pv</span>
-<span class="c">##         0    1</span>
-<span class="c">## [1,] 0.26 0.74</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.289 0.711</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.823279 0.01034082 0.8235886 0.8028596 0.8433234</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.8230374 0.01037104 0.8230678 0.8011799 0.8424039</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.182 0.818</span>
+<span class="c">## [1,] 0.163 0.837</span>
 <span class="c">## fd</span>
-<span class="c">##          mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.113494 0.01173378 0.1140511 0.0911537 0.1364891</span>
+<span class="c">##           mean         sd       50%       2.5%   97.5%</span>
+<span class="c">## [1,] 0.1136595 0.01142551 0.1131236 0.09164349 0.13761</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1492,22 +1527,22 @@ variable:</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.434882 0.1877221 5.435081 5.078943 5.802927</span>
+<span class="c">## 1 5.429491 0.1901993 5.431081 5.050011 5.798847</span>
 <span class="c">## pv</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.434882 0.1877221 5.435081 5.078943 5.802927</span>
+<span class="c">## 1 5.429491 0.1901993 5.431081 5.050011 5.798847</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
-<span class="c">## 1 4.614864 0.1856473 4.616415 4.26142 4.983094</span>
+<span class="c">##      mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 4.60029 0.1835274 4.595742 4.252209 4.977369</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
-<span class="c">## 1 4.614864 0.1856473 4.616415 4.26142 4.983094</span>
+<span class="c">##      mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 4.60029 0.1835274 4.595742 4.252209 4.977369</span>
 <span class="c">## fd</span>
-<span class="c">##         mean        sd       50%      2.5%      97.5%</span>
-<span class="c">## 1 -0.8200178 0.2294083 -0.822329 -1.272104 -0.3813351</span>
+<span class="c">##         mean        sd       50%      2.5%     97.5%</span>
+<span class="c">## 1 -0.8292016 0.2351483 -0.841582 -1.302644 -0.351349</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -1752,13 +1787,13 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 2.970654 0.3526413 2.950225 2.361613 3.717315</span>
+<span class="c">## [1,] 2.978158 0.3503323 2.967269 2.361879 3.725625</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##     0     1     2     3     4     5     6     7     8     9    10    11</span>
-<span class="c">## 0.208 0.224 0.159 0.136 0.091 0.061 0.049 0.031 0.016 0.008 0.006 0.006</span>
-<span class="c">##    12    13    15</span>
-<span class="c">## 0.001 0.003 0.001</span>
+<span class="c">## 0.139 0.190 0.160 0.147 0.113 0.077 0.047 0.037 0.031 0.019 0.010 0.014</span>
+<span class="c">##    12    13    14    15    16    17    18    19</span>
+<span class="c">## 0.004 0.004 0.001 0.002 0.002 0.001 0.001 0.001</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1967,22 +2002,22 @@ high (80th percentile) and low (20th percentile) values for trade:</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 5.421636 0.1934419 5.416947 5.050007 5.805921</span>
+<span class="c">## [1,] 5.432532 0.1869439 5.438897 5.082568 5.800635</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd     50%       2.5%    97.5%</span>
-<span class="c">## [1,] 5.307206 2.774139 5.21072 -0.2732345 10.85246</span>
+<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 5.474993 2.767455 5.478948 0.4837479 10.75018</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.605848 0.1856338 4.604929 4.228962 4.957149</span>
+<span class="c">## [1,] 4.593397 0.1849357 4.596519 4.210552 4.931859</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## [1,] 4.606711 2.806033 4.633587 -1.000983 9.745887</span>
+<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
+<span class="c">## [1,] 4.574628 2.728899 4.538834 -0.7472256 9.935443</span>
 <span class="c">## fd</span>
-<span class="c">##            mean        sd       50%      2.5%      97.5%</span>
-<span class="c">## [1,] -0.8157879 0.2359565 -0.804469 -1.288961 -0.3667709</span>
+<span class="c">##            mean        sd        50%      2.5%      97.5%</span>
+<span class="c">## [1,] -0.8391345 0.2337216 -0.8343814 -1.315722 -0.4047965</span>
 </pre></div>
 </div>
 <p>A visual summary of quantities of interest:</p>
@@ -2159,11 +2194,11 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd      50%     2.5%   97.5%</span>
-<span class="c">## [1,] 3.243595 0.2315298 3.222749 2.836051 3.77531</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 3.241645 0.2411847 3.233713 2.812957 3.725572</span>
 <span class="c">## pv</span>
-<span class="c">##       mean      sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.228 1.79199   3    0     7</span>
+<span class="c">##       mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.199 1.825029   3    0     7</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -2545,10 +2580,10 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##             mean           sd         50%        2.5%       97.5%</span>
-<span class="c">## [1,] 0.002390218 0.0001556091 0.002387679 0.002089796 0.002713131</span>
+<span class="c">## [1,] 0.002403785 0.0001519576 0.002405877 0.002106385 0.002701354</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.997 0.003</span>
+<span class="c">## [1,] 0.998 0.002</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -2588,30 +2623,16 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">## [1] 1</span>
 <span class="c">##</span>
 <span class="c">##</span>
-<span class="c">## Call:</span>
-<span class="c">## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country),</span>
+<span class="c">## Call:  stats::glm(formula = vote ~ race + educate, family = binomial(&quot;logit&quot;),</span>
 <span class="c">##     data = .)</span>
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
-<span class="c">##                      (Intercept)                               gdp</span>
-<span class="c">##                          -5.8432                           -0.1102</span>
-<span class="c">##                            trade                            capmob</span>
-<span class="c">##                           0.1442                            0.8147</span>
-<span class="c">##        as.factor(country)Belgium          as.factor(country)Canada</span>
-<span class="c">##                          -1.5986                            6.7594</span>
-<span class="c">##        as.factor(country)Denmark         as.factor(country)Finland</span>
-<span class="c">##                           4.3107                            4.8099</span>
-<span class="c">##         as.factor(country)France           as.factor(country)Italy</span>
-<span class="c">##                           6.9048                            9.2897</span>
-<span class="c">##          as.factor(country)Japan     as.factor(country)Netherlands</span>
-<span class="c">##                           5.4586                           -1.4593</span>
-<span class="c">##         as.factor(country)Norway          as.factor(country)Sweden</span>
-<span class="c">##                          -2.7537                            0.9253</span>
-<span class="c">## as.factor(country)United Kingdom   as.factor(country)United States</span>
-<span class="c">##                           5.6008                           10.0662</span>
-<span class="c">##   as.factor(country)West Germany</span>
-<span class="c">##                           3.3636</span>
+<span class="c">## (Intercept)    racewhite      educate</span>
+<span class="c">##     -1.2189       0.5022       0.1610</span>
 <span class="c">##</span>
+<span class="c">## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual</span>
+<span class="c">## Null Deviance:       2267</span>
+<span class="c">## Residual Deviance: 2138  AIC: 2144</span>
 <span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
@@ -2633,11 +2654,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean      sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 8.224193 0.39594 8.23914 7.417608 8.966866</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7729134 0.01053068 0.7728625 0.7515642 0.7941928</span>
 <span class="c">## pv</span>
-<span class="c">##       mean      sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 8.224193 0.39594 8.23914 7.417608 8.966866</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.229 0.771</span>
 </pre></div>
 </div>
 </div>
@@ -2879,7 +2900,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7fd7bcfe6c28&gt;</span>
+<span class="c">## &lt;environment: 0x7f9cd002be70&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -2909,11 +2930,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean      sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 8.224193 0.39594 8.23914 7.417608 8.966866</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7729134 0.01053068 0.7728625 0.7515642 0.7941928</span>
 <span class="c">## pv</span>
-<span class="c">##       mean      sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 8.224193 0.39594 8.23914 7.417608 8.966866</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.229 0.771</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -3187,10 +3208,10 @@ its own cluster.</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.531805 0.6493522 1.453968 0.5217624 2.937965</span>
+<span class="c">## 1 1.552781 0.6359192 1.468163 0.5703843 2.985368</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 2.844014 3.872782 1.104319    0 13.29528</span>
+<span class="c">##          mean       sd      50% 2.5%   97.5%</span>
+<span class="c">## [1,] 3.134717 4.072317 1.518505    0 13.2702</span>
 </pre></div>
 </div>
 </div>
@@ -3227,23 +3248,23 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd     50%      2.5%    97.5%</span>
-<span class="c">## 1 1.251523 0.7914154 1.09156 0.1996368 3.272437</span>
+<span class="c">##      mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 1.22134 0.7669291 1.066079 0.1851743 3.162145</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.012727 4.144764 1.133467    0 13.28919</span>
+<span class="c">##          mean      sd      50% 2.5%    97.5%</span>
+<span class="c">## [1,] 3.090054 4.20484 1.386942    0 13.69941</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 2.072685 1.010379 1.931515 0.5579195 4.396102</span>
+<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 2.044099 0.9570811 1.914968 0.5696176 4.205237</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.595723 4.487017 1.778495    0 15.33395</span>
+<span class="c">## [1,] 3.565195 4.449782 2.090699    0 14.47168</span>
 <span class="c">## fd</span>
-<span class="c">##        mean       sd       50%      2.5%    97.5%</span>
-<span class="c">## 1 0.8211621 1.248904 0.7614533 -1.487486 3.495811</span>
+<span class="c">##        mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 0.8227594 1.178409 0.737396 -1.420181 3.235628</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -3690,7 +3711,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.5612 0.2075 0.2313</span>
+<span class="c">## 0.5503 0.2135 0.2362</span>
 </pre></div>
 </div>
 </div>
@@ -3732,7 +3753,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.7155 0.1314 0.1531</span>
+<span class="c">## 0.7171 0.1297 0.1532</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -3744,7 +3765,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.3960 0.3138 0.2902</span>
+<span class="c">## 0.4042 0.3019 0.2939</span>
 <span class="c">## fd</span>
 <span class="c">##              mean         sd        50%        2.5%      97.5%</span>
 <span class="c">## P(Y=1) -0.3128754 0.03459857 -0.3128662 -0.38111485 -0.2442630</span>
@@ -3871,7 +3892,7 @@ the CODA library by Martyn Plummer, Nicky Best, Kate Cowles, Karen Vines, Deepay
 ordered and categorical. They may take either integer values or
 character strings. The model is estimated using a Gibbs sampler with
 data augmentation. For a maximum-likelihood implementation of this
-models, see .</p>
+models, see <cite>probit</cite>.</p>
 <div class="section" id="id81">
 <h3>Syntax<a class="headerlink" href="#id81" title="Permalink to this headline">¶</a></h3>
 <p>With reference classes:</p>
@@ -4207,6 +4228,281 @@ for the treated from conditional prediction models.</li>
 Andrew D. Martin and Kevin M. Quinn . The convergence diagnostics are
 part of the CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and
 Karen Vines.</p>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="zelig-poissonbayes">
+<span id="zpoissonbayes"></span><h2>zelig-poissonbayes<a class="headerlink" href="#zelig-poissonbayes" title="Permalink to this headline">¶</a></h2>
+<p>Use the Poisson regression model if the observations of your dependent
+variable represents the number of independent events that occur during
+a fixed period of time. The model is fit using a random walk
+Metropolis algorithm.  For a maximum-likelihood estimation of this
+model see <cite>poisson</cite>.</p>
+<div class="section" id="id90">
+<h3>Syntax<a class="headerlink" href="#id90" title="Permalink to this headline">¶</a></h3>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zpoissonbayes<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id91">
+<h3>Additional Inputs<a class="headerlink" href="#id91" title="Permalink to this headline">¶</a></h3>
+<p>Use the following argument to monitor the Markov chain:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">burnin</span></tt>: number of the initial MCMC iterations to be discarded
+(defaults to 1,000).</li>
+<li><tt class="docutils literal"><span class="pre">mcmc</span></tt>: number of the MCMC iterations after burnin (defaults to
+10,000).</li>
+<li><tt class="docutils literal"><span class="pre">thin</span></tt>: thinning interval for the Markov chain. Only every
+<tt class="docutils literal"><span class="pre">thin</span></tt>-th draw from the Markov chain is kept. The value of <tt class="docutils literal"><span class="pre">mcmc</span></tt>
+must be divisible by this value. The default value is 1.</li>
+<li><tt class="docutils literal"><span class="pre">tune</span></tt>: Metropolis tuning parameter, either a positive scalar or a
+vector of length <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>, where <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> is the number of
+coefficients. The tuning parameter should be set such that the
+acceptance rate of the Metropolis algorithm is satisfactory
+(typically between 0.20 and 0.5). The default value is 1.1.</li>
+<li><tt class="docutils literal"><span class="pre">verbose</span></tt>: default to FALSE. If <tt class="docutils literal"><span class="pre">TRUE</span></tt>, the progress of the
+sampler (every <img class="math" src="_images/math/edce6cd55e38e73a0341fc79fb72bb04c90eeca4.png" alt="10\%"/>) is printed to the screen.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: seed for the random number generator. The default is <tt class="docutils literal"><span class="pre">NA</span></tt>
+which corresponds to a random seed of 12345.</li>
+<li><tt class="docutils literal"><span class="pre">beta.start</span></tt>: starting values for the Markov chain, either a scalar
+or vector with length equal to the number of estimated coefficients.
+The default is <tt class="docutils literal"><span class="pre">NA</span></tt>, such that the maximum likelihood estimates are
+used as the starting values.</li>
+</ul>
+<p>Use the following parameters to specify the model’s priors:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">b0</span></tt>: prior mean for the coefficients, either a numeric vector or a
+scalar. If a scalar, that value will be the prior mean for all the
+coefficients. The default is 0.</li>
+<li><tt class="docutils literal"><span class="pre">B0</span></tt>: prior precision parameter for the coefficients, either a
+square matrix (with the dimensions equal to the number of the
+coefficients) or a scalar. If a scalar, that value times an identity
+matrix will be the prior precision parameter. The default is 0, which
+leads to an improper prior.</li>
+</ul>
+<p>Zelig users may wish to refer to <tt class="docutils literal"><span class="pre">help(MCMCpoisson)</span></tt> for more
+information.</p>
+</div>
+<div class="section" id="id92">
+<h3>Examples<a class="headerlink" href="#id92" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id93">
+<h4>Basic Example<a class="headerlink" href="#id93" title="Permalink to this headline">¶</a></h4>
+<p>Attaching the sample dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>sanction<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimating the Poisson regression using <tt class="docutils literal"><span class="pre">poisson.bayes</span></tt>:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.bayes&quot;</span><span class="p">,</span>
+               data <span class="o">=</span> sanction<span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Ben Goodrich, Ying Lu. 2013.</span>
+<span class="c">##   poissonbayes: Bayesian Poisson Regression</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://zeligproject.org/</span>
+</pre></div>
+</div>
+<p>Checking convergence diagnostics before summarizing the estimates:</p>
+<div class="highlight-r"><div class="highlight"><pre>geweke.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>heidel.diag<span class="p">(</span>z.out`\ coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>raftery.diag<span class="p">(</span>z.out..coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Setting values for the explanatory variables to their sample averages:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<p>Simulating quantities of interest from the posterior distribution given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id94">
+<h4>Simulating First Differences<a class="headerlink" href="#id94" title="Permalink to this headline">¶</a></h4>
+<p>Estimating the first difference in the number of countries imposing
+sanctions when the number of targets is set to be its maximum versus its minimum :</p>
+<div class="highlight-r"><div class="highlight"><pre>x.max <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> target <span class="o">=</span> max<span class="p">(</span>sanction<span class="o">$</span>target<span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>x.min <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> target <span class="o">=</span> min<span class="p">(</span>sanction<span class="o">$</span>target<span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
+<span class="c">## Use &#39;group_by_&#39; instead.</span>
+<span class="c">## See help(&quot;Deprecated&quot;)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.max<span class="p">,</span> x1 <span class="o">=</span> x.min<span class="p">)</span>
+summary<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733</span>
+<span class="c">## pv</span>
+<span class="c">##        mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.2418 1.821116   3    0     7</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022</span>
+<span class="c">## pv</span>
+<span class="c">##        mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.2974 1.851404   3    0     7</span>
+<span class="c">## fd</span>
+<span class="c">##           mean        sd       50%       2.5%     97.5%</span>
+<span class="c">## [1,] 0.1146376 0.3671544 0.1265036 -0.6072035 0.8342282</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id95">
+<h3>Model<a class="headerlink" href="#id95" title="Permalink to this headline">¶</a></h3>
+<p>Let <img class="math" src="_images/math/0e1e069d7b701cb98cfecc70660e4e31b786db9a.png" alt="Y_{i}"/> be the number of independent events that occur during
+a fixed time period.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/ea903a844966d327c5804197b944c5b57f6f2e4b.png" alt="\begin{aligned}
+Y_{i}  &amp;  \sim &amp; \textrm{Poisson}(\lambda_i)\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/> is the mean and variance parameter.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/f17f0771bc7a8cd4c9fe0c301f3cf813fad32a13.png" alt="\begin{aligned}
+\lambda_{i}= \exp(x_{i} \beta)\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/c223a5391d7bfd7e7c68274c104fc7418944376e.png" alt="x_{i}"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of
+coefficients.</p>
+</li>
+<li><p class="first">The <em>prior</em> for <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is given by</p>
+<div class="math">
+<p><img src="_images/math/b786073674269995bb95620d4df7511b8cd7e452.png" alt="\begin{aligned}
+\beta \sim \textrm{Normal}_k \left(  b_{0},B_{0}^{-1}\right)\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/9d80db7ae48caf02365282c5dff832fcbe0a74d5.png" alt="b_{0}"/> is the vector of means for the <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>
+explanatory variables and <img class="math" src="_images/math/6a119b5ae9ee269e28bcaa4d39e47a3d3de4f5e5.png" alt="B_{0}"/> is the <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/>
+precision matrix (the inverse of a variance-covariance matrix).</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id96">
+<h3>Quantities of Interest<a class="headerlink" href="#id96" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">The expected values (<tt class="docutils literal"><span class="pre">qi$ev</span></tt>) for the Poisson model are calculated
+as following:</p>
+<div class="math">
+<p><img src="_images/math/2668f5aa2c8db1b92dc68b5950271ab71880e0f4.png" alt="\begin{aligned}
+E(Y\mid X) = \lambda_i = \exp(x_i \beta),\end{aligned}"/></p>
+</div><p>given the posterior draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> based on the MCMC
+iterations.</p>
+</li>
+<li><p class="first">The predicted values (<tt class="docutils literal"><span class="pre">qi$pr</span></tt>) are draws from the Poisson
+distribution with parameter <img class="math" src="_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/>.</p>
+</li>
+<li><p class="first">The first difference (<tt class="docutils literal"><span class="pre">qi$fd</span></tt>) for the Poisson model is defined as</p>
+<div class="math">
+<p><img src="_images/math/e32bcefcd3232180d0737b016162063cf960ee3d.png" alt="\begin{aligned}
+\text{FD}=E(Y\mid X_{1})-E(Y\mid X).\end{aligned}"/></p>
+</div></li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>) for the treatment group is</p>
+<div class="math">
+<p><img src="_images/math/155601c69591d66ffefcd58f0d7909591a67f704.png" alt="\begin{aligned}
+\frac{1}{\sum_{i=1}^n t_{i}}\sum_{i:t_{i}=1}\{Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)]\},\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.pr</span></tt>) for the treatment group is</p>
+<div class="math">
+<p><img src="_images/math/50406baf96b768004de658ce511942b4ae34b395.png" alt="\begin{aligned}
+\frac{1}{\sum_{i=1}^n t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id97">
+<h3>Output Values<a class="headerlink" href="#id97" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.bayes&quot;</span><span class="p">,</span> data<span class="p">)</span>
+</pre></div>
+</div>
+<p>you may examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the draws from the posterior distribution of the
+<tt class="docutils literal"><span class="pre">coefficients</span></tt> by using <tt class="docutils literal"><span class="pre">z.out$coefficients</span></tt>, and view a default
+summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements
+available through the <tt class="docutils literal"><span class="pre">$</span></tt> operator are listed below.</p>
+<ul class="simple">
+<li>From the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object <tt class="docutils literal"><span class="pre">z.out</span></tt>, you may extract:<ul>
+<li><tt class="docutils literal"><span class="pre">coefficients</span></tt>: draws from the posterior distributions of the
+estimated parameters.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: the random seed used in the model.</li>
+</ul>
+</li>
+<li>From the <tt class="docutils literal"><span class="pre">sim()</span></tt> output object <tt class="docutils literal"><span class="pre">s.out</span></tt>:<ul>
+<li><tt class="docutils literal"><span class="pre">qi$ev</span></tt>: the simulated expected values for the specified values
+of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$pr</span></tt>: the simulated predicted values for the specified values
+of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$fd</span></tt>: the simulated first difference in the expected values
+for the values specified in <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">x1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>: the simulated average expected treatment effect for
+the treated from conditional prediction models.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.pr</span></tt>: the simulated average predicted treatment effect
+for the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id98">
+<h3>See also<a class="headerlink" href="#id98" title="Permalink to this headline">¶</a></h3>
+<p>Bayesian poisson regression is part of the MCMCpack library by Andrew D.
+Martin and Kevin M. Quinn . The convergence diagnostics are part of the
+CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.</p>
 <hr class="docutils" />
 <div class="toctree-wrapper compound">
 </div>

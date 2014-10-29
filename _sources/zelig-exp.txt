@@ -205,12 +205,6 @@ Simulate expected values and first differences:
     s.out <- sim(z.out, x = x.low, x1 = x.high)
 
 
-::
-
-    ## Error in sim(z.out, x = x.low, x1 = x.high): object 'x.low' not found
-
-
-
 Summarize quantities of interest and produce some plots:
 
 
@@ -222,7 +216,27 @@ Summarize quantities of interest and produce some plots:
 
 ::
 
-    ## Error in summary(s.out): error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean        sd      50%    2.5%    97.5%
+    ## 1 4.614089 0.1820881 4.612107 4.25745 4.965254
+    ## pv
+    ##       mean        sd      50%    2.5%    97.5%
+    ## 1 4.614089 0.1820881 4.612107 4.25745 4.965254
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 5.436715 0.1880952 5.438604 5.067961 5.815886
+    ## pv
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 5.436715 0.1880952 5.438604 5.067961 5.815886
+    ## fd
+    ##        mean        sd      50%      2.5%    97.5%
+    ## 1 0.8226266 0.2302595 0.835174 0.3790788 1.232339
 
 
 
@@ -232,12 +246,10 @@ Summarize quantities of interest and produce some plots:
 
     plot(s.out)
 
+.. figure:: figure/Zelig-exp-1.png
+    :alt: Zelig-exp
 
-::
-
-    ## Error in plot(s.out): error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
-
-
+    Zelig-exp
 
 Model
 +++++
