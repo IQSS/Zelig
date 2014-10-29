@@ -29,6 +29,7 @@
 #' @include model-oprobit-bayes.R
 #' @include model-poisson-bayes.R
 #' @include model-probit-bayes.R
+#' @include model-weibull.R
 
 zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #   .Deprecated("\nz$new() \nz$zelig(...)")
@@ -83,6 +84,8 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
     z5 <- zpoissonbayes$new()
   else if (model == "probit.bayes")
     z5 <- zprobitbayes$new()
+  else if (model == "weibull")
+    z5 <- zweibull$new()
   else
     stop("Model '", model,"' not found")
   ## End: Zelig 5 models (more to be linked from, e.g, Zelig5Choice)

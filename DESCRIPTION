@@ -64,6 +64,7 @@ Collate:
     'model-oprobit-bayes.R'
     'model-poisson-bayes.R'
     'model-probit-bayes.R'
+    'model-weibull.R'
     'create-json.R'
     'wrappers.R'
     'plots.R'
