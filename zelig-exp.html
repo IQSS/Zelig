@@ -350,39 +350,21 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in sim(z.out, x = x.low, x1 = x.high): object &#39;x.low&#39; not found</span>
+</pre></div>
+</div>
 <p>Summarize quantities of interest and produce some plots:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
-<span class="c">##  sim x :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
-<span class="c">## 1 4.614089 0.1820881 4.612107 4.25745 4.965254</span>
-<span class="c">## pv</span>
-<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
-<span class="c">## 1 4.614089 0.1820881 4.612107 4.25745 4.965254</span>
-<span class="c">##</span>
-<span class="c">##  sim x1 :</span>
-<span class="c">##  -----</span>
-<span class="c">## ev</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.436715 0.1880952 5.438604 5.067961 5.815886</span>
-<span class="c">## pv</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.436715 0.1880952 5.438604 5.067961 5.815886</span>
-<span class="c">## fd</span>
-<span class="c">##        mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 0.8226266 0.2302595 0.835174 0.3790788 1.232339</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in summary(s.out): error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure">
-<img alt="Zelig-exp" src="_images/Zelig-exp-1.png" />
-<p class="caption">Zelig-exp</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in plot(s.out): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="model">
