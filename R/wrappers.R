@@ -90,7 +90,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   mf$model <- NULL
   mf$cite <- NULL
   mf[[1]] <- quote(z5$zelig)
-  mf <- try(eval(mf, environment()))
+  mf <- try(eval(mf, environment()), silent = TRUE)
   if ("try-error" %in% class(mf))
     z5$zelig(formula = formula, data = data, ...)
   if (cite)

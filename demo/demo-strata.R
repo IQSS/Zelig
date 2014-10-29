@@ -39,7 +39,7 @@ by(turnout,  factor(turnout$race),
    function(x) lm(vote ~ age , data = x))
 
 by(turnout,  factor(turnout$race),
-   function(x) zelig(vote ~ age , data = x, model = "ls"))
+   function(x) Zelig::zelig(vote ~ age , data = x, model = "ls"))
 
 by(turnout,  factor(turnout$race),
    function(x) {
