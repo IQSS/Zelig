@@ -58,124 +58,16 @@ when appropriate.
 Additional Inputs
 +++++
 
+
 Use the following arguments to specify the structure of the “working”
 correlations within clusters:
 
--  ``corstr``: defaults to “independence”. It can take on the following
-   arguments:
+- ``corstr``: character string specifying the correlation structure:
+  "independence", "exchangeable", "ar1", "unstructured" and
+  "userdefined"
 
-   -  Independence (``corstr = independence``): :math:`{\rm
-          cor}(y_{it}, y_{it'})=0`, :math:`\forall t, t'` with
-      :math:`t\ne t'`. It assumes that there is no correlation within
-      the clusters and the model becomes equivalent to standard gamma
-      regression. The “working” correlation matrix is the identity
-      matrix.
+- See ``geeglm`` in package ``geepack`` for other function arguments.
 
-   -  Fixed (``corstr = fixed``): If selected, the user must define the
-      “working” correlation matrix with the ``R`` argument rather than
-      estimating it from the model.
-
-   -  Stationary :math:`m` dependent (``corstr = stat_M_dep``):
-
-      .. math::
-
-         {\rm cor}(y_{it}, y_{it'})=\left\{\begin{array}{ccc}
-               \alpha_{|t-t'|} & {\rm if} & |t-t'|\le m \\ 0 & {\rm if}
-               & |t-t'| > m
-             \end{array}\right.
-
-      If (``corstr = stat_M_dep``), you must also specify ``Mv`` =
-      :math:`m`, where :math:`m` is the number of periods :math:`t` of
-      dependence. Choose this option when the correlations are assumed
-      to be the same for observations of the same :math:`|t-t'|` periods
-      apart for :math:`|t-t'| \leq m`.
-
-      | Sample “working” correlation for Stationary 2 dependence (Mv=2)
-      | :math:`\left( \begin{array}{ccccc}
-      1 & \alpha_1 & \alpha_2 & 0 & 0 \\
-      \alpha_1 & 1 & \alpha_1 & \alpha_2 & 0 \\
-      \alpha_2 & \alpha_1 & 1 & \alpha_1 & \alpha_2 \\
-      0 & \alpha_2 & \alpha_1 & 1 & \alpha_1 \\
-      0 & 0 & \alpha_2 & \alpha_1 & 1
-      \end{array} \right) `
-
-   -  Non-stationary :math:`m` dependent (``corstr = non_stat_M_dep``):
-
-      .. math::
-
-         {\rm cor}(y_{it}, y_{it'})=\left\{\begin{array}{ccc}
-               \alpha_{tt'} & {\rm if} & |t-t'|\le m \\ 0 & {\rm if}
-               & |t-t'| > m
-             \end{array}\right.
-
-      If (``corstr = non_stat_M_dep``), you must also specify ``Mv`` =
-      :math:`m`, where :math:`m` is the number of periods :math:`t` of
-      dependence. This option relaxes the assumption that the
-      correlations are the same for all observations of the same
-      :math:`|t-t'|` periods apart.
-
-      | Sample “working” correlation for Non-stationary 2 dependence
-      (Mv=2)
-      | :math:`\left( \begin{array}{ccccc}
-      1 & \alpha_{12} & \alpha_{13} & 0 & 0 \\
-      \alpha_{12} & 1 & \alpha_{23} & \alpha_{24} & 0 \\
-      \alpha_{13} & \alpha_{23} & 1 & \alpha_{34} & \alpha_{35} \\
-      0 & \alpha_{24} & \alpha_{34} & 1 & \alpha_{45} \\
-      0 & 0 & \alpha_{35} & \alpha_{45} & 1
-      \end{array} \right) `
-
-   -  Exchangeable (``corstr = exchangeable``): :math:`{\rm
-          cor}(y_{it}, y_{it'})=\alpha`, :math:`\forall t, t'` with
-      :math:`t\ne t'`. Choose this option if the correlations are
-      assumed to be the same for all observations within the cluster.
-
-      | Sample “working” correlation for Exchangeable
-      | :math:`\left( \begin{array}{ccccc}
-      1 & \alpha & \alpha & \alpha & \alpha \\
-      \alpha & 1 & \alpha & \alpha & \alpha \\
-      \alpha & \alpha & 1 & \alpha & \alpha \\
-      \alpha & \alpha & \alpha & 1 & \alpha \\
-      \alpha & \alpha & \alpha & \alpha & 1
-      \end{array} \right) `
-
-   -  Stationary :math:`m`\ th order autoregressive (``corstr = AR-M``):
-      If (``corstr = AR-M``), you must also specify ``Mv`` = :math:`m`,
-      where :math:`m` is the number of periods :math:`t` of dependence.
-      For example, the first order autoregressive model (AR-1) implies
-      :math:`{\rm cor}(y_{it},
-        y_{it'})=\alpha^{|t-t'|}, \forall t, t'` with :math:`t\ne t'`.
-      In AR-1, observation 1 and observation 2 have a correlation of
-      :math:`\alpha`. Observation 2 and observation 3 also have a
-      correlation of :math:`\alpha`. Observation 1 and observation 3
-      have a correlation of :math:`\alpha^2`, which is a function of how
-      1 and 2 are correlated (:math:`\alpha`) multiplied by how 2 and 3
-      are correlated (:math:`\alpha`). Observation 1 and 4 have a
-      correlation that is a function of the correlation between 1 and 2,
-      2 and 3, and 3 and 4, and so forth.
-
-      | Sample “working” correlation for Stationary AR-1 (Mv=1)
-      | :math:`\left( \begin{array}{ccccc}
-      1 & \alpha & \alpha^2 & \alpha^3 & \alpha^4 \\
-      \alpha & 1 & \alpha & \alpha^2 & \alpha^3 \\
-      \alpha^2 & \alpha & 1 & \alpha & \alpha^2 \\
-      \alpha^3 & \alpha^2 & \alpha & 1 & \alpha \\
-      \alpha^4 & \alpha^3 & \alpha^2 & \alpha & 1
-      \end{array} \right) `
-
-   -  Unstructured (``corstr = unstructured``): :math:`{\rm
-          cor}(y_{it}, y_{it'})=\alpha_{tt'}`, :math:`\forall t, t'`
-      with :math:`t\ne t'`. No constraints are placed on the
-      correlations, which are then estimated from the data.
-
--  ``Mv``: defaults to 1. It specifies the number of periods of
-   correlation and only needs to be specified when ``corstr`` is
-   “stat\_M\_dep”, “non\_stat\_M\_dep”, or “AR-M”.
-
--  ``R``: defaults to ``NULL``. It specifies a user-defined correlation
-   matrix rather than estimating it from the data. The argument is used
-   only when ``corstr`` is “fixed”. The input is a :math:`T \times T`
-   matrix of correlations, where :math:`T` is the size of the largest
-   cluster.
 
 Examples
 +++++
@@ -309,23 +201,23 @@ Simulate quantities of interest
     ##  sim x :
     ##  -----
     ## ev
-    ##          mean      sd     50%     2.5%    97.5%
-    ## [1,] 14.42152 1.12433 14.3364 12.47104 16.89451
+    ##          mean       sd     50%     2.5%    97.5%
+    ## [1,] 14.40728 1.150051 14.3262 12.36709 16.89536
     ## pv
-    ##          mean       sd      50%       2.5%   97.5%
-    ## [1,] 13.73471 16.19528 7.390911 0.06528046 59.0092
+    ##          mean       sd      50%       2.5%    97.5%
+    ## [1,] 14.07835 18.14224 7.603815 0.06235246 65.07778
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 19.19156 1.059807 19.17569 17.32821 21.64616
+    ##          mean       sd      50%    2.5%    97.5%
+    ## [1,] 19.21808 1.117628 19.18863 17.2676 21.63706
     ## pv
     ##          mean       sd      50%       2.5%    97.5%
-    ## [1,] 19.29397 25.26029 9.820899 0.05006266 91.30573
+    ## [1,] 19.61789 23.70813 11.10875 0.04327947 82.02938
     ## fd
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 4.770042 1.601858 4.778185 1.571234 7.981507
+    ##          mean       sd      50%     2.5%   97.5%
+    ## [1,] 4.810795 1.677545 4.759365 1.566173 8.00721
 
 
 
@@ -458,10 +350,7 @@ may view. For example, if you run
     z.out <- zelig(y ~ x, model = "gamma.gee", id, data)
 
 
-then you may
-examine the available information in ``z.out`` by using
-``names(z.out)``, see the coefficients by using z.out$coefficients, and
-a default summary of information through ``summary(z.out)``. Other
+then you may see a default summary of information through ``summary(z.out)``. Other
 elements available through the $ operator are listed below.
 
 -  From the zelig() output object z.out, you may extract:
@@ -502,6 +391,6 @@ elements available through the $ operator are listed below.
 See also
 +++++
 
-The gee function is part of the gee package by Vincent J. Carey, ported
-to R by Thomas Lumley and Brian Ripley. Advanced users may wish to refer
-to ``help(gee)`` and ``help(family)``. Sample data are from .
+The gee function is part of the geepack package by Søren Højsgaard,
+Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
+to ``help(geepack)`` and ``help(family)``.

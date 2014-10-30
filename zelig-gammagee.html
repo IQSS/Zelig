@@ -271,134 +271,11 @@ when appropriate.</p>
 <h2>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
 <p>Use the following arguments to specify the structure of the “working”
 correlations within clusters:</p>
-<ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">corstr</span></tt>: defaults to “independence”. It can take on the following
-arguments:</p>
-<ul>
-<li><dl class="first docutils">
-<dt>Independence (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">independence</span></tt>): :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>{rm</dt>
-<dd><p class="first last">cor}(y_{it}, y_{it&#8217;})=0`, <img class="math" src="_images/math/b62913dba4dcf0ad967a352ba799160add6cfccf.png" alt="\forall t, t'"/> with</p>
-</dd>
-</dl>
-<p><img class="math" src="_images/math/1d9aca3aa78b7d7e198a06a8c89f830205f58690.png" alt="t\ne t'"/>. It assumes that there is no correlation within
-the clusters and the model becomes equivalent to standard gamma
-regression. The “working” correlation matrix is the identity
-matrix.</p>
-</li>
-<li><p class="first">Fixed (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">fixed</span></tt>): If selected, the user must define the
-“working” correlation matrix with the <tt class="docutils literal"><span class="pre">R</span></tt> argument rather than
-estimating it from the model.</p>
-</li>
-<li><p class="first">Stationary <img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> dependent (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">stat_M_dep</span></tt>):</p>
-<div class="math">
-<p><img src="_images/math/46332125c018ee25a946daf752cbc6d68b7aaa68.png" alt="{\rm cor}(y_{it}, y_{it'})=\left\{\begin{array}{ccc}
-      \alpha_{|t-t'|} &amp; {\rm if} &amp; |t-t'|\le m \\ 0 &amp; {\rm if}
-      &amp; |t-t'| &gt; m
-    \end{array}\right."/></p>
-</div><p>If (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">stat_M_dep</span></tt>), you must also specify <tt class="docutils literal"><span class="pre">Mv</span></tt> =
-<img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/>, where <img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> is the number of periods <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> of
-dependence. Choose this option when the correlations are assumed
-to be the same for observations of the same <img class="math" src="_images/math/3662c4dcc9b71c0976999c0bf36245ec7e9ec834.png" alt="|t-t'|"/> periods
-apart for <img class="math" src="_images/math/01e492a183b963820a9666de3ac2a92f001f9053.png" alt="|t-t'| \leq m"/>.</p>
-<div class="line-block">
-<div class="line">Sample “working” correlation for Stationary 2 dependence (Mv=2)</div>
-<div class="line">:math:<a href="#id3"><span class="problematic" id="id4">`</span></a>left( begin{array}{ccccc}</div>
-</div>
-<p>1 &amp; alpha_1 &amp; alpha_2 &amp; 0 &amp; 0 \
-alpha_1 &amp; 1 &amp; alpha_1 &amp; alpha_2 &amp; 0 \
-alpha_2 &amp; alpha_1 &amp; 1 &amp; alpha_1 &amp; alpha_2 \
-0 &amp; alpha_2 &amp; alpha_1 &amp; 1 &amp; alpha_1 \
-0 &amp; 0 &amp; alpha_2 &amp; alpha_1 &amp; 1
-end{array} right) `</p>
-</li>
-<li><p class="first">Non-stationary <img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> dependent (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">non_stat_M_dep</span></tt>):</p>
-<div class="math">
-<p><img src="_images/math/a91874a9d3a0536569ad378f6145528bc802f8eb.png" alt="{\rm cor}(y_{it}, y_{it'})=\left\{\begin{array}{ccc}
-      \alpha_{tt'} &amp; {\rm if} &amp; |t-t'|\le m \\ 0 &amp; {\rm if}
-      &amp; |t-t'| &gt; m
-    \end{array}\right."/></p>
-</div><p>If (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">non_stat_M_dep</span></tt>), you must also specify <tt class="docutils literal"><span class="pre">Mv</span></tt> =
-<img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/>, where <img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> is the number of periods <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> of
-dependence. This option relaxes the assumption that the
-correlations are the same for all observations of the same
-<img class="math" src="_images/math/3662c4dcc9b71c0976999c0bf36245ec7e9ec834.png" alt="|t-t'|"/> periods apart.</p>
-<div class="line-block">
-<div class="line">Sample “working” correlation for Non-stationary 2 dependence</div>
-</div>
-<p>(Mv=2)
-| :math:<a href="#id5"><span class="problematic" id="id6">`</span></a>left( begin{array}{ccccc}
-1 &amp; alpha_{12} &amp; alpha_{13} &amp; 0 &amp; 0 \
-alpha_{12} &amp; 1 &amp; alpha_{23} &amp; alpha_{24} &amp; 0 \
-alpha_{13} &amp; alpha_{23} &amp; 1 &amp; alpha_{34} &amp; alpha_{35} \
-0 &amp; alpha_{24} &amp; alpha_{34} &amp; 1 &amp; alpha_{45} \
-0 &amp; 0 &amp; alpha_{35} &amp; alpha_{45} &amp; 1
-end{array} right) `</p>
-</li>
-<li><dl class="first docutils">
-<dt>Exchangeable (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">exchangeable</span></tt>): :math:<a href="#id7"><span class="problematic" id="id8">`</span></a>{rm</dt>
-<dd><p class="first last">cor}(y_{it}, y_{it&#8217;})=alpha`, <img class="math" src="_images/math/b62913dba4dcf0ad967a352ba799160add6cfccf.png" alt="\forall t, t'"/> with</p>
-</dd>
-</dl>
-<p><img class="math" src="_images/math/1d9aca3aa78b7d7e198a06a8c89f830205f58690.png" alt="t\ne t'"/>. Choose this option if the correlations are
-assumed to be the same for all observations within the cluster.</p>
-<div class="line-block">
-<div class="line">Sample “working” correlation for Exchangeable</div>
-<div class="line">:math:<a href="#id9"><span class="problematic" id="id10">`</span></a>left( begin{array}{ccccc}</div>
-</div>
-<p>1 &amp; alpha &amp; alpha &amp; alpha &amp; alpha \
-alpha &amp; 1 &amp; alpha &amp; alpha &amp; alpha \
-alpha &amp; alpha &amp; 1 &amp; alpha &amp; alpha \
-alpha &amp; alpha &amp; alpha &amp; 1 &amp; alpha \
-alpha &amp; alpha &amp; alpha &amp; alpha &amp; 1
-end{array} right) `</p>
-</li>
-<li><p class="first">Stationary <img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/>th order autoregressive (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">AR-M</span></tt>):
-If (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">AR-M</span></tt>), you must also specify <tt class="docutils literal"><span class="pre">Mv</span></tt> = <img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/>,
-where <img class="math" src="_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> is the number of periods <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> of dependence.
-For example, the first order autoregressive model (AR-1) implies
-:math:<a href="#id11"><span class="problematic" id="id12">`</span></a>{rm cor}(y_{it},</p>
-<blockquote>
-<div><p>y_{it&#8217;})=alpha^{<a href="#id17"><span class="problematic" id="id18">|t-t&#8217;|</span></a>}, forall t, t&#8217;` with <img class="math" src="_images/math/1d9aca3aa78b7d7e198a06a8c89f830205f58690.png" alt="t\ne t'"/>.</p>
-</div></blockquote>
-<p>In AR-1, observation 1 and observation 2 have a correlation of
-<img class="math" src="_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/>. Observation 2 and observation 3 also have a
-correlation of <img class="math" src="_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/>. Observation 1 and observation 3
-have a correlation of <img class="math" src="_images/math/9d69220703bc83cb796e561eba21d8a539d7de8c.png" alt="\alpha^2"/>, which is a function of how
-1 and 2 are correlated (<img class="math" src="_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/>) multiplied by how 2 and 3
-are correlated (<img class="math" src="_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/>). Observation 1 and 4 have a
-correlation that is a function of the correlation between 1 and 2,
-2 and 3, and 3 and 4, and so forth.</p>
-<div class="line-block">
-<div class="line">Sample “working” correlation for Stationary AR-1 (Mv=1)</div>
-<div class="line">:math:<a href="#id13"><span class="problematic" id="id14">`</span></a>left( begin{array}{ccccc}</div>
-</div>
-<p>1 &amp; alpha &amp; alpha^2 &amp; alpha^3 &amp; alpha^4 \
-alpha &amp; 1 &amp; alpha &amp; alpha^2 &amp; alpha^3 \
-alpha^2 &amp; alpha &amp; 1 &amp; alpha &amp; alpha^2 \
-alpha^3 &amp; alpha^2 &amp; alpha &amp; 1 &amp; alpha \
-alpha^4 &amp; alpha^3 &amp; alpha^2 &amp; alpha &amp; 1
-end{array} right) `</p>
-</li>
-<li><dl class="first docutils">
-<dt>Unstructured (<tt class="docutils literal"><span class="pre">corstr</span> <span class="pre">=</span> <span class="pre">unstructured</span></tt>): :math:<a href="#id15"><span class="problematic" id="id16">`</span></a>{rm</dt>
-<dd><p class="first last">cor}(y_{it}, y_{it&#8217;})=alpha_{tt&#8217;}`, <img class="math" src="_images/math/b62913dba4dcf0ad967a352ba799160add6cfccf.png" alt="\forall t, t'"/></p>
-</dd>
-</dl>
-<p>with <img class="math" src="_images/math/1d9aca3aa78b7d7e198a06a8c89f830205f58690.png" alt="t\ne t'"/>. No constraints are placed on the
-correlations, which are then estimated from the data.</p>
-</li>
-</ul>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">Mv</span></tt>: defaults to 1. It specifies the number of periods of
-correlation and only needs to be specified when <tt class="docutils literal"><span class="pre">corstr</span></tt> is
-“stat_M_dep”, “non_stat_M_dep”, or “AR-M”.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">R</span></tt>: defaults to <tt class="docutils literal"><span class="pre">NULL</span></tt>. It specifies a user-defined correlation
-matrix rather than estimating it from the data. The argument is used
-only when <tt class="docutils literal"><span class="pre">corstr</span></tt> is “fixed”. The input is a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/>
-matrix of correlations, where <img class="math" src="_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/> is the size of the largest
-cluster.</p>
-</li>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">corstr</span></tt>: character string specifying the correlation structure:
+&#8220;independence&#8221;, &#8220;exchangeable&#8221;, &#8220;ar1&#8221;, &#8220;unstructured&#8221; and
+&#8220;userdefined&#8221;</li>
+<li>See <tt class="docutils literal"><span class="pre">geeglm</span></tt> in package <tt class="docutils literal"><span class="pre">geepack</span></tt> for other function arguments.</li>
 </ul>
 </div>
 <div class="section" id="examples">
@@ -493,22 +370,22 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.46497 1.153327 14.37357 12.49383 16.94209</span>
+<span class="c">## [1,] 14.49735 1.172769 14.39593 12.46936 17.04982</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50%       2.5%    97.5%</span>
-<span class="c">## [1,] 14.30868 17.18637 7.868604 0.03462041 62.70623</span>
+<span class="c">## [1,] 14.92509 18.91978 7.452783 0.06297923 72.27136</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 19.25164 1.132768 19.18969 17.23264 21.69016</span>
+<span class="c">##          mean       sd     50%     2.5%   97.5%</span>
+<span class="c">## [1,] 19.23653 1.125065 19.1701 17.29328 21.5597</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd     50%       2.5%    97.5%</span>
-<span class="c">## [1,] 19.25864 24.12849 10.8615 0.07663885 78.91181</span>
+<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
+<span class="c">## [1,] 18.35982 23.27834 10.02439 0.08042521 79.64386</span>
 <span class="c">## fd</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.786672 1.652719 4.757884 1.585669 8.072185</span>
+<span class="c">## [1,] 4.739181 1.700097 4.747633 1.289065 7.982112</span>
 </pre></div>
 </div>
 <p>Generate a plot of quantities of interest:</p>
@@ -623,10 +500,7 @@ may view. For example, if you run</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma.gee&quot;</span><span class="p">,</span> id<span class="p">,</span> data<span class="p">)</span>
 </pre></div>
 </div>
-<p>then you may
-examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
-<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
-a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
+<p>then you may see a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
 elements available through the $ operator are listed below.</p>
 <ul class="simple">
 <li>From the zelig() output object z.out, you may extract:<ul>
@@ -661,9 +535,9 @@ treated from conditional prediction models.</li>
 </div>
 <div class="section" id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
-<p>The gee function is part of the gee package by Vincent J. Carey, ported
-to R by Thomas Lumley and Brian Ripley. Advanced users may wish to refer
-to <tt class="docutils literal"><span class="pre">help(gee)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>. Sample data are from .</p>
+<p>The gee function is part of the geepack package by Søren Højsgaard,
+Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
+to <tt class="docutils literal"><span class="pre">help(geepack)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 </div>
 </div>
 

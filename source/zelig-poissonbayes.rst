@@ -206,7 +206,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
     ## [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733
     ## pv
     ##        mean       sd 50% 2.5% 97.5%
-    ## [1,] 3.2032 1.819846   3    0     7
+    ## [1,] 3.2091 1.805409   3    0     7
     ## 
     ##  sim x1 :
     ##  -----
@@ -215,7 +215,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
     ## [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022
     ## pv
     ##        mean       sd 50% 2.5% 97.5%
-    ## [1,] 3.2878 1.843776   3    0     7
+    ## [1,] 3.3227 1.851353   3    0     7
     ## fd
     ##           mean        sd       50%       2.5%     97.5%
     ## [1,] 0.1146376 0.3671544 0.1265036 -0.6072035 0.8342282
