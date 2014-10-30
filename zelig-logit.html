@@ -101,7 +101,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -204,7 +205,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -278,11 +280,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%    97.5%</span>
-<span class="c">## [1,] 0.7486877 0.01168114 0.7488028 0.7254938 0.770096</span>
+<span class="c">##          mean         sd       50%     2.5%     97.5%</span>
+<span class="c">## [1,] 0.747423 0.01151586 0.7479957 0.724659 0.7692269</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.226 0.774</span>
+<span class="c">## [1,] 0.239 0.761</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -319,22 +321,22 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.8232575 0.01081732 0.8232759 0.8009015 0.8436472</span>
+<span class="c">## [1,] 0.8231929 0.01027654 0.8234474 0.8025492 0.8419841</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.168 0.832</span>
+<span class="c">## [1,] 0.161 0.839</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%    97.5%</span>
-<span class="c">## [1,] 0.7091252 0.01380664 0.7091974 0.6820573 0.734547</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7100883 0.01286978 0.7103029 0.6843689 0.7329142</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.279 0.721</span>
+<span class="c">## [1,] 0.306 0.694</span>
 <span class="c">## fd</span>
 <span class="c">##            mean         sd        50%       2.5%       97.5%</span>
-<span class="c">## [1,] -0.1141323 0.01185073 -0.1138707 -0.1380832 -0.09200143</span>
+<span class="c">## [1,] -0.1131046 0.01158198 -0.1132559 -0.1356832 -0.09014774</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>

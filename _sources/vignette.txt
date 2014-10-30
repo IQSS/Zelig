@@ -23,10 +23,12 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Tobit Regression <ztobit>`: ``ztobit$new()``
 - :ref:`Bayesian Factor Analysis <zfactorbayes>`: ``zfactorbayes$new()``
 - :ref:`Bayesian Multinomial Logistic Regression <zmlogitbayes>`: ``zmlogitbayes$new()``
-- :ref:`Bayesian Ordered Probit Regression <zoprobitbayes>`: ``zoprobitbayes()``
-- :ref:`Bayesian Poisson Regression <zpoissonbayes>`: ``zpoissonbayes()``
-- :ref:`Bayesian Probit Regression <zprobitbayes>`: ``zprobitbayes()``
-- :ref:`Bayesian Tobit Regression <ztobitbayes>`: ``ztobitbayes()``
+- :ref:`Bayesian Ordered Probit Regression <zoprobitbayes>`: ``zoprobitbayes$new()``
+- :ref:`Bayesian Poisson Regression <zpoissonbayes>`: ``zpoissonbayes$new()``
+- :ref:`Bayesian Probit Regression <zprobitbayes>`: ``zprobitbayes$new()``
+- :ref:`Bayesian Tobit Regression <ztobitbayes>`: ``ztobitbayes$new()``
+- :ref:`Generalized Estimating Equation for Gamma Regression <zgammagee>`: ``zgammagee$new()``
+
 
 --------
 
@@ -98,6 +100,10 @@ The following models are currently supported in Zelig 5.0-1:
 
 --------
 
+.. include:: zelig-gammagee.rst
+
+--------
+
 .. toctree::
    :hidden:
 
@@ -118,3 +124,4 @@ The following models are currently supported in Zelig 5.0-1:
    zelig-poissonbayes.rst
    zelig-probitbayes.rst
    zelig-tobitbayes.rst
+   zelig-gammagee.rst
