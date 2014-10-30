@@ -276,22 +276,22 @@ z5
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.2036 6.648726 100.3955 87.48638 113.1307}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.3608 6.576465 100.1968 87.12987 113.6136}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.2036 6.648726 100.3955 87.48638 113.1307}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.3608 6.576465 100.1968 87.12987 113.6136}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.6555 14.94544 178.6917 150.6178 207.4482}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 179.0936 14.73503 178.676 150.5174 208.3254}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.6555 14.94544 178.6917 150.6178 207.4482}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 179.0936 14.73503 178.676 150.5174 208.3254}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.45186 8.509248 78.41948 62.36565 94.82592}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.73283 8.387351 78.63873 62.45234 95.84909}
 \end{Verbatim}
 
 Now we've estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
@@ -419,6 +419,9 @@ The following models are currently supported in Zelig 5.0-1:
 
 \item {} 
 {\hyperref[zelig-probitbayes:zprobitbayes]{\emph{Bayesian Probit Regression}}}: \code{zprobitbayes()}
+
+\item {} 
+{\hyperref[zelig-tobitbayes:ztobitbayes]{\emph{Bayesian Tobit Regression}}}: \code{ztobitbayes()}
 
 \end{itemize}
 
@@ -587,23 +590,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.592001 0.1967758 4.590536 4.218226 4.971665}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.612716 0.1855573 4.609889 4.263145 4.98938}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.592001 0.1967758 4.590536 4.218226 4.971665}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.612716 0.1855573 4.609889 4.263145 4.98938}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.423165 0.201319 5.422621 5.011384 5.844916}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.432797 0.1908298 5.427777 5.085272 5.816623}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.423165 0.201319 5.422621 5.011384 5.844916}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.432797 0.1908298 5.427777 5.085272 5.816623}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean        sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8311636 0.2468827 0.8333205 0.3566207 1.321157}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean        sd       50\PYGZpc{}      2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8200807 0.2344375 0.8276709 0.3776508 1.25543}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -859,23 +862,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.42874 1.044723 14.35477 12.68851 16.70565}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.43669 1.05651 14.35653 12.45813 16.68585}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.92848 13.10584 11.46637 0.8386745 48.91065}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.07218 12.42464 11.03407 0.7562569 45.66532}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.18956 1.100343 19.15012 17.17949 21.39145}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19102 1.115738 19.12301 17.23664 21.77321}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.46754 17.1207 13.89235 1.154979 66.02768}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.80275 16.88256 13.89781 0.9559193 60.48853}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.760814 1.549563 4.818538 1.816034 7.642665}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.75433 1.519047 4.754526 1.765408 7.806584}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1062,10 +1065,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7480078 0.01227905 0.7482574 0.7238253 0.7710782}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7479165 0.01179856 0.7484823 0.7245613 0.7702412}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.271 0.729}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.269 0.731}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1110,22 +1113,22 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8232008 0.01096113 0.8234357 0.8001988 0.8441997}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8233909 0.01056314 0.8236845 0.8014725 0.8424936}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.195 0.805}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.178 0.822}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7092107 0.01345578 0.7090336 0.6830907 0.7355974}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7096696 0.01299331 0.7096651 0.6841499 0.7349281}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.304 0.696}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.289 0.711}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1139901 0.01174191 \PYGZhy{}0.1133193 \PYGZhy{}0.1376314 \PYGZhy{}0.09102502}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}      2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1137213 0.01160227 \PYGZhy{}0.1136132 \PYGZhy{}0.135827 \PYGZhy{}0.08916492}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1408,23 +1411,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7095652 0.01343751 0.7098432 0.6845229 0.7355864}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7096772 0.01298512 0.7096237 0.6849588 0.734475}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.279 0.721}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.28 0.72}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8233838 0.01044801 0.8234843 0.8022665 0.8423926}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8222837 0.01039701 0.8223497 0.8021902 0.8417386}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.17 0.83}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.182 0.818}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1138186 0.01150209 0.1137771 0.09188337 0.1351186}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1126065 0.01130449 0.1125562 0.0910976 0.13508}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1673,22 +1676,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.437434 0.1925401 5.435823 5.074829 5.804683}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.434048 0.1944899 5.440312 5.071242 5.811498}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.437434 0.1925401 5.435823 5.074829 5.804683}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.434048 0.1944899 5.440312 5.071242 5.811498}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.603556 0.1881623 4.603536 4.234286 4.962196}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd     50\PYGZpc{}     2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.594424 0.1813432 4.59459 4.226226 4.9349}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.603556 0.1881623 4.603536 4.234286 4.962196}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd     50\PYGZpc{}     2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.594424 0.1813432 4.59459 4.226226 4.9349}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8338776 0.2377153 \PYGZhy{}0.8310315 \PYGZhy{}1.311119 \PYGZhy{}0.3831337}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8396242 0.2262872 \PYGZhy{}0.8370692 \PYGZhy{}1.274089 \PYGZhy{}0.3877678}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1966,14 +1969,14 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.94812 0.3485532 2.932558 2.287411 3.671719}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.994608 0.3525952 2.967996 2.356915 3.731505}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     0     1     2     3     4     5     6     7     8     9    10    11}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.196 0.219 0.194 0.137 0.063 0.075 0.053 0.019 0.016 0.012 0.004 0.003}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    16}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.006 0.002 0.001}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.152 0.181 0.185 0.126 0.106 0.067 0.056 0.043 0.018 0.019 0.013 0.014}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    15    17    18    19}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.004 0.007 0.003 0.001 0.002 0.001 0.002}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2208,22 +2211,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.429909 0.1998203 5.416373 5.020877 5.845284}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.435362 0.2016653 5.428109 5.056559 5.833468}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.416567 2.69826 5.324486 0.2834969 10.98592}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.312972 2.736482 5.277823 \PYGZhy{}0.2546272 10.87145}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.59723 0.1817573 4.580832 4.254966 4.952315}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.600603 0.1956006 4.593311 4.236557 5.002675}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.642464 2.741573 4.659209 \PYGZhy{}0.5550422 9.812229}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}       2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.589261 2.73261 4.502403 \PYGZhy{}0.5669269 9.80368}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8326795 0.2380639 \PYGZhy{}0.8345765 \PYGZhy{}1.288643 \PYGZhy{}0.364245}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean      sd        50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8347583 0.24325 \PYGZhy{}0.8280742 \PYGZhy{}1.316434 \PYGZhy{}0.368348}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -2428,11 +2431,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.238298 0.2367941 3.228979 2.778994 3.694647}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.248979 0.2347704 3.230468 2.82541 3.749075}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.299 1.865765   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.17 1.884317   3    0     7}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2880,11 +2883,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002402587 0.0001568773 0.002397125 0.002120017 0.00272692}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002400131 0.0001548169 0.002392281 0.002120211 0.002711706}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.997 0.003}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.999 0.001}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2955,10 +2958,10 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7729059 0.01034217 0.7731725 0.7519471 0.7917689}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7729344 0.01062272 0.7733414 0.7518754 0.7935698}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.232 0.768}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.24 0.76}
 \end{Verbatim}
 
 
@@ -3201,7 +3204,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7f9c453a4310\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7facacb17d80\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -3234,10 +3237,10 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7729059 0.01034217 0.7731725 0.7519471 0.7917689}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7729344 0.01062272 0.7733414 0.7518754 0.7935698}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.232 0.768}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.24 0.76}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3555,11 +3558,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.538876 0.634953 1.466031 0.4994437 2.994257}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.516434 0.6140876 1.472987 0.5149253 2.858411}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.403031 4.354752 1.657705    0 14.20849}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{} 2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.093736 4.16469 1.348408    0 14.051}
 \end{Verbatim}
 
 
@@ -3590,23 +3593,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.190843 0.7508335 1.05022 0.164604 2.983402}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.196007 0.7502254 1.053949 0.1861577 3.077148}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd      50\PYGZpc{} 2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.9535 4.008222 1.083378    0 13.8212}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.849821 3.961425 1.024531    0 13.25112}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.028624 0.9528355 1.908794 0.5333251 4.253571}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.039772 1.014861 1.889514 0.5595843 4.567412}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean      sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.70077 4.59532 2.039028    0 14.61645}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.428482 4.326568 2.066052    0 15.04971}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean      sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8377812 1.18729 0.7846834 \PYGZhy{}1.440624 3.542198}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8437655 1.266337 0.7690163 \PYGZhy{}1.713612 3.553202}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4194,7 +4197,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5532 0.2162 0.2306}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5618 0.2074 0.2308}
 \end{Verbatim}
 
 
@@ -4225,7 +4228,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7133 0.1298 0.1569}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7166 0.1291 0.1543}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -4237,7 +4240,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4030 0.3042 0.2928}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.3933 0.3130 0.2937}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}              mean         sd        50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} P(Y=1) \PYGZhy{}0.3128754 0.03459857 \PYGZhy{}0.3128662 \PYGZhy{}0.38111485 \PYGZhy{}0.2442630}
@@ -4972,7 +4975,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1941 1.809904   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1919 1.806267   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -4980,8 +4983,8 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2986 1.838199   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.301 1.842482   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1146376 0.3671544 0.1265036 \PYGZhy{}0.6072035 0.8342282}
@@ -5985,23 +5988,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.592001 0.1967758 4.590536 4.218226 4.971665}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.612716 0.1855573 4.609889 4.263145 4.98938}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.592001 0.1967758 4.590536 4.218226 4.971665}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.612716 0.1855573 4.609889 4.263145 4.98938}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.423165 0.201319 5.422621 5.011384 5.844916}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.432797 0.1908298 5.427777 5.085272 5.816623}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.423165 0.201319 5.422621 5.011384 5.844916}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.432797 0.1908298 5.427777 5.085272 5.816623}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean        sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8311636 0.2468827 0.8333205 0.3566207 1.321157}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean        sd       50\PYGZpc{}      2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8200807 0.2344375 0.8276709 0.3776508 1.25543}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6253,23 +6256,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.42874 1.044723 14.35477 12.68851 16.70565}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.43669 1.05651 14.35653 12.45813 16.68585}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.92848 13.10584 11.46637 0.8386745 48.91065}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.07218 12.42464 11.03407 0.7562569 45.66532}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.18956 1.100343 19.15012 17.17949 21.39145}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19102 1.115738 19.12301 17.23664 21.77321}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.46754 17.1207 13.89235 1.154979 66.02768}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.80275 16.88256 13.89781 0.9559193 60.48853}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.760814 1.549563 4.818538 1.816034 7.642665}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.75433 1.519047 4.754526 1.765408 7.806584}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6452,10 +6455,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7480078 0.01227905 0.7482574 0.7238253 0.7710782}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7479165 0.01179856 0.7484823 0.7245613 0.7702412}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.271 0.729}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.269 0.731}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6500,22 +6503,22 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8232008 0.01096113 0.8234357 0.8001988 0.8441997}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8233909 0.01056314 0.8236845 0.8014725 0.8424936}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.195 0.805}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.178 0.822}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7092107 0.01345578 0.7090336 0.6830907 0.7355974}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7096696 0.01299331 0.7096651 0.6841499 0.7349281}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.304 0.696}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.289 0.711}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1139901 0.01174191 \PYGZhy{}0.1133193 \PYGZhy{}0.1376314 \PYGZhy{}0.09102502}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}      2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1137213 0.01160227 \PYGZhy{}0.1136132 \PYGZhy{}0.135827 \PYGZhy{}0.08916492}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6794,23 +6797,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7095652 0.01343751 0.7098432 0.6845229 0.7355864}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7096772 0.01298512 0.7096237 0.6849588 0.734475}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.279 0.721}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.28 0.72}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8233838 0.01044801 0.8234843 0.8022665 0.8423926}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8222837 0.01039701 0.8223497 0.8021902 0.8417386}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.17 0.83}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.182 0.818}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1138186 0.01150209 0.1137771 0.09188337 0.1351186}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1126065 0.01130449 0.1125562 0.0910976 0.13508}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7055,22 +7058,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.437434 0.1925401 5.435823 5.074829 5.804683}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.434048 0.1944899 5.440312 5.071242 5.811498}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.437434 0.1925401 5.435823 5.074829 5.804683}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.434048 0.1944899 5.440312 5.071242 5.811498}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.603556 0.1881623 4.603536 4.234286 4.962196}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd     50\PYGZpc{}     2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.594424 0.1813432 4.59459 4.226226 4.9349}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.603556 0.1881623 4.603536 4.234286 4.962196}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd     50\PYGZpc{}     2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.594424 0.1813432 4.59459 4.226226 4.9349}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8338776 0.2377153 \PYGZhy{}0.8310315 \PYGZhy{}1.311119 \PYGZhy{}0.3831337}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8396242 0.2262872 \PYGZhy{}0.8370692 \PYGZhy{}1.274089 \PYGZhy{}0.3877678}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7344,14 +7347,14 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.94812 0.3485532 2.932558 2.287411 3.671719}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.994608 0.3525952 2.967996 2.356915 3.731505}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     0     1     2     3     4     5     6     7     8     9    10    11}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.196 0.219 0.194 0.137 0.063 0.075 0.053 0.019 0.016 0.012 0.004 0.003}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    16}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.006 0.002 0.001}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.152 0.181 0.185 0.126 0.106 0.067 0.056 0.043 0.018 0.019 0.013 0.014}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    15    17    18    19}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.004 0.007 0.003 0.001 0.002 0.001 0.002}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7582,22 +7585,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.429909 0.1998203 5.416373 5.020877 5.845284}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.435362 0.2016653 5.428109 5.056559 5.833468}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.416567 2.69826 5.324486 0.2834969 10.98592}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.312972 2.736482 5.277823 \PYGZhy{}0.2546272 10.87145}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.59723 0.1817573 4.580832 4.254966 4.952315}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.600603 0.1956006 4.593311 4.236557 5.002675}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.642464 2.741573 4.659209 \PYGZhy{}0.5550422 9.812229}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}       2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.589261 2.73261 4.502403 \PYGZhy{}0.5669269 9.80368}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8326795 0.2380639 \PYGZhy{}0.8345765 \PYGZhy{}1.288643 \PYGZhy{}0.364245}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean      sd        50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8347583 0.24325 \PYGZhy{}0.8280742 \PYGZhy{}1.316434 \PYGZhy{}0.368348}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -7798,11 +7801,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.238298 0.2367941 3.228979 2.778994 3.694647}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.248979 0.2347704 3.230468 2.82541 3.749075}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.299 1.865765   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.17 1.884317   3    0     7}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8242,11 +8245,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002402587 0.0001568773 0.002397125 0.002120017 0.00272692}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002400131 0.0001548169 0.002392281 0.002120211 0.002711706}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.997 0.003}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.999 0.001}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8317,10 +8320,10 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7729059 0.01034217 0.7731725 0.7519471 0.7917689}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7729344 0.01062272 0.7733414 0.7518754 0.7935698}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.232 0.768}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.24 0.76}
 \end{Verbatim}
 
 
@@ -8563,7 +8566,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7f9c453a4310\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7facacb17d80\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -8596,10 +8599,10 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7729059 0.01034217 0.7731725 0.7519471 0.7917689}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7729344 0.01062272 0.7733414 0.7518754 0.7935698}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.232 0.768}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.24 0.76}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8913,11 +8916,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.538876 0.634953 1.466031 0.4994437 2.994257}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.516434 0.6140876 1.472987 0.5149253 2.858411}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.403031 4.354752 1.657705    0 14.20849}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{} 2.5\PYGZpc{}  97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.093736 4.16469 1.348408    0 14.051}
 \end{Verbatim}
 
 
@@ -8948,23 +8951,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.190843 0.7508335 1.05022 0.164604 2.983402}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.196007 0.7502254 1.053949 0.1861577 3.077148}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd      50\PYGZpc{} 2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.9535 4.008222 1.083378    0 13.8212}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.849821 3.961425 1.024531    0 13.25112}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.028624 0.9528355 1.908794 0.5333251 4.253571}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.039772 1.014861 1.889514 0.5595843 4.567412}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean      sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.70077 4.59532 2.039028    0 14.61645}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.428482 4.326568 2.066052    0 15.04971}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean      sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8377812 1.18729 0.7846834 \PYGZhy{}1.440624 3.542198}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8437655 1.266337 0.7690163 \PYGZhy{}1.713612 3.553202}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -9544,7 +9547,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5532 0.2162 0.2306}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5618 0.2074 0.2308}
 \end{Verbatim}
 
 
@@ -9575,7 +9578,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7133 0.1298 0.1569}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7166 0.1291 0.1543}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -9587,7 +9590,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4030 0.3042 0.2928}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.3933 0.3130 0.2937}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}              mean         sd        50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} P(Y=1) \PYGZhy{}0.3128754 0.03459857 \PYGZhy{}0.3128662 \PYGZhy{}0.38111485 \PYGZhy{}0.2442630}
@@ -10314,7 +10317,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1941 1.809904   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1919 1.806267   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -10322,8 +10325,8 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2986 1.838199   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.301 1.842482   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1146376 0.3671544 0.1265036 \PYGZhy{}0.6072035 0.8342282}

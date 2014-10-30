@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>zelig-tobitbayes &mdash; Zelig 5.0-1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0-1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
+    <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="prev" title="zelig-probitbayes" href="zelig-probitbayes.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0-1</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-and-zelig">Installing R and Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">zelig-tobitbayes</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#inputs">Inputs</a></li>
+<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#basic-example">Basic Example</a></li>
+<li><a class="reference internal" href="#simulating-first-differences">Simulating First Differences</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="zelig-probitbayes.html" title="Previous Chapter: zelig-probitbayes"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; zelig-probitbaye...</span>
+    </a>
+  </li>
+  <li>
+    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a></li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="zelig-tobitbayes">
+<span id="ztobitbayes"></span><h1>zelig-tobitbayes<a class="headerlink" href="#zelig-tobitbayes" title="Permalink to this headline">¶</a></h1>
+<p>Bayesian tobit regression estimates a linear regression model with a
+censored dependent variable using a Gibbs sampler. The dependent
+variable may be censored from below and/or from above. For other linear
+regression models with fully observed dependent variables, see Bayesian
+regression, maximum likelihood normal regression, or least squares.</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zprobitbayes<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">((</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> below <span class="o">=</span> <span class="m">0</span><span class="p">,</span> above <span class="o">=</span> <span class="kc">Inf</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> below <span class="o">=</span> <span class="m">0</span><span class="p">,</span> above <span class="o">=</span> <span class="kc">Inf</span><span class="p">,</span>
+               model <span class="o">=</span> <span class="s">&quot;tobit.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>zelig() accepts the following arguments to specify how the dependent
+variable is censored.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">below</span></tt>: point at which the dependent variable is censored from
+below. If the dependent variable is only censored from above, set
+<tt class="docutils literal"><span class="pre">below</span> <span class="pre">=</span> <span class="pre">-Inf</span></tt>. The default value is 0.</li>
+<li><tt class="docutils literal"><span class="pre">above</span></tt>: point at which the dependent variable is censored from
+above. If the dependent variable is only censored from below, set
+<tt class="docutils literal"><span class="pre">above</span> <span class="pre">=</span> <span class="pre">Inf</span></tt>. The default value is <tt class="docutils literal"><span class="pre">Inf</span></tt>.</li>
+</ul>
+</div>
+<div class="section" id="additional-inputs">
+<h2>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
+<p>Use the following arguments to monitor the convergence of the Markov
+chain:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">burnin</span></tt>: number of the initial MCMC iterations to be discarded
+(defaults to 1,000).</li>
+<li><tt class="docutils literal"><span class="pre">mcmc</span></tt>: number of the MCMC iterations after burnin (defaults to
+10,000).</li>
+<li><tt class="docutils literal"><span class="pre">thin</span></tt>: thinning interval for the Markov chain. Only every
+<tt class="docutils literal"><span class="pre">thin</span></tt>-th draw from the Markov chain is kept. The value of <tt class="docutils literal"><span class="pre">mcmc</span></tt>
+must be divisible by this value. The default value is 1.</li>
+<li><tt class="docutils literal"><span class="pre">verbose</span></tt>: defaults to FALSE. If <tt class="docutils literal"><span class="pre">TRUE</span></tt>, the progress of the
+sampler (every <img class="math" src="_images/math/edce6cd55e38e73a0341fc79fb72bb04c90eeca4.png" alt="10\%"/>) is printed to the screen.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: seed for the random number generator. The default is <tt class="docutils literal"><span class="pre">NA</span></tt>
+which corresponds to a random seed of 12345.</li>
+<li><tt class="docutils literal"><span class="pre">beta.start</span></tt>: starting values for the Markov chain, either a scalar
+or vector with length equal to the number of estimated coefficients.
+The default is <tt class="docutils literal"><span class="pre">NA</span></tt>, such that the least squares estimates are used
+as the starting values.</li>
+</ul>
+<p>Use the following parameters to specify the model’s priors:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">b0</span></tt>: prior mean for the coefficients, either a numeric vector or a
+scalar. If a scalar, that value will be the prior mean for all
+coefficients. The default is 0.</li>
+<li><tt class="docutils literal"><span class="pre">B0</span></tt>: prior precision parameter for the coefficients, either a
+square matrix (with the dimensions equal to the number of the
+coefficients) or a scalar. If a scalar, that value times an identity
+matrix will be the prior precision parameter. The default is 0, which
+leads to an improper prior.</li>
+<li><tt class="docutils literal"><span class="pre">c0</span></tt>: <tt class="docutils literal"><span class="pre">c0/2</span></tt> is the shape parameter for the Inverse Gamma prior
+on the variance of the disturbance terms.</li>
+<li><tt class="docutils literal"><span class="pre">d0</span></tt>: <tt class="docutils literal"><span class="pre">d0/2</span></tt> is the scale parameter for the Inverse Gamma prior
+on the variance of the disturbance terms.</li>
+</ul>
+<p>Zelig users may wish to refer to <tt class="docutils literal"><span class="pre">help(MCMCtobit)</span></tt> for more
+information.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="basic-example">
+<h3>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h3>
+<p>Attaching the sample dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>tobin<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimating linear regression using <tt class="docutils literal"><span class="pre">tobit.bayes</span></tt>:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>durable <span class="o">~</span> age <span class="o">+</span> quant<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;tobit.bayes&quot;</span><span class="p">,</span>
+               data <span class="o">=</span> tobin<span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in zelig(durable ~ age + quant, model = &quot;tobit.bayes&quot;, data = tobin, : Model &#39;tobit.bayes&#39; not found</span>
+</pre></div>
+</div>
+<p>Checking for convergence before summarizing the estimates:</p>
+<div class="highlight-r"><div class="highlight"><pre>geweke.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>heidel.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>raftery.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Setting values for the explanatory variables to their sample averages:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulating quantities of interest from the posterior distribution given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simulating-first-differences">
+<h3>Simulating First Differences<a class="headerlink" href="#simulating-first-differences" title="Permalink to this headline">¶</a></h3>
+<p>Set explanatory variables to their default(mean/mode) values, with
+high (80th percentile) and low (20th percentile) liquidity ratio (<tt class="docutils literal"><span class="pre">quant</span></tt>):</p>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.8</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Estimating the first difference for the effect of high versus low liquidity ratio on duration( <tt class="docutils literal"><span class="pre">durable</span></tt>):</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>Let <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> be the dependent variable which is not directly
+observed. Instead, we observe <img class="math" src="_images/math/bc99eef60e4cfed714571a15a3192837beb4bd4c.png" alt="Y_i"/> which is defined as following:</p>
+<div class="math">
+<p><img src="_images/math/6177e9ea11a1ce79d4a22769db58be80cbcefb65.png" alt="Y_i = \left\{
+\begin{array}{lcl}
+Y_i^*  &amp;\textrm{if} &amp; c_1&lt;Y_i^*&lt;c_2 \\
+c_1    &amp;\textrm{if} &amp; c_1 \ge Y_i^* \\
+c_2    &amp;\textrm{if} &amp; c_2 \le Y_i^*
+\end{array}\right."/></p>
+</div><p>where <img class="math" src="_images/math/3b3656365ff2748ee55de15a942b63693cb47dae.png" alt="c_1"/> is the lower bound below which <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/> is
+censored, and <img class="math" src="_images/math/5081ba4156b5c83e0ad11d0dbf1ddd83fa988929.png" alt="c_2"/> is the upper bound above which <img class="math" src="_images/math/d618fcc344538f93b4596930823c957af4a11865.png" alt="Y_i^*"/>
+is censored.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/bba99ec8514413a99fe9eeac87dc26cb92200c20.png" alt="\begin{aligned}
+\epsilon_{i}  &amp;  \sim &amp; \textrm{Normal}(0, \sigma^2)\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/a2e934f8fc24c921e07ec0ba27d0c89922ad8fbc.png" alt="\epsilon_{i}=Y^*_i-\mu_i"/>.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/30262eeff311dcffec8a37eeee77beb1e7de5ba8.png" alt="\begin{aligned}
+\mu_{i}= x_{i} \beta,\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/c223a5391d7bfd7e7c68274c104fc7418944376e.png" alt="x_{i}"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+for observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of
+coefficients.</p>
+</li>
+<li><p class="first">The <em>semi-conjugate priors</em> for <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> and <img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/>
+are given by</p>
+<div class="math">
+<p><img src="_images/math/e490be64f5b3ec90fae48cb38d9e07d87810802f.png" alt="\begin{aligned}
+\beta &amp; \sim &amp; \textrm{Normal}_k \left( b_{0},B_{0}^{-1}\right) \\
+\sigma^{2} &amp; \sim &amp; \textrm{InverseGamma} \left( \frac{c_0}{2}, \frac{d_0}{2}
+\right) \end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/9d80db7ae48caf02365282c5dff832fcbe0a74d5.png" alt="b_{0}"/> is the vector of means for the <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>
+explanatory variables, <img class="math" src="_images/math/6a119b5ae9ee269e28bcaa4d39e47a3d3de4f5e5.png" alt="B_{0}"/> is the <img class="math" src="_images/math/f7ad0969df4d6e13c90ede9c19428da3d9d72b51.png" alt="k\times k"/>
+precision matrix (the inverse of a variance-covariance matrix), and
+<img class="math" src="_images/math/b3e82fc83be5a12833b456068201e39c2c8a32aa.png" alt="c_0/2"/> and <img class="math" src="_images/math/5e09d331f43f4162daeb55e031911436ab1f687a.png" alt="d_0/2"/> are the shape and scale parameters
+for <img class="math" src="_images/math/c257a14ece85ea075f075f381c2729c3d3da0100.png" alt="\sigma^{2}"/>. Note that <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> and <img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/>
+are assumed <em>a priori</em> independent.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The expected values (<tt class="docutils literal"><span class="pre">qi$ev</span></tt>) for the tobit regression model is
+calculated as following. Let</p>
+<div class="math">
+<p><img src="_images/math/fb8797d633023f188277ec0f3d76220a12ebcc64.png" alt="\begin{aligned}
+\Phi_1 &amp;=&amp; \Phi\left(\frac{(c_1 - x \beta)}{\sigma}\right) \\
+\Phi_2 &amp;=&amp; \Phi\left(\frac{(c_2 - x \beta)}{\sigma}\right) \\
+\phi_1 &amp;=&amp; \phi\left(\frac{(c_1 - x \beta)}{\sigma}\right) \\
+\phi_2 &amp;=&amp; \phi\left(\frac{(c_2 - x \beta)}{\sigma}\right) \end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/262565daee431ce18fed8cbe6ff35db082bb6a9b.png" alt="\Phi(\cdot)"/> is the (cumulative) Normal density function
+and <img class="math" src="_images/math/c1174cd218c6279eac6e39968dd22da553ac30a6.png" alt="\phi(\cdot)"/> is the Normal probability density function of
+the standard normal distribution. Then the expected values are</p>
+<div class="math">
+<p><img src="_images/math/b4248a90240916af1a721025820ad7c1eba9b532.png" alt="\begin{aligned}
+E(Y|x) &amp;=&amp; P(Y^* \le c_1|x) c_1+P(c_1&lt;Y^*&lt;c_2|x) E(Y^* \mid c_1&lt;Y^*&lt;c_2, x)+P(Y^* \ge c_2) c_2 \\
+   &amp;=&amp; \Phi_{1}c_1 + x \beta(\Phi_{2}-\Phi_{1}) + \sigma (\phi_1 -\phi_2) + (1-\Phi_2) c_2,\end{aligned}"/></p>
+</div></li>
+<li><p class="first">The first difference (<tt class="docutils literal"><span class="pre">qi$fd</span></tt>) for the tobit regression model is
+defined as</p>
+<div class="math">
+<p><img src="_images/math/6af4ba00e718a455472875d35f977fd00b79e943.png" alt="\begin{aligned}
+\text{FD}=E(Y\mid x_{1})-E(Y\mid x).\end{aligned}"/></p>
+</div></li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>) for the treatment group is</p>
+<div class="math">
+<p><img src="_images/math/72b57ba1ea5551a32c3fa473511823ae37508662.png" alt="\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)]],\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;tobit.bayes&quot;</span><span class="p">,</span> data<span class="p">)</span>
+</pre></div>
+</div>
+<p>then you may examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the draws from the posterior distribution of the
+<tt class="docutils literal"><span class="pre">coefficients</span></tt> by using <tt class="docutils literal"><span class="pre">z.out$coefficients</span></tt>, and view a default
+summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements
+available through the <tt class="docutils literal"><span class="pre">$</span></tt> operator are listed below.</p>
+<ul class="simple">
+<li>From the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object <tt class="docutils literal"><span class="pre">z.out</span></tt>, you may extract:<ul>
+<li><tt class="docutils literal"><span class="pre">coefficients</span></tt>: draws from the posterior distributions of the
+estimated parameters. The first <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> columns contain the
+posterior draws of the coefficients <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/>, and the last
+column contains the posterior draws of the variance
+<img class="math" src="_images/math/93c29bfedc993de115781b4fbb7e3a8b9e8d6b51.png" alt="\sigma^2"/>.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: the random seed used in the model.</li>
+</ul>
+</li>
+<li>From the <tt class="docutils literal"><span class="pre">sim()</span></tt> output object <tt class="docutils literal"><span class="pre">s.out</span></tt>:<ul>
+<li><tt class="docutils literal"><span class="pre">qi$ev</span></tt>: the simulated expected value for the specified values
+of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$fd</span></tt>: the simulated first difference in the expected values
+given the values specified in <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">x1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>: the simulated average expected treatment effect for
+the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>Bayesian tobit regression is part of the MCMCpack library by Andrew D.
+Martin and Kevin M. Quinn . The convergence diagnostics are part of the
+CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/zelig-tobitbayes.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'http://zeligproject.org/');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

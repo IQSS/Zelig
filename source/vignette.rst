@@ -26,6 +26,7 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Bayesian Ordered Probit Regression <zoprobitbayes>`: ``zoprobitbayes()``
 - :ref:`Bayesian Poisson Regression <zpoissonbayes>`: ``zpoissonbayes()``
 - :ref:`Bayesian Probit Regression <zprobitbayes>`: ``zprobitbayes()``
+- :ref:`Bayesian Tobit Regression <ztobitbayes>`: ``ztobitbayes()``
 
 --------
 
