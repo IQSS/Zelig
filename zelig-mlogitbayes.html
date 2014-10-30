@@ -99,7 +99,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -201,7 +202,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -306,11 +308,6 @@ improper prior.</li>
                verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Calculating MLEs and large sample var-cov matrix.</span>
 <span class="c">## This may take a moment...</span>
 <span class="c">## Inverting Hessian to get large sample var-cov matrix.</span>
@@ -343,11 +340,6 @@ averages:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulating quantities of interest from the posterior distribution
 given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
@@ -365,7 +357,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.5675 0.1982 0.2343</span>
+<span class="c">## 0.5592 0.2085 0.2323</span>
 </pre></div>
 </div>
 </div>
@@ -377,22 +369,8 @@ strength of the PRI) is set to be weak (equal to 1) versus strong
 (equal to 3) while all the other variables held at their default
 values.</p>
 <div class="highlight-r"><div class="highlight"><pre>x.weak <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> pristr <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.strong <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> pristr <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.strong<span class="p">,</span> x1 <span class="o">=</span> x.weak<span class="p">)</span>
+x.strong <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> pristr <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.strong<span class="p">,</span> x1 <span class="o">=</span> x.weak<span class="p">)</span>
 summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
@@ -407,7 +385,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.7166 0.1265 0.1569</span>
+<span class="c">## 0.7172 0.1273 0.1555</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -419,7 +397,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.4065 0.2995 0.2940</span>
+<span class="c">## 0.4027 0.3054 0.2919</span>
 <span class="c">## fd</span>
 <span class="c">##              mean         sd        50%        2.5%      97.5%</span>
 <span class="c">## P(Y=1) -0.3128754 0.03459857 -0.3128662 -0.38111485 -0.2442630</span>

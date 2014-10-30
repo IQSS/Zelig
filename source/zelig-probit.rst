@@ -59,14 +59,6 @@ Estimate parameter values for the probit regression:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   probit: Probit Regression for Dichotomous Dependent Variables
@@ -110,14 +102,6 @@ Set values for the explanatory variables to their default values.
     
 
     x.out <- setx(z.out)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Simulate quantities of interest from the posterior distribution.

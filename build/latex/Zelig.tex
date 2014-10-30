@@ -14,7 +14,7 @@
 
 
 \title{Zelig Documentation}
-\date{October 29, 2014}
+\date{October 30, 2014}
 \release{5.0-1}
 \author{The Zelig Team}
 \newcommand{\sphinxlogo}{}
@@ -230,15 +230,6 @@ data\PYG{p}{(}cars\PYG{p}{)}
 z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zls\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
 \PYG{c+c1}{\PYGZsh{} estimate ls model}
 z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}dist \PYG{o}{\PYGZti{}} speed\PYG{p}{,} data \PYG{o}{=} cars\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{} you can now get model summary estimates}
 summary\PYG{p}{(}z5\PYG{p}{)}
 \end{Verbatim}
@@ -266,23 +257,9 @@ Zelig makes this simple, by automating the translation of model estimates in int
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{} set speed to 30}
 z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}speed \PYG{o}{=} \PYG{l+m}{30}\PYG{p}{)}
-\end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{} set speed to 50}
 z5\PYG{o}{\PYGZdl{}}setx1\PYG{p}{(}speed \PYG{o}{=} \PYG{l+m}{50}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Now that we've set our variables, all we have to do is run our simulations:
@@ -298,23 +275,23 @@ z5
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.6135 6.422235 100.6161 88.5412 112.9483}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.0594 6.588758 100.467 86.9325 112.5575}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.6135 6.422235 100.6161 88.5412 112.9483}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.0594 6.588758 100.467 86.9325 112.5575}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 179.4622 14.39959 179.5063 152.9028 206.4436}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.2301 14.75085 178.8296 147.661 205.8809}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 179.4622 14.39959 179.5063 152.9028 206.4436}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.2301 14.75085 178.8296 147.661 205.8809}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.84873 8.192486 78.8501 63.46384 94.52778}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.17075 8.375725 78.46994 60.38378 93.58789}
 \end{Verbatim}
 
 Now we've estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
@@ -440,6 +417,9 @@ The following models are currently supported in Zelig 5.0-1:
 \item {} 
 {\hyperref[zelig-poissonbayes:zpoissonbayes]{\emph{Bayesian Poisson Regression}}}: \code{zpoissonbayes()}
 
+\item {} 
+{\hyperref[zelig-probitbayes:zprobitbayes]{\emph{Bayesian Probit Regression}}}: \code{zprobitbayes()}
+
 \end{itemize}
 
 
@@ -534,12 +514,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}duration\PYG{p}{,
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Olivia Lau, Kosuke Imai, Gary King. 2011.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   exp: Exponential Regression for Duration Dependent Variables}
@@ -583,24 +557,12 @@ x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Error in terms(lm(formula, data), \PYGZdq{}predvars\PYGZdq{}): error in evaluating the argument \PYGZsq{}x\PYGZsq{} in selecting a method for function \PYGZsq{}terms\PYGZsq{}: Error in Ops.Surv(y, z\PYGZdl{}residuals) : Invalid operation on a survival time}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Calls: lm \PYGZhy{}\PYGZgt{} lm.fit \PYGZhy{}\PYGZgt{} Ops.Surv}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -614,10 +576,6 @@ Simulate expected values and first differences:
 s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.low\PYG{p}{,} x1 \PYG{o}{=} x.high\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Error in sim(z.out, x = x.low, x1 = x.high): object \PYGZsq{}x.low\PYGZsq{} not found}
-\end{Verbatim}
-
 Summarize quantities of interest and produce some plots:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -625,16 +583,38 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Error in summary(s.out): error in evaluating the argument \PYGZsq{}object\PYGZsq{} in selecting a method for function \PYGZsq{}summary\PYGZsq{}: Error: object \PYGZsq{}s.out\PYGZsq{} not found}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.61167 0.178409 4.61234 4.253718 4.970509}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.61167 0.178409 4.61234 4.253718 4.970509}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.432936 0.1911714 5.435334 5.03635 5.793026}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.432936 0.1911714 5.435334 5.03635 5.793026}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean        sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8212663 0.2285222 0.8252123 0.3658387 1.259808}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 plot\PYG{p}{(}s.out\PYG{p}{)}
 \end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Error in plot(s.out): error in evaluating the argument \PYGZsq{}x\PYGZsq{} in selecting a method for function \PYGZsq{}plot\PYGZsq{}: Error: object \PYGZsq{}s.out\PYGZsq{} not found}
-\end{Verbatim}
+\includegraphics{Zelig-exp-1.png}
+\caption{Zelig-exp}\end{figure}
 
 
 \subsection{Model}
@@ -823,12 +803,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}duration \PYG{o}{\PYGZti{}} fra
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   gamma: Gamma Regression for Continuous, Positive Dependent Variables}
@@ -867,22 +841,7 @@ X:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate expected values (qi\$ev) and first differences (qi\$fd):
@@ -900,23 +859,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}  2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.43782 1.113267 14.33311 12.49 16.8138}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.41947 1.064664 14.35618 12.51195 16.63425}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.45985 12.92341 11.14248 0.8673413 48.0112}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.21243 12.60368 10.89322 0.6728363 47.30353}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19226 1.105784 19.13677 17.22523 21.40817}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19869 1.133553 19.11127 17.1843 21.62197}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.36689 15.43004 14.56058 1.008213 58.00364}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.60736 16.66119 13.88459 0.9246994 61.53045}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.75444 1.584051 4.797595 1.705692 7.94088}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.779217 1.535785 4.734045 1.825047 7.751185}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1074,12 +1033,6 @@ z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} age \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   logit: Logistic Regression for Dichotomous Dependent Variables}
@@ -1091,12 +1044,6 @@ Setting values for the explanatory variables:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} age \PYG{o}{=} \PYG{l+m}{36}\PYG{p}{,} race \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{white\PYGZdq{}}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulating quantities of interest from the posterior distribution.
@@ -1114,11 +1061,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7471511 0.01154251 0.7469772 0.7256361 0.7692274}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}     2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7479394 0.01193434 0.748012 0.724231 0.7712138}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.273 0.727}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.278 0.722}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1143,12 +1090,6 @@ z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   logit: Logistic Regression for Dichotomous Dependent Variables}
@@ -1158,25 +1099,7 @@ z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.75}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.25}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out2\PYG{p}{,} x \PYG{o}{=} x.high\PYG{p}{,} x1 \PYG{o}{=} x.low\PYG{p}{)}
 summary\PYG{p}{(}s.out2\PYG{p}{)}
 \end{Verbatim}
@@ -1186,23 +1109,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}     2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8232649 0.01032739 0.8238304 0.801879 0.8421641}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8221088 0.01046643 0.8225926 0.7989981 0.8425136}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.174 0.826}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.172 0.828}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7091199 0.01302403 0.7091913 0.6839686 0.7338648}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7091027 0.01317142 0.708915 0.6826494 0.734145}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.271 0.729}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.303 0.697}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1141451 0.01161089 \PYGZhy{}0.1139854 \PYGZhy{}0.1368375 \PYGZhy{}0.09117048}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1130061 0.0116836 \PYGZhy{}0.1131443 \PYGZhy{}0.1363372 \PYGZhy{}0.09073965}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1414,12 +1337,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}duration\PYG{p}{,
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   lognorm: Log\PYGZhy{}Normal Regression for Duration Dependent Variables}
@@ -1463,24 +1380,12 @@ x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Error in terms(lm(formula, data), \PYGZdq{}predvars\PYGZdq{}): error in evaluating the argument \PYGZsq{}x\PYGZsq{} in selecting a method for function \PYGZsq{}terms\PYGZsq{}: Error in Ops.Surv(y, z\PYGZdl{}residuals) : Invalid operation on a survival time}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Calls: lm \PYGZhy{}\PYGZgt{} lm.fit \PYGZhy{}\PYGZgt{} Ops.Surv}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2\PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1503,23 +1408,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7096412 0.01339433 0.7103068 0.6832911 0.7349613}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7098857 0.01311726 0.709487 0.6856631 0.7358735}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.278 0.722}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.298 0.702}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8233247 0.01039145 0.8237771 0.8022964 0.8428224}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8230556 0.0105009 0.8227265 0.8028129 0.8433327}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.176 0.824}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.18 0.82}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1136834 0.01116033 0.1138095 0.09156911 0.1356637}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1131699 0.01186652 0.1134081 0.09045198 0.1366067}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1714,12 +1619,6 @@ z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   ls: Least Squares Regression for Continuous Dependent Variables}
@@ -1755,22 +1654,7 @@ variable:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Generate first differences for the effect of high versus low trade on GDP:
@@ -1788,23 +1672,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.440006 0.1918098 5.440879 5.057022 5.81467}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.430307 0.1971789 5.431243 5.038718 5.815665}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.440006 0.1918098 5.440879 5.057022 5.81467}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.430307 0.1971789 5.431243 5.038718 5.815665}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.619442 0.1745564 4.616195 4.280881 4.967021}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602931 0.1804596 4.604509 4.23388 4.957203}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.619442 0.1745564 4.616195 4.280881 4.967021}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602931 0.1804596 4.604509 4.23388 4.957203}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}   2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8205637 0.2259837 \PYGZhy{}0.8196998 \PYGZhy{}1.265 \PYGZhy{}0.3643689}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8273756 0.2379988 \PYGZhy{}0.8281937 \PYGZhy{}1.295583 \PYGZhy{}0.3443534}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1829,12 +1713,6 @@ z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   ls: Least Squares Regression for Continuous Dependent Variables}
@@ -1848,22 +1726,7 @@ respectively:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.US \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} country \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{United States\PYGZdq{}}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.Japan \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} country \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Japan\PYGZdq{}}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate quantities of interest:
@@ -2052,12 +1915,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2008.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   negbinom: Negative Binomial Regression for Event Count Dependent Variables}
@@ -2094,12 +1951,6 @@ Set values for the explanatory variables to their default mean values:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulate fitted values:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2115,14 +1966,14 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.96861 0.3463154 2.948297 2.334299 3.746737}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.948528 0.360773 2.916141 2.323829 3.703429}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     0     1     2     3     4     5     6     7     8     9    10    11}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.213 0.210 0.155 0.147 0.099 0.062 0.037 0.026 0.019 0.012 0.008 0.003}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    16    18}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.003 0.001 0.002 0.002 0.001}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.193 0.189 0.186 0.134 0.095 0.064 0.045 0.036 0.026 0.007 0.007 0.009}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    15    16    17    30}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.002 0.001 0.001 0.002 0.001 0.001 0.001}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2301,12 +2152,6 @@ z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2008.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   normal: Normal Regression for Continuous Dependent Variables}
@@ -2344,22 +2189,7 @@ high (80th percentile) and low (20th percentile) values for trade:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Generate first differences for the effect of high versus low trade on GDP:
@@ -2378,22 +2208,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.430076 0.1927843 5.427808 5.053228 5.797554}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.433104 0.1993954 5.432221 5.032391 5.833022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.368924 2.838694 5.298213 0.2145337 10.70033}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.460641 2.736715 5.472975 0.09863579 10.62646}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.597734 0.1850997 4.605157 4.248915 4.955591}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.602042 0.1755117 4.613065 4.252265 4.945202}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.627997 2.787291 4.672328 \PYGZhy{}0.8738676 9.998134}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.767229 2.699091 4.677271 \PYGZhy{}0.5714166 10.08173}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8323416 0.2342716 \PYGZhy{}0.8250043 \PYGZhy{}1.315922 \PYGZhy{}0.4026502}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.831062 0.2364614 \PYGZhy{}0.8278868 \PYGZhy{}1.296051 \PYGZhy{}0.3667207}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -2550,12 +2380,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   poisson: Poisson Regression for Event Count Dependent Variables}
@@ -2592,12 +2416,6 @@ Set values for the explanatory variables to their default mean values:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulate fitted values:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2610,11 +2428,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.246341 0.232475 3.232489 2.817607 3.746427}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.25377 0.2285971 3.253635 2.828186 3.714806}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.231 1.768266   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.253 1.896995   3    0     7}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2767,12 +2585,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   probit: Probit Regression for Dichotomous Dependent Variables}
@@ -2807,12 +2619,6 @@ Set values for the explanatory variables to their default values.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate quantities of interest from the posterior distribution.
@@ -3021,12 +2827,6 @@ z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} ma
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2014.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables}
@@ -3068,12 +2868,6 @@ Set the explanatory variables to their means:
 x.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulate quantities of interest:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3086,11 +2880,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002404205 0.0001494019 0.002399947 0.00213574 0.002704852}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             mean          sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002402049 0.000157269 0.002399256 0.002087972 0.002716099}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.999 0.001}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.997 0.003}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3114,18 +2908,6 @@ z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} ma
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Error in glm.control(robust = TRUE): unused argument (robust = TRUE)}
 \end{Verbatim}
 
@@ -3141,30 +2923,16 @@ summary\PYG{p}{(}z.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] 1}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Call:}
-\PYG{c}{\PYGZsh{}\PYGZsh{} stats::lm(formula = unem \PYGZti{} gdp + trade + capmob + as.factor(country),}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  stats::glm(formula = vote \PYGZti{} race + educate, family = binomial(\PYGZdq{}logit\PYGZdq{}),}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     data = .)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                      (Intercept)                               gdp}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                          \PYGZhy{}5.8432                           \PYGZhy{}0.1102}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                            trade                            capmob}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           0.1442                            0.8147}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        as.factor(country)Belgium          as.factor(country)Canada}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                          \PYGZhy{}1.5986                            6.7594}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        as.factor(country)Denmark         as.factor(country)Finland}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           4.3107                            4.8099}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         as.factor(country)France           as.factor(country)Italy}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           6.9048                            9.2897}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          as.factor(country)Japan     as.factor(country)Netherlands}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           5.4586                           \PYGZhy{}1.4593}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         as.factor(country)Norway          as.factor(country)Sweden}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                          \PYGZhy{}2.7537                            0.9253}
-\PYG{c}{\PYGZsh{}\PYGZsh{} as.factor(country)United Kingdom   as.factor(country)United States}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           5.6008                           10.0662}
-\PYG{c}{\PYGZsh{}\PYGZsh{}   as.factor(country)West Germany}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           3.3636}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)    racewhite      educate}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}1.2189       0.5022       0.1610}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       2267}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 2138  AIC: 2144}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
 \end{Verbatim}
 
@@ -3172,12 +2940,6 @@ Set the explanatory variables to their means:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate quantities of interest:
@@ -3192,11 +2954,11 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.610363 0.3689253 5.588014 4.921086 6.34316}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7724619 0.01000481 0.772542 0.7532891 0.7918851}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.610363 0.3689253 5.588014 4.921086 6.34316}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.202 0.798}
 \end{Verbatim}
 
 
@@ -3209,12 +2971,6 @@ default prior correction method for case control correction):
 
 \begin{Verbatim}[commandchars=\\\{\}]
 z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} major \PYG{o}{+} contig \PYG{o}{+} power \PYG{o}{+} maxdem \PYG{o}{+} mindem \PYG{o}{+} years\PYG{p}{,} data \PYG{o}{=} mid\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{relogit\PYGZdq{}}\PYG{p}{,} tau \PYG{o}{=} c\PYG{p}{(}\PYG{l+m}{0.002}\PYG{p}{,} \PYG{l+m}{0.005}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3445,7 +3201,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7ffb1880aa38\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fa7c50f1498\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -3456,12 +3212,6 @@ Set the explanatory variables to their means:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate quantities of interest:
@@ -3483,11 +3233,11 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.610363 0.3689253 5.588014 4.921086 6.34316}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7724619 0.01000481 0.772542 0.7532891 0.7918851}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.610363 0.3689253 5.588014 4.921086 6.34316}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.202 0.798}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3777,12 +3527,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}durable \PYG{o}{\PYGZti{}} age 
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2011.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   tobit: Linear regression for Left\PYGZhy{}Censored Dependent Variable}
@@ -3794,12 +3538,6 @@ Setting values for the explanatory variables to their sample averages:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulating quantities of interest from the posterior distribution given \code{x.out}.
@@ -3818,10 +3556,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.537693 0.6193036 1.467966 0.5144852 2.983214}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.522538 0.6238672 1.476463 0.4294109 2.971289}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{} 2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.13298 4.219286 1.314589    0 14.7225}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.09644 3.898018 1.431842    0 12.69079}
 \end{Verbatim}
 
 
@@ -3833,22 +3571,7 @@ high (80th percentile) and low (20th percentile) liquidity ratio
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} quant \PYG{o}{=} quantile\PYG{p}{(}tobin\PYG{o}{\PYGZdl{}}quant\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} quant \PYG{o}{=} quantile\PYG{p}{(}tobin\PYG{o}{\PYGZdl{}}quant\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Estimating the first difference for the effect of high versus low
@@ -3867,23 +3590,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.222171 0.7934861 1.082417 0.1560119 3.192929}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.192813 0.7800701 1.070859 0.123258 3.16135}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.934373 4.083103 1.138922    0 13.32195}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.132773 4.150502 1.323289    0 14.14609}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.074034 0.9716177 1.934698 0.5305872 4.279578}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.023184 0.9289575 1.907224 0.5365063 4.132607}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.39088 4.366783 1.737774    0 14.09312}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.724101 4.401357 2.11134    0 15.06014}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8518632 1.223644 0.8091948 \PYGZhy{}1.45033 3.333646}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8303709 1.143904 0.7664756 \PYGZhy{}1.441829 3.200998}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4411,12 +4134,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote88 \PYG{o}{\PYGZti{}} prist
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Calculating MLEs and large sample var\PYGZhy{}cov matrix.}
 \PYG{c}{\PYGZsh{}\PYGZsh{} This may take a moment...}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Inverting Hessian to get large sample var\PYGZhy{}cov matrix.}
@@ -4457,12 +4174,6 @@ averages:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulating quantities of interest from the posterior distribution
 given \code{x.out}.
 
@@ -4483,7 +4194,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5566 0.2158 0.2276}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5544 0.2155 0.2301}
 \end{Verbatim}
 
 
@@ -4497,25 +4208,7 @@ values.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.weak \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} pristr \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.strong \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} pristr \PYG{o}{=} \PYG{l+m}{3}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.strong\PYG{p}{,} x1 \PYG{o}{=} x.weak\PYG{p}{)}
 summary\PYG{p}{(}s.out2\PYG{p}{)}
 \end{Verbatim}
@@ -4532,7 +4225,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7222 0.1281 0.1497}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7241 0.1153 0.1606}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -4544,7 +4237,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4032 0.2991 0.2977}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4028 0.3059 0.2913}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}              mean         sd        50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} P(Y=1) \PYGZhy{}0.3128754 0.03459857 \PYGZhy{}0.3128662 \PYGZhy{}0.38111485 \PYGZhy{}0.2442630}
@@ -4793,12 +4486,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}ncost \PYG{o}{\PYGZti{}} mil \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Warning in model.response(mf, \PYGZdq{}numeric\PYGZdq{}): using type = \PYGZdq{}numeric\PYGZdq{} with a}
 \PYG{c}{\PYGZsh{}\PYGZsh{} factor response will be ignored}
 \end{Verbatim}
@@ -4840,12 +4527,6 @@ Setting values for the explanatory variables to their sample averages:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulating quantities of interest from the posterior distribution given: \code{x.out}.
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4878,22 +4559,7 @@ versus military action while all the other variables held at their default value
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} mil \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} mil \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5240,12 +4906,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Ben Goodrich, Ying Lu. 2013.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   poissonbayes: Bayesian Poisson Regression}
@@ -5277,12 +4937,6 @@ Setting values for the explanatory variables to their sample averages:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulating quantities of interest from the posterior distribution given \code{x.out}.
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5301,22 +4955,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.max \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} target \PYG{o}{=} max\PYG{p}{(}sanction\PYG{o}{\PYGZdl{}}target\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.min \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} target \PYG{o}{=} min\PYG{p}{(}sanction\PYG{o}{\PYGZdl{}}target\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5333,7 +4972,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2188 1.790041   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1653 1.820799   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5342,7 +4981,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3095 1.849825   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2962 1.842174   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1146376 0.3671544 0.1265036 \PYGZhy{}0.6072035 0.8342282}
@@ -5499,6 +5138,348 @@ CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
 
 
 
+\section{zelig-probitbayes}
+\label{vignette:zelig-probitbayes}\label{vignette:zprobitbayes}
+Use the probit regression model for model binary dependent variables
+specified as a function of a set of explanatory variables. The model is
+estimated using a Gibbs sampler. For other models suitable for binary
+response variables, see Bayesian logistic regression, maximum
+likelihood logit regression, and maximum likelihood probit regression.
+
+
+\subsection{Syntax}
+\label{vignette:id99}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zprobitbayes\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit.bayes\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+
+\subsection{Additional Inputs}
+\label{vignette:id100}
+Using the following arguments to monitor the Markov chains:
+\begin{itemize}
+\item {} 
+\code{burnin}: number of the initial MCMC iterations to be discarded
+(defaults to 1,000).
+
+\item {} 
+\code{mcmc}: number of the MCMC iterations after burnin (defaults to
+10,000).
+
+\item {} 
+\code{thin}: thinning interval for the Markov chain. Only every
+\code{thin}-th draw from the Markov chain is kept. The value of \code{mcmc}
+must be divisible by this value. The default value is 1.
+
+\item {} 
+\code{verbose}: defaults to FALSE. If \code{TRUE}, the progress of the
+sampler (every \(10\%\)) is printed to the screen.
+
+\item {} 
+\code{seed}: seed for the random number generator. The default is \code{NA}
+which corresponds to a random seed of 12345.
+
+\item {} 
+\code{beta.start}: starting values for the Markov chain, either a scalar
+or vector with length equal to the number of estimated coefficients.
+The default is \code{NA}, such that the maximum likelihood estimates are
+used as the starting values.
+
+\end{itemize}
+
+Use the following parameters to specify the model’s priors:
+\begin{itemize}
+\item {} 
+\code{b0}: prior mean for the coefficients, either a numeric vector or a
+scalar. If a scalar value, that value will be the prior mean for all
+the coefficients. The default is 0.
+
+\item {} 
+\code{B0}: prior precision parameter for the coefficients, either a
+square matrix (with the dimensions equal to the number of the
+coefficients) or a scalar. If a scalar value, that value times an
+identity matrix will be the prior precision parameter. The default is
+0, which leads to an improper prior.
+
+\end{itemize}
+
+Use the following arguments to specify optional output for the model:
+\begin{itemize}
+\item {} 
+\code{bayes.resid}: defaults to FALSE. If TRUE, the latent Bayesian
+residuals for all observations are returned. Alternatively, users can
+specify a vector of observations for which the latent residuals
+should be returned.
+
+\end{itemize}
+
+Zelig users may wish to refer to \code{help(MCMCprobit)} for more
+information.
+
+
+\subsection{Examples}
+\label{vignette:id101}
+
+\subsubsection{Basic Example}
+\label{vignette:id102}
+Attaching the sample dataset:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}turnout\PYG{p}{)}
+\end{Verbatim}
+
+Estimating the probit regression using \code{probit.bayes}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \PYG{o}{+} educate\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit.bayes\PYGZdq{}}\PYG{p}{,}
+               data \PYG{o}{=} turnout\PYG{p}{,} verbose \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Ben Goodrich, Ying Lu. 2013.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   probitbayes: Bayesian Probit Regression for Dichotomous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://zeligproject.org/}
+\end{Verbatim}
+
+Checking for convergence before summarizing the estimates:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+geweke.diag\PYG{p}{(}z.out coefficients\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+heidel.diag\PYG{p}{(}z.out coefficients\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+raftery.diag\PYG{p}{(}z.out coefficients\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Setting values for the explanatory variables to their sample averages:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Simulating quantities of interest from the posterior distribution given: \code{x.out}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+
+
+\subsubsection{Simulating First Differences}
+\label{vignette:id103}
+Estimating the first difference (and risk ratio) in individual’s
+probability of voting when education is set to be low (25th
+percentile) versus high (75th percentile) while all the other variables are held at their default values:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.75}\PYG{p}{)}\PYG{p}{)}
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.25}\PYG{p}{)}\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.high\PYG{p}{,} x1 \PYG{o}{=} x.low\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+
+
+\subsection{Model}
+\label{vignette:id104}
+Let \(Y_{i}\) be the binary dependent variable for observation
+\(i\) which takes the value of either 0 or 1.
+\begin{itemize}
+\item {} 
+The \emph{stochastic component} is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+Y_{i}  &  \sim & \textrm{Bernoulli}(\pi_{i})\\
+&  = & \pi_{i}^{Y_{i}}(1-\pi_{i})^{1-Y_{i}},\end{aligned}\end{split}\notag
+\end{gather}
+where \(\pi_{i}=\Pr(Y_{i}=1)\).
+
+\item {} 
+The \emph{systematic component} is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+\pi_{i}= \Phi(x_i \beta),\end{aligned}\end{split}\notag
+\end{gather}
+where \(\Phi(\cdot)\) is the cumulative density function of the
+standard Normal distribution with mean 0 and variance 1,
+\(x_{i}\) is the vector of \(k\) explanatory variables for
+observation \(i\), and \(\beta\) is the vector of
+coefficients.
+
+\item {} 
+The \emph{prior} for \(\beta\) is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+\beta \sim \textrm{Normal}_k \left(  b_{0}, B_{0}^{-1} \right)\end{aligned}\end{split}\notag
+\end{gather}
+where \(b_{0}\) is the vector of means for the \(k\)
+explanatory variables and \(B_{0}\) is the \(k \times k\)
+precision matrix (the inverse of a variance-covariance matrix).
+
+\end{itemize}
+
+
+\subsection{Quantities of Interest}
+\label{vignette:id105}\begin{itemize}
+\item {} 
+The expected values (\code{qi\$ev}) for the probit model are the
+predicted probability of a success:
+\begin{gather}
+\begin{split}\begin{aligned}
+E(Y \mid X) = \pi_{i}= \Phi(x_i \beta),\end{aligned}\end{split}\notag
+\end{gather}
+given the posterior draws of \(\beta\) from the MCMC iterations.
+
+\item {} 
+The predicted values (\code{qi\$pr}) are draws from the Bernoulli
+distribution with mean equal to the simulated expected value
+\(\pi_{i}\).
+
+\item {} 
+The first difference (\code{qi\$fd}) for the probit model is defined as
+\begin{gather}
+\begin{split}\begin{aligned}
+\text{FD}=\Pr(Y=1\mid X_{1})-\Pr(Y=1\mid X).\end{aligned}\end{split}\notag
+\end{gather}
+\item {} 
+The risk ratio (\code{qi\$rr})is defined as
+\begin{gather}
+\begin{split}\begin{aligned}
+\text{RR}=\Pr(Y=1\mid X_{1})\ /\ \Pr(Y=1\mid X).\end{aligned}\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (\code{qi\$att.ev}) for the treatment group is
+\begin{gather}
+\begin{split}\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)]],\end{aligned}\end{split}\notag
+\end{gather}
+where \(t_{i}\) is a binary explanatory variable defining the
+treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups.
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (\code{qi\$att.pr}) for the treatment group is
+\begin{gather}
+\begin{split}\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],\end{aligned}\end{split}\notag
+\end{gather}
+where \(t_{i}\) is a binary explanatory variable defining the
+treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups.
+
+\end{itemize}
+
+
+\subsection{Output Values}
+\label{vignette:id106}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}y \PYG{o}{\PYGZti{}} x\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit.bayes\PYGZdq{}}\PYG{p}{,} data\PYG{p}{)}
+\end{Verbatim}
+
+then you may examine the available information in \code{z.out} by using
+\code{names(z.out)}, see the draws from the posterior distribution of the
+\code{coefficients} by using \code{z.out\$coefficients}, and view a default
+summary of information through \code{summary(z.out)}. Other elements
+available through the \code{\$} operator are listed below.
+\begin{itemize}
+\item {} 
+From the \code{zelig()} output object \code{z.out}, you may extract:
+\begin{itemize}
+\item {} 
+\code{coefficients}: draws from the posterior distributions of the
+estimated parameters.
+
+\item {} 
+zelig.data: the input data frame if save.data = TRUE.
+
+\item {} 
+\code{bayes.residuals}: When \code{bayes.residual} is \code{TRUE} or a set
+of observation numbers is given, this object contains the
+posterior draws of the latent Bayesian residuals of all the
+observations or the observations specified by the user.
+
+\item {} 
+\code{seed}: the random seed used in the model.
+
+\end{itemize}
+
+\item {} 
+From the \code{sim()} output object \code{s.out}:
+\begin{itemize}
+\item {} 
+\code{qi\$ev}: the simulated expected values (probabilities) for the
+specified values of \code{x}.
+
+\item {} 
+\code{qi\$pr}: the simulated predicted values for the specified values
+of \code{x}.
+
+\item {} 
+\code{qi\$fd}: the simulated first difference in the expected values
+for the values specified in \code{x} and \code{x1}.
+
+\item {} 
+\code{qi\$rr}: the simulated risk ratio for the expected values
+simulated from \code{x} and \code{x1}.
+
+\item {} 
+\code{qi\$att.ev}: the simulated average expected treatment effect for
+the treated from conditional prediction models.
+
+\item {} 
+\code{qi\$att.pr}: the simulated average predicted treatment effect
+for the treated from conditional prediction models.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\subsection{See also}
+\label{vignette:id107}
+Bayesian probit regression is part of the MCMCpack library by Andrew D.
+Martin and Kevin M. Quinn . The convergence diagnostics are part of the
+CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+
+
+\bigskip\hrule{}\bigskip
+
+
+
 \subsubsection{zelig-exp}
 \label{zelig-exp:zelig-exp}\label{zelig-exp::doc}\label{zelig-exp:zexp}
 Exponential Regression for Duration Dependent Variables
@@ -5586,12 +5567,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}duration\PYG{p}{,
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Olivia Lau, Kosuke Imai, Gary King. 2011.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   exp: Exponential Regression for Duration Dependent Variables}
@@ -5635,24 +5610,12 @@ x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Error in terms(lm(formula, data), \PYGZdq{}predvars\PYGZdq{}): error in evaluating the argument \PYGZsq{}x\PYGZsq{} in selecting a method for function \PYGZsq{}terms\PYGZsq{}: Error in Ops.Surv(y, z\PYGZdl{}residuals) : Invalid operation on a survival time}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Calls: lm \PYGZhy{}\PYGZgt{} lm.fit \PYGZhy{}\PYGZgt{} Ops.Surv}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5666,10 +5629,6 @@ Simulate expected values and first differences:
 s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.low\PYG{p}{,} x1 \PYG{o}{=} x.high\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Error in sim(z.out, x = x.low, x1 = x.high): object \PYGZsq{}x.low\PYGZsq{} not found}
-\end{Verbatim}
-
 Summarize quantities of interest and produce some plots:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5677,16 +5636,38 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Error in summary(s.out): error in evaluating the argument \PYGZsq{}object\PYGZsq{} in selecting a method for function \PYGZsq{}summary\PYGZsq{}: Error: object \PYGZsq{}s.out\PYGZsq{} not found}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.61167 0.178409 4.61234 4.253718 4.970509}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.61167 0.178409 4.61234 4.253718 4.970509}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.432936 0.1911714 5.435334 5.03635 5.793026}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.432936 0.1911714 5.435334 5.03635 5.793026}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean        sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8212663 0.2285222 0.8252123 0.3658387 1.259808}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 plot\PYG{p}{(}s.out\PYG{p}{)}
 \end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Error in plot(s.out): error in evaluating the argument \PYGZsq{}x\PYGZsq{} in selecting a method for function \PYGZsq{}plot\PYGZsq{}: Error: object \PYGZsq{}s.out\PYGZsq{} not found}
-\end{Verbatim}
+\includegraphics{Zelig-exp-1.png}
+\caption{Zelig-exp}\end{figure}
 
 
 \paragraph{Model}
@@ -5871,12 +5852,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}duration \PYG{o}{\PYGZti{}} fra
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   gamma: Gamma Regression for Continuous, Positive Dependent Variables}
@@ -5915,22 +5890,7 @@ X:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate expected values (qi\$ev) and first differences (qi\$fd):
@@ -5948,23 +5908,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}  2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.43782 1.113267 14.33311 12.49 16.8138}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.41947 1.064664 14.35618 12.51195 16.63425}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.45985 12.92341 11.14248 0.8673413 48.0112}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.21243 12.60368 10.89322 0.6728363 47.30353}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19226 1.105784 19.13677 17.22523 21.40817}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19869 1.133553 19.11127 17.1843 21.62197}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.36689 15.43004 14.56058 1.008213 58.00364}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.60736 16.66119 13.88459 0.9246994 61.53045}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.75444 1.584051 4.797595 1.705692 7.94088}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.779217 1.535785 4.734045 1.825047 7.751185}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6118,12 +6078,6 @@ z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} age \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   logit: Logistic Regression for Dichotomous Dependent Variables}
@@ -6135,12 +6089,6 @@ Setting values for the explanatory variables:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} age \PYG{o}{=} \PYG{l+m}{36}\PYG{p}{,} race \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{white\PYGZdq{}}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulating quantities of interest from the posterior distribution.
@@ -6158,11 +6106,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7471511 0.01154251 0.7469772 0.7256361 0.7692274}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}     2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7479394 0.01193434 0.748012 0.724231 0.7712138}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.273 0.727}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.278 0.722}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6187,12 +6135,6 @@ z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   logit: Logistic Regression for Dichotomous Dependent Variables}
@@ -6202,25 +6144,7 @@ z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.75}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.25}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out2\PYG{p}{,} x \PYG{o}{=} x.high\PYG{p}{,} x1 \PYG{o}{=} x.low\PYG{p}{)}
 summary\PYG{p}{(}s.out2\PYG{p}{)}
 \end{Verbatim}
@@ -6230,23 +6154,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}     2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8232649 0.01032739 0.8238304 0.801879 0.8421641}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8221088 0.01046643 0.8225926 0.7989981 0.8425136}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.174 0.826}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.172 0.828}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7091199 0.01302403 0.7091913 0.6839686 0.7338648}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7091027 0.01317142 0.708915 0.6826494 0.734145}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.271 0.729}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.303 0.697}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1141451 0.01161089 \PYGZhy{}0.1139854 \PYGZhy{}0.1368375 \PYGZhy{}0.09117048}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1130061 0.0116836 \PYGZhy{}0.1131443 \PYGZhy{}0.1363372 \PYGZhy{}0.09073965}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6454,12 +6378,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}duration\PYG{p}{,
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   lognorm: Log\PYGZhy{}Normal Regression for Duration Dependent Variables}
@@ -6503,24 +6421,12 @@ x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Error in terms(lm(formula, data), \PYGZdq{}predvars\PYGZdq{}): error in evaluating the argument \PYGZsq{}x\PYGZsq{} in selecting a method for function \PYGZsq{}terms\PYGZsq{}: Error in Ops.Surv(y, z\PYGZdl{}residuals) : Invalid operation on a survival time}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Calls: lm \PYGZhy{}\PYGZgt{} lm.fit \PYGZhy{}\PYGZgt{} Ops.Surv}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2\PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6543,23 +6449,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7096412 0.01339433 0.7103068 0.6832911 0.7349613}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7098857 0.01311726 0.709487 0.6856631 0.7358735}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.278 0.722}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.298 0.702}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8233247 0.01039145 0.8237771 0.8022964 0.8428224}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8230556 0.0105009 0.8227265 0.8028129 0.8433327}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.176 0.824}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.18 0.82}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1136834 0.01116033 0.1138095 0.09156911 0.1356637}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1131699 0.01186652 0.1134081 0.09045198 0.1366067}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6750,12 +6656,6 @@ z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   ls: Least Squares Regression for Continuous Dependent Variables}
@@ -6791,22 +6691,7 @@ variable:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Generate first differences for the effect of high versus low trade on GDP:
@@ -6824,23 +6709,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.440006 0.1918098 5.440879 5.057022 5.81467}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.430307 0.1971789 5.431243 5.038718 5.815665}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.440006 0.1918098 5.440879 5.057022 5.81467}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.430307 0.1971789 5.431243 5.038718 5.815665}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.619442 0.1745564 4.616195 4.280881 4.967021}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602931 0.1804596 4.604509 4.23388 4.957203}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.619442 0.1745564 4.616195 4.280881 4.967021}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602931 0.1804596 4.604509 4.23388 4.957203}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}   2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8205637 0.2259837 \PYGZhy{}0.8196998 \PYGZhy{}1.265 \PYGZhy{}0.3643689}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8273756 0.2379988 \PYGZhy{}0.8281937 \PYGZhy{}1.295583 \PYGZhy{}0.3443534}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6865,12 +6750,6 @@ z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   ls: Least Squares Regression for Continuous Dependent Variables}
@@ -6884,22 +6763,7 @@ respectively:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.US \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} country \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{United States\PYGZdq{}}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.Japan \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{,} country \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Japan\PYGZdq{}}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate quantities of interest:
@@ -7084,12 +6948,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2008.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   negbinom: Negative Binomial Regression for Event Count Dependent Variables}
@@ -7126,12 +6984,6 @@ Set values for the explanatory variables to their default mean values:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulate fitted values:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7147,14 +6999,14 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.96861 0.3463154 2.948297 2.334299 3.746737}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.948528 0.360773 2.916141 2.323829 3.703429}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     0     1     2     3     4     5     6     7     8     9    10    11}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.213 0.210 0.155 0.147 0.099 0.062 0.037 0.026 0.019 0.012 0.008 0.003}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    16    18}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.003 0.001 0.002 0.002 0.001}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.193 0.189 0.186 0.134 0.095 0.064 0.045 0.036 0.026 0.007 0.007 0.009}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    15    16    17    30}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.002 0.001 0.001 0.002 0.001 0.001 0.001}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7329,12 +7181,6 @@ z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}unem \PYG{o}{\PYGZti{}} gdp \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2008.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   normal: Normal Regression for Continuous Dependent Variables}
@@ -7372,22 +7218,7 @@ high (80th percentile) and low (20th percentile) values for trade:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{,} trade \PYG{o}{=} quantile\PYG{p}{(}macro\PYG{o}{\PYGZdl{}}trade\PYG{p}{,} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Generate first differences for the effect of high versus low trade on GDP:
@@ -7406,22 +7237,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.430076 0.1927843 5.427808 5.053228 5.797554}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.433104 0.1993954 5.432221 5.032391 5.833022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.368924 2.838694 5.298213 0.2145337 10.70033}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.460641 2.736715 5.472975 0.09863579 10.62646}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.597734 0.1850997 4.605157 4.248915 4.955591}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.602042 0.1755117 4.613065 4.252265 4.945202}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.627997 2.787291 4.672328 \PYGZhy{}0.8738676 9.998134}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.767229 2.699091 4.677271 \PYGZhy{}0.5714166 10.08173}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8323416 0.2342716 \PYGZhy{}0.8250043 \PYGZhy{}1.315922 \PYGZhy{}0.4026502}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.831062 0.2364614 \PYGZhy{}0.8278868 \PYGZhy{}1.296051 \PYGZhy{}0.3667207}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -7574,12 +7405,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   poisson: Poisson Regression for Event Count Dependent Variables}
@@ -7616,12 +7441,6 @@ Set values for the explanatory variables to their default mean values:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulate fitted values:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7634,11 +7453,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.246341 0.232475 3.232489 2.817607 3.746427}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.25377 0.2285971 3.253635 2.828186 3.714806}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.231 1.768266   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.253 1.896995   3    0     7}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7787,12 +7606,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2007.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   probit: Probit Regression for Dichotomous Dependent Variables}
@@ -7827,12 +7640,6 @@ Set values for the explanatory variables to their default values.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate quantities of interest from the posterior distribution.
@@ -8037,12 +7844,6 @@ z.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} ma
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, and Olivia Lau. 2014.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables}
@@ -8084,12 +7885,6 @@ Set the explanatory variables to their means:
 x.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out1\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulate quantities of interest:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8102,11 +7897,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002404205 0.0001494019 0.002399947 0.00213574 0.002704852}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             mean          sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002402049 0.000157269 0.002399256 0.002087972 0.002716099}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.999 0.001}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.997 0.003}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8130,18 +7925,6 @@ z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} ma
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Error in glm.control(robust = TRUE): unused argument (robust = TRUE)}
 \end{Verbatim}
 
@@ -8157,30 +7940,16 @@ summary\PYG{p}{(}z.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] 1}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Call:}
-\PYG{c}{\PYGZsh{}\PYGZsh{} stats::lm(formula = unem \PYGZti{} gdp + trade + capmob + as.factor(country),}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:  stats::glm(formula = vote \PYGZti{} race + educate, family = binomial(\PYGZdq{}logit\PYGZdq{}),}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     data = .)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                      (Intercept)                               gdp}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                          \PYGZhy{}5.8432                           \PYGZhy{}0.1102}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                            trade                            capmob}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           0.1442                            0.8147}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        as.factor(country)Belgium          as.factor(country)Canada}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                          \PYGZhy{}1.5986                            6.7594}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        as.factor(country)Denmark         as.factor(country)Finland}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           4.3107                            4.8099}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         as.factor(country)France           as.factor(country)Italy}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           6.9048                            9.2897}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          as.factor(country)Japan     as.factor(country)Netherlands}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           5.4586                           \PYGZhy{}1.4593}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         as.factor(country)Norway          as.factor(country)Sweden}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                          \PYGZhy{}2.7537                            0.9253}
-\PYG{c}{\PYGZsh{}\PYGZsh{} as.factor(country)United Kingdom   as.factor(country)United States}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           5.6008                           10.0662}
-\PYG{c}{\PYGZsh{}\PYGZsh{}   as.factor(country)West Germany}
-\PYG{c}{\PYGZsh{}\PYGZsh{}                           3.3636}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)    racewhite      educate}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     \PYGZhy{}1.2189       0.5022       0.1610}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Null Deviance:       2267}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Residual Deviance: 2138  AIC: 2144}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
 \end{Verbatim}
 
@@ -8188,12 +7957,6 @@ Set the explanatory variables to their means:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate quantities of interest:
@@ -8208,11 +7971,11 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.610363 0.3689253 5.588014 4.921086 6.34316}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7724619 0.01000481 0.772542 0.7532891 0.7918851}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.610363 0.3689253 5.588014 4.921086 6.34316}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.202 0.798}
 \end{Verbatim}
 
 
@@ -8225,12 +7988,6 @@ default prior correction method for case control correction):
 
 \begin{Verbatim}[commandchars=\\\{\}]
 z.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}conflict \PYG{o}{\PYGZti{}} major \PYG{o}{+} contig \PYG{o}{+} power \PYG{o}{+} maxdem \PYG{o}{+} mindem \PYG{o}{+} years\PYG{p}{,} data \PYG{o}{=} mid\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{relogit\PYGZdq{}}\PYG{p}{,} tau \PYG{o}{=} c\PYG{p}{(}\PYG{l+m}{0.002}\PYG{p}{,} \PYG{l+m}{0.005}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8461,7 +8218,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7ffb1880aa38\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fa7c50f1498\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -8472,12 +8229,6 @@ Set the explanatory variables to their means:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out2\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulate quantities of interest:
@@ -8499,11 +8250,11 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.610363 0.3689253 5.588014 4.921086 6.34316}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7724619 0.01000481 0.772542 0.7532891 0.7918851}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.610363 0.3689253 5.588014 4.921086 6.34316}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.202 0.798}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8789,12 +8540,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}durable \PYG{o}{\PYGZti{}} age 
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Kosuke Imai, Gary King, Olivia Lau. 2011.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   tobit: Linear regression for Left\PYGZhy{}Censored Dependent Variable}
@@ -8806,12 +8551,6 @@ Setting values for the explanatory variables to their sample averages:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Simulating quantities of interest from the posterior distribution given \code{x.out}.
@@ -8830,10 +8569,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.537693 0.6193036 1.467966 0.5144852 2.983214}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.522538 0.6238672 1.476463 0.4294109 2.971289}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{} 2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.13298 4.219286 1.314589    0 14.7225}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.09644 3.898018 1.431842    0 12.69079}
 \end{Verbatim}
 
 
@@ -8845,22 +8584,7 @@ high (80th percentile) and low (20th percentile) liquidity ratio
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} quant \PYG{o}{=} quantile\PYG{p}{(}tobin\PYG{o}{\PYGZdl{}}quant\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.8}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} quant \PYG{o}{=} quantile\PYG{p}{(}tobin\PYG{o}{\PYGZdl{}}quant\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.2}\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 Estimating the first difference for the effect of high versus low
@@ -8879,23 +8603,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.222171 0.7934861 1.082417 0.1560119 3.192929}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.192813 0.7800701 1.070859 0.123258 3.16135}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.934373 4.083103 1.138922    0 13.32195}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.132773 4.150502 1.323289    0 14.14609}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.074034 0.9716177 1.934698 0.5305872 4.279578}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.023184 0.9289575 1.907224 0.5365063 4.132607}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.39088 4.366783 1.737774    0 14.09312}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.724101 4.401357 2.11134    0 15.06014}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8518632 1.223644 0.8091948 \PYGZhy{}1.45033 3.333646}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8303709 1.143904 0.7664756 \PYGZhy{}1.441829 3.200998}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -9415,12 +9139,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote88 \PYG{o}{\PYGZti{}} prist
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Calculating MLEs and large sample var\PYGZhy{}cov matrix.}
 \PYG{c}{\PYGZsh{}\PYGZsh{} This may take a moment...}
 \PYG{c}{\PYGZsh{}\PYGZsh{} Inverting Hessian to get large sample var\PYGZhy{}cov matrix.}
@@ -9461,12 +9179,6 @@ averages:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulating quantities of interest from the posterior distribution
 given \code{x.out}.
 
@@ -9487,7 +9199,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5566 0.2158 0.2276}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5544 0.2155 0.2301}
 \end{Verbatim}
 
 
@@ -9501,25 +9213,7 @@ values.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.weak \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} pristr \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.strong \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} pristr \PYG{o}{=} \PYG{l+m}{3}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.strong\PYG{p}{,} x1 \PYG{o}{=} x.weak\PYG{p}{)}
 summary\PYG{p}{(}s.out2\PYG{p}{)}
 \end{Verbatim}
@@ -9536,7 +9230,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7222 0.1281 0.1497}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7241 0.1153 0.1606}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -9548,7 +9242,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4032 0.2991 0.2977}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4028 0.3059 0.2913}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}              mean         sd        50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} P(Y=1) \PYGZhy{}0.3128754 0.03459857 \PYGZhy{}0.3128662 \PYGZhy{}0.38111485 \PYGZhy{}0.2442630}
@@ -9793,12 +9487,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}ncost \PYG{o}{\PYGZti{}} mil \P
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} Warning in model.response(mf, \PYGZdq{}numeric\PYGZdq{}): using type = \PYGZdq{}numeric\PYGZdq{} with a}
 \PYG{c}{\PYGZsh{}\PYGZsh{} factor response will be ignored}
 \end{Verbatim}
@@ -9840,12 +9528,6 @@ Setting values for the explanatory variables to their sample averages:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulating quantities of interest from the posterior distribution given: \code{x.out}.
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -9878,22 +9560,7 @@ versus military action while all the other variables held at their default value
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} mil \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} mil \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -10236,12 +9903,6 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   Ben Goodrich, Ying Lu. 2013.}
 \PYG{c}{\PYGZsh{}\PYGZsh{}   poissonbayes: Bayesian Poisson Regression}
@@ -10273,12 +9934,6 @@ Setting values for the explanatory variables to their sample averages:
 x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
 \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
 Simulating quantities of interest from the posterior distribution given \code{x.out}.
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -10297,22 +9952,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
 
 \begin{Verbatim}[commandchars=\\\{\}]
 x.max \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} target \PYG{o}{=} max\PYG{p}{(}sanction\PYG{o}{\PYGZdl{}}target\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
 x.min \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} target \PYG{o}{=} min\PYG{p}{(}sanction\PYG{o}{\PYGZdl{}}target\PYG{p}{)}\PYG{p}{)}
-\end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}\PYGZsh{} Warning: \PYGZsq{}regroup\PYGZsq{} is deprecated.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} Use \PYGZsq{}group\PYGZus{}by\PYGZus{}\PYGZsq{} instead.}
-\PYG{c}{\PYGZsh{}\PYGZsh{} See help(\PYGZdq{}Deprecated\PYGZdq{})}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -10329,7 +9969,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2188 1.790041   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1653 1.820799   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -10338,7 +9978,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3095 1.849825   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2962 1.842174   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1146376 0.3671544 0.1265036 \PYGZhy{}0.6072035 0.8342282}
@@ -10487,6 +10127,344 @@ for the treated from conditional prediction models.
 \paragraph{See also}
 \label{zelig-poissonbayes:see-also}
 Bayesian poisson regression is part of the MCMCpack library by Andrew D.
+Martin and Kevin M. Quinn . The convergence diagnostics are part of the
+CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+
+
+\subsubsection{zelig-probitbayes}
+\label{zelig-probitbayes:zprobitbayes}\label{zelig-probitbayes::doc}\label{zelig-probitbayes:zelig-probitbayes}
+Use the probit regression model for model binary dependent variables
+specified as a function of a set of explanatory variables. The model is
+estimated using a Gibbs sampler. For other models suitable for binary
+response variables, see Bayesian logistic regression, maximum
+likelihood logit regression, and maximum likelihood probit regression.
+
+
+\paragraph{Syntax}
+\label{zelig-probitbayes:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zprobitbayes\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit.bayes\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Additional Inputs}
+\label{zelig-probitbayes:additional-inputs}
+Using the following arguments to monitor the Markov chains:
+\begin{itemize}
+\item {} 
+\code{burnin}: number of the initial MCMC iterations to be discarded
+(defaults to 1,000).
+
+\item {} 
+\code{mcmc}: number of the MCMC iterations after burnin (defaults to
+10,000).
+
+\item {} 
+\code{thin}: thinning interval for the Markov chain. Only every
+\code{thin}-th draw from the Markov chain is kept. The value of \code{mcmc}
+must be divisible by this value. The default value is 1.
+
+\item {} 
+\code{verbose}: defaults to FALSE. If \code{TRUE}, the progress of the
+sampler (every \(10\%\)) is printed to the screen.
+
+\item {} 
+\code{seed}: seed for the random number generator. The default is \code{NA}
+which corresponds to a random seed of 12345.
+
+\item {} 
+\code{beta.start}: starting values for the Markov chain, either a scalar
+or vector with length equal to the number of estimated coefficients.
+The default is \code{NA}, such that the maximum likelihood estimates are
+used as the starting values.
+
+\end{itemize}
+
+Use the following parameters to specify the model’s priors:
+\begin{itemize}
+\item {} 
+\code{b0}: prior mean for the coefficients, either a numeric vector or a
+scalar. If a scalar value, that value will be the prior mean for all
+the coefficients. The default is 0.
+
+\item {} 
+\code{B0}: prior precision parameter for the coefficients, either a
+square matrix (with the dimensions equal to the number of the
+coefficients) or a scalar. If a scalar value, that value times an
+identity matrix will be the prior precision parameter. The default is
+0, which leads to an improper prior.
+
+\end{itemize}
+
+Use the following arguments to specify optional output for the model:
+\begin{itemize}
+\item {} 
+\code{bayes.resid}: defaults to FALSE. If TRUE, the latent Bayesian
+residuals for all observations are returned. Alternatively, users can
+specify a vector of observations for which the latent residuals
+should be returned.
+
+\end{itemize}
+
+Zelig users may wish to refer to \code{help(MCMCprobit)} for more
+information.
+
+
+\paragraph{Examples}
+\label{zelig-probitbayes:examples}
+
+\subparagraph{Basic Example}
+\label{zelig-probitbayes:basic-example}
+Attaching the sample dataset:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}turnout\PYG{p}{)}
+\end{Verbatim}
+
+Estimating the probit regression using \code{probit.bayes}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}vote \PYG{o}{\PYGZti{}} race \PYG{o}{+} educate\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit.bayes\PYGZdq{}}\PYG{p}{,}
+               data \PYG{o}{=} turnout\PYG{p}{,} verbose \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Ben Goodrich, Ying Lu. 2013.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   probitbayes: Bayesian Probit Regression for Dichotomous Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://zeligproject.org/}
+\end{Verbatim}
+
+Checking for convergence before summarizing the estimates:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+geweke.diag\PYG{p}{(}z.out coefficients\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+heidel.diag\PYG{p}{(}z.out coefficients\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+raftery.diag\PYG{p}{(}z.out coefficients\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Setting values for the explanatory variables to their sample averages:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Simulating quantities of interest from the posterior distribution given: \code{x.out}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out1 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out1\PYG{p}{)}
+\end{Verbatim}
+
+
+\subparagraph{Simulating First Differences}
+\label{zelig-probitbayes:simulating-first-differences}
+Estimating the first difference (and risk ratio) in individual’s
+probability of voting when education is set to be low (25th
+percentile) versus high (75th percentile) while all the other variables are held at their default values:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.75}\PYG{p}{)}\PYG{p}{)}
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} educate \PYG{o}{=} quantile\PYG{p}{(}turnout\PYG{o}{\PYGZdl{}}educate\PYG{p}{,} prob \PYG{o}{=} \PYG{l+m}{0.25}\PYG{p}{)}\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out2 \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.high\PYG{p}{,} x1 \PYG{o}{=} x.low\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out2\PYG{p}{)}
+\end{Verbatim}
+
+
+\paragraph{Model}
+\label{zelig-probitbayes:model}
+Let \(Y_{i}\) be the binary dependent variable for observation
+\(i\) which takes the value of either 0 or 1.
+\begin{itemize}
+\item {} 
+The \emph{stochastic component} is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+Y_{i}  &  \sim & \textrm{Bernoulli}(\pi_{i})\\
+&  = & \pi_{i}^{Y_{i}}(1-\pi_{i})^{1-Y_{i}},\end{aligned}\end{split}\notag
+\end{gather}
+where \(\pi_{i}=\Pr(Y_{i}=1)\).
+
+\item {} 
+The \emph{systematic component} is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+\pi_{i}= \Phi(x_i \beta),\end{aligned}\end{split}\notag
+\end{gather}
+where \(\Phi(\cdot)\) is the cumulative density function of the
+standard Normal distribution with mean 0 and variance 1,
+\(x_{i}\) is the vector of \(k\) explanatory variables for
+observation \(i\), and \(\beta\) is the vector of
+coefficients.
+
+\item {} 
+The \emph{prior} for \(\beta\) is given by
+\begin{gather}
+\begin{split}\begin{aligned}
+\beta \sim \textrm{Normal}_k \left(  b_{0}, B_{0}^{-1} \right)\end{aligned}\end{split}\notag
+\end{gather}
+where \(b_{0}\) is the vector of means for the \(k\)
+explanatory variables and \(B_{0}\) is the \(k \times k\)
+precision matrix (the inverse of a variance-covariance matrix).
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-probitbayes:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected values (\code{qi\$ev}) for the probit model are the
+predicted probability of a success:
+\begin{gather}
+\begin{split}\begin{aligned}
+E(Y \mid X) = \pi_{i}= \Phi(x_i \beta),\end{aligned}\end{split}\notag
+\end{gather}
+given the posterior draws of \(\beta\) from the MCMC iterations.
+
+\item {} 
+The predicted values (\code{qi\$pr}) are draws from the Bernoulli
+distribution with mean equal to the simulated expected value
+\(\pi_{i}\).
+
+\item {} 
+The first difference (\code{qi\$fd}) for the probit model is defined as
+\begin{gather}
+\begin{split}\begin{aligned}
+\text{FD}=\Pr(Y=1\mid X_{1})-\Pr(Y=1\mid X).\end{aligned}\end{split}\notag
+\end{gather}
+\item {} 
+The risk ratio (\code{qi\$rr})is defined as
+\begin{gather}
+\begin{split}\begin{aligned}
+\text{RR}=\Pr(Y=1\mid X_{1})\ /\ \Pr(Y=1\mid X).\end{aligned}\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (\code{qi\$att.ev}) for the treatment group is
+\begin{gather}
+\begin{split}\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)]],\end{aligned}\end{split}\notag
+\end{gather}
+where \(t_{i}\) is a binary explanatory variable defining the
+treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups.
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (\code{qi\$att.pr}) for the treatment group is
+\begin{gather}
+\begin{split}\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],\end{aligned}\end{split}\notag
+\end{gather}
+where \(t_{i}\) is a binary explanatory variable defining the
+treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups.
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-probitbayes:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}y \PYG{o}{\PYGZti{}} x\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit.bayes\PYGZdq{}}\PYG{p}{,} data\PYG{p}{)}
+\end{Verbatim}
+
+then you may examine the available information in \code{z.out} by using
+\code{names(z.out)}, see the draws from the posterior distribution of the
+\code{coefficients} by using \code{z.out\$coefficients}, and view a default
+summary of information through \code{summary(z.out)}. Other elements
+available through the \code{\$} operator are listed below.
+\begin{itemize}
+\item {} 
+From the \code{zelig()} output object \code{z.out}, you may extract:
+\begin{itemize}
+\item {} 
+\code{coefficients}: draws from the posterior distributions of the
+estimated parameters.
+
+\item {} 
+zelig.data: the input data frame if save.data = TRUE.
+
+\item {} 
+\code{bayes.residuals}: When \code{bayes.residual} is \code{TRUE} or a set
+of observation numbers is given, this object contains the
+posterior draws of the latent Bayesian residuals of all the
+observations or the observations specified by the user.
+
+\item {} 
+\code{seed}: the random seed used in the model.
+
+\end{itemize}
+
+\item {} 
+From the \code{sim()} output object \code{s.out}:
+\begin{itemize}
+\item {} 
+\code{qi\$ev}: the simulated expected values (probabilities) for the
+specified values of \code{x}.
+
+\item {} 
+\code{qi\$pr}: the simulated predicted values for the specified values
+of \code{x}.
+
+\item {} 
+\code{qi\$fd}: the simulated first difference in the expected values
+for the values specified in \code{x} and \code{x1}.
+
+\item {} 
+\code{qi\$rr}: the simulated risk ratio for the expected values
+simulated from \code{x} and \code{x1}.
+
+\item {} 
+\code{qi\$att.ev}: the simulated average expected treatment effect for
+the treated from conditional prediction models.
+
+\item {} 
+\code{qi\$att.pr}: the simulated average predicted treatment effect
+for the treated from conditional prediction models.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\paragraph{See also}
+\label{zelig-probitbayes:see-also}
+Bayesian probit regression is part of the MCMCpack library by Andrew D.
 Martin and Kevin M. Quinn . The convergence diagnostics are part of the
 CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
 

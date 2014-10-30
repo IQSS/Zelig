@@ -95,14 +95,6 @@ of militarized interstate conflicts to the absence of disputes is
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2014.
     ##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables
@@ -153,14 +145,6 @@ Set the explanatory variables to their means:
     x.out1 <- setx(z.out1)
 
 
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
 Simulate quantities of interest:
 
 
@@ -178,10 +162,10 @@ Simulate quantities of interest:
     ##  -----
     ## ev
     ##             mean           sd         50%        2.5%       97.5%
-    ## [1,] 0.002394628 0.0001517166 0.002387472 0.002094494 0.002697017
+    ## [1,] 0.002404106 0.0001582528 0.002397304 0.002128284 0.002734741
     ## pv
     ##          0     1
-    ## [1,] 0.997 0.003
+    ## [1,] 0.998 0.002
 
 
 
@@ -211,22 +195,6 @@ Suppose that we wish to perform case control correction using weighting
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## Error in glm.control(robust = TRUE): unused argument (robust = TRUE)
 
 
@@ -247,30 +215,16 @@ Summarize the model output:
     ## [1] 1
     ## 
     ## 
-    ## Call:
-    ## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country), 
+    ## Call:  stats::glm(formula = vote ~ race + educate, family = binomial("logit"), 
     ##     data = .)
     ## 
     ## Coefficients:
-    ##                      (Intercept)                               gdp  
-    ##                          -5.8432                           -0.1102  
-    ##                            trade                            capmob  
-    ##                           0.1442                            0.8147  
-    ##        as.factor(country)Belgium          as.factor(country)Canada  
-    ##                          -1.5986                            6.7594  
-    ##        as.factor(country)Denmark         as.factor(country)Finland  
-    ##                           4.3107                            4.8099  
-    ##         as.factor(country)France           as.factor(country)Italy  
-    ##                           6.9048                            9.2897  
-    ##          as.factor(country)Japan     as.factor(country)Netherlands  
-    ##                           5.4586                           -1.4593  
-    ##         as.factor(country)Norway          as.factor(country)Sweden  
-    ##                          -2.7537                            0.9253  
-    ## as.factor(country)United Kingdom   as.factor(country)United States  
-    ##                           5.6008                           10.0662  
-    ##   as.factor(country)West Germany  
-    ##                           3.3636  
+    ## (Intercept)    racewhite      educate  
+    ##     -1.2189       0.5022       0.1610  
     ## 
+    ## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual
+    ## Null Deviance:	    2267 
+    ## Residual Deviance: 2138 	AIC: 2144
     ## Next step: Use 'setx' method
 
 
@@ -282,14 +236,6 @@ Set the explanatory variables to their means:
     
 
     x.out2 <- setx(z.out2)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Simulate quantities of interest:
@@ -308,11 +254,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##      mean        sd     50%      2.5%    97.5%
-    ## 1 1.32532 0.3745495 1.33224 0.5711662 2.037085
+    ##           mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.7732387 0.01051603 0.7738457 0.7519949 0.7919187
     ## pv
-    ##      mean        sd     50%      2.5%    97.5%
-    ## 1 1.32532 0.3745495 1.33224 0.5711662 2.037085
+    ##         0    1
+    ## [1,] 0.23 0.77
 
 
 
@@ -329,14 +275,6 @@ default prior correction method for case control correction):
     
 
     z.out2 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years, data = mid, model = "relogit", tau = c(0.002, 0.005))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 ::
@@ -573,7 +511,7 @@ Summarize the model output:
     ## $formula
     ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
     ##     mindem + years
-    ## <environment: 0x7fb7d5765e70>
+    ## <environment: 0x7fdc12548ce0>
     ## 
     ## attr(,"class")
     ## [1] "Relogit2" "Relogit" 
@@ -588,14 +526,6 @@ Set the explanatory variables to their means:
     
 
     x.out2 <- setx(z.out2)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Simulate quantities of interest:
@@ -626,11 +556,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##      mean        sd     50%      2.5%    97.5%
-    ## 1 1.32532 0.3745495 1.33224 0.5711662 2.037085
+    ##           mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.7732387 0.01051603 0.7738457 0.7519949 0.7919187
     ## pv
-    ##      mean        sd     50%      2.5%    97.5%
-    ## 1 1.32532 0.3745495 1.33224 0.5711662 2.037085
+    ##         0    1
+    ## [1,] 0.23 0.77
 
 
 

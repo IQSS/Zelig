@@ -62,14 +62,6 @@ Estimating parameter values for the logistic regression:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   logit: Logistic Regression for Dichotomous Dependent Variables
@@ -85,14 +77,6 @@ Setting values for the explanatory variables:
     
 
     x.out1 <- setx(z.out1, age = 36, race = "white")
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Simulating quantities of interest from the posterior distribution.
@@ -117,11 +101,11 @@ Simulating quantities of interest from the posterior distribution.
     ##  sim x :
     ##  -----
     ## ev
-    ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.7471511 0.01154251 0.7469772 0.7256361 0.7692274
+    ##           mean         sd      50%     2.5%     97.5%
+    ## [1,] 0.7479394 0.01193434 0.748012 0.724231 0.7712138
     ## pv
     ##          0     1
-    ## [1,] 0.273 0.727
+    ## [1,] 0.278 0.722
 
 
 
@@ -152,14 +136,6 @@ other variables held at their default values.
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   logit: Logistic Regression for Dichotomous Dependent Variables
@@ -171,31 +147,7 @@ other variables held at their default values.
     
 
     x.high <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.75))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.25))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     s.out2 <- sim(z.out2, x = x.high, x1 = x.low)
     summary(s.out2)
 
@@ -206,23 +158,23 @@ other variables held at their default values.
     ##  sim x :
     ##  -----
     ## ev
-    ##           mean         sd       50%     2.5%     97.5%
-    ## [1,] 0.8232649 0.01032739 0.8238304 0.801879 0.8421641
+    ##           mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.8221088 0.01046643 0.8225926 0.7989981 0.8425136
     ## pv
     ##          0     1
-    ## [1,] 0.174 0.826
+    ## [1,] 0.172 0.828
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.7091199 0.01302403 0.7091913 0.6839686 0.7338648
+    ##           mean         sd      50%      2.5%    97.5%
+    ## [1,] 0.7091027 0.01317142 0.708915 0.6826494 0.734145
     ## pv
     ##          0     1
-    ## [1,] 0.271 0.729
+    ## [1,] 0.303 0.697
     ## fd
-    ##            mean         sd        50%       2.5%       97.5%
-    ## [1,] -0.1141451 0.01161089 -0.1139854 -0.1368375 -0.09117048
+    ##            mean        sd        50%       2.5%       97.5%
+    ## [1,] -0.1130061 0.0116836 -0.1131443 -0.1363372 -0.09073965
 
 
 

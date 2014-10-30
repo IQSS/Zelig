@@ -4,262 +4,282 @@
 \contentsline {section}{\numberline {1.2}Quickstart Guide}{4}{section.1.2}
 \contentsline {chapter}{\numberline {2}Model Reference and Vignettes}{9}{chapter.2}
 \contentsline {section}{\numberline {2.1}Reference}{9}{section.2.1}
-\contentsline {section}{\numberline {2.2}zelig-exp}{9}{section.2.2}
+\contentsline {section}{\numberline {2.2}zelig-exp}{10}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Syntax}{10}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Input Values}{10}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Example}{10}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Model}{12}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Quantities of Interest}{12}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}Output Values}{13}{subsection.2.2.6}
-\contentsline {subsection}{\numberline {2.2.7}See also}{13}{subsection.2.2.7}
-\contentsline {section}{\numberline {2.3}zelig-gamma}{13}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Syntax}{13}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Example}{14}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Model}{15}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}Quantities of Interest}{17}{subsection.2.3.4}
-\contentsline {subsection}{\numberline {2.3.5}Output Values}{17}{subsection.2.3.5}
-\contentsline {subsection}{\numberline {2.3.6}See also}{17}{subsection.2.3.6}
-\contentsline {section}{\numberline {2.4}zelig-logit}{17}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Syntax}{18}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Examples}{18}{subsection.2.4.2}
-\contentsline {subsubsection}{Basic Example}{18}{subsubsection*.3}
-\contentsline {subsubsection}{Simulating First Differences}{19}{subsubsection*.4}
-\contentsline {subsection}{\numberline {2.4.3}Model}{20}{subsection.2.4.3}
-\contentsline {subsection}{\numberline {2.4.4}Quantities of Interest}{22}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.2.5}Quantities of Interest}{14}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Output Values}{14}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}See also}{14}{subsection.2.2.7}
+\contentsline {section}{\numberline {2.3}zelig-gamma}{15}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Syntax}{15}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Example}{15}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Model}{16}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Quantities of Interest}{18}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}Output Values}{18}{subsection.2.3.5}
+\contentsline {subsection}{\numberline {2.3.6}See also}{18}{subsection.2.3.6}
+\contentsline {section}{\numberline {2.4}zelig-logit}{18}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Syntax}{19}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Examples}{19}{subsection.2.4.2}
+\contentsline {subsubsection}{Basic Example}{19}{subsubsection*.3}
+\contentsline {subsubsection}{Simulating First Differences}{21}{subsubsection*.4}
+\contentsline {subsection}{\numberline {2.4.3}Model}{21}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}Quantities of Interest}{23}{subsection.2.4.4}
 \contentsline {subsection}{\numberline {2.4.5}Output Values}{23}{subsection.2.4.5}
 \contentsline {subsection}{\numberline {2.4.6}See also}{23}{subsection.2.4.6}
-\contentsline {section}{\numberline {2.5}zelig-lognorm}{23}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}Syntax}{23}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}Input Values}{23}{subsection.2.5.2}
+\contentsline {section}{\numberline {2.5}zelig-lognorm}{24}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Syntax}{24}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Input Values}{24}{subsection.2.5.2}
 \contentsline {subsection}{\numberline {2.5.3}Example}{24}{subsection.2.5.3}
-\contentsline {subsection}{\numberline {2.5.4}Model}{25}{subsection.2.5.4}
-\contentsline {subsection}{\numberline {2.5.5}Quantities of Interest}{27}{subsection.2.5.5}
+\contentsline {subsection}{\numberline {2.5.4}Model}{26}{subsection.2.5.4}
+\contentsline {subsection}{\numberline {2.5.5}Quantities of Interest}{28}{subsection.2.5.5}
 \contentsline {subsection}{\numberline {2.5.6}Output Values}{28}{subsection.2.5.6}
 \contentsline {subsection}{\numberline {2.5.7}See also}{28}{subsection.2.5.7}
-\contentsline {section}{\numberline {2.6}zelig-ls}{28}{section.2.6}
-\contentsline {subsection}{\numberline {2.6.1}Syntax}{28}{subsection.2.6.1}
+\contentsline {section}{\numberline {2.6}zelig-ls}{29}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Syntax}{29}{subsection.2.6.1}
 \contentsline {subsection}{\numberline {2.6.2}Examples}{29}{subsection.2.6.2}
 \contentsline {subsubsection}{Basic Example with First Differences}{29}{subsubsection*.5}
 \contentsline {subsubsection}{Using Dummy Variables}{30}{subsubsection*.6}
-\contentsline {subsection}{\numberline {2.6.3}Model}{33}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.6.3}Model}{32}{subsection.2.6.3}
 \contentsline {subsection}{\numberline {2.6.4}Quantities of Interest}{33}{subsection.2.6.4}
 \contentsline {subsection}{\numberline {2.6.5}Output Values}{33}{subsection.2.6.5}
 \contentsline {subsection}{\numberline {2.6.6}See also}{34}{subsection.2.6.6}
 \contentsline {section}{\numberline {2.7}zelig-negbin}{34}{section.2.7}
 \contentsline {subsection}{\numberline {2.7.1}Syntax}{34}{subsection.2.7.1}
 \contentsline {subsection}{\numberline {2.7.2}Example}{34}{subsection.2.7.2}
-\contentsline {subsection}{\numberline {2.7.3}Model}{36}{subsection.2.7.3}
+\contentsline {subsection}{\numberline {2.7.3}Model}{35}{subsection.2.7.3}
 \contentsline {subsection}{\numberline {2.7.4}Quantities of Interest}{37}{subsection.2.7.4}
-\contentsline {subsection}{\numberline {2.7.5}Output Values}{38}{subsection.2.7.5}
+\contentsline {subsection}{\numberline {2.7.5}Output Values}{37}{subsection.2.7.5}
 \contentsline {subsection}{\numberline {2.7.6}See also}{38}{subsection.2.7.6}
 \contentsline {section}{\numberline {2.8}zelig-normal}{38}{section.2.8}
 \contentsline {subsection}{\numberline {2.8.1}Syntax}{38}{subsection.2.8.1}
 \contentsline {subsection}{\numberline {2.8.2}Examples}{38}{subsection.2.8.2}
 \contentsline {subsubsection}{Basic Example with First Differences}{38}{subsubsection*.7}
-\contentsline {subsection}{\numberline {2.8.3}Model}{40}{subsection.2.8.3}
-\contentsline {subsection}{\numberline {2.8.4}Quantities of Interest}{40}{subsection.2.8.4}
-\contentsline {subsection}{\numberline {2.8.5}Output Values}{42}{subsection.2.8.5}
+\contentsline {subsection}{\numberline {2.8.3}Model}{39}{subsection.2.8.3}
+\contentsline {subsection}{\numberline {2.8.4}Quantities of Interest}{41}{subsection.2.8.4}
+\contentsline {subsection}{\numberline {2.8.5}Output Values}{41}{subsection.2.8.5}
 \contentsline {subsection}{\numberline {2.8.6}See also}{42}{subsection.2.8.6}
 \contentsline {section}{\numberline {2.9}zelig-poisson}{42}{section.2.9}
 \contentsline {subsection}{\numberline {2.9.1}Syntax}{42}{subsection.2.9.1}
-\contentsline {subsection}{\numberline {2.9.2}Example}{43}{subsection.2.9.2}
-\contentsline {subsection}{\numberline {2.9.3}Model}{44}{subsection.2.9.3}
-\contentsline {subsection}{\numberline {2.9.4}Quantities of Interest}{45}{subsection.2.9.4}
+\contentsline {subsection}{\numberline {2.9.2}Example}{42}{subsection.2.9.2}
+\contentsline {subsection}{\numberline {2.9.3}Model}{43}{subsection.2.9.3}
+\contentsline {subsection}{\numberline {2.9.4}Quantities of Interest}{43}{subsection.2.9.4}
 \contentsline {subsection}{\numberline {2.9.5}Output Values}{45}{subsection.2.9.5}
-\contentsline {subsection}{\numberline {2.9.6}See also}{46}{subsection.2.9.6}
-\contentsline {section}{\numberline {2.10}zelig-probit}{46}{section.2.10}
-\contentsline {subsection}{\numberline {2.10.1}Syntax}{46}{subsection.2.10.1}
+\contentsline {subsection}{\numberline {2.9.6}See also}{45}{subsection.2.9.6}
+\contentsline {section}{\numberline {2.10}zelig-probit}{45}{section.2.10}
+\contentsline {subsection}{\numberline {2.10.1}Syntax}{45}{subsection.2.10.1}
 \contentsline {subsection}{\numberline {2.10.2}Example}{46}{subsection.2.10.2}
-\contentsline {subsection}{\numberline {2.10.3}Model}{47}{subsection.2.10.3}
-\contentsline {subsection}{\numberline {2.10.4}Quantities of Interest}{47}{subsection.2.10.4}
-\contentsline {subsection}{\numberline {2.10.5}Output Values}{49}{subsection.2.10.5}
+\contentsline {subsection}{\numberline {2.10.3}Model}{46}{subsection.2.10.3}
+\contentsline {subsection}{\numberline {2.10.4}Quantities of Interest}{48}{subsection.2.10.4}
+\contentsline {subsection}{\numberline {2.10.5}Output Values}{48}{subsection.2.10.5}
 \contentsline {subsection}{\numberline {2.10.6}See also}{49}{subsection.2.10.6}
 \contentsline {section}{\numberline {2.11}zelig-relogit}{49}{section.2.11}
 \contentsline {subsection}{\numberline {2.11.1}Syntax}{49}{subsection.2.11.1}
-\contentsline {subsection}{\numberline {2.11.2}Arguments}{50}{subsection.2.11.2}
+\contentsline {subsection}{\numberline {2.11.2}Arguments}{49}{subsection.2.11.2}
 \contentsline {subsection}{\numberline {2.11.3}Example 1: One Tau with Prior Correction and Bias Correction}{50}{subsection.2.11.3}
 \contentsline {subsection}{\numberline {2.11.4}Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction}{51}{subsection.2.11.4}
-\contentsline {subsection}{\numberline {2.11.5}Example 3: Two Taus with Bias Correction and Prior Correction}{54}{subsection.2.11.5}
+\contentsline {subsection}{\numberline {2.11.5}Example 3: Two Taus with Bias Correction and Prior Correction}{52}{subsection.2.11.5}
 \contentsline {subsection}{\numberline {2.11.6}Model}{58}{subsection.2.11.6}
-\contentsline {subsection}{\numberline {2.11.7}Quantities of Interest}{60}{subsection.2.11.7}
-\contentsline {subsection}{\numberline {2.11.8}Output Values}{61}{subsection.2.11.8}
-\contentsline {subsection}{\numberline {2.11.9}Differences with Stata Version}{61}{subsection.2.11.9}
-\contentsline {subsection}{\numberline {2.11.10}See also}{62}{subsection.2.11.10}
-\contentsline {section}{\numberline {2.12}zelig-tobit}{62}{section.2.12}
-\contentsline {subsection}{\numberline {2.12.1}Syntax}{62}{subsection.2.12.1}
-\contentsline {subsection}{\numberline {2.12.2}Inputs}{62}{subsection.2.12.2}
-\contentsline {subsection}{\numberline {2.12.3}Examples}{62}{subsection.2.12.3}
-\contentsline {subsubsection}{Basic Example}{62}{subsubsection*.8}
-\contentsline {subsubsection}{Simulating First Differences}{63}{subsubsection*.9}
-\contentsline {subsection}{\numberline {2.12.4}Model}{64}{subsection.2.12.4}
-\contentsline {subsection}{\numberline {2.12.5}Quantities of Interest}{64}{subsection.2.12.5}
-\contentsline {subsection}{\numberline {2.12.6}Output Values}{66}{subsection.2.12.6}
-\contentsline {subsection}{\numberline {2.12.7}See also}{66}{subsection.2.12.7}
-\contentsline {section}{\numberline {2.13}zelig-factorbayes}{66}{section.2.13}
-\contentsline {subsection}{\numberline {2.13.1}Syntax}{66}{subsection.2.13.1}
-\contentsline {subsection}{\numberline {2.13.2}Inputs}{66}{subsection.2.13.2}
-\contentsline {subsection}{\numberline {2.13.3}Additional Inputs}{67}{subsection.2.13.3}
-\contentsline {subsection}{\numberline {2.13.4}Example}{68}{subsection.2.13.4}
-\contentsline {subsection}{\numberline {2.13.5}Model}{68}{subsection.2.13.5}
-\contentsline {subsection}{\numberline {2.13.6}Output Values}{69}{subsection.2.13.6}
-\contentsline {section}{\numberline {2.14}zelig-mlogitbayes}{69}{section.2.14}
-\contentsline {subsection}{\numberline {2.14.1}Syntax}{69}{subsection.2.14.1}
-\contentsline {subsection}{\numberline {2.14.2}Additional Inputs}{70}{subsection.2.14.2}
-\contentsline {subsection}{\numberline {2.14.3}Examples}{70}{subsection.2.14.3}
-\contentsline {subsubsection}{Basic Example}{70}{subsubsection*.10}
-\contentsline {subsubsection}{Simulating First Differences}{71}{subsubsection*.11}
-\contentsline {subsection}{\numberline {2.14.4}Model}{72}{subsection.2.14.4}
-\contentsline {subsection}{\numberline {2.14.5}Quantities of Interest}{73}{subsection.2.14.5}
-\contentsline {subsection}{\numberline {2.14.6}Output Values}{73}{subsection.2.14.6}
-\contentsline {subsection}{\numberline {2.14.7}See also}{74}{subsection.2.14.7}
-\contentsline {section}{\numberline {2.15}zelig-oprobitbayes}{74}{section.2.15}
-\contentsline {subsection}{\numberline {2.15.1}Syntax}{74}{subsection.2.15.1}
-\contentsline {subsection}{\numberline {2.15.2}Additional Inputs}{74}{subsection.2.15.2}
-\contentsline {subsection}{\numberline {2.15.3}Examples}{75}{subsection.2.15.3}
-\contentsline {subsubsection}{Basic Example}{75}{subsubsection*.12}
-\contentsline {subsubsection}{Simulating First Differences}{76}{subsubsection*.13}
-\contentsline {subsection}{\numberline {2.15.4}Model}{77}{subsection.2.15.4}
-\contentsline {subsection}{\numberline {2.15.5}Quantities of Interest}{77}{subsection.2.15.5}
-\contentsline {subsection}{\numberline {2.15.6}Output Values}{78}{subsection.2.15.6}
-\contentsline {subsection}{\numberline {2.15.7}See also}{79}{subsection.2.15.7}
-\contentsline {section}{\numberline {2.16}zelig-poissonbayes}{79}{section.2.16}
-\contentsline {subsection}{\numberline {2.16.1}Syntax}{79}{subsection.2.16.1}
-\contentsline {subsection}{\numberline {2.16.2}Additional Inputs}{79}{subsection.2.16.2}
-\contentsline {subsection}{\numberline {2.16.3}Examples}{80}{subsection.2.16.3}
-\contentsline {subsubsection}{Basic Example}{80}{subsubsection*.14}
-\contentsline {subsubsection}{Simulating First Differences}{81}{subsubsection*.15}
-\contentsline {subsection}{\numberline {2.16.4}Model}{81}{subsection.2.16.4}
-\contentsline {subsection}{\numberline {2.16.5}Quantities of Interest}{82}{subsection.2.16.5}
-\contentsline {subsection}{\numberline {2.16.6}Output Values}{82}{subsection.2.16.6}
-\contentsline {subsection}{\numberline {2.16.7}See also}{83}{subsection.2.16.7}
-\contentsline {subsubsection}{zelig-exp}{83}{subsubsection*.16}
-\contentsline {paragraph}{Syntax}{83}{paragraph*.17}
-\contentsline {paragraph}{Input Values}{84}{paragraph*.18}
-\contentsline {paragraph}{Example}{84}{paragraph*.19}
-\contentsline {paragraph}{Model}{85}{paragraph*.20}
-\contentsline {paragraph}{Quantities of Interest}{86}{paragraph*.21}
-\contentsline {paragraph}{Output Values}{87}{paragraph*.22}
-\contentsline {paragraph}{See also}{87}{paragraph*.23}
-\contentsline {subsubsection}{zelig-gamma}{87}{subsubsection*.24}
-\contentsline {paragraph}{Syntax}{87}{paragraph*.25}
-\contentsline {paragraph}{Example}{87}{paragraph*.26}
-\contentsline {paragraph}{Model}{90}{paragraph*.27}
-\contentsline {paragraph}{Quantities of Interest}{90}{paragraph*.28}
-\contentsline {paragraph}{Output Values}{90}{paragraph*.29}
-\contentsline {paragraph}{See also}{91}{paragraph*.30}
-\contentsline {subsubsection}{zelig-logit}{91}{subsubsection*.31}
-\contentsline {paragraph}{Syntax}{91}{paragraph*.32}
-\contentsline {paragraph}{Examples}{91}{paragraph*.33}
-\contentsline {subparagraph}{Basic Example}{91}{subparagraph*.34}
-\contentsline {subparagraph}{Simulating First Differences}{92}{subparagraph*.35}
-\contentsline {paragraph}{Model}{94}{paragraph*.36}
-\contentsline {paragraph}{Quantities of Interest}{94}{paragraph*.37}
-\contentsline {paragraph}{Output Values}{96}{paragraph*.38}
-\contentsline {paragraph}{See also}{96}{paragraph*.39}
-\contentsline {subsubsection}{zelig-lognorm}{96}{subsubsection*.40}
-\contentsline {paragraph}{Syntax}{96}{paragraph*.41}
-\contentsline {paragraph}{Input Values}{97}{paragraph*.42}
-\contentsline {paragraph}{Example}{97}{paragraph*.43}
-\contentsline {paragraph}{Model}{99}{paragraph*.44}
-\contentsline {paragraph}{Quantities of Interest}{100}{paragraph*.45}
-\contentsline {paragraph}{Output Values}{101}{paragraph*.46}
-\contentsline {paragraph}{See also}{101}{paragraph*.47}
-\contentsline {subsubsection}{zelig-ls}{101}{subsubsection*.48}
-\contentsline {paragraph}{Syntax}{101}{paragraph*.49}
-\contentsline {paragraph}{Examples}{101}{paragraph*.50}
-\contentsline {subparagraph}{Basic Example with First Differences}{101}{subparagraph*.51}
-\contentsline {subparagraph}{Using Dummy Variables}{103}{subparagraph*.52}
-\contentsline {paragraph}{Model}{106}{paragraph*.53}
-\contentsline {paragraph}{Quantities of Interest}{106}{paragraph*.54}
-\contentsline {paragraph}{Output Values}{106}{paragraph*.55}
-\contentsline {paragraph}{See also}{107}{paragraph*.56}
-\contentsline {subsubsection}{zelig-negbin}{107}{subsubsection*.57}
-\contentsline {paragraph}{Syntax}{107}{paragraph*.58}
-\contentsline {paragraph}{Example}{107}{paragraph*.59}
-\contentsline {paragraph}{Model}{108}{paragraph*.60}
-\contentsline {paragraph}{Quantities of Interest}{110}{paragraph*.61}
-\contentsline {paragraph}{Output Values}{111}{paragraph*.62}
-\contentsline {paragraph}{See also}{111}{paragraph*.63}
-\contentsline {subsubsection}{zelig-normal}{111}{subsubsection*.64}
-\contentsline {paragraph}{Syntax}{111}{paragraph*.65}
-\contentsline {paragraph}{Examples}{111}{paragraph*.66}
-\contentsline {subparagraph}{Basic Example with First Differences}{111}{subparagraph*.67}
-\contentsline {paragraph}{Model}{114}{paragraph*.68}
-\contentsline {paragraph}{Quantities of Interest}{114}{paragraph*.69}
-\contentsline {paragraph}{Output Values}{114}{paragraph*.70}
-\contentsline {paragraph}{See also}{115}{paragraph*.71}
-\contentsline {subsubsection}{zelig-poisson}{115}{subsubsection*.72}
-\contentsline {paragraph}{Syntax}{115}{paragraph*.73}
-\contentsline {paragraph}{Example}{115}{paragraph*.74}
-\contentsline {paragraph}{Model}{116}{paragraph*.75}
-\contentsline {paragraph}{Quantities of Interest}{116}{paragraph*.76}
-\contentsline {paragraph}{Output Values}{118}{paragraph*.77}
-\contentsline {paragraph}{See also}{118}{paragraph*.78}
-\contentsline {subsubsection}{zelig-probit}{118}{subsubsection*.79}
-\contentsline {paragraph}{Syntax}{118}{paragraph*.80}
-\contentsline {paragraph}{Example}{119}{paragraph*.81}
-\contentsline {paragraph}{Model}{120}{paragraph*.82}
-\contentsline {paragraph}{Quantities of Interest}{121}{paragraph*.83}
-\contentsline {paragraph}{Output Values}{121}{paragraph*.84}
-\contentsline {paragraph}{See also}{122}{paragraph*.85}
-\contentsline {subsubsection}{zelig-relogit}{122}{subsubsection*.86}
-\contentsline {paragraph}{Syntax}{122}{paragraph*.87}
-\contentsline {paragraph}{Arguments}{122}{paragraph*.88}
-\contentsline {paragraph}{Example 1: One Tau with Prior Correction and Bias Correction}{123}{paragraph*.89}
-\contentsline {paragraph}{Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction}{125}{paragraph*.90}
-\contentsline {paragraph}{Example 3: Two Taus with Bias Correction and Prior Correction}{126}{paragraph*.91}
-\contentsline {paragraph}{Model}{132}{paragraph*.92}
-\contentsline {paragraph}{Quantities of Interest}{133}{paragraph*.93}
-\contentsline {paragraph}{Output Values}{133}{paragraph*.94}
-\contentsline {paragraph}{Differences with Stata Version}{133}{paragraph*.95}
-\contentsline {paragraph}{See also}{134}{paragraph*.96}
-\contentsline {subsubsection}{zelig-tobit}{134}{subsubsection*.97}
-\contentsline {paragraph}{Syntax}{134}{paragraph*.98}
-\contentsline {paragraph}{Inputs}{134}{paragraph*.99}
-\contentsline {paragraph}{Examples}{134}{paragraph*.100}
-\contentsline {subparagraph}{Basic Example}{134}{subparagraph*.101}
-\contentsline {subparagraph}{Simulating First Differences}{135}{subparagraph*.102}
-\contentsline {paragraph}{Model}{136}{paragraph*.103}
-\contentsline {paragraph}{Quantities of Interest}{136}{paragraph*.104}
-\contentsline {paragraph}{Output Values}{138}{paragraph*.105}
-\contentsline {paragraph}{See also}{138}{paragraph*.106}
-\contentsline {subsubsection}{zelig-factorbayes}{138}{subsubsection*.107}
-\contentsline {paragraph}{Syntax}{138}{paragraph*.108}
-\contentsline {paragraph}{Inputs}{138}{paragraph*.109}
-\contentsline {paragraph}{Additional Inputs}{139}{paragraph*.110}
-\contentsline {paragraph}{Example}{140}{paragraph*.111}
-\contentsline {paragraph}{Model}{140}{paragraph*.112}
-\contentsline {paragraph}{Output Values}{141}{paragraph*.113}
-\contentsline {subsubsection}{zelig-mlogitbayes}{141}{subsubsection*.114}
-\contentsline {paragraph}{Syntax}{141}{paragraph*.115}
-\contentsline {paragraph}{Additional Inputs}{141}{paragraph*.116}
-\contentsline {paragraph}{Examples}{142}{paragraph*.117}
-\contentsline {subparagraph}{Basic Example}{142}{subparagraph*.118}
-\contentsline {subparagraph}{Simulating First Differences}{143}{subparagraph*.119}
-\contentsline {paragraph}{Model}{144}{paragraph*.120}
-\contentsline {paragraph}{Quantities of Interest}{145}{paragraph*.121}
-\contentsline {paragraph}{Output Values}{145}{paragraph*.122}
-\contentsline {paragraph}{See also}{146}{paragraph*.123}
-\contentsline {subsubsection}{zelig-oprobitbayes}{146}{subsubsection*.124}
-\contentsline {paragraph}{Syntax}{146}{paragraph*.125}
-\contentsline {paragraph}{Additional Inputs}{146}{paragraph*.126}
-\contentsline {paragraph}{Examples}{147}{paragraph*.127}
-\contentsline {subparagraph}{Basic Example}{147}{subparagraph*.128}
-\contentsline {subparagraph}{Simulating First Differences}{148}{subparagraph*.129}
-\contentsline {paragraph}{Model}{149}{paragraph*.130}
-\contentsline {paragraph}{Quantities of Interest}{149}{paragraph*.131}
-\contentsline {paragraph}{Output Values}{150}{paragraph*.132}
-\contentsline {paragraph}{See also}{151}{paragraph*.133}
-\contentsline {subsubsection}{zelig-poissonbayes}{151}{subsubsection*.134}
-\contentsline {paragraph}{Syntax}{151}{paragraph*.135}
-\contentsline {paragraph}{Additional Inputs}{151}{paragraph*.136}
-\contentsline {paragraph}{Examples}{152}{paragraph*.137}
-\contentsline {subparagraph}{Basic Example}{152}{subparagraph*.138}
-\contentsline {subparagraph}{Simulating First Differences}{152}{subparagraph*.139}
-\contentsline {paragraph}{Model}{153}{paragraph*.140}
-\contentsline {paragraph}{Quantities of Interest}{154}{paragraph*.141}
-\contentsline {paragraph}{Output Values}{154}{paragraph*.142}
-\contentsline {paragraph}{See also}{155}{paragraph*.143}
+\contentsline {subsection}{\numberline {2.11.7}Quantities of Interest}{59}{subsection.2.11.7}
+\contentsline {subsection}{\numberline {2.11.8}Output Values}{59}{subsection.2.11.8}
+\contentsline {subsection}{\numberline {2.11.9}Differences with Stata Version}{59}{subsection.2.11.9}
+\contentsline {subsection}{\numberline {2.11.10}See also}{60}{subsection.2.11.10}
+\contentsline {section}{\numberline {2.12}zelig-tobit}{60}{section.2.12}
+\contentsline {subsection}{\numberline {2.12.1}Syntax}{60}{subsection.2.12.1}
+\contentsline {subsection}{\numberline {2.12.2}Inputs}{60}{subsection.2.12.2}
+\contentsline {subsection}{\numberline {2.12.3}Examples}{60}{subsection.2.12.3}
+\contentsline {subsubsection}{Basic Example}{60}{subsubsection*.8}
+\contentsline {subsubsection}{Simulating First Differences}{61}{subsubsection*.9}
+\contentsline {subsection}{\numberline {2.12.4}Model}{63}{subsection.2.12.4}
+\contentsline {subsection}{\numberline {2.12.5}Quantities of Interest}{63}{subsection.2.12.5}
+\contentsline {subsection}{\numberline {2.12.6}Output Values}{63}{subsection.2.12.6}
+\contentsline {subsection}{\numberline {2.12.7}See also}{63}{subsection.2.12.7}
+\contentsline {section}{\numberline {2.13}zelig-factorbayes}{64}{section.2.13}
+\contentsline {subsection}{\numberline {2.13.1}Syntax}{64}{subsection.2.13.1}
+\contentsline {subsection}{\numberline {2.13.2}Inputs}{64}{subsection.2.13.2}
+\contentsline {subsection}{\numberline {2.13.3}Additional Inputs}{64}{subsection.2.13.3}
+\contentsline {subsection}{\numberline {2.13.4}Example}{65}{subsection.2.13.4}
+\contentsline {subsection}{\numberline {2.13.5}Model}{66}{subsection.2.13.5}
+\contentsline {subsection}{\numberline {2.13.6}Output Values}{66}{subsection.2.13.6}
+\contentsline {section}{\numberline {2.14}zelig-mlogitbayes}{67}{section.2.14}
+\contentsline {subsection}{\numberline {2.14.1}Syntax}{67}{subsection.2.14.1}
+\contentsline {subsection}{\numberline {2.14.2}Additional Inputs}{67}{subsection.2.14.2}
+\contentsline {subsection}{\numberline {2.14.3}Examples}{68}{subsection.2.14.3}
+\contentsline {subsubsection}{Basic Example}{68}{subsubsection*.10}
+\contentsline {subsubsection}{Simulating First Differences}{69}{subsubsection*.11}
+\contentsline {subsection}{\numberline {2.14.4}Model}{69}{subsection.2.14.4}
+\contentsline {subsection}{\numberline {2.14.5}Quantities of Interest}{70}{subsection.2.14.5}
+\contentsline {subsection}{\numberline {2.14.6}Output Values}{71}{subsection.2.14.6}
+\contentsline {subsection}{\numberline {2.14.7}See also}{71}{subsection.2.14.7}
+\contentsline {section}{\numberline {2.15}zelig-oprobitbayes}{71}{section.2.15}
+\contentsline {subsection}{\numberline {2.15.1}Syntax}{71}{subsection.2.15.1}
+\contentsline {subsection}{\numberline {2.15.2}Additional Inputs}{72}{subsection.2.15.2}
+\contentsline {subsection}{\numberline {2.15.3}Examples}{72}{subsection.2.15.3}
+\contentsline {subsubsection}{Basic Example}{72}{subsubsection*.12}
+\contentsline {subsubsection}{Simulating First Differences}{73}{subsubsection*.13}
+\contentsline {subsection}{\numberline {2.15.4}Model}{74}{subsection.2.15.4}
+\contentsline {subsection}{\numberline {2.15.5}Quantities of Interest}{74}{subsection.2.15.5}
+\contentsline {subsection}{\numberline {2.15.6}Output Values}{75}{subsection.2.15.6}
+\contentsline {subsection}{\numberline {2.15.7}See also}{76}{subsection.2.15.7}
+\contentsline {section}{\numberline {2.16}zelig-poissonbayes}{76}{section.2.16}
+\contentsline {subsection}{\numberline {2.16.1}Syntax}{76}{subsection.2.16.1}
+\contentsline {subsection}{\numberline {2.16.2}Additional Inputs}{76}{subsection.2.16.2}
+\contentsline {subsection}{\numberline {2.16.3}Examples}{77}{subsection.2.16.3}
+\contentsline {subsubsection}{Basic Example}{77}{subsubsection*.14}
+\contentsline {subsubsection}{Simulating First Differences}{77}{subsubsection*.15}
+\contentsline {subsection}{\numberline {2.16.4}Model}{78}{subsection.2.16.4}
+\contentsline {subsection}{\numberline {2.16.5}Quantities of Interest}{78}{subsection.2.16.5}
+\contentsline {subsection}{\numberline {2.16.6}Output Values}{79}{subsection.2.16.6}
+\contentsline {subsection}{\numberline {2.16.7}See also}{79}{subsection.2.16.7}
+\contentsline {section}{\numberline {2.17}zelig-probitbayes}{80}{section.2.17}
+\contentsline {subsection}{\numberline {2.17.1}Syntax}{80}{subsection.2.17.1}
+\contentsline {subsection}{\numberline {2.17.2}Additional Inputs}{80}{subsection.2.17.2}
+\contentsline {subsection}{\numberline {2.17.3}Examples}{81}{subsection.2.17.3}
+\contentsline {subsubsection}{Basic Example}{81}{subsubsection*.16}
+\contentsline {subsubsection}{Simulating First Differences}{81}{subsubsection*.17}
+\contentsline {subsection}{\numberline {2.17.4}Model}{81}{subsection.2.17.4}
+\contentsline {subsection}{\numberline {2.17.5}Quantities of Interest}{82}{subsection.2.17.5}
+\contentsline {subsection}{\numberline {2.17.6}Output Values}{82}{subsection.2.17.6}
+\contentsline {subsection}{\numberline {2.17.7}See also}{83}{subsection.2.17.7}
+\contentsline {subsubsection}{zelig-exp}{83}{subsubsection*.18}
+\contentsline {paragraph}{Syntax}{83}{paragraph*.19}
+\contentsline {paragraph}{Input Values}{84}{paragraph*.20}
+\contentsline {paragraph}{Example}{84}{paragraph*.21}
+\contentsline {paragraph}{Model}{87}{paragraph*.22}
+\contentsline {paragraph}{Quantities of Interest}{87}{paragraph*.23}
+\contentsline {paragraph}{Output Values}{88}{paragraph*.24}
+\contentsline {paragraph}{See also}{88}{paragraph*.25}
+\contentsline {subsubsection}{zelig-gamma}{88}{subsubsection*.26}
+\contentsline {paragraph}{Syntax}{88}{paragraph*.27}
+\contentsline {paragraph}{Example}{89}{paragraph*.28}
+\contentsline {paragraph}{Model}{90}{paragraph*.29}
+\contentsline {paragraph}{Quantities of Interest}{90}{paragraph*.30}
+\contentsline {paragraph}{Output Values}{92}{paragraph*.31}
+\contentsline {paragraph}{See also}{92}{paragraph*.32}
+\contentsline {subsubsection}{zelig-logit}{92}{subsubsection*.33}
+\contentsline {paragraph}{Syntax}{92}{paragraph*.34}
+\contentsline {paragraph}{Examples}{92}{paragraph*.35}
+\contentsline {subparagraph}{Basic Example}{92}{subparagraph*.36}
+\contentsline {subparagraph}{Simulating First Differences}{93}{subparagraph*.37}
+\contentsline {paragraph}{Model}{95}{paragraph*.38}
+\contentsline {paragraph}{Quantities of Interest}{95}{paragraph*.39}
+\contentsline {paragraph}{Output Values}{97}{paragraph*.40}
+\contentsline {paragraph}{See also}{97}{paragraph*.41}
+\contentsline {subsubsection}{zelig-lognorm}{97}{subsubsection*.42}
+\contentsline {paragraph}{Syntax}{97}{paragraph*.43}
+\contentsline {paragraph}{Input Values}{98}{paragraph*.44}
+\contentsline {paragraph}{Example}{98}{paragraph*.45}
+\contentsline {paragraph}{Model}{99}{paragraph*.46}
+\contentsline {paragraph}{Quantities of Interest}{101}{paragraph*.47}
+\contentsline {paragraph}{Output Values}{102}{paragraph*.48}
+\contentsline {paragraph}{See also}{102}{paragraph*.49}
+\contentsline {subsubsection}{zelig-ls}{102}{subsubsection*.50}
+\contentsline {paragraph}{Syntax}{102}{paragraph*.51}
+\contentsline {paragraph}{Examples}{102}{paragraph*.52}
+\contentsline {subparagraph}{Basic Example with First Differences}{102}{subparagraph*.53}
+\contentsline {subparagraph}{Using Dummy Variables}{104}{subparagraph*.54}
+\contentsline {paragraph}{Model}{106}{paragraph*.55}
+\contentsline {paragraph}{Quantities of Interest}{106}{paragraph*.56}
+\contentsline {paragraph}{Output Values}{106}{paragraph*.57}
+\contentsline {paragraph}{See also}{107}{paragraph*.58}
+\contentsline {subsubsection}{zelig-negbin}{107}{subsubsection*.59}
+\contentsline {paragraph}{Syntax}{107}{paragraph*.60}
+\contentsline {paragraph}{Example}{107}{paragraph*.61}
+\contentsline {paragraph}{Model}{108}{paragraph*.62}
+\contentsline {paragraph}{Quantities of Interest}{110}{paragraph*.63}
+\contentsline {paragraph}{Output Values}{111}{paragraph*.64}
+\contentsline {paragraph}{See also}{111}{paragraph*.65}
+\contentsline {subsubsection}{zelig-normal}{111}{subsubsection*.66}
+\contentsline {paragraph}{Syntax}{111}{paragraph*.67}
+\contentsline {paragraph}{Examples}{111}{paragraph*.68}
+\contentsline {subparagraph}{Basic Example with First Differences}{111}{subparagraph*.69}
+\contentsline {paragraph}{Model}{114}{paragraph*.70}
+\contentsline {paragraph}{Quantities of Interest}{114}{paragraph*.71}
+\contentsline {paragraph}{Output Values}{114}{paragraph*.72}
+\contentsline {paragraph}{See also}{115}{paragraph*.73}
+\contentsline {subsubsection}{zelig-poisson}{115}{subsubsection*.74}
+\contentsline {paragraph}{Syntax}{115}{paragraph*.75}
+\contentsline {paragraph}{Example}{115}{paragraph*.76}
+\contentsline {paragraph}{Model}{116}{paragraph*.77}
+\contentsline {paragraph}{Quantities of Interest}{116}{paragraph*.78}
+\contentsline {paragraph}{Output Values}{118}{paragraph*.79}
+\contentsline {paragraph}{See also}{118}{paragraph*.80}
+\contentsline {subsubsection}{zelig-probit}{118}{subsubsection*.81}
+\contentsline {paragraph}{Syntax}{118}{paragraph*.82}
+\contentsline {paragraph}{Example}{119}{paragraph*.83}
+\contentsline {paragraph}{Model}{119}{paragraph*.84}
+\contentsline {paragraph}{Quantities of Interest}{121}{paragraph*.85}
+\contentsline {paragraph}{Output Values}{121}{paragraph*.86}
+\contentsline {paragraph}{See also}{121}{paragraph*.87}
+\contentsline {subsubsection}{zelig-relogit}{122}{subsubsection*.88}
+\contentsline {paragraph}{Syntax}{122}{paragraph*.89}
+\contentsline {paragraph}{Arguments}{122}{paragraph*.90}
+\contentsline {paragraph}{Example 1: One Tau with Prior Correction and Bias Correction}{122}{paragraph*.91}
+\contentsline {paragraph}{Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction}{125}{paragraph*.92}
+\contentsline {paragraph}{Example 3: Two Taus with Bias Correction and Prior Correction}{125}{paragraph*.93}
+\contentsline {paragraph}{Model}{130}{paragraph*.94}
+\contentsline {paragraph}{Quantities of Interest}{132}{paragraph*.95}
+\contentsline {paragraph}{Output Values}{133}{paragraph*.96}
+\contentsline {paragraph}{Differences with Stata Version}{133}{paragraph*.97}
+\contentsline {paragraph}{See also}{133}{paragraph*.98}
+\contentsline {subsubsection}{zelig-tobit}{133}{subsubsection*.99}
+\contentsline {paragraph}{Syntax}{133}{paragraph*.100}
+\contentsline {paragraph}{Inputs}{133}{paragraph*.101}
+\contentsline {paragraph}{Examples}{134}{paragraph*.102}
+\contentsline {subparagraph}{Basic Example}{134}{subparagraph*.103}
+\contentsline {subparagraph}{Simulating First Differences}{134}{subparagraph*.104}
+\contentsline {paragraph}{Model}{135}{paragraph*.105}
+\contentsline {paragraph}{Quantities of Interest}{135}{paragraph*.106}
+\contentsline {paragraph}{Output Values}{137}{paragraph*.107}
+\contentsline {paragraph}{See also}{137}{paragraph*.108}
+\contentsline {subsubsection}{zelig-factorbayes}{137}{subsubsection*.109}
+\contentsline {paragraph}{Syntax}{137}{paragraph*.110}
+\contentsline {paragraph}{Inputs}{137}{paragraph*.111}
+\contentsline {paragraph}{Additional Inputs}{138}{paragraph*.112}
+\contentsline {paragraph}{Example}{139}{paragraph*.113}
+\contentsline {paragraph}{Model}{139}{paragraph*.114}
+\contentsline {paragraph}{Output Values}{140}{paragraph*.115}
+\contentsline {subsubsection}{zelig-mlogitbayes}{140}{subsubsection*.116}
+\contentsline {paragraph}{Syntax}{140}{paragraph*.117}
+\contentsline {paragraph}{Additional Inputs}{140}{paragraph*.118}
+\contentsline {paragraph}{Examples}{141}{paragraph*.119}
+\contentsline {subparagraph}{Basic Example}{141}{subparagraph*.120}
+\contentsline {subparagraph}{Simulating First Differences}{142}{subparagraph*.121}
+\contentsline {paragraph}{Model}{143}{paragraph*.122}
+\contentsline {paragraph}{Quantities of Interest}{143}{paragraph*.123}
+\contentsline {paragraph}{Output Values}{144}{paragraph*.124}
+\contentsline {paragraph}{See also}{144}{paragraph*.125}
+\contentsline {subsubsection}{zelig-oprobitbayes}{144}{subsubsection*.126}
+\contentsline {paragraph}{Syntax}{144}{paragraph*.127}
+\contentsline {paragraph}{Additional Inputs}{145}{paragraph*.128}
+\contentsline {paragraph}{Examples}{145}{paragraph*.129}
+\contentsline {subparagraph}{Basic Example}{145}{subparagraph*.130}
+\contentsline {subparagraph}{Simulating First Differences}{146}{subparagraph*.131}
+\contentsline {paragraph}{Model}{147}{paragraph*.132}
+\contentsline {paragraph}{Quantities of Interest}{148}{paragraph*.133}
+\contentsline {paragraph}{Output Values}{148}{paragraph*.134}
+\contentsline {paragraph}{See also}{149}{paragraph*.135}
+\contentsline {subsubsection}{zelig-poissonbayes}{149}{subsubsection*.136}
+\contentsline {paragraph}{Syntax}{149}{paragraph*.137}
+\contentsline {paragraph}{Additional Inputs}{149}{paragraph*.138}
+\contentsline {paragraph}{Examples}{150}{paragraph*.139}
+\contentsline {subparagraph}{Basic Example}{150}{subparagraph*.140}
+\contentsline {subparagraph}{Simulating First Differences}{151}{subparagraph*.141}
+\contentsline {paragraph}{Model}{151}{paragraph*.142}
+\contentsline {paragraph}{Quantities of Interest}{151}{paragraph*.143}
+\contentsline {paragraph}{Output Values}{152}{paragraph*.144}
+\contentsline {paragraph}{See also}{152}{paragraph*.145}
+\contentsline {subsubsection}{zelig-probitbayes}{153}{subsubsection*.146}
+\contentsline {paragraph}{Syntax}{153}{paragraph*.147}
+\contentsline {paragraph}{Additional Inputs}{153}{paragraph*.148}
+\contentsline {paragraph}{Examples}{154}{paragraph*.149}
+\contentsline {subparagraph}{Basic Example}{154}{subparagraph*.150}
+\contentsline {subparagraph}{Simulating First Differences}{154}{subparagraph*.151}
+\contentsline {paragraph}{Model}{154}{paragraph*.152}
+\contentsline {paragraph}{Quantities of Interest}{155}{paragraph*.153}
+\contentsline {paragraph}{Output Values}{155}{paragraph*.154}
+\contentsline {paragraph}{See also}{156}{paragraph*.155}
 \contentsline {chapter}{\numberline {3}Frequently Asked Questions}{157}{chapter.3}
 \contentsline {section}{\numberline {3.1}Why can\IeC {\textquoteright }t I install Zelig?}{157}{section.3.1}
 \contentsline {section}{\numberline {3.2}Why can\IeC {\textquoteright }t I install R?}{157}{section.3.2}

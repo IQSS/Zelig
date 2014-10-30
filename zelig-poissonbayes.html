@@ -34,7 +34,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
     <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
-    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="next" title="zelig-probitbayes" href="zelig-probitbayes.html" />
     <link rel="prev" title="zelig-oprobitbayes" href="zelig-oprobitbayes.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -99,7 +99,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -155,7 +156,7 @@
     </a>
   </li>
   <li>
-    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
+    <a href="zelig-probitbayes.html" title="Next Chapter: zelig-probitbayes"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">zelig-probitbaye... &raquo;</span>
     </a>
   </li>
               
@@ -201,7 +202,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -295,11 +297,6 @@ information.</p>
                data <span class="o">=</span> sanction<span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Ben Goodrich, Ying Lu. 2013.</span>
 <span class="c">##   poissonbayes: Bayesian Poisson Regression</span>
@@ -324,11 +321,6 @@ information.</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulating quantities of interest from the posterior distribution given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 </pre></div>
@@ -342,19 +334,7 @@ information.</p>
 <p>Estimating the first difference in the number of countries imposing
 sanctions when the number of targets is set to be its maximum versus its minimum :</p>
 <div class="highlight-r"><div class="highlight"><pre>x.max <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> target <span class="o">=</span> max<span class="p">(</span>sanction<span class="o">$</span>target<span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.min <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> target <span class="o">=</span> min<span class="p">(</span>sanction<span class="o">$</span>target<span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
+x.min <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> target <span class="o">=</span> min<span class="p">(</span>sanction<span class="o">$</span>target<span class="p">))</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.max<span class="p">,</span> x1 <span class="o">=</span> x.min<span class="p">)</span>
@@ -369,7 +349,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733</span>
 <span class="c">## pv</span>
 <span class="c">##        mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.1698 1.801025   3    0     7</span>
+<span class="c">## [1,] 3.2056 1.830318   3    0     7</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -378,7 +358,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022</span>
 <span class="c">## pv</span>
 <span class="c">##        mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.3126 1.839244   3    0     7</span>
+<span class="c">## [1,] 3.3127 1.852852   3    0     7</span>
 <span class="c">## fd</span>
 <span class="c">##           mean        sd       50%       2.5%     97.5%</span>
 <span class="c">## [1,] 0.1146376 0.3671544 0.1265036 -0.6072035 0.8342282</span>

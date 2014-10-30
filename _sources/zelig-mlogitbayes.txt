@@ -123,14 +123,6 @@ Estimating multinomial logistics regression using ``mlogit.bayes``:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## Calculating MLEs and large sample var-cov matrix.
     ## This may take a moment...
     ## Inverting Hessian to get large sample var-cov matrix.
@@ -187,14 +179,6 @@ averages:
     x.out <- setx(z.out)
 
 
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
 Simulating quantities of interest from the posterior distribution
 given ``x.out``.
 
@@ -219,7 +203,7 @@ given ``x.out``.
     ## pv
     ## qi
     ##      1      2      3 
-    ## 0.5675 0.1982 0.2343
+    ## 0.5592 0.2085 0.2323
 
 
 
@@ -237,31 +221,7 @@ values.
     
 
     x.weak <- setx(z.out, pristr = 1)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.strong <- setx(z.out, pristr = 3)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     s.out2 <- sim(z.out, x = x.strong, x1 = x.weak)
     summary(s.out2)
 
@@ -279,7 +239,7 @@ values.
     ## pv
     ## qi
     ##      1      2      3 
-    ## 0.7166 0.1265 0.1569 
+    ## 0.7172 0.1273 0.1555 
     ## 
     ##  sim x1 :
     ##  -----
@@ -291,7 +251,7 @@ values.
     ## pv
     ## qi
     ##      1      2      3 
-    ## 0.4065 0.2995 0.2940 
+    ## 0.4027 0.3054 0.2919 
     ## fd
     ##              mean         sd        50%        2.5%      97.5%
     ## P(Y=1) -0.3128754 0.03459857 -0.3128662 -0.38111485 -0.2442630

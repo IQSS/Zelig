@@ -99,7 +99,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -196,7 +197,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -247,11 +249,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;negbin&quot;</span><span class="p">,</span> data <span class="o">=</span> sanction<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2008.</span>
 <span class="c">##   negbinom: Negative Binomial Regression for Event Count Dependent Variables</span>
@@ -284,11 +281,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulate fitted values:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 </pre></div>
@@ -300,14 +292,14 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 2.974735 0.3581579 2.939842 2.356151 3.740315</span>
+<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 2.985229 0.352562 2.981121 2.351444 3.702897</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##     0     1     2     3     4     5     6     7     8     9    10    11</span>
-<span class="c">## 0.172 0.173 0.174 0.143 0.105 0.075 0.049 0.032 0.027 0.014 0.014 0.011</span>
-<span class="c">##    12    13    14    21</span>
-<span class="c">## 0.005 0.001 0.004 0.001</span>
+<span class="c">## 0.117 0.186 0.185 0.117 0.115 0.082 0.052 0.042 0.025 0.025 0.017 0.008</span>
+<span class="c">##    12    13    14    15    18    23</span>
+<span class="c">## 0.005 0.012 0.007 0.002 0.002 0.001</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>

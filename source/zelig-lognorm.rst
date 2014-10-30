@@ -112,14 +112,6 @@ Estimate the model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.
     ##   lognorm: Log-Normal Regression for Duration Dependent Variables
@@ -173,14 +165,6 @@ X:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## Error in terms(lm(formula, data), "predvars"): error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
     ## Calls: lm -> lm.fit -> Ops.Surv
 
@@ -189,14 +173,6 @@ X:
     
 
     x.high <- setx(z.out, numst2= 1)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 ::
@@ -228,23 +204,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.7096412 0.01339433 0.7103068 0.6832911 0.7349613
+    ##           mean         sd      50%      2.5%     97.5%
+    ## [1,] 0.7098857 0.01311726 0.709487 0.6856631 0.7358735
     ## pv
     ##          0     1
-    ## [1,] 0.278 0.722
+    ## [1,] 0.298 0.702
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.8233247 0.01039145 0.8237771 0.8022964 0.8428224
+    ##           mean        sd       50%      2.5%     97.5%
+    ## [1,] 0.8230556 0.0105009 0.8227265 0.8028129 0.8433327
     ## pv
-    ##          0     1
-    ## [1,] 0.176 0.824
+    ##         0    1
+    ## [1,] 0.18 0.82
     ## fd
     ##           mean         sd       50%       2.5%     97.5%
-    ## [1,] 0.1136834 0.01116033 0.1138095 0.09156911 0.1356637
+    ## [1,] 0.1131699 0.01186652 0.1134081 0.09045198 0.1366067
 
 
 

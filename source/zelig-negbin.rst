@@ -61,14 +61,6 @@ Estimate the model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
     ##   negbinom: Negative Binomial Regression for Event Count Dependent Variables
@@ -114,14 +106,6 @@ Set values for the explanatory variables to their default mean values:
     x.out <- setx(z.out)
 
 
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
 Simulate fitted values:
 
 
@@ -144,14 +128,14 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##         mean        sd      50%     2.5%    97.5%
-    ## [1,] 2.96861 0.3463154 2.948297 2.334299 3.746737
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 2.948528 0.360773 2.916141 2.323829 3.703429
     ## pv
     ## qi
     ##     0     1     2     3     4     5     6     7     8     9    10    11 
-    ## 0.213 0.210 0.155 0.147 0.099 0.062 0.037 0.026 0.019 0.012 0.008 0.003 
-    ##    12    13    14    16    18 
-    ## 0.003 0.001 0.002 0.002 0.001
+    ## 0.193 0.189 0.186 0.134 0.095 0.064 0.045 0.036 0.026 0.007 0.007 0.009 
+    ##    12    13    14    15    16    17    30 
+    ## 0.002 0.001 0.001 0.002 0.001 0.001 0.001
 
 
 

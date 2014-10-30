@@ -62,14 +62,6 @@ Estimate the model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   gamma: Gamma Regression for Continuous, Positive Dependent Variables
@@ -117,27 +109,7 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.high <- setx(z.out, numst2 = 1)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
@@ -162,23 +134,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##          mean       sd      50%  2.5%   97.5%
-    ## [1,] 14.43782 1.113267 14.33311 12.49 16.8138
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 14.41947 1.064664 14.35618 12.51195 16.63425
     ## pv
-    ##          mean       sd      50%      2.5%   97.5%
-    ## [1,] 14.45985 12.92341 11.14248 0.8673413 48.0112
+    ##          mean       sd      50%      2.5%    97.5%
+    ## [1,] 14.21243 12.60368 10.89322 0.6728363 47.30353
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 19.19226 1.105784 19.13677 17.22523 21.40817
+    ##          mean       sd      50%    2.5%    97.5%
+    ## [1,] 19.19869 1.133553 19.11127 17.1843 21.62197
     ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 18.36689 15.43004 14.56058 1.008213 58.00364
+    ##          mean       sd      50%      2.5%    97.5%
+    ## [1,] 18.60736 16.66119 13.88459 0.9246994 61.53045
     ## fd
-    ##         mean       sd      50%     2.5%   97.5%
-    ## [1,] 4.75444 1.584051 4.797595 1.705692 7.94088
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 4.779217 1.535785 4.734045 1.825047 7.751185
 
 
 

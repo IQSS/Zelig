@@ -99,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -256,14 +257,7 @@ data<span class="p">(</span>cars<span class="p">)</span>
 z5 <span class="o">&lt;-</span> zls<span class="o">$</span>new<span class="p">()</span>
 <span class="c1"># estimate ls model</span>
 z5<span class="o">$</span>zelig<span class="p">(</span>dist <span class="o">~</span> speed<span class="p">,</span> data <span class="o">=</span> cars<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre><span class="c1"># you can now get model summary estimates</span>
+<span class="c1"># you can now get model summary estimates</span>
 summary<span class="p">(</span>z5<span class="p">)</span>
 </pre></div>
 </div>
@@ -286,20 +280,9 @@ summary<span class="p">(</span>z5<span class="p">)</span>
 <p>Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the <tt class="docutils literal"><span class="pre">$setx()</span></tt> method:</p>
 <div class="highlight-r"><div class="highlight"><pre><span class="c1"># set speed to 30</span>
 z5<span class="o">$</span>setx<span class="p">(</span>speed <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre><span class="c1"># set speed to 50</span>
+
+<span class="c1"># set speed to 50</span>
 z5<span class="o">$</span>setx1<span class="p">(</span>speed <span class="o">=</span> <span class="m">50</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Now that we&#8217;ve set our variables, all we have to do is run our simulations:</p>
@@ -313,22 +296,22 @@ z5
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 100.3223 6.459648 100.4802 87.61366 113.0389</span>
+<span class="c">## 1 100.6662 6.456331 100.5533 88.15976 113.0308</span>
 <span class="c">## pv</span>
 <span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 100.3223 6.459648 100.4802 87.61366 113.0389</span>
+<span class="c">## 1 100.6662 6.456331 100.5533 88.15976 113.0308</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 178.8134 14.48817 179.3161 149.6704 207.0842</span>
+<span class="c">## 1 179.7029 14.71943 179.6526 150.8946 207.6544</span>
 <span class="c">## pv</span>
 <span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 178.8134 14.48817 179.3161 149.6704 207.0842</span>
+<span class="c">## 1 179.7029 14.71943 179.6526 150.8946 207.6544</span>
 <span class="c">## fd</span>
 <span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 78.49103 8.230934 78.79178 62.09097 94.67248</span>
+<span class="c">## 1 79.03668 8.481399 78.96452 62.17205 95.01606</span>
 </pre></div>
 </div>
 <p>Now we&#8217;ve estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.</p>

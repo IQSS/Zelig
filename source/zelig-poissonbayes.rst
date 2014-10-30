@@ -111,14 +111,6 @@ Estimating the Poisson regression using ``poisson.bayes``:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Ben Goodrich, Ying Lu. 2013.
     ##   poissonbayes: Bayesian Poisson Regression
@@ -166,14 +158,6 @@ Setting values for the explanatory variables to their sample averages:
     x.out <- setx(z.out)
 
 
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
 Simulating quantities of interest from the posterior distribution given ``x.out``.
 
 
@@ -201,27 +185,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
     
 
     x.max <- setx(z.out, target = max(sanction$target))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.min <- setx(z.out, target = min(sanction$target))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 
@@ -242,7 +206,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
     ## [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733
     ## pv
     ##        mean       sd 50% 2.5% 97.5%
-    ## [1,] 3.2188 1.790041   3    0     7
+    ## [1,] 3.1653 1.820799   3    0     7
     ## 
     ##  sim x1 :
     ##  -----
@@ -251,7 +215,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
     ## [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022
     ## pv
     ##        mean       sd 50% 2.5% 97.5%
-    ## [1,] 3.3095 1.849825   3    0     7
+    ## [1,] 3.2962 1.842174   3    0     7
     ## fd
     ##           mean        sd       50%       2.5%     97.5%
     ## [1,] 0.1146376 0.3671544 0.1265036 -0.6072035 0.8342282

@@ -62,14 +62,6 @@ Estimate model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
     ##   ls: Least Squares Regression for Continuous Dependent Variables
@@ -114,27 +106,7 @@ variable:
     
 
     x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Generate first differences for the effect of high versus low trade on GDP:
@@ -159,23 +131,23 @@ Generate first differences for the effect of high versus low trade on GDP:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean        sd      50%     2.5%   97.5%
-    ## 1 5.440006 0.1918098 5.440879 5.057022 5.81467
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 5.430307 0.1971789 5.431243 5.038718 5.815665
     ## pv
-    ##       mean        sd      50%     2.5%   97.5%
-    ## 1 5.440006 0.1918098 5.440879 5.057022 5.81467
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 5.430307 0.1971789 5.431243 5.038718 5.815665
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean        sd      50%     2.5%    97.5%
-    ## 1 4.619442 0.1745564 4.616195 4.280881 4.967021
+    ##       mean        sd      50%    2.5%    97.5%
+    ## 1 4.602931 0.1804596 4.604509 4.23388 4.957203
     ## pv
-    ##       mean        sd      50%     2.5%    97.5%
-    ## 1 4.619442 0.1745564 4.616195 4.280881 4.967021
+    ##       mean        sd      50%    2.5%    97.5%
+    ## 1 4.602931 0.1804596 4.604509 4.23388 4.957203
     ## fd
-    ##         mean        sd        50%   2.5%      97.5%
-    ## 1 -0.8205637 0.2259837 -0.8196998 -1.265 -0.3643689
+    ##         mean        sd        50%      2.5%      97.5%
+    ## 1 -0.8273756 0.2379988 -0.8281937 -1.295583 -0.3443534
 
 
 
@@ -207,14 +179,6 @@ in the selected variable into discrete levels.
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
     ##   ls: Least Squares Regression for Continuous Dependent Variables
@@ -232,27 +196,7 @@ respectively:
     
 
     x.US <- setx(z.out2, country = "United States")
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.Japan <- setx(z.out2, country = "Japan")
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
    
 Simulate quantities of interest:

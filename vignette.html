@@ -99,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -301,6 +302,20 @@
 <li><a class="reference internal" href="#id98">See also</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#zelig-probitbayes">zelig-probitbayes</a><ul>
+<li><a class="reference internal" href="#id99">Syntax</a></li>
+<li><a class="reference internal" href="#id100">Additional Inputs</a></li>
+<li><a class="reference internal" href="#id101">Examples</a><ul>
+<li><a class="reference internal" href="#id102">Basic Example</a></li>
+<li><a class="reference internal" href="#id103">Simulating First Differences</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id104">Model</a></li>
+<li><a class="reference internal" href="#id105">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id106">Output Values</a></li>
+<li><a class="reference internal" href="#id107">See also</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -363,6 +378,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-probitbayes">zelig-probitbayes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -403,6 +419,7 @@
 <li><a class="reference internal" href="zelig-mlogitbayes.html#zmlogitbayes"><em>Bayesian Multinomial Logistic Regression</em></a>: <tt class="docutils literal"><span class="pre">zmlogitbayes$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-oprobitbayes.html#zoprobitbayes"><em>Bayesian Ordered Probit Regression</em></a>: <tt class="docutils literal"><span class="pre">zoprobitbayes()</span></tt></li>
 <li><a class="reference internal" href="zelig-poissonbayes.html#zpoissonbayes"><em>Bayesian Poisson Regression</em></a>: <tt class="docutils literal"><span class="pre">zpoissonbayes()</span></tt></li>
+<li><a class="reference internal" href="zelig-probitbayes.html#zprobitbayes"><em>Bayesian Probit Regression</em></a>: <tt class="docutils literal"><span class="pre">zprobitbayes()</span></tt></li>
 </ul>
 <hr class="docutils" />
 </div>
@@ -473,11 +490,6 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;exp&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Olivia Lau, Kosuke Imai, Gary King. 2011.</span>
 <span class="c">##   exp: Exponential Regression for Duration Dependent Variables</span>
@@ -515,21 +527,11 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
 <span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
@@ -540,21 +542,39 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.low<span class="p">,</span> x1 <span class="o">=</span> x.high<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in sim(z.out, x = x.low, x1 = x.high): object &#39;x.low&#39; not found</span>
-</pre></div>
-</div>
 <p>Summarize quantities of interest and produce some plots:</p>
 <div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in summary(s.out): error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: Error: object &#39;s.out&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 4.606144 0.187008 4.603214 4.247413 4.951216</span>
+<span class="c">## pv</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 4.606144 0.187008 4.603214 4.247413 4.951216</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 5.424566 0.1896621 5.424858 5.03835 5.788495</span>
+<span class="c">## pv</span>
+<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 5.424566 0.1896621 5.424858 5.03835 5.788495</span>
+<span class="c">## fd</span>
+<span class="c">##        mean        sd       50%      2.5%    97.5%</span>
+<span class="c">## 1 0.8184217 0.2370402 0.8056103 0.3770491 1.307285</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in plot(s.out): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error: object &#39;s.out&#39; not found</span>
-</pre></div>
+<div class="figure">
+<img alt="Zelig-exp" src="_images/Zelig-exp-1.png" />
+<p class="caption">Zelig-exp</p>
 </div>
 </div>
 <div class="section" id="model">
@@ -712,11 +732,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>duration <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma&quot;</span><span class="p">,</span> data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   gamma: Gamma Regression for Continuous, Positive Dependent Variables</span>
@@ -750,19 +765,7 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
@@ -777,22 +780,22 @@ X:</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.42786 1.130325 14.30242 12.44081 16.95893</span>
+<span class="c">## [1,] 14.41641 1.088869 14.34477 12.54037 16.77276</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%      2.5%   97.5%</span>
-<span class="c">## [1,] 14.13235 12.54945 10.94083 0.6970682 46.3694</span>
+<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 14.11637 12.46043 10.59288 0.7702395 48.54746</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##         mean       sd     50%     2.5%    97.5%</span>
-<span class="c">## [1,] 19.2178 1.146213 19.1983 17.11109 21.57583</span>
+<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 19.19801 1.079215 19.19244 17.25413 21.34647</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%     2.5%  97.5%</span>
-<span class="c">## [1,] 19.71074 17.55625 15.35145 1.109281 63.905</span>
+<span class="c">##        mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 18.767 16.47209 14.24803 0.8891153 62.19505</span>
 <span class="c">## fd</span>
-<span class="c">##          mean       sd      50%  2.5%    97.5%</span>
-<span class="c">## [1,] 4.789939 1.622219 4.846749 1.683 7.937257</span>
+<span class="c">##          mean       sd    50%     2.5%    97.5%</span>
+<span class="c">## [1,] 4.781595 1.526892 4.8362 1.767735 7.750527</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -919,11 +922,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> age <span class="o">+</span> race<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
@@ -933,11 +931,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </div>
 <p>Setting values for the explanatory variables:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> age <span class="o">=</span> <span class="m">36</span><span class="p">,</span> race <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Simulating quantities of interest from the posterior distribution.</p>
@@ -952,10 +945,10 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7485501 0.01110266 0.7483159 0.7264441 0.7698571</span>
+<span class="c">## [1,] 0.7485479 0.01178686 0.7487759 0.7264948 0.7711856</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.262 0.738</span>
+<span class="c">## [1,] 0.256 0.744</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -974,11 +967,6 @@ other variables held at their default values.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;logit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   logit: Logistic Regression for Dichotomous Dependent Variables</span>
@@ -987,22 +975,8 @@ other variables held at their default values.</p>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out2<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
 summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
@@ -1010,23 +984,23 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean        sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.8234144 0.0106761 0.8235464 0.8020668 0.8431998</span>
+<span class="c">##          mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.822638 0.01052395 0.8228147 0.8004196 0.8416615</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.186 0.814</span>
+<span class="c">## [1,] 0.184 0.816</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7098427 0.01339609 0.7098271 0.6810229 0.7367797</span>
+<span class="c">## [1,] 0.7088047 0.01302488 0.7092194 0.6826477 0.7335934</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.286 0.714</span>
+<span class="c">## [1,] 0.293 0.707</span>
 <span class="c">## fd</span>
 <span class="c">##            mean         sd        50%       2.5%       97.5%</span>
-<span class="c">## [1,] -0.1135717 0.01197592 -0.1133295 -0.1369786 -0.08985636</span>
+<span class="c">## [1,] -0.1138332 0.01131961 -0.1137248 -0.1367113 -0.09211111</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -1196,11 +1170,6 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Surv<span class="p">(</span>duration<span class="p">,</span> ciep12<span class="p">)</span> <span class="o">~</span> fract <span class="o">+</span> numst2<span class="p">,</span> model <span class="o">=</span><span class="s">&quot;lognorm&quot;</span><span class="p">,</span>  data <span class="o">=</span> coalition<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.</span>
 <span class="c">##   lognorm: Log-Normal Regression for Duration Dependent Variables</span>
@@ -1238,21 +1207,11 @@ X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
 <span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
@@ -1271,22 +1230,22 @@ X:</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7095071 0.01349635 0.7093999 0.6843218 0.7354087</span>
+<span class="c">## [1,] 0.7099215 0.01288319 0.7098277 0.6836295 0.7352659</span>
 <span class="c">## pv</span>
-<span class="c">##         0    1</span>
-<span class="c">## [1,] 0.28 0.72</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.302 0.698</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.8226539 0.01037307 0.8227699 0.8006155 0.8415482</span>
+<span class="c">## [1,] 0.8234066 0.01028937 0.8238263 0.8026161 0.8432414</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.158 0.842</span>
+<span class="c">## [1,] 0.206 0.794</span>
 <span class="c">## fd</span>
 <span class="c">##           mean         sd       50%       2.5%     97.5%</span>
-<span class="c">## [1,] 0.1131468 0.01183496 0.1132525 0.09042013 0.1354947</span>
+<span class="c">## [1,] 0.1134851 0.01145056 0.1137647 0.09178273 0.1342509</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1447,11 +1406,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
 <span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
@@ -1482,19 +1436,7 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 high (80th percentile) and low (20th percentile) values for the trade
 variable:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Generate first differences for the effect of high versus low trade on GDP:</p>
@@ -1508,23 +1450,23 @@ variable:</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.438618 0.1912621 5.443747 5.049026 5.816853</span>
+<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 5.441179 0.1847308 5.435519 5.08245 5.799259</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.438618 0.1912621 5.443747 5.049026 5.816853</span>
+<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 5.441179 0.1847308 5.435519 5.08245 5.799259</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 4.604564 0.1849544 4.609653 4.234372 4.941483</span>
+<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 4.593409 0.1799387 4.592137 4.25587 4.970209</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 4.604564 0.1849544 4.609653 4.234372 4.941483</span>
+<span class="c">##       mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## 1 4.593409 0.1799387 4.592137 4.25587 4.970209</span>
 <span class="c">## fd</span>
 <span class="c">##         mean        sd        50%      2.5%      97.5%</span>
-<span class="c">## 1 -0.8340539 0.2298241 -0.8302928 -1.311155 -0.3908726</span>
+<span class="c">## 1 -0.8477697 0.2253766 -0.8502935 -1.278007 -0.4170428</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -1543,11 +1485,6 @@ in the selected variable into discrete levels.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> trade <span class="o">+</span> capmob <span class="o">+</span> as.factor<span class="p">(</span>country<span class="p">),</span> model <span class="o">=</span> <span class="s">&quot;ls&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2007.</span>
 <span class="c">##   ls: Least Squares Regression for Continuous Dependent Variables</span>
@@ -1559,19 +1496,7 @@ in the selected variable into discrete levels.</p>
 values, with country set to the United States and Japan,
 respectively:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.US <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;United States&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;Japan&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
+x.Japan <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">,</span> country <span class="o">=</span> <span class="s">&quot;Japan&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulate quantities of interest:</p>
@@ -1715,11 +1640,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;negbin&quot;</span><span class="p">,</span> data <span class="o">=</span> sanction<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2008.</span>
 <span class="c">##   negbinom: Negative Binomial Regression for Event Count Dependent Variables</span>
@@ -1752,11 +1672,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulate fitted values:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 </pre></div>
@@ -1768,14 +1683,14 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 2.974735 0.3581579 2.939842 2.356151 3.740315</span>
+<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 2.985229 0.352562 2.981121 2.351444 3.702897</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##     0     1     2     3     4     5     6     7     8     9    10    11</span>
-<span class="c">## 0.172 0.173 0.174 0.143 0.105 0.075 0.049 0.032 0.027 0.014 0.014 0.011</span>
-<span class="c">##    12    13    14    21</span>
-<span class="c">## 0.005 0.001 0.004 0.001</span>
+<span class="c">## 0.117 0.186 0.185 0.117 0.115 0.082 0.052 0.042 0.025 0.025 0.017 0.008</span>
+<span class="c">##    12    13    14    15    18    23</span>
+<span class="c">## 0.005 0.012 0.007 0.002 0.002 0.001</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1920,11 +1835,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>unem <span class="o">~</span> gdp <span class="o">+</span> capmob <span class="o">+</span> trade<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;normal&quot;</span><span class="p">,</span> data <span class="o">=</span> macro<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2008.</span>
 <span class="c">##   normal: Normal Regression for Continuous Dependent Variables</span>
@@ -1957,19 +1867,7 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <p>Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for trade:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> trade <span class="o">=</span> quantile<span class="p">(</span>macro<span class="o">$</span>trade<span class="p">,</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Generate first differences for the effect of high versus low trade on GDP:</p>
@@ -1983,23 +1881,23 @@ high (80th percentile) and low (20th percentile) values for trade:</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##         mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 5.42515 0.1909207 5.428434 5.042517 5.801554</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 5.441108 0.1927328 5.437063 5.068863 5.819076</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
-<span class="c">## [1,] 5.377824 2.765618 5.421634 -0.1210032 10.81302</span>
+<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 5.390377 2.786037 5.437308 0.217206 10.95756</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.598901 0.1810367 4.592086 4.259321 4.953172</span>
+<span class="c">##         mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 4.60702 0.1879488 4.604871 4.252595 4.981808</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd     50%      2.5%    97.5%</span>
-<span class="c">## [1,] 4.778033 2.822209 4.68922 -0.728083 10.32672</span>
+<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
+<span class="c">## [1,] 4.495729 2.739572 4.457007 -0.7275102 9.972415</span>
 <span class="c">## fd</span>
 <span class="c">##            mean        sd        50%      2.5%      97.5%</span>
-<span class="c">## [1,] -0.8262487 0.2380424 -0.8349833 -1.280642 -0.3586149</span>
+<span class="c">## [1,] -0.8340885 0.2403939 -0.8350503 -1.305262 -0.3647726</span>
 </pre></div>
 </div>
 <p>A visual summary of quantities of interest:</p>
@@ -2125,11 +2023,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson&quot;</span><span class="p">,</span> data <span class="o">=</span> sanction<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   poisson: Poisson Regression for Event Count Dependent Variables</span>
@@ -2162,11 +2055,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulate fitted values:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 summary<span class="p">(</span>s.out<span class="p">)</span>
@@ -2176,11 +2064,11 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd      50%     2.5%   97.5%</span>
-<span class="c">## [1,] 3.241478 0.2327889 3.226769 2.812084 3.69784</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 3.239086 0.2357021 3.225085 2.798137 3.721586</span>
 <span class="c">## pv</span>
-<span class="c">##       mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.182 1.772574   3    0     7</span>
+<span class="c">##      mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.33 1.822202   3    0     7</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -2301,11 +2189,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit&quot;</span><span class="p">,</span> data <span class="o">=</span> turnout<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2007.</span>
 <span class="c">##   probit: Probit Regression for Dichotomous Dependent Variables</span>
@@ -2336,11 +2219,6 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 </div>
 <p>Set values for the explanatory variables to their default values.</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Simulate quantities of interest from the posterior distribution.</p>
@@ -2506,11 +2384,6 @@ of militarized interstate conflicts to the absence of disputes is
 <div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> <span class="m">1042</span><span class="o">/</span><span class="m">303772</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, and Olivia Lau. 2014.</span>
 <span class="c">##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables</span>
@@ -2547,11 +2420,6 @@ of militarized interstate conflicts to the absence of disputes is
 <div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulate quantities of interest:</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
 summary<span class="p">(</span>s.out1<span class="p">)</span>
@@ -2562,10 +2430,10 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##             mean           sd         50%        2.5%       97.5%</span>
-<span class="c">## [1,] 0.002394628 0.0001517166 0.002387472 0.002094494 0.002697017</span>
+<span class="c">## [1,] 0.002404106 0.0001582528 0.002397304 0.002128284 0.002734741</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.997 0.003</span>
+<span class="c">## [1,] 0.998 0.002</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -2583,16 +2451,6 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> <span class="m">1042</span><span class="o">/</span><span class="m">303772</span><span class="p">,</span> case.control <span class="o">=</span> <span class="s">&quot;weighting&quot;</span><span class="p">,</span> robust <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in glm.control(robust = TRUE): unused argument (robust = TRUE)</span>
 </pre></div>
 </div>
@@ -2605,40 +2463,21 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">## [1] 1</span>
 <span class="c">##</span>
 <span class="c">##</span>
-<span class="c">## Call:</span>
-<span class="c">## stats::lm(formula = unem ~ gdp + trade + capmob + as.factor(country),</span>
+<span class="c">## Call:  stats::glm(formula = vote ~ race + educate, family = binomial(&quot;logit&quot;),</span>
 <span class="c">##     data = .)</span>
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
-<span class="c">##                      (Intercept)                               gdp</span>
-<span class="c">##                          -5.8432                           -0.1102</span>
-<span class="c">##                            trade                            capmob</span>
-<span class="c">##                           0.1442                            0.8147</span>
-<span class="c">##        as.factor(country)Belgium          as.factor(country)Canada</span>
-<span class="c">##                          -1.5986                            6.7594</span>
-<span class="c">##        as.factor(country)Denmark         as.factor(country)Finland</span>
-<span class="c">##                           4.3107                            4.8099</span>
-<span class="c">##         as.factor(country)France           as.factor(country)Italy</span>
-<span class="c">##                           6.9048                            9.2897</span>
-<span class="c">##          as.factor(country)Japan     as.factor(country)Netherlands</span>
-<span class="c">##                           5.4586                           -1.4593</span>
-<span class="c">##         as.factor(country)Norway          as.factor(country)Sweden</span>
-<span class="c">##                          -2.7537                            0.9253</span>
-<span class="c">## as.factor(country)United Kingdom   as.factor(country)United States</span>
-<span class="c">##                           5.6008                           10.0662</span>
-<span class="c">##   as.factor(country)West Germany</span>
-<span class="c">##                           3.3636</span>
+<span class="c">## (Intercept)    racewhite      educate</span>
+<span class="c">##     -1.2189       0.5022       0.1610</span>
 <span class="c">##</span>
+<span class="c">## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual</span>
+<span class="c">## Null Deviance:       2267</span>
+<span class="c">## Residual Deviance: 2138  AIC: 2144</span>
 <span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out2 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Simulate quantities of interest:</p>
@@ -2650,11 +2489,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##      mean        sd     50%      2.5%    97.5%</span>
-<span class="c">## 1 1.32532 0.3745495 1.33224 0.5711662 2.037085</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7732387 0.01051603 0.7738457 0.7519949 0.7919187</span>
 <span class="c">## pv</span>
-<span class="c">##      mean        sd     50%      2.5%    97.5%</span>
-<span class="c">## 1 1.32532 0.3745495 1.33224 0.5711662 2.037085</span>
+<span class="c">##         0    1</span>
+<span class="c">## [1,] 0.23 0.77</span>
 </pre></div>
 </div>
 </div>
@@ -2665,11 +2504,6 @@ that it was somewhere between <img class="math" src="_images/math/501e197d9ac226
 model with a range of feasible estimates for <img class="math" src="_images/math/d9e99c35d3632bb156b7aca0e93cd78a148a10e8.png" alt="\tau"/> (using the
 default prior correction method for case control correction):</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>conflict <span class="o">~</span> major <span class="o">+</span> contig <span class="o">+</span> power <span class="o">+</span> maxdem <span class="o">+</span> mindem <span class="o">+</span> years<span class="p">,</span> data <span class="o">=</span> mid<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;relogit&quot;</span><span class="p">,</span> tau <span class="o">=</span> c<span class="p">(</span><span class="m">0.002</span><span class="p">,</span> <span class="m">0.005</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
@@ -2896,7 +2730,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7fb7d5765e70&gt;</span>
+<span class="c">## &lt;environment: 0x7fdc12548ce0&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -2905,11 +2739,6 @@ default prior correction method for case control correction):</p>
 </div>
 <p>Set the explanatory variables to their means:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out2 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out2<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Simulate quantities of interest:</p>
@@ -2926,11 +2755,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##      mean        sd     50%      2.5%    97.5%</span>
-<span class="c">## 1 1.32532 0.3745495 1.33224 0.5711662 2.037085</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7732387 0.01051603 0.7738457 0.7519949 0.7919187</span>
 <span class="c">## pv</span>
-<span class="c">##      mean        sd     50%      2.5%    97.5%</span>
-<span class="c">## 1 1.32532 0.3745495 1.33224 0.5711662 2.037085</span>
+<span class="c">##         0    1</span>
+<span class="c">## [1,] 0.23 0.77</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -3171,11 +3000,6 @@ its own cluster.</p>
 <div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>durable <span class="o">~</span> age <span class="o">+</span> quant<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;tobit&quot;</span><span class="p">,</span> data <span class="o">=</span> tobin<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Kosuke Imai, Gary King, Olivia Lau. 2011.</span>
 <span class="c">##   tobit: Linear regression for Left-Censored Dependent Variable</span>
@@ -3185,11 +3009,6 @@ its own cluster.</p>
 </div>
 <p>Setting values for the explanatory variables to their sample averages:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
 </pre></div>
 </div>
 <p>Simulating quantities of interest from the posterior distribution given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
@@ -3203,11 +3022,11 @@ its own cluster.</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.531947 0.6410062 1.465043 0.5172227 2.964802</span>
+<span class="c">##       mean        sd      50%      2.5%   97.5%</span>
+<span class="c">## 1 1.575597 0.6353754 1.514082 0.5300464 3.01011</span>
 <span class="c">## pv</span>
-<span class="c">##          mean      sd      50% 2.5%   97.5%</span>
-<span class="c">## [1,] 2.900588 3.96678 1.014522    0 14.0933</span>
+<span class="c">##          mean       sd      50% 2.5%   97.5%</span>
+<span class="c">## [1,] 3.060805 4.079116 1.246191    0 13.3956</span>
 </pre></div>
 </div>
 </div>
@@ -3217,19 +3036,7 @@ its own cluster.</p>
 high (80th percentile) and low (20th percentile) liquidity ratio
 (<tt class="docutils literal"><span class="pre">quant</span></tt>):</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.8</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> quant <span class="o">=</span> quantile<span class="p">(</span>tobin<span class="o">$</span>quant<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Estimating the first difference for the effect of high versus low
@@ -3245,22 +3052,22 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.205461 0.7703749 1.063352 0.1638994 3.018231</span>
+<span class="c">## 1 1.200461 0.7339273 1.075621 0.1708024 3.026218</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 2.940562 4.081004 0.919633    0 13.63869</span>
+<span class="c">## [1,] 3.138435 4.244194 1.342093    0 13.92825</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 2.065306 1.004243 1.907754 0.5995876 4.456631</span>
+<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 2.046834 0.9880616 1.906263 0.554175 4.449854</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.398784 4.189753 1.997358    0 14.19207</span>
+<span class="c">## [1,] 3.433001 4.246531 1.905852    0 14.30947</span>
 <span class="c">## fd</span>
-<span class="c">##        mean       sd       50%      2.5%    97.5%</span>
-<span class="c">## 1 0.8598451 1.224709 0.7636338 -1.506526 3.574621</span>
+<span class="c">##        mean       sd       50%     2.5%   97.5%</span>
+<span class="c">## 1 0.8463736 1.168561 0.8283062 -1.41062 3.28393</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -3648,11 +3455,6 @@ improper prior.</li>
                verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Calculating MLEs and large sample var-cov matrix.</span>
 <span class="c">## This may take a moment...</span>
 <span class="c">## Inverting Hessian to get large sample var-cov matrix.</span>
@@ -3685,11 +3487,6 @@ averages:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulating quantities of interest from the posterior distribution
 given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
@@ -3707,7 +3504,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.5675 0.1982 0.2343</span>
+<span class="c">## 0.5592 0.2085 0.2323</span>
 </pre></div>
 </div>
 </div>
@@ -3719,22 +3516,8 @@ strength of the PRI) is set to be weak (equal to 1) versus strong
 (equal to 3) while all the other variables held at their default
 values.</p>
 <div class="highlight-r"><div class="highlight"><pre>x.weak <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> pristr <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.strong <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> pristr <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.strong<span class="p">,</span> x1 <span class="o">=</span> x.weak<span class="p">)</span>
+x.strong <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> pristr <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.strong<span class="p">,</span> x1 <span class="o">=</span> x.weak<span class="p">)</span>
 summary<span class="p">(</span>s.out2<span class="p">)</span>
 </pre></div>
 </div>
@@ -3749,7 +3532,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.7166 0.1265 0.1569</span>
+<span class="c">## 0.7172 0.1273 0.1555</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -3761,7 +3544,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.4065 0.2995 0.2940</span>
+<span class="c">## 0.4027 0.3054 0.2919</span>
 <span class="c">## fd</span>
 <span class="c">##              mean         sd        50%        2.5%      97.5%</span>
 <span class="c">## P(Y=1) -0.3128754 0.03459857 -0.3128662 -0.38111485 -0.2442630</span>
@@ -3955,11 +3738,6 @@ information.</p>
                data <span class="o">=</span> sanction<span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning in model.response(mf, &quot;numeric&quot;): using type = &quot;numeric&quot; with a</span>
 <span class="c">## factor response will be ignored</span>
 </pre></div>
@@ -3992,11 +3770,6 @@ raftery.diag<span class="p">(</span>z.out<span class="o">$</span>coefficients<sp
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulating quantities of interest from the posterior distribution given: <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 summary<span class="p">(</span>s.out1<span class="p">)</span>
@@ -4024,19 +3797,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 of incurring different level of cost when there is no military action
 versus military action while all the other variables held at their default values.</p>
 <div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> mil <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> mil <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> mil <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
@@ -4302,11 +4063,6 @@ information.</p>
                data <span class="o">=</span> sanction<span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
 <span class="c">##   Ben Goodrich, Ying Lu. 2013.</span>
 <span class="c">##   poissonbayes: Bayesian Poisson Regression</span>
@@ -4331,11 +4087,6 @@ information.</p>
 <div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
 <p>Simulating quantities of interest from the posterior distribution given <tt class="docutils literal"><span class="pre">x.out</span></tt>.</p>
 <div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
 </pre></div>
@@ -4349,19 +4100,7 @@ information.</p>
 <p>Estimating the first difference in the number of countries imposing
 sanctions when the number of targets is set to be its maximum versus its minimum :</p>
 <div class="highlight-r"><div class="highlight"><pre>x.max <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> target <span class="o">=</span> max<span class="p">(</span>sanction<span class="o">$</span>target<span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.min <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> target <span class="o">=</span> min<span class="p">(</span>sanction<span class="o">$</span>target<span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Warning: &#39;regroup&#39; is deprecated.</span>
-<span class="c">## Use &#39;group_by_&#39; instead.</span>
-<span class="c">## See help(&quot;Deprecated&quot;)</span>
+x.min <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> target <span class="o">=</span> min<span class="p">(</span>sanction<span class="o">$</span>target<span class="p">))</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.max<span class="p">,</span> x1 <span class="o">=</span> x.min<span class="p">)</span>
@@ -4376,7 +4115,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733</span>
 <span class="c">## pv</span>
 <span class="c">##        mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.1698 1.801025   3    0     7</span>
+<span class="c">## [1,] 3.2056 1.830318   3    0     7</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -4385,7 +4124,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022</span>
 <span class="c">## pv</span>
 <span class="c">##        mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.3126 1.839244   3    0     7</span>
+<span class="c">## [1,] 3.3127 1.852852   3    0     7</span>
 <span class="c">## fd</span>
 <span class="c">##           mean        sd       50%       2.5%     97.5%</span>
 <span class="c">## [1,] 0.1146376 0.3671544 0.1265036 -0.6072035 0.8342282</span>
@@ -4497,6 +4236,255 @@ for the treated from conditional prediction models.</li>
 <div class="section" id="id98">
 <h3>See also<a class="headerlink" href="#id98" title="Permalink to this headline">¶</a></h3>
 <p>Bayesian poisson regression is part of the MCMCpack library by Andrew D.
+Martin and Kevin M. Quinn . The convergence diagnostics are part of the
+CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.</p>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="zelig-probitbayes">
+<span id="zprobitbayes"></span><h2>zelig-probitbayes<a class="headerlink" href="#zelig-probitbayes" title="Permalink to this headline">¶</a></h2>
+<p>Use the probit regression model for model binary dependent variables
+specified as a function of a set of explanatory variables. The model is
+estimated using a Gibbs sampler. For other models suitable for binary
+response variables, see Bayesian logistic regression, maximum
+likelihood logit regression, and maximum likelihood probit regression.</p>
+<div class="section" id="id99">
+<h3>Syntax<a class="headerlink" href="#id99" title="Permalink to this headline">¶</a></h3>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zprobitbayes<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit.bayes&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id100">
+<h3>Additional Inputs<a class="headerlink" href="#id100" title="Permalink to this headline">¶</a></h3>
+<p>Using the following arguments to monitor the Markov chains:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">burnin</span></tt>: number of the initial MCMC iterations to be discarded
+(defaults to 1,000).</li>
+<li><tt class="docutils literal"><span class="pre">mcmc</span></tt>: number of the MCMC iterations after burnin (defaults to
+10,000).</li>
+<li><tt class="docutils literal"><span class="pre">thin</span></tt>: thinning interval for the Markov chain. Only every
+<tt class="docutils literal"><span class="pre">thin</span></tt>-th draw from the Markov chain is kept. The value of <tt class="docutils literal"><span class="pre">mcmc</span></tt>
+must be divisible by this value. The default value is 1.</li>
+<li><tt class="docutils literal"><span class="pre">verbose</span></tt>: defaults to FALSE. If <tt class="docutils literal"><span class="pre">TRUE</span></tt>, the progress of the
+sampler (every <img class="math" src="_images/math/edce6cd55e38e73a0341fc79fb72bb04c90eeca4.png" alt="10\%"/>) is printed to the screen.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: seed for the random number generator. The default is <tt class="docutils literal"><span class="pre">NA</span></tt>
+which corresponds to a random seed of 12345.</li>
+<li><tt class="docutils literal"><span class="pre">beta.start</span></tt>: starting values for the Markov chain, either a scalar
+or vector with length equal to the number of estimated coefficients.
+The default is <tt class="docutils literal"><span class="pre">NA</span></tt>, such that the maximum likelihood estimates are
+used as the starting values.</li>
+</ul>
+<p>Use the following parameters to specify the model’s priors:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">b0</span></tt>: prior mean for the coefficients, either a numeric vector or a
+scalar. If a scalar value, that value will be the prior mean for all
+the coefficients. The default is 0.</li>
+<li><tt class="docutils literal"><span class="pre">B0</span></tt>: prior precision parameter for the coefficients, either a
+square matrix (with the dimensions equal to the number of the
+coefficients) or a scalar. If a scalar value, that value times an
+identity matrix will be the prior precision parameter. The default is
+0, which leads to an improper prior.</li>
+</ul>
+<p>Use the following arguments to specify optional output for the model:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">bayes.resid</span></tt>: defaults to FALSE. If TRUE, the latent Bayesian
+residuals for all observations are returned. Alternatively, users can
+specify a vector of observations for which the latent residuals
+should be returned.</li>
+</ul>
+<p>Zelig users may wish to refer to <tt class="docutils literal"><span class="pre">help(MCMCprobit)</span></tt> for more
+information.</p>
+</div>
+<div class="section" id="id101">
+<h3>Examples<a class="headerlink" href="#id101" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id102">
+<h4>Basic Example<a class="headerlink" href="#id102" title="Permalink to this headline">¶</a></h4>
+<p>Attaching the sample dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>turnout<span class="p">)</span>
+</pre></div>
+</div>
+<p>Estimating the probit regression using <tt class="docutils literal"><span class="pre">probit.bayes</span></tt>:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit.bayes&quot;</span><span class="p">,</span>
+               data <span class="o">=</span> turnout<span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Ben Goodrich, Ying Lu. 2013.</span>
+<span class="c">##   probitbayes: Bayesian Probit Regression for Dichotomous Dependent Variables</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://zeligproject.org/</span>
+</pre></div>
+</div>
+<p>Checking for convergence before summarizing the estimates:</p>
+<div class="highlight-r"><div class="highlight"><pre>geweke.diag<span class="p">(</span>z.out coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>heidel.diag<span class="p">(</span>z.out coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>raftery.diag<span class="p">(</span>z.out coefficients<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Setting values for the explanatory variables to their sample averages:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulating quantities of interest from the posterior distribution given: <tt class="docutils literal"><span class="pre">x.out</span></tt></p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id103">
+<h4>Simulating First Differences<a class="headerlink" href="#id103" title="Permalink to this headline">¶</a></h4>
+<p>Estimating the first difference (and risk ratio) in individual’s
+probability of voting when education is set to be low (25th
+percentile) versus high (75th percentile) while all the other variables are held at their default values:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id104">
+<h3>Model<a class="headerlink" href="#id104" title="Permalink to this headline">¶</a></h3>
+<p>Let <img class="math" src="_images/math/0e1e069d7b701cb98cfecc70660e4e31b786db9a.png" alt="Y_{i}"/> be the binary dependent variable for observation
+<img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> which takes the value of either 0 or 1.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/b8dda738cea0ccca73ff135a88c134d9e9288e53.png" alt="\begin{aligned}
+Y_{i}  &amp;  \sim &amp; \textrm{Bernoulli}(\pi_{i})\\
+&amp;  = &amp; \pi_{i}^{Y_{i}}(1-\pi_{i})^{1-Y_{i}},\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/119dd61e8bc116cc69c29362754356787f09e5be.png" alt="\pi_{i}=\Pr(Y_{i}=1)"/>.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is given by</p>
+<div class="math">
+<p><img src="_images/math/05e662995b85cc81eb1fb362e134a98b0be57fac.png" alt="\begin{aligned}
+\pi_{i}= \Phi(x_i \beta),\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/262565daee431ce18fed8cbe6ff35db082bb6a9b.png" alt="\Phi(\cdot)"/> is the cumulative density function of the
+standard Normal distribution with mean 0 and variance 1,
+<img class="math" src="_images/math/c223a5391d7bfd7e7c68274c104fc7418944376e.png" alt="x_{i}"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables for
+observation <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>, and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of
+coefficients.</p>
+</li>
+<li><p class="first">The <em>prior</em> for <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is given by</p>
+<div class="math">
+<p><img src="_images/math/7607fa8c02af8d4dfc7f426eb5732a4bb9069b42.png" alt="\begin{aligned}
+\beta \sim \textrm{Normal}_k \left(  b_{0}, B_{0}^{-1} \right)\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/9d80db7ae48caf02365282c5dff832fcbe0a74d5.png" alt="b_{0}"/> is the vector of means for the <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/>
+explanatory variables and <img class="math" src="_images/math/6a119b5ae9ee269e28bcaa4d39e47a3d3de4f5e5.png" alt="B_{0}"/> is the <img class="math" src="_images/math/3908ba50237c94909083edd0295cd1c9345b0a8c.png" alt="k \times k"/>
+precision matrix (the inverse of a variance-covariance matrix).</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id105">
+<h3>Quantities of Interest<a class="headerlink" href="#id105" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">The expected values (<tt class="docutils literal"><span class="pre">qi$ev</span></tt>) for the probit model are the
+predicted probability of a success:</p>
+<div class="math">
+<p><img src="_images/math/251a0c2a46caf0d86aab6add5e2c4f5960c88b2a.png" alt="\begin{aligned}
+E(Y \mid X) = \pi_{i}= \Phi(x_i \beta),\end{aligned}"/></p>
+</div><p>given the posterior draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from the MCMC iterations.</p>
+</li>
+<li><p class="first">The predicted values (<tt class="docutils literal"><span class="pre">qi$pr</span></tt>) are draws from the Bernoulli
+distribution with mean equal to the simulated expected value
+<img class="math" src="_images/math/56d13901556c9d691c7d1893b7b9329d60794bd6.png" alt="\pi_{i}"/>.</p>
+</li>
+<li><p class="first">The first difference (<tt class="docutils literal"><span class="pre">qi$fd</span></tt>) for the probit model is defined as</p>
+<div class="math">
+<p><img src="_images/math/b8f51d813d7d58f8d1db9ff6d4999f95081705c9.png" alt="\begin{aligned}
+\text{FD}=\Pr(Y=1\mid X_{1})-\Pr(Y=1\mid X).\end{aligned}"/></p>
+</div></li>
+<li><p class="first">The risk ratio (<tt class="docutils literal"><span class="pre">qi$rr</span></tt>)is defined as</p>
+<div class="math">
+<p><img src="_images/math/d2bdd6f85746d5731bd9679e294d3e22b805d218.png" alt="\begin{aligned}
+\text{RR}=\Pr(Y=1\mid X_{1})\ /\ \Pr(Y=1\mid X).\end{aligned}"/></p>
+</div></li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>) for the treatment group is</p>
+<div class="math">
+<p><img src="_images/math/72b57ba1ea5551a32c3fa473511823ae37508662.png" alt="\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)]],\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups.</p>
+</li>
+<li><p class="first">In conditional prediction models, the average predicted treatment
+effect (<tt class="docutils literal"><span class="pre">qi$att.pr</span></tt>) for the treatment group is</p>
+<div class="math">
+<p><img src="_images/math/9009cc654392b7154f901adf17e5170c105149a0.png" alt="\begin{aligned}
+\frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/10ea017369414222fb61b769804fb55f01f1f886.png" alt="t_{i}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/4313486a2444e99c09afd625a9f811c03d22538f.png" alt="t_{i}=1"/>) and control (<img class="math" src="_images/math/254a135214133c3926c66cf9682fd612cae45ce4.png" alt="t_{i}=0"/>) groups.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id106">
+<h3>Output Values<a class="headerlink" href="#id106" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>y <span class="o">~</span> x<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit.bayes&quot;</span><span class="p">,</span> data<span class="p">)</span>
+</pre></div>
+</div>
+<p>then you may examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the draws from the posterior distribution of the
+<tt class="docutils literal"><span class="pre">coefficients</span></tt> by using <tt class="docutils literal"><span class="pre">z.out$coefficients</span></tt>, and view a default
+summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other elements
+available through the <tt class="docutils literal"><span class="pre">$</span></tt> operator are listed below.</p>
+<ul class="simple">
+<li>From the <tt class="docutils literal"><span class="pre">zelig()</span></tt> output object <tt class="docutils literal"><span class="pre">z.out</span></tt>, you may extract:<ul>
+<li><tt class="docutils literal"><span class="pre">coefficients</span></tt>: draws from the posterior distributions of the
+estimated parameters.</li>
+<li>zelig.data: the input data frame if save.data = TRUE.</li>
+<li><tt class="docutils literal"><span class="pre">bayes.residuals</span></tt>: When <tt class="docutils literal"><span class="pre">bayes.residual</span></tt> is <tt class="docutils literal"><span class="pre">TRUE</span></tt> or a set
+of observation numbers is given, this object contains the
+posterior draws of the latent Bayesian residuals of all the
+observations or the observations specified by the user.</li>
+<li><tt class="docutils literal"><span class="pre">seed</span></tt>: the random seed used in the model.</li>
+</ul>
+</li>
+<li>From the <tt class="docutils literal"><span class="pre">sim()</span></tt> output object <tt class="docutils literal"><span class="pre">s.out</span></tt>:<ul>
+<li><tt class="docutils literal"><span class="pre">qi$ev</span></tt>: the simulated expected values (probabilities) for the
+specified values of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$pr</span></tt>: the simulated predicted values for the specified values
+of <tt class="docutils literal"><span class="pre">x</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$fd</span></tt>: the simulated first difference in the expected values
+for the values specified in <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">x1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$rr</span></tt>: the simulated risk ratio for the expected values
+simulated from <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">x1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.ev</span></tt>: the simulated average expected treatment effect for
+the treated from conditional prediction models.</li>
+<li><tt class="docutils literal"><span class="pre">qi$att.pr</span></tt>: the simulated average predicted treatment effect
+for the treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id107">
+<h3>See also<a class="headerlink" href="#id107" title="Permalink to this headline">¶</a></h3>
+<p>Bayesian probit regression is part of the MCMCpack library by Andrew D.
 Martin and Kevin M. Quinn . The convergence diagnostics are part of the
 CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.</p>
 <hr class="docutils" />

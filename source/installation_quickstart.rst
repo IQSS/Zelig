@@ -107,18 +107,6 @@ To fit this model to our data, we must first create Zelig least squares object, 
     z5 <- zls$new()
     # estimate ls model                     
     z5$zelig(dist ~ speed, data = cars)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     # you can now get model summary estimates
     summary(z5)
 
@@ -151,28 +139,9 @@ Zelig makes this simple, by automating the translation of model estimates in int
 
     # set speed to 30
     z5$setx(speed = 30)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
     
-
     # set speed to 50
     z5$setx1(speed = 50)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Now that we've set our variables, all we have to do is run our simulations:
@@ -192,23 +161,23 @@ Now that we've set our variables, all we have to do is run our simulations:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean       sd      50%    2.5%    97.5%
-    ## 1 100.6135 6.422235 100.6161 88.5412 112.9483
+    ##       mean       sd     50%    2.5%    97.5%
+    ## 1 100.0594 6.588758 100.467 86.9325 112.5575
     ## pv
-    ##       mean       sd      50%    2.5%    97.5%
-    ## 1 100.6135 6.422235 100.6161 88.5412 112.9483
+    ##       mean       sd     50%    2.5%    97.5%
+    ## 1 100.0594 6.588758 100.467 86.9325 112.5575
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 179.4622 14.39959 179.5063 152.9028 206.4436
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 178.2301 14.75085 178.8296 147.661 205.8809
     ## pv
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 179.4622 14.39959 179.5063 152.9028 206.4436
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 178.2301 14.75085 178.8296 147.661 205.8809
     ## fd
-    ##       mean       sd     50%     2.5%    97.5%
-    ## 1 78.84873 8.192486 78.8501 63.46384 94.52778
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 78.17075 8.375725 78.46994 60.38378 93.58789
 
 
 

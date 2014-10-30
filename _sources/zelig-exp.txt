@@ -102,14 +102,6 @@ Estimate the model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Olivia Lau, Kosuke Imai, Gary King. 2011.
     ##   exp: Exponential Regression for Duration Dependent Variables
@@ -163,14 +155,6 @@ X:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## Error in terms(lm(formula, data), "predvars"): error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
     ## Calls: lm -> lm.fit -> Ops.Surv
 
@@ -179,14 +163,6 @@ X:
     
 
     x.high <- setx(z.out, numst2 = 1)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 ::
@@ -205,12 +181,6 @@ Simulate expected values and first differences:
     s.out <- sim(z.out, x = x.low, x1 = x.high)
 
 
-::
-
-    ## Error in sim(z.out, x = x.low, x1 = x.high): object 'x.low' not found
-
-
-
 Summarize quantities of interest and produce some plots:
 
 
@@ -222,7 +192,27 @@ Summarize quantities of interest and produce some plots:
 
 ::
 
-    ## Error in summary(s.out): error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 's.out' not found
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 4.606144 0.187008 4.603214 4.247413 4.951216
+    ## pv
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 4.606144 0.187008 4.603214 4.247413 4.951216
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##       mean        sd      50%    2.5%    97.5%
+    ## 1 5.424566 0.1896621 5.424858 5.03835 5.788495
+    ## pv
+    ##       mean        sd      50%    2.5%    97.5%
+    ## 1 5.424566 0.1896621 5.424858 5.03835 5.788495
+    ## fd
+    ##        mean        sd       50%      2.5%    97.5%
+    ## 1 0.8184217 0.2370402 0.8056103 0.3770491 1.307285
 
 
 
@@ -232,12 +222,10 @@ Summarize quantities of interest and produce some plots:
 
     plot(s.out)
 
+.. figure:: figure/Zelig-exp-1.png
+    :alt: Zelig-exp
 
-::
-
-    ## Error in plot(s.out): error in evaluating the argument 'x' in selecting a method for function 'plot': Error: object 's.out' not found
-
-
+    Zelig-exp
 
 Model
 +++++

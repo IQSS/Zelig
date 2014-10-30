@@ -98,14 +98,6 @@ Estimating linear regression using ``tobit``:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2011.
     ##   tobit: Linear regression for Left-Censored Dependent Variable
@@ -121,14 +113,6 @@ Setting values for the explanatory variables to their sample averages:
     
 
     x.out <- setx(z.out)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Simulating quantities of interest from the posterior distribution given ``x.out``.
@@ -153,11 +137,11 @@ Simulating quantities of interest from the posterior distribution given ``x.out`
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean        sd      50%      2.5%    97.5%
-    ## 1 1.531947 0.6410062 1.465043 0.5172227 2.964802
+    ##       mean        sd      50%      2.5%   97.5%
+    ## 1 1.575597 0.6353754 1.514082 0.5300464 3.01011
     ## pv
-    ##          mean      sd      50% 2.5%   97.5%
-    ## [1,] 2.900588 3.96678 1.014522    0 14.0933
+    ##          mean       sd      50% 2.5%   97.5%
+    ## [1,] 3.060805 4.079116 1.246191    0 13.3956
 
 
 
@@ -173,27 +157,7 @@ high (80th percentile) and low (20th percentile) liquidity ratio
     
 
     x.high <- setx(z.out, quant = quantile(tobin$quant, prob = 0.8))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out, quant = quantile(tobin$quant, prob = 0.2))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Estimating the first difference for the effect of high versus low
@@ -220,22 +184,22 @@ liquidity ratio on duration(\ ``durable``):
     ##  -----
     ## ev
     ##       mean        sd      50%      2.5%    97.5%
-    ## 1 1.205461 0.7703749 1.063352 0.1638994 3.018231
+    ## 1 1.200461 0.7339273 1.075621 0.1708024 3.026218
     ## pv
     ##          mean       sd      50% 2.5%    97.5%
-    ## [1,] 2.940562 4.081004 0.919633    0 13.63869
+    ## [1,] 3.138435 4.244194 1.342093    0 13.92825
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean       sd      50%      2.5%    97.5%
-    ## 1 2.065306 1.004243 1.907754 0.5995876 4.456631
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 2.046834 0.9880616 1.906263 0.554175 4.449854
     ## pv
     ##          mean       sd      50% 2.5%    97.5%
-    ## [1,] 3.398784 4.189753 1.997358    0 14.19207
+    ## [1,] 3.433001 4.246531 1.905852    0 14.30947
     ## fd
-    ##        mean       sd       50%      2.5%    97.5%
-    ## 1 0.8598451 1.224709 0.7636338 -1.506526 3.574621
+    ##        mean       sd       50%     2.5%   97.5%
+    ## 1 0.8463736 1.168561 0.8283062 -1.41062 3.28393
 
 
 

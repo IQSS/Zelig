@@ -62,14 +62,6 @@ Estimate the model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   gamma: Gamma Regression for Continuous, Positive Dependent Variables
@@ -117,27 +109,7 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.high <- setx(z.out, numst2 = 1)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
@@ -163,22 +135,22 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  -----
     ## ev
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 14.42786 1.130325 14.30242 12.44081 16.95893
+    ## [1,] 14.41641 1.088869 14.34477 12.54037 16.77276
     ## pv
-    ##          mean       sd      50%      2.5%   97.5%
-    ## [1,] 14.13235 12.54945 10.94083 0.6970682 46.3694
+    ##          mean       sd      50%      2.5%    97.5%
+    ## [1,] 14.11637 12.46043 10.59288 0.7702395 48.54746
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##         mean       sd     50%     2.5%    97.5%
-    ## [1,] 19.2178 1.146213 19.1983 17.11109 21.57583
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 19.19801 1.079215 19.19244 17.25413 21.34647
     ## pv
-    ##          mean       sd      50%     2.5%  97.5%
-    ## [1,] 19.71074 17.55625 15.35145 1.109281 63.905
+    ##        mean       sd      50%      2.5%    97.5%
+    ## [1,] 18.767 16.47209 14.24803 0.8891153 62.19505
     ## fd
-    ##          mean       sd      50%  2.5%    97.5%
-    ## [1,] 4.789939 1.622219 4.846749 1.683 7.937257
+    ##          mean       sd    50%     2.5%    97.5%
+    ## [1,] 4.781595 1.526892 4.8362 1.767735 7.750527
 
 
 

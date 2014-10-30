@@ -107,18 +107,6 @@ To fit this model to our data, we must first create Zelig least squares object, 
     z5 <- zls$new()
     # estimate ls model                     
     z5$zelig(dist ~ speed, data = cars)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     # you can now get model summary estimates
     summary(z5)
 
@@ -151,28 +139,9 @@ Zelig makes this simple, by automating the translation of model estimates in int
 
     # set speed to 30
     z5$setx(speed = 30)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
     
-
     # set speed to 50
     z5$setx1(speed = 50)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Now that we've set our variables, all we have to do is run our simulations:
@@ -193,22 +162,22 @@ Now that we've set our variables, all we have to do is run our simulations:
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 100.3223 6.459648 100.4802 87.61366 113.0389
+    ## 1 100.6662 6.456331 100.5533 88.15976 113.0308
     ## pv
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 100.3223 6.459648 100.4802 87.61366 113.0389
+    ## 1 100.6662 6.456331 100.5533 88.15976 113.0308
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 178.8134 14.48817 179.3161 149.6704 207.0842
+    ## 1 179.7029 14.71943 179.6526 150.8946 207.6544
     ## pv
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 178.8134 14.48817 179.3161 149.6704 207.0842
+    ## 1 179.7029 14.71943 179.6526 150.8946 207.6544
     ## fd
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 78.49103 8.230934 78.79178 62.09097 94.67248
+    ## 1 79.03668 8.481399 78.96452 62.17205 95.01606
 
 
 

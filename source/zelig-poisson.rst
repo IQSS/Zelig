@@ -62,14 +62,6 @@ Estimate Poisson model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   poisson: Poisson Regression for Event Count Dependent Variables
@@ -115,14 +107,6 @@ Set values for the explanatory variables to their default mean values:
     x.out <- setx(z.out)
 
 
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
 Simulate fitted values:
 
 
@@ -139,11 +123,11 @@ Simulate fitted values:
     ##  sim x :
     ##  -----
     ## ev
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 3.246341 0.232475 3.232489 2.817607 3.746427
+    ##         mean        sd      50%     2.5%    97.5%
+    ## [1,] 3.25377 0.2285971 3.253635 2.828186 3.714806
     ## pv
     ##       mean       sd 50% 2.5% 97.5%
-    ## [1,] 3.231 1.768266   3    0     7
+    ## [1,] 3.253 1.896995   3    0     7
 
 
 

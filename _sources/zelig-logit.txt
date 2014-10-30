@@ -62,14 +62,6 @@ Estimating parameter values for the logistic regression:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   logit: Logistic Regression for Dichotomous Dependent Variables
@@ -85,14 +77,6 @@ Setting values for the explanatory variables:
     
 
     x.out1 <- setx(z.out1, age = 36, race = "white")
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 Simulating quantities of interest from the posterior distribution.
@@ -118,10 +102,10 @@ Simulating quantities of interest from the posterior distribution.
     ##  -----
     ## ev
     ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.7485501 0.01110266 0.7483159 0.7264441 0.7698571
+    ## [1,] 0.7485479 0.01178686 0.7487759 0.7264948 0.7711856
     ## pv
     ##          0     1
-    ## [1,] 0.262 0.738
+    ## [1,] 0.256 0.744
 
 
 
@@ -152,14 +136,6 @@ other variables held at their default values.
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2007.
     ##   logit: Logistic Regression for Dichotomous Dependent Variables
@@ -171,31 +147,7 @@ other variables held at their default values.
     
 
     x.high <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.75))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out2, educate = quantile(turnout$educate, prob = 0.25))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     s.out2 <- sim(z.out2, x = x.high, x1 = x.low)
     summary(s.out2)
 
@@ -206,23 +158,23 @@ other variables held at their default values.
     ##  sim x :
     ##  -----
     ## ev
-    ##           mean        sd       50%      2.5%     97.5%
-    ## [1,] 0.8234144 0.0106761 0.8235464 0.8020668 0.8431998
+    ##          mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.822638 0.01052395 0.8228147 0.8004196 0.8416615
     ## pv
     ##          0     1
-    ## [1,] 0.186 0.814
+    ## [1,] 0.184 0.816
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.7098427 0.01339609 0.7098271 0.6810229 0.7367797
+    ## [1,] 0.7088047 0.01302488 0.7092194 0.6826477 0.7335934
     ## pv
     ##          0     1
-    ## [1,] 0.286 0.714
+    ## [1,] 0.293 0.707
     ## fd
     ##            mean         sd        50%       2.5%       97.5%
-    ## [1,] -0.1135717 0.01197592 -0.1133295 -0.1369786 -0.08985636
+    ## [1,] -0.1138332 0.01131961 -0.1137248 -0.1367113 -0.09211111
 
 
 

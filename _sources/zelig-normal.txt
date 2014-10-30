@@ -67,14 +67,6 @@ Estimate model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
     ##   normal: Normal Regression for Continuous Dependent Variables
@@ -121,27 +113,7 @@ high (80th percentile) and low (20th percentile) values for trade:
     
 
     x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
    
 Generate first differences for the effect of high versus low trade on GDP:
@@ -166,23 +138,23 @@ Generate first differences for the effect of high versus low trade on GDP:
     ##  sim x :
     ##  -----
     ## ev
-    ##         mean        sd      50%     2.5%    97.5%
-    ## [1,] 5.42515 0.1909207 5.428434 5.042517 5.801554
+    ##          mean        sd      50%     2.5%    97.5%
+    ## [1,] 5.441108 0.1927328 5.437063 5.068863 5.819076
     ## pv
-    ##          mean       sd      50%       2.5%    97.5%
-    ## [1,] 5.377824 2.765618 5.421634 -0.1210032 10.81302
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 5.390377 2.786037 5.437308 0.217206 10.95756
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##          mean        sd      50%     2.5%    97.5%
-    ## [1,] 4.598901 0.1810367 4.592086 4.259321 4.953172
+    ##         mean        sd      50%     2.5%    97.5%
+    ## [1,] 4.60702 0.1879488 4.604871 4.252595 4.981808
     ## pv
-    ##          mean       sd     50%      2.5%    97.5%
-    ## [1,] 4.778033 2.822209 4.68922 -0.728083 10.32672
+    ##          mean       sd      50%       2.5%    97.5%
+    ## [1,] 4.495729 2.739572 4.457007 -0.7275102 9.972415
     ## fd
     ##            mean        sd        50%      2.5%      97.5%
-    ## [1,] -0.8262487 0.2380424 -0.8349833 -1.280642 -0.3586149
+    ## [1,] -0.8340885 0.2403939 -0.8350503 -1.305262 -0.3647726
 
 
 

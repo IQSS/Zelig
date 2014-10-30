@@ -67,14 +67,6 @@ Estimate model:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## How to cite this model in Zelig:
     ##   Kosuke Imai, Gary King, Olivia Lau. 2008.
     ##   normal: Normal Regression for Continuous Dependent Variables
@@ -121,27 +113,7 @@ high (80th percentile) and low (20th percentile) values for trade:
     
 
     x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
    
 Generate first differences for the effect of high versus low trade on GDP:
@@ -167,22 +139,22 @@ Generate first differences for the effect of high versus low trade on GDP:
     ##  -----
     ## ev
     ##          mean        sd      50%     2.5%    97.5%
-    ## [1,] 5.430076 0.1927843 5.427808 5.053228 5.797554
+    ## [1,] 5.433104 0.1993954 5.432221 5.032391 5.833022
     ## pv
-    ##          mean       sd      50%      2.5%    97.5%
-    ## [1,] 5.368924 2.838694 5.298213 0.2145337 10.70033
+    ##          mean       sd      50%       2.5%    97.5%
+    ## [1,] 5.460641 2.736715 5.472975 0.09863579 10.62646
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##          mean        sd      50%     2.5%    97.5%
-    ## [1,] 4.597734 0.1850997 4.605157 4.248915 4.955591
+    ## [1,] 4.602042 0.1755117 4.613065 4.252265 4.945202
     ## pv
     ##          mean       sd      50%       2.5%    97.5%
-    ## [1,] 4.627997 2.787291 4.672328 -0.8738676 9.998134
+    ## [1,] 4.767229 2.699091 4.677271 -0.5714166 10.08173
     ## fd
-    ##            mean        sd        50%      2.5%      97.5%
-    ## [1,] -0.8323416 0.2342716 -0.8250043 -1.315922 -0.4026502
+    ##           mean        sd        50%      2.5%      97.5%
+    ## [1,] -0.831062 0.2364614 -0.8278868 -1.296051 -0.3667207
 
 
 

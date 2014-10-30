@@ -109,14 +109,6 @@ Estimating ordered probit regression using ``oprobit.bayes``:
 
 ::
 
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
-::
-
     ## Warning in model.response(mf, "numeric"): using type = "numeric" with a
     ## factor response will be ignored
 
@@ -175,14 +167,6 @@ Setting values for the explanatory variables to their sample averages:
     x.out <- setx(z.out)
 
 
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-
 Simulating quantities of interest from the posterior distribution given: ``x.out``.
 
 
@@ -223,27 +207,7 @@ versus military action while all the other variables held at their default value
     
 
     x.high <- setx(z.out, mil = 0)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
-
-.. sourcecode:: r
-    
-
     x.low <- setx(z.out, mil = 1)
-
-
-::
-
-    ## Warning: 'regroup' is deprecated.
-    ## Use 'group_by_' instead.
-    ## See help("Deprecated")
-
 
 
 

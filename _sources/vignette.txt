@@ -25,6 +25,7 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Bayesian Multinomial Logistic Regression <zmlogitbayes>`: ``zmlogitbayes$new()``
 - :ref:`Bayesian Ordered Probit Regression <zoprobitbayes>`: ``zoprobitbayes()``
 - :ref:`Bayesian Poisson Regression <zpoissonbayes>`: ``zpoissonbayes()``
+- :ref:`Bayesian Probit Regression <zprobitbayes>`: ``zprobitbayes()``
 
 --------
 
@@ -88,6 +89,10 @@ The following models are currently supported in Zelig 5.0-1:
 
 --------
 
+.. include:: zelig-probitbayes.rst
+
+--------
+
 .. toctree::
    :hidden:
 
@@ -106,3 +111,4 @@ The following models are currently supported in Zelig 5.0-1:
    zelig-mlogitbayes.rst
    zelig-oprobitbayes.rst
    zelig-poissonbayes.rst
+   zelig-probitbayes.rst
