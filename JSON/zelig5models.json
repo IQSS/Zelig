@@ -707,6 +707,37 @@
                 "Zelig-binchoice"
             ]
         },
+        "tobitbayes": {
+            "name": [
+                "tobitbayes"
+            ],
+            "description": [
+                "Bayesian Tobit Regression for a Censored Dependent Variable"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://zeligproject.org/zelig-tobit-bayes.html"
+            ],
+            "tree": [
+                "Zelig-tobit-bayes",
+                "Zelig-bayes",
+                "Zelig-tobit",
+                "Zelig"
+            ]
+        },
         "weibull": {
             "name": [
                 "weibull"
