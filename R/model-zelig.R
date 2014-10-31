@@ -132,7 +132,6 @@ z$methods(
     }
     .self$data <- tbl_df(.self$data)
     .self$zelig.out <- .self$data %>% 
-      # regroup(lapply(.self$by, as.symbol)) %>%
       group_by_(.self$by) %>% 
         do(z.out = eval(fn2(.self$model.call, quote(.))))
   }
@@ -143,7 +142,6 @@ z$methods(
     s <-list(...)
     f <- update(.self$formula, 1 ~ .)
     update <- .self$data %>% 
-       # regroup(lapply(.self$by, as.symbol)) %>%
       group_by_(.self$by) %>%
       do(mm = model.matrix(f, reduce(dataset = ., s, 
                                      formula = .self$formula,
