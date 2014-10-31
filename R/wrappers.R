@@ -29,6 +29,7 @@
 #' @include model-oprobit-bayes.R
 #' @include model-poisson-bayes.R
 #' @include model-probit-bayes.R
+#' @include model-tobit-bayes.R
 #' @include model-weibull.R
 
 zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
@@ -84,6 +85,8 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
     z5 <- zpoissonbayes$new()
   else if (model == "probit.bayes")
     z5 <- zprobitbayes$new()
+  else if (model == "tobit.bayes")
+    z5 <- ztobitbayes$new()
   else if (model == "weibull")
     z5 <- zweibull$new()
   else

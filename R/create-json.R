@@ -28,6 +28,7 @@
 #' @include model-oprobit-bayes.R
 #' @include model-poisson-bayes.R
 #' @include model-probit-bayes.R
+#' @include model-tobit-bayes.R
 #' @include model-weibull.R
 
 library(jsonlite)
@@ -101,6 +102,9 @@ z5poissonbayes$toJSON()
 z5probitbayes <- zprobitbayes$new()
 z5probitbayes$toJSON()
 
+z5tobitbayes <- ztobitbayes$new()
+z5tobitbayes$toJSON()
+
 z5weibull <- zweibull$new()
 z5weibull$toJSON()
 
@@ -127,6 +131,7 @@ zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "oprobitbayes" = z5oprobitbayes$ljson,
                     "poissonbayes" = z5poissonbayes$ljson,
                     "probitbayes" = z5probitbayes$ljson,
+                    "tobitbayes" = z5tobitbayes$ljson,
                     "weibull" = z5weibull$ljson))
 
 # cat(toJSON(zeligmodels, pretty = TRUE))
