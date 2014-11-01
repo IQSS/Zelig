@@ -3,10 +3,10 @@ zgee <- setRefClass("Zelig-gee",
                     contains = "Zelig")
 
 zgee$methods(
-  zelig = function(formula, id, ..., R = NULL, corstr = "independence", data, by = NULL) {
+  zelig = function(formula, id, ..., zcor = NULL, corstr = "independence", data, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
-    if (corstr == "fixed" && is.null(R))
+    if (corstr == "fixed" && is.null(zcor))
       stop("R must be defined")
     # if id is a valid column-name in data, then we just need to extract the
     # column and re-order the data.frame and cluster information
@@ -17,7 +17,7 @@ zgee$methods(
     }
     .self$model.call$family <- call(.self$family, .self$link)
     .self$model.call$id <- id
-    .self$model.call$R <- R
+    .self$model.call$zcor <- zcor
     .self$model.call$corstr <- corstr
     callSuper(formula = formula, data = data, ..., by = by)
   }
