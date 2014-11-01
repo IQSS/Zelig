@@ -161,25 +161,7 @@ X:
     
 
     x.low <- setx(z.out, numst2 = 0)
-
-
-::
-
-    ## Error in terms(lm(formula, data), "predvars"): error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
-    ## Calls: lm -> lm.fit -> Ops.Surv
-
-
-.. sourcecode:: r
-    
-
     x.high <- setx(z.out, numst2= 1)
-
-
-::
-
-    ## Error in terms(lm(formula, data), "predvars"): error in evaluating the argument 'x' in selecting a method for function 'terms': Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time
-    ## Calls: lm -> lm.fit -> Ops.Surv
-
 
 
 Simulate expected values (qi$ev) and first differences (qi$fd):
@@ -204,23 +186,23 @@ Simulate expected values (qi$ev) and first differences (qi$fd):
     ##  sim x :
     ##  -----
     ## ev
-    ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.7100528 0.01309083 0.7102303 0.6833987 0.7348151
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 18.26673 2.453344 17.96374 14.0495 23.63974
     ## pv
-    ##          0     1
-    ## [1,] 0.289 0.711
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 18.26673 2.453344 17.96374 14.0495 23.63974
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##           mean         sd       50%      2.5%    97.5%
-    ## [1,] 0.8231874 0.01030848 0.8233464 0.8015839 0.841741
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 31.78883 3.691845 31.61766 25.28495 39.49397
     ## pv
-    ##          0     1
-    ## [1,] 0.161 0.839
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 31.78883 3.691845 31.61766 25.28495 39.49397
     ## fd
-    ##           mean         sd       50%       2.5%    97.5%
-    ## [1,] 0.1131346 0.01174466 0.1133255 0.08971273 0.135815
+    ##      mean       sd      50%     2.5%    97.5%
+    ## 1 13.5221 3.640255 13.28077 6.972665 21.32603
 
 
 

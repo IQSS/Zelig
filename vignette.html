@@ -102,6 +102,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-tobitbayes">zelig-tobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-probitgee">zelig-probitgee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -346,6 +347,21 @@
 <li><a class="reference internal" href="#id123">See also</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#zelig-probitgee">zelig-probitgee</a><ul>
+<li><a class="reference internal" href="#id124">Syntax</a></li>
+<li><a class="reference internal" href="#id125">Additional Inputs</a></li>
+<li><a class="reference internal" href="#id126">Examples</a><ul>
+<li><a class="reference internal" href="#example-with-stationary-3-dependence">Example with Stationary 3 Dependence</a></li>
+<li><a class="reference internal" href="#id127">Simulating First Differences</a></li>
+<li><a class="reference internal" href="#example-with-fixed-correlation-structure">Example with Fixed Correlation Structure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id128">The Model</a></li>
+<li><a class="reference internal" href="#id129">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id130">Output Values</a></li>
+<li><a class="reference internal" href="#id131">See also</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -411,6 +427,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-tobitbayes">zelig-tobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-probitgee">zelig-probitgee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -454,6 +471,7 @@
 <li><a class="reference internal" href="zelig-probitbayes.html#zprobitbayes"><em>Bayesian Probit Regression</em></a>: <tt class="docutils literal"><span class="pre">zprobitbayes$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-tobitbayes.html#ztobitbayes"><em>Bayesian Tobit Regression</em></a>: <tt class="docutils literal"><span class="pre">ztobitbayes$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-gammagee.html#zgammagee"><em>Generalized Estimating Equation for Gamma Regression</em></a>: <tt class="docutils literal"><span class="pre">zgammagee$new()</span></tt></li>
+<li><a class="reference internal" href="zelig-probitgee.html#zprobitgee"><em>Generalized Estimating Equation for Probit Regression</em></a>: <tt class="docutils literal"><span class="pre">zprobitgee$new()</span></tt></li>
 </ul>
 <hr class="docutils" />
 </div>
@@ -559,17 +577,7 @@ its own cluster.</p>
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
-<span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
-<span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulate expected values and first differences:</p>
@@ -584,23 +592,23 @@ X:</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 4.594892 0.1843223 4.59509 4.219607 4.960884</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 15.25314 1.416569 15.21626 12.57592 18.13386</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 4.594892 0.1843223 4.59509 4.219607 4.960884</span>
+<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 14.57396 15.02881 10.48885 0.3992942 52.52459</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.431578 0.1925678 5.432627 5.044559 5.822894</span>
+<span class="c">##       mean      sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 24.26416 1.84284 24.15739 20.94223 28.15189</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.431578 0.1925678 5.432627 5.044559 5.822894</span>
+<span class="c">##          mean    sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 23.25116 23.43 15.65451 0.5542274 84.02236</span>
 <span class="c">## fd</span>
-<span class="c">##        mean        sd       50%     2.5%    97.5%</span>
-<span class="c">## 1 0.8366865 0.2377083 0.8398277 0.377787 1.312504</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 9.011029 2.371775 9.016912 4.608011 13.75459</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -814,22 +822,22 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.44938 1.069529 14.34811 12.52605 16.82741</span>
+<span class="c">## [1,] 14.44615 1.071027 14.35797 12.59052 16.78689</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## [1,] 14.61193 13.38374 10.72441 0.7639122 47.98865</span>
+<span class="c">## [1,] 14.72239 12.44278 11.64117 0.9901817 46.83314</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%   2.5%   97.5%</span>
-<span class="c">## [1,] 19.16686 1.090759 19.07194 17.103 21.3965</span>
+<span class="c">##         mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 19.1989 1.081392 19.13044 17.25731 21.44067</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%     2.5%   97.5%</span>
-<span class="c">## [1,] 19.99428 17.88002 14.95644 1.197142 66.8573</span>
-<span class="c">## fd</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.717475 1.538236 4.733789 1.659306 7.628952</span>
+<span class="c">## [1,] 19.68273 17.12021 15.11255 1.011184 62.42028</span>
+<span class="c">## fd</span>
+<span class="c">##         mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 4.75274 1.528284 4.737792 1.754951 7.583601</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -978,11 +986,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7480162 0.01172188 0.7479808 0.7242193 0.7699176</span>
+<span class="c">##           mean         sd      50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7485079 0.01156338 0.749109 0.7248014 0.7703464</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.277 0.723</span>
+<span class="c">## [1,] 0.247 0.753</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -1018,23 +1026,23 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.8231418 0.01062323 0.8239162 0.8021504 0.8426878</span>
+<span class="c">##           mean         sd       50%      2.5%    97.5%</span>
+<span class="c">## [1,] 0.8226736 0.01020924 0.8228195 0.8018086 0.842495</span>
 <span class="c">## pv</span>
-<span class="c">##         0    1</span>
-<span class="c">## [1,] 0.17 0.83</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.176 0.824</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7098562 0.01296962 0.7103844 0.6825698 0.7336499</span>
+<span class="c">##           mean        sd      50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7096698 0.0130468 0.709652 0.6841382 0.7352514</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.285 0.715</span>
+<span class="c">## [1,] 0.278 0.722</span>
 <span class="c">## fd</span>
-<span class="c">##            mean       sd        50%       2.5%       97.5%</span>
-<span class="c">## [1,] -0.1132857 0.011981 -0.1135318 -0.1365751 -0.09022964</span>
+<span class="c">##            mean         sd        50%       2.5%       97.5%</span>
+<span class="c">## [1,] -0.1130038 0.01169729 -0.1132458 -0.1349504 -0.09015794</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -1239,17 +1247,7 @@ its own cluster.</p>
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
-<span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
-<span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2<span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulate expected values (qi$ev) and first differences (qi$fd):</p>
@@ -1263,23 +1261,23 @@ X:</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7094031 0.01294832 0.7092934 0.6835838 0.7344767</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 18.19362 2.371267 18.11104 14.08417 23.06188</span>
 <span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.297 0.703</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 18.19362 2.371267 18.11104 14.08417 23.06188</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.8227998 0.01019122 0.8231835 0.8034257 0.8421279</span>
+<span class="c">##       mean       sd     50%     2.5%    97.5%</span>
+<span class="c">## 1 31.90019 3.469152 31.7184 25.59735 39.52204</span>
 <span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.168 0.832</span>
+<span class="c">##       mean       sd     50%     2.5%    97.5%</span>
+<span class="c">## 1 31.90019 3.469152 31.7184 25.59735 39.52204</span>
 <span class="c">## fd</span>
-<span class="c">##           mean        sd       50%       2.5%     97.5%</span>
-<span class="c">## [1,] 0.1133967 0.0116871 0.1132278 0.09149872 0.1352678</span>
+<span class="c">##       mean       sd     50%     2.5%    97.5%</span>
+<span class="c">## 1 13.70656 3.468008 13.7663 7.035872 20.85506</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1485,22 +1483,22 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.437875 0.1859963 5.439866 5.077088 5.804771</span>
+<span class="c">## 1 5.434484 0.1997577 5.428918 5.042411 5.834617</span>
 <span class="c">## pv</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.437875 0.1859963 5.439866 5.077088 5.804771</span>
+<span class="c">## 1 5.434484 0.1997577 5.428918 5.042411 5.834617</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 4.592359 0.1853561 4.582546 4.254108 4.967409</span>
+<span class="c">## 1 4.610012 0.1803894 4.609983 4.263222 4.951356</span>
 <span class="c">## pv</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 4.592359 0.1853561 4.582546 4.254108 4.967409</span>
+<span class="c">## 1 4.610012 0.1803894 4.609983 4.263222 4.951356</span>
 <span class="c">## fd</span>
-<span class="c">##         mean       sd        50%      2.5%      97.5%</span>
-<span class="c">## 1 -0.8455156 0.235801 -0.8515615 -1.309244 -0.3689678</span>
+<span class="c">##         mean        sd        50%      2.5%     97.5%</span>
+<span class="c">## 1 -0.8244712 0.2384615 -0.8257637 -1.289853 -0.354111</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -1717,14 +1715,14 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd    50%    2.5%    97.5%</span>
-<span class="c">## [1,] 2.975543 0.3651927 2.9417 2.34888 3.758461</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 2.963261 0.3432443 2.934795 2.340916 3.680897</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##     0     1     2     3     4     5     6     7     8     9    10    11</span>
-<span class="c">## 0.172 0.203 0.178 0.119 0.109 0.061 0.056 0.034 0.021 0.016 0.007 0.012</span>
-<span class="c">##    12    13    14    15    16    18    19</span>
-<span class="c">## 0.002 0.002 0.001 0.004 0.001 0.001 0.001</span>
+<span class="c">## 0.212 0.236 0.199 0.118 0.087 0.053 0.038 0.024 0.015 0.007 0.005 0.004</span>
+<span class="c">##    12    15</span>
+<span class="c">## 0.001 0.001</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1916,22 +1914,22 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 5.436495 0.1924933 5.435165 5.067231 5.810911</span>
+<span class="c">## [1,] 5.434555 0.1863455 5.430816 5.085397 5.810403</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 5.425581 2.682227 5.485109 0.153477 10.73978</span>
+<span class="c">##          mean      sd     50%      2.5%    97.5%</span>
+<span class="c">## [1,] 5.528254 2.79554 5.55017 0.2026511 10.78222</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##         mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.59686 0.1798946 4.599766 4.243216 4.950844</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 4.597008 0.1861236 4.595616 4.231923 4.952495</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
-<span class="c">## [1,] 4.610479 2.869062 4.580247 -0.9931268 10.06305</span>
+<span class="c">##          mean       sd     50%       2.5%    97.5%</span>
+<span class="c">## [1,] 4.393074 2.789529 4.37476 -0.8702172 9.832896</span>
 <span class="c">## fd</span>
-<span class="c">##            mean        sd        50%      2.5%      97.5%</span>
-<span class="c">## [1,] -0.8396348 0.2371093 -0.8419579 -1.299043 -0.4081257</span>
+<span class="c">##            mean        sd        50%     2.5%      97.5%</span>
+<span class="c">## [1,] -0.8375471 0.2289522 -0.8386266 -1.27664 -0.3915574</span>
 </pre></div>
 </div>
 <p>A visual summary of quantities of interest:</p>
@@ -2098,11 +2096,11 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## [1,] 3.248264 0.2311284 3.23742 2.839613 3.747231</span>
+<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 3.248014 0.2451944 3.241129 2.766096 3.736676</span>
 <span class="c">## pv</span>
 <span class="c">##       mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.196 1.767685   3    0     7</span>
+<span class="c">## [1,] 3.346 1.847619   3    0     7</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -2463,11 +2461,11 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##             mean           sd         50%        2.5%       97.5%</span>
-<span class="c">## [1,] 0.002403635 0.0001573793 0.002399862 0.002119693 0.002732888</span>
+<span class="c">##             mean           sd         50%        2.5%      97.5%</span>
+<span class="c">## [1,] 0.002401692 0.0001502532 0.002399357 0.002124212 0.00269711</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.998 0.002</span>
+<span class="c">## [1,] 0.999 0.001</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -2497,16 +2495,748 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">## [1] 1</span>
 <span class="c">##</span>
 <span class="c">##</span>
-<span class="c">## Call:  stats::glm(formula = vote ~ race + educate, family = binomial(&quot;logit&quot;),</span>
-<span class="c">##     data = .)</span>
+<span class="c">## Call:</span>
+<span class="c">## geepack::geeglm(formula = vote ~ race + educate, family = binomial(&quot;probit&quot;),</span>
+<span class="c">##     data = ., id = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,</span>
+<span class="c">##     2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L,</span>
+<span class="c">##     3L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L,</span>
+<span class="c">##     5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 6L, 6L, 6L, 6L, 6L,</span>
+<span class="c">##     6L, 6L, 6L, 6L, 6L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L, 7L,</span>
+<span class="c">##     8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 8L, 9L, 9L, 9L, 9L, 9L,</span>
+<span class="c">##     9L, 9L, 9L, 9L, 9L, 10L, 10L, 10L, 10L, 10L, 10L, 10L, 10L,</span>
+<span class="c">##     10L, 10L, 11L, 11L, 11L, 11L, 11L, 11L, 11L, 11L, 11L, 11L,</span>
+<span class="c">##     12L, 12L, 12L, 12L, 12L, 12L, 12L, 12L, 12L, 12L, 13L, 13L,</span>
+<span class="c">##     13L, 13L, 13L, 13L, 13L, 13L, 13L, 13L, 14L, 14L, 14L, 14L,</span>
+<span class="c">##     14L, 14L, 14L, 14L, 14L, 14L, 15L, 15L, 15L, 15L, 15L, 15L,</span>
+<span class="c">##     15L, 15L, 15L, 15L, 16L, 16L, 16L, 16L, 16L, 16L, 16L, 16L,</span>
+<span class="c">##     16L, 16L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L, 17L,</span>
+<span class="c">##     18L, 18L, 18L, 18L, 18L, 18L, 18L, 18L, 18L, 18L, 19L, 19L,</span>
+<span class="c">##     19L, 19L, 19L, 19L, 19L, 19L, 19L, 19L, 20L, 20L, 20L, 20L,</span>
+<span class="c">##     20L, 20L, 20L, 20L, 20L, 20L, 21L, 21L, 21L, 21L, 21L, 21L,</span>
+<span class="c">##     21L, 21L, 21L, 21L, 22L, 22L, 22L, 22L, 22L, 22L, 22L, 22L,</span>
+<span class="c">##     22L, 22L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L, 23L,</span>
+<span class="c">##     24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 24L, 25L, 25L,</span>
+<span class="c">##     25L, 25L, 25L, 25L, 25L, 25L, 25L, 25L, 26L, 26L, 26L, 26L,</span>
+<span class="c">##     26L, 26L, 26L, 26L, 26L, 26L, 27L, 27L, 27L, 27L, 27L, 27L,</span>
+<span class="c">##     27L, 27L, 27L, 27L, 28L, 28L, 28L, 28L, 28L, 28L, 28L, 28L,</span>
+<span class="c">##     28L, 28L, 29L, 29L, 29L, 29L, 29L, 29L, 29L, 29L, 29L, 29L,</span>
+<span class="c">##     30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 31L, 31L,</span>
+<span class="c">##     31L, 31L, 31L, 31L, 31L, 31L, 31L, 31L, 32L, 32L, 32L, 32L,</span>
+<span class="c">##     32L, 32L, 32L, 32L, 32L, 32L, 33L, 33L, 33L, 33L, 33L, 33L,</span>
+<span class="c">##     33L, 33L, 33L, 33L, 34L, 34L, 34L, 34L, 34L, 34L, 34L, 34L,</span>
+<span class="c">##     34L, 34L, 35L, 35L, 35L, 35L, 35L, 35L, 35L, 35L, 35L, 35L,</span>
+<span class="c">##     36L, 36L, 36L, 36L, 36L, 36L, 36L, 36L, 36L, 36L, 37L, 37L,</span>
+<span class="c">##     37L, 37L, 37L, 37L, 37L, 37L, 37L, 37L, 38L, 38L, 38L, 38L,</span>
+<span class="c">##     38L, 38L, 38L, 38L, 38L, 38L, 39L, 39L, 39L, 39L, 39L, 39L,</span>
+<span class="c">##     39L, 39L, 39L, 39L, 40L, 40L, 40L, 40L, 40L, 40L, 40L, 40L,</span>
+<span class="c">##     40L, 40L, 41L, 41L, 41L, 41L, 41L, 41L, 41L, 41L, 41L, 41L,</span>
+<span class="c">##     42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 42L, 43L, 43L,</span>
+<span class="c">##     43L, 43L, 43L, 43L, 43L, 43L, 43L, 43L, 44L, 44L, 44L, 44L,</span>
+<span class="c">##     44L, 44L, 44L, 44L, 44L, 44L, 45L, 45L, 45L, 45L, 45L, 45L,</span>
+<span class="c">##     45L, 45L, 45L, 45L, 46L, 46L, 46L, 46L, 46L, 46L, 46L, 46L,</span>
+<span class="c">##     46L, 46L, 47L, 47L, 47L, 47L, 47L, 47L, 47L, 47L, 47L, 47L,</span>
+<span class="c">##     48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 48L, 49L, 49L,</span>
+<span class="c">##     49L, 49L, 49L, 49L, 49L, 49L, 49L, 49L, 50L, 50L, 50L, 50L,</span>
+<span class="c">##     50L, 50L, 50L, 50L, 50L, 50L, 51L, 51L, 51L, 51L, 51L, 51L,</span>
+<span class="c">##     51L, 51L, 51L, 51L, 52L, 52L, 52L, 52L, 52L, 52L, 52L, 52L,</span>
+<span class="c">##     52L, 52L, 53L, 53L, 53L, 53L, 53L, 53L, 53L, 53L, 53L, 53L,</span>
+<span class="c">##     54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 54L, 55L, 55L,</span>
+<span class="c">##     55L, 55L, 55L, 55L, 55L, 55L, 55L, 55L, 56L, 56L, 56L, 56L,</span>
+<span class="c">##     56L, 56L, 56L, 56L, 56L, 56L, 57L, 57L, 57L, 57L, 57L, 57L,</span>
+<span class="c">##     57L, 57L, 57L, 57L, 58L, 58L, 58L, 58L, 58L, 58L, 58L, 58L,</span>
+<span class="c">##     58L, 58L, 59L, 59L, 59L, 59L, 59L, 59L, 59L, 59L, 59L, 59L,</span>
+<span class="c">##     60L, 60L, 60L, 60L, 60L, 60L, 60L, 60L, 60L, 60L, 61L, 61L,</span>
+<span class="c">##     61L, 61L, 61L, 61L, 61L, 61L, 61L, 61L, 62L, 62L, 62L, 62L,</span>
+<span class="c">##     62L, 62L, 62L, 62L, 62L, 62L, 63L, 63L, 63L, 63L, 63L, 63L,</span>
+<span class="c">##     63L, 63L, 63L, 63L, 64L, 64L, 64L, 64L, 64L, 64L, 64L, 64L,</span>
+<span class="c">##     64L, 64L, 65L, 65L, 65L, 65L, 65L, 65L, 65L, 65L, 65L, 65L,</span>
+<span class="c">##     66L, 66L, 66L, 66L, 66L, 66L, 66L, 66L, 66L, 66L, 67L, 67L,</span>
+<span class="c">##     67L, 67L, 67L, 67L, 67L, 67L, 67L, 67L, 68L, 68L, 68L, 68L,</span>
+<span class="c">##     68L, 68L, 68L, 68L, 68L, 68L, 69L, 69L, 69L, 69L, 69L, 69L,</span>
+<span class="c">##     69L, 69L, 69L, 69L, 70L, 70L, 70L, 70L, 70L, 70L, 70L, 70L,</span>
+<span class="c">##     70L, 70L, 71L, 71L, 71L, 71L, 71L, 71L, 71L, 71L, 71L, 71L,</span>
+<span class="c">##     72L, 72L, 72L, 72L, 72L, 72L, 72L, 72L, 72L, 72L, 73L, 73L,</span>
+<span class="c">##     73L, 73L, 73L, 73L, 73L, 73L, 73L, 73L, 74L, 74L, 74L, 74L,</span>
+<span class="c">##     74L, 74L, 74L, 74L, 74L, 74L, 75L, 75L, 75L, 75L, 75L, 75L,</span>
+<span class="c">##     75L, 75L, 75L, 75L, 76L, 76L, 76L, 76L, 76L, 76L, 76L, 76L,</span>
+<span class="c">##     76L, 76L, 77L, 77L, 77L, 77L, 77L, 77L, 77L, 77L, 77L, 77L,</span>
+<span class="c">##     78L, 78L, 78L, 78L, 78L, 78L, 78L, 78L, 78L, 78L, 79L, 79L,</span>
+<span class="c">##     79L, 79L, 79L, 79L, 79L, 79L, 79L, 79L, 80L, 80L, 80L, 80L,</span>
+<span class="c">##     80L, 80L, 80L, 80L, 80L, 80L, 81L, 81L, 81L, 81L, 81L, 81L,</span>
+<span class="c">##     81L, 81L, 81L, 81L, 82L, 82L, 82L, 82L, 82L, 82L, 82L, 82L,</span>
+<span class="c">##     82L, 82L, 83L, 83L, 83L, 83L, 83L, 83L, 83L, 83L, 83L, 83L,</span>
+<span class="c">##     84L, 84L, 84L, 84L, 84L, 84L, 84L, 84L, 84L, 84L, 85L, 85L,</span>
+<span class="c">##     85L, 85L, 85L, 85L, 85L, 85L, 85L, 85L, 86L, 86L, 86L, 86L,</span>
+<span class="c">##     86L, 86L, 86L, 86L, 86L, 86L, 87L, 87L, 87L, 87L, 87L, 87L,</span>
+<span class="c">##     87L, 87L, 87L, 87L, 88L, 88L, 88L, 88L, 88L, 88L, 88L, 88L,</span>
+<span class="c">##     88L, 88L, 89L, 89L, 89L, 89L, 89L, 89L, 89L, 89L, 89L, 89L,</span>
+<span class="c">##     90L, 90L, 90L, 90L, 90L, 90L, 90L, 90L, 90L, 90L, 91L, 91L,</span>
+<span class="c">##     91L, 91L, 91L, 91L, 91L, 91L, 91L, 91L, 92L, 92L, 92L, 92L,</span>
+<span class="c">##     92L, 92L, 92L, 92L, 92L, 92L, 93L, 93L, 93L, 93L, 93L, 93L,</span>
+<span class="c">##     93L, 93L, 93L, 93L, 94L, 94L, 94L, 94L, 94L, 94L, 94L, 94L,</span>
+<span class="c">##     94L, 94L, 95L, 95L, 95L, 95L, 95L, 95L, 95L, 95L, 95L, 95L,</span>
+<span class="c">##     96L, 96L, 96L, 96L, 96L, 96L, 96L, 96L, 96L, 96L, 97L, 97L,</span>
+<span class="c">##     97L, 97L, 97L, 97L, 97L, 97L, 97L, 97L, 98L, 98L, 98L, 98L,</span>
+<span class="c">##     98L, 98L, 98L, 98L, 98L, 98L, 99L, 99L, 99L, 99L, 99L, 99L,</span>
+<span class="c">##     99L, 99L, 99L, 99L, 100L, 100L, 100L, 100L, 100L, 100L, 100L,</span>
+<span class="c">##     100L, 100L, 100L, 101L, 101L, 101L, 101L, 101L, 101L, 101L,</span>
+<span class="c">##     101L, 101L, 101L, 102L, 102L, 102L, 102L, 102L, 102L, 102L,</span>
+<span class="c">##     102L, 102L, 102L, 103L, 103L, 103L, 103L, 103L, 103L, 103L,</span>
+<span class="c">##     103L, 103L, 103L, 104L, 104L, 104L, 104L, 104L, 104L, 104L,</span>
+<span class="c">##     104L, 104L, 104L, 105L, 105L, 105L, 105L, 105L, 105L, 105L,</span>
+<span class="c">##     105L, 105L, 105L, 106L, 106L, 106L, 106L, 106L, 106L, 106L,</span>
+<span class="c">##     106L, 106L, 106L, 107L, 107L, 107L, 107L, 107L, 107L, 107L,</span>
+<span class="c">##     107L, 107L, 107L, 108L, 108L, 108L, 108L, 108L, 108L, 108L,</span>
+<span class="c">##     108L, 108L, 108L, 109L, 109L, 109L, 109L, 109L, 109L, 109L,</span>
+<span class="c">##     109L, 109L, 109L, 110L, 110L, 110L, 110L, 110L, 110L, 110L,</span>
+<span class="c">##     110L, 110L, 110L, 111L, 111L, 111L, 111L, 111L, 111L, 111L,</span>
+<span class="c">##     111L, 111L, 111L, 112L, 112L, 112L, 112L, 112L, 112L, 112L,</span>
+<span class="c">##     112L, 112L, 112L, 113L, 113L, 113L, 113L, 113L, 113L, 113L,</span>
+<span class="c">##     113L, 113L, 113L, 114L, 114L, 114L, 114L, 114L, 114L, 114L,</span>
+<span class="c">##     114L, 114L, 114L, 115L, 115L, 115L, 115L, 115L, 115L, 115L,</span>
+<span class="c">##     115L, 115L, 115L, 116L, 116L, 116L, 116L, 116L, 116L, 116L,</span>
+<span class="c">##     116L, 116L, 116L, 117L, 117L, 117L, 117L, 117L, 117L, 117L,</span>
+<span class="c">##     117L, 117L, 117L, 118L, 118L, 118L, 118L, 118L, 118L, 118L,</span>
+<span class="c">##     118L, 118L, 118L, 119L, 119L, 119L, 119L, 119L, 119L, 119L,</span>
+<span class="c">##     119L, 119L, 119L, 120L, 120L, 120L, 120L, 120L, 120L, 120L,</span>
+<span class="c">##     120L, 120L, 120L, 121L, 121L, 121L, 121L, 121L, 121L, 121L,</span>
+<span class="c">##     121L, 121L, 121L, 122L, 122L, 122L, 122L, 122L, 122L, 122L,</span>
+<span class="c">##     122L, 122L, 122L, 123L, 123L, 123L, 123L, 123L, 123L, 123L,</span>
+<span class="c">##     123L, 123L, 123L, 124L, 124L, 124L, 124L, 124L, 124L, 124L,</span>
+<span class="c">##     124L, 124L, 124L, 125L, 125L, 125L, 125L, 125L, 125L, 125L,</span>
+<span class="c">##     125L, 125L, 125L, 126L, 126L, 126L, 126L, 126L, 126L, 126L,</span>
+<span class="c">##     126L, 126L, 126L, 127L, 127L, 127L, 127L, 127L, 127L, 127L,</span>
+<span class="c">##     127L, 127L, 127L, 128L, 128L, 128L, 128L, 128L, 128L, 128L,</span>
+<span class="c">##     128L, 128L, 128L, 129L, 129L, 129L, 129L, 129L, 129L, 129L,</span>
+<span class="c">##     129L, 129L, 129L, 130L, 130L, 130L, 130L, 130L, 130L, 130L,</span>
+<span class="c">##     130L, 130L, 130L, 131L, 131L, 131L, 131L, 131L, 131L, 131L,</span>
+<span class="c">##     131L, 131L, 131L, 132L, 132L, 132L, 132L, 132L, 132L, 132L,</span>
+<span class="c">##     132L, 132L, 132L, 133L, 133L, 133L, 133L, 133L, 133L, 133L,</span>
+<span class="c">##     133L, 133L, 133L, 134L, 134L, 134L, 134L, 134L, 134L, 134L,</span>
+<span class="c">##     134L, 134L, 134L, 135L, 135L, 135L, 135L, 135L, 135L, 135L,</span>
+<span class="c">##     135L, 135L, 135L, 136L, 136L, 136L, 136L, 136L, 136L, 136L,</span>
+<span class="c">##     136L, 136L, 136L, 137L, 137L, 137L, 137L, 137L, 137L, 137L,</span>
+<span class="c">##     137L, 137L, 137L, 138L, 138L, 138L, 138L, 138L, 138L, 138L,</span>
+<span class="c">##     138L, 138L, 138L, 139L, 139L, 139L, 139L, 139L, 139L, 139L,</span>
+<span class="c">##     139L, 139L, 139L, 140L, 140L, 140L, 140L, 140L, 140L, 140L,</span>
+<span class="c">##     140L, 140L, 140L, 141L, 141L, 141L, 141L, 141L, 141L, 141L,</span>
+<span class="c">##     141L, 141L, 141L, 142L, 142L, 142L, 142L, 142L, 142L, 142L,</span>
+<span class="c">##     142L, 142L, 142L, 143L, 143L, 143L, 143L, 143L, 143L, 143L,</span>
+<span class="c">##     143L, 143L, 143L, 144L, 144L, 144L, 144L, 144L, 144L, 144L,</span>
+<span class="c">##     144L, 144L, 144L, 145L, 145L, 145L, 145L, 145L, 145L, 145L,</span>
+<span class="c">##     145L, 145L, 145L, 146L, 146L, 146L, 146L, 146L, 146L, 146L,</span>
+<span class="c">##     146L, 146L, 146L, 147L, 147L, 147L, 147L, 147L, 147L, 147L,</span>
+<span class="c">##     147L, 147L, 147L, 148L, 148L, 148L, 148L, 148L, 148L, 148L,</span>
+<span class="c">##     148L, 148L, 148L, 149L, 149L, 149L, 149L, 149L, 149L, 149L,</span>
+<span class="c">##     149L, 149L, 149L, 150L, 150L, 150L, 150L, 150L, 150L, 150L,</span>
+<span class="c">##     150L, 150L, 150L, 151L, 151L, 151L, 151L, 151L, 151L, 151L,</span>
+<span class="c">##     151L, 151L, 151L, 152L, 152L, 152L, 152L, 152L, 152L, 152L,</span>
+<span class="c">##     152L, 152L, 152L, 153L, 153L, 153L, 153L, 153L, 153L, 153L,</span>
+<span class="c">##     153L, 153L, 153L, 154L, 154L, 154L, 154L, 154L, 154L, 154L,</span>
+<span class="c">##     154L, 154L, 154L, 155L, 155L, 155L, 155L, 155L, 155L, 155L,</span>
+<span class="c">##     155L, 155L, 155L, 156L, 156L, 156L, 156L, 156L, 156L, 156L,</span>
+<span class="c">##     156L, 156L, 156L, 157L, 157L, 157L, 157L, 157L, 157L, 157L,</span>
+<span class="c">##     157L, 157L, 157L, 158L, 158L, 158L, 158L, 158L, 158L, 158L,</span>
+<span class="c">##     158L, 158L, 158L, 159L, 159L, 159L, 159L, 159L, 159L, 159L,</span>
+<span class="c">##     159L, 159L, 159L, 160L, 160L, 160L, 160L, 160L, 160L, 160L,</span>
+<span class="c">##     160L, 160L, 160L, 161L, 161L, 161L, 161L, 161L, 161L, 161L,</span>
+<span class="c">##     161L, 161L, 161L, 162L, 162L, 162L, 162L, 162L, 162L, 162L,</span>
+<span class="c">##     162L, 162L, 162L, 163L, 163L, 163L, 163L, 163L, 163L, 163L,</span>
+<span class="c">##     163L, 163L, 163L, 164L, 164L, 164L, 164L, 164L, 164L, 164L,</span>
+<span class="c">##     164L, 164L, 164L, 165L, 165L, 165L, 165L, 165L, 165L, 165L,</span>
+<span class="c">##     165L, 165L, 165L, 166L, 166L, 166L, 166L, 166L, 166L, 166L,</span>
+<span class="c">##     166L, 166L, 166L, 167L, 167L, 167L, 167L, 167L, 167L, 167L,</span>
+<span class="c">##     167L, 167L, 167L, 168L, 168L, 168L, 168L, 168L, 168L, 168L,</span>
+<span class="c">##     168L, 168L, 168L, 169L, 169L, 169L, 169L, 169L, 169L, 169L,</span>
+<span class="c">##     169L, 169L, 169L, 170L, 170L, 170L, 170L, 170L, 170L, 170L,</span>
+<span class="c">##     170L, 170L, 170L, 171L, 171L, 171L, 171L, 171L, 171L, 171L,</span>
+<span class="c">##     171L, 171L, 171L, 172L, 172L, 172L, 172L, 172L, 172L, 172L,</span>
+<span class="c">##     172L, 172L, 172L, 173L, 173L, 173L, 173L, 173L, 173L, 173L,</span>
+<span class="c">##     173L, 173L, 173L, 174L, 174L, 174L, 174L, 174L, 174L, 174L,</span>
+<span class="c">##     174L, 174L, 174L, 175L, 175L, 175L, 175L, 175L, 175L, 175L,</span>
+<span class="c">##     175L, 175L, 175L, 176L, 176L, 176L, 176L, 176L, 176L, 176L,</span>
+<span class="c">##     176L, 176L, 176L, 177L, 177L, 177L, 177L, 177L, 177L, 177L,</span>
+<span class="c">##     177L, 177L, 177L, 178L, 178L, 178L, 178L, 178L, 178L, 178L,</span>
+<span class="c">##     178L, 178L, 178L, 179L, 179L, 179L, 179L, 179L, 179L, 179L,</span>
+<span class="c">##     179L, 179L, 179L, 180L, 180L, 180L, 180L, 180L, 180L, 180L,</span>
+<span class="c">##     180L, 180L, 180L, 181L, 181L, 181L, 181L, 181L, 181L, 181L,</span>
+<span class="c">##     181L, 181L, 181L, 182L, 182L, 182L, 182L, 182L, 182L, 182L,</span>
+<span class="c">##     182L, 182L, 182L, 183L, 183L, 183L, 183L, 183L, 183L, 183L,</span>
+<span class="c">##     183L, 183L, 183L, 184L, 184L, 184L, 184L, 184L, 184L, 184L,</span>
+<span class="c">##     184L, 184L, 184L, 185L, 185L, 185L, 185L, 185L, 185L, 185L,</span>
+<span class="c">##     185L, 185L, 185L, 186L, 186L, 186L, 186L, 186L, 186L, 186L,</span>
+<span class="c">##     186L, 186L, 186L, 187L, 187L, 187L, 187L, 187L, 187L, 187L,</span>
+<span class="c">##     187L, 187L, 187L, 188L, 188L, 188L, 188L, 188L, 188L, 188L,</span>
+<span class="c">##     188L, 188L, 188L, 189L, 189L, 189L, 189L, 189L, 189L, 189L,</span>
+<span class="c">##     189L, 189L, 189L, 190L, 190L, 190L, 190L, 190L, 190L, 190L,</span>
+<span class="c">##     190L, 190L, 190L, 191L, 191L, 191L, 191L, 191L, 191L, 191L,</span>
+<span class="c">##     191L, 191L, 191L, 192L, 192L, 192L, 192L, 192L, 192L, 192L,</span>
+<span class="c">##     192L, 192L, 192L, 193L, 193L, 193L, 193L, 193L, 193L, 193L,</span>
+<span class="c">##     193L, 193L, 193L, 194L, 194L, 194L, 194L, 194L, 194L, 194L,</span>
+<span class="c">##     194L, 194L, 194L, 195L, 195L, 195L, 195L, 195L, 195L, 195L,</span>
+<span class="c">##     195L, 195L, 195L, 196L, 196L, 196L, 196L, 196L, 196L, 196L,</span>
+<span class="c">##     196L, 196L, 196L, 197L, 197L, 197L, 197L, 197L, 197L, 197L,</span>
+<span class="c">##     197L, 197L, 197L, 198L, 198L, 198L, 198L, 198L, 198L, 198L,</span>
+<span class="c">##     198L, 198L, 198L, 199L, 199L, 199L, 199L, 199L, 199L, 199L,</span>
+<span class="c">##     199L, 199L, 199L, 200L, 200L, 200L, 200L, 200L, 200L, 200L,</span>
+<span class="c">##     200L, 200L, 200L), zcor = c(0.5, 1, 1, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 1, 1, 1, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 1,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 0.5, 1, 0.5, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1,</span>
+<span class="c">##     1, 0.5, 1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 0.5, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 1,</span>
+<span class="c">##     0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 0.5,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5,</span>
+<span class="c">##     0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="c">##     1, 1, 1, 1, 1, 1), corstr = &quot;fixed&quot;)</span>
 <span class="c">##</span>
 <span class="c">## Coefficients:</span>
-<span class="c">## (Intercept)    racewhite      educate</span>
-<span class="c">##     -1.2189       0.5022       0.1610</span>
+<span class="c">## (Intercept)   racewhite     educate</span>
+<span class="c">##   -24.55278   -19.89639  -296.26380</span>
 <span class="c">##</span>
-<span class="c">## Degrees of Freedom: 1999 Total (i.e. Null);  1997 Residual</span>
-<span class="c">## Null Deviance:       2267</span>
-<span class="c">## Residual Deviance: 2138  AIC: 2144</span>
+<span class="c">## Degrees of Freedom: 2000 Total (i.e. Null);  1997 Residual</span>
+<span class="c">##</span>
+<span class="c">## Scale Link:                   identity</span>
+<span class="c">## Estimated Scale Parameters:  [1] 3.359685e+15</span>
+<span class="c">##</span>
+<span class="c">## Correlation:  Structure = fixed    Link = identity</span>
+<span class="c">## Estimated Correlation Parameters:</span>
+<span class="c">## alpha:1</span>
+<span class="c">##       1</span>
+<span class="c">##</span>
+<span class="c">## Number of clusters:   200   Maximum cluster size: 10</span>
+<span class="c">##</span>
 <span class="c">## Next step: Use &#39;setx&#39; method</span>
 </pre></div>
 </div>
@@ -2523,11 +3253,11 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7728246 0.01022554 0.7727693 0.7528031 0.7930372</span>
+<span class="c">##              mean sd          50%         2.5%        97.5%</span>
+<span class="c">## [1,] 2.220446e-16  0 2.220446e-16 2.220446e-16 2.220446e-16</span>
 <span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.244 0.756</span>
+<span class="c">##      [,1]</span>
+<span class="c">## [1,]    1</span>
 </pre></div>
 </div>
 </div>
@@ -2764,7 +3494,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7fe312be2e28&gt;</span>
+<span class="c">## &lt;environment: 0x7f910e4f0f50&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -2789,11 +3519,11 @@ default prior correction method for case control correction):</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7728246 0.01022554 0.7727693 0.7528031 0.7930372</span>
+<span class="c">##              mean sd          50%         2.5%        97.5%</span>
+<span class="c">## [1,] 2.220446e-16  0 2.220446e-16 2.220446e-16 2.220446e-16</span>
 <span class="c">## pv</span>
-<span class="c">##          0     1</span>
-<span class="c">## [1,] 0.244 0.756</span>
+<span class="c">##      [,1]</span>
+<span class="c">## [1,]    1</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -3057,10 +3787,10 @@ its own cluster.</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.534063 0.6412206 1.444938 0.5685301 3.002123</span>
+<span class="c">## 1 1.532134 0.6451426 1.461142 0.4906876 2.911972</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.213643 4.285599 1.220935    0 13.30927</span>
+<span class="c">##          mean       sd      50% 2.5%   97.5%</span>
+<span class="c">## [1,] 3.253126 4.291598 1.453459    0 13.8559</span>
 </pre></div>
 </div>
 </div>
@@ -3085,23 +3815,23 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 1.204777 0.7487216 1.066459 0.162634 2.929993</span>
+<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 1.219587 0.7820647 1.056607 0.1938312 3.132361</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.085525 4.389859 1.076885    0 14.92368</span>
+<span class="c">## [1,] 3.156665 4.316591 1.533816    0 14.58822</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 2.081584 1.004855 1.923635 0.4795757 4.391376</span>
+<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 2.028201 0.9736607 1.880171 0.5858679 4.234879</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.669501 4.582729 2.002288    0 15.47859</span>
+<span class="c">## [1,] 3.541122 4.448873 1.869328    0 15.11714</span>
 <span class="c">## fd</span>
-<span class="c">##        mean       sd       50%      2.5%    97.5%</span>
-<span class="c">## 1 0.8768065 1.206082 0.7855366 -1.392322 3.591732</span>
+<span class="c">##        mean      sd       50%      2.5%    97.5%</span>
+<span class="c">## 1 0.8086145 1.19362 0.7742679 -1.429158 3.302684</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -3538,7 +4268,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.5592 0.2108 0.2300</span>
+<span class="c">## 0.5585 0.2083 0.2332</span>
 </pre></div>
 </div>
 </div>
@@ -3566,7 +4296,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.7116 0.1228 0.1656</span>
+<span class="c">## 0.7181 0.1230 0.1589</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -3578,7 +4308,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.3995 0.3056 0.2949</span>
+<span class="c">## 0.4060 0.3068 0.2872</span>
 <span class="c">## fd</span>
 <span class="c">##              mean         sd        50%        2.5%      97.5%</span>
 <span class="c">## P(Y=1) -0.3128754 0.03459857 -0.3128662 -0.38111485 -0.2442630</span>
@@ -4148,8 +4878,8 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
 <span class="c">## [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733</span>
 <span class="c">## pv</span>
-<span class="c">##        mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.2078 1.794754   3    0     7</span>
+<span class="c">##       mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.188 1.798327   3    0     7</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -4158,7 +4888,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022</span>
 <span class="c">## pv</span>
 <span class="c">##        mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.3056 1.830941   3    0     7</span>
+<span class="c">## [1,] 3.2831 1.806068   3    0     7</span>
 <span class="c">## fd</span>
 <span class="c">##           mean        sd       50%       2.5%     97.5%</span>
 <span class="c">## [1,] 0.1146376 0.3671544 0.1265036 -0.6072035 0.8342282</span>
@@ -4613,7 +5343,11 @@ information.</p>
                data <span class="o">=</span> tobin<span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in zelig(durable ~ age + quant, model = &quot;tobit.bayes&quot;, data = tobin, : Model &#39;tobit.bayes&#39; not found</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Ben Goodrich, Ying Lu. 2013.</span>
+<span class="c">##   tobitbayes: Bayesian Tobit Regression for a Censored Dependent Variable</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://zeligproject.org/</span>
 </pre></div>
 </div>
 <p>Checking for convergence before summarizing the estimates:</p>
@@ -4924,23 +5658,23 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.49735 1.172769 14.39593 12.46936 17.04982</span>
+<span class="c">##         mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 14.4428 1.178599 14.35994 12.38191 17.17232</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
-<span class="c">## [1,] 14.92509 18.91978 7.452783 0.06297923 72.27136</span>
+<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 14.49358 18.37112 7.689967 0.0371853 59.67929</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd     50%     2.5%   97.5%</span>
-<span class="c">## [1,] 19.23653 1.125065 19.1701 17.29328 21.5597</span>
+<span class="c">##          mean     sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 19.23895 1.0624 19.15919 17.36893 21.39009</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50%       2.5%    97.5%</span>
-<span class="c">## [1,] 18.35982 23.27834 10.02439 0.08042521 79.64386</span>
+<span class="c">## [1,] 18.70868 24.08268 9.382438 0.04664003 86.95106</span>
 <span class="c">## fd</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.739181 1.700097 4.747633 1.289065 7.982112</span>
+<span class="c">## [1,] 4.796152 1.662188 4.879644 1.574513 8.042778</span>
 </pre></div>
 </div>
 <p>Generate a plot of quantities of interest:</p>
@@ -4948,8 +5682,8 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure">
-<img alt="plot of chunk unnamed-chunk-10" src="_images/unnamed-chunk-10-1.png" />
-<p class="caption">plot of chunk unnamed-chunk-10</p>
+<img alt="Zelig-gammagee" src="_images/Zelig-exp-1.png" />
+<p class="caption">Zelig-gammagee</p>
 </div>
 </div>
 </div>
@@ -5090,7 +5824,344 @@ treated from conditional prediction models.</li>
 </div>
 <div class="section" id="id123">
 <h3>See also<a class="headerlink" href="#id123" title="Permalink to this headline">¶</a></h3>
-<p>The gee function is part of the geepack package by Søren Højsgaard,
+<p>The geeglm function is part of the geepack package by Søren Højsgaard,
+Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
+to <tt class="docutils literal"><span class="pre">help(geepack)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="zelig-probitgee">
+<span id="zprobitgee"></span><h2>zelig-probitgee<a class="headerlink" href="#zelig-probitgee" title="Permalink to this headline">¶</a></h2>
+<p>The GEE probit estimates the same model as the standard probit
+regression (appropriate when you have a dichotomous dependent variable
+and a set of explanatory variables). Unlike in probit regression, GEE
+probit allows for dependence within clusters, such as in longitudinal
+data, although its use is not limited to just panel data. The user must
+first specify a “working” correlation matrix for the clusters, which
+models the dependence of each observation with other observations in the
+same cluster. The “working” correlation matrix is a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/>
+matrix of correlations, where <img class="math" src="_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/> is the size of the largest
+cluster and the elements of the matrix are correlations between
+within-cluster observations. The appeal of GEE models is that it gives
+consistent estimates of the parameters and consistent estimates of the
+standard errors can be obtained using a robust “sandwich” estimator even
+if the “working” correlation matrix is incorrectly specified. If the
+“working” correlation matrix is correctly specified, GEE models will
+give more efficient estimates of the parameters. GEE models measure
+population-averaged effects as opposed to cluster-specific effects.</p>
+<div class="section" id="id124">
+<h3>Syntax<a class="headerlink" href="#id124" title="Permalink to this headline">¶</a></h3>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zgammagee<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma.gee&quot;</span><span class="p">,</span>
+         id <span class="o">=</span> <span class="s">&quot;X3&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit.gee&quot;</span><span class="p">,</span>
+               id <span class="o">=</span> <span class="s">&quot;X3&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>where <tt class="docutils literal"><span class="pre">id</span></tt> is a variable which identifies the clusters. The data
+should be sorted by <tt class="docutils literal"><span class="pre">id</span></tt> and should be ordered within each cluster
+when appropriate.</p>
+</div>
+<div class="section" id="id125">
+<h3>Additional Inputs<a class="headerlink" href="#id125" title="Permalink to this headline">¶</a></h3>
+<p>Use the following arguments to specify the structure of the “working”
+correlations within clusters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">corstr</span></tt>: character string specifying the correlation structure:
+&#8220;independence&#8221;, &#8220;exchangeable&#8221;, &#8220;ar1&#8221;, &#8220;unstructured&#8221; and
+&#8220;userdefined&#8221;</li>
+<li>See <tt class="docutils literal"><span class="pre">geeglm</span></tt> in package <tt class="docutils literal"><span class="pre">geepack</span></tt> for other function arguments.</li>
+</ul>
+</div>
+<div class="section" id="id126">
+<h3>Examples<a class="headerlink" href="#id126" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="example-with-stationary-3-dependence">
+<h4>Example with Stationary 3 Dependence<a class="headerlink" href="#example-with-stationary-3-dependence" title="Permalink to this headline">¶</a></h4>
+<p>Attaching the sample turnout dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>turnout<span class="p">)</span>
+</pre></div>
+</div>
+<p>Variable identifying clusters</p>
+<div class="highlight-r"><div class="highlight"><pre>turnout<span class="o">$</span>cluster <span class="o">&lt;-</span> rep<span class="p">(</span>c<span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">200</span><span class="p">),</span> <span class="m">10</span><span class="p">)</span>
+sorted.turnout <span class="o">&lt;-</span> turnout<span class="p">[</span>order<span class="p">(</span>turnout<span class="o">$</span>cluster<span class="p">),</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>Estimating parameter values:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out1 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit.gee&quot;</span><span class="p">,</span>
+                id <span class="o">=</span> <span class="s">&quot;cluster&quot;</span><span class="p">,</span> data <span class="o">=</span> sorted.turnout<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Patrick Lam. 2011.</span>
+<span class="c">##   probitgee: General Estimating Equation for Probit Regression</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://zeligproject.org/</span>
+</pre></div>
+</div>
+<p>Setting values for the explanatory variables to their default values:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out1 <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulating quantities of interest:</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out1 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7719186 0.01113215 0.7719613 0.7496063 0.7937158</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.223 0.777</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="Zelig-probitgee1" src="_images/Zelig-probitgee1-1.png" />
+<p class="caption">Zelig-probitgee1</p>
+</div>
+</div>
+<div class="section" id="id127">
+<h4>Simulating First Differences<a class="headerlink" href="#id127" title="Permalink to this headline">¶</a></h4>
+<p>Estimating the risk difference (and risk ratio) between low education
+(25th percentile) and high education (75th percentile) while all the other variables held at their default values.</p>
+<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.75</span><span class="p">))</span>
+x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class="p">,</span> educate <span class="o">=</span> quantile<span class="p">(</span>turnout<span class="o">$</span>educate<span class="p">,</span> prob <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>s.out2 <span class="o">&lt;-</span> sim<span class="p">(</span>z.out1<span class="p">,</span> x <span class="o">=</span> x.high<span class="p">,</span> x1 <span class="o">=</span> x.low<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.8245057 0.01067036 0.8252109 0.8028768 0.8452697</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.189 0.811</span>
+<span class="c">##</span>
+<span class="c">##  sim x1 :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7059552 0.01399964 0.7056651 0.6783915 0.7321398</span>
+<span class="c">## pv</span>
+<span class="c">##          0     1</span>
+<span class="c">## [1,] 0.267 0.733</span>
+<span class="c">## fd</span>
+<span class="c">##            mean         sd        50%       2.5%       97.5%</span>
+<span class="c">## [1,] -0.1185505 0.01224151 -0.1184114 -0.1423489 -0.09597774</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="Zelig-probitgee2" src="_images/Zelig-probitgee2-1.png" />
+<p class="caption">Zelig-probitgee2</p>
+</div>
+</div>
+<div class="section" id="example-with-fixed-correlation-structure">
+<h4>Example with Fixed Correlation Structure<a class="headerlink" href="#example-with-fixed-correlation-structure" title="Permalink to this headline">¶</a></h4>
+<p>User-defined correlation structure</p>
+<div class="highlight-r"><div class="highlight"><pre>corr.mat <span class="o">&lt;-</span> matrix<span class="p">(</span>rep<span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> nrow <span class="o">=</span> <span class="m">10</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+diag<span class="p">(</span>corr.mat<span class="p">)</span> <span class="o">&lt;-</span> <span class="m">1</span>
+corr.mat <span class="o">&lt;-</span> fixed2Zcor<span class="p">(</span>corr.mat<span class="p">,</span> id<span class="o">=</span>sorted.turnout<span class="o">$</span>cluster<span class="p">,</span> waves<span class="o">=</span>sorted.turnout<span class="o">$</span>race<span class="p">)</span>
+</pre></div>
+</div>
+<p>Generating empirical estimates:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out2 <span class="o">&lt;-</span> zelig<span class="p">(</span>vote <span class="o">~</span> race <span class="o">+</span> educate<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit.gee&quot;</span><span class="p">,</span>
+                id <span class="o">=</span> <span class="s">&quot;cluster&quot;</span><span class="p">,</span> data <span class="o">=</span> sorted.turnout<span class="p">,</span>
+                corstr <span class="o">=</span> <span class="s">&quot;fixed&quot;</span><span class="p">,</span> zcor <span class="o">=</span> corr.mat<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Patrick Lam. 2011.</span>
+<span class="c">##   probitgee: General Estimating Equation for Probit Regression</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://zeligproject.org/</span>
+</pre></div>
+</div>
+<p>Viewing the regression output:</p>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out2<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id128">
+<h3>The Model<a class="headerlink" href="#id128" title="Permalink to this headline">¶</a></h3>
+<p>Suppose we have a panel dataset, with <img class="math" src="_images/math/30f89e733d3b75f1db48233adcde1aa3ef74a897.png" alt="Y_{it}"/> denoting the binary
+dependent variable for unit <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> at time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. <img class="math" src="_images/math/0e1e069d7b701cb98cfecc70660e4e31b786db9a.png" alt="Y_{i}"/>
+is a vector or cluster of correlated data where <img class="math" src="_images/math/b840d9057a2e3bad080c274b8f1d9303520f9052.png" alt="y_{it}"/> is
+correlated with <img class="math" src="_images/math/da57192d38416f50ec88d145367cc7d5be0c06c5.png" alt="y_{it^\prime}"/> for some or all
+<img class="math" src="_images/math/2d3acc5e57adc9f94593e8bb1b3b28df87caf045.png" alt="t, t^\prime"/>. Note that the model assumes correlations within
+<img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> but independence across <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by the joint and marginal
+distributions</p>
+<div class="math">
+<p><img src="_images/math/99e52afc172ca96e215469c88f249c909a028bb5.png" alt="\begin{aligned}
+Y_{i} &amp;\sim&amp; f(y_{i} \mid \pi_{i})\\
+Y_{it} &amp;\sim&amp; g(y_{it} \mid \pi_{it})\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/0001d02b63ede2fe3219e05a7cd09c82ae6298b6.png" alt="f"/> and <img class="math" src="_images/math/67f4714f065d485540ad40829e0717bf75e9dd85.png" alt="g"/> are unspecified distributions with
+means <img class="math" src="_images/math/56d13901556c9d691c7d1893b7b9329d60794bd6.png" alt="\pi_{i}"/> and <img class="math" src="_images/math/241cd55f42e0d99b5eaf7d34334bf6f3d2ca4c29.png" alt="\pi_{it}"/>. GEE models make no
+distributional assumptions and only require three specifications: a
+mean function, a variance function, and a correlation structure.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is the <em>mean function</em>, given by:</p>
+<div class="math">
+<p><img src="_images/math/565417850a92690cacd5341abe762a0a1f00425b.png" alt="\pi_{it} = \Phi(x_{it} \beta)"/></p>
+</div><p>where <img class="math" src="_images/math/e4f08b55c6f99b472e0a295b96ff6487d545dfd0.png" alt="\Phi(\mu)"/> is the cumulative distribution function of
+the Normal distribution with mean 0 and unit variance, <img class="math" src="_images/math/d43ef14e28002ff45394741fc187dced216e80f0.png" alt="x_{it}"/>
+is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables for unit <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>
+at time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector of coefficients.</p>
+</li>
+<li><p class="first">The <em>variance function</em> is given by:</p>
+<div class="math">
+<p><img src="_images/math/0366b791aadbdf9d17328c80ea70cebf89e3b9df.png" alt="V_{it} = \pi_{it} (1-\pi_{it})"/></p>
+</div></li>
+<li><p class="first">The <em>correlation structure</em> is defined by a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/>
+“working” correlation matrix, where <img class="math" src="_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/> is the size of the
+largest cluster. Users must specify the structure of the “working”
+correlation matrix <em>a priori</em>. The “working” correlation matrix then
+enters the variance term for each <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>, given by:</p>
+<div class="math">
+<p><img src="_images/math/16993e098fe3b3316a2033c341dedf1a4a5722f0.png" alt="V_{i} = \phi \, A_{i}^{\frac{1}{2}} R_{i}(\alpha) A_{i}^{\frac{1}{2}}"/></p>
+</div><p>where <img class="math" src="_images/math/7f4051f79dc41b4b9b5b105d110e19898642c02d.png" alt="A_{i}"/> is a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/> diagonal matrix with the
+variance function <img class="math" src="_images/math/41fbbeaa3c8f0735faaab30c5bcc4432123fc864.png" alt="V_{it} = \pi_{it} (1-\pi_{it})"/> as the
+<img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>th diagonal element, <img class="math" src="_images/math/165cf808f99660333864da96d49d02862c5804ba.png" alt="R_{i}(\alpha)"/> is the
+“working” correlation matrix, and <img class="math" src="_images/math/10e009bdb83f96c5f47c58b34d5d4b12ef268d5b.png" alt="\phi"/> is a scale parameter.
+The parameters are then estimated via a quasi-likelihood approach.</p>
+</li>
+<li><p class="first">In GEE models, if the mean is correctly specified, but the variance
+and correlation structure are incorrectly specified, then GEE models
+provide consistent estimates of the parameters and thus the mean
+function as well, while consistent estimates of the standard errors
+can be obtained via a robust “sandwich” estimator. Similarly, if the
+mean and variance are correctly specified but the correlation
+structure is incorrectly specified, the parameters can be estimated
+consistently and the standard errors can be estimated consistently
+with the sandwich estimator. If all three are specified correctly,
+then the estimates of the parameters are more efficient.</p>
+</li>
+<li><p class="first">The robust “sandwich” estimator gives consistent estimates of the
+standard errors when the correlations are specified incorrectly only
+if the number of units <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> is relatively large and the number
+of repeated periods <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> is relatively small. Otherwise, one
+should use the “naïve” model-based standard errors, which assume that
+the specified correlations are close approximations to the true
+underlying correlations. See for more details.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id129">
+<h3>Quantities of Interest<a class="headerlink" href="#id129" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">All quantities of interest are for marginal means rather than joint
+means.</p>
+</li>
+<li><p class="first">The method of bootstrapping generally should not be used in GEE
+models. If you must bootstrap, bootstrapping should be done within
+clusters, which is not currently supported in Zelig. For conditional
+prediction models, data should be matched within clusters.</p>
+</li>
+<li><p class="first">The expected values (qi$ev) for the GEE probit model are simulations
+of the predicted probability of a success:</p>
+<div class="math">
+<p><img src="_images/math/a46d02dd9a03502f3cc57aaa0cd73a509c5814e2.png" alt="E(Y) =
+  \pi_{c}= \Phi(x_{c} \beta),"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its sampling distribution, where
+<img class="math" src="_images/math/5502b77b431ce3a22763c40fede2822fe42a5aa2.png" alt="x_{c}"/> is a vector of values, one for each independent
+variable, chosen by the user.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) for the GEE probit model is defined as</p>
+<div class="math">
+<p><img src="_images/math/8f669920018c72d7f23a4ba843925381c4703f17.png" alt="\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x)."/></p>
+</div></li>
+<li><p class="first">The risk ratio (qi$rr) is defined as</p>
+<div class="math">
+<p><img src="_images/math/8540cd3e413420e1eceaa11af2b8fc70ef717f37.png" alt="\textrm{RR} = \Pr(Y = 1 \mid x_1) \ / \ \Pr(Y = 1 \mid x)."/></p>
+</div></li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+<p><img src="_images/math/40ac87a54bf074ab721d0606edc354d20bfe2890.png" alt="\frac{1}{\sum_{i=1}^n \sum_{t=1}^T tr_{it}}\sum_{i:tr_{it}=1}^n \sum_{t:tr_{it}=1}^T \left\{ Y_{it}(tr_{it}=1) -
+      E[Y_{it}(tr_{it}=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/e6f125c03f6d788e356d369529940f022a7f2758.png" alt="tr_{it}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/6456da07c94c2f41fd2db133459327f848c0f4bd.png" alt="tr_{it}=1"/>) and control (<img class="math" src="_images/math/cacdbdc3e92ce5d077bfe72555b39b0aa02b8a35.png" alt="tr_{it}=0"/>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<img class="math" src="_images/math/55447d1ae15443b039fe51a56aee680735c5eff7.png" alt="E[Y_{it}(tr_{it}=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/30f89e733d3b75f1db48233adcde1aa3ef74a897.png" alt="Y_{it}"/> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <img class="math" src="_images/math/cacdbdc3e92ce5d077bfe72555b39b0aa02b8a35.png" alt="tr_{it}=0"/>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id130">
+<h3>Output Values<a class="headerlink" href="#id130" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For examle, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">probit.gee,</span> <span class="pre">id,</span> <span class="pre">data)</span></tt>, then you may
+examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
+elements available through the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>residuals: the working residuals in the final iteration of the
+fit.</li>
+<li>fitted.values: the vector of fitted values for the systemic
+component, <img class="math" src="_images/math/241cd55f42e0d99b5eaf7d34334bf6f3d2ca4c29.png" alt="\pi_{it}"/>.</li>
+<li>linear.predictors: the vector of <img class="math" src="_images/math/62d42b965bd7739c65b214098af7195a9940d3fc.png" alt="x_{it}\beta"/></li>
+<li>max.id: the size of the largest cluster.</li>
+</ul>
+</li>
+<li>From summary(z.out), you may extract:<ul>
+<li>coefficients: the parameter estimates with their associated
+standard errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/84d7271dd9e78c1e05d6c3c6ecb60309ef7dfc73.png" alt="z"/>-statistics.</li>
+<li>working.correlation: the “working” correlation matrix</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected probabilities for the specified
+values of x.</li>
+<li>qi$fd: the simulated first difference in the expected
+probabilities for the values specified in x and x1.</li>
+<li>qi$rr: the simulated risk ratio for the expected probabilities
+simulated from x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id131">
+<h3>See also<a class="headerlink" href="#id131" title="Permalink to this headline">¶</a></h3>
+<p>The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to <tt class="docutils literal"><span class="pre">help(geepack)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 <hr class="docutils" />

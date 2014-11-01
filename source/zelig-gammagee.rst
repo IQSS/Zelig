@@ -201,23 +201,23 @@ Simulate quantities of interest
     ##  sim x :
     ##  -----
     ## ev
-    ##          mean       sd     50%     2.5%    97.5%
-    ## [1,] 14.40728 1.150051 14.3262 12.36709 16.89536
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 14.48301 1.166943 14.41832 12.47176 16.95212
     ## pv
-    ##          mean       sd      50%       2.5%    97.5%
-    ## [1,] 14.07835 18.14224 7.603815 0.06235246 65.07778
+    ##          mean     sd      50%       2.5%    97.5%
+    ## [1,] 13.86452 17.574 7.529647 0.05557155 61.09469
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##          mean       sd      50%    2.5%    97.5%
-    ## [1,] 19.21808 1.117628 19.18863 17.2676 21.63706
+    ##          mean       sd     50%     2.5%    97.5%
+    ## [1,] 19.19918 1.077627 19.1506 17.18881 21.51597
     ## pv
-    ##          mean       sd      50%       2.5%    97.5%
-    ## [1,] 19.61789 23.70813 11.10875 0.04327947 82.02938
+    ##          mean     sd      50%       2.5%    97.5%
+    ## [1,] 19.31203 25.195 10.83798 0.08005704 97.18345
     ## fd
-    ##          mean       sd      50%     2.5%   97.5%
-    ## [1,] 4.810795 1.677545 4.759365 1.566173 8.00721
+    ##          mean       sd      50%    2.5%    97.5%
+    ## [1,] 4.716168 1.609804 4.782122 1.55319 7.790825
 
 
 
@@ -229,10 +229,10 @@ Generate a plot of quantities of interest:
 
     plot(s.out)
 
-.. figure:: figure/unnamed-chunk-10-1.png
-    :alt: plot of chunk unnamed-chunk-10
+.. figure:: figure/Zelig-exp-1.png
+    :alt: Zelig-gammagee
 
-    plot of chunk unnamed-chunk-10
+    Zelig-gammagee
 
 The Model
 +++++
@@ -391,6 +391,6 @@ elements available through the $ operator are listed below.
 See also
 +++++
 
-The gee function is part of the geepack package by Søren Højsgaard,
+The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to ``help(geepack)`` and ``help(family)``.

@@ -34,7 +34,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
     <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
-    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="next" title="zelig-probitgee" href="zelig-probitgee.html" />
     <link rel="prev" title="zelig-tobitbayes" href="zelig-tobitbayes.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -102,7 +102,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -157,7 +158,7 @@
     </a>
   </li>
   <li>
-    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
+    <a href="zelig-probitgee.html" title="Next Chapter: zelig-probitgee"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">zelig-probitgee &raquo;</span>
     </a>
   </li>
               
@@ -206,7 +207,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -369,23 +371,23 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.49735 1.172769 14.39593 12.46936 17.04982</span>
+<span class="c">##         mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 14.4428 1.178599 14.35994 12.38191 17.17232</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
-<span class="c">## [1,] 14.92509 18.91978 7.452783 0.06297923 72.27136</span>
+<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 14.49358 18.37112 7.689967 0.0371853 59.67929</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd     50%     2.5%   97.5%</span>
-<span class="c">## [1,] 19.23653 1.125065 19.1701 17.29328 21.5597</span>
+<span class="c">##          mean     sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 19.23895 1.0624 19.15919 17.36893 21.39009</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50%       2.5%    97.5%</span>
-<span class="c">## [1,] 18.35982 23.27834 10.02439 0.08042521 79.64386</span>
+<span class="c">## [1,] 18.70868 24.08268 9.382438 0.04664003 86.95106</span>
 <span class="c">## fd</span>
 <span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.739181 1.700097 4.747633 1.289065 7.982112</span>
+<span class="c">## [1,] 4.796152 1.662188 4.879644 1.574513 8.042778</span>
 </pre></div>
 </div>
 <p>Generate a plot of quantities of interest:</p>
@@ -393,8 +395,8 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure">
-<img alt="plot of chunk unnamed-chunk-10" src="_images/unnamed-chunk-10-1.png" />
-<p class="caption">plot of chunk unnamed-chunk-10</p>
+<img alt="Zelig-gammagee" src="_images/Zelig-exp-1.png" />
+<p class="caption">Zelig-gammagee</p>
 </div>
 </div>
 </div>
@@ -535,7 +537,7 @@ treated from conditional prediction models.</li>
 </div>
 <div class="section" id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
-<p>The gee function is part of the geepack package by Søren Højsgaard,
+<p>The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to <tt class="docutils literal"><span class="pre">help(geepack)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
 </div>

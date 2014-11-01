@@ -127,7 +127,11 @@ Estimating linear regression using ``tobit.bayes``:
 
 ::
 
-    ## Error in zelig(durable ~ age + quant, model = "tobit.bayes", data = tobin, : Model 'tobit.bayes' not found
+    ## How to cite this model in Zelig:
+    ##   Ben Goodrich, Ying Lu. 2013.
+    ##   tobitbayes: Bayesian Tobit Regression for a Censored Dependent Variable
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://zeligproject.org/
 
 
 

@@ -102,7 +102,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -207,7 +208,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -318,10 +320,10 @@ its own cluster.</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.534063 0.6412206 1.444938 0.5685301 3.002123</span>
+<span class="c">## 1 1.532134 0.6451426 1.461142 0.4906876 2.911972</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.213643 4.285599 1.220935    0 13.30927</span>
+<span class="c">##          mean       sd      50% 2.5%   97.5%</span>
+<span class="c">## [1,] 3.253126 4.291598 1.453459    0 13.8559</span>
 </pre></div>
 </div>
 </div>
@@ -346,23 +348,23 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 1.204777 0.7487216 1.066459 0.162634 2.929993</span>
+<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 1.219587 0.7820647 1.056607 0.1938312 3.132361</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.085525 4.389859 1.076885    0 14.92368</span>
+<span class="c">## [1,] 3.156665 4.316591 1.533816    0 14.58822</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 2.081584 1.004855 1.923635 0.4795757 4.391376</span>
+<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 2.028201 0.9736607 1.880171 0.5858679 4.234879</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.669501 4.582729 2.002288    0 15.47859</span>
+<span class="c">## [1,] 3.541122 4.448873 1.869328    0 15.11714</span>
 <span class="c">## fd</span>
-<span class="c">##        mean       sd       50%      2.5%    97.5%</span>
-<span class="c">## 1 0.8768065 1.206082 0.7855366 -1.392322 3.591732</span>
+<span class="c">##        mean      sd       50%      2.5%    97.5%</span>
+<span class="c">## 1 0.8086145 1.19362 0.7742679 -1.429158 3.302684</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>

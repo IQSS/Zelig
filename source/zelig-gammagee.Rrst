@@ -114,7 +114,7 @@ summary(s.out)
 
 Generate a plot of quantities of interest:
 
-.. {r, eval = TRUE}
+.. {r Zelig-exp, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-gammagee"}
 plot(s.out)
 .. ..
 
@@ -272,6 +272,6 @@ elements available through the $ operator are listed below.
 See also
 +++++
 
-The gee function is part of the geepack package by Søren Højsgaard,
+The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to ``help(geepack)`` and ``help(family)``.

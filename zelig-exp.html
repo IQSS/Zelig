@@ -102,7 +102,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -203,7 +204,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -324,17 +326,7 @@ its own cluster.</p>
 the alternative values (with the ruling coalition in the majority) for
 X:</p>
 <div class="highlight-r"><div class="highlight"><pre>x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
-<span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
-</pre></div>
-</div>
-<div class="highlight-r"><div class="highlight"><pre>x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">## Error in terms(lm(formula, data), &quot;predvars&quot;): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;terms&#39;: Error in Ops.Surv(y, z$residuals) : Invalid operation on a survival time</span>
-<span class="c">## Calls: lm -&gt; lm.fit -&gt; Ops.Surv</span>
+x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">,</span> numst2 <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Simulate expected values and first differences:</p>
@@ -349,23 +341,23 @@ X:</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 4.594892 0.1843223 4.59509 4.219607 4.960884</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 15.25314 1.416569 15.21626 12.57592 18.13386</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 4.594892 0.1843223 4.59509 4.219607 4.960884</span>
+<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 14.57396 15.02881 10.48885 0.3992942 52.52459</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.431578 0.1925678 5.432627 5.044559 5.822894</span>
+<span class="c">##       mean      sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 24.26416 1.84284 24.15739 20.94223 28.15189</span>
 <span class="c">## pv</span>
-<span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.431578 0.1925678 5.432627 5.044559 5.822894</span>
+<span class="c">##          mean    sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 23.25116 23.43 15.65451 0.5542274 84.02236</span>
 <span class="c">## fd</span>
-<span class="c">##        mean        sd       50%     2.5%    97.5%</span>
-<span class="c">## 1 0.8366865 0.2377083 0.8398277 0.377787 1.312504</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 9.011029 2.371775 9.016912 4.608011 13.75459</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
