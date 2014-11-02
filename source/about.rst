@@ -23,7 +23,6 @@ Zelig leverages (R) code from many researchers and is designed to allow anyone t
   Imai, Kosuke, Gary King, and Olivia Lau. 2008. "Toward A Common Framework for Statistical Analysis and Development." Journal of Computational and Graphical Statistics, Vol. 17, No. 4 (December), pp. 892-913, http://j.mp/msE15c.
 
 **License:** GPL-2 | GPL-3 [expanded from: GPL (>= 2)]
-------------
 
 Technical Vision
 ~~~~~~~~~~~~~~~~
