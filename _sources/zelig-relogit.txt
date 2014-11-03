@@ -161,11 +161,11 @@ Simulate quantities of interest:
     ##  sim x :
     ##  -----
     ## ev
-    ##             mean           sd         50%        2.5%       97.5%
-    ## [1,] 0.002405263 0.0001539955 0.002402354 0.002121008 0.002706454
+    ##             mean           sd        50%        2.5%       97.5%
+    ## [1,] 0.002396371 0.0001496194 0.00238697 0.002133949 0.002720633
     ## pv
     ##          0     1
-    ## [1,] 0.996 0.004
+    ## [1,] 0.997 0.003
 
 
 
@@ -1243,7 +1243,7 @@ Summarize the model output:
     ## $formula
     ## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem + 
     ##     mindem + years
-    ## <environment: 0x7fbd401c0390>
+    ## <environment: 0x7ff335918588>
     ## 
     ## attr(,"class")
     ## [1] "Relogit2" "Relogit" 

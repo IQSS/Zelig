@@ -276,22 +276,22 @@ z5
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.3164 6.391689 100.3292 87.68235 113.086}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.6166 6.477574 100.4972 88.43053 113.675}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.3164 6.391689 100.3292 87.68235 113.086}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.6166 6.477574 100.4972 88.43053 113.675}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.8672 14.3981 179.2611 150.4575 207.4455}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 179.4036 14.5777 178.8034 152.8794 209.4079}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.8672 14.3981 179.2611 150.4575 207.4455}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 179.4036 14.5777 178.8034 152.8794 209.4079}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.55081 8.243275 78.64177 62.53495 94.45128}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.78705 8.297555 78.29615 63.85415 95.65695}
 \end{Verbatim}
 
 Now we've estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
@@ -404,6 +404,9 @@ The following models are currently supported in Zelig 5.0-1:
 
 \item {} 
 {\hyperref[zelig-tobit:ztobit]{\emph{Tobit Regression}}}: \code{ztobit\$new()}
+
+\item {} 
+{\hyperref[zelig-weibull:zweibull]{\emph{Weibull Regression for Duration Dependent Variables}}}: \code{zweibull\$new()}
 
 \item {} 
 {\hyperref[zelig-factorbayes:zfactorbayes]{\emph{Bayesian Factor Analysis}}}: \code{zfactorbayes\$new()}
@@ -586,23 +589,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.40177 1.485172 15.33163 12.74853 18.50084}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.35595 1.50048 15.27378 12.65471 18.55162}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.7764 15.40579 11.11561 0.5190185 57.44633}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.27044 14.97946 11.1967 0.3316068 55.02532}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.39296 2.006561 24.26818 20.83258 28.57829}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.36562 1.858434 24.32734 20.93379 28.07387}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 25.00588 23.77518 17.29385 0.6273553 87.39125}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 22.91648 22.09981 15.6335 0.5768573 84.46408}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 8.99119 2.554579 8.917678 4.02514 14.15965}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 9.009674 2.388341 9.037939 4.126534 13.31389}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -859,22 +862,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.47572 1.083043 14.35451 12.73489 16.79113}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.41109 1.082216 14.32963 12.44906 16.75609}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.16857 12.83508 10.31738 0.694669 45.94131}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.94117 12.54657 10.16727 0.6361924 46.63783}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.22962 1.111613 19.15837 17.17047 21.57195}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.12725 1.107758 19.06307 17.18116 21.3768}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.88802 17.19659 14.36555 1.086112 67.37241}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.03346 16.60206 14.11098 1.113402 60.34434}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.753894 1.537927 4.783697 1.683207 7.866827}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.716166 1.534134 4.739363 1.629791 7.676791}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1061,10 +1064,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7475134 0.01161024 0.7475172 0.7244414 0.7688564}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7473238 0.01167537 0.7471396 0.7244763 0.7700529}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.265 0.735}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.233 0.767}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1108,23 +1111,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8228304 0.01028316 0.8235217 0.8015221 0.8411065}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8231979 0.01077993 0.8238294 0.8007929 0.842699}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.175 0.825}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.19 0.81}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7086667 0.01270915 0.7090941 0.6827574 0.7318733}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.709183 0.01280819 0.7091317 0.6827829 0.7341248}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.306 0.694}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.303 0.697}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1141637 0.01110103 \PYGZhy{}0.1139216 \PYGZhy{}0.1364665 \PYGZhy{}0.09250428}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.114015 0.01131852 \PYGZhy{}0.1142518 \PYGZhy{}0.1359273 \PYGZhy{}0.09163807}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1395,22 +1398,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.20453 2.395591 18.02876 13.89477 23.36577}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.49145 2.473131 18.24921 14.28183 23.87022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.20453 2.395591 18.02876 13.89477 23.36577}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.49145 2.473131 18.24921 14.28183 23.87022}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.81323 3.593166 31.6042 25.56477 38.82508}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.15915 3.634718 31.85431 25.70069 40.13242}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.81323 3.593166 31.6042 25.56477 38.82508}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.15915 3.634718 31.85431 25.70069 40.13242}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.6087 3.609597 13.59424 6.944184 20.73132}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.6677 3.732054 13.72353 6.757411 21.23939}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1658,23 +1661,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.428996 0.1897214 5.425557 5.053605 5.810824}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.41837 0.1836892 5.423229 5.055735 5.782975}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.428996 0.1897214 5.425557 5.053605 5.810824}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.41837 0.1836892 5.423229 5.055735 5.782975}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602755 0.1756249 4.602389 4.244421 4.93695}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.604969 0.1846724 4.605665 4.242188 4.961839}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602755 0.1756249 4.602389 4.244421 4.93695}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.604969 0.1846724 4.605665 4.242188 4.961839}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8262409 0.2224789 \PYGZhy{}0.8235743 \PYGZhy{}1.265408 \PYGZhy{}0.3938791}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8134005 0.2279988 \PYGZhy{}0.8060883 \PYGZhy{}1.264271 \PYGZhy{}0.3714899}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1953,13 +1956,13 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.992601 0.3433441 2.986007 2.351178 3.706982}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.981306 0.3413427 2.956457 2.371612 3.718206}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     0     1     2     3     4     5     6     7     8     9    10    11}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.137 0.147 0.174 0.137 0.107 0.076 0.064 0.046 0.028 0.028 0.018 0.012}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    15    16    17    18    19    22}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.002 0.007 0.001 0.008 0.001 0.001 0.004 0.001 0.001}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.199 0.206 0.175 0.125 0.099 0.060 0.052 0.033 0.019 0.009 0.007 0.008}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    15    16    19}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.003 0.001 0.002 0.001 0.001}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2193,23 +2196,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}   2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.420924 0.1953245 5.421642 5.0659 5.798868}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.431162 0.1966832 5.430723 5.037194 5.81941}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.408576 2.683773 5.418586 0.1979007 10.53428}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.435296 2.743124 5.455823 0.1924082 10.74049}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.599927 0.1848846 4.597226 4.256534 4.956503}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.596956 0.1773931 4.58876 4.258523 4.953134}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd     50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.61483 2.801966 4.71042 \PYGZhy{}0.9031632 10.19823}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.540683 2.729306 4.562981 \PYGZhy{}1.237993 9.505813}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8209972 0.2419528 \PYGZhy{}0.8239984 \PYGZhy{}1.283453 \PYGZhy{}0.3511441}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8342058 0.2335622 \PYGZhy{}0.8409698 \PYGZhy{}1.269391 \PYGZhy{}0.3914609}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -2414,11 +2417,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.241622 0.2411348 3.234479 2.76923 3.759604}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.265293 0.2295563 3.259036 2.798051 3.729538}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.211 1.807137   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.299 1.874864   3    0     8}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2867,10 +2870,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002397549 0.0001553224 0.002387028 0.002128876 0.002714324}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002398411 0.0001557397 0.002396977 0.002100549 0.002709837}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.998 0.002}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.997 0.003}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3919,7 +3922,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fcd0512f6e0\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7f9113ca29f0\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -4274,10 +4277,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.548292 0.6452852 1.490412 0.5591164 3.047875}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.557609 0.6428807 1.485459 0.5172969 2.994908}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.137902 4.216097 1.354024    0 13.97745}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.160987 4.158712 1.447864    0 14.22161}
 \end{Verbatim}
 
 
@@ -4309,22 +4312,22 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.191589 0.7888275 1.037962 0.1416495 3.180346}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.211497 0.7317731 1.065063 0.1941876 2.936198}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.142293 4.263291 1.262011    0 13.84198}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd     50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.111962 4.12876 1.33297    0 14.69529}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd    50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.053921 0.969557 1.8994 0.5800073 4.165493}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.101096 1.018149 1.966143 0.5869947 4.503016}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}  97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.804252 4.868043 2.085459    0 16.963}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.61894 4.357355 2.219499    0 14.53047}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8623314 1.199594 0.8464547 \PYGZhy{}1.631705 3.298214}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.889599 1.227234 0.7726493 \PYGZhy{}1.537488 3.369584}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4424,6 +4427,390 @@ ported to R by Thomas Lumley. Advanced users may wish to refer to
 
 
 
+\section{zelig-weibull}
+\label{vignette:zelig-weibull}\label{vignette:zweibull}
+Weibull Regression for Duration Dependent Variables
+
+Choose the Weibull regression model if the values in your dependent
+variable are duration observations. The Weibull model relaxes the
+exponential model’s assumption of constant hazard, and allows the
+hazard rate to increase or decrease monotonically with respect to
+elapsed time.
+
+
+\subsection{Syntax}
+\label{vignette:id67}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zweibull\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{weibull\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+Weibull models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length \(n\). For each
+observation \(i\) in 1, …, \(n\), the value \(y_i\) is the
+duration (lifetime, for example), and the associated \(c_i\) is a
+binary variable such that \(c_i = 1\) if the duration is not
+censored (\emph{e.g.}, the subject dies during the study) or \(c_i = 0\)
+if the duration is censored (\emph{e.g.}, the subject is still alive at the
+end of the study). If \(c_i\) is omitted, all Y are assumed to be
+completed; that is, time defaults to 1 for all observations.
+
+
+\subsection{Input Values}
+\label{vignette:id68}
+In addition to the standard inputs, zelig() takes the following
+additional options for weibull regression:
+\begin{itemize}
+\item {} 
+robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) based on the options
+in cluster.
+
+\item {} 
+cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then
+
+\end{itemize}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}y \PYG{o}{\PYGZti{}} x1 \PYG{o}{+} x2\PYG{p}{,} robust \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{,} cluster \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{x3\PYGZdq{}}\PYG{p}{,}
+               model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{exp\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+\end{Verbatim}
+
+means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If \emph{robust = TRUE} but cluster is not specified, zelig() assumes that each observation falls into its own cluster.
+
+
+\subsection{Example}
+\label{vignette:id69}
+Attach the sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}coalition\PYG{p}{)}
+\end{Verbatim}
+
+Estimate the model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}duration\PYG{p}{,} ciep12\PYG{p}{)} \PYG{o}{\PYGZti{}} fract \PYG{o}{+} numst2\PYG{p}{,}
+               model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{weibull\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} coalition\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Olivia Lau, Kosuke Imai, Gary King. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   weibull: Weibull Regression for Duration Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://zeligproject.org/}
+\end{Verbatim}
+
+View the regression output:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}by}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1] 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} survival::survreg(formula = Surv(duration, ciep12) \PYGZti{} fract +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     numst2, data = ., dist = \PYGZdq{}weibull\PYGZdq{}, model = FALSE)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  (Intercept)        fract       numst2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  5.498500132 \PYGZhy{}0.003838969  0.452319329}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Scale= 0.9566212}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Loglik(model)= \PYGZhy{}1077   Loglik(intercept only)= \PYGZhy{}1100.6}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  Chisq= 47.18 on 2 degrees of freedom, p= 5.7e\PYGZhy{}11}
+\PYG{c}{\PYGZsh{}\PYGZsh{} n= 314}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
+\end{Verbatim}
+
+Simulate expected values and first differences:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.low\PYG{p}{,} x1 \PYG{o}{=} x.high\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}  2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 58.74475 9.418221 58.00551 42.88 79.71307}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}        2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 60.25157 184.256 7.726762 0.001016853 463.3723}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 91.92603 15.12111 90.51753 67.70032 124.2653}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}        2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 81.36877 240.7577 6.789176 0.000676992 685.9505}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 33.18128 10.50362 32.27583 15.1778 55.38708}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-weibull-1.png}
+\caption{Zelig-weibull}\end{figure}
+
+
+\subsection{Model}
+\label{vignette:id70}
+Let \(Y_i^*\) be the survival time for observation \(i\). This
+variable might be censored for some observations at a fixed time
+\(y_c\) such that the fully observed dependent variable,
+\(Y_i\), is defined as
+\begin{gather}
+\begin{split}Y_i = \left\{ \begin{array}{ll}
+      Y_i^* & \textrm{if }Y_i^* \leq y_c \\
+      y_c & \textrm{if }Y_i^* > y_c
+    \end{array} \right.\end{split}\notag
+\end{gather}\begin{itemize}
+\item {} 
+The \emph{stochastic component} is described by the distribution of the
+partially observed variable \(Y^*\). We assume \(Y_i^*\)
+follows the Weibull distribution whose density function is given by
+\begin{gather}
+\begin{split}f(y_i^*\mid \lambda_i, \alpha) = \frac{\alpha}{\lambda_i^\alpha}
+    y_i^{* \alpha-1} \exp \left\{ -\left( \frac{y_i^*}{\lambda_i}
+\right)^{\alpha} \right\}\end{split}\notag
+\end{gather}
+for \(y_i^* \ge 0\), the scale parameter \(\lambda_i > 0\),
+and the shape parameter \(\alpha > 0\). The mean of this
+distribution is :math:{\color{red}\bfseries{}{}`}lambda\_i
+\begin{quote}
+
+Gamma(1 + 1 / alpha){}`. When \(\alpha = 1\), the distribution
+\end{quote}
+
+reduces to the exponential distribution (see Section {[}exp{]}). (Note
+that the output from zelig() parameterizes
+scale:math:{}` = 1 / alpha{}`.)
+
+In addition, survival models like the Weibull have three additional
+properties. The hazard function \(h(t)\) measures the probability
+of not surviving past time \(t\) given survival up to \(t\).
+In general, the hazard function is equal to \(f(t)/S(t)\) where
+the survival function \(S(t) = 1 - \int_{0}^t f(s) ds\)
+represents the fraction still surviving at time \(t\). The
+cumulative hazard function \(H(t)\) describes the probability of
+dying before time \(t\). In general,
+\(H(t)= \int_{0}^{t} h(s) ds = -\log S(t)\). In the case of the
+Weibull model,
+\begin{gather}
+\begin{split}\begin{aligned}
+h(t) &=& \frac{\alpha}{\lambda_i^{\alpha}} t^{\alpha - 1}  \\
+S(t) &=&  \exp \left\{ -\left( \frac{t}{\lambda_i} \right)^{\alpha} \right\} \\
+H(t) &=& \left( \frac{t}{\lambda_i} \right)^{\alpha}\end{aligned}\end{split}\notag
+\end{gather}
+For the Weibull model, the hazard function \(h(t)\) can increase
+or decrease monotonically over time.
+
+\item {} 
+The \emph{systematic component} \(\lambda_i\) is modeled as
+\begin{gather}
+\begin{split}\lambda_i = \exp(x_i \beta),\end{split}\notag
+\end{gather}
+where \(x_i\) is the vector of explanatory variables, and
+\(\beta\) is the vector of coefficients.
+
+\end{itemize}
+
+
+\subsection{Quantities of Interest}
+\label{vignette:id73}\begin{itemize}
+\item {} 
+The expected values (qi\$ev) for the Weibull model are simulations of
+the expected duration:
+\begin{gather}
+\begin{split}E(Y) = \lambda_i \, \Gamma (1 + \alpha^{-1}),\end{split}\notag
+\end{gather}
+given draws of \(\beta\) and \(\alpha\) from their sampling
+distributions.
+
+\item {} 
+The predicted value (qi\$pr) is drawn from a distribution defined by
+\((\lambda_i, \alpha)\).
+
+\item {} 
+The first difference (qi\$fd) in expected value is
+\begin{gather}
+\begin{split}\textrm{FD} = E(Y \mid x_1) - E(Y \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups. When
+\(Y_i(t_i=1)\) is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations are due to
+uncertainty in simulating \(E[Y_i(t_i=0)]\), the counterfactual
+expected value of \(Y_i\) for observations in the treatment
+group, under the assumption that everything stays the same except
+that the treatment indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups. When
+\(Y_i(t_i=1)\) is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations are due to
+uncertainty in simulating \(\widehat{Y_i(t_i=0)}\), the
+counterfactual predicted value of \(Y_i\) for observations in the
+treatment group, under the assumption that everything stays the same
+except that the treatment indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\subsection{Output Values}
+\label{vignette:id74}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = weibull, data)}, then you may examine
+the available information in \code{z.out} by using \code{names(z.out)}, see
+the coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}. Other elements available through
+the \$ operator are listed below.
+\begin{itemize}
+\item {} 
+From the zelig() output object z.out, you may extract:
+\begin{itemize}
+\item {} 
+coefficients: parameter estimates for the explanatory variables.
+
+\item {} 
+icoef: parameter estimates for the intercept and “scale” parameter
+\(1 / \alpha\).
+
+\item {} 
+var: the variance-covariance matrix.
+
+\item {} 
+loglik: a vector containing the log-likelihood for the model and
+intercept only (respectively).
+
+\item {} 
+linear.predictors: a vector of the \(x_{i}\beta\).
+
+\item {} 
+df.residual: the residual degrees of freedom.
+
+\item {} 
+df.null: the residual degrees of freedom for the null model.
+
+\item {} 
+zelig.data: the input data frame if save.data = TRUE.
+
+\end{itemize}
+
+\item {} 
+Most of this may be conveniently summarized using summary(z.out).
+From summary(z.out), you may additionally extract:
+\begin{itemize}
+\item {} 
+table: the parameter estimates with their associated standard
+errors, \(p\)-values, and \(t\)-statistics.
+
+\end{itemize}
+
+\item {} 
+From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation \(\times\)
+x-observation (for more than one x-observation). Available quantities
+are:
+\begin{itemize}
+\item {} 
+qi\$ev: the simulated expected values for the specified values of
+x.
+
+\item {} 
+qi\$pr: the simulated predicted values drawn from a distribution
+defined by \((\lambda_i, \alpha)\).
+
+\item {} 
+qi\$fd: the simulated first differences between the simulated
+expected values for x and x1.
+
+\item {} 
+qi\$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.
+
+\item {} 
+qi\$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\subsection{See also}
+\label{vignette:id75}
+The Weibull model is part of the survival library by Terry Therneau,
+ported to R by Thomas Lumley. Advanced users may wish to refer to
+\code{help(survfit)} in the survival library.
+
+
+\bigskip\hrule{}\bigskip
+
+
+
 \section{zelig-factorbayes}
 \label{vignette:zelig-factorbayes}\label{vignette:zfactorbayes}
 Given some unobserved explanatory variables and observed dependent
@@ -4436,7 +4823,7 @@ model ().
 
 
 \subsection{Syntax}
-\label{vignette:id67}
+\label{vignette:id76}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4454,7 +4841,7 @@ z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}cbind\PYG{p}{(}Y1 \PYG{p}{,}Y2\
 
 
 \subsection{Inputs}
-\label{vignette:id68}
+\label{vignette:id77}
 zelig() takes the following functions for factor.bayes:
 \begin{itemize}
 \item {} 
@@ -4587,7 +4974,7 @@ information.
 
 
 \subsection{Example}
-\label{vignette:id69}
+\label{vignette:id78}
 Attaching the sample dataset:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4630,7 +5017,7 @@ summary\PYG{p}{(}z.out\PYG{p}{)}
 
 
 \subsection{Model}
-\label{vignette:id70}
+\label{vignette:id79}
 Suppose for observation \(i\) we observe \(K\) variables and
 hypothesize that there are \(d\) underlying factors such that:
 \begin{gather}
@@ -4686,7 +5073,7 @@ where \(I_d\) is a :math:{}` dtimes d {}` identity matrix.
 
 
 \subsection{Output Values}
-\label{vignette:id71}
+\label{vignette:id80}
 The output of each Zelig command contains useful information which you
 may view. For example, if you run:
 
@@ -4738,7 +5125,7 @@ maximum-likelihood estimation of this model.
 
 
 \subsection{Syntax}
-\label{vignette:id72}
+\label{vignette:id81}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4758,7 +5145,7 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 
 \subsection{Additional Inputs}
-\label{vignette:id73}
+\label{vignette:id82}
 zelig() accepts the following arguments for mlogit.bayes:
 \begin{itemize}
 \item {} 
@@ -4833,10 +5220,10 @@ Zelig users may wish to refer to \code{help(MCMCmnl)} for more information.
 
 
 \subsection{Examples}
-\label{vignette:id74}
+\label{vignette:id83}
 
 \subsubsection{Basic Example}
-\label{vignette:id75}
+\label{vignette:id84}
 Attaching the sample dataset:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4912,12 +5299,12 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5581 0.2125 0.2294}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5580 0.2089 0.2331}
 \end{Verbatim}
 
 
 \subsubsection{Simulating First Differences}
-\label{vignette:id76}
+\label{vignette:id85}
 Estimating the first difference (and risk ratio) in the
 probabilities of voting different candidates when \code{pristr} (the
 strength of the PRI) is set to be weak (equal to 1) versus strong
@@ -4943,7 +5330,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7110 0.1297 0.1593}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7210 0.1235 0.1555}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -4955,7 +5342,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.3979 0.3086 0.2935}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4047 0.3051 0.2902}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}              mean         sd        50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} P(Y=1) \PYGZhy{}0.3128754 0.03459857 \PYGZhy{}0.3128662 \PYGZhy{}0.38111485 \PYGZhy{}0.2442630}
@@ -4965,7 +5352,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 
 
 \subsection{Model}
-\label{vignette:id77}
+\label{vignette:id86}
 Let \(Y_{i}\) be the (unordered) categorical dependent variable for
 observation \(i\) which takes an integer values
 \(j=1, \ldots, J\).
@@ -5005,7 +5392,7 @@ precision matrix (the inverse of a variance-covariance matrix).
 
 
 \subsection{Quantities of Interest}
-\label{vignette:id78}\begin{itemize}
+\label{vignette:id87}\begin{itemize}
 \item {} 
 The expected values (\code{qi\$ev}) for the multinomial logistics
 regression model are the predicted probability of belonging to each
@@ -5072,7 +5459,7 @@ treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups, and
 
 
 \subsection{Output Values}
-\label{vignette:id79}
+\label{vignette:id88}
 The output of each Zelig command contains useful information which you
 may view. For example, if you run:
 
@@ -5088,7 +5475,7 @@ available through the \code{\$} operator are listed below.
 
 
 \subsection{See also}
-\label{vignette:id80}
+\label{vignette:id89}
 Bayesian logistic regression is part of the MCMCpack library by Andrew
 D. Martin and Kevin M. Quinn . The convergence diagnostics are part of
 the CODA library by Martyn Plummer, Nicky Best, Kate Cowles, Karen Vines, Deepayan Sarkar, Russell Almond.
@@ -5108,7 +5495,7 @@ models, see \emph{probit}.
 
 
 \subsection{Syntax}
-\label{vignette:id81}
+\label{vignette:id90}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5128,7 +5515,7 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 
 \subsection{Additional Inputs}
-\label{vignette:id82}
+\label{vignette:id91}
 zelig() accepts the following arguments to monitor the Markov chain:
 \begin{itemize}
 \item {} 
@@ -5186,10 +5573,10 @@ information.
 
 
 \subsection{Examples}
-\label{vignette:id83}
+\label{vignette:id92}
 
 \subsubsection{Basic Example}
-\label{vignette:id84}
+\label{vignette:id93}
 Attaching the sample dataset:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5270,7 +5657,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 
 
 \subsubsection{Simulating First Differences}
-\label{vignette:id85}
+\label{vignette:id94}
 Estimating the first difference (and risk ratio) in the probabilities
 of incurring different level of cost when there is no military action
 versus military action while all the other variables held at their default values.
@@ -5322,7 +5709,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 
 
 \subsection{Model}
-\label{vignette:id86}
+\label{vignette:id95}
 Let \(Y_{i}\) be the ordered categorical dependent variable for
 observation \(i\) which takes an integer value
 \(j=1, \ldots, J\).
@@ -5380,7 +5767,7 @@ precision matrix (the inverse of a variance-covariance matrix).
 
 
 \subsection{Quantities of Interest}
-\label{vignette:id87}\begin{itemize}
+\label{vignette:id96}\begin{itemize}
 \item {} 
 The expected values (\code{qi\$ev}) for the ordered probit model are the
 predicted probability of belonging to each category:
@@ -5440,7 +5827,7 @@ belong to category \(j\).
 
 
 \subsection{Output Values}
-\label{vignette:id88}
+\label{vignette:id97}
 The output of each Zelig command contains useful information which you
 may view. For example, if you run:
 
@@ -5505,7 +5892,7 @@ for the treated from conditional prediction models.
 
 
 \subsection{See also}
-\label{vignette:id89}
+\label{vignette:id98}
 Bayesian ordinal probit regression is part of the MCMCpack library by
 Andrew D. Martin and Kevin M. Quinn . The convergence diagnostics are
 part of the CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and
@@ -5526,7 +5913,7 @@ model see \emph{poisson}.
 
 
 \subsection{Syntax}
-\label{vignette:id90}
+\label{vignette:id99}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5546,7 +5933,7 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 
 \subsection{Additional Inputs}
-\label{vignette:id91}
+\label{vignette:id100}
 Use the following argument to monitor the Markov chain:
 \begin{itemize}
 \item {} 
@@ -5606,10 +5993,10 @@ information.
 
 
 \subsection{Examples}
-\label{vignette:id92}
+\label{vignette:id101}
 
 \subsubsection{Basic Example}
-\label{vignette:id93}
+\label{vignette:id102}
 Attaching the sample dataset:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5667,7 +6054,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 
 
 \subsubsection{Simulating First Differences}
-\label{vignette:id94}
+\label{vignette:id103}
 Estimating the first difference in the number of countries imposing
 sanctions when the number of targets is set to be its maximum versus its minimum :
 
@@ -5690,7 +6077,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2195 1.840722   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1694 1.804724   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5699,7 +6086,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2979 1.817329   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3129 1.872043   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1146376 0.3671544 0.1265036 \PYGZhy{}0.6072035 0.8342282}
@@ -5707,7 +6094,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 
 
 \subsection{Model}
-\label{vignette:id95}
+\label{vignette:id104}
 Let \(Y_{i}\) be the number of independent events that occur during
 a fixed time period.
 \begin{itemize}
@@ -5743,7 +6130,7 @@ precision matrix (the inverse of a variance-covariance matrix).
 
 
 \subsection{Quantities of Interest}
-\label{vignette:id96}\begin{itemize}
+\label{vignette:id105}\begin{itemize}
 \item {} 
 The expected values (\code{qi\$ev}) for the Poisson model are calculated
 as following:
@@ -5788,7 +6175,7 @@ treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups.
 
 
 \subsection{Output Values}
-\label{vignette:id97}
+\label{vignette:id106}
 The output of each Zelig command contains useful information which you
 may view. For example, if you run:
 
@@ -5846,7 +6233,7 @@ for the treated from conditional prediction models.
 
 
 \subsection{See also}
-\label{vignette:id98}
+\label{vignette:id107}
 Bayesian poisson regression is part of the MCMCpack library by Andrew D.
 Martin and Kevin M. Quinn . The convergence diagnostics are part of the
 CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
@@ -5866,7 +6253,7 @@ likelihood logit regression, and maximum likelihood probit regression.
 
 
 \subsection{Syntax}
-\label{vignette:id99}
+\label{vignette:id108}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -5886,7 +6273,7 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 
 \subsection{Additional Inputs}
-\label{vignette:id100}
+\label{vignette:id109}
 Using the following arguments to monitor the Markov chains:
 \begin{itemize}
 \item {} 
@@ -5949,10 +6336,10 @@ information.
 
 
 \subsection{Examples}
-\label{vignette:id101}
+\label{vignette:id110}
 
 \subsubsection{Basic Example}
-\label{vignette:id102}
+\label{vignette:id111}
 Attaching the sample dataset:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6010,7 +6397,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 
 
 \subsubsection{Simulating First Differences}
-\label{vignette:id103}
+\label{vignette:id112}
 Estimating the first difference (and risk ratio) in individual’s
 probability of voting when education is set to be low (25th
 percentile) versus high (75th percentile) while all the other variables are held at their default values:
@@ -6030,7 +6417,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 
 
 \subsection{Model}
-\label{vignette:id104}
+\label{vignette:id113}
 Let \(Y_{i}\) be the binary dependent variable for observation
 \(i\) which takes the value of either 0 or 1.
 \begin{itemize}
@@ -6069,7 +6456,7 @@ precision matrix (the inverse of a variance-covariance matrix).
 
 
 \subsection{Quantities of Interest}
-\label{vignette:id105}\begin{itemize}
+\label{vignette:id114}\begin{itemize}
 \item {} 
 The expected values (\code{qi\$ev}) for the probit model are the
 predicted probability of a success:
@@ -6120,7 +6507,7 @@ treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups.
 
 
 \subsection{Output Values}
-\label{vignette:id106}
+\label{vignette:id115}
 The output of each Zelig command contains useful information which you
 may view. For example, if you run:
 
@@ -6188,7 +6575,7 @@ for the treated from conditional prediction models.
 
 
 \subsection{See also}
-\label{vignette:id107}
+\label{vignette:id116}
 Bayesian probit regression is part of the MCMCpack library by Andrew D.
 Martin and Kevin M. Quinn . The convergence diagnostics are part of the
 CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
@@ -6208,7 +6595,7 @@ regression, maximum likelihood normal regression, or least squares.
 
 
 \subsection{Syntax}
-\label{vignette:id108}
+\label{vignette:id117}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6229,7 +6616,7 @@ s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.ou
 
 
 \subsection{Inputs}
-\label{vignette:id109}
+\label{vignette:id118}
 zelig() accepts the following arguments to specify how the dependent
 variable is censored.
 \begin{itemize}
@@ -6247,7 +6634,7 @@ above. If the dependent variable is only censored from below, set
 
 
 \subsection{Additional Inputs}
-\label{vignette:id110}
+\label{vignette:id119}
 Use the following arguments to monitor the convergence of the Markov
 chain:
 \begin{itemize}
@@ -6309,10 +6696,10 @@ information.
 
 
 \subsection{Examples}
-\label{vignette:id111}
+\label{vignette:id120}
 
 \subsubsection{Basic Example}
-\label{vignette:id112}
+\label{vignette:id121}
 Attaching the sample dataset:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6370,7 +6757,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 
 
 \subsubsection{Simulating First Differences}
-\label{vignette:id113}
+\label{vignette:id122}
 Set explanatory variables to their default(mean/mode) values, with
 high (80th percentile) and low (20th percentile) liquidity ratio (\code{quant}):
 
@@ -6391,7 +6778,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 
 
 \subsection{Model}
-\label{vignette:id114}
+\label{vignette:id123}
 Let \(Y_i^*\) be the dependent variable which is not directly
 observed. Instead, we observe \(Y_i\) which is defined as following:
 \begin{gather}
@@ -6444,7 +6831,7 @@ are assumed \emph{a priori} independent.
 
 
 \subsection{Quantities of Interest}
-\label{vignette:id115}\begin{itemize}
+\label{vignette:id124}\begin{itemize}
 \item {} 
 The expected values (\code{qi\$ev}) for the tobit regression model is
 calculated as following. Let
@@ -6484,7 +6871,7 @@ treatment (\(t_{i}=1\)) and control (\(t_{i}=0\)) groups.
 
 
 \subsection{Output Values}
-\label{vignette:id116}
+\label{vignette:id125}
 The output of each Zelig command contains useful information which you
 may view. For example, if you run:
 
@@ -6537,7 +6924,7 @@ the treated from conditional prediction models.
 
 
 \subsection{See also}
-\label{vignette:id117}
+\label{vignette:id126}
 Bayesian tobit regression is part of the MCMCpack library by Andrew D.
 Martin and Kevin M. Quinn . The convergence diagnostics are part of the
 CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
@@ -6571,7 +6958,7 @@ cluster-specific effects.
 
 
 \subsection{Syntax}
-\label{vignette:id118}
+\label{vignette:id127}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6597,7 +6984,7 @@ when appropriate.
 
 
 \subsection{Additional Inputs}
-\label{vignette:id119}
+\label{vignette:id128}
 Use the following arguments to specify the structure of the “working”
 correlations within clusters:
 \begin{itemize}
@@ -6613,7 +7000,7 @@ See \code{geeglm} in package \code{geepack} for other function arguments.
 
 
 \subsection{Examples}
-\label{vignette:id120}
+\label{vignette:id129}
 
 \subsubsection{Example with Exchangeable Dependence}
 \label{vignette:example-with-exchangeable-dependence}
@@ -6719,22 +7106,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.43618 1.140867 14.41688 12.50134 17.05527}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.47962 1.184813 14.36195 12.40606 17.10809}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.94097 18.13501 7.270785 0.06845807 74.0427}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.06975 17.49187 7.928356 0.05567912 65.12722}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.15422 1.10064 19.08731 17.08474 21.68266}
-\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.60384 23.46134 10.35709 0.04089519 84.40417}
-\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.718037 1.598019 4.802672 1.344324 7.753627}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.14871 1.038972 19.09748 17.24552 21.33667}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.66752 23.57859 9.76568 0.05837228 79.49553}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.669085 1.607434 4.724825 1.497059 7.65948}
 \end{Verbatim}
 
 Generate a plot of quantities of interest:
@@ -6817,7 +7204,7 @@ then the estimates of the parameters are more efficient.
 
 
 \subsection{Quantities of Interest}
-\label{vignette:id121}\begin{itemize}
+\label{vignette:id130}\begin{itemize}
 \item {} 
 All quantities of interest are for marginal means rather than joint
 means.
@@ -6862,7 +7249,7 @@ indicator is switched to \(tr_{it}=0\).
 
 
 \subsection{Output Values}
-\label{vignette:id122}
+\label{vignette:id131}
 The output of each Zelig command contains useful information which you
 may view. For example, if you run
 
@@ -6931,7 +7318,7 @@ treated from conditional prediction models.
 
 
 \subsection{See also}
-\label{vignette:id123}
+\label{vignette:id132}
 The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to \code{help(geepack)} and \code{help(family)}.
@@ -6963,7 +7350,7 @@ population-averaged effects as opposed to cluster-specific effects.
 
 
 \subsection{Syntax}
-\label{vignette:id124}
+\label{vignette:id133}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -6989,7 +7376,7 @@ when appropriate.
 
 
 \subsection{Additional Inputs}
-\label{vignette:id125}
+\label{vignette:id134}
 Use the following arguments to specify the structure of the “working”
 correlations within clusters:
 \begin{itemize}
@@ -7005,7 +7392,7 @@ See \code{geeglm} in package \code{geepack} for other function arguments.
 
 
 \subsection{Examples}
-\label{vignette:id126}
+\label{vignette:id135}
 
 \subsubsection{Example with Stationary 3 Dependence}
 \label{vignette:example-with-stationary-3-dependence}
@@ -7059,10 +7446,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7716508 0.01119217 0.7719297 0.7503274 0.7939713}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7721393 0.01095129 0.7720728 0.7498369 0.7932306}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.223 0.777}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.226 0.774}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7077,7 +7464,7 @@ plot\PYG{p}{(}s.out1\PYG{p}{)}
 
 
 \subsubsection{Simulating First Differences}
-\label{vignette:id127}
+\label{vignette:id136}
 Estimating the risk difference (and risk ratio) between low education
 (25th percentile) and high education (75th percentile) while all the other variables held at their default values.
 
@@ -7100,22 +7487,22 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8238661 0.01054522 0.8239899 0.8024018 0.8437268}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8243979 0.01078837 0.8251905 0.8019221 0.8437694}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.178 0.822}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.169 0.831}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7064925 0.01408771 0.7069607 0.6794078 0.7342336}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7068951 0.01492397 0.7068337 0.6792366 0.7358521}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.288 0.712}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.309 0.691}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd       50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1173735 0.01156997 \PYGZhy{}0.116562 \PYGZhy{}0.1394049 \PYGZhy{}0.09514254}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1175028 0.01210207 \PYGZhy{}0.1173469 \PYGZhy{}0.1415988 \PYGZhy{}0.0949398}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7163,7 +7550,7 @@ summary\PYG{p}{(}z.out2\PYG{p}{)}
 
 
 \subsection{The Model}
-\label{vignette:id128}
+\label{vignette:id137}
 Suppose we have a panel dataset, with \(Y_{it}\) denoting the binary
 dependent variable for unit \(i\) at time \(t\). \(Y_{i}\)
 is a vector or cluster of correlated data where \(y_{it}\) is
@@ -7239,7 +7626,7 @@ underlying correlations. See for more details.
 
 
 \subsection{Quantities of Interest}
-\label{vignette:id129}\begin{itemize}
+\label{vignette:id138}\begin{itemize}
 \item {} 
 All quantities of interest are for marginal means rather than joint
 means.
@@ -7290,7 +7677,7 @@ indicator is switched to \(tr_{it}=0\).
 
 
 \subsection{Output Values}
-\label{vignette:id130}
+\label{vignette:id139}
 The output of each Zelig command contains useful information which you
 may view. For examle, if you run
 \code{z.out \textless{}- zelig(y \textasciitilde{} x, model = probit.gee, id, data)}, then you may
@@ -7361,7 +7748,7 @@ treated from conditional prediction models.
 
 
 \subsection{See also}
-\label{vignette:id131}
+\label{vignette:id140}
 The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to \code{help(geepack)} and \code{help(family)}.
@@ -7394,7 +7781,7 @@ cluster-specific effects.
 
 
 \subsection{Syntax}
-\label{vignette:id132}
+\label{vignette:id141}
 With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7420,7 +7807,7 @@ when appropriate.
 
 
 \subsection{Additional Inputs}
-\label{vignette:id133}
+\label{vignette:id142}
 Use the following arguments to specify the structure of the “working”
 correlations within clusters:
 \begin{itemize}
@@ -7436,10 +7823,10 @@ See \code{geeglm} in package \code{geepack} for other function arguments.
 
 
 \subsection{Examples}
-\label{vignette:id134}
+\label{vignette:id143}
 
 \subsubsection{Example with Exchangeable Dependence}
-\label{vignette:id135}
+\label{vignette:id144}
 Attaching the sample turnout dataset:
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7524,11 +7911,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.387283 0.9148386 3.251185 2.030655 5.448114}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3783 0.8655404 3.249361 1.952557 5.426074}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.323 1.955632   3    0     8}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.284 1.988793   3    0     8}
 \end{Verbatim}
 
 Generate a plot of quantities of interest:
@@ -7545,7 +7932,7 @@ plot\PYG{p}{(}s.out\PYG{p}{)}
 
 
 \subsection{The Model}
-\label{vignette:id136}
+\label{vignette:id145}
 Suppose we have a panel dataset, with \(Y_{it}\) denoting the
 dependent variable of the number of independent events for a fixed
 period of time for unit \(i\) at time \(t\). \(Y_{i}\) is a
@@ -7621,7 +8008,7 @@ underlying correlations. See for more details.
 
 
 \subsection{Quantities of Interest}
-\label{vignette:id137}\begin{itemize}
+\label{vignette:id146}\begin{itemize}
 \item {} 
 All quantities of interest are for marginal means rather than joint
 means.
@@ -7667,7 +8054,7 @@ indicator is switched to \(tr_{it}=0\).
 
 
 \subsection{Output Values}
-\label{vignette:id138}
+\label{vignette:id147}
 The output of each Zelig command contains useful information which you
 may view. For example, if you run
 \code{z.out \textless{}- zelig(y \textasciitilde{} x, model = poisson.gee, id, data)}, then you may
@@ -7734,7 +8121,7 @@ treated from conditional prediction models.
 
 
 \subsection{See also}
-\label{vignette:id139}
+\label{vignette:id148}
 The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to \code{help(geepack)} and \code{help(family)}.
@@ -7891,23 +8278,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.40177 1.485172 15.33163 12.74853 18.50084}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.35595 1.50048 15.27378 12.65471 18.55162}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.7764 15.40579 11.11561 0.5190185 57.44633}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.27044 14.97946 11.1967 0.3316068 55.02532}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.39296 2.006561 24.26818 20.83258 28.57829}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.36562 1.858434 24.32734 20.93379 28.07387}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 25.00588 23.77518 17.29385 0.6273553 87.39125}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 22.91648 22.09981 15.6335 0.5768573 84.46408}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 8.99119 2.554579 8.917678 4.02514 14.15965}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 9.009674 2.388341 9.037939 4.126534 13.31389}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8160,22 +8547,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.47572 1.083043 14.35451 12.73489 16.79113}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.41109 1.082216 14.32963 12.44906 16.75609}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.16857 12.83508 10.31738 0.694669 45.94131}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.94117 12.54657 10.16727 0.6361924 46.63783}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.22962 1.111613 19.15837 17.17047 21.57195}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.12725 1.107758 19.06307 17.18116 21.3768}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.88802 17.19659 14.36555 1.086112 67.37241}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.03346 16.60206 14.11098 1.113402 60.34434}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.753894 1.537927 4.783697 1.683207 7.866827}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.716166 1.534134 4.739363 1.629791 7.676791}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8358,10 +8745,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7475134 0.01161024 0.7475172 0.7244414 0.7688564}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7473238 0.01167537 0.7471396 0.7244763 0.7700529}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.265 0.735}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.233 0.767}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8405,23 +8792,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8228304 0.01028316 0.8235217 0.8015221 0.8411065}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8231979 0.01077993 0.8238294 0.8007929 0.842699}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.175 0.825}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.19 0.81}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7086667 0.01270915 0.7090941 0.6827574 0.7318733}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.709183 0.01280819 0.7091317 0.6827829 0.7341248}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.306 0.694}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.303 0.697}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1141637 0.01110103 \PYGZhy{}0.1139216 \PYGZhy{}0.1364665 \PYGZhy{}0.09250428}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.114015 0.01131852 \PYGZhy{}0.1142518 \PYGZhy{}0.1359273 \PYGZhy{}0.09163807}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8688,22 +9075,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.20453 2.395591 18.02876 13.89477 23.36577}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.49145 2.473131 18.24921 14.28183 23.87022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.20453 2.395591 18.02876 13.89477 23.36577}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.49145 2.473131 18.24921 14.28183 23.87022}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.81323 3.593166 31.6042 25.56477 38.82508}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.15915 3.634718 31.85431 25.70069 40.13242}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.81323 3.593166 31.6042 25.56477 38.82508}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 32.15915 3.634718 31.85431 25.70069 40.13242}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.6087 3.609597 13.59424 6.944184 20.73132}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.6677 3.732054 13.72353 6.757411 21.23939}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8947,23 +9334,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.428996 0.1897214 5.425557 5.053605 5.810824}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.41837 0.1836892 5.423229 5.055735 5.782975}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.428996 0.1897214 5.425557 5.053605 5.810824}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.41837 0.1836892 5.423229 5.055735 5.782975}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602755 0.1756249 4.602389 4.244421 4.93695}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.604969 0.1846724 4.605665 4.242188 4.961839}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602755 0.1756249 4.602389 4.244421 4.93695}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.604969 0.1846724 4.605665 4.242188 4.961839}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8262409 0.2224789 \PYGZhy{}0.8235743 \PYGZhy{}1.265408 \PYGZhy{}0.3938791}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8134005 0.2279988 \PYGZhy{}0.8060883 \PYGZhy{}1.264271 \PYGZhy{}0.3714899}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -9238,13 +9625,13 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.992601 0.3433441 2.986007 2.351178 3.706982}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.981306 0.3413427 2.956457 2.371612 3.718206}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     0     1     2     3     4     5     6     7     8     9    10    11}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.137 0.147 0.174 0.137 0.107 0.076 0.064 0.046 0.028 0.028 0.018 0.012}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    15    16    17    18    19    22}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.002 0.007 0.001 0.008 0.001 0.001 0.004 0.001 0.001}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.199 0.206 0.175 0.125 0.099 0.060 0.052 0.033 0.019 0.009 0.007 0.008}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    15    16    19}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.003 0.001 0.002 0.001 0.001}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -9474,23 +9861,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}   2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.420924 0.1953245 5.421642 5.0659 5.798868}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.431162 0.1966832 5.430723 5.037194 5.81941}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.408576 2.683773 5.418586 0.1979007 10.53428}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.435296 2.743124 5.455823 0.1924082 10.74049}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.599927 0.1848846 4.597226 4.256534 4.956503}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.596956 0.1773931 4.58876 4.258523 4.953134}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd     50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.61483 2.801966 4.71042 \PYGZhy{}0.9031632 10.19823}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.540683 2.729306 4.562981 \PYGZhy{}1.237993 9.505813}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8209972 0.2419528 \PYGZhy{}0.8239984 \PYGZhy{}1.283453 \PYGZhy{}0.3511441}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8342058 0.2335622 \PYGZhy{}0.8409698 \PYGZhy{}1.269391 \PYGZhy{}0.3914609}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -9691,11 +10078,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.241622 0.2411348 3.234479 2.76923 3.759604}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.265293 0.2295563 3.259036 2.798051 3.729538}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.211 1.807137   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.299 1.874864   3    0     8}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -10136,10 +10523,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002397549 0.0001553224 0.002387028 0.002128876 0.002714324}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002398411 0.0001557397 0.002396977 0.002100549 0.002709837}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.998 0.002}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.997 0.003}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -11188,7 +11575,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fcd0512f6e0\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7f9113ca29f0\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -11539,10 +11926,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.548292 0.6452852 1.490412 0.5591164 3.047875}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.557609 0.6428807 1.485459 0.5172969 2.994908}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.137902 4.216097 1.354024    0 13.97745}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.160987 4.158712 1.447864    0 14.22161}
 \end{Verbatim}
 
 
@@ -11574,22 +11961,22 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.191589 0.7888275 1.037962 0.1416495 3.180346}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.211497 0.7317731 1.065063 0.1941876 2.936198}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.142293 4.263291 1.262011    0 13.84198}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd     50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.111962 4.12876 1.33297    0 14.69529}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd    50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.053921 0.969557 1.8994 0.5800073 4.165493}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.101096 1.018149 1.966143 0.5869947 4.503016}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}  97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.804252 4.868043 2.085459    0 16.963}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.61894 4.357355 2.219499    0 14.53047}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8623314 1.199594 0.8464547 \PYGZhy{}1.631705 3.298214}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.889599 1.227234 0.7726493 \PYGZhy{}1.537488 3.369584}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -11681,6 +12068,386 @@ then you may examine the available information in {\color{red}\bfseries{}{}`{}`}
 \paragraph{See also}
 \label{zelig-tobit:see-also}
 The tobit function is part of the survival library by Terry Therneau,
+ported to R by Thomas Lumley. Advanced users may wish to refer to
+\code{help(survfit)} in the survival library.
+
+
+\subsubsection{zelig-weibull}
+\label{zelig-weibull:zweibull}\label{zelig-weibull::doc}\label{zelig-weibull:zelig-weibull}
+Weibull Regression for Duration Dependent Variables
+
+Choose the Weibull regression model if the values in your dependent
+variable are duration observations. The Weibull model relaxes the
+exponential model’s assumption of constant hazard, and allows the
+hazard rate to increase or decrease monotonically with respect to
+elapsed time.
+
+
+\paragraph{Syntax}
+\label{zelig-weibull:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zweibull\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}Y\PYG{p}{,} C\PYG{p}{)} \PYG{o}{\PYGZti{}} X\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{weibull\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+Weibull models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length \(n\). For each
+observation \(i\) in 1, …, \(n\), the value \(y_i\) is the
+duration (lifetime, for example), and the associated \(c_i\) is a
+binary variable such that \(c_i = 1\) if the duration is not
+censored (\emph{e.g.}, the subject dies during the study) or \(c_i = 0\)
+if the duration is censored (\emph{e.g.}, the subject is still alive at the
+end of the study). If \(c_i\) is omitted, all Y are assumed to be
+completed; that is, time defaults to 1 for all observations.
+
+
+\paragraph{Input Values}
+\label{zelig-weibull:input-values}
+In addition to the standard inputs, zelig() takes the following
+additional options for weibull regression:
+\begin{itemize}
+\item {} 
+robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+errors based on sandwich estimators (see and ) based on the options
+in cluster.
+
+\item {} 
+cluster: if robust = TRUE, you may select a variable to define groups
+of correlated observations. Let x3 be a variable that consists of
+either discrete numeric values, character strings, or factors that
+define strata. Then
+
+\end{itemize}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}y \PYG{o}{\PYGZti{}} x1 \PYG{o}{+} x2\PYG{p}{,} robust \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{,} cluster \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{x3\PYGZdq{}}\PYG{p}{,}
+               model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{exp\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+\end{Verbatim}
+
+means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If \emph{robust = TRUE} but cluster is not specified, zelig() assumes that each observation falls into its own cluster.
+
+
+\paragraph{Example}
+\label{zelig-weibull:example}
+Attach the sample data:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}coalition\PYG{p}{)}
+\end{Verbatim}
+
+Estimate the model:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Surv\PYG{p}{(}duration\PYG{p}{,} ciep12\PYG{p}{)} \PYG{o}{\PYGZti{}} fract \PYG{o}{+} numst2\PYG{p}{,}
+               model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{weibull\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} coalition\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Olivia Lau, Kosuke Imai, Gary King. 2007.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   weibull: Weibull Regression for Duration Dependent Variables}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://zeligproject.org/}
+\end{Verbatim}
+
+View the regression output:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}by}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1] 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} survival::survreg(formula = Surv(duration, ciep12) \PYGZti{} fract +}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     numst2, data = ., dist = \PYGZdq{}weibull\PYGZdq{}, model = FALSE)}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  (Intercept)        fract       numst2}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  5.498500132 \PYGZhy{}0.003838969  0.452319329}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Scale= 0.9566212}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Loglik(model)= \PYGZhy{}1077   Loglik(intercept only)= \PYGZhy{}1100.6}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  Chisq= 47.18 on 2 degrees of freedom, p= 5.7e\PYGZhy{}11}
+\PYG{c}{\PYGZsh{}\PYGZsh{} n= 314}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.low \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{)}
+x.high \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{,} numst2 \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
+\end{Verbatim}
+
+Simulate expected values and first differences:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.low\PYG{p}{,} x1 \PYG{o}{=} x.high\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}  2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 58.74475 9.418221 58.00551 42.88 79.71307}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}        2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 60.25157 184.256 7.726762 0.001016853 463.3723}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 91.92603 15.12111 90.51753 67.70032 124.2653}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}        2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 81.36877 240.7577 6.789176 0.000676992 685.9505}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 33.18128 10.50362 32.27583 15.1778 55.38708}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-weibull-1.png}
+\caption{Zelig-weibull}\end{figure}
+
+
+\paragraph{Model}
+\label{zelig-weibull:model}
+Let \(Y_i^*\) be the survival time for observation \(i\). This
+variable might be censored for some observations at a fixed time
+\(y_c\) such that the fully observed dependent variable,
+\(Y_i\), is defined as
+\begin{gather}
+\begin{split}Y_i = \left\{ \begin{array}{ll}
+      Y_i^* & \textrm{if }Y_i^* \leq y_c \\
+      y_c & \textrm{if }Y_i^* > y_c
+    \end{array} \right.\end{split}\notag
+\end{gather}\begin{itemize}
+\item {} 
+The \emph{stochastic component} is described by the distribution of the
+partially observed variable \(Y^*\). We assume \(Y_i^*\)
+follows the Weibull distribution whose density function is given by
+\begin{gather}
+\begin{split}f(y_i^*\mid \lambda_i, \alpha) = \frac{\alpha}{\lambda_i^\alpha}
+    y_i^{* \alpha-1} \exp \left\{ -\left( \frac{y_i^*}{\lambda_i}
+\right)^{\alpha} \right\}\end{split}\notag
+\end{gather}
+for \(y_i^* \ge 0\), the scale parameter \(\lambda_i > 0\),
+and the shape parameter \(\alpha > 0\). The mean of this
+distribution is :math:{\color{red}\bfseries{}{}`}lambda\_i
+\begin{quote}
+
+Gamma(1 + 1 / alpha){}`. When \(\alpha = 1\), the distribution
+\end{quote}
+
+reduces to the exponential distribution (see Section {[}exp{]}). (Note
+that the output from zelig() parameterizes
+scale:math:{}` = 1 / alpha{}`.)
+
+In addition, survival models like the Weibull have three additional
+properties. The hazard function \(h(t)\) measures the probability
+of not surviving past time \(t\) given survival up to \(t\).
+In general, the hazard function is equal to \(f(t)/S(t)\) where
+the survival function \(S(t) = 1 - \int_{0}^t f(s) ds\)
+represents the fraction still surviving at time \(t\). The
+cumulative hazard function \(H(t)\) describes the probability of
+dying before time \(t\). In general,
+\(H(t)= \int_{0}^{t} h(s) ds = -\log S(t)\). In the case of the
+Weibull model,
+\begin{gather}
+\begin{split}\begin{aligned}
+h(t) &=& \frac{\alpha}{\lambda_i^{\alpha}} t^{\alpha - 1}  \\
+S(t) &=&  \exp \left\{ -\left( \frac{t}{\lambda_i} \right)^{\alpha} \right\} \\
+H(t) &=& \left( \frac{t}{\lambda_i} \right)^{\alpha}\end{aligned}\end{split}\notag
+\end{gather}
+For the Weibull model, the hazard function \(h(t)\) can increase
+or decrease monotonically over time.
+
+\item {} 
+The \emph{systematic component} \(\lambda_i\) is modeled as
+\begin{gather}
+\begin{split}\lambda_i = \exp(x_i \beta),\end{split}\notag
+\end{gather}
+where \(x_i\) is the vector of explanatory variables, and
+\(\beta\) is the vector of coefficients.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-weibull:quantities-of-interest}\begin{itemize}
+\item {} 
+The expected values (qi\$ev) for the Weibull model are simulations of
+the expected duration:
+\begin{gather}
+\begin{split}E(Y) = \lambda_i \, \Gamma (1 + \alpha^{-1}),\end{split}\notag
+\end{gather}
+given draws of \(\beta\) and \(\alpha\) from their sampling
+distributions.
+
+\item {} 
+The predicted value (qi\$pr) is drawn from a distribution defined by
+\((\lambda_i, \alpha)\).
+
+\item {} 
+The first difference (qi\$fd) in expected value is
+\begin{gather}
+\begin{split}\textrm{FD} = E(Y \mid x_1) - E(Y \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      E[Y_i(t_i=0)] \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups. When
+\(Y_i(t_i=1)\) is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations are due to
+uncertainty in simulating \(E[Y_i(t_i=0)]\), the counterfactual
+expected value of \(Y_i\) for observations in the treatment
+group, under the assumption that everything stays the same except
+that the treatment indicator is switched to \(t_i=0\).
+
+\item {} 
+In conditional prediction models, the average predicted treatment
+effect (att.pr) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \right\},\end{split}\notag
+\end{gather}
+where \(t_i\) is a binary explanatory variable defining the
+treatment (\(t_i=1\)) and control (\(t_i=0\)) groups. When
+\(Y_i(t_i=1)\) is censored rather than observed, we replace it
+with a simulation from the model given available knowledge of the
+censoring process. Variation in the simulations are due to
+uncertainty in simulating \(\widehat{Y_i(t_i=0)}\), the
+counterfactual predicted value of \(Y_i\) for observations in the
+treatment group, under the assumption that everything stays the same
+except that the treatment indicator is switched to \(t_i=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-weibull:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = weibull, data)}, then you may examine
+the available information in \code{z.out} by using \code{names(z.out)}, see
+the coefficients by using z.out\$coefficients, and a default summary of
+information through \code{summary(z.out)}. Other elements available through
+the \$ operator are listed below.
+\begin{itemize}
+\item {} 
+From the zelig() output object z.out, you may extract:
+\begin{itemize}
+\item {} 
+coefficients: parameter estimates for the explanatory variables.
+
+\item {} 
+icoef: parameter estimates for the intercept and “scale” parameter
+\(1 / \alpha\).
+
+\item {} 
+var: the variance-covariance matrix.
+
+\item {} 
+loglik: a vector containing the log-likelihood for the model and
+intercept only (respectively).
+
+\item {} 
+linear.predictors: a vector of the \(x_{i}\beta\).
+
+\item {} 
+df.residual: the residual degrees of freedom.
+
+\item {} 
+df.null: the residual degrees of freedom for the null model.
+
+\item {} 
+zelig.data: the input data frame if save.data = TRUE.
+
+\end{itemize}
+
+\item {} 
+Most of this may be conveniently summarized using summary(z.out).
+From summary(z.out), you may additionally extract:
+\begin{itemize}
+\item {} 
+table: the parameter estimates with their associated standard
+errors, \(p\)-values, and \(t\)-statistics.
+
+\end{itemize}
+
+\item {} 
+From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation \(\times\)
+x-observation (for more than one x-observation). Available quantities
+are:
+\begin{itemize}
+\item {} 
+qi\$ev: the simulated expected values for the specified values of
+x.
+
+\item {} 
+qi\$pr: the simulated predicted values drawn from a distribution
+defined by \((\lambda_i, \alpha)\).
+
+\item {} 
+qi\$fd: the simulated first differences between the simulated
+expected values for x and x1.
+
+\item {} 
+qi\$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.
+
+\item {} 
+qi\$att.pr: the simulated average predicted treatment effect for
+the treated from conditional prediction models.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\paragraph{See also}
+\label{zelig-weibull:see-also}
+The Weibull model is part of the survival library by Terry Therneau,
 ported to R by Thomas Lumley. Advanced users may wish to refer to
 \code{help(survfit)} in the survival library.
 
@@ -12169,7 +12936,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5581 0.2125 0.2294}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5580 0.2089 0.2331}
 \end{Verbatim}
 
 
@@ -12200,7 +12967,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7110 0.1297 0.1593}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7210 0.1235 0.1555}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -12212,7 +12979,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.3979 0.3086 0.2935}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4047 0.3051 0.2902}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}              mean         sd        50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} P(Y=1) \PYGZhy{}0.3128754 0.03459857 \PYGZhy{}0.3128662 \PYGZhy{}0.38111485 \PYGZhy{}0.2442630}
@@ -12939,7 +13706,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2195 1.840722   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1694 1.804724   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -12948,7 +13715,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.2979 1.817329   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3129 1.872043   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1146376 0.3671544 0.1265036 \PYGZhy{}0.6072035 0.8342282}
@@ -13956,22 +14723,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.43618 1.140867 14.41688 12.50134 17.05527}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.47962 1.184813 14.36195 12.40606 17.10809}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.94097 18.13501 7.270785 0.06845807 74.0427}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.06975 17.49187 7.928356 0.05567912 65.12722}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.15422 1.10064 19.08731 17.08474 21.68266}
-\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.60384 23.46134 10.35709 0.04089519 84.40417}
-\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.718037 1.598019 4.802672 1.344324 7.753627}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.14871 1.038972 19.09748 17.24552 21.33667}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.66752 23.57859 9.76568 0.05837228 79.49553}
+\PYG{c}{\PYGZsh{}\PYGZsh{} fd}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.669085 1.607434 4.724825 1.497059 7.65948}
 \end{Verbatim}
 
 Generate a plot of quantities of interest:
@@ -14292,10 +15059,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7716508 0.01119217 0.7719297 0.7503274 0.7939713}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7721393 0.01095129 0.7720728 0.7498369 0.7932306}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.223 0.777}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.226 0.774}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -14333,22 +15100,22 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8238661 0.01054522 0.8239899 0.8024018 0.8437268}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8243979 0.01078837 0.8251905 0.8019221 0.8437694}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.178 0.822}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.169 0.831}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7064925 0.01408771 0.7069607 0.6794078 0.7342336}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7068951 0.01492397 0.7068337 0.6792366 0.7358521}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.288 0.712}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.309 0.691}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd       50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1173735 0.01156997 \PYGZhy{}0.116562 \PYGZhy{}0.1394049 \PYGZhy{}0.09514254}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1175028 0.01210207 \PYGZhy{}0.1173469 \PYGZhy{}0.1415988 \PYGZhy{}0.0949398}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -14753,11 +15520,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.387283 0.9148386 3.251185 2.030655 5.448114}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3783 0.8655404 3.249361 1.952557 5.426074}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.323 1.955632   3    0     8}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.284 1.988793   3    0     8}
 \end{Verbatim}
 
 Generate a plot of quantities of interest:

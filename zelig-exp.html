@@ -96,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-weibull">zelig-weibull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
@@ -198,6 +199,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-weibull">zelig-weibull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
@@ -341,23 +343,23 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 15.36298 1.438689 15.33826 12.70218 18.30888</span>
+<span class="c">##       mean       sd     50%     2.5%    97.5%</span>
+<span class="c">## 1 15.34602 1.523781 15.2551 12.63501 18.76127</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd     50%      2.5%    97.5%</span>
-<span class="c">## [1,] 15.07043 15.35106 10.7774 0.4021945 57.05547</span>
+<span class="c">## [1,] 15.77413 15.24358 11.4823 0.3324345 53.15109</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 24.32556 1.932239 24.24489 20.78317 28.27883</span>
+<span class="c">## 1 24.30661 1.967885 24.23044 20.61469 28.22129</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## [1,] 22.94529 24.23278 15.85962 0.4857821 84.14575</span>
+<span class="c">## [1,] 23.82064 25.94461 15.01297 0.5677649 89.84064</span>
 <span class="c">## fd</span>
-<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 8.962583 2.422242 8.887219 4.245063 13.62539</span>
+<span class="c">##       mean       sd      50%     2.5%   97.5%</span>
+<span class="c">## 1 8.960586 2.443173 8.937186 4.049825 13.8958</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>

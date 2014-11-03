@@ -21,6 +21,7 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Probit Regression <zprobit>`: ``zprobit$new()``
 - :ref:`Rare Events Logistic Regression <zrelogit>`: ``zrelogit$new()``
 - :ref:`Tobit Regression <ztobit>`: ``ztobit$new()``
+- :ref:`Weibull Regression for Duration Dependent Variables <zweibull>`: ``zweibull$new()``
 - :ref:`Bayesian Factor Analysis <zfactorbayes>`: ``zfactorbayes$new()``
 - :ref:`Bayesian Multinomial Logistic Regression <zmlogitbayes>`: ``zmlogitbayes$new()``
 - :ref:`Bayesian Ordered Probit Regression <zoprobitbayes>`: ``zoprobitbayes$new()``
@@ -78,6 +79,10 @@ The following models are currently supported in Zelig 5.0-1:
 
 --------
 
+.. include:: zelig-weibull.rst
+
+--------
+
 .. include:: zelig-factorbayes.rst
 
 --------
@@ -128,6 +133,7 @@ The following models are currently supported in Zelig 5.0-1:
    zelig-probit.rst
    zelig-relogit.rst
    zelig-tobit.rst
+   zelig-weibull.rst
    zelig-factorbayes.rst
    zelig-mlogitbayes.rst
    zelig-oprobitbayes.rst

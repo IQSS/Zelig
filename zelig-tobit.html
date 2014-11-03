@@ -34,7 +34,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
     <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
-    <link rel="next" title="zelig-factorbayes" href="zelig-factorbayes.html" />
+    <link rel="next" title="zelig-weibull" href="zelig-weibull.html" />
     <link rel="prev" title="zelig-relogit" href="zelig-relogit.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -96,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-weibull">zelig-weibull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
@@ -159,7 +160,7 @@
     </a>
   </li>
   <li>
-    <a href="zelig-factorbayes.html" title="Next Chapter: zelig-factorbayes"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">zelig-factorbaye... &raquo;</span>
+    <a href="zelig-weibull.html" title="Next Chapter: zelig-weibull"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">zelig-weibull &raquo;</span>
     </a>
   </li>
               
@@ -202,6 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-weibull">zelig-weibull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
@@ -320,10 +322,10 @@ its own cluster.</p>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.540738 0.6405017 1.467451 0.5174713 2.980449</span>
+<span class="c">## 1 1.545981 0.6461613 1.461303 0.5197283 2.983462</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.142629 4.018374 1.485433    0 13.34411</span>
+<span class="c">##          mean      sd      50% 2.5%    97.5%</span>
+<span class="c">## [1,] 3.003191 3.90936 1.321498    0 13.24722</span>
 </pre></div>
 </div>
 </div>
@@ -349,22 +351,22 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.205942 0.7639112 1.068916 0.1493239 2.998634</span>
+<span class="c">## 1 1.227702 0.7762866 1.068474 0.1532736 3.145453</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd       50% 2.5%    97.5%</span>
-<span class="c">## [1,] 2.915005 4.039914 0.9748693    0 13.42858</span>
+<span class="c">##          mean      sd      50% 2.5%   97.5%</span>
+<span class="c">## [1,] 2.875352 3.95269 1.043619    0 12.9054</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 2.051492 0.9616041 1.912933 0.5832715 4.267949</span>
+<span class="c">## 1 2.017149 0.9548178 1.884671 0.5887645 4.321557</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.645041 4.452181 2.169932    0 15.24345</span>
+<span class="c">## [1,] 3.468774 4.348168 2.061813    0 14.72022</span>
 <span class="c">## fd</span>
 <span class="c">##        mean       sd       50%      2.5%    97.5%</span>
-<span class="c">## 1 0.8455502 1.205934 0.8034092 -1.591235 3.420923</span>
+<span class="c">## 1 0.7894464 1.155566 0.6871567 -1.267174 3.044403</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
