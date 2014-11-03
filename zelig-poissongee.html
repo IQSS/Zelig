@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>zelig-poissongee &mdash; Zelig 5.0-1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/my-styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0-1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Zelig 5.0-1 documentation" href="index.html" />
+    <link rel="up" title="Model Reference and Vignettes" href="vignette.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="prev" title="zelig-probitgee" href="zelig-probitgee.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+<a href="https://github.com/IQSS/Zelig"><img style="position: absolute; top: 45px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"" alt="Fork me on GitHub"></a>
+<div id="navbar" class="navbar-inverse navbar-default navbar-fixed-top">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- <a class="logo"> <img height="32" width="32" src="http://datascience.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/zelig-small_1.png?itok=catC420a" /></a> -->
+        <a class="navbar-brand" href="index.html">Zelig</a>
+        <span class="navbar-text navbar-version pull-left"><b>Version 5.0-1</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="http://roadmap.datascience.iq.harvard.edu/milestones/milestone-roadmap/Zelig/">Roadmap</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#installing-r-and-zelig">Installing R and Zelig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_quickstart.html#quickstart-guide">Quickstart Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissongee">zelig-poissongee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-zelig">Why can’t I install Zelig?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-install-r">Why can’t I install R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-cant-i-load-data">Why can’t I load data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">zelig-poissongee</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#additional-inputs">Additional Inputs</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#example-with-exchangeable-dependence">Example with Exchangeable Dependence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-model">The Model</a></li>
+<li><a class="reference internal" href="#quantities-of-interest">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#output-values">Output Values</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="zelig-probitgee.html" title="Previous Chapter: zelig-probitgee"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; zelig-probitgee</span>
+    </a>
+  </li>
+  <li>
+    <a href="faq.html" title="Next Chapter: Frequently Asked Questions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Frequently Asked... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_quickstart.html">Installation and Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="vignette.html">Model Reference and Vignettes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-exp">zelig-exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gamma">zelig-gamma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-logit">zelig-logit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-lognorm">zelig-lognorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-ls">zelig-ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-negbin">zelig-negbin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-normal">zelig-normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poisson">zelig-poisson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probit">zelig-probit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-relogit">zelig-relogit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobit">zelig-tobit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-factorbayes">zelig-factorbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-mlogitbayes">zelig-mlogitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-oprobitbayes">zelig-oprobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-poissonbayes">zelig-poissonbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissongee">zelig-poissongee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+  <div class="section" id="zelig-poissongee">
+<span id="zpoissongee"></span><h1>zelig-poissongee<a class="headerlink" href="#zelig-poissongee" title="Permalink to this headline">¶</a></h1>
+<p>The GEE poisson estimates the same model as the standard poisson
+regression (appropriate when your dependent variable represents the
+number of independent events that occur during a fixed period of time).
+Unlike in poisson regression, GEE poisson allows for dependence within
+clusters, such as in longitudinal data, although its use is not limited
+to just panel data. The user must first specify a “working” correlation
+matrix for the clusters, which models the dependence of each observation
+with other observations in the same cluster. The “working” correlation
+matrix is a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/> matrix of correlations, where <img class="math" src="_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/>
+is the size of the largest cluster and the elements of the matrix are
+correlations between within-cluster observations. The appeal of GEE
+models is that it gives consistent estimates of the parameters and
+consistent estimates of the standard errors can be obtained using a
+robust “sandwich” estimator even if the “working” correlation matrix is
+incorrectly specified. If the “working” correlation matrix is correctly
+specified, GEE models will give more efficient estimates of the
+parameters. GEE models measure population-averaged effects as opposed to
+cluster-specific effects.</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zgammagee<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.gee&quot;</span><span class="p">,</span>
+         id <span class="o">=</span> <span class="s">&quot;X3&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.gee&quot;</span><span class="p">,</span>
+               id <span class="o">=</span> <span class="s">&quot;X3&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>where <tt class="docutils literal"><span class="pre">id</span></tt> is a variable which identifies the clusters. The data
+should be sorted by <tt class="docutils literal"><span class="pre">id</span></tt> and should be ordered within each cluster
+when appropriate.</p>
+</div>
+<div class="section" id="additional-inputs">
+<h2>Additional Inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
+<p>Use the following arguments to specify the structure of the “working”
+correlations within clusters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">corstr</span></tt>: character string specifying the correlation structure:
+&#8220;independence&#8221;, &#8220;exchangeable&#8221;, &#8220;ar1&#8221;, &#8220;unstructured&#8221; and
+&#8220;userdefined&#8221;</li>
+<li>See <tt class="docutils literal"><span class="pre">geeglm</span></tt> in package <tt class="docutils literal"><span class="pre">geepack</span></tt> for other function arguments.</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example-with-exchangeable-dependence">
+<h3>Example with Exchangeable Dependence<a class="headerlink" href="#example-with-exchangeable-dependence" title="Permalink to this headline">¶</a></h3>
+<p>Attaching the sample turnout dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>sanction<span class="p">)</span>
+</pre></div>
+</div>
+<p>Variable identifying clusters</p>
+<div class="highlight-r"><div class="highlight"><pre>sanction<span class="o">$</span>cluster <span class="o">&lt;-</span> c<span class="p">(</span>rep<span class="p">(</span>c<span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">),</span> <span class="m">5</span><span class="p">),</span> rep<span class="p">(</span>c<span class="p">(</span><span class="m">16</span><span class="p">),</span> <span class="m">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Sorting by cluster</p>
+<div class="highlight-r"><div class="highlight"><pre>sorted.sanction <span class="o">&lt;-</span> sanction<span class="p">[</span>order<span class="p">(</span>sanction<span class="o">$</span>cluster<span class="p">),</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>Estimating model and presenting summary:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.gee&quot;</span><span class="p">,</span>
+               id <span class="o">=</span> <span class="s">&quot;cluster&quot;</span><span class="p">,</span> data <span class="o">=</span> sorted.sanction<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Patrick Lam. 2011.</span>
+<span class="c">##   poissongee: General Estimating Equation for Poisson Regression</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://zeligproject.org/</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
+<span class="c">## Call:</span>
+<span class="c">## geepack::geeglm(formula = num ~ target + coop, family = poisson(&quot;log&quot;),</span>
+<span class="c">##     data = ., id = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3,</span>
+<span class="c">##     3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7,</span>
+<span class="c">##     7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11,</span>
+<span class="c">##     11, 11, 11, 11, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 14,</span>
+<span class="c">##     14, 14, 14, 14, 15, 15, 15, 15, 15, 16, 16, 16), corstr = &quot;independence&quot;)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)      target        coop</span>
+<span class="c">## -0.96771994 -0.02102351  1.21081908</span>
+<span class="c">##</span>
+<span class="c">## Degrees of Freedom: 78 Total (i.e. Null);  75 Residual</span>
+<span class="c">##</span>
+<span class="c">## Scale Link:                   identity</span>
+<span class="c">## Estimated Scale Parameters:  [1] 16.4486</span>
+<span class="c">##</span>
+<span class="c">## Correlation:  Structure = independence</span>
+<span class="c">## Number of clusters:   16   Maximum cluster size: 5</span>
+<span class="c">##</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
+</pre></div>
+</div>
+<p>Set explanatory variables to their default values:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulate quantities of interest</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##          mean        sd      50%    2.5%    97.5%</span>
+<span class="c">## [1,] 3.339216 0.8748024 3.218752 1.94679 5.246481</span>
+<span class="c">## pv</span>
+<span class="c">##       mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.285 2.119969   3    0     8</span>
+</pre></div>
+</div>
+<p>Generate a plot of quantities of interest:</p>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="Zelig-poisson" src="_images/Zelig-poissongee-1.png" />
+<p class="caption">Zelig-poisson</p>
+</div>
+</div>
+</div>
+<div class="section" id="the-model">
+<h2>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we have a panel dataset, with <img class="math" src="_images/math/30f89e733d3b75f1db48233adcde1aa3ef74a897.png" alt="Y_{it}"/> denoting the
+dependent variable of the number of independent events for a fixed
+period of time for unit <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> at time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. <img class="math" src="_images/math/0e1e069d7b701cb98cfecc70660e4e31b786db9a.png" alt="Y_{i}"/> is a
+vector or cluster of correlated data where <img class="math" src="_images/math/b840d9057a2e3bad080c274b8f1d9303520f9052.png" alt="y_{it}"/> is correlated
+with <img class="math" src="_images/math/da57192d38416f50ec88d145367cc7d5be0c06c5.png" alt="y_{it^\prime}"/> for some or all <img class="math" src="_images/math/2d3acc5e57adc9f94593e8bb1b3b28df87caf045.png" alt="t, t^\prime"/>. Note
+that the model assumes correlations within <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> but independence
+across <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by the joint and marginal
+distributions</p>
+<div class="math">
+<p><img src="_images/math/07e7595e1d9c1222ab0eab8fa6aa39fe54251868.png" alt="\begin{aligned}
+Y_{i} &amp;\sim&amp; f(y_{i} \mid \lambda_{i})\\
+Y_{it} &amp;\sim&amp; g(y_{it} \mid \lambda_{it})\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/0001d02b63ede2fe3219e05a7cd09c82ae6298b6.png" alt="f"/> and <img class="math" src="_images/math/67f4714f065d485540ad40829e0717bf75e9dd85.png" alt="g"/> are unspecified distributions with
+means <img class="math" src="_images/math/3d9a1fde3ad183d72319e293ff637c7528c831a4.png" alt="\lambda_{i}"/> and <img class="math" src="_images/math/5fc838daf306e42980d81b1d6b359f4a47fbd630.png" alt="\lambda_{it}"/>. GEE models make
+no distributional assumptions and only require three specifications:
+a mean function, a variance function, and a correlation structure.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is the <em>mean function</em>, given by:</p>
+<div class="math">
+<p><img src="_images/math/20ee5577bd63708f61b808d3433488f940221b46.png" alt="\lambda_{it}  = \mathrm{exp}(x_{it} \beta)"/></p>
+</div><p>where <img class="math" src="_images/math/d43ef14e28002ff45394741fc187dced216e80f0.png" alt="x_{it}"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+for unit <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> at time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector
+of coefficients.</p>
+</li>
+<li><p class="first">The <em>variance function</em> is given by:</p>
+<div class="math">
+<p><img src="_images/math/662af28b641c55a6dde1cfe560e751b26ee2666b.png" alt="V_{it} = \lambda_{it}"/></p>
+</div></li>
+<li><p class="first">The <em>correlation structure</em> is defined by a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/>
+“working” correlation matrix, where <img class="math" src="_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/> is the size of the
+largest cluster. Users must specify the structure of the “working”
+correlation matrix <em>a priori</em>. The “working” correlation matrix then
+enters the variance term for each <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>, given by:</p>
+<div class="math">
+<p><img src="_images/math/16993e098fe3b3316a2033c341dedf1a4a5722f0.png" alt="V_{i} = \phi \, A_{i}^{\frac{1}{2}} R_{i}(\alpha) A_{i}^{\frac{1}{2}}"/></p>
+</div><p>where <img class="math" src="_images/math/7f4051f79dc41b4b9b5b105d110e19898642c02d.png" alt="A_{i}"/> is a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/> diagonal matrix with the
+variance function <img class="math" src="_images/math/7010e7d09e4adb6f88eade64a20026b8a6418def.png" alt="V_{it} = \lambda_{it}"/> as the <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>th
+diagonal element, <img class="math" src="_images/math/165cf808f99660333864da96d49d02862c5804ba.png" alt="R_{i}(\alpha)"/> is the “working” correlation
+matrix, and <img class="math" src="_images/math/10e009bdb83f96c5f47c58b34d5d4b12ef268d5b.png" alt="\phi"/> is a scale parameter. The parameters are
+then estimated via a quasi-likelihood approach.</p>
+</li>
+<li><p class="first">In GEE models, if the mean is correctly specified, but the variance
+and correlation structure are incorrectly specified, then GEE models
+provide consistent estimates of the parameters and thus the mean
+function as well, while consistent estimates of the standard errors
+can be obtained via a robust “sandwich” estimator. Similarly, if the
+mean and variance are correctly specified but the correlation
+structure is incorrectly specified, the parameters can be estimated
+consistently and the standard errors can be estimated consistently
+with the sandwich estimator. If all three are specified correctly,
+then the estimates of the parameters are more efficient.</p>
+</li>
+<li><p class="first">The robust “sandwich” estimator gives consistent estimates of the
+standard errors when the correlations are specified incorrectly only
+if the number of units <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> is relatively large and the number
+of repeated periods <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> is relatively small. Otherwise, one
+should use the “naïve” model-based standard errors, which assume that
+the specified correlations are close approximations to the true
+underlying correlations. See for more details.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="quantities-of-interest">
+<h2>Quantities of Interest<a class="headerlink" href="#quantities-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">All quantities of interest are for marginal means rather than joint
+means.</p>
+</li>
+<li><p class="first">The method of bootstrapping generally should not be used in GEE
+models. If you must bootstrap, bootstrapping should be done within
+clusters, which is not currently supported in Zelig. For conditional
+prediction models, data should be matched within clusters.</p>
+</li>
+<li><p class="first">The expected values (qi$ev) for the GEE poisson model is the mean of
+simulations from the stochastic component:</p>
+<div class="math">
+<p><img src="_images/math/63bc144cca597bb88033d1558cd78b4257b46d3d.png" alt="E(Y) =
+  \lambda_{c} = \mathrm{exp}(x_{c} \beta),"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its sampling distribution, where
+<img class="math" src="_images/math/5502b77b431ce3a22763c40fede2822fe42a5aa2.png" alt="x_{c}"/> is a vector of values, one for each independent
+variable, chosen by the user.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) for the GEE poisson model is defined as</p>
+<div class="math">
+<p><img src="_images/math/8f669920018c72d7f23a4ba843925381c4703f17.png" alt="\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x)."/></p>
+</div></li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+<p><img src="_images/math/40ac87a54bf074ab721d0606edc354d20bfe2890.png" alt="\frac{1}{\sum_{i=1}^n \sum_{t=1}^T tr_{it}}\sum_{i:tr_{it}=1}^n \sum_{t:tr_{it}=1}^T \left\{ Y_{it}(tr_{it}=1) -
+      E[Y_{it}(tr_{it}=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/e6f125c03f6d788e356d369529940f022a7f2758.png" alt="tr_{it}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/6456da07c94c2f41fd2db133459327f848c0f4bd.png" alt="tr_{it}=1"/>) and control (<img class="math" src="_images/math/cacdbdc3e92ce5d077bfe72555b39b0aa02b8a35.png" alt="tr_{it}=0"/>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<img class="math" src="_images/math/55447d1ae15443b039fe51a56aee680735c5eff7.png" alt="E[Y_{it}(tr_{it}=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/30f89e733d3b75f1db48233adcde1aa3ef74a897.png" alt="Y_{it}"/> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <img class="math" src="_images/math/cacdbdc3e92ce5d077bfe72555b39b0aa02b8a35.png" alt="tr_{it}=0"/>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="output-values">
+<h2>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h2>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">poisson.gee,</span> <span class="pre">id,</span> <span class="pre">data)</span></tt>, then you may
+examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
+elements available through the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>residuals: the working residuals in the final iteration of the
+fit.</li>
+<li>fitted.values: the vector of fitted values for the systemic
+component, <img class="math" src="_images/math/5fc838daf306e42980d81b1d6b359f4a47fbd630.png" alt="\lambda_{it}"/>.</li>
+<li>linear.predictors: the vector of <img class="math" src="_images/math/62d42b965bd7739c65b214098af7195a9940d3fc.png" alt="x_{it}\beta"/></li>
+<li>max.id: the size of the largest cluster.</li>
+</ul>
+</li>
+<li>From summary(z.out), you may extract:<ul>
+<li>coefficients: the parameter estimates with their associated
+standard errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/84d7271dd9e78c1e05d6c3c6ecb60309ef7dfc73.png" alt="z"/>-statistics.</li>
+<li>working.correlation: the “working” correlation matrix</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected values for the specified values of
+x.</li>
+<li>qi$fd: the simulated first difference in the expected
+probabilities for the values specified in x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>The geeglm function is part of the geepack package by Søren Højsgaard,
+Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
+to <tt class="docutils literal"><span class="pre">help(geepack)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/zelig-poissongee.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, The Zelig Team.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-7', 'http://zeligproject.org/');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>
