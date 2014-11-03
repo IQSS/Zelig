@@ -103,6 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-tobitbayes">zelig-tobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-gammagee">zelig-gammagee</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-probitgee">zelig-probitgee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-poissongee">zelig-poissongee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -112,8 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
@@ -362,6 +362,19 @@
 <li><a class="reference internal" href="#id131">See also</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#zelig-poissongee">zelig-poissongee</a><ul>
+<li><a class="reference internal" href="#id132">Syntax</a></li>
+<li><a class="reference internal" href="#id133">Additional Inputs</a></li>
+<li><a class="reference internal" href="#id134">Examples</a><ul>
+<li><a class="reference internal" href="#id135">Example with Exchangeable Dependence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id136">The Model</a></li>
+<li><a class="reference internal" href="#id137">Quantities of Interest</a></li>
+<li><a class="reference internal" href="#id138">Output Values</a></li>
+<li><a class="reference internal" href="#id139">See also</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -428,11 +441,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#zelig-tobitbayes">zelig-tobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-gammagee">zelig-gammagee</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zelig-probitgee">zelig-probitgee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zelig-poissongee">zelig-poissongee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -472,6 +485,7 @@
 <li><a class="reference internal" href="zelig-tobitbayes.html#ztobitbayes"><em>Bayesian Tobit Regression</em></a>: <tt class="docutils literal"><span class="pre">ztobitbayes$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-gammagee.html#zgammagee"><em>Generalized Estimating Equation for Gamma Regression</em></a>: <tt class="docutils literal"><span class="pre">zgammagee$new()</span></tt></li>
 <li><a class="reference internal" href="zelig-probitgee.html#zprobitgee"><em>Generalized Estimating Equation for Probit Regression</em></a>: <tt class="docutils literal"><span class="pre">zprobitgee$new()</span></tt></li>
+<li><a class="reference internal" href="zelig-poissongee.html#zpoissongee"><em>Generalized Estimating Equation for Poisson Regression</em></a>: <tt class="docutils literal"><span class="pre">zpoissongee$new()</span></tt></li>
 </ul>
 <hr class="docutils" />
 </div>
@@ -592,23 +606,23 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 15.25314 1.416569 15.21626 12.57592 18.13386</span>
+<span class="c">##       mean      sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 15.43081 1.52368 15.32697 12.72487 18.68341</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## [1,] 14.57396 15.02881 10.48885 0.3992942 52.52459</span>
+<span class="c">## [1,] 16.00199 15.98672 11.32632 0.4557638 57.13426</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean      sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 24.26416 1.84284 24.15739 20.94223 28.15189</span>
+<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 24.18597 1.870668 24.12244 20.82418 27.86244</span>
 <span class="c">## pv</span>
-<span class="c">##          mean    sd      50%      2.5%    97.5%</span>
-<span class="c">## [1,] 23.25116 23.43 15.65451 0.5542274 84.02236</span>
+<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 24.61733 24.73576 17.05047 0.707866 89.68701</span>
 <span class="c">## fd</span>
 <span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 9.011029 2.371775 9.016912 4.608011 13.75459</span>
+<span class="c">## 1 8.755156 2.389292 8.783194 3.841161 13.39911</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -821,23 +835,23 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.44615 1.071027 14.35797 12.59052 16.78689</span>
+<span class="c">##          mean       sd    50%     2.5%    97.5%</span>
+<span class="c">## [1,] 14.39194 1.068886 14.305 12.57214 16.80882</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## [1,] 14.72239 12.44278 11.64117 0.9901817 46.83314</span>
+<span class="c">## [1,] 14.49829 12.86906 11.11199 0.8769833 45.94762</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##         mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 19.1989 1.081392 19.13044 17.25731 21.44067</span>
+<span class="c">##          mean       sd      50%     2.5%   97.5%</span>
+<span class="c">## [1,] 19.20212 1.103207 19.10303 17.21913 21.6358</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 19.68273 17.12021 15.11255 1.011184 62.42028</span>
+<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## [1,] 19.11395 16.80035 15.19162 0.9473961 61.25709</span>
 <span class="c">## fd</span>
-<span class="c">##         mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.75274 1.528284 4.737792 1.754951 7.583601</span>
+<span class="c">##          mean       sd      50%    2.5%    97.5%</span>
+<span class="c">## [1,] 4.810179 1.525556 4.787446 1.71354 7.867312</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -986,11 +1000,11 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd      50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7485079 0.01156338 0.749109 0.7248014 0.7703464</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7481113 0.01170125 0.7482405 0.7247404 0.7713178</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.247 0.753</span>
+<span class="c">## [1,] 0.244 0.756</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -1026,23 +1040,23 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%    97.5%</span>
-<span class="c">## [1,] 0.8226736 0.01020924 0.8228195 0.8018086 0.842495</span>
+<span class="c">##          mean         sd       50%     2.5%     97.5%</span>
+<span class="c">## [1,] 0.822111 0.01077383 0.8222156 0.800303 0.8424658</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.176 0.824</span>
+<span class="c">## [1,] 0.179 0.821</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean        sd      50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7096698 0.0130468 0.709652 0.6841382 0.7352514</span>
+<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.7090078 0.01300084 0.7093828 0.6822851 0.7337154</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.278 0.722</span>
+<span class="c">## [1,] 0.274 0.726</span>
 <span class="c">## fd</span>
 <span class="c">##            mean         sd        50%       2.5%       97.5%</span>
-<span class="c">## [1,] -0.1130038 0.01169729 -0.1132458 -0.1349504 -0.09015794</span>
+<span class="c">## [1,] -0.1131032 0.01129201 -0.1127253 -0.1356376 -0.09070864</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -1261,23 +1275,23 @@ x.high <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 18.19362 2.371267 18.11104 14.08417 23.06188</span>
+<span class="c">##      mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 18.4619 2.458254 18.33849 14.15747 23.51863</span>
 <span class="c">## pv</span>
-<span class="c">##       mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 18.19362 2.371267 18.11104 14.08417 23.06188</span>
+<span class="c">##      mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## 1 18.4619 2.458254 18.33849 14.15747 23.51863</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean       sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 31.90019 3.469152 31.7184 25.59735 39.52204</span>
+<span class="c">##       mean       sd      50%     2.5%  97.5%</span>
+<span class="c">## 1 31.93645 3.604909 31.70443 25.69007 39.525</span>
 <span class="c">## pv</span>
-<span class="c">##       mean       sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 31.90019 3.469152 31.7184 25.59735 39.52204</span>
+<span class="c">##       mean       sd      50%     2.5%  97.5%</span>
+<span class="c">## 1 31.93645 3.604909 31.70443 25.69007 39.525</span>
 <span class="c">## fd</span>
-<span class="c">##       mean       sd     50%     2.5%    97.5%</span>
-<span class="c">## 1 13.70656 3.468008 13.7663 7.035872 20.85506</span>
+<span class="c">##       mean       sd      50%    2.5%   97.5%</span>
+<span class="c">## 1 13.47455 3.560784 13.47514 6.94813 20.3542</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1483,22 +1497,22 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.434484 0.1997577 5.428918 5.042411 5.834617</span>
+<span class="c">## 1 5.427036 0.1877834 5.425805 5.050003 5.791052</span>
 <span class="c">## pv</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 5.434484 0.1997577 5.428918 5.042411 5.834617</span>
+<span class="c">## 1 5.427036 0.1877834 5.425805 5.050003 5.791052</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 4.610012 0.1803894 4.609983 4.263222 4.951356</span>
+<span class="c">## 1 4.593292 0.1831436 4.592212 4.247357 4.953272</span>
 <span class="c">## pv</span>
 <span class="c">##       mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## 1 4.610012 0.1803894 4.609983 4.263222 4.951356</span>
+<span class="c">## 1 4.593292 0.1831436 4.592212 4.247357 4.953272</span>
 <span class="c">## fd</span>
-<span class="c">##         mean        sd        50%      2.5%     97.5%</span>
-<span class="c">## 1 -0.8244712 0.2384615 -0.8257637 -1.289853 -0.354111</span>
+<span class="c">##        mean        sd        50%      2.5%      97.5%</span>
+<span class="c">## 1 -0.833744 0.2326566 -0.8432084 -1.293242 -0.3663361</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -1716,13 +1730,13 @@ s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 2.963261 0.3432443 2.934795 2.340916 3.680897</span>
+<span class="c">## [1,] 2.974071 0.3465394 2.960367 2.354767 3.694426</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##     0     1     2     3     4     5     6     7     8     9    10    11</span>
-<span class="c">## 0.212 0.236 0.199 0.118 0.087 0.053 0.038 0.024 0.015 0.007 0.005 0.004</span>
-<span class="c">##    12    15</span>
-<span class="c">## 0.001 0.001</span>
+<span class="c">## 0.194 0.210 0.155 0.147 0.102 0.066 0.041 0.039 0.016 0.010 0.012 0.002</span>
+<span class="c">##    12    13    14    17</span>
+<span class="c">## 0.003 0.001 0.001 0.001</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -1913,23 +1927,23 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 5.434555 0.1863455 5.430816 5.085397 5.810403</span>
+<span class="c">##         mean        sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 5.44085 0.1927372 5.444817 5.065964 5.820001</span>
 <span class="c">## pv</span>
-<span class="c">##          mean      sd     50%      2.5%    97.5%</span>
-<span class="c">## [1,] 5.528254 2.79554 5.55017 0.2026511 10.78222</span>
+<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
+<span class="c">## [1,] 5.419273 2.761912 5.347111 0.07132339 10.88591</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.597008 0.1861236 4.595616 4.231923 4.952495</span>
+<span class="c">##          mean        sd      50%     2.5%   97.5%</span>
+<span class="c">## [1,] 4.607515 0.1829098 4.604763 4.250816 4.98398</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd     50%       2.5%    97.5%</span>
-<span class="c">## [1,] 4.393074 2.789529 4.37476 -0.8702172 9.832896</span>
+<span class="c">##          mean       sd      50%       2.5%    97.5%</span>
+<span class="c">## [1,] 4.620467 2.635781 4.533976 -0.4712343 9.978094</span>
 <span class="c">## fd</span>
-<span class="c">##            mean        sd        50%     2.5%      97.5%</span>
-<span class="c">## [1,] -0.8375471 0.2289522 -0.8386266 -1.27664 -0.3915574</span>
+<span class="c">##            mean       sd        50%      2.5%     97.5%</span>
+<span class="c">## [1,] -0.8333356 0.234874 -0.8310912 -1.292786 -0.383876</span>
 </pre></div>
 </div>
 <p>A visual summary of quantities of interest:</p>
@@ -2097,10 +2111,10 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 3.248014 0.2451944 3.241129 2.766096 3.736676</span>
+<span class="c">## [1,] 3.246635 0.2359562 3.232322 2.819113 3.741376</span>
 <span class="c">## pv</span>
 <span class="c">##       mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.346 1.847619   3    0     7</span>
+<span class="c">## [1,] 3.249 1.851061   3    0     7</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
@@ -2461,11 +2475,11 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##             mean           sd         50%        2.5%      97.5%</span>
-<span class="c">## [1,] 0.002401692 0.0001502532 0.002399357 0.002124212 0.00269711</span>
+<span class="c">##             mean           sd        50%        2.5%       97.5%</span>
+<span class="c">## [1,] 0.002398937 0.0001529609 0.00239108 0.002126827 0.002735678</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.999 0.001</span>
+<span class="c">## [1,] 0.996 0.004</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -3494,7 +3508,7 @@ default prior correction method for case control correction):</p>
 <span class="c">## $formula</span>
 <span class="c">## cbind(conflict, 1 - conflict) ~ major + contig + power + maxdem +</span>
 <span class="c">##     mindem + years</span>
-<span class="c">## &lt;environment: 0x7f910e4f0f50&gt;</span>
+<span class="c">## &lt;environment: 0x7fd38d61aa98&gt;</span>
 <span class="c">##</span>
 <span class="c">## attr(,&quot;class&quot;)</span>
 <span class="c">## [1] &quot;Relogit2&quot; &quot;Relogit&quot;</span>
@@ -3786,11 +3800,11 @@ its own cluster.</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.532134 0.6451426 1.461142 0.4906876 2.911972</span>
+<span class="c">##       mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 1.528516 0.633703 1.430801 0.5225189 3.052643</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%   97.5%</span>
-<span class="c">## [1,] 3.253126 4.291598 1.453459    0 13.8559</span>
+<span class="c">##          mean      sd      50% 2.5%    97.5%</span>
+<span class="c">## [1,] 3.291238 4.23083 1.582286    0 14.84473</span>
 </pre></div>
 </div>
 </div>
@@ -3815,23 +3829,23 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.219587 0.7820647 1.056607 0.1938312 3.132361</span>
+<span class="c">##       mean        sd     50%      2.5%    97.5%</span>
+<span class="c">## 1 1.202739 0.7549425 1.06331 0.1805177 3.019912</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.156665 4.316591 1.533816    0 14.58822</span>
+<span class="c">## [1,] 3.269685 4.326484 1.271605    0 13.50531</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 2.028201 0.9736607 1.880171 0.5858679 4.234879</span>
+<span class="c">##      mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 2.06353 0.9885348 1.921634 0.5153851 4.337817</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.541122 4.448873 1.869328    0 15.11714</span>
+<span class="c">##          mean       sd     50% 2.5%    97.5%</span>
+<span class="c">## [1,] 3.602969 4.459958 1.99389    0 15.19406</span>
 <span class="c">## fd</span>
-<span class="c">##        mean      sd       50%      2.5%    97.5%</span>
-<span class="c">## 1 0.8086145 1.19362 0.7742679 -1.429158 3.302684</span>
+<span class="c">##       mean       sd       50%     2.5%    97.5%</span>
+<span class="c">## 1 0.860791 1.194954 0.7659795 -1.29223 3.621189</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -4268,7 +4282,7 @@ summary<span class="p">(</span>s.out1<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.5585 0.2083 0.2332</span>
+<span class="c">## 0.5591 0.2095 0.2314</span>
 </pre></div>
 </div>
 </div>
@@ -4296,7 +4310,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.7181 0.1230 0.1589</span>
+<span class="c">## 0.7130 0.1272 0.1598</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -4308,7 +4322,7 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">## pv</span>
 <span class="c">## qi</span>
 <span class="c">##      1      2      3</span>
-<span class="c">## 0.4060 0.3068 0.2872</span>
+<span class="c">## 0.4041 0.3034 0.2925</span>
 <span class="c">## fd</span>
 <span class="c">##              mean         sd        50%        2.5%      97.5%</span>
 <span class="c">## P(Y=1) -0.3128754 0.03459857 -0.3128662 -0.38111485 -0.2442630</span>
@@ -4878,8 +4892,8 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
 <span class="c">## [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733</span>
 <span class="c">## pv</span>
-<span class="c">##       mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.188 1.798327   3    0     7</span>
+<span class="c">##        mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.1965 1.789192   3    0     7</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
@@ -4887,8 +4901,8 @@ summary<span class="p">(</span>s.out2<span class="p">)</span>
 <span class="c">##          mean        sd      50%     2.5%    97.5%</span>
 <span class="c">## [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022</span>
 <span class="c">## pv</span>
-<span class="c">##        mean       sd 50% 2.5% 97.5%</span>
-<span class="c">## [1,] 3.2831 1.806068   3    0     7</span>
+<span class="c">##       mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,] 3.313 1.836238   3    0     7</span>
 <span class="c">## fd</span>
 <span class="c">##           mean        sd       50%       2.5%     97.5%</span>
 <span class="c">## [1,] 0.1146376 0.3671544 0.1265036 -0.6072035 0.8342282</span>
@@ -5658,23 +5672,23 @@ summary<span class="p">(</span>s.out<span class="p">)</span>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##         mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 14.4428 1.178599 14.35994 12.38191 17.17232</span>
+<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 14.45251 1.127631 14.36772 12.45473 16.87643</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50%      2.5%    97.5%</span>
-<span class="c">## [1,] 14.49358 18.37112 7.689967 0.0371853 59.67929</span>
+<span class="c">##          mean       sd     50%       2.5%   97.5%</span>
+<span class="c">## [1,] 14.50373 18.21463 7.43788 0.07171734 64.4594</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##          mean     sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 19.23895 1.0624 19.15919 17.36893 21.39009</span>
+<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 19.17208 1.089517 19.07782 17.30751 21.55358</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50%       2.5%    97.5%</span>
-<span class="c">## [1,] 18.70868 24.08268 9.382438 0.04664003 86.95106</span>
+<span class="c">## [1,] 18.22824 23.15564 9.891832 0.05163555 86.17169</span>
 <span class="c">## fd</span>
-<span class="c">##          mean       sd      50%     2.5%    97.5%</span>
-<span class="c">## [1,] 4.796152 1.662188 4.879644 1.574513 8.042778</span>
+<span class="c">##          mean      sd      50%     2.5%    97.5%</span>
+<span class="c">## [1,] 4.719575 1.60035 4.758231 1.528882 7.643681</span>
 </pre></div>
 </div>
 <p>Generate a plot of quantities of interest:</p>
@@ -5853,7 +5867,7 @@ population-averaged effects as opposed to cluster-specific effects.</p>
 <h3>Syntax<a class="headerlink" href="#id124" title="Permalink to this headline">¶</a></h3>
 <p>With reference classes:</p>
 <div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zgammagee<span class="o">$</span>new<span class="p">()</span>
-z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;gamma.gee&quot;</span><span class="p">,</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;probit.gee&quot;</span><span class="p">,</span>
          id <span class="o">=</span> <span class="s">&quot;X3&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
 z5<span class="o">$</span>setx<span class="p">()</span>
 z5<span class="o">$</span>sim<span class="p">()</span>
@@ -5922,10 +5936,10 @@ sorted.turnout <span class="o">&lt;-</span> turnout<span class="p">[</span>order
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7719186 0.01113215 0.7719613 0.7496063 0.7937158</span>
+<span class="c">## [1,] 0.7716882 0.01100725 0.7714571 0.7499338 0.7918181</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.223 0.777</span>
+<span class="c">## [1,] 0.212 0.788</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -5955,22 +5969,22 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.8245057 0.01067036 0.8252109 0.8028768 0.8452697</span>
+<span class="c">## [1,] 0.8244545 0.01081592 0.8246281 0.8039027 0.8449496</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.189 0.811</span>
+<span class="c">## [1,] 0.163 0.837</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7059552 0.01399964 0.7056651 0.6783915 0.7321398</span>
+<span class="c">##          mean         sd       50%      2.5%     97.5%</span>
+<span class="c">## [1,] 0.706857 0.01494853 0.7073066 0.6759093 0.7338948</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.267 0.733</span>
+<span class="c">## [1,] 0.313 0.687</span>
 <span class="c">## fd</span>
-<span class="c">##            mean         sd        50%       2.5%       97.5%</span>
-<span class="c">## [1,] -0.1185505 0.01224151 -0.1184114 -0.1423489 -0.09597774</span>
+<span class="c">##            mean         sd        50%      2.5%       97.5%</span>
+<span class="c">## [1,] -0.1175976 0.01206635 -0.1175868 -0.140646 -0.09302323</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>
@@ -6161,6 +6175,300 @@ treated from conditional prediction models.</li>
 </div>
 <div class="section" id="id131">
 <h3>See also<a class="headerlink" href="#id131" title="Permalink to this headline">¶</a></h3>
+<p>The geeglm function is part of the geepack package by Søren Højsgaard,
+Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
+to <tt class="docutils literal"><span class="pre">help(geepack)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="zelig-poissongee">
+<span id="zpoissongee"></span><h2>zelig-poissongee<a class="headerlink" href="#zelig-poissongee" title="Permalink to this headline">¶</a></h2>
+<p>The GEE poisson estimates the same model as the standard poisson
+regression (appropriate when your dependent variable represents the
+number of independent events that occur during a fixed period of time).
+Unlike in poisson regression, GEE poisson allows for dependence within
+clusters, such as in longitudinal data, although its use is not limited
+to just panel data. The user must first specify a “working” correlation
+matrix for the clusters, which models the dependence of each observation
+with other observations in the same cluster. The “working” correlation
+matrix is a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/> matrix of correlations, where <img class="math" src="_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/>
+is the size of the largest cluster and the elements of the matrix are
+correlations between within-cluster observations. The appeal of GEE
+models is that it gives consistent estimates of the parameters and
+consistent estimates of the standard errors can be obtained using a
+robust “sandwich” estimator even if the “working” correlation matrix is
+incorrectly specified. If the “working” correlation matrix is correctly
+specified, GEE models will give more efficient estimates of the
+parameters. GEE models measure population-averaged effects as opposed to
+cluster-specific effects.</p>
+<div class="section" id="id132">
+<h3>Syntax<a class="headerlink" href="#id132" title="Permalink to this headline">¶</a></h3>
+<p>With reference classes:</p>
+<div class="highlight-r"><div class="highlight"><pre>z5 <span class="o">&lt;-</span> zgammagee<span class="o">$</span>new<span class="p">()</span>
+z5<span class="o">$</span>zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.gee&quot;</span><span class="p">,</span>
+         id <span class="o">=</span> <span class="s">&quot;X3&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+z5<span class="o">$</span>setx<span class="p">()</span>
+z5<span class="o">$</span>sim<span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Zelig 4 compatibility wrappers:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>Y <span class="o">~</span> X1 <span class="o">+</span> X2<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.gee&quot;</span><span class="p">,</span>
+               id <span class="o">=</span> <span class="s">&quot;X3&quot;</span><span class="p">,</span> data <span class="o">=</span> mydata<span class="p">)</span>
+x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>where <tt class="docutils literal"><span class="pre">id</span></tt> is a variable which identifies the clusters. The data
+should be sorted by <tt class="docutils literal"><span class="pre">id</span></tt> and should be ordered within each cluster
+when appropriate.</p>
+</div>
+<div class="section" id="id133">
+<h3>Additional Inputs<a class="headerlink" href="#id133" title="Permalink to this headline">¶</a></h3>
+<p>Use the following arguments to specify the structure of the “working”
+correlations within clusters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">corstr</span></tt>: character string specifying the correlation structure:
+&#8220;independence&#8221;, &#8220;exchangeable&#8221;, &#8220;ar1&#8221;, &#8220;unstructured&#8221; and
+&#8220;userdefined&#8221;</li>
+<li>See <tt class="docutils literal"><span class="pre">geeglm</span></tt> in package <tt class="docutils literal"><span class="pre">geepack</span></tt> for other function arguments.</li>
+</ul>
+</div>
+<div class="section" id="id134">
+<h3>Examples<a class="headerlink" href="#id134" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id135">
+<h4>Example with Exchangeable Dependence<a class="headerlink" href="#id135" title="Permalink to this headline">¶</a></h4>
+<p>Attaching the sample turnout dataset:</p>
+<div class="highlight-r"><div class="highlight"><pre>data<span class="p">(</span>sanction<span class="p">)</span>
+</pre></div>
+</div>
+<p>Variable identifying clusters</p>
+<div class="highlight-r"><div class="highlight"><pre>sanction<span class="o">$</span>cluster <span class="o">&lt;-</span> c<span class="p">(</span>rep<span class="p">(</span>c<span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">),</span> <span class="m">5</span><span class="p">),</span> rep<span class="p">(</span>c<span class="p">(</span><span class="m">16</span><span class="p">),</span> <span class="m">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Sorting by cluster</p>
+<div class="highlight-r"><div class="highlight"><pre>sorted.sanction <span class="o">&lt;-</span> sanction<span class="p">[</span>order<span class="p">(</span>sanction<span class="o">$</span>cluster<span class="p">),</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>Estimating model and presenting summary:</p>
+<div class="highlight-r"><div class="highlight"><pre>z.out <span class="o">&lt;-</span> zelig<span class="p">(</span>num <span class="o">~</span> target <span class="o">+</span> coop<span class="p">,</span> model <span class="o">=</span> <span class="s">&quot;poisson.gee&quot;</span><span class="p">,</span>
+               id <span class="o">=</span> <span class="s">&quot;cluster&quot;</span><span class="p">,</span> data <span class="o">=</span> sorted.sanction<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## How to cite this model in Zelig:</span>
+<span class="c">##   Patrick Lam. 2011.</span>
+<span class="c">##   poissongee: General Estimating Equation for Poisson Regression</span>
+<span class="c">##   in Kosuke Imai, Gary King, and Olivia Lau, &quot;Zelig: Everyone&#39;s Statistical Software,&quot;</span>
+<span class="c">##   http://zeligproject.org/</span>
+</pre></div>
+</div>
+<div class="highlight-r"><div class="highlight"><pre>summary<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## Model:</span>
+<span class="c">## $by</span>
+<span class="c">## [1] 1</span>
+<span class="c">##</span>
+<span class="c">##</span>
+<span class="c">## Call:</span>
+<span class="c">## geepack::geeglm(formula = num ~ target + coop, family = poisson(&quot;log&quot;),</span>
+<span class="c">##     data = ., id = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3,</span>
+<span class="c">##     3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7,</span>
+<span class="c">##     7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11,</span>
+<span class="c">##     11, 11, 11, 11, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 14,</span>
+<span class="c">##     14, 14, 14, 14, 15, 15, 15, 15, 15, 16, 16, 16), corstr = &quot;independence&quot;)</span>
+<span class="c">##</span>
+<span class="c">## Coefficients:</span>
+<span class="c">## (Intercept)      target        coop</span>
+<span class="c">## -0.96771994 -0.02102351  1.21081908</span>
+<span class="c">##</span>
+<span class="c">## Degrees of Freedom: 78 Total (i.e. Null);  75 Residual</span>
+<span class="c">##</span>
+<span class="c">## Scale Link:                   identity</span>
+<span class="c">## Estimated Scale Parameters:  [1] 16.4486</span>
+<span class="c">##</span>
+<span class="c">## Correlation:  Structure = independence</span>
+<span class="c">## Number of clusters:   16   Maximum cluster size: 5</span>
+<span class="c">##</span>
+<span class="c">## Next step: Use &#39;setx&#39; method</span>
+</pre></div>
+</div>
+<p>Set explanatory variables to their default values:</p>
+<div class="highlight-r"><div class="highlight"><pre>x.out <span class="o">&lt;-</span> setx<span class="p">(</span>z.out<span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulate quantities of interest</p>
+<div class="highlight-r"><div class="highlight"><pre>s.out <span class="o">&lt;-</span> sim<span class="p">(</span>z.out<span class="p">,</span> x <span class="o">=</span> x.out<span class="p">)</span>
+summary<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">##  sim x :</span>
+<span class="c">##  -----</span>
+<span class="c">## ev</span>
+<span class="c">##        mean        sd      50%    2.5%   97.5%</span>
+<span class="c">## [1,] 3.3337 0.8158654 3.240037 1.98258 5.12109</span>
+<span class="c">## pv</span>
+<span class="c">##      mean       sd 50% 2.5% 97.5%</span>
+<span class="c">## [1,]  3.4 2.064525   3    0     8</span>
+</pre></div>
+</div>
+<p>Generate a plot of quantities of interest:</p>
+<div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out<span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="Zelig-poisson" src="_images/Zelig-poissongee-1.png" />
+<p class="caption">Zelig-poisson</p>
+</div>
+</div>
+</div>
+<div class="section" id="id136">
+<h3>The Model<a class="headerlink" href="#id136" title="Permalink to this headline">¶</a></h3>
+<p>Suppose we have a panel dataset, with <img class="math" src="_images/math/30f89e733d3b75f1db48233adcde1aa3ef74a897.png" alt="Y_{it}"/> denoting the
+dependent variable of the number of independent events for a fixed
+period of time for unit <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> at time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>. <img class="math" src="_images/math/0e1e069d7b701cb98cfecc70660e4e31b786db9a.png" alt="Y_{i}"/> is a
+vector or cluster of correlated data where <img class="math" src="_images/math/b840d9057a2e3bad080c274b8f1d9303520f9052.png" alt="y_{it}"/> is correlated
+with <img class="math" src="_images/math/da57192d38416f50ec88d145367cc7d5be0c06c5.png" alt="y_{it^\prime}"/> for some or all <img class="math" src="_images/math/2d3acc5e57adc9f94593e8bb1b3b28df87caf045.png" alt="t, t^\prime"/>. Note
+that the model assumes correlations within <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> but independence
+across <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>.</p>
+<ul>
+<li><p class="first">The <em>stochastic component</em> is given by the joint and marginal
+distributions</p>
+<div class="math">
+<p><img src="_images/math/07e7595e1d9c1222ab0eab8fa6aa39fe54251868.png" alt="\begin{aligned}
+Y_{i} &amp;\sim&amp; f(y_{i} \mid \lambda_{i})\\
+Y_{it} &amp;\sim&amp; g(y_{it} \mid \lambda_{it})\end{aligned}"/></p>
+</div><p>where <img class="math" src="_images/math/0001d02b63ede2fe3219e05a7cd09c82ae6298b6.png" alt="f"/> and <img class="math" src="_images/math/67f4714f065d485540ad40829e0717bf75e9dd85.png" alt="g"/> are unspecified distributions with
+means <img class="math" src="_images/math/3d9a1fde3ad183d72319e293ff637c7528c831a4.png" alt="\lambda_{i}"/> and <img class="math" src="_images/math/5fc838daf306e42980d81b1d6b359f4a47fbd630.png" alt="\lambda_{it}"/>. GEE models make
+no distributional assumptions and only require three specifications:
+a mean function, a variance function, and a correlation structure.</p>
+</li>
+<li><p class="first">The <em>systematic component</em> is the <em>mean function</em>, given by:</p>
+<div class="math">
+<p><img src="_images/math/20ee5577bd63708f61b808d3433488f940221b46.png" alt="\lambda_{it}  = \mathrm{exp}(x_{it} \beta)"/></p>
+</div><p>where <img class="math" src="_images/math/d43ef14e28002ff45394741fc187dced216e80f0.png" alt="x_{it}"/> is the vector of <img class="math" src="_images/math/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k"/> explanatory variables
+for unit <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> at time <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> and <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> is the vector
+of coefficients.</p>
+</li>
+<li><p class="first">The <em>variance function</em> is given by:</p>
+<div class="math">
+<p><img src="_images/math/662af28b641c55a6dde1cfe560e751b26ee2666b.png" alt="V_{it} = \lambda_{it}"/></p>
+</div></li>
+<li><p class="first">The <em>correlation structure</em> is defined by a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/>
+“working” correlation matrix, where <img class="math" src="_images/math/6d42c88506b8da39a2a23653aecbfb7c29728063.png" alt="T"/> is the size of the
+largest cluster. Users must specify the structure of the “working”
+correlation matrix <em>a priori</em>. The “working” correlation matrix then
+enters the variance term for each <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/>, given by:</p>
+<div class="math">
+<p><img src="_images/math/16993e098fe3b3316a2033c341dedf1a4a5722f0.png" alt="V_{i} = \phi \, A_{i}^{\frac{1}{2}} R_{i}(\alpha) A_{i}^{\frac{1}{2}}"/></p>
+</div><p>where <img class="math" src="_images/math/7f4051f79dc41b4b9b5b105d110e19898642c02d.png" alt="A_{i}"/> is a <img class="math" src="_images/math/88cefb40c3b35d50f8819fd81d3fd0694f0c9df4.png" alt="T \times T"/> diagonal matrix with the
+variance function <img class="math" src="_images/math/7010e7d09e4adb6f88eade64a20026b8a6418def.png" alt="V_{it} = \lambda_{it}"/> as the <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/>th
+diagonal element, <img class="math" src="_images/math/165cf808f99660333864da96d49d02862c5804ba.png" alt="R_{i}(\alpha)"/> is the “working” correlation
+matrix, and <img class="math" src="_images/math/10e009bdb83f96c5f47c58b34d5d4b12ef268d5b.png" alt="\phi"/> is a scale parameter. The parameters are
+then estimated via a quasi-likelihood approach.</p>
+</li>
+<li><p class="first">In GEE models, if the mean is correctly specified, but the variance
+and correlation structure are incorrectly specified, then GEE models
+provide consistent estimates of the parameters and thus the mean
+function as well, while consistent estimates of the standard errors
+can be obtained via a robust “sandwich” estimator. Similarly, if the
+mean and variance are correctly specified but the correlation
+structure is incorrectly specified, the parameters can be estimated
+consistently and the standard errors can be estimated consistently
+with the sandwich estimator. If all three are specified correctly,
+then the estimates of the parameters are more efficient.</p>
+</li>
+<li><p class="first">The robust “sandwich” estimator gives consistent estimates of the
+standard errors when the correlations are specified incorrectly only
+if the number of units <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> is relatively large and the number
+of repeated periods <img class="math" src="_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> is relatively small. Otherwise, one
+should use the “naïve” model-based standard errors, which assume that
+the specified correlations are close approximations to the true
+underlying correlations. See for more details.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id137">
+<h3>Quantities of Interest<a class="headerlink" href="#id137" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">All quantities of interest are for marginal means rather than joint
+means.</p>
+</li>
+<li><p class="first">The method of bootstrapping generally should not be used in GEE
+models. If you must bootstrap, bootstrapping should be done within
+clusters, which is not currently supported in Zelig. For conditional
+prediction models, data should be matched within clusters.</p>
+</li>
+<li><p class="first">The expected values (qi$ev) for the GEE poisson model is the mean of
+simulations from the stochastic component:</p>
+<div class="math">
+<p><img src="_images/math/63bc144cca597bb88033d1558cd78b4257b46d3d.png" alt="E(Y) =
+  \lambda_{c} = \mathrm{exp}(x_{c} \beta),"/></p>
+</div><p>given draws of <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> from its sampling distribution, where
+<img class="math" src="_images/math/5502b77b431ce3a22763c40fede2822fe42a5aa2.png" alt="x_{c}"/> is a vector of values, one for each independent
+variable, chosen by the user.</p>
+</li>
+<li><p class="first">The first difference (qi$fd) for the GEE poisson model is defined as</p>
+<div class="math">
+<p><img src="_images/math/8f669920018c72d7f23a4ba843925381c4703f17.png" alt="\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x)."/></p>
+</div></li>
+<li><p class="first">In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is</p>
+<div class="math">
+<p><img src="_images/math/40ac87a54bf074ab721d0606edc354d20bfe2890.png" alt="\frac{1}{\sum_{i=1}^n \sum_{t=1}^T tr_{it}}\sum_{i:tr_{it}=1}^n \sum_{t:tr_{it}=1}^T \left\{ Y_{it}(tr_{it}=1) -
+      E[Y_{it}(tr_{it}=0)] \right\},"/></p>
+</div><p>where <img class="math" src="_images/math/e6f125c03f6d788e356d369529940f022a7f2758.png" alt="tr_{it}"/> is a binary explanatory variable defining the
+treatment (<img class="math" src="_images/math/6456da07c94c2f41fd2db133459327f848c0f4bd.png" alt="tr_{it}=1"/>) and control (<img class="math" src="_images/math/cacdbdc3e92ce5d077bfe72555b39b0aa02b8a35.png" alt="tr_{it}=0"/>) groups.
+Variation in the simulations are due to uncertainty in simulating
+<img class="math" src="_images/math/55447d1ae15443b039fe51a56aee680735c5eff7.png" alt="E[Y_{it}(tr_{it}=0)]"/>, the counterfactual expected value of
+<img class="math" src="_images/math/30f89e733d3b75f1db48233adcde1aa3ef74a897.png" alt="Y_{it}"/> for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to <img class="math" src="_images/math/cacdbdc3e92ce5d077bfe72555b39b0aa02b8a35.png" alt="tr_{it}=0"/>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id138">
+<h3>Output Values<a class="headerlink" href="#id138" title="Permalink to this headline">¶</a></h3>
+<p>The output of each Zelig command contains useful information which you
+may view. For example, if you run
+<tt class="docutils literal"><span class="pre">z.out</span> <span class="pre">&lt;-</span> <span class="pre">zelig(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">poisson.gee,</span> <span class="pre">id,</span> <span class="pre">data)</span></tt>, then you may
+examine the available information in <tt class="docutils literal"><span class="pre">z.out</span></tt> by using
+<tt class="docutils literal"><span class="pre">names(z.out)</span></tt>, see the coefficients by using z.out$coefficients, and
+a default summary of information through <tt class="docutils literal"><span class="pre">summary(z.out)</span></tt>. Other
+elements available through the $ operator are listed below.</p>
+<ul class="simple">
+<li>From the zelig() output object z.out, you may extract:<ul>
+<li>coefficients: parameter estimates for the explanatory variables.</li>
+<li>residuals: the working residuals in the final iteration of the
+fit.</li>
+<li>fitted.values: the vector of fitted values for the systemic
+component, <img class="math" src="_images/math/5fc838daf306e42980d81b1d6b359f4a47fbd630.png" alt="\lambda_{it}"/>.</li>
+<li>linear.predictors: the vector of <img class="math" src="_images/math/62d42b965bd7739c65b214098af7195a9940d3fc.png" alt="x_{it}\beta"/></li>
+<li>max.id: the size of the largest cluster.</li>
+</ul>
+</li>
+<li>From summary(z.out), you may extract:<ul>
+<li>coefficients: the parameter estimates with their associated
+standard errors, <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/>-values, and <img class="math" src="_images/math/84d7271dd9e78c1e05d6c3c6ecb60309ef7dfc73.png" alt="z"/>-statistics.</li>
+<li>working.correlation: the “working” correlation matrix</li>
+</ul>
+</li>
+<li>From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/>
+x-observation (for more than one x-observation). Available quantities
+are:<ul>
+<li>qi$ev: the simulated expected values for the specified values of
+x.</li>
+<li>qi$fd: the simulated first difference in the expected
+probabilities for the values specified in x and x1.</li>
+<li>qi$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id139">
+<h3>See also<a class="headerlink" href="#id139" title="Permalink to this headline">¶</a></h3>
 <p>The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to <tt class="docutils literal"><span class="pre">help(geepack)</span></tt> and <tt class="docutils literal"><span class="pre">help(family)</span></tt>.</p>

@@ -14,7 +14,7 @@
 
 
 \title{Zelig Documentation}
-\date{November 01, 2014}
+\date{November 03, 2014}
 \release{5.0-1}
 \author{The Zelig Team}
 \newcommand{\sphinxlogo}{}
@@ -275,23 +275,23 @@ z5
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.5098 6.454685 100.3023 88.34565 113.4212}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean      sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.2751 6.63002 100.1334 87.24616 113.454}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.5098 6.454685 100.3023 88.34565 113.4212}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean      sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 100.2751 6.63002 100.1334 87.24616 113.454}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 179.2583 14.45611 178.842 151.7702 208.1194}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.984 14.92172 178.853 149.1131 207.5596}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 179.2583 14.45611 178.842 151.7702 208.1194}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 178.984 14.92172 178.853 149.1131 207.5596}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.74848 8.218439 78.59211 63.35696 94.94674}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 78.70893 8.504066 78.58703 61.65402 95.09653}
 \end{Verbatim}
 
 Now we've estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
@@ -428,6 +428,9 @@ The following models are currently supported in Zelig 5.0-1:
 
 \item {} 
 {\hyperref[zelig-probitgee:zprobitgee]{\emph{Generalized Estimating Equation for Probit Regression}}}: \code{zprobitgee\$new()}
+
+\item {} 
+{\hyperref[zelig-poissongee:zpoissongee]{\emph{Generalized Estimating Equation for Poisson Regression}}}: \code{zpoissongee\$new()}
 
 \end{itemize}
 
@@ -584,22 +587,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.31088 1.516646 15.20347 12.69496 18.41292}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.36158 1.478743 15.28649 12.61304 18.31195}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.72383 16.59789 10.56416 0.5529531 60.18212}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}    2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.33986 15.4133 10.57153 0.45714 59.4691}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.29067 1.946844 24.26463 20.97917 28.57344}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.29521 1.928462 24.12594 20.83289 28.38867}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 23.13872 24.42566 15.33196 0.4849859 88.3956}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 22.65632 23.06558 15.5508 0.8880729 87.37884}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 8.979791 2.472204 8.958028 3.884591 13.68355}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 8.933631 2.431425 8.828573 4.246791 13.98708}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -855,23 +858,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.46379 1.092605 14.40868 12.56453 16.76678}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.43838 1.07771 14.39222 12.53062 16.76161}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.45584 12.84726 11.09674 0.4847629 49.79201}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd    50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.4586 12.94196 10.809 0.8495967 48.78469}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19525 1.050819 19.15361 17.30056 21.44441}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.17071 1.113305 19.11164 17.06345 21.43286}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.68393 16.17422 14.13402 1.108795 60.44474}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 20.26299 17.73175 15.4742 1.159031 68.98787}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.731454 1.523061 4.752819 1.450543 7.553088}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.732326 1.536274 4.723702 1.618467 7.590303}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1057,11 +1060,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7482259 0.01205803 0.7483482 0.7238516 0.7709263}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7480262 0.01132186 0.7478753 0.7248837 0.769847}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.257 0.743}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.228 0.772}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1105,23 +1108,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8228535 0.01019481 0.8228296 0.801629 0.842782}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8231351 0.01051265 0.8233849 0.8023874 0.8449256}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.165 0.835}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.175 0.825}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7094251 0.01314793 0.7090459 0.6822935 0.7344283}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7089306 0.0130707 0.7093288 0.6828238 0.7334215}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.283 0.717}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.286 0.714}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1134285 0.01172323 \PYGZhy{}0.1133748 \PYGZhy{}0.1366835 \PYGZhy{}0.08877236}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}      2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1142046 0.01150632 \PYGZhy{}0.1136883 \PYGZhy{}0.138327 \PYGZhy{}0.09289479}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1391,23 +1394,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.26673 2.453344 17.96374 14.0495 23.63974}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.20475 2.436988 18.07393 13.94864 23.36684}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.26673 2.453344 17.96374 14.0495 23.63974}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.20475 2.436988 18.07393 13.94864 23.36684}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.78883 3.691845 31.61766 25.28495 39.49397}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.81005 3.622648 31.55709 25.61213 40.03681}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.78883 3.691845 31.61766 25.28495 39.49397}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.81005 3.622648 31.55709 25.61213 40.03681}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.5221 3.640255 13.28077 6.972665 21.32603}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.6053 3.609242 13.44006 6.886618 20.8934}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1656,22 +1659,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.429543 0.1957666 5.430941 5.043023 5.819018}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.436376 0.1893336 5.437394 5.044565 5.841255}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.429543 0.1957666 5.430941 5.043023 5.819018}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.436376 0.1893336 5.437394 5.044565 5.841255}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602529 0.1901505 4.605174 4.229291 4.955183}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.605863 0.1883871 4.616567 4.239721 4.983073}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602529 0.1901505 4.605174 4.229291 4.955183}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.605863 0.1883871 4.616567 4.239721 4.983073}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8270142 0.2304615 \PYGZhy{}0.8263858 \PYGZhy{}1.306393 \PYGZhy{}0.399102}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}     2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8305129 0.2363276 \PYGZhy{}0.8213057 \PYGZhy{}1.30866 \PYGZhy{}0.3497701}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1950,13 +1953,13 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.955683 0.3390233 2.933675 2.366098 3.657664}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.999398 0.3686432 2.976453 2.304905 3.786685}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     0     1     2     3     4     5     6     7     8     9    10    11}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.175 0.189 0.189 0.135 0.105 0.067 0.046 0.037 0.016 0.016 0.009 0.007}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    16}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.004 0.001 0.002 0.002}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.129 0.173 0.158 0.132 0.116 0.077 0.057 0.040 0.035 0.018 0.021 0.011}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    15    16    17    18}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.009 0.011 0.006 0.001 0.003 0.002 0.001}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2190,23 +2193,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.440143 0.1978276 5.434579 5.061702 5.817909}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.425881 0.1924125 5.430764 5.04588 5.810964}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.581836 2.783195 5.703507 \PYGZhy{}0.3080639 10.56189}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}        2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.348664 2.643057 5.424203 \PYGZhy{}0.05250755 10.48605}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.607841 0.1798421 4.607168 4.251265 4.946762}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.609896 0.1803193 4.605653 4.257043 4.958737}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.66497 2.853867 4.737543 \PYGZhy{}0.8377445 10.21696}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd     50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.69855 2.797551 4.71524 \PYGZhy{}0.5020909 10.03141}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8323018 0.2270675 \PYGZhy{}0.8342968 \PYGZhy{}1.265098 \PYGZhy{}0.3918768}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean       sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8159849 0.233915 \PYGZhy{}0.8279386 \PYGZhy{}1.250969 \PYGZhy{}0.3642137}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -2411,11 +2414,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.250631 0.2322972 3.241869 2.809167 3.697163}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.242421 0.2318702 3.23178 2.843409 3.725624}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.285 1.912965   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.227 1.773306   3    0     7}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2863,11 +2866,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002402753 0.0001555756 0.002400299 0.002103228 0.002716029}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             mean          sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002404025 0.000158373 0.002401872 0.002123804 0.002711504}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.998 0.002}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.996 0.004}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -3916,7 +3919,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fdb780cf780\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fa7b2eb53f8\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -4271,10 +4274,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.541442 0.6415949 1.473815 0.5177541 2.898226}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.540544 0.6660333 1.467009 0.5173287 3.090256}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.090217 3.931659 1.274843    0 12.81784}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.018551 4.172932 1.211329    0 13.42392}
 \end{Verbatim}
 
 
@@ -4305,23 +4308,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.163522 0.7848121 0.9932738 0.1532378 3.113013}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.209005 0.7852084 1.049115 0.1989944 3.246478}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.888728 4.231921 0.736211    0 14.32921}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.149813 4.088084 1.633467    0 13.76629}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.044476 0.965597 1.921539 0.5586401 4.196996}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.06951 0.9584062 1.948711 0.5819058 4.220884}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.565961 4.226179 2.228278    0 13.55553}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.671334 4.224482 2.356272    0 14.27537}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.880954 1.169275 0.8141965 \PYGZhy{}1.371962 3.303162}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8605055 1.189032 0.8049943 \PYGZhy{}1.462274 3.245281}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -4909,7 +4912,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5625 0.2044 0.2331}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5545 0.2091 0.2364}
 \end{Verbatim}
 
 
@@ -4940,7 +4943,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7112 0.1285 0.1603}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7189 0.1266 0.1545}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -4952,7 +4955,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4000 0.3074 0.2926}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4077 0.3051 0.2872}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}              mean         sd        50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} P(Y=1) \PYGZhy{}0.3128754 0.03459857 \PYGZhy{}0.3128662 \PYGZhy{}0.38111485 \PYGZhy{}0.2442630}
@@ -5686,8 +5689,8 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.16 1.800257   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1711 1.783632   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5696,7 +5699,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3112 1.851458   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3242 1.854734   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1146376 0.3671544 0.1265036 \PYGZhy{}0.6072035 0.8342282}
@@ -6716,22 +6719,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.48301 1.166943 14.41832 12.47176 16.95212}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.49477 1.177533 14.40391 12.44265 17.15888}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean     sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.86452 17.574 7.529647 0.05557155 61.09469}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.96993 18.56953 7.142533 0.0515812 65.05457}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19918 1.077627 19.1506 17.18881 21.51597}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.20356 1.117133 19.1605 17.29048 21.51946}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean     sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.31203 25.195 10.83798 0.08005704 97.18345}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.02537 23.26498 10.43719 0.05548186 78.86624}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.716168 1.609804 4.782122 1.55319 7.790825}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.708787 1.66512 4.766058 1.244495 7.765793}
 \end{Verbatim}
 
 Generate a plot of quantities of interest:
@@ -6965,7 +6968,7 @@ With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zgammagee\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
-z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{gamma.gee\PYGZdq{}}\PYG{p}{,}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit.gee\PYGZdq{}}\PYG{p}{,}
          id \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{X3\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
 z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
 z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
@@ -7055,11 +7058,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7719878 0.01137391 0.7721956 0.7491908 0.792567}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}     2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7722069 0.01095085 0.7725093 0.749711 0.7935359}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.234 0.766}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.227 0.773}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7096,23 +7099,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}     2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8245284 0.01040831 0.8249692 0.803323 0.8451305}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.824176 0.01074142 0.8243357 0.8029316 0.8443001}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.191 0.809}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.169 0.831}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7069944 0.01431468 0.707399 0.6770327 0.7345215}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean       sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7061076 0.014779 0.7061188 0.6778453 0.7354142}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.29 0.71}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.304 0.696}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1175341 0.01186909 \PYGZhy{}0.1171008 \PYGZhy{}0.1409706 \PYGZhy{}0.0960347}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1180684 0.0118833 \PYGZhy{}0.1180939 \PYGZhy{}0.139591 \PYGZhy{}0.09576689}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7368,6 +7371,379 @@ to \code{help(geepack)} and \code{help(family)}.
 
 
 
+\section{zelig-poissongee}
+\label{vignette:zelig-poissongee}\label{vignette:zpoissongee}
+The GEE poisson estimates the same model as the standard poisson
+regression (appropriate when your dependent variable represents the
+number of independent events that occur during a fixed period of time).
+Unlike in poisson regression, GEE poisson allows for dependence within
+clusters, such as in longitudinal data, although its use is not limited
+to just panel data. The user must first specify a “working” correlation
+matrix for the clusters, which models the dependence of each observation
+with other observations in the same cluster. The “working” correlation
+matrix is a \(T \times T\) matrix of correlations, where \(T\)
+is the size of the largest cluster and the elements of the matrix are
+correlations between within-cluster observations. The appeal of GEE
+models is that it gives consistent estimates of the parameters and
+consistent estimates of the standard errors can be obtained using a
+robust “sandwich” estimator even if the “working” correlation matrix is
+incorrectly specified. If the “working” correlation matrix is correctly
+specified, GEE models will give more efficient estimates of the
+parameters. GEE models measure population-averaged effects as opposed to
+cluster-specific effects.
+
+
+\subsection{Syntax}
+\label{vignette:id132}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zgammagee\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{poisson.gee\PYGZdq{}}\PYG{p}{,}
+         id \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{X3\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{poisson.gee\PYGZdq{}}\PYG{p}{,}
+               id \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{X3\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+where \code{id} is a variable which identifies the clusters. The data
+should be sorted by \code{id} and should be ordered within each cluster
+when appropriate.
+
+
+\subsection{Additional Inputs}
+\label{vignette:id133}
+Use the following arguments to specify the structure of the “working”
+correlations within clusters:
+\begin{itemize}
+\item {} 
+\code{corstr}: character string specifying the correlation structure:
+``independence'', ``exchangeable'', ``ar1'', ``unstructured'' and
+``userdefined''
+
+\item {} 
+See \code{geeglm} in package \code{geepack} for other function arguments.
+
+\end{itemize}
+
+
+\subsection{Examples}
+\label{vignette:id134}
+
+\subsubsection{Example with Exchangeable Dependence}
+\label{vignette:id135}
+Attaching the sample turnout dataset:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}sanction\PYG{p}{)}
+\end{Verbatim}
+
+Variable identifying clusters
+
+\begin{Verbatim}[commandchars=\\\{\}]
+sanction\PYG{o}{\PYGZdl{}}cluster \PYG{o}{\PYGZlt{}\PYGZhy{}} c\PYG{p}{(}rep\PYG{p}{(}c\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{:}\PYG{l+m}{15}\PYG{p}{)}\PYG{p}{,} \PYG{l+m}{5}\PYG{p}{)}\PYG{p}{,} rep\PYG{p}{(}c\PYG{p}{(}\PYG{l+m}{16}\PYG{p}{)}\PYG{p}{,} \PYG{l+m}{3}\PYG{p}{)}\PYG{p}{)}
+\end{Verbatim}
+
+Sorting by cluster
+
+\begin{Verbatim}[commandchars=\\\{\}]
+sorted.sanction \PYG{o}{\PYGZlt{}\PYGZhy{}} sanction\PYG{p}{[}order\PYG{p}{(}sanction\PYG{o}{\PYGZdl{}}cluster\PYG{p}{)}\PYG{p}{,} \PYG{p}{]}
+\end{Verbatim}
+
+Estimating model and presenting summary:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \PYG{o}{+} coop\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{poisson.gee\PYGZdq{}}\PYG{p}{,}
+               id \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cluster\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} sorted.sanction\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Patrick Lam. 2011.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   poissongee: General Estimating Equation for Poisson Regression}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://zeligproject.org/}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}by}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1] 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} geepack::geeglm(formula = num \PYGZti{} target + coop, family = poisson(\PYGZdq{}log\PYGZdq{}),}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     data = ., id = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     11, 11, 11, 11, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 14,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     14, 14, 14, 14, 15, 15, 15, 15, 15, 16, 16, 16), corstr = \PYGZdq{}independence\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)      target        coop}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZhy{}0.96771994 \PYGZhy{}0.02102351  1.21081908}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 78 Total (i.e. Null);  75 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Scale Link:                   identity}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Estimated Scale Parameters:  [1] 16.4486}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Correlation:  Structure = independence}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Number of clusters:   16   Maximum cluster size: 5}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set explanatory variables to their default values:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Simulate quantities of interest
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.392332 0.8735381 3.310923 2.00031 5.397346}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.311 2.041678   3    0     8}
+\end{Verbatim}
+
+Generate a plot of quantities of interest:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-poissongee-1.png}
+\caption{Zelig-poisson}\end{figure}
+
+
+\subsection{The Model}
+\label{vignette:id136}
+Suppose we have a panel dataset, with \(Y_{it}\) denoting the
+dependent variable of the number of independent events for a fixed
+period of time for unit \(i\) at time \(t\). \(Y_{i}\) is a
+vector or cluster of correlated data where \(y_{it}\) is correlated
+with \(y_{it^\prime}\) for some or all \(t, t^\prime\). Note
+that the model assumes correlations within \(i\) but independence
+across \(i\).
+\begin{itemize}
+\item {} 
+The \emph{stochastic component} is given by the joint and marginal
+distributions
+\begin{gather}
+\begin{split}\begin{aligned}
+Y_{i} &\sim& f(y_{i} \mid \lambda_{i})\\
+Y_{it} &\sim& g(y_{it} \mid \lambda_{it})\end{aligned}\end{split}\notag
+\end{gather}
+where \(f\) and \(g\) are unspecified distributions with
+means \(\lambda_{i}\) and \(\lambda_{it}\). GEE models make
+no distributional assumptions and only require three specifications:
+a mean function, a variance function, and a correlation structure.
+
+\item {} 
+The \emph{systematic component} is the \emph{mean function}, given by:
+\begin{gather}
+\begin{split}\lambda_{it}  = \mathrm{exp}(x_{it} \beta)\end{split}\notag
+\end{gather}
+where \(x_{it}\) is the vector of \(k\) explanatory variables
+for unit \(i\) at time \(t\) and \(\beta\) is the vector
+of coefficients.
+
+\item {} 
+The \emph{variance function} is given by:
+\begin{gather}
+\begin{split}V_{it} = \lambda_{it}\end{split}\notag
+\end{gather}
+\item {} 
+The \emph{correlation structure} is defined by a \(T \times T\)
+“working” correlation matrix, where \(T\) is the size of the
+largest cluster. Users must specify the structure of the “working”
+correlation matrix \emph{a priori}. The “working” correlation matrix then
+enters the variance term for each \(i\), given by:
+\begin{gather}
+\begin{split}V_{i} = \phi \, A_{i}^{\frac{1}{2}} R_{i}(\alpha) A_{i}^{\frac{1}{2}}\end{split}\notag
+\end{gather}
+where \(A_{i}\) is a \(T \times T\) diagonal matrix with the
+variance function \(V_{it} = \lambda_{it}\) as the \(t\)th
+diagonal element, \(R_{i}(\alpha)\) is the “working” correlation
+matrix, and \(\phi\) is a scale parameter. The parameters are
+then estimated via a quasi-likelihood approach.
+
+\item {} 
+In GEE models, if the mean is correctly specified, but the variance
+and correlation structure are incorrectly specified, then GEE models
+provide consistent estimates of the parameters and thus the mean
+function as well, while consistent estimates of the standard errors
+can be obtained via a robust “sandwich” estimator. Similarly, if the
+mean and variance are correctly specified but the correlation
+structure is incorrectly specified, the parameters can be estimated
+consistently and the standard errors can be estimated consistently
+with the sandwich estimator. If all three are specified correctly,
+then the estimates of the parameters are more efficient.
+
+\item {} 
+The robust “sandwich” estimator gives consistent estimates of the
+standard errors when the correlations are specified incorrectly only
+if the number of units \(i\) is relatively large and the number
+of repeated periods \(t\) is relatively small. Otherwise, one
+should use the “naïve” model-based standard errors, which assume that
+the specified correlations are close approximations to the true
+underlying correlations. See for more details.
+
+\end{itemize}
+
+
+\subsection{Quantities of Interest}
+\label{vignette:id137}\begin{itemize}
+\item {} 
+All quantities of interest are for marginal means rather than joint
+means.
+
+\item {} 
+The method of bootstrapping generally should not be used in GEE
+models. If you must bootstrap, bootstrapping should be done within
+clusters, which is not currently supported in Zelig. For conditional
+prediction models, data should be matched within clusters.
+
+\item {} 
+The expected values (qi\$ev) for the GEE poisson model is the mean of
+simulations from the stochastic component:
+\begin{gather}
+\begin{split}E(Y) =
+  \lambda_{c} = \mathrm{exp}(x_{c} \beta),\end{split}\notag
+\end{gather}
+given draws of \(\beta\) from its sampling distribution, where
+\(x_{c}\) is a vector of values, one for each independent
+variable, chosen by the user.
+
+\item {} 
+The first difference (qi\$fd) for the GEE poisson model is defined as
+\begin{gather}
+\begin{split}\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n \sum_{t=1}^T tr_{it}}\sum_{i:tr_{it}=1}^n \sum_{t:tr_{it}=1}^T \left\{ Y_{it}(tr_{it}=1) -
+      E[Y_{it}(tr_{it}=0)] \right\},\end{split}\notag
+\end{gather}
+where \(tr_{it}\) is a binary explanatory variable defining the
+treatment (\(tr_{it}=1\)) and control (\(tr_{it}=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_{it}(tr_{it}=0)]\), the counterfactual expected value of
+\(Y_{it}\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(tr_{it}=0\).
+
+\end{itemize}
+
+
+\subsection{Output Values}
+\label{vignette:id138}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = poisson.gee, id, data)}, then you may
+examine the available information in \code{z.out} by using
+\code{names(z.out)}, see the coefficients by using z.out\$coefficients, and
+a default summary of information through \code{summary(z.out)}. Other
+elements available through the \$ operator are listed below.
+\begin{itemize}
+\item {} 
+From the zelig() output object z.out, you may extract:
+\begin{itemize}
+\item {} 
+coefficients: parameter estimates for the explanatory variables.
+
+\item {} 
+residuals: the working residuals in the final iteration of the
+fit.
+
+\item {} 
+fitted.values: the vector of fitted values for the systemic
+component, \(\lambda_{it}\).
+
+\item {} 
+linear.predictors: the vector of \(x_{it}\beta\)
+
+\item {} 
+max.id: the size of the largest cluster.
+
+\end{itemize}
+
+\item {} 
+From summary(z.out), you may extract:
+\begin{itemize}
+\item {} 
+coefficients: the parameter estimates with their associated
+standard errors, \(p\)-values, and \(z\)-statistics.
+
+\item {} 
+working.correlation: the “working” correlation matrix
+
+\end{itemize}
+
+\item {} 
+From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation \(\times\)
+x-observation (for more than one x-observation). Available quantities
+are:
+\begin{itemize}
+\item {} 
+qi\$ev: the simulated expected values for the specified values of
+x.
+
+\item {} 
+qi\$fd: the simulated first difference in the expected
+probabilities for the values specified in x and x1.
+
+\item {} 
+qi\$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\subsection{See also}
+\label{vignette:id139}
+The geeglm function is part of the geepack package by Søren Højsgaard,
+Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
+to \code{help(geepack)} and \code{help(family)}.
+
+
+\bigskip\hrule{}\bigskip
+
+
+
 \subsubsection{zelig-exp}
 \label{zelig-exp:zelig-exp}\label{zelig-exp::doc}\label{zelig-exp:zexp}
 Exponential Regression for Duration Dependent Variables
@@ -7516,22 +7892,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.31088 1.516646 15.20347 12.69496 18.41292}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 15.36158 1.478743 15.28649 12.61304 18.31195}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.72383 16.59789 10.56416 0.5529531 60.18212}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}    2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 15.33986 15.4133 10.57153 0.45714 59.4691}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.29067 1.946844 24.26463 20.97917 28.57344}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 24.29521 1.928462 24.12594 20.83289 28.38867}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}   97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 23.13872 24.42566 15.33196 0.4849859 88.3956}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 22.65632 23.06558 15.5508 0.8880729 87.37884}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 8.979791 2.472204 8.958028 3.884591 13.68355}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 8.933631 2.431425 8.828573 4.246791 13.98708}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7783,23 +8159,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.46379 1.092605 14.40868 12.56453 16.76678}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.43838 1.07771 14.39222 12.53062 16.76161}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.45584 12.84726 11.09674 0.4847629 49.79201}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd    50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.4586 12.94196 10.809 0.8495967 48.78469}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19525 1.050819 19.15361 17.30056 21.44441}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.17071 1.113305 19.11164 17.06345 21.43286}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.68393 16.17422 14.13402 1.108795 60.44474}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 20.26299 17.73175 15.4742 1.159031 68.98787}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.731454 1.523061 4.752819 1.450543 7.553088}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.732326 1.536274 4.723702 1.618467 7.590303}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -7981,11 +8357,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7482259 0.01205803 0.7483482 0.7238516 0.7709263}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7480262 0.01132186 0.7478753 0.7248837 0.769847}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.257 0.743}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.228 0.772}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8029,23 +8405,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8228535 0.01019481 0.8228296 0.801629 0.842782}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8231351 0.01051265 0.8233849 0.8023874 0.8449256}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.165 0.835}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.175 0.825}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7094251 0.01314793 0.7090459 0.6822935 0.7344283}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7089306 0.0130707 0.7093288 0.6828238 0.7334215}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.283 0.717}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.286 0.714}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1134285 0.01172323 \PYGZhy{}0.1133748 \PYGZhy{}0.1366835 \PYGZhy{}0.08877236}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}      2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1142046 0.01150632 \PYGZhy{}0.1136883 \PYGZhy{}0.138327 \PYGZhy{}0.09289479}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8311,23 +8687,23 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.26673 2.453344 17.96374 14.0495 23.63974}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.20475 2.436988 18.07393 13.94864 23.36684}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.26673 2.453344 17.96374 14.0495 23.63974}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 18.20475 2.436988 18.07393 13.94864 23.36684}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.78883 3.691845 31.61766 25.28495 39.49397}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.81005 3.622648 31.55709 25.61213 40.03681}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.78883 3.691845 31.61766 25.28495 39.49397}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 31.81005 3.622648 31.55709 25.61213 40.03681}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.5221 3.640255 13.28077 6.972665 21.32603}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd      50\PYGZpc{}     2.5\PYGZpc{}   97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 13.6053 3.609242 13.44006 6.886618 20.8934}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8572,22 +8948,22 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.429543 0.1957666 5.430941 5.043023 5.819018}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.436376 0.1893336 5.437394 5.044565 5.841255}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.429543 0.1957666 5.430941 5.043023 5.819018}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 5.436376 0.1893336 5.437394 5.044565 5.841255}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602529 0.1901505 4.605174 4.229291 4.955183}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.605863 0.1883871 4.616567 4.239721 4.983073}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.602529 0.1901505 4.605174 4.229291 4.955183}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 4.605863 0.1883871 4.616567 4.239721 4.983073}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8270142 0.2304615 \PYGZhy{}0.8263858 \PYGZhy{}1.306393 \PYGZhy{}0.399102}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean        sd        50\PYGZpc{}     2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 \PYGZhy{}0.8305129 0.2363276 \PYGZhy{}0.8213057 \PYGZhy{}1.30866 \PYGZhy{}0.3497701}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -8862,13 +9238,13 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.955683 0.3390233 2.933675 2.366098 3.657664}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.999398 0.3686432 2.976453 2.304905 3.786685}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     0     1     2     3     4     5     6     7     8     9    10    11}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.175 0.189 0.189 0.135 0.105 0.067 0.046 0.037 0.016 0.016 0.009 0.007}
-\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    16}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.004 0.001 0.002 0.002}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.129 0.173 0.158 0.132 0.116 0.077 0.057 0.040 0.035 0.018 0.021 0.011}
+\PYG{c}{\PYGZsh{}\PYGZsh{}    12    13    14    15    16    17    18}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.009 0.011 0.006 0.001 0.003 0.002 0.001}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -9098,23 +9474,23 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.440143 0.1978276 5.434579 5.061702 5.817909}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.425881 0.1924125 5.430764 5.04588 5.810964}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.581836 2.783195 5.703507 \PYGZhy{}0.3080639 10.56189}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}        2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 5.348664 2.643057 5.424203 \PYGZhy{}0.05250755 10.48605}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.607841 0.1798421 4.607168 4.251265 4.946762}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.609896 0.1803193 4.605653 4.257043 4.958737}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.66497 2.853867 4.737543 \PYGZhy{}0.8377445 10.21696}
+\PYG{c}{\PYGZsh{}\PYGZsh{}         mean       sd     50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.69855 2.797551 4.71524 \PYGZhy{}0.5020909 10.03141}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8323018 0.2270675 \PYGZhy{}0.8342968 \PYGZhy{}1.265098 \PYGZhy{}0.3918768}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean       sd        50\PYGZpc{}      2.5\PYGZpc{}      97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.8159849 0.233915 \PYGZhy{}0.8279386 \PYGZhy{}1.250969 \PYGZhy{}0.3642137}
 \end{Verbatim}
 
 A visual summary of quantities of interest:
@@ -9315,11 +9691,11 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.250631 0.2322972 3.241869 2.809167 3.697163}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.242421 0.2318702 3.23178 2.843409 3.725624}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.285 1.912965   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.227 1.773306   3    0     7}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -9759,11 +10135,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}             mean           sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002402753 0.0001555756 0.002400299 0.002103228 0.002716029}
+\PYG{c}{\PYGZsh{}\PYGZsh{}             mean          sd         50\PYGZpc{}        2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.002404025 0.000158373 0.002401872 0.002123804 0.002711504}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.998 0.002}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.996 0.004}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -10812,7 +11188,7 @@ z.out2
 \PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}formula}
 \PYG{c}{\PYGZsh{}\PYGZsh{} cbind(conflict, 1 \PYGZhy{} conflict) \PYGZti{} major + contig + power + maxdem +}
 \PYG{c}{\PYGZsh{}\PYGZsh{}     mindem + years}
-\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fdb780cf780\PYGZgt{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZlt{}environment: 0x7fa7b2eb53f8\PYGZgt{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1] \PYGZdq{}Relogit2\PYGZdq{} \PYGZdq{}Relogit\PYGZdq{}}
@@ -11163,10 +11539,10 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.541442 0.6415949 1.473815 0.5177541 2.898226}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.540544 0.6660333 1.467009 0.5173287 3.090256}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.090217 3.931659 1.274843    0 12.81784}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.018551 4.172932 1.211329    0 13.42392}
 \end{Verbatim}
 
 
@@ -11197,23 +11573,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.163522 0.7848121 0.9932738 0.1532378 3.113013}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 1.209005 0.7852084 1.049115 0.1989944 3.246478}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 2.888728 4.231921 0.736211    0 14.32921}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.149813 4.088084 1.633467    0 13.76629}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.044476 0.965597 1.921539 0.5586401 4.196996}
+\PYG{c}{\PYGZsh{}\PYGZsh{}      mean        sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 2.06951 0.9584062 1.948711 0.5819058 4.220884}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{} 2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.565961 4.226179 2.228278    0 13.55553}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.671334 4.224482 2.356272    0 14.27537}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.880954 1.169275 0.8141965 \PYGZhy{}1.371962 3.303162}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 1 0.8605055 1.189032 0.8049943 \PYGZhy{}1.462274 3.245281}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -11793,7 +12169,7 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5625 0.2044 0.2331}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.5545 0.2091 0.2364}
 \end{Verbatim}
 
 
@@ -11824,7 +12200,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7112 0.1285 0.1603}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.7189 0.1266 0.1545}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -11836,7 +12212,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{} qi}
 \PYG{c}{\PYGZsh{}\PYGZsh{}      1      2      3}
-\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4000 0.3074 0.2926}
+\PYG{c}{\PYGZsh{}\PYGZsh{} 0.4077 0.3051 0.2872}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}              mean         sd        50\PYGZpc{}        2.5\PYGZpc{}      97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} P(Y=1) \PYGZhy{}0.3128754 0.03459857 \PYGZhy{}0.3128662 \PYGZhy{}0.38111485 \PYGZhy{}0.2442630}
@@ -12562,8 +12938,8 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}      mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.16 1.800257   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.1711 1.783632   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -12572,7 +12948,7 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}        mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3112 1.851458   3    0     7}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.3242 1.854734   3    0     7}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
 \PYG{c}{\PYGZsh{}\PYGZsh{}           mean        sd       50\PYGZpc{}       2.5\PYGZpc{}     97.5\PYGZpc{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.1146376 0.3671544 0.1265036 \PYGZhy{}0.6072035 0.8342282}
@@ -13580,22 +13956,22 @@ summary\PYG{p}{(}s.out\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.48301 1.166943 14.41832 12.47176 16.95212}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 14.49477 1.177533 14.40391 12.44265 17.15888}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean     sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.86452 17.574 7.529647 0.05557155 61.09469}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 13.96993 18.56953 7.142533 0.0515812 65.05457}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd     50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.19918 1.077627 19.1506 17.18881 21.51597}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.20356 1.117133 19.1605 17.29048 21.51946}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean     sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 19.31203 25.195 10.83798 0.08005704 97.18345}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}       2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 18.02537 23.26498 10.43719 0.05548186 78.86624}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}          mean       sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.716168 1.609804 4.782122 1.55319 7.790825}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean      sd      50\PYGZpc{}     2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 4.708787 1.66512 4.766058 1.244495 7.765793}
 \end{Verbatim}
 
 Generate a plot of quantities of interest:
@@ -13825,7 +14201,7 @@ With reference classes:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zgammagee\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
-z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{gamma.gee\PYGZdq{}}\PYG{p}{,}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{probit.gee\PYGZdq{}}\PYG{p}{,}
          id \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{X3\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
 z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
 z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
@@ -13915,11 +14291,11 @@ summary\PYG{p}{(}s.out1\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}      2.5\PYGZpc{}    97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7719878 0.01137391 0.7721956 0.7491908 0.792567}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}     2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7722069 0.01095085 0.7725093 0.749711 0.7935359}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.234 0.766}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.227 0.773}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -13956,23 +14332,23 @@ summary\PYG{p}{(}s.out2\PYG{p}{)}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd       50\PYGZpc{}     2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.8245284 0.01040831 0.8249692 0.803323 0.8451305}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean         sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.824176 0.01074142 0.8243357 0.8029316 0.8443001}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
 \PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.191 0.809}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.169 0.831}
 \PYG{c}{\PYGZsh{}\PYGZsh{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  sim x1 :}
 \PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{c}{\PYGZsh{}\PYGZsh{} ev}
-\PYG{c}{\PYGZsh{}\PYGZsh{}           mean         sd      50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7069944 0.01431468 0.707399 0.6770327 0.7345215}
+\PYG{c}{\PYGZsh{}\PYGZsh{}           mean       sd       50\PYGZpc{}      2.5\PYGZpc{}     97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.7061076 0.014779 0.7061188 0.6778453 0.7354142}
 \PYG{c}{\PYGZsh{}\PYGZsh{} pv}
-\PYG{c}{\PYGZsh{}\PYGZsh{}         0    1}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.29 0.71}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          0     1}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 0.304 0.696}
 \PYG{c}{\PYGZsh{}\PYGZsh{} fd}
-\PYG{c}{\PYGZsh{}\PYGZsh{}            mean         sd        50\PYGZpc{}       2.5\PYGZpc{}      97.5\PYGZpc{}}
-\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1175341 0.01186909 \PYGZhy{}0.1171008 \PYGZhy{}0.1409706 \PYGZhy{}0.0960347}
+\PYG{c}{\PYGZsh{}\PYGZsh{}            mean        sd        50\PYGZpc{}      2.5\PYGZpc{}       97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] \PYGZhy{}0.1180684 0.0118833 \PYGZhy{}0.1180939 \PYGZhy{}0.139591 \PYGZhy{}0.09576689}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -14224,6 +14600,375 @@ Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to \code{help(geepack)} and \code{help(family)}.
 
 
+\subsubsection{zelig-poissongee}
+\label{zelig-poissongee:zelig-poissongee}\label{zelig-poissongee:zpoissongee}\label{zelig-poissongee::doc}
+The GEE poisson estimates the same model as the standard poisson
+regression (appropriate when your dependent variable represents the
+number of independent events that occur during a fixed period of time).
+Unlike in poisson regression, GEE poisson allows for dependence within
+clusters, such as in longitudinal data, although its use is not limited
+to just panel data. The user must first specify a “working” correlation
+matrix for the clusters, which models the dependence of each observation
+with other observations in the same cluster. The “working” correlation
+matrix is a \(T \times T\) matrix of correlations, where \(T\)
+is the size of the largest cluster and the elements of the matrix are
+correlations between within-cluster observations. The appeal of GEE
+models is that it gives consistent estimates of the parameters and
+consistent estimates of the standard errors can be obtained using a
+robust “sandwich” estimator even if the “working” correlation matrix is
+incorrectly specified. If the “working” correlation matrix is correctly
+specified, GEE models will give more efficient estimates of the
+parameters. GEE models measure population-averaged effects as opposed to
+cluster-specific effects.
+
+
+\paragraph{Syntax}
+\label{zelig-poissongee:syntax}
+With reference classes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z5 \PYG{o}{\PYGZlt{}\PYGZhy{}} zgammagee\PYG{o}{\PYGZdl{}}new\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{poisson.gee\PYGZdq{}}\PYG{p}{,}
+         id \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{X3\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}setx\PYG{p}{(}\PYG{p}{)}
+z5\PYG{o}{\PYGZdl{}}sim\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+With the Zelig 4 compatibility wrappers:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}Y \PYG{o}{\PYGZti{}} X1 \PYG{o}{+} X2\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{poisson.gee\PYGZdq{}}\PYG{p}{,}
+               id \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{X3\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} mydata\PYG{p}{)}
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+\end{Verbatim}
+
+where \code{id} is a variable which identifies the clusters. The data
+should be sorted by \code{id} and should be ordered within each cluster
+when appropriate.
+
+
+\paragraph{Additional Inputs}
+\label{zelig-poissongee:additional-inputs}
+Use the following arguments to specify the structure of the “working”
+correlations within clusters:
+\begin{itemize}
+\item {} 
+\code{corstr}: character string specifying the correlation structure:
+``independence'', ``exchangeable'', ``ar1'', ``unstructured'' and
+``userdefined''
+
+\item {} 
+See \code{geeglm} in package \code{geepack} for other function arguments.
+
+\end{itemize}
+
+
+\paragraph{Examples}
+\label{zelig-poissongee:examples}
+
+\subparagraph{Example with Exchangeable Dependence}
+\label{zelig-poissongee:example-with-exchangeable-dependence}
+Attaching the sample turnout dataset:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+data\PYG{p}{(}sanction\PYG{p}{)}
+\end{Verbatim}
+
+Variable identifying clusters
+
+\begin{Verbatim}[commandchars=\\\{\}]
+sanction\PYG{o}{\PYGZdl{}}cluster \PYG{o}{\PYGZlt{}\PYGZhy{}} c\PYG{p}{(}rep\PYG{p}{(}c\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{:}\PYG{l+m}{15}\PYG{p}{)}\PYG{p}{,} \PYG{l+m}{5}\PYG{p}{)}\PYG{p}{,} rep\PYG{p}{(}c\PYG{p}{(}\PYG{l+m}{16}\PYG{p}{)}\PYG{p}{,} \PYG{l+m}{3}\PYG{p}{)}\PYG{p}{)}
+\end{Verbatim}
+
+Sorting by cluster
+
+\begin{Verbatim}[commandchars=\\\{\}]
+sorted.sanction \PYG{o}{\PYGZlt{}\PYGZhy{}} sanction\PYG{p}{[}order\PYG{p}{(}sanction\PYG{o}{\PYGZdl{}}cluster\PYG{p}{)}\PYG{p}{,} \PYG{p}{]}
+\end{Verbatim}
+
+Estimating model and presenting summary:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+z.out \PYG{o}{\PYGZlt{}\PYGZhy{}} zelig\PYG{p}{(}num \PYG{o}{\PYGZti{}} target \PYG{o}{+} coop\PYG{p}{,} model \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{poisson.gee\PYGZdq{}}\PYG{p}{,}
+               id \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cluster\PYGZdq{}}\PYG{p}{,} data \PYG{o}{=} sorted.sanction\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} How to cite this model in Zelig:}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   Patrick Lam. 2011.}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   poissongee: General Estimating Equation for Poisson Regression}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   in Kosuke Imai, Gary King, and Olivia Lau, \PYGZdq{}Zelig: Everyone\PYGZsq{}s Statistical Software,\PYGZdq{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}   http://zeligproject.org/}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+summary\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{} Model:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZdl{}by}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1] 1}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Call:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} geepack::geeglm(formula = num \PYGZti{} target + coop, family = poisson(\PYGZdq{}log\PYGZdq{}),}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     data = ., id = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     11, 11, 11, 11, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 14,}
+\PYG{c}{\PYGZsh{}\PYGZsh{}     14, 14, 14, 14, 15, 15, 15, 15, 15, 16, 16, 16), corstr = \PYGZdq{}independence\PYGZdq{})}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Coefficients:}
+\PYG{c}{\PYGZsh{}\PYGZsh{} (Intercept)      target        coop}
+\PYG{c}{\PYGZsh{}\PYGZsh{} \PYGZhy{}0.96771994 \PYGZhy{}0.02102351  1.21081908}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Degrees of Freedom: 78 Total (i.e. Null);  75 Residual}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Scale Link:                   identity}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Estimated Scale Parameters:  [1] 16.4486}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Correlation:  Structure = independence}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Number of clusters:   16   Maximum cluster size: 5}
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} Next step: Use \PYGZsq{}setx\PYGZsq{} method}
+\end{Verbatim}
+
+Set explanatory variables to their default values:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+x.out \PYG{o}{\PYGZlt{}\PYGZhy{}} setx\PYG{p}{(}z.out\PYG{p}{)}
+\end{Verbatim}
+
+Simulate quantities of interest
+
+\begin{Verbatim}[commandchars=\\\{\}]
+s.out \PYG{o}{\PYGZlt{}\PYGZhy{}} sim\PYG{p}{(}z.out\PYG{p}{,} x \PYG{o}{=} x.out\PYG{p}{)}
+summary\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZsh{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  sim x :}
+\PYG{c}{\PYGZsh{}\PYGZsh{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} ev}
+\PYG{c}{\PYGZsh{}\PYGZsh{}          mean        sd      50\PYGZpc{}    2.5\PYGZpc{}    97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.392332 0.8735381 3.310923 2.00031 5.397346}
+\PYG{c}{\PYGZsh{}\PYGZsh{} pv}
+\PYG{c}{\PYGZsh{}\PYGZsh{}       mean       sd 50\PYGZpc{} 2.5\PYGZpc{} 97.5\PYGZpc{}}
+\PYG{c}{\PYGZsh{}\PYGZsh{} [1,] 3.311 2.041678   3    0     8}
+\end{Verbatim}
+
+Generate a plot of quantities of interest:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+plot\PYG{p}{(}s.out\PYG{p}{)}
+\end{Verbatim}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\includegraphics{Zelig-poissongee-1.png}
+\caption{Zelig-poisson}\end{figure}
+
+
+\paragraph{The Model}
+\label{zelig-poissongee:the-model}
+Suppose we have a panel dataset, with \(Y_{it}\) denoting the
+dependent variable of the number of independent events for a fixed
+period of time for unit \(i\) at time \(t\). \(Y_{i}\) is a
+vector or cluster of correlated data where \(y_{it}\) is correlated
+with \(y_{it^\prime}\) for some or all \(t, t^\prime\). Note
+that the model assumes correlations within \(i\) but independence
+across \(i\).
+\begin{itemize}
+\item {} 
+The \emph{stochastic component} is given by the joint and marginal
+distributions
+\begin{gather}
+\begin{split}\begin{aligned}
+Y_{i} &\sim& f(y_{i} \mid \lambda_{i})\\
+Y_{it} &\sim& g(y_{it} \mid \lambda_{it})\end{aligned}\end{split}\notag
+\end{gather}
+where \(f\) and \(g\) are unspecified distributions with
+means \(\lambda_{i}\) and \(\lambda_{it}\). GEE models make
+no distributional assumptions and only require three specifications:
+a mean function, a variance function, and a correlation structure.
+
+\item {} 
+The \emph{systematic component} is the \emph{mean function}, given by:
+\begin{gather}
+\begin{split}\lambda_{it}  = \mathrm{exp}(x_{it} \beta)\end{split}\notag
+\end{gather}
+where \(x_{it}\) is the vector of \(k\) explanatory variables
+for unit \(i\) at time \(t\) and \(\beta\) is the vector
+of coefficients.
+
+\item {} 
+The \emph{variance function} is given by:
+\begin{gather}
+\begin{split}V_{it} = \lambda_{it}\end{split}\notag
+\end{gather}
+\item {} 
+The \emph{correlation structure} is defined by a \(T \times T\)
+“working” correlation matrix, where \(T\) is the size of the
+largest cluster. Users must specify the structure of the “working”
+correlation matrix \emph{a priori}. The “working” correlation matrix then
+enters the variance term for each \(i\), given by:
+\begin{gather}
+\begin{split}V_{i} = \phi \, A_{i}^{\frac{1}{2}} R_{i}(\alpha) A_{i}^{\frac{1}{2}}\end{split}\notag
+\end{gather}
+where \(A_{i}\) is a \(T \times T\) diagonal matrix with the
+variance function \(V_{it} = \lambda_{it}\) as the \(t\)th
+diagonal element, \(R_{i}(\alpha)\) is the “working” correlation
+matrix, and \(\phi\) is a scale parameter. The parameters are
+then estimated via a quasi-likelihood approach.
+
+\item {} 
+In GEE models, if the mean is correctly specified, but the variance
+and correlation structure are incorrectly specified, then GEE models
+provide consistent estimates of the parameters and thus the mean
+function as well, while consistent estimates of the standard errors
+can be obtained via a robust “sandwich” estimator. Similarly, if the
+mean and variance are correctly specified but the correlation
+structure is incorrectly specified, the parameters can be estimated
+consistently and the standard errors can be estimated consistently
+with the sandwich estimator. If all three are specified correctly,
+then the estimates of the parameters are more efficient.
+
+\item {} 
+The robust “sandwich” estimator gives consistent estimates of the
+standard errors when the correlations are specified incorrectly only
+if the number of units \(i\) is relatively large and the number
+of repeated periods \(t\) is relatively small. Otherwise, one
+should use the “naïve” model-based standard errors, which assume that
+the specified correlations are close approximations to the true
+underlying correlations. See for more details.
+
+\end{itemize}
+
+
+\paragraph{Quantities of Interest}
+\label{zelig-poissongee:quantities-of-interest}\begin{itemize}
+\item {} 
+All quantities of interest are for marginal means rather than joint
+means.
+
+\item {} 
+The method of bootstrapping generally should not be used in GEE
+models. If you must bootstrap, bootstrapping should be done within
+clusters, which is not currently supported in Zelig. For conditional
+prediction models, data should be matched within clusters.
+
+\item {} 
+The expected values (qi\$ev) for the GEE poisson model is the mean of
+simulations from the stochastic component:
+\begin{gather}
+\begin{split}E(Y) =
+  \lambda_{c} = \mathrm{exp}(x_{c} \beta),\end{split}\notag
+\end{gather}
+given draws of \(\beta\) from its sampling distribution, where
+\(x_{c}\) is a vector of values, one for each independent
+variable, chosen by the user.
+
+\item {} 
+The first difference (qi\$fd) for the GEE poisson model is defined as
+\begin{gather}
+\begin{split}\textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).\end{split}\notag
+\end{gather}
+\item {} 
+In conditional prediction models, the average expected treatment
+effect (att.ev) for the treatment group is
+\begin{gather}
+\begin{split}\frac{1}{\sum_{i=1}^n \sum_{t=1}^T tr_{it}}\sum_{i:tr_{it}=1}^n \sum_{t:tr_{it}=1}^T \left\{ Y_{it}(tr_{it}=1) -
+      E[Y_{it}(tr_{it}=0)] \right\},\end{split}\notag
+\end{gather}
+where \(tr_{it}\) is a binary explanatory variable defining the
+treatment (\(tr_{it}=1\)) and control (\(tr_{it}=0\)) groups.
+Variation in the simulations are due to uncertainty in simulating
+\(E[Y_{it}(tr_{it}=0)]\), the counterfactual expected value of
+\(Y_{it}\) for observations in the treatment group, under the
+assumption that everything stays the same except that the treatment
+indicator is switched to \(tr_{it}=0\).
+
+\end{itemize}
+
+
+\paragraph{Output Values}
+\label{zelig-poissongee:output-values}
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+\code{z.out \textless{}- zelig(y \textasciitilde{} x, model = poisson.gee, id, data)}, then you may
+examine the available information in \code{z.out} by using
+\code{names(z.out)}, see the coefficients by using z.out\$coefficients, and
+a default summary of information through \code{summary(z.out)}. Other
+elements available through the \$ operator are listed below.
+\begin{itemize}
+\item {} 
+From the zelig() output object z.out, you may extract:
+\begin{itemize}
+\item {} 
+coefficients: parameter estimates for the explanatory variables.
+
+\item {} 
+residuals: the working residuals in the final iteration of the
+fit.
+
+\item {} 
+fitted.values: the vector of fitted values for the systemic
+component, \(\lambda_{it}\).
+
+\item {} 
+linear.predictors: the vector of \(x_{it}\beta\)
+
+\item {} 
+max.id: the size of the largest cluster.
+
+\end{itemize}
+
+\item {} 
+From summary(z.out), you may extract:
+\begin{itemize}
+\item {} 
+coefficients: the parameter estimates with their associated
+standard errors, \(p\)-values, and \(z\)-statistics.
+
+\item {} 
+working.correlation: the “working” correlation matrix
+
+\end{itemize}
+
+\item {} 
+From the sim() output object s.out, you may extract quantities of
+interest arranged as matrices indexed by simulation \(\times\)
+x-observation (for more than one x-observation). Available quantities
+are:
+\begin{itemize}
+\item {} 
+qi\$ev: the simulated expected values for the specified values of
+x.
+
+\item {} 
+qi\$fd: the simulated first difference in the expected
+probabilities for the values specified in x and x1.
+
+\item {} 
+qi\$att.ev: the simulated average expected treatment effect for the
+treated from conditional prediction models.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\paragraph{See also}
+\label{zelig-poissongee:see-also}
+The geeglm function is part of the geepack package by Søren Højsgaard,
+Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
+to \code{help(geepack)} and \code{help(family)}.
+
+
 \chapter{Frequently Asked Questions}
 \label{faq:faq}\label{faq::doc}\label{faq:frequently-asked-questions}
 If you find a bug, or cannot figure something out after reading through the FAQs below, please send your question to the Zelig listserv at: \href{https://groups.google.com/forum/\#!forum/zelig-statistical-software}{https://groups.google.com/forum/\#!forum/zelig-statistical-software}. Please explain exactly what you did and include the full error message, including the traceback(). You should get an answer from the developers or another user in short order.
@@ -14311,9 +15056,8 @@ Kosuke Imai, Gary King, and Olivia Lau. 2007. ``Zelig: Everyone's Statistical So
 Imai, Kosuke, Gary King, and Olivia Lau. 2008. ``Toward A Common Framework for Statistical Analysis and Development.'' Journal of Computational and Graphical Statistics, Vol. 17, No. 4 (December), pp. 892-913, \href{http://j.mp/msE15c}{http://j.mp/msE15c}.
 \end{quote}
 
+\textbf{License:} GPL-2 \textbar{} GPL-3 {[}expanded from: GPL (\textgreater{}= 2){]}
 
-\chapter{\textbf{License:} GPL-2 \textbar{} GPL-3 {[}expanded from: GPL (\textgreater{}= 2){]}}
-\label{about:license-gpl-2-gpl-3-expanded-from-gpl-2}
 
 \section{Technical Vision}
 \label{about:technical-vision}

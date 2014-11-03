@@ -29,6 +29,7 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Bayesian Tobit Regression <ztobitbayes>`: ``ztobitbayes$new()``
 - :ref:`Generalized Estimating Equation for Gamma Regression <zgammagee>`: ``zgammagee$new()``
 - :ref:`Generalized Estimating Equation for Probit Regression <zprobitgee>`: ``zprobitgee$new()``
+- :ref:`Generalized Estimating Equation for Poisson Regression <zpoissongee>`: ``zpoissongee$new()``
 
 
 --------
@@ -109,6 +110,9 @@ The following models are currently supported in Zelig 5.0-1:
 
 --------
 
+.. include:: zelig-poissongee.rst
+
+--------
 
 .. toctree::
    :hidden:
@@ -132,3 +136,4 @@ The following models are currently supported in Zelig 5.0-1:
    zelig-tobitbayes.rst
    zelig-gammagee.rst
    zelig-probitgee.rst
+   zelig-poissongee.rst

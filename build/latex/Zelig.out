@@ -22,12 +22,12 @@
 \BOOKMARK [1][-]{section.2.18}{zelig-tobitbayes}{chapter.2}% 22
 \BOOKMARK [1][-]{section.2.19}{zelig-gammagee}{chapter.2}% 23
 \BOOKMARK [1][-]{section.2.20}{zelig-probitgee}{chapter.2}% 24
-\BOOKMARK [0][-]{chapter.3}{Frequently Asked Questions}{}% 25
-\BOOKMARK [1][-]{section.3.1}{Why can\220t I install Zelig?}{chapter.3}% 26
-\BOOKMARK [1][-]{section.3.2}{Why can\220t I install R?}{chapter.3}% 27
-\BOOKMARK [1][-]{section.3.3}{Why can\220t I load data?}{chapter.3}% 28
-\BOOKMARK [1][-]{section.3.4}{R is neat. How can I find out more?}{chapter.3}% 29
-\BOOKMARK [0][-]{chapter.4}{About Zelig}{}% 30
-\BOOKMARK [0][-]{chapter.5}{License: GPL-2 | GPL-3 [expanded from: GPL \(>= 2\)]}{}% 31
-\BOOKMARK [1][-]{section.5.1}{Technical Vision}{chapter.5}% 32
-\BOOKMARK [1][-]{section.5.2}{Release Notes}{chapter.5}% 33
+\BOOKMARK [1][-]{section.2.21}{zelig-poissongee}{chapter.2}% 25
+\BOOKMARK [0][-]{chapter.3}{Frequently Asked Questions}{}% 26
+\BOOKMARK [1][-]{section.3.1}{Why can\220t I install Zelig?}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.2}{Why can\220t I install R?}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.3}{Why can\220t I load data?}{chapter.3}% 29
+\BOOKMARK [1][-]{section.3.4}{R is neat. How can I find out more?}{chapter.3}% 30
+\BOOKMARK [0][-]{chapter.4}{About Zelig}{}% 31
+\BOOKMARK [1][-]{section.4.1}{Technical Vision}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.2}{Release Notes}{chapter.4}% 33

@@ -103,7 +103,8 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissongee">zelig-poissongee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
@@ -113,8 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#r-is-neat-how-can-i-find-out-more">R is neat. How can I find out more?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about.html#technical-vision">Technical Vision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#release-notes">Release Notes</a></li>
 </ul>
@@ -209,12 +209,12 @@
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitbayes">zelig-probitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-tobitbayes">zelig-tobitbayes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-gammagee">zelig-gammagee</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vignette.html#zelig-probitgee">zelig-probitgee</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vignette.html#zelig-poissongee">zelig-poissongee</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Zelig</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html#license-gpl-2-gpl-3-expanded-from-gpl-2"><strong>License:</strong> GPL-2 | GPL-3 [expanded from: GPL (&gt;= 2)]</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -319,11 +319,11 @@ its own cluster.</p>
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.532134 0.6451426 1.461142 0.4906876 2.911972</span>
+<span class="c">##       mean       sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 1.528516 0.633703 1.430801 0.5225189 3.052643</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%   97.5%</span>
-<span class="c">## [1,] 3.253126 4.291598 1.453459    0 13.8559</span>
+<span class="c">##          mean      sd      50% 2.5%    97.5%</span>
+<span class="c">## [1,] 3.291238 4.23083 1.582286    0 14.84473</span>
 </pre></div>
 </div>
 </div>
@@ -348,23 +348,23 @@ liquidity ratio on duration(<tt class="docutils literal"><span class="pre">durab
 <span class="c">##  sim x :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 1.219587 0.7820647 1.056607 0.1938312 3.132361</span>
+<span class="c">##       mean        sd     50%      2.5%    97.5%</span>
+<span class="c">## 1 1.202739 0.7549425 1.06331 0.1805177 3.019912</span>
 <span class="c">## pv</span>
 <span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.156665 4.316591 1.533816    0 14.58822</span>
+<span class="c">## [1,] 3.269685 4.326484 1.271605    0 13.50531</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
-<span class="c">##       mean        sd      50%      2.5%    97.5%</span>
-<span class="c">## 1 2.028201 0.9736607 1.880171 0.5858679 4.234879</span>
+<span class="c">##      mean        sd      50%      2.5%    97.5%</span>
+<span class="c">## 1 2.06353 0.9885348 1.921634 0.5153851 4.337817</span>
 <span class="c">## pv</span>
-<span class="c">##          mean       sd      50% 2.5%    97.5%</span>
-<span class="c">## [1,] 3.541122 4.448873 1.869328    0 15.11714</span>
+<span class="c">##          mean       sd     50% 2.5%    97.5%</span>
+<span class="c">## [1,] 3.602969 4.459958 1.99389    0 15.19406</span>
 <span class="c">## fd</span>
-<span class="c">##        mean      sd       50%      2.5%    97.5%</span>
-<span class="c">## 1 0.8086145 1.19362 0.7742679 -1.429158 3.302684</span>
+<span class="c">##       mean       sd       50%     2.5%    97.5%</span>
+<span class="c">## 1 0.860791 1.194954 0.7659795 -1.29223 3.621189</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
