@@ -3,6 +3,8 @@
 zelig-poissonbayes
 ~~~~~~
 
+Bayesian Poisson Regression
+
 Use the Poisson regression model if the observations of your dependent
 variable represents the number of independent events that occur during
 a fixed period of time. The model is fit using a random walk
@@ -206,7 +208,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
     ## [1,] 3.191614 0.2936585 3.183013 2.642371 3.803733
     ## pv
     ##        mean       sd 50% 2.5% 97.5%
-    ## [1,] 3.1694 1.804724   3    0     7
+    ## [1,] 3.1961 1.833571   3    0     7
     ## 
     ##  sim x1 :
     ##  -----
@@ -215,7 +217,7 @@ sanctions when the number of targets is set to be its maximum versus its minimum
     ## [1,] 3.306252 0.3059862 3.300095 2.729466 3.944022
     ## pv
     ##        mean       sd 50% 2.5% 97.5%
-    ## [1,] 3.3129 1.872043   3    0     7
+    ## [1,] 3.2968 1.834025   3    0     7
     ## fd
     ##           mean        sd       50%       2.5%     97.5%
     ## [1,] 0.1146376 0.3671544 0.1265036 -0.6072035 0.8342282

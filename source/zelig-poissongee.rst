@@ -3,6 +3,8 @@
 zelig-poissongee
 ~~~~~~
 
+Generalized Estimating Equation for Poisson Regression
+
 The GEE poisson estimates the same model as the standard poisson
 regression (appropriate when your dependent variable represents the
 number of independent events that occur during a fixed period of time).
@@ -184,11 +186,11 @@ Simulate quantities of interest
     ##  sim x :
     ##  -----
     ## ev
-    ##        mean        sd      50%     2.5%    97.5%
-    ## [1,] 3.3783 0.8655404 3.249361 1.952557 5.426074
+    ##          mean        sd     50%     2.5%    97.5%
+    ## [1,] 3.314773 0.8449146 3.21985 1.982111 5.217113
     ## pv
-    ##       mean       sd 50% 2.5% 97.5%
-    ## [1,] 3.284 1.988793   3    0     8
+    ##      mean       sd 50% 2.5% 97.5%
+    ## [1,] 3.29 2.014437   3    0     8
 
 
 

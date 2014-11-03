@@ -3,6 +3,8 @@
 zelig-gammagee
 ~~~~~~
 
+Generalized Estimating Equation for Gamma Regression
+
 The GEE gamma is similar to standard gamma regression (appropriate when
 you have an uncensored, positive-valued, continuous dependent variable
 such as the time until a parliamentary cabinet falls). Unlike in gamma

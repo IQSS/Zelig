@@ -3,6 +3,8 @@
 zelig-probitgee
 ~~~~~~
 
+Generalized Estimating Equation for Probit Regression
+
 The GEE probit estimates the same model as the standard probit
 regression (appropriate when you have a dichotomous dependent variable
 and a set of explanatory variables). Unlike in probit regression, GEE

@@ -233,6 +233,7 @@
       
   <div class="section" id="zelig-probitgee">
 <span id="zprobitgee"></span><h1>zelig-probitgee<a class="headerlink" href="#zelig-probitgee" title="Permalink to this headline">¶</a></h1>
+<p>Generalized Estimating Equation for Probit Regression</p>
 <p>The GEE probit estimates the same model as the standard probit
 regression (appropriate when you have a dichotomous dependent variable
 and a set of explanatory variables). Unlike in probit regression, GEE
@@ -323,10 +324,10 @@ sorted.turnout <span class="o">&lt;-</span> turnout<span class="p">[</span>order
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7710248 0.01148642 0.7715162 0.7476183 0.7937804</span>
+<span class="c">## [1,] 0.7709032 0.01102908 0.7705572 0.7494677 0.7921488</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.229 0.771</span>
+<span class="c">## [1,] 0.226 0.774</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out1<span class="p">)</span>
@@ -356,22 +357,22 @@ x.low <span class="o">&lt;-</span> setx<span class="p">(</span>z.out1<span class
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.8243189 0.01064132 0.8251121 0.8034013 0.8442554</span>
+<span class="c">## [1,] 0.8245311 0.01062961 0.8248262 0.8031532 0.8441389</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.181 0.819</span>
+<span class="c">## [1,] 0.186 0.814</span>
 <span class="c">##</span>
 <span class="c">##  sim x1 :</span>
 <span class="c">##  -----</span>
 <span class="c">## ev</span>
 <span class="c">##           mean         sd       50%      2.5%     97.5%</span>
-<span class="c">## [1,] 0.7064974 0.01460634 0.7059701 0.6776687 0.7355476</span>
+<span class="c">## [1,] 0.7073285 0.01541172 0.7075261 0.6782131 0.7356432</span>
 <span class="c">## pv</span>
 <span class="c">##          0     1</span>
-<span class="c">## [1,] 0.292 0.708</span>
+<span class="c">## [1,] 0.297 0.703</span>
 <span class="c">## fd</span>
 <span class="c">##            mean         sd        50%       2.5%       97.5%</span>
-<span class="c">## [1,] -0.1178215 0.01203205 -0.1175201 -0.1422335 -0.09466796</span>
+<span class="c">## [1,] -0.1172026 0.01232901 -0.1171414 -0.1418306 -0.09389655</span>
 </pre></div>
 </div>
 <div class="highlight-r"><div class="highlight"><pre>plot<span class="p">(</span>s.out2<span class="p">)</span>

@@ -3,6 +3,8 @@
 zelig-probitgee
 ~~~~~~
 
+Generalized Estimating Equation for Probit Regression
+
 The GEE probit estimates the same model as the standard probit
 regression (appropriate when you have a dichotomous dependent variable
 and a set of explanatory variables). Unlike in probit regression, GEE
@@ -145,10 +147,10 @@ Simulating quantities of interest:
     ##  -----
     ## ev
     ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.7721393 0.01095129 0.7720728 0.7498369 0.7932306
+    ## [1,] 0.7714339 0.01116122 0.7716805 0.7493789 0.7932561
     ## pv
     ##          0     1
-    ## [1,] 0.226 0.774
+    ## [1,] 0.242 0.758
 
 
 
@@ -197,23 +199,23 @@ Estimating the risk difference (and risk ratio) between low education
     ##  sim x :
     ##  -----
     ## ev
-    ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.8243979 0.01078837 0.8251905 0.8019221 0.8437694
+    ##          mean         sd       50%      2.5%     97.5%
+    ## [1,] 0.824644 0.01021875 0.8249386 0.8038777 0.8437308
     ## pv
     ##          0     1
-    ## [1,] 0.169 0.831
+    ## [1,] 0.176 0.824
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##           mean         sd       50%      2.5%     97.5%
-    ## [1,] 0.7068951 0.01492397 0.7068337 0.6792366 0.7358521
+    ## [1,] 0.7069563 0.01455131 0.7069515 0.6797742 0.7359784
     ## pv
     ##          0     1
-    ## [1,] 0.309 0.691
+    ## [1,] 0.295 0.705
     ## fd
-    ##            mean         sd        50%       2.5%      97.5%
-    ## [1,] -0.1175028 0.01210207 -0.1173469 -0.1415988 -0.0949398
+    ##            mean         sd        50%       2.5%       97.5%
+    ## [1,] -0.1176876 0.01202535 -0.1177123 -0.1416701 -0.09455958
 
 
 

@@ -308,12 +308,12 @@
 \contentsline {paragraph}{See also}{200}{paragraph*.140}
 \contentsline {subsubsection}{zelig-oprobitbayes}{200}{subsubsection*.141}
 \contentsline {paragraph}{Syntax}{200}{paragraph*.142}
-\contentsline {paragraph}{Additional Inputs}{200}{paragraph*.143}
+\contentsline {paragraph}{Additional Inputs}{201}{paragraph*.143}
 \contentsline {paragraph}{Examples}{201}{paragraph*.144}
 \contentsline {subparagraph}{Basic Example}{201}{subparagraph*.145}
 \contentsline {subparagraph}{Simulating First Differences}{202}{subparagraph*.146}
 \contentsline {paragraph}{Model}{203}{paragraph*.147}
-\contentsline {paragraph}{Quantities of Interest}{203}{paragraph*.148}
+\contentsline {paragraph}{Quantities of Interest}{204}{paragraph*.148}
 \contentsline {paragraph}{Output Values}{204}{paragraph*.149}
 \contentsline {paragraph}{See also}{205}{paragraph*.150}
 \contentsline {subsubsection}{zelig-poissonbayes}{205}{subsubsection*.151}
@@ -321,16 +321,16 @@
 \contentsline {paragraph}{Additional Inputs}{205}{paragraph*.153}
 \contentsline {paragraph}{Examples}{206}{paragraph*.154}
 \contentsline {subparagraph}{Basic Example}{206}{subparagraph*.155}
-\contentsline {subparagraph}{Simulating First Differences}{206}{subparagraph*.156}
+\contentsline {subparagraph}{Simulating First Differences}{207}{subparagraph*.156}
 \contentsline {paragraph}{Model}{207}{paragraph*.157}
 \contentsline {paragraph}{Quantities of Interest}{207}{paragraph*.158}
 \contentsline {paragraph}{Output Values}{208}{paragraph*.159}
 \contentsline {paragraph}{See also}{208}{paragraph*.160}
-\contentsline {subsubsection}{zelig-probitbayes}{208}{subsubsection*.161}
-\contentsline {paragraph}{Syntax}{208}{paragraph*.162}
+\contentsline {subsubsection}{zelig-probitbayes}{209}{subsubsection*.161}
+\contentsline {paragraph}{Syntax}{209}{paragraph*.162}
 \contentsline {paragraph}{Additional Inputs}{209}{paragraph*.163}
-\contentsline {paragraph}{Examples}{209}{paragraph*.164}
-\contentsline {subparagraph}{Basic Example}{209}{subparagraph*.165}
+\contentsline {paragraph}{Examples}{210}{paragraph*.164}
+\contentsline {subparagraph}{Basic Example}{210}{subparagraph*.165}
 \contentsline {subparagraph}{Simulating First Differences}{210}{subparagraph*.166}
 \contentsline {paragraph}{Model}{210}{paragraph*.167}
 \contentsline {paragraph}{Quantities of Interest}{211}{paragraph*.168}
@@ -338,7 +338,7 @@
 \contentsline {paragraph}{See also}{212}{paragraph*.170}
 \contentsline {subsubsection}{zelig-tobitbayes}{212}{subsubsection*.171}
 \contentsline {paragraph}{Syntax}{212}{paragraph*.172}
-\contentsline {paragraph}{Inputs}{212}{paragraph*.173}
+\contentsline {paragraph}{Inputs}{213}{paragraph*.173}
 \contentsline {paragraph}{Additional Inputs}{213}{paragraph*.174}
 \contentsline {paragraph}{Examples}{213}{paragraph*.175}
 \contentsline {subparagraph}{Basic Example}{213}{subparagraph*.176}
@@ -350,28 +350,28 @@
 \contentsline {subsubsection}{zelig-gammagee}{216}{subsubsection*.182}
 \contentsline {paragraph}{Syntax}{216}{paragraph*.183}
 \contentsline {paragraph}{Additional Inputs}{216}{paragraph*.184}
-\contentsline {paragraph}{Examples}{216}{paragraph*.185}
-\contentsline {subparagraph}{Example with Exchangeable Dependence}{216}{subparagraph*.186}
-\contentsline {paragraph}{The Model}{218}{paragraph*.187}
+\contentsline {paragraph}{Examples}{217}{paragraph*.185}
+\contentsline {subparagraph}{Example with Exchangeable Dependence}{217}{subparagraph*.186}
+\contentsline {paragraph}{The Model}{220}{paragraph*.187}
 \contentsline {paragraph}{Quantities of Interest}{220}{paragraph*.188}
 \contentsline {paragraph}{Output Values}{221}{paragraph*.189}
 \contentsline {paragraph}{See also}{221}{paragraph*.190}
-\contentsline {subsubsection}{zelig-probitgee}{221}{subsubsection*.191}
-\contentsline {paragraph}{Syntax}{221}{paragraph*.192}
+\contentsline {subsubsection}{zelig-probitgee}{222}{subsubsection*.191}
+\contentsline {paragraph}{Syntax}{222}{paragraph*.192}
 \contentsline {paragraph}{Additional Inputs}{222}{paragraph*.193}
 \contentsline {paragraph}{Examples}{222}{paragraph*.194}
 \contentsline {subparagraph}{Example with Stationary 3 Dependence}{222}{subparagraph*.195}
 \contentsline {subparagraph}{Simulating First Differences}{223}{subparagraph*.196}
-\contentsline {subparagraph}{Example with Fixed Correlation Structure}{224}{subparagraph*.197}
+\contentsline {subparagraph}{Example with Fixed Correlation Structure}{225}{subparagraph*.197}
 \contentsline {paragraph}{The Model}{226}{paragraph*.198}
-\contentsline {paragraph}{Quantities of Interest}{226}{paragraph*.199}
+\contentsline {paragraph}{Quantities of Interest}{227}{paragraph*.199}
 \contentsline {paragraph}{Output Values}{227}{paragraph*.200}
 \contentsline {paragraph}{See also}{228}{paragraph*.201}
 \contentsline {subsubsection}{zelig-poissongee}{228}{subsubsection*.202}
 \contentsline {paragraph}{Syntax}{228}{paragraph*.203}
-\contentsline {paragraph}{Additional Inputs}{228}{paragraph*.204}
-\contentsline {paragraph}{Examples}{228}{paragraph*.205}
-\contentsline {subparagraph}{Example with Exchangeable Dependence}{228}{subparagraph*.206}
+\contentsline {paragraph}{Additional Inputs}{229}{paragraph*.204}
+\contentsline {paragraph}{Examples}{229}{paragraph*.205}
+\contentsline {subparagraph}{Example with Exchangeable Dependence}{229}{subparagraph*.206}
 \contentsline {paragraph}{The Model}{230}{paragraph*.207}
 \contentsline {paragraph}{Quantities of Interest}{232}{paragraph*.208}
 \contentsline {paragraph}{Output Values}{232}{paragraph*.209}

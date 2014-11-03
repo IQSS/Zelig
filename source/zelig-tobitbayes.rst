@@ -3,6 +3,8 @@
 zelig-tobitbayes
 ~~~~~~
 
+Bayesian Tobit Regression
+
 Bayesian tobit regression estimates a linear regression model with a
 censored dependent variable using a Gibbs sampler. The dependent
 variable may be censored from below and/or from above. For other linear

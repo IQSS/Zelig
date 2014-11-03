@@ -3,6 +3,8 @@
 zelig-gammagee
 ~~~~~~
 
+Generalized Estimating Equation for Gamma Regression
+
 The GEE gamma is similar to standard gamma regression (appropriate when
 you have an uncensored, positive-valued, continuous dependent variable
 such as the time until a parliamentary cabinet falls). Unlike in gamma
@@ -202,22 +204,22 @@ Simulate quantities of interest
     ##  -----
     ## ev
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 14.44855 1.106705 14.34894 12.45345 16.79042
+    ## [1,] 14.52701 1.135796 14.46841 12.52479 16.93073
     ## pv
     ##          mean       sd      50%       2.5%    97.5%
-    ## [1,] 14.58999 18.61796 7.400069 0.04056687 66.71991
+    ## [1,] 14.46139 18.80529 7.980534 0.07422578 69.41165
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##          mean       sd     50%    2.5%    97.5%
-    ## [1,] 19.14387 1.074071 19.1044 17.1316 21.58457
+    ##          mean       sd    50%     2.5%    97.5%
+    ## [1,] 19.18129 1.125101 19.104 17.15803 21.56179
     ## pv
-    ##          mean       sd      50%      2.5%    97.5%
-    ## [1,] 19.69058 25.09517 10.78035 0.0497614 85.65704
+    ##          mean       sd      50%       2.5%    97.5%
+    ## [1,] 19.77418 25.79127 10.28122 0.07512259 95.45174
     ## fd
-    ##          mean       sd     50%     2.5%   97.5%
-    ## [1,] 4.695313 1.529355 4.70746 1.523622 7.75042
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 4.654282 1.608944 4.579684 1.484912 7.880554
 
 
 

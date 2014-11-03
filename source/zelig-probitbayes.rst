@@ -3,6 +3,8 @@
 zelig-probitbayes
 ~~~~~~
 
+Bayesian Probit Regression
+
 Use the probit regression model for model binary dependent variables
 specified as a function of a set of explanatory variables. The model is
 estimated using a Gibbs sampler. For other models suitable for binary

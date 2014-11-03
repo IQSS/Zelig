@@ -3,6 +3,8 @@
 zelig-factorbayes
 ~~~~~~
 
+Bayesian Factor Analysis
+
 Given some unobserved explanatory variables and observed dependent
 variables, the Normal theory factor analysis model estimates the latent
 factors. The model is implemented using a Markov Chain Monte Carlo

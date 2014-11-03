@@ -3,6 +3,8 @@
 zelig-oprobitbayes
 ~~~~~~
 
+Bayesian Ordered Probit Regression
+
 Use the ordinal probit regression model if your dependent variables are
 ordered and categorical. They may take either integer values or
 character strings. The model is estimated using a Gibbs sampler with

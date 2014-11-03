@@ -3,6 +3,8 @@
 zelig-mlogitbayes
 ~~~~~
 
+Bayesian Multinomial Logistic Regression
+
 Use Bayesian multinomial logistic regression to model unordered
 categorical variables. The dependent variable may be in the format of
 either character strings or integer values. The model is estimated via a
@@ -203,7 +205,7 @@ given ``x.out``.
     ## pv
     ## qi
     ##      1      2      3 
-    ## 0.5580 0.2089 0.2331
+    ## 0.5649 0.2082 0.2269
 
 
 
@@ -239,7 +241,7 @@ values.
     ## pv
     ## qi
     ##      1      2      3 
-    ## 0.7210 0.1235 0.1555 
+    ## 0.7168 0.1230 0.1602 
     ## 
     ##  sim x1 :
     ##  -----
@@ -251,7 +253,7 @@ values.
     ## pv
     ## qi
     ##      1      2      3 
-    ## 0.4047 0.3051 0.2902 
+    ## 0.4066 0.3002 0.2932 
     ## fd
     ##              mean         sd        50%        2.5%      97.5%
     ## P(Y=1) -0.3128754 0.03459857 -0.3128662 -0.38111485 -0.2442630

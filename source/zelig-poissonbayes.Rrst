@@ -3,6 +3,8 @@
 zelig-poissonbayes
 ~~~~~~
 
+Bayesian Poisson Regression
+
 Use the Poisson regression model if the observations of your dependent
 variable represents the number of independent events that occur during
 a fixed period of time. The model is fit using a random walk
