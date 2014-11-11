@@ -52,3 +52,33 @@ znegbin$methods(
   }
 )
 
+znegbin$methods(
+  test = function(b0 = -1, b1 = 1, nsim = 1000, minx = -1, maxx = 1) {
+    x.init <- mcunit.init(nsim, minx, maxx)
+    
+    b0 <- b0
+    b1 <- b1 
+    sd <- 1
+    
+    mu.sim <- exp(b1 * x.init[,1] + b0)
+    y.sim <- rnbinom(nsim, 1, mu = mu.sim)
+    y.true <- exp(b1 * x.init[,2] + b0)
+    data <- cbind(x.init, y.sim, y.true)
+    
+    z <- znegbin$new()
+    callSuper(z, data)
+    
+  }
+)
+
+
+
+
+
+# 
+# n<-6;p<-.3;
+# mu.sim <- exp(b1[i]* x.sim + b0[i])
+# zeta.sim<-rgamma(nsim , n, p/(1-p))
+# lambda.tilde.sim <- mu.sim * zeta.sim
+# data$y.sim.negbinom <- rpois(nsim,lambda.tilde.sim)
+# data$y.hat.negbinom <- exp(b1[i]* x.sim + b0[i]) * zeta.sim

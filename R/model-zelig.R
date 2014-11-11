@@ -47,7 +47,10 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         json = "ANY", # JSON export
                                         ljson = "ANY",
                                         outcome = "ANY",
-                                        explanatory = "ANY"))
+                                        explanatory = "ANY",
+                                        
+                                        #Unit Testing
+                                        mcunit.test = "ANY"))
 
 z$methods(
   initialize = function() { 
@@ -364,6 +367,44 @@ z$methods(
     .self$ljson <- .self$json
     .self$json <- jsonlite::toJSON(json, pretty = TRUE)
     return(.self$json)
+  }
+)
+
+z$methods(
+  mcunit.init = function(nsim, minx, maxx) {
+    cat("\nRunning Monte Carlo Unit Test...", sep="")
+    x.sim <- runif(nsim, minx, maxx)
+    x.seq <- seq(from = minx, to = maxx, length = nsim)
+    return(data.frame(cbind(x.sim, x.seq)))
+  }
+)
+
+z$methods(
+  test = function(z, data) {
+    z$zelig(y.sim ~ x.sim, data = data)
+    z$setrange(x.sim = data$x.seq)    
+    z$sim(num = nrow(data))
+    
+    ev <- c()
+    for(j in 1:nrow(data)){
+      foo <- lapply(z$sim.out$range[j][[1]]$ev, mean)
+      ev <- append(ev, foo[[1]])  
+    }
+    
+    # Kolmogorov–Smirnov test
+    kstest <- ks.test(ev, data$y.true)
+    .self$mcunit.test <- if(kstest$p.value > .1) 'PASS' else 'FAIL'
+    if(kstest$p.value < .05){
+      cat("\nFailed K-S Test.", sep="")
+    } else{cat("\nPassed K-S Test.")}
+    
+    
+    output = list(
+      kstest = kstest,
+      data = data
+    )
+    
+    return(output)
   }
 )
 

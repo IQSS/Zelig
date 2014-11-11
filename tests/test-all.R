@@ -1,3 +1,3 @@
 library(testthat)
-test_check("Zelig5")
+test_check("Zelig")
 
