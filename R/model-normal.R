@@ -16,6 +16,7 @@ znormal$methods(
     .self$description <- "Normal Regression for Continuous Dependent Variables"
     # JSON
     .self$outcome <- "continuous"
+    .self$wrapper <- "normal"
   }
 )
 

@@ -17,6 +17,7 @@ zpoisson$methods(
     .self$description <- "Poisson Regression for Event Count Dependent Variables"
     # JSON
     .self$outcome <- "discrete"
+    .self$wrapper <- "poisson"
   }
 )
 

@@ -1,95 +1,20 @@
-#' @include utils.R
-#' @include model-zelig.R
-#' @include model-tobit.R
-#' @include model-glm.R
-#' @include model-binchoice.R
-#' @include model-probit.R
-#' @include model-poisson.R
-#' @include model-normal.R
-#' @include model-negbinom.R
-#' @include model-ls.R
-#' @include model-lognorm.R
-#' @include model-logit.R
-#' @include model-gamma.R
-#' @include model-exp.R
-#' @include model-relogit.R
-#' @include model-quantile.R
-#' @include model-gee.R
-#' @include model-binchoice-gee.R
-#' @include model-logit-gee.R
-#' @include model-probit-gee.R
-#' @include model-gamma-gee.R
-#' @include model-normal-gee.R
-#' @include model-poisson-gee.R
-#' @include model-bayes.R
-#' @include model-factor-bayes.R
-#' @include model-logit-bayes.R
-#' @include model-mlogit-bayes.R
-#' @include model-normal-bayes.R
-#' @include model-oprobit-bayes.R
-#' @include model-poisson-bayes.R
-#' @include model-probit-bayes.R
-#' @include model-tobit-bayes.R
-#' @include model-weibull.R
-
 zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
-#   .Deprecated("\nz$new() \nz$zelig(...)")
-  # Begin: Zelig 5 models
-  if (model == "ls")
-    z5 <- zls$new()
-  else if (model == "logit")
-    z5 <- zlogit$new()
-  else if (model == "probit")
-    z5 <- zprobit$new()
-  else if (model == "gamma")
-    z5 <- zgamma$new()
-  else if (model == "exp")
-    z5 <- zexp$new()
-  else if (model == "negbin")
-    z5 <- znegbin$new()
-  else if (model == "normal")
-    z5 <- znormal$new()
-  else if (model == "poisson")
-    z5 <- zpoisson$new()
-  else if (model == "expnorm")
-    z5 <- zexpnorm$new()
-  else if (model == "lognorm")
-    z5 <- zlognorm$new()
-  else if (model == "tobit")
-    z5 <- ztobit$new()
-  else if (model == "relogit")
-    z5 <- zrelogit$new()
-  else if (model == "quantile")
-    z5 <- zquantile$new()
-  else if (model == "logit.gee")
-    z5 <- zlogitgee$new()
-  else if (model == "probit.gee")
-    z5 <- zprobitgee$new()
-  else if (model == "gamma.gee")
-    z5 <- zgammagee$new()
-  else if (model == "normal.gee")
-    z5 <- znormalgee$new()
-  else if (model == "poisson.gee")
-    z5 <- zpoissongee$new()
-  else if (model == "factor.bayes")
-    z5 <- zfactorbayes$new()
-  else if (model == "logit.bayes")
-    z5 <- zlogitbayes$new()
-  else if (model == "mlogit.bayes")
-    z5 <- zmlogitbayes$new()
-  else if (model == "normal.bayes")
-    z5 <- znormalbayes$new()
-  else if (model == "oprobit.bayes")
-    z5 <- zoprobitbayes$new()
-  else if (model == "poisson.bayes")
-    z5 <- zpoissonbayes$new()
-  else if (model == "probit.bayes")
-    z5 <- zprobitbayes$new()
-  else if (model == "tobit.bayes")
-    z5 <- ztobitbayes$new()
-  else if (model == "weibull")
-    z5 <- zweibull$new()
-  else
+  #   .Deprecated("\nz$new() \nz$zelig(...)")
+  zeligmodels <- system.file(file.path("JSON", "zelig5models.json"), package = "Zelig")
+  models <- jsonlite::fromJSON(txt = readLines(zeligmodels))$zelig5models
+  
+  zeligchoicemodels <- system.file(file.path("JSON", "zelig5choicemodels.json"), package = "ZeligChoice")
+  if (zeligchoicemodels != "")
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligchoicemodels))$zelig5choicemodels)
+  
+  models4 <- list()
+  for (i in seq(models)) {
+    models4[[models[[i]]$wrapper]] <- names(models)[i]
+  }
+  
+  model.init <- paste0("z", models4[[model]], "$new()")
+  z5 <- try(eval(parse(text = model.init)), silent = TRUE)
+  if ("try-error" %in% class(z5))
     stop("Model '", model,"' not found")
   ## End: Zelig 5 models (more to be linked from, e.g, Zelig5Choice)
   mf <- match.call()
@@ -98,7 +23,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   mf[[1]] <- quote(z5$zelig)
   mf <- try(eval(mf, environment()), silent = TRUE)
   if ("try-error" %in% class(mf))
-    z5$zelig(formula = formula, data = data, ...)
+    z5$zelig(formula = formula, data = data, ..., by = by)
   if (cite)
     z5$cite()
   return(z5)

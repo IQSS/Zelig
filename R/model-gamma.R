@@ -15,6 +15,7 @@ zgamma$methods(
     .self$description <- "Gamma Regression for Continuous, Positive Dependent Variables"
     # JSON
     .self$outcome <- "continous"
+    .self$wrapper <- "gamma"
   }
 )
 

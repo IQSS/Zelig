@@ -18,5 +18,6 @@ zlogitbayes$methods(
     .self$description = "Bayesian Logistic Regression for Dichotomous Dependent Variables"
     .self$fn <- quote(MCMCpack::MCMClogit)
     # JSON from parent
+    .self$wrapper <- "logit.bayes"
   }
 )

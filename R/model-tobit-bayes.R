@@ -15,6 +15,7 @@ ztobitbayes$methods(
     .self$description = "Bayesian Tobit Regression for a Censored Dependent Variable"
     .self$fn <- quote(MCMCpack::MCMCtobit)
     # JSON from parent
+    .self$wrapper <- "tobit.bayes"
   }
 )
 

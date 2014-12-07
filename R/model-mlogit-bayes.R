@@ -14,6 +14,7 @@ zmlogitbayes$methods(
     .self$description = "Bayesian Multinomial Logistic Regression for Dependent Variables with Unordered Categorical Values"
     .self$fn <- quote(MCMCpack::MCMCmnl)
     # JSON from parent
+    .self$wrapper <- "mlogit.bayes"
   }
 )
 

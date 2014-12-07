@@ -12,6 +12,7 @@ zfactorbayes$methods(
     .self$description = "Bayesian Factor Analysis"
     .self$fn <- quote(MCMCpack::MCMCfactanal)
     # JSON from parent
+    .self$wrapper <- "factor.bayes"
   }
 )
 

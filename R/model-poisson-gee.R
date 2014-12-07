@@ -14,6 +14,7 @@ zpoissongee$methods(
     .self$description = "General Estimating Equation for Poisson Regression"
     .self$fn <- quote(geepack::geeglm)
     # JSON from parent
+    .self$wrapper <- "poisson.gee"
   }
 )
 

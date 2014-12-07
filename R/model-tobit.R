@@ -14,6 +14,7 @@ ztobit$methods(
     .self$fn <- quote(AER::tobit)
     # JSON
     .self$outcome <- "continous"
+    .self$wrapper <- "tobit"
   }
 )
 

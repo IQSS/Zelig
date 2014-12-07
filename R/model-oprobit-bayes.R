@@ -14,6 +14,7 @@ zoprobitbayes$methods(
     .self$description = "Bayesian Probit Regression for Dichotomous Dependent Variables"
     .self$fn <- quote(MCMCpack::MCMCoprobit)
     # JSON from parent
+    .self$wrapper <- "oprobit.bayes"
   }
 )
 

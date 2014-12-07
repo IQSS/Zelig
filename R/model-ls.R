@@ -11,6 +11,7 @@ zls$methods(
     .self$fn <- quote(stats::lm)
     # JSON
     .self$outcome <- "continous"
+    .self$wrapper <- "ls"
   }
 )
 

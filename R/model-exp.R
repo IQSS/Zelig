@@ -15,6 +15,7 @@ zexp$methods(
     .self$linkinv <- survreg.distributions[["exponential"]]$itrans
     # JSON
     .self$outcome <- "continous"
+    .self$wrapper <- "exp"
   }
 )
 

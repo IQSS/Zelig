@@ -47,13 +47,14 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         json = "ANY", # JSON export
                                         ljson = "ANY",
                                         outcome = "ANY",
+                                        wrapper = "character",
                                         explanatory = "ANY",
                                         
                                         #Unit Testing
                                         mcunit.test = "ANY"))
 
 z$methods(
-  initialize = function() { 
+  initialize = function() {
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://zeligproject.org/"
@@ -75,6 +76,7 @@ z$methods(
                            "ordinal",
                            "binary")
     .self$outcome <- ""
+    .self$wrapper <- "wrapper"
   }
 )
 
@@ -98,32 +100,14 @@ z$methods(
     .self$formula <- formula
     .self$by <- by
     # MI datasets from Amelia
-#     if(class(data)=="amelia"){
-#       if(data$m>1){
-#         .self$mi <- TRUE
-#         imputationNumber <- rep(1,nrow(data$imputations[[1]]))
-#         temp<-as.data.frame(cbind(imputationNumber, data$imputations[[1]]))  # check exactly when type cast is necessary
-#         names(temp)[1]<- "imputationNumber"
-#         for(i in 2:data$m){
-#           imputationNumber<- rep(i,nrow(data$imputations[[i]]))
-#           temp<-rbind(temp, as.data.frame(cbind(imputationNumber,data$imputations[[i]])))
-#         }
-#         .self$by <- c("imputationNumber", by)  # CC: "by" and Amelia.
-#         .self$data <- temp
-#       }else{
-#         .self$data <- as.data.frame(data$imputations[[1]])
-#       }
-#     }else{
-#       .self$data <- data
-#     }
     # CC: can be rewritten as:
-    if(class(data)=="amelia"){
+    if(class(data) == "amelia"){
       idata <- data$imputations
       .self$data <- rbind_all(lapply(seq(length(idata)),
                                 function(imputationNumber)
                                   cbind(imputationNumber, idata[[imputationNumber]])))
       .self$by <- c("imputationNumber", by)
-    }else{
+    } else {
       .self$data <- data
     }
     .self$model.call[[1]] <- .self$fn
@@ -149,8 +133,6 @@ z$methods(
       do(mm = model.matrix(f, reduce(dataset = ., s, 
                                      formula = .self$formula,
                                      data = .self$data)))
-#       do(mm = model.matrix(f, reduce(dataset = ., s, 
-#                                      model = .self$zelig.out$z.out[[1]])))
     return(update)
   }
 )
@@ -275,7 +257,7 @@ z$methods(
     else if (length(.self$setx.out) == 0) {
       summ <- .self$zelig.out %>%
         do(summ = {cat("Model: \n")
-#                    print(unlist(.[.self$by]))
+                   # print(unlist(.[.self$by]))
                    print(.[.self$by])
                    print(.$z.out)})
       cat("Next step: Use 'setx' method\n")
@@ -362,6 +344,7 @@ z$methods(
     .self$json$"outcome" <- list(modelingType = .self$outcome)
     .self$json$"explanatory" <- list(modelingType = .self$explanatory)
     .self$json$"vignette.url" <- .self$vignette.url
+    .self$json$"wrapper" <- .self$wrapper
     .self$json$tree <- c(class(.self)[1],
                          head(.self$.refClassDef@refSuperClasses, -1))
     .self$ljson <- .self$json
@@ -381,9 +364,9 @@ z$methods(
 
 z$methods(
   test = function(z, data) {
-    z$zelig(y.sim ~ x.sim, data = data)
-    z$setrange(x.sim = data$x.seq)    
-    z$sim(num = nrow(data))
+    .self$zelig(y.sim ~ x.sim, data = data)
+    .self$setrange(x.sim = data$x.seq)    
+    .self$sim(num = nrow(data))
     
     ev <- c()
     for(j in 1:nrow(data)){
@@ -394,10 +377,11 @@ z$methods(
     # Kolmogorov–Smirnov test
     kstest <- ks.test(ev, data$y.true)
     .self$mcunit.test <- if(kstest$p.value > .1) 'PASS' else 'FAIL'
-    if(kstest$p.value < .05){
-      cat("\nFailed K-S Test.", sep="")
-    } else{cat("\nPassed K-S Test.")}
-    
+    if(kstest$p.value < .05) {
+      cat("\nFailed K-S Test.", sep = "")
+    } else {
+      cat("\nPassed K-S Test.")
+    }
     
     output = list(
       kstest = kstest,

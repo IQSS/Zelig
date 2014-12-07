@@ -19,5 +19,6 @@ zpoissonbayes$methods(
     .self$description = "Bayesian Poisson Regression"
     .self$fn <- quote(MCMCpack::MCMCpoisson)
     # JSON from parent
+    .self$wrapper <- "poisson.bayes"
   }
 )

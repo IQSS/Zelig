@@ -24,6 +24,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-ls.html"
             ],
+            "wrapper": [
+                "ls"
+            ],
             "tree": [
                 "Zelig-ls",
                 "Zelig"
@@ -52,6 +55,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-logit.html"
+            ],
+            "wrapper": [
+                "logit"
             ],
             "tree": [
                 "Zelig-logit",
@@ -84,6 +90,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-probit.html"
             ],
+            "wrapper": [
+                "probit"
+            ],
             "tree": [
                 "Zelig-probit",
                 "Zelig-binchoice",
@@ -115,6 +124,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-poisson.html"
             ],
+            "wrapper": [
+                "poisson"
+            ],
             "tree": [
                 "Zelig-poisson",
                 "Zelig-glm",
@@ -144,6 +156,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-normal.html"
+            ],
+            "wrapper": [
+                "normal"
             ],
             "tree": [
                 "Zelig-normal",
@@ -175,6 +190,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-gamma.html"
             ],
+            "wrapper": [
+                "gamma"
+            ],
             "tree": [
                 "Zelig-gamma",
                 "Zelig-glm",
@@ -205,6 +223,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-negbin.html"
             ],
+            "wrapper": [
+                "negbin"
+            ],
             "tree": [
                 "Zelig-negbin",
                 "Zelig"
@@ -233,6 +254,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-exp.html"
+            ],
+            "wrapper": [
+                "exp"
             ],
             "tree": [
                 "Zelig-exp",
@@ -263,6 +287,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-lognorm.html"
             ],
+            "wrapper": [
+                "lognorm"
+            ],
             "tree": [
                 "Zelig-lognorm",
                 "Zelig"
@@ -291,6 +318,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-tobit.html"
+            ],
+            "wrapper": [
+                "tobit"
             ],
             "tree": [
                 "Zelig-tobit",
@@ -321,6 +351,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-quantile.html"
             ],
+            "wrapper": [
+                "wrapper"
+            ],
             "tree": [
                 "Zelig-quantile",
                 "Zelig"
@@ -349,6 +382,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-logit-gee.html"
+            ],
+            "wrapper": [
+                "wrapper"
             ],
             "tree": [
                 "Zelig-logit-gee",
@@ -383,6 +419,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-probit-gee.html"
             ],
+            "wrapper": [
+                "probit.gee"
+            ],
             "tree": [
                 "Zelig-probit-gee",
                 "Zelig-binchoice-gee",
@@ -394,7 +433,7 @@
         },
         "gammagee": {
             "name": [
-                "zgammagee"
+                "gammagee"
             ],
             "description": [
                 "General Estimating Equation for Gamma Regression"
@@ -415,6 +454,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-gamma-gee.html"
+            ],
+            "wrapper": [
+                "gamma.gee"
             ],
             "tree": [
                 "Zelig-gamma-gee",
@@ -448,6 +490,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-normal-gee.html"
             ],
+            "wrapper": [
+                "wrapper"
+            ],
             "tree": [
                 "Zelig-normal-gee",
                 "Zelig-gee",
@@ -479,6 +524,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-poisson-gee.html"
+            ],
+            "wrapper": [
+                "poisson.gee"
             ],
             "tree": [
                 "Zelig-poisson-gee",
@@ -512,6 +560,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-factor-bayes.html"
             ],
+            "wrapper": [
+                "factor.bayes"
+            ],
             "tree": [
                 "Zelig-factor-bayes",
                 "Zelig"
@@ -540,6 +591,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-logit-bayes.html"
+            ],
+            "wrapper": [
+                "logit.bayes"
             ],
             "tree": [
                 "Zelig-logit-bayes",
@@ -574,6 +628,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-mlogit-bayes.html"
             ],
+            "wrapper": [
+                "mlogit.bayes"
+            ],
             "tree": [
                 "Zelig-mlogit-bayes",
                 "Zelig-bayes",
@@ -603,6 +660,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-normal-bayes.html"
+            ],
+            "wrapper": [
+                "wrapper"
             ],
             "tree": [
                 "Zelig-normal-bayes",
@@ -636,6 +696,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-oprobit-bayes.html"
             ],
+            "wrapper": [
+                "oprobit.bayes"
+            ],
             "tree": [
                 "Zelig-oprobit-bayes",
                 "Zelig-bayes",
@@ -665,6 +728,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-poisson-bayes.html"
+            ],
+            "wrapper": [
+                "poisson.bayes"
             ],
             "tree": [
                 "Zelig-poisson-bayes",
@@ -697,6 +763,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-probit-bayes.html"
+            ],
+            "wrapper": [
+                "wrapper"
             ],
             "tree": [
                 "Zelig-probit-bayes",
@@ -731,6 +800,9 @@
             "vignette.url": [
                 "http://zeligproject.org/zelig-tobit-bayes.html"
             ],
+            "wrapper": [
+                "tobit.bayes"
+            ],
             "tree": [
                 "Zelig-tobit-bayes",
                 "Zelig-bayes",
@@ -761,6 +833,9 @@
             },
             "vignette.url": [
                 "http://zeligproject.org/zelig-weibull.html"
+            ],
+            "wrapper": [
+                "weibull"
             ],
             "tree": [
                 "Zelig-weibull",

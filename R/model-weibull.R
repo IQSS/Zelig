@@ -16,6 +16,7 @@ zweibull$methods(
     .self$linkinv <- survreg.distributions[["weibull"]]$itrans
     # JSON
     .self$outcome <- "bounded"
+    .self$wrapper <- "weibull"
   }
 )
 

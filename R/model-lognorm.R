@@ -14,6 +14,7 @@ zlognorm$methods(
     .self$linkinv <- survreg.distributions[["lognormal"]]$itrans
     # JSON
     .self$outcome <- "discrete"
+    .self$wrapper <- "lognorm"
   }
 )
 

@@ -15,6 +15,7 @@ znegbin$methods(
     .self$description <- "Negative Binomial Regression for Event Count Dependent Variables"
     # JSON
     .self$outcome <- "discrete"
+    .self$wrapper <- "negbin"
   }
 )
 

@@ -16,6 +16,7 @@ zrelogit$methods(
     .self$fn <- quote(relogit)
     .self$family <- "binomial"
     .self$link <- "logit"
+    .self$wrapper <- "relogit"
   }
 )
 
