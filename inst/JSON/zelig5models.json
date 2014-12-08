@@ -28,8 +28,7 @@
                 "ls"
             ],
             "tree": [
-                "Zelig-ls",
-                "Zelig"
+                "Zelig-ls"
             ]
         },
         "logit": {
@@ -62,8 +61,7 @@
             "tree": [
                 "Zelig-logit",
                 "Zelig-binchoice",
-                "Zelig-glm",
-                "Zelig"
+                "Zelig-glm"
             ]
         },
         "probit": {
@@ -96,8 +94,7 @@
             "tree": [
                 "Zelig-probit",
                 "Zelig-binchoice",
-                "Zelig-glm",
-                "Zelig"
+                "Zelig-glm"
             ]
         },
         "poisson": {
@@ -129,8 +126,7 @@
             ],
             "tree": [
                 "Zelig-poisson",
-                "Zelig-glm",
-                "Zelig"
+                "Zelig-glm"
             ]
         },
         "normal": {
@@ -162,8 +158,7 @@
             ],
             "tree": [
                 "Zelig-normal",
-                "Zelig-glm",
-                "Zelig"
+                "Zelig-glm"
             ]
         },
         "gamma": {
@@ -195,8 +190,7 @@
             ],
             "tree": [
                 "Zelig-gamma",
-                "Zelig-glm",
-                "Zelig"
+                "Zelig-glm"
             ]
         },
         "negbinom": {
@@ -227,8 +221,7 @@
                 "negbin"
             ],
             "tree": [
-                "Zelig-negbin",
-                "Zelig"
+                "Zelig-negbin"
             ]
         },
         "exp": {
@@ -259,8 +252,7 @@
                 "exp"
             ],
             "tree": [
-                "Zelig-exp",
-                "Zelig"
+                "Zelig-exp"
             ]
         },
         "lognorm": {
@@ -291,8 +283,7 @@
                 "lognorm"
             ],
             "tree": [
-                "Zelig-lognorm",
-                "Zelig"
+                "Zelig-lognorm"
             ]
         },
         "tobit": {
@@ -323,8 +314,7 @@
                 "tobit"
             ],
             "tree": [
-                "Zelig-tobit",
-                "Zelig"
+                "Zelig-tobit"
             ]
         },
         "quantile": {
@@ -355,8 +345,7 @@
                 "wrapper"
             ],
             "tree": [
-                "Zelig-quantile",
-                "Zelig"
+                "Zelig-quantile"
             ]
         },
         "logitgee": {
@@ -390,9 +379,7 @@
                 "Zelig-logit-gee",
                 "Zelig-binchoice-gee",
                 "Zelig-gee",
-                "Zelig-binchoice",
-                "Zelig",
-                "envRefClass"
+                "Zelig-binchoice"
             ]
         },
         "probitgee": {
@@ -426,9 +413,7 @@
                 "Zelig-probit-gee",
                 "Zelig-binchoice-gee",
                 "Zelig-gee",
-                "Zelig-binchoice",
-                "Zelig",
-                "envRefClass"
+                "Zelig-binchoice"
             ]
         },
         "gammagee": {
@@ -461,9 +446,7 @@
             "tree": [
                 "Zelig-gamma-gee",
                 "Zelig-gee",
-                "Zelig-gamma",
-                "Zelig",
-                "envRefClass"
+                "Zelig-gamma"
             ]
         },
         "normalgee": {
@@ -496,9 +479,7 @@
             "tree": [
                 "Zelig-normal-gee",
                 "Zelig-gee",
-                "Zelig-normal",
-                "Zelig",
-                "envRefClass"
+                "Zelig-normal"
             ]
         },
         "poissongee": {
@@ -531,9 +512,7 @@
             "tree": [
                 "Zelig-poisson-gee",
                 "Zelig-gee",
-                "Zelig-poisson",
-                "Zelig",
-                "envRefClass"
+                "Zelig-poisson"
             ]
         },
         "factorbayes": {
@@ -564,8 +543,7 @@
                 "factor.bayes"
             ],
             "tree": [
-                "Zelig-factor-bayes",
-                "Zelig"
+                "Zelig-factor-bayes"
             ]
         },
         "logitbayes": {
@@ -598,10 +576,7 @@
             "tree": [
                 "Zelig-logit-bayes",
                 "Zelig-bayes",
-                "Zelig-logit",
-                "Zelig",
-                "envRefClass",
-                "Zelig-binchoice"
+                "Zelig-logit"
             ]
         },
         "mlogitbayes": {
@@ -633,8 +608,7 @@
             ],
             "tree": [
                 "Zelig-mlogit-bayes",
-                "Zelig-bayes",
-                "Zelig"
+                "Zelig-bayes"
             ]
         },
         "normalbayes": {
@@ -667,9 +641,7 @@
             "tree": [
                 "Zelig-normal-bayes",
                 "Zelig-bayes",
-                "Zelig-normal",
-                "Zelig",
-                "envRefClass"
+                "Zelig-normal"
             ]
         },
         "oprobitbayes": {
@@ -701,8 +673,7 @@
             ],
             "tree": [
                 "Zelig-oprobit-bayes",
-                "Zelig-bayes",
-                "Zelig"
+                "Zelig-bayes"
             ]
         },
         "poissonbayes": {
@@ -735,9 +706,7 @@
             "tree": [
                 "Zelig-poisson-bayes",
                 "Zelig-bayes",
-                "Zelig-poisson",
-                "Zelig",
-                "envRefClass"
+                "Zelig-poisson"
             ]
         },
         "probitbayes": {
@@ -770,10 +739,7 @@
             "tree": [
                 "Zelig-probit-bayes",
                 "Zelig-bayes",
-                "Zelig-probit",
-                "Zelig",
-                "envRefClass",
-                "Zelig-binchoice"
+                "Zelig-probit"
             ]
         },
         "tobitbayes": {
@@ -806,8 +772,7 @@
             "tree": [
                 "Zelig-tobit-bayes",
                 "Zelig-bayes",
-                "Zelig-tobit",
-                "Zelig"
+                "Zelig-tobit"
             ]
         },
         "weibull": {
@@ -838,8 +803,7 @@
                 "weibull"
             ],
             "tree": [
-                "Zelig-weibull",
-                "Zelig"
+                "Zelig-weibull"
             ]
         }
     }

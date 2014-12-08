@@ -101,11 +101,11 @@ z$methods(
     .self$by <- by
     # MI datasets from Amelia
     # CC: can be rewritten as:
-    if(class(data) == "amelia"){
+    if (class(data) == "amelia"){
       idata <- data$imputations
       .self$data <- rbind_all(lapply(seq(length(idata)),
-                                function(imputationNumber)
-                                  cbind(imputationNumber, idata[[imputationNumber]])))
+                                     function(imputationNumber)
+                                       cbind(imputationNumber, idata[[imputationNumber]])))
       .self$by <- c("imputationNumber", by)
     } else {
       .self$data <- data
@@ -345,8 +345,12 @@ z$methods(
     .self$json$"explanatory" <- list(modelingType = .self$explanatory)
     .self$json$"vignette.url" <- .self$vignette.url
     .self$json$"wrapper" <- .self$wrapper
-    .self$json$tree <- c(class(.self)[1],
-                         head(.self$.refClassDef@refSuperClasses, -1))
+#     tree <- c(class(.self)[1], .self$.refClassDef@refSuperClasses)
+#     tree <- tree[tree != "envRefClass"]
+#     if (tail(tree, 1) != "Zelig")
+#       tree <- c(tree, "Zelig")
+    tree <- c(class(.self)[1], .self$.refClassDef@refSuperClasses)
+    .self$json$tree <- head(tree, match("Zelig", tree) - 1)
     .self$ljson <- .self$json
     .self$json <- jsonlite::toJSON(json, pretty = TRUE)
     return(.self$json)
