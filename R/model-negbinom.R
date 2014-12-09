@@ -1,14 +1,14 @@
 #' @include model-zelig.R
 znegbin <- setRefClass("Zelig-negbin",
-                         contains="Zelig",
-                         field=list(simalpha = "list" # ancillary parameters
+                         contains = "Zelig",
+                         field = list(simalpha = "list" # ancillary parameters
                          ))
 
 znegbin$methods(
   initialize = function() {
     callSuper()
     .self$fn <- quote(MASS::glm.nb)
-    .self$name <- "negbinom"
+    .self$name <- "negbin"
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
     .self$year <- 2008
     .self$category <- "count"

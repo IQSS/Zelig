@@ -193,9 +193,9 @@
                 "Zelig-glm"
             ]
         },
-        "negbinom": {
+        "negbin": {
             "name": [
-                "negbinom"
+                "negbin"
             ],
             "description": [
                 "Negative Binomial Regression for Event Count Dependent Variables"
