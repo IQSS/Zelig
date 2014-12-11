@@ -336,6 +336,36 @@ z$methods(
 )
 
 z$methods(
+  getcoef = function() {
+    result <- try(lapply(.self$zelig.out$z.out, coef), silent = TRUE)
+    if ("try-error" %in% class(result))
+      stop("'coef' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  } 
+)
+
+z$methods(
+  getvcov = function() {
+    result <- lapply(.self$zelig.out$z.out, vcov)
+    if ("try-error" %in% class(result))
+      stop("'vcov' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  }
+)
+
+z$methods(
+  getpredict = function() {
+    result <- lapply(.self$zelig.out$z.out, predict)
+    if ("try-error" %in% class(result))
+      stop("'predict' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  }
+)
+
+z$methods(
   toJSON = function() {
     if (!is.list(.self$json))
       .self$json <- list()
@@ -345,10 +375,6 @@ z$methods(
     .self$json$"explanatory" <- list(modelingType = .self$explanatory)
     .self$json$"vignette.url" <- .self$vignette.url
     .self$json$"wrapper" <- .self$wrapper
-#     tree <- c(class(.self)[1], .self$.refClassDef@refSuperClasses)
-#     tree <- tree[tree != "envRefClass"]
-#     if (tail(tree, 1) != "Zelig")
-#       tree <- c(tree, "Zelig")
     tree <- c(class(.self)[1], .self$.refClassDef@refSuperClasses)
     .self$json$tree <- head(tree, match("Zelig", tree) - 1)
     .self$ljson <- .self$json
@@ -407,6 +433,25 @@ setMethod("plot", "Zelig",
             x$graph()
           }
 )
+
+setMethod("vcov", "Zelig",
+          function(object, ...) {
+            object$getvcov()
+          }
+)
+
+setMethod("coef", "Zelig",
+          function(object, ...) {
+            object$getcoef()
+          }
+)
+
+setMethod("predict", "Zelig",
+          function(object, ...) {
+            object$getpredict()
+          }
+)
+
 
 #       idx <- match(names(.self$setx.labels),
 #                    names(.self$sim.out),
