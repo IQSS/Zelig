@@ -40,6 +40,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         year = "numeric",
                                         description = "character",
                                         url = "character",
+                                        url.docs = "character",
                                         category = "character",
                                         
                                         vignette.url = "character",
@@ -58,6 +59,7 @@ z$methods(
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://zeligproject.org/"
+    .self$url.docs <- "http://docs.zeligproject.org/"
     .self$setx.out <- list()
     .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
                               ev1 = "Expected Values: E(Y|X1)",
@@ -69,7 +71,7 @@ z$methods(
     .self$bsetrange <- FALSE
     .self$bsetrange1 <- FALSE
     # JSON
-    .self$vignette.url <- paste(.self$url, tolower(class(.self)[1]), ".html", sep = "")
+    .self$vignette.url <- paste(.self$url.docs, tolower(class(.self)[1]), ".html", sep = "")
     .self$explanatory <- c("continuous",
                            "discrete",
                            "nominal",

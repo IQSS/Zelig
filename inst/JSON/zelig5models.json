@@ -22,7 +22,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-ls.html"
+                "http://docs.zeligproject.org/zelig-ls.html"
             ],
             "wrapper": [
                 "ls"
@@ -53,7 +53,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-logit.html"
+                "http://docs.zeligproject.org/zelig-logit.html"
             ],
             "wrapper": [
                 "logit"
@@ -86,7 +86,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-probit.html"
+                "http://docs.zeligproject.org/zelig-probit.html"
             ],
             "wrapper": [
                 "probit"
@@ -119,7 +119,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-poisson.html"
+                "http://docs.zeligproject.org/zelig-poisson.html"
             ],
             "wrapper": [
                 "poisson"
@@ -151,7 +151,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-normal.html"
+                "http://docs.zeligproject.org/zelig-normal.html"
             ],
             "wrapper": [
                 "normal"
@@ -183,7 +183,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-gamma.html"
+                "http://docs.zeligproject.org/zelig-gamma.html"
             ],
             "wrapper": [
                 "gamma"
@@ -215,7 +215,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-negbin.html"
+                "http://docs.zeligproject.org/zelig-negbin.html"
             ],
             "wrapper": [
                 "negbin"
@@ -246,7 +246,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-exp.html"
+                "http://docs.zeligproject.org/zelig-exp.html"
             ],
             "wrapper": [
                 "exp"
@@ -277,7 +277,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-lognorm.html"
+                "http://docs.zeligproject.org/zelig-lognorm.html"
             ],
             "wrapper": [
                 "lognorm"
@@ -308,7 +308,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-tobit.html"
+                "http://docs.zeligproject.org/zelig-tobit.html"
             ],
             "wrapper": [
                 "tobit"
@@ -339,7 +339,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-quantile.html"
+                "http://docs.zeligproject.org/zelig-quantile.html"
             ],
             "wrapper": [
                 "wrapper"
@@ -370,7 +370,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-logit-gee.html"
+                "http://docs.zeligproject.org/zelig-logit-gee.html"
             ],
             "wrapper": [
                 "wrapper"
@@ -404,7 +404,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-probit-gee.html"
+                "http://docs.zeligproject.org/zelig-probit-gee.html"
             ],
             "wrapper": [
                 "probit.gee"
@@ -438,7 +438,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-gamma-gee.html"
+                "http://docs.zeligproject.org/zelig-gamma-gee.html"
             ],
             "wrapper": [
                 "gamma.gee"
@@ -471,7 +471,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-normal-gee.html"
+                "http://docs.zeligproject.org/zelig-normal-gee.html"
             ],
             "wrapper": [
                 "wrapper"
@@ -504,7 +504,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-poisson-gee.html"
+                "http://docs.zeligproject.org/zelig-poisson-gee.html"
             ],
             "wrapper": [
                 "poisson.gee"
@@ -537,7 +537,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-factor-bayes.html"
+                "http://docs.zeligproject.org/zelig-factor-bayes.html"
             ],
             "wrapper": [
                 "factor.bayes"
@@ -568,7 +568,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-logit-bayes.html"
+                "http://docs.zeligproject.org/zelig-logit-bayes.html"
             ],
             "wrapper": [
                 "logit.bayes"
@@ -601,7 +601,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-mlogit-bayes.html"
+                "http://docs.zeligproject.org/zelig-mlogit-bayes.html"
             ],
             "wrapper": [
                 "mlogit.bayes"
@@ -633,7 +633,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-normal-bayes.html"
+                "http://docs.zeligproject.org/zelig-normal-bayes.html"
             ],
             "wrapper": [
                 "wrapper"
@@ -666,7 +666,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-oprobit-bayes.html"
+                "http://docs.zeligproject.org/zelig-oprobit-bayes.html"
             ],
             "wrapper": [
                 "oprobit.bayes"
@@ -698,7 +698,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-poisson-bayes.html"
+                "http://docs.zeligproject.org/zelig-poisson-bayes.html"
             ],
             "wrapper": [
                 "poisson.bayes"
@@ -731,7 +731,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-probit-bayes.html"
+                "http://docs.zeligproject.org/zelig-probit-bayes.html"
             ],
             "wrapper": [
                 "wrapper"
@@ -764,7 +764,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-tobit-bayes.html"
+                "http://docs.zeligproject.org/zelig-tobit-bayes.html"
             ],
             "wrapper": [
                 "tobit.bayes"
@@ -797,7 +797,7 @@
                 ]
             },
             "vignette.url": [
-                "http://zeligproject.org/zelig-weibull.html"
+                "http://docs.zeligproject.org/zelig-weibull.html"
             ],
             "wrapper": [
                 "weibull"
