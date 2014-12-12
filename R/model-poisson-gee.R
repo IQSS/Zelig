@@ -4,7 +4,7 @@ zpoissongee <- setRefClass("Zelig-poisson-gee",
 zpoissongee$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "poissongee"
+    .self$name <- "poisson-gee"
     .self$family <- "poisson"
     .self$link <- "log"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv

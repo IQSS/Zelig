@@ -350,7 +350,7 @@
         },
         "logitgee": {
             "name": [
-                "logitgee"
+                "logit-gee"
             ],
             "description": [
                 "General Estimating Equation for Logistic Regression"
@@ -384,7 +384,7 @@
         },
         "probitgee": {
             "name": [
-                "probitgee"
+                "probit-gee"
             ],
             "description": [
                 "General Estimating Equation for Probit Regression"
@@ -418,7 +418,7 @@
         },
         "gammagee": {
             "name": [
-                "gammagee"
+                "gamma-gee"
             ],
             "description": [
                 "General Estimating Equation for Gamma Regression"
@@ -451,7 +451,7 @@
         },
         "normalgee": {
             "name": [
-                "znormalgee"
+                "normal-gee"
             ],
             "description": [
                 "General Estimating Equation for Normal Regression"
@@ -484,7 +484,7 @@
         },
         "poissongee": {
             "name": [
-                "poissongee"
+                "poisson-gee"
             ],
             "description": [
                 "General Estimating Equation for Poisson Regression"
@@ -517,7 +517,7 @@
         },
         "factorbayes": {
             "name": [
-                "factorbayes"
+                "factor-bayes"
             ],
             "description": [
                 "Bayesian Factor Analysis"
@@ -548,7 +548,7 @@
         },
         "logitbayes": {
             "name": [
-                "logitbayes"
+                "logit-bayes"
             ],
             "description": [
                 "Bayesian Logistic Regression for Dichotomous Dependent Variables"
@@ -581,7 +581,7 @@
         },
         "mlogitbayes": {
             "name": [
-                "mlogitbayes"
+                "mlogit-bayes"
             ],
             "description": [
                 "Bayesian Multinomial Logistic Regression for Dependent Variables with Unordered Categorical Values"
@@ -613,7 +613,7 @@
         },
         "normalbayes": {
             "name": [
-                "normalbayes"
+                "normal-bayes"
             ],
             "description": [
                 "Bayesian Normal Linear Regression"
@@ -646,7 +646,7 @@
         },
         "oprobitbayes": {
             "name": [
-                "oprobitbayes"
+                "oprobit-bayes"
             ],
             "description": [
                 "Bayesian Probit Regression for Dichotomous Dependent Variables"
@@ -678,7 +678,7 @@
         },
         "poissonbayes": {
             "name": [
-                "poissonbayes"
+                "poisson-bayes"
             ],
             "description": [
                 "Bayesian Poisson Regression"
@@ -711,7 +711,7 @@
         },
         "probitbayes": {
             "name": [
-                "probitbayes"
+                "probit-bayes"
             ],
             "description": [
                 "Bayesian Probit Regression for Dichotomous Dependent Variables"
@@ -744,7 +744,7 @@
         },
         "tobitbayes": {
             "name": [
-                "tobitbayes"
+                "tobit-bayes"
             ],
             "description": [
                 "Bayesian Tobit Regression for a Censored Dependent Variable"

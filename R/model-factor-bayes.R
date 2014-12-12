@@ -6,7 +6,7 @@ zfactorbayes <- setRefClass("Zelig-factor-bayes",
 zfactorbayes$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "factorbayes"
+    .self$name <- "factor-bayes"
     .self$year <- 2013
     .self$authors <- "Ben Goodrich, Ying Lu"
     .self$description = "Bayesian Factor Analysis"

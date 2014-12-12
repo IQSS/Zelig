@@ -8,7 +8,7 @@ zlogitbayes <- setRefClass("Zelig-logit-bayes",
 zlogitbayes$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "logitbayes"
+    .self$name <- "logit-bayes"
     .self$family <- "binomial"
     .self$link <- "logit"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv

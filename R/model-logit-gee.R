@@ -4,7 +4,7 @@ zlogitgee <- setRefClass("Zelig-logit-gee",
 zlogitgee$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "logitgee"
+    .self$name <- "logit-gee"
     .self$link <- "logit"
     .self$description = "General Estimating Equation for Logistic Regression"
   }

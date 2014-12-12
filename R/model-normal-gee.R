@@ -4,7 +4,7 @@ znormalgee <- setRefClass("Zelig-normal-gee",
 znormalgee$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "znormalgee"
+    .self$name <- "normal-gee"
     .self$family <- "gaussian"
     .self$link <- "identity"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
