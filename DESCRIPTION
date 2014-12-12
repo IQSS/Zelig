@@ -28,7 +28,8 @@ Depends:
     dplyr (>= 0.3.0.2),
     quantreg,
     geepack,
-    MCMCpack
+    MCMCpack,
+    maxLik
 Suggests:
     testthat,
     knitr

@@ -1,5 +1,5 @@
 import(methods, MASS, survival, VGAM, jsonlite, AER, plyr, dplyr,
-       quantreg, geepack, MCMCpack)
+       quantreg, geepack, MCMCpack, maxLik)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
