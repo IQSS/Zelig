@@ -7,7 +7,7 @@ zmlogitbayes <- setRefClass("Zelig-mlogit-bayes",
 zmlogitbayes$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "mlogitbayes"
+    .self$name <- "mlogit-bayes"
     .self$year <- 2013
     .self$category <- "discrete"
     .self$authors <- "Ben Goodrich, Ying Lu"

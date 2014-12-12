@@ -9,7 +9,7 @@ zpoissonbayes <- setRefClass("Zelig-poisson-bayes",
 zpoissonbayes$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "poissonbayes"
+    .self$name <- "poisson-bayes"
     .self$family <- "poisson"
     .self$link <- "log"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv

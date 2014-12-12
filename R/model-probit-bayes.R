@@ -8,7 +8,7 @@ zprobitbayes <- setRefClass("Zelig-probit-bayes",
 zprobitbayes$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "probitbayes"
+    .self$name <- "probit-bayes"
     .self$family <- "binomial"
     .self$link <- "probit"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv

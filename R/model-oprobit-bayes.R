@@ -7,7 +7,7 @@ zoprobitbayes <- setRefClass("Zelig-oprobit-bayes",
 zoprobitbayes$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "oprobitbayes"
+    .self$name <- "oprobit-bayes"
     .self$year <- 2013
     .self$category <- "discrete"
     .self$authors <- "Ben Goodrich, Ying Lu"

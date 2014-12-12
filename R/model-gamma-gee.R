@@ -4,7 +4,7 @@ zgammagee <- setRefClass("Zelig-gamma-gee",
 zgammagee$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "gammagee"
+    .self$name <- "gamma-gee"
     .self$family <- "Gamma"
     .self$link <- "inverse"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv

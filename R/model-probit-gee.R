@@ -4,7 +4,7 @@ zprobitgee <- setRefClass("Zelig-probit-gee",
 zprobitgee$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "probitgee"
+    .self$name <- "probit-gee"
     .self$link <- "probit"
     .self$description = "General Estimating Equation for Probit Regression"
     .self$wrapper <- "probit.gee"

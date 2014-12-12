@@ -9,7 +9,7 @@ znormalbayes <- setRefClass("Zelig-normal-bayes",
 znormalbayes$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "normalbayes" # CC: should't it be lsbayes?
+    .self$name <- "normal-bayes" # CC: should't it be lsbayes?
     .self$year <- 2013
     .self$category <- "continuous"
     .self$authors <- "Ben Goodrich, Ying Lu"

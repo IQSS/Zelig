@@ -8,7 +8,7 @@ ztobitbayes <- setRefClass("Zelig-tobit-bayes",
 ztobitbayes$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "tobitbayes"
+    .self$name <- "tobit-bayes"
     .self$year <- 2013
     .self$category <- "dichotomous"
     .self$authors <- "Ben Goodrich, Ying Lu"
