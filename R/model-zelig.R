@@ -109,8 +109,10 @@ z$methods(
                                      function(imputationNumber)
                                        cbind(imputationNumber, idata[[imputationNumber]])))
       .self$by <- c("imputationNumber", by)
+      .self$mi <- TRUE
     } else {
       .self$data <- data
+      .self$mi <- FALSE
     }
     .self$model.call[[1]] <- .self$fn
     .self$model.call$by <- NULL
@@ -262,6 +264,30 @@ z$methods(
                    print(.[.self$by])
                    print(base::summary(.$z.out))
                    })
+        if(.self$mi){
+            cat("Model: Combined Imputations \n")
+            vcovlist <-.self$getvcov()
+            coeflist <-.self$getcoef()
+            am.m<-length(coeflist)
+            am.k<-length(coeflist[[1]])
+            q <- matrix(unlist(coeflist), nrow=am.m, ncol=am.k, byrow=TRUE)
+            se <- matrix(NA, nrow=am.m, ncol=am.k)
+            for(i in 1:am.m){
+                se[i,]<-sqrt(diag(vcovlist[[i]]))
+            }
+            ones <- matrix(1, nrow = 1, ncol = am.m)
+            imp.q <- (ones %*% q)/am.m        # Slightly faster than "apply(b,2,mean)"
+            ave.se2 <- (ones %*% (se^2))/am.m # Similarly, faster than "apply(se^2,2,mean)"
+            diff <- q - matrix(1, nrow = am.m, ncol = 1) %*% imp.q
+            sq2 <- (ones %*% (diff^2))/(am.m - 1)
+            imp.se <- sqrt(ave.se2 + sq2 * (1 + 1/am.m))
+            
+            Estimate<-as.vector(imp.q)
+            Std.Error<-as.vector(imp.se)
+            results<-data.frame(Estimate,Std.Error,row.names=names(coeflist[[1]]))
+            print(results)
+            cat("\n")
+        }
       cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
       cat("setx:\n")
