@@ -10,12 +10,6 @@ z5$setx(numst2 = 0)
 z.out <- z5$zelig.out$z.out[[1]]
 z.out
 
-.self <- z.out
-dataset = coalition
-formula = z5$formula
-data = coalition
-s <- list(numst2 = 0)
-
 # z5$setx(numst2 = 0) # fails
 # Error in terms(lm(formula, data), "predvars") : 
 #   error in evaluating the argument 'x' in selecting a method for function 'terms':

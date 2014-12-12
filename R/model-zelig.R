@@ -259,9 +259,9 @@ z$methods(
     else if (length(.self$setx.out) == 0) {
       summ <- .self$zelig.out %>%
         do(summ = {cat("Model: \n")
-                   # print(unlist(.[.self$by]))
                    print(.[.self$by])
-                   print(.$z.out)})
+                   print(base::summary(.$z.out))
+                   })
       cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
       cat("setx:\n")

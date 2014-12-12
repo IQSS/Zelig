@@ -13,7 +13,8 @@ data(stackloss)
 z.out1 <- zquantile$new()
 z.out1$zelig(stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.,
              data = stackloss, tau = 0.5)
-summary(z.out1$zelig.out[[1]])
+z.out1
+summary(z.out1$zelig.out$z.out[[1]])
 x.high <- z.out1$setx(Water.Temp = quantile(stackloss$Water.Temp, 0.8))
 x.low <- z.out1$setx1(Water.Temp = quantile(stackloss$Water.Temp, 0.2))
 z.out1$sim(num = 10000)

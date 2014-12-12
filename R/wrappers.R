@@ -1,12 +1,13 @@
 zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   #   .Deprecated("\nz$new() \nz$zelig(...)")
+  # Zelig Core
   zeligmodels <- system.file(file.path("JSON", "zelig5models.json"), package = "Zelig")
   models <- jsonlite::fromJSON(txt = readLines(zeligmodels))$zelig5models
-  
+  # Zelig Choice
   zeligchoicemodels <- system.file(file.path("JSON", "zelig5choicemodels.json"), package = "ZeligChoice")
   if (zeligchoicemodels != "")
     models <- c(models, jsonlite::fromJSON(txt = readLines(zeligchoicemodels))$zelig5choicemodels)
-  
+  # Aggregating all available models
   models4 <- list()
   for (i in seq(models)) {
     models4[[models[[i]]$wrapper]] <- names(models)[i]
@@ -16,7 +17,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   z5 <- try(eval(parse(text = model.init)), silent = TRUE)
   if ("try-error" %in% class(z5))
     stop("Model '", model,"' not found")
-  ## End: Zelig 5 models (more to be linked from, e.g, Zelig5Choice)
+  ## End: Zelig 5 models
   mf <- match.call()
   mf$model <- NULL
   mf$cite <- NULL
