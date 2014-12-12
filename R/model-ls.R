@@ -41,30 +41,71 @@ zls$methods(
 )
 
 zls$methods(
-  gim = function(B=50) {
+  gim = function(B=50, B2=50) {
     ll.normal.bsIM <- function(par,y,X,sigma){
         beta <- par[1:length(X)]
         sigma2 <- sigma
         -1/2 * (sum(log(sigma2) + (y -(X%*%beta))^2/sigma2))
     }
     
+    getVb<-function(Dboot){
+      Dbar <- matrix(apply(Dboot,2,mean),nrow=B, ncol=length(Dhat), byrow=TRUE)
+      Diff <- Dboot - Dbar
+      Vb <- (t(Diff) %*% Diff) / (nrow(Dboot)-1)
+      return(Vb)
+    }
+    
+    getSigma<-function(lm.obj){
+      return(sum(lm.obj$residuals^2)/(nrow(model.matrix(lm.obj))-ncol(model.matrix(lm.obj))))
+    }
+    
     D.est<-function(formula,data){
+      lm1 <- lm(formula,data, y=TRUE)
+      mm <- model.matrix(lm1)
+      y <- lm1$y
+      sigma <- getSigma(lm1)
+    
+      grad <- apply(cbind(y,mm),1,function(x) numericGradient(ll.normal.bsIM, lm1$coefficients, y=x[1], X=x[2:length(x)], sigma=sigma))
+      meat <- grad%*%t(grad)
+      bread <- -solve(vcov(lm1))
+      Dhat <- nrow(mm)^(-1/2)* as.vector(diag(meat + bread))
+      return(Dhat)
+    }
+
+    D.est.vb<-function(formula,data){
         lm1 <- lm(formula,data, y=TRUE)
         mm <- model.matrix(lm1)
         y <- lm1$y
-        sigma <- sum(lm1$residuals^2)/(nrow(model.matrix(lm1))-ncol(model.matrix(lm1)))
+        sigma <- getSigma(lm1)
         
         grad <- apply(cbind(y,mm),1,function(x) numericGradient(ll.normal.bsIM, lm1$coefficients, y=x[1], X=x[2:length(x)], sigma=sigma))
         meat <- grad%*%t(grad)
         bread <- -solve(vcov(lm1))
         Dhat <- nrow(mm)^(-1/2)* as.vector(diag(meat + bread))
-        return(Dhat)
+
+        muB<-lm1$fitted.values
+        DB <- matrix(NA, nrow=B2, ncol=length(Dhat))
+            
+        for(j in 1:B2){
+          yB2 <- rnorm(nrow(data), muB, sqrt(sigma))
+          lm1B2 <- lm(yB2 ~ mm-1)
+          sigmaB2 <- getSigma(lm1B2)
+
+          grad <- apply(cbind(yB2,model.matrix(lm1B2)),1,function(x) numericGradient(ll.normal.bsIM, lm1B2$coefficients, y=x[1], X=x[2:length(x)], sigma=sigmaB2))
+          meat <- grad%*%t(grad)
+          bread <- -solve(vcov(lm1B2))
+          DB[j,] <- nrow(mm)^(-1/2)*diag((meat + bread))
+        }
+        Vb <- getVb(DB)
+        T<- t(Dhat)%*%solve(Vb)%*%Dhat
+
+        return(list(Dhat=Dhat,T=T))
     }
     
     Dhat <- D.est(formula=.self$formula, data=.self$data)
     lm1 <- lm(formula=.self$formula, data=.self$data)
     mu <- lm1$fitted.values
-    sigma <- sum(lm1$residuals^2)/(nrow(model.matrix(lm1))-ncol(model.matrix(lm1)))
+    sigma <- getSigma(lm1)
     n <- length(mu)
     yname <- all.vars(.self$formula[[2]])
     
@@ -73,15 +114,16 @@ zls$methods(
     for(i in 1:B){
         yB <- rnorm(n, mu, sqrt(sigma))
         bootdata[yname] <- yB
-        Dboot[i,] <- D.est(formula=.self$formula, data=bootdata)
+        result <- D.est.vb(formula=.self$formula, data=bootdata)
+        Dboot[i,] <- result$Dhat
+        T[i] <- result$T
     }
-    
-    Dbar <- matrix(apply(Dboot,2,mean),nrow=B, ncol=length(Dhat), byrow=TRUE)
-    Diff <- Dboot - Dbar
-    Vb <- (t(Diff) %*% Diff) / (B-1)
+
+    Vb <- getVb(Dboot)
     omega <- t(Dhat) %*% solve(Vb) %*% Dhat
+    pb = (B+1-sum(T< as.numeric(omega)))/(B+1)
     
-    .self$test.statistics$gim <- list(stat=omega) #, pval=pb)
+    .self$test.statistics$gim <- list(stat=omega, pval=pb)
   }
 )
 
