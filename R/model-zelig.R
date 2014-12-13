@@ -284,8 +284,26 @@ z$methods(
             
             Estimate<-as.vector(imp.q)
             Std.Error<-as.vector(imp.se)
-            results<-data.frame(Estimate,Std.Error,row.names=names(coeflist[[1]]))
-            print(results)
+            zvalue<-Estimate/Std.Error
+            Pr.z<-2*(1-pnorm(abs(zvalue)))
+            stars<-rep("",am.k)
+            for(i in 1:am.k){
+                if(Pr.z[i]<.0001){
+                    stars[i]<-"***"
+                }else if(Pr.z[i]<.001){
+                    stars[i]<-"**"
+                }else if(Pr.z[i]<.01){
+                    stars[i]<-"*"
+                }else if(Pr.z[i]<.05){
+                    stars[i]<-"."
+                    
+                }
+            }
+            
+            results<-data.frame(Estimate,Std.Error,zvalue,Pr.z,stars,row.names=names(coeflist[[1]]))
+            names(results)<-c("Estimate","Std.Error","z value","Pr(>|z|)","")
+            print(results, digits=max(3, getOption("digits") - 3))
+            cat("---\nSignif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n")
             cat("\n")
         }
       cat("Next step: Use 'setx' method\n")
