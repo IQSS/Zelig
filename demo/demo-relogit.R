@@ -22,8 +22,11 @@ set.seed(42)
 z5$sim(num=1000)
 z5$summarize()
 z5$cite()
-z5$plotting()
 plot(z5)
+
+z.out <- zelig(conflict ~ major + contig + power + maxdem + mindem + years, data = mid,
+               tau = 1042/303772,
+               model = "relogit")
 
 ## Example 2
 

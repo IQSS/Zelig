@@ -13,6 +13,7 @@
 #' @include model-lognorm.R
 #' @include model-tobit.R
 #' @include model-quantile.R
+#' @include model-relogit.R
 #' @include model-gee.R
 #' @include model-binchoice-gee.R
 #' @include model-logit-gee.R
@@ -65,6 +66,9 @@ z5tobit$toJSON()
 
 z5quantile <- zquantile$new()
 z5quantile$toJSON()
+
+z5relogit <- zrelogit$new()
+z5relogit$toJSON()
 
 z5logitgee <- zlogitgee$new()
 z5logitgee$toJSON()
@@ -119,6 +123,7 @@ zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "lognorm" = z5lognorm$ljson,
                     "tobit" = z5tobit$ljson,
                     "quantile" = z5quantile$ljson,
+                    "relogit" = z5relogit$ljson,
                     "logitgee" = z5logitgee$ljson,
                     "probitgee" = z5probitgee$ljson,
                     "gammagee" = z5gammagee$ljson,

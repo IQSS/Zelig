@@ -22,3 +22,6 @@ set.seed(42)
 z5$sim(num = 1000)
 z5$summarize()
 z5$cite()
+
+z.out <- zelig(admit ~ gre + gpa, data = mydata, model = "probit.bayes")
+z.out
