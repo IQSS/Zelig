@@ -311,22 +311,18 @@ z$methods(
         }
       cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
-      if(!is.null(.self$setx.out$x$mm[[1]])){
-        cat("setx:\n")
-        print(.self$setx.out$x$mm[[1]])
+      niceprint<-function(obj, name){
+        if(!is.null(obj[[1]])){
+          cat(name,":\n", sep="")
+          screenoutput<-obj[[1]]
+          attr(screenoutput,"assign")<-NULL
+          print(screenoutput, digits=max(3, getOption("digits") - 3))
+        }
       }
-      if(!is.null(.self$setx.out$x1$mm[[1]])){
-        cat("setx1:\n")
-        print(.self$setx.out$x1$mm[[1]])
-      }
-      if(!is.null(.self$setx.out$range[[1]]$mm[[1]])){
-        cat("setrange:\n")
-        print(.self$setx.out$range[[1]]$mm[[1]])
-      }
-      if(!is.null(.self$setx.out$range1[[1]]$mm[[1]])){
-        cat("setrange1:\n")
-        print(.self$setx.out$range1[[1]]$mm[[1]])
-      }
+      niceprint(obj=.self$setx.out$x$mm, name="setx")
+      niceprint(obj=.self$setx.out$x1$mm, name="setx1")
+      niceprint(obj=.self$setx.out$range[[1]]$mm, name="range")
+      niceprint(obj=.self$setx.out$range1[[1]]$mm, name="range1")
       cat("\nNext step: Use 'sim' method\n")
     } else { # sim.out
       pstat <- function(s.out, what = "sim x") {
