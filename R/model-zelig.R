@@ -287,18 +287,21 @@ z$methods(
             zvalue<-Estimate/Std.Error
             Pr.z<-2*(1-pnorm(abs(zvalue)))
             stars<-rep("",am.k)
-            for(i in 1:am.k){
-                if(Pr.z[i]<.0001){
-                    stars[i]<-"***"
-                }else if(Pr.z[i]<.001){
-                    stars[i]<-"**"
-                }else if(Pr.z[i]<.01){
-                    stars[i]<-"*"
-                }else if(Pr.z[i]<.05){
-                    stars[i]<-"."
-                    
-                }
-            }
+            # for(i in 1:am.k){
+            #    if(Pr.z[i]<.0001){
+            #        stars[i]<-"***"
+            #    }else if(Pr.z[i]<.001){
+            #        stars[i]<-"**"
+            #    }else if(Pr.z[i]<.01){
+            #        stars[i]<-"*"
+            #    }else if(Pr.z[i]<.05){
+            #        stars[i]<-"."
+            #    }
+            # }
+            stars[Pr.z<.05]<-"."
+            stars[Pr.z<.01]<-"*"
+            stars[Pr.z<.001]<-"**"
+            stars[Pr.z<.0001]<-"***"
             
             results<-data.frame(Estimate,Std.Error,zvalue,Pr.z,stars,row.names=names(coeflist[[1]]))
             names(results)<-c("Estimate","Std.Error","z value","Pr(>|z|)","")
