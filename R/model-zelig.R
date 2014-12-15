@@ -311,15 +311,23 @@ z$methods(
         }
       cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
-      cat("setx:\n")
-      print(.self$setx.out$x$mm)
-      cat("setx1:\n")
-      print(.self$setx.out$x1$mm)
-      cat("setrange:\n")
-      print(.self$setx.out$range[[1]]$mm)
-      cat("setrange1:\n")
-      print(.self$setx.out$range1[[1]]$mm)
-      cat("Next step: Use 'sim' method\n")
+      if(!is.null(.self$setx.out$x$mm[[1]])){
+        cat("setx:\n")
+        print(.self$setx.out$x$mm[[1]])
+      }
+      if(!is.null(.self$setx.out$x1$mm[[1]])){
+        cat("setx1:\n")
+        print(.self$setx.out$x1$mm[[1]])
+      }
+      if(!is.null(.self$setx.out$range[[1]]$mm[[1]])){
+        cat("setrange:\n")
+        print(.self$setx.out$range[[1]]$mm[[1]])
+      }
+      if(!is.null(.self$setx.out$range1[[1]]$mm[[1]])){
+        cat("setrange1:\n")
+        print(.self$setx.out$range1[[1]]$mm[[1]])
+      }
+      cat("\nNext step: Use 'sim' method\n")
     } else { # sim.out
       pstat <- function(s.out, what = "sim x") {
         simu <- s.out %>%
