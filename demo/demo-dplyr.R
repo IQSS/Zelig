@@ -3,18 +3,11 @@ library(Amelia)
 data(freetrade)
 df <- freetrade
 imp <- amelia(x = df , cs = "country", m = 10) 
-idata <- imp$imputations
-MI <- length(idata)
-iidata <- lapply(seq(MI), function(mi) cbind(mi, idata[[mi]]))
-ddata <- rbind_all(iidata)
-
-ddata <- na.omit(ddata)
-
-dat <- ddata
 
 z5 <- zls$new()
 z5
-z5$zelig(gdp.pc ~ tariff + intresmi, data = dat)
+z5$zelig(gdp.pc ~ tariff + intresmi, data = imp)
+z5
 z5$zelig.out
 z5$setx(tariff = 0.4)
 z5$setx.out
