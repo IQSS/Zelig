@@ -109,8 +109,10 @@ z$methods(
                                      function(imputationNumber)
                                        cbind(imputationNumber, idata[[imputationNumber]])))
       .self$by <- c("imputationNumber", by)
+      .self$mi <- TRUE
     } else {
       .self$data <- data
+      .self$mi <- FALSE
     }
     .self$model.call[[1]] <- .self$fn
     .self$model.call$by <- NULL
@@ -271,17 +273,56 @@ z$methods(
                    }
                    print(base::summary(.$z.out))
                    })
+        
+      if(.self$mi){
+        cat("Model: Combined Imputations \n")
+        vcovlist <-.self$getvcov()
+        coeflist <-.self$getcoef()
+        am.m<-length(coeflist)
+        am.k<-length(coeflist[[1]])
+        q <- matrix(unlist(coeflist), nrow=am.m, ncol=am.k, byrow=TRUE)
+        se <- matrix(NA, nrow=am.m, ncol=am.k)
+        for(i in 1:am.m){
+          se[i,]<-sqrt(diag(vcovlist[[i]]))
+        }
+        ones <- matrix(1, nrow = 1, ncol = am.m)
+        imp.q <- (ones %*% q)/am.m        # Slightly faster than "apply(b,2,mean)"
+        ave.se2 <- (ones %*% (se^2))/am.m # Similarly, faster than "apply(se^2,2,mean)"
+        diff <- q - matrix(1, nrow = am.m, ncol = 1) %*% imp.q
+        sq2 <- (ones %*% (diff^2))/(am.m - 1)
+        imp.se <- sqrt(ave.se2 + sq2 * (1 + 1/am.m))
+            
+        Estimate<-as.vector(imp.q)
+        Std.Error<-as.vector(imp.se)
+        zvalue<-Estimate/Std.Error
+        Pr.z<-2*(1-pnorm(abs(zvalue)))
+        stars<-rep("",am.k)
+        stars[Pr.z<.05]<-"."
+        stars[Pr.z<.01]<-"*"
+        stars[Pr.z<.001]<-"**"
+        stars[Pr.z<.0001]<-"***"
+
+        results<-data.frame(Estimate,Std.Error,zvalue,Pr.z,stars,row.names=names(coeflist[[1]]))
+        names(results)<-c("Estimate","Std.Error","z value","Pr(>|z|)","")
+        print(results, digits=max(3, getOption("digits") - 3))
+        cat("---\nSignif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n")
+        cat("\n")
+      }
       cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
-      cat("setx:\n")
-      print(.self$setx.out$x$mm)
-      cat("setx1:\n")
-      print(.self$setx.out$x1$mm)
-      cat("setrange:\n")
-      print(.self$setx.out$range[[1]]$mm)
-      cat("setrange1:\n")
-      print(.self$setx.out$range1[[1]]$mm)
-      cat("Next step: Use 'sim' method\n")
+      niceprint<-function(obj, name){
+        if(!is.null(obj[[1]])){
+          cat(name,":\n", sep="")
+          screenoutput<-obj[[1]]
+          attr(screenoutput,"assign")<-NULL
+          print(screenoutput, digits=max(3, getOption("digits") - 3))
+        }
+      }
+      niceprint(obj=.self$setx.out$x$mm, name="setx")
+      niceprint(obj=.self$setx.out$x1$mm, name="setx1")
+      niceprint(obj=.self$setx.out$range[[1]]$mm, name="range")
+      niceprint(obj=.self$setx.out$range1[[1]]$mm, name="range1")
+      cat("\nNext step: Use 'sim' method\n")
     } else { # sim.out
       pstat <- function(s.out, what = "sim x") {
         simu <- s.out %>%
