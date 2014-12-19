@@ -16,6 +16,7 @@ znormalbayes$methods(
     .self$description = "Bayesian Normal Linear Regression"
     .self$fn <- quote(MCMCpack::MCMCregress)
     # JSON from parent
+    .self$wrapper <- "normal.bayes"
   }
 )
 
