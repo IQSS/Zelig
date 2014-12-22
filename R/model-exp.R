@@ -32,6 +32,8 @@ zexp$methods(
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
               cluster = cluster,  by = by)
+    rse<-llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
+    .self$test.statistics<- list(robust.se = rse)
   }
 )
 
