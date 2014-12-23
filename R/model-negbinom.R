@@ -51,7 +51,7 @@ znegbin$methods(
     #
     for (i in 1:ncol(ev))
       pv[, i] <- rnegbin(nrow(ev), mu = ev[i, ], theta = alpha[i])
-    return(list(ev  = ev, pv = as.factor(pv)))
+    return(list(ev  = ev, pv = pv))
   }
 )
 
