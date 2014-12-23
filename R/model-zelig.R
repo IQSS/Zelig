@@ -8,8 +8,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         weights = "numeric", 
                                         name = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix,
-                                        ddata = "ANY",
-                                        data.by = "ANY", # data frame or matrix
+                                        # ddata = "ANY",
+                                        # data.by = "ANY", # data frame or matrix
                                         by = "ANY",
                                         mi = "logical",
                                         
@@ -446,9 +446,9 @@ z$methods(
 
 z$methods(
   test = function(z, data) {
-    .self$zelig(y.sim ~ x.sim, data = data)
-    .self$setrange(x.sim = data$x.seq)    
-    .self$sim(num = nrow(data))
+    z$zelig(y.sim ~ x.sim, data = data)
+    z$setrange(x.sim = data$x.seq)    
+    z$sim(num = nrow(data))
     
     ev <- c()
     for(j in 1:nrow(data)){
