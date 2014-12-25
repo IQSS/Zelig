@@ -14,10 +14,9 @@ summary(s.out)
 # Zelig 5 code:
 set.seed(42)
 z5 <- zgammagee$new()
-z5$zelig(duration ~ fract + numst2, id = "cluster",
+z5$zelig(duration ~ fract + numst2, id = coalition$cluster,
          data = coalition, corstr = "exchangeable")
 z5
-zo <- z5$zelig.out$z.out[[1]]
 z5$zelig.call
 z5$model.call
 z5$setx(numst2 = 0)
@@ -26,3 +25,10 @@ set.seed(42)
 z5$sim(num=10)
 z5$summarize()
 z5$cite()
+
+# geepack::geeglm(formula = duration ~ fract + numst2, family = Gamma("inverse"), 
+#                 data = coalition, id = coalition$cluster, corstr = "exchangeable")
+# 
+# geepack::geeglm(formula = duration ~ fract + numst2, family = Gamma, 
+#                 data = coalition, id = coalition$cluster, corstr = "exchangeable")
+

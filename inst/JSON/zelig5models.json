@@ -505,7 +505,7 @@
                 "http://docs.zeligproject.org/zelig-normal-gee.html"
             ],
             "wrapper": [
-                "wrapper"
+                "normal.gee"
             ],
             "tree": [
                 "Zelig-normal-gee",
@@ -667,7 +667,7 @@
                 "http://docs.zeligproject.org/zelig-normal-bayes.html"
             ],
             "wrapper": [
-                "wrapper"
+                "normal.bayes"
             ],
             "tree": [
                 "Zelig-normal-bayes",

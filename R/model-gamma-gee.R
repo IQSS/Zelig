@@ -17,4 +17,3 @@ zgammagee$methods(
     .self$wrapper <- "gamma.gee"
   }
 )
-

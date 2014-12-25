@@ -1,7 +1,7 @@
 # Zelig 4 code:
 library(Zelig4)
 data(coalition)
-coalition$cluster <- c(rep(c(1:62),5),rep(c(63),4))
+coalition$cluster <- c(rep(c(1:62), 5), rep(c(63), 4))
 sorted.coalition <- coalition[order(coalition$cluster),]
 z.out <- Zelig4::zelig(duration ~ fract + numst2, model = "normal.gee", 
                        id = "cluster", data = coalition)

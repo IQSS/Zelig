@@ -14,5 +14,6 @@ znormalgee$methods(
     .self$description = "General Estimating Equation for Normal Regression"
     .self$fn <- quote(geepack::geeglm)
     # JSON from parent
+    .self$wrapper <- "normal.gee"
   }
 )
