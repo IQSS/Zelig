@@ -124,7 +124,7 @@ z$methods(
     .self$data <- tbl_df(.self$data)
     .self$zelig.out <- .self$data %>% 
       group_by_(.self$by) %>% 
-        do(z.out = eval(fn2(.self$model.call, quote(.))))
+        do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
   }
 )
 
