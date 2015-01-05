@@ -59,7 +59,7 @@ z$methods(
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://zeligproject.org/"
-    .self$url.docs <- "http://docs.zeligproject.org/"
+    .self$url.docs <- "http://docs.zeligproject.org/en/latest/"
     .self$setx.out <- list()
     .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
                               ev1 = "Expected Values: E(Y|X1)",
@@ -72,6 +72,9 @@ z$methods(
     .self$bsetrange1 <- FALSE
     # JSON
     .self$vignette.url <- paste(.self$url.docs, tolower(class(.self)[1]), ".html", sep = "")
+    .self$vignette.url <- sub("-gee", "gee", .self$vignette.url)
+    .self$vignette.url <- sub("-bayes", "bayes", .self$vignette.url)
+    # .self$vignette.url <- paste(.self$url.docs, "zelig-", sub("-", "", .self$name), ".html", sep = "")
     .self$explanatory <- c("continuous",
                            "discrete",
                            "nominal",
