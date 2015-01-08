@@ -10,6 +10,7 @@ zprobit$methods(
     .self$name <- "probit"
     .self$link <- "probit"
     .self$description = "Probit Regression for Dichotomous Dependent Variables"
+    .self$packageauthors <- "R Core Team"
     .self$wrapper <- "probit"
   }
 )

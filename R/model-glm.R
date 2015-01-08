@@ -10,6 +10,7 @@ zglm$methods(
   initialize = function() {
     callSuper()
     .self$fn <- quote(stats::glm)
+    .self$packageauthors <- "R Core Team"
   }
 )
 

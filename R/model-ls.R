@@ -8,6 +8,7 @@ zls$methods(
     .self$year <- 2007
     .self$category <- "continuous"
     .self$description <- "Least Squares Regression for Continuous Dependent Variables"
+    .self$packageauthors <- "R Core Team"
     .self$fn <- quote(stats::lm)
     # JSON
     .self$outcome <- "continous"

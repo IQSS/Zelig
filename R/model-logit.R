@@ -10,6 +10,7 @@ zlogit$methods(
     .self$name <- "logit"
     .self$link <- "logit"
     .self$description = "Logistic Regression for Dichotomous Dependent Variables"
+    .self$packageauthors <- "R Core Team"
     .self$wrapper <- "logit"
   }
 )
