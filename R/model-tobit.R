@@ -9,6 +9,7 @@ ztobit$methods(
     callSuper()
     .self$name <- "tobit"
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
+    .self$packageauthors <- "Christian Kleiber, and Achim Zeileis"
     .self$year <- 2011
     .self$description = "Linear regression for Left-Censored Dependent Variable"
     .self$fn <- quote(AER::tobit)

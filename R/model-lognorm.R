@@ -8,6 +8,7 @@ zlognorm$methods(
     callSuper()
     .self$name <- "lognorm"
     .self$authors <- "Matthew Owen, Olivia Lau, Kosuke Imai, Gary King"
+    .self$packageauthors <- "Terry M Therneau, and Thomas Lumley"
     .self$year <- 2007
     .self$description <- "Log-Normal Regression for Duration Dependent Variables"
     .self$fn <- quote(survival::survreg)
