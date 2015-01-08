@@ -10,6 +10,7 @@ zquantile$methods(
     .self$fn <- quote(quantreg::rq)
     .self$name <- "quantile"
     .self$authors <- "Alexander D'Amour"
+    .self$packageauthors <- "Roger Koenker"
     .self$year <- 2008
     .self$category <- "continuous"
     .self$description <- "Quantile Regression for Continuous Dependent Variables"
