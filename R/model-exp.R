@@ -9,6 +9,7 @@ zexp$methods(
     callSuper()
     .self$name <- "exp"
     .self$authors <- "Olivia Lau, Kosuke Imai, Gary King"
+    .self$packageauthors <- "Terry M. Therneau, and Thomas Lumley"
     .self$year <- 2011
     .self$description <- "Exponential Regression for Duration Dependent Variables"
     .self$fn <- quote(survival::survreg)

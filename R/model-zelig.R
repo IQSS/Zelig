@@ -33,10 +33,12 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         sim.out = "list", # simulated qi's
                                         simparam = "ANY", # simulated parameters
                                         num = "numeric", # nb of simulations
-                                        
-                                        # summary.out = "list", # summary of estimated models
-                                        
+
                                         authors = "character", # Zelig model description
+                                        zeligauthors = "character",
+                                        modelauthors = "character",
+                                        packageauthors = "character",
+
                                         year = "numeric",
                                         description = "character",
                                         url = "character",
@@ -57,6 +59,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
 z$methods(
   initialize = function() {
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
+    .self$zeligauthors <- "Christine Choirat, James Honaker, Kosuke Imai, Gary King, and Olivia Lau"
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://zeligproject.org/"
     .self$url.docs <- "http://docs.zeligproject.org/en/latest/"
