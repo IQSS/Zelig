@@ -89,6 +89,15 @@ z$methods(
 )
 
 z$methods(
+  packagename = function() {
+      # If this becomes "quote(mypackage::myfunction) then
+      # regmatches(.self$fn,regexpr("(?<=\\()(.*?)(?=\\::)",.self$fn, perl=TRUE))
+      # would extract "mypackage"
+      return(as.character(.self$fn)[2])
+  }
+)
+
+z$methods(
   cite = function() {
     title <- paste(.self$name, ": ", .self$description, sep="")
     cat("How to cite this model in Zelig:\n  ",
