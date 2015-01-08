@@ -10,6 +10,7 @@ znegbin$methods(
     .self$fn <- quote(MASS::glm.nb)
     .self$name <- "negbin"
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
+    .self$packageauthors <- "William N. Venables, and Brian D. Ripley"
     .self$year <- 2008
     .self$category <- "count"
     .self$description <- "Negative Binomial Regression for Event Count Dependent Variables"
