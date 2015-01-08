@@ -9,6 +9,7 @@ zfactorbayes$methods(
     .self$name <- "factor-bayes"
     .self$year <- 2013
     .self$authors <- "Ben Goodrich, Ying Lu"
+    .self$packageauthors <- "Andrew D. Martin, Kevin M. Quinn, and Jong Hee Park"
     .self$description = "Bayesian Factor Analysis"
     .self$fn <- quote(MCMCpack::MCMCfactanal)
     # JSON from parent

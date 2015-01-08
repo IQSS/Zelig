@@ -10,6 +10,7 @@ zweibull$methods(
     callSuper()
     .self$name <- "weibull"
     .self$authors <- "Olivia Lau, Kosuke Imai, Gary King"
+    .self$packageauthors <- "Terry M Therneau, and Thomas Lumley"
     .self$year <- 2007
     .self$description <- "Weibull Regression for Duration Dependent Variables"
     .self$fn <- quote(survival::survreg)

@@ -3,6 +3,13 @@ zbayes <- setRefClass("Zelig-bayes",
                       contains = "Zelig")
 
 zbayes$methods(
+  initialize = function() {
+    callSuper()
+    .self$packageauthors <- "Andrew D. Martin, Kevin M. Quinn, and Jong Hee Park"
+  }
+)
+
+zbayes$methods(
   zelig = function(formula, 
                    burnin = 1000, mcmc = 10000, 
                    verbose = 0, 

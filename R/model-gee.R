@@ -3,6 +3,14 @@ zgee <- setRefClass("Zelig-gee",
                     contains = "Zelig")
 
 zgee$methods(
+  initialize = function() {
+    callSuper()
+    .self$packageauthors <- "Søren Højsgaard, Ulrich Halekoh, and Jun Yan"
+  }
+)
+
+
+zgee$methods(
   zelig = function(formula, id, ..., zcor = NULL, corstr = "independence", data, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
