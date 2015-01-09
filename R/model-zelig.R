@@ -121,7 +121,7 @@ z$methods(
     }
     cat("How to cite this model in Zelig:\n  ",
     localauthors, ". ", .self$year, ".\n  ", title,
-    "\n  in ", .self$zeligauthors, 
+    "\n  in ", .self$zeligauthors,
     "\"Zelig: Everyone's Statistical Software,\"",
     "\n  ", .self$url, "\n", sep = "")
   }
@@ -129,7 +129,9 @@ z$methods(
 
 z$methods(
   references = function(style="text", sphinx=TRUE) {
-    s<-capture.output(print(citation(.self$packagename()), style = style))
+    c<-citation(.self$packagename())
+    c<-c[!duplicated(c)]
+    s<-capture.output(print(c, style = style))
     if(sphinx){
       s<-gsub("\\*","\\*\\*",s, perl=TRUE)
       s<-gsub("_","\\*",s, perl=TRUE)
