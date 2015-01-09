@@ -109,6 +109,37 @@ z$methods(
 )
 
 z$methods(
+  citenew = function() {
+    title <- paste(.self$name, ": ", .self$description, sep="")
+    localauthors <- ""
+    if (length(.self$modelauthors) & .self$modelauthors!=""){
+        localauthors<-.self$modelauthors
+    }else if (length(.self$packageauthors) & .self$packageauthors!=""){
+        localauthors<-.self$packageauthors
+    }else{
+        localauthors<-.self$zeligauthors
+    }
+    cat("How to cite this model in Zelig:\n  ",
+    localauthors, ". ", .self$year, ".\n  ", title,
+    "\n  in ", .self$zeligauthors, 
+    "\"Zelig: Everyone's Statistical Software,\"",
+    "\n  ", .self$url, "\n", sep = "")
+  }
+)
+
+z$methods(
+  references = function(style="text", sphinx=TRUE) {
+    s<-capture.output(print(citation(.self$packagename()), style = style))
+    if(sphinx){
+      s<-gsub("\\*","\\*\\*",s, perl=TRUE)
+      s<-gsub("_","\\*",s, perl=TRUE)
+    }
+    cat(s, sep="\n")
+  }
+)
+
+
+z$methods(
   zelig = function(formula, data, ..., weights = NULL, by) {
     fn2 <- function(fc, data) {
       fc$data <- data
