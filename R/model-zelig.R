@@ -135,6 +135,7 @@ z$methods(
     if(sphinx){
       s<-gsub("\\*","\\*\\*",s, perl=TRUE)
       s<-gsub("_","\\*",s, perl=TRUE)
+      s<-gsub("\\*\\(","\\* \\(",s, perl=TRUE)
     }
     cat(s, sep="\n")
   }
