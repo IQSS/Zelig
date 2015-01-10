@@ -29,8 +29,10 @@ zgee$methods(
     .self$model.call$corstr <- corstr
     callSuper(formula = formula, data = data, ..., by = by)
     # Prettify summary display without modifying .self$model.call
-    for (i in length(.self$zelig.out$z.out))
+    for (i in length(.self$zelig.out$z.out)) {
       .self$zelig.out$z.out[[i]]$call$id <- .self$zelig.call$id
+      .self$zelig.out$z.out[[i]]$call$zcor <- "zcor"
+    }
   }
 )
 

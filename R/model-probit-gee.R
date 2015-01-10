@@ -6,7 +6,7 @@ zprobitgee$methods(
     callSuper()
     .self$name <- "probit-gee"
     .self$link <- "probit"
-    .self$description = "General Estimating Equation for Probit Regression"
+    .self$description <- "General Estimating Equation for Probit Regression"
     .self$wrapper <- "probit.gee"
   }
 )

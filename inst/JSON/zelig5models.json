@@ -404,7 +404,7 @@
                 "http://docs.zeligproject.org/en/latest/zelig-logitgee.html"
             ],
             "wrapper": [
-                "wrapper"
+                "logit.gee"
             ],
             "tree": [
                 "Zelig-logit-gee",

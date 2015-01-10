@@ -6,6 +6,7 @@ zlogitgee$methods(
     callSuper()
     .self$name <- "logit-gee"
     .self$link <- "logit"
-    .self$description = "General Estimating Equation for Logistic Regression"
+    .self$description <- "General Estimating Equation for Logistic Regression"
+    .self$wrapper <- "logit.gee"
   }
 )
