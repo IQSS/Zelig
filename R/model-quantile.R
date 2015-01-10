@@ -16,6 +16,7 @@ zquantile$methods(
     .self$description <- "Quantile Regression for Continuous Dependent Variables"
     # JSON
     .self$outcome <- "continuous"
+    .self$wrapper <- "rq"
   }
 )
 

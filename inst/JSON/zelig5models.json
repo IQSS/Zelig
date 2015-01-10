@@ -342,7 +342,7 @@
                 "http://docs.zeligproject.org/en/latest/zelig-quantile.html"
             ],
             "wrapper": [
-                "wrapper"
+                "rq"
             ],
             "tree": [
                 "Zelig-quantile"

@@ -13,6 +13,13 @@ data(stackloss)
 z.out1 <- zquantile$new()
 z.out1$zelig(stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.,
              data = stackloss, tau = 0.5)
+
+z.out1 <- zelig(stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.,
+                model = "rq", data = stackloss,
+                tau = 0.5)
+
+quantreg::rq(formula = log(wage) ~ experience + I(experience^2) + 
+               education, data = CPS1988, tau = 0.75)
 z.out1
 summary(z.out1$zelig.out$z.out[[1]])
 x.high <- z.out1$setx(Water.Temp = quantile(stackloss$Water.Temp, 0.8))
@@ -61,3 +68,19 @@ z.out3$sim()
 
 fit <- rq(foodexp ~ income, tau = seq(0.1, 0.9, by = 0.1), data = engel)
 plot(summary(fit))
+
+
+#####
+# data(engel)
+# z.out3 <- zelig(foodexp ~ income, model = "quantile",
+#                 tau = seq(0.1,0.9,by=0.1), data = engel)
+# summary(z.out3)
+# plot(summary(z.out3))
+# plot(z.out3)
+# 
+# x.bottom <- setx(z.out3, income=quantile(engel$income, 0.25))
+# x.top <- setx(z.out3, income=quantile(engel$income, 0.75))
+# 
+# s.out3 <- sim(z.out3, x = x.bottom, x1 = x.top)
+# 
+# summary(s.out3)
