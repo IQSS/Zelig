@@ -17,6 +17,31 @@ zrelogit$methods(
     .self$family <- "binomial"
     .self$link <- "logit"
     .self$wrapper <- "relogit"
+    ref1<-bibentry(
+            bibtype="Article",
+            title = "Logistic Regression in Rare Events Data",
+            author = c(
+                person("Gary", "King"),
+                person("Langche", "Zeng")
+                ),
+            journal = "Political Analysis",
+            volume = 9,
+            number = 2,
+            year = 2001,
+            pages = "137–163")
+    ref2<-bibentry(
+            bibtype="Article",
+            title = "Explaining Rare Events in International Relations",
+            author = c(
+                person("Gary", "King"),
+                person("Langche", "Zeng")
+                ),
+            journal = "International Organization",
+            volume = 55,
+            number = 3,
+            year = 2001,
+            pages = "693-715")
+    .self$refs<-c(ref1,ref2)
   }
 )
 

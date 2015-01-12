@@ -38,7 +38,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         zeligauthors = "character",
                                         modelauthors = "character",
                                         packageauthors = "character",
-                                        refs = "bibentry",
+                                        refs = "ANY", # is there a way to recognize class "bibentry"?,
 
                                         year = "numeric",
                                         description = "character",
@@ -61,6 +61,7 @@ z$methods(
   initialize = function() {
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
     .self$zeligauthors <- "Christine Choirat, James Honaker, Kosuke Imai, Gary King, and Olivia Lau"
+    .self$refs <- bibentry()
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://zeligproject.org/"
     .self$url.docs <- "http://docs.zeligproject.org/en/latest/"
@@ -138,9 +139,12 @@ z$methods(
     if (mystyle=="sphinx"){
         mystyle <- "text"
     }
-    c<-c(.self$ref, citation(.self$packagename()))  # Concatentate model specific Zelig references with package references
-    c<-c[!duplicated(c)]                            # Remove duplicates (many packages have duplicate references in their lists)
-    s<-capture.output(print(c, style = mystyle))
+    mycites<-.self$refs
+    if(!is.na(.self$packagename() )){
+      mycites<-c(mycites, citation(.self$packagename()))  # Concatentate model specific Zelig references with package references
+    }
+    mycites<-mycites[!duplicated(mycites)]                            # Remove duplicates (many packages have duplicate references in their lists)
+    s<-capture.output(print(mycites, style = mystyle))
     if(style == "sphinx"){                          # format the "text" style conventions for sphinx markdown for building docs for zeligproject.org
       s<-gsub("\\*","\\*\\*",s, perl=TRUE)
       s<-gsub("_","\\*",s, perl=TRUE)
