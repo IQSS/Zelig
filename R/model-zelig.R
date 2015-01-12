@@ -38,6 +38,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         zeligauthors = "character",
                                         modelauthors = "character",
                                         packageauthors = "character",
+                                        refs = "bibentry",
 
                                         year = "numeric",
                                         description = "character",
@@ -127,12 +128,20 @@ z$methods(
   }
 )
 
+# Construct a reference list specific to a Zelig model
+# Styles available from the bibentry print method: "text", "Bibtex", "citation", "html", "latex", "R", "textVersion"
+# The "sphinx" style reformats "text" style with some markdown substitutions
+
 z$methods(
-  references = function(style="text", sphinx=TRUE) {
-    c<-citation(.self$packagename())
-    c<-c[!duplicated(c)]
-    s<-capture.output(print(c, style = style))
-    if(sphinx){
+  references = function(style="sphinx") {
+    mystyle <- style
+    if (mystyle=="sphinx"){
+        mystyle <- "text"
+    }
+    c<-c(.self$ref, citation(.self$packagename()))  # Concatentate model specific Zelig references with package references
+    c<-c[!duplicated(c)]                            # Remove duplicates (many packages have duplicate references in their lists)
+    s<-capture.output(print(c, style = mystyle))
+    if(style == "sphinx"){                          # format the "text" style conventions for sphinx markdown for building docs for zeligproject.org
       s<-gsub("\\*","\\*\\*",s, perl=TRUE)
       s<-gsub("_","\\*",s, perl=TRUE)
       s<-gsub("\\*\\(","\\* \\(",s, perl=TRUE)
