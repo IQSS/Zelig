@@ -1,0 +1,34 @@
+citHeader("To cite Zelig in publications please use:")
+
+year <- 2015 
+vers <- "Version 5.0-3" 
+
+bibentry(
+            bibtype="Manual",
+            title = "Zelig: Everyone's Statistical Software",
+            author = c(
+            	person("Christine", "Choirat", email="cchoirat@iq.harvard.edu", role = "aut"),
+            	person("James", "Honaker", email="jhonaker@iq.harvard.edu", role = "aut"),
+            	person("Kosuke", "Imai", role = "aut"),
+                person("Gary", "King", role = "aut"),
+                person("Olivia", "Lau", role = "aut")
+                ),
+            year = year,
+            note = vers,
+            url = "http://zeligproject.org/")
+
+
+bibentry(
+            bibtype="Article",
+            title = "Toward A Common Framework for Statistical Analysis and Development",
+            author = c(
+            	person("Kosuke", "Imai"),
+                person("Gary", "King"),
+                person("Olivia", "Lau")
+                ),
+            journal = "Journal of Computational Graphics and Statistics",
+            volume = 17,
+            number = 4,
+            year = 2008,
+            pages = "892-913",
+            url =  "http://j.mp/msE15c")
