@@ -112,8 +112,8 @@ z$methods(
     }
     cat("How to cite this model in Zelig:\n  ",
     localauthors, ". ", .self$year, ".\n  ", title,
-    "\n  in ", .self$zeligauthors,
-    ", \n  \"Zelig: Everyone's Statistical Software,\" ",
+    "\n  in ", .self$zeligauthors, ", \n",
+    "  \"Zelig: Everyone's Statistical Software,\" ",
     .self$url, "\n", sep = "")
   }
 )
