@@ -2,7 +2,7 @@ Package: Zelig
 Maintainer: James Honaker <zelig-zee@iq.harvard.edu>
 License: GPL (>=2)
 Title: Everyone's Statistical Software
-Author: Kosuke Imai, Gary King, Olivia Lau
+Author: Christine Choirat, James Honaker, Kosuke Imai, Gary King, Olivia Lau
 Description: Zelig is an easy-to-use program that can estimate, and
     help interpret the results of, an enormous range of statistical
     models. It literally is ``everyone's statistical software'' because
@@ -30,6 +30,7 @@ Depends:
     quantreg,
     geepack,
     MCMCpack,
+    Amelia,
     maxLik
 Suggests:
     testthat,
