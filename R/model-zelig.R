@@ -102,21 +102,10 @@ z$methods(
 z$methods(
   cite = function() {
     title <- paste(.self$name, ": ", .self$description, sep="")
-    cat("How to cite this model in Zelig:\n  ",
-        .self$authors, ". ", .self$year, ".\n  ", title,
-        "\n  in Kosuke Imai, Gary King, and Olivia Lau, ",
-        "\"Zelig: Everyone's Statistical Software,\"",
-        "\n  ", .self$url, "\n", sep = "")
-  }
-)
-
-z$methods(
-  citenew = function() {
-    title <- paste(.self$name, ": ", .self$description, sep="")
     localauthors <- ""
-    if (length(.self$modelauthors) & .self$modelauthors!=""){
+    if (length(.self$modelauthors) & (!identical(.self$modelauthors,""))){   # covers both empty styles: character(0) and "" --the latter being length 1.
         localauthors<-.self$modelauthors
-    }else if (length(.self$packageauthors) & .self$packageauthors!=""){
+    }else if (length(.self$packageauthors) & (!identical(.self$packageauthors,""))){
         localauthors<-.self$packageauthors
     }else{
         localauthors<-.self$zeligauthors
@@ -124,7 +113,7 @@ z$methods(
     cat("How to cite this model in Zelig:\n  ",
     localauthors, ". ", .self$year, ".\n  ", title,
     "\n  in ", .self$zeligauthors,
-    "\"Zelig: Everyone's Statistical Software,\"",
+    ", \"Zelig: Everyone's Statistical Software,\"",
     "\n  ", .self$url, "\n", sep = "")
   }
 )
