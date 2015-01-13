@@ -125,6 +125,20 @@ zls$methods(
     pb = (B+1-sum(T< as.numeric(omega)))/(B+1)
     
     .self$test.statistics$gim <- list(stat=omega, pval=pb)
+
+    # When method used, add to references
+    gimreference <- bibentry(
+        bibtype="Article",
+        title = "How Robust Standard Errors Expose Methodological Problems They Do Not Fix, and What to Do About It",
+        author = c(
+        person("Gary", "King"),
+        person("Margret E.", "Roberts")
+        ),
+        journal = "Political Analysis",
+        year = 2014,
+        pages = "1-21",
+        url =  "http://j.mp/InK5jU")
+    .self$refs <- c(.self$refs, gimreference)
   }
 )
 
