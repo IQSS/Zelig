@@ -6,6 +6,7 @@ zbayes$methods(
   initialize = function() {
     callSuper()
     .self$packageauthors <- "Andrew D. Martin, Kevin M. Quinn, and Jong Hee Park"
+    .self$modelauthors <- "Ben Goodrich, and Ying Lu"
   }
 )
 

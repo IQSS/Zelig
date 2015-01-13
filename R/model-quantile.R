@@ -11,6 +11,7 @@ zquantile$methods(
     .self$name <- "quantile"
     .self$authors <- "Alexander D'Amour"
     .self$packageauthors <- "Roger Koenker"
+    .self$modelauthors <- "Alexander D'Amour"
     .self$year <- 2008
     .self$category <- "continuous"
     .self$description <- "Quantile Regression for Continuous Dependent Variables"

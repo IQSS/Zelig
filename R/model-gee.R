@@ -6,6 +6,7 @@ zgee$methods(
   initialize = function() {
     callSuper()
     .self$packageauthors <- "Søren Højsgaard, Ulrich Halekoh, and Jun Yan"
+    .self$modelauthors <- "Patrick Lam"
   }
 )
 
