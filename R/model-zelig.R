@@ -164,7 +164,6 @@ z$methods(
     .self$formula <- formula
     .self$by <- by
     # MI datasets from Amelia
-    # CC: can be rewritten as:
     if (class(data) == "amelia"){
       idata <- data$imputations
       .self$data <- rbind_all(lapply(seq(length(idata)),
@@ -172,6 +171,7 @@ z$methods(
                                        cbind(imputationNumber, idata[[imputationNumber]])))
       .self$by <- c("imputationNumber", by)
       .self$mi <- TRUE
+      .self$refs<-c(.self$refs,citation("Amelia"))
     } else {
       .self$data <- data
       .self$mi <- FALSE
