@@ -24,13 +24,13 @@ znormal$methods(
   param = function(z.out) {
     degrees.freedom <- z.out$df.residual
     sig2 <- base::summary(z.out)$dispersion # not to call class summary method
-    simparam <- mvrnorm(n = .self$num,
+    simparam.local <- mvrnorm(n = .self$num,
                               mu = coef(z.out),
                               Sigma = vcov(z.out))
     simalpha <- sqrt(degrees.freedom * sig2 
                      / rchisq(.self$num, degrees.freedom))
-    simparam <- list(simparam = simparam, simalpha = simalpha)
-    return(simparam)
+    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+    return(simparam.local)
   }
 )
 

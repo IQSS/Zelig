@@ -26,10 +26,10 @@ zprobit$methods(
     pi.sim <- pnorm(b1 * x.init[,1] + b0) 
     y.sim <- rbinom(nsim, 1, pi.sim)
     y.true <- pnorm(b1 * x.init[,2] + b0)
-    data <- cbind(x.init, y.sim, y.true)
+    data.local <- cbind(x.init, y.sim, y.true)
     
     z <- zprobit$new()
-    callSuper(z, data)
+    callSuper(z, data.local)
     
   }
 )

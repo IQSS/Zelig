@@ -44,11 +44,11 @@ zgee$methods(
     simalpha <- rnorm(n = .self$num,
                       mean = shape[1][[1]],
                       sd = shape[2][[1]])
-    simparam <- mvrnorm(n = .self$num,
+    simparam.local <- mvrnorm(n = .self$num,
                         mu = coef(z.out),
                         Sigma = so$cov.unscaled)
-    simparam <- list(simparam = simparam, simalpha = simalpha)
-    return(simparam)
+    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+    return(simparam.local)
   }
 )
 

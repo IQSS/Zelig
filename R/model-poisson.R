@@ -24,11 +24,11 @@ zpoisson$methods(
 zpoisson$methods(
   qi = function(simparam, mm) {
     eta <- simparam %*% t(mm)
-    theta <- matrix(.self$linkinv(eta), nrow = nrow(simparam))
-    ev <- theta
-    pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
-    for (i in 1:ncol(theta))
-      pv[, i] <- rpois(nrow(theta), lambda = theta[, i])
+    theta.local <- matrix(.self$linkinv(eta), nrow = nrow(simparam))
+    ev <- theta.local
+    pv <- matrix(NA, nrow = nrow(theta.local), ncol = ncol(theta.local))
+    for (i in 1:ncol(theta.local))
+      pv[, i] <- rpois(nrow(theta.local), lambda = theta.local[, i])
     return(list(ev = ev, pv = pv))
   }
 )
@@ -45,10 +45,10 @@ zpoisson$methods(
     lambda.sim <- exp(b1 * x.init[,1] + b0)
     y.sim <- rpois(nsim, lambda.sim)
     y.true <- exp(b1 * x.init[,2] + b0)
-    data <- cbind(x.init, y.sim, y.true)
+    data.local <- cbind(x.init, y.sim, y.true)
     
     z <- zpoisson$new()
-    callSuper(z, data)
+    callSuper(z, data.local)
     
   }
 )

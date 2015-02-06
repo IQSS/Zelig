@@ -38,10 +38,10 @@ ztobit$methods(
   param = function(z.out) {
     mu <- c(coef(z.out), log(z.out$scale))
     simfull <- mvrnorm(n = .self$num, mu = mu, Sigma = vcov(z.out))
-    simparam <- as.matrix(simfull[, -ncol(simfull)])
+    simparam.local <- as.matrix(simfull[, -ncol(simfull)])
     simalpha <- exp(as.matrix(simfull[, ncol(simfull)]))
-    simparam <- list(simparam = simparam, simalpha = simalpha)
-    return(simparam)
+    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+    return(simparam.local)
   }
 )
 

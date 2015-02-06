@@ -33,10 +33,10 @@ znegbin$methods(
 znegbin$methods(
   param = function(z.out) {
     simalpha <- z.out$theta
-    simparam <- mvrnorm(n = .self$num, mu = coef(z.out),
+    simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
                         Sigma = vcov(z.out))
-    simparam <- list(simparam = simparam, simalpha = simalpha)
-    return(simparam)
+    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+    return(simparam.local)
   }
 )
 
@@ -67,10 +67,10 @@ znegbin$methods(
     mu.sim <- exp(b1 * x.init[,1] + b0)
     y.sim <- rnbinom(nsim, 1, mu = mu.sim)
     y.true <- exp(b1 * x.init[,2] + b0)
-    data <- cbind(x.init, y.sim, y.true)
+    data.local <- cbind(x.init, y.sim, y.true)
     
     z <- znegbin$new()
-    callSuper(z, data)
+    callSuper(z, data.local)
     
   }
 )

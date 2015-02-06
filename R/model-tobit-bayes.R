@@ -25,9 +25,9 @@ ztobitbayes$methods(
       .self$below <- 0
     if (length(.self$above) == 0)
       .self$above <- Inf
-    simparam <- list()
-    simparam$simparam <- z.out[, 1:(ncol(z.out) - 1)]
-    simparam$simalpha <- sqrt(z.out[, ncol(z.out)])
-    return(simparam)
+    simparam.local <- list()
+    simparam.local$simparam <- z.out[, 1:(ncol(z.out) - 1)]
+    simparam.local$simalpha <- sqrt(z.out[, ncol(z.out)])
+    return(simparam.local)
   }
 )

@@ -23,10 +23,10 @@ zgamma$methods(
   param = function(z.out) {
     shape <- gamma.shape(z.out)
     simalpha <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
-    simparam <- mvrnorm(n = .self$num, mu = coef(z.out),
+    simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
                                    Sigma = vcov(z.out))
-    simparam <- list(simparam = simparam, simalpha = simalpha)
-    return(simparam)
+    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+    return(simparam.local)
   }
 )
 

@@ -21,8 +21,8 @@ zpoissongee$methods(
 
 zpoissongee$methods(
   param = function(z.out) {
-    simparam <- callSuper(z.out)
-    return(simparam$simparam) # no ancillary parameter
+    simparam.local <- callSuper(z.out)
+    return(simparam.local$simparam) # no ancillary parameter
   }
 )
 
