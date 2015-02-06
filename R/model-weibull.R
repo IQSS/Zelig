@@ -44,8 +44,8 @@ zweibull$methods(
     cov <- vcov(z.out)
     simulations <- mvrnorm(.self$num, mu = mu, Sigma = cov)
     simparam.local <- as.matrix(simulations[, 1:length(coeff)])
-    simalpha <- as.matrix(simulations[, -(1:length(coeff))])
-    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+    simalpha.local <- as.matrix(simulations[, -(1:length(coeff))])
+    simparam.local <- list(simparam = simparam.local, simalpha = simalpha.local)
     return(simparam.local)
   }
 )

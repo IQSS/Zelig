@@ -32,10 +32,10 @@ znegbin$methods(
 
 znegbin$methods(
   param = function(z.out) {
-    simalpha <- z.out$theta
+    simalpha.local <- z.out$theta
     simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
                         Sigma = vcov(z.out))
-    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+    simparam.local <- list(simparam = simparam.local, simalpha = simalpha.local)
     return(simparam.local)
   }
 )
