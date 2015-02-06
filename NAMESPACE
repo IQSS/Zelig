@@ -1,4 +1,4 @@
-import(sandwich, methods, MASS, survival, VGAM, jsonlite, AER, plyr, dplyr,
+import(sandwich, methods, MASS, survival, VGAM, jsonlite, AER, dplyr,
        quantreg, geepack, MCMCpack, Amelia, maxLik)
 
 exportPattern("^[[:alpha:]]+")
