@@ -497,31 +497,50 @@ z$methods(
 
 z$methods(
   test = function(z, data) {
-    z$zelig(y.sim ~ x.sim, data = data)
-    z$setrange(x.sim = data$x.seq)    
-    z$sim(num = nrow(data))
-    
-    ev <- c()
-    for(j in 1:nrow(data)){
-      foo <- lapply(z$sim.out$range[j][[1]]$ev, mean)
-      ev <- append(ev, foo[[1]])  
+    survival = c("Zelig-weibull", "Zelig-exp")
+    if(class(z)[1] %in% survival){
+      z$zelig(Surv(time.sim, event) ~ x.sim, data = data)
     }
     
-    # Kolmogorov–Smirnov test
-    kstest <- ks.test(ev, data$y.true)
-    .self$mcunit.test <- if(kstest$p.value > .1) 'PASS' else 'FAIL'
-    if(kstest$p.value < .05) {
-      cat("\nFailed K-S Test.", sep = "")
-    } else {
-      cat("\nPassed K-S Test.")
+    else{
+      z$zelig(y.sim ~ x.sim, data = data)
     }
+    #     z$setrange(x.sim = data$x.seq)    
+    #     z$sim(num = nrow(data))
+    return(z)
     
-    output = list(
-      kstest = kstest,
-      data = data
-    )
+    #     ev <- c()
+    # 
+    #     for(i in 1:k){
+    #       z$sim(num = nrow(data))
+    #       ev <- append(ev, z$sim.out$x$ev)
+    #     }
+    #     
+    #     return(ev)
     
-    return(output)
+    
+    
+    #     ev <- c()
+    #     for(j in 1:nrow(data)){
+    #       foo <- lapply(z$sim.out$range[j][[1]]$ev, mean)
+    #       ev <- append(ev, foo[[1]])  
+    #     }
+    #     
+    #     # Kolmogorov–Smirnov test
+    #     kstest <- ks.test(ev, data$y.true)
+    #     .self$mcunit.test <- if(kstest$p.value > .1) 'PASS' else 'FAIL'
+    #     if(kstest$p.value < .05) {
+    #       cat("\nFailed K-S Test.", sep = "")
+    #     } else {
+    #       cat("\nPassed K-S Test.")
+    #     }
+    #     
+    #     output = list(
+    #       kstest = kstest,
+    #       data = data
+    #     )
+    #     
+    #     return(output)
   }
 )
 

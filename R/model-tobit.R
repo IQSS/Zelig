@@ -61,3 +61,20 @@ ztobit$methods(
     return(list(ev = ev, pv = pv))
   }
 )
+
+ztobit$methods(
+  test = function(b0 = -1, b1 = 1, nsim = 1000, minx = -1, maxx = 1) {
+    
+    x.init <- mcunit.init(nsim, minx, maxx)
+    
+    mu.sim <- b0 + b1 * x.init[,1]
+    y.star <- rnorm(nsim, mean = mu.sim, sd = 1)
+    y.sim <- (y.star > 0) * y.star #all positive, censor negative to 0
+    y.true <- b0 + b1 * x.init[,2]
+    data = data.frame(cbind(x.init, y.star, y.sim, y.true))
+    
+    z <- ztobit$new()
+    callSuper(z, data)
+    #     z$zelig(y.sim~x.sim, data = data)
+  }
+)

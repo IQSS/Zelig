@@ -62,6 +62,24 @@ zweibull$methods(
   }
 )
 
+zweibull$methods(
+  test = function(b0 = -1, b1 = 1, nsim = 1000, minx = -1, maxx = 1) {
+    
+    x.init <- mcunit.init(nsim, minx, maxx)
+    
+    
+    time.sim = rweibull(nsim, shape=1, scale=exp(b0 + b1 * x.init[,1])) 
+    #     censor = rweibull(n, shape=1, scale=lambdaC)   #censoring time
+    #     time = pmin(time, censor)
+    event = time.sim==time.sim   # set to 1 if event is observed
+    time.true = rweibull(nsim, shape=1, scale=exp(b0 + b1 * x.init[,2]))
+    data = data.frame(cbind(x.init, time.sim, event, time.true))
+    
+    z <- zweibull$new()
+    callSuper(z, data)
+  }
+)
+
 # if (model %in% c("weibull", "Weibull", "lognorm", "exp"))
 #   link <- survreg.distributions[[object$dist]]$itrans
 # else if (model == "tobit")
