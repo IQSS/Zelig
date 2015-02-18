@@ -1,3 +1,6 @@
+#' @include model-zelig.R
+#' @include model-binchoice.R
+#' @include model-gee.R
 zbinchoicegee <- setRefClass("Zelig-binchoice-gee",
                            contains = c("Zelig-gee",
                                         "Zelig-binchoice"))

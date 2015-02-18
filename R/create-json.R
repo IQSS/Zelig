@@ -139,8 +139,8 @@ zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "tobitbayes" = z5tobitbayes$ljson,
                     "weibull" = z5weibull$ljson))
 
-cat(toJSON(zeligmodels, pretty = TRUE),
-    file = file.path("inst/JSON", "zelig5models.json"))
+# cat(toJSON(zeligmodels, pretty = TRUE),
+#     file = file.path("inst/JSON", "zelig5models.json"))
 
 # cat(toJSON(zeligmodels, pretty = TRUE))
 

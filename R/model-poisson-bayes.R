@@ -1,6 +1,6 @@
 #' @include model-zelig.R
 #' @include model-bayes.R
-#' @include model-poisson
+#' @include model-poisson.R
 
 zpoissonbayes <- setRefClass("Zelig-poisson-bayes",
                              contains = c("Zelig-bayes",

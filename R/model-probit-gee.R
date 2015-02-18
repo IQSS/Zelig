@@ -1,3 +1,4 @@
+#' @include model-binchoice-gee.R
 zprobitgee <- setRefClass("Zelig-probit-gee",
                           contains = c("Zelig-binchoice-gee"))
 
