@@ -32,7 +32,8 @@ exportClasses(
      "Zelig-poisson-bayes",
      "Zelig-probit-bayes",
      "Zelig-tobit-bayes",
-     "Zelig-weibull"
+     "Zelig-weibull",
+     "Zelig-coxph"
 )
 
 importFrom(methods, setRefClass)

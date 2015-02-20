@@ -69,6 +69,7 @@ Collate:
     'model-probit-bayes.R'
     'model-tobit-bayes.R'
     'model-weibull.R'
+    'model-coxph.R'
     'create-json.R'
     'wrappers.R'
     'plots.R'

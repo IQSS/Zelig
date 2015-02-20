@@ -119,6 +119,8 @@ reduce <- function(dataset, s, formula, data) {
     pred <- try(terms(lm(formula, data), "predvars"), silent = TRUE)
     if ("try-error" %in% class(pred)) # exp and weibull
       pred <- try(terms(survreg(formula, data), "predvars"), silent = TRUE)
+    if ("try-error" %in% class(pred)) # coxph
+      pred <- try(terms(coxph(formula, data), "predvars"), silent = TRUE)
     n <- union(as.character(attr(pred, "predvars"))[-1],
                names(dataset))
     if (is.list(s[[1]]))
