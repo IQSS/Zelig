@@ -253,7 +253,7 @@ plot.qi <- function (obj, ...) {
 
 #' Method for plotting qi simulations across a range within a variable, with confidence intervals
 #'
-#' @param x A reference class zelig5 object
+#' @param obj A reference class zelig5 object
 #' @param qi a character-string specifying the quantity of interest to plot
 #' @param var The variable to be used on the x-axis. Default is the variable
 #' across all the chosen values with smallest nonzero variance
