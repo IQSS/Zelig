@@ -1,6 +1,6 @@
 #' @include model-zelig.R
-#' @include model-probit.R
-
+#' @include model-bayes.R
+#' @include model-tobit.R
 ztobitbayes <- setRefClass("Zelig-tobit-bayes",
                            contains = c("Zelig-bayes",
                                         "Zelig-tobit"))

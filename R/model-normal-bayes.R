@@ -1,6 +1,6 @@
 #' @include model-zelig.R
 #' @include model-bayes.R
-#' @include model-normal
+#' @include model-normal.R
 
 znormalbayes <- setRefClass("Zelig-normal-bayes",
                              contains = c("Zelig-bayes",
