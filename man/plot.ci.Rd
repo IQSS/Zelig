@@ -7,6 +7,8 @@
 \method{plot}{ci}(obj, qi="ev", var=NULL, ..., legcol="gray20", col=NULL, leg=1, legpos=NULL)
 }
 \arguments{
+\item{obj}{A reference class zelig5 object}
+
 \item{qi}{a character-string specifying the quantity of interest to plot}
 
 \item{var}{The variable to be used on the x-axis. Default is the variable
@@ -35,8 +37,6 @@ position of the legend. 1 to 4 correspond to ``SE'', ``SW'', ``NW'', and
 
 \item{legpos}{``legend type'', exact coordinates and sizes for legend.
 Overrides argment ``leg.type''}
-
-\item{x}{A reference class zelig5 object}
 }
 \value{
 the current graphical parameters. This is subject to change in future
