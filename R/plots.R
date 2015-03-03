@@ -559,7 +559,55 @@ plot.ci <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
     text(hx,my+3*dy,labels=paste("ci",ci[3],sep=""),pos=4,cex=0.5,col=legcol)
 }
 
-
+#' Receiver Operator Characteristic Plots
+#'
+#' The 'rocplot' command generates a receiver operator characteristic plot to
+#' compare the in-sample (default) or out-of-sample fit for two logit or probit
+#' regressions.
+#'
+#' @usage
+#' rocplot(y1, y2, fitted1, fitted2,
+#' cutoff = seq(from=0, to=1, length=100), lty1="solid",
+#' lty2="dashed", lwd1=par("lwd"), lwd2=par("lwd"),
+#' col1=par("col"), col2=par("col"),
+#' main="ROC Curve",
+#' xlab = "Proportion of 1's Correctly Predicted",
+#' ylab="Proportion of 0's Correctly Predicted",
+#' plot = TRUE, 
+#' ...
+#' )
+#'
+#' @param z1 first model
+#' @param z2 second model
+#' @param cutoff A vector of cut-off values between 0 and 1, at which to
+#'   evaluate the proportion of 0s and 1s correctly predicted by the first and
+#'   second model.  By default, this is 100 increments between 0 and 1
+#'   inclusive
+#' @param lty1 the line type of the first model (defaults to 'line')
+#' @param lty2 the line type of the second model (defaults to 'dashed')
+#' @param lwd1 the line width of the first model (defaults to 1)
+#' @param lwd2 the line width of the second model (defaults to 1)
+#' @param col1 the color of the first model (defaults to 'black')
+#' @param col2 the color of the second model (defaults to 'black')
+#' @param main a title for the plot (defaults to "ROC Curve")
+#' @param xlab a label for the X-axis
+#' @param ylab a lavel for the Y-axis
+#' @param plot whether to generate a plot to the selected device
+#' @param \dots additional parameters to be passed to the plot
+#' @return if plot is TRUE, rocplot simply generates a plot. Otherwise, a list
+#'   with the following is produced:
+#'   \item{roc1}{a matrix containing a vector of x-coordinates and
+#'     y-coordinates corresponding to the number of ones and zeros correctly
+#'     predicted for the first model.}
+#'   \item{roc2}{a matrix containing a vector of x-coordinates and
+#'     y-coordinates corresponding to the number of ones and zeros correctly
+#'     predicted for the second model.}
+#'   \item{area1}{the area under the first ROC curve, calculated using
+#'     Reimann sums.}
+#'   \item{area2}{the area under the second ROC curve, calculated using
+#'     Reimann sums.}
+#' @export
+#" @author Kosuke Imai and Olivia Lau
 rocplot <- function(z1, z2,
                     cutoff = seq(from=0, to=1, length=100), lty1="solid",
                     lty2="dashed", lwd1=par("lwd"), lwd2=par("lwd"),
@@ -569,10 +617,10 @@ rocplot <- function(z1, z2,
                     ylab="Proportion of 0's Correctly Predicted",
                     plot = TRUE, 
                     ...) {
-  y1 <- z1$data[as.character(z1$formula[[2]])]
-  y2 <- z2$data[as.character(z2$formula[[2]])]
-  fitted1 <- z1$zelig.out$z.out[[1]]$fitted
-  fitted2 <- z2$zelig.out$z.out[[1]]$fitted
+  y1 <- z1$data[as.character(z.out1$formula[[2]])]
+  y2 <- z2$data[as.character(z.out2$formula[[2]])]
+  fitted1 <- fitted(z1)[[1]]
+  fitted2 <- fitted(z2)[[1]]
   roc1 <- roc2 <- matrix(NA, nrow = length(cutoff), ncol = 2)
   colnames(roc1) <- colnames(roc2) <- c("ones", "zeros")
   for (i in 1:length(cutoff)) {
