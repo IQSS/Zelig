@@ -183,7 +183,7 @@ z$methods(
   set = function(...) {
     s <-list(...)
     f <- update(.self$formula, 1 ~ .)
-    update <- .self$data %>% 
+    update <- na.omit(.self$data) %>% # remove missing values
       group_by_(.self$by) %>%
       do(mm = model.matrix(f, reduce(dataset = ., s, 
                                      formula = .self$formula,
