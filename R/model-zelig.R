@@ -55,7 +55,10 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         explanatory = "ANY",
                                         
                                         #Unit Testing
-                                        mcunit.test = "ANY"))
+                                        mcunit.test = "ANY",
+                                        
+                                        # Feedback
+                                        with.feedback = "logical"))
 
 z$methods(
   initialize = function() {
@@ -87,6 +90,8 @@ z$methods(
                            "binary")
     .self$outcome <- ""
     .self$wrapper <- "wrapper"
+    # Feedback installed
+    .self$with.feedback <- require(ZeligFeedback)
   }
 )
 
@@ -142,7 +147,6 @@ z$methods(
     cat(s, sep="\n")
   }
 )
-
 
 z$methods(
   zelig = function(formula, data, ..., weights = NULL, by) {
@@ -544,6 +548,28 @@ z$methods(
   }
 )
 
+z$methods(
+  feedback = function() {
+    if (!.self$with.feedback)
+      return("ZeligFeedback package not installed")
+    # If ZeligFeedback is installed
+    print("ZeligFeedback package installed")
+    print(ZeligFeedback::feedback(.self))
+  }
+)
+
+z$methods(
+  finalize = function() {
+    if (!.self$with.feedback)
+      return("ZeligFeedback package not installed")
+    # If ZeligFeedback is installed
+    print("Thanks for providing Zelig usage information")
+    # print(ZeligFeedback::feedback(.self))
+    write(paste("feedback", ZeligFeedback::feedback(.self)),
+          file = paste0("test-zelig-finalize-", date(), ".txt"))
+  }
+)
+
 setMethod("summary", "Zelig",
           function(object, ...) {
             object$summarize()
@@ -573,7 +599,6 @@ setMethod("predict", "Zelig",
             object$getpredict()
           }
 )
-
 
 #       idx <- match(names(.self$setx.labels),
 #                    names(.self$sim.out),
