@@ -363,6 +363,16 @@ z$methods(
         cat("---\nSignif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n")
         cat("\n")
       }
+      
+      if(!is.null(.self$test.statistics$gim.criteria)){
+          if(.self$test.statistics$gim.criteria){
+              cat("According to the GIM-rule-of-thumb, your model probably has some type of specification error.\n",
+              "We suggest you run model diagnostics and seek to fix the problem.\n",
+              "You may also wish to run the full GIM test (which takes more time) to be sure.\n",
+              "See http://.... for more information.\n \n")
+          }
+      }
+      
       cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
       niceprint<-function(obj, name){

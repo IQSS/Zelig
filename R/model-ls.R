@@ -22,8 +22,13 @@ zls$methods(
     .self$model.call <- .self$zelig.call
     callSuper(formula = formula, data = data, ...,
               weights = NULL, by = by)
+    # Automated Background Test Statistics and Criteria
     rse<-plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
-    .self$test.statistics<- list(robust.se = rse)
+    rse.se <- sqrt(diag(rse[[1]]))                 # Needs to work with "by" argument
+    est.se <- sqrt(diag(.self$getvcov()[[1]]))
+    print(est.se/rse.se)
+    quickGim <- any( est.se > 1.5*rse.se | rse.se > 1.5*est.se )
+    .self$test.statistics<- list(robust.se = rse, gim.criteria = quickGim)
   }
 )
 
