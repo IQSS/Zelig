@@ -90,8 +90,8 @@ z$methods(
                            "binary")
     .self$outcome <- ""
     .self$wrapper <- "wrapper"
-    # Feedback installed
-    .self$with.feedback <- require(ZeligFeedback)
+    # Is 'ZeligFeedback' package installed?
+    .self$with.feedback <- "ZeligFeedback" %in% installed.packages()
   }
 )
 
