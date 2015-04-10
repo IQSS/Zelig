@@ -531,6 +531,16 @@ z$methods(
 )
 
 z$methods(
+  getfitted = function() {
+    result <- lapply(.self$zelig.out$z.out, fitted)
+    if ("try-error" %in% class(result))
+      stop("'predict' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  }
+)
+
+z$methods(
   getpredict = function() {
     "Get predcted values"
     result <- lapply(.self$zelig.out$z.out, predict)
@@ -664,6 +674,12 @@ setMethod("vcov", "Zelig",
 setMethod("coef", "Zelig",
           function(object, ...) {
             object$getcoef()
+          }
+)
+
+setMethod("fitted", "Zelig",
+          function(object, ...) {
+            object$getfitted()
           }
 )
 
