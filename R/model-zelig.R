@@ -198,7 +198,7 @@ z$methods(
 
 z$methods(
   zelig = function(formula, data, ..., weights = NULL, by) {
-    "The zelig command estimates a variety of statistical models."
+    "The zelig command estimates a variety of statistical models"
     fn2 <- function(fc, data) {
       fc$data <- data
       return(fc)

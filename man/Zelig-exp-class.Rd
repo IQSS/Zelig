@@ -13,6 +13,6 @@ Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-exp.html}
 \describe{
 \item{\code{test(z, data)}}{Monte Carlo Unit Test}
 
-\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models.}
+\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models}
 }}
 

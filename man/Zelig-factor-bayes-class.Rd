@@ -11,6 +11,6 @@ Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-factorbayes.html}
 \section{Methods}{
 
 \describe{
-\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models.}
+\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models}
 }}
 

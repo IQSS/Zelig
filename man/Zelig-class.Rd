@@ -128,6 +128,6 @@ Zelig reference class: \url{http://zeligproject.org/}
 
 \item{\code{toJSON()}}{Convert Zelig object to JSON format}
 
-\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models.}
+\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models}
 }}
 
