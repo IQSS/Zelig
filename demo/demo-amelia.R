@@ -22,8 +22,6 @@ z5$zelig(infl ~ trade + civlib, data = imp)
 z5$zelig(infl ~ trade + civlib, data = imp, by = "country")
 z5
 z5$zelig.out
-z5$zelig.out$mods
-.self <- z5
 z5$model.call
 z5$zelig.call
 z5$setx(civlib = .5)

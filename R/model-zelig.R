@@ -1,6 +1,6 @@
 #' Zelig reference class
 #'
-#' Zelig reference class: \url{http://zeligproject.org/}
+#' Zelig website: \url{http://zeligproject.org/}
 #'
 #' @import methods
 #' @export Zelig
@@ -237,7 +237,8 @@ z$methods(
     "Setting Explanatory Variable Values"
     s <-list(...)
     f <- update(.self$formula, 1 ~ .)
-    update <- na.omit(.self$data) %>% # remove missing values
+    # update <- na.omit(.self$data) %>% # remove missing values
+    update <- .self$data %>%
       group_by_(.self$by) %>%
       do(mm = model.matrix(f, reduce(dataset = ., s, 
                                      formula = .self$formula,

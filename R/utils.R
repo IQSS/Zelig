@@ -113,12 +113,12 @@ cluster.formula <- function (formula, cluster) {
 }
 
 reduce <- function(dataset, s, formula, data) {
-  dataset <- as.data.frame(dataset)
+  pred <- try(terms(fit <- lm(formula, data), "predvars"), silent = TRUE)
+  if ("try-error" %in% class(pred)) # exp and weibull
+    pred <- try(terms(fit <- survreg(formula, data), "predvars"), silent = TRUE)
+  dataset <- model.frame(fit)
   ldata <- lapply(dataset, avg)
   if (length(s) > 0) {
-    pred <- try(terms(lm(formula, data), "predvars"), silent = TRUE)
-    if ("try-error" %in% class(pred)) # exp and weibull
-      pred <- try(terms(survreg(formula, data), "predvars"), silent = TRUE)
     n <- union(as.character(attr(pred, "predvars"))[-1],
                names(dataset))
     if (is.list(s[[1]]))
