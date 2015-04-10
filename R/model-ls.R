@@ -1,4 +1,12 @@
+#' Least Squares Regression for Continuous Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-ls.html}
+#' @import methods
+#' @export Zelig-ls
+#' @exportClass Zelig-ls
+#'
 #' @include model-zelig.R
+
 zls <- setRefClass("Zelig-ls", contains = "Zelig")
 
 zls$methods(

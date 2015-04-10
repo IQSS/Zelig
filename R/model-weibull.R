@@ -1,4 +1,12 @@
+#' Weibull Regression for Duration Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-weibull.html}
+#' @import methods
+#' @export Zelig-tobit-bayes
+#' @exportClass Zelig-tobit-bayes
+#'
 #' @include model-zelig.R
+
 zweibull <- setRefClass("Zelig-weibull",
                         contains = "Zelig",
                         fields = list(simalpha = "list",

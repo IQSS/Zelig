@@ -1,6 +1,17 @@
+#' Logistic Regression for Dichotomous Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-logit.html}
+#' @import methods
+#' @export Zelig-logit
+#' @exportClass Zelig-logit
+#' 
+#' @include model-zelig.R
+#' @include model-gee.R
+#' @include model-gamma.R
 #' @include model-zelig.R
 #' @include model-glm.R
 #' @include model-binchoice.R
+
 zlogit <- setRefClass("Zelig-logit",
                       contains = "Zelig-binchoice")
   

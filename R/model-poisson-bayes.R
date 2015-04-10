@@ -1,3 +1,10 @@
+#' Bayesian Poisson Regression
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-poissonbayes.html}
+#' @import methods
+#' @export Zelig-poisson-bayes
+#' @exportClass Zelig-poisson-bayes
+#'
 #' @include model-zelig.R
 #' @include model-bayes.R
 #' @include model-poisson.R

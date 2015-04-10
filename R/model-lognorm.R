@@ -1,4 +1,12 @@
+#' Log-Normal Regression for Duration Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-lognorm.html}
+#' @import methods
+#' @export Zelig-lognorm
+#' @exportClass Zelig-lognorm
+#' 
 #' @include model-zelig.R
+
 zlognorm <- setRefClass("Zelig-lognorm",
                         contains ="Zelig",
                         fields = list(linkinv = "function"))

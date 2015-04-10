@@ -1,7 +1,15 @@
+#' Rare Events Logistic Regression for Dichotomous Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-relogit.html}
+#' @import methods
+#' @export Zelig-relogit
+#' @exportClass Zelig-relogit
+#'
 #' @include model-zelig.R
 #' @include model-glm.R
 #' @include model-binchoice.R
 #' @include model-logit.R
+
 zrelogit <- setRefClass("Zelig-relogit",
                       contains = "Zelig",
                       fields = list(family = "character",

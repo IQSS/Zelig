@@ -1,5 +1,7 @@
 #' Zelig reference class
 #'
+#' Zelig reference class: \url{http://zeligproject.org/}
+#'
 #' @import methods
 #' @export Zelig
 #' @exportClass Zelig

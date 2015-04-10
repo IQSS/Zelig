@@ -1,5 +1,13 @@
+#' Gamma Regression for Continuous, Positive Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-gamma.html}
+#' @import methods
+#' @export Zelig-gamma
+#' @exportClass Zelig-gamma
+#' 
 #' @include model-zelig.R
 #' @include model-glm.R
+
 zgamma <- setRefClass("Zelig-gamma",
                       contains = "Zelig-glm")
 

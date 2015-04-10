@@ -1,4 +1,12 @@
+#' Negative Binomial Regression for Event Count Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-negbin.html}
+#' @import methods
+#' @export Zelig-negbin
+#' @exportClass Zelig-negbin
+#'
 #' @include model-zelig.R
+
 znegbin <- setRefClass("Zelig-negbin",
                          contains = "Zelig",
                          field = list(simalpha = "list" # ancillary parameters

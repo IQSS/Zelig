@@ -6,7 +6,7 @@
 \alias{z}
 \title{Zelig reference class}
 \description{
-Zelig reference class
+Zelig reference class: \url{http://zeligproject.org/}
 }
 \section{Fields}{
 

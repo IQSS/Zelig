@@ -1,5 +1,13 @@
+#' Poisson Regression for Event Count Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-poisson.html}
+#' @import methods
+#' @export Zelig-poisson
+#' @exportClass Zelig-poisson
+#'
 #' @include model-zelig.R
 #' @include model-glm.R
+
 zpoisson <- setRefClass("Zelig-poisson",
                         contains = "Zelig-glm",
                         fields = list(theta = "ANY"))
