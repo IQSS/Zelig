@@ -206,7 +206,7 @@ z$methods(
     .self$formula <- formula
     .self$by <- by
     # MI datasets from Amelia
-    if (class(data) == "amelia"){
+    if ("amelia" %in% class(data)){
       idata <- data$imputations
       .self$data <- rbind_all(lapply(seq(length(idata)),
                                      function(imputationNumber)
