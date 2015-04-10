@@ -1,3 +1,10 @@
+#' Bayesian Factor Analysis
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-factorbayes.html}
+#' @import methods
+#' @export Zelig-factor-bayes
+#' @exportClass Zelig-factor-bayes
+#' 
 #' @include model-zelig.R
 
 zfactorbayes <- setRefClass("Zelig-factor-bayes",

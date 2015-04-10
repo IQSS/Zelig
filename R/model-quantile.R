@@ -1,4 +1,12 @@
+#' Quantile Regression for Continuous Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-quantile.html}
+#' @import methods
+#' @export Zelig-quantile
+#' @exportClass Zelig-quantile
+#'
 #' @include model-zelig.R
+
 zquantile <- setRefClass("Zelig-quantile",
                          contains = "Zelig",
                          field = list(tau = "ANY"

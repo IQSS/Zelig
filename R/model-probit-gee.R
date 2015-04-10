@@ -1,4 +1,12 @@
+#' Generalized Estimating Equation for Probit Regression
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-probitgee.html}
+#' @import methods
+#' @export Zelig-probit-gee
+#' @exportClass Zelig-probit-gee
+#'
 #' @include model-binchoice-gee.R
+
 zprobitgee <- setRefClass("Zelig-probit-gee",
                           contains = c("Zelig-binchoice-gee"))
 

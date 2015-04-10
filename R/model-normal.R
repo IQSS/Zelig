@@ -1,5 +1,13 @@
+#' Normal Regression for Continuous Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-normal.html}
+#' @import methods
+#' @export Zelig-normal
+#' @exportClass Zelig-normal
+#'
 #' @include model-zelig.R
 #' @include model-glm.R
+
 znormal <- setRefClass("Zelig-normal",
                        contains = "Zelig-glm")
 

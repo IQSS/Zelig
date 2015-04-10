@@ -1,4 +1,12 @@
+#' Linear Regression for a Left-Censored Dependent Variable
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-tobit.html}
+#' @import methods
+#' @export Zelig-tobit
+#' @exportClass Zelig-tobit
+#'
 #' @include model-zelig.R
+
 ztobit <- setRefClass("Zelig-tobit",
                       contains = "Zelig",
                       fields = list(above = "numeric",

@@ -1,3 +1,14 @@
+#' Generalized Estimating Equation for Poisson Regression
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-poissongee.html}
+#' @import methods
+#' @export Zelig-poisson-gee
+#' @exportClass Zelig-poisson-gee
+#'
+#' @include model-zelig.R
+#' @include model-gee.R
+#' @include model-poisson.R
+
 zpoissongee <- setRefClass("Zelig-poisson-gee",
                            contains = c("Zelig-gee", "Zelig-poisson"))
 

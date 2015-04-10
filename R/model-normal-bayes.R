@@ -1,3 +1,10 @@
+#' Bayesian Normal Linear Regression
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-normalbayes.html}
+#' @import methods
+#' @export Zelig-normal-bayes
+#' @exportClass Zelig-normal-bayes
+#'  
 #' @include model-zelig.R
 #' @include model-bayes.R
 #' @include model-normal.R

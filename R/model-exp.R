@@ -1,4 +1,12 @@
+#' Exponential Regression for Duration Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-exp.html}
+#' @import methods
+#' @export Zelig-exp
+#' @exportClass Zelig-exp
+#' 
 #' @include model-zelig.R
+
 zexp <- setRefClass("Zelig-exp",
                         contains = "Zelig",
                         fields = list(simalpha = "list",

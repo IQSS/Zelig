@@ -1,6 +1,14 @@
+#' Probit Regression for Dichotomous Dependent Variables
+#'
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-probit.html}
+#' @import methods
+#' @export Zelig-probit
+#' @exportClass Zelig-probit
+#'
 #' @include model-zelig.R
 #' @include model-glm.R
 #' @include model-binchoice.R
+  
 zprobit <- setRefClass("Zelig-probit",
                        contains = "Zelig-binchoice")
 
