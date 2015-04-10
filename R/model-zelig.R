@@ -1,8 +1,51 @@
-#' A class description
+#' Zelig reference class
 #'
 #' @import methods
 #' @export Zelig
 #' @exportClass Zelig
+#' 
+#' @field fn R function to call to wrap
+#' @field formula Zelig formula
+#' @field weights forthcoming
+#' @field name name of the Zelig model
+#' @field data data frame or matrix
+#' @field by split the data by factors
+#' @field mi work with imputed dataset
+#' @field idx model index
+#' @field zelig.call Zelig function call
+#' @field model.call wrapped function call
+#' @field zelig.out estimated zelig model(s)
+#' @field setx.out set values
+#' @field setx.labels pretty-print qi
+#' @field bsetx is x set?
+#' @field bsetx1 is x1 set?
+#' @field bsetrange is range set?
+#' @field bsetrange1 is range1 set?
+#' @field range range
+#' @field range1 range1
+#' @field test.statistics list of test statistics
+#' @field sim.out simulated qi's
+#' @field simparam simulated parameters
+#' @field num  number of simulations
+#' @field authors Zelig model authors
+#' @field zeligauthors Zelig authors
+#' @field modelauthors wrapped model authors
+#' @field packageauthors wrapped package authors
+#' @field refs citation information
+#' @field year model is released
+#' @field description model description
+#' @field url model URL
+#' @field url.docs model documentation URL
+#' @field category model category
+#' @field vignette.url vignette URL
+#' @field json JSON export
+#' @field ljson JSON export
+#' @field outcome JSON export
+#' @field wrapper JSON export
+#' @field explanatory JSON export
+#' @field mcunit.test unit testing
+#' @field with.feedback Feedback
+
 z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         formula = "ANY", # Zelig formula
                                         weights = "numeric", 
@@ -97,15 +140,17 @@ z$methods(
 
 z$methods(
   packagename = function() {
-      # If this becomes "quote(mypackage::myfunction) then
-      # regmatches(.self$fn,regexpr("(?<=\\()(.*?)(?=\\::)",.self$fn, perl=TRUE))
-      # would extract "mypackage"
-      return(as.character(.self$fn)[2])
+    "Automatically retrieve wrapped package name"
+    # If this becomes "quote(mypackage::myfunction) then
+    # regmatches(.self$fn,regexpr("(?<=\\()(.*?)(?=\\::)",.self$fn, perl=TRUE))
+    # would extract "mypackage"
+    return(as.character(.self$fn)[2])
   }
 )
 
 z$methods(
   cite = function() {
+    "Provide citation information about Zelig and Zelig model, and about wrapped package and wrapped model"
     title <- paste(.self$name, ": ", .self$description, sep="")
     localauthors <- ""
     if (length(.self$modelauthors) & (!identical(.self$modelauthors,""))){   # covers both empty styles: character(0) and "" --the latter being length 1.
@@ -129,6 +174,7 @@ z$methods(
 
 z$methods(
   references = function(style="sphinx") {
+    "Construct a reference list specific to a Zelig model."
     mystyle <- style
     if (mystyle=="sphinx"){
         mystyle <- "text"
@@ -150,6 +196,7 @@ z$methods(
 
 z$methods(
   zelig = function(formula, data, ..., weights = NULL, by) {
+    "The zelig command estimates a variety of statistical models."
     fn2 <- function(fc, data) {
       fc$data <- data
       return(fc)
@@ -185,6 +232,7 @@ z$methods(
 
 z$methods(
   set = function(...) {
+    "Setting Explanatory Variable Values"
     s <-list(...)
     f <- update(.self$formula, 1 ~ .)
     update <- na.omit(.self$data) %>% # remove missing values
@@ -244,6 +292,7 @@ z$methods(
 
 z$methods(
   sim = function(num = 1000) {
+    "Generic Method for Computing and Organizing Simulated Quantities of Interest"
     if (length(.self$num) == 0) 
       .self$num <- num
     .self$simparam <- .self$zelig.out %>%
@@ -311,6 +360,7 @@ z$methods(
 
 z$methods(
   show = function() {
+    "Display a Zelig object"
     if ("uninitializedField" %in% class(.self$zelig.out))
       cat("Next step: Use 'zelig' method")
     else if (length(.self$setx.out) == 0) {
@@ -429,24 +479,28 @@ z$methods(
 
 z$methods(
   graph = function() {
+    "Plot the quantities of interest"
     plot.qi(.self)
   }
 )
 
 z$methods(
   summarize = function(...) {
+    "Display a Zelig object"
     show(...)
   }
 )
 
 z$methods(
   summarise = function(...) {
+    "Display a Zelig object"
     summarize(...)
   }
 )
 
 z$methods(
   help = function() {
+    "Open the model vignette from http://zeligproject.org/"
 #     vignette(class(.self)[1])
     browseURL(.self$vignette.url)
   } 
@@ -454,6 +508,7 @@ z$methods(
 
 z$methods(
   getcoef = function() {
+    "Get estimated model coefficients"
     result <- try(lapply(.self$zelig.out$z.out, coef), silent = TRUE)
     if ("try-error" %in% class(result))
       stop("'coef' method' not implemented for model '", .self$name, "'")
@@ -464,6 +519,7 @@ z$methods(
 
 z$methods(
   getvcov = function() {
+    "Get estimated model variance-covariance matrix"
     result <- lapply(.self$zelig.out$z.out, vcov)
     if ("try-error" %in% class(result))
       stop("'vcov' method' not implemented for model '", .self$name, "'")
@@ -474,6 +530,7 @@ z$methods(
 
 z$methods(
   getpredict = function() {
+    "Get predcted values"
     result <- lapply(.self$zelig.out$z.out, predict)
     if ("try-error" %in% class(result))
       stop("'predict' method' not implemented for model '", .self$name, "'")
@@ -484,6 +541,7 @@ z$methods(
 
 z$methods(
   toJSON = function() {
+    "Convert Zelig object to JSON format"
     if (!is.list(.self$json))
       .self$json <- list()
     .self$json$"name" <- .self$name
@@ -502,6 +560,7 @@ z$methods(
 
 z$methods(
   mcunit.init = function(nsim, minx, maxx) {
+    "Monte Carlo Unit Test"
     cat("\nRunning Monte Carlo Unit Test...", sep="")
     x.sim <- runif(nsim, minx, maxx)
     x.seq <- seq(from = minx, to = maxx, length = nsim)
@@ -511,6 +570,7 @@ z$methods(
 
 z$methods(
   test = function(z, data) {
+    "Monte Carlo Unit Test"
     survival = c("Zelig-weibull", "Zelig-exp")
     if(class(z)[1] %in% survival){
       z$zelig(Surv(time.sim, event) ~ x.sim, data = data)
@@ -560,6 +620,7 @@ z$methods(
 
 z$methods(
   feedback = function() {
+    "Send feedback to the Zelig team"
     if (!.self$with.feedback)
       return("ZeligFeedback package not installed")
     # If ZeligFeedback is installed

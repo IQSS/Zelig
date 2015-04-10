@@ -4,8 +4,130 @@
 \name{Zelig-class}
 \alias{Zelig-class}
 \alias{z}
-\title{A class description}
+\title{Zelig reference class}
 \description{
-A class description
+Zelig reference class
 }
+\section{Fields}{
+
+\describe{
+\item{\code{fn}}{R function to call to wrap}
+
+\item{\code{formula}}{Zelig formula}
+
+\item{\code{weights}}{forthcoming}
+
+\item{\code{name}}{name of the Zelig model}
+
+\item{\code{data}}{data frame or matrix}
+
+\item{\code{by}}{split the data by factors}
+
+\item{\code{mi}}{work with imputed dataset}
+
+\item{\code{idx}}{model index}
+
+\item{\code{zelig.call}}{Zelig function call}
+
+\item{\code{model.call}}{wrapped function call}
+
+\item{\code{zelig.out}}{estimated zelig model(s)}
+
+\item{\code{setx.out}}{set values}
+
+\item{\code{setx.labels}}{pretty-print qi}
+
+\item{\code{bsetx}}{is x set?}
+
+\item{\code{bsetx1}}{is x1 set?}
+
+\item{\code{bsetrange}}{is range set?}
+
+\item{\code{bsetrange1}}{is range1 set?}
+
+\item{\code{range}}{range}
+
+\item{\code{range1}}{range1}
+
+\item{\code{test.statistics}}{list of test statistics}
+
+\item{\code{sim.out}}{simulated qi's}
+
+\item{\code{simparam}}{simulated parameters}
+
+\item{\code{num}}{number of simulations}
+
+\item{\code{authors}}{Zelig model authors}
+
+\item{\code{zeligauthors}}{Zelig authors}
+
+\item{\code{modelauthors}}{wrapped model authors}
+
+\item{\code{packageauthors}}{wrapped package authors}
+
+\item{\code{refs}}{citation information}
+
+\item{\code{year}}{model is released}
+
+\item{\code{description}}{model description}
+
+\item{\code{url}}{model URL}
+
+\item{\code{url.docs}}{model documentation URL}
+
+\item{\code{category}}{model category}
+
+\item{\code{vignette.url}}{vignette URL}
+
+\item{\code{json}}{JSON export}
+
+\item{\code{ljson}}{JSON export}
+
+\item{\code{outcome}}{JSON export}
+
+\item{\code{wrapper}}{JSON export}
+
+\item{\code{explanatory}}{JSON export}
+
+\item{\code{mcunit.test}}{unit testing}
+
+\item{\code{with.feedback}}{Feedback}
+}}
+\section{Methods}{
+
+\describe{
+\item{\code{cite()}}{Provide citation information about Zelig and Zelig model, and about wrapped package and wrapped model}
+
+\item{\code{feedback()}}{Send feedback to the Zelig team}
+
+\item{\code{getcoef()}}{Get estimated model coefficients}
+
+\item{\code{getpredict()}}{Get predcted values}
+
+\item{\code{getvcov()}}{Get estimated model variance-covariance matrix}
+
+\item{\code{graph()}}{Plot the quantities of interest}
+
+\item{\code{help()}}{Open the model vignette from http://zeligproject.org/}
+
+\item{\code{mcunit.init(nsim, minx, maxx)}}{Monte Carlo Unit Test}
+
+\item{\code{packagename()}}{Automatically retrieve wrapped package name}
+
+\item{\code{references(style = "sphinx")}}{Construct a reference list specific to a Zelig model.}
+
+\item{\code{set(...)}}{Setting Explanatory Variable Values}
+
+\item{\code{sim(num = 1000)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
+
+\item{\code{summarise(...)}}{Display a Zelig object}
+
+\item{\code{summarize(...)}}{Display a Zelig object}
+
+\item{\code{test(z, data)}}{Monte Carlo Unit Test}
+
+\item{\code{toJSON()}}{Convert Zelig object to JSON format}
+
+\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models.}
+}}
 
