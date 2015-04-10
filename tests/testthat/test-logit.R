@@ -1,16 +1,16 @@
-library(testthat)
-
-context("Unit Testing Zelig-logit (Logistic Regression)")
-
-test_that("Monte Carlo Testing Zelig-logit", {
-  
-  z <- zlogit$new()
-  set.seed(93544)
-  test <- z$test()
-  
-  expect_that(test$kstest$p.value > .05, is_true() )
-}
-)
+# library(testthat)
+# 
+# context("Unit Testing Zelig-logit (Logistic Regression)")
+# 
+# test_that("Monte Carlo Testing Zelig-logit", {
+#   
+#   z5 <- zlogit$new()
+#   set.seed(93544)
+#   test <- z5$test()
+#   
+#   expect_that(test$kstest$p.value > .05, is_true() )
+# }
+# )
 
 # test_that("From Zelig 4 model vignette: 'Basic Example'", {
 #   

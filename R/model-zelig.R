@@ -642,17 +642,17 @@ z$methods(
   }
 )
 
-z$methods(
-  finalize = function() {
-    if (!.self$with.feedback)
-      return("ZeligFeedback package not installed")
-    # If ZeligFeedback is installed
-    print("Thanks for providing Zelig usage information")
-    # print(ZeligFeedback::feedback(.self))
-    write(paste("feedback", ZeligFeedback::feedback(.self)),
-          file = paste0("test-zelig-finalize-", date(), ".txt"))
-  }
-)
+# z$methods(
+#   finalize = function() {
+#     if (!.self$with.feedback)
+#       return("ZeligFeedback package not installed")
+#     # If ZeligFeedback is installed
+#     print("Thanks for providing Zelig usage information")
+#     # print(ZeligFeedback::feedback(.self))
+#     write(paste("feedback", ZeligFeedback::feedback(.self)),
+#           file = paste0("test-zelig-finalize-", date(), ".txt"))
+#   }
+# )
 
 setMethod("summary", "Zelig",
           function(object, ...) {

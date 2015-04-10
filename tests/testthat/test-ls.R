@@ -1,16 +1,16 @@
-library(testthat)
-
-context("Unit Testing Zelig-ls (Least Squares Regression)")
-
-test_that("Monte Carlo Testing Zelig-ls", {
-  
-  z <- zls$new()
-  set.seed(93544)
-  test <- z$test()
-  
-  expect_that(test$kstest$p.value > .05, is_true() )
-}
-)
+# library(testthat)
+# 
+# context("Unit Testing Zelig-ls (Least Squares Regression)")
+# 
+# test_that("Monte Carlo Testing Zelig-ls", {
+#   
+#   z5 <- zls$new()
+#   set.seed(93544)
+#   test <- z5$test()
+#   
+#   expect_that(test$kstest$p.value > .05, is_true() )
+# }
+# )
 
  
 # context("ls: Zelig 5 vs Zelig 4")
