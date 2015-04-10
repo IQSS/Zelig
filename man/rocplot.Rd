@@ -4,7 +4,7 @@
 \alias{rocplot}
 \title{Receiver Operator Characteristic Plots}
 \usage{
-rocplot(y1, y2, fitted1, fitted2,
+rocplot(z1, z2,
 cutoff = seq(from=0, to=1, length=100), lty1="solid",
 lty2="dashed", lwd1=par("lwd"), lwd2=par("lwd"),
 col1=par("col"), col2=par("col"),
