@@ -428,10 +428,10 @@ z$methods(
 #               "We suggest you run model diagnostics and seek to fix the problem.\n",
 #               "You may also wish to run the full GIM test (which takes more time) to be sure.\n",
 #               "See http://.... for more information.\n \n")
-            cat("Statistical Warning: The GIM test suggests this model is misspecified \n
-                (based on comparisons between classical and robust SE’s; see http://j.mp/GIMtest). \n
-                We suggest you run diagnostics to ascertain the cause, respecify the model, \n
-                and run it again.")
+            cat("Statistical Warning: The GIM test suggests this model is misspecified\n",
+                "(based on comparisons between classical and robust SE’s; see http://j.mp/GIMtest).\n",
+                "We suggest you run diagnostics to ascertain the cause, respecify the model\n",
+                "and run it again.\n\n")
           }
       }
       
