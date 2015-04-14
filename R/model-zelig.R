@@ -63,6 +63,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         zelig.call = "call", # Zelig function call
                                         model.call = "call", # wrapped function call
                                         zelig.out = "ANY", # estimated zelig model(s)
+                                        signif.stars = "logical",
+                                        signif.stars.default = "logical", # significance stars default
                                         
                                         setx.out = "ANY", # set values
                                         setx.labels = "list", # pretty-print qi,
@@ -362,8 +364,11 @@ z$methods(
 )
 
 z$methods(
-  show = function() {
+  show = function(signif.stars = FALSE) {
     "Display a Zelig object"
+    .self$signif.stars <- signif.stars
+    .self$signif.stars.default <- getOption("show.signif.stars")
+    options(show.signif.stars = .self$signif.stars)
     if ("uninitializedField" %in% class(.self$zelig.out))
       cat("Next step: Use 'zelig' method")
     else if (length(.self$setx.out) == 0) {
@@ -419,10 +424,14 @@ z$methods(
       
       if(!is.null(.self$test.statistics$gim.criteria)){
           if(.self$test.statistics$gim.criteria){
-              cat("According to the GIM-rule-of-thumb, your model probably has some type of specification error.\n",
-              "We suggest you run model diagnostics and seek to fix the problem.\n",
-              "You may also wish to run the full GIM test (which takes more time) to be sure.\n",
-              "See http://.... for more information.\n \n")
+#               cat("According to the GIM-rule-of-thumb, your model probably has some type of specification error.\n",
+#               "We suggest you run model diagnostics and seek to fix the problem.\n",
+#               "You may also wish to run the full GIM test (which takes more time) to be sure.\n",
+#               "See http://.... for more information.\n \n")
+            cat("Statistical Warning: The GIM test suggests this model is misspecified \n
+                (based on comparisons between classical and robust SE’s; see http://j.mp/GIMtest). \n
+                We suggest you run diagnostics to ascertain the cause, respecify the model, \n
+                and run it again.")
           }
       }
       
@@ -477,6 +486,7 @@ z$methods(
         }
       }
     }
+    options(show.signif.stars = .self$signif.stars.default)
   }
 )
 
@@ -656,7 +666,7 @@ z$methods(
 
 setMethod("summary", "Zelig",
           function(object, ...) {
-            object$summarize()
+            object$summarize(...)
           }
 )
 
