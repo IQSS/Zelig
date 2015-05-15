@@ -234,18 +234,34 @@ z$methods(
   }
 )
 
+# z$methods(
+#   set = function(...) {
+#     "Setting Explanatory Variable Values"
+#     s <- list(...)
+#     f <- update(.self$formula, 1 ~ .)
+#     # update <- na.omit(.self$data) %>% # remove missing values
+#     update <- .self$data %>%
+#       group_by_(.self$by) %>%
+#       do(mm = model.matrix(f, reduce(dataset = ., s, 
+#                                      formula = .self$formula,
+#                                      data = .self$data)))
+#     return(update)
+#   }
+# )
+
 z$methods(
   set = function(...) {
     "Setting Explanatory Variable Values"
-    s <-list(...)
-    f <- update(.self$formula, 1 ~ .)
+    s <- list(...)
+    # f <- update(.self$formula, 1 ~ .)
+    f <- formula(.self$zelig.out$z.out[[1]])
     # update <- na.omit(.self$data) %>% # remove missing values
     update <- .self$data %>%
       group_by_(.self$by) %>%
-      do(mm = model.matrix(f, reduce(dataset = ., s, 
-                                     formula = .self$formula,
-                                     data = .self$data)))
-    return(update)
+#       do(print(data.frame(lapply(., avg)))) %>%
+#       do({l <- lapply(., avg)}) %>%
+      do(mm = model.matrix(f, data = data.frame(c(s, mapply(avg, .)))))
+    return(l)
   }
 )
 
