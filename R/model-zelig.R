@@ -253,15 +253,11 @@ z$methods(
   set = function(...) {
     "Setting Explanatory Variable Values"
     s <- list(...)
-    # f <- update(.self$formula, 1 ~ .)
-    f <- formula(.self$zelig.out$z.out[[1]])
-    # update <- na.omit(.self$data) %>% # remove missing values
     update <- .self$data %>%
       group_by_(.self$by) %>%
-#       do(print(data.frame(lapply(., avg)))) %>%
-#       do({l <- lapply(., avg)}) %>%
-      do(mm = model.matrix(f, data = data.frame(c(s, mapply(avg, .)))))
-    return(l)
+      do(mm = model.matrix(formula(.self$zelig.out$z.out[[1]]),
+                           data = merge_list(s, lapply(., avg))))
+    return(update)
   }
 )
 
@@ -288,9 +284,9 @@ z$methods(
     .self$range <- m
     .self$setx.out$range <- list()
     for (i in 1:nrow(m)) {
-      l <- as.list(as.list(m[i, ]))
+      l <- m[i, ]
       names(l) <- names(m)
-      .self$setx.out$range[[i]] <- .self$set(l)
+      .self$setx.out$range[[i]] <- do.call(.self$set, as.list(l))
     }
   }
 )
@@ -304,9 +300,9 @@ z$methods(
     .self$range1 <- m
     .self$setx.out$range1 <- list()
     for (i in 1:nrow(m)) {
-      l <- as.list(as.list(m[i, ]))
+      l <- m[i, ]
       names(l) <- names(m)
-      .self$setx.out$range1[[i]] <- .self$set(l)
+      .self$setx.out$range1[[i]] <- do.call(.self$set, as.list(l))
     }
   }
 )

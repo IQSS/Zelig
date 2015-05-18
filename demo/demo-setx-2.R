@@ -22,6 +22,13 @@ z5
 z5$setx(country = "United States", unem = 2)
 z5$setx.out
 
+z5 <- zls$new()
+z5$zelig(unem ~ gdp + trade + capmob +
+           country, data = macro)
+z5
+z5$setx(unem = 2)
+z5$setx.out
+
 z5$setx()
 z5$setx.out
 

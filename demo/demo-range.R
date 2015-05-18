@@ -43,6 +43,7 @@ z5 <- zls$new()
 z5$zelig(vote ~ race + educate + age + I(age^2) + income, data = turnout)
 z5
 z5$setrange(educate = 12:13, age = 18)
+
 z5$setx.out
 set.seed(42)
 z5$sim(num = 5)
@@ -50,6 +51,9 @@ z5$summarize()
 
 z5$setrange(educate = 12:13)
 z5$setx.out
+z5$setx.out$range[[1]]$mm
+z5$setx.out$range[[2]]$mm
+z5$setrange1(educate = 12:13)
 
 s <- list(educate = c(10, 15))
 expand.grid(s)

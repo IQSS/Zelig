@@ -13,7 +13,6 @@ z5$setx(tariff = 0.4)
 z5$setx.out
 # z5$setx1(tariff = 0.6)
 z5$setx.out
-z5$zelig.out
 # z5$setrange(tariff = 1:3)
 z5$setx.out
 z5$zelig.out

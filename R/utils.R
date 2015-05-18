@@ -162,3 +162,22 @@ reduce <- function(dataset, s, formula, data) {
 #   }
 #   return(ldata)
 # }
+
+merge_list <- function(l1, l2) {
+  l3 <- l2
+  for (i in seq(l1)) {
+    e1 <- names(l1)[i]
+    pos <- match(e1, names(l2))
+    if (is.na(pos))
+      warning(paste("Variable '", e1,"' not in data set.\n", sep = ""))
+    else {
+      l3[[pos]] <- l1[[i]]
+      if (is.factor(l2[[pos]])) {
+        if (!l1[[i]] %in% levels(l2[[pos]]))
+            stop("Level not in dataset")
+        l3[[pos]] <- factor(l3[[pos]], levels =  levels(l2[[pos]]))
+      }
+    }
+  }
+  return(l3)
+}
