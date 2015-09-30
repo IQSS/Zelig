@@ -21,6 +21,7 @@ zls$methods(
     # JSON
     .self$outcome <- "continous"
     .self$wrapper <- "ls"
+    .self$acceptweights <- TRUE
   }
 )
 
@@ -29,7 +30,7 @@ zls$methods(
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     callSuper(formula = formula, data = data, ...,
-              weights = NULL, by = by)
+              weights = weights, by = by)
     # Automated Background Test Statistics and Criteria
     rse<-plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
     rse.se <- sqrt(diag(rse[[1]]))                 # Needs to work with "by" argument
