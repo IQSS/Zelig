@@ -54,6 +54,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         acceptweights = "logical",
                                         name = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix,
+                                        originaldata = "ANY", # data frame or matrix,
+                                        originalweights = "ANY",
                                         # ddata = "ANY",
                                         # data.by = "ANY", # data frame or matrix
                                         by = "ANY",
@@ -202,7 +204,7 @@ z$methods(
 )
 
 z$methods(
-  zelig = function(formula, data, ..., weights = NULL, by) {
+  zelig = function(formula, data, ..., weights=NULL, by) {
     "The zelig command estimates a variety of statistical models"
     fn2 <- function(fc, data) {
       fc$data <- data
@@ -210,6 +212,8 @@ z$methods(
     }
     .self$formula <- formula
     .self$by <- by
+    .self$originaldata <- data
+    .self$originalweights <- weights
     datareformed <- FALSE
 
     # Matched datasets from MatchIt
@@ -269,13 +273,49 @@ z$methods(
 
     if (!datareformed){
       .self$data <- data  # If none of the above package integrations have already reformed the data from another object, use the supplied data
-      .self$weights <- weights
+
+      # Run some checking on weights argument, and see if is valid string or vector
+      if(!is.null(weights)){
+      	if(is.character(weights)){
+      		if(weights %in% names(.self$data)){
+      			.self$weights <- .self$data[[weights]]  # This is a way to convert data.frame portion to type numeric (as data.frames are lists)
+      		}else{
+      			cat("Variable name given for weights not found in dataset, so will be ignored.\n\n")
+      			.self$weights <- NULL  # No valid weights
+      		}
+      	}else if(is.vector(weights)){
+      		if(length(weights)==nrow(.self$data) & is.vector(weights)){
+      			if(min(weights)<0){
+      				weights[weights < 0] <- 0
+      				cat("Negative valued weights were supplied and will be replaced with zeros.")
+      			}
+      			.self$weights <- weights # Weights 
+      		}else{
+      			cat("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n")
+      			.self$weights <- NULL # No valid weights
+      		}
+      	}else{
+      		cat("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n")
+      		.self$weights <- NULL # No valid weights
+      	}
+      }else{
+        .self$weights <- NULL  # No weights set, so weights are NULL
+      }
     } 
 
+    cat("weights after checking:\n")
+    print(.self$weights)
+
     # If the Zelig model does not not accept weights, but weights are provided, we rebuild the data 
-    #   by duplicating rows proportional to the ceiling of their weight
-    if ((!.self$acceptweights) & (!is.null(.self$weights)) ){
-      .self$buildDataByWeights()  # Could use alternative method $buildDataByWeights2() for bootstrap approach.  Maybe set as argument?
+    #   by bootstrapping using the weights as probabilities
+    #   or by duplicating rows proportional to the ceiling of their weight
+    # Otherwise we pass the weights to the model call  
+    if(!is.null(.self$weights)){
+      if ((!.self$acceptweights)){
+        .self$buildDataByWeights2()  # Could use alternative method $buildDataByWeights() for duplication approach.  Maybe set as argument?
+	  } else {
+		.self$model.call$weights <- .self$weights   # NEED TO CHECK THIS IS THE NAME FOR ALL MODELS, or add more generic field containing the name for the weights argument
+	  }
 	}
 
     .self$model.call[[1]] <- .self$fn
@@ -285,7 +325,13 @@ z$methods(
       names(.self$data)[1] <- "by"
       .self$by <- "by"
     }
+
+    cat("zelig.call:\n")
+    print(.self$zelig.call)
+    cat("model.call:\n")
+    print(.self$model.call)
     .self$data <- tbl_df(.self$data)
+    #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>% 
       group_by_(.self$by) %>% 
         do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
@@ -699,6 +745,7 @@ z$methods(
   }
 )
 
+# rebuild dataset by duplicating observations by (rounded) weights
 z$methods(
   buildDataByWeights = function() {
     if(!.self$acceptweights){
@@ -717,6 +764,7 @@ z$methods(
   }
 )
 
+# rebuild dataset by bootstrapping using weights as probabilities
 z$methods(
   buildDataByWeights2 = function() {
     if(!.self$acceptweights){
