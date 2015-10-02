@@ -327,10 +327,10 @@ z$methods(
       .self$by <- "by"
     }
 
-    cat("zelig.call:\n")
-    print(.self$zelig.call)
-    cat("model.call:\n")
-    print(.self$model.call)
+    #cat("zelig.call:\n")
+    #print(.self$zelig.call)
+    #cat("model.call:\n")
+    #print(.self$model.call)
     .self$data <- tbl_df(.self$data)
     #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>% 
