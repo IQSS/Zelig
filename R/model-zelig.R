@@ -303,9 +303,6 @@ z$methods(
       }
     } 
 
-    cat("weights after checking:\n")
-    print(.self$weights)
-
     # If the Zelig model does not not accept weights, but weights are provided, we rebuild the data 
     #   by bootstrapping using the weights as probabilities
     #   or by duplicating rows proportional to the ceiling of their weight
@@ -327,10 +324,10 @@ z$methods(
       .self$by <- "by"
     }
 
-    cat("zelig.call:\n")
-    print(.self$zelig.call)
-    cat("model.call:\n")
-    print(.self$model.call)
+    #cat("zelig.call:\n")
+    #print(.self$zelig.call)
+    #cat("model.call:\n")
+    #print(.self$model.call)
     .self$data <- tbl_df(.self$data)
     #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>% 
