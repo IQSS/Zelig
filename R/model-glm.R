@@ -11,7 +11,7 @@ zglm$methods(
     callSuper()
     .self$fn <- quote(stats::glm)
     .self$packageauthors <- "R Core Team"
-    .self$acceptweights <- TRUE
+    .self$acceptweights <- FALSE # "Why glm refers to the number of trials as weight is a trick question to the developers' conscience."
   }
 )
 
