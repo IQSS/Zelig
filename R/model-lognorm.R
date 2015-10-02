@@ -24,11 +24,12 @@ zlognorm$methods(
     # JSON
     .self$outcome <- "discrete"
     .self$wrapper <- "lognorm"
+    .self$acceptweights <- TRUE
   }
 )
 
 zlognorm$methods(
-  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, by = NULL) {
+  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (!(is.null(cluster) || robust))
@@ -39,7 +40,7 @@ zlognorm$methods(
     .self$model.call$dist <- "lognormal"
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
-              cluster = cluster, by = by)
+              cluster = cluster, weights = weights, by = by)
   }
 )
 
