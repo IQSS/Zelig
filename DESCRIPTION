@@ -31,6 +31,7 @@ Depends:
     geepack,
     MCMCpack,
     Amelia,
+    MatchIt,
     maxLik
 Suggests:
     testthat,
