@@ -312,7 +312,8 @@ z$methods(
     # Otherwise we pass the weights to the model call  
     if(!is.null(.self$weights)){
       if ((!.self$acceptweights)){
-        .self$buildDataByWeights2()  # Could use alternative method $buildDataByWeights() for duplication approach.  Maybe set as argument?
+        .self$buildDataByWeights2()  # Could use alternative method $buildDataByWeights() for duplication approach.  Maybe set as argument?\
+        .self$model.call$weights <- NULL
 	  } else {
 		.self$model.call$weights <- .self$weights   # NEED TO CHECK THIS IS THE NAME FOR ALL MODELS, or add more generic field containing the name for the weights argument
 	  }
@@ -476,6 +477,13 @@ z$methods(
     if ("uninitializedField" %in% class(.self$zelig.out))
       cat("Next step: Use 'zelig' method")
     else if (length(.self$setx.out) == 0) {
+      #############################################################################	
+      # Current workaround to display call as $zelig.call rather than $model.call
+      # should improve this approach in future:
+      for(jj in 1:length(.self$zelig.out$z.out)){
+      	.self$zelig.out$z.out[[jj]]$call <- .self$zelig.call
+      }	
+      #############################################################################
       summ <- .self$zelig.out %>%
         do(summ = {cat("Model: \n")
                    if (length(.self$by) == 1) {
@@ -768,11 +776,11 @@ z$methods(
 z$methods(
   buildDataByWeights2 = function() {
     if(!.self$acceptweights){
+      iweights <- .self$weights
       if(any(iweights != ceiling(iweights))){
         cat("Noninteger weights were set, but the model in Zelig is only able to use integer valued weights.\n",
       	   "A bootstrapped version of the dataset was constructed using the weights as sample probabilities.\n\n")
         idata <- .self$data	
-        iweights <- .self$weights
         n.obs <- nrow(idata)
         n.w   <- sum(iweights)
         iweights <- iweights/n.w
