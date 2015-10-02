@@ -282,6 +282,7 @@ z$methods(
       		}else{
       			cat("Variable name given for weights not found in dataset, so will be ignored.\n\n")
       			.self$weights <- NULL  # No valid weights
+                .self$model.call$weights <- NULL
       		}
       	}else if(is.vector(weights)){
       		if(length(weights)==nrow(.self$data) & is.vector(weights)){
@@ -293,10 +294,12 @@ z$methods(
       		}else{
       			cat("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n")
       			.self$weights <- NULL # No valid weights
+                .self$model.call$weights <- NULL
       		}
       	}else{
       		cat("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n")
       		.self$weights <- NULL # No valid weights
+            .self$model.call$weights <- NULL
       	}
       }else{
         .self$weights <- NULL  # No weights set, so weights are NULL
@@ -324,10 +327,10 @@ z$methods(
       .self$by <- "by"
     }
 
-    #cat("zelig.call:\n")
-    #print(.self$zelig.call)
-    #cat("model.call:\n")
-    #print(.self$model.call)
+    cat("zelig.call:\n")
+    print(.self$zelig.call)
+    cat("model.call:\n")
+    print(.self$model.call)
     .self$data <- tbl_df(.self$data)
     #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>% 
