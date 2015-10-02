@@ -11,6 +11,7 @@ zglm$methods(
     callSuper()
     .self$fn <- quote(stats::glm)
     .self$packageauthors <- "R Core Team"
+    .self$acceptweights <- FALSE # "Why glm refers to the number of trials as weight is a trick question to the developers' conscience."
   }
 )
 
@@ -19,7 +20,7 @@ zglm$methods(
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     .self$model.call$family <- call(.self$family, .self$link)
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
     rse <- plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
     .self$test.statistics <- list(robust.se = rse)
   }

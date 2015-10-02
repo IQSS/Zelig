@@ -7,12 +7,13 @@ zgee$methods(
     callSuper()
     .self$packageauthors <- "Søren Højsgaard, Ulrich Halekoh, and Jun Yan"
     .self$modelauthors <- "Patrick Lam"
+    .self$acceptweights <- TRUE
   }
 )
 
 
 zgee$methods(
-  zelig = function(formula, id, ..., zcor = NULL, corstr = "independence", data, by = NULL) {
+  zelig = function(formula, id, ..., zcor = NULL, corstr = "independence", data, weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (corstr == "fixed" && is.null(zcor))
@@ -28,7 +29,7 @@ zgee$methods(
     .self$model.call$id <- id
     .self$model.call$zcor <- zcor
     .self$model.call$corstr <- corstr
-    callSuper(formula = formula, data = data, ..., by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
     # Prettify summary display without modifying .self$model.call
     for (i in length(.self$zelig.out$z.out)) {
       .self$zelig.out$z.out[[i]]$call$id <- .self$zelig.call$id

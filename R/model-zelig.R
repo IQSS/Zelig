@@ -50,13 +50,17 @@
 
 z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         formula = "ANY", # Zelig formula
-                                        weights = "numeric", 
+                                        weights = "ANY", 
+                                        acceptweights = "logical",
                                         name = "character", # name of the Zelig model
                                         data = "ANY", # data frame or matrix,
+                                        originaldata = "ANY", # data frame or matrix,
+                                        originalweights = "ANY",
                                         # ddata = "ANY",
                                         # data.by = "ANY", # data frame or matrix
                                         by = "ANY",
                                         mi = "logical",
+                                        matched = "logical",
                                         
                                         idx = "ANY", # model index
                                         
@@ -125,6 +129,7 @@ z$methods(
     .self$bsetx1 <- FALSE
     .self$bsetrange <- FALSE
     .self$bsetrange1 <- FALSE
+    .self$acceptweights <- FALSE
     # JSON
     .self$vignette.url <- paste(.self$url.docs, tolower(class(.self)[1]), ".html", sep = "")
     .self$vignette.url <- sub("-gee", "gee", .self$vignette.url)
@@ -199,7 +204,7 @@ z$methods(
 )
 
 z$methods(
-  zelig = function(formula, data, ..., weights = NULL, by) {
+  zelig = function(formula, data, ..., weights=NULL, by) {
     "The zelig command estimates a variety of statistical models"
     fn2 <- function(fc, data) {
       fc$data <- data
@@ -207,19 +212,113 @@ z$methods(
     }
     .self$formula <- formula
     .self$by <- by
-    # MI datasets from Amelia
+    .self$originaldata <- data
+    .self$originalweights <- weights
+    datareformed <- FALSE
+
+    # Matched datasets from MatchIt
+    if ("matchit" %in% class(data)){
+      idata <- MatchIt::match.data(data) 
+      iweights <- idata$weights
+
+      .self$matched <- TRUE
+      .self$data <- idata
+      datareformed <- TRUE
+
+      # Check if noninteger valued weights exist and are incompatible with zelig model
+      validweights <- TRUE
+      if(!.self$acceptweights){           # This is a convoluted way to do this, but avoids the costly "any()" calculation if not necessary
+      	if(any(iweights != ceiling(iweights))){  # any(y != ceiling(y)) tests slightly faster than all(y == ceiling(y))
+      		validweights <- FALSE
+      	}
+      }
+      if(!validweights){   # could also be  if((!acceptweights) & (any(iweights != ceiling(iweights))  but avoid the long any for big datasets
+      	cat("The weights created by matching for this dataset have noninteger values,\n",
+             "however, the statistical model you have chosen is only compatible with integer weights.\n",
+             "Either change the matching method (such as to `optimal' matching with a 1:1 ratio)\n",
+             "or change the statistical model in Zelig.\n",
+             "We will round matching weights up to integers to proceed.\n\n")
+      	.self$weights <- ceiling(iweights)
+      }else{
+        .self$weights <- iweights
+      }
+
+      # Set references appropriate to matching methods used 
+      .self$refs <- c(.self$refs, citation("MatchIt"))
+      if(m.out$call$method=="cem" & ("cem" %in% installed.packages())) .self$refs <- c(.self$refs, citation("cem"))
+      #if(m.out$call$method=="exact") .self$refs <- c(.self$refs, citation(""))
+      if((m.out$call$method=="full") & ("optmatch" %in% installed.packages())) .self$refs <- c(.self$refs, citation("optmatch"))
+      if(m.out$call$method=="genetic" & ("Matching" %in% installed.packages())) .self$refs <- c(.self$refs, citation("Matching"))
+      #if(m.out$call$method=="nearest") .self$refs <- c(.self$refs, citation(""))
+      if(m.out$call$method=="optimal" & ("optmatch" %in% installed.packages())) .self$refs <- c(.self$refs, citation("optmatch"))
+      #if(m.out$call$method=="subclass") .self$refs <- c(.self$refs, citation(""))
+    } else {
+      .self$matched  <- FALSE
+    }
+    # Multiply Imputed datasets from Amelia  
+    # Notice Amelia objects ignore weights currently, which is reasonable as the Amelia package ignores weights
     if ("amelia" %in% class(data)){
       idata <- data$imputations
       .self$data <- rbind_all(lapply(seq(length(idata)),
                                      function(imputationNumber)
                                        cbind(imputationNumber, idata[[imputationNumber]])))
+      .self$weights <- NULL  # This should be considered or addressed
+      datareformed <- TRUE
       .self$by <- c("imputationNumber", by)
       .self$mi <- TRUE
-      .self$refs<-c(.self$refs,citation("Amelia"))
+      .self$refs<-c(.self$refs, citation("Amelia"))
     } else {
-      .self$data <- data
       .self$mi <- FALSE
     }
+
+    if (!datareformed){
+      .self$data <- data  # If none of the above package integrations have already reformed the data from another object, use the supplied data
+
+      # Run some checking on weights argument, and see if is valid string or vector
+      if(!is.null(weights)){
+      	if(is.character(weights)){
+      		if(weights %in% names(.self$data)){
+      			.self$weights <- .self$data[[weights]]  # This is a way to convert data.frame portion to type numeric (as data.frames are lists)
+      		}else{
+      			cat("Variable name given for weights not found in dataset, so will be ignored.\n\n")
+      			.self$weights <- NULL  # No valid weights
+      		}
+      	}else if(is.vector(weights)){
+      		if(length(weights)==nrow(.self$data) & is.vector(weights)){
+      			if(min(weights)<0){
+      				weights[weights < 0] <- 0
+      				cat("Negative valued weights were supplied and will be replaced with zeros.")
+      			}
+      			.self$weights <- weights # Weights 
+      		}else{
+      			cat("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n")
+      			.self$weights <- NULL # No valid weights
+      		}
+      	}else{
+      		cat("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n")
+      		.self$weights <- NULL # No valid weights
+      	}
+      }else{
+        .self$weights <- NULL  # No weights set, so weights are NULL
+      }
+    } 
+
+    cat("weights after checking:\n")
+    print(.self$weights)
+
+    # If the Zelig model does not not accept weights, but weights are provided, we rebuild the data 
+    #   by bootstrapping using the weights as probabilities
+    #   or by duplicating rows proportional to the ceiling of their weight
+    # Otherwise we pass the weights to the model call  
+    if(!is.null(.self$weights)){
+      if ((!.self$acceptweights)){
+        .self$buildDataByWeights2()  # Could use alternative method $buildDataByWeights() for duplication approach.  Maybe set as argument?\
+        .self$model.call$weights <- NULL
+	  } else {
+		.self$model.call$weights <- .self$weights   # NEED TO CHECK THIS IS THE NAME FOR ALL MODELS, or add more generic field containing the name for the weights argument
+	  }
+	}
+
     .self$model.call[[1]] <- .self$fn
     .self$model.call$by <- NULL
     if (is.null(.self$by)) {
@@ -227,7 +326,13 @@ z$methods(
       names(.self$data)[1] <- "by"
       .self$by <- "by"
     }
+
+    cat("zelig.call:\n")
+    print(.self$zelig.call)
+    cat("model.call:\n")
+    print(.self$model.call)
     .self$data <- tbl_df(.self$data)
+    #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>% 
       group_by_(.self$by) %>% 
         do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
@@ -372,6 +477,13 @@ z$methods(
     if ("uninitializedField" %in% class(.self$zelig.out))
       cat("Next step: Use 'zelig' method")
     else if (length(.self$setx.out) == 0) {
+      #############################################################################	
+      # Current workaround to display call as $zelig.call rather than $model.call
+      # should improve this approach in future:
+      for(jj in 1:length(.self$zelig.out$z.out)){
+      	.self$zelig.out$z.out[[jj]]$call <- .self$zelig.call
+      }	
+      #############################################################################
       summ <- .self$zelig.out %>%
         do(summ = {cat("Model: \n")
                    if (length(.self$by) == 1) {
@@ -638,6 +750,47 @@ z$methods(
     #     )
     #     
     #     return(output)
+  }
+)
+
+# rebuild dataset by duplicating observations by (rounded) weights
+z$methods(
+  buildDataByWeights = function() {
+    if(!.self$acceptweights){
+      idata <- .self$data
+      iweights <- .self$weights
+      ceilweights <- ceiling(iweights)
+      n.obs <- nrow(idata)
+      windex <- rep(1:n.obs, ceilweights)
+      idata <- idata[windex,]
+      .self$data <- idata
+      if(any(iweights != ceiling(iweights))){
+        cat("Noninteger weights were set, but the model in Zelig is only able to use integer valued weights.\n",
+      	   "Each weight has been rounded up to the nearest integer.\n\n")
+  	  }
+    }
+  }
+)
+
+# rebuild dataset by bootstrapping using weights as probabilities
+z$methods(
+  buildDataByWeights2 = function() {
+    if(!.self$acceptweights){
+      iweights <- .self$weights
+      if(any(iweights != ceiling(iweights))){
+        cat("Noninteger weights were set, but the model in Zelig is only able to use integer valued weights.\n",
+      	   "A bootstrapped version of the dataset was constructed using the weights as sample probabilities.\n\n")
+        idata <- .self$data	
+        n.obs <- nrow(idata)
+        n.w   <- sum(iweights)
+        iweights <- iweights/n.w
+        windex <- sample(x=1:n.obs, size=n.w, replace=TRUE, prob=iweights)
+        idata <- idata[windex,]
+        .self$data <- idata
+      }else{
+         .self$buildDataByWeights()  # If all weights are integers, just use duplication to rebuild dataset.
+  	  }
+    }
   }
 )
 

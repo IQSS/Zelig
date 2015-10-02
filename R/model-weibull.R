@@ -26,11 +26,12 @@ zweibull$methods(
     # JSON
     .self$outcome <- "bounded"
     .self$wrapper <- "weibull"
+    .self$acceptweights <- TRUE
   }
 )
 
 zweibull$methods(
-  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, by = NULL) {
+  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (!(is.null(cluster) || robust))
@@ -41,7 +42,7 @@ zweibull$methods(
     .self$model.call$dist <- "weibull"
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
-              cluster = cluster,  by = by)
+              cluster = cluster,  weights = weights, by = by)
   }
 )
 

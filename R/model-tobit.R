@@ -24,12 +24,13 @@ ztobit$methods(
     # JSON
     .self$outcome <- "continous"
     .self$wrapper <- "tobit"
+    .self$acceptweights <- TRUE
   }
 )
 
 ztobit$methods(
   zelig = function(formula, ..., below = 0, above = Inf,
-                   robust = FALSE, data, by = NULL) {
+                   robust = FALSE, data, weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     .self$below <- below
@@ -38,7 +39,7 @@ ztobit$methods(
     .self$model.call$above <- NULL
     .self$model.call$left <- below
     .self$model.call$right <- above
-    callSuper(formula = formula, data = data, ..., by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
   }
 )
 

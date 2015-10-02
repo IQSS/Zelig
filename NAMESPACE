@@ -1,5 +1,5 @@
 import(sandwich, methods, MASS, survival, VGAM, jsonlite, dplyr,
-       quantreg, geepack, MCMCpack, Amelia, maxLik)
+       quantreg, geepack, MCMCpack, Amelia, MatchIt, maxLik)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(

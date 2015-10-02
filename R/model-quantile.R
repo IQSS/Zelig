@@ -26,6 +26,7 @@ zquantile$methods(
     # JSON
     .self$outcome <- "continuous"
     .self$wrapper <- "rq"
+    .self$acceptweights <- TRUE
   }
 )
 
@@ -43,7 +44,7 @@ zquantile$methods(
     }
     else 
       .self$tau <- 0.5
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
   }
 )
 
