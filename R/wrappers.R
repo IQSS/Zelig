@@ -51,21 +51,23 @@
 zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   #   .Deprecated("\nz$new() \nz$zelig(...)")
   # Zelig Core
-  zeligmodels <- system.file(file.path("JSON", "zelig5models.json"),
-                             package = "Zelig")
+  zeligmodels <- system.file(file.path("JSON", "zelig5models.json"), package = "Zelig")
   models <- jsonlite::fromJSON(txt = readLines(zeligmodels))$zelig5models
   # Zelig Choice
   zeligchoicemodels <- system.file(file.path("JSON", "zelig5choicemodels.json"),
                                    package = "ZeligChoice")
   if (zeligchoicemodels != "")
-    models <- c(models,
-                jsonlite::fromJSON(txt = readLines(zeligchoicemodels))$zelig5choicemodels)
-  # Zelig Panel
-  zeligpanelemodels <- system.file(file.path("JSON", "zelig5panelmodels.json"),
-                                   package = "ZeligPanel")
-  if (zeligpanelemodels != "")
-    models <- c(models,
-                jsonlite::fromJSON(txt = readLines(zeligpanelemodels))$zelig5panelmodels)
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligchoicemodels))$zelig5choicemodels)
+#   # Zelig Panel
+#   zeligpanelmodels <- system.file(file.path("JSON", "zelig5panelmodels.json"),
+#                                    package = "ZeligPanel")
+#   if (zeligpanelmodels != "")
+#     models <- c(models, jsonlite::fromJSON(txt = readLines(zeligpanelmodels))$zelig5panelmodels)
+  # Zelig GAM
+  zeligamgmodels <- system.file(file.path("JSON", "zelig5models.json"),
+                                   package = "ZeligGAM")
+  if (zeligamgmodels != "")
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeliggammodels))$zelig5models)
   # Aggregating all available models
   models4 <- list()
   for (i in seq(models)) {
