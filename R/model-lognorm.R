@@ -41,6 +41,8 @@ zlognorm$methods(
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
               cluster = cluster, weights = weights, by = by)
+    rse<-plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
+    .self$test.statistics<- list(robust.se = rse)
   }
 )
 
