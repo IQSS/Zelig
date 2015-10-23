@@ -7,7 +7,7 @@ zsurvey$methods(
     callSuper()
     .self$fn <- quote(survey::svyglm)
     .self$packageauthors <- "Thomas Lumley"
-    #.self$modelauthors <- "Nicholas Carnes" ??
+    .self$modelauthors <- "Nicholas Carnes"
     .self$acceptweights <- TRUE
   }
 )
