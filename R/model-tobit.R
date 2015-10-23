@@ -40,6 +40,21 @@ ztobit$methods(
     .self$model.call$left <- below
     .self$model.call$right <- above
     callSuper(formula = formula, data = data, ..., weights = weights, by = by)
+
+    if(!robust){
+        fn2 <- function(fc, data) {
+            fc$data <- data
+            return(fc)
+        }
+        robust.model.call <- .self$model.call
+        robust.model.call$robust <- TRUE
+        
+        robust.zelig.out <- .self$data %>%
+        group_by_(.self$by) %>%
+        do(z.out = eval(fn2(robust.model.call, quote(as.data.frame(.))))$var )
+        
+        .self$test.statistics<- list(robust.se = robust.zelig.out$z.out)
+    }
   }
 )
 
