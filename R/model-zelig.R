@@ -693,63 +693,65 @@ z$methods(
   }
 )
 
+# empty default data generating process to avoid error if not created as model specific method
 z$methods(
-  mcunit.init = function(nsim, minx, maxx) {
-    "Monte Carlo Unit Test"
-    cat("\nRunning Monte Carlo Unit Test...", sep="")
-    x.sim <- runif(nsim, minx, maxx)
-    x.seq <- seq(from = minx, to = maxx, length = nsim)
-    return(data.frame(cbind(x.sim, x.seq)))
+  mcfun = function(x, ...){
+    return( rep(1,length(x)) )
   }
 )
 
+# Monte Carlo unit test
 z$methods(
-  test = function(z, data) {
-    "Monte Carlo Unit Test"
-    survival = c("Zelig-weibull", "Zelig-exp")
-    if(class(z)[1] %in% survival){
-      z$zelig(Surv(time.sim, event) ~ x.sim, data = data)
+  mcunit = function(nsim=1000, minx=-1, maxx=1, b0=0, b1=1, sd=1, ...){
+      
+    n.short<-10
+    alpha<-.10
+    x.sim <- runif(n=nsim, min=minx, max=maxx)
+    x.seq <- seq(from=minx, to=maxx, length = nsim)
+    
+    y.hat <- .self$mcfun(x=x.seq, b0=b0, b1=b1, sd=sd, ..., sim=FALSE)
+    y.sim <- .self$mcfun(x=x.sim, b0=b0, b1=b1, sd=sd, ..., sim=TRUE)
+    
+    data.sim <- data.frame(x.sim, y.sim)
+    data.seq <- data.frame(x.seq, y.hat)
+    
+    ## Estimate Zelig model and create numerical bounds on expected values
+    ## These lines useful when we cover survival style formula expressions:
+    #survival = c("Zelig-weibull", "Zelig-exp")
+    #if(class(z)[1] %in% survival){
+    #    time.sim <- y.sim$t
+    #    z$zelig(Surv(time.sim, event) ~ x.sim, data = data.sim)
+    #}else{
+    #    z$zelig(y.sim ~ x.sim, data = data.sim)
+    #}
+    
+    ## Estimate Zelig model and create numerical bounds on expected values
+    .self$zelig(y.sim ~ x.sim, data = data.sim)
+    x.short.seq<-seq(from=minx, to=maxx, length=n.short)
+    .self$setrange(x.sim=x.short.seq)
+    .self$sim()
+    
+    history <- matrix(NA, nrow=n.short, ncol=2)
+    for(i in 1:n.short){
+        temp<-sort( .self$sim.out$range[[i]]$ev[[1]] )
+        history[i,1]<-temp[max(round(nsim*(alpha/2)),1) ]     # Lower ci bound
+        history[i,2]<-temp[round(nsim*(1 - (alpha/2)))]       # Upper ci bound
     }
     
-    else{
-      z$zelig(y.sim ~ x.sim, data = data)
+    ## Plot Monte Carlo Data
+    
+    all.main<-paste(.self$name," (",b1,",",b0,",",sd,")",sep="")
+    all.ylim<-c( min(c(y.sim, y.hat)) , max(c(y.sim,y.hat)) )
+    
+    plot(x.sim, y.sim, main=all.main, ylim=all.ylim, xlab="x", ylab="y", col="steelblue")
+    par(new=TRUE)
+    plot(x.seq, y.hat, main="", ylim=all.ylim, xlab="", ylab="", xaxt="n", yaxt="n", type="l", col="firebrick", lwd=2)
+  
+    print(history)
+    for(i in 1:n.short){
+      lines(x=rep(x.short.seq[i],2), y=c(history[i,1],history[i,2]))
     }
-    #     z$setrange(x.sim = data$x.seq)    
-    #     z$sim(num = nrow(data))
-    return(z)
     
-    #     ev <- c()
-    # 
-    #     for(i in 1:k){
-    #       z$sim(num = nrow(data))
-    #       ev <- append(ev, z$sim.out$x$ev)
-    #     }
-    #     
-    #     return(ev)
-    
-    
-    
-    #     ev <- c()
-    #     for(j in 1:nrow(data)){
-    #       foo <- lapply(z$sim.out$range[j][[1]]$ev, mean)
-    #       ev <- append(ev, foo[[1]])  
-    #     }
-    #     
-    #     # Kolmogorov–Smirnov test
-    #     kstest <- ks.test(ev, data$y.true)
-    #     .self$mcunit.test <- if(kstest$p.value > .1) 'PASS' else 'FAIL'
-    #     if(kstest$p.value < .05) {
-    #       cat("\nFailed K-S Test.", sep = "")
-    #     } else {
-    #       cat("\nPassed K-S Test.")
-    #     }
-    #     
-    #     output = list(
-    #       kstest = kstest,
-    #       data = data
-    #     )
-    #     
-    #     return(output)
   }
 )
 

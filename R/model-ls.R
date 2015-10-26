@@ -155,23 +155,9 @@ zls$methods(
   }
 )
 
-
-
 zls$methods(
-  test = function(b0 = -1, b1 = 1, nsim = 1000, minx = -1, maxx = 1) {
-    x.init <- mcunit.init(nsim, minx, maxx)
-    
-    b0 <- b0
-    b1 <- b1 
-    sd <- 1
-    
-    mu.sim <- b1 * x.init[,1] + b0
-    y.sim <- rnorm(nsim, mean = mu.sim, sd = sd)
-    y.true <- b1 * x.init[,2] + b0
-    data <- cbind(x.init, y.sim, y.true)
-    
-    z <- zls$new()
-    callSuper(z, data)
+  mcfun = function(x, b0=0, b1=1, sd=1, sim=TRUE){
+    y <- b0 + b1*x + sim * rnorm(n=length(x), sd=sd)
+    return(y)
   }
 )
-
