@@ -102,3 +102,19 @@ ztobit$methods(
     #     z$zelig(y.sim~x.sim, data = data)
   }
 )
+
+ztobit$methods(
+  mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
+    mu <- b0 + b1 * x
+    ystar <- rnorm(n=length(x), mean=mu, sd=alpha)
+    if(sim){
+        y <- (ystar>0) * ystar  # censoring from below at zero
+        return(y)
+    }else{
+        y.uncensored.hat.tobit<- mu + dnorm(mu, mean=0, sd=alpha)/pnorm(mu, mean=0, sd=alpha)
+        y.hat.tobit<- y.uncensored.hat.tobit * (1- pnorm(0, mean=mu, sd=alpha) )  # expected value of censored outcome
+        return(y.hat.tobit)
+    }
+  }
+)
+

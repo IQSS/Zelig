@@ -84,6 +84,17 @@ znegbin$methods(
   }
 )
 
+znegbin$methods(
+  mcfun = function(x, b0=0, b1=1, ..., sim=TRUE){
+    mu <- exp(b0 + b1 * x)
+    if(sim){
+        y <- rnbinom(n=length(x), 1, mu=mu)
+        return(y)
+    }else{
+        return(mu)
+    }
+  }
+)
 
 
 

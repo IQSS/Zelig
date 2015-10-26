@@ -156,8 +156,8 @@ zls$methods(
 )
 
 zls$methods(
-  mcfun = function(x, b0=0, b1=1, sd=1, sim=TRUE){
-    y <- b0 + b1*x + sim * rnorm(n=length(x), sd=sd)
+  mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
+    y <- b0 + b1*x + sim * rnorm(n=length(x), sd=alpha)
     return(y)
   }
 )

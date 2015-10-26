@@ -44,3 +44,17 @@ zlogit$methods(
     
   }
 )
+
+
+zlogit$methods(
+  mcfun = function(x, b0=0, b1=1, ..., sim=TRUE){
+    mu <- 1/(1 + exp(-b0 - b1 * x))
+    if(sim){
+        y <- rbinom(n=length(x), size=1, prob=mu)
+        return(y)
+    }else{
+        return(mu)
+    }
+  }
+)
+

@@ -702,15 +702,15 @@ z$methods(
 
 # Monte Carlo unit test
 z$methods(
-  mcunit = function(nsim=1000, minx=-1, maxx=1, b0=0, b1=1, sd=1, ...){
+  mcunit = function(nsim=500, minx=-2, maxx=2, b0=0, b1=1, alpha=1, ci=0.9, ...){
       
-    n.short<-10
-    alpha<-.10
+    n.short <- 10      # number of p
+    alpha.ci <- 1-ci   # alpha values for ci bounds, not speed parameter
     x.sim <- runif(n=nsim, min=minx, max=maxx)
     x.seq <- seq(from=minx, to=maxx, length = nsim)
     
-    y.hat <- .self$mcfun(x=x.seq, b0=b0, b1=b1, sd=sd, ..., sim=FALSE)
-    y.sim <- .self$mcfun(x=x.sim, b0=b0, b1=b1, sd=sd, ..., sim=TRUE)
+    y.hat <- .self$mcfun(x=x.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
+    y.sim <- .self$mcfun(x=x.sim, b0=b0, b1=b1, alpha=alpha, ..., sim=TRUE)
     
     data.sim <- data.frame(x.sim, y.sim)
     data.seq <- data.frame(x.seq, y.hat)
@@ -734,20 +734,26 @@ z$methods(
     history <- matrix(NA, nrow=n.short, ncol=2)
     for(i in 1:n.short){
         temp<-sort( .self$sim.out$range[[i]]$ev[[1]] )
-        history[i,1]<-temp[max(round(nsim*(alpha/2)),1) ]     # Lower ci bound
-        history[i,2]<-temp[round(nsim*(1 - (alpha/2)))]       # Upper ci bound
+        history[i,1]<-temp[max(round(nsim*(alpha.ci/2)),1) ]     # Lower ci bound
+        history[i,2]<-temp[round(nsim*(1 - (alpha.ci/2)))]       # Upper ci bound
     }
     
     ## Plot Monte Carlo Data
     
-    all.main<-paste(.self$name," (",b1,",",b0,",",sd,")",sep="")
+    #all.main<-expression(paste(.self$name," (",beta,b1,",",b0,",",alpha,")",sep=""))
+    
+    all.main = substitute(
+    paste(modelname, "(", beta[0], "=", b0, ", ", beta[1], "=", b1,",", alpha, "=", a0, ")"),
+    list(modelname = .self$name, b0 = b0, b1=b1, a0 = alpha)
+    )
+    
+    
     all.ylim<-c( min(c(y.sim, y.hat)) , max(c(y.sim,y.hat)) )
     
     plot(x.sim, y.sim, main=all.main, ylim=all.ylim, xlab="x", ylab="y", col="steelblue")
     par(new=TRUE)
     plot(x.seq, y.hat, main="", ylim=all.ylim, xlab="", ylab="", xaxt="n", yaxt="n", type="l", col="firebrick", lwd=2)
   
-    print(history)
     for(i in 1:n.short){
       lines(x=rep(x.short.seq[i],2), y=c(history[i,1],history[i,2]))
     }

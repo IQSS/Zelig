@@ -52,3 +52,15 @@ zgamma$methods(
   }
 )
 
+zgamma$methods(
+  mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
+    lambda <- 1/(b0 + b1 * x)
+    if(sim){
+        y <- rgamma(n=length(x), shape=lambda, scale = alpha)
+        return(y)
+    }else{
+        return(alpha * lambda)
+    }
+  }
+)
+
