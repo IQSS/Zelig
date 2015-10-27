@@ -80,7 +80,8 @@ zlognorm$methods(
     eta <- coeff %*% t(mm)
     theta <- as.matrix(apply(eta, 2, linkinv))
     ev <- exp(log(theta) + 0.5 * (exp(alpha))^2)
+    pv <- rlnorm(n=length(ev), meanlog=log(theta), sdlog=exp(alpha))
     dimnames(ev) <- dimnames(theta)
-    return(list(ev = ev, pv = ev))
+    return(list(ev = ev, pv = pv))
   }
 )
