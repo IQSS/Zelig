@@ -78,50 +78,9 @@ zweibull$methods(
   qi = function(simparam, mm) {
     eta <- simparam$simparam %*% t(mm)
     theta <- as.matrix(apply(eta, 2, linkinv))
-    ev <- theta * gamma(1 + exp(simparam$simalpha))
-    pv <- as.matrix(rweibull(length(ev), 
-                             shape = 1 / exp(simparam$simalpha), 
-                             scale = theta))
+    ev <- theta * gamma(1 + 1/exp(simparam$simalpha))
+    pv <- as.matrix(rweibull(length(ev), shape = exp(simparam$simalpha), scale = theta))
     return(list(ev = ev, pv = pv))
   }
 )
 
-zweibull$methods(
-  test = function(b0 = -1, b1 = 1, nsim = 1000, minx = -1, maxx = 1) {
-    
-    x.init <- mcunit.init(nsim, minx, maxx)
-    
-    
-    time.sim = rweibull(nsim, shape=1, scale=exp(b0 + b1 * x.init[,1])) 
-    #     censor = rweibull(n, shape=1, scale=lambdaC)   #censoring time
-    #     time = pmin(time, censor)
-    event = time.sim==time.sim   # set to 1 if event is observed
-    time.true = rweibull(nsim, shape=1, scale=exp(b0 + b1 * x.init[,2]))
-    data = data.frame(cbind(x.init, time.sim, event, time.true))
-    
-    z <- zweibull$new()
-    callSuper(z, data)
-  }
-)
-
-# if (model %in% c("weibull", "Weibull", "lognorm", "exp"))
-#   link <- survreg.distributions[[object$dist]]$itrans
-# else if (model == "tobit")
-#   link <- function(x) x
-# ev.surv <- function(model, sim.coef, sim.scale, x, link) {
-#   eta <- sim.coef %*% t(x)
-#   theta <- as.matrix(apply(eta, 2, link))
-#   if (model == "lognorm") {
-#     ev <- exp(log(theta) + 0.5*(exp(sim.scale))^2)
-#     dimnames(ev) <- dimnames(theta)
-#   }
-#   else if (model %in% c("weibull", "Weibull")) {
-#     ev <- theta * gamma(1 + exp(sim.scale))
-#     dimnames(ev) <- dimnames(theta)
-#   }
-#   else if (model %in% c("exp", "tobit")) {
-#     ev <- theta
-#   }
-#   
-# 
-# 
