@@ -63,23 +63,6 @@ zexp$methods(
 )
 
 zexp$methods(
-  test = function(b0 = -1, b1 = 1, nsim = 1000, minx = -1, maxx = 1) {
-    
-    x.init <- mcunit.init(nsim, minx, maxx)
-    
-    time.sim = rexp(nsim, rate = exp(-b0 - b1 * x.init[,1]))
-    #     C = rweibull(n, shape=1, scale=lambdaC)   #censoring time
-    event = time.sim==time.sim   # set to 1 if event is observed
-    time.true = rexp(nsim, rate = exp(-b0 - b1 * x.init[,2]))
-    data = data.frame(cbind(x.init, time.sim, event, time.true))
-    
-    z <- zexp$new()
-    callSuper(z, data)
-    
-  }
-)
-
-zexp$methods(
   mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
     .self$mcformula <- as.formula("Surv(y.sim, event) ~ x.sim")
     
