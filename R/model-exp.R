@@ -79,4 +79,22 @@ zexp$methods(
   }
 )
 
+zexp$methods(
+  mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
+    .self$mcformula <- as.formula("Surv(y.sim, event) ~ x.sim")
+    
+    lambda <-exp(b0 + b1 * x)
+    event <- rep(1, length(x))
+    y.sim <- rexp(n=length(x), rate=lambda)
+    y.hat <- 1/lambda
+    
+    if(sim){
+        data <- data.frame(y.sim=y.sim, event=event, x.sim=x)
+        return(data)
+    }else{
+        data <- data.frame(y.hat=y.hat, event=event, x.seq=x)
+        return(data)
+    }
+  }
+)
 
