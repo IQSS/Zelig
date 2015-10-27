@@ -42,14 +42,14 @@ zls$methods(
 
 zls$methods(
   param = function(z.out) {
-      return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
+      return(list(simparam=mvrnorm(.self$num, coef(z.out), vcov(z.out)), simalpha=rep( summary(z.out)$sigma, .self$num) )  )
   }
 )
 
 zls$methods(
   qi = function(simparam, mm) {
-    ev <- simparam %*% t(mm)
-    pv <- ev
+    ev <- simparam$simparam %*% t(mm)
+    pv <- rnorm(n=length(ev), mean=ev, sd=simparam$simalpha)
     return(list(ev = ev, pv = pv))
   }
 )
