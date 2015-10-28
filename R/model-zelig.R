@@ -107,6 +107,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         
                                         #Unit Testing
                                         mcunit.test = "ANY",
+                                        mcformula = "ANY",
                                         
                                         # Feedback
                                         with.feedback = "logical"))
@@ -211,6 +212,16 @@ z$methods(
       return(fc)
     }
     .self$formula <- formula
+    # Overwrite formula with mc unit test formula into correct environment, if it exists
+    # Requires fixing R scoping issue
+    if(is.formula(.self$mcformula)){
+      .self$formula <- as.formula( deparse(.self$mcformula), env=environment(.self$formula) )
+      .self$model.call$formula <- as.formula( deparse(.self$mcformula), env=globalenv() )
+    }else if(is.character(.self$mcformula)) {
+      .self$formula <- as.formula( .self$mcformula, env=environment(.self$formula) )
+      .self$model.call$formula <- as.formula( .self$mcformula, env=globalenv() )
+    }
+    
     .self$by <- by
     .self$originaldata <- data
     .self$originalweights <- weights
@@ -693,63 +704,80 @@ z$methods(
   }
 )
 
+# empty default data generating process to avoid error if not created as model specific method
 z$methods(
-  mcunit.init = function(nsim, minx, maxx) {
-    "Monte Carlo Unit Test"
-    cat("\nRunning Monte Carlo Unit Test...", sep="")
-    x.sim <- runif(nsim, minx, maxx)
-    x.seq <- seq(from = minx, to = maxx, length = nsim)
-    return(data.frame(cbind(x.sim, x.seq)))
+  mcfun = function(x, ...){
+    return( rep(1,length(x)) )
   }
 )
 
+# Monte Carlo unit test
 z$methods(
-  test = function(z, data) {
-    "Monte Carlo Unit Test"
-    survival = c("Zelig-weibull", "Zelig-exp")
-    if(class(z)[1] %in% survival){
-      z$zelig(Surv(time.sim, event) ~ x.sim, data = data)
+  mcunit = function(nsim=500, minx=-2, maxx=2, b0=0, b1=1, alpha=1, ci=0.95, ...){
+      
+    n.short <- 10      # number of p
+    alpha.ci <- 1-ci   # alpha values for ci bounds, not speed parameter
+    x.sim <- runif(n=nsim, min=minx, max=maxx)
+    x.seq <- seq(from=minx, to=maxx, length = nsim)
+    
+    data.hat <- .self$mcfun(x=x.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
+    if(!is.data.frame(data.hat)){
+        data.hat<-data.frame(x.seq=x.seq, y.hat=data.hat)
+    }
+    data.sim <- .self$mcfun(x=x.sim, b0=b0, b1=b1, alpha=alpha, ..., sim=TRUE)
+    if(!is.data.frame(data.sim)){
+        data.sim<-data.frame(x.sim=x.sim, y.sim=data.sim)
+    }
+
+    ## Estimate Zelig model and create numerical bounds on expected values
+    # This should be the solution, but requires fixing R scoping issue:
+    #.self$zelig(y.sim~x.sim, data=data.sim)      # formula will be overwritten in zelig() if .self$mcformula has been set
+    
+    ## Instead, remove formula field and set by hard code
+    .self$mcformula <- NULL
+    if(.self$name %in% c("exp","weibull","lognorm")){
+      .self$zelig(Surv(y.sim,event)~x.sim, data=data.sim)
+    }else{
+      .self$zelig(y.sim~x.sim, data=data.sim)
     }
     
-    else{
-      z$zelig(y.sim ~ x.sim, data = data)
+    x.short.seq<-seq(from=minx, to=maxx, length=n.short)
+    .self$setrange(x.sim=x.short.seq)
+    .self$sim()
+    
+    history.ev <- history.pv <- matrix(NA, nrow=n.short, ncol=2)
+    for(i in 1:n.short){
+        xtemp<-x.short.seq[i]
+        .self$setx(x.sim=xtemp)
+        .self$sim()
+        #temp<-sort( .self$sim.out$x$ev[[1]] )
+        temp<-sort( .self$sim.out$range[[i]]$ev[[1]] )
+
+        history.ev[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
+        history.ev[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
+        #temp<-sort( .self$sim.out$x$pv[[1]] )
+        temp<-sort( .self$sim.out$range[[i]]$pv[[1]] )
+
+        history.pv[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
+        history.pv[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
     }
-    #     z$setrange(x.sim = data$x.seq)    
-    #     z$sim(num = nrow(data))
-    return(z)
     
-    #     ev <- c()
-    # 
-    #     for(i in 1:k){
-    #       z$sim(num = nrow(data))
-    #       ev <- append(ev, z$sim.out$x$ev)
-    #     }
-    #     
-    #     return(ev)
+    ## Plot Monte Carlo Data
+    all.main = substitute(
+      paste(modelname, "(", beta[0], "=", b0, ", ", beta[1], "=", b1,",", alpha, "=", a0, ")"),
+      list(modelname = .self$name, b0 = b0, b1=b1, a0 = alpha)
+    )
     
+    all.ylim<-c( min(c(data.sim$y.sim, data.hat$y.hat)) , max(c(data.sim$y.sim, data.hat$y.hat)) )
     
-    
-    #     ev <- c()
-    #     for(j in 1:nrow(data)){
-    #       foo <- lapply(z$sim.out$range[j][[1]]$ev, mean)
-    #       ev <- append(ev, foo[[1]])  
-    #     }
-    #     
-    #     # Kolmogorov–Smirnov test
-    #     kstest <- ks.test(ev, data$y.true)
-    #     .self$mcunit.test <- if(kstest$p.value > .1) 'PASS' else 'FAIL'
-    #     if(kstest$p.value < .05) {
-    #       cat("\nFailed K-S Test.", sep = "")
-    #     } else {
-    #       cat("\nPassed K-S Test.")
-    #     }
-    #     
-    #     output = list(
-    #       kstest = kstest,
-    #       data = data
-    #     )
-    #     
-    #     return(output)
+    plot(data.sim$x.sim, data.sim$y.sim, main=all.main, ylim=all.ylim, xlab="x", ylab="y", col="steelblue")
+    par(new=TRUE)
+    plot(data.hat$x.seq, data.hat$y.hat, main="", ylim=all.ylim, xlab="", ylab="", xaxt="n", yaxt="n", type="l", col="green", lwd=2)
+  
+    for(i in 1:n.short){
+      lines(x=rep(x.short.seq[i],2), y=c(history.pv[i,1],history.pv[i,2]), col="lightpink", lwd=1.6)
+      lines(x=rep(x.short.seq[i],2), y=c(history.ev[i,1],history.ev[i,2]), col="firebrick", lwd=1.6)
+    }
   }
 )
 

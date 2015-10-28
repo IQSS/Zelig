@@ -43,6 +43,21 @@ zweibull$methods(
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
               cluster = cluster,  weights = weights, by = by)
+
+    if(!robust){
+      fn2 <- function(fc, data) {
+        fc$data <- data
+        return(fc)
+      }
+      robust.model.call <- .self$model.call
+      robust.model.call$robust <- TRUE
+    
+      robust.zelig.out <- .self$data %>%
+      group_by_(.self$by) %>%
+      do(z.out = eval(fn2(robust.model.call, quote(as.data.frame(.))))$var )
+    
+      .self$test.statistics<- list(robust.se = robust.zelig.out$z.out)
+    }
   }
 )
 
@@ -63,50 +78,28 @@ zweibull$methods(
   qi = function(simparam, mm) {
     eta <- simparam$simparam %*% t(mm)
     theta <- as.matrix(apply(eta, 2, linkinv))
-    ev <- theta * gamma(1 + exp(simparam$simalpha))
-    pv <- as.matrix(rweibull(length(ev), 
-                             shape = 1 / exp(simparam$simalpha), 
-                             scale = theta))
+    ev <- theta * gamma(1 + 1/exp(simparam$simalpha))
+    pv <- as.matrix(rweibull(length(ev), shape = exp(simparam$simalpha), scale = theta))
     return(list(ev = ev, pv = pv))
   }
 )
 
 zweibull$methods(
-  test = function(b0 = -1, b1 = 1, nsim = 1000, minx = -1, maxx = 1) {
+  mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
+    .self$mcformula <- as.formula("Surv(y.sim, event) ~ x.sim")
     
-    x.init <- mcunit.init(nsim, minx, maxx)
+    lambda <-exp(b0 + b1 * x)
+    event <- rep(1, length(x))
+    y.sim <- rweibull(n=length(x), shape=alpha, scale=lambda)
+    y.hat <- lambda * gamma(1 + (1/alpha))
     
-    
-    time.sim = rweibull(nsim, shape=1, scale=exp(b0 + b1 * x.init[,1])) 
-    #     censor = rweibull(n, shape=1, scale=lambdaC)   #censoring time
-    #     time = pmin(time, censor)
-    event = time.sim==time.sim   # set to 1 if event is observed
-    time.true = rweibull(nsim, shape=1, scale=exp(b0 + b1 * x.init[,2]))
-    data = data.frame(cbind(x.init, time.sim, event, time.true))
-    
-    z <- zweibull$new()
-    callSuper(z, data)
+    if(sim){
+        data <- data.frame(y.sim=y.sim, event=event, x.sim=x)
+        return(data)
+    }else{
+        data <- data.frame(y.hat=y.hat, event=event, x.seq=x)
+        return(data)
+    }
   }
 )
 
-# if (model %in% c("weibull", "Weibull", "lognorm", "exp"))
-#   link <- survreg.distributions[[object$dist]]$itrans
-# else if (model == "tobit")
-#   link <- function(x) x
-# ev.surv <- function(model, sim.coef, sim.scale, x, link) {
-#   eta <- sim.coef %*% t(x)
-#   theta <- as.matrix(apply(eta, 2, link))
-#   if (model == "lognorm") {
-#     ev <- exp(log(theta) + 0.5*(exp(sim.scale))^2)
-#     dimnames(ev) <- dimnames(theta)
-#   }
-#   else if (model %in% c("weibull", "Weibull")) {
-#     ev <- theta * gamma(1 + exp(sim.scale))
-#     dimnames(ev) <- dimnames(theta)
-#   }
-#   else if (model %in% c("exp", "tobit")) {
-#     ev <- theta
-#   }
-#   
-# 
-# 

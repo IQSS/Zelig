@@ -40,6 +40,21 @@ ztobit$methods(
     .self$model.call$left <- below
     .self$model.call$right <- above
     callSuper(formula = formula, data = data, ..., weights = weights, by = by)
+
+    if(!robust){
+        fn2 <- function(fc, data) {
+            fc$data <- data
+            return(fc)
+        }
+        robust.model.call <- .self$model.call
+        robust.model.call$robust <- TRUE
+        
+        robust.zelig.out <- .self$data %>%
+        group_by_(.self$by) %>%
+        do(z.out = eval(fn2(robust.model.call, quote(as.data.frame(.))))$var )
+        
+        .self$test.statistics<- list(robust.se = robust.zelig.out$z.out)
+    }
   }
 )
 
@@ -72,18 +87,17 @@ ztobit$methods(
 )
 
 ztobit$methods(
-  test = function(b0 = -1, b1 = 1, nsim = 1000, minx = -1, maxx = 1) {
-    
-    x.init <- mcunit.init(nsim, minx, maxx)
-    
-    mu.sim <- b0 + b1 * x.init[,1]
-    y.star <- rnorm(nsim, mean = mu.sim, sd = 1)
-    y.sim <- (y.star > 0) * y.star #all positive, censor negative to 0
-    y.true <- b0 + b1 * x.init[,2]
-    data = data.frame(cbind(x.init, y.star, y.sim, y.true))
-    
-    z <- ztobit$new()
-    callSuper(z, data)
-    #     z$zelig(y.sim~x.sim, data = data)
+  mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
+    mu <- b0 + b1 * x
+    ystar <- rnorm(n=length(x), mean=mu, sd=alpha)
+    if(sim){
+        y <- (ystar>0) * ystar  # censoring from below at zero
+        return(y)
+    }else{
+        y.uncensored.hat.tobit<- mu + dnorm(mu, mean=0, sd=alpha)/pnorm(mu, mean=0, sd=alpha)
+        y.hat.tobit<- y.uncensored.hat.tobit * (1- pnorm(0, mean=mu, sd=alpha) )  # expected value of censored outcome
+        return(y.hat.tobit)
+    }
   }
 )
+
