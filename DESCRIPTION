@@ -60,4 +60,4 @@ Collate:
     'create-json.R'
     'plots.R'
     'wrappers.R'
-VignetteBuilder: knitr
+
