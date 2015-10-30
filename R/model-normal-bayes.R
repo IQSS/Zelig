@@ -45,3 +45,9 @@ znormalbayes$methods(
   }
 )
 
+znormalbayes$methods(
+  mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
+    y <- b0 + b1*x + sim * rnorm(n=length(x), sd=alpha)
+    return(y)
+  }
+)
