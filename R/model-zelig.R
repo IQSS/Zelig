@@ -214,7 +214,7 @@ z$methods(
     .self$formula <- formula
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
-    if(is.formula(.self$mcformula)){
+    if("formula" %in% class(.self$mcformula)){
       .self$formula <- as.formula( deparse(.self$mcformula), env=environment(.self$formula) )
       .self$model.call$formula <- as.formula( deparse(.self$mcformula), env=globalenv() )
     }else if(is.character(.self$mcformula)) {
@@ -541,7 +541,7 @@ z$methods(
         results<-data.frame(Estimate,Std.Error,zvalue,Pr.z,stars,row.names=names(coeflist[[1]]))
         names(results)<-c("Estimate","Std.Error","z value","Pr(>|z|)","")
         print(results, digits=max(3, getOption("digits") - 3))
-        cat("---\nSignif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n")
+        cat("---\nSignif. codes:  '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n")
         cat("\n")
       }
       
@@ -552,7 +552,7 @@ z$methods(
 #               "You may also wish to run the full GIM test (which takes more time) to be sure.\n",
 #               "See http://.... for more information.\n \n")
             cat("Statistical Warning: The GIM test suggests this model is misspecified\n",
-                "(based on comparisons between classical and robust SE’s; see http://j.mp/GIMtest).\n",
+                "(based on comparisons between classical and robust SE's; see http://j.mp/GIMtest).\n",
                 "We suggest you run diagnostics to ascertain the cause, respecify the model\n",
                 "and run it again.\n\n")
           }

@@ -4,7 +4,10 @@
 \alias{plot.ci}
 \title{Method for plotting qi simulations across a range within a variable, with confidence intervals}
 \usage{
-\method{plot}{ci}(obj, qi="ev", var=NULL, ..., legcol="gray20", col=NULL, leg=1, legpos=NULL)
+\method{plot}{ci}(obj, qi = "ev", var = NULL, ..., main = NULL, sub =
+                 NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim =
+                 NULL, legcol = "gray20", col = NULL, leg = 1, legpos =
+                 NULL, ci = c(80, 95, 99.9))
 }
 \arguments{
 \item{obj}{A reference class zelig5 object}
@@ -25,6 +28,10 @@ implicitly called for numeric simulations}
 
 \item{ylab}{a character-string specifying the label for the y-axis}
 
+\item{xlim}{Limits to the x-axis}
+
+\item{ylim}{Limits to the y-asix}
+
 \item{legcol}{``legend color'', an valid color used for plotting the line
 colors in the legend}
 
@@ -37,6 +44,8 @@ position of the legend. 1 to 4 correspond to ``SE'', ``SW'', ``NW'', and
 
 \item{legpos}{``legend type'', exact coordinates and sizes for legend.
 Overrides argment ``leg.type''}
+
+\item{ci}{vector of length three of confidence interval levels to draw.}
 }
 \value{
 the current graphical parameters. This is subject to change in future

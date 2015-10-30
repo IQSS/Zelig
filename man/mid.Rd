@@ -5,8 +5,7 @@
 \title{Militarized Interstate Disputes}
 
 \description{
-  A small sample from the militarized interstate disputes database,
-  available at \url{http://pss.la.psu.edu/MID_DATA.HTM}.  
+  A small sample from the militarized interstate disputes (MID) database.
 }
 
 \usage{data(mid)}

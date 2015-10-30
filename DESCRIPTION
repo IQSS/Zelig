@@ -3,29 +3,16 @@ Maintainer: James Honaker <zelig-zee@iq.harvard.edu>
 License: GPL (>=2)
 Title: Everyone's Statistical Software
 Author: Christine Choirat, James Honaker, Kosuke Imai, Gary King, Olivia Lau
-Description: Zelig is an easy-to-use program that can estimate, and
-    help interpret the results of, an enormous range of statistical
-    models. It literally is ``everyone's statistical software'' because
-    Zelig's simple unified framework incorporates everyone else's (R)
-    code. We also hope it will become ``everyone's statistical
-    software'' for applications and teaching, and so have designed
-    Zelig so that anyone can easily use it or add their programs to it.
-    Zelig also comes with infrastructure that facilitates the use of
-    any existing method, such as by allowing multiply imputed data for
-    any model, and mimicking the program Clarify (for Stata) that takes
-    the raw output of existing statistical procedures and translates
-    them into quantities of direct interest.
+Description: A framework that brings together an abundance of common statistical models found across packages into a unified interface, and provides a common architecture for estimation and interpretation, as well as bridging functions to absorb increasingly more models into the collective library.  Zelig allows each individual package, for each statistical model, to be accessed by a common uniformly structured call and set of arguments.  Moreover, Zelig automates all the surrounding building blocks of a statistical workflow --procedures and algorithms that may be essential to one user's application but which the original package developer did use in their own research and might not themselves support. These include bootstrapping, jackknifing, and reweighting of data, and in particular, Zelig automatically generates predicted and simulated quantities of interest (such as relative risk ratios, average treatment effects, first differences and predicted and expected values) to interpret and visualize complex models.
 Version: 5.0-7
 Date: 2015-10-29
-Depends:
+Imports:
     sandwich,
     methods,
     MASS,
     survival,
     VGAM,
     jsonlite,
-    AER,
-    plyr,
     dplyr (>= 0.3.0.2),
     quantreg,
     geepack,
@@ -45,11 +32,7 @@ Collate:
     'model-tobit-bayes.R'
     'model-glm.R'
     'model-gee.R'
-    'model-survey.R'
     'model-binchoice.R'
-    'model-binchoice-survey.R'
-    'model-logit-survey.R'
-    'model-probit-survey.R'
     'model-gamma.R'
     'model-logit.R'
     'model-relogit.R'

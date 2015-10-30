@@ -36,7 +36,7 @@ zrelogit$methods(
             volume = 9,
             number = 2,
             year = 2001,
-            pages = "137–163")
+            pages = "137--163")
     ref2<-bibentry(
             bibtype="Article",
             title = "Explaining Rare Events in International Relations",
@@ -48,7 +48,7 @@ zrelogit$methods(
             volume = 55,
             number = 3,
             year = 2001,
-            pages = "693-715")
+            pages = "693--715")
     .self$refs<-c(ref1,ref2)
   }
 )

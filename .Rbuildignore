@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 .gitignore
 vignettes/*.*
+images
+README.md

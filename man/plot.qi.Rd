@@ -4,7 +4,13 @@
 \alias{plot.qi}
 \title{Default Plot Design For Zelig Model QI's}
 \usage{
-plot.qi(obj, ...)
+\method{plot}{qi}(obj, ...)
+}
+\arguments{
+\item{obj}{A reference class zelig5 object}
+
+\item{...}{Parameters to be passed to the `truehist' function which is
+implicitly called for numeric simulations}
 }
 \description{
 Default Plot Design For Zelig Model QI's

@@ -5,7 +5,7 @@ zgee <- setRefClass("Zelig-gee",
 zgee$methods(
   initialize = function() {
     callSuper()
-    .self$packageauthors <- "Søren Højsgaard, Ulrich Halekoh, and Jun Yan"
+    .self$packageauthors <- "Soren Hojsgaard, Ulrich Halekoh, and Jun Yan"
     .self$modelauthors <- "Patrick Lam"
     .self$acceptweights <- TRUE
   }

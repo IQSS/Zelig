@@ -617,8 +617,8 @@ rocplot <- function(z1, z2,
                     ylab="Proportion of 0's Correctly Predicted",
                     plot = TRUE, 
                     ...) {
-  y1 <- z1$data[as.character(z.out1$formula[[2]])]
-  y2 <- z2$data[as.character(z.out2$formula[[2]])]
+  y1 <- z1$data[as.character(z1$formula[[2]])]
+  y2 <- z2$data[as.character(z2$formula[[2]])]
   fitted1 <- fitted(z1)[[1]]
   fitted2 <- fitted(z2)[[1]]
   roc1 <- roc2 <- matrix(NA, nrow = length(cutoff), ncol = 2)
