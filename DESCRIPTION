@@ -13,6 +13,8 @@ Imports:
     survival,
     VGAM,
     jsonlite,
+    AER,
+    plyr,
     dplyr (>= 0.3.0.2),
     quantreg,
     geepack,
