@@ -713,8 +713,9 @@ z$methods(
 
 # Monte Carlo unit test
 z$methods(
-  mcunit = function(nsim=500, minx=-2, maxx=2, b0=0, b1=1, alpha=1, ci=0.95, ...){
-      
+  mcunit = function(nsim=500, minx=-2, maxx=2, b0=0, b1=1, alpha=1, ci=0.95, plot = TRUE, ...){
+    
+    passes <- TRUE
     n.short <- 10      # number of p
     alpha.ci <- 1-ci   # alpha values for ci bounds, not speed parameter
     x.sim <- runif(n=nsim, min=minx, max=maxx)
@@ -745,6 +746,11 @@ z$methods(
     .self$setrange(x.sim=x.short.seq)
     .self$sim()
     
+    data.short.hat <- .self$mcfun(x=x.short.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
+    if(!is.data.frame(data.short.hat)){
+        data.short.hat<-data.frame(x.seq=x.short.seq, y.hat=data.short.hat)
+    }
+    
     history.ev <- history.pv <- matrix(NA, nrow=n.short, ncol=2)
     for(i in 1:n.short){
         xtemp<-x.short.seq[i]
@@ -752,32 +758,41 @@ z$methods(
         .self$sim()
         #temp<-sort( .self$sim.out$x$ev[[1]] )
         temp<-sort( .self$sim.out$range[[i]]$ev[[1]] )
-
+        
+        #calculate bounds of expected values
         history.ev[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
         history.ev[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
         #temp<-sort( .self$sim.out$x$pv[[1]] )
         temp<-sort( .self$sim.out$range[[i]]$pv[[1]] )
-
+        
+        #check that ci contains true value
+        passes <- passes & (min(history.ev[i,]) <= data.short.hat$y.hat[i] ) & (max(history.ev[i,]) >= data.short.hat$y.hat[i] )
+        
+        #calculate bounds of predicted values
         history.pv[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
         history.pv[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
     }
     
     ## Plot Monte Carlo Data
-    all.main = substitute(
-      paste(modelname, "(", beta[0], "=", b0, ", ", beta[1], "=", b1,",", alpha, "=", a0, ")"),
-      list(modelname = .self$name, b0 = b0, b1=b1, a0 = alpha)
-    )
+    if(plot){
+      all.main = substitute(
+        paste(modelname, "(", beta[0], "=", b0, ", ", beta[1], "=", b1,",", alpha, "=", a0, ")"),
+        list(modelname = .self$name, b0 = b0, b1=b1, a0 = alpha)
+      )
     
-    all.ylim<-c( min(c(data.sim$y.sim, data.hat$y.hat)) , max(c(data.sim$y.sim, data.hat$y.hat)) )
+      all.ylim<-c( min(c(data.sim$y.sim, data.hat$y.hat)) , max(c(data.sim$y.sim, data.hat$y.hat)) )
     
-    plot(data.sim$x.sim, data.sim$y.sim, main=all.main, ylim=all.ylim, xlab="x", ylab="y", col="steelblue")
-    par(new=TRUE)
-    plot(data.hat$x.seq, data.hat$y.hat, main="", ylim=all.ylim, xlab="", ylab="", xaxt="n", yaxt="n", type="l", col="green", lwd=2)
+      plot(data.sim$x.sim, data.sim$y.sim, main=all.main, ylim=all.ylim, xlab="x", ylab="y", col="steelblue")
+      par(new=TRUE)
+      plot(data.hat$x.seq, data.hat$y.hat, main="", ylim=all.ylim, xlab="", ylab="", xaxt="n", yaxt="n", type="l", col="green", lwd=2)
   
-    for(i in 1:n.short){
-      lines(x=rep(x.short.seq[i],2), y=c(history.pv[i,1],history.pv[i,2]), col="lightpink", lwd=1.6)
-      lines(x=rep(x.short.seq[i],2), y=c(history.ev[i,1],history.ev[i,2]), col="firebrick", lwd=1.6)
+      for(i in 1:n.short){
+        lines(x=rep(x.short.seq[i],2), y=c(history.pv[i,1],history.pv[i,2]), col="lightpink", lwd=1.6)
+        lines(x=rep(x.short.seq[i],2), y=c(history.ev[i,1],history.ev[i,2]), col="firebrick", lwd=1.6)
+      }
     }
+    return(passes)
+    
   }
 )
 
