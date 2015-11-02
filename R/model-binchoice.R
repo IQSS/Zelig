@@ -5,6 +5,7 @@
 #' @exportClass Zelig-binchoice
 #'
 #' @include model-zelig.R
+#' @include model-glm.R
 zbinchoice <- setRefClass("Zelig-binchoice",
                           contains = "Zelig-glm")
   

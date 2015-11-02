@@ -7,7 +7,7 @@
 ci.plot(obj, qi="ev", var=NULL, ..., main = NULL, sub =
  NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim =
  NULL, legcol="gray20", col=NULL, leg=1, legpos=
- NULL, ci = c(80, 95, 99.99))
+ NULL, ci = c(80, 95, 99.9))
 }
 \arguments{
 \item{obj}{A reference class zelig5 object}

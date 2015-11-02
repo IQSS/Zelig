@@ -78,15 +78,8 @@ zweibull$methods(
   qi = function(simparam, mm) {
     eta <- simparam$simparam %*% t(mm)
     theta <- as.matrix(apply(eta, 2, linkinv))
-    
-    ev <- theta * gamma(1 + exp(simparam$simalpha))
-        pv <- as.matrix(rweibull(length(ev),
-                                 shape = 1 / exp(simparam$simalpha),
-                                 scale = theta))
-    
-    
-    #ev <- theta * gamma(1 + 1/exp(simparam$simalpha))
-    #pv <- as.matrix(rweibull(length(ev), shape = exp(simparam$simalpha), scale = theta))
+    ev <- theta * gamma(1 + 1/exp(simparam$simalpha))
+    pv <- as.matrix(rweibull(length(ev), shape = exp(simparam$simalpha), scale = theta))
     return(list(ev = ev, pv = pv))
   }
 )
