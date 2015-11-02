@@ -32,87 +32,89 @@
 #' @include model-tobit-bayes.R
 #' @include model-weibull.R
 
-library(jsonlite)
+#library(jsonlite)
 
-z5ls <- zls$new()
-z5ls$toJSON()
+createJSON <- function(){
 
-z5logit <- zlogit$new()
-z5logit$toJSON()
+  z5ls <- zls$new()
+  z5ls$toJSON()
 
-z5probit <- zprobit$new()
-z5probit$toJSON()
+  z5logit <- zlogit$new()
+  z5logit$toJSON()
 
-z5poisson <- zpoisson$new()
-z5poisson$toJSON()
+  z5probit <- zprobit$new()
+  z5probit$toJSON()
 
-z5normal <- znormal$new()
-z5normal$toJSON()
+  z5poisson <- zpoisson$new()
+  z5poisson$toJSON()
 
-z5gamma <- zgamma$new()
-z5gamma$toJSON()
+  z5normal <- znormal$new()
+  z5normal$toJSON()
 
-z5negbin <- znegbin$new()
-z5negbin$toJSON()
+  z5gamma <- zgamma$new()
+  z5gamma$toJSON()
 
-z5exp <- zexp$new()
-z5exp$toJSON()
+  z5negbin <- znegbin$new()
+  z5negbin$toJSON()
 
-z5lognorm <- zlognorm$new()
-z5lognorm$toJSON()
+  z5exp <- zexp$new()
+  z5exp$toJSON()
 
-z5tobit <- ztobit$new()
-z5tobit$toJSON()
+  z5lognorm <- zlognorm$new()
+  z5lognorm$toJSON()
 
-z5quantile <- zquantile$new()
-z5quantile$toJSON()
+  z5tobit <- ztobit$new()
+  z5tobit$toJSON()
 
-z5relogit <- zrelogit$new()
-z5relogit$toJSON()
+  z5quantile <- zquantile$new()
+  z5quantile$toJSON()
 
-z5logitgee <- zlogitgee$new()
-z5logitgee$toJSON()
+  z5relogit <- zrelogit$new()
+  z5relogit$toJSON()
 
-z5probitgee <- zprobitgee$new()
-z5probitgee$toJSON()
+  z5logitgee <- zlogitgee$new()
+  z5logitgee$toJSON()
 
-z5gammagee <- zgammagee$new()
-z5gammagee$toJSON()
+  z5probitgee <- zprobitgee$new()
+  z5probitgee$toJSON()
 
-z5normalgee <- znormalgee$new()
-z5normalgee$toJSON()
+  z5gammagee <- zgammagee$new()
+  z5gammagee$toJSON()
 
-z5poissongee <- zpoissongee$new()
-z5poissongee$toJSON()
+  z5normalgee <- znormalgee$new()
+  z5normalgee$toJSON()
 
-z5factorbayes <- zfactorbayes$new()
-z5factorbayes$toJSON()
+  z5poissongee <- zpoissongee$new()
+  z5poissongee$toJSON()
 
-z5logitbayes <- zlogitbayes$new()
-z5logitbayes$toJSON()
+  z5factorbayes <- zfactorbayes$new()
+  z5factorbayes$toJSON()
 
-z5mlogitbayes <- zmlogitbayes$new()
-z5mlogitbayes$toJSON()
+  z5logitbayes <- zlogitbayes$new()
+  z5logitbayes$toJSON()
 
-z5normalbayes <- znormalbayes$new()
-z5normalbayes$toJSON()
+  z5mlogitbayes <- zmlogitbayes$new()
+  z5mlogitbayes$toJSON()
 
-z5oprobitbayes <- zoprobitbayes$new()
-z5oprobitbayes$toJSON()
+  z5normalbayes <- znormalbayes$new()
+  z5normalbayes$toJSON()
 
-z5poissonbayes <- zpoissonbayes$new()
-z5poissonbayes$toJSON()
+  z5oprobitbayes <- zoprobitbayes$new()
+  z5oprobitbayes$toJSON()
 
-z5probitbayes <- zprobitbayes$new()
-z5probitbayes$toJSON()
+  z5poissonbayes <- zpoissonbayes$new()
+  z5poissonbayes$toJSON()
 
-z5tobitbayes <- ztobitbayes$new()
-z5tobitbayes$toJSON()
+  z5probitbayes <- zprobitbayes$new()
+  z5probitbayes$toJSON()
 
-z5weibull <- zweibull$new()
-z5weibull$toJSON()
+  z5tobitbayes <- ztobitbayes$new()
+  z5tobitbayes$toJSON()
 
-zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
+  z5weibull <- zweibull$new()
+  z5weibull$toJSON()
+
+  zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "logit" = z5logit$ljson,
                     "probit" = z5probit$ljson,
                     "poisson" = z5poisson$ljson,
@@ -139,12 +141,15 @@ zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "tobitbayes" = z5tobitbayes$ljson,
                     "weibull" = z5weibull$ljson))
 
-# cat(toJSON(zeligmodels, pretty = TRUE), file = file.path("tools", "zelig5models.json"))
-# file.copy(from = file.path("tools", "zelig5models.json"), to = file.path("inst", "JSON", "zelig5models.json"))
+  # cat(toJSON(zeligmodels, pretty = TRUE), file = file.path("tools", "zelig5models.json"))
+  # file.copy(from = file.path("tools", "zelig5models.json"), to = file.path("inst", "JSON", "zelig5models.json"))
 
-cat(toJSON(zeligmodels, pretty = TRUE), "\n", file = file.path("zelig5models.json"))
-file.rename(from = file.path("zelig5models.json"), to = file.path("inst", "JSON", "zelig5models.json"))
-file.remove(file.path("zelig5models.json"))
+  cat(toJSON(zeligmodels, pretty = TRUE), "\n", file = file.path("zelig5models.json"))
+  file.rename(from = file.path("zelig5models.json"), to = file.path("inst", "JSON", "zelig5models.json"))
+  file.remove(file.path("zelig5models.json"))
 
-# cat(toJSON(zeligmodels, pretty = TRUE))
-# j <- jsonlite::fromJSON(txt = readLines(file.path("..", "/JSON", "/zelig5models.json")))
+  # cat(toJSON(zeligmodels, pretty = TRUE))
+  # j <- jsonlite::fromJSON(txt = readLines(file.path("..", "/JSON", "/zelig5models.json")))
+  
+  return(TRUE)
+}

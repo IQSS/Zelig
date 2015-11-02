@@ -616,7 +616,7 @@ z$methods(
 z$methods(
   graph = function() {
     "Plot the quantities of interest"
-    plot.qi(.self)
+    qi.plot(.self)
   }
 )
 
