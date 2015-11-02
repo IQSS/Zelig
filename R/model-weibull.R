@@ -78,8 +78,15 @@ zweibull$methods(
   qi = function(simparam, mm) {
     eta <- simparam$simparam %*% t(mm)
     theta <- as.matrix(apply(eta, 2, linkinv))
-    ev <- theta * gamma(1 + 1/exp(simparam$simalpha))
-    pv <- as.matrix(rweibull(length(ev), shape = exp(simparam$simalpha), scale = theta))
+    
+    ev <- theta * gamma(1 + exp(simparam$simalpha))
+        pv <- as.matrix(rweibull(length(ev),
+                                 shape = 1 / exp(simparam$simalpha),
+                                 scale = theta))
+    
+    
+    #ev <- theta * gamma(1 + 1/exp(simparam$simalpha))
+    #pv <- as.matrix(rweibull(length(ev), shape = exp(simparam$simalpha), scale = theta))
     return(list(ev = ev, pv = pv))
   }
 )
@@ -87,6 +94,7 @@ zweibull$methods(
 zweibull$methods(
   mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
     .self$mcformula <- as.formula("Surv(y.sim, event) ~ x.sim")
+    
     
     lambda <-exp(b0 + b1 * x)
     event <- rep(1, length(x))

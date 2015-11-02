@@ -1,3 +1,10 @@
+#' Object for Binary Choice outcomes in Generalized Estimating Equations 
+#' for inheritance across models in Zelig
+#'
+#' @import methods
+#' @export Zelig-binchoice-gee
+#' @exportClass Zelig-binchoice-gee
+#'
 #' @include model-zelig.R
 #' @include model-binchoice.R
 #' @include model-gee.R

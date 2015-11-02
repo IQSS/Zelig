@@ -1,3 +1,9 @@
+#' Generalized Linear Model object for inheritance across models in Zelig
+#'
+#' @import methods
+#' @export Zelig-glm
+#' @exportClass Zelig-glm
+#'
 #' @include model-zelig.R
 
 zglm <- setRefClass("Zelig-glm",

@@ -1,4 +1,11 @@
+#' Generalized Estimating Equations Model object for inheritance across models in Zelig
+#'
+#' @import methods
+#' @export Zelig-gee
+#' @exportClass Zelig-gee
+#'
 #' @include model-zelig.R
+
 zgee <- setRefClass("Zelig-gee",
                     contains = "Zelig")
 
