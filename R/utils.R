@@ -33,6 +33,12 @@ Median <- function (x, na.rm=NULL) {
   v
 }
 
+#' Describe Here
+#' @param x Describe Here
+#' @param levels Describe Here
+#' @param ... Describe Here
+#' @return Describe Here
+#' @keywords internal
 table.levels <- function (x, levels, ...) {
   # if levels are not explicitly set, then
   # search inside of x
@@ -46,6 +52,10 @@ table.levels <- function (x, levels, ...) {
   }
 }
 
+#' Compute central tendancy as approrpriate to data type
+#' @param val a vector of values
+#' @return a mean (if numeric) or a median (if ordered) or mode (otherwise)
+#' @export
 avg <- function(val) {
   if (is.numeric(val))
     mean(val)
@@ -55,6 +65,11 @@ avg <- function(val) {
     Mode(val)
 }
 
+#' Describe Here
+#' @param fv Describe Here
+#' @param v Describe Here
+#' @return Describe Here
+#' @keywords internal
 setfactor <- function (fv, v) {
   lev <- levels(fv)
   if (!v %in% lev)
@@ -62,6 +77,11 @@ setfactor <- function (fv, v) {
   return(factor(v, levels = lev))
 }
 
+#' Describe Here
+#' @param val a vector of values
+#' @param newval Describe Here
+#' @return Describe Here
+#' @keywords internal
 setval <- function(val, newval) {
   if (is.numeric(val))
     newval
@@ -75,6 +95,11 @@ setval <- function(val, newval) {
   }
 } 
 
+#' Describe Here
+#' @param qi Describe Here
+#' @return Describe Here
+#' @keywords internal
+#' @author Christine Choirat
 statmat <- function(qi) {
   m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm = TRUE))
   n <- matrix(apply(qi, 2, mean, na.rm = TRUE))
@@ -85,6 +110,12 @@ statmat <- function(qi) {
   return(p)
 }
 
+#' Describe Here
+#' @param qi Describe Here
+#' @param num Describe Here
+#' @return Describe Here
+#' @keywords internal
+#' @author Christine Choirat
 statlevel <- function(qi, num) {
   if (is.matrix(qi))
     m <- t(apply(qi, 2, table)) / num
@@ -93,6 +124,12 @@ statlevel <- function(qi, num) {
   return(m)
 }
 
+#' Describe Here
+#' @param qi Describe Here
+#' @param num Describe Here
+#' @return Describe Here
+#' @keywords internal
+#' @author Christine Choirat
 stat <- function(qi, num) {
   if (is.null(attr(qi, "levels")))
     return(statmat(qi))
@@ -100,6 +137,11 @@ stat <- function(qi, num) {
     return(statlevel(qi, num))
 }
 
+#' Describe Here
+#' @param formula Describe Here
+#' @param cluster Describe Here
+#' @return Describe Here
+#' @keywords internal
 cluster.formula <- function (formula, cluster) { 
   # Convert LHS of formula to a string
   lhs <- deparse(formula[[2]])
@@ -112,6 +154,15 @@ cluster.formula <- function (formula, cluster) {
   update(formula, paste(". ~ .", cluster.part, sep = " + "))
 }
 
+#' Describe Here
+#' @param dataset Describe Here
+#' @param s Describe Here
+#' @param formula Describe Here
+#' @param data Describe Here
+#' @return Describe Here
+#' @export
+#' @keywords internal
+#' @author Christine Choirat
 reduce <- function(dataset, s, formula, data) {
   pred <- try(terms(fit <- lm(formula, data), "predvars"), silent = TRUE)
   if ("try-error" %in% class(pred)) # exp and weibull
@@ -162,3 +213,18 @@ reduce <- function(dataset, s, formula, data) {
 #   }
 #   return(ldata)
 # }
+
+
+#' Zelig Copy of plyr::mutate to avoid namespace conflict with dplyr
+#' @keywords internal
+zeligPlyrMutate<-function (.data, ...) 
+{
+    stopifnot(is.data.frame(.data) || is.list(.data) || is.environment(.data))
+    cols <- as.list(substitute(list(...))[-1])
+    cols <- cols[names(cols) != ""]
+    for (col in names(cols)) {
+        .data[[col]] <- eval(cols[[col]], .data, parent.frame())
+    }
+    .data
+}
+

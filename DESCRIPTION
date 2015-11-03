@@ -3,7 +3,21 @@ Maintainer: James Honaker <zelig-zee@iq.harvard.edu>
 License: GPL (>=2)
 Title: Everyone's Statistical Software
 Author: Christine Choirat, James Honaker, Kosuke Imai, Gary King, Olivia Lau
-Description: A framework that brings together an abundance of common statistical models found across packages into a unified interface, and provides a common architecture for estimation and interpretation, as well as bridging functions to absorb increasingly more models into the collective library.  Zelig allows each individual package, for each statistical model, to be accessed by a common uniformly structured call and set of arguments.  Moreover, Zelig automates all the surrounding building blocks of a statistical workflow --procedures and algorithms that may be essential to one user's application but which the original package developer did use in their own research and might not themselves support. These include bootstrapping, jackknifing, and reweighting of data, and in particular, Zelig automatically generates predicted and simulated quantities of interest (such as relative risk ratios, average treatment effects, first differences and predicted and expected values) to interpret and visualize complex models.
+Description: A framework that brings together an abundance of common
+    statistical models found across packages into a unified interface, and
+    provides a common architecture for estimation and interpretation, as well
+    as bridging functions to absorb increasingly more models into the
+    collective library.  Zelig allows each individual package, for each
+    statistical model, to be accessed by a common uniformly structured call and
+    set of arguments.  Moreover, Zelig automates all the surrounding building
+    blocks of a statistical workflow --procedures and algorithms that may be
+    essential to one user's application but which the original package
+    developer did use in their own research and might not themselves support.
+    These include bootstrapping, jackknifing, and reweighting of data, and in
+    particular, Zelig automatically generates predicted and simulated
+    quantities of interest (such as relative risk ratios, average treatment
+    effects, first differences and predicted and expected values) to interpret
+    and visualize complex models.
 Version: 5.0-7
 Date: 2015-10-29
 Imports:
@@ -14,7 +28,6 @@ Imports:
     VGAM,
     jsonlite,
     AER,
-    plyr,
     dplyr (>= 0.3.0.2),
     quantreg,
     geepack,
@@ -34,8 +47,8 @@ Collate:
     'model-tobit-bayes.R'
     'model-glm.R'
     'model-gee.R'
-    'model-binchoice.R'
     'model-gamma.R'
+    'model-binchoice.R'
     'model-logit.R'
     'model-relogit.R'
     'model-quantile.R'
@@ -62,4 +75,3 @@ Collate:
     'create-json.R'
     'plots.R'
     'wrappers.R'
-

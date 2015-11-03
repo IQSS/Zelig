@@ -431,8 +431,8 @@ z$methods(
 
 z$methods(
   simx = function() {
-    d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-    d <- plyr::mutate(d, mm = .self$setx.out$x$mm)
+    d <- zeligPlyrMutate(.self$zelig.out, simparam = .self$simparam$simparam)
+    d <- zeligPlyrMutate(d, mm = .self$setx.out$x$mm)
     .self$sim.out$x <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm)) %>%
       do(ev = .$qi$ev, pv = .$qi$pv)
@@ -441,15 +441,15 @@ z$methods(
 
 z$methods(
   simx1 = function() {
-    d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-    d <- plyr::mutate(d, mm = .self$setx.out$x1$mm)
+    d <- zeligPlyrMutate(.self$zelig.out, simparam = .self$simparam$simparam)
+    d <- zeligPlyrMutate(d, mm = .self$setx.out$x1$mm)
     .self$sim.out$x1 <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm)) %>%
       do(ev = .$qi$ev, pv = .$qi$pv)
-    d <- plyr::mutate(.self$sim.out$x1, ev0 = .self$sim.out$x$ev)
+    d <- zeligPlyrMutate(.self$sim.out$x1, ev0 = .self$sim.out$x$ev)
     d <- d %>%
       do(fd = .$ev - .$ev0)
-    .self$sim.out$x1 <- plyr::mutate(.self$sim.out$x1, fd = d$fd) #JH
+    .self$sim.out$x1 <- zeligPlyrMutate(.self$sim.out$x1, fd = d$fd) #JH
   }
 )
 
@@ -457,8 +457,8 @@ z$methods(
   simrange = function() {
     .self$sim.out$range <- list()
     for (i in 1:nrow(.self$range)) {
-      d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-      d <- plyr::mutate(d, mm = .self$setx.out$range[[i]]$mm)
+      d <- zeligPlyrMutate(.self$zelig.out, simparam = .self$simparam$simparam)
+      d <- zeligPlyrMutate(d, mm = .self$setx.out$range[[i]]$mm)
       .self$sim.out$range[[i]] <-  d %>%
         do(qi = .self$qi(.$simparam, .$mm)) %>%
         do(ev = .$qi$ev, pv = .$qi$pv)
@@ -470,8 +470,8 @@ z$methods(
   simrange1 = function() {
     .self$sim.out$range1 <- list()
     for (i in 1:nrow(.self$range1)) {
-      d <- plyr::mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-      d <- plyr::mutate(d, mm = .self$setx.out$range1[[i]]$mm)
+      d <- zeligPlyrMutate(.self$zelig.out, simparam = .self$simparam$simparam)
+      d <- zeligPlyrMutate(d, mm = .self$setx.out$range1[[i]]$mm)
       .self$sim.out$range1[[i]] <-  d %>%
         do(qi = .self$qi(.$simparam, .$mm)) %>%
         do(ev = .$qi$ev, pv = .$qi$pv)
