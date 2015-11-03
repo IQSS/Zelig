@@ -88,6 +88,7 @@ zweibull$methods(
   mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
     .self$mcformula <- as.formula("Surv(y.sim, event) ~ x.sim")
     
+    
     lambda <-exp(b0 + b1 * x)
     event <- rep(1, length(x))
     y.sim <- rweibull(n=length(x), shape=alpha, scale=lambda)

@@ -1,3 +1,9 @@
+#' Bayes Model object for inheritance across models in Zelig
+#'
+#' @import methods
+#' @export Zelig-bayes
+#' @exportClass Zelig-bayes
+#'
 #' @include model-zelig.R
 zbayes <- setRefClass("Zelig-bayes",
                       contains = "Zelig")

@@ -1,5 +1,13 @@
-import(sandwich, methods, MASS, survival, VGAM, jsonlite, AER, plyr, dplyr,
-       quantreg, geepack, MCMCpack, Amelia, MatchIt, maxLik)
+import(sandwich, methods, survival, jsonlite, dplyr,
+       geepack, MCMCpack, Amelia, MatchIt, maxLik)
+
+importFrom(MASS, glm.nb, mvrnorm)
+importFrom(VGAM, vglm)
+importFrom(AER, tobit)
+importFrom(quantreg, rq, summary.rq)
+
+importClassesFrom(VGAM, vglm)
+importMethodsFrom(VGAM, coef, fitted, plot, predict, summary, vcov)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
@@ -35,4 +43,3 @@ exportClasses(
      "Zelig-weibull"
 )
 
-importFrom(methods, setRefClass)
