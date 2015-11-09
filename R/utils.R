@@ -33,12 +33,15 @@ Median <- function (x, na.rm=NULL) {
   v
 }
 
-#' Describe Here
-#' @param x Describe Here
-#' @param levels Describe Here
-#' @param ... Describe Here
-#' @return Describe Here
-#' @keywords internal
+#' Create a table, but ensure that the correct
+#' columns exist. In particular, this allows for
+#' entires with zero as a value, which is not
+#' the default for standard tables
+#' @param x a vector
+#' @param levels a vector of levels
+#' @param ... parameters for table
+#' @return a table
+#' @author Matt Owen \email{mowen@@iq.harvard.edu}
 table.levels <- function (x, levels, ...) {
   # if levels are not explicitly set, then
   # search inside of x
@@ -65,10 +68,10 @@ avg <- function(val) {
     Mode(val)
 }
 
-#' Describe Here
-#' @param fv Describe Here
-#' @param v Describe Here
-#' @return Describe Here
+#' Set new value of a factor variable, checking for existing levels
+#' @param fv factor variable
+#' @param v value
+#' @return a factor variable with a value \code{val} and the same levels
 #' @keywords internal
 setfactor <- function (fv, v) {
   lev <- levels(fv)
@@ -77,10 +80,10 @@ setfactor <- function (fv, v) {
   return(factor(v, levels = lev))
 }
 
-#' Describe Here
-#' @param val a vector of values
-#' @param newval Describe Here
-#' @return Describe Here
+#' Set new value of a variable as approrpriate to data type
+#' @param val old value
+#' @param newval new value
+#' @return a variable of the same type with a value \code{val}
 #' @keywords internal
 setval <- function(val, newval) {
   if (is.numeric(val))
@@ -96,8 +99,8 @@ setval <- function(val, newval) {
 } 
 
 #' Describe Here
-#' @param qi Describe Here
-#' @return Describe Here
+#' @param qi quantity of interest in the discrete case
+#' @return a formatted qi
 #' @keywords internal
 #' @author Christine Choirat
 statmat <- function(qi) {
@@ -111,9 +114,9 @@ statmat <- function(qi) {
 }
 
 #' Describe Here
-#' @param qi Describe Here
-#' @param num Describe Here
-#' @return Describe Here
+#' @param qi quantity of interest in the discrete case
+#' @param num number of simulations
+#' @return a formatted qi
 #' @keywords internal
 #' @author Christine Choirat
 statlevel <- function(qi, num) {
@@ -124,10 +127,10 @@ statlevel <- function(qi, num) {
   return(m)
 }
 
-#' Describe Here
-#' @param qi Describe Here
-#' @param num Describe Here
-#' @return Describe Here
+#' 
+#' @param qi quantity of interest (e.g., estimated value or predicted value)
+#' @param num number of simulations
+#' @return a formatted qi
 #' @keywords internal
 #' @author Christine Choirat
 stat <- function(qi, num) {
@@ -137,11 +140,13 @@ stat <- function(qi, num) {
     return(statlevel(qi, num))
 }
 
-#' Describe Here
-#' @param formula Describe Here
-#' @param cluster Describe Here
-#' @return Describe Here
-#' @keywords internal
+#' Generate Formulae that Consider Clustering
+#'
+#' This method is used internally by the "Zelig" Package to interpret
+#' clustering in GEE models.
+#' @param formula a formula object
+#' @param cluster a vector
+#' @return a formula object describing clustering
 cluster.formula <- function (formula, cluster) { 
   # Convert LHS of formula to a string
   lhs <- deparse(formula[[2]])
@@ -154,12 +159,15 @@ cluster.formula <- function (formula, cluster) {
   update(formula, paste(". ~ .", cluster.part, sep = " + "))
 }
 
-#' Describe Here
-#' @param dataset Describe Here
-#' @param s Describe Here
-#' @param formula Describe Here
-#' @param data Describe Here
-#' @return Describe Here
+#' Calculate the reduced dataset to be used in code{\link{setx}}
+#' 
+#' #' This method is used internally
+#' 
+#' @param dataset Zelig object data, possibly split to deal with \code{by} argument
+#' @param s list of variables and their tentative \code{setx} values
+#' @param formula a simplified version of the Zelig object formula (typically with 1 on the lhs)
+#' @param data Zelig object data
+#' @return a list of with all the model variables either at their central tendancy or their \code{setx} value
 #' @export
 #' @keywords internal
 #' @author Christine Choirat
