@@ -5,7 +5,7 @@ importFrom("plyr", "llply")
 importFrom("MASS", "glm.nb", "mvrnorm")
 importFrom("VGAM", "vglm")
 importFrom("AER", "tobit")
-importFrom("quantreg", "rq", "summary.rq")
+importFrom("quantreg", "rq", "summary.rq", "bandwidth.rq")
 importFrom("grDevices", "col2rgb", "heat.colors", "rgb")
 importFrom("graphics", "abline", "axis", "barplot", "box", "image",
              "layout", "lines", "par", "polygon", "text")
