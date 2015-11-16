@@ -15,7 +15,7 @@ importFrom("stats", "binomial", "complete.cases", "density", "glm",
              "sd", "terms", "update")
 
 importClassesFrom("VGAM", "vglm")
-importMethodsFrom("VGAM", "coef", "fitted", "plot", "predict", "summary", "vcov")
+importMethodsFrom("VGAM", "coef", "fitted", "predict", "vcov")
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
