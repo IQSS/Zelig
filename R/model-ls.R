@@ -49,7 +49,7 @@ zls$methods(
 zls$methods(
   qi = function(simparam, mm) {
     ev <- simparam$simparam %*% t(mm)
-    pv <- rnorm(n=length(ev), mean=ev, sd=simparam$simalpha)
+    pv <- as.matrix(rnorm(n=length(ev), mean=ev, sd=simparam$simalpha), nrow=length(ev), ncol=1)
     return(list(ev = ev, pv = pv))
   }
 )
