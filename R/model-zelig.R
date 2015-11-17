@@ -553,7 +553,7 @@ z$methods(
       }
 
 
-      if("gim.criteria" %in% .self$test.statistics){
+      if("gim.criteria" %in% names(.self$test.statistics)){
           if(.self$test.statistics$gim.criteria){
 #               cat("According to the GIM-rule-of-thumb, your model probably has some type of specification error.\n",
 #               "We suggest you run model diagnostics and seek to fix the problem.\n",
