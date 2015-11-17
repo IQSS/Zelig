@@ -1,3 +1,3 @@
 z <- zlogit$new()
-test <- z$mcunit(minx=-4, maxx=4, plot=FALSE)
+test <- z$mcunit(minx=-2, maxx=2, plot=FALSE)
 expect_true(test)
