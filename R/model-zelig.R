@@ -480,7 +480,7 @@ z$methods(
 )
 
 z$methods(
-  show = function(signif.stars = FALSE) {
+  show = function(signif.stars = FALSE, subset = NULL) {
     "Display a Zelig object"
     .self$signif.stars <- signif.stars
     .self$signif.stars.default <- getOption("show.signif.stars")
@@ -495,22 +495,8 @@ z$methods(
       	.self$zelig.out$z.out[[jj]]$call <- .self$zelig.call
       }	
       #############################################################################
-      summ <- .self$zelig.out %>%
-        do(summ = {cat("Model: \n")
-                   if (length(.self$by) == 1) {
-                     if (.self$by == "by") {
-                       cat()
-                     }
-                     else {
-                       print(.[.self$by])
-                     }
-                   } else {
-                     print(.[.self$by])
-                   }
-                   print(base::summary(.$z.out))
-                   })
-        
-      if(.self$mi){
+
+      if((.self$mi) & is.null(subset)){
         cat("Model: Combined Imputations \n")
         vcovlist <-.self$getvcov()
         coeflist <-.self$getcoef()
@@ -543,8 +529,30 @@ z$methods(
         print(results, digits=max(3, getOption("digits") - 3))
         cat("---\nSignif. codes:  '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n")
         cat("\n")
+        cat("For results from individual imputed datasets, use summary(x, subset = i:j)\n")
+      }else if ((.self$mi) & !is.null(subset)) {
+        for(i in subset){
+            cat("Imputed Dataset ",i,sep="")
+            print(base::summary(.self$zelig.out$z.out[[i]]))
+        }
+      }else{
+        summ <- .self$zelig.out %>%
+        do(summ = {cat("Model: \n")
+          if (length(.self$by) == 1) {
+              if (.self$by == "by") {
+                  cat()
+              }
+              else {
+                  print(.[.self$by])
+              }
+          } else {
+              print(.[.self$by])
+          }
+          print(base::summary(.$z.out))
+        })
       }
-      
+
+
       if(!is.null(.self$test.statistics$gim.criteria)){
           if(.self$test.statistics$gim.criteria){
 #               cat("According to the GIM-rule-of-thumb, your model probably has some type of specification error.\n",
@@ -757,7 +765,12 @@ z$methods(
         .self$setx(x.sim=xtemp)
         .self$sim()
         #temp<-sort( .self$sim.out$x$ev[[1]] )
-        temp<-sort( .self$sim.out$range[[i]]$ev[[1]] )
+        temp<-.self$sim.out$range[[i]]$ev[[1]]
+        # This is for ev's that are a probability distribution across outcomes, like ordered logit/probit
+        if(ncol(temp)>1){
+            temp <- temp %*% as.numeric(colnames(temp))
+        }
+        temp <- sort(temp)
         
         #calculate bounds of expected values
         history.ev[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
