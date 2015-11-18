@@ -12,14 +12,14 @@ Description: A framework that brings together an abundance of common
     set of arguments.  Moreover, Zelig automates all the surrounding building
     blocks of a statistical workflow --procedures and algorithms that may be
     essential to one user's application but which the original package
-    developer did not use in their own research and might not themselves support.
-    These include bootstrapping, jackknifing, and reweighting of data.  In
-    particular, Zelig automatically generates predicted and simulated
+    developer did not use in their own research and might not themselves
+    support. These include bootstrapping, jackknifing, and reweighting of data.
+    In particular, Zelig automatically generates predicted and simulated
     quantities of interest (such as relative risk ratios, average treatment
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
-Version: 5.0-8
-Date: 2015-11-11
+Version: 5.0-9
+Date: 2015-11-19
 Imports:
     sandwich,
     methods,
