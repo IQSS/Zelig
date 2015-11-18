@@ -684,7 +684,7 @@ z$methods(
 
 z$methods(
   getpredict = function() {
-    "Get predcted values"
+    "Get predicted values"
     result <- lapply(.self$zelig.out$z.out, predict)
     if ("try-error" %in% class(result))
       stop("'predict' method' not implemented for model '", .self$name, "'")
@@ -695,6 +695,7 @@ z$methods(
 
 z$methods(
   getqi = function(qi="ev", xvalue="x"){
+    "Get quantities of interest"
     possiblexvalues <- names(.self$sim.out)
     if(!(xvalue %in% possiblexvalues)){
       stop(paste("xvalue must be ", paste(possiblexvalues, collapse=" or ") , ".", sep=""))
