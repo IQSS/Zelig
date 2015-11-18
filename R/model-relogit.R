@@ -97,6 +97,9 @@ zrelogit$methods(
   }
 )
 
+
+#' Estimation function for rare events logit models
+#' @keywords internal
 relogit <- function(formula,
                     data = sys.parent(),
                     tau = NULL,

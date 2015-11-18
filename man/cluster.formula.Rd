@@ -2,20 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{cluster.formula}
 \alias{cluster.formula}
-\title{Describe Here}
+\title{Generate Formulae that Consider Clustering}
 \usage{
 cluster.formula(formula, cluster)
 }
 \arguments{
-\item{formula}{Describe Here}
+\item{formula}{a formula object}
 
-\item{cluster}{Describe Here}
+\item{cluster}{a vector}
 }
 \value{
-Describe Here
+a formula object describing clustering
 }
 \description{
-Describe Here
+This method is used internally by the "Zelig" Package to interpret
+clustering in GEE models.
 }
-\keyword{internal}
 

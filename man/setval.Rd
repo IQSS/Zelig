@@ -2,20 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{setval}
 \alias{setval}
-\title{Describe Here}
+\title{Set new value of a variable as approrpriate to data type}
 \usage{
 setval(val, newval)
 }
 \arguments{
-\item{val}{a vector of values}
+\item{val}{old value}
 
-\item{newval}{Describe Here}
+\item{newval}{new value}
 }
 \value{
-Describe Here
+a variable of the same type with a value \code{val}
 }
 \description{
-Describe Here
+Set new value of a variable as approrpriate to data type
 }
 \keyword{internal}
 

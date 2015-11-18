@@ -2,18 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{statmat}
 \alias{statmat}
-\title{Describe Here}
+\title{Summarize Quantities of Interest when Matricies}
 \usage{
 statmat(qi)
 }
 \arguments{
-\item{qi}{Describe Here}
+\item{qi}{quantity of interest in the discrete case}
 }
 \value{
-Describe Here
+a formatted qi
 }
 \description{
-Describe Here
+Summarize Quantities of Interest when Matricies
 }
 \author{
 Christine Choirat

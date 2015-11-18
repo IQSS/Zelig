@@ -2,20 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{setfactor}
 \alias{setfactor}
-\title{Describe Here}
+\title{Set new value of a factor variable, checking for existing levels}
 \usage{
 setfactor(fv, v)
 }
 \arguments{
-\item{fv}{Describe Here}
+\item{fv}{factor variable}
 
-\item{v}{Describe Here}
+\item{v}{value}
 }
 \value{
-Describe Here
+a factor variable with a value \code{val} and the same levels
 }
 \description{
-Describe Here
+Set new value of a factor variable, checking for existing levels
 }
 \keyword{internal}
 

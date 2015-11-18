@@ -2,20 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{statlevel}
 \alias{statlevel}
-\title{Describe Here}
+\title{Summarize Quantities of Interest when Factors}
 \usage{
 statlevel(qi, num)
 }
 \arguments{
-\item{qi}{Describe Here}
+\item{qi}{quantity of interest in the discrete case}
 
-\item{num}{Describe Here}
+\item{num}{number of simulations}
 }
 \value{
-Describe Here
+a formatted qi
 }
 \description{
-Describe Here
+Summarize Quantities of Interest when Factors
 }
 \author{
 Christine Choirat

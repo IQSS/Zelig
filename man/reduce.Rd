@@ -2,24 +2,24 @@
 % Please edit documentation in R/utils.R
 \name{reduce}
 \alias{reduce}
-\title{Describe Here}
+\title{Calculate the reduced dataset to be used in code{\link{setx}}}
 \usage{
 reduce(dataset, s, formula, data)
 }
 \arguments{
-\item{dataset}{Describe Here}
+\item{dataset}{Zelig object data, possibly split to deal with \code{by} argument}
 
-\item{s}{Describe Here}
+\item{s}{list of variables and their tentative \code{setx} values}
 
-\item{formula}{Describe Here}
+\item{formula}{a simplified version of the Zelig object formula (typically with 1 on the lhs)}
 
-\item{data}{Describe Here}
+\item{data}{Zelig object data}
 }
 \value{
-Describe Here
+a list of with all the model variables either at their central tendancy or their \code{setx} value
 }
 \description{
-Describe Here
+#' This method is used internally
 }
 \author{
 Christine Choirat

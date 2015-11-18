@@ -2,13 +2,13 @@
 % Please edit documentation in R/model-relogit.R
 \name{relogit}
 \alias{relogit}
-\title{Internal function for Rare Events Logistic Regression for Dichotomous Dependent Variables}
+\title{Estimation function for rare events logit models}
 \usage{
 relogit(formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,
   case.control = "prior", ...)
 }
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-relogit.html}
+Estimation function for rare events logit models
 }
 \keyword{internal}
 

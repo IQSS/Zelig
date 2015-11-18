@@ -2,22 +2,30 @@
 % Please edit documentation in R/utils.R
 \name{table.levels}
 \alias{table.levels}
-\title{Describe Here}
+\title{Create a table, but ensure that the correct
+columns exist. In particular, this allows for
+entires with zero as a value, which is not
+the default for standard tables}
 \usage{
 table.levels(x, levels, ...)
 }
 \arguments{
-\item{x}{Describe Here}
+\item{x}{a vector}
 
-\item{levels}{Describe Here}
+\item{levels}{a vector of levels}
 
-\item{...}{Describe Here}
+\item{...}{parameters for table}
 }
 \value{
-Describe Here
+a table
 }
 \description{
-Describe Here
+Create a table, but ensure that the correct
+columns exist. In particular, this allows for
+entires with zero as a value, which is not
+the default for standard tables
 }
-\keyword{internal}
+\author{
+Matt Owen \email{mowen@iq.harvard.edu}
+}
 

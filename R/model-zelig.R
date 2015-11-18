@@ -694,6 +694,26 @@ z$methods(
 )
 
 z$methods(
+  getqi = function(qi="ev", xvalue="x"){
+    possiblexvalues <- names(.self$sim.out)
+    if(!(xvalue %in% possiblexvalues)){
+      stop(paste("xvalue must be ", paste(possiblexvalues, collapse=" or ") , ".", sep=""))
+    }
+    possibleqivalues <- names(.self$sim.out[[xvalue]])
+    if(!(qi %in% possibleqivalues)){
+      stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
+    }
+
+    if(.self$mi){
+      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
+    } else {
+      tempqi<- .self$sim.out[[xvalue]][[qi]][[1]]
+    }
+    return(tempqi)
+  }
+)
+
+z$methods(
   toJSON = function() {
     "Convert Zelig object to JSON format"
     if (!is.list(.self$json))
@@ -873,43 +893,58 @@ z$methods(
 #   }
 # )
 
+
+#' Summary method for Zelig objects"
+#' @param object An Object of Class Zelig
+#' @param ... Additional parameters to be passed to summary
 setMethod("summary", "Zelig",
           function(object, ...) {
             object$summarize(...)
           }
 )
 
+#' Plot method for Zelig objects
+#' @param x An Object of Class Zelig
+#' @param y unused
+#' @param ... Additional parameters to be passed to plot
 setMethod("plot", "Zelig",
           function(x, ...) {
             x$graph()
           }
 )
 
+#' Variance-covariance method for Zelig objects
+#' @param object An Object of Class Zelig
+#' @param ... Additional parameters to be passed to vcov
 setMethod("vcov", "Zelig",
           function(object, ...) {
             object$getvcov()
           }
 )
 
+#' Method for extracting estimated coefficients from Zelig objects
+#' @param object An Object of Class Zelig
+#' @param ... Additional parameters to be passed to coef
 setMethod("coef", "Zelig",
           function(object, ...) {
             object$getcoef()
           }
 )
 
+#' Method for extracting estimated fitted values from Zelig objects
+#' @param object An Object of Class Zelig
+#' @param ... Additional parameters to be passed to fitted
 setMethod("fitted", "Zelig",
           function(object, ...) {
             object$getfitted()
           }
 )
 
+#' Method for getting predicted values from Zelig objects
+#' @param object An Object of Class Zelig
+#' @param ... Additional parameters to be passed to predict
 setMethod("predict", "Zelig",
           function(object, ...) {
             object$getpredict()
           }
 )
-
-#       idx <- match(names(.self$setx.labels),
-#                    names(.self$sim.out),
-#                    nomatch = 0) 
-#       names(.self$sim.out)[idx] <- .self$setx.labels[idx != 0]

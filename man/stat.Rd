@@ -2,20 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{stat}
 \alias{stat}
-\title{Describe Here}
+\title{Pass Quantities of Interest to Appropriate Summary Function}
 \usage{
 stat(qi, num)
 }
 \arguments{
-\item{qi}{Describe Here}
+\item{qi}{quantity of interest (e.g., estimated value or predicted value)}
 
-\item{num}{Describe Here}
+\item{num}{number of simulations}
 }
 \value{
-Describe Here
+a formatted qi
 }
 \description{
-Describe Here
+Pass Quantities of Interest to Appropriate Summary Function
 }
 \author{
 Christine Choirat
