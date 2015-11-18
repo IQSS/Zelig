@@ -226,25 +226,25 @@ qi.plot <- function (obj, ...) {
     
     # Plot each simulation
     if(length(obj$sim.out$x$pv)>0)
-        simulations.plot(obj$sim.out$x$pv[[1]], main = titles$pv, col = color.x, line.col = "black")
+        simulations.plot(obj$getqi(qi="pv", xvalue="x"), main = titles$pv, col = color.x, line.col = "black")
     
     if(length(obj$sim.out$x1$pv)>0)
-        simulations.plot(obj$sim.out$x1$pv[[1]], main = titles$pv1, col = color.x1, line.col = "black")
+        simulations.plot(obj$getqi(qi="pv", xvalue="x1"), main = titles$pv1, col = color.x1, line.col = "black")
         
     if(length(obj$sim.out$x$ev)>0)
-        simulations.plot(obj$sim.out$x$ev[[1]], main = titles$ev, col = color.x, line.col = "black")
+        simulations.plot(obj$getqi(qi="ev", xvalue="x"), main = titles$ev, col = color.x, line.col = "black")
 
     if(length(obj$sim.out$x1$ev)>0)
-        simulations.plot(obj$sim.out$x1$ev[[1]], main = titles$ev1, col = color.x1, line.col = "black")
+        simulations.plot(obj$getqi(qi="ev", xvalue="x1"), main = titles$ev1, col = color.x1, line.col = "black")
 
     if(length(obj$sim.out$x1$fd)>0)
-        simulations.plot(obj$sim.out$x1$fd[[1]], main = titles$fd, col = color.mixed, line.col = "black")
+        simulations.plot(obj$getqi(qi="fd", xvalue="x1"), main = titles$fd, col = color.mixed, line.col = "black")
     
     if(both.pv.exist)
-        simulations.plot(y=obj$sim.out$x$pv[[1]], y1=obj$sim.out$x1$pv[[1]], main = "Comparison of Y|X and Y|X1", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
+        simulations.plot(y=obj$getqi(qi="pv", xvalue="x"), y1=obj$getqi(qi="pv", xvalue="x1"), main = "Comparison of Y|X and Y|X1", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
         
     if(both.ev.exist)
-        simulations.plot(y=obj$sim.out$x$ev[[1]], y1=obj$sim.out$x1$ev[[1]], main = "Comparison of E(Y|X) and E(Y|X1)", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
+        simulations.plot(y=obj$getqi(qi="ev", xvalue="x"), y1=obj$getqi(qi="ev", xvalue="x1"), main = "Comparison of E(Y|X) and E(Y|X1)", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
 
     
     # Restore old state
