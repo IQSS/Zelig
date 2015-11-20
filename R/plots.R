@@ -33,8 +33,12 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
         line.col <- "black"
         
         # Integer Values
-        if (length(unique(y))<11 & all(as.integer(y) == y)) {
+        if ((length(unique(y))<11 & all(as.integer(y) == y)) | is.factor(y) | is.character(y)) {
             
+                if(is.factor(y) | is.character(y)){
+                    y <- as.numeric(y)
+                }
+
                 # Create a sequence of names
                 nameseq <- paste("Y=", min(y):max(y), sep="")
                 
@@ -101,8 +105,13 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
     }else{
         
         # Integer - Plot and shade a matrix
-        if( length(unique(y))<11 & all(as.integer(y) == y) ){
+        if(( length(unique(y))<11 & all(as.integer(y) == y) ) | is.factor(y) | is.character(y)){
             
+            if(is.factor(y) | is.character(y)){
+                y <- as.numeric(y)
+                y1 <- as.numeric(y1)
+            }
+
             yseq<-min(c(y,y1)):max(c(y,y1))
             nameseq<- paste("Y=",yseq,sep="")
             n.y<-length(yseq)
