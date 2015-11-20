@@ -51,40 +51,39 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
         # Continuous Values
         } else if(is.numeric(y)){
             if(ncol(as.matrix(y))>1){
+                ncoly <- ncol(y)
                 hold.dens <- list()
                 ymax <- xmax <- xmin <- rep(0,ncol(y))
-                for(i in 1:ncol(y)){
+                for(i in 1:ncoly){
                     hold.dens[[i]] <- density(y[,i])
                     ymax[i] <- max(hold.dens[[i]]$y)
                     xmax[i] <- max(hold.dens[[i]]$x)
                     xmin[i] <- min(hold.dens[[i]]$x)
                 }
-                shift.margin <- 0.1
+                shift <- 0:ncoly
                 all.xlim <- c(min(xmin), max(xmax))
-                all.ylim <- c(0,sum(ymax) * (1 + shift.margin))
+                all.ylim <- c(0,ncoly)
                 if(is.null(names(y))){
-                    all.names <- 1:ncol(y)
+                    all.names <- 1:ncoly
                 }else{
                     all.names <- names(y)
                 }
-                shift.eps <- (sum(ymax) * shift.margin )/(ncol(y) -1 )
-                shift <- 0
-                for(i in 1:ncol(y) ){
-                    if(i<ncol(y)){
-                        output <- plot(hold.dens[[i]]$x, hold.dens[[i]]$y + shift[i], xaxt="n", yaxt="n", xlab="", ylab="", main="", col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
+                shrink <- 0.9
+                for(i in 1:ncoly ){
+                    if(i<ncoly){
+                        output <- plot(hold.dens[[i]]$x, shrink*hold.dens[[i]]$y/ymax[i] + shift[i], xaxt="n", yaxt="n", xlab="", ylab="", main="", col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
                         if(!identical(col[1],"n")){
-                            polygon(hold.dens[[i]]$x, hold.dens[[i]]$y + shift[i], col=col[1])
+                            polygon(hold.dens[[i]]$x, shrink*hold.dens[[i]]$y/ymax[i] + shift[i], col=col[1])
                         }
-                        shift <- c(shift, shift[i] + ymax[i] + shift.eps)
                         abline(h=shift[i+1])
                         text(x=all.xlim[1], y=(shift[i] + shift[i+1])/2, labels=all.names[i])
                         par(new=TRUE)
                     }else{
-                        output <- plot(hold.dens[[i]]$x, hold.dens[[i]]$y + shift[i], yaxt="n", xlab=xlab, ylab=ylab, main=main, col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
+                        output <- plot(hold.dens[[i]]$x, shrink*hold.dens[[i]]$y/ymax[i] + shift[i], yaxt="n", xlab=xlab, ylab=ylab, main=main, col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
                         if(!identical(col[1],"n")){
-                            polygon(hold.dens[[i]]$x, hold.dens[[i]]$y + shift[i], col=col[1])
+                            polygon(hold.dens[[i]]$x, shrink*hold.dens[[i]]$y/ymax[i] + shift[i], col=col[1])
                         }
-                        text(x=all.xlim[1], y=(shift[i] + all.ylim[2])/2, labels=all.names[i])
+                        text(x=all.xlim[1], y=(shift[i] + shift[i+1])/2, labels=all.names[i])
                     }
                 }
 
@@ -154,54 +153,53 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
             }
 
             if(ncol(as.matrix(y))>1){
+                shrink <- 0.9
+                ncoly <- ncol(y)  # Assumes columns of y match cols y1.  Should check or enforce.
+                if(is.null(names(y))){
+                    all.names <- 1:ncoly
+                }else{
+                    all.names <- names(y)
+                }
+
                 hold.dens.y <- hold.dens.y1 <- list()
-                ymax <- xmax <- xmin <- rep(0,ncol(y))
-                for(i in 1:ncol(y)){
+                ymax <- xmax <- xmin <- rep(0,ncoly)
+                for(i in 1:ncoly){
                     hold.dens.y[[i]] <- density(y[,i])
-                    hold.dens.y1[[i]] <- density(y1[,i])
+                    hold.dens.y1[[i]] <- density(y1[,i], bw=hold.dens.y[[i]]$bw)
                     ymax[i] <- max(hold.dens.y[[i]]$y, hold.dens.y1[[i]]$y)
                     xmax[i] <- max(hold.dens.y[[i]]$x, hold.dens.y1[[i]]$x)
                     xmin[i] <- min(hold.dens.y[[i]]$x, hold.dens.y1[[i]]$x)
                 }
-                shift.margin <- 0.1
                 all.xlim <- c(min(xmin), max(xmax))
-                all.ylim <- c(0,sum(ymax) * (1 + shift.margin))
-                if(is.null(names(y))){
-                    all.names <- 1:ncol(y)
-                }else{
-                    all.names <- names(y)
-                }
-                shift.eps <- (sum(ymax) * shift.margin )/(ncol(y) -1 )
-                shift <- 0
-                for(i in 1:ncol(y) ){
-                    if(i<ncol(y)){
-                        output <- plot(hold.dens.y[[i]]$x, hold.dens.y[[i]]$y + shift[i], xaxt="n", yaxt="n", xlab="", ylab="", main="", col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
+                all.ylim <- c(0,ncoly)
+                shift <- 0:ncoly
+                for(i in 1:ncoly ){
+                    if(i<ncoly){
+                        output <- plot(hold.dens.y[[i]]$x, shrink*hold.dens.y[[i]]$y/ymax[i] + shift[i], xaxt="n", yaxt="n", xlab="", ylab="", main="", col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
                         par(new=TRUE)
-                        output <- plot(hold.dens.y1[[i]]$x, hold.dens.y1[[i]]$y + shift[i], xaxt="n", yaxt="n", xlab="", ylab="", main="", col=line.col[2], xlim=all.xlim, ylim=all.ylim, type="l")
+                        output <- plot(hold.dens.y1[[i]]$x, shrink*hold.dens.y1[[i]]$y/ymax[i] + shift[i], xaxt="n", yaxt="n", xlab="", ylab="", main="", col=line.col[2], xlim=all.xlim, ylim=all.ylim, type="l")
 
                         if(!identical(col[1],"n")){
-                            polygon(hold.dens.y[[i]]$x, hold.dens.y[[i]]$y + shift[i], col=col[1])
+                            polygon(hold.dens.y[[i]]$x, shrink*hold.dens.y[[i]]$y/ymax[i] + shift[i], col=col[1])
                         }
                         if(!identical(col[2],"n")){
-                            polygon(hold.dens.y1[[i]]$x, hold.dens.y1[[i]]$y + shift[i], col=col[2])
+                            polygon(hold.dens.y1[[i]]$x, shrink*hold.dens.y1[[i]]$y/ymax[i] + shift[i], col=col[2])
                         }
-                        shift <- c(shift, shift[i] + ymax[i] + shift.eps)
                         abline(h=shift[i+1])
                         text(x=all.xlim[1], y=(shift[i] + shift[i+1])/2, labels=all.names[i])
                         par(new=TRUE)
                     }else{
-                        output <- plot(hold.dens.y[[i]]$x, hold.dens.y[[i]]$y + shift[i], yaxt="n", xlab=xlab, ylab=ylab, main=main, col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
+                        output <- plot(hold.dens.y[[i]]$x, shrink*hold.dens.y[[i]]$y/ymax[i] + shift[i], yaxt="n", xlab=xlab, ylab=ylab, main=main, col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
                         par(new=TRUE)
-                        output <- plot(hold.dens.y1[[i]]$x, hold.dens.y1[[i]]$y + shift[i], yaxt="n", xlab=xlab, ylab=ylab, main=main, col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
+                        output <- plot(hold.dens.y1[[i]]$x, shrink*hold.dens.y1[[i]]$y/ymax[i] + shift[i], yaxt="n", xlab=xlab, ylab=ylab, main=main, col=line.col[1], xlim=all.xlim, ylim=all.ylim, type="l")
 
                         if(!identical(col[1],"n")){
-                            polygon(hold.dens.y[[i]]$x, hold.dens.y[[i]]$y + shift[i], col=col[1])
+                            polygon(hold.dens.y[[i]]$x, shrink*hold.dens.y[[i]]$y/ymax[i] + shift[i], col=col[1])
                         }
                         if(!identical(col[2],"n")){
-                            polygon(hold.dens.y1[[i]]$x, hold.dens.y1[[i]]$y + shift[i], col=col[2])
+                            polygon(hold.dens.y1[[i]]$x, shrink*hold.dens.y1[[i]]$y/ymax[i] + shift[i], col=col[2])
                         }
-
-                        text(x=all.xlim[1], y=(shift[i] + all.ylim[2])/2, labels=all.names[i])
+                        text(x=all.xlim[1], y=(shift[i] + shift[i+1])/2, labels=all.names[i])
                     }
                 } 
             }else{
