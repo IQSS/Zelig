@@ -205,7 +205,7 @@ z$methods(
 )
 
 z$methods(
-  zelig = function(formula, data, ..., weights=NULL, by) {
+  zelig = function(formula, data, model=NULL, ..., weights=NULL, by) {
     "The zelig command estimates a variety of statistical models"
     fn2 <- function(fc, data) {
       fc$data <- data
@@ -221,7 +221,15 @@ z$methods(
       .self$formula <- as.formula( .self$mcformula, env=environment(.self$formula) )
       .self$model.call$formula <- as.formula( .self$mcformula, env=globalenv() )
     }
-    
+    if(!is.null(model)){
+      cat("Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.\n")
+      flag <- !(names(.self$model.call)=="model")
+      .self$model.call <- .self$model.call[flag]
+      flag <- !(names(.self$zelig.call)=="model")
+      .self$zelig.call <- .self$zelig.call[flag]
+    }
+
+
     .self$by <- by
     .self$originaldata <- data
     .self$originalweights <- weights
