@@ -67,7 +67,6 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
                 }else{
                     all.names <- names(y)
                 }
-                print(all.names)
                 shift.eps <- (sum(ymax) * shift.margin )/(ncol(y) -1 )
                 shift <- 0
                 for(i in 1:ncol(y) ){
