@@ -789,7 +789,7 @@ z$methods(
         temp<-.self$sim.out$range[[i]]$ev[[1]]
         # This is for ev's that are a probability distribution across outcomes, like ordered logit/probit
         if(ncol(temp)>1){
-            temp <- temp %*% as.numeric(colnames(temp))
+          temp <- temp %*% as.numeric(sort(unique(data.sim$y.sim)))  #as.numeric(colnames(temp))
         }
         temp <- sort(temp)
         
