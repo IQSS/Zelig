@@ -500,7 +500,11 @@ z$methods(
       # Current workaround to display call as $zelig.call rather than $model.call
       # should improve this approach in future:
       for(jj in 1:length(.self$zelig.out$z.out)){
-      	.self$zelig.out$z.out[[jj]]$call <- .self$zelig.call
+        if("S4" %in% typeof(.self$zelig.out$z.out[[jj]]) ){
+          slot(.self$zelig.out$z.out[[jj]],"call") <- .self$zelig.call
+        } else {
+      	  .self$zelig.out$z.out[[jj]]$call <- .self$zelig.call
+        }
       }	
       #############################################################################
 
@@ -556,7 +560,11 @@ z$methods(
           } else {
               print(.[.self$by])
           }
-          print(base::summary(.$z.out))
+          if("S4" %in% typeof(.$z.out)){  # Need to change summary method here for some classes
+              print(base::summary(.$z.out))    
+          }else{
+              print(base::summary(.$z.out))
+          }
         })
       }
 
