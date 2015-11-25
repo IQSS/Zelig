@@ -120,10 +120,13 @@ statmat <- function(qi) {
 #' @keywords internal
 #' @author Christine Choirat
 statlevel <- function(qi, num) {
-  if (is.matrix(qi))
-    m <- t(apply(qi, 2, table)) / num
-  else
-    m <- table(qi) / num
+    if (is.matrix(qi)){
+        #m <- t(apply(qi, 2, table)) / num
+        all.levels <- levels(qi)
+        m <- t(apply(qi, 2, function(x) table(factor(x, levels=all.levels)))) / num
+    }else{
+        m <- table(qi) / num
+    }
   return(m)
 }
 
