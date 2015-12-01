@@ -136,6 +136,7 @@ z$methods(
     .self$vignette.url <- sub("-gee", "gee", .self$vignette.url)
     .self$vignette.url <- sub("-bayes", "bayes", .self$vignette.url)
     # .self$vignette.url <- paste(.self$url.docs, "zelig-", sub("-", "", .self$name), ".html", sep = "")
+    .self$category <- "undefined"
     .self$explanatory <- c("continuous",
                            "discrete",
                            "nominal",
