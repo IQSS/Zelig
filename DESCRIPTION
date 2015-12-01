@@ -18,8 +18,8 @@ Description: A framework that brings together an abundance of common
     quantities of interest (such as relative risk ratios, average treatment
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
-Version: 5.0-9
-Date: 2015-11-19
+Version: 5.0-10
+Date: 2015-12-01
 Imports:
     sandwich,
     methods,
