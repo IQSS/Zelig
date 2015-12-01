@@ -362,12 +362,18 @@ z$methods(
   set = function(...) {
     "Setting Explanatory Variable Values"
     s <-list(...)
-    f <- update(.self$formula, 1 ~ .)
+    # This eliminates warning messages when factor rhs passed to lm() model in reduce() utility function
+    if(.self$category=="multinomial"){  # Perhaps find more robust way to test if dep.var. is factor
+      f2 <- update(.self$formula, as.numeric(.) ~ .)
+    }else{
+      f2 <- .self$formula
+    }
+      f <- update(.self$formula, 1 ~ .)      
     # update <- na.omit(.self$data) %>% # remove missing values
     update <- .self$data %>%
       group_by_(.self$by) %>%
       do(mm = model.matrix(f, reduce(dataset = ., s, 
-                                     formula = .self$formula,
+                                     formula = f2, 
                                      data = .self$data)))
     return(update)
   }
