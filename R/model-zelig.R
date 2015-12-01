@@ -561,7 +561,7 @@ z$methods(
               print(.[.self$by])
           }
           if("S4" %in% typeof(.$z.out)){  # Need to change summary method here for some classes
-              print(base::summary(.$z.out))    
+              print(summary(.$z.out))    
           }else{
               print(base::summary(.$z.out))
           }
