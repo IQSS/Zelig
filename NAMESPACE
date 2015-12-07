@@ -1,5 +1,5 @@
 import(sandwich, methods, survival, jsonlite, dplyr,
-       geepack, MCMCpack, Amelia, MatchIt, maxLik)
+       geepack, MCMCpack, Amelia, MatchIt, maxLik, survey)
 
 importFrom("plyr", "llply")
 importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm")

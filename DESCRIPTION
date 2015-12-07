@@ -35,7 +35,8 @@ Imports:
     MCMCpack,
     Amelia,
     MatchIt,
-    maxLik
+    maxLik,
+    survey
 Suggests:
     testthat,
     knitr
@@ -48,6 +49,7 @@ Collate:
     'model-tobit-bayes.R'
     'model-glm.R'
     'model-gee.R'
+    'model-survey.R'
     'model-gamma.R'
     'model-binchoice.R'
     'model-logit.R'
@@ -64,6 +66,7 @@ Collate:
     'model-normal.R'
     'model-normal-gee.R'
     'model-normal-bayes.R'
+    'model-normal-survey.R'
     'model-negbinom.R'
     'model-mlogit-bayes.R'
     'model-ls.R'
