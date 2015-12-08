@@ -5,6 +5,7 @@
 #' @export Zelig-probit-gee
 #' @exportClass Zelig-probit-gee
 #'
+#' @include model-zelig.R
 #' @include model-binchoice-gee.R
 
 zprobitgee <- setRefClass("Zelig-probit-gee",

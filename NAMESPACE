@@ -1,8 +1,8 @@
 import(sandwich, methods, survival, jsonlite, dplyr,
-       geepack, MCMCpack, Amelia, MatchIt, maxLik)
+       geepack, MCMCpack, Amelia, MatchIt, maxLik, survey)
 
 importFrom("plyr", "llply")
-importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm")
+importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm", "gamma.shape")
 importFrom("VGAM", "vglm")
 importFrom("AER", "tobit")
 importFrom("quantreg", "rq", "summary.rq", "bandwidth.rq")

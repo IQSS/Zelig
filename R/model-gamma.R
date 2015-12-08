@@ -29,7 +29,7 @@ zgamma$methods(
 
 zgamma$methods(
   param = function(z.out) {
-    shape <- gamma.shape(z.out)
+    shape <- MASS::gamma.shape(z.out)
     simalpha <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
     simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
                                    Sigma = vcov(z.out))
