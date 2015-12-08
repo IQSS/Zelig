@@ -1,6 +1,6 @@
-#' Normal Regression for Continuous Dependent Variables
+#' Normal Regression for Continuous Dependent Variables with Survey Weights
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-normal.html}
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-normal-survey.html}
 #' @import methods
 #' @export Zelig-normal
 #' @exportClass Zelig-normal
@@ -14,7 +14,8 @@ znormalsurvey <- setRefClass("Zelig-normal-survey",
                        contains = c("Zelig-survey"),
                        fields = list(family = "character",
                                   link = "character",
-                                  linkinv = "function"))#, "Zelig-normal"))
+                                  linkinv = "function"))
+                                  #, "Zelig-normal"))
 
 znormalsurvey$methods(
   initialize = function() {

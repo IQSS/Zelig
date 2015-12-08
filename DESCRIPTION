@@ -62,6 +62,7 @@ Collate:
     'model-poisson.R'
     'model-poisson-gee.R'
     'model-poisson-bayes.R'
+    'model-poisson-survey.R'
     'model-oprobit-bayes.R'
     'model-normal.R'
     'model-normal-gee.R'
