@@ -19,7 +19,7 @@ Description: A framework that brings together an abundance of common
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
 Version: 5.0-10
-Date: 2015-12-01
+Date: 2015-12-08
 Imports:
     sandwich,
     methods,
@@ -51,12 +51,14 @@ Collate:
     'model-gee.R'
     'model-survey.R'
     'model-gamma.R'
+    'model-gamma-survey.R'
     'model-binchoice.R'
     'model-logit.R'
     'model-relogit.R'
     'model-quantile.R'
     'model-probit.R'
     'model-binchoice-gee.R'
+    'model-binchoice-survey.R'    
     'model-probit-gee.R'
     'model-probit-bayes.R'
     'model-poisson.R'
