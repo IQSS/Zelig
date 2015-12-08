@@ -337,6 +337,71 @@
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-weibull.html"],
       "wrapper": ["weibull"],
       "tree": ["Zelig-weibull"]
+    },
+    "logitsurvey": {
+      "name": ["logit-survey"],
+      "description": ["Logistic Regression with Survey Weights"],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-logit-survey.html"],
+      "wrapper": ["logit.survey"],
+      "tree": ["Zelig-logit-survey", "Zelig-binchoice-survey", "Zelig-survey", "Zelig-binchoice"]
+    },
+    "probitsurvey": {
+      "name": ["probit-survey"],
+      "description": ["Probit Regression with Survey Weights"],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-probit-survey.html"],
+      "wrapper": ["probit.survey"],
+      "tree": ["Zelig-probit-survey", "Zelig-binchoice-survey", "Zelig-survey", "Zelig-binchoice"]
+    },
+    "normalsurvey": {
+      "name": ["normal-survey"],
+      "description": ["Normal Regression for Continuous Dependent Variables with Survey Weights"],
+      "outcome": {
+        "modelingType": ["continuous"]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-normal-survey.html"],
+      "wrapper": ["normal.survey"],
+      "tree": ["Zelig-normal-survey", "Zelig-survey"]
+    },
+    "gammasurvey": {
+      "name": ["gamma-survey"],
+      "description": ["Gamma Regression with Survey Weights"],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-gamma-survey.html"],
+      "wrapper": ["gamma.survey"],
+      "tree": ["Zelig-gamma-survey", "Zelig-survey", "Zelig-gamma"]
+    },
+    "poissonsurvey": {
+      "name": ["poisson-survey"],
+      "description": ["Poisson Regression with Survey Weights"],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-poisson-survey.html"],
+      "wrapper": ["poisson.survey"],
+      "tree": ["Zelig-poisson-survey", "Zelig-survey", "Zelig-poisson"]
     }
   }
 } 
