@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{stat}
 \alias{stat}
-\title{Pass Quantities of Interest to Appropriate Summary Function}
+\title{}
 \usage{
 stat(qi, num)
 }
@@ -15,7 +15,7 @@ stat(qi, num)
 a formatted qi
 }
 \description{
-Pass Quantities of Interest to Appropriate Summary Function
+
 }
 \author{
 Christine Choirat
