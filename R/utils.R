@@ -130,6 +130,7 @@ statlevel <- function(qi, num) {
   return(m)
 }
 
+#' Pass Quantities of Interest to Appropriate Summary Function
 #' 
 #' @param qi quantity of interest (e.g., estimated value or predicted value)
 #' @param num number of simulations
