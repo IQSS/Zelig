@@ -11,6 +11,6 @@ Bayes Model object for inheritance across models in Zelig
 \section{Methods}{
 
 \describe{
-\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models}
+\item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models}
 }}
 

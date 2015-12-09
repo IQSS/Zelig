@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{statmat}
 \alias{statmat}
-\title{Summarize Quantities of Interest when Matricies}
+\title{Describe Here}
 \usage{
 statmat(qi)
 }
@@ -13,7 +13,7 @@ statmat(qi)
 a formatted qi
 }
 \description{
-Summarize Quantities of Interest when Matricies
+Describe Here
 }
 \author{
 Christine Choirat

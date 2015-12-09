@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{statlevel}
 \alias{statlevel}
-\title{Summarize Quantities of Interest when Factors}
+\title{Describe Here}
 \usage{
 statlevel(qi, num)
 }
@@ -15,7 +15,7 @@ statlevel(qi, num)
 a formatted qi
 }
 \description{
-Summarize Quantities of Interest when Factors
+Describe Here
 }
 \author{
 Christine Choirat

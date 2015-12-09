@@ -102,7 +102,9 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{getcoef()}}{Get estimated model coefficients}
 
-\item{\code{getpredict()}}{Get predcted values}
+\item{\code{getpredict()}}{Get predicted values}
+
+\item{\code{getqi(qi = "ev", xvalue = "x")}}{Get quantities of interest}
 
 \item{\code{getvcov()}}{Get estimated model variance-covariance matrix}
 
@@ -124,6 +126,6 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{toJSON()}}{Convert Zelig object to JSON format}
 
-\item{\code{zelig(formula, data, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models}
+\item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by)}}{The zelig command estimates a variety of statistical models}
 }}
 
