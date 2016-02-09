@@ -723,15 +723,16 @@ z$methods(
     if(!(xvalue %in% possiblexvalues)){
       stop(paste("xvalue must be ", paste(possiblexvalues, collapse=" or ") , ".", sep=""))
     }
-    possibleqivalues <- names(.self$sim.out[[xvalue]])
+    possibleqivalues <- c(names(.self$sim.out[[xvalue]]), names(.self$sim.out[[xvalue]][[1]]))
     if(!(qi %in% possibleqivalues)){
-      stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
+        stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
     }
-
     if(.self$mi){
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
+    } else if(xvalue %in% c("range", "range1")) {
+      tempqi <- do.call(rbind, .self$sim.out[[xvalue]])[[qi]]
     } else {
-      tempqi<- .self$sim.out[[xvalue]][[qi]][[1]]
+      tempqi<- .self$sim.out[[xvalue]][[qi]][[1]]   # also works:   tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
     }
     return(tempqi)
   }
