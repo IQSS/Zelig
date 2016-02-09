@@ -22,7 +22,7 @@ Version: 5.0-10
 Date: 2016-01-30
 Imports: sandwich, methods, MASS, survival, VGAM, jsonlite, AER, plyr,
         dplyr (>= 0.3.0.2), quantreg, geepack, MCMCpack, Amelia,
-        MatchIt, maxLik, survey, ei
+        MatchIt, maxLik, survey
 Suggests: testthat, knitr
 Collate: 'utils.R' 'model-zelig.R' 'model-weibull.R' 'model-tobit.R'
         'model-bayes.R' 'model-tobit-bayes.R' 'model-glm.R'
