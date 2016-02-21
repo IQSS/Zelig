@@ -7,6 +7,7 @@
 #' 
 #' @include model-zelig.R
 #' @include model-bayes.R
+#' @include model-logit.R
 
 zlogitbayes <- setRefClass("Zelig-logit-bayes",
                              contains = c("Zelig-bayes",

@@ -64,10 +64,10 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   if (zeligpanelmodels != "")
     models <- c(models, jsonlite::fromJSON(txt = readLines(zeligpanelmodels))$zelig5panelmodels)
   # Zelig GAM
-  zeligmodels <- system.file(file.path("JSON", "zelig5gammodels.json"),
-                                   package = "ZeligGAM")
-  if (zeligmodels != "")
-    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligmodels))$zelig5gammodels)
+  zeligammodels <- system.file(file.path("JSON", "zelig5gammodels.json"),
+                               package = "ZeligGAM")
+  if (zeligammodels != "")
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligammodels))$zelig5gammodels)
   # Aggregating all available models
   models4 <- list()
   for (i in seq(models)) {
