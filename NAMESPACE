@@ -1,5 +1,5 @@
 import(sandwich, methods, survival, jsonlite, dplyr,
-       geepack, MCMCpack, Amelia, MatchIt, maxLik, survey, ei)
+       geepack, MCMCpack, Amelia, MatchIt, maxLik, survey)
 
 importFrom("plyr", "llply")
 importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm", "gamma.shape")
@@ -48,6 +48,8 @@ exportClasses(
      "Zelig-poisson-bayes",
      "Zelig-probit-bayes",
      "Zelig-tobit-bayes",
-     "Zelig-weibull"
+     "Zelig-weibull",
+     "Zelig-timeseries",
+     "Zelig-arma"
 )
 
