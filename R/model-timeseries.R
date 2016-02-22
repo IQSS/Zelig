@@ -20,7 +20,7 @@ ztimeseries$methods(
   }
 )
 
-zsurvey$methods(
+ztimeseries$methods(
   param = function(z.out) {
     return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
   }
