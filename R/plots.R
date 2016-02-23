@@ -850,3 +850,55 @@ rocplot <- function(z1, z2,
 }
 
 
+#' Plot Autocorrelation Function from Zelig QI object
+#' @keywords internal
+
+
+zeligACFplot <- function(z, omitzero=FALSE,  barcol="black", epsilon=0.1, col=NULL, main="Autocorrelation Function", xlab="Period", ylab="Correlation of Present Shock with Future Outcomes", ylim=NULL, ...){
+
+    x <- z$expected.acf
+    ci.x <- z$ci.acf
+
+    if(omitzero){
+        x<-x[2:length(x)]
+        ci.x$ci.upper <- ci.x$ci.upper[2:length(ci.x$ci.upper)]
+        ci.x$ci.lower <- ci.x$ci.lower[2:length(ci.x$ci.lower)]
+    }
+
+    if(is.null(ylim)){
+        ylim<-c(min( c(ci.x$ci.lower, 0, x) ), max( c(ci.x$ci.upper, 0 , x) ))
+    
+    }
+    if(is.null(col)){
+        col <- rgb(100,149,237,maxColorValue=255)
+    }
+
+    bout <- barplot(x, col=col, main=main, xlab=xlab, ylab=ylab, ylim=ylim, ...)
+    
+    n <- length(x)
+    xseq <- as.vector(bout)
+    NAseq <- rep(NA, n)
+
+    xtemp <- cbind( xseq-epsilon, xseq+epsilon, NAseq)
+    xtemp <- as.vector(t(xtemp))
+    ytemp <- cbind(ci.x$ci.upper, ci.x$ci.upper, NAseq)
+    ytemp <- as.vector(t(ytemp))
+    lines(x=xtemp ,y=ytemp, col=barcol)
+        
+    ytemp <- cbind(ci.x$ci.lower, ci.x$ci.lower, NAseq)
+    ytemp <- as.vector(t(ytemp))
+    lines(x=xtemp ,y=ytemp, col=barcol)
+        
+    xtemp <- cbind( xseq, xseq, NAseq)
+    xtemp <- as.vector(t(xtemp))
+    ytemp <- cbind(ci.x$ci.upper, ci.x$ci.lower, NAseq)
+    ytemp <- as.vector(t(ytemp))
+    lines(x=xtemp ,y=ytemp, col=barcol)
+}
+
+
+
+
+
+
+
