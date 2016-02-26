@@ -19,7 +19,6 @@ zarma$methods(
     #.self$family <- "gaussian"
     .self$fn <- quote(zeligArimaWrapper)
     #.self$linkinv <- eval(call(.self$family, .self$link))$linkinv
-    .self$category <- "continuous"
     .self$description <- "Autoregressive Moving-Average Models for Time-Series Data"
     # JSON
     .self$outcome <- "continuous"
@@ -28,14 +27,38 @@ zarma$methods(
 )
 
 zarma$methods(
-  qi = function(simparam, mm) {
+  qi = function(simparam, mm, mm1=NULL, y.init=0, alpha) {
     myorder <- eval(.self$zelig.call$order)
     mycoef <- coef(.self$zelig.out$z.out[[1]])
 
     acf <- simacf(coef=mycoef, order=myorder, params=simparam, alpha=0.05)
-    ev <- 1
-    pv <- 1
-    return(list(acf = acf, ev = ev, pv = pv))
+
+    acf.length <- length(acf$expected.acf)
+
+    x  <- mm
+    sd <- alpha
+    t1 <- 2*acf.length
+    t2 <- 2*acf.length
+
+    if(.self$bsetx1){
+      x1 <- mm1 
+      yseries <- zeligARMAbreakforecaster(y.init=y.init, x=x, x1=x1, simparam=simparam, sd=sd, t1=t1, t2=t2) 
+
+      pv <- yseries$innovation[t1,]                 # could use either $innovation or $shock here
+      pv1.shortrun <- yseries$innovation[t1+1,]     # could use either $innovation or $shock here
+      pv1.longrun <- yseries$innovation[t1+t2,]     # must use $innovation here
+
+      ev <- rnorm(n=nrow(simparam))
+      ev1.shortrun <- rnorm(n=nrow(simparam))
+      ev1.longrun <- rnorm(n=nrow(simparam))
+    }else{
+      yseries <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, sd=sd, t1=t1, t2=t2) 
+
+      pv <- yseries$shock[nrow(yseries),] 
+      ev <- rnorm(n=nrow(simparam))
+    }
+    return(list(acf = acf, ev = ev, pv = pv, pv1.shortrun=pv1.shortrun, pv1.longrun=pv1.longrun, 
+                range.shock=yseries.shock, range.innovation=yseries.innovation))
   }
 )
 
@@ -98,12 +121,12 @@ simacf <- function(coef, order, params, alpha = 0.5){
   }
 
   if(order[3]>0){
-    manames <- paste("ma", 1:order[1], sep="")
+    manames <- paste("ma", 1:order[3], sep="")
     myma <- coef[manames]
     myma.seq <- params[,manames]
   }
 
-  mylag.max<-10  # Need to set automatically
+  mylag.max<-10  # Need to set automatically.  
 
   n.sims<-nrow(params)
 
@@ -131,4 +154,179 @@ simacf <- function(coef, order, params, alpha = 0.5){
   ci.acf <- ci.matrix(x=acf.history, alpha=0.05)
 
   return(list(expected.acf=expected.acf, ci.acf=ci.acf, sims.acf=acf.history))
+}
+
+
+#' Construct Simulated Next Step in Dynamic Series
+#' @keywords internal
+
+zeligARMAnextstep <- function(yseries=NULL, xseries, wseries=NULL, beta, ar=NULL, i=NULL, ma=NULL, sd){
+  
+  ## Check inputs
+  # t is obs across time
+  # s is sims
+  # k is covariates
+  # order is (p,q,r)
+  # assume yseries (t x sims), xseries (t x k), wseries (t x s), beta (s x k), ar (s x p), ma (s x r) are matrix
+  # assume sd is scalar
+
+  if(is.vector(yseries)){
+    print("warning: yseries is vector")
+    yseries <- matrix(yseries, ncol=1)      # Assume if y is a vector, that we are only running one simulation chain of y, so y is (t x 1)
+  }
+  if(is.vector(xseries)){
+    print("warning: xseries is vector")
+    xseries <- matrix(xseries, nrow=1)      # Assume if x is a vector, that there are no lagged terms, so x is (1 x k)
+  }
+  if(is.vector(wseries)){
+    print("warning: wseries is vector")
+    wseries <- matrix(wseries, ncol=1)      # Assume if w is a vector, that we are only running one simulation chain of y, so w is (t x 1)
+  }
+  if(is.vector(beta)){
+    print("warning: beta is vector")
+    beta <- matrix(beta, ncol=1)
+  }
+  if(is.vector(ar)){
+    print("warning: xseries is vector")
+    ar <- matrix(ar, ncol=1)
+  }
+  if(is.vector(ma)){
+    print("warning: wseries is vector")
+    ma <- matrix(ma, ncol=1)
+  }
+
+  ar.term <- function(yseries, ar, n){
+    yshort <- yseries[1:ncol(ar), ]           # because we only need the diagonal of a square matrix, we can avoid full matrix multiplication
+    return( rowSums( ar * t(yshort) ) )       # diag[(s x p) . (p x s)] = diag[(s x s)] = (s x 1)  
+  }
+  xt.term <- function(yseries, beta){
+    return( as.vector(beta %*% t(xseries)) )  # (s x k) . t(1 x k) = (s x 1)
+  }
+  ma.term <- function(yseries, ma){    
+    wshort <- wseries[1:ncol(ma), ]
+    return( rowSums( ma * t(wshort)) )        # diag[(s x r) . (r x s)] = diag[(s x s)] = (s x 1)
+  }
+
+  n.sims <- n.row(ar) 
+
+  w <- rnorm(n=n.sims, mean=0, sd=sd)
+  y <- xt.term(xseries,beta) + w     # conformable if xt is vector and w vector
+  if(!is.null(ar)){
+    y <- y + ar.term(yseries,ar)     # conformable if y vector and ar vector 
+  }
+  if(!is.null(ma)){
+    y <- y + ma.term(wseries,ma)     # conformable if y vector and ma vector 
+  }
+
+  return(list(y=y, w=w))
+}
+
+
+#' Calculate the Long Run Exquilibrium for Fixed X
+#' @keywords internal
+
+zeligARMAlongrun <- function(y.init, x, simparam, order, sd, tol=NULL, burnin=20){
+  if(is.null(tol)){
+    tol<-0.01
+  }
+
+  ar <- i <- ma <- NULL
+
+  xnames <- names(x)
+  beta.test <- names(simparam) %in% xnames 
+  if(sum(beta.test) < ncol(x)){
+    print("warning: provided covariates and simulated parameters do not seem to match.")
+  }
+  beta <- simparam[,xnames]
+
+
+
+  if(order[1]>0){
+    arnames <- paste("ar", 1:order[1], sep="")
+    ar <- simparam[,arnames]
+  }
+
+  if(order[3]>0){
+    manames <- paste("ma", 1:order[3], sep="")
+    ma <- simparam[,manames]
+  }
+
+  timepast <- max(order[1],order[3])
+  n.sims <- nrow(simparam)
+
+  yseries <- NULL
+  for(i in 1:timepast){
+    yseries <- cbind(y.init, yseries)
+  }
+  wseries <- matrix(rnorm(), nrow=timepast, ncol=n.sims)
+
+
+  finished <- FALSE
+  count <- 0
+  while(!finished){
+    y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    yseries <- rbind(y, yseries)
+    #diff <- mean(abs(y.1 - y.0))  # Eventually need to determine some automated stopping rule
+    count <- count+1
+    finished <- count>burnin #| (diff < tol)
+  }
+
+  return(y.longrun=yseries)
+}
+
+
+#' Construct Simulated Series with Internal Discontinuity in X
+#' @keywords internal
+
+zeligARMAbreakforecaster <- function(y.init, x, x1, simparam, order, sd, t1=5, t2=10){
+
+  yseries <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, order=order, sd=sd)   
+
+  xnames <- names(x)
+  beta.test <- names(simparam) %in% xnames 
+  if(sum(beta.test) < ncol(x)){
+    print("warning: provided covariates and simulated parameters do not seem to match.")
+  }
+  beta <- simparam[,xnames]
+
+  ar <- i <- ma <- NULL
+  if(order[1]>0){                                      # Should we track this value and use below?
+    arnames <- paste("ar", 1:order[1], sep="")
+    ar <- simparam[,arnames]
+  }
+
+  if(order[3]>0){
+    manames <- paste("ma", 1:order[3], sep="")
+    ma <- simparam[,manames]
+  }
+
+  timepast <- max(order[1],order[3]) # How many steps backward are needed in the series  --  could we be more precise?
+
+  # Take a step at covariates x
+  for(i in 2:t1){
+    y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    yseries <- rbind(y, yseries)
+  }
+
+  # Introduce shock
+    y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x1, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    yseries <- rbind(y, yseries)
+    y.innov <- yseries
+
+  for(i in 2:t2){
+    # Take further steps at covariates x1 (an introduction of an innovation)
+    y <- zeligARMAnextstep(y=y.innov[1:timepast, ], x=x1, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    y.innov <- rbind(y, yseries)
+    # And take steps returning to old covariates (an introduction of a shock)
+    y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    y.innov <- rbind(y, yseries)
+  }
+
+  yseries <- yseries[t1 + t2, ]  # Truncate series to last periods, removing burn-in to equilibrium
+  y.innov <- y.innov[t1 + t2, ]
+
+  yseries <- yseries[nrow(yseries):1,]  # Change y to conventional row ordering by time before returning
+  y.innov <- y.innov[nrow(y.innov):1,]
+
+  return(y.shock = yseries, y.innovation = y.innov)  
 }
