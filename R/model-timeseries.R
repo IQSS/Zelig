@@ -9,6 +9,7 @@ ztimeseries$methods(
     callSuper()
     .self$packageauthors <- ""  # Need to decide
     .self$acceptweights <- FALSE  #  Need to deal with block bootstrap
+    .self$category <- "timeseries"
   }
 )
 
@@ -35,5 +36,45 @@ ztimeseries$methods(
     .self$sim.out$x <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm)) %>%
       do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv)
+  }
+)
+
+ztimeseries$methods(
+  simx1 = function() {
+    d <- zeligPlyrMutate(.self$zelig.out, simparam = .self$simparam$simparam)
+    d <- zeligPlyrMutate(d, mm = .self$setx.out$x$mm)
+    d <- zeligPlyrMutate(d, mm1 = .self$setx.out$x1$mm)
+
+    .self$sim.out$x1 <-  d %>%
+      do(qi = .self$qi(.$simparam, .$mm, .$mm1)) %>%
+      do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv, ev.shortrun = .$qi$ev.shortrun, pv.shortrun = .$qi$pv.shortrun, ev.longrun = .$qi$ev.longrun, pv.longrun = .$qi$pv.longrun, range.shock= .$qi$range.shock, range.innovation= .$qi$range.innovation)
+      # Will eventually have to then move acf, ev, and pv from .self$setx.out$x1 to .self$setx.out$x
+      # This will also effect next line:
+
+    d <- zeligPlyrMutate(.self$sim.out$x1, ev0 = .self$sim.out$x1$ev)    # Eventually, when ev moves, then this path for ev0 changes.  (Or make movement happen after fd calculation.)
+    d <- d %>%
+      do(fd = .$ev.longrun - .$ev0)
+    .self$sim.out$x1 <- zeligPlyrMutate(.self$sim.out$x1, fd = d$fd) #JH
+  }
+)
+
+# replace sim method to skip {simx, simx1, simrange, simrange1} methods as they are not separable
+# instead go directly to qi method
+
+ztimeseries$methods(
+  sim = function(num = 1000) {
+    "Timeseries Method for Computing and Organizing Simulated Quantities of Interest"
+    if (length(.self$num) == 0) 
+      .self$num <- num
+    .self$simparam <- .self$zelig.out %>%
+      do(simparam = .self$param(.$z.out))
+
+    # NOTE difference here from standard Zelig approach.  
+    # Normally these are done in sequence, but now we do one or the other.  
+    if (.self$bsetx1){
+      .self$simx1()
+    }else{
+      .self$simx()
+    }
   }
 )
