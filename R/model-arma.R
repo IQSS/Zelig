@@ -27,7 +27,7 @@ zarma$methods(
 )
 
 zarma$methods(
-  qi = function(simparam, mm, mm1=NULL, y.init=0, alpha) {
+  qi = function(simparam, mm, mm1=NULL){ 
     myorder <- eval(.self$zelig.call$order)
     mycoef <- coef(.self$zelig.out$z.out[[1]])
 
@@ -35,30 +35,37 @@ zarma$methods(
 
     acf.length <- length(acf$expected.acf)
 
-    x  <- mm
-    sd <- alpha
+    sd <- 1#something2(simparam)  ### SOMETHING HERE
     t1 <- 2*acf.length
     t2 <- 2*acf.length
 
-    if(.self$bsetx1){
-      x1 <- mm1 
-      yseries <- zeligARMAbreakforecaster(y.init=y.init, x=x, x1=x1, simparam=simparam, sd=sd, t1=t1, t2=t2) 
 
-      pv <- yseries$innovation[t1,]                 # could use either $innovation or $shock here
-      pv1.shortrun <- yseries$innovation[t1+1,]     # could use either $innovation or $shock here
-      pv1.longrun <- yseries$innovation[t1+t2,]     # must use $innovation here
+    if(.self$bsetx1){             # could also check if mm1 is NULL
+      # zeligARMAbreakforecaster() calls zeligARMAlongrun() internally
+      yseries <- zeligARMAbreakforecaster(y.init=NULL, x=mm, x1=mm1, simparam=simparam, order=myorder, sd=sd, t1=t1, t2=t2) 
 
+      # maybe check nrow(yseries)=t1 + t2 ?
+
+      pv <- yseries$innovation[t1,]                # could use either $innovation or $shock here
+      pv.shortrun <- yseries$innovation[t1+1,]     # could use either $innovation or $shock here
+      pv.longrun <- yseries$innovation[t1+t2,]     # must use $innovation here
+
+      # Remember, these are expectations using the same simparam in each expectation.
       ev <- rnorm(n=nrow(simparam))
-      ev1.shortrun <- rnorm(n=nrow(simparam))
-      ev1.longrun <- rnorm(n=nrow(simparam))
-    }else{
-      yseries <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, sd=sd, t1=t1, t2=t2) 
-
-      pv <- yseries$shock[nrow(yseries),] 
-      ev <- rnorm(n=nrow(simparam))
-    }
-    return(list(acf = acf, ev = ev, pv = pv, pv1.shortrun=pv1.shortrun, pv1.longrun=pv1.longrun, 
+      ev.shortrun <- rnorm(n=nrow(simparam))
+      ev.longrun <- rnorm(n=nrow(simparam))
+      return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun, 
                 range.shock=yseries.shock, range.innovation=yseries.innovation))
+
+    }else{
+      # just call zeligARMAlongrun()
+      yseries <- zeligARMAlongrun(y.init=NULL, x=mm, simparam=simparam, order=myorder, sd=sd) 
+      pv <- yseries[nrow(yseries),] 
+
+      # Remember, these are expectations using the same simparam in each expectation.
+      ev <- rnorm(n=nrow(simparam))
+      return(list(acf = acf, ev = ev, pv = pv))
+    }
   }
 )
 
@@ -104,10 +111,8 @@ zeligArimaWrapper <- function(formula, order=c(1,0,0), ... , include.mean=TRUE, 
 }
 
 
-
 #' Construct Autocorrelation Function from Zelig object and simulated parameters
 #' @keywords internal
-
 
 simacf <- function(coef, order, params, alpha = 0.5){
 
@@ -196,27 +201,38 @@ zeligARMAnextstep <- function(yseries=NULL, xseries, wseries=NULL, beta, ar=NULL
   }
 
   ar.term <- function(yseries, ar, n){
+print("yseries")
+    print(dim(yseries))
+    print(yseries[,1:5])
     yshort <- yseries[1:ncol(ar), ]           # because we only need the diagonal of a square matrix, we can avoid full matrix multiplication
+#    print(ar)
+#    print(yshort)
+#    print(dim(yshort))
     return( rowSums( ar * t(yshort) ) )       # diag[(s x p) . (p x s)] = diag[(s x s)] = (s x 1)  
   }
-  xt.term <- function(yseries, beta){
+  xt.term <- function(xseries, beta){
     return( as.vector(beta %*% t(xseries)) )  # (s x k) . t(1 x k) = (s x 1)
   }
-  ma.term <- function(yseries, ma){    
+  ma.term <- function(wseries, ma){    
     wshort <- wseries[1:ncol(ma), ]
     return( rowSums( ma * t(wshort)) )        # diag[(s x r) . (r x s)] = diag[(s x s)] = (s x 1)
   }
 
-  n.sims <- n.row(ar) 
+  n.sims <- nrow(ar) 
 
   w <- rnorm(n=n.sims, mean=0, sd=sd)
-  y <- xt.term(xseries,beta) + w     # conformable if xt is vector and w vector
+  y <- xt.term(xseries,beta) + w      # conformable if xt is vector and w vector
+  print(dim(y))
+
   if(!is.null(ar)){
-    y <- y + ar.term(yseries,ar)     # conformable if y vector and ar vector 
+    y <- y + ar.term(yseries,ar)      # conformable if y vector and ar vector 
   }
+  print(dim(y))
+
   if(!is.null(ma)){
-    y <- y + ma.term(wseries,ma)     # conformable if y vector and ma vector 
+    y <- y + ma.term(wseries,ma)      # conformable if y vector and ma vector 
   }
+  print(dim(y))
 
   return(list(y=y, w=w))
 }
@@ -225,14 +241,14 @@ zeligARMAnextstep <- function(yseries=NULL, xseries, wseries=NULL, beta, ar=NULL
 #' Calculate the Long Run Exquilibrium for Fixed X
 #' @keywords internal
 
-zeligARMAlongrun <- function(y.init, x, simparam, order, sd, tol=NULL, burnin=20){
+zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burnin=20){
   if(is.null(tol)){
     tol<-0.01
   }
 
   ar <- i <- ma <- NULL
 
-  xnames <- names(x)
+  xnames <- colnames(x)
   beta.test <- names(simparam) %in% xnames 
   if(sum(beta.test) < ncol(x)){
     print("warning: provided covariates and simulated parameters do not seem to match.")
@@ -254,11 +270,17 @@ zeligARMAlongrun <- function(y.init, x, simparam, order, sd, tol=NULL, burnin=20
   timepast <- max(order[1],order[3])
   n.sims <- nrow(simparam)
 
+  if(is.null(y.init)){
+    betabar <- t(apply(beta,2, mean))
+    y.init <- x %*% t(betabar)
+  }
+
   yseries <- NULL
   for(i in 1:timepast){
     yseries <- cbind(y.init, yseries)
   }
-  wseries <- matrix(rnorm(), nrow=timepast, ncol=n.sims)
+  yseries <- matrix(yseries, nrow=timepast, ncol=n.sims)
+  wseries <- matrix(rnorm(n=timepast*n.sims), nrow=timepast, ncol=n.sims)
 
 
   finished <- FALSE
@@ -278,7 +300,7 @@ zeligARMAlongrun <- function(y.init, x, simparam, order, sd, tol=NULL, burnin=20
 #' Construct Simulated Series with Internal Discontinuity in X
 #' @keywords internal
 
-zeligARMAbreakforecaster <- function(y.init, x, x1, simparam, order, sd, t1=5, t2=10){
+zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1=5, t2=10){
 
   yseries <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, order=order, sd=sd)   
 
