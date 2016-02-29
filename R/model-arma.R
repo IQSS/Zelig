@@ -30,12 +30,12 @@ zarma$methods(
   qi = function(simparam, mm, mm1=NULL){ 
     myorder <- eval(.self$zelig.call$order)
     mycoef <- coef(.self$zelig.out$z.out[[1]])
+    sd <- sqrt(.self$zelig.out$z.out[[1]]$sigma2)
+
 
     acf <- simacf(coef=mycoef, order=myorder, params=simparam, alpha=0.05)
-
     acf.length <- length(acf$expected.acf)
 
-    sd <- 1#something2(simparam)  ### SOMETHING HERE
     t1 <- 2*acf.length
     t2 <- 2*acf.length
 
@@ -60,7 +60,12 @@ zarma$methods(
     }else{
       # just call zeligARMAlongrun()
       yseries <- zeligARMAlongrun(y.init=NULL, x=mm, simparam=simparam, order=myorder, sd=sd) 
-      pv <- yseries[nrow(yseries),] 
+ #     print("got here A")
+      pv <- yseries$y[1,]   # zeligARMAlongrun returns the series in reverse order to zeligARMAbreakforecaster
+#      print(yseries$y[,1:5])
+#      print(dim(pv))
+#      print("got here B")
+#      stop()
 
       # Remember, these are expectations using the same simparam in each expectation.
       ev <- rnorm(n=nrow(simparam))
@@ -122,13 +127,13 @@ simacf <- function(coef, order, params, alpha = 0.5){
   if(order[1]>0){
     arnames <- paste("ar", 1:order[1], sep="")
     myar <- coef[arnames]
-    myar.seq <- params[,arnames]
+    myar.seq <- params[, arnames, drop=FALSE]
   }
 
   if(order[3]>0){
     manames <- paste("ma", 1:order[3], sep="")
     myma <- coef[manames]
-    myma.seq <- params[,manames]
+    myma.seq <- params[, manames, drop=FALSE]
   }
 
   mylag.max<-10  # Need to set automatically.  
@@ -138,7 +143,7 @@ simacf <- function(coef, order, params, alpha = 0.5){
   expected.acf <- ARMAacf(ar=myar, ma=myma, lag.max=mylag.max)
   acf.history<-matrix(NA, nrow=n.sims, ncol=length(expected.acf))      # length(expected.acf) = mylag.max +1 
   for(i in 1:n.sims){
-    acf.history[i,] <- ARMAacf(ar=myar.seq[i], ma=myma.seq[i], lag.max=mylag.max)
+    acf.history[i,] <- ARMAacf(ar=myar.seq[i,], ma=myma.seq[i,], lag.max=mylag.max)
   }
 
 
@@ -175,64 +180,58 @@ zeligARMAnextstep <- function(yseries=NULL, xseries, wseries=NULL, beta, ar=NULL
   # assume yseries (t x sims), xseries (t x k), wseries (t x s), beta (s x k), ar (s x p), ma (s x r) are matrix
   # assume sd is scalar
 
+  ## Could construct these by using known order more deliberatively
+
   if(is.vector(yseries)){
-    print("warning: yseries is vector")
-    yseries <- matrix(yseries, ncol=1)      # Assume if y is a vector, that we are only running one simulation chain of y, so y is (t x 1)
+    #print("warning: yseries is vector")
+    yseries <- matrix(yseries, nrow=1)        # Assume if y is a vector, that we are only running one simulation chain of y, so y is (t x 1)
   }
   if(is.vector(xseries)){
-    print("warning: xseries is vector")
-    xseries <- matrix(xseries, nrow=1)      # Assume if x is a vector, that there are no lagged terms, so x is (1 x k)
+    #print("warning: xseries is vector")
+    xseries <- matrix(xseries, nrow=1)        # Assume if x is a vector, that there are no lagged terms, so x is (1 x k)
   }
   if(is.vector(wseries)){
-    print("warning: wseries is vector")
-    wseries <- matrix(wseries, ncol=1)      # Assume if w is a vector, that we are only running one simulation chain of y, so w is (t x 1)
+    #print("warning: wseries is vector")
+    wseries <- matrix(wseries, nrow=1)        # Assume if w is a vector, that we are only running one simulation chain of y, so w is (t x 1)
   }
   if(is.vector(beta)){
-    print("warning: beta is vector")
+    #print("warning: beta is vector")
     beta <- matrix(beta, ncol=1)
   }
   if(is.vector(ar)){
-    print("warning: xseries is vector")
+    #print("warning: ar is vector")
     ar <- matrix(ar, ncol=1)
   }
   if(is.vector(ma)){
-    print("warning: wseries is vector")
+    #print("warning: ma is vector")
     ma <- matrix(ma, ncol=1)
   }
 
+#print(ar)
+#print(yseries)
+#stop()
+
   ar.term <- function(yseries, ar, n){
-print("yseries")
-    print(dim(yseries))
-    print(yseries[,1:5])
-    yshort <- yseries[1:ncol(ar), ]           # because we only need the diagonal of a square matrix, we can avoid full matrix multiplication
-#    print(ar)
-#    print(yshort)
-#    print(dim(yshort))
+    yshort <- yseries[1:ncol(ar), , drop=FALSE]           # because we only need the diagonal of a square matrix, we can avoid full matrix multiplication
     return( rowSums( ar * t(yshort) ) )       # diag[(s x p) . (p x s)] = diag[(s x s)] = (s x 1)  
   }
   xt.term <- function(xseries, beta){
     return( as.vector(beta %*% t(xseries)) )  # (s x k) . t(1 x k) = (s x 1)
   }
   ma.term <- function(wseries, ma){    
-    wshort <- wseries[1:ncol(ma), ]
+    wshort <- wseries[1:ncol(ma), , drop=FALSE]
     return( rowSums( ma * t(wshort)) )        # diag[(s x r) . (r x s)] = diag[(s x s)] = (s x 1)
   }
 
-  n.sims <- nrow(ar) 
-
+  n.sims <- ncol(yseries)   
   w <- rnorm(n=n.sims, mean=0, sd=sd)
-  y <- xt.term(xseries,beta) + w      # conformable if xt is vector and w vector
-  print(dim(y))
-
+  y <- xt.term(xseries,beta) + w              # conformable if xt is vector and w vector
   if(!is.null(ar)){
-    y <- y + ar.term(yseries,ar)      # conformable if y vector and ar vector 
+    y <- y + ar.term(yseries,ar)              # conformable if y vector and ar vector 
   }
-  print(dim(y))
-
   if(!is.null(ma)){
-    y <- y + ma.term(wseries,ma)      # conformable if y vector and ma vector 
+    y <- y + ma.term(wseries,ma)              # conformable if y vector and ma vector 
   }
-  print(dim(y))
 
   return(list(y=y, w=w))
 }
@@ -249,13 +248,19 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
   ar <- i <- ma <- NULL
 
   xnames <- colnames(x)
-  beta.test <- names(simparam) %in% xnames 
-  if(sum(beta.test) < ncol(x)){
-    print("warning: provided covariates and simulated parameters do not seem to match.")
+
+  #beta.test <- names(simparam) %in% xnames 
+  #if(sum(beta.test) < ncol(x)){
+  #  print("warning: provided covariates and simulated parameters do not seem to match.")
+  #}
+
+  ### -- revise this approach:  ###
+  if("(Intercept)" %in% xnames){
+    flag <- xnames == "(Intercept)"
+    xnames[flag] <- "intercept"
   }
+
   beta <- simparam[,xnames]
-
-
 
   if(order[1]>0){
     arnames <- paste("ar", 1:order[1], sep="")
@@ -270,30 +275,41 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
   timepast <- max(order[1],order[3])
   n.sims <- nrow(simparam)
 
+  if(is.vector(x)){
+    x<-matrix(x,nrow=1, ncol=length(x))
+  }
+
   if(is.null(y.init)){
     betabar <- t(apply(beta,2, mean))
-    y.init <- x %*% t(betabar)
+    y.init <- x %*% t(beta)
   }
 
-  yseries <- NULL
-  for(i in 1:timepast){
-    yseries <- cbind(y.init, yseries)
-  }
-  yseries <- matrix(yseries, nrow=timepast, ncol=n.sims)
+  yseries <- matrix(y.init, nrow=timepast, ncol=n.sims, byrow=TRUE)
   wseries <- matrix(rnorm(n=timepast*n.sims), nrow=timepast, ncol=n.sims)
-
 
   finished <- FALSE
   count <- 0
   while(!finished){
+    #cat("*************************** \n")
+    #cat(paste("Count is ", count, "\n"))
+    #cat(paste("yseries is: \n"))
+    #print(yseries[,1:5])
     y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    yseries <- rbind(y, yseries)
+    #print(y$y[1:10])
+    #plot(density(y$y))
+    #abline(v=mean(y.init))
+    yseries <- rbind(y$y, yseries)
+    wseries <- rbind(y$w, wseries)
+    #print(yseries[,1:5])
+    #cat("-=-=-=-=-=-=-=-=-=-=-=-=-=- \n")
+
+
     #diff <- mean(abs(y.1 - y.0))  # Eventually need to determine some automated stopping rule
     count <- count+1
     finished <- count>burnin #| (diff < tol)
   }
 
-  return(y.longrun=yseries)
+  return(list(y.longrun=yseries, w.longrun=wseries))
 }
 
 
@@ -302,7 +318,10 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
 
 zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1=5, t2=10){
 
-  yseries <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, order=order, sd=sd)   
+  longrun.out <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, order=order, sd=sd)   
+
+  yseries <- longrun.out$y.longrun
+  wseries <- longrun.out$wseries
 
   xnames <- names(x)
   beta.test <- names(simparam) %in% xnames 
@@ -326,22 +345,27 @@ zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1
 
   # Take a step at covariates x
   for(i in 2:t1){
-    y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    yseries <- rbind(y, yseries)
+    nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    yseries <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
+    wseries <- rbind(nextstep$w, wseries)
   }
 
   # Introduce shock
-    y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x1, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    yseries <- rbind(y, yseries)
+    nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x1, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    yseries <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
+    wseries <- rbind(nextstep$w, wseries)
     y.innov <- yseries
+    w.innov <- wseries  # Note: sequence of stocastic terms are going to depart now
 
   for(i in 2:t2){
     # Take further steps at covariates x1 (an introduction of an innovation)
-    y <- zeligARMAnextstep(y=y.innov[1:timepast, ], x=x1, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    y.innov <- rbind(y, yseries)
+    nextstep <- zeligARMAnextstep(y=y.innov[1:timepast, ], x=x1, wseries=w.innov[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    y.innov <- rbind(nextstep$y, y.innov)  # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
+    w.innov <- rbind(nextstep$w, w.innov)
     # And take steps returning to old covariates (an introduction of a shock)
-    y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    y.innov <- rbind(y, yseries)
+    nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    yseries <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
+    wseries <- rbind(nextstep$w, wseries)
   }
 
   yseries <- yseries[t1 + t2, ]  # Truncate series to last periods, removing burn-in to equilibrium
