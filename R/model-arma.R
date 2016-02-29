@@ -42,33 +42,30 @@ zarma$methods(
 
     if(.self$bsetx1){             # could also check if mm1 is NULL
       # zeligARMAbreakforecaster() calls zeligARMAlongrun() internally
+      #  return(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov)  
+
       yseries <- zeligARMAbreakforecaster(y.init=NULL, x=mm, x1=mm1, simparam=simparam, order=myorder, sd=sd, t1=t1, t2=t2) 
 
       # maybe check nrow(yseries)=t1 + t2 ?
 
-      pv <- yseries$innovation[t1,]                # could use either $innovation or $shock here
-      pv.shortrun <- yseries$innovation[t1+1,]     # could use either $innovation or $shock here
-      pv.longrun <- yseries$innovation[t1+t2,]     # must use $innovation here
+      pv <- yseries$y.innovation[t1,]                # could use either $innovation or $shock here
+      pv.shortrun <- yseries$y.innovation[t1+1,]     # could use either $innovation or $shock here
+      pv.longrun <- yseries$y.innovation[t1+t2,]     # must use $innovation here
 
       # Remember, these are expectations using the same simparam in each expectation.
-      ev <- rnorm(n=nrow(simparam))
-      ev.shortrun <- rnorm(n=nrow(simparam))
-      ev.longrun <- rnorm(n=nrow(simparam))
+      ev <- yseries$ev.innovation[t1,]
+      ev.shortrun <- yseries$ev.innovation[t1+1,]
+      ev.longrun <- yseries$ev.innovation[t1+t2,]
       return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun, 
-                range.shock=yseries.shock, range.innovation=yseries.innovation))
+                pvseries.shock=yseries$y.shock, pvseries.innovation=yseries$y.innovation,
+                evseries.shock=yseries$ev.shock, evseries.innovation=yseries$ev.innovation))
 
     }else{
       # just call zeligARMAlongrun()
       yseries <- zeligARMAlongrun(y.init=NULL, x=mm, simparam=simparam, order=myorder, sd=sd) 
- #     print("got here A")
       pv <- yseries$y[1,]   # zeligARMAlongrun returns the series in reverse order to zeligARMAbreakforecaster
-#      print(yseries$y[,1:5])
-#      print(dim(pv))
-#      print("got here B")
-#      stop()
-
-      # Remember, these are expectations using the same simparam in each expectation.
-      ev <- rnorm(n=nrow(simparam))
+      # Remember, these are expectations using the same simparam in each expectation:
+      ev <- yseries$ev[1,]
       return(list(acf = acf, ev = ev, pv = pv))
     }
   }
@@ -207,10 +204,6 @@ zeligARMAnextstep <- function(yseries=NULL, xseries, wseries=NULL, beta, ar=NULL
     ma <- matrix(ma, ncol=1)
   }
 
-#print(ar)
-#print(yseries)
-#stop()
-
   ar.term <- function(yseries, ar, n){
     yshort <- yseries[1:ncol(ar), , drop=FALSE]           # because we only need the diagonal of a square matrix, we can avoid full matrix multiplication
     return( rowSums( ar * t(yshort) ) )       # diag[(s x p) . (p x s)] = diag[(s x s)] = (s x 1)  
@@ -233,7 +226,8 @@ zeligARMAnextstep <- function(yseries=NULL, xseries, wseries=NULL, beta, ar=NULL
     y <- y + ma.term(wseries,ma)              # conformable if y vector and ma vector 
   }
 
-  return(list(y=y, w=w))
+  exp.y <- y - w                              # one interpretation of an EV QI:  E(y| l(w), l(y))
+  return(list(y=y, w=w, exp.y=exp.y))
 }
 
 
@@ -248,17 +242,12 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
   ar <- i <- ma <- NULL
 
   xnames <- colnames(x)
-
-  #beta.test <- names(simparam) %in% xnames 
-  #if(sum(beta.test) < ncol(x)){
-  #  print("warning: provided covariates and simulated parameters do not seem to match.")
-  #}
-
   ### -- revise this approach:  ###
   if("(Intercept)" %in% xnames){
     flag <- xnames == "(Intercept)"
     xnames[flag] <- "intercept"
   }
+  ### -- ###
 
   beta <- simparam[,xnames]
 
@@ -286,30 +275,23 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
 
   yseries <- matrix(y.init, nrow=timepast, ncol=n.sims, byrow=TRUE)
   wseries <- matrix(rnorm(n=timepast*n.sims), nrow=timepast, ncol=n.sims)
+  evseries <- matrix(NA, nrow=timepast, ncol=n.sims)
+
 
   finished <- FALSE
   count <- 0
   while(!finished){
-    #cat("*************************** \n")
-    #cat(paste("Count is ", count, "\n"))
-    #cat(paste("yseries is: \n"))
-    #print(yseries[,1:5])
     y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    #print(y$y[1:10])
-    #plot(density(y$y))
-    #abline(v=mean(y.init))
     yseries <- rbind(y$y, yseries)
     wseries <- rbind(y$w, wseries)
-    #print(yseries[,1:5])
-    #cat("-=-=-=-=-=-=-=-=-=-=-=-=-=- \n")
-
+    evseries<- rbind(y$exp.y, evseries)
 
     #diff <- mean(abs(y.1 - y.0))  # Eventually need to determine some automated stopping rule
     count <- count+1
     finished <- count>burnin #| (diff < tol)
   }
 
-  return(list(y.longrun=yseries, w.longrun=wseries))
+  return(list(y.longrun=yseries, w.longrun=wseries, ev.longrun=evseries))
 }
 
 
@@ -320,14 +302,19 @@ zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1
 
   longrun.out <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, order=order, sd=sd)   
 
-  yseries <- longrun.out$y.longrun
-  wseries <- longrun.out$wseries
+  yseries  <- longrun.out$y.longrun
+  wseries  <- longrun.out$w.longrun
+  evseries <- longrun.out$ev.longrun
 
-  xnames <- names(x)
-  beta.test <- names(simparam) %in% xnames 
-  if(sum(beta.test) < ncol(x)){
-    print("warning: provided covariates and simulated parameters do not seem to match.")
+
+  xnames <- colnames(x)
+  ### -- revise this approach:  ###
+  if("(Intercept)" %in% xnames){
+    flag <- xnames == "(Intercept)"
+    xnames[flag] <- "intercept"
   }
+  ### -- ###
+
   beta <- simparam[,xnames]
 
   ar <- i <- ma <- NULL
@@ -346,33 +333,45 @@ zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1
   # Take a step at covariates x
   for(i in 2:t1){
     nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    yseries <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
-    wseries <- rbind(nextstep$w, wseries)
+    yseries  <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
+    wseries  <- rbind(nextstep$w, wseries)
+    evseries <- rbind(nextstep$exp.y, evseries)
   }
 
   # Introduce shock
     nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x1, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    yseries <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
-    wseries <- rbind(nextstep$w, wseries)
-    y.innov <- yseries
-    w.innov <- wseries  # Note: sequence of stocastic terms are going to depart now
+    yseries  <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
+    wseries  <- rbind(nextstep$w, wseries)
+    evseries <- rbind(nextstep$exp.y, evseries)
+
+    y.innov  <- yseries
+    w.innov  <- wseries  # Note: sequence of stocastic terms are going to depart now
+    ev.innov <- evseries
 
   for(i in 2:t2){
     # Take further steps at covariates x1 (an introduction of an innovation)
     nextstep <- zeligARMAnextstep(y=y.innov[1:timepast, ], x=x1, wseries=w.innov[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    y.innov <- rbind(nextstep$y, y.innov)  # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
-    w.innov <- rbind(nextstep$w, w.innov)
+    y.innov  <- rbind(nextstep$y, y.innov)  # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
+    w.innov  <- rbind(nextstep$w, w.innov)
+    ev.innov <- rbind(nextstep$exp.y, ev.innov)
+
     # And take steps returning to old covariates (an introduction of a shock)
     nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
-    yseries <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
-    wseries <- rbind(nextstep$w, wseries)
+    yseries  <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
+    wseries  <- rbind(nextstep$w, wseries)
+    evseries <- rbind(nextstep$exp.y, evseries)
+
   }
 
-  yseries <- yseries[t1 + t2, ]  # Truncate series to last periods, removing burn-in to equilibrium
-  y.innov <- y.innov[t1 + t2, ]
+  yseries <- yseries[1:(t1 + t2), ]  # Truncate series to last periods, removing burn-in to equilibrium
+  y.innov <- y.innov[1:(t1 + t2), ]
+  evseries <- evseries[1:(t1 + t2), ]
+  ev.innov <- ev.innov[1:(t1 + t2), ]
 
   yseries <- yseries[nrow(yseries):1,]  # Change y to conventional row ordering by time before returning
   y.innov <- y.innov[nrow(y.innov):1,]
+  evseries <- evseries[nrow(evseries):1, ]
+  ev.innov <- ev.innov[nrow(ev.innov):1, ]
 
-  return(y.shock = yseries, y.innovation = y.innov)  
+  return(list(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov))  
 }
