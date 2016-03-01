@@ -661,7 +661,7 @@ z$methods(
 z$methods(
   summarise = function(...) {
     "Display a Zelig object"
-    summarize(...)
+    show(...)
   }
 )
 
@@ -725,7 +725,7 @@ z$methods(
     }
     possibleqivalues <- c(names(.self$sim.out[[xvalue]]), names(.self$sim.out[[xvalue]][[1]]))
     if(!(qi %in% possibleqivalues)){
-        stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
+      stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
     }
     if(.self$mi){
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])

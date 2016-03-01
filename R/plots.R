@@ -476,6 +476,8 @@ qi.plot <- function (obj, ...) {
 #' @param legpos ``legend type'', exact coordinates and sizes for legend.
 #' Overrides argment ``leg.type''
 #' @param ci vector of length three of confidence interval levels to draw.
+#' @param discont optional point of discontinuity along the x-asis at which 
+#' to interupt the graph
 #' @return the current graphical parameters. This is subject to change in future
 #' implementations of Zelig
 #' @author James Honaker
@@ -484,43 +486,14 @@ qi.plot <- function (obj, ...) {
 #'  NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim = 
 #'  NULL, legcol="gray20", col=NULL, leg=1, legpos=
 #'  NULL, ci = c(80, 95, 99.9))
-ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL, legcol="gray20", col=NULL, leg=1, legpos=NULL, ci=c(80,95,99.9)) {
-    
-    if(length(ci)<3){
-        ci<-rep(ci,3)
-    }
-    if(length(ci)>3){
-        ci<-ci[1:3]
-    }
-    ci<-sort(ci)
-    
-    d<-length(obj$sim.out$range)
-    
-    if (d<1) {
-        return()  # Should add warning
-    }
-    
-    xmatrix<-matrix(NA,nrow=d, ncol=length( obj$setx.out$range[[1]]$mm[[1]] ))    # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
-    
-    for(i in 1:d){
-        xmatrix[i,]<-as.matrix( obj$setx.out$range[[i]]$mm[[1]] )   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
-    }
-    
-    if (d == 1 && is.null(var)) {
-        warning("Must specify the `var` parameter when plotting the confidence interval of an unvarying model. Plotting nothing.")
-        return(invisible(FALSE))
-    }
-    
-    xvarnames<-names(as.data.frame( obj$setx.out$range[[1]]$mm[[1]]))  # MUST BE A BETTER WAY/PATH TO GET NAMES
-    
-    if(is.character(var)){
-        if( !(var %in% xvarnames   ) ){
-            warning("Specified variable for confidence interval plot is not in estimated model.  Plotting nothing.")
-            return(invisible(FALSE))
-        }
-    }
-    
+ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL, legcol="gray20", col=NULL, leg=1, legpos=NULL, ci=c(80,95,99.9), discont=NULL) {
+ 
+    ########################### 
+    #### Utility Functions ####
+
     # Define function to cycle over range list and extract correct qi's
+    ## CAN THESE NOW BE REPLACED WITH THE GETTER METHODS?
+
     extract.sims<-function(obj,qi){
         d<-length(obj$sim.out$range)
         k<-length(obj$sim.out$range[[1]][qi][[1]][[1]])   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
@@ -541,8 +514,9 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         return(hold)
     }
 
-
     # Define functions to compute confidence intervals
+    ## CAN WE MERGE THESE TOGETHER SO AS NOT TO HAVE TO SORT TWICE?
+
     ci.upper <- function (x, alpha) {
         pos <- max(round((1-(alpha/100))*length(x)), 1)
         return(sort(x)[pos])
@@ -552,36 +526,98 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         pos<-max(round((alpha/100)*length(x)), 1)
         return(sort(x)[pos])
     }
+
+    ###########################
+
+    if(length(ci)<3){
+        ci<-rep(ci,3)
+    }
+    if(length(ci)>3){
+        ci<-ci[1:3]
+    }
+    ci<-sort(ci)
     
     
-    
-    if (is.null(var)) {
-        each.var <- apply(xmatrix,2,sd)
-        flag <- each.var>0
-        min.var<-min(each.var[flag])
-        var.seq<-1:ncol(xmatrix)
-        position<-var.seq[each.var==min.var]
-    } else {
-        if(is.numeric(var)){
-            position<-var
-        }else if(is.character(var)){
-           position<-grep(var,xvarnames )
+    ## Timeseries:
+    if("timeseries" %in% obj$category){
+        #xmatrix<-              ## Do we need to know the x in which the shock/innovation occcured?  For secondary graphs, titles, legends?
+        xname <- "Time"
+        qiseries <- c("pvseries.shock","pvseries.innovation","evseries.shock","evseries.innovation")
+        if (!qi %in% qiseries){
+            cat(paste("Error: For Timeseries models, argument qi must be one of ", paste(qiseries, collapse=" or ") ,".\n", sep="") )
+            return()
         }
-    }
-    position<-min(position)
-    xseq<-xmatrix[,position]
-    xname<-xvarnames[position] 
+        ev<-t( obj$getqi(qi=qi, xvalue="x1") )   # NOTE THE NECESSARY TRANSPOSE.  Should we more clearly standardize this?
+        d<-ncol(ev)
+        xseq<-1:d  
+        ev1 <- NULL  # Maybe want to add ability to overlay another graph?
+
+        # Define xlabel
+        if (is.null(xlab))
+        xlab <- xname
+        if (is.null(discont))
+        discont <- 22.5    # NEED TO SET AUTOMATICALLY
+
+    ## Everything Else:
+    }else{
+        d<-length(obj$sim.out$range)
     
-    # Use "qi" argument to select quantities of interest and set labels
-    ev1<-NULL
-    if(!is.null(obj$sim.out$range1)){
-        ev1<-extract.sims1(obj,qi=qi)
+        if (d<1) {
+            return()  # Should add warning
+        }
+
+        xmatrix<-matrix(NA,nrow=d, ncol=length( obj$setx.out$range[[1]]$mm[[1]] ))    # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        for(i in 1:d){
+            xmatrix[i,]<-as.matrix( obj$setx.out$range[[i]]$mm[[1]] )   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        }
+
+        if (d == 1 && is.null(var)) {
+            warning("Must specify the `var` parameter when plotting the confidence interval of an unvarying model. Plotting nothing.")
+            return(invisible(FALSE))
+        }
+    
+        xvarnames<-names(as.data.frame( obj$setx.out$range[[1]]$mm[[1]]))  # MUST BE A BETTER WAY/PATH TO GET NAMES
+    
+        if(is.character(var)){
+            if( !(var %in% xvarnames   ) ){
+                warning("Specified variable for confidence interval plot is not in estimated model.  Plotting nothing.")
+                return(invisible(FALSE))
+            }
+        }
+
+        if (is.null(var)) {
+            each.var <- apply(xmatrix,2,sd)
+            flag <- each.var>0
+            min.var<-min(each.var[flag])
+            var.seq<-1:ncol(xmatrix)
+            position<-var.seq[each.var==min.var]
+        } else {
+            if(is.numeric(var)){
+                position<-var
+            }else if(is.character(var)){
+                position<-grep(var,xvarnames )
+            }
+        }
+        position<-min(position)
+        xseq<-xmatrix[,position]
+        xname<-xvarnames[position] 
+        # Define xlabel
+        if (is.null(xlab))
+        xlab <- paste("Range of",xname)
+
+        # Use "qi" argument to select quantities of interest and set labels
+        ev1<-NULL
+        if(!is.null(obj$sim.out$range1)){
+            ev1<-extract.sims1(obj,qi=qi)
+        }
+        ev<-extract.sims(obj,qi=qi)
     }
-    ev<-extract.sims(obj,qi=qi)
+    
+
     if (is.null(ylab)){
         ylab <- as.character(obj$setx.labels[qi])
     }
-    
+
     #
     k<-ncol(ev)
     n<-nrow(ev)
@@ -694,37 +730,70 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
     else
     ylim
     
-    
-    # Define xlabel
-    if (is.null(xlab))
-    xlab <- paste("Range of",xname)
-    
+
+    # Define y label
     if (is.null(ylab))
     ylab <- "Expected Values: E(Y|X)"
+
     
     ## This is the plot
     
     par(bty="n")
-    plot(x=history[, 1], y=history[, 2], type="l", xlim=all.xlim, ylim=all.ylim, main = main, sub = sub, xlab=xlab, ylab=ylab)
+    centralx<-history[,1]
+    centraly<-history[,2]
 
-    polygon(c(history[,1],history[k:1,1]),c(history[,7],history[k:1,8]),col=col[3],border="white")
-    polygon(c(history[,1],history[k:1,1]),c(history[,5],history[k:1,6]),col=col[2],border="gray90")
-    polygon(c(history[,1],history[k:1,1]),c(history[,3],history[k:1,4]),col=col[1],border="gray60")
-    polygon(c(history[,1],history[k:1,1]),c(history[,7],history[k:1,8]),col=NA,border="white")
 
-  
-    if(!is.null(ev1)){
-        lines(x=history1[, 1], y=history1[, 2], type="l")
-        
-        polygon(c(history1[,1],history1[k:1,1]),c(history1[,7],history1[k:1,8]),col=col[6],border="white")
-        polygon(c(history1[,1],history1[k:1,1]),c(history1[,5],history1[k:1,6]),col=col[5],border="gray90")
-        polygon(c(history1[,1],history1[k:1,1]),c(history1[,3],history1[k:1,4]),col=col[4],border="gray60")
-        polygon(c(history1[,1],history1[k:1,1]),c(history1[,7],history1[k:1,8]),col=NA,border="white")
-        
+    if(is.null(discont)){
+        gotok <- k
+    }else{
+        gotok <- sum(xseq < discont)
+        if((gotok<2) | (gotok>(k-2))){
+            cat("Warning: Discontinuity is located at edge or outside the range of x-axis.\n") 
+            gotok<-k   
+            discont<-NULL 
+        }
+        if(gotok<k){
+            gotokp1<- gotok+1
+            centralx<-c(centralx[1:gotok], NA, centralx[gotok+1:length(centralx)])
+            centraly<-c(centraly[1:gotok], NA, centraly[gotok+1:length(centraly)])
+        }
     }
 
-   
-    
+    plot(x=centralx, y=centraly, type="l", xlim=all.xlim, ylim=all.ylim, main = main, sub = sub, xlab=xlab, ylab=ylab)
+
+    polygon(c(history[1:gotok,1],history[gotok:1,1]),c(history[1:gotok,7],history[gotok:1,8]),col=col[3],border="white")
+    polygon(c(history[1:gotok,1],history[gotok:1,1]),c(history[1:gotok,5],history[gotok:1,6]),col=col[2],border="gray90")
+    polygon(c(history[1:gotok,1],history[gotok:1,1]),c(history[1:gotok,3],history[gotok:1,4]),col=col[1],border="gray60")
+    polygon(c(history[1:gotok,1],history[gotok:1,1]),c(history[1:gotok,7],history[gotok:1,8]),col=NA,border="white")
+
+    if(!is.null(discont)){
+        polygon(c(history[gotokp1:k,1],history[k:gotokp1,1]),c(history[gotokp1:k,7],history[k:gotokp1,8]),col=col[3],border="white")
+        polygon(c(history[gotokp1:k,1],history[k:gotokp1,1]),c(history[gotokp1:k,5],history[k:gotokp1,6]),col=col[2],border="gray90")
+        polygon(c(history[gotokp1:k,1],history[k:gotokp1,1]),c(history[gotokp1:k,3],history[k:gotokp1,4]),col=col[1],border="gray60")
+        polygon(c(history[gotokp1:k,1],history[k:gotokp1,1]),c(history[gotokp1:k,7],history[k:gotokp1,8]),col=NA,border="white")
+        abline(v=discont, lty=5, col="grey85")
+    }
+  
+    if(!is.null(ev1)){
+
+        lines(x=history1[1:gotok, 1], y=history1[1:gotok, 2], type="l")
+        if(!is.null(discont)){
+            lines(x=history1[gotokp1:k, 1], y=history1[gotokp1:k, 2], type="l")
+        }
+
+        polygon(c(history1[1:gotok,1],history1[gotok:1,1]),c(history1[1:gotok,7],history1[gotok:1,8]),col=col[6],border="white")
+        polygon(c(history1[1:gotok,1],history1[gotok:1,1]),c(history1[1:gotok,5],history1[gotok:1,6]),col=col[5],border="gray90")
+        polygon(c(history1[1:gotok,1],history1[gotok:1,1]),c(history1[1:gotok,3],history1[gotok:1,4]),col=col[4],border="gray60")
+        polygon(c(history1[1:gotok,1],history1[gotok:1,1]),c(history1[1:gotok,7],history1[gotok:1,8]),col=NA,border="white")
+
+        if(!is.null(discont)){
+            polygon(c(history1[gotokp1:k,1],history1[k:gotokp1,1]),c(history1[gotokp1:k,7],history1[k:gotokp1,8]),col=col[6],border="white")
+            polygon(c(history1[gotokp1:k,1],history1[k:gotokp1,1]),c(history1[gotokp1:k,5],history1[k:gotokp1,6]),col=col[5],border="gray90")
+            polygon(c(history1[gotokp1:k,1],history1[k:gotokp1,1]),c(history1[gotokp1:k,3],history1[k:gotokp1,4]),col=col[4],border="gray60")
+            polygon(c(history1[gotokp1:k,1],history1[k:gotokp1,1]),c(history1[gotokp1:k,7],history1[k:gotokp1,8]),col=NA,border="white")
+        }        
+    }
+  
     ## This is the legend
     
     if(is.null(legpos)){
