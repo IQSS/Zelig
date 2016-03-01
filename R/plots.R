@@ -342,7 +342,10 @@ qi.plot <- function (obj, ...) {
     old.par <- par(no.readonly=T)
 
     if("timeseries" %in% obj$category){
-        zeligACFplot(obj$getqi("acf", xvalue="x"))
+        par(mfcol=c(3,1))
+        zeligACFplot(obj$getqi("acf", xvalue="x1"))
+        ci.plot(obj, qi="pvseries.shock")
+        ci.plot(obj, qi="pvseries.innovation")
         return()
     }
 
@@ -555,6 +558,15 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         # Define xlabel
         if (is.null(xlab))
         xlab <- xname
+        if (is.null(ylab)){
+            if(qi %in% c("pvseries.shock", "pvseries.innovation"))
+                ylab<- as.character(obj$setx.labels["pv"])
+            if(qi %in% c("evseries.shock", "evseries.innovation"))
+                ylab<- as.character(obj$setx.labels["ev"])    
+        }
+
+        if (is.null(main))
+        main <- as.character(obj$setx.labels[qi])
         if (is.null(discont))
         discont <- 22.5    # NEED TO SET AUTOMATICALLY
 
@@ -611,12 +623,14 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
             ev1<-extract.sims1(obj,qi=qi)
         }
         ev<-extract.sims(obj,qi=qi)
+        if (is.null(ylab)){
+            ylab <- as.character(obj$setx.labels[qi])
+        }
+
     }
     
 
-    if (is.null(ylab)){
-        ylab <- as.character(obj$setx.labels[qi])
-    }
+
 
     #
     k<-ncol(ev)

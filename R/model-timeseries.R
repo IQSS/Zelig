@@ -11,6 +11,20 @@ ztimeseries$methods(
     .self$packageauthors <- ""  # Need to decide
     .self$acceptweights <- FALSE  #  Need to deal with block bootstrap
     .self$category <- "timeseries"
+    .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
+                              ev1 = "Expected Values: E(Y|X1)",
+                              pv  = "Predicted Values: Y|X",
+                              pv1 = "Predicted Values: Y|X1",
+                              fd  = "First Differences: E(Y|X1) - E(Y|X)",
+                              acf = "Autocorrelation Function",
+                              ev.shortrun = "Expected Values Immediately Resulting from Shock",
+                              ev.longrun = "Long Run Expected Values after Innovation",
+                              pv.shortrun = "Predicted Values Immediately Resulting from Shock",
+                              pv.longrun = "Long Run Predicted Values after Innovation",
+                              evseries.shock = "Expected Values Over Time from Shock",
+                              evseries.innovation ="Expected Values Over Time from Innovation",
+                              pvseries.shock = "Predicted Values Over Time from Shock",
+                              pvseries.innovation ="Predicted Values Over Time from Innovation")
   }
 )
 
