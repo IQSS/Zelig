@@ -4,6 +4,7 @@ ztimeseries <- setRefClass("Zelig-timeseries",
                     fields = list(link = "character",
                                   linkinv = "function"))
 
+
 ztimeseries$methods(
   initialize = function() {
     callSuper()
@@ -45,9 +46,13 @@ ztimeseries$methods(
     d <- zeligPlyrMutate(d, mm = .self$setx.out$x$mm)
     d <- zeligPlyrMutate(d, mm1 = .self$setx.out$x1$mm)
 
+#      return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun, 
+#                pvseries.shock=yseries$y.shock, pvseries.innovation=yseries$y.innovation,
+#                evseries.shock=yseries$ev.shock, evseries.innovation=yseries$ev.innovation))
+
     .self$sim.out$x1 <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm, .$mm1)) %>%
-      do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv, ev.shortrun = .$qi$ev.shortrun, pv.shortrun = .$qi$pv.shortrun, ev.longrun = .$qi$ev.longrun, pv.longrun = .$qi$pv.longrun, range.shock= .$qi$range.shock, range.innovation= .$qi$range.innovation)
+      do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv, ev.shortrun = .$qi$ev.shortrun, pv.shortrun = .$qi$pv.shortrun, ev.longrun = .$qi$ev.longrun, pv.longrun = .$qi$pv.longrun, pvseries.shock = .$qi$pvseries.shock, evseries.shock = .$qi$evseries.shock, pvseries.innovation = .$qi$pvseries.innovation,  evseries.innovation = .$qi$evseries.innovation)
       # Will eventually have to then move acf, ev, and pv from .self$setx.out$x1 to .self$setx.out$x
       # This will also effect next line:
 

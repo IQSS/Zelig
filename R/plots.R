@@ -28,6 +28,8 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
       return(FALSE)
     }
 
+
+
     ## Univariate Plots ##
     if(is.null(y1)){
         
@@ -338,6 +340,11 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
 qi.plot <- function (obj, ...) {
     # Save old state
     old.par <- par(no.readonly=T)
+
+    if("timeseries" %in% obj$category){
+        zeligACFplot(obj$getqi("acf", xvalue="x"))
+        return()
+    }
 
     # Determine whether two "Expected Values" qi's exist
          both.ev.exist <- (length(obj$sim.out$x$ev)>0) & (length(obj$sim.out$x1$ev)>0)
