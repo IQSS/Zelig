@@ -1,17 +1,17 @@
-#' Autoregressive and Moving-Average Models for Time-Series Data
+#' Autoregressive and Moving-Average Models with Integration for Time-Series Data
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-arma.html}
+#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-arima.html}
 #' @import methods
-#' @export Zelig-arma
-#' @exportClass Zelig-arma
+#' @export Zelig-arima
+#' @exportClass Zelig-arima
 #'
 #' @include model-zelig.R
 #' @include model-timeseries.R
 
-zarma <- setRefClass("Zelig-arma",
+zarima <- setRefClass("Zelig-arima",
                         contains = "Zelig-timeseries")
 
-zarma$methods(
+zarima$methods(
   initialize = function() {
     callSuper()
     .self$name <- "arma"
@@ -26,7 +26,7 @@ zarma$methods(
   }
 )
 
-zarma$methods(
+zarima$methods(
   qi = function(simparam, mm, mm1=NULL){ 
     myorder <- eval(.self$zelig.call$order)
     mycoef <- coef(.self$zelig.out$z.out[[1]])
@@ -71,7 +71,7 @@ zarma$methods(
   }
 )
 
-zarma$methods(
+zarima$methods(
   mcfun = function(x, b0=0, b1=1, ..., sim=TRUE){
     mu <- exp(b0 + b1 * x)
     if(sim){
