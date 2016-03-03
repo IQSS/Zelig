@@ -22,11 +22,11 @@ zglm$methods(
 )
 
 zglm$methods(
-  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     .self$model.call$family <- call(.self$family, .self$link)
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
     rse <- plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
     .self$test.statistics <- list(robust.se = rse)
   }

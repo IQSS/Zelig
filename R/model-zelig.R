@@ -84,6 +84,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         sim.out = "list", # simulated qi's
                                         simparam = "ANY", # simulated parameters
                                         num = "numeric", # nb of simulations
+                                        bootstrap = "logical", # use bootstrap
+                                        bootstrap.num = "numeric", # number of bootstraps to use
 
                                         authors = "character", # Zelig model description
                                         zeligauthors = "character",
@@ -131,6 +133,9 @@ z$methods(
     .self$bsetrange <- FALSE
     .self$bsetrange1 <- FALSE
     .self$acceptweights <- FALSE
+
+    .self$bootstrap <- FALSE
+    .self$bootstrap.num <- 100
     # JSON
     .self$vignette.url <- paste(.self$url.docs, tolower(class(.self)[1]), ".html", sep = "")
     .self$vignette.url <- sub("-gee", "gee", .self$vignette.url)
@@ -206,12 +211,13 @@ z$methods(
 )
 
 z$methods(
-  zelig = function(formula, data, model=NULL, ..., weights=NULL, by) {
+  zelig = function(formula, data, model=NULL, ..., weights=NULL, by, bootstrap=FALSE) {
     "The zelig command estimates a variety of statistical models"
     fn2 <- function(fc, data) {
       fc$data <- data
       return(fc)
     }
+
     .self$formula <- formula
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
@@ -235,6 +241,16 @@ z$methods(
     .self$originaldata <- data
     .self$originalweights <- weights
     datareformed <- FALSE
+
+    if(is.numeric(bootstrap)){
+      .self$bootstrap <- TRUE
+      .self$bootstrap.num <- bootstrap
+    }else if(is.logical(bootstrap)){
+      .self$bootstrap <- bootstrap
+    }
+    # Remove bootstrap argument from model call
+    .self$model.call$bootstrap <- NULL
+
 
     # Matched datasets from MatchIt
     if ("matchit" %in% class(data)){
@@ -332,12 +348,16 @@ z$methods(
     # Otherwise we pass the weights to the model call  
     if(!is.null(.self$weights)){
       if ((!.self$acceptweights)){
-        .self$buildDataByWeights2()  # Could use alternative method $buildDataByWeights() for duplication approach.  Maybe set as argument?\
+        .self$buildDataByWeights2()   # Could use alternative method $buildDataByWeights() for duplication approach.  Maybe set as argument?\
         .self$model.call$weights <- NULL
 	  } else {
 		.self$model.call$weights <- .self$weights   # NEED TO CHECK THIS IS THE NAME FOR ALL MODELS, or add more generic field containing the name for the weights argument
 	  }
 	}
+
+    if(.self$bootstrap){
+      .self$buildDataByBootstrap()
+    }
 
     .self$model.call[[1]] <- .self$fn
     .self$model.call$by <- NULL
@@ -661,7 +681,7 @@ z$methods(
 z$methods(
   summarise = function(...) {
     "Display a Zelig object"
-    summarize(...)
+    show(...)
   }
 )
 
@@ -723,15 +743,16 @@ z$methods(
     if(!(xvalue %in% possiblexvalues)){
       stop(paste("xvalue must be ", paste(possiblexvalues, collapse=" or ") , ".", sep=""))
     }
-    possibleqivalues <- names(.self$sim.out[[xvalue]])
+    possibleqivalues <- c(names(.self$sim.out[[xvalue]]), names(.self$sim.out[[xvalue]][[1]]))
     if(!(qi %in% possibleqivalues)){
       stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
     }
-
     if(.self$mi){
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
+    } else if(xvalue %in% c("range", "range1")) {
+      tempqi <- do.call(rbind, .self$sim.out[[xvalue]])[[qi]]
     } else {
-      tempqi<- .self$sim.out[[xvalue]][[qi]][[1]]
+      tempqi<- .self$sim.out[[xvalue]][[qi]][[1]]   # also works:   tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
     }
     return(tempqi)
   }
@@ -884,7 +905,7 @@ z$methods(
         n.obs <- nrow(idata)
         n.w   <- sum(iweights)
         iweights <- iweights/n.w
-        windex <- sample(x=1:n.obs, size=n.w, replace=TRUE, prob=iweights)
+        windex <- sample(x=1:n.obs, size=n.w, replace=TRUE, prob=iweights)  # Should size be n.w or n.obs?  Relatedly, n.w might not be integer.
         idata <- idata[windex,]
         .self$data <- idata
       }else{
@@ -893,6 +914,39 @@ z$methods(
     }
   }
 )
+
+
+# rebuild dataset by bootstrapping using weights as probabilities
+#   might possibly combine this method with $buildDataByWeights2()
+z$methods(
+  buildDataByBootstrap = function() {
+      idata <- .self$data 
+      n.boot <- .self$bootstrap.num
+      n.obs <- nrow(idata)
+
+      if(!is.null(.self$weights)){
+        iweights <- .self$weights
+        n.w   <- sum(iweights)
+        iweights <- iweights/n.w
+      }else{
+        iweights <- NULL
+      }
+
+      windex <- bootstrapIndex <- NULL
+      for(i in 1:n.boot){
+        windex <- c(windex, sample(x=1:n.obs, size=n.obs, replace=TRUE, prob=iweights))
+        bootstrapIndex <- c(bootstrapIndex, rep(i,n.obs))
+      } 
+      idata <- idata[windex,]
+      idata$bootstrapIndex <- bootstrapIndex
+      .self$data <- idata
+      .self$by <- c("bootstrapIndex", .self$by)
+  }
+)
+
+
+
+
 
 z$methods(
   feedback = function() {

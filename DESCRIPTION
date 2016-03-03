@@ -19,68 +19,25 @@ Description: A framework that brings together an abundance of common
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
 Version: 5.0-10
-Date: 2015-12-08
-Imports:
-    sandwich,
-    methods,
-    MASS,
-    survival,
-    VGAM,
-    jsonlite,
-    AER,
-    plyr,
-    dplyr (>= 0.3.0.2),
-    quantreg,
-    geepack,
-    MCMCpack,
-    Amelia,
-    MatchIt,
-    maxLik,
-    survey
-Suggests:
-    testthat,
-    knitr
-Collate:
-    'utils.R'
-    'model-zelig.R'
-    'model-weibull.R'
-    'model-tobit.R'
-    'model-bayes.R'
-    'model-tobit-bayes.R'
-    'model-glm.R'
-    'model-gee.R'
-    'model-survey.R'
-    'model-gamma.R'
-    'model-gamma-survey.R'
-    'model-binchoice.R'
-    'model-logit.R'
-    'model-relogit.R'
-    'model-quantile.R'
-    'model-probit.R'
-    'model-binchoice-gee.R'
-    'model-binchoice-survey.R'    
-    'model-probit-gee.R'
-    'model-probit-bayes.R'
-    'model-probit-survey.R'
-    'model-poisson.R'
-    'model-poisson-gee.R'
-    'model-poisson-bayes.R'
-    'model-poisson-survey.R'
-    'model-oprobit-bayes.R'
-    'model-normal.R'
-    'model-normal-gee.R'
-    'model-normal-bayes.R'
-    'model-normal-survey.R'
-    'model-negbinom.R'
-    'model-mlogit-bayes.R'
-    'model-ls.R'
-    'model-lognorm.R'
-    'model-logit-gee.R'
-    'model-logit-bayes.R'
-    'model-logit-survey.R'
-    'model-gamma-gee.R'
-    'model-factor-bayes.R'
-    'model-exp.R'
-    'create-json.R'
-    'plots.R'
-    'wrappers.R'
+Date: 2016-02-17
+Imports: sandwich, methods, MASS, survival, VGAM, jsonlite, AER, plyr,
+        dplyr (>= 0.3.0.2), quantreg, geepack, MCMCpack, Amelia,
+        MatchIt, maxLik, survey
+Suggests: testthat, knitr
+Collate: 'utils.R' 'model-zelig.R' 'model-weibull.R' 'model-tobit.R'
+        'model-bayes.R' 'model-tobit-bayes.R' 'model-glm.R'
+        'model-gee.R' 'model-gamma.R' 'model-binchoice.R'
+        'model-logit.R' 'model-relogit.R' 'model-quantile.R'
+        'model-probit.R' 'model-binchoice-gee.R' 'model-probit-gee.R'
+        'model-probit-bayes.R' 'model-poisson.R' 'model-poisson-gee.R'
+        'model-poisson-bayes.R' 'model-oprobit-bayes.R'
+        'model-normal.R' 'model-normal-gee.R' 'model-normal-bayes.R'
+        'model-negbinom.R' 'model-mlogit-bayes.R' 'model-ls.R'
+        'model-lognorm.R' 'model-logit-gee.R' 'model-logit-bayes.R'
+        'model-gamma-gee.R' 'model-factor-bayes.R' 'model-exp.R'
+        'create-json.R' 'model-survey.R' 'model-binchoice-survey.R'
+        'model-gamma-survey.R' 'model-logit-survey.R'
+        'model-normal-survey.R' 'model-poisson-survey.R'
+        'model-probit-survey.R' 'model-timeseries.R' 'model-arima.R' 
+        'plots.R' 'wrappers.R'
+

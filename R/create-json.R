@@ -31,6 +31,8 @@
 #' @include model-probit-bayes.R
 #' @include model-tobit-bayes.R
 #' @include model-weibull.R
+#' @include model-timeseries.R
+#' @include model-arima.R
 
 #library(jsonlite)
 
@@ -128,6 +130,9 @@ createJSON <- function(){
 
   z5poissonsurvey <- zpoissonsurvey$new()
   z5poissonsurvey$toJSON()
+  
+  z5arima <- zarima$new()
+  z5arima$toJSON()
 
 
   zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
@@ -160,7 +165,8 @@ createJSON <- function(){
                     "probitsurvey" = z5probitsurvey$ljson,
                     "normalsurvey" = z5normalsurvey$ljson,
                     "gammasurvey" = z5gammasurvey$ljson,
-                    "poissonsurvey" = z5poissonsurvey$ljson))
+                    "poissonsurvey" = z5poissonsurvey$ljson,
+                    "arima" = z5arima$ljson))
 
   # cat(toJSON(zeligmodels, pretty = TRUE), file = file.path("tools", "zelig5models.json"))
   # file.copy(from = file.path("tools", "zelig5models.json"), to = file.path("inst", "JSON", "zelig5models.json"))

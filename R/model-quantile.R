@@ -31,7 +31,7 @@ zquantile$methods(
 )
 
 zquantile$methods(
-  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
     if (!is.null(.self$model.call$tau)) {
@@ -44,7 +44,7 @@ zquantile$methods(
     }
     else 
       .self$tau <- 0.5
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
     
     rse<-plyr::llply(.self$zelig.out$z.out, (function(x) quantreg::summary.rq(x,se="nid", cov=TRUE)$cov))
     .self$test.statistics<- list(robust.se = rse)

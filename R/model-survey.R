@@ -1,3 +1,9 @@
+#' Survey models in Zelig for weights for complex sampling designs
+#'
+#' @import methods
+#' @export Zelig-survey
+#' @exportClass Zelig-survey
+#'
 #' @include model-zelig.R
 zsurvey <- setRefClass("Zelig-survey",
                     contains = "Zelig")
@@ -15,7 +21,7 @@ zsurvey$methods(
 zsurvey$methods(
   zelig = function(formula, data, ids = ~1, probs = NULL, strata = NULL, fpc = NULL, nest = FALSE, check.strata = !nest, 
                    repweights = NULL, type = NULL, combined.weights = FALSE, rho = NULL, bootstrap.average = NULL, scale = NULL,
-                   rscales = NULL, fpctype = "fraction", ... , weights = NULL, by = NULL) {
+                   rscales = NULL, fpctype = "fraction", ... , weights = NULL, by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
 
     recastString2Formula <- function(a){
@@ -62,7 +68,7 @@ zsurvey$methods(
     }
     .self$model.call <- as.call(list(.self$fn, formula=.self$zelig.call$formula,  design=design))  # fn will be set again by super, but initialized here for clarity
     .self$model.call$family <- call(.self$family, .self$link)
-    callSuper(formula = formula, data = data, ..., by = by)
+    callSuper(formula = formula, data = data, ..., by = by, bootstrap = FALSE)
   }
 )
 

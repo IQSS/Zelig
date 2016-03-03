@@ -26,11 +26,11 @@ zls$methods(
 )
 
 zls$methods(
-  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     callSuper(formula = formula, data = data, ...,
-              weights = weights, by = by)
+              weights = weights, by = by, bootstrap = bootstrap)
     # Automated Background Test Statistics and Criteria
     rse<-plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
     rse.se <- sqrt(diag(rse[[1]]))                 # Needs to work with "by" argument
