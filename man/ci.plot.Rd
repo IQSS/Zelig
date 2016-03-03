@@ -46,6 +46,9 @@ position of the legend. 1 to 4 correspond to ``SE'', ``SW'', ``NW'', and
 Overrides argment ``leg.type''}
 
 \item{ci}{vector of length three of confidence interval levels to draw.}
+
+\item{discont}{optional point of discontinuity along the x-asis at which 
+to interupt the graph}
 }
 \value{
 the current graphical parameters. This is subject to change in future
