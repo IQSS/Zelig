@@ -479,7 +479,7 @@ qi.plot <- function (obj, ...) {
 #' @param legpos ``legend type'', exact coordinates and sizes for legend.
 #' Overrides argment ``leg.type''
 #' @param ci vector of length three of confidence interval levels to draw.
-#' @param discont optional point of discontinuity along the x-asis at which 
+#' @param discont optional point of discontinuity along the x-axis at which 
 #' to interupt the graph
 #' @return the current graphical parameters. This is subject to change in future
 #' implementations of Zelig

@@ -47,7 +47,7 @@ Overrides argment ``leg.type''}
 
 \item{ci}{vector of length three of confidence interval levels to draw.}
 
-\item{discont}{optional point of discontinuity along the x-asis at which 
+\item{discont}{optional point of discontinuity along the x-axis at which 
 to interupt the graph}
 }
 \value{
