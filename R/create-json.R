@@ -166,7 +166,7 @@ createJSON <- function(){
                     "normalsurvey" = z5normalsurvey$ljson,
                     "gammasurvey" = z5gammasurvey$ljson,
                     "poissonsurvey" = z5poissonsurvey$ljson,
-                    "arima" = z5arima))
+                    "arima" = z5arima$ljson))
 
   # cat(toJSON(zeligmodels, pretty = TRUE), file = file.path("tools", "zelig5models.json"))
   # file.copy(from = file.path("tools", "zelig5models.json"), to = file.path("inst", "JSON", "zelig5models.json"))
