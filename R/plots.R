@@ -488,7 +488,7 @@ qi.plot <- function (obj, ...) {
 #' @usage ci.plot(obj, qi="ev", var=NULL, ..., main = NULL, sub = 
 #'  NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim = 
 #'  NULL, legcol="gray20", col=NULL, leg=1, legpos=
-#'  NULL, ci = c(80, 95, 99.9))
+#'  NULL, ci = c(80, 95, 99.9), discont=NULL)
 ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL, legcol="gray20", col=NULL, leg=1, legpos=NULL, ci=c(80,95,99.9), discont=NULL) {
  
     ########################### 
