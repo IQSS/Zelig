@@ -31,7 +31,8 @@ zfactorbayes$methods(
                    verbose = 0, 
                    ..., 
                    data,
-                   by = NULL) {
+                   by = NULL,
+                   bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (missing(verbose))
@@ -41,7 +42,7 @@ zfactorbayes$methods(
     .self$model.call$verbose <- verbose
     .self$model.call$x <- formula
     .self$model.call$factors <- factors
-    callSuper(formula = formula, data = data,..., by = by)
+    callSuper(formula = formula, data = data,..., by = by, bootstrap = FALSE)
   }
 )
 

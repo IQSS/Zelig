@@ -29,10 +29,10 @@ ztimeseries$methods(
 )
 
 ztimeseries$methods(
-  zelig = function(formula, data, ..., weights=NULL, by=NULL){
+  zelig = function(formula, data, ..., weights=NULL, by=NULL, bootstrap = FALSE){
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
   }
 )
 

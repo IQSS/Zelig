@@ -54,7 +54,7 @@ zrelogit$methods(
 )
 
 zrelogit$methods(
-  zelig = function(formula, ..., tau = NULL, bias.correct = NULL, case.control = NULL, data, by = NULL) {
+  zelig = function(formula, ..., tau = NULL, bias.correct = NULL, case.control = NULL, data, by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     # Catch NULL case.control
@@ -71,7 +71,7 @@ zrelogit$methods(
     .self$model.call$case.control <- case.control
     .self$model.call$bias.correct <- bias.correct
     .self$model.call$tau <- tau
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
+    callSuper(formula = formula, data = data, ..., weights = NULL, by = by, bootstrap = FALSE)
   }
 )
 

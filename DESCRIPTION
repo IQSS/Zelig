@@ -38,6 +38,6 @@ Collate: 'utils.R' 'model-zelig.R' 'model-weibull.R' 'model-tobit.R'
         'create-json.R' 'model-survey.R' 'model-binchoice-survey.R'
         'model-gamma-survey.R' 'model-logit-survey.R'
         'model-normal-survey.R' 'model-poisson-survey.R'
-        'model-probit-survey.R' 'model-timeseries.R' 'model-arma.R' 
+        'model-probit-survey.R' 'model-timeseries.R' 'model-arima.R' 
         'plots.R' 'wrappers.R'
 

@@ -20,7 +20,7 @@ zgee$methods(
 
 
 zgee$methods(
-  zelig = function(formula, id, ..., zcor = NULL, corstr = "independence", data, weights = NULL, by = NULL) {
+  zelig = function(formula, id, ..., zcor = NULL, corstr = "independence", data, weights = NULL, by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (corstr == "fixed" && is.null(zcor))
@@ -36,7 +36,7 @@ zgee$methods(
     .self$model.call$id <- id
     .self$model.call$zcor <- zcor
     .self$model.call$corstr <- corstr
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
     # Prettify summary display without modifying .self$model.call
     for (i in length(.self$zelig.out$z.out)) {
       .self$zelig.out$z.out[[i]]$call$id <- .self$zelig.call$id
