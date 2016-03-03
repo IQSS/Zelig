@@ -1,3 +1,9 @@
+#' Time-series models in Zelig
+#'
+#' @import methods
+#' @export Zelig-timeseries
+#' @exportClass Zelig-timeseries
+#'
 #' @include model-zelig.R
 ztimeseries <- setRefClass("Zelig-timeseries",
                     contains = "Zelig",
