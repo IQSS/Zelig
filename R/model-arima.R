@@ -281,7 +281,7 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
   finished <- FALSE
   count <- 0
   while(!finished){
-    y <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    y <- zeligARMAnextstep(yseries=yseries[1:timepast, ], xseries=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
     yseries <- rbind(y$y, yseries)
     wseries <- rbind(y$w, wseries)
     evseries<- rbind(y$exp.y, evseries)
@@ -332,14 +332,14 @@ zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1
 
   # Take a step at covariates x
   for(i in 2:t1){
-    nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    nextstep <- zeligARMAnextstep(yseries=yseries[1:timepast, ], xseries=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
     yseries  <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
     wseries  <- rbind(nextstep$w, wseries)
     evseries <- rbind(nextstep$exp.y, evseries)
   }
 
   # Introduce shock
-    nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x1, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    nextstep <- zeligARMAnextstep(yseries=yseries[1:timepast, ], xseries=x1, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
     yseries  <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
     wseries  <- rbind(nextstep$w, wseries)
     evseries <- rbind(nextstep$exp.y, evseries)
@@ -350,13 +350,13 @@ zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1
 
   for(i in 2:t2){
     # Take further steps at covariates x1 (an introduction of an innovation)
-    nextstep <- zeligARMAnextstep(y=y.innov[1:timepast, ], x=x1, wseries=w.innov[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    nextstep <- zeligARMAnextstep(yseries=y.innov[1:timepast, ], xseries=x1, wseries=w.innov[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
     y.innov  <- rbind(nextstep$y, y.innov)  # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
     w.innov  <- rbind(nextstep$w, w.innov)
     ev.innov <- rbind(nextstep$exp.y, ev.innov)
 
     # And take steps returning to old covariates (an introduction of a shock)
-    nextstep <- zeligARMAnextstep(y=yseries[1:timepast, ], x=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+    nextstep <- zeligARMAnextstep(yseries=yseries[1:timepast, ], xseries=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
     yseries  <- rbind(nextstep$y, yseries)   # Could just change arguments so nextstep(nextstep) doesn't need to copy elsewhere.
     wseries  <- rbind(nextstep$w, wseries)
     evseries <- rbind(nextstep$exp.y, evseries)
