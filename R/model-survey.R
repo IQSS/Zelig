@@ -1,3 +1,9 @@
+#' Survey models in Zelig for weights for complex sampling designs
+#'
+#' @import methods
+#' @export Zelig-survey
+#' @exportClass Zelig-survey
+#'
 #' @include model-zelig.R
 zsurvey <- setRefClass("Zelig-survey",
                     contains = "Zelig")
