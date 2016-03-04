@@ -582,10 +582,10 @@ z$methods(
         am.m<-length(coeflist)
         am.k<-length(coeflist[[1]])
         q <- matrix(unlist(coeflist), nrow=am.m, ncol=am.k, byrow=TRUE)
-        se <- matrix(NA, nrow=am.m, ncol=am.k)
-        for(i in 1:am.m){
-          se[i,]<-sqrt(diag(vcovlist[[i]]))
-        }
+        #se <- matrix(NA, nrow=am.m, ncol=am.k)
+        #for(i in 1:am.m){
+        #  se[i,]<-sqrt(diag(vcovlist[[i]]))
+        #}
         ones <- matrix(1, nrow = 1, ncol = am.m)
         imp.q <- (ones %*% q)/am.m        # Slightly faster than "apply(b,2,mean)"
         #ave.se2 <- (ones %*% (se^2))/am.m # Similarly, faster than "apply(se^2,2,mean)"
