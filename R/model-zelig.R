@@ -574,6 +574,48 @@ z$methods(
             cat("Imputed Dataset ",i,sep="")
             print(base::summary(.self$zelig.out$z.out[[i]]))
         }
+      }else if ((.self$bootstrap) & is.null(subset)) {  
+        # Much reuse of Rubin's Rules from above.  Probably able to better generalize across these two cases:
+        cat("Model: Combined Bootstraps \n")
+        vcovlist <-.self$getvcov()
+        coeflist <-.self$getcoef()
+        am.m<-length(coeflist)
+        am.k<-length(coeflist[[1]])
+        q <- matrix(unlist(coeflist), nrow=am.m, ncol=am.k, byrow=TRUE)
+        se <- matrix(NA, nrow=am.m, ncol=am.k)
+        for(i in 1:am.m){
+          se[i,]<-sqrt(diag(vcovlist[[i]]))
+        }
+        ones <- matrix(1, nrow = 1, ncol = am.m)
+        imp.q <- (ones %*% q)/am.m        # Slightly faster than "apply(b,2,mean)"
+        #ave.se2 <- (ones %*% (se^2))/am.m # Similarly, faster than "apply(se^2,2,mean)"
+        diff <- q - matrix(1, nrow = am.m, ncol = 1) %*% imp.q
+        sq2 <- (ones %*% (diff^2))/(am.m - 1)
+        #imp.se <- sqrt(ave.se2 + sq2 * (1 + 1/am.m))
+        imp.se <- sqrt(sq2 * (1 + 1/am.m))  # Note departure from Rubin's rules here.  
+            
+        Estimate<-as.vector(imp.q)
+        Std.Error<-as.vector(imp.se)
+        zvalue<-Estimate/Std.Error
+        Pr.z<-2*(1-pnorm(abs(zvalue)))
+        stars<-rep("",am.k)
+        stars[Pr.z<.05]<-"."
+        stars[Pr.z<.01]<-"*"
+        stars[Pr.z<.001]<-"**"
+        stars[Pr.z<.0001]<-"***"
+
+        results<-data.frame(Estimate,Std.Error,zvalue,Pr.z,stars,row.names=names(coeflist[[1]]))
+        names(results)<-c("Estimate","Std.Error","z value","Pr(>|z|)","")
+        print(results, digits=max(3, getOption("digits") - 3))
+        cat("---\nSignif. codes:  '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n")
+        cat("\n")
+        cat("For results from individual bootstrapped datasets, use summary(x, subset = i:j)\n")
+
+      }else if ((.self$bootstrap) & !is.null(subset)) {
+        for(i in subset){
+            cat("Bootstrapped Dataset ",i,sep="")
+            print(base::summary(.self$zelig.out$z.out[[i]]))
+        }
       }else{
         summ <- .self$zelig.out %>%
         do(summ = {cat("Model: \n")
