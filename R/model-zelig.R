@@ -449,8 +449,18 @@ z$methods(
 z$methods(
   sim = function(num = 1000) {
     "Generic Method for Computing and Organizing Simulated Quantities of Interest"
+
     if (length(.self$num) == 0) 
       .self$num <- num
+
+    # Divide simulations among imputed or bootstrapped datasets
+    if(.self$mi){
+      am.m<-length(.self$getcoef())
+      .self$num <- ceiling(.self$num/am.m)
+    } else if (.self$bootstrap){
+      .self$num <- ceiling(.self$num/.self$bootstrap.num) 
+    }
+
     .self$simparam <- .self$zelig.out %>%
       do(simparam = .self$param(.$z.out))
     if (.self$bsetx)
@@ -790,6 +800,8 @@ z$methods(
       stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
     }
     if(.self$mi){
+      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
+    } else if(.self$bootstrap){
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
     } else if(xvalue %in% c("range", "range1")) {
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]])[[qi]]
