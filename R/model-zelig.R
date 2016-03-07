@@ -453,16 +453,23 @@ z$methods(
     if (length(.self$num) == 0) 
       .self$num <- num
 
-    # Divide simulations among imputed or bootstrapped datasets
+    # Divide simulations among imputed datasets
     if(.self$mi){
       am.m<-length(.self$getcoef())
       .self$num <- ceiling(.self$num/am.m)
-    } else if (.self$bootstrap){
-      .self$num <- ceiling(.self$num/.self$bootstrap.num) 
     }
 
-    .self$simparam <- .self$zelig.out %>%
-      do(simparam = .self$param(.$z.out))
+    # If bootstrapped, use distribution of estimated parameters, 
+    #  otherwise use $param() method for parametric bootstrap.    
+    if (.self$bootstrap & ! .self$mi){
+      .self$num <- 1 
+      .self$simparam <- .self$zelig.out %>%
+        do(simparam = .self$param(.$z.out, point=TRUE))
+    } else {
+      .self$simparam <- .self$zelig.out %>%
+        do(simparam = .self$param(.$z.out))
+    }
+
     if (.self$bsetx)
       .self$simx()
     if (.self$bsetx1)
