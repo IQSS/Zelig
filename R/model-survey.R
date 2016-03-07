@@ -72,8 +72,3 @@ zsurvey$methods(
   }
 )
 
-zsurvey$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
-  }
-)

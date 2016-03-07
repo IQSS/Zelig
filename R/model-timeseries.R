@@ -42,12 +42,6 @@ ztimeseries$methods(
   }
 )
 
-ztimeseries$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
-  }
-)
-
 # replace simx method to add ACF as QI.
 
 ztimeseries$methods(

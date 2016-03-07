@@ -48,12 +48,6 @@ zexp$methods(
 )
 
 zexp$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
-  }
-)
-
-zexp$methods(
   qi = function(simparam, mm) {
     eta <- simparam %*% t(mm)
     ev <- as.matrix(apply(eta, 2, linkinv))

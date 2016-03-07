@@ -76,12 +76,6 @@ zrelogit$methods(
 )
 
 zrelogit$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
-  }
-)
-
-zrelogit$methods(
   qi = function(simparam, mm) {
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
     coeff <- simparam

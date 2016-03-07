@@ -31,10 +31,3 @@ zglm$methods(
     .self$test.statistics <- list(robust.se = rse)
   }
 )
-
-zglm$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
-  }
-)
-

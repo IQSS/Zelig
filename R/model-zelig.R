@@ -447,6 +447,19 @@ z$methods(
 )
 
 z$methods(
+  param = function(z.out, method="mvn") {
+    if(identical(method,"mvn")){
+      return(mvrnorm(.self$num, coef(z.out), vcov(z.out))) 
+    } else if(identical(method,"point")){
+      return(t(as.matrix(coef(z.out))))
+    } else {
+      stop("param called with method argument of undefined type.")
+    }
+  }
+)
+
+
+z$methods(
   sim = function(num = 1000) {
     "Generic Method for Computing and Organizing Simulated Quantities of Interest"
 
@@ -464,7 +477,7 @@ z$methods(
     if (.self$bootstrap & ! .self$mi){
       .self$num <- 1 
       .self$simparam <- .self$zelig.out %>%
-        do(simparam = .self$param(.$z.out, point=TRUE))
+        do(simparam = .self$param(.$z.out, method="point"))
     } else {
       .self$simparam <- .self$zelig.out %>%
         do(simparam = .self$param(.$z.out))
