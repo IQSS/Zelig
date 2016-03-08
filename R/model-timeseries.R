@@ -14,7 +14,8 @@ ztimeseries <- setRefClass("Zelig-timeseries",
 ztimeseries$methods(
   initialize = function() {
     callSuper()
-    .self$packageauthors <- ""  # Need to decide
+    .self$packageauthors <- "R Core Team"
+    .self$modelauthors <- "James Honaker"
     .self$acceptweights <- FALSE  #  Need to deal with block bootstrap
     .self$category <- "timeseries"
     .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
