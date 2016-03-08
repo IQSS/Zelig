@@ -44,19 +44,23 @@ zgee$methods(
     }
   }
 )
-
+   
 zgee$methods(
-  param = function(z.out, ancillary = TRUE) {
+  param = function(z.out, method="mvn") {
     so <- summary(z.out)
     shape <- so$dispersion
-    simalpha <- rnorm(n = .self$num,
+    if(identical(method,"point")){
+      return( list(simparam = t(as.matrix(coef(z.out))), simalpha = shape[1][1] ))
+    }else if(identical(method,"mvn")){
+      simalpha <- rnorm(n = .self$num,
                       mean = shape[1][[1]],
                       sd = shape[2][[1]])
-    simparam.local <- mvrnorm(n = .self$num,
+      simparam.local <- mvrnorm(n = .self$num,
                         mu = coef(z.out),
                         Sigma = so$cov.unscaled)
-    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
-    return(simparam.local)
+      simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+      return(simparam.local)
+    }
   }
 )
 
