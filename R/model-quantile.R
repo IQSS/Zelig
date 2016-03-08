@@ -52,10 +52,14 @@ zquantile$methods(
 )
 
 zquantile$methods(
-  param = function(z.out) {
+  param = function(z.out, method="mvn") {
     object <- z.out
-    rq.sum <- summary.rq(object, cov = TRUE, se = object$se)
-    return(mvrnorm(n = .self$num, mu = object$coef, Sigma = rq.sum$cov))
+    if(identical(method,"mvn")){
+      rq.sum <- summary.rq(object, cov = TRUE, se = object$se)
+      return(mvrnorm(n = .self$num, mu = object$coef, Sigma = rq.sum$cov))
+    }else if(identical(method,"point")){
+      return(t(as.matrix(object$coef)))
+    }
   }
 )
 
