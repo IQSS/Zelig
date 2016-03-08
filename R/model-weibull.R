@@ -42,7 +42,7 @@ zweibull$methods(
     .self$model.call$dist <- "weibull"
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
-              cluster = cluster,  weights = weights, by = by, bootstrap = FALSE)
+              cluster = cluster,  weights = weights, by = by, bootstrap = bootstrap)
 
     if(!robust){
       fn2 <- function(fc, data) {

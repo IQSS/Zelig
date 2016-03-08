@@ -250,6 +250,12 @@ z$methods(
     }
     # Remove bootstrap argument from model call
     .self$model.call$bootstrap <- NULL
+    # Check if bootstrap possible by checking whether param method has method argument available
+    if(.self$bootstrap){
+      if(!("method" %in% names(formals(.self$param)))){
+        stop("The bootstrap does not appear to be implemented for this Zelig model.  Check that the param() method allows point predictions.")
+      }
+    }
 
 
     # Matched datasets from MatchIt

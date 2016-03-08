@@ -42,7 +42,7 @@ zfactorbayes$methods(
     .self$model.call$verbose <- verbose
     .self$model.call$x <- formula
     .self$model.call$factors <- factors
-    callSuper(formula = formula, data = data,..., by = by, bootstrap = FALSE)
+    callSuper(formula = formula, data = data,..., by = by, bootstrap = bootstrap)
   }
 )
 

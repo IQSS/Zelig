@@ -71,7 +71,7 @@ zrelogit$methods(
     .self$model.call$case.control <- case.control
     .self$model.call$bias.correct <- bias.correct
     .self$model.call$tau <- tau
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by, bootstrap = FALSE)
+    callSuper(formula = formula, data = data, ..., weights = NULL, by = by, bootstrap = bootstrap)
   }
 )
 

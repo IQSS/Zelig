@@ -41,7 +41,7 @@ zexp$methods(
     .self$model.call$dist <- "exponential"
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
-              cluster = cluster,  weights = weights, by = by, bootstrap = FALSE)
+              cluster = cluster,  weights = weights, by = by, bootstrap = bootstrap)
     rse<-plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
     .self$test.statistics<- list(robust.se = rse)
   }

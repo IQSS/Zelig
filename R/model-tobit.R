@@ -39,7 +39,7 @@ ztobit$methods(
     .self$model.call$above <- NULL
     .self$model.call$left <- below
     .self$model.call$right <- above
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = bootstrap)
 
     if(!robust){
         fn2 <- function(fc, data) {

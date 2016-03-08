@@ -33,7 +33,7 @@ znegbin$methods(
   zelig = function(formula, data, ..., weights=NULL, by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
-    callSuper(formula=formula, data=data, ..., weights=weights, by = by, bootstrap = FALSE)
+    callSuper(formula=formula, data=data, ..., weights=weights, by = by, bootstrap = bootstrap)
     rse<-plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
     .self$test.statistics<- list(robust.se = rse)
   }
