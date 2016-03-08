@@ -28,13 +28,17 @@ zgamma$methods(
 )
 
 zgamma$methods(
-  param = function(z.out) {
+  param = function(z.out, method="mvn") {
     shape <- MASS::gamma.shape(z.out)
-    simalpha <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
-    simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
+    if(identical(method, "mvn")){
+      simalpha <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
+      simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
                                    Sigma = vcov(z.out))
-    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
-    return(simparam.local)
+      simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+      return(simparam.local)
+    } else if(identical(method,"point")){
+      return(list(simparam = t(as.matrix(coef(z.out))), simalpha = shape$alpha ))
+    }
   }
 )
 
