@@ -40,12 +40,16 @@ znegbin$methods(
 )
 
 znegbin$methods(
-  param = function(z.out) {
+  param = function(z.out, method="mvn") {
     simalpha.local <- z.out$theta
-    simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
+    if(identical(method,"mvn")){
+      simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
                         Sigma = vcov(z.out))
-    simparam.local <- list(simparam = simparam.local, simalpha = simalpha.local)
-    return(simparam.local)
+      simparam.local <- list(simparam = simparam.local, simalpha = simalpha.local)
+      return(simparam.local)
+    } else if(identical(method,"point")){
+      return(list(simparam = t(as.matrix(coef(z.out))), simalpha = simalpha.local))
+    }
   }
 )
 
