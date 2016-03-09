@@ -78,6 +78,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         bsetrange1 = "logical",
                                         range = "ANY",
                                         range1 = "ANY",
+                                        setforeveryby = "logical",
 
                                         test.statistics = "ANY",
                                         
@@ -151,6 +152,7 @@ z$methods(
     .self$wrapper <- "wrapper"
     # Is 'ZeligFeedback' package installed?
     .self$with.feedback <- "ZeligFeedback" %in% installed.packages()
+    .self$setforeveryby <- TRUE
   }
 )
 
@@ -255,6 +257,7 @@ z$methods(
       if(!("method" %in% names(formals(.self$param)))){
         stop("The bootstrap does not appear to be implemented for this Zelig model.  Check that the param() method allows point predictions.")
       }
+      .self$setforeveryby <- FALSE  # compute covariates in set() at the dataset-level
     }
 
 
@@ -308,6 +311,7 @@ z$methods(
       datareformed <- TRUE
       .self$by <- c("imputationNumber", by)
       .self$mi <- TRUE
+      .self$setforeveryby <- FALSE  # compute covariates in set() at on the entire stacked dataset
       .self$refs<-c(.self$refs, citation("Amelia"))
     } else {
       .self$mi <- FALSE
@@ -397,11 +401,32 @@ z$methods(
     }
       f <- update(.self$formula, 1 ~ .)      
     # update <- na.omit(.self$data) %>% # remove missing values
-    update <- .self$data %>%
-      group_by_(.self$by) %>%
-      do(mm = model.matrix(f, reduce(dataset = ., s, 
+
+    # compute on each slice of the dataset defined by "by"
+    if(.self$setforeveryby){  
+      update <- .self$data %>%
+        group_by_(.self$by) %>%
+        do(mm = model.matrix(f, reduce(dataset = "MEANINGLESS ARGUMENT", s, 
                                      formula = f2, 
-                                     data = .self$data)))
+                                     data = .)))  # fix in last argument from data=.self$data to data=.  (JH)
+
+    # compute over the entire dataset  - currently used for mi and bootstrap.  Should be opened up to user.    
+    } else {  
+      if(.self$bootstrap){
+        flag <- .self$data$bootstrapIndex == (.self$bootstrap.num + 1) # These are the original observations
+        tempdata <- .self$data[flag,]  
+      }else{
+        tempdata <- .self$data # presently this is for mi.  And this is then the entire stacked dataset.
+      }
+
+      allreduce <- reduce(dataset = "MEANINGLESS ARGUMENT", s, 
+                                     formula = f2, 
+                                     data = tempdata)
+      allmm <- model.matrix(f, allreduce) 
+      update <- .self$data %>%
+        group_by_(.self$by) %>%
+        do(mm = allmm)  
+    }
     return(update)
   }
 )
@@ -551,7 +576,7 @@ z$methods(
 )
 
 z$methods(
-  show = function(signif.stars = FALSE, subset = NULL) {
+  show = function(signif.stars = FALSE, subset = NULL, bagging = FALSE) {
     "Display a Zelig object"
     .self$signif.stars <- signif.stars
     .self$signif.stars.default <- getOption("show.signif.stars")
@@ -615,9 +640,9 @@ z$methods(
         cat("Model: Combined Bootstraps \n")
         vcovlist <-.self$getvcov()
         coeflist <-.self$getcoef()
-        am.m<-length(coeflist)
+        am.m<-length(coeflist) - 1
         am.k<-length(coeflist[[1]])
-        q <- matrix(unlist(coeflist), nrow=am.m, ncol=am.k, byrow=TRUE)
+        q <- matrix(unlist(coeflist[-(am.m+1)]), nrow=am.m, ncol=am.k, byrow=TRUE)
         #se <- matrix(NA, nrow=am.m, ncol=am.k)
         #for(i in 1:am.m){
         #  se[i,]<-sqrt(diag(vcovlist[[i]]))
@@ -629,8 +654,12 @@ z$methods(
         sq2 <- (ones %*% (diff^2))/(am.m - 1)
         #imp.se <- sqrt(ave.se2 + sq2 * (1 + 1/am.m))
         imp.se <- sqrt(sq2 * (1 + 1/am.m))  # Note departure from Rubin's rules here.  
-            
-        Estimate<-as.vector(imp.q)
+        
+        if(bagging){    
+          Estimate<-as.vector(imp.q)
+        }else{
+          Estimate<-coeflist[[am.m+1]]
+        }
         Std.Error<-as.vector(imp.se)
         zvalue<-Estimate/Std.Error
         Pr.z<-2*(1-pnorm(abs(zvalue)))
@@ -815,7 +844,7 @@ z$methods(
 )
 
 z$methods(
-  getqi = function(qi="ev", xvalue="x"){
+  getqi = function(qi="ev", xvalue="x", subset=NULL){
     "Get quantities of interest"
     possiblexvalues <- names(.self$sim.out)
     if(!(xvalue %in% possiblexvalues)){
@@ -826,9 +855,16 @@ z$methods(
       stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
     }
     if(.self$mi){
-      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
+      if(is.null(subset)){
+        am.m<-length(.self$getcoef())
+        subset <- 1:am.m
+      }
+      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]][subset])
     } else if(.self$bootstrap){
-      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
+      if(is.null(subset)){
+        subset <- 1:.self$bootstrap.num
+      }
+      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]][subset])
     } else if(xvalue %in% c("range", "range1")) {
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]])[[qi]]
     } else {
@@ -1017,7 +1053,10 @@ z$methods(
         windex <- c(windex, sample(x=1:n.obs, size=n.obs, replace=TRUE, prob=iweights))
         bootstrapIndex <- c(bootstrapIndex, rep(i,n.obs))
       } 
-      idata <- idata[windex,]
+      # Last dataset is original data
+      idata <- rbind(idata[windex,], idata)
+      bootstrapIndex <- c(bootstrapIndex, rep(n.boot+1,n.obs))
+
       idata$bootstrapIndex <- bootstrapIndex
       .self$data <- idata
       .self$by <- c("bootstrapIndex", .self$by)
