@@ -37,9 +37,12 @@ ztimeseries$methods(
 
 ztimeseries$methods(
   zelig = function(formula, data, ..., weights=NULL, by=NULL, bootstrap = FALSE){
+    if(!identical(bootstrap,FALSE)){
+      stop("Error: The bootstrap is not implemented for time-series models")
+    }
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = bootstrap)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
   }
 )
 

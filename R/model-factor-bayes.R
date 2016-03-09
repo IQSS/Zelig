@@ -33,6 +33,9 @@ zfactorbayes$methods(
                    data,
                    by = NULL,
                    bootstrap = FALSE) {
+    if(!identical(bootstrap,FALSE)){
+      stop("Error: The bootstrap is not available for Monte Carlo Markov Chain models.")
+    }
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (missing(verbose))
@@ -42,7 +45,7 @@ zfactorbayes$methods(
     .self$model.call$verbose <- verbose
     .self$model.call$x <- formula
     .self$model.call$factors <- factors
-    callSuper(formula = formula, data = data,..., by = by, bootstrap = bootstrap)
+    callSuper(formula = formula, data = data,..., by = by, bootstrap = FALSE)
   }
 )
 
