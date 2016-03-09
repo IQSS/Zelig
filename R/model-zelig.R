@@ -413,7 +413,7 @@ z$methods(
     # compute over the entire dataset  - currently used for mi and bootstrap.  Should be opened up to user.    
     } else {  
       if(.self$bootstrap){
-        flag <- .self$data$bootstrapIndex == (.self$boostrap.num + 1) # These are the original observations
+        flag <- .self$data$bootstrapIndex == (.self$bootstrap.num + 1) # These are the original observations
         tempdata <- .self$data[flag,]  
       }else{
         tempdata <- .self$data # presently this is for mi.  And this is then the entire stacked dataset.
@@ -844,7 +844,7 @@ z$methods(
 )
 
 z$methods(
-  getqi = function(qi="ev", xvalue="x"){
+  getqi = function(qi="ev", xvalue="x", subset=NULL){
     "Get quantities of interest"
     possiblexvalues <- names(.self$sim.out)
     if(!(xvalue %in% possiblexvalues)){
@@ -855,9 +855,16 @@ z$methods(
       stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
     }
     if(.self$mi){
-      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
+      if(is.null(subset)){
+        am.m<-length(.self$getcoef())
+        subset <- 1:am.m
+      }
+      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]][subset])
     } else if(.self$bootstrap){
-      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]])
+      if(is.null(subset)){
+        subset <- 1:.self$bootstrap.num
+      }
+      tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]][subset])
     } else if(xvalue %in% c("range", "range1")) {
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]])[[qi]]
     } else {
