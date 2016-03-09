@@ -34,7 +34,7 @@ zfactorbayes$methods(
                    by = NULL,
                    bootstrap = FALSE) {
     if(!identical(bootstrap,FALSE)){
-      stop("Error: The bootstrap is not available for Markov Chain Monte Carlo (MCMC) models.")
+      stop("Error: The bootstrap is not available for Markov chain Monte Carlo (MCMC) models.")
     }
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
