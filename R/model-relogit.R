@@ -71,13 +71,7 @@ zrelogit$methods(
     .self$model.call$case.control <- case.control
     .self$model.call$bias.correct <- bias.correct
     .self$model.call$tau <- tau
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by, bootstrap = FALSE)
-  }
-)
-
-zrelogit$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
+    callSuper(formula = formula, data = data, ..., weights = NULL, by = by, bootstrap = bootstrap)
   }
 )
 

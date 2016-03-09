@@ -40,7 +40,7 @@ zlognorm$methods(
     .self$model.call$dist <- "lognormal"
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
-              cluster = cluster, weights = weights, by = by, bootstrap = FALSE)
+              cluster = cluster, weights = weights, by = by, bootstrap = bootstrap)
               
     if(!robust){
       fn2 <- function(fc, data) {
@@ -60,15 +60,19 @@ zlognorm$methods(
 )
 
 zlognorm$methods(
-  param = function(z.out) {
-    coeff <- coef(z.out)
-    mu <- c(coeff, log(z.out$scale))
-    cov <- vcov(z.out)
-    simulations <- mvrnorm(.self$num, mu = mu, Sigma = cov)
-    simparam.local <- as.matrix(simulations[, 1:length(coeff)])
-    simalpha <- as.matrix(simulations[, -(1:length(coeff))])
-    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
-    return(simparam.local)
+  param = function(z.out, method="mvn") {
+    if(identical(method,"mvn")){
+      coeff <- coef(z.out)
+      mu <- c(coeff, log(z.out$scale))
+      cov <- vcov(z.out)
+      simulations <- mvrnorm(.self$num, mu = mu, Sigma = cov)
+      simparam.local <- as.matrix(simulations[, 1:length(coeff)])
+      simalpha <- as.matrix(simulations[, -(1:length(coeff))])
+      simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+      return(simparam.local)
+    } else if(identical(method,"point")){
+      return(list(simparam = t(as.matrix(coef(z.out))), simalpha = log(z.out$scale) ))
+    }
   }
 )
 

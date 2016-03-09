@@ -41,8 +41,12 @@ zls$methods(
 )
 
 zls$methods(
-  param = function(z.out) {
+  param = function(z.out, method="mvn") {
+    if(method=="mvn"){
       return(list(simparam=mvrnorm(.self$num, coef(z.out), vcov(z.out)), simalpha=rep( summary(z.out)$sigma, .self$num) )  )
+    } else if(method=="point"){
+      return(list(simparam=t(as.matrix(coef(z.out))), simalpha=summary(z.out)$sigma))
+    }
   }
 )
 

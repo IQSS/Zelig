@@ -14,7 +14,8 @@ ztimeseries <- setRefClass("Zelig-timeseries",
 ztimeseries$methods(
   initialize = function() {
     callSuper()
-    .self$packageauthors <- ""  # Need to decide
+    .self$packageauthors <- "R Core Team"
+    .self$modelauthors <- "James Honaker"
     .self$acceptweights <- FALSE  #  Need to deal with block bootstrap
     .self$category <- "timeseries"
     .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
@@ -36,15 +37,12 @@ ztimeseries$methods(
 
 ztimeseries$methods(
   zelig = function(formula, data, ..., weights=NULL, by=NULL, bootstrap = FALSE){
+    if(!identical(bootstrap,FALSE)){
+      stop("Error: The bootstrap is not implemented for time-series models")
+    }
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
-  }
-)
-
-ztimeseries$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
   }
 )
 

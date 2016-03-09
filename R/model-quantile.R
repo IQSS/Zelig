@@ -44,7 +44,7 @@ zquantile$methods(
     }
     else 
       .self$tau <- 0.5
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = bootstrap)
     
     rse<-plyr::llply(.self$zelig.out$z.out, (function(x) quantreg::summary.rq(x,se="nid", cov=TRUE)$cov))
     .self$test.statistics<- list(robust.se = rse)
@@ -52,10 +52,14 @@ zquantile$methods(
 )
 
 zquantile$methods(
-  param = function(z.out) {
+  param = function(z.out, method="mvn") {
     object <- z.out
-    rq.sum <- summary.rq(object, cov = TRUE, se = object$se)
-    return(mvrnorm(n = .self$num, mu = object$coef, Sigma = rq.sum$cov))
+    if(identical(method,"mvn")){
+      rq.sum <- summary.rq(object, cov = TRUE, se = object$se)
+      return(mvrnorm(n = .self$num, mu = object$coef, Sigma = rq.sum$cov))
+    }else if(identical(method,"point")){
+      return(t(as.matrix(object$coef)))
+    }
   }
 )
 

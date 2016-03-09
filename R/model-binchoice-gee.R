@@ -25,8 +25,8 @@ zbinchoicegee$methods(
 )
 
 zbinchoicegee$methods(
-  param = function(z.out) {
-    simparam.local <- callSuper(z.out)
+  param = function(z.out, method="mvn") {
+    simparam.local <- callSuper(z.out, method=method)
     return(simparam.local$simparam) # no ancillary parameter
   }
 )

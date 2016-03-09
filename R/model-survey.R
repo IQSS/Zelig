@@ -68,12 +68,7 @@ zsurvey$methods(
     }
     .self$model.call <- as.call(list(.self$fn, formula=.self$zelig.call$formula,  design=design))  # fn will be set again by super, but initialized here for clarity
     .self$model.call$family <- call(.self$family, .self$link)
-    callSuper(formula = formula, data = data, ..., by = by, bootstrap = FALSE)
+    callSuper(formula = formula, data = data, ..., by = by, bootstrap = bootstrap)
   }
 )
 
-zsurvey$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
-  }
-)

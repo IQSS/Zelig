@@ -250,6 +250,12 @@ z$methods(
     }
     # Remove bootstrap argument from model call
     .self$model.call$bootstrap <- NULL
+    # Check if bootstrap possible by checking whether param method has method argument available
+    if(.self$bootstrap){
+      if(!("method" %in% names(formals(.self$param)))){
+        stop("The bootstrap does not appear to be implemented for this Zelig model.  Check that the param() method allows point predictions.")
+      }
+    }
 
 
     # Matched datasets from MatchIt
@@ -447,22 +453,42 @@ z$methods(
 )
 
 z$methods(
+  param = function(z.out, method="mvn") {
+    if(identical(method,"mvn")){
+      return(mvrnorm(.self$num, coef(z.out), vcov(z.out))) 
+    } else if(identical(method,"point")){
+      return(t(as.matrix(coef(z.out))))
+    } else {
+      stop("param called with method argument of undefined type.")
+    }
+  }
+)
+
+
+z$methods(
   sim = function(num = 1000) {
     "Generic Method for Computing and Organizing Simulated Quantities of Interest"
 
     if (length(.self$num) == 0) 
       .self$num <- num
 
-    # Divide simulations among imputed or bootstrapped datasets
+    # Divide simulations among imputed datasets
     if(.self$mi){
       am.m<-length(.self$getcoef())
       .self$num <- ceiling(.self$num/am.m)
-    } else if (.self$bootstrap){
-      .self$num <- ceiling(.self$num/.self$bootstrap.num) 
     }
 
-    .self$simparam <- .self$zelig.out %>%
-      do(simparam = .self$param(.$z.out))
+    # If bootstrapped, use distribution of estimated parameters, 
+    #  otherwise use $param() method for parametric bootstrap.    
+    if (.self$bootstrap & ! .self$mi){
+      .self$num <- 1 
+      .self$simparam <- .self$zelig.out %>%
+        do(simparam = .self$param(.$z.out, method="point"))
+    } else {
+      .self$simparam <- .self$zelig.out %>%
+        do(simparam = .self$param(.$z.out))
+    }
+
     if (.self$bsetx)
       .self$simx()
     if (.self$bsetx1)

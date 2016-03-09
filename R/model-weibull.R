@@ -42,7 +42,7 @@ zweibull$methods(
     .self$model.call$dist <- "weibull"
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
-              cluster = cluster,  weights = weights, by = by, bootstrap = FALSE)
+              cluster = cluster,  weights = weights, by = by, bootstrap = bootstrap)
 
     if(!robust){
       fn2 <- function(fc, data) {
@@ -62,15 +62,19 @@ zweibull$methods(
 )
 
 zweibull$methods(
-  param = function(z.out) {
-    coeff <- coef(z.out)
-    mu <- c(coeff, z.out$scale)
-    cov <- vcov(z.out)
-    simulations <- mvrnorm(.self$num, mu = mu, Sigma = cov)
-    simparam.local <- as.matrix(simulations[, 1:length(coeff)])
-    simalpha.local <- as.matrix(simulations[, -(1:length(coeff))])
-    simparam.local <- list(simparam = simparam.local, simalpha = simalpha.local)
-    return(simparam.local)
+  param = function(z.out, method="mvn") {
+    if(identical(method,"mvn")){
+      coeff <- coef(z.out)
+      mu <- c(coeff, z.out$scale)
+      cov <- vcov(z.out)
+      simulations <- mvrnorm(.self$num, mu = mu, Sigma = cov)
+      simparam.local <- as.matrix(simulations[, 1:length(coeff)])
+      simalpha.local <- as.matrix(simulations[, -(1:length(coeff))])
+      simparam.local <- list(simparam = simparam.local, simalpha = simalpha.local)
+      return(simparam.local)
+    } else if(identical(method,"point")){
+      return(list(simparam = t(as.matrix(coef(z.out))), simalpha = z.out$scale))
+    }
   }
 )
 

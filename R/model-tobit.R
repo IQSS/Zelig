@@ -39,7 +39,7 @@ ztobit$methods(
     .self$model.call$above <- NULL
     .self$model.call$left <- below
     .self$model.call$right <- above
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = bootstrap)
 
     if(!robust){
         fn2 <- function(fc, data) {
@@ -60,13 +60,17 @@ ztobit$methods(
 
 
 ztobit$methods(
-  param = function(z.out) {
-    mu <- c(coef(z.out), log(z.out$scale))
-    simfull <- mvrnorm(n = .self$num, mu = mu, Sigma = vcov(z.out))
-    simparam.local <- as.matrix(simfull[, -ncol(simfull)])
-    simalpha <- exp(as.matrix(simfull[, ncol(simfull)]))
-    simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
-    return(simparam.local)
+  param = function(z.out, method="mvn") {
+    if(identical(method,"mvn")){
+      mu <- c(coef(z.out), log(z.out$scale))
+      simfull <- mvrnorm(n = .self$num, mu = mu, Sigma = vcov(z.out))
+      simparam.local <- as.matrix(simfull[, -ncol(simfull)])
+      simalpha <- exp(as.matrix(simfull[, ncol(simfull)]))
+      simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
+      return(simparam.local)
+    } else if(identical(method,"point")){
+      return(list(simparam = t(as.matrix(coef(z.out))), simalpha = log(z.out$scale) ))
+    }
   }
 )
 
