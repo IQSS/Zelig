@@ -12,7 +12,7 @@ importFrom("graphics", "abline", "axis", "barplot", "box", "image",
 importFrom("stats", "binomial", "complete.cases", "density", "glm",
              "lm", "lm.influence", "median", "model.frame",
              "model.matrix", "model.response", "na.omit", "quantile",
-             "sd", "terms", "update")
+             "sd", "terms", "update", "ARMAacf", "rnorm")
 
 importClassesFrom("VGAM", "vglm")
 importMethodsFrom("VGAM", "coef", "fitted", "predict", "vcov")
