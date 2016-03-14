@@ -50,6 +50,8 @@ exportClasses(
      "Zelig-tobit-bayes",
      "Zelig-weibull",
      "Zelig-timeseries",
-     "Zelig-arima"
+     "Zelig-arima",
+     "Zelig-ar",
+     "Zelig-ma"
 )
 

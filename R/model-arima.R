@@ -14,7 +14,7 @@ zarima <- setRefClass("Zelig-arima",
 zarima$methods(
   initialize = function() {
     callSuper()
-    .self$name <- "arma"
+    .self$name <- "arima"
     .self$link <- "identity"
     #.self$family <- "gaussian"
     .self$fn <- quote(zeligArimaWrapper)
