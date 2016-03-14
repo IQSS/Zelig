@@ -416,19 +416,6 @@
       "wrapper": ["timeseries"],
       "tree": ["Zelig-arima", "Zelig-timeseries"]
     },
-    "ar": {
-      "name": ["ar"],
-      "description": ["Time-Series Model with Autoregressive Disturbance"],
-      "outcome": {
-        "modelingType": ["continuous"]
-      },
-      "explanatory": {
-        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
-      },
-      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-ar.html"],
-      "wrapper": ["timeseries"],
-      "tree": ["Zelig-ar", "Zelig-timeseries"]
-    },
     "ma": {
       "name": ["ma"],
       "description": ["Time-Series Model with Moving Average"],
@@ -441,6 +428,19 @@
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-ma.html"],
       "wrapper": ["timeseries"],
       "tree": ["Zelig-ma", "Zelig-timeseries"]
+    },    
+    "ar": {
+      "name": ["ar"],
+      "description": ["Time-Series Model with Autoregressive Disturbance"],
+      "outcome": {
+        "modelingType": ["continuous"]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-ar.html"],
+      "wrapper": ["timeseries"],
+      "tree": ["Zelig-ar", "Zelig-timeseries"]
     }
   }
 } 
