@@ -33,6 +33,8 @@
 #' @include model-weibull.R
 #' @include model-timeseries.R
 #' @include model-arima.R
+#' @include model-ar.R
+#' @include model-ma.R
 
 #library(jsonlite)
 
@@ -134,6 +136,11 @@ createJSON <- function(){
   z5arima <- zarima$new()
   z5arima$toJSON()
 
+  z5ar <- zar$new()
+  z5ar$toJSON()
+
+  z5ma <- zma$new()
+  z5ma$toJSON()
 
   zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
                     "logit" = z5logit$ljson,
@@ -166,7 +173,9 @@ createJSON <- function(){
                     "normalsurvey" = z5normalsurvey$ljson,
                     "gammasurvey" = z5gammasurvey$ljson,
                     "poissonsurvey" = z5poissonsurvey$ljson,
-                    "arima" = z5arima$ljson))
+                    "arima" = z5arima$ljson, 
+                    "ar" = z5ar$ljson,
+                    "ma" = z5ma$ljson))
 
   # cat(toJSON(zeligmodels, pretty = TRUE), file = file.path("tools", "zelig5models.json"))
   # file.copy(from = file.path("tools", "zelig5models.json"), to = file.path("inst", "JSON", "zelig5models.json"))
