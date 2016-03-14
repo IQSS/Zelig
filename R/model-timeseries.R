@@ -40,6 +40,11 @@ ztimeseries$methods(
     if(!identical(bootstrap,FALSE)){
       stop("Error: The bootstrap is not implemented for time-series models")
     }
+    if(identical(.self$name,"ar")){
+      order<-c(1,0,0)
+    } else if(identical(.self$name,"ma")){
+      order<-c(0,0,1)
+    }
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)

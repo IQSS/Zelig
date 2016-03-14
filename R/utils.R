@@ -171,7 +171,7 @@ cluster.formula <- function (formula, cluster) {
 #' @param s list of variables and their tentative \code{setx} values
 #' @param formula a simplified version of the Zelig object formula (typically with 1 on the lhs)
 #' @param data Zelig object data
-#' @return a list of with all the model variables either at their central tendancy or their \code{setx} value
+#' @return a list of all the model variables either at their central tendancy or their \code{setx} value
 #' @export
 #' @keywords internal
 #' @author Christine Choirat

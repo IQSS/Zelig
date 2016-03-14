@@ -10,16 +10,16 @@ Description: A framework that brings together an abundance of common
     collective library.  Zelig allows each individual package, for each
     statistical model, to be accessed by a common uniformly structured call and
     set of arguments.  Moreover, Zelig automates all the surrounding building
-    blocks of a statistical workflow --procedures and algorithms that may be
+    blocks of a statistical work-flow --procedures and algorithms that may be
     essential to one user's application but which the original package
     developer did not use in their own research and might not themselves
-    support. These include bootstrapping, jackknifing, and reweighting of data.
+    support. These include bootstrapping, jackknifing, and re-weighting of data.
     In particular, Zelig automatically generates predicted and simulated
     quantities of interest (such as relative risk ratios, average treatment
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
 Version: 5.0-10
-Date: 2016-03-03
+Date: 2016-03-14
 Imports: sandwich, methods, MASS, survival, VGAM, jsonlite, AER, plyr,
         dplyr (>= 0.3.0.2), quantreg, geepack, MCMCpack, Amelia,
         MatchIt, maxLik, survey
@@ -38,6 +38,7 @@ Collate: 'utils.R' 'model-zelig.R' 'model-weibull.R' 'model-tobit.R'
         'create-json.R' 'model-survey.R' 'model-binchoice-survey.R'
         'model-gamma-survey.R' 'model-logit-survey.R'
         'model-normal-survey.R' 'model-poisson-survey.R'
-        'model-probit-survey.R' 'model-timeseries.R' 'model-arima.R' 
+        'model-probit-survey.R' 
+        'model-timeseries.R' 'model-arima.R' 'model-ar.R' 'model-ma.R'
         'plots.R' 'wrappers.R'
 
