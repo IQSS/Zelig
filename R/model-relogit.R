@@ -49,7 +49,7 @@ zrelogit$methods(
             number = 3,
             year = 2001,
             pages = "693--715")
-    .self$refs<-c(ref1,ref2)
+    .self$refs<-c(.self$refs,ref1,ref2)
   }
 )
 
