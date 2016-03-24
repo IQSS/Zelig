@@ -43,3 +43,40 @@ zbayes$methods(
     return(z.out)
   }
 )
+
+zbayes$methods(
+  getcoef = function() {
+    "Get estimated model coefficients"
+    return(.self$zelig.out$z.out[[1]])
+  } 
+)
+
+zbayes$methods(
+  geweke.diag = function() {
+    diag <- coda::geweke.diag(.self$getcoef())
+    if(!citation("coda") %in% .self$refs){
+      .self$refs<-c(.self$refs,citation("coda"))
+    }
+    return(diag)
+  } 
+)
+
+zbayes$methods(
+  heidel.diag = function() {
+    diag <- coda::heidel.diag(.self$getcoef())
+    if(!citation("coda") %in% .self$refs){
+      .self$refs<-c(.self$refs,citation("coda"))
+    }
+    return(diag)
+  } 
+)
+
+zbayes$methods(
+  raftery.diag = function() {
+    diag <- coda::raftery.diag(.self$getcoef())
+    if(!citation("coda") %in% .self$refs){
+      .self$refs<-c(.self$refs,citation("coda"))
+    }
+    return(diag)
+  } 
+)
