@@ -54,6 +54,11 @@ zbayes$methods(
 zbayes$methods(
   geweke.diag = function() {
     diag <- lapply(.self$zelig.out$z.out, coda::geweke.diag)
+    # Collapse if only one list element for prettier printing
+    if(length(diag)==1){
+        diag<-diag[[1]]
+    }
+
 
     if(!citation("coda") %in% .self$refs){
       .self$refs<-c(.self$refs,citation("coda"))
@@ -76,6 +81,11 @@ zbayes$methods(
 zbayes$methods(
   heidel.diag = function() {
     diag <- lapply(.self$zelig.out$z.out, coda::heidel.diag)
+    # Collapse if only one list element for prettier printing
+    if(length(diag)==1){
+        diag<-diag[[1]]
+    }
+
 
     if(!citation("coda") %in% .self$refs){
       .self$refs<-c(.self$refs,citation("coda"))
@@ -96,6 +106,11 @@ zbayes$methods(
 zbayes$methods(
   raftery.diag = function() {
     diag <- lapply(.self$zelig.out$z.out, coda::raftery.diag)
+    # Collapse if only one list element for prettier printing
+    if(length(diag)==1){
+        diag<-diag[[1]]
+    }
+
 
     if(!citation("coda") %in% .self$refs){
       .self$refs<-c(.self$refs,citation("coda"))
