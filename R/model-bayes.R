@@ -93,16 +93,6 @@ zbayes$methods(
   } 
 )
 
-
-   Raftery, A.E. and Lewis, S.M. (1992).  One long run with diagnostics:
-   Implementation strategies for Markov chain Monte Carlo.
-   \emph{Statistical Science}, \bold{7}, 493-497.
-
-   Raftery, A.E. and Lewis, S.M. (1995).  The number of iterations,
-   convergence diagnostics and generic Metropolis algorithms.  \emph{In}
-   Practical Markov Chain Monte Carlo (W.R. Gilks, D.J. Spiegelhalter
-   and S. Richardson, eds.). London, U.K.: Chapman and Hall.
-
 zbayes$methods(
   raftery.diag = function() {
     diag <- coda::raftery.diag(.self$getcoef())
