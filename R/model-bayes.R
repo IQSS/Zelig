@@ -53,7 +53,7 @@ zbayes$methods(
 
 zbayes$methods(
   geweke.diag = function() {
-    diag <- lapply(.self$zelig.out$z.out, coda::geweke.diag(.))
+    diag <- lapply(.self$zelig.out$z.out, coda::geweke.diag)
 
     if(!citation("coda") %in% .self$refs){
       .self$refs<-c(.self$refs,citation("coda"))
@@ -75,7 +75,7 @@ zbayes$methods(
 
 zbayes$methods(
   heidel.diag = function() {
-    diag <- lapply(.self$zelig.out$z.out, coda::heidel.diag(.))
+    diag <- lapply(.self$zelig.out$z.out, coda::heidel.diag)
 
     if(!citation("coda") %in% .self$refs){
       .self$refs<-c(.self$refs,citation("coda"))
@@ -95,7 +95,7 @@ zbayes$methods(
 
 zbayes$methods(
   raftery.diag = function() {
-    diag <- lapply(.self$zelig.out$z.out, coda::raftery.diag(.))
+    diag <- lapply(.self$zelig.out$z.out, coda::raftery.diag)
 
     if(!citation("coda") %in% .self$refs){
       .self$refs<-c(.self$refs,citation("coda"))
