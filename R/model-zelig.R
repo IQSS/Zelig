@@ -585,7 +585,7 @@ z$methods(
     if ("uninitializedField" %in% class(.self$zelig.out))
       cat("Next step: Use 'zelig' method")
     else if (length(.self$setx.out) == 0) {
-      
+
       #############################################################################	
       # Current workaround to display call as $zelig.call rather than $model.call
       # This is becoming a more complex workaround than revising the summary method
@@ -596,8 +596,8 @@ z$methods(
         } else {
           if("call" %in% names(.self$zelig.out$z.out[[jj]])){
       	    .self$zelig.out$z.out[[jj]]$call <- .self$zelig.call
-          } else if ("call" %in% names(attributes(z.out$zelig.out$z.out[[1]])) ){
-            attr(z.out$zelig.out$z.out[[1]],"call")<- .self$zelig.call
+          } else if ("call" %in% names(attributes(.self$zelig.out$z.out[[1]])) ){
+            attr(.self$zelig.out$z.out[[1]],"call")<- .self$zelig.call
           }
         }
       }	
