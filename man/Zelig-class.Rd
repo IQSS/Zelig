@@ -96,6 +96,8 @@ Zelig website: \url{http://zeligproject.org/}
 \section{Methods}{
 
 \describe{
+\item{\code{ATT(treatment, treated = 1, quietly = TRUE, num = NULL)}}{Generic Method for Computing Simulated (Sample) Average Treatment Effects on the Treated}
+
 \item{\code{cite()}}{Provide citation information about Zelig and Zelig model, and about wrapped package and wrapped model}
 
 \item{\code{feedback()}}{Send feedback to the Zelig team}
@@ -104,7 +106,7 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{getpredict()}}{Get predicted values}
 
-\item{\code{getqi(qi = "ev", xvalue = "x")}}{Get quantities of interest}
+\item{\code{getqi(qi = "ev", xvalue = "x", subset = NULL)}}{Get quantities of interest}
 
 \item{\code{getvcov()}}{Get estimated model variance-covariance matrix}
 
@@ -118,7 +120,9 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{set(...)}}{Setting Explanatory Variable Values}
 
-\item{\code{sim(num = 1000)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
+\item{\code{sim(num = NULL)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
+
+\item{\code{simATT(simparam, data, depvar, treatment, treated)}}{Simulate an Average Treatment on the Treated}
 
 \item{\code{summarise(...)}}{Display a Zelig object}
 
