@@ -19,7 +19,7 @@ Description: A framework that brings together an abundance of common
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
 Version: 5.0-12
-Date: 2016-03-23
+Date: 2016-03-30
 Imports: sandwich, methods, MASS, survival, VGAM, jsonlite, AER, plyr,
         dplyr (>= 0.3.0.2), quantreg, geepack, MCMCpack, coda, Amelia,
         MatchIt, maxLik, survey

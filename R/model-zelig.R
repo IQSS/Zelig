@@ -490,13 +490,24 @@ z$methods(
   }
 )
 
-
 z$methods(
-  sim = function(num = 1000) {
+  sim = function(num = NULL) {
     "Generic Method for Computing and Organizing Simulated Quantities of Interest"
 
-    if (length(.self$num) == 0) 
+    ## If num is defined by user, it overrides the value stored in the .self$num field.
+    ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
+    if (length(.self$num) == 0){
+      if(is.null(num)){
+        num <- 1000
+      }
+    }
+    if(!is.null(num)){
       .self$num <- num
+    }
+
+    # This was previous version, that assumed sim only called once, or only method to access/write .self$num field:
+    #if (length(.self$num) == 0) 
+    #  .self$num <- num
 
     # Divide simulations among imputed datasets
     if(.self$mi){
@@ -508,7 +519,7 @@ z$methods(
     #  otherwise use $param() method for parametric bootstrap.    
     if (.self$bootstrap & ! .self$mi){
       .self$num <- 1 
-      .self$simparam <- .self$zelig.out %>%
+      .self$simparam <- .self$zelig.out %>% 
         do(simparam = .self$param(.$z.out, method="point"))
     } else {
       .self$simparam <- .self$zelig.out %>%
@@ -575,6 +586,95 @@ z$methods(
     }
   }
 )
+
+
+
+z$methods(
+  simx = function() {
+    d <- zeligPlyrMutate(.self$zelig.out, simparam = .self$simparam$simparam)
+    d <- zeligPlyrMutate(d, mm = .self$setx.out$x$mm)
+    .self$sim.out$x <-  d %>%
+      do(qi = .self$qi(.$simparam, .$mm)) %>%
+      do(ev = .$qi$ev, pv = .$qi$pv)
+  }
+)
+
+
+z$methods(
+  ATT = function(treatment, treated=1, quietly=TRUE, num=NULL) {
+    "Generic Method for Computing Simulated (Sample) Average Treatment Effects on the Treated"
+
+    ## Checks on user provided arguments
+    if(!is.character(treatment)){
+      stop("Argument treatment should be the name of the treatment variable in the dataset.")
+    }
+    if(!(treatment %in% names(.self$data))){
+      stop(cat("Specified treatment variable", treatment, "is not in the dataset."))
+    }
+    # Check treatment variable included in model.
+    # Check treatment variable is 0 or 1 (or generalize to dichotomous).
+    # Check argument "treated" is 0 or 1 (or generalize to values of "treatment").
+    # Check "ev" is available QI.
+    # Check if multiple equation model (which will need method overwrite).
+
+
+    ## If num is defined by user, it overrides the value stored in the .self$num field.
+    ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
+    if (length(.self$num) == 0){
+      if(is.null(num)){
+        num <- 1000
+      }
+    }
+    if(!is.null(num)){
+      if(!identical(num,.self$num)){   # .self$num changed, so regenerate simparam
+        .self$num <- num
+        .self$simparam <- .self$zelig.out %>%
+          do(simparam = .self$param(.$z.out))
+      }
+    }
+
+    ## Extract name of dependent variable, treated units
+    depvar <- as.character(.self$zelig.call[[2]][2]) 
+
+    ## Use dplyr to cycle over all splits of dataset
+    ## NOTE: THIS IS GOING TO USE THE SAME simparam SET FOR EVERY SPLIT
+    .self$sim.out$TE <- .self$data %>% 
+      group_by_(.self$by) %>% 
+        do(ATT = .self$simATT(simparam=.self$simparam$simparam[[1]], data=. , depvar=depvar, treatment=treatment, treated=treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+
+    if(!quietly){
+      return(.self$sim.out$TE)  # The $getqi() method may generalize, otherwise, write a $getter.
+    } 
+  }
+)
+
+# Has calls to .self, so constructed as method rather than function internal to $ATT()
+# Function to simulate ATT 
+
+z$methods(
+  simATT = function(simparam, data, depvar, treatment, treated){
+    "Simulate an Average Treatment on the Treated"
+    
+    flag <- data[[treatment]]==treated
+    data[[treatment]] <- 1-treated
+
+    cf.mm <- model.matrix(.self$formula, data) # Counterfactual model matrix
+    cf.mm <- cf.mm[flag,]
+    
+    y1 <- data[flag, depvar] 
+    y1.n <- sum(flag)
+
+    ATT <- matrix(NA, nrow=y1.n, ncol= .self$num)
+    for(i in 1:y1.n){                   # Maybe $qi() generally works for all mm? Of all dimensions? If so, loop not needed.
+      ATT[i,] <- as.numeric(y1[i,1]) - .self$qi(simparam=simparam, mm=cf.mm[i, , drop=FALSE])$ev   
+    }
+    ATT <- apply(ATT, 2, mean) 
+    return(ATT)
+  }
+)
+
+
+
 
 z$methods(
   show = function(signif.stars = FALSE, subset = NULL, bagging = FALSE) {

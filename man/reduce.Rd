@@ -16,7 +16,7 @@ reduce(dataset, s, formula, data)
 \item{data}{Zelig object data}
 }
 \value{
-a list of with all the model variables either at their central tendancy or their \code{setx} value
+a list of all the model variables either at their central tendancy or their \code{setx} value
 }
 \description{
 #' This method is used internally
