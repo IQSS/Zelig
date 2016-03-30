@@ -112,6 +112,12 @@ ztimeseries$methods(
 # There is no fitting summary function for objects of class Arima.  
 # So this passes the object through to print, and z$summary() is essentially print(summary(x)).
 
-#' summary wrapper to print for Arima class
-#' @keywords internal
-summary.Arima = function(x) x
+#' Summary of an object of class Arima
+#' @method summary Arima
+#' @param object An object of class Arima 
+#' @param ... Additional parameters
+#' @return The original object 
+#' @export
+
+
+summary.Arima = function(object, ...) object
