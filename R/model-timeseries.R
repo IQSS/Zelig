@@ -36,18 +36,20 @@ ztimeseries$methods(
 )
 
 ztimeseries$methods(
-  zelig = function(formula, data, ..., weights=NULL, by=NULL, bootstrap = FALSE){
+  zelig = function(formula, data, order=c(1,0,0), ..., weights=NULL, by=NULL, bootstrap = FALSE){
     if(!identical(bootstrap,FALSE)){
       stop("Error: The bootstrap is not implemented for time-series models")
     }
+    .self$zelig.call <- match.call(expand.dots = TRUE)
     if(identical(.self$name,"ar")){
       order<-c(1,0,0)
+      .self$zelig.call$order <- order
     } else if(identical(.self$name,"ma")){
       order<-c(0,0,1)
+      .self$zelig.call$order <- order
     }
-    .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = FALSE)
+    callSuper(formula = formula, data = data, order=order, ..., weights = weights, by = by, bootstrap = FALSE)
   }
 )
 
@@ -106,3 +108,16 @@ ztimeseries$methods(
     }
   }
 )
+
+# There is no fitting summary function for objects of class Arima.  
+# So this passes the object through to print, and z$summary() is essentially print(summary(x)).
+
+#' Summary of an object of class Arima
+#' @method summary Arima
+#' @param object An object of class Arima 
+#' @param ... Additional parameters
+#' @return The original object 
+#' @export
+
+
+summary.Arima = function(object, ...) object

@@ -17,6 +17,9 @@ importFrom("stats", "binomial", "complete.cases", "density", "glm",
 importClassesFrom("VGAM", "vglm")
 importMethodsFrom("VGAM", "coef", "fitted", "predict", "vcov")
 
+
+S3method(summary, Arima)
+
 exportPattern("^[[:alpha:]]+")
 exportClasses(
      "Zelig",
