@@ -28,14 +28,36 @@ zarima$methods(
 
 zarima$methods(
   qi = function(simparam, mm, mm1=NULL){ 
+
     myorder <- eval(.self$zelig.call$order)
     mycoef <- coef(.self$zelig.out$z.out[[1]])
     sd <- sqrt(.self$zelig.out$z.out[[1]]$sigma2)
 
+    ## Check mm and mm1.  Particularly for issues surrounding intercept.
+    rebuildMM <- function(simparam, x){
+      xnames <- colnames(x)
+      snames <- colnames(simparam)
+      ## parameter "intercept" can be spelt "(Intercept)"" in model matrix
+      if("(Intercept)" %in% xnames){     
+        flag <- xnames == "(Intercept)"
+        xnames[flag] <- "intercept"
+        colnames(x)[flag]<- "intercept" # this is equivalent to: colnames(x) <- xnames  
+      }
+      ## "intercept" can be included in model matrix when not an estimated parameter (for example in models with integration)
+      xnamesflag <- xnames %in% snames
+      x <- x[, xnamesflag, drop=FALSE]
+      return(x)
+    }
 
+    mm <- rebuildMM(simparam, mm)
+    if(!is.null(mm1)){
+      mm1 <- rebuildMM(simparam, mm1)
+    }
+
+
+    ## Make ACF 
     acf <- simacf(coef=mycoef, order=myorder, params=simparam, alpha=0.05)
     acf.length <- length(acf$expected.acf)
-
     t1 <- 2*acf.length
     t2 <- 2*acf.length
 
@@ -43,9 +65,7 @@ zarima$methods(
     if(.self$bsetx1){             # could also check if mm1 is NULL
       # zeligARMAbreakforecaster() calls zeligARMAlongrun() internally
       #  return(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov)  
-
       yseries <- zeligARMAbreakforecaster(y.init=NULL, x=mm, x1=mm1, simparam=simparam, order=myorder, sd=sd, t1=t1, t2=t2) 
-
       # maybe check nrow(yseries)=t1 + t2 ?
 
       pv <- yseries$y.innovation[t1,]                # could use either $innovation or $shock here
@@ -56,6 +76,7 @@ zarima$methods(
       ev <- yseries$ev.innovation[t1,]
       ev.shortrun <- yseries$ev.innovation[t1+1,]
       ev.longrun <- yseries$ev.innovation[t1+t2,]
+
       return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun, 
                 pvseries.shock=yseries$y.shock, pvseries.innovation=yseries$y.innovation,
                 evseries.shock=yseries$ev.shock, evseries.innovation=yseries$ev.innovation))
@@ -136,7 +157,6 @@ simacf <- function(coef, order, params, alpha = 0.5){
   mylag.max<-10  # Need to set automatically.  
 
   n.sims<-nrow(params)
-
   expected.acf <- ARMAacf(ar=myar, ma=myma, lag.max=mylag.max)
   acf.history<-matrix(NA, nrow=n.sims, ncol=length(expected.acf))      # length(expected.acf) = mylag.max +1 
   for(i in 1:n.sims){
@@ -157,7 +177,6 @@ simacf <- function(coef, order, params, alpha = 0.5){
     }
     return(list(ci.lower=ci.lower, ci.upper=ci.upper))
   }
-
   ci.acf <- ci.matrix(x=acf.history, alpha=0.05)
 
   return(list(expected.acf=expected.acf, ci.acf=ci.acf, sims.acf=acf.history))
@@ -238,17 +257,21 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
   if(is.null(tol)){
     tol<-0.01
   }
-
   ar <- i <- ma <- NULL
 
   xnames <- colnames(x)
+  ## All of this commented out code should now be handled earlier by rebuildMM in qi method:
+  ##
   ### -- revise this approach:  ###
-  if("(Intercept)" %in% xnames){
-    flag <- xnames == "(Intercept)"
-    xnames[flag] <- "intercept"
-  }
+  #if("(Intercept)" %in% xnames){
+  #  flag <- xnames == "(Intercept)"
+  #  xnames[flag] <- "intercept"
+  #}
   ### -- ###
-
+  #xnamesflag <- xnames %in% colnames(simparam)
+  #xnames <- xnames[xnamesflag]
+  #x <- x[,xnames]
+  
   beta <- simparam[,xnames]
 
   if(order[1]>0){
@@ -277,7 +300,6 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
   wseries <- matrix(rnorm(n=timepast*n.sims), nrow=timepast, ncol=n.sims)
   evseries <- matrix(NA, nrow=timepast, ncol=n.sims)
 
-
   finished <- FALSE
   count <- 0
   while(!finished){
@@ -301,18 +323,20 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
 zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1=5, t2=10){
 
   longrun.out <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, order=order, sd=sd)   
-
   yseries  <- longrun.out$y.longrun
   wseries  <- longrun.out$w.longrun
   evseries <- longrun.out$ev.longrun
 
 
   xnames <- colnames(x)
+  
+  ## All of this commented out code should now be handled earlier by rebuildMM in qi method:
+  ##
   ### -- revise this approach:  ###
-  if("(Intercept)" %in% xnames){
-    flag <- xnames == "(Intercept)"
-    xnames[flag] <- "intercept"
-  }
+  #if("(Intercept)" %in% xnames){
+  #  flag <- xnames == "(Intercept)"
+  #  xnames[flag] <- "intercept"
+  #}
   ### -- ###
 
   beta <- simparam[,xnames]
