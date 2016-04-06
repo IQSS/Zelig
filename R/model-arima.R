@@ -259,32 +259,21 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
   }
   ar <- i <- ma <- NULL
 
+  ## Ensure parameter simulations in same order as model matrix
   xnames <- colnames(x)
-  ## All of this commented out code should now be handled earlier by rebuildMM in qi method:
-  ##
-  ### -- revise this approach:  ###
-  #if("(Intercept)" %in% xnames){
-  #  flag <- xnames == "(Intercept)"
-  #  xnames[flag] <- "intercept"
-  #}
-  ### -- ###
-  #xnamesflag <- xnames %in% colnames(simparam)
-  #xnames <- xnames[xnamesflag]
-  #x <- x[,xnames]
-  
   beta <- simparam[,xnames]
 
+  ## Extract AR and MA terms
   if(order[1]>0){
     arnames <- paste("ar", 1:order[1], sep="")
     ar <- simparam[,arnames]
   }
-
   if(order[3]>0){
     manames <- paste("ma", 1:order[3], sep="")
     ma <- simparam[,manames]
   }
-
   timepast <- max(order[1],order[3])
+  
   n.sims <- nrow(simparam)
 
   if(is.vector(x)){
@@ -327,31 +316,20 @@ zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1
   wseries  <- longrun.out$w.longrun
   evseries <- longrun.out$ev.longrun
 
-
+  ## Ensure parameter simulations in same order as model matrix
   xnames <- colnames(x)
-  
-  ## All of this commented out code should now be handled earlier by rebuildMM in qi method:
-  ##
-  ### -- revise this approach:  ###
-  #if("(Intercept)" %in% xnames){
-  #  flag <- xnames == "(Intercept)"
-  #  xnames[flag] <- "intercept"
-  #}
-  ### -- ###
-
   beta <- simparam[,xnames]
 
+  ## Extract AR and MA terms
   ar <- i <- ma <- NULL
-  if(order[1]>0){                                      # Should we track this value and use below?
+  if(order[1]>0){                                      
     arnames <- paste("ar", 1:order[1], sep="")
     ar <- simparam[,arnames]
   }
-
   if(order[3]>0){
     manames <- paste("ma", 1:order[3], sep="")
     ma <- simparam[,manames]
   }
-
   timepast <- max(order[1],order[3]) # How many steps backward are needed in the series  --  could we be more precise?
 
   # Take a step at covariates x
