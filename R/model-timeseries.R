@@ -36,7 +36,7 @@ ztimeseries$methods(
 )
 
 ztimeseries$methods(
-  zelig = function(formula, data, order=c(1,0,0), ..., weights=NULL, by=NULL, bootstrap = FALSE){
+  zelig = function(formula, data, order=c(1,0,0), ts=NULL, cs=NULL, ..., weights=NULL, by=NULL, bootstrap = FALSE){
     if(!identical(bootstrap,FALSE)){
       stop("Error: The bootstrap is not implemented for time-series models")
     }
@@ -49,6 +49,25 @@ ztimeseries$methods(
       .self$zelig.call$order <- order
     }
     .self$model.call <- .self$zelig.call
+
+    ## Sort dataset by time and cross-section
+    ## Should add checks that ts, cs, are valid, and consider how to interact with by.
+    ## This follows handling from Amelia::prep.r, which also has code to deal with lags, should we add those.
+    if(!identical(ts,NULL)){
+      .self$model.call$ts <- NULL
+      if (!identical(cs,NULL)) {
+        .self$model.call$cs <- NULL
+        tsarg<-list(data[,cs],data[,ts])
+        by <- cs  # Use by architecture to deal with cross-sections in time-series models that do not support such.  Currently overrides.
+      } else {
+        tsarg<-list(data[,ts])
+      }
+
+      tssort<-do.call("order",tsarg)
+      data<-data[tssort,]
+    }
+
+    ## ts and cs are used to reorganize dataset, and do not get further passed on to Super
     callSuper(formula = formula, data = data, order=order, ..., weights = weights, by = by, bootstrap = FALSE)
   }
 )
