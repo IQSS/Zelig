@@ -2,7 +2,7 @@
 
 \alias{seatshare}
 
-\title{Leftist Party Seat Share in 11 OECD Countries}
+\title{Left Party Seat Share in 11 OECD Countries}
 
 \description{
   This data set contains time-series data of the seat shares in the lower legislative house of left leaning parties over time, as well as the level of unemployment.  Data follows the style used in Hibbs (1977).}
