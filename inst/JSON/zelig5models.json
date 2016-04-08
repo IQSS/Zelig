@@ -413,7 +413,7 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-arima.html"],
-      "wrapper": ["timeseries"],
+      "wrapper": ["arima"],
       "tree": ["Zelig-arima", "Zelig-timeseries"]
     },
     "ma": {
@@ -426,7 +426,7 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-ma.html"],
-      "wrapper": ["timeseries"],
+      "wrapper": ["ma"],
       "tree": ["Zelig-ma", "Zelig-timeseries"]
     },    
     "ar": {
@@ -439,7 +439,7 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-ar.html"],
-      "wrapper": ["timeseries"],
+      "wrapper": ["ar"],
       "tree": ["Zelig-ar", "Zelig-timeseries"]
     }
   }
