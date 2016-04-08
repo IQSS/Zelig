@@ -72,6 +72,16 @@ ztimeseries$methods(
   }
 )
 
+# replace packagename method as stats::arima() has a second layer of wrapping in zeligArimaWrapper().
+
+ztimeseries$methods(
+  packagename = function() {
+    "Automatically retrieve wrapped package name"
+    return("stats")
+  }
+)
+
+
 # replace simx method to add ACF as QI.
 
 ztimeseries$methods(
