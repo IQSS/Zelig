@@ -68,6 +68,11 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
                                package = "ZeligGAM")
   if (zeligammodels != "")
     models <- c(models, jsonlite::fromJSON(txt = readLines(zeligammodels))$zelig5gammodels)
+  # Zelig Multilevel
+  zeligmixedmodels <- system.file(file.path("JSON", "zelig5mixedmodels.json"),
+                               package = "ZeligMultilevel")
+  if (zeligmixedmodels != "")
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligmixedmodels))$zelig5mixedmodels)
   # Aggregating all available models
   models4 <- list()
   for (i in seq(models)) {
