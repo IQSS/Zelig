@@ -62,6 +62,8 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         mi = "logical",
                                         matched = "logical",
                                         
+                                        avg = "ANY",
+                                        
                                         idx = "ANY", # model index
                                         
                                         zelig.call = "call", # Zelig function call
@@ -153,6 +155,15 @@ z$methods(
     # Is 'ZeligFeedback' package installed?
     .self$with.feedback <- "ZeligFeedback" %in% installed.packages()
     .self$setforeveryby <- TRUE
+    
+    .self$avg <- function(val) {
+      if (is.numeric(val))
+        mean(val)
+      else if (is.ordered(val))
+        Median(val)
+      else
+        Mode(val)
+    }
   }
 )
 
@@ -391,8 +402,16 @@ z$methods(
 )
 
 z$methods(
-  set = function(...) {
+  set = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
     "Setting Explanatory Variable Values"
+    .self$avg <- function(val) {
+      if (is.numeric(val))
+        ifelse(is.null(fn$numeric), mean(val), fn$numeric(val))
+      else if (is.ordered(val))
+        ifelse(is.null(fn$ordered), Median(val), fn$ordered(val))
+      else
+        ifelse(is.null(fn$other), Mode(val), fn$other(val))
+    }
     s <-list(...)
     # This eliminates warning messages when factor rhs passed to lm() model in reduce() utility function
     if(.self$category=="multinomial"){  # Perhaps find more robust way to test if dep.var. is factor
@@ -408,9 +427,9 @@ z$methods(
       update <- .self$data %>%
         group_by_(.self$by) %>%
         do(mm = model.matrix(f, reduce(dataset = "MEANINGLESS ARGUMENT", s, 
-                                     formula = f2, 
-                                     data = .)))  # fix in last argument from data=.self$data to data=.  (JH)
-
+                                       formula = f2, 
+                                       data = ., avg = .self$avg))) # fix in last argument from data=.self$data to data=.  (JH)
+      
     # compute over the entire dataset  - currently used for mi and bootstrap.  Should be opened up to user.    
     } else {  
       if(.self$bootstrap){
@@ -421,8 +440,9 @@ z$methods(
       }
 
       allreduce <- reduce(dataset = "MEANINGLESS ARGUMENT", s, 
-                                     formula = f2, 
-                                     data = tempdata)
+                          formula = f2, 
+                          data = tempdata,
+                          avg = .self$avg)
       allmm <- model.matrix(f, allreduce) 
       update <- .self$data %>%
         group_by_(.self$by) %>%
@@ -433,21 +453,21 @@ z$methods(
 )
 
 z$methods(
-  setx = function(...) {
+  setx = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
     .self$bsetx <- TRUE
-    .self$setx.out$x  <- .self$set(...)
+    .self$setx.out$x  <- .self$set(..., fn = fn)
   }
 )
 
 z$methods(
-  setx1 = function(...) {
+  setx1 = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
     .self$bsetx1 <- TRUE
     .self$setx.out$x1 <- .self$set(...)
   }
 )
 
 z$methods(
-  setrange = function(...) {
+  setrange = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
     .self$bsetrange <- TRUE
     rng <- list()
     s <- list(...)
@@ -463,7 +483,7 @@ z$methods(
 )
 
 z$methods(
-  setrange1 = function(...) {
+  setrange1 = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
     .self$bsetrange1 <- TRUE
     rng <- list()
     s <- list(...)

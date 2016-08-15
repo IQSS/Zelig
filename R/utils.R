@@ -8,7 +8,7 @@ Mode <- function (x) {
   # build a table of values of x
   tab <- table(as.factor(x))
   # find the mode, then if there's more than one, select one randomly
-  v <- sample(names(which(tab == max(tab))), size=1)
+  v <- sample(names(which(tab == max(tab))), size = 1)
   # if it came in as a factor, we need to re-cast it
   # as a factor, with the same exact levels
   if (is.factor(x))
@@ -16,6 +16,9 @@ Mode <- function (x) {
   # re-cast as any other data-type
   as(v, class(x))
 }
+
+## Zelig3 and 4 backward compatibility
+mode <- Mode
 
 #' Compute the Statistical Median of a Vector
 #' @param x a vector of numeric or ordered values
@@ -98,6 +101,44 @@ setval <- function(val, newval) {
   }
 } 
 
+#' Calculate the reduced dataset to be used in code{\link{setx}}
+#' 
+#' #' This method is used internally
+#' 
+#' @param dataset Zelig object data, possibly split to deal with \code{by} argument
+#' @param s list of variables and their tentative \code{setx} values
+#' @param formula a simplified version of the Zelig object formula (typically with 1 on the lhs)
+#' @param data Zelig object data
+#' @param avg function of data transformations
+#' @return a list of all the model variables either at their central tendancy or their \code{setx} value
+#' @export
+#' @keywords internal
+#' @author Christine Choirat
+reduce = function(dataset, s, formula, data, avg = avg) {
+  pred <- try(terms(fit <- lm(formula, data), "predvars"), silent = TRUE)
+  if ("try-error" %in% class(pred)) # exp and weibull
+    pred <- try(terms(fit <- survreg(formula, data), "predvars"), silent = TRUE)
+  dataset <- model.frame(fit)
+  ldata <- lapply(dataset, avg)
+  if (length(s) > 0) {
+    n <- union(as.character(attr(pred, "predvars"))[-1],
+               names(dataset))
+    if (is.list(s[[1]]))
+      s <- s[[1]]
+    m <- match(names(s), n)
+    ma <- m[!is.na(m)]
+    if (!all(complete.cases(m))) {
+      w <- paste("Variable '", names(s[is.na(m)]),
+                 "' not in data set.\n", sep = "")
+      warning(w)
+    }
+    for (i in seq(n[ma]))
+      ldata[n[ma]][i][[1]] <- setval(dataset[n[ma]][i][[1]],
+                                     s[n[ma]][i][[1]])
+  }
+  return(ldata)
+}
+
 #' Describe Here
 #' @param qi quantity of interest in the discrete case
 #' @return a formatted qi
@@ -162,69 +203,6 @@ cluster.formula <- function (formula, cluster) {
     sprintf("cluster(%s)", cluster)
   update(formula, paste(". ~ .", cluster.part, sep = " + "))
 }
-
-#' Calculate the reduced dataset to be used in code{\link{setx}}
-#' 
-#' #' This method is used internally
-#' 
-#' @param dataset Zelig object data, possibly split to deal with \code{by} argument
-#' @param s list of variables and their tentative \code{setx} values
-#' @param formula a simplified version of the Zelig object formula (typically with 1 on the lhs)
-#' @param data Zelig object data
-#' @return a list of all the model variables either at their central tendancy or their \code{setx} value
-#' @export
-#' @keywords internal
-#' @author Christine Choirat
-reduce <- function(dataset, s, formula, data) {
-  pred <- try(terms(fit <- lm(formula, data), "predvars"), silent = TRUE)
-  if ("try-error" %in% class(pred)) # exp and weibull
-    pred <- try(terms(fit <- survreg(formula, data), "predvars"), silent = TRUE)
-  dataset <- model.frame(fit)
-  ldata <- lapply(dataset, avg)
-  if (length(s) > 0) {
-    n <- union(as.character(attr(pred, "predvars"))[-1],
-               names(dataset))
-    if (is.list(s[[1]]))
-      s <- s[[1]]
-    m <- match(names(s), n)
-    ma <- m[!is.na(m)]
-    if (!all(complete.cases(m))) {
-      w <- paste("Variable '", names(s[is.na(m)]),
-                 "' not in data set.\n", sep = "")
-      warning(w)
-    }
-    for (i in seq(n[ma]))
-      ldata[n[ma]][i][[1]] <- setval(dataset[n[ma]][i][[1]],
-                                     s[n[ma]][i][[1]])
-  }
-  return(ldata)
-}
-
-# reduce <- function(dataset, s, model = zelig.out$model[[1]]) {
-#   dataset <- as.data.frame(dataset)
-#   ldata <- lapply(dataset, avg)
-#   if (length(s) > 0) {
-#     pred <- terms(model, "predvars")
-# #     pred <- terms(model, "regressors")
-#     n <- union(as.character(attr(pred, "predvars"))[-1],
-#                names(dataset))
-# #     n <- union(as.character(attr(pred, "variables"))[-1],
-# #                names(dataset))
-#     if (is.list(s[[1]]))
-#       s <- s[[1]]
-#     m <- match(names(s), n)
-#     ma <- m[!is.na(m)]
-#     if (!all(complete.cases(m))) {
-#       w <- paste("Variable '", names(s[is.na(m)]),
-#                  "' not in data set.\n", sep = "")
-#       warning(w)
-#     }
-#     for (i in seq(n[ma]))
-#       ldata[n[ma]][i][[1]] <- setval(dataset[n[ma]][i][[1]],
-#                                      s[n[ma]][i][[1]])
-#   }
-#   return(ldata)
-# }
 
 
 #' Zelig Copy of plyr::mutate to avoid namespace conflict with dplyr

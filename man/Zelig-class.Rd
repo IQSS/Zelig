@@ -118,7 +118,7 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{references(style = "sphinx")}}{Construct a reference list specific to a Zelig model.}
 
-\item{\code{set(...)}}{Setting Explanatory Variable Values}
+\item{\code{set(..., fn = list(numeric = mean, ordered = Median, other = Mode))}}{Setting Explanatory Variable Values}
 
 \item{\code{sim(num = NULL)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
 

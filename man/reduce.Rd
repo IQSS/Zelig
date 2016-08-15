@@ -4,7 +4,7 @@
 \alias{reduce}
 \title{Calculate the reduced dataset to be used in code{\link{setx}}}
 \usage{
-reduce(dataset, s, formula, data)
+reduce(dataset, s, formula, data, avg = avg)
 }
 \arguments{
 \item{dataset}{Zelig object data, possibly split to deal with \code{by} argument}
@@ -14,6 +14,8 @@ reduce(dataset, s, formula, data)
 \item{formula}{a simplified version of the Zelig object formula (typically with 1 on the lhs)}
 
 \item{data}{Zelig object data}
+
+\item{avg}{function of data transformations}
 }
 \value{
 a list of all the model variables either at their central tendancy or their \code{setx} value
