@@ -1,3 +1,5 @@
+##----- See thread: https://groups.google.com/forum/#!topic/zelig-statistical-software/1ohCNA5S_0A
+
 library(Zelig)
 z5 <- zls$new()
 z5$zelig(Fertility ~ Agriculture + Education, data = swiss)
