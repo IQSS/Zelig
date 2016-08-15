@@ -17,7 +17,7 @@ Mode <- function (x) {
   as(v, class(x))
 }
 
-## Zelig3 and 4 backward compatibility
+## Zelig 3 and 4 backward compatibility
 mode <- Mode
 
 #' Compute the Statistical Median of a Vector
