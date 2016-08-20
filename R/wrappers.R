@@ -91,9 +91,12 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   mf <- try(eval(mf, environment()), silent = TRUE)
   if ("try-error" %in% class(mf))
     z5$zelig(formula = formula, data = data, ..., by = by)
+  modelFit <- z5$zelig.out$z.out
+  if(length(modelFit) == 1) modelFit <- modelFit[[1]]
+  attr(modelFit, "Zelig") <- z5
   if (cite)
     z5$cite()
-  return(z5)
+  return(modelFit)
 }
 
 #' Setting Explanatory Variable Values
@@ -143,7 +146,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 
 setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
   # .Deprecated("\nz$new() \nz$zelig(...) \nz$setx() or z$setx1 or z$setrange")
-  x5 <- obj$copy()
+  x5 <- attr(obj, "Zelig")$copy()
   # This is the length of each argument in '...'s
   s <- list(...)
   if (length(s) > 0) {
