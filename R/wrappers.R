@@ -360,13 +360,12 @@ qi_dist.lm <- function(model, at = list(), fd_at = list(x1 = NULL, x2 = NULL), n
   do.call(z.out$zelig, z$model.args)
   if(!all(sapply(fd_at, is.null))) {
     if(length(at) >0) warning("'at' and 'fd_at' both specified: ignoring 'at'.")
-    if(length(by) >0) warning("'by' and 'fd_at' both specified: ignoring 'by'.")
     do.call(z.out$setx, fd_at$x1)
     do.call(z.out$setx1, fd_at$x2)
     z.out$sim(num = nsim)
     return(get_all_qi(z.out, nsim = nsim))
   }
-    by <- rowwise(do.call(expand.grid, at))
+  by <- rowwise(do.call(expand.grid, at))
   by.names <- names(by)
   simqi <- vector(mode = "list", length = nrow(by))
   for(i in 1:nrow(by)) {
