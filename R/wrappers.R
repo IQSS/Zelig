@@ -412,6 +412,14 @@ summary.qidist <- function(x, probs = c(0.025, 0.50, 0.975)) {
               FUN = function(y) c(mean = mean(y), sd = sd(y), quantile(y, probs = probs)))
   },
   simplify = FALSE)
+  qi_dist <- sapply(qi_dist,
+                    function(foo) {
+                      tmp <- data.frame(foo[["x"]])
+                      names(tmp) <- gsub("^X", "qp_", names(tmp))
+                      names(tmp) <- gsub("\\.$", "", names(tmp))
+                      cbind(foo[, setdiff(names(foo), "x")], tmp)
+                    },
+                    simplify = FALSE)
   class(qi_dist) <- c("qidist_summary", class(qi_dist))
   return(qi_dist)
 }
