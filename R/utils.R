@@ -218,3 +218,93 @@ zeligPlyrMutate<-function (.data, ...)
     .data
 }
 
+#' List available zelig models.
+#' @return A named list. Each element contains information about a zelig class
+#' @export
+zmodelsAvailable <- function() {
+  zeligmodels <- system.file(file.path("JSON", "zelig5models.json"), package = "Zelig")
+  models <- jsonlite::fromJSON(txt = readLines(zeligmodels))$zelig5models
+  # Zelig Choice
+  zeligchoicemodels <- system.file(file.path("JSON", "zelig5choicemodels.json"),
+                                   package = "ZeligChoice")
+  if (zeligchoicemodels != "")
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligchoicemodels))$zelig5choicemodels)
+  # Zelig Panel
+  zeligpanelmodels <- system.file(file.path("JSON", "zelig5panelmodels.json"),
+                                   package = "ZeligPanel")
+  if (zeligpanelmodels != "")
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligpanelmodels))$zelig5panelmodels)
+  # Zelig GAM
+  zeligammodels <- system.file(file.path("JSON", "zelig5gammodels.json"),
+                               package = "ZeligGAM")
+  if (zeligammodels != "")
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligammodels))$zelig5gammodels)
+  # Zelig Multilevel
+  zeligmixedmodels <- system.file(file.path("JSON", "zelig5mixedmodels.json"),
+                               package = "ZeligMultilevel")
+  if (zeligmixedmodels != "")
+    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligmixedmodels))$zelig5mixedmodels)
+  # Aggregating all available models
+  return(models)
+}
+
+#' Match a model fit object to the corresponsding Zelig class.
+#'
+#' This is a generic function. At the moment the only useful method is for lm objects.
+#' @param model A model fit object
+#' @param ... Not currently used.
+#' @export
+zmodelMatcher <- function(model, ...) {
+  UseMethod("zmodelMatcher")
+}
+## zmodelMatcher.lm <- function(model) {
+##   return(zls$new())
+## }
+
+#' Match a model fit object to the corresponsding Zelig class.
+#'
+#' This is a generic function. At the moment the only useful method is for lm objects.
+#' @param model A model fit object
+#' @return a zelig object capable of producing the model.
+#' @export
+zmodelMatcher.lm <- function(model) {
+  zmodels <- lapply(zmodelsAvailable(), unlist, recursive = TRUE)
+  model.args <- as.list(getCall(model))
+  func <- as.character(model.args[[1]])
+  family <- model.args$family
+  link <- model.args$family
+  if(!is.null(family)) {
+    family <- model.args$family
+    link <- model.args$link
+    linkinv <- model.args$linkinv
+    family.obj <- eval(family)
+    if(class(family.obj) == "family") {
+      family <- family.obj$family
+      link <- family.obj$link
+      linkinv <- family.obj$linkinv
+    }
+  }
+  zmodelMatch <- na.omit(
+    sapply(zmodels,
+           function(x) {
+             if(is.na(x["func"])) x["func"] <- x["name"]
+             if(is.na(x["func"])) x["func"] <- "unknown"
+             zmodel <- na.omit(gsub("^.*::", "", x[c("func", "family", "link")]))
+             return(all(zmodel == na.omit(c(func, family, link))))
+           }))
+  nmatches <- sum(zmodelMatch) 
+  if(sum(nmatches) < 1) stop("Could not find a matching Zelig model.")
+  zmodel <- zmodels[zmodelMatch][[1]]
+  if(sum(nmatches) > 1) warning(paste("Multiple models matched, using ",
+                                      zmodel[["name"]],
+                                      ":",
+                                      paste(sapply(zmodels[zmodelMatch],
+                                                   function(x) x[["name"]]),
+                                            collapse = ", "),
+                                      sep = ""))
+  return(list(zelig = eval(parse(text = paste("z", zmodel[["name"]], "$new()", sep = ""))),
+              model.args = model.args[-1]))
+}
+
+
+

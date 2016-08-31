@@ -51,34 +51,11 @@
 zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   #   .Deprecated("\nz$new() \nz$zelig(...)")
   # Zelig Core
-  zeligmodels <- system.file(file.path("JSON", "zelig5models.json"), package = "Zelig")
-  models <- jsonlite::fromJSON(txt = readLines(zeligmodels))$zelig5models
-  # Zelig Choice
-  zeligchoicemodels <- system.file(file.path("JSON", "zelig5choicemodels.json"),
-                                   package = "ZeligChoice")
-  if (zeligchoicemodels != "")
-    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligchoicemodels))$zelig5choicemodels)
-  # Zelig Panel
-  zeligpanelmodels <- system.file(file.path("JSON", "zelig5panelmodels.json"),
-                                   package = "ZeligPanel")
-  if (zeligpanelmodels != "")
-    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligpanelmodels))$zelig5panelmodels)
-  # Zelig GAM
-  zeligammodels <- system.file(file.path("JSON", "zelig5gammodels.json"),
-                               package = "ZeligGAM")
-  if (zeligammodels != "")
-    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligammodels))$zelig5gammodels)
-  # Zelig Multilevel
-  zeligmixedmodels <- system.file(file.path("JSON", "zelig5mixedmodels.json"),
-                               package = "ZeligMultilevel")
-  if (zeligmixedmodels != "")
-    models <- c(models, jsonlite::fromJSON(txt = readLines(zeligmixedmodels))$zelig5mixedmodels)
-  # Aggregating all available models
+  models <- zmodelsAvailable()
   models4 <- list()
   for (i in seq(models)) {
     models4[[models[[i]]$wrapper]] <- names(models)[i]
   }
-  
   model.init <- paste0("z", models4[[model]], "$new()")
   z5 <- try(eval(parse(text = model.init)), silent = TRUE)
   if ("try-error" %in% class(z5))
@@ -91,12 +68,9 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   mf <- try(eval(mf, environment()), silent = TRUE)
   if ("try-error" %in% class(mf))
     z5$zelig(formula = formula, data = data, ..., by = by)
-  modelFit <- z5$zelig.out$z.out
-  if(length(modelFit) == 1) modelFit <- modelFit[[1]]
-  attr(modelFit, "Zelig") <- z5
   if (cite)
     z5$cite()
-  return(modelFit)
+  return(z5)
 }
 
 #' Setting Explanatory Variable Values
@@ -146,7 +120,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 
 setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
   # .Deprecated("\nz$new() \nz$zelig(...) \nz$setx() or z$setx1 or z$setrange")
-  x5 <- attr(obj, "Zelig")$copy()
+  x5 <- obj$copy()
   # This is the length of each argument in '...'s
   s <- list(...)
   if (length(s) > 0) {
@@ -251,6 +225,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #' @export
 #' @author Matt Owen \email{mowen@@iq.harvard.edu}, Olivia Lau and Kosuke Imai 
 
+
 sim <- function(obj, x = NULL, x1 = NULL, y = NULL, num = 1000, bootstrap = F, 
                 bootfn = NULL, cond.data = NULL, ...) {
   # .Deprecated("\nz$new() \n[...] \nz$sim(...)")
@@ -270,3 +245,228 @@ sim <- function(obj, x = NULL, x1 = NULL, y = NULL, num = 1000, bootstrap = F,
   s5$sim(num = num)
   return(s5)
 }
+
+#' Extract quantities of interest from a Zelig model
+#' 
+
+#' @param z.out the output object from zelig
+#' @param nsim the number of simulations used
+#' @return A list containing data.frames with columns stroring covariate values
+#'   and quantities of interest. Specifically,
+#'   \item{at} A data.frame with
+#'   quantities of interest at specific covariate value and possibly
+#'   \item{fd_at}{A data.frame with differences in quantities of interest at a
+#'   set of covariate values}
+get_all_qi <- function(z.out, nsim) {
+  x.out.tmp <- z.out$setx.out
+  ## browser()
+  ##                                       # if(length(x.out.tmp) >1) x.out.tmp <- do.call(c, x.out.tmp)
+  ## if("range" %in% names(x.out.tmp)) x.out.tmp <- x.out.tmp[[1]]
+  ## x.out <- do.call(rbind,
+  ##                  lapply(x.out.tmp,
+  ##                         function(x) {
+  ##                           do.call(rbind,
+  ##                                   lapply(x[[2]],
+  ##                                          as.data.frame))
+  ##                         }))
+  x.out <- bind_rows(lapply(names(x.out.tmp),
+                            function(x) {
+                              bind_rows(lapply(x.out.tmp[[x]][[2]],
+                                               function(y) {
+                                                 mutate(as.data.frame(y,
+                                                                      stringsAsFactors = FALSE),
+                                                        zelig__source = x)
+                                               }))
+                            }))
+  s.out <- bind_rows(lapply(names(z.out$sim.out),
+                            function(x) {
+                              bind_rows(
+                                lapply(c(names(z.out$sim.out[[x]]), names(z.out$sim.out[[x]][[1]])),
+                                       function(y) {
+                                         mutate(
+                                           setNames(
+                                             as.data.frame(z.out$getqi(qi = y, xvalue = x),
+                                                           stringsAsFactors = FALSE),
+                                             "value"),
+                                           zelig__source = x,
+                                           type = y)
+                                       }))
+                            }))
+  if("x" %in% x.out$zelig__source && "x1" %in% x.out$zelig__source) {
+    x.out <- list(
+      x.at = x.out,
+      x.fd_at = as.data.frame(sapply(x.out,
+                                     function(x)
+                                     {
+                                       if(is.numeric(x)) x <- round(x, digits = 4)
+                                       paste(substr(x, 1, 4), sep = "", collapse = " :VS: ")
+                                     },
+                                     simplify = FALSE),
+                              check.names = FALSE))
+    s.out <- list(s.at = droplevels(s.out[s.out$type != "fd", ]),
+                  s.fd_at = droplevels(transform(s.out[s.out$type == "fd", ], zelig__source = "x :VS: x1")))
+    simqi <- list(at = merge(x.out[[1]], s.out[[1]]),
+                  fd_at = merge(x.out[[2]], s.out[[2]]))
+  } else {
+    simqi <- list(at = merge(x.out, s.out))
+  }
+  simqi <- sapply(simqi, function(x) {
+    drop(transform(x[, setdiff(names(x), "(Intercept)")],
+                   type = factor(type,
+                                 levels = c("pv", "ev", "fd"),
+                                 labels = c("Predicted values", "Expected values", "Difference in Expected Values"))))
+  },
+  simplify = FALSE)
+  class(simqi) <- c("qidist", class(simqi))
+  return(simqi)
+}
+
+#' Simulated distributions of quantities of interest.
+#' 
+#' This is a generic function. Currently the only useful method is for lm
+#' models.
+#' @param model A model fit object
+#' @param nsim the number of simulations used
+#' @param ... arguments passed to methods
+#' @return A list containing data.frames with columns stroring covariate values
+#'   and quantities of interest. Specifically,
+#'   \item{at} A data.frame with
+#'   quantities of interest at specific covariate value and possibly
+#'   \item{fd_at}{A data.frame with differences in quantities of interest at a
+#'   set of covariate values}
+#' @export
+  qi_dist <- function(model, nsim = 1000, ...) {
+  UseMethod("qi_dist")
+}
+
+#' Simulated distributions of quantities of interest from lm and glm models.
+#' 
+#' @param model A model fit object
+#' @param at A named list of covariate values.
+#' @param fd_at A list of length 2. Each element must itself be a named list of covariate values.
+#' @param nsim The number of simulations used
+#' @return A list containing data.frames with columns stroring covariate values
+#'   and quantities of interest. Specifically,
+#'   \item{at} {A data.frame with simulated
+#'   quantities of interest at specific covariate value}
+#'   and possibly
+#'   \item{fd_at}{A data.frame with differences in quantities of interest at a
+#'   set of covariate values}
+#' @export
+#' @rdname qi_dist
+qi_dist.lm <- function(model, at = list(), fd_at = list(x1 = NULL, x2 = NULL), nsim = 1000) {
+  z <- zmodelMatcher(model)
+  z.out <- z$zelig
+  do.call(z.out$zelig, z$model.args)
+  if(!all(sapply(fd_at, is.null))) {
+    if(length(at) >0) warning("'at' and 'fd_at' both specified: ignoring 'at'.")
+    if(length(by) >0) warning("'by' and 'fd_at' both specified: ignoring 'by'.")
+    do.call(z.out$setx, fd_at$x1)
+    do.call(z.out$setx1, fd_at$x2)
+    z.out$sim(num = nsim)
+    return(get_all_qi(z.out, nsim = nsim))
+  }
+    by <- rowwise(do.call(expand.grid, at))
+  by.names <- names(by)
+  simqi <- vector(mode = "list", length = nrow(by))
+  for(i in 1:nrow(by)) {
+    by.i <- as.list(by[i, , drop = TRUE])
+    do.call(z.out$setx, by.i)
+    z.out$sim(num = nsim)
+    simqi[[i]] <- get_all_qi(z.out, nsim = nsim)
+    simqi[[i]] <- sapply(simqi[[i]], function(x) {
+      for(j in by.names) x[[j]] <- by.i[[j]]
+      return(x)
+    },
+    simplify = FALSE)
+  }
+  simqi_at <- do.call(rbind, sapply(simqi, function(x) x[["at"]], simplify = FALSE))
+  if("fd_at" %in% names(simqi)) {
+    simqi_fd_at <- do.call(rbind, sapply(simqi, function(x) x[["fd_at"]], simplify = FALSE))
+    simqi_at <- list(at = simqi_at, fd_at = simqi_fd_att)
+  } else {
+    simqi_at <- list(at = simqi_at)
+  }
+  class(simqi_at) <- c("qidist", class(simqi_at))
+  return(simqi_at)
+}
+
+
+#' Summary statistic from distributions of quantities of interest.
+#' 
+#' @param x A list containing distributions of quantities of interest.
+#' @param probs probabilities passed to quantile.
+#' @param fd_at A list of length 2. Each element must itself be a named list of covariate values.
+#' @param nsim The number of simulations used
+#' @return A list containing data.frames with columns stroring covariate values
+#'   and summry statistic for quantities of interest. Specifically,
+#'   \item{at} {A data.frame with simulated statistics for
+#'   quantities of interest at specific covariate values}
+#'   and possibly
+#'   \item{fd_at}{A data.frame with summaries of differences in quantities of interest at a
+#'   set of covariate values}
+#' @export
+summary.qidist <- function(x, probs = c(0.025, 0.50, 0.975)) {
+  qi_dist <- sapply(x, function(y) {
+    aggregate(y$value,
+              by = as.list(y[setdiff(names(y), "value")]),
+              FUN = function(y) c(mean = mean(y), sd = sd(y), quantile(y, probs = probs)))
+  },
+  simplify = FALSE)
+  class(qi_dist) <- c("qidist_summary", class(qi_dist))
+  return(qi_dist)
+}
+
+#' Plot distributions of quantities of interest.
+#' 
+#' @param qi_dist A list containing distributions of quantities of interest.
+#' @return A ggplot object.
+#' @export
+plot.qidist <- function(qi_dist) {
+  varnames <- setdiff(names(qi_dist[[1]]), c("value", "type", "zelig__source"))
+  varlen <- sapply(qi_dist[[1]][, varnames, drop = FALSE], function(x) length(unique(x)))
+  diffvars <- varnames[varlen > 1]
+  #diffvars <- diffvars[order(varlen, decreasing = TRUE)]
+  staticvars <- setdiff(varnames, diffvars)
+  staticvals <- sapply(qi_dist[[1]][, staticvars, drop = FALSE], unique)
+  minpos <- aggregate(qi_dist[[1]]["value"],
+                      by = as.list(qi_dist[[1]][c("type", staticvars)]),
+                      FUN = min)
+  minpos$othervars <- rep(paste(paste(staticvars, staticvals, sep = " = "), collapse = "\n"), nrow(minpos))
+  for(i in diffvars) {
+    if(varlen[i] > 4){
+      qi_dist[[1]][[i]] <- cut(qi_dist[[1]][[i]], 4)
+    }
+    qi_dist[[1]][[i]] <- factor(qi_dist[[1]][[i]])
+  }
+  diffvar <- diffvars[1]
+  if(length(diffvars) > 1) diffvars <- setdiff(diffvars, diffvar)
+  foo <- sapply(diffvars, function(x) {
+    col <- qi_dist[[1]][[x]]
+    if(is.numeric(col)) col <- as.character(round(col, digits = 2))
+    paste(x, col, sep = " = ")
+  })
+  if(is.matrix(foo)) foo <- apply(foo, 1, paste, collapse = ",")
+  qi_dist[[1]][["covars"]] <- paste("(", qi_dist[[1]][["type"]], " | ", foo, ")", sep = "")
+  diffvars <- setdiff(diffvars, diffvar)
+  p <- ggplot(qi_dist[[1]],
+              aes(x = value),
+              alpha = 0.125) +
+    geom_density(aes_string(y = "..scaled..", fill = "covars", color = "covars"), alpha = 0.125, size = 1) +
+    geom_text(aes(y = 0.9, label =  othervars), hjust = 0, data = minpos)
+  if(length(unique(qi_dist[[1]][["covars"]])) >5 && length(diffvars) > 0) {
+    p <- p + facet_grid(as.formula(paste(diffvar, "~ type", collapse = "")), scales = "free", labeller = "label_both") +
+      scale_y_continuous(limits = c(0, 1.35))
+  } else {
+    p <- p + facet_wrap(~type, ncol = 1, scales = "free") +
+      scale_y_continuous(limits = c(0, 1.1))
+  }
+  if("fd_at" %in% names(qi_dist)) {
+    qi_dist[[2]]$covars <- NA
+    p <- p + geom_density(aes_string(y = "..scaled..", fill = "covars"), data = qi_dist[[2]], alpha = 0.125, size = 1, color = "gray60")
+  }
+  direct.label(p +
+                theme(legend.position = "top"),
+               method = "top.bumptwice")
+}
+

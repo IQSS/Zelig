@@ -1012,6 +1012,14 @@ z$methods(
     .self$json$"explanatory" <- list(modelingType = .self$explanatory)
     .self$json$"vignette.url" <- .self$vignette.url
     .self$json$"wrapper" <- .self$wrapper
+    .self$json$"func" <- paste(na.omit(as(.self$fn, "character")[c(2, 1, 3)]), collapse = "")
+    glm.info = list(family = try(.self$family, silent = TRUE),
+                    link = try(.self$link, silent = TRUE),
+                    linkinv = try(.self$linkinv, silent = TRUE))
+    for(i in names(glm.info)) {
+      .self$json[[i]] <- NA
+      if(class(glm.info[[i]]) != "try-error") .self$json[[i]] <- glm.info[[i]]
+    }
     tree <- c(class(.self)[1], .self$.refClassDef@refSuperClasses)
     .self$json$tree <- head(tree, match("Zelig", tree) - 1)
     .self$ljson <- .self$json
@@ -1189,10 +1197,6 @@ z$methods(
       .self$by <- c("bootstrapIndex", .self$by)
   }
 )
-
-
-
-
 
 z$methods(
   feedback = function() {
