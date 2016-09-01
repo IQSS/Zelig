@@ -10,8 +10,8 @@ importFrom("grDevices", "col2rgb", "heat.colors", "rgb")
 importFrom("graphics", "abline", "axis", "barplot", "box", "image",
            "layout", "lines", "par", "polygon", "text")
 importFrom("ggplot2", "ggplot", "aes", "aes_string", "geom_density",
-           "geom_text", "facet_wrap", "facet_grid", "scale_y_continuous",
-           "theme", "guides")
+           "geom_text", "geom_errorbar", "geom_smooth", "facet_wrap",
+           "facet_grid", "scale_y_continuous", "theme", "guides")
 importFrom("directlabels", "direct.label")
 importFrom("stats", "binomial", "complete.cases", "density", "glm",
              "lm", "lm.influence", "median", "model.frame",

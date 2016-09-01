@@ -430,54 +430,79 @@ summary.qidist <- function(x, probs = c(0.025, 0.50, 0.975)) {
 #' @return A ggplot object.
 #' @export
 plot.qidist <- function(qi_dist) {
+  ## This could resonably by re-factored into simulation.plot or so.
+  qi_dist[] <- sapply(qi_dist, function(x) x[, !grepl(":", names(x))], simplify = FALSE)
   varnames <- setdiff(names(qi_dist[[1]]), c("value", "type", "zelig__source"))
   varlen <- sapply(qi_dist[[1]][, varnames, drop = FALSE], function(x) length(unique(x)))
+  varnames <- varnames[order(varlen, decreasing = TRUE)]
+  varlen <- varlen[order(varlen, decreasing = TRUE)]
   diffvars <- varnames[varlen > 1]
-  #diffvars <- diffvars[order(varlen, decreasing = TRUE)]
   staticvars <- setdiff(varnames, diffvars)
   staticvals <- sapply(qi_dist[[1]][, staticvars, drop = FALSE], unique)
+  diffvar <- diffvars[1]
+  if(length(diffvars) > 1) diffvars <- setdiff(diffvars, diffvar)
   minpos <- aggregate(qi_dist[[1]]["value"],
                       by = as.list(qi_dist[[1]][c("type", staticvars)]),
                       FUN = min)
   minpos$othervars <- rep(paste(paste(staticvars, staticvals, sep = " = "), collapse = "\n"), nrow(minpos))
-  for(i in diffvars) {
-    if(varlen[i] > 4){
-      qi_dist[[1]][[i]] <- cut(qi_dist[[1]][[i]], 4)
-    }
-    qi_dist[[1]][[i]] <- factor(qi_dist[[1]][[i]])
-  }
-  diffvar <- diffvars[1]
-  if(length(diffvars) > 1) diffvars <- setdiff(diffvars, diffvar)
   foo <- sapply(diffvars, function(x) {
     col <- qi_dist[[1]][[x]]
     if(is.numeric(col)) col <- as.character(round(col, digits = 2))
     paste(x, col, sep = " = ")
   })
-  if(is.matrix(foo)) foo <- apply(foo, 1, paste, collapse = ",")
+  if(is.matrix(foo) && ncol(foo) > 1) foo <- apply(foo, 1, paste, collapse = ",")
   qi_dist[[1]][["covars"]] <- paste("(", qi_dist[[1]][["type"]], " | ", foo, ")", sep = "")
   diffvars <- setdiff(diffvars, diffvar)
-  p <- ggplot(qi_dist[[1]],
-              aes(x = value),
-              alpha = 0.125) +
-    geom_density(aes_string(y = "..scaled..", fill = "covars", color = "covars"), alpha = 0.125, size = 1) +
-    geom_text(aes(y = 0.9, label =  othervars), hjust = 0, data = minpos)
-  if(length(unique(qi_dist[[1]][["covars"]])) >5 && length(diffvars) > 0) {
-    p <- p + facet_grid(as.formula(paste(diffvar, "~ type", collapse = "")), scales = "free", labeller = "label_both") +
-      scale_y_continuous(limits = c(0, 1.35))
+  if(max(varlen) <= 2) {
+    p <- ggplot(qi_dist[[1]],
+                aes(x = value),
+                alpha = 0.125) +
+      geom_density(aes_string(y = "..scaled..", fill = "covars", color = "covars"), alpha = 0.125, size = 1) +
+      geom_text(aes(y = 0.9, label =  othervars), hjust = 0, data = minpos)
+    if(length(unique(qi_dist[[1]][["covars"]])) >5 && length(diffvars) > 0) {
+      p <- p + facet_grid(as.formula(paste(diffvar, "~ type", collapse = "")), scales = "free", labeller = "label_both") +
+        scale_y_continuous(limits = c(0, 1.35))
+    } else {
+      p <- p + facet_wrap(~type, ncol = 1, scales = "free") +
+        scale_y_continuous(limits = c(0, 1.1))
+    }
+    if("fd_at" %in% names(qi_dist)) {
+      qi_dist[[2]]$covars <- NA
+      p <- p + geom_density(aes_string(y = "..scaled..", fill = "covars"), data = qi_dist[[2]], alpha = 0.125, size = 1, color = "gray60")
+    }
+    ggp <- any(grepl("ggplot2", search()))
+    if(!ggp) require(ggplot2, quietly = TRUE) ## not sure why the import system isn't finding this.
+    p <- direct.label(p +
+                      theme(legend.position = "top"),
+                      method = "top.bumptwice")
+    if(!ggp) detach(package:ggplot2)
   } else {
-    p <- p + facet_wrap(~type, ncol = 1, scales = "free") +
-      scale_y_continuous(limits = c(0, 1.1))
+    pdat <- summary(qi_dist)[[1]]
+    if (max(varlen) < 10) {
+      pdat[[diffvar]] <- factor(pdat[[diffvar]])
+      p <- ggplot(pdat, aes_string(x = diffvar, y = "mean"))
+      if(length(diffvars) > 0) {
+        p <- p + geom_errorbar(aes(ymin = qp_2.5, ymax = qp_97.5,
+                               color = covars),
+                           stat = "identity") 
+      } else {
+        p <- p + geom_errorbar(aes(ymin = qp_2.5, ymax = qp_97.5),
+                           stat = "identity")
+      }
+    } else {
+      p <- ggplot(pdat, aes_string(x = diffvar, y = "mean"))
+      if(length(diffvars) >0) {
+        p <- p + geom_smooth(aes(ymin = qp_2.5, ymax = qp_97.5,
+                                 color = covars), stat = "identity")
+      } else {
+        p <- p + geom_smooth(aes(ymin = qp_2.5, ymax = qp_97.5),
+                             stat = "identity")
+      }
+    }
+    p <- p +
+      facet_wrap(~type) +
+      theme(legend.position = "top")
   }
-  if("fd_at" %in% names(qi_dist)) {
-    qi_dist[[2]]$covars <- NA
-    p <- p + geom_density(aes_string(y = "..scaled..", fill = "covars"), data = qi_dist[[2]], alpha = 0.125, size = 1, color = "gray60")
-  }
-  ggp <- grepl("ggplot2", search())
-  if(!ggp) require(ggplot2, quietly = TRUE) ## not sure why the import system isn't finding this.
-  p <- direct.label(p +
-                    theme(legend.position = "top"),
-                    method = "top.bumptwice")
-  if(!ggp) detach(package:ggplot2, unload = TRUE)
   return(p)
 }
 
