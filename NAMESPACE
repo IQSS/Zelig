@@ -11,7 +11,7 @@ importFrom("graphics", "abline", "axis", "barplot", "box", "image",
            "layout", "lines", "par", "polygon", "text")
 importFrom("ggplot2", "ggplot", "aes", "aes_string", "geom_density",
            "geom_text", "facet_wrap", "facet_grid", "scale_y_continuous",
-           "theme")
+           "theme", "guides")
 importFrom("directlabels", "direct.label")
 importFrom("stats", "binomial", "complete.cases", "density", "glm",
              "lm", "lm.influence", "median", "model.frame",
