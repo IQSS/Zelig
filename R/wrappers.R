@@ -472,8 +472,12 @@ plot.qidist <- function(qi_dist) {
     qi_dist[[2]]$covars <- NA
     p <- p + geom_density(aes_string(y = "..scaled..", fill = "covars"), data = qi_dist[[2]], alpha = 0.125, size = 1, color = "gray60")
   }
-  direct.label(p +
-                theme(legend.position = "top"),
-               method = "top.bumptwice")
+  ggp <- grepl("ggplot2", search())
+  if(!ggp) require(ggplot2, quietly = TRUE) ## not sure why the import system isn't finding this.
+  p <- direct.label(p +
+                    theme(legend.position = "top"),
+                    method = "top.bumptwice")
+  if(!ggp) detach(package:ggplot2, unload = TRUE)
+  return(p)
 }
 
