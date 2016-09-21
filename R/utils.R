@@ -28,7 +28,7 @@ mode <- Mode
 #' @author Matt Owen \email{mowen@@iq.harvard.edu}
 Median <- function (x, na.rm=NULL) {
   v <- ifelse(is.numeric(x),
-              median(v),
+              median(x),
               levels(x)[ceiling(median(as.numeric(x)))]
   )
   if (is.ordered(x))
