@@ -39,3 +39,22 @@ zlogit$methods(
   }
 )
 
+
+zlogit$methods(
+  show = function(show.odds.ratios = FALSE,...) {
+  if (show.odds.ratios & !.self$mi & !.self$bootstrap) {
+    summ <- .self$zelig.out %>%
+        do(summ = {cat("Model: \n")
+           ## Replace coefficients with odds-ratios
+          .z.out.summary = base::summary(.$z.out)
+          .z.out.summary$coefficients[,c(1,2)] <- exp(.z.out.summary$coefficients[,c(1,2)])
+          colnames(.z.out.summary$coefficients)[c(1,2)] <- paste(colnames(.z.out.summary$coefficients)[c(1,2)], '(odds ratio)')
+          print(.z.out.summary)
+        })
+  }
+  else {
+    callSuper(...)
+  }
+    #print(base::summary(.self$zelig.out))
+  }
+)
