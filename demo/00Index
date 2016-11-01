@@ -31,6 +31,7 @@ demo-roc 			example of ROC graph for comparing binary choice outcome models
 demo-scope 			example of scoping behavior 
 demo-setx-2 		additional example of setx function for estimating quantities of interest
 demo-setx 			example of setx function for estimating quantities of interest
+demo-setx-fn		example of setx function using the fn argument
 demo-show 			example of printing model coefficients
 demo-signif-stars 	example of modifying tables of model coefficients
 demo-strata 		example of estimatation with strata
