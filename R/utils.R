@@ -1,4 +1,5 @@
 #' Compute the Statistical Mode of a Vector
+#' @aliases Mode mode
 #' @param x a vector of numeric, factor, or ordered values
 #' @return the statistical mode of the vector. If two modes exist, one is
 #'   randomly selected (by design)

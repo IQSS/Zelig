@@ -2,6 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{Mode}
 \alias{Mode}
+\alias{mode}
 \title{Compute the Statistical Mode of a Vector}
 \usage{
 Mode(x)
