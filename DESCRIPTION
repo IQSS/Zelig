@@ -18,8 +18,8 @@ Description: A framework that brings together an abundance of common
     quantities of interest (such as relative risk ratios, average treatment
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
-Version: 5.0-13
-Date: 2016-11-01
+Version: 5.0-14
+Date: 2016-11-02
 Imports: sandwich, methods, MASS, survival, VGAM, jsonlite, AER, plyr,
         dplyr (>= 0.3.0.2), quantreg, geepack, MCMCpack, coda, Amelia,
         MatchIt, maxLik, survey
