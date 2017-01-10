@@ -23,7 +23,7 @@
 #' @param data the name of a data frame containing the variables
 #'   referenced in the formula, or a list of multiply imputed data frames
 #'   each having the same variable names and row numbers (created by
-#'   \code{mi}) 
+#'   \code{mi})
 #' @param ... additional arguments passed to \code{zelig},
 #'   depending on the model to be estimated
 #' @param by a factor variable contained in \code{data}.  Zelig will subset
@@ -39,17 +39,21 @@
 #'   and \code{formula} which may be summarized using
 #'   \code{summary(z.out)} or individually extracted using, for example,
 #'   \code{z.out\$coefficients}.  See the specific models listed above
-#'   for additional output values, or simply type \code{names(z.out)}.  
+#'   for additional output values, or simply type \code{names(z.out)}.
 #'
 #' @name zelig
 #' @export
 #' @author Matt Owen \email{mowen@@iq.harvard.edu}, Kosuke Imai, Olivia Lau, and
-#' Gary King 
+#' Gary King
 #' Maintainer: Matt Owen \email{mowen@@iq.harvard.edu}
 #' @keywords package
 
 zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   #   .Deprecated("\nz$new() \nz$zelig(...)")
+  # Check if required model argument is specified
+  if(missing(model)) stop('Estimation model type not specified.\nSelect estimation model type with the model argument.',
+    call. = FALSE)
+
   # Zelig Core
   zeligmodels <- system.file(file.path("JSON", "zelig5models.json"), package = "Zelig")
   models <- jsonlite::fromJSON(txt = readLines(zeligmodels))$zelig5models
@@ -78,7 +82,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
   for (i in seq(models)) {
     models4[[models[[i]]$wrapper]] <- names(models)[i]
   }
-  
+
   model.init <- paste0("z", models4[[model]], "$new()")
   z5 <- try(eval(parse(text = model.init)), silent = TRUE)
   if ("try-error" %in% class(z5))
@@ -111,7 +115,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #' @param cond   a logical value indicating whether unconditional
 #'   (default) or conditional (choose \code{cond = TRUE}) prediction
 #'   should be performed.  If you choose \code{cond = TRUE}, \code{setx}
-#'   will coerce \code{fn = NULL} and ignore the additional arguments in 
+#'   will coerce \code{fn = NULL} and ignore the additional arguments in
 #'   \code{\dots}.  If \code{cond = TRUE} and \code{data = NULL},
 #'   \code{setx} will prompt you for a data frame.
 #' @param ... user-defined values of specific variables for overwriting the
@@ -125,7 +129,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #'   analyses (i.e., when choosing the \code{by} option in \code{\link{zelig}},
 #'   \code{setx} returns the selected values calculated over the entire
 #'   data frame.  If you wish to calculate values over just one subset of
-#'   the data frame, the 5th subset for example, you may use:  
+#'   the data frame, the 5th subset for example, you may use:
 #'   \code{x.out <- setx(z.out[[5]])}
 #' @export
 #' @examples
@@ -136,7 +140,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #' x.out <- setx(z.out)
 #' s.out <- sim(z.out, x = x.out)
 #'
-#' @author Matt Owen \email{mowen@@iq.harvard.edu}, Olivia Lau and Kosuke Imai 
+#' @author Matt Owen \email{mowen@@iq.harvard.edu}, Olivia Lau and Kosuke Imai
 #' @seealso The full Zelig manual may be accessed online at
 #'   \url{http://gking.harvard.edu/zelig}
 #' @keywords file
@@ -163,7 +167,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 }
 
 #' Generic Method for Computing and Organizing Simulated Quantities of Interest
-#' 
+#'
 #' Simulate quantities of interest from the estimated model
 #' output from \code{zelig()} given specified values of explanatory
 #' variables established in \code{setx()}.  For classical \emph{maximum
@@ -190,7 +194,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #' @param ... arguments reserved future versions of Zelig
 #' @return The output stored in \code{s.out} varies by model.  Use the
 #'  \code{names} command to view the output stored in \code{s.out}.
-#'  Common elements include: 
+#'  Common elements include:
 #'  \item{x}{the \code{\link{setx}} values for the explanatory variables,
 #'    used to calculate the quantities of interest (expected values,
 #'    predicted values, etc.). }
@@ -198,7 +202,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'    first differences, and other model-specific quantities of
 #'    interest, such as risk-ratios.}
 #'  \item{call}{the options selected for \code{\link{sim}}, used to
-#'    replicate quantities of interest. } 
+#'    replicate quantities of interest. }
 #'  \item{zelig.call}{the original command and options for
 #'    \code{\link{zelig}}, used to replicate analyses. }
 #'  \item{num}{the number of simulations requested. }
@@ -224,7 +228,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'    the treatment (\eqn{t_i=1}) and control (\eqn{t_i=0}) groups.  Then the
 #'    average expected treatment effect for the treatment group is
 #'    \deqn{ \frac{1}{n}\sum_{i=1}^n [ \, Y_i(t_i=1) -
-#'      E[Y_i(t_i=0)] \mid t_i=1 \,],} 
+#'      E[Y_i(t_i=0)] \mid t_i=1 \,],}
 #'    where \eqn{Y_i(t_i=1)} is the value of the dependent variable for
 #'    observation \eqn{i} in the treatment group.  Variation in the
 #'    simulations are due to uncertainty in simulating \eqn{E[Y_i(t_i=0)]},
@@ -237,7 +241,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'    the treatment (\eqn{t_i=1}) and control (\eqn{t_i=0}) groups.  Then the
 #'    average predicted treatment effect for the treatment group is
 #'    \deqn{ \frac{1}{n}\sum_{i=1}^n [ \, Y_i(t_i=1) -
-#'      \widehat{Y_i(t_i=0)} \mid t_i=1 \,],} 
+#'      \widehat{Y_i(t_i=0)} \mid t_i=1 \,],}
 #'    where \eqn{Y_i(t_i=1)} is the value of the dependent variable for
 #'    observation \eqn{i} in the treatment group.  Variation in the
 #'    simulations are due to uncertainty in simulating
@@ -246,9 +250,9 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'    assumption that everything stays the same except that the
 #'    treatment indicator is switched to \eqn{t_i=0}.}
 #' @export
-#' @author Matt Owen \email{mowen@@iq.harvard.edu}, Olivia Lau and Kosuke Imai 
+#' @author Matt Owen \email{mowen@@iq.harvard.edu}, Olivia Lau and Kosuke Imai
 
-sim <- function(obj, x = NULL, x1 = NULL, y = NULL, num = 1000, bootstrap = F, 
+sim <- function(obj, x = NULL, x1 = NULL, y = NULL, num = 1000, bootstrap = F,
                 bootfn = NULL, cond.data = NULL, ...) {
   # .Deprecated("\nz$new() \n[...] \nz$sim(...)")
   s5 <- x$copy()

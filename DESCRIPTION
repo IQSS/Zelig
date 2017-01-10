@@ -20,25 +20,73 @@ Description: A framework that brings together an abundance of common
     and visualize complex models.
 Version: 5.0-14
 Date: 2016-11-02
-Imports: sandwich, methods, MASS, survival, VGAM, jsonlite, AER, plyr,
-        dplyr (>= 0.3.0.2), quantreg, geepack, MCMCpack, coda, Amelia,
-        MatchIt, maxLik, survey
-Suggests: testthat, knitr
-Collate: 'utils.R' 'model-zelig.R' 'model-weibull.R' 'model-tobit.R'
-        'model-bayes.R' 'model-tobit-bayes.R' 'model-glm.R'
-        'model-gee.R' 'model-gamma.R' 'model-binchoice.R'
-        'model-logit.R' 'model-relogit.R' 'model-quantile.R'
-        'model-probit.R' 'model-binchoice-gee.R' 'model-probit-gee.R'
-        'model-probit-bayes.R' 'model-poisson.R' 'model-poisson-gee.R'
-        'model-poisson-bayes.R' 'model-oprobit-bayes.R'
-        'model-normal.R' 'model-normal-gee.R' 'model-normal-bayes.R'
-        'model-negbinom.R' 'model-mlogit-bayes.R' 'model-ls.R'
-        'model-lognorm.R' 'model-logit-gee.R' 'model-logit-bayes.R'
-        'model-gamma-gee.R' 'model-factor-bayes.R' 'model-exp.R'
-        'create-json.R' 'model-survey.R' 'model-binchoice-survey.R'
-        'model-gamma-survey.R' 'model-logit-survey.R'
-        'model-normal-survey.R' 'model-poisson-survey.R'
-        'model-probit-survey.R' 
-        'model-timeseries.R' 'model-arima.R' 'model-ar.R' 'model-ma.R'
-        'plots.R' 'wrappers.R'
-
+Imports:
+    sandwich,
+    methods,
+    MASS,
+    survival,
+    VGAM,
+    jsonlite,
+    AER,
+    plyr,
+    dplyr (>= 0.3.0.2),
+    quantreg,
+    geepack,
+    MCMCpack,
+    coda,
+    Amelia,
+    MatchIt,
+    maxLik,
+    survey
+Suggests:
+    testthat,
+    knitr
+Collate:
+    'model-zelig.R'
+    'model-timeseries.R'
+    'model-ma.R'
+    'model-ar.R'
+    'model-arima.R'
+    'model-weibull.R'
+    'model-tobit.R'
+    'model-bayes.R'
+    'model-tobit-bayes.R'
+    'model-glm.R'
+    'model-binchoice.R'
+    'model-probit.R'
+    'model-probit-bayes.R'
+    'model-poisson.R'
+    'model-poisson-bayes.R'
+    'model-oprobit-bayes.R'
+    'model-normal.R'
+    'model-normal-bayes.R'
+    'model-mlogit-bayes.R'
+    'model-gamma.R'
+    'model-gee.R'
+    'model-logit.R'
+    'model-logit-bayes.R'
+    'model-factor-bayes.R'
+    'model-poisson-gee.R'
+    'model-normal-gee.R'
+    'model-gamma-gee.R'
+    'model-binchoice-gee.R'
+    'model-probit-gee.R'
+    'model-logit-gee.R'
+    'model-relogit.R'
+    'model-quantile.R'
+    'model-lognorm.R'
+    'model-exp.R'
+    'model-negbinom.R'
+    'model-ls.R'
+    'utils.R'
+    'create-json.R'
+    'model-survey.R'
+    'model-binchoice-survey.R'
+    'model-gamma-survey.R'
+    'model-logit-survey.R'
+    'model-normal-survey.R'
+    'model-poisson-survey.R'
+    'model-probit-survey.R'
+    'plots.R'
+    'wrappers.R'
+RoxygenNote: 5.0.1
