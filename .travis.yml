@@ -1,6 +1,12 @@
 language: r
 cache: packages
 
+r_packages:
+    - covr
+  
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
+
 branches:
     only:
     - master
