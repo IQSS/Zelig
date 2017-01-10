@@ -1,0 +1,7 @@
+language: r
+cache: packages
+
+branches:
+    only:
+    - master
+    - pkgdown
