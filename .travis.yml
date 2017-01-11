@@ -1,11 +1,11 @@
 language: r
 cache: packages
 
-r_packages:
-    - covr
-  
+r_github_packages:
+    - jimhester/covr
+
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
+    - Rscript -e 'covr::codecov()'
 
 branches:
     only:
