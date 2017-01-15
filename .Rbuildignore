@@ -4,3 +4,4 @@
 images
 README.md
 .travis.yml
+^appveyor\.yml$
