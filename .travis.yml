@@ -1,14 +1,13 @@
 language: r
 cache: packages
+branches:
+    only:
+    - master
+    - /^tests.*$/
+    - pkgdown
 
 r_github_packages:
     - jimhester/covr
 
 after_success:
     - Rscript -e 'covr::codecov()'
-
-branches:
-    only:
-    - master
-    - /^test-.*$/
-    - pkgdown
