@@ -10,4 +10,5 @@ after_success:
 branches:
     only:
     - master
+    - /^test-.*$/
     - pkgdown
