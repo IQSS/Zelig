@@ -18,7 +18,7 @@ data frame called in zelig is used}
 \item{cond}{a logical value indicating whether unconditional
 (default) or conditional (choose \code{cond = TRUE}) prediction
 should be performed.  If you choose \code{cond = TRUE}, \code{setx}
-will coerce \code{fn = NULL} and ignore the additional arguments in 
+will coerce \code{fn = NULL} and ignore the additional arguments in
 \code{\dots}.  If \code{cond = TRUE} and \code{data = NULL},
 \code{setx} will prompt you for a data frame.}
 
@@ -35,7 +35,7 @@ For unconditional prediction, \code{x.out} is a model matrix based
   analyses (i.e., when choosing the \code{by} option in \code{\link{zelig}},
   \code{setx} returns the selected values calculated over the entire
   data frame.  If you wish to calculate values over just one subset of
-  the data frame, the 5th subset for example, you may use:  
+  the data frame, the 5th subset for example, you may use:
   \code{x.out <- setx(z.out[[5]])}
 }
 \description{

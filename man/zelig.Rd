@@ -58,7 +58,7 @@ first differences, along with the associated measures of uncertainty
 }
 \author{
 Matt Owen \email{mowen@iq.harvard.edu}, Kosuke Imai, Olivia Lau, and
-Gary King 
+Gary King
 Maintainer: Matt Owen \email{mowen@iq.harvard.edu}
 }
 \keyword{package}
