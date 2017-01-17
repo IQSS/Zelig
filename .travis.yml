@@ -3,7 +3,7 @@ cache: packages
 branches:
     only:
     - master
-    - /^tests.*$/
+    - /^test.*$/
     - pkgdown
 
 r_github_packages:
