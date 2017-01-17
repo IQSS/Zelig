@@ -7,9 +7,9 @@ Description: A framework that brings together an abundance of common
     statistical models found across packages into a unified interface, and
     provides a common architecture for estimation and interpretation, as well
     as bridging functions to absorb increasingly more models into the
-    collective library.  Zelig allows each individual package, for each
+    collective library. Zelig allows each individual package, for each
     statistical model, to be accessed by a common uniformly structured call and
-    set of arguments.  Moreover, Zelig automates all the surrounding building
+    set of arguments. Moreover, Zelig automates all the surrounding building
     blocks of a statistical work-flow --procedures and algorithms that may be
     essential to one user's application but which the original package
     developer did not use in their own research and might not themselves
@@ -18,8 +18,10 @@ Description: A framework that brings together an abundance of common
     quantities of interest (such as relative risk ratios, average treatment
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
+URL: https://cran.r-project.org/web/packages/Zelig/index.html
+BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-14
-Date: 2016-11-02
+Date: 2017-01-16
 Imports:
     sandwich,
     methods,
