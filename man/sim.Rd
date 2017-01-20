@@ -32,7 +32,7 @@ models currently support this parameter}
 \item{...}{arguments reserved future versions of Zelig}
 }
 \value{
-The output stored in \code{s.out} varies by model.  Use the
+The output stored in \code{s.out} varies by model. Use the
  \code{names} command to view the output stored in \code{s.out}.
  Common elements include:
  \item{x}{the \code{\link{setx}} values for the explanatory variables,
@@ -47,7 +47,7 @@ The output stored in \code{s.out} varies by model.  Use the
    \code{\link{zelig}}, used to replicate analyses. }
  \item{num}{the number of simulations requested. }
  \item{par}{the parameters (coefficients, and additional
-   model-specific parameters).  You may wish to use the same set of
+   model-specific parameters). You may wish to use the same set of
    simulated parameters to calculate quantities of interest rather
    than simulating another set.}
  \item{qi\$ev}{simulations of the expected values given the
@@ -57,20 +57,20 @@ The output stored in \code{s.out} varies by model.  Use the
  \item{qi\$fd}{simulations of the first differences (or risk
    difference for binary models) for the given \code{x} and \code{x1}.
    The difference is calculated by subtracting the expected values
-   given \code{x} from the expected values given \code{x1}.  (If do not
+   given \code{x} from the expected values given \code{x1}. (If do not
    specify \code{x1}, you will not get first differences or risk
    ratios.) }
  \item{qi\$rr}{simulations of the risk ratios for binary and
-   multinomial models.  See specific models for details.}
+   multinomial models. See specific models for details.}
  \item{qi\$ate.ev}{simulations of the average expected
    treatment effect for the treatment group, using conditional
    prediction. Let \eqn{t_i} be a binary explanatory variable defining
-   the treatment (\eqn{t_i=1}) and control (\eqn{t_i=0}) groups.  Then the
+   the treatment (\eqn{t_i=1}) and control (\eqn{t_i=0}) groups. Then the
    average expected treatment effect for the treatment group is
    \deqn{ \frac{1}{n}\sum_{i=1}^n [ \, Y_i(t_i=1) -
      E[Y_i(t_i=0)] \mid t_i=1 \,],}
    where \eqn{Y_i(t_i=1)} is the value of the dependent variable for
-   observation \eqn{i} in the treatment group.  Variation in the
+   observation \eqn{i} in the treatment group. Variation in the
    simulations are due to uncertainty in simulating \eqn{E[Y_i(t_i=0)]},
    the counterfactual expected value of \eqn{Y_i} for observations in the
    treatment group, under the assumption that everything stays the
@@ -78,12 +78,12 @@ The output stored in \code{s.out} varies by model.  Use the
  \item{qi\$ate.pr}{simulations of the average predicted
    treatment effect for the treatment group, using conditional
    prediction. Let \eqn{t_i} be a binary explanatory variable defining
-   the treatment (\eqn{t_i=1}) and control (\eqn{t_i=0}) groups.  Then the
+   the treatment (\eqn{t_i=1}) and control (\eqn{t_i=0}) groups. Then the
    average predicted treatment effect for the treatment group is
    \deqn{ \frac{1}{n}\sum_{i=1}^n [ \, Y_i(t_i=1) -
      \widehat{Y_i(t_i=0)} \mid t_i=1 \,],}
    where \eqn{Y_i(t_i=1)} is the value of the dependent variable for
-   observation \eqn{i} in the treatment group.  Variation in the
+   observation \eqn{i} in the treatment group. Variation in the
    simulations are due to uncertainty in simulating
    \eqn{\widehat{Y_i(t_i=0)}}, the counterfactual predicted value of
    \eqn{Y_i} for observations in the treatment group, under the
@@ -93,16 +93,20 @@ The output stored in \code{s.out} varies by model.  Use the
 \description{
 Simulate quantities of interest from the estimated model
 output from \code{zelig()} given specified values of explanatory
-variables established in \code{setx()}.  For classical \emph{maximum
+variables established in \code{setx()}. For classical \emph{maximum
 likelihood} models, \code{sim()} uses asymptotic normal
-approximation to the log-likelihood.  For \emph{Bayesian models},
+approximation to the log-likelihood. For \emph{Bayesian models},
 Zelig simulates quantities of interest from the posterior density,
-whenever possible.  For \emph{robust Bayesian models}, simulations
+whenever possible. For \emph{robust Bayesian models}, simulations
 are drawn from the identified class of Bayesian posteriors.
 Alternatively, you may generate quantities of interest using
 bootstrapped parameters.
 }
+\details{
+This documentation describes the \code{sim} Zelig 4 compatibility wrapper 
+function.
+}
 \author{
-Matt Owen \email{mowen@iq.harvard.edu}, Olivia Lau and Kosuke Imai
+Matt Owen, Olivia Lau and Kosuke Imai
 }
 
