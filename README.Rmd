@@ -110,7 +110,22 @@ At this point, we’ve estimated a model, set the predictor value, and estimated
 
 Zelig’s `graph()` method plots the estimated quantities of interest:
 
-```{r example_plot_1, fig.height=15, fig.width=10}
+```{r example_plot_graph, fig.height=11, fig.width=7}
 z5$graph()
 ```
 
+We can also simulate and plot simulations from ranges of simulated values. For example, first use the `setrange` method to set a range of fitted values for one of the covariates and draw simulations as before: 
+
+```{r}
+# set Education to range from 5 to 15 at single integer increments
+z5$setrange(Education = 5:15)
+
+# run simulations and estimate quantities of interest
+z5$sim()
+```
+
+Then pass the Zelig object to the `ci.plot` function:
+
+```{r example_plot_ci_plot, fig.height=5, fig.width=5}
+ci.plot(z5)
+```

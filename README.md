@@ -155,23 +155,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean       sd      50%     2.5%   97.5%
-    ## 1 75.21191 1.644432 75.24545 71.95282 78.2947
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 75.32214 1.616559 75.35173 72.1043 78.61496
     ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 74.99261 9.939054 75.05308 56.04266 94.37075
+    ##         mean       sd      50%     2.5%    97.5%
+    ## [1,] 75.4627 9.363758 75.52672 56.80704 93.21132
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.65529 1.504845 66.67759 63.75745 69.45737
+    ## 1 66.64621 1.473502 66.64853 63.89152 69.58572
     ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.46168 9.416217 66.56552 47.13064 84.14331
+    ##          mean       sd      50%    2.5%    97.5%
+    ## [1,] 67.12007 9.667353 67.00918 48.0223 86.05283
     ## fd
     ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.556617 1.443082 -8.540944 -11.33572 -5.895454
+    ## 1 -8.675923 1.426615 -8.731342 -11.29172 -5.761524
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
@@ -187,4 +187,20 @@ Zelig’s `graph()` method plots the estimated quantities of interest:
 
     z5$graph()
 
-![](README_files/figure-markdown_strict/example_plot_1-1.png)
+![](README_files/figure-markdown_strict/example_plot_graph-1.png)
+
+We can also simulate and plot simulations from ranges of simulated
+values. For example, first use the `setrange` method to set a range of
+fitted values for one of the covariates and draw simulations as before:
+
+    # set Education to range from 5 to 15 at single integer increments
+    z5$setrange(Education = 5:15)
+
+    # run simulations and estimate quantities of interest
+    z5$sim()
+
+Then pass the Zelig object to the `ci.plot` function:
+
+    ci.plot(z5)
+
+![](README_files/figure-markdown_strict/example_plot_ci_plot-1.png)
