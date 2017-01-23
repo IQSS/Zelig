@@ -117,6 +117,9 @@ z5$graph()
 We can also simulate and plot simulations from ranges of simulated values. For example, first use the `setrange` method to set a range of fitted values for one of the covariates and draw simulations as before: 
 
 ```{r}
+z5 <- zls$new()
+z5$zelig(Fertility ~ Education, data = swiss)
+
 # set Education to range from 5 to 15 at single integer increments
 z5$setrange(Education = 5:15)
 
@@ -124,8 +127,9 @@ z5$setrange(Education = 5:15)
 z5$sim()
 ```
 
-Then pass the Zelig object to the `ci.plot` function:
+Then use the `graph()` method as before:
 
 ```{r example_plot_ci_plot, fig.height=5, fig.width=5}
-ci.plot(z5)
+
+z5$graph()
 ```

@@ -37,6 +37,21 @@ is_simspresent <- function(x, fail = TRUE) {
     } else return(passes)
 }
 
+#' Check if simulations for individual values are present in sim.out
+#' @param x a sim.out method
+#' @param fail logical whether to return an error if simulation range is not
+#'   present.
+
+is_simsx <- function(x, fail = TRUE) {
+    passes <- TRUE
+    if (is.null(x$x)) passes <- FALSE
+    if (isTRUE(fail)) {
+        if (!isTRUE(passes))
+            stop('Simulations for individual fitted values are not present.',
+                call. = FALSE)
+    } else return(passes)
+}
+
 #' Check if simulations for a range of fitted values are present in sim.out
 #' @param x a sim.out method
 #' @param fail logical whether to return an error if simulation range is not

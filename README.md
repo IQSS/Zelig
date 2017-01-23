@@ -155,23 +155,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 75.27288 1.555114 75.25768 72.10674 78.29407
+    ##       mean       sd     50%    2.5%   97.5%
+    ## 1 75.34669 1.623717 75.3778 72.0946 78.3423
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.35558 9.603978 75.60731 56.68893 93.09457
+    ## [1,] 75.06701 9.872719 74.97049 55.38795 94.03839
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean       sd     50%     2.5%   97.5%
-    ## 1 66.58746 1.477427 66.6462 63.53562 69.4124
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 66.68021 1.520516 66.66157 63.7506 69.69706
     ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.54054 9.149655 66.61737 48.81021 84.46248
+    ##          mean       sd      50%    2.5%   97.5%
+    ## [1,] 66.56147 9.525085 66.82548 47.6388 85.4093
     ## fd
-    ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.685425 1.371735 -8.682234 -11.32805 -6.046019
+    ##        mean       sd       50%     2.5%     97.5%
+    ## 1 -8.666479 1.396604 -8.661257 -11.4146 -5.917406
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
@@ -193,14 +193,17 @@ We can also simulate and plot simulations from ranges of simulated
 values. For example, first use the `setrange` method to set a range of
 fitted values for one of the covariates and draw simulations as before:
 
+    z5 <- zls$new()
+    z5$zelig(Fertility ~ Education, data = swiss)
+
     # set Education to range from 5 to 15 at single integer increments
     z5$setrange(Education = 5:15)
 
     # run simulations and estimate quantities of interest
     z5$sim()
 
-Then pass the Zelig object to the `ci.plot` function:
+Then use the `graph()` method as before:
 
-    ci.plot(z5)
+    z5$graph()
 
 ![](README_files/figure-markdown_strict/example_plot_ci_plot-1.png)
