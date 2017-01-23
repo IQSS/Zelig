@@ -32,3 +32,9 @@ test_that('setx wrapper test x', {
     z4_set_vector <- round(as.vector(unlist(z4_set$setx.out)))
     expect_equivalent(z4_set_vector, c(1, 1, 11))
 })
+
+# FAIL TEST non-zelig objects --------------------------------------------------
+test_that('setx and sim non-zelig object fail', {
+    expect_error(setx('TEST'), 'Not a Zelig object.')
+    expect_error(sim('TEST'), 'Not a Zelig object.')
+})

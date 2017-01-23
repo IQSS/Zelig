@@ -20,7 +20,7 @@ exclude the main effects; and quadratic terms in the form
 \code{I(x1^2)}}
 
 \item{model}{the name of a statistical model.
-For a list of supported models visit: 
+For a list of supported models visit:
 \url{http://docs.zeligproject.org/en/latest/}.}
 
 \item{data}{the name of a data frame containing the variables
@@ -57,7 +57,7 @@ first differences, along with the associated measures of uncertainty
 (standard errors and confidence intervals).
 }
 \details{
-This documentation describes the \code{zelig} Zelig 4 compatibility wrapper 
+This documentation describes the \code{zelig} Zelig 4 compatibility wrapper
 function.
 }
 \author{

@@ -9,7 +9,7 @@ qi.plot(obj, ...)
 \arguments{
 \item{obj}{A reference class zelig5 object}
 
-\item{...}{Parameters to be passed to the `truehist' function which is 
+\item{...}{Parameters to be passed to the `truehist' function which is
 implicitly called for numeric simulations}
 }
 \description{

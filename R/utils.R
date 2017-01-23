@@ -100,12 +100,12 @@ setval <- function(val, newval) {
       stop("Wrong factor")
     return(factor(newval, levels = lev))
   }
-} 
+}
 
 #' Calculate the reduced dataset to be used in code{\link{setx}}
-#' 
+#'
 #' #' This method is used internally
-#' 
+#'
 #' @param dataset Zelig object data, possibly split to deal with \code{by} argument
 #' @param s list of variables and their tentative \code{setx} values
 #' @param formula a simplified version of the Zelig object formula (typically with 1 on the lhs)
@@ -173,7 +173,7 @@ statlevel <- function(qi, num) {
 }
 
 #' Pass Quantities of Interest to Appropriate Summary Function
-#' 
+#'
 #' @param qi quantity of interest (e.g., estimated value or predicted value)
 #' @param num number of simulations
 #' @return a formatted qi
@@ -193,7 +193,7 @@ stat <- function(qi, num) {
 #' @param formula a formula object
 #' @param cluster a vector
 #' @return a formula object describing clustering
-cluster.formula <- function (formula, cluster) { 
+cluster.formula <- function (formula, cluster) {
   # Convert LHS of formula to a string
   lhs <- deparse(formula[[2]])
   cluster.part <- if (is.null(cluster))
@@ -208,7 +208,7 @@ cluster.formula <- function (formula, cluster) {
 
 #' Zelig Copy of plyr::mutate to avoid namespace conflict with dplyr
 #' @keywords internal
-zeligPlyrMutate<-function (.data, ...) 
+zeligPlyrMutate<-function (.data, ...)
 {
     stopifnot(is.data.frame(.data) || is.list(.data) || is.environment(.data))
     cols <- as.list(substitute(list(...))[-1])
@@ -218,4 +218,3 @@ zeligPlyrMutate<-function (.data, ...)
     }
     .data
 }
-
