@@ -915,11 +915,12 @@ z$methods(
 z$methods(
   graph = function() {
     "Plot the quantities of interest"
-    
+
     is_uninitializedField(.self$zelig.out)
     is_simspresent(.self$sim.out)
 
-    qi.plot(.self)
+    if (is_simsx(.self$sim.out, fail = FALSE)) qi.plot(.self)
+    if (is_simsrange(.self$sim.out, fail = FALSE)) ci.plot(.self)
   }
 )
 
