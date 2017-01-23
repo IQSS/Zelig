@@ -7,7 +7,7 @@
 setx(obj, fn = NULL, data = NULL, cond = FALSE, ...)
 }
 \arguments{
-\item{obj}{the saved output from zelig}
+\item{obj}{output object from \code{zelig}}
 
 \item{fn}{a list of functions to apply to the data frame}
 
@@ -46,7 +46,7 @@ after \code{zelig} and before \code{sim} to simulate quantities of
 interest.
 }
 \details{
-This documentation describes the \code{setx} Zelig 4 compatibility wrapper 
+This documentation describes the \code{setx} Zelig 4 compatibility wrapper
 function.
 }
 \examples{

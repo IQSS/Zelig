@@ -44,6 +44,7 @@ Suggests:
     testthat,
     knitr
 Collate:
+    'assertions.R'
     'model-zelig.R'
     'model-timeseries.R'
     'model-ma.R'

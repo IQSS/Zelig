@@ -404,6 +404,8 @@ z$methods(
 z$methods(
   set = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
     "Setting Explanatory Variable Values"
+    is_uninitializedField(.self$zelig.out)
+
     .self$avg <- function(val) {
       if (is.numeric(val))
         ifelse(is.null(fn$numeric), mean(val), fn$numeric(val))
@@ -453,7 +455,10 @@ z$methods(
 )
 
 z$methods(
-  setx = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
+  setx = function(..., fn = list(numeric = mean, ordered = Median,
+                  other = Mode)) {
+    is_uninitializedField(.self$zelig.out)
+
     .self$bsetx <- TRUE
     .self$setx.out$x  <- .self$set(..., fn = fn)
   }
@@ -468,6 +473,8 @@ z$methods(
 
 z$methods(
   setrange = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
+    is_uninitializedField(.self$zelig.out)
+
     .self$bsetrange <- TRUE
     rng <- list()
     s <- list(...)
@@ -513,6 +520,8 @@ z$methods(
 z$methods(
   sim = function(num = NULL) {
     "Generic Method for Computing and Organizing Simulated Quantities of Interest"
+    is_zelig(.self)
+    is_uninitializedField(.self$zelig.out)
 
     ## If num is defined by user, it overrides the value stored in the .self$num field.
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
@@ -531,7 +540,7 @@ z$methods(
 
     # Divide simulations among imputed datasets
     if(.self$mi){
-      am.m<-length(.self$getcoef())
+      am.m <- length(.self$getcoef())
       .self$num <- ceiling(.self$num/am.m)
     }
 
@@ -540,7 +549,7 @@ z$methods(
     if (.self$bootstrap & ! .self$mi){
       .self$num <- 1
       .self$simparam <- .self$zelig.out %>%
-        do(simparam = .self$param(.$z.out, method="point"))
+        do(simparam = .self$param(.$z.out, method = "point"))
     } else {
       .self$simparam <- .self$zelig.out %>%
         do(simparam = .self$param(.$z.out))
@@ -555,8 +564,10 @@ z$methods(
     if (.self$bsetrange1)
       .self$simrange1()
 
-    if (is.null(.self$sim.out$x))
-        warning('Insufficient inputs, no simulations drawn.', call. = FALSE)
+    #if (is.null(.self$sim.out$x) & is.null(.self$sim.out$range))
+    if (!isTRUE(is_simspresent(.self$sim.out, fail = FALSE)))
+        warning('No simulations drawn, likely due to insufficient inputs.',
+                call. = FALSE)
   }
 )
 
@@ -904,6 +915,10 @@ z$methods(
 z$methods(
   graph = function() {
     "Plot the quantities of interest"
+    
+    is_uninitializedField(.self$zelig.out)
+    is_simspresent(.self$sim.out)
+
     qi.plot(.self)
   }
 )
@@ -974,7 +989,7 @@ z$methods(
 )
 
 z$methods(
-  getqi = function(qi="ev", xvalue="x", subset=NULL){
+  getqi = function(qi = "ev", xvalue = "x", subset = NULL){
     "Get quantities of interest"
     possiblexvalues <- names(.self$sim.out)
     if(!(xvalue %in% possiblexvalues)){
@@ -1032,37 +1047,39 @@ z$methods(
 
 # Monte Carlo unit test
 z$methods(
-  mcunit = function(nsim=500, minx=-2, maxx=2, b0=0, b1=1, alpha=1, ci=0.95, plot = TRUE, ...){
+  mcunit = function(nsim = 500, minx = -2, maxx = 2, b0 = 0, b1 = 1, alpha = 1,
+                    ci = 0.95, plot = TRUE, ...){
 
     passes <- TRUE
     n.short <- 10      # number of p
-    alpha.ci <- 1-ci   # alpha values for ci bounds, not speed parameter
+    alpha.ci <- 1 - ci   # alpha values for ci bounds, not speed parameter
     x.sim <- runif(n=nsim, min=minx, max=maxx)
     x.seq <- seq(from=minx, to=maxx, length = nsim)
 
     data.hat <- .self$mcfun(x=x.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
     if(!is.data.frame(data.hat)){
-        data.hat<-data.frame(x.seq=x.seq, y.hat=data.hat)
+        data.hat <- data.frame(x.seq=x.seq, y.hat=data.hat)
     }
     data.sim <- .self$mcfun(x=x.sim, b0=b0, b1=b1, alpha=alpha, ..., sim=TRUE)
     if(!is.data.frame(data.sim)){
-        data.sim<-data.frame(x.sim=x.sim, y.sim=data.sim)
+        data.sim <- data.frame(x.sim=x.sim, y.sim=data.sim)
     }
 
     ## Estimate Zelig model and create numerical bounds on expected values
     # This should be the solution, but requires fixing R scoping issue:
-    #.self$zelig(y.sim~x.sim, data=data.sim)      # formula will be overwritten in zelig() if .self$mcformula has been set
+    #.self$zelig(y.sim~x.sim, data=data.sim)
+    # formula will be overwritten in zelig() if .self$mcformula has been set
 
     ## Instead, remove formula field and set by hard code
     .self$mcformula <- NULL
-    if(.self$name %in% c("exp","weibull","lognorm")){
-      .self$zelig(Surv(y.sim,event)~x.sim, data=data.sim)
-    }else{
-      .self$zelig(y.sim~x.sim, data=data.sim)
+    if(.self$name %in% c("exp", "weibull", "lognorm")){
+      .self$zelig(Surv(y.sim,event) ~ x.sim, data = data.sim)
+    } else{
+      .self$zelig(y.sim ~ x.sim, data = data.sim)
     }
 
-    x.short.seq<-seq(from=minx, to=maxx, length=n.short)
-    .self$setrange(x.sim=x.short.seq)
+    x.short.seq<-seq(from = minx, to = maxx, length = n.short)
+    .self$setrange(x.sim = x.short.seq)
     .self$sim()
 
     data.short.hat <- .self$mcfun(x=x.short.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
@@ -1072,13 +1089,13 @@ z$methods(
 
     history.ev <- history.pv <- matrix(NA, nrow=n.short, ncol=2)
     for(i in 1:n.short){
-        xtemp<-x.short.seq[i]
-        .self$setx(x.sim=xtemp)
+        xtemp <- x.short.seq[i]
+        .self$setx(x.sim = xtemp)
         .self$sim()
         #temp<-sort( .self$sim.out$x$ev[[1]] )
-        temp<-.self$sim.out$range[[i]]$ev[[1]]
+        temp <- .self$sim.out$range[[i]]$ev[[1]]
         # This is for ev's that are a probability distribution across outcomes, like ordered logit/probit
-        if(ncol(temp)>1){
+        if(ncol(temp) > 1){
           temp <- temp %*% as.numeric(sort(unique(data.sim$y.sim)))  #as.numeric(colnames(temp))
         }
         temp <- sort(temp)
