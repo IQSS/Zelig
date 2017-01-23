@@ -11,7 +11,7 @@ col1=par("col"), col2=par("col"),
 main="ROC Curve",
 xlab = "Proportion of 1's Correctly Predicted",
 ylab="Proportion of 0's Correctly Predicted",
-plot = TRUE, 
+plot = TRUE,
 ...
 )
 }

@@ -22,7 +22,7 @@
 #' @return nothing
 #' @author James Honaker
 simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, line.col=NULL, axisnames=TRUE) {
-    
+
     binarytest <- function(j){
       if(!is.null(attr(j,"levels"))) return(identical( sort(levels(j)),c(0,1)))
       return(FALSE)
@@ -32,29 +32,29 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
 
     ## Univariate Plots ##
     if(is.null(y1)){
-        
+
         if (is.null(col))
         col <- rgb(100,149,237,maxColorValue=255)
-        
+
         if (is.null(line.col))
         line.col <- "black"
-        
+
         # Integer Values
         if ((length(unique(y))<11 & all(as.integer(y) == y)) | is.factor(y) | is.character(y)) {
-            
+
                 if(is.factor(y) | is.character(y)){
                     y <- as.numeric(y)
                 }
 
                 # Create a sequence of names
                 nameseq <- paste("Y=", min(y):max(y), sep="")
-                
+
                 # Set the heights of the barplots.
                 # Note that tablar requires that all out values are greater than zero.
                 # So, we subtract the min value (ensuring everything is at least zero)
                 # then add 1
                 bar.heights <- tabulate(y - min(y) + 1) / length(y)
-                
+
                 # Barplot with (potentially) some zero columns
                 output <- barplot(bar.heights, xlab=xlab, ylab=ylab, main=main, col=col[1],
                     axisnames=axisnames, names.arg=nameseq)
@@ -73,7 +73,7 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
             }else{
                 all.names <- names(y)
             }
-            
+
             # Barplot with (potentially) some zero columns
             output <- barplot( apply(y,2,sum)/n.y, xlab=xlab, ylab=ylab, main=main, col=col[1],
                 axisnames=axisnames, names.arg=all.names)
@@ -131,14 +131,14 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
                 }
             }
         }
-        
+
     ## Comparison Plots ##
-        
+
     }else{
-        
+
         # Integer - Plot and shade a matrix
         if(( length(unique(y))<11 & all(as.integer(y) == y) ) | is.factor(y) | is.character(y)){
-            
+
             if(is.factor(y) | is.character(y)){
                 y <- as.numeric(y)
                 y1 <- as.numeric(y1)
@@ -147,35 +147,35 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
             yseq<-min(c(y,y1)):max(c(y,y1))
             nameseq<- paste("Y=",yseq,sep="")
             n.y<-length(yseq)
-            
+
             colors<-rev(heat.colors(n.y^2))
             lab.colors<-c("black","white")
             comp<-matrix(NA,nrow=n.y,ncol=n.y)
-            
+
             for(i in 1:n.y){
                 for(j in 1:n.y){
                     flag<- y==yseq[i] & y1==yseq[j]
                     comp[i,j]<-mean(flag)
                 }
             }
-            
+
             old.pty<-par()$pty
             old.mai<-par()$mai
-            
+
             par(pty="s")
             par(mai=c(0.3,0.3,0.3,0.1))
-            
+
             image(z=comp, axes=FALSE, col=colors, zlim=c(min(comp),max(comp)),main=main )
-            
+
             locations.x<-seq(from=0,to=1,length=nrow(comp))
             locations.y<-locations.x
-            
+
             for(m in 1:n.y){
                 for(n in 1:n.y){
                     text(x=locations.x[m],y=locations.y[n],labels=paste(round(100*comp[m,n])), col=lab.colors[(comp[m,n]> ((max(comp)-min(comp))/2) )+1])
                 }
             }
-            
+
             axis(side=1,labels=nameseq, at=seq(0,1,length=n.y), cex.axis=1, las=1)
             axis(side=2,labels=nameseq, at=seq(0,1,length=n.y), cex.axis=1, las=3)
             box()
@@ -206,39 +206,39 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
             colors<-rev(heat.colors(n.y^2))
             lab.colors<-c("black","white")
             comp<-matrix(NA,nrow=n.y,ncol=n.y)
-            
+
             for(i in 1:n.y){
                 for(j in 1:n.y){
                     flag<- y==yseq[i] & y1==yseq[j]
                     comp[i,j]<-mean(flag)
                 }
             }
-            
+
             old.pty<-par()$pty
             old.mai<-par()$mai
-            
+
             par(pty="s")
             par(mai=c(0.3,0.3,0.3,0.1))
-            
+
             image(z=comp, axes=FALSE, col=colors, zlim=c(min(comp),max(comp)),main=main )
-            
+
             locations.x<-seq(from=0,to=1,length=nrow(comp))
             locations.y<-locations.x
-            
+
             for(m in 1:n.y){
                 for(n in 1:n.y){
                     text(x=locations.x[m],y=locations.y[n],labels=paste(round(100*comp[m,n])), col=lab.colors[(comp[m,n]> ((max(comp)-min(comp))/2) )+1])
                 }
             }
-            
+
             axis(side=1,labels=nameseq, at=seq(0,1,length=n.y), cex.axis=1, las=1)
             axis(side=2,labels=nameseq, at=seq(0,1,length=n.y), cex.axis=1, las=3)
             box()
             par(pty=old.pty,mai=old.mai)
-         
+
         ## Numeric - Plot two densities on top of each other
         }else if(is.numeric(y) & is.numeric(y1)){
-            
+
             if(is.null(col)){
                 semi.col.x <-rgb(142,229,238,150,maxColorValue=255)
                 semi.col.x1<-rgb(255,114,86,150,maxColorValue=255)
@@ -301,18 +301,18 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
                         }
                         text(x=all.xlim[1], y=(shift[i] + shift[i+1])/2, labels=all.names[i], pos=4)
                     }
-                } 
+                }
             }else{
                 den.y<-density(y)
                 den.y1<-density(y1,bw=den.y$bw)
-            
+
                 all.xlim<-c(min(c(den.y$x,den.y1$x)),max(c(den.y$x,den.y1$x)))
                 all.ylim<-c(min(c(den.y$y,den.y1$y)),max(c(den.y$y,den.y1$y)))
-            
+
                 output<-plot(den.y,xlab=xlab,ylab=ylab,main=main,col=col[1],xlim=all.xlim,ylim=all.ylim)
                 par(new=TRUE)
                 output<-plot(den.y1,xlab=xlab,ylab=ylab,main="",col=col[2],xlim=all.xlim,ylim=all.ylim)
-            
+
                 if(!identical(col[1],"n")){
                     polygon(den.y$x,den.y$y,col=col[1])
                 }
@@ -330,10 +330,10 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
 
 
 #' Default Plot Design For Zelig Model QI's
-#' 
+#'
 #' @usage qi.plot(obj, ...)
 #' @param obj A reference class zelig5 object
-#' @param ... Parameters to be passed to the `truehist' function which is 
+#' @param ... Parameters to be passed to the `truehist' function which is
 #' implicitly called for numeric simulations
 #' @author James Honaker with panel layouts from Matt Owen
 
@@ -358,14 +358,14 @@ qi.plot <- function (obj, ...) {
     color.x1 <- rgb(100, 149, 237, maxColorValue=255)
     # Interpolation of the above colors in rgb color space:
     color.mixed <- rgb(t(round((col2rgb(color.x) + col2rgb(color.x1))/2)), maxColorValue=255)
-    
+
     if (! ("x" %in% names(obj$sim.out))) {
         return(par(old.par))
     } else if (! ("x1" %in% names(obj$sim.out))) {
 
 
     panels <- matrix(1:2, 2, 1)
-        
+
         # The plotting device:
         #
         # +-----------+
@@ -375,7 +375,7 @@ qi.plot <- function (obj, ...) {
         # +-----------+
     } else {
         panels <- matrix(c(1:5, 5), ncol=2, nrow=3, byrow = TRUE)
-        
+
         # the plotting device:
         #
         # +-----+-----+
@@ -385,10 +385,10 @@ qi.plot <- function (obj, ...) {
         # +-----+-----+
         # |     5     |
         # +-----------+
-        
+
         panels <- if (xor(both.ev.exist, both.pv.exist))
         rbind(panels, c(6, 6))
-        
+
         # the plotting device:
         #
         # +-----+-----+
@@ -400,12 +400,12 @@ qi.plot <- function (obj, ...) {
         # +-----------+
         # |     6     |
         # +-----------+
-        
+
         else if (both.ev.exist && both.pv.exist)
         rbind(panels, c(6, 7))
         else
         panels
-        
+
         # the plotting device:
         #
         # +-----+-----+
@@ -418,18 +418,18 @@ qi.plot <- function (obj, ...) {
         # |  6  |  7  |
         # +-----+-----+
     }
-    
+
     layout(panels)
-    
+
     titles <- obj$setx.labels
-    
+
     # Plot each simulation
     if(length(obj$sim.out$x$pv)>0)
         simulations.plot(obj$getqi(qi="pv", xvalue="x"), main = titles$pv, col = color.x, line.col = "black")
-    
+
     if(length(obj$sim.out$x1$pv)>0)
         simulations.plot(obj$getqi(qi="pv", xvalue="x1"), main = titles$pv1, col = color.x1, line.col = "black")
-        
+
     if(length(obj$sim.out$x$ev)>0)
         simulations.plot(obj$getqi(qi="ev", xvalue="x"), main = titles$ev, col = color.x, line.col = "black")
 
@@ -438,17 +438,17 @@ qi.plot <- function (obj, ...) {
 
     if(length(obj$sim.out$x1$fd)>0)
         simulations.plot(obj$getqi(qi="fd", xvalue="x1"), main = titles$fd, col = color.mixed, line.col = "black")
-    
+
     if(both.pv.exist)
         simulations.plot(y=obj$getqi(qi="pv", xvalue="x"), y1=obj$getqi(qi="pv", xvalue="x1"), main = "Comparison of Y|X and Y|X1", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
-        
+
     if(both.ev.exist)
         simulations.plot(y=obj$getqi(qi="ev", xvalue="x"), y1=obj$getqi(qi="ev", xvalue="x1"), main = "Comparison of E(Y|X) and E(Y|X1)", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
 
-    
+
     # Restore old state
     par(old.par)
-    
+
     # Return old parameter invisibly
     invisible(old.par)
 }
@@ -479,25 +479,31 @@ qi.plot <- function (obj, ...) {
 #' @param legpos ``legend type'', exact coordinates and sizes for legend.
 #' Overrides argment ``leg.type''
 #' @param ci vector of length three of confidence interval levels to draw.
-#' @param discont optional point of discontinuity along the x-axis at which 
+#' @param discont optional point of discontinuity along the x-axis at which
 #' to interupt the graph
 #' @return the current graphical parameters. This is subject to change in future
 #' implementations of Zelig
 #' @author James Honaker
-#' @export plot.ci
-#' @usage ci.plot(obj, qi="ev", var=NULL, ..., main = NULL, sub = 
-#'  NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim = 
+#' @usage ci.plot(obj, qi="ev", var=NULL, ..., main = NULL, sub =
+#'  NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim =
 #'  NULL, legcol="gray20", col=NULL, leg=1, legpos=
 #'  NULL, ci = c(80, 95, 99.9), discont=NULL)
-ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL, legcol="gray20", col=NULL, leg=1, legpos=NULL, ci=c(80,95,99.9), discont=NULL) {
- 
-    ########################### 
-    #### Utility Functions ####
+#' @export
 
+ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
+                    xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+                    legcol = "gray20", col = NULL, leg = 1, legpos = NULL,
+                    ci = c(80, 95, 99.9), discont = NULL) {
+
+    is_zelig(obj)
+    is_simsrange(obj$sim.out)
+
+    ###########################
+    #### Utility Functions ####
     # Define function to cycle over range list and extract correct qi's
     ## CAN THESE NOW BE REPLACED WITH THE GETTER METHODS?
 
-    extract.sims<-function(obj,qi){
+    extract.sims <- function(obj,qi){
         d<-length(obj$sim.out$range)
         k<-length(obj$sim.out$range[[1]][qi][[1]][[1]])   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         hold<-matrix(NA,nrow=k, ncol=d)
@@ -519,12 +525,11 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
 
     # Define functions to compute confidence intervals
     ## CAN WE MERGE THESE TOGETHER SO AS NOT TO HAVE TO SORT TWICE?
-
     ci.upper <- function (x, alpha) {
         pos <- max(round((1-(alpha/100))*length(x)), 1)
         return(sort(x)[pos])
     }
-    
+
     ci.lower <- function (x, alpha) {
         pos<-max(round((alpha/100)*length(x)), 1)
         return(sort(x)[pos])
@@ -539,8 +544,8 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         ci<-ci[1:3]
     }
     ci<-sort(ci)
-    
-    
+
+
     ## Timeseries:
     if("timeseries" %in% obj$category){
         #xmatrix<-              ## Do we need to know the x in which the shock/innovation occcured?  For secondary graphs, titles, legends?
@@ -552,7 +557,7 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         }
         ev<-t( obj$getqi(qi=qi, xvalue="x1") )   # NOTE THE NECESSARY TRANSPOSE.  Should we more clearly standardize this?
         d<-ncol(ev)
-        xseq<-1:d  
+        xseq<-1:d
         ev1 <- NULL  # Maybe want to add ability to overlay another graph?
 
         # Define xlabel
@@ -562,7 +567,7 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
             if(qi %in% c("pvseries.shock", "pvseries.innovation"))
                 ylab<- as.character(obj$setx.labels["pv"])
             if(qi %in% c("evseries.shock", "evseries.innovation"))
-                ylab<- as.character(obj$setx.labels["ev"])    
+                ylab<- as.character(obj$setx.labels["ev"])
         }
 
         if (is.null(main))
@@ -573,7 +578,7 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
     ## Everything Else:
     }else{
         d<-length(obj$sim.out$range)
-    
+
         if (d<1) {
             return()  # Should add warning
         }
@@ -587,9 +592,9 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
             warning("Must specify the `var` parameter when plotting the confidence interval of an unvarying model. Plotting nothing.")
             return(invisible(FALSE))
         }
-    
+
         xvarnames<-names(as.data.frame( obj$setx.out$range[[1]]$mm[[1]]))  # MUST BE A BETTER WAY/PATH TO GET NAMES
-    
+
         if(is.character(var)){
             if( !(var %in% xvarnames   ) ){
                 warning("Specified variable for confidence interval plot is not in estimated model.  Plotting nothing.")
@@ -612,7 +617,7 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         }
         position<-min(position)
         xseq<-xmatrix[,position]
-        xname<-xvarnames[position] 
+        xname<-xvarnames[position]
         # Define xlabel
         if (is.null(xlab))
         xlab <- paste("Range of",xname)
@@ -628,14 +633,14 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         }
 
     }
-    
+
 
 
 
     #
     k<-ncol(ev)
     n<-nrow(ev)
-    
+
     #
     if(is.null(col)){
         myblue1<-rgb( 100, 149, 237, alpha=50, maxColorValue=255)
@@ -644,78 +649,78 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         myred1 <-rgb( 237, 149, 100, alpha=50, maxColorValue=255)
         myred2 <-rgb( 255, 245, 152, alpha=50, maxColorValue=255)
         myred3 <-rgb( 255, 239, 191, alpha=70, maxColorValue=255)
-        
+
         col<-c(myblue1,myblue2,myblue3,myred1,myred2,myred3)
     }else{
         if(length(col)<6){
             col<-rep(col,6)[1:6]
         }
     }
-    
+
     # Define function to numerically extract summaries of distributions from set of all simulated qi's
     form.history <- function (k,xseq,results,ci=c(80,95,99.9)){
-        
+
         history<-matrix(NA, nrow=k,ncol=8)
         for (i in 1:k) {
             v <- c(
             xseq[i],
             median(results[,i]),
-            
+
             ci.upper(results[,i],ci[1]),
             ci.lower(results[,i],ci[1]),
-            
+
             ci.upper(results[,i],ci[2]),
             ci.lower(results[,i],ci[2]),
-            
+
             ci.upper(results[,i],ci[3]),
             ci.lower(results[,i],ci[3])
             )
-            
+
             history[i, ] <- v
         }
         if (k == 1) {
             left <- c(
             xseq[1]-.5,
             median(results[,1]),
-            
+
             ci.upper(results[,1],ci[1]),
             ci.lower(results[,1],ci[1]),
-            
+
             ci.upper(results[,1],ci[2]),
             ci.lower(results[,1],ci[2]),
-            
+
             ci.upper(results[,1],ci[3]),
             ci.lower(results[,1],ci[3])
             )
             right <- c(
             xseq[1]+.5,
             median(results[,1]),
-            
+
             ci.upper(results[,1],ci[1]),
             ci.lower(results[,1],ci[1]),
-            
+
             ci.upper(results[,1],ci[2]),
             ci.lower(results[,1],ci[2]),
-            
+
             ci.upper(results[,1],ci[3]),
             ci.lower(results[,1],ci[3])
             )
             v <- c(
             xseq[1],
             median(results[,1]),
-            
+
             ci.upper(results[,1],ci[1]),
             ci.lower(results[,1],ci[1]),
-            
+
             ci.upper(results[,1],ci[2]),
             ci.lower(results[,1],ci[2]),
-            
+
             ci.upper(results[,1],ci[3]),
             ci.lower(results[,1],ci[3])
             )
             history <- rbind(left, v, right)
         }
-        
+
         return(history)
     }
 
@@ -725,33 +730,33 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
     }else{
         history1<-NULL
     }
-    
+
     # This is for small sets that have been duplicated so as to have observable volume
     if(k==1){
         k<-3
     }
-   
+
     # Specify x-axis length
     all.xlim <- if (is.null(xlim))
     c(min(c(history[, 1],history1[, 1])),max(c(history[, 1],history1[, 1])))
     else
     xlim
-    
-    
+
+
     # Specify y-axis length
     all.ylim <-if (is.null(ylim))
     c(min(c(history[, -1],history1[, -1])),max(c(history[, -1],history1[, -1])))
     else
     ylim
-    
+
 
     # Define y label
     if (is.null(ylab))
     ylab <- "Expected Values: E(Y|X)"
 
-    
+
     ## This is the plot
-    
+
     par(bty="n")
     centralx<-history[,1]
     centraly<-history[,2]
@@ -762,9 +767,9 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
     }else{
         gotok <- sum(xseq < discont)
         if((gotok<2) | (gotok>(k-2))){
-            cat("Warning: Discontinuity is located at edge or outside the range of x-axis.\n") 
-            gotok<-k   
-            discont<-NULL 
+            cat("Warning: Discontinuity is located at edge or outside the range of x-axis.\n")
+            gotok<-k
+            discont<-NULL
         }
         if(gotok<k){
             gotokp1<- gotok+1
@@ -787,7 +792,7 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
         polygon(c(history[gotokp1:k,1],history[k:gotokp1,1]),c(history[gotokp1:k,7],history[k:gotokp1,8]),col=NA,border="white")
         abline(v=discont, lty=5, col="grey85")
     }
-  
+
     if(!is.null(ev1)){
 
         lines(x=history1[1:gotok, 1], y=history1[1:gotok, 2], type="l")
@@ -805,11 +810,11 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
             polygon(c(history1[gotokp1:k,1],history1[k:gotokp1,1]),c(history1[gotokp1:k,5],history1[k:gotokp1,6]),col=col[5],border="gray90")
             polygon(c(history1[gotokp1:k,1],history1[k:gotokp1,1]),c(history1[gotokp1:k,3],history1[k:gotokp1,4]),col=col[4],border="gray60")
             polygon(c(history1[gotokp1:k,1],history1[k:gotokp1,1]),c(history1[gotokp1:k,7],history1[k:gotokp1,8]),col=NA,border="white")
-        }        
+        }
     }
-  
+
     ## This is the legend
-    
+
     if(is.null(legpos)){
         if(leg==1){
             legpos<-c(.91,.04,.2,.05)
@@ -821,28 +826,28 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
             legpos<-c(.91,.04,.8,.05)
         }
     }
-    
+
     lx<-min(all.xlim)+ legpos[1]*(max(all.xlim)- min(all.xlim))
     hx<-min(all.xlim)+ (legpos[1]+legpos[2])*(max(all.xlim)- min(all.xlim))
-    
+
     deltax<-(hx-lx)*.1
-    
+
     my<-min(all.ylim) +legpos[3]*min(max(all.ylim) - min(all.ylim))
     dy<-legpos[4]*(max(all.ylim) - min(all.ylim))
-    
-    
+
+
     lines(c(hx+deltax,hx+2*deltax,hx+2*deltax,hx+deltax),c(my+3*dy,my+3*dy,my-3*dy,my-3*dy),col=legcol)
     lines(c(hx+3*deltax,hx+4*deltax,hx+4*deltax,hx+3*deltax),c(my+1*dy,my+1*dy,my-1*dy,my-1*dy),col=legcol)
     lines(c(lx-deltax,lx-2*deltax,lx-2*deltax,lx-deltax),c(my+2*dy,my+2*dy,my-2*dy,my-2*dy),col=legcol)
     lines(c(lx-5*deltax,lx),c(my,my),col="white",lwd=3)
     lines(c(lx-5*deltax,lx),c(my,my),col=legcol)
     lines(c(lx,hx),c(my,my))
-    
+
     polygon(c(lx,lx,hx,hx),c(my-3*dy,my+3*dy,my+3*dy,my-3*dy),col=col[3],border="white")
     polygon(c(lx,lx,hx,hx),c(my-2*dy,my+2*dy,my+2*dy,my-2*dy),col=col[2],border="gray90")
     polygon(c(lx,lx,hx,hx),c(my-1*dy,my+1*dy,my+1*dy,my-1*dy),col=col[1],border="gray60")
     polygon(c(lx,lx,hx,hx),c(my-3*dy,my+3*dy,my+3*dy,my-3*dy),col=NA,border="white")
-    
+
     text(lx,my,labels="median",pos=2,cex=0.5,col=legcol)
     text(lx,my+2*dy,labels=paste("ci",ci[2],sep=""),pos=2,cex=0.5,col=legcol)
     text(hx,my+1*dy,labels=paste("ci",ci[1],sep=""),pos=4,cex=0.5,col=legcol)
@@ -863,7 +868,7 @@ ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL, xlab =
 #' main="ROC Curve",
 #' xlab = "Proportion of 1's Correctly Predicted",
 #' ylab="Proportion of 0's Correctly Predicted",
-#' plot = TRUE, 
+#' plot = TRUE,
 #' ...
 #' )
 #'
@@ -905,7 +910,7 @@ rocplot <- function(z1, z2,
                     main="ROC Curve",
                     xlab = "Proportion of 1's Correctly Predicted",
                     ylab="Proportion of 0's Correctly Predicted",
-                    plot = TRUE, 
+                    plot = TRUE,
                     ...) {
   y1 <- z1$data[as.character(z1$formula[[2]])]
   y2 <- z2$data[as.character(z2$formula[[2]])]
@@ -914,7 +919,7 @@ rocplot <- function(z1, z2,
   roc1 <- roc2 <- matrix(NA, nrow = length(cutoff), ncol = 2)
   colnames(roc1) <- colnames(roc2) <- c("ones", "zeros")
   for (i in 1:length(cutoff)) {
-    roc1[i,1] <- mean(fitted1[y1==1] >= cutoff[i]) 
+    roc1[i,1] <- mean(fitted1[y1==1] >= cutoff[i])
     roc2[i,1] <- mean(fitted2[y2==1] >= cutoff[i])
     roc1[i,2] <- mean(fitted1[y1==0] < cutoff[i])
     roc2[i,2] <- mean(fitted2[y2==0] < cutoff[i])
@@ -929,10 +934,10 @@ rocplot <- function(z1, z2,
   else {
     area1 <- area2 <- array()
     for (i in 2:length(cutoff)) {
-      area1[i-1] <- (roc1[i,2] - roc1[(i-1),2]) * roc1[i,1] 
-      area2[i-1] <- (roc2[i,2] - roc2[(i-1),2]) * roc2[i,1] 
+      area1[i-1] <- (roc1[i,2] - roc1[(i-1),2]) * roc1[i,1]
+      area2[i-1] <- (roc2[i,2] - roc2[(i-1),2]) * roc2[i,1]
     }
-    return(list(roc1 = roc1, 
+    return(list(roc1 = roc1,
                 roc2 = roc2,
                 area1 = sum(na.omit(area1)),
                 area2 = sum(na.omit(area2))))
@@ -957,14 +962,14 @@ zeligACFplot <- function(z, omitzero=FALSE,  barcol="black", epsilon=0.1, col=NU
 
     if(is.null(ylim)){
         ylim<-c(min( c(ci.x$ci.lower, 0, x) ), max( c(ci.x$ci.upper, 0 , x) ))
-    
+
     }
     if(is.null(col)){
         col <- rgb(100,149,237,maxColorValue=255)
     }
 
     bout <- barplot(x, col=col, main=main, xlab=xlab, ylab=ylab, ylim=ylim, ...)
-    
+
     n <- length(x)
     xseq <- as.vector(bout)
     NAseq <- rep(NA, n)
@@ -974,21 +979,14 @@ zeligACFplot <- function(z, omitzero=FALSE,  barcol="black", epsilon=0.1, col=NU
     ytemp <- cbind(ci.x$ci.upper, ci.x$ci.upper, NAseq)
     ytemp <- as.vector(t(ytemp))
     lines(x=xtemp ,y=ytemp, col=barcol)
-        
+
     ytemp <- cbind(ci.x$ci.lower, ci.x$ci.lower, NAseq)
     ytemp <- as.vector(t(ytemp))
     lines(x=xtemp ,y=ytemp, col=barcol)
-        
+
     xtemp <- cbind( xseq, xseq, NAseq)
     xtemp <- as.vector(t(xtemp))
     ytemp <- cbind(ci.x$ci.upper, ci.x$ci.lower, NAseq)
     ytemp <- as.vector(t(ytemp))
     lines(x=xtemp ,y=ytemp, col=barcol)
 }
-
-
-
-
-
-
-
