@@ -490,18 +490,20 @@ qi.plot <- function (obj, ...) {
 #'  NULL, ci = c(80, 95, 99.9), discont=NULL)
 #' @export
 
-ci.plot <- function(obj, qi="ev", var=NULL, ..., main = NULL, sub = NULL,
+ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
                     xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
                     legcol = "gray20", col = NULL, leg = 1, legpos = NULL,
                     ci = c(80, 95, 99.9), discont = NULL) {
 
+    is_zelig(obj)
+    is_simsrange(obj$sim.out)
+
     ###########################
     #### Utility Functions ####
-
     # Define function to cycle over range list and extract correct qi's
     ## CAN THESE NOW BE REPLACED WITH THE GETTER METHODS?
 
-    extract.sims<-function(obj,qi){
+    extract.sims <- function(obj,qi){
         d<-length(obj$sim.out$range)
         k<-length(obj$sim.out$range[[1]][qi][[1]][[1]])   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         hold<-matrix(NA,nrow=k, ncol=d)
