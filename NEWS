@@ -1,0 +1,18 @@
+# Zelig 5.0-14
+
+## Major changes
+
+- New testing architecture and more tests for model-ls, Zelig 4 wrappers
+
+## Minor changes
+
+- Documentation improvements for Zelig 4 wrappers.
+
+- Improved error messages if Zelig methods are supplied with to little information.
+
+- Improved error messages for Zelig 4 wrappers.
+
+- Dynamically generated README.md.
+
+
+## Bug fixes
