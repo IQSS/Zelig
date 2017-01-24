@@ -18,10 +18,10 @@ Description: A framework that brings together an abundance of common
     quantities of interest (such as relative risk ratios, average treatment
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
-URL: https://cran.r-project.org/web/packages/Zelig/index.html
+URL: http://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-14
-Date: 2017-01-16
+Date: 2017-01-24
 Imports:
     sandwich,
     methods,
@@ -29,7 +29,6 @@ Imports:
     survival,
     VGAM,
     jsonlite,
-    AER,
     plyr,
     dplyr (>= 0.3.0.2),
     quantreg,
@@ -41,8 +40,9 @@ Imports:
     maxLik,
     survey
 Suggests:
-    testthat,
-    knitr
+    AER,
+    knitr,
+    testthat
 Collate:
     'assertions.R'
     'model-zelig.R'

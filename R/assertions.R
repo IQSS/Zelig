@@ -66,3 +66,13 @@ is_simsrange <- function(x, fail = TRUE) {
                 call. = FALSE)
     } else return(passes)
 }
+
+#' Check if suggested package is installed
+#' @param x character string of suggested package's name
+
+is_pkginstalled <- function(x) {
+    if(!requireNamespace(x, quietly = TRUE))
+        stop(sprintf('%s package needed.\n To install it use: install.packages("%s")',
+             x, x),
+             call. = FALSE)
+}

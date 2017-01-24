@@ -14,6 +14,8 @@ ztobit <- setRefClass("Zelig-tobit",
 
 ztobit$methods(
   initialize = function() {
+    is_pkginstalled('AER')
+    
     callSuper()
     .self$name <- "tobit"
     .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
@@ -48,11 +50,11 @@ ztobit$methods(
         }
         robust.model.call <- .self$model.call
         robust.model.call$robust <- TRUE
-        
+
         robust.zelig.out <- .self$data %>%
         group_by_(.self$by) %>%
         do(z.out = eval(fn2(robust.model.call, quote(as.data.frame(.))))$var )
-        
+
         .self$test.statistics<- list(robust.se = robust.zelig.out$z.out)
     }
   }
@@ -105,4 +107,3 @@ ztobit$methods(
     }
   }
 )
-
