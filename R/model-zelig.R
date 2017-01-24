@@ -565,7 +565,7 @@ z$methods(
       .self$simrange1()
 
     #if (is.null(.self$sim.out$x) & is.null(.self$sim.out$range))
-    if (!isTRUE(is_simspresent(.self$sim.out, fail = FALSE)))
+    if (!isTRUE(is_sims_present(.self$sim.out, fail = FALSE)))
         warning('No simulations drawn, likely due to insufficient inputs.',
                 call. = FALSE)
   }
@@ -917,7 +917,7 @@ z$methods(
     "Plot the quantities of interest"
 
     is_uninitializedField(.self$zelig.out)
-    is_simspresent(.self$sim.out)
+    is_sims_present(.self$sim.out)
 
     if (is_simsx(.self$sim.out, fail = FALSE)) qi.plot(.self)
     if (is_simsrange(.self$sim.out, fail = FALSE)) ci.plot(.self)

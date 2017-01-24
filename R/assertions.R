@@ -24,11 +24,11 @@ is_uninitializedField <- function(x, fail = TRUE) {
     } else return(passes)
 }
 
-#' Check if simulations are present in sim.out
+#' Check if any simulations are present in sim.out
 #' @param x a sim.out method
 #' @param fail logical whether to return an error if no simulations are present.
 
-is_simspresent <- function(x, fail = TRUE) {
+is_sims_present <- function(x, fail = TRUE) {
     passes <- TRUE
     if (is.null(x$x) & is.null(x$range)) passes <- FALSE
     if (isTRUE(fail)) {
