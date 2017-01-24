@@ -497,41 +497,47 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
 
     is_zelig(obj)
     is_simsrange(obj$sim.out)
+    if (!is.null(obj$sim.out$range1)) {
+        if (length(obj$sim.out$range) != length(obj$sim.out$range1))
+            stop('The two fitted data ranges are not the same length.',
+                 call. = FALSE)
+    }
 
     ###########################
     #### Utility Functions ####
     # Define function to cycle over range list and extract correct qi's
     ## CAN THESE NOW BE REPLACED WITH THE GETTER METHODS?
 
-    extract.sims <- function(obj,qi){
-        d<-length(obj$sim.out$range)
-        k<-length(obj$sim.out$range[[1]][qi][[1]][[1]])   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
-        hold<-matrix(NA,nrow=k, ncol=d)
-        for(i in 1:d){
-            hold[,i]<-obj$sim.out$range[[i]][qi][[1]][[1]]  # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+    extract.sims <- function(obj, qi) {
+        d <- length(obj$sim.out$range)
+        k <- length(obj$sim.out$range[[1]][qi][[1]][[1]])  # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        hold <- matrix(NA, nrow = k, ncol = d)
+        for (i in 1:d) {
+            hold[, i] <- obj$sim.out$range[[i]][qi][[1]][[1]]  # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         }
         return(hold)
     }
 
-    extract.sims1<-function(obj,qi){    #Should find better architecture for alternate range sims
-        d<-length(obj$sim.out$range1)
-        k<-length(obj$sim.out$range1[[1]][qi][[1]][[1]])   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
-        hold<-matrix(NA,nrow=k, ncol=d)
-        for(i in 1:d){
-            hold[,i]<-obj$sim.out$range1[[i]][qi][[1]][[1]]  # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+    extract.sims1 <- function(obj, qi) {
+        # Should find better architecture for alternate range sims
+        d <- length(obj$sim.out$range1)
+        k <- length(obj$sim.out$range1[[1]][qi][[1]][[1]])  # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        hold <- matrix(NA, nrow = k, ncol = d)
+        for (i in 1:d) {
+            hold[, i] <- obj$sim.out$range1[[i]][qi][[1]][[1]]  # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         }
         return(hold)
     }
 
-    # Define functions to compute confidence intervals
-    ## CAN WE MERGE THESE TOGETHER SO AS NOT TO HAVE TO SORT TWICE?
-    ci.upper <- function (x, alpha) {
-        pos <- max(round((1-(alpha/100))*length(x)), 1)
+    # Define functions to compute confidence intervals CAN WE MERGE THESE TOGETHER SO AS NOT TO
+    # HAVE TO SORT TWICE?
+    ci.upper <- function(x, alpha) {
+        pos <- max(round((1 - (alpha/100)) * length(x)), 1)
         return(sort(x)[pos])
     }
 
-    ci.lower <- function (x, alpha) {
-        pos<-max(round((alpha/100)*length(x)), 1)
+    ci.lower <- function(x, alpha) {
+        pos <- max(round((alpha/100) * length(x)), 1)
         return(sort(x)[pos])
     }
 
