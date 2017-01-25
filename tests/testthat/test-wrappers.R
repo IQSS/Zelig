@@ -1,7 +1,7 @@
 # Zelig 4 ls wrapper working ---------------------------------------------------
 
 test_that('ls wrapper continuous covar -- quickstart (Zelig 4 syntax)', {
-    z4 <- zelig(Fertility ~ Education, data = swiss, model = 'ls')
+    z4 <- zelig(Fertility ~ Education, data = swiss, model = 'ls', cite = FALSE)
   
     # extract education coefficient parameter estimate and compare to reference
     expect_equivalent(round(as.numeric(z4$getcoef()[[1]][2]), 7), -0.8623503)
