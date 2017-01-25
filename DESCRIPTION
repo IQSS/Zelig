@@ -1,5 +1,4 @@
 Package: Zelig
-Maintainer: James Honaker <zelig.zee@gmail.com>
 License: GPL (>=2)
 Title: Everyone's Statistical Software
 Authors@R: c(
