@@ -120,7 +120,7 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
 z$methods(
   initialize = function() {
     .self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"
-    .self$zeligauthors <- "Christine Choirat, James Honaker, Kosuke Imai, Gary King, and Olivia Lau"
+    .self$zeligauthors <- "Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau"
     .self$refs <- bibentry()
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://zeligproject.org/"
