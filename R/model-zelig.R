@@ -478,7 +478,7 @@ z$methods(
     .self$bsetrange <- TRUE
     rng <- list()
     s <- list(...)
-    m <- expand.grid(s)
+    m <- expand_grid_setrange(s)
     .self$range <- m
     .self$setx.out$range <- list()
     for (i in 1:nrow(m)) {
@@ -494,7 +494,7 @@ z$methods(
     .self$bsetrange1 <- TRUE
     rng <- list()
     s <- list(...)
-    m <- expand.grid(s)
+    m <- expand_grid_setrange(s)
     .self$range1 <- m
     .self$setx.out$range1 <- list()
     for (i in 1:nrow(m)) {

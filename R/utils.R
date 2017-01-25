@@ -218,3 +218,16 @@ zeligPlyrMutate<-function (.data, ...)
     }
     .data
 }
+
+#' Convenience function for setrange and setrange
+#'
+#' @param x data passed to setrange or setrange1
+#' @keywords internal
+
+expand_grid_setrange <- function(x) {
+    m <- expand.grid(x)
+    if (nrow(m) == 1)
+        warning('Only one fitted observation provided to setrange.\nConsider using setx instead.',
+                call. = FALSE)
+    return(m)
+}
