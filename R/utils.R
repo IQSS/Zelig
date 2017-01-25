@@ -207,8 +207,12 @@ cluster.formula <- function (formula, cluster) {
 
 
 #' Zelig Copy of plyr::mutate to avoid namespace conflict with dplyr
+#'
+#' @source Hadley Wickham (2011). The Split-Apply-Combine Strategy for Data
+#' Analysis. Journal of Statistical Software, 40(1), 1-29. URL
+#' \url{http://www.jstatsoft.org/v40/i01/}.
 #' @keywords internal
-zeligPlyrMutate<-function (.data, ...)
+zelig_mutate <- function (.data, ...)
 {
     stopifnot(is.data.frame(.data) || is.list(.data) || is.environment(.data))
     cols <- as.list(substitute(list(...))[-1])

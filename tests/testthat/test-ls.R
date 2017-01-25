@@ -1,4 +1,4 @@
-# Monte Carlo test -------------------------------------------------------------
+# REQUIRE TEST Monte Carlo test ------------------------------------------------
 
 test_that('REQUIRE TEST ls monte carlo test', {
     z <- zls$new()
@@ -6,7 +6,7 @@ test_that('REQUIRE TEST ls monte carlo test', {
     expect_true(test)
 })
 
-# Documentation examples -------------------------------------------------------
+# REQUIE TEST ls with continuous covar -----------------------------------------
 
 test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
     z5 <- zls$new()
@@ -14,6 +14,17 @@ test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
   
     # extract education coefficient parameter estimate and compare to reference
     expect_equivalent(round(as.numeric(z5$getcoef()[[1]][2]), 7), -0.8623503)
+})
+
+
+# REQUIE TEST ls with by -------------------------------------------------------
+
+test_that('REQUIRE TEST ls with by', {
+    # Majority Catholic dummy
+    swiss$maj_catholic <- cut(swiss$Catholic, breaks = c(0, 51, 100))
+  
+    z5 <- zls$new()
+    z5$zelig(Fertility ~ Education, data = swiss, by = 'maj_catholic')
 })
 
 # gim method tests -------------------------------------------------------------

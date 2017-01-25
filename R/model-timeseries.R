@@ -86,8 +86,8 @@ ztimeseries$methods(
 
 ztimeseries$methods(
   simx = function() {
-    d <- zeligPlyrMutate(.self$zelig.out, simparam = .self$simparam$simparam)
-    d <- zeligPlyrMutate(d, mm = .self$setx.out$x$mm)
+    d <- zelig_mutate(.self$zelig.out, simparam = .self$simparam$simparam)
+    d <- zelig_mutate(d, mm = .self$setx.out$x$mm)
     .self$sim.out$x <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm)) %>%
       do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv)
@@ -96,9 +96,9 @@ ztimeseries$methods(
 
 ztimeseries$methods(
   simx1 = function() {
-    d <- zeligPlyrMutate(.self$zelig.out, simparam = .self$simparam$simparam)
-    d <- zeligPlyrMutate(d, mm = .self$setx.out$x$mm)
-    d <- zeligPlyrMutate(d, mm1 = .self$setx.out$x1$mm)
+    d <- zelig_mutate(.self$zelig.out, simparam = .self$simparam$simparam)
+    d <- zelig_mutate(d, mm = .self$setx.out$x$mm)
+    d <- zelig_mutate(d, mm1 = .self$setx.out$x1$mm)
 
 #      return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun, 
 #                pvseries.shock=yseries$y.shock, pvseries.innovation=yseries$y.innovation,
@@ -110,10 +110,10 @@ ztimeseries$methods(
       # Will eventually have to then move acf, ev, and pv from .self$setx.out$x1 to .self$setx.out$x
       # This will also effect next line:
 
-    d <- zeligPlyrMutate(.self$sim.out$x1, ev0 = .self$sim.out$x1$ev)    # Eventually, when ev moves, then this path for ev0 changes.  (Or make movement happen after fd calculation.)
+    d <- zelig_mutate(.self$sim.out$x1, ev0 = .self$sim.out$x1$ev)    # Eventually, when ev moves, then this path for ev0 changes.  (Or make movement happen after fd calculation.)
     d <- d %>%
       do(fd = .$ev.longrun - .$ev0)
-    .self$sim.out$x1 <- zeligPlyrMutate(.self$sim.out$x1, fd = d$fd) #JH
+    .self$sim.out$x1 <- zelig_mutate(.self$sim.out$x1, fd = d$fd) #JH
   }
 )
 
