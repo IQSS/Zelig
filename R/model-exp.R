@@ -4,7 +4,7 @@
 #' @import methods
 #' @export Zelig-exp
 #' @exportClass Zelig-exp
-#' 
+#'
 #' @include model-zelig.R
 
 zexp <- setRefClass("Zelig-exp",
@@ -42,7 +42,7 @@ zexp$methods(
     .self$model.call$model <- FALSE
     callSuper(formula = formula, data = data, ..., robust = robust,
               cluster = cluster,  weights = weights, by = by, bootstrap = bootstrap)
-    rse<-plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x,type="HC0")))
+    rse<- lapply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
     .self$test.statistics<- list(robust.se = rse)
   }
 )
@@ -59,12 +59,12 @@ zexp$methods(
 zexp$methods(
   mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
     .self$mcformula <- as.formula("Surv(y.sim, event) ~ x.sim")
-    
+
     lambda <-exp(b0 + b1 * x)
     event <- rep(1, length(x))
     y.sim <- rexp(n=length(x), rate=lambda)
     y.hat <- 1/lambda
-    
+
     if(sim){
         data <- data.frame(y.sim=y.sim, event=event, x.sim=x)
         return(data)
@@ -74,4 +74,3 @@ zexp$methods(
     }
   }
 )
-

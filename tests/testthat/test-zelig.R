@@ -1,4 +1,4 @@
-# Integration tests for the Zelig estimate, set, sim, plot workflow ------------
+#### Integration tests for the Zelig estimate, set, sim, plot workflow      ####
 
 
 # FAIL TEST sim workflow -------------------------------------------------------
@@ -27,6 +27,7 @@ test_that('FAIL TEST ci.plot range > length = 1', {
                    'Only one fitted observation provided to setrange.\nConsider using setx instead.')
     expect_error(z$graph(),
                  'Simulations for more than one fitted observation are required.')
+})
                  
 # REQUIRE TEST for by estimation workflow --------------------------------------
 test_that('REQUIRE TEST for by estimation workflow', {

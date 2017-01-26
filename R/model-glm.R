@@ -11,7 +11,7 @@ zglm <- setRefClass("Zelig-glm",
                     fields = list(family = "character",
                                   link = "character",
                                   linkinv = "function"))
-  
+
 zglm$methods(
   initialize = function() {
     callSuper()
@@ -27,7 +27,7 @@ zglm$methods(
     .self$model.call <- .self$zelig.call
     .self$model.call$family <- call(.self$family, .self$link)
     callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = bootstrap)
-    rse <- plyr::llply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
+    rse <- lapply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
     .self$test.statistics <- list(robust.se = rse)
   }
 )

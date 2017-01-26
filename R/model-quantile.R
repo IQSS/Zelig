@@ -42,11 +42,12 @@ zquantile$methods(
         by <- cbind("tau", by)
       }
     }
-    else 
+    else
       .self$tau <- 0.5
     callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = bootstrap)
-    
-    rse<-plyr::llply(.self$zelig.out$z.out, (function(x) quantreg::summary.rq(x,se="nid", cov=TRUE)$cov))
+
+    rse <- lapply(.self$zelig.out$z.out, (function(x)
+                    quantreg::summary.rq(x, se = "nid", cov = TRUE)$cov))
     .self$test.statistics<- list(robust.se = rse)
   }
 )

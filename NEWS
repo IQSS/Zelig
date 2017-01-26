@@ -2,20 +2,21 @@
 
 ## Major changes
 
-- New testing architecture and more tests for model-ls, Zelig 4 wrappers, Zelig workflow, and `ci.plot`.
+- New testing architecture and more tests for model-ls, Zelig 4 wrappers, Zelig 
+workflow, and `ci.plot`.
 
-- `graph` method now accepts simulations from `setx` and `setrange`. For the former it uses `qi.plot`
-and `ci.plot` for the latter.
+- `graph` method now accepts simulations from `setx` and `setrange`. For the 
+former it uses `qi.plot` and `ci.plot` for the latter.
 
 ## Minor changes
 
 - Documentation improvements for Zelig 4 wrappers.
 
-- Improved error messages if Zelig methods are supplied with to little information.
-
 - Improved error messages for Zelig 4 wrappers.
+
+- Improved error messages if Zelig methods are supplied with too little 
+information.
 
 - Dynamically generated README.md.
 
-
-## Bug fixes
+- Removed plyr package dependency.
