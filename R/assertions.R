@@ -66,3 +66,21 @@ is_simsrange <- function(x, fail = TRUE) {
                 call. = FALSE)
     } else return(passes)
 }
+
+#' Check if an object has a length greater than 1
+#' @param x an object
+#' @param msg character string with the error message to return if
+#'   \code{fail = TRUE}.
+#' @param fail logical whether to return an error if length is not greater than
+#'   1.
+
+is_length_not_1 <- function(x, msg = 'Length is 1.',
+                            fail = TRUE) {
+    passes <- TRUE
+
+    if (length(x) == 1) passes <- FALSE
+    if (isTRUE(fail)) {
+        if (!isTRUE(passes))
+            stop(msg, call. = FALSE)
+    }
+}

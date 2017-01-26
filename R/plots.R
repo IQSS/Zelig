@@ -497,7 +497,10 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
 
     is_zelig(obj)
     is_simsrange(obj$sim.out)
+    msg <- 'Simulations for more than one fitted observation are required.'
+    is_length_not_1(obj$sim.out$range, msg = msg)
     if (!is.null(obj$sim.out$range1)) {
+        is_length_not_1(obj$sim.out$range1, msg)
         if (length(obj$sim.out$range) != length(obj$sim.out$range1))
             stop('The two fitted data ranges are not the same length.',
                  call. = FALSE)
