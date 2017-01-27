@@ -2,15 +2,15 @@
 
 ## Major changes
 
-- New testing architecture and more tests for model-ls, Zelig 4 wrappers, Zelig 
-workflow, and `ci.plot`.
+- Initial development on a new testing architecture and more tests for model-ls, 
+Zelig 4 wrappers, Zelig workflow, and `ci.plot`.
 
 - `graph` method now accepts simulations from `setx` and `setrange`. For the 
 former it uses `qi.plot` and `ci.plot` for the latter.
 
 ## Minor changes
 
-- Documentation improvements for Zelig 4 wrappers.
+- Minor documentation improvements for Zelig 4 wrappers.
 
 - Improved error messages for Zelig 4 wrappers.
 
