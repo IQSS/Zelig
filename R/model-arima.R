@@ -27,7 +27,7 @@ zarima$methods(
 )
 
 zarima$methods(
-  qi = function(simparam, mm, mm1=NULL){ 
+  qi = function(simparam, mm, mm1=NULL){
 
     myorder <- eval(.self$zelig.call$order)
     mycoef <- coef(.self$zelig.out$z.out[[1]])
@@ -38,10 +38,10 @@ zarima$methods(
       xnames <- colnames(x)
       snames <- colnames(simparam)
       ## parameter "intercept" can be spelt "(Intercept)"" in model matrix
-      if("(Intercept)" %in% xnames){     
+      if("(Intercept)" %in% xnames){
         flag <- xnames == "(Intercept)"
         xnames[flag] <- "intercept"
-        colnames(x)[flag]<- "intercept" # this is equivalent to: colnames(x) <- xnames  
+        colnames(x)[flag]<- "intercept" # this is equivalent to: colnames(x) <- xnames
       }
       ## "intercept" can be included in model matrix when not an estimated parameter (for example in models with integration)
       xnamesflag <- xnames %in% snames
@@ -55,7 +55,7 @@ zarima$methods(
     }
 
 
-    ## Make ACF 
+    ## Make ACF
     acf <- simacf(coef=mycoef, order=myorder, params=simparam, alpha=0.05)
     acf.length <- length(acf$expected.acf)
     t1 <- 2*acf.length
@@ -64,8 +64,8 @@ zarima$methods(
 
     if(.self$bsetx1){             # could also check if mm1 is NULL
       # zeligARMAbreakforecaster() calls zeligARMAlongrun() internally
-      #  return(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov)  
-      yseries <- zeligARMAbreakforecaster(y.init=NULL, x=mm, x1=mm1, simparam=simparam, order=myorder, sd=sd, t1=t1, t2=t2) 
+      #  return(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov)
+      yseries <- zeligARMAbreakforecaster(y.init=NULL, x=mm, x1=mm1, simparam=simparam, order=myorder, sd=sd, t1=t1, t2=t2)
       # maybe check nrow(yseries)=t1 + t2 ?
 
       pv <- yseries$y.innovation[t1,]                # could use either $innovation or $shock here
@@ -77,13 +77,13 @@ zarima$methods(
       ev.shortrun <- yseries$ev.innovation[t1+1,]
       ev.longrun <- yseries$ev.innovation[t1+t2,]
 
-      return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun, 
+      return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun,
                 pvseries.shock=yseries$y.shock, pvseries.innovation=yseries$y.innovation,
                 evseries.shock=yseries$ev.shock, evseries.innovation=yseries$ev.innovation))
 
     }else{
       # just call zeligARMAlongrun()
-      yseries <- zeligARMAlongrun(y.init=NULL, x=mm, simparam=simparam, order=myorder, sd=sd) 
+      yseries <- zeligARMAlongrun(y.init=NULL, x=mm, simparam=simparam, order=myorder, sd=sd)
       pv <- yseries$y[1,]   # zeligARMAlongrun returns the series in reverse order to zeligARMAbreakforecaster
       # Remember, these are expectations using the same simparam in each expectation:
       ev <- yseries$ev[1,]
@@ -107,8 +107,9 @@ zarima$methods(
 #' Estimation wrapper function for arima models, to easily fit with Zelig architecture
 #' @keywords internal
 
-zeligArimaWrapper <- function(formula, order=c(1,0,0), ... , include.mean=TRUE, data){
-    
+zeligArimaWrapper <- function(formula, order = c(1, 0, 0), ... ,
+                                include.mean = TRUE, data){
+
     # Using with():
     # myArimaCall <- quote( arima(x=, order =, xreg= ) )
     # output <- with(data, myArimaCall )
@@ -118,18 +119,19 @@ zeligArimaWrapper <- function(formula, order=c(1,0,0), ... , include.mean=TRUE, 
     mf <- model.frame(formula, data)
 
     acf3 <- as.character(formula[[3]])
-    
-    yflag <- names(mf) %in% all.vars(formula[-3]) 
-    xflag <- names(mf) %in% all.vars(formula[-2]) 
-    
-    myx <- as.matrix(mf[,yflag, drop=FALSE])  # could use get_all_vars()
-    myxreg <- as.matrix(mf[,xflag, drop=FALSE])
-    
+
+    yflag <- names(mf) %in% all.vars(formula[-3])
+    xflag <- names(mf) %in% all.vars(formula[-2])
+    myx <- as.matrix(mf[,yflag, drop = FALSE])  # could use get_all_vars()
+    is_varying(as.vector(myx), msg = 'Dependent variable does not vary for at least one of the cases.')
+    myxreg <- as.matrix(mf[,xflag, drop = FALSE])
+
     if (("1" %in% acf3 ) & ("-" %in% acf3 )){
         include.mean <- FALSE
     }
-    
-    output <- stats::arima(x=myx, order=order, xreg=myxreg, include.mean=include.mean, ...)
+
+    output <- stats::arima(x = myx, order = order, xreg = myxreg,
+                            include.mean = include.mean, ...)
 
 }
 
@@ -154,11 +156,11 @@ simacf <- function(coef, order, params, alpha = 0.5){
     myma.seq <- params[, manames, drop=FALSE]
   }
 
-  mylag.max<-10  # Need to set automatically.  
+  mylag.max<-10  # Need to set automatically.
 
   n.sims<-nrow(params)
   expected.acf <- ARMAacf(ar=myar, ma=myma, lag.max=mylag.max)
-  acf.history<-matrix(NA, nrow=n.sims, ncol=length(expected.acf))      # length(expected.acf) = mylag.max +1 
+  acf.history<-matrix(NA, nrow=n.sims, ncol=length(expected.acf))      # length(expected.acf) = mylag.max +1
   for(i in 1:n.sims){
     acf.history[i,] <- ARMAacf(ar=myar.seq[i,], ma=myma.seq[i,], lag.max=mylag.max)
   }
@@ -187,7 +189,7 @@ simacf <- function(coef, order, params, alpha = 0.5){
 #' @keywords internal
 
 zeligARMAnextstep <- function(yseries=NULL, xseries, wseries=NULL, beta, ar=NULL, i=NULL, ma=NULL, sd){
-  
+
   ## Check inputs
   # t is obs across time
   # s is sims
@@ -225,24 +227,24 @@ zeligARMAnextstep <- function(yseries=NULL, xseries, wseries=NULL, beta, ar=NULL
 
   ar.term <- function(yseries, ar, n){
     yshort <- yseries[1:ncol(ar), , drop=FALSE]           # because we only need the diagonal of a square matrix, we can avoid full matrix multiplication
-    return( rowSums( ar * t(yshort) ) )       # diag[(s x p) . (p x s)] = diag[(s x s)] = (s x 1)  
+    return( rowSums( ar * t(yshort) ) )       # diag[(s x p) . (p x s)] = diag[(s x s)] = (s x 1)
   }
   xt.term <- function(xseries, beta){
     return( as.vector(beta %*% t(xseries)) )  # (s x k) . t(1 x k) = (s x 1)
   }
-  ma.term <- function(wseries, ma){    
+  ma.term <- function(wseries, ma){
     wshort <- wseries[1:ncol(ma), , drop=FALSE]
     return( rowSums( ma * t(wshort)) )        # diag[(s x r) . (r x s)] = diag[(s x s)] = (s x 1)
   }
 
-  n.sims <- ncol(yseries)   
+  n.sims <- ncol(yseries)
   w <- rnorm(n=n.sims, mean=0, sd=sd)
   y <- xt.term(xseries,beta) + w              # conformable if xt is vector and w vector
   if(!is.null(ar)){
-    y <- y + ar.term(yseries,ar)              # conformable if y vector and ar vector 
+    y <- y + ar.term(yseries,ar)              # conformable if y vector and ar vector
   }
   if(!is.null(ma)){
-    y <- y + ma.term(wseries,ma)              # conformable if y vector and ma vector 
+    y <- y + ma.term(wseries,ma)              # conformable if y vector and ma vector
   }
 
   exp.y <- y - w                              # one interpretation of an EV QI:  E(y| l(w), l(y))
@@ -273,7 +275,7 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
     ma <- simparam[,manames]
   }
   timepast <- max(order[1],order[3])
-  
+
   n.sims <- nrow(simparam)
 
   if(is.vector(x)){
@@ -311,7 +313,7 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
 
 zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1=5, t2=10){
 
-  longrun.out <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, order=order, sd=sd)   
+  longrun.out <- zeligARMAlongrun(y.init=y.init, x=x, simparam=simparam, order=order, sd=sd)
   yseries  <- longrun.out$y.longrun
   wseries  <- longrun.out$w.longrun
   evseries <- longrun.out$ev.longrun
@@ -322,7 +324,7 @@ zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1
 
   ## Extract AR and MA terms
   ar <- i <- ma <- NULL
-  if(order[1]>0){                                      
+  if(order[1]>0){
     arnames <- paste("ar", 1:order[1], sep="")
     ar <- simparam[,arnames]
   }
@@ -375,5 +377,5 @@ zeligARMAbreakforecaster <- function(y.init=NULL, x, x1, simparam, order, sd, t1
   evseries <- evseries[nrow(evseries):1, ]
   ev.innov <- ev.innov[nrow(ev.innov):1, ]
 
-  return(list(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov))  
+  return(list(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov))
 }

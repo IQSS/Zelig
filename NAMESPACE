@@ -1,7 +1,6 @@
 import(sandwich, methods, survival, jsonlite, dplyr,
        geepack, MCMCpack, coda, Amelia, MatchIt, maxLik, survey)
 
-importFrom("plyr", "llply")
 importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm", "gamma.shape")
 importFrom("VGAM", "vglm")
 importFrom("AER", "tobit")

@@ -207,8 +207,12 @@ cluster.formula <- function (formula, cluster) {
 
 
 #' Zelig Copy of plyr::mutate to avoid namespace conflict with dplyr
+#'
+#' @source Hadley Wickham (2011). The Split-Apply-Combine Strategy for Data
+#' Analysis. Journal of Statistical Software, 40(1), 1-29. URL
+#' \url{http://www.jstatsoft.org/v40/i01/}.
 #' @keywords internal
-zeligPlyrMutate<-function (.data, ...)
+zelig_mutate <- function (.data, ...)
 {
     stopifnot(is.data.frame(.data) || is.list(.data) || is.environment(.data))
     cols <- as.list(substitute(list(...))[-1])
@@ -217,4 +221,17 @@ zeligPlyrMutate<-function (.data, ...)
         .data[[col]] <- eval(cols[[col]], .data, parent.frame())
     }
     .data
+}
+
+#' Convenience function for setrange and setrange
+#'
+#' @param x data passed to setrange or setrange1
+#' @keywords internal
+
+expand_grid_setrange <- function(x) {
+    m <- expand.grid(x)
+    if (nrow(m) == 1)
+        warning('Only one fitted observation provided to setrange.\nConsider using setx instead.',
+                call. = FALSE)
+    return(m)
 }

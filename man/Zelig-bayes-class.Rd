@@ -14,6 +14,6 @@ Bayes Model object for inheritance across models in Zelig
 \item{\code{getcoef()}}{Get estimated model coefficients}
 
 \item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)}}{The zelig command estimates a variety of statistical models}
+  bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 

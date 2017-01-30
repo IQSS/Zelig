@@ -1,8 +1,15 @@
 Package: Zelig
-Maintainer: James Honaker <zelig.zee@gmail.com>
-License: GPL (>=2)
+License: GPL (>=3)
 Title: Everyone's Statistical Software
-Author: Christine Choirat, James Honaker, Kosuke Imai, Gary King, Olivia Lau
+Authors@R: c(
+    person("Christine.", "Choirat", role = "aut"),
+    person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
+    role = c("aut", "cre")),
+    person("Gary", "King", role = "aut"),
+    person("James", "Honaker", role = "aut"),
+    person("Kosuke", "Imai", role = "aut"),
+    person("Olivia", "Lau", role = "aut")
+    )
 Description: A framework that brings together an abundance of common
     statistical models found across packages into a unified interface, and
     provides a common architecture for estimation and interpretation, as well
@@ -18,10 +25,10 @@ Description: A framework that brings together an abundance of common
     quantities of interest (such as relative risk ratios, average treatment
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
-URL: https://cran.r-project.org/web/packages/Zelig/index.html
+URL: http://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-14
-Date: 2017-01-16
+Date: 2017-01-30
 Imports:
     sandwich,
     methods,
@@ -30,7 +37,6 @@ Imports:
     VGAM,
     jsonlite,
     AER,
-    plyr,
     dplyr (>= 0.3.0.2),
     quantreg,
     geepack,

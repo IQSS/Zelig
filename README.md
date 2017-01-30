@@ -15,6 +15,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=mas
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
 [![Pull requests waiting for
 review](https://badge.waffle.io/iqss/zelig.svg?label=development)](https://waffle.io/iqss/zelig)
+[Dev-Blog](https://medium.com/zelig-dev)
 
 Zelig is an easy-to-use, free, open source, general purpose statistics
 program for estimating, interpreting, and presenting results from any
@@ -39,8 +40,8 @@ problems by completely rewriting into R’s Reference Classes for a fully
 object-oriented architecture. Comparability wrappers are available so
 that you can still use pre-Zelig 5 syntax.
 
-Quick Start Zelig 5
--------------------
+Zelig 5 workflow overview
+-------------------------
 
 All models in Zelig 5 can be estimated and results explored presented
 using a five simple steps:
@@ -57,7 +58,20 @@ using a five simple steps:
 
 -   `graph` to plot the simulation results.
 
-Let’s load the package and walk through an example. The swiss dataset
+### Differences from Zelig 4 and backwards compatability
+
+Zelig 5 uses [reference classes](http://adv-r.had.co.nz/R5.html) which
+work a bit differently from what you may expect in R. The big difference
+is that they are "mutable", i.e. assigning values to them does not
+overwrite the objects previous contents.
+
+Zelig 5 does contain wrappers (largely) allowing you to use Zelig 4
+syntax if you'ld like.
+
+Zelig 5 Quickstart Guide
+------------------------
+
+Let’s walk through an example. This example uses the swiss dataset. It
 contains data on fertility and socioeconomic factors in Switzerland’s 47
 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551).
 We will model the effect of education on fertility, where education is
@@ -65,10 +79,18 @@ measured as the percent of draftees with education beyond primary school
 and fertility is measured using the common standardized fertility
 measure (see Muehlenbein (2010, 80-81) for details).
 
-Loading Zelig
--------------
+Installing and Loading Zelig
+----------------------------
 
-First, open your R console and load Zelig:
+If you haven't already done so, open your R console and install Zelig:
+
+    install.packages('Zelig')
+
+Alternatively you can install the development version with:
+
+    devtools::install_github('IQSS/Zelig')
+
+Once Zelig is installed, load it:
 
     library(Zelig)
 
@@ -82,8 +104,8 @@ appropriate model choice. We first create a Zelig least squares object:
     # initialize Zelig5 least squares object
     z5 <- zls$new()
 
-To estimate our model, we call the zelig() method, which is a function
-that is internal to the Zelig object. We pass the zelig() method two
+To estimate our model, we call the `zelig()` method, which is a function
+that is internal to the Zelig object. We pass the `zelig()` method two
 arguments: equation and data:
 
     # estimate ls model
@@ -155,23 +177,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean       sd     50%    2.5%   97.5%
-    ## 1 75.34669 1.623717 75.3778 72.0946 78.3423
+    ##     mean       sd      50%     2.5%    97.5%
+    ## 1 75.291 1.575095 75.25233 72.38984 78.44461
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.06701 9.872719 74.97049 55.38795 94.03839
+    ## [1,] 75.24904 9.419252 75.91061 56.76001 91.95659
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean       sd      50%    2.5%    97.5%
-    ## 1 66.68021 1.520516 66.66157 63.7506 69.69706
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 66.66368 1.416404 66.63681 63.99208 69.45811
     ## pv
-    ##          mean       sd      50%    2.5%   97.5%
-    ## [1,] 66.56147 9.525085 66.82548 47.6388 85.4093
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 66.60779 9.694003 66.48146 47.26967 85.07781
     ## fd
-    ##        mean       sd       50%     2.5%     97.5%
-    ## 1 -8.666479 1.396604 -8.661257 -11.4146 -5.917406
+    ##       mean       sd       50%      2.5%     97.5%
+    ## 1 -8.62732 1.415942 -8.630518 -11.22842 -5.979453
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
@@ -207,3 +229,5 @@ Then use the `graph()` method as before:
     z5$graph()
 
 ![](README_files/figure-markdown_strict/example_plot_ci_plot-1.png)
+
+Note: implemented in version 5.0-14.

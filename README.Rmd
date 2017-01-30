@@ -24,7 +24,7 @@ knitr::opts_knit$set(
 [![Travis (LINUX) Build Status](https://travis-ci.org/IQSS/Zelig.svg?branch=master)](https://travis-ci.org/IQSS/Zelig)
 [![AppVeyor (Windows) Build Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
-[![Pull requests waiting for review](https://badge.waffle.io/iqss/zelig.svg?label=development)](https://waffle.io/iqss/zelig)
+[![Pull requests waiting for review](https://badge.waffle.io/iqss/zelig.svg?label=development)](https://waffle.io/iqss/zelig) [Dev-Blog](https://medium.com/zelig-dev)
 
 Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of R, with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three commands and consistent documentation for every method. Zelig uses R code from many researchers, making it "everyone’s statistical software." We hope it becomes everyone’s statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach. 
 
@@ -34,7 +34,7 @@ Project page and publications available at: <http://zeligproject.org>.
 
 The release of Zelig 5.0 expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture. Comparability wrappers are available so that you can still use pre-Zelig 5 syntax.
 
-## Quick Start Zelig 5
+## Zelig 5 workflow overview
 
 All models in Zelig 5 can be estimated and results explored presented using a five simple steps:
 
@@ -48,11 +48,32 @@ All models in Zelig 5 can be estimated and results explored presented using a fi
   
   + `graph` to plot the simulation results.
 
-Let’s load the package and walk through an example. The swiss dataset contains data on fertility and socioeconomic factors in Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). We will model the effect of education on fertility, where education is measured as the percent of draftees with education beyond primary school and fertility is measured using the common standardized fertility measure (see Muehlenbein (2010, 80-81) for details).
+### Differences from Zelig 4 and backwards compatability
 
-## Loading Zelig
+Zelig 5 uses [reference classes](http://adv-r.had.co.nz/R5.html) which work a bit differently from what you may expect in R. The big difference is that they are "mutable", i.e. assigning values to them does not overwrite the objects previous contents. 
 
-First, open your R console and load Zelig:
+Zelig 5 does contain wrappers (largely) allowing you to use Zelig 4 syntax if you'ld like.
+
+## Zelig 5 Quickstart Guide
+
+Let’s walk through an example. This example uses the swiss dataset. It contains 
+data on fertility and socioeconomic factors in Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). We will model the effect of education on fertility, where education is measured as the percent of draftees with education beyond primary school and fertility is measured using the common standardized fertility measure (see Muehlenbein (2010, 80-81) for details).
+
+## Installing and Loading Zelig
+
+If you haven't already done so, open your R console and install Zelig:
+
+```{r eval=FALSE}
+install.packages('Zelig')
+```
+
+Alternatively you can install the development version with:
+
+```{r eval=FALSE}
+devtools::install_github('IQSS/Zelig')
+```
+
+Once Zelig is installed, load it:
 
 ```{r message=FALSE}
 library(Zelig)
@@ -67,7 +88,7 @@ Let’s assume we want to estimate the effect of education on fertility. Since f
 z5 <- zls$new()
 ```
 
-To estimate our model, we call the zelig() method, which is a function that is internal to the Zelig object. We pass the zelig() method two arguments: equation and data:
+To estimate our model, we call the `zelig()` method, which is a function that is internal to the Zelig object. We pass the `zelig()` method two arguments: equation and data:
 
 ```{r}
 # estimate ls model
@@ -133,3 +154,5 @@ Then use the `graph()` method as before:
 
 z5$graph()
 ```
+
+Note: implemented in version 5.0-14.

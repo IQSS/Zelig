@@ -12,6 +12,6 @@ Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-lognorm.html}
 
 \describe{
 \item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)}}{The zelig command estimates a variety of statistical models}
+  bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 
