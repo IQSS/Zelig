@@ -1,3 +1,17 @@
+# Zelig version 5.0-15
+
+## Major changes
+
+- The Zelig 4 `sim` wrapper now intellegently looks for fitted values from the
+reference class object if not supplied via the \code{x} argument.
+
+
+
+## Minor Changes
+
+
+
+
 # Zelig version 5.0-14
 
 ## Major changes
