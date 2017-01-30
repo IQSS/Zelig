@@ -323,7 +323,7 @@ z$methods(
     # Notice Amelia objects ignore weights currently, which is reasonable as the Amelia package ignores weights
     if ("amelia" %in% class(data)){
       idata <- data$imputations
-      .self$data <- rbind_all(lapply(seq(length(idata)),
+      .self$data <- bind_rows(lapply(seq(length(idata)),
                                      function(imputationNumber)
                                        cbind(imputationNumber, idata[[imputationNumber]])))
       .self$weights <- NULL  # This should be considered or addressed
