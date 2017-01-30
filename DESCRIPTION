@@ -5,9 +5,9 @@ Authors@R: c(
     person("Christine.", "Choirat", role = "aut"),
     person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
     role = c("aut", "cre")),
-    person("Gary", "King", role = "aut"),
     person("James", "Honaker", role = "aut"),
     person("Kosuke", "Imai", role = "aut"),
+    person("Gary", "King", role = "aut"),
     person("Olivia", "Lau", role = "aut")
     )
 Description: A framework that brings together an abundance of common
@@ -25,7 +25,7 @@ Description: A framework that brings together an abundance of common
     quantities of interest (such as relative risk ratios, average treatment
     effects, first differences and predicted and expected values) to interpret
     and visualize complex models.
-URL: http://cran.r-project.org/package=Zelig
+URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-14
 Date: 2017-01-30
