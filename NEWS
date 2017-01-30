@@ -1,22 +1,27 @@
-# Zelig 5.0-14
+# Zelig version 5.0-14
 
 ## Major changes
 
-- Initial development on a new testing architecture and more tests for model-ls, 
-Zelig 4 wrappers, Zelig workflow, and `ci.plot`.
+- Initial development on a new testing architecture and more tests for 
+`model-ls`, Zelig 4 wrappers, Zelig workflow, and `ci.plot`.
 
 - `graph` method now accepts simulations from `setx` and `setrange`. For the 
 former it uses `qi.plot` and `ci.plot` for the latter.
 
-## Minor changes
-
-- Minor documentation improvements for Zelig 4 wrappers.
+- `model-arima` now fails if the dependent variable does not vary for one of the 
+cases.
 
 - Improved error messages for Zelig 4 wrappers.
 
 - Improved error messages if Zelig methods are supplied with too little 
 information.
 
+## Minor changes
+
+- Minor documentation improvements for Zelig 4 wrappers.
+
 - Dynamically generated README.md.
 
 - Removed plyr package dependency.
+
+- `rbind_all` replaced by `bind_rows` as the former is deprecated by dplyr.

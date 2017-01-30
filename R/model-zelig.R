@@ -231,7 +231,7 @@ z$methods(
       fc$data <- data
       return(fc)
     }
-
+    
     .self$formula <- formula
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
@@ -252,7 +252,6 @@ z$methods(
       flag <- !(names(.self$zelig.call) == "model")
       .self$zelig.call <- .self$zelig.call[flag]
     }
-
 
     .self$by <- by
     .self$originaldata <- data

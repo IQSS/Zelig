@@ -122,9 +122,9 @@ zeligArimaWrapper <- function(formula, order = c(1, 0, 0), ... ,
 
     yflag <- names(mf) %in% all.vars(formula[-3])
     xflag <- names(mf) %in% all.vars(formula[-2])
-
-    myx <- as.matrix(mf[,yflag, drop=FALSE])  # could use get_all_vars()
-    myxreg <- as.matrix(mf[,xflag, drop=FALSE])
+    myx <- as.matrix(mf[,yflag, drop = FALSE])  # could use get_all_vars()
+    is_varying(as.vector(myx), msg = 'Dependent variable does not vary for at least one of the cases.')
+    myxreg <- as.matrix(mf[,xflag, drop = FALSE])
 
     if (("1" %in% acf3 ) & ("-" %in% acf3 )){
         include.mean <- FALSE

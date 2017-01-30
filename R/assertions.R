@@ -74,13 +74,29 @@ is_simsrange <- function(x, fail = TRUE) {
 #' @param fail logical whether to return an error if length is not greater than
 #'   1.
 
-is_length_not_1 <- function(x, msg = 'Length is 1.',
-                            fail = TRUE) {
+is_length_not_1 <- function(x, msg = 'Length is 1.', fail = TRUE) {
     passes <- TRUE
 
     if (length(x) == 1) passes <- FALSE
     if (isTRUE(fail)) {
         if (!isTRUE(passes))
             stop(msg, call. = FALSE)
-    }
+    } else return(passes)
+}
+
+#' Check if the values in a vector vary
+#' @param x a vector
+#' @param msg character string with the error message to return if
+#'   \code{fail = TRUE}.
+#' @param fail logical whether to return an error if \code{x} does not vary.
+
+is_varying <- function(x, msg = 'Vector does not vary.', fail = TRUE) {
+    if (!is.vector(x)) stop('x must be a vector.', call. = FALSE)
+    passes <- TRUE
+
+    if (length(unique(x)) == 1) passes <- FALSE
+    if (isTRUE(fail)) {
+        if (!isTRUE(passes))
+            stop(msg, call. = FALSE)
+    } else return(passes)
 }

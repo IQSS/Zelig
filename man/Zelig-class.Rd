@@ -15,7 +15,7 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{formula}}{Zelig formula}
 
-\item{\code{weights}}{forthcoming}
+\item{\code{weights}}{[forthcoming]}
 
 \item{\code{name}}{name of the Zelig model}
 

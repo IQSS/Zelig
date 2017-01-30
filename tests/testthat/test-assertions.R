@@ -35,3 +35,13 @@ test_that('FAIL TEST length is not greater than 1', {
     not_more_1 <- 1
     expect_error(is_length_not_1(not_more_1), 'Length is 1.')
 })
+
+# FAIL TEST vector does not vary -----------------------------------------------
+test_that('FAIL TEST vector does not vary', {
+    expect_error(is_varying(c(rep(1, 5))), 'Vector does not vary.')
+})
+
+# REQUIRE TEST vector does not vary -----------------------------------------------
+test_that('REQIURE TEST vector does not vary', {
+    expect_true(is_varying(c(1, 2, 3), fail = FALSE))
+})
