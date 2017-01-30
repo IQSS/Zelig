@@ -28,7 +28,7 @@ Description: A framework that brings together an abundance of common
 URL: http://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-14
-Date: 2017-01-27
+Date: 2017-01-30
 Imports:
     sandwich,
     methods,

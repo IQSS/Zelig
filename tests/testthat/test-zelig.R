@@ -28,7 +28,7 @@ test_that('FAIL TEST ci.plot range > length = 1', {
     expect_error(z$graph(),
                  'Simulations for more than one fitted observation are required.')
 })
-                 
+
 # REQUIRE TEST for by estimation workflow --------------------------------------
 test_that('REQUIRE TEST for by estimation workflow', {
     # Majority Catholic dummy
@@ -40,5 +40,14 @@ test_that('REQUIRE TEST for by estimation workflow', {
     z5$sim()
 
     z5$graph()
+
+})
+
+# FAIL TEST for estimation model failure ---------------------------------------
+test_that('FAIL TEST for estimation model failure', {
+    no_vary_df <- data.frame(y = rep(1, 10), x = rep(2, 10))
+    z <- zarima$new()
+    expect_error(z$zelig(y ~ x, data = no_vary_df))
+    expect_error(summary(z), 'Zelig model has not been estimated.')
 
 })
