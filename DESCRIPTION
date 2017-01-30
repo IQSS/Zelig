@@ -17,7 +17,7 @@ Description: A framework that brings together an abundance of common
     collective library. Zelig allows each individual package, for each
     statistical model, to be accessed by a common uniformly structured call and
     set of arguments. Moreover, Zelig automates all the surrounding building
-    blocks of a statistical work-flow --procedures and algorithms that may be
+    blocks of a statistical work-flow--procedures and algorithms that may be
     essential to one user's application but which the original package
     developer did not use in their own research and might not themselves
     support. These include bootstrapping, jackknifing, and re-weighting of data.
