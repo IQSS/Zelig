@@ -14,4 +14,3 @@ is_zelig(x, fail = TRUE)
 \description{
 Check if is a zelig object
 }
-

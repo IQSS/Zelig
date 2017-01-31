@@ -18,4 +18,3 @@ a variable of the same type with a value \code{val}
 Set new value of a variable as approrpriate to data type
 }
 \keyword{internal}
-

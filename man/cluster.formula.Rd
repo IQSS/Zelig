@@ -18,4 +18,3 @@ a formula object describing clustering
 This method is used internally by the "Zelig" Package to interpret
 clustering in GEE models.
 }
-

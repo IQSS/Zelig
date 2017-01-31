@@ -15,4 +15,3 @@
 \description{
 Method for extracting estimated coefficients from Zelig objects
 }
-

@@ -15,4 +15,3 @@
 \description{
 Method for getting predicted values from Zelig objects
 }
-

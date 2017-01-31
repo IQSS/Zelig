@@ -18,4 +18,3 @@ Default Plot Design For Zelig Model QI's
 \author{
 James Honaker with panel layouts from Matt Owen
 }
-

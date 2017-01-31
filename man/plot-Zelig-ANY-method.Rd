@@ -17,4 +17,3 @@
 \description{
 Plot method for Zelig objects
 }
-

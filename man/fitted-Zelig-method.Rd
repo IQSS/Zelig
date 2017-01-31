@@ -15,4 +15,3 @@
 \description{
 Method for extracting estimated fitted values from Zelig objects
 }
-

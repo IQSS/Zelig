@@ -15,4 +15,3 @@ a mean (if numeric) or a median (if ordered) or mode (otherwise)
 \description{
 Compute central tendancy as approrpriate to data type
 }
-

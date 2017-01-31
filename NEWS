@@ -5,8 +5,8 @@
 - The Zelig 4 `sim` wrapper now intellegently looks for fitted values from the
 reference class object if not supplied via the \code{x} argument.
 
-- New `mi` utility function for combining multiply imputed datasets for passing 
-to Zelig
+- New `to_zelig_mi` utility function for combining multiply imputed datasets for 
+passing to `zelig`. #178
 
 ## Minor Changes
 

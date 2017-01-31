@@ -11,4 +11,3 @@ zeligArimaWrapper(formula, order = c(1, 0, 0), ..., include.mean = TRUE,
 Estimation wrapper function for arima models, to easily fit with Zelig architecture
 }
 \keyword{internal}
-

@@ -14,4 +14,3 @@ is_uninitializedField(x, fail = TRUE)
 \description{
 Check if uninitializedField
 }
-

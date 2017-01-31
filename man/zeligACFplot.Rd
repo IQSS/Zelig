@@ -13,4 +13,3 @@ zeligACFplot(z, omitzero = FALSE, barcol = "black", epsilon = 0.1,
 Plot Autocorrelation Function from Zelig QI object
 }
 \keyword{internal}
-

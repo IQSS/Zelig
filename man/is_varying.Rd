@@ -17,4 +17,3 @@ is_varying(x, msg = "Vector does not vary.", fail = TRUE)
 \description{
 Check if the values in a vector vary
 }
-

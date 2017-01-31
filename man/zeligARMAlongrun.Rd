@@ -11,4 +11,3 @@ zeligARMAlongrun(y.init = NULL, x, simparam, order, sd, tol = NULL,
 Calculate the Long Run Exquilibrium for Fixed X
 }
 \keyword{internal}
-

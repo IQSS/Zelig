@@ -15,4 +15,3 @@ zelig_mutate(.data, ...)
 Zelig Copy of plyr::mutate to avoid namespace conflict with dplyr
 }
 \keyword{internal}
-

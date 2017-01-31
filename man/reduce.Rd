@@ -27,4 +27,3 @@ a list of all the model variables either at their central tendancy or their \cod
 Christine Choirat
 }
 \keyword{internal}
-

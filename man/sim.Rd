@@ -110,4 +110,3 @@ function.
 \author{
 Christopher Gandrud, Matt Owen, Olivia Lau and Kosuke Imai
 }
-

@@ -18,4 +18,3 @@ is_length_not_1(x, msg = "Length is 1.", fail = TRUE)
 \description{
 Check if an object has a length greater than 1
 }
-

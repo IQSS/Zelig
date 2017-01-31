@@ -20,4 +20,3 @@ Compute the Statistical Median of a Vector
 \author{
 Matt Owen \email{mowen@iq.harvard.edu}
 }
-

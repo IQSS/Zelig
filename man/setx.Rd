@@ -58,12 +58,11 @@ x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 
 }
-\author{
-Matt Owen, Olivia Lau and Kosuke Imai
-}
 \seealso{
 The full Zelig manual may be accessed online at
   \url{http://docs.zeligproject.org/en/latest/}
 }
+\author{
+Matt Owen, Olivia Lau and Kosuke Imai
+}
 \keyword{file}
-

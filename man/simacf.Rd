@@ -10,4 +10,3 @@ simacf(coef, order, params, alpha = 0.5)
 Construct Autocorrelation Function from Zelig object and simulated parameters
 }
 \keyword{internal}
-

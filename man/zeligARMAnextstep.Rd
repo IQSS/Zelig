@@ -11,4 +11,3 @@ zeligARMAnextstep(yseries = NULL, xseries, wseries = NULL, beta,
 Construct Simulated Next Step in Dynamic Series
 }
 \keyword{internal}
-

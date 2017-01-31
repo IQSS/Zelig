@@ -14,4 +14,3 @@ is_sims_present(x, fail = TRUE)
 \description{
 Check if any simulations are present in sim.out
 }
-

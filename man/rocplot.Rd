@@ -66,4 +66,3 @@ The 'rocplot' command generates a receiver operator characteristic plot to
 compare the in-sample (default) or out-of-sample fit for two logit or probit
 regressions.
 }
-
