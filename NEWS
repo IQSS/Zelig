@@ -1,21 +1,14 @@
-# Zelig version 5.0-15
+# Zelig version 5.0-14
 
 ## Major changes
+
+- `mode` has been deprecated. Please use `Mode`. #152 
 
 - The Zelig 4 `sim` wrapper now intellegently looks for fitted values from the
 reference class object if not supplied via the \code{x} argument.
 
 - New `to_zelig_mi` utility function for combining multiply imputed datasets for 
-passing to `zelig`. #178
-
-## Minor Changes
-
-
-
-
-# Zelig version 5.0-14
-
-## Major changes
+passing to `zelig`. `mi` will also work to enable backwards compatability. #178
 
 - Initial development on a new testing architecture and more tests for 
 `model-ls`, Zelig 4 wrappers, Zelig workflow, and `ci.plot`.

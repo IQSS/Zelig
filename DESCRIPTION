@@ -3,7 +3,7 @@ License: GPL (>=3)
 Title: Everyone's Statistical Software
 Authors@R: c(
     person("Christine.", "Choirat", role = "aut"),
-    person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
+    person("Christopher", "Gandrud", email = "zelig.zee@gmail.com",
     role = c("aut", "cre")),
     person("James", "Honaker", role = "aut"),
     person("Kosuke", "Imai", role = "aut"),
@@ -27,7 +27,7 @@ Description: A framework that brings together an abundance of common
     and visualize complex models.
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
-Version: 5.0-15
+Version: 5.0-14
 Date: 2017-01-31
 Imports:
     sandwich,

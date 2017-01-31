@@ -289,3 +289,12 @@ to_zelig_mi <- function (...) {
 
     return(imputations)
 }
+
+#' Enables backwards compatability for preparing non-amelia imputed data sets
+#' for \code{zelig}. 
+#' 
+#' See \code{\link{to_zelig_mi}}
+#' 
+#' @param ... a set of \code{data.frame}'s
+#' @return an \code{mi} object composed of a list of data frames.
+mi <- to_zelig_mi
