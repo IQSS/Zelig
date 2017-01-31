@@ -65,15 +65,15 @@ zweibull$methods(
   param = function(z.out, method="mvn") {
     if(identical(method,"mvn")){
       coeff <- coef(z.out)
-      mu <- c(coeff, z.out$scale)
+      mu <- c(coeff, log(z.out$scale) )  # JH this is the scale of the vcov used below
       cov <- vcov(z.out)
       simulations <- mvrnorm(.self$num, mu = mu, Sigma = cov)
       simparam.local <- as.matrix(simulations[, 1:length(coeff)])
-      simalpha.local <- as.matrix(simulations[, -(1:length(coeff))])
+      simalpha.local <- as.matrix(simulations[, (length(coeff)+1)])
       simparam.local <- list(simparam = simparam.local, simalpha = simalpha.local)
       return(simparam.local)
     } else if(identical(method,"point")){
-      return(list(simparam = t(as.matrix(coef(z.out))), simalpha = z.out$scale))
+      return(list(simparam = t(as.matrix(coef(z.out))), simalpha = log(z.out$scale)))
     }
   }
 )
@@ -82,8 +82,8 @@ zweibull$methods(
   qi = function(simparam, mm) {
     eta <- simparam$simparam %*% t(mm)
     theta <- as.matrix(apply(eta, 2, linkinv))
-    ev <- theta * gamma(1 + 1/exp(simparam$simalpha))
-    pv <- as.matrix(rweibull(length(ev), shape = exp(simparam$simalpha), scale = theta))
+    ev <- theta * gamma(1 + exp(simparam$simalpha))
+    pv <- as.matrix(rweibull(length(ev), shape = 1/exp(simparam$simalpha), scale = theta))
     return(list(ev = ev, pv = pv))
   }
 )
