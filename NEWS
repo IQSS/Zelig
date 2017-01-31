@@ -2,26 +2,26 @@
 
 ## Major changes
 
-- `mode` has been deprecated. Please use `Mode`. #152 
+- `mode` has been deprecated. Please use `Mode`. #152
 
 - The Zelig 4 `sim` wrapper now intellegently looks for fitted values from the
 reference class object if not supplied via the \code{x} argument.
 
-- New `to_zelig_mi` utility function for combining multiply imputed datasets for 
+- New `to_zelig_mi` utility function for combining multiply imputed datasets for
 passing to `zelig`. `mi` will also work to enable backwards compatability. #178
 
-- Initial development on a new testing architecture and more tests for 
-`model-ls`, Zelig 4 wrappers, Zelig workflow, and `ci.plot`.
+- Initial development on a new testing architecture and more tests for
+`model-*`, Zelig 4 wrappers, `ci.plot`, and the Zelig workflow.
 
-- `graph` method now accepts simulations from `setx` and `setrange`. For the 
+- `graph` method now accepts simulations from `setx` and `setrange`. For the
 former it uses `qi.plot` and `ci.plot` for the latter.
 
 - Improved error messages for Zelig 4 wrappers.
 
-- Improved error messages if Zelig methods are supplied with too little 
+- Improved error messages if Zelig methods are supplied with too little
 information.
 
-- `model-arima` now fails if the dependent variable does not vary for one of the 
+- `model-arima` now fails if the dependent variable does not vary for one of the
 cases.
 
 ## Minor changes
