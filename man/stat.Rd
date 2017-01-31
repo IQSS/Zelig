@@ -21,4 +21,3 @@ Pass Quantities of Interest to Appropriate Summary Function
 Christine Choirat
 }
 \keyword{internal}
-

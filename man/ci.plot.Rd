@@ -60,4 +60,3 @@ Method for plotting qi simulations across a range within a variable, with confid
 \author{
 James Honaker
 }
-

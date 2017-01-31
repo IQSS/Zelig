@@ -13,4 +13,3 @@ expand_grid_setrange(x)
 Convenience function for setrange and setrange
 }
 \keyword{internal}
-

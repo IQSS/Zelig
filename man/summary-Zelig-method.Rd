@@ -15,4 +15,3 @@
 \description{
 Summary method for Zelig objects"
 }
-

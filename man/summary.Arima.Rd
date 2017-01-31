@@ -17,4 +17,3 @@ The original object
 \description{
 Summary of an object of class Arima
 }
-

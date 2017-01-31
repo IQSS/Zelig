@@ -65,4 +65,3 @@ Matt Owen, Kosuke Imai, Olivia Lau, and Gary King
 Maintainer: Christopher Gandrud
 }
 \keyword{package}
-

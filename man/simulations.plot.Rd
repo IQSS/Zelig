@@ -41,4 +41,3 @@ Zelig
 \author{
 James Honaker
 }
-

@@ -18,4 +18,3 @@ a factor variable with a value \code{val} and the same levels
 Set new value of a factor variable, checking for existing levels
 }
 \keyword{internal}
-

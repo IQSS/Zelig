@@ -11,4 +11,3 @@ zeligARMAbreakforecaster(y.init = NULL, x, x1, simparam, order, sd, t1 = 5,
 Construct Simulated Series with Internal Discontinuity in X
 }
 \keyword{internal}
-

@@ -11,4 +11,3 @@ relogit(formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,
 Estimation function for rare events logit models
 }
 \keyword{internal}
-

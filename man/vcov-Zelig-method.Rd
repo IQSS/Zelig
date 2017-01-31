@@ -15,4 +15,3 @@
 \description{
 Variance-covariance method for Zelig objects
 }
-

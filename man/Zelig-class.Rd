@@ -93,6 +93,7 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{with.feedback}}{Feedback}
 }}
+
 \section{Methods}{
 
 \describe{
