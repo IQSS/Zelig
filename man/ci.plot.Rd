@@ -40,7 +40,7 @@ confidence intervals}
 
 \item{leg}{``legend position'', an integer from 1 to 4, specifying the
 position of the legend. 1 to 4 correspond to ``SE'', ``SW'', ``NW'', and
-``NE'' respectively}
+``NE'' respectively.  Setting to 0 or ``n'' turns off the legend.}
 
 \item{legpos}{``legend type'', exact coordinates and sizes for legend.
 Overrides argment ``leg.type''}
