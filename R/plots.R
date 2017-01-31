@@ -475,7 +475,7 @@ qi.plot <- function (obj, ...) {
 #' confidence intervals
 #' @param leg ``legend position'', an integer from 1 to 4, specifying the
 #' position of the legend. 1 to 4 correspond to ``SE'', ``SW'', ``NW'', and
-#' ``NE'' respectively
+#' ``NE'' respectively.  Setting to 0 or ``n'' turns off the legend.
 #' @param legpos ``legend type'', exact coordinates and sizes for legend.
 #' Overrides argment ``leg.type''
 #' @param ci vector of length three of confidence interval levels to draw.
@@ -823,44 +823,47 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
     }
 
     ## This is the legend
+    if((leg != "n") & (leg != 0)){
 
-    if(is.null(legpos)){
-        if(leg==1){
-            legpos<-c(.91,.04,.2,.05)
-        }else if(leg==2){
-            legpos<-c(.09,.04,.2,.05)
-        }else if(leg==3){
-            legpos<-c(.09,.04,.8,.05)
-        }else{
-            legpos<-c(.91,.04,.8,.05)
+        if(is.null(legpos)){
+            if(leg==1){
+                legpos<-c(.91,.04,.2,.05)
+            }else if(leg==2){
+                legpos<-c(.09,.04,.2,.05)
+            }else if(leg==3){
+                legpos<-c(.09,.04,.8,.05)
+            }else{
+                legpos<-c(.91,.04,.8,.05)
+            }
         }
+
+        lx<-min(all.xlim)+ legpos[1]*(max(all.xlim)- min(all.xlim))
+        hx<-min(all.xlim)+ (legpos[1]+legpos[2])*(max(all.xlim)- min(all.xlim))
+
+        deltax<-(hx-lx)*.1
+
+        my<-min(all.ylim) +legpos[3]*min(max(all.ylim) - min(all.ylim))
+        dy<-legpos[4]*(max(all.ylim) - min(all.ylim))
+
+
+        lines(c(hx+deltax,hx+2*deltax,hx+2*deltax,hx+deltax),c(my+3*dy,my+3*dy,my-3*dy,my-3*dy),col=legcol)
+        lines(c(hx+3*deltax,hx+4*deltax,hx+4*deltax,hx+3*deltax),c(my+1*dy,my+1*dy,my-1*dy,my-1*dy),col=legcol)
+        lines(c(lx-deltax,lx-2*deltax,lx-2*deltax,lx-deltax),c(my+2*dy,my+2*dy,my-2*dy,my-2*dy),col=legcol)
+        lines(c(lx-5*deltax,lx),c(my,my),col="white",lwd=3)
+        lines(c(lx-5*deltax,lx),c(my,my),col=legcol)
+        lines(c(lx,hx),c(my,my))
+
+        polygon(c(lx,lx,hx,hx),c(my-3*dy,my+3*dy,my+3*dy,my-3*dy),col=col[3],border="white")
+        polygon(c(lx,lx,hx,hx),c(my-2*dy,my+2*dy,my+2*dy,my-2*dy),col=col[2],border="gray90")
+        polygon(c(lx,lx,hx,hx),c(my-1*dy,my+1*dy,my+1*dy,my-1*dy),col=col[1],border="gray60")
+        polygon(c(lx,lx,hx,hx),c(my-3*dy,my+3*dy,my+3*dy,my-3*dy),col=NA,border="white")
+
+        text(lx,my,labels="median",pos=2,cex=0.5,col=legcol)
+        text(lx,my+2*dy,labels=paste("ci",ci[2],sep=""),pos=2,cex=0.5,col=legcol)
+        text(hx,my+1*dy,labels=paste("ci",ci[1],sep=""),pos=4,cex=0.5,col=legcol)
+        text(hx,my+3*dy,labels=paste("ci",ci[3],sep=""),pos=4,cex=0.5,col=legcol)
     }
 
-    lx<-min(all.xlim)+ legpos[1]*(max(all.xlim)- min(all.xlim))
-    hx<-min(all.xlim)+ (legpos[1]+legpos[2])*(max(all.xlim)- min(all.xlim))
-
-    deltax<-(hx-lx)*.1
-
-    my<-min(all.ylim) +legpos[3]*min(max(all.ylim) - min(all.ylim))
-    dy<-legpos[4]*(max(all.ylim) - min(all.ylim))
-
-
-    lines(c(hx+deltax,hx+2*deltax,hx+2*deltax,hx+deltax),c(my+3*dy,my+3*dy,my-3*dy,my-3*dy),col=legcol)
-    lines(c(hx+3*deltax,hx+4*deltax,hx+4*deltax,hx+3*deltax),c(my+1*dy,my+1*dy,my-1*dy,my-1*dy),col=legcol)
-    lines(c(lx-deltax,lx-2*deltax,lx-2*deltax,lx-deltax),c(my+2*dy,my+2*dy,my-2*dy,my-2*dy),col=legcol)
-    lines(c(lx-5*deltax,lx),c(my,my),col="white",lwd=3)
-    lines(c(lx-5*deltax,lx),c(my,my),col=legcol)
-    lines(c(lx,hx),c(my,my))
-
-    polygon(c(lx,lx,hx,hx),c(my-3*dy,my+3*dy,my+3*dy,my-3*dy),col=col[3],border="white")
-    polygon(c(lx,lx,hx,hx),c(my-2*dy,my+2*dy,my+2*dy,my-2*dy),col=col[2],border="gray90")
-    polygon(c(lx,lx,hx,hx),c(my-1*dy,my+1*dy,my+1*dy,my-1*dy),col=col[1],border="gray60")
-    polygon(c(lx,lx,hx,hx),c(my-3*dy,my+3*dy,my+3*dy,my-3*dy),col=NA,border="white")
-
-    text(lx,my,labels="median",pos=2,cex=0.5,col=legcol)
-    text(lx,my+2*dy,labels=paste("ci",ci[2],sep=""),pos=2,cex=0.5,col=legcol)
-    text(hx,my+1*dy,labels=paste("ci",ci[1],sep=""),pos=4,cex=0.5,col=legcol)
-    text(hx,my+3*dy,labels=paste("ci",ci[3],sep=""),pos=4,cex=0.5,col=legcol)
 }
 
 #' Receiver Operator Characteristic Plots
