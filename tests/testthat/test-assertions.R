@@ -41,7 +41,14 @@ test_that('FAIL TEST vector does not vary', {
     expect_error(is_varying(c(rep(1, 5))), 'Vector does not vary.')
 })
 
-# REQUIRE TEST vector does not vary -----------------------------------------------
+# REQUIRE TEST vector does not vary --------------------------------------------
 test_that('REQIURE TEST vector does not vary', {
     expect_true(is_varying(c(1, 2, 3), fail = FALSE))
+})
+
+# FAIL TEST is_simsx error message ---------------------------------------------
+test_that('FAIL TEST is_simsx error message', {
+    z <- zls$new()
+    expect_error(is_simsx(z$sim.out), 
+                 'Simulations for individual fitted values are not present.')
 })
