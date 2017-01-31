@@ -6,7 +6,7 @@ test_that('REQUIRE TEST ls Monte Carlo', {
     expect_true(test)
 })
 
-# REQUIE TEST ls with continuous covar -----------------------------------------
+# REQUIRE TEST ls with continuous covar -----------------------------------------
 
 test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
     z5 <- zls$new()
@@ -17,7 +17,7 @@ test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
 })
 
 
-# REQUIE TEST ls with by -------------------------------------------------------
+# REQUIRE TEST ls with by -------------------------------------------------------
 
 test_that('REQUIRE TEST ls with by', {
     # Majority Catholic dummy
