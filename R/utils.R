@@ -19,7 +19,8 @@ Mode <- function (x) {
 }
 
 ## Zelig 3 and 4 backward compatibility
-mode <- Mode
+## This enables backward compatibility, but results in a warning when library attached
+# mode <- Mode
 
 #' Compute the Statistical Median of a Vector
 #' @param x a vector of numeric or ordered values
@@ -234,4 +235,53 @@ expand_grid_setrange <- function(x) {
         warning('Only one fitted observation provided to setrange.\nConsider using setx instead.',
                 call. = FALSE)
     return(m)
+}
+
+#' Bundle Multiply Imputed Data Sets into an Object for Zelig
+#' 
+#' This object prepares multiply imputed data sets so they can be used by Zelig.
+#' @note This function creates a list of \code{data.frame} objects, which 
+#'   resembles the storage of imputed data sets in the \code{amelia} object.
+#' @param ... a set of \code{data.frame}'s
+#' @return an \code{mi} object
+#' @authors Matt Owen, James Honaker
+#' @export
+#' @examples
+#' # create datasets
+#' n <- 100
+#' x1 <- runif(n)
+#' x2 <- runif(n)
+#' y <- rnorm(n)
+#' data.1 <- data.frame(y=y, x=x1)
+#' data.2 <- data.frame(y=y, x=x2) 
+#' # merge datasets into one object as if imputed datasets
+#' mi.out <- mi(data.1, data.2)
+#' # pass object in place of data argument
+#' z.out <- zelig(y~x, model="ls", data=mi.out)
+
+mi <- function (...) {
+
+  # Get arguments as list
+  imputations <- list(...)
+  names(imputations) <- paste("imp", 1:length(imputations), sep="")
+
+  # Ensure that everything is data.fram
+  for (k in length(imputations):1) {
+    if (!is.data.frame(imputations[[k]])){
+      imputations[[k]] <- NULL
+      	warning("Item ", k, " of the provided imputed datasets is not a data.frame and will be ignored.\n")
+      }
+  }
+
+  if(length(imputations)<1){
+  	stop("The resulting object contains no data.frames, and as such is not a valid multiple imputation object.")
+  }
+  if(length(imputations)<2){
+  	stop("The resulting object contains only one data.frame, and as such is not a valid multiple imputation object.")
+  }
+
+  class(imputations) <-c("mi","list")
+  
+  # Return
+  imputations
 }

@@ -318,10 +318,15 @@ z$methods(
     } else {
       .self$matched  <- FALSE
     }
-    # Multiply Imputed datasets from Amelia
-    # Notice Amelia objects ignore weights currently, which is reasonable as the Amelia package ignores weights
-    if ("amelia" %in% class(data)){
-      idata <- data$imputations
+    # Multiply Imputed datasets from Amelia or mi utility
+    # Notice imputed objects ignore weights currently, which is reasonable as the Amelia package ignores weights
+    if (("amelia" %in% class(data)) | ("mi" %in% class(data))){
+      if ("amelia" %in% class(data)){
+        idata <- data$imputations
+      }else{
+        idata <- data
+      }
+
       .self$data <- bind_rows(lapply(seq(length(idata)),
                                      function(imputationNumber)
                                        cbind(imputationNumber, idata[[imputationNumber]])))
