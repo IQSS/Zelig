@@ -2,6 +2,6 @@
 
 test_that('REQUIRE TEST probitbayes Monte Carlo', {
     z <- zprobitbayes$new()
-    test <- z$mcunit(plot = FALSE)
+    test <- z$mcunit(nsim=1000, plot = FALSE)
     expect_true(test)
 })
