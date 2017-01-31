@@ -32,4 +32,7 @@ mi.out <- mi(data.1, data.2)
 # pass object in place of data argument
 z.out <- zelig(y~x, model="ls", data=mi.out)
 }
+\author{
+Matt Owen, and James Honaker
+}
 

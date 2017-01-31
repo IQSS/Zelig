@@ -244,7 +244,7 @@ expand_grid_setrange <- function(x) {
 #'   resembles the storage of imputed data sets in the \code{amelia} object.
 #' @param ... a set of \code{data.frame}'s
 #' @return an \code{mi} object
-#' @authors Matt Owen, James Honaker
+#' @author Matt Owen, and James Honaker
 #' @export
 #' @examples
 #' # create datasets
