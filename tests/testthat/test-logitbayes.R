@@ -2,6 +2,6 @@
 
 test_that('REQUIRE TEST logitbayes Monte Carlo', {
     z <- zlogitbayes$new()
-    test <- z$mcunit(plot = FALSE)
-    expect_true(test)
+    test.logitbayes <- z$mcunit(nsim = 2000, ci=0.99, plot = FALSE)
+    expect_true(test.logitbayes)
 })
