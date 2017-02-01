@@ -2,6 +2,6 @@
 
 test_that('REQUIRE TEST normal Monte Carlo', {
     z <- znormal$new()
-    test <- z$mcunit(plot = FALSE)
-    expect_true(test)
+    test.normal <- z$mcunit(plot = FALSE)
+    expect_true(test.normal)
 })

@@ -2,6 +2,6 @@
 
 test_that('REQUIRE TEST poissonbayes Monte Carlo', {
     z <- zpoissonbayes$new()
-    test <- z$mcunit(plot = FALSE)
-    expect_true(test)
+    test.poissonbayes <- z$mcunit(minx=1, nsim = 2000, ci=0.99, plot = FALSE)
+    expect_true(test.poissonbayes)
 })

@@ -2,8 +2,8 @@
 
 test_that('REQUIRE TEST ls Monte Carlo', {
     z <- zls$new()
-    test <- z$mcunit(plot = FALSE)
-    expect_true(test)
+    test.ls <- z$mcunit(plot = FALSE)
+    expect_true(test.ls)
 })
 
 # REQUIRE TEST ls with continuous covar -----------------------------------------

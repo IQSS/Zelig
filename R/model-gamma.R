@@ -32,8 +32,7 @@ zgamma$methods(
     shape <- MASS::gamma.shape(z.out)
     if(identical(method, "mvn")){
       simalpha <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
-      simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
-                                   Sigma = vcov(z.out))
+      simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out), Sigma = vcov(z.out))
       simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
       return(simparam.local)
     } else if(identical(method,"point")){
@@ -44,14 +43,11 @@ zgamma$methods(
 
 zgamma$methods(
   qi = function(simparam, mm) {
-    coeff <- simparam$simparam
-    eta <- coeff %*% t(mm)
-    theta <- matrix(1 / eta, nrow = nrow(coeff))
-    ev <- theta
-    pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
-    for (ii in 1:nrow(ev))
-      pv[ii, ] <- rgamma(ncol(ev), shape = simparam$simalpha[ii], 
-                         scale = theta[ii] / simparam$simalpha[ii])
+    coeff <- simparam$simparam 
+    eta <- (coeff %*% t(mm) ) * simparam$simalpha  # JH need to better understand this parameterization.  Coefs appear parameterized so E(y_i) = 1/ (x_i\hat{\beta})
+    theta <- matrix(1 / eta, nrow = nrow(coeff), ncol=1)
+    ev <- theta * simparam$simalpha 
+    pv<- matrix(rgamma(nrow(ev), shape = simparam$simalpha, scale = theta), nrow=nrow(ev), ncol=1)
     return(list(ev = ev, pv = pv))
   }
 )
@@ -60,7 +56,7 @@ zgamma$methods(
   mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
     lambda <- 1/(b0 + b1 * x)
     if(sim){
-        y <- rgamma(n=length(x), shape=lambda, scale = alpha)
+        y <- rgamma(n=length(x), shape=alpha, scale = lambda)
         return(y)
     }else{
         return(alpha * lambda)
