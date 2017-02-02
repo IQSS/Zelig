@@ -274,7 +274,7 @@ sim <- function(obj, x, x1, y = NULL, num = 1000, bootstrap = F,
     bootfn = NULL, cond.data = NULL, ...) {
     # .Deprecated('\nz$new() \n[...] \nz$sim(...)')
     is_zelig(obj)
-    
+
     if (!missing(x)) s5 <- x$copy()
     if (!missing(x1)) {
         s15 <- x1$copy()
@@ -289,7 +289,30 @@ sim <- function(obj, x, x1, y = NULL, num = 1000, bootstrap = F,
         }
     }
     if (missing(x)) s5 <- obj$copy()
-    
+
     s5$sim(num = num)
     return(s5)
+}
+
+#' Extract the original fitted model object from a \code{zelig} estimation
+#'
+#' @param obj a zelig object with an estimated model
+#'
+#' @details Extracts the original fitted model object from a \code{zelig}
+#'   estimation. This can be useful for passing output to non-Zelig
+#'   post-estimation functions and packages such as texreg and stargazer.
+#'
+#' @examples
+#' z5 <- zls$new()
+#' z5$zelig(Fertility ~ Education, data = swiss)
+#' from_zelig(z5)
+#'
+#' @author Christopher Gandrud
+#' @export
+
+from_zelig <- function(obj) {
+    is_zelig(obj)
+
+    f5 <- obj$copy()
+    return(f5$from_zelig())
 }

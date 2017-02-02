@@ -231,7 +231,7 @@ z$methods(
       fc$data <- data
       return(fc)
     }
-    
+
     .self$formula <- formula
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
@@ -962,8 +962,29 @@ z$methods(
 )
 
 z$methods(
+    from_zelig = function() {
+        "Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions."
+        is_uninitializedField(.self$zelig.out)
+        result <- try(.self$zelig.out$z.out, silent = TRUE)
+
+        if ("try-error" %in% class(result)) {
+            stop("from_zelig not available for this fitted model.")
+        }
+        else {
+            if (length(result) == 1) {
+                result <- result[[1]]
+            } else if (length(result) > 1) {
+                message("Returning fitted model objects for each imputed data set in a list.")
+            }
+            return(result)
+        }
+    }
+)
+
+z$methods(
   getcoef = function() {
     "Get estimated model coefficients"
+    is_uninitializedField(.self$zelig.out)
     result <- try(lapply(.self$zelig.out$z.out, coef), silent = TRUE)
     if ("try-error" %in% class(result))
       stop("'coef' method' not implemented for model '", .self$name, "'")
@@ -975,6 +996,7 @@ z$methods(
 z$methods(
   getvcov = function() {
     "Get estimated model variance-covariance matrix"
+    is_uninitializedField(.self$zelig.out)
     result <- lapply(.self$zelig.out$z.out, vcov)
     if ("try-error" %in% class(result))
       stop("'vcov' method' not implemented for model '", .self$name, "'")
@@ -985,6 +1007,7 @@ z$methods(
 
 z$methods(
   getfitted = function() {
+    is_uninitializedField(.self$zelig.out)
     result <- lapply(.self$zelig.out$z.out, fitted)
     if ("try-error" %in% class(result))
       stop("'predict' method' not implemented for model '", .self$name, "'")

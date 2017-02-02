@@ -4,6 +4,8 @@
 
 - Additional MC tests for Weibull, Gamma and Gammasurvey models.
 
+- `from_zelig` function to extract original fitted model objects from `zelig`
+estimation calls. #189
 
 ## Bug fixes
 

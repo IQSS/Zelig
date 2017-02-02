@@ -52,3 +52,10 @@ test_that('REQUIRE TEST sim wraper minimal working', {
     zsimwrap <- sim(z5, num = 10)
     expect_equal(length(zsimwrap$getqi()), 10)
 })
+
+# REQUIRE TEST from_zelig returns expected fitted model object -----------------
+test_that('REQUIRE TEST from_zelig returns expected fitted model object', {
+    z5 <- zls$new()
+    z5$zelig(Fertility ~ Education, data = swiss)
+    expect_is(from_zelig(z5), class = 'lm')
+})

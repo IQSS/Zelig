@@ -103,6 +103,8 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{feedback()}}{Send feedback to the Zelig team}
 
+\item{\code{from_zelig()}}{Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions.}
+
 \item{\code{getcoef()}}{Get estimated model coefficients}
 
 \item{\code{getpredict()}}{Get predicted values}
