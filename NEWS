@@ -1,3 +1,14 @@
+# Zelig version 5.0-15
+
+## Major changes
+
+- Additional MC tests for Weibull, Gamma and Gammasurvey models.
+
+
+## Bug fixes
+
+- Fixed an issue with `model-survey` where `ids` was hard coded as `~1`. #144
+
 # Zelig version 5.0-14
 
 ## Major changes
