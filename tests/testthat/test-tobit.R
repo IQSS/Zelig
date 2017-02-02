@@ -2,6 +2,6 @@
 
 test_that('REQUIRE TEST tobit Monte Carlo', {
     z <- ztobit$new()
-    test <- z$mcunit(plot = FALSE)
-    expect_true(test)
+    test.tobit <- z$mcunit(minx=0, plot = FALSE)
+    expect_true(test.tobit)
 })
