@@ -31,8 +31,7 @@ zgammasurvey$methods(
     shape <- MASS::gamma.shape(z.out)
     if(identical(method,"mvn")){
       simalpha <- rnorm(n = .self$num, mean = shape$alpha, sd = shape$SE)
-      simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out),
-                                   Sigma = vcov(z.out))
+      simparam.local <- mvrnorm(n = .self$num, mu = coef(z.out), Sigma = vcov(z.out))
       simparam.local <- list(simparam = simparam.local, simalpha = simalpha)
       return(simparam.local)
     } else if(identical(method,"point")){
@@ -45,7 +44,7 @@ zgammasurvey$methods(
   mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
     lambda <- 1/(b0 + b1 * x)
     if(sim){
-        y <- rgamma(n=length(x), shape=lambda, scale = alpha)
+        y <- rgamma(n=length(x), shape=alpha, scale = lambda)
         return(y)
     }else{
         return(alpha * lambda)
