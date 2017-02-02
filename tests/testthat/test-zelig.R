@@ -64,3 +64,25 @@ test_that('REQUIRE TEST for sim num argument', {
     z5$sim(num = 10) # Look into unexpected behaviour if sim order is reversed
     expect_equal(length(z5$getqi()), 10)
 })
+
+# REQUIRE TEST from_zelig returns expected fitted model object -----------------
+test_that('REQUIRE TEST from_zelig returns expected fitted model object', {
+    z5 <- zls$new()
+    z5$zelig(Fertility ~ Education, data = swiss)
+    expect_is(z5$from_zelig(), class = 'lm')
+})
+
+# REQUIRE TEST from_zelig returns each fitted model object from mi -------------
+test_that('REQUIRE TEST from_zelig returns each fitted model object from mi', {
+  set.seed(123)
+  n <- 100
+  x1 <- runif(n)
+  x2 <- runif(n)
+  y <- rnorm(n)
+  data.1 <- data.frame(y = y, x = x1)
+  data.2 <- data.frame(y = y, x = x2)
+  
+  mi.out <- to_zelig_mi(data.1, data.2)
+  z.out <- zelig(y ~ x, model = "ls", data = mi.out)
+  expect_is(z.out$from_zelig(), 'list')
+})
