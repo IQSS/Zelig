@@ -121,4 +121,11 @@ test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
   expect_equivalent(round(mean(z.out$getqi(qi="fd", xvalue="x1")),2), 1)
 
   expect_true(is.null(plot(z.out)))
+  
+  xseq <- seq(from=0, to=1, length=10)
+  z.out$setrange(x=xseq)
+  z.out$sim()
+  
+  expect_true(is.null(plot(z.out)))  
+  
 })
