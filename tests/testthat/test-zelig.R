@@ -96,6 +96,7 @@ test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
   x <- myseq/n
   y <- x + (-1)^(myseq) * 0.1
   mydata <- data.frame(y = y, x = x)
+  mydata2 <- data.frame(y = y, x = x + 2) 
   z.out <- zelig(y ~ x, model = "ls", data = mydata)
   
   expect_equivalent(round(as.numeric(z.out$getcoef()[[1]]), 2), c(0,1))
@@ -126,6 +127,19 @@ test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
   z.out$setrange(x=xseq)
   z.out$sim()
   
-  expect_true(is.null(plot(z.out)))  
+  expect_true(is.null(plot(z.out))) 
+  
+  myref <- capture.output(z.out$references()) 
+  expect_equivalent(substr(myref[1],1,11), "R Core Team")
+  
+  set.seed(123)
+  boot.out <- zelig(y ~ x, model = "ls", bootstrap = 20, data = mydata)
+  expect_equivalent(round(as.numeric(boot.out$getcoef()[[1]]), 2), c(0,1))
+  
+  set.seed(123)
+  mi.out <- zelig(y ~ x, model = "ls", data = mi(mydata,mydata2) )
+  expect_equivalent(round(as.numeric(mi.out$getcoef()[[1]]), 2), c(0,1))
+  expect_equivalent(round(as.numeric(mi.out$getcoef()[[2]]), 2), c(-2,1))
+  
   
 })
