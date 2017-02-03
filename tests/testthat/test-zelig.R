@@ -86,3 +86,39 @@ test_that('REQUIRE TEST from_zelig returns each fitted model object from mi', {
   z.out <- zelig(y ~ x, model = "ls", data = mi.out)
   expect_is(z.out$from_zelig(), 'list')
 })
+
+
+# REQUIRE TEST getters values and dimensions and plot does not fail-------------
+test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
+  set.seed(123)
+  n <- 1000
+  myseq <- 1:n
+  x <- myseq/n
+  y <- x + (-1)^(myseq) * 0.1
+  mydata <- data.frame(y = y, x = x)
+  z.out <- zelig(y ~ x, model = "ls", data = mydata)
+  
+  expect_equivalent(round(as.numeric(z.out$getcoef()[[1]]), 2), c(0,1))
+  expect_equivalent(length(z.out$getpredict()[[1]]), n)
+  expect_equivalent(length(z.out$getfitted()[[1]]), n)
+  expect_equivalent(dim(z.out$getvcov()[[1]]), c(2,2))
+
+  z.out$setx(x=0)
+  z.out$setx1(x=1)
+  z.out$sim()
+  
+  expect_equivalent(length(z.out$getqi(qi="ev", xvalue="x")), n)
+  expect_equivalent(round(mean(z.out$getqi(qi="ev", xvalue="x")),2), 0)
+  expect_equivalent(length(z.out$getqi(qi="ev", xvalue="x1")), n)
+  expect_equivalent(round(mean(z.out$getqi(qi="ev", xvalue="x1")),2), 1)
+
+  expect_equivalent(length(z.out$getqi(qi="pv", xvalue="x")), n)
+  expect_equivalent(round(mean(z.out$getqi(qi="pv", xvalue="x")),2), 0)
+  expect_equivalent(length(z.out$getqi(qi="pv", xvalue="x1")), n)
+  expect_equivalent(round(mean(z.out$getqi(qi="pv", xvalue="x1")),2), 1)
+
+  expect_equivalent(length(z.out$getqi(qi="fd", xvalue="x1")), n)
+  expect_equivalent(round(mean(z.out$getqi(qi="fd", xvalue="x1")),2), 1)
+
+  expect_true(is.null(plot(z.out)))
+})
