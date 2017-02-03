@@ -300,7 +300,8 @@ sim <- function(obj, x, x1, y = NULL, num = 1000, bootstrap = F,
 #'
 #' @details Extracts the original fitted model object from a \code{zelig}
 #'   estimation. This can be useful for passing output to non-Zelig
-#'   post-estimation functions and packages such as texreg and stargazer.
+#'   post-estimation functions and packages such as texreg and stargazer
+#'   for creating well-formatted presentation document tables.
 #'
 #' @examples
 #' z5 <- zls$new()
