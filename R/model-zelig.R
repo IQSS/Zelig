@@ -1113,7 +1113,10 @@ z$methods(
     .self$mcformula <- NULL
     if(.self$name %in% c("exp", "weibull", "lognorm")){
       .self$zelig(Surv(y.sim,event) ~ x.sim, data = data.sim)
-    } else{
+    } else if (.self$name %in% c("relogit")) {
+        tau <- sum(data.sim$y.sim)/nsim
+    	  .self$zelig(y.sim ~ x.sim, tau = tau, data = data.sim)
+    } else {
       .self$zelig(y.sim ~ x.sim, data = data.sim)
     }
 
@@ -1121,7 +1124,12 @@ z$methods(
     .self$setrange(x.sim = x.short.seq)
     .self$sim()
 
-    data.short.hat <- .self$mcfun(x=x.short.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
+    if (.self$name %in% c("relogit")) {
+      data.short.hat <- .self$mcfun(x=x.short.seq, b0=b0, b1=b1, alpha=alpha, keepall=TRUE, ..., sim=FALSE)
+    } else {
+      data.short.hat <- .self$mcfun(x=x.short.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
+    }
+
     if(!is.data.frame(data.short.hat)){
         data.short.hat<-data.frame(x.seq=x.short.seq, y.hat=data.short.hat)
     }
