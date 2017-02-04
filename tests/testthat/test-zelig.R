@@ -155,3 +155,37 @@ test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
   expect_false(show.mi.subset[[1]])
   
 })
+
+
+# REQUIRE TEST Binary QI's and ATT effects-------------
+test_that('REQUIRE TEST Binary QIs and ATT effects', {
+  set.seed(123)
+  # Simulate data
+  n <- 100
+  xx <- rbinom(n = n, size = 1, prob = 0.5)
+  zz <- runif(n)
+  ss <- runif(n)
+  rr <- rbinom(n, size = 1, prob = 0.5)
+  mypi <- 1/ (1+exp(-xx -3*zz -0.5))
+  yb <- rbinom(n, size = 1, prob = mypi)
+  data <- data.frame(rr, ss, xx, zz, yb)
+  
+  # Estimate Zelig Logit model
+  zb.out <- zlogit$new()
+  zb.out$zelig(yb ~ xx + zz, data=data, by="rr")
+   
+  x.high <- setx(zb.out, xx = quantile(data$xx, prob = 0.75))
+  x.low <- setx(zb.out, xx = quantile(data$xx, prob = 0.25))
+  s.out <- sim(zb.out, x = x.high, x1 = x.low)
+
+  show.logit <- summary(s.out)
+  expect_false(show.logit[[1]])
+  expect_true(is.null(plot(s.out)))
+  
+  # Method to calculate ATT
+  #zb.out$ATT(treatment = "xx")
+  
+  # Getter to extract ATT
+  #out <- zb.out$getqi(qi="ATT", xvalue="TE")
+  #show.ATT <- summary(out)
+})
