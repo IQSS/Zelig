@@ -106,7 +106,9 @@ test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
 
   z.out$setx(x=0)
   z.out$setx1(x=1)
+  show.setx <- summary(z.out)
   z.out$sim()
+  show.sim <- summary(z.out)
   
   expect_equivalent(length(z.out$getqi(qi="ev", xvalue="x")), n)
   expect_equivalent(round(mean(z.out$getqi(qi="ev", xvalue="x")),2), 0)
@@ -121,6 +123,8 @@ test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
   expect_equivalent(length(z.out$getqi(qi="fd", xvalue="x1")), n)
   expect_equivalent(round(mean(z.out$getqi(qi="fd", xvalue="x1")),2), 1)
 
+  expect_false(show.setx[[1]])
+  expect_false(show.sim[[1]])
   expect_true(is.null(plot(z.out)))
   
   xseq <- seq(from=0, to=1, length=10)
@@ -143,9 +147,11 @@ test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
   mi.out <- zelig(y ~ x, model = "ls", data = mi(mydata,mydata2) )
   expect_equivalent(round(as.numeric(mi.out$getcoef()[[1]]), 2), c(0,1))
   expect_equivalent(round(as.numeric(mi.out$getcoef()[[2]]), 2), c(-2,1))
-  expect_equivalent(length(mi.out$toJSON),1)
+  expect_equivalent(length(mi.out$toJSON()),1)
   
   show.mi <- summary(mi.out)
   expect_false(show.mi[[1]])
+  show.mi.subset <- summary(mi.out, subset=1)
+  expect_false(show.mi.subset[[1]])
   
 })
