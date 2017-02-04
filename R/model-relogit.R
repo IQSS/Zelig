@@ -197,3 +197,22 @@ relogit <- function(formula,
     return(res)
   }
 }
+
+zrelogit$methods(mcfun = function(x, b0 = 0, b1 = 1, alpha, mc.seed=123, keepall=FALSE, ..., sim = TRUE) {
+    set.seed(mc.seed)
+    mu <- 1/(1 + exp(-b0 - b1 * x))
+
+    y <- rbinom(n = length(x), size = 1, prob = mu)
+    if(keepall){
+      flag <- rep(TRUE, length(x))
+    }else{
+      select <- runif(length(x)) <alpha
+      flag <- ((y==0) & (select)) | (y==1)
+    }
+
+    if (sim) {
+        return(data.frame(y.sim=y[flag], x.sim=x[flag]))
+    } else {
+        return(data.frame(y.hat=mu[flag], x.seq=x[flag]))
+    }
+})
