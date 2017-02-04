@@ -135,11 +135,17 @@ test_that('REQUIRE TEST getters values and dimensions and plot does not fail', {
   set.seed(123)
   boot.out <- zelig(y ~ x, model = "ls", bootstrap = 20, data = mydata)
   expect_equivalent(round(as.numeric(boot.out$getcoef()[[1]]), 2), c(0,1))
+
+  show.boot <- summary(boot.out, bagging=TRUE)
+  expect_false(show.boot[[1]])
   
   set.seed(123)
   mi.out <- zelig(y ~ x, model = "ls", data = mi(mydata,mydata2) )
   expect_equivalent(round(as.numeric(mi.out$getcoef()[[1]]), 2), c(0,1))
   expect_equivalent(round(as.numeric(mi.out$getcoef()[[2]]), 2), c(-2,1))
+  expect_equivalent(length(mi.out$toJSON),1)
   
+  show.mi <- summary(mi.out)
+  expect_false(show.mi[[1]])
   
 })
