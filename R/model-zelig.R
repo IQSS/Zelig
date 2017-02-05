@@ -539,7 +539,7 @@ z$methods(
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
     if (length(.self$num) == 0){
       if(is.null(num)){
-        num <<- 1000
+        num <- 1000
       }
     }
     if(!is.null(num)){
@@ -668,7 +668,7 @@ z$methods(
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
     if (length(.self$num) == 0){
       if(is.null(num)){
-        num <<- 1000
+        num <- 1000
       }
     }
     if(!is.null(num)){
@@ -974,7 +974,13 @@ z$methods(
             if (length(result) == 1) {
                 result <- result[[1]]
             } else if (length(result) > 1) {
-                message("Returning fitted model objects for each imputed data set in a list.")
+            	if(.self$mi){
+ 	              message("Returning fitted model objects for each imputed data set in a list.")
+ 	            } else if (.self$bootstrap) {
+ 	            	message("Returning fitted model objects for each bootstrapped data set in a list.")
+ 	            } else {
+ 	            	message("Returning fitted model objects for each subset of the data created from the 'by' argument, in a list.")
+ 	            }
             }
             return(result)
         }
