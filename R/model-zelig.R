@@ -539,7 +539,7 @@ z$methods(
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
     if (length(.self$num) == 0){
       if(is.null(num)){
-        num <<- 1000
+        num <- 1000
       }
     }
     if(!is.null(num)){
@@ -668,7 +668,7 @@ z$methods(
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
     if (length(.self$num) == 0){
       if(is.null(num)){
-        num <<- 1000
+        num <- 1000
       }
     }
     if(!is.null(num)){

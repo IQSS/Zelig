@@ -86,3 +86,23 @@ test_that('REQUIRE TEST from_zelig returns each fitted model object from mi', {
   z.out <- zelig(y ~ x, model = "ls", data = mi.out)
   expect_is(z.out$from_zelig(), 'list')
 })
+
+# REQUIRE TEST functioning simparam with by and ATT ----------------------------
+test_that('REQUIRE TEST functioning simparam with by and ATT', {
+    set.seed(123)
+    n <- 100
+    xx <- rbinom(n = n, size = 1, prob = 0.3)
+    zz <- runif(n)
+    ss <- runif(n)
+    rr <- rbinom(n, size = 1, prob = 0.5)
+    mypi <- 1/(1 + exp(-xx -3*zz -0.5))
+    yb <- rbinom(n, size = 1, prob = mypi)
+    data <- data.frame(rr, ss, xx, zz, yb)
+  
+    zb.out <- zlogit$new()
+    zb.out$zelig(yb ~ xx + zz, data = data, by = "rr")
+    
+    zb.out$ATT(treatment = "xx")
+    out <- zb.out$getqi(qi = "ATT", xvalue = "TE")
+    expect_equal(length(out), 1000)
+})

@@ -14,8 +14,8 @@ Extract the original fitted model object from a \code{zelig} estimation
 }
 \details{
 Extracts the original fitted model object from a \code{zelig}
-  estimation. This can be useful for passing output to non-Zelig post
-  estimation functions and packages such as texreg and stargazer.
+  estimation. This can be useful for passing output to non-Zelig
+  post-estimation functions and packages such as texreg and stargazer.
 }
 \examples{
 z5 <- zls$new()

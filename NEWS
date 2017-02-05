@@ -11,6 +11,8 @@ estimation calls. #189
 
 - Fixed an issue with `model-survey` where `ids` was hard coded as `~1`. #144
 
+- Fixed #194 `ATT` bug introduced in 5.0-14
+
 # Zelig version 5.0-14
 
 ## Major changes
