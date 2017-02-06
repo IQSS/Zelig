@@ -88,7 +88,7 @@ test_that('REQUIRE TEST arima models', {
 
     test <- Zelig:::simacf(coef=mycoef, order=myorder, params=myparams, alpha = 0.5)
 
-    expect_true(is.null(zeligACFplot(test)))
+    expect_true(is.null(zeligACFplot(test, omitzero=TRUE)))
 
     # plots
     #plot(zj)
