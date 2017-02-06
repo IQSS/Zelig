@@ -27,14 +27,14 @@ zoprobitbayes$methods(
 
 zoprobitbayes$methods(
   param = function(z.out) {
-    simparam <- callSuper(z.out)
+    mysimparam <- callSuper(z.out)
     # Produce the model matrix in order to get all terms (explicit and implicit)
     # from the regression model.
     mat <- model.matrix(.self$formula, data = .self$data)
     # Response Terms
     p <- ncol(mat)
     # All coefficients
-    coefficients <- simparam
+    coefficients <- mysimparam
     # Coefficients for predictor variables
     beta <- coefficients[, 1:p]
     # Middle values of "gamma" matrix
@@ -51,8 +51,8 @@ zoprobitbayes$methods(
     if (ncol(gamma) > 3)
       gamma[, 3:(ncol(gamma) - 1)] <- mid.gamma
     # return
-    simparam <- list(simparam = beta, simalpha = gamma)
-    return(simparam)
+    mysimparam <- list(simparam = beta, simalpha = gamma)
+    return(mysimparam)
   }
 )
 
