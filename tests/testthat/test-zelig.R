@@ -202,9 +202,15 @@ test_that('REQUIRE TEST Binary QIs and ATT effects', {
     yb <- rbinom(n, size = 1, prob = mypi)
     data <- data.frame(rr, ss, xx, zz, yb)
 
-    # Estimate Zelig Logit model
+    # Estimate Zelig Logit models
     zb.out <- zlogit$new()
     zb.out$zelig(yb ~ xx + zz, data=data, by="rr")
+ 
+    zb2.out <- zlogit$new()
+    zb2.out$zelig(yb ~ xx, data=data)
+
+    zb3.out <- zlogit$new()
+    zb3.out$zelig(yb ~ xx + zz, data=data)
 
     x.high <- setx(zb.out, xx = quantile(data$xx, prob = 0.75))
     x.low <- setx(zb.out, xx = quantile(data$xx, prob = 0.25))
@@ -220,4 +226,7 @@ test_that('REQUIRE TEST Binary QIs and ATT effects', {
     # Getter to extract ATT
     out <- zb.out$getqi(qi="ATT", xvalue="TE")
     expect_equal(length(out), 1000)
+
+    # Plot ROC 
+    expect_true(is.null(rocplot(zb2.out, zb3.out)))
 })
