@@ -30,16 +30,18 @@ zlognorm$methods(
 
 zlognorm$methods(
   zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, weights = NULL, by = NULL, bootstrap = FALSE) {
+
+    localFormula <- formula # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (!(is.null(cluster) || robust))
       stop("If cluster is specified, then `robust` must be TRUE")
     # Add cluster term
     if (robust || !is.null(cluster))
-      formula <- cluster.formula(formula, cluster)
+      localFormula <- cluster.formula(localFormula, cluster)
     .self$model.call$dist <- "lognormal"
     .self$model.call$model <- FALSE
-    callSuper(formula = formula, data = data, ..., robust = robust,
+    callSuper(formula = localFormula, data = data, ..., robust = robust,
               cluster = cluster, weights = weights, by = by, bootstrap = bootstrap)
               
     if(!robust){

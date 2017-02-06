@@ -356,10 +356,11 @@ z$methods(
           } else if(is.vector(weights)){
               if(length(weights)==nrow(.self$data) & is.vector(weights)){
                   if(min(weights)<0){
-                      weights[weights < 0] <- 0
+                      localWeights <- weights # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
+                      localWeights[localWeights < 0] <- 0
                       cat("Negative valued weights were supplied and will be replaced with zeros.")
                   }
-                  .self$weights <- weights # Weights
+                  .self$weights <- localWeights # Weights
               } else{
                   cat("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n")
                   .self$weights <- NULL # No valid weights
@@ -530,20 +531,22 @@ z$methods(
 )
 
 z$methods(
-  sim = function(num = 1000) {
+  sim = function(num = NULL) {
     "Generic Method for Computing and Organizing Simulated Quantities of Interest"
     is_zelig(.self)
     is_uninitializedField(.self$zelig.out)
 
     ## If num is defined by user, it overrides the value stored in the .self$num field.
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
+
+    localNum <- num # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
     if (length(.self$num) == 0){
-      if(is.null(num)){
-        num <- 1000
+      if(is.null(localNum)){
+        localNum <- 1000
       }
     }
-    if(!is.null(num)){
-      .self$num <- num
+    if(!is.null(localNum)){
+      .self$num <- localNum
     }
 
     # This was previous version, that assumed sim only called once, or only method to access/write .self$num field:
@@ -650,11 +653,12 @@ z$methods(
   ATT = function(treatment, treated=1, quietly=TRUE, num=NULL) {
     "Generic Method for Computing Simulated (Sample) Average Treatment Effects on the Treated"
 
+    localTreatment <- treatment   # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
     ## Checks on user provided arguments
-    if(!is.character(treatment)){
+    if(!is.character(localTreatment)){
       stop("Argument treatment should be the name of the treatment variable in the dataset.")
     }
-    if(!(treatment %in% names(.self$data))){
+    if(!(localTreatment %in% names(.self$data))){
       stop(cat("Specified treatment variable", treatment, "is not in the dataset."))
     }
     # Check treatment variable included in model.
@@ -666,14 +670,15 @@ z$methods(
 
     ## If num is defined by user, it overrides the value stored in the .self$num field.
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
+    localNum <- num
     if (length(.self$num) == 0){
-      if(is.null(num)){
-        num <- 1000
+      if(is.null(localNum)){
+        localNum <- 1000
       }
     }
-    if(!is.null(num)){
-      if(!identical(num,.self$num)){   # .self$num changed, so regenerate simparam
-        .self$num <- num
+    if(!is.null(localNum)){
+      if(!identical(localNum,.self$num)){   # .self$num changed, so regenerate simparam
+        .self$num <- localNum
         .self$simparam <- .self$zelig.out %>%
           do(simparam = .self$param(.$z.out))
       }
@@ -686,7 +691,7 @@ z$methods(
     ## NOTE: THIS IS GOING TO USE THE SAME simparam SET FOR EVERY SPLIT
     .self$sim.out$TE <- .self$data %>%
       group_by_(.self$by) %>%
-        do(ATT = .self$simATT(simparam=.self$simparam$simparam[[1]], data=. , depvar=depvar, treatment=treatment, treated=treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+        do(ATT = .self$simATT(simparam=.self$simparam$simparam[[1]], data=. , depvar=depvar, treatment=localTreatment, treated=treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
 
     if(!quietly){
       return(.self$sim.out$TE)  # The $getqi() method may generalize, otherwise, write a $getter.
@@ -701,8 +706,9 @@ z$methods(
   simATT = function(simparam, data, depvar, treatment, treated){
     "Simulate an Average Treatment on the Treated"
 
-    flag <- data[[treatment]]==treated
-    data[[treatment]] <- 1-treated
+    localTreatment <- treatment   # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
+    flag <- data[[localTreatment]]==treated
+    data[[localTreatment]] <- 1-treated
 
     cf.mm <- model.matrix(.self$formula, data) # Counterfactual model matrix
     cf.mm <- cf.mm[flag,]
