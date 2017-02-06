@@ -427,6 +427,7 @@ z$methods(
         ifelse(is.null(fn$other), Mode(val), fn$other(val))
     }
     s <- list(...)
+
     # This eliminates warning messages when factor rhs passed to lm() model in reduce() utility function
     if(.self$category=="multinomial"){  # Perhaps find more robust way to test if dep.var. is factor
       f2 <- update(.self$formula, as.numeric(.) ~ .)
@@ -555,7 +556,6 @@ z$methods(
       am.m <- length(.self$getcoef())
       .self$num <- ceiling(.self$num/am.m)
     }
-
     # If bootstrapped, use distribution of estimated parameters,
     #  otherwise use $param() method for parametric bootstrap.
     if (.self$bootstrap & ! .self$mi){

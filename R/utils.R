@@ -103,7 +103,7 @@ setval <- function(val, newval) {
   }
 }
 
-#' Calculate the reduced dataset to be used in code{\link{setx}}
+#' Calculate the reduced dataset to be used in \code{\link{setx}}
 #'
 #' #' This method is used internally
 #'
@@ -117,6 +117,7 @@ setval <- function(val, newval) {
 #' @keywords internal
 #' @author Christine Choirat
 reduce = function(dataset, s, formula, data, avg = avg) {
+browser()
   pred <- try(terms(fit <- lm(formula, data), "predvars"), silent = TRUE)
   if ("try-error" %in% class(pred)) # exp and weibull
     pred <- try(terms(fit <- survreg(formula, data), "predvars"), silent = TRUE)
@@ -291,10 +292,10 @@ to_zelig_mi <- function (...) {
 }
 
 #' Enables backwards compatability for preparing non-amelia imputed data sets
-#' for \code{zelig}. 
-#' 
+#' for \code{zelig}.
+#'
 #' See \code{\link{to_zelig_mi}}
-#' 
+#'
 #' @param ... a set of \code{data.frame}'s
 #' @return an \code{mi} object composed of a list of data frames.
 mi <- to_zelig_mi

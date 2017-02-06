@@ -32,3 +32,17 @@ test_that('REQUIRE TEST ls with by', {
 #test_that('REQUIRE TESTls gim method', {
     #z5$gim()
 #})
+
+
+# REQUIRE TEST for sim with ls models including factor levels ---------------------
+test_that('REQUIRE TEST for sim with models including factor levels', {
+    z.out <- zelig(Petal.Width ~ Petal.Length + Species, data = iris, 
+                   model = "ls")
+    x.out <- setx(z.out, Petal.Length = 1)
+    expect_error(sim(z.out, x.out), NA)
+    
+    z <- zls$new()
+    z$zelig(Petal.Width ~ Petal.Length + Species, data = iris)
+    z$setx(Petal.Length = 1)
+    z$sim()
+})
