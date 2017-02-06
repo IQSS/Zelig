@@ -21,22 +21,24 @@ zgee$methods(
 
 zgee$methods(
   zelig = function(formula, id, ..., zcor = NULL, corstr = "independence", data, weights = NULL, by = NULL, bootstrap = FALSE) {
+
+    localData <- data # avoids CRAN warning about deep assignment from formula existing separately as argument and field
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (corstr == "fixed" && is.null(zcor))
       stop("R must be defined")
     # if id is a valid column-name in data, then we just need to extract the
     # column and re-order the data.frame and cluster information
-    if (is.character(id) && length(id) == 1 && id %in% colnames(data)) {
-      id <- data[, id]
-      data <- data[order(id), ]
+    if (is.character(id) && length(id) == 1 && id %in% colnames(localData)) {
+      id <- localData[, id]
+      localData <- localData[order(id), ]
       id <- sort(id)
     }
     .self$model.call$family <- call(.self$family, .self$link)
     .self$model.call$id <- id
     .self$model.call$zcor <- zcor
     .self$model.call$corstr <- corstr
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = bootstrap)
+    callSuper(formula = formula, data = localData, ..., weights = weights, by = by, bootstrap = bootstrap)
     # Prettify summary display without modifying .self$model.call
     for (i in length(.self$zelig.out$z.out)) {
       .self$zelig.out$z.out[[i]]$call$id <- .self$zelig.call$id

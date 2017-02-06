@@ -356,7 +356,7 @@ z$methods(
           } else if(is.vector(weights)){
               if(length(weights)==nrow(.self$data) & is.vector(weights)){
                   if(min(weights)<0){
-                      localWeights <- weights # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
+                      localWeights <- weights # avoids CRAN warning about deep assignment from weights existing separately as argument and field
                       localWeights[localWeights < 0] <- 0
                       cat("Negative valued weights were supplied and will be replaced with zeros.")
                   }
@@ -539,7 +539,7 @@ z$methods(
     ## If num is defined by user, it overrides the value stored in the .self$num field.
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
 
-    localNum <- num # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
+    localNum <- num # avoids CRAN warning about deep assignment from num existing separately as argument and field
     if (length(.self$num) == 0){
       if(is.null(localNum)){
         localNum <- 1000
@@ -653,12 +653,11 @@ z$methods(
   ATT = function(treatment, treated=1, quietly=TRUE, num=NULL) {
     "Generic Method for Computing Simulated (Sample) Average Treatment Effects on the Treated"
 
-    localTreatment <- treatment   # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
     ## Checks on user provided arguments
-    if(!is.character(localTreatment)){
+    if(!is.character(treatment)){
       stop("Argument treatment should be the name of the treatment variable in the dataset.")
     }
-    if(!(localTreatment %in% names(.self$data))){
+    if(!(treatment %in% names(.self$data))){
       stop(cat("Specified treatment variable", treatment, "is not in the dataset."))
     }
     # Check treatment variable included in model.
@@ -706,14 +705,14 @@ z$methods(
   simATT = function(simparam, data, depvar, treatment, treated){
     "Simulate an Average Treatment on the Treated"
 
-    localTreatment <- treatment   # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
-    flag <- data[[localTreatment]]==treated
-    data[[localTreatment]] <- 1-treated
+    localData <- data # avoids CRAN warning about deep assignment from data existing separately as argument and field
+    flag <- localData[[treatment]]==treated
+    localData[[treatment]] <- 1-treated
 
-    cf.mm <- model.matrix(.self$formula, data) # Counterfactual model matrix
+    cf.mm <- model.matrix(.self$formula, localData) # Counterfactual model matrix
     cf.mm <- cf.mm[flag,]
 
-    y1 <- data[flag, depvar]
+    y1 <- localData[flag, depvar]
     y1.n <- sum(flag)
 
     ATT <- matrix(NA, nrow=y1.n, ncol= .self$num)

@@ -37,6 +37,9 @@ ztimeseries$methods(
 
 ztimeseries$methods(
   zelig = function(formula, data, order=c(1,0,0), ts=NULL, cs=NULL, ..., weights=NULL, by=NULL, bootstrap = FALSE){
+
+    localBy <- by     # avoids CRAN warning about deep assignment from by existing separately as argument and field
+    localData <- data # avoids CRAN warning about deep assignment from data existing separately as argument and field
     if(!identical(bootstrap,FALSE)){
       stop("Error: The bootstrap is not implemented for time-series models")
     }
@@ -57,18 +60,18 @@ ztimeseries$methods(
       .self$model.call$ts <- NULL
       if (!identical(cs,NULL)) {
         .self$model.call$cs <- NULL
-        tsarg<-list(data[,cs],data[,ts])
-        by <- cs  # Use by architecture to deal with cross-sections in time-series models that do not support such.  Currently overrides.
+        tsarg<-list(localData[,cs],localData[,ts])
+        localBy <- cs  # Use by architecture to deal with cross-sections in time-series models that do not support such.  Currently overrides.
       } else {
-        tsarg<-list(data[,ts])
+        tsarg<-list(localData[,ts])
       }
 
       tssort<-do.call("order",tsarg)
-      data<-data[tssort,]
+      localData<-localData[tssort,]
     }
 
     ## ts and cs are used to reorganize dataset, and do not get further passed on to Super
-    callSuper(formula = formula, data = data, order=order, ..., weights = weights, by = by, bootstrap = FALSE)
+    callSuper(formula = formula, data = localData, order=order, ..., weights = weights, by = localBy, bootstrap = FALSE)
   }
 )
 

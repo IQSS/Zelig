@@ -31,7 +31,7 @@ zlognorm$methods(
 zlognorm$methods(
   zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, weights = NULL, by = NULL, bootstrap = FALSE) {
 
-    localFormula <- formula # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
+    localFormula <- formula # avoids CRAN warning about deep assignment from formula existing separately as argument and field
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     if (!(is.null(cluster) || robust))
@@ -102,11 +102,11 @@ zlognorm$methods(
     y.hat <- exp(mu + 0.5*alpha^2)
     
     if(sim){
-        data <- data.frame(y.sim=y.sim, event=event, x.sim=x)
-        return(data)
+        mydata <- data.frame(y.sim=y.sim, event=event, x.sim=x)
+        return(mydata)
     }else{
-        data <- data.frame(y.hat=y.hat, event=event, x.seq=x)
-        return(data)
+        mydata <- data.frame(y.hat=y.hat, event=event, x.seq=x)
+        return(mydata)
     }
   }
 )
