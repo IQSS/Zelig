@@ -26,3 +26,17 @@ test_that('FAIL TEST ci.plot first difference setrange and setrange1 same length
     z$sim()
     expect_error(z$graph(), NA)
 })
+
+# REQUIRE TEST ordered plots ---------------------------------------------
+
+test_that('REQUIRE TEST ordered plots', {
+    data(sanction)
+    sanction$ncost <- factor(sanction$ncost, ordered = TRUE, levels = c("net gain", "little effect", "modest loss", "major loss"))
+    z.out <- zoprobitbayes$new()
+    z.out$zelig(ncost ~ mil + coop, data = sanction, verbose = FALSE)
+    z.out$setx(mil=0)
+    z.out$setx1(mil=1)
+    z.out$sim()
+    expect_true(is.null(plot(z.out)))
+})
+

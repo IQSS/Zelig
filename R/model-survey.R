@@ -43,6 +43,9 @@ zsurvey$methods(zelig = function(formula, data, ids = ~1, probs = NULL,
 
     }
 
+
+    localWeights <- weights # avoids CRAN warning about deep assignment from treatment existing separately as argument and field
+
     ## Check arguments:
 
     ## Zelig generally accepts formula names of variables present in dataset, but survey
@@ -50,7 +53,7 @@ zsurvey$methods(zelig = function(formula, data, ids = ~1, probs = NULL,
     ## character arguments.
     ids <- recastString2Formula(ids)
     probs <- recastString2Formula(probs)
-    weights <- recastString2Formula(weights)
+    localWeights <- recastString2Formula(localWeights)
     strata <- recastString2Formula(strata)
     fpc <- recastString2Formula(fpc)
     checkforerror <- checkLogical(nest, "nest")
@@ -64,10 +67,10 @@ zsurvey$methods(zelig = function(formula, data, ids = ~1, probs = NULL,
         design <- survey::svydesign(data = data, ids = ids, probs = probs,
                                     strata = strata, fpc = fpc, nest = nest,
                                     check.strata = check.strata,
-                                    weights = weights)
+                                    weights = localWeights)
     } else {
         design <- survey::svrepdesign(data = data, repweights = repweights,
-                                        type = type, weights = weights,
+                                        type = type, weights = localWeights,
                                         combined.weights = combined.weights,
                                         rho = rho,
                                         bootstrap.average = bootstrap.average,
@@ -77,6 +80,6 @@ zsurvey$methods(zelig = function(formula, data, ids = ~1, probs = NULL,
                                 formula = .self$zelig.call$formula,
                                 design = design))  # fn will be set again by super, but initialized here for clarity
     .self$model.call$family <- call(.self$family, .self$link)
-    callSuper(formula = formula, data = data, ..., by = by,
+    callSuper(formula = formula, data = data, weights = localWeights, ..., by = by,
               bootstrap = bootstrap)
 })

@@ -12,3 +12,18 @@ test_that('REQUIRE TEST Bayes Diagnostics', {
     expect_equivalent(length(heidel.test),30)
     expect_equivalent(length(raftery.test),2)
 })
+
+test_that('REQUIRE TEST Bayes Diagnostics for factors', {
+    data(swiss)
+    names(swiss) <- c("Fert", "Agr", "Exam", "Educ", "Cath", "InfMort")
+    z <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+               model = "factor.bayes", data = swiss,
+               factors = 2, verbose = FALSE,
+               a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
+    geweke.test <- z$geweke.diag()
+    heidel.test <- z$heidel.diag()
+    raftery.test <- z$raftery.diag()
+    expect_equivalent(length(geweke.test),2)
+    expect_equivalent(length(heidel.test),90)
+    expect_equivalent(length(raftery.test),2)
+})

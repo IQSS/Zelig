@@ -13,7 +13,7 @@ Time-series models in Zelig
 \describe{
 \item{\code{packagename()}}{Automatically retrieve wrapped package name}
 
-\item{\code{sim(num = 1000)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
+\item{\code{sim(num = NULL)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
 
 \item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
   bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}

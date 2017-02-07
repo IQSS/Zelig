@@ -52,3 +52,10 @@ test_that('FAIL TEST is_simsx error message', {
     expect_error(is_simsx(z$sim.out), 
                  'Simulations for individual fitted values are not present.')
 })
+
+# FAIL TEST is_timeseries ------------------------------------------------------
+test_that('FAIL TEST is_timeseries', {
+    z <- zls$new()
+    expect_false(is_timeseries(z))
+    expect_error(is_timeseries(z, fail = TRUE), 'Not a timeseries object.')
+}) 

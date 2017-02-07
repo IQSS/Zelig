@@ -32,19 +32,22 @@ zquantile$methods(
 
 zquantile$methods(
   zelig = function(formula, data, ..., weights = NULL, by = NULL, bootstrap = FALSE) {
+
+    localBy <- by # avoids CRAN warning about deep assignment from formula existing separately as argument and field
+    localData <- data # avoids CRAN warning about deep assignment from formula existing separately as argument and field
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
     if (!is.null(.self$model.call$tau)) {
       .self$tau <- eval(.self$model.call$tau)
       if (length(.self$tau)) {
-        data <- rbind_all(lapply(eval(.self$tau),
-                                 function(tau) cbind(tau, data)))
-        by <- cbind("tau", by)
+        localDataata <- rbind_all(lapply(eval(.self$tau),
+                                 function(tau) cbind(tau, localData)))
+        localBy <- cbind("tau", localBy)
       }
     }
     else
       .self$tau <- 0.5
-    callSuper(formula = formula, data = data, ..., weights = weights, by = by, bootstrap = bootstrap)
+    callSuper(formula = formula, data = localData, ..., weights = weights, by = localBy, bootstrap = bootstrap)
 
     rse <- lapply(.self$zelig.out$z.out, (function(x)
                     quantreg::summary.rq(x, se = "nid", cov = TRUE)$cov))

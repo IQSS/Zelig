@@ -123,7 +123,7 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{set(..., fn = list(numeric = mean, ordered = Median, other = Mode))}}{Setting Explanatory Variable Values}
 
-\item{\code{sim(num = 1000)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
+\item{\code{sim(num = NULL)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
 
 \item{\code{simATT(simparam, data, depvar, treatment, treated)}}{Simulate an Average Treatment on the Treated}
 
