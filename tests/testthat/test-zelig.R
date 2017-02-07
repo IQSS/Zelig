@@ -174,6 +174,10 @@ test_that("REQUIRE TEST getters values and dimensions and plot does not fail",
     show.boot <- summary(boot.out, bagging = TRUE)
     expect_false(show.boot[[1]])
 
+    show.boot <- summary(boot.out, subset=2:3)
+    expect_false(show.boot[[1]])
+
+
     set.seed(123)
     mi.out <- zelig(y ~ x, model = "ls", data = mi(mydata, mydata2))
     expect_equivalent(round(as.numeric(mi.out$getcoef()[[1]]), 2), c(0,
@@ -189,9 +193,9 @@ test_that("REQUIRE TEST getters values and dimensions and plot does not fail",
 
 })
 
-# REQUIRE TEST Binary QI's and ATT effects-------------
-test_that('REQUIRE TEST Binary QIs and ATT effects', {
-  set.seed(123)
+# REQUIRE TEST Binary QI's and ATT effects and BY argument-------------
+test_that('REQUIRE TEST Binary QIs and ATT effects and BY argument', {
+    set.seed(123)
     # Simulate data
     n <- 100
     xx <- rbinom(n = n, size = 1, prob = 0.5)
@@ -205,7 +209,10 @@ test_that('REQUIRE TEST Binary QIs and ATT effects', {
     # Estimate Zelig Logit models
     zb.out <- zlogit$new()
     zb.out$zelig(yb ~ xx + zz, data=data, by="rr")
- 
+
+    show.logit <- summary(zb.out)
+    expect_false(show.logit[[1]])
+
     zb2.out <- zlogit$new()
     zb2.out$zelig(yb ~ xx, data=data)
 
@@ -230,3 +237,4 @@ test_that('REQUIRE TEST Binary QIs and ATT effects', {
     # Plot ROC 
     expect_true(is.null(rocplot(zb2.out, zb3.out)))
 })
+
