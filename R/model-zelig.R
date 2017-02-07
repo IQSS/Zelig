@@ -227,12 +227,22 @@ z$methods(
   zelig = function(formula, data, model = NULL, ..., weights = NULL, by,
                     bootstrap = FALSE) {
     "The zelig function estimates a variety of statistical models"
+
     fn2 <- function(fc, data) {
       fc$data <- data
       return(fc)
     }
+    
+    # Convert factors converted internally to the zelig call
+    if (factorize(formula, check = TRUE)) {
+        localformula <- factorize(formula, data, f_out = TRUE)
+        localdata <- factorize(formula, data, d_out = TRUE)
+        .self$formula <- localformula
+        .self$data <- localdata
+    }
+    else 
+      .self$formula <- formula
 
-    .self$formula <- formula
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
     if("formula" %in% class(.self$mcformula)){

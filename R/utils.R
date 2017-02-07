@@ -5,17 +5,18 @@
 #'   randomly selected (by design)
 #' @export
 #' @author Matt Owen \email{mowen@@iq.harvard.edu}
+
 Mode <- function (x) {
-  # build a table of values of x
-  tab <- table(as.factor(x))
-  # find the mode, then if there's more than one, select one randomly
-  v <- sample(names(which(tab == max(tab))), size = 1)
-  # if it came in as a factor, we need to re-cast it
-  # as a factor, with the same exact levels
-  if (is.factor(x))
-    return(factor(v, levels = levels(x)))
-  # re-cast as any other data-type
-  as(v, class(x))
+    # build a table of values of x
+    tab <- table(as.factor(x))
+    # find the mode, then if there's more than one, select one randomly
+    v <- sample(names(which(tab == max(tab))), size = 1)
+    # if it came in as a factor, we need to re-cast it
+    # as a factor, with the same exact levels
+    if (is.factor(x))
+        return(factor(v, levels = levels(x)))
+    # re-cast as any other data-type
+    as(v, class(x))
 }
 
 ## Zelig 3 and 4 backward compatibility
@@ -298,3 +299,51 @@ to_zelig_mi <- function (...) {
 #' @param ... a set of \code{data.frame}'s
 #' @return an \code{mi} object composed of a list of data frames.
 mi <- to_zelig_mi
+
+#' Convert \code{as.factor}s called inside a \code{zelig} call
+#'
+#' @param formula model formulae
+#' @param data data frame used in \code{formula}
+#' @param check logical whether to just check if a formula contains internally
+#'   called factors and return \code{TRUE} or \code{FALSE} 
+#' @param f_out logical whether to return the converted formula
+#' @param d_out logical whether to return the converted data frame. Note:
+#'   \code{f_out} must be missing
+#' @author Christopher Gandrud
+
+factorize <- function(formula, data, check, f_out, d_out) {
+    f <- as.character(formula)[3]
+    f_split <- unlist(strsplit(f, split = ' '))
+    to_factor <- grep(pattern = 'as.factor', f_split)
+    
+    if (!missing(check)) {
+        if (length(to_factor) > 0) return(TRUE)
+        else return(FALSE)
+    }
+
+    if (length(to_factor) > 0) {
+        to_factor_raw <- f_split[to_factor]
+        to_factor_raw <- gsub('as\\.factor\\(', '', to_factor_raw)
+        to_factor_plain <- gsub('\\)', '', to_factor_raw)
+
+        if (!all(to_factor_plain %in% names(data)))
+            stop('Unable to find variable to convert to factor.')
+
+        if (!missing(f_out)) {
+            f_split[to_factor] <- to_factor_plain
+            f_comb <- paste(f_split, collapse = ' ')
+            dv <- gsub('\\(\\)', '', formula[2])
+            f_new <- paste(dv, '~', f_comb, collapse = ' ')
+            f_out <- as.formula(f_new)
+            return(f_out)
+        }
+        else if (d_out) {
+            for (i in to_factor_plain) data[, i] <- as.factor(data[, i])
+            return(data)
+        }
+    }
+    else if (length(to_factor) == 0) {
+          if (!missing(f_out)) return(formula)
+          else if (d_out) return(data)
+    }
+}

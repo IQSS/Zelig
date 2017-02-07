@@ -2,7 +2,10 @@
 
 ## Major changes
 
-- Additional MC tests for a wide range of additional models.
+- Additional MC tests for a wide range of additional models. #160
+
+- Allows users to convert an independent variable to a factor within a `zelig`
+call using `as.factor`. #213
 
 - `from_zelig` function to extract original fitted model objects from `zelig`
 estimation calls. #189

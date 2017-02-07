@@ -47,3 +47,20 @@ test_that('REQUIRE TEST for sim with models including factor levels', {
     sims2 <- sim(z.out, x.out2)
     expect_equal(length(sims2$sim.out$range), 10)
 })
+
+# REQUIRE TEST for set with ls models including factors set within zelig call --
+test_that('REQUIRE TEST for set with ls models including factors set within zelig call', {
+    data(macro)
+    z1 <- zelig(unem ~ gdp + trade + capmob + as.factor(country), 
+             model = "ls", data = macro)
+    setUS1 <- setx(z1, country = "United States")
+  
+    macro$country <- as.factor(macro$country)
+    z2 <- zelig(unem ~ gdp + trade + capmob + country, 
+                model = "ls", data = macro)
+    setUS2 <- setx(z2, country = "United States")
+  
+    expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 1)
+    expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 
+                 setUS2$setx.out$x$mm[[1]][[16]])
+})
