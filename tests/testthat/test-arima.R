@@ -91,8 +91,9 @@ test_that('REQUIRE TEST arima models', {
     expect_true(is.null(zeligACFplot(test, omitzero=TRUE)))
 
     # plots
-    #plot(zj)
-    #ci.plot(zj, qi="pvseries.shock")
-    #ci.plot(zj, qi="pvseries.innovation")
+
+    expect_true(is.null(ci.plot(zj, qi="pvseries.shock")))
+    expect_true(is.null(ci.plot(zj, qi="pvseries.innovation")))
+    expect_true(is.null(plot(zj)))
 
 })
