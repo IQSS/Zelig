@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{reduce}
 \alias{reduce}
-\title{Calculate the reduced dataset to be used in code{\link{setx}}}
+\title{Calculate the reduced dataset to be used in \code{\link{setx}}}
 \usage{
 reduce(dataset, s, formula, data, avg = avg)
 }

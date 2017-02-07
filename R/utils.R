@@ -117,7 +117,6 @@ setval <- function(val, newval) {
 #' @keywords internal
 #' @author Christine Choirat
 reduce = function(dataset, s, formula, data, avg = avg) {
-browser()
   pred <- try(terms(fit <- lm(formula, data), "predvars"), silent = TRUE)
   if ("try-error" %in% class(pred)) # exp and weibull
     pred <- try(terms(fit <- survreg(formula, data), "predvars"), silent = TRUE)

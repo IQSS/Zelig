@@ -36,13 +36,14 @@ test_that('REQUIRE TEST ls with by', {
 
 # REQUIRE TEST for sim with ls models including factor levels ---------------------
 test_that('REQUIRE TEST for sim with models including factor levels', {
+    expect_is(iris$Species, 'factor')
     z.out <- zelig(Petal.Width ~ Petal.Length + Species, data = iris, 
                    model = "ls")
-    x.out <- setx(z.out, Petal.Length = 1)
-    expect_error(sim(z.out, x.out), NA)
+    x.out1 <- setx(z.out, Petal.Length = 1:10)
+    sims1 <- sim(z.out, x.out1)
+    expect_equal(length(sims1$sim.out$range), 10)
     
-    z <- zls$new()
-    z$zelig(Petal.Width ~ Petal.Length + Species, data = iris)
-    z$setx(Petal.Length = 1)
-    z$sim()
+    x.out2 <- setx(z.out, Petal.Length = 1:10, fn = list(numeric = Median))
+    sims2 <- sim(z.out, x.out2)
+    expect_equal(length(sims2$sim.out$range), 10)
 })

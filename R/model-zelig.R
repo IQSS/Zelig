@@ -415,17 +415,17 @@ z$methods(
 )
 
 z$methods(
-  set = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
+  set = function(..., fn = list(numeric = mean, ordered = Median)) {
     "Setting Explanatory Variable Values"
     is_uninitializedField(.self$zelig.out)
 
     .self$avg <- function(val) {
       if (is.numeric(val))
-        ifelse(is.null(fn$numeric), mean(val), fn$numeric(val))
+          ifelse(is.null(fn$numeric), mean(val), fn$numeric(val))
       else if (is.ordered(val))
-        ifelse(is.null(fn$ordered), Median(val), fn$ordered(val))
+          ifelse(is.null(fn$ordered), Median(val), fn$ordered(val))
       else
-        ifelse(is.null(fn$other), Mode(val), fn$other(val))
+          Mode(val)
     }
     s <- list(...)
 

@@ -2,12 +2,15 @@
 
 ## Major changes
 
-- Additional MC tests for Weibull, Gamma and Gammasurvey models.
+- Additional MC tests for a wide range of additional models.
 
 - `from_zelig` function to extract original fitted model objects from `zelig`
 estimation calls. #189
 
 ## Bug fixes
+
+- Resolves a bug from `set` where `sim` would fail for models that included
+factor level independent variables. #156
 
 - Fixed an issue with `model-survey` where `ids` was hard coded as `~1`. #144
 
