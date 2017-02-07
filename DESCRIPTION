@@ -30,22 +30,22 @@ BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-15
 Date: 2017-02-07
 Imports:
+    AER,
+    Amelia,
+    coda,
+    dplyr (>= 0.3.0.2),
+    geepack,
+    jsonlite,
     sandwich,
     methods,
     MASS,
-    survival,
-    VGAM,
-    jsonlite,
-    AER,
-    dplyr (>= 0.3.0.2),
-    quantreg,
-    geepack,
-    MCMCpack,
-    coda,
-    Amelia,
     MatchIt,
     maxLik,
-    survey
+    MCMCpack,
+    quantreg,
+    survey,
+    survival,
+    VGAM
 Suggests:
     testthat,
     knitr
