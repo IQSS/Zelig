@@ -11,7 +11,9 @@ estimation calls. #189
 
 - Fixed an issue with `model-survey` where `ids` was hard coded as `~1`. #144
 
-- Fixed #194 `ATT` bug introduced in 5.0-14
+- Fixed `ATT` bug introduced in 5.0-14. #194 
+
+- Fixed `ci.plot` bug with `timeseries` models introduced in 5.0-15. #204
 
 # Zelig version 5.0-14
 
