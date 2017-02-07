@@ -12,3 +12,15 @@ test_that('REQUIRE TEST Bayes Diagnostics', {
     expect_equivalent(length(heidel.test),30)
     expect_equivalent(length(raftery.test),2)
 })
+
+test_that('REQUIRE TEST Bayes Diagnostics for factors', {
+    data(sanction)
+    sanction$ncost <- factor(sanction$ncost, ordered = TRUE, levels = c("net gain", "little effect", "modest loss", "major loss"))
+    z <- zelig(ncost ~ mil + coop, model = "oprobit.bayes", data = sanction, verbose = FALSE)
+    geweke.test <- z$geweke.diag()
+    heidel.test <- z$heidel.diag()
+    raftery.test <- z$raftery.diag()
+    expect_equivalent(length(geweke.test),2)
+    expect_equivalent(length(heidel.test),30)
+    expect_equivalent(length(raftery.test),2)
+})
