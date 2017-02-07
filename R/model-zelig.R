@@ -355,8 +355,8 @@ z$methods(
               }
           } else if(is.vector(weights)){
               if(length(weights)==nrow(.self$data) & is.vector(weights)){
-                  if(min(weights)<0){
-                      localWeights <- weights # avoids CRAN warning about deep assignment from weights existing separately as argument and field
+                  localWeights <- weights # avoids CRAN warning about deep assignment from weights existing separately as argument and field
+                  if(min(localWeights)<0){
                       localWeights[localWeights < 0] <- 0
                       cat("Negative valued weights were supplied and will be replaced with zeros.")
                   }
