@@ -341,7 +341,7 @@ qi.plot <- function (obj, ...) {
     # Save old state
     old.par <- par(no.readonly=T)
 
-    if("timeseries" %in% obj$category){
+    if(is_timeseries(obj)){
         par(mfcol=c(3,1))
         zeligACFplot(obj$getqi("acf", xvalue="x1"))
         ci.plot(obj, qi="pvseries.shock")
@@ -496,8 +496,7 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
                     ci = c(80, 95, 99.9), discont = NULL) {
 
     is_zelig(obj)
-    if(!"timeseries" %in% obj$category) 
-        is_simsrange(obj$sim.out)
+    if(!is_timeseries(obj)) is_simsrange(obj$sim.out)
     msg <- 'Simulations for more than one fitted observation are required.'
     is_length_not_1(obj$sim.out$range, msg = msg)
     if (!is.null(obj$sim.out$range1)) {
@@ -557,7 +556,7 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
 
 
     ## Timeseries:
-    if("timeseries" %in% obj$category){
+    if(is_timeseries(obj)){
         #xmatrix<-              ## Do we need to know the x in which the shock/innovation occcured?  For secondary graphs, titles, legends?
         xname <- "Time"
         qiseries <- c("pvseries.shock","pvseries.innovation","evseries.shock","evseries.innovation")

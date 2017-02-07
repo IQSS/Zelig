@@ -100,3 +100,20 @@ is_varying <- function(x, msg = 'Vector does not vary.', fail = TRUE) {
             stop(msg, call. = FALSE)
     } else return(passes)
 }
+
+#' Check if a zelig object contains a time series model
+#' 
+#' @param x a zelig object
+#' @param msg character string with the error message to return if
+#'   \code{fail = TRUE}.
+#' @param fail logical whether to return an error if \code{x} is not a timeseries.
+
+is_timeseries <- function(x, msg = 'Not a timeseries object.', fail = FALSE) {
+    is_zelig(x)
+    passes <- TRUE
+    if (!"timeseries" %in% x$category) passes <- FALSE
+    if (isTRUE(fail)) {
+        if (!isTRUE(passes))
+            stop(msg, call. = FALSE)
+    } else return(passes)
+}
