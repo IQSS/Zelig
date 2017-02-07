@@ -349,7 +349,7 @@ z$methods(
               if(weights %in% names(.self$data)){
                   .self$weights <- .self$data[[weights]]  # This is a way to convert data.frame portion to type numeric (as data.frames are lists)
               } else {
-                  cat("Variable name given for weights not found in dataset, so will be ignored.\n\n")
+                  warning("Variable name given for weights not found in dataset, so will be ignored.\n\n", .call=FALSE)
                   .self$weights <- NULL  # No valid weights
             .self$model.call$weights <- NULL
               }
@@ -358,16 +358,16 @@ z$methods(
                   localWeights <- weights # avoids CRAN warning about deep assignment from weights existing separately as argument and field
                   if(min(localWeights)<0){
                       localWeights[localWeights < 0] <- 0
-                      cat("Negative valued weights were supplied and will be replaced with zeros.")
+                      warning("Negative valued weights were supplied and will be replaced with zeros.", .call=FALSE)
                   }
                   .self$weights <- localWeights # Weights
               } else{
-                  cat("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n")
+                  warning("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n", .call=FALSE)
                   .self$weights <- NULL # No valid weights
             .self$model.call$weights <- NULL
               }
           } else {
-              cat("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n")
+              warning("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n", .call=FALSE)
               .self$weights <- NULL # No valid weights
           .self$model.call$weights <- NULL
           }
