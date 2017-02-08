@@ -305,7 +305,7 @@ mi <- to_zelig_mi
 #' @param formula model formulae
 #' @param data data frame used in \code{formula}
 #' @param check logical whether to just check if a formula contains internally
-#'   called factors and return \code{TRUE} or \code{FALSE} 
+#'   called factors and return \code{TRUE} or \code{FALSE}
 #' @param f_out logical whether to return the converted formula
 #' @param d_out logical whether to return the converted data frame. Note:
 #'   \code{f_out} must be missing
@@ -315,7 +315,7 @@ factorize <- function(formula, data, check, f_out, d_out) {
     f <- as.character(formula)[3]
     f_split <- unlist(strsplit(f, split = ' '))
     to_factor <- grep(pattern = 'as.factor', f_split)
-    
+
     if (!missing(check)) {
         if (length(to_factor) > 0) return(TRUE)
         else return(FALSE)
@@ -346,4 +346,16 @@ factorize <- function(formula, data, check, f_out, d_out) {
           if (!missing(f_out)) return(formula)
           else if (d_out) return(data)
     }
+}
+
+#' Remove package names from fitted model object calls.
+#'
+#' Enables \code{\link{from_zelig_model}} output to work with stargazer.
+#' @param x a fitted model object result
+
+strip_package_name <- function(x) {
+    call_temp <- gsub('^.*(?=(::))', '', x$call[1], perl = TRUE)
+    call_temp <- gsub('::', '', call_temp, perl = TRUE)
+    x$call[1] <- as.call(list(as.symbol(call_temp)))
+    return(x)
 }

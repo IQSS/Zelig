@@ -232,7 +232,7 @@ z$methods(
       fc$data <- data
       return(fc)
     }
-    
+
     # Convert factors converted internally to the zelig call
     if (factorize(formula, check = TRUE)) {
         localformula <- factorize(formula, data, f_out = TRUE)
@@ -240,7 +240,7 @@ z$methods(
         .self$formula <- localformula
         .self$data <- localdata
     }
-    else 
+    else
       .self$formula <- formula
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
@@ -976,31 +976,31 @@ z$methods(
   }
 )
 
-z$methods(
-    from_zelig = function() {
-        "Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions."
-        is_uninitializedField(.self$zelig.out)
-        result <- try(.self$zelig.out$z.out, silent = TRUE)
+z$methods(from_zelig_model = function() {
+    "Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions."
+    is_uninitializedField(.self$zelig.out)
+    result <- try(.self$zelig.out$z.out, silent = TRUE)
 
-        if ("try-error" %in% class(result)) {
-            stop("from_zelig not available for this fitted model.")
-        }
-        else {
-            if (length(result) == 1) {
-                result <- result[[1]]
-            } else if (length(result) > 1) {
-            	if(.self$mi){
- 	              message("Returning fitted model objects for each imputed data set in a list.")
- 	            } else if (.self$bootstrap) {
- 	            	message("Returning fitted model objects for each bootstrapped data set in a list.")
- 	            } else {
- 	            	message("Returning fitted model objects for each subset of the data created from the 'by' argument, in a list.")
- 	            }
+    if ("try-error" %in% class(result)) {
+        stop("from_zelig_model not available for this fitted model.")
+    } else {
+        if (length(result) == 1) {
+            result <- result[[1]]
+            result <- strip_package_name(result)
+        } else if (length(result) > 1) {
+            if (.self$mi) {
+                message("Returning fitted model objects for each imputed data set in a list.")
+            } else if (.self$bootstrap) {
+                message("Returning fitted model objects for each bootstrapped data set in a list.")
+            } else {
+                message("Returning fitted model objects for each subset of the data created from the 'by' argument, in a list.")
             }
-            return(result)
+            result <- lapply(result, strip_package_name)
         }
+        return(result)
     }
-)
+})
+
 
 z$methods(
   getcoef = function() {
@@ -1136,7 +1136,7 @@ z$methods(
       .self$zelig(Surv(y.sim,event) ~ x.sim, data = data.sim)
     } else if (.self$name %in% c("relogit")) {
         tau <- sum(data.sim$y.sim)/nsim
-    	  .self$zelig(y.sim ~ x.sim, tau = tau, data = data.sim)
+          .self$zelig(y.sim ~ x.sim, tau = tau, data = data.sim)
     } else {
       .self$zelig(y.sim ~ x.sim, data = data.sim)
     }

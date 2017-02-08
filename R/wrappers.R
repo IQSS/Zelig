@@ -306,14 +306,14 @@ sim <- function(obj, x, x1, y = NULL, num = 1000, bootstrap = F,
 #' @examples
 #' z5 <- zls$new()
 #' z5$zelig(Fertility ~ Education, data = swiss)
-#' from_zelig(z5)
+#' from_zelig_model(z5)
 #'
 #' @author Christopher Gandrud
 #' @export
 
-from_zelig <- function(obj) {
+from_zelig_model <- function(obj) {
     is_zelig(obj)
 
     f5 <- obj$copy()
-    return(f5$from_zelig())
+    return(f5$from_zelig_model())
 }

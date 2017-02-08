@@ -65,26 +65,30 @@ test_that('REQUIRE TEST for sim num argument', {
     expect_equal(length(z5$getqi()), 10)
 })
 
-# REQUIRE TEST from_zelig returns expected fitted model object -----------------
-test_that('REQUIRE TEST from_zelig returns expected fitted model object', {
+# REQUIRE TEST from_zelig_model returns expected fitted model object -----------------
+test_that('REQUIRE TEST from_zelig_model returns expected fitted model object', {
     z5 <- zls$new()
     z5$zelig(Fertility ~ Education, data = swiss)
-    expect_is(z5$from_zelig(), class = 'lm')
+    model_object <- z5$from_zelig_model()
+    expect_is(model_object, class = 'lm')
+    expect_equal(as.character(model_object$call[1]), 'lm')
 })
 
-# REQUIRE TEST from_zelig returns each fitted model object from mi -------------
-test_that('REQUIRE TEST from_zelig returns each fitted model object from mi', {
-  set.seed(123)
-  n <- 100
-  x1 <- runif(n)
-  x2 <- runif(n)
-  y <- rnorm(n)
-  data.1 <- data.frame(y = y, x = x1)
-  data.2 <- data.frame(y = y, x = x2)
+# REQUIRE TEST from_zelig_model returns each fitted model object from mi -------------
+test_that('REQUIRE TEST from_zelig_model returns each fitted model object from mi', {
+    set.seed(123)
+    n <- 100
+    x1 <- runif(n)
+    x2 <- runif(n)
+    y <- rnorm(n)
+    data.1 <- data.frame(y = y, x = x1)
+    data.2 <- data.frame(y = y, x = x2)
 
-  mi.out <- to_zelig_mi(data.1, data.2)
-  z.out <- zelig(y ~ x, model = "ls", data = mi.out)
-  expect_is(z.out$from_zelig(), 'list')
+    mi.out <- to_zelig_mi(data.1, data.2)
+    z.out <- zelig(y ~ x, model = "ls", data = mi.out)
+    model_list <- z.out$from_zelig_model()
+    expect_is(model_list, class = 'list')
+    expect_equal(as.character(model_list[[2]]$call[1]), 'lm')
 })
 
 # REQUIRE TEST functioning simparam with by and ATT ----------------------------
@@ -107,8 +111,7 @@ test_that('REQUIRE TEST functioning simparam with by and ATT', {
     expect_equal(length(out), 1000)
 })
 
-# REQUIRE TEST getters values and dimensions and plot does not
-# fail-------------
+# REQUIRE TEST getters values and dimensions and plot does not fail-------------
 test_that("REQUIRE TEST getters values and dimensions and plot does not fail",
 {
     set.seed(123)

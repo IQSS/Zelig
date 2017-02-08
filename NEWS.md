@@ -1,14 +1,17 @@
-# Zelig version 5.0-15
+Zelig version 5.0-15
+==============================
 
 ## Major changes
-
-- Additional MC tests for a wide range of additional models. #160
 
 - Allows users to convert an independent variable to a factor within a `zelig`
 call using `as.factor`. #213
 
-- `from_zelig` function to extract original fitted model objects from `zelig`
-estimation calls. #189
+- `from_zelig_model` function to extract original fitted model objects from 
+`zelig` estimation calls. This is useful for conducting non-Zelig supported
+post-estimation and easy integration with the texreg and stargazer packages
+for formatted parameter estimate tables. #189
+
+- Additional MC tests for a wide range of models. #160
 
 ## Bug fixes
 
@@ -21,7 +24,9 @@ factor level independent variables. #156
 
 - Fixed `ci.plot` bug with `timeseries` models introduced in 5.0-15. #204
 
-# Zelig version 5.0-14
+
+Zelig version 5.0-14 
+==============================
 
 ## Major changes
 
