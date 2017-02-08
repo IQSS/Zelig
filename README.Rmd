@@ -24,7 +24,9 @@ knitr::opts_knit$set(
 [![Travis (LINUX) Build Status](https://travis-ci.org/IQSS/Zelig.svg?branch=master)](https://travis-ci.org/IQSS/Zelig)
 [![AppVeyor (Windows) Build Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
-[![Pull requests waiting for review](https://badge.waffle.io/iqss/zelig.svg?label=development)](https://waffle.io/iqss/zelig) [Dev-Blog](https://medium.com/zelig-dev)
+[![Pull requests waiting for review](https://badge.waffle.io/iqss/zelig.svg?label=development)](https://waffle.io/iqss/zelig)
+[![Gitter chat](https://badges.gitter.im/Zelig-dev/gitter.png)](https://gitter.im/Zelig-dev/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+[Dev-Blog](https://medium.com/zelig-dev)
 
 Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of R, with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three commands and consistent documentation for every method. Zelig uses R code from many researchers, making it "everyone’s statistical software." We hope it becomes everyone’s statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach. 
 

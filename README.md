@@ -15,6 +15,8 @@ Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=mas
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
 [![Pull requests waiting for
 review](https://badge.waffle.io/iqss/zelig.svg?label=development)](https://waffle.io/iqss/zelig)
+[![Gitter
+chat](https://badges.gitter.im/Zelig-dev/gitter.png)](https://gitter.im/Zelig-dev/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 [Dev-Blog](https://medium.com/zelig-dev)
 
 Zelig is an easy-to-use, free, open source, general purpose statistics
@@ -178,22 +180,22 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 75.29608 1.635414 75.27304 71.99525 78.63947
+    ## 1 75.31758 1.673029 75.28931 72.07853 78.68178
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.23224 9.368202 75.48045 56.55565 93.65355
+    ## [1,] 74.41169 8.957357 74.69282 56.65099 92.14212
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.67805 1.488391 66.62106 63.87903 69.70775
+    ## 1 66.70986 1.526883 66.73615 63.86242 69.68899
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.37137 9.307872 66.21536 48.20021 84.17525
+    ## [1,] 66.36758 9.740049 65.96846 47.04424 86.13389
     ## fd
-    ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.618031 1.398079 -8.663985 -11.38144 -5.806046
+    ##        mean       sd       50%      2.5%    97.5%
+    ## 1 -8.607724 1.425526 -8.606875 -11.50482 -5.76133
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
