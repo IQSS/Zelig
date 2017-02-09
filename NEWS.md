@@ -13,6 +13,10 @@ for formatted parameter estimate tables. #189
 
 - Additional MC tests for a wide range of models. #160
 
+## Minor changes
+
+- Solved deep assignment issue that returned a series of warnings on build. #172
+
 ## Bug fixes
 
 - Resolves a bug from `set` where `sim` would fail for models that included
@@ -32,11 +36,11 @@ Zelig version 5.0-14
 
 - `mode` has been deprecated. Please use `Mode`. #152
 
-- The Zelig 4 `sim` wrapper now intellegently looks for fitted values from the
+- The Zelig 4 `sim` wrapper now intelligently looks for fitted values from the
 reference class object if not supplied via the \code{x} argument.
 
 - New `to_zelig_mi` utility function for combining multiply imputed datasets for
-passing to `zelig`. `mi` will also work to enable backwards compatability. #178
+passing to `zelig`. `mi` will also work to enable backwards compatibility. #178
 
 - Initial development on a new testing architecture and more tests for
 `model-*`, Zelig 4 wrappers, `ci.plot`, and the Zelig workflow.
