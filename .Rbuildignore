@@ -7,3 +7,5 @@ README.md
 ^appveyor\.yml$
 ^README\.Rmd$
 ^README_files/*
+index*
+_pkgdown.yml

@@ -1,0 +1,51 @@
+templates:
+  params:
+    bootswatch: readable
+
+navbar:
+  title: "Zelig Project"
+  type: inverse
+  left: 
+    - text: "Reference"
+      href: "reference/index.html"
+      menu: 
+        - text: "Workflow"
+          href: "reference/index.html#section-main-zelig-workflow"
+        - text: "Estimation Methods"
+          href: "reference/index.html#section-estimation-methods"
+        - text: "Interationcs Outside of Zelig"
+          href: "reference/index.html#section-exterior-interaction-functions"
+  right: 
+    - text: "Dev-Blog"
+      icon: fa-medium
+      href: https://medium.com/zelig-dev/archive
+    - icon: fa-twitter fa-2x
+      href: https://twitter.com/zeligproject
+    - icon: fa-github fa-2x
+      href: https://github.com/IQSS/Zelig
+      
+reference: 
+  - title: "Main Zelig Workflow"
+    desc: >
+      The main functions Zelig's estimate, set fitted values, simulate, and plot
+      workflow
+    contents:
+      - zelig
+      - setx
+      - setx1
+      - setxrange
+      - sim
+      - graph
+      - plot
+      
+  - title: "Estimation Methods" 
+    desc: >
+      Methods for finding parameter estimates
+    contents:
+      - zls
+  - title: "Exterior Interaction Functions"
+    desc: > 
+      Functions for helping Zelig interact with the non-Zelig R world
+    contents: 
+      - from_zelig_model
+      - to_zelig_mi
