@@ -5,7 +5,47 @@
 \alias{Zelig-ls-class}
 \alias{zls}
 \title{Least Squares Regression for Continuous Dependent Variables}
+\arguments{
+\item{formula}{an object of class "formula" (or one that can be coerced to
+that class): a symbolic description of the model to be fitted.}
+
+\item{data}{an optional data frame, list or environment (or object coercible
+by \code{as.data.frame} to a data frame) containing the variables in the model.
+If not found in data, the variables are taken from \code{environment(formula)},
+typically the environment from which `lm`` is called.
+
+Imputed data sets created with \link{amelia} or \code{\link{to_zelig_mi}}
+can also be supplied.}
+
+\item{...}{arguments to pass to \code{\link{lm}}.}
+
+\item{model}{a character string specifying the model type. NOTE: only
+required if using the Zelig 4 wrappers.}
+
+\item{weights}{an optional vector of weight values or character string
+identifying a weighting variable in \code{data}. Weights adjust the observed
+sample distribution in the data to an underlying population of interest.
+\itemize{
+\item If the supplied weights are all integer values, then \code{zelig} rebuilds a new
+version of the dataset by duplicating observations according to their
+weight (and removing observations with zero weight).
+\item If the weights are continuously valued, `zelig`` bootstraps the supplied
+dataset, using the relative weights as bootstrap probabilities.
+}}
+
+\item{by}{an optional character string identifying a variable in \code{data}
+to conduct the model analysis along. This can be used to run separate
+models for different levels of a categorical variable.}
+
+\item{bootstrap}{logical whether or not to bootstrap the data set.}
+}
 \description{
+Least Squares Regression for Continuous Dependent Variables
+}
+\details{
+Use least squares regression analysis to estimate the best linear
+predictor for the specified dependent variables.
+
 Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-ls.html}
 }
 \section{Methods}{
@@ -15,3 +55,39 @@ Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-ls.html}
   bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 
+\examples{
+\dontrun{
+# Workflow: Zelig 5 Reference Classes
+z5 <- zls$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+z5$graph()
+
+# Workflow: Zelig 4 Wrappers
+z.out <- zelig(Y ~ X1 + X2, model = "ls", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+plot(s.out)
+}
+
+
+# Basic Example with First Differences (using Zelig 4 wrappers) #
+
+data(macro)
+
+# Estimate model
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
+
+# Set explanatory variables to their default (mean/mode) values, with high 
+# (80th percentile) and low (20th percentile) values for the trade variable
+x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
+
+# Simulate quantities of interest
+s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+
+# Plot first differences
+plot(s.out1)
+
+}

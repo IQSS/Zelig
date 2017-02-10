@@ -1,9 +1,13 @@
 Zelig version 5.0-16
 ==============================
 
+## Major changes
+
+- Extensive additions to model estimation method documentation. 
+
 ## Minor changes
 
-- Internal code improvements. 
+- Internal code improvements.
 
 Zelig version 5.0-15
 ==============================
