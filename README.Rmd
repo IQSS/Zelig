@@ -156,5 +156,3 @@ Then use the `graph()` method as before:
 
 z5$graph()
 ```
-
-Note: implemented in version 5.0-14.

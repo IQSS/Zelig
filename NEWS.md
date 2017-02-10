@@ -1,3 +1,10 @@
+Zelig version 5.0-16
+==============================
+
+## Minor changes
+
+- Internal code improvements. 
+
 Zelig version 5.0-15
 ==============================
 
@@ -6,7 +13,7 @@ Zelig version 5.0-15
 - Allows users to convert an independent variable to a factor within a `zelig`
 call using `as.factor`. #213
 
-- `from_zelig_model` function to extract original fitted model objects from 
+- `from_zelig_model` function to extract original fitted model objects from
 `zelig` estimation calls. This is useful for conducting non-Zelig supported
 post-estimation and easy integration with the texreg and stargazer packages
 for formatted parameter estimate tables. #189
@@ -24,12 +31,12 @@ factor level independent variables. #156
 
 - Fixed an issue with `model-survey` where `ids` was hard coded as `~1`. #144
 
-- Fixed `ATT` bug introduced in 5.0-14. #194 
+- Fixed `ATT` bug introduced in 5.0-14. #194
 
 - Fixed `ci.plot` bug with `timeseries` models introduced in 5.0-15. #204
 
 
-Zelig version 5.0-14 
+Zelig version 5.0-14
 ==============================
 
 ## Major changes

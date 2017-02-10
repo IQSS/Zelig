@@ -233,6 +233,7 @@ z$methods(
       return(fc)
     }
 
+    .self$formula <- formula
     # Convert factors converted internally to the zelig call
     if (factorize(formula, check = TRUE)) {
         localformula <- factorize(formula, data, f_out = TRUE)
@@ -240,8 +241,6 @@ z$methods(
         .self$formula <- localformula
         .self$data <- localdata
     }
-    else
-      .self$formula <- formula
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
