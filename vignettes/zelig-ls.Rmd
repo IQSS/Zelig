@@ -162,11 +162,32 @@ s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
 # Output Values
 
 The output of each Zelig function call contains useful information which you
-may view. For example, if you run `z.out <- zelig(y ~ x, model = ls, data)`, 
-then you may examine the available information in `z.out` by using 
-`names(z.out)`, see the coefficients by using `z.out$coefficients`, and a 
-default summary of information through `summary(z.out)`. Other elements 
-available through the `$` operator are listed below.
+may view. For example, using the `z.out1` object we estimated above, 
+then you may examine the available information in `z.out1` by using:
+
+```{r}
+z.out1$names()
+```
+
+or see the coefficients by using [`getcoef`](reference/getcoef.html):
+
+```{r}
+z.out1$getcoef() 
+```
+
+For a default summary of information use either 
+
+```{r}
+z.out1$summarize()
+```
+
+Or as we saw before using the wrapper:
+
+```{r}
+summary(z.out1) 
+```
+
+Other elements available through the `$` operator are listed below.
 
 -  From the `zelig()` output object `z.out`, you may extract:
 
