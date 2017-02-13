@@ -9,3 +9,4 @@ README.md
 ^README_files/*
 index*
 _pkgdown.yml
+docs/*
