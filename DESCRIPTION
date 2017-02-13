@@ -28,7 +28,7 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-16
-Date: 2017-02-10
+Date: 2017-02-13
 Imports:
     AER,
     Amelia,
@@ -48,7 +48,8 @@ Imports:
     VGAM
 Suggests:
     testthat,
-    knitr
+    knitr,
+    rmarkdown
 Collate:
     'assertions.R'
     'model-zelig.R'
@@ -99,3 +100,4 @@ Collate:
     'plots.R'
     'wrappers.R'
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr

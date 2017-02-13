@@ -3,6 +3,8 @@ Zelig version 5.0-16
 
 ## Minor changes
 
+- Zelig 5 Quickstart vignette added.
+
 - Internal code improvements. 
 
 Zelig version 5.0-15
