@@ -8,6 +8,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+```
+
 The release of Zelig 5.0 expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture. Comparability wrappers are available so that you can still use pre-Zelig 5 syntax.
 
 ## Zelig 5 workflow overview
@@ -146,6 +154,5 @@ z5$sim()
 Then use the `graph()` method as before:
 
 ```{r example_plot_ci_plot, fig.height=5, fig.width=5}
-
 z5$graph()
 ```

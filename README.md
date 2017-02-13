@@ -19,23 +19,6 @@ review](https://badge.waffle.io/iqss/zelig.svg?label=development)](https://waffl
 chat](https://badges.gitter.im/Zelig-dev/gitter.png)](https://gitter.im/Zelig-dev/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 [Dev-Blog](https://medium.com/zelig-dev)
 
-Zelig is an easy-to-use, free, open source, general purpose statistics
-program for estimating, interpreting, and presenting results from any
-statistical method. Zelig turns the power of R, with thousands of open
-source packages — but with free ranging syntax, diverse examples, and
-documentation written for different audiences — into the same three
-commands and consistent documentation for every method. Zelig uses R
-code from many researchers, making it "everyone’s statistical software."
-We hope it becomes everyone’s statistical software for applications too,
-as we designed it so anyone can use it or add their methods to it. We
-aim for Zelig to be the best way to do analysis, prepare replication
-files, learn new methods, or teach.
-
-Project page and publications available at: <http://zeligproject.org>.
-
-Zelig 5
-=======
-
 The release of Zelig 5.0 expands the set of models available, while
 simplifying the model wrapping process, and solving architectural
 problems by completely rewriting into R’s Reference Classes for a fully
@@ -68,7 +51,24 @@ is that they are "mutable", i.e. assigning values to them does not
 overwrite the objects previous contents.
 
 Zelig 5 does contain wrappers (largely) allowing you to use Zelig 4
-syntax if you'ld like.
+syntax if you'd like. Here is an example workflow with Zelig 5:
+
+    z5 <- zls$new()
+    z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+    z5$setx()
+    z5$sim()
+    z5$graph()
+
+Here is the same set of operations using the Zelig 4 wrappers:
+
+    z.out <- zelig(Y ~ X1 + X2, model = "ls", weights = w, data = mydata)
+    x.out <- setx(z.out)
+    s.out <- sim(z.out, x = x.out)
+    plot(s.out)
+
+Note that all of the output objects from the Zelig 4 wrappers are Zelig
+5 reference class objects, so you can mix and match which syntax you
+like.
 
 Zelig 5 Quickstart Guide
 ------------------------
@@ -116,8 +116,25 @@ arguments: equation and data:
     # model summary
     summary(z5)
 
-    ##   Length    Class     Mode 
-    ##        1 Zelig-ls       S4
+    ## Model: 
+    ## 
+    ## Call:
+    ## z5$zelig(formula = Fertility ~ Education, data = swiss)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -17.036  -6.711  -1.011   9.526  19.689 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)
+    ## (Intercept)  79.6101     2.1041  37.836  < 2e-16
+    ## Education    -0.8624     0.1448  -5.954 3.66e-07
+    ## 
+    ## Residual standard error: 9.446 on 45 degrees of freedom
+    ## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
+    ## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
+    ## 
+    ## Next step: Use 'setx' method
 
 The -0.8624 coefficient on education suggests a negative relationship
 between the education of a province and its fertility rate. More
@@ -141,8 +158,14 @@ predictor value using the `setx()` method:
     # model summary
     summary(z5)
 
-    ##   Length    Class     Mode 
-    ##        1 Zelig-ls       S4
+    ## setx:
+    ##   (Intercept) Education
+    ## 1           1         5
+    ## setx1:
+    ##   (Intercept) Education
+    ## 1           1        15
+    ## 
+    ## Next step: Use 'sim' method
 
 After setting our predictor value, we simulate using the `sim()` method:
 
@@ -152,8 +175,27 @@ After setting our predictor value, we simulate using the `sim()` method:
     # model summary
     summary(z5)
 
-    ##   Length    Class     Mode 
-    ##        1 Zelig-ls       S4
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 75.29158 1.575164 75.26392 72.3781 78.36415
+    ## pv
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 74.69827 9.738443 74.91301 56.04747 93.10676
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##       mean       sd      50%    2.5%    97.5%
+    ## 1 66.67985 1.482245 66.58182 63.8816 69.87853
+    ## pv
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 66.49971 9.712819 66.37913 47.46916 85.62189
+    ## fd
+    ##        mean       sd       50%      2.5%     97.5%
+    ## 1 -8.611726 1.407792 -8.613964 -11.40761 -5.786901
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`

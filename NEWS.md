@@ -3,11 +3,9 @@ Zelig version 5.0-16
 
 ## Major changes
 
-- Extensive additions to model estimation method documentation.
+- Extensive additions to model estimation method documentation and vignettes.
 
 ## Minor changes
-
-- Zelig 5 Quickstart vignette added.
 
 - Internal code improvements.
 

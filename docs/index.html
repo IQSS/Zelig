@@ -28,9 +28,15 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="articles/quickstart.html">Quickstart</a>
+</li>
+<li>
+  <a href="articles/index.html">Vignettes</a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Reference
+    Function Reference
      
     <span class="caret"></span>
   </a>
@@ -42,7 +48,7 @@
       <a href="reference/index.html#section-estimation-methods">Estimation Methods</a>
     </li>
     <li>
-      <a href="reference/index.html#section-exterior-interaction-functions">Interationcs Outside of Zelig</a>
+      <a href="reference/index.html#section-exterior-interaction-functions">Interacting Outside of Zelig</a>
     </li>
   </ul>
 </li>
@@ -86,9 +92,12 @@
 <div id="everyones-statistical-software" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#everyones-statistical-software" class="anchor"> </a>Everyone’s statistical software</h1></div>
-<p><a href="http://cran.r-project.org/package=Zelig"><img src="http://www.r-pkg.org/badges/version/Zelig" alt="CRAN Version"></a> <img src="http://cranlogs.r-pkg.org/badges/last-month/Zelig" alt="CRAN Monthly Downloads"><img src="http://cranlogs.r-pkg.org/badges/grand-total/Zelig" alt="CRAN Total Downloads"></p>
-<p><a href="https://travis-ci.org/IQSS/Zelig"><img src="https://travis-ci.org/IQSS/Zelig.svg?branch=master" alt="Travis (LINUX) Build Status"></a> <a href="https://ci.appveyor.com/project/IQSS/Zelig"><img src="https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&amp;svg=true" alt="AppVeyor (Windows) Build Status"></a> <a href="https://codecov.io/gh/IQSS/Zelig"><img src="https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://waffle.io/iqss/zelig"><img src="https://badge.waffle.io/iqss/zelig.svg?label=development" alt="Pull requests waiting for review"></a> <a href="https://gitter.im/Zelig-dev/Lobby?utm_source=share-link&amp;utm_medium=link&amp;utm_campaign=share-link"><img src="https://badges.gitter.im/Zelig-dev/gitter.png" alt="Gitter chat"></a></p>
-<p>Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of R, with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three commands and consistent documentation for every method. Zelig uses R code from many researchers, making it “everyone’s statistical software.” We hope it becomes everyone’s statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach.</p>
+
+<blockquote>
+<p>NOTE: This site is in BETA. For the current official Zelig site see: <a href="http://zeligproject.org" class="uri">http://zeligproject.org</a></p>
+</blockquote>
+<p>Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of R, with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three functions and consistent documentation for every method. Zelig uses R code from many researchers, making it “everyone’s statistical software”. We hope it becomes everyone’s statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach.</p>
+<p>Get started with the <a href="articles/quickstart.html">Quickstart Guide</a>.</p>
 <p>Zelig includes many specific methods, based on likelihood, frequentist, Bayesian, robust Bayesian, nonparametric, and population and superpopulation theories of inference. Zelig adds considerable infrastructure to improve the use of existing methods. It translates hard-to-interpret coefficients into meaningful quantities of interest, along with the uncertainty estimates (generalizing <a href="http://gking.harvard.edu/publications/clarify-software-interpreting-and-presenting-statistical-results">Clarify</a> for Stata); automates graphics and numerical summaries for all models; evaluates counterfactuals (incorporating <a href="http://gking.harvard.edu/whatif">WhatIf</a>); combines multiply imputed data sets to impute missing data and correct for measurement error (via <a href="http://gking.harvard.edu/amelia">Amelia</a>); automates bootstrapping for all models; allows for matching for causal inference to reduce model dependence (via <a href="http://gking.harvard.edu/publications/matchit-nonparametric-preprocessing-parametric-causal-inference">MatchIt</a> and <a href="http://gking.harvard.edu/cem">cem</a>); and generates replication data files (for <a href="http://dataverse.org/">Dataverse</a> to satisfy community replication standards). Developers can make their R packages usable from Zelig by writing a few simple bridge functions. If you have suggestions improvements, we’d love to hear from you!</p>
 <script>
   ((window.gitter = {}).chat = {}).options = {
@@ -118,6 +127,15 @@
 <li>Gary King <br><small class="roles"> Author </small> </li>
 <li>Olivia Lau <br><small class="roles"> Author </small> </li>
 </ul>
+<html><body>
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="http://cran.r-project.org/package=Zelig"><img src="http://www.r-pkg.org/badges/version/Zelig" alt="CRAN Version"></a></li>
+<li><a href="https://travis-ci.org/IQSS/Zelig"><img src="https://travis-ci.org/IQSS/Zelig.svg?branch=master" alt="Travis (LINUX) Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/IQSS/Zelig"><img src="https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&amp;svg=true" alt="AppVeyor (Windows) Build Status"></a></li>
+<li><a href="https://codecov.io/gh/IQSS/Zelig"><img src="https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg" alt="codecov"></a></li>
+</ul>
+</body></html>
 </div>
 
 </div>

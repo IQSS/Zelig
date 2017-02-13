@@ -1,3 +1,8 @@
+## ----setup, include=FALSE------------------------------------------------
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+
 ## ----zelig-5-pseudo, eval=FALSE------------------------------------------
 #  z5 <- zls$new()
 #  z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
@@ -65,6 +70,5 @@ z5$setrange(Education = 5:15)
 z5$sim()
 
 ## ----example_plot_ci_plot, fig.height=5, fig.width=5---------------------
-
 z5$graph()
 
