@@ -108,6 +108,7 @@ z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
+<p>For more details about the difference between Zelig’s reference classes and compatibility wrappers see the <a href="articles/quickstart.html">Quickstart Vignette</a></p>
 </div>
 <div id="examples" class="section level1">
 <h1 class="hasAnchor">
@@ -211,6 +212,51 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <p>where <span class="math inline">\(x_i\)</span> is the vector of covariates, and <span class="math inline">\(\beta\)</span> is the vector of coefficients.</p>
 <p>The least squares estimator is the best linear predictor of a dependent variable given <span class="math inline">\(x_i\)</span>, and minimizes the sum of squared residuals, <span class="math inline">\(\sum_{i=1}^n (Y_i-x_i \beta)^2\)</span>.</p>
 </div>
+<div id="quantities-of-interest-definition" class="section level1">
+<h1 class="hasAnchor">
+<html><body><a href="#quantities-of-interest-definition" class="anchor"> </a></body></html>Quantities of Interest Definition</h1>
+<ul>
+<li>The expected value (<code>qi$ev</code>) is the mean of simulations from the stochastic component,</li>
+</ul>
+<p><span class="math display">\[E(Y) = x_i \beta,\]</span></p>
+<p>given a draw of <span class="math inline">\(\beta\)</span> from its sampling distribution.</p>
+<ul>
+<li>In conditional prediction models, the average expected treatment effect (<code>att.ev</code>) for the treatment group is</li>
+</ul>
+<p><span class="math display">\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            E[Y_i(t_i=0)] \right\},\]</span></p>
+<p>where <span class="math inline">\(t_i\)</span> is a binary explanatory variable defining the treatment (<span class="math inline">\(t_i=1\)</span>) and control (<span class="math inline">\(t_i=0\)</span>) groups. Variation in the simulations are due to uncertainty in simulating <span class="math inline">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of <span class="math inline">\(Y_i\)</span> for observations in the treatment group, under the assumption that everything stays the same except that the treatment indicator is switched to :math: <span class="math inline">\(t_i=0\)</span>.</p>
+</div>
+<div id="output-values" class="section level1">
+<h1 class="hasAnchor">
+<html><body><a href="#output-values" class="anchor"> </a></body></html>Output Values</h1>
+<p>The output of each Zelig command contains useful information which you may view. For example, if you run <code>z.out &lt;- zelig(y ~ x, model = ls, data)</code>, then you may examine the available information in <code>z.out</code> by using <code>names(z.out)</code>, see the coefficients by using <code>z.out$coefficients</code>, and a default summary of information through <code>summary(z.out)</code>. Other elements available through the <code>$</code> operator are listed below.</p>
+<ul>
+<li><p>From the <code><a href="../reference/zelig.html">zelig()</a></code> output object <code>z.out</code>, you may extract:</p></li>
+<li><p>coefficients: parameter estimates for the explanatory variables.</p></li>
+<li><p>residuals: the working residuals in the final iteration of the IWLS fit.</p></li>
+<li><p>fitted.values: fitted values.</p></li>
+<li><p>df.residual: the residual degrees of freedom.</p></li>
+<li><p>zelig.data: the input data frame if save.data = TRUE.</p></li>
+<li><p>From summary(z.out), you may extract:</p></li>
+<li>
+<p>coefficients: the parameter estimates with their associated standard errors, :math:<code>p</code>-values, and :math:<code>t</code>-statistics.</p>
+<p>.. math::  ; = ; (_{i=1}^n x_i’ x_i)^{-1} x_i y_i</p>
+</li>
+<li>
+<p>sigma: the square root of the estimate variance of the random error :math:<code>e</code>:</p>
+<p>.. math::  ; = ; </p>
+</li>
+<li>
+<p>r.squared: the fraction of the variance explained by the model.</p>
+<p>.. math::</p>
+<pre><code> R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
+          \bar{y})^2}</code></pre>
+</li>
+<li><p>adj.r.squared: the above :math:<code>R^2</code> statistic, penalizing for an increased number of explanatory variables.</p></li>
+<li><p>cov.unscaled: a :math:<code>k \times k</code> matrix of unscaled covariances.</p></li>
+</ul>
+</div>
 </div>
   </div>
 
@@ -226,6 +272,8 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
       </ul>
 </li>
       <li><a href="#model-definition">Model Definition</a></li>
+      <li><a href="#quantities-of-interest-definition">Quantities of Interest Definition</a></li>
+      <li><a href="#output-values">Output Values</a></li>
       </ul>
 </div>
       </div>

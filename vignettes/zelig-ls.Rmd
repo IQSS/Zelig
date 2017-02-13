@@ -38,6 +38,9 @@ x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 ```
 
+For more details about the difference between Zelig's reference classes and 
+compatibility wrappers see the [Quickstart Vignette](articles/quickstart.html).
+
 # Examples
 
 ## Simple first differences
@@ -132,3 +135,70 @@ s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
    The least squares estimator is the best linear predictor of a
    dependent variable given $x_i$, and minimizes the sum of
    squared residuals, $\sum_{i=1}^n (Y_i-x_i \beta)^2$.
+
+# Quantities of Interest Definition 
+
+-  The expected value (`qi$ev`) is the mean of simulations from the
+   stochastic component,
+
+   $$E(Y) = x_i \beta,$$
+
+   given a draw of $\beta$ from its sampling distribution.
+
+-  In conditional prediction models, the average expected treatment
+   effect (`att.ev`) for the treatment group is
+
+   $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            E[Y_i(t_i=0)] \right\},$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math: $t_i=0$.
+   
+# Output Values
+
+The output of each Zelig function call contains useful information which you
+may view. For example, if you run `z.out <- zelig(y ~ x, model = ls, data)`, 
+then you may examine the available information in `z.out` by using 
+`names(z.out)`, see the coefficients by using `z.out$coefficients`, and a 
+default summary of information through `summary(z.out)`. Other elements 
+available through the `$` operator are listed below.
+
+-  From the `zelig()` output object `z.out`, you may extract:
+
+   -  coefficients: parameter estimates for the explanatory variables.
+
+   -  residuals: the working residuals in the final iteration of the
+      IWLS fit.
+
+   -  fitted.values: fitted values.
+
+   -  df.residual: the residual degrees of freedom.
+
+   -  zelig.data: the input data frame if save.data = TRUE.
+
+-  From summary(z.out), you may extract:
+
+   -  coefficients: the parameter estimates with their associated
+      standard errors, :math:`p`-values, and :math:`t`-statistics.
+
+      .. math:: \hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i
+
+   -  sigma: the square root of the estimate variance of the random
+      error :math:`e`:
+
+      .. math:: \hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}
+
+   -  r.squared: the fraction of the variance explained by the model.
+
+      $$R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
+                  \bar{y})^2}$$
+
+   -  adj.r.squared: the above :math:`R^2` statistic, penalizing for an
+      increased number of explanatory variables.
+
+   -  cov.unscaled: a :math:`k \times k` matrix of unscaled covariances.
