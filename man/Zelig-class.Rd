@@ -113,6 +113,8 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{getqi(qi = "ev", xvalue = "x", subset = NULL)}}{Get quantities of interest}
 
+\item{\code{getresiduals()}}{Get estimated model residuals}
+
 \item{\code{getvcov()}}{Get estimated model variance-covariance matrix}
 
 \item{\code{graph()}}{Plot the quantities of interest}

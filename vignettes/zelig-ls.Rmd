@@ -163,16 +163,16 @@ s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
 
 The output of each Zelig function call contains useful information which you
 may view. For example, using the `z.out1` object we estimated above, 
-then you may examine the available information in `z.out1` by using:
-
-```{r}
-z.out1$names()
-```
-
-or see the coefficients by using [`getcoef`](reference/getcoef.html):
+then you may see the coefficients by using `getcoef`:
 
 ```{r}
 z.out1$getcoef() 
+```
+
+or the variance-covariance matrix with `getvcov`:
+
+```{r}
+z.out1$getvcov()
 ```
 
 For a default summary of information use either 
@@ -183,7 +183,7 @@ z.out1$summarize()
 
 Or as we saw before using the wrapper:
 
-```{r}
+```{r, eval=FALSE}
 summary(z.out1) 
 ```
 
@@ -191,12 +191,10 @@ Other elements available through the `$` operator are listed below.
 
 -  From the `zelig()` output object `z.out`, you may extract:
 
-   -  coefficients: parameter estimates for the explanatory variables.
-
-   -  residuals: the working residuals in the final iteration of the
+   -  `getresiduals`: the working residuals in the final iteration of the
       IWLS fit.
 
-   -  fitted.values: fitted values.
+   -  `getfitted`: fitted values.
 
    -  df.residual: the residual degrees of freedom.
 

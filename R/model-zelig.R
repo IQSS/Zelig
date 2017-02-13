@@ -1007,10 +1007,13 @@ z$methods(
     }
 })
 
+#' Method for extracting estimated coefficients from Zelig objects
+#' @param object an object of class Zelig
 
 z$methods(
   getcoef = function() {
     "Get estimated model coefficients"
+
     is_uninitializedField(.self$zelig.out)
     result <- try(lapply(.self$zelig.out$z.out, coef), silent = TRUE)
     if ("try-error" %in% class(result))
@@ -1027,6 +1030,19 @@ z$methods(
     result <- lapply(.self$zelig.out$z.out, vcov)
     if ("try-error" %in% class(result))
       stop("'vcov' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  }
+)
+
+z$methods(
+  getresiduals = function() {
+    "Get estimated model residuals"
+
+    is_uninitializedField(.self$zelig.out)
+    result <- try(lapply(.self$zelig.out$z.out, residuals), silent = TRUE)
+    if ("try-error" %in% class(result))
+      stop("'residuals' method' not implemented for model '", .self$name, "'")
     else
       return(result)
   }
@@ -1350,10 +1366,17 @@ setMethod("vcov", "Zelig",
 
 #' Method for extracting estimated coefficients from Zelig objects
 #' @param object An Object of Class Zelig
-#' @param ... Additional parameters to be passed to coef
 setMethod("coef", "Zelig",
-          function(object, ...) {
+          function(object) {
             object$getcoef()
+          }
+)
+
+#' Method for extracting residuals from Zelig objects
+#' @param object An Object of Class Zelig
+setMethod("residuals", "Zelig",
+          function(object) {
+            object$getresiduals()
           }
 )
 

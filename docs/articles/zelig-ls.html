@@ -108,7 +108,7 @@ z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
-<p>For more details about the difference between Zelig’s reference classes and compatibility wrappers see the <a href="articles/quickstart.html">Quickstart Vignette</a></p>
+<p>For more details about the difference between Zelig’s reference classes and compatibility wrappers see the <a href="articles/quickstart.html">Quickstart Vignette</a>.</p>
 </div>
 <div id="examples" class="section level1">
 <h1 class="hasAnchor">
@@ -230,7 +230,45 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <div id="output-values" class="section level1">
 <h1 class="hasAnchor">
 <html><body><a href="#output-values" class="anchor"> </a></body></html>Output Values</h1>
-<p>The output of each Zelig command contains useful information which you may view. For example, if you run <code>z.out &lt;- zelig(y ~ x, model = ls, data)</code>, then you may examine the available information in <code>z.out</code> by using <code>names(z.out)</code>, see the coefficients by using <code>z.out$coefficients</code>, and a default summary of information through <code>summary(z.out)</code>. Other elements available through the <code>$</code> operator are listed below.</p>
+<p>The output of each Zelig function call contains useful information which you may view. For example, using the <code>z.out1</code> object we estimated above, then you may see the coefficients by using <code>getcoef</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">getcoef</span>() </code></pre></div>
+<pre><code>## [[1]]
+## (Intercept)         gdp      capmob       trade 
+##  6.18129445 -0.32360059  1.42193926  0.01985421</code></pre>
+<p>or the variance-covariance matrix:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">getvcov</span>()</code></pre></div>
+<pre><code>## [[1]]
+##              (Intercept)           gdp       capmob         trade
+## (Intercept)  0.203014830 -1.582154e-02 1.679720e-02 -2.014899e-03
+## gdp         -0.015821542  3.946360e-03 1.721017e-03  7.907613e-05
+## capmob       0.016797200  1.721017e-03 2.770329e-02  4.025728e-05
+## trade       -0.002014899  7.907613e-05 4.025728e-05  3.142207e-05</code></pre>
+<p>For a default summary of information use either</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">summarize</span>()</code></pre></div>
+<pre><code>## Model: 
+## 
+## Call:
+## z5$zelig(formula = unem ~ gdp + capmob + trade, data = macro)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.3008 -2.0768 -0.3187  1.9789  7.7715 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  6.181294   0.450572  13.719  &lt; 2e-16
+## gdp         -0.323601   0.062820  -5.151 4.36e-07
+## capmob       1.421939   0.166443   8.543 4.22e-16
+## trade        0.019854   0.005606   3.542 0.000452
+## 
+## Residual standard error: 2.746 on 346 degrees of freedom
+## Multiple R-squared:  0.2878, Adjusted R-squared:  0.2817 
+## F-statistic: 46.61 on 3 and 346 DF,  p-value: &lt; 2.2e-16
+## 
+## Next step: Use 'setx' method</code></pre>
+<p>Or as we saw before using the wrapper:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out1) </code></pre></div>
+<p>Other elements available through the <code>$</code> operator are listed below.</p>
 <ul>
 <li><p>From the <code><a href="../reference/zelig.html">zelig()</a></code> output object <code>z.out</code>, you may extract:</p></li>
 <li><p>coefficients: parameter estimates for the explanatory variables.</p></li>
@@ -249,9 +287,8 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 </li>
 <li>
 <p>r.squared: the fraction of the variance explained by the model.</p>
-<p>.. math::</p>
-<pre><code> R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
-          \bar{y})^2}</code></pre>
+<p><span class="math display">\[R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
+              \bar{y})^2}\]</span></p>
 </li>
 <li><p>adj.r.squared: the above :math:<code>R^2</code> statistic, penalizing for an increased number of explanatory variables.</p></li>
 <li><p>cov.unscaled: a :math:<code>k \times k</code> matrix of unscaled covariances.</p></li>

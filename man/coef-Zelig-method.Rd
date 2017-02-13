@@ -5,12 +5,10 @@
 \alias{coef,Zelig-method}
 \title{Method for extracting estimated coefficients from Zelig objects}
 \usage{
-\S4method{coef}{Zelig}(object, ...)
+\S4method{coef}{Zelig}(object)
 }
 \arguments{
 \item{object}{An Object of Class Zelig}
-
-\item{...}{Additional parameters to be passed to coef}
 }
 \description{
 Method for extracting estimated coefficients from Zelig objects

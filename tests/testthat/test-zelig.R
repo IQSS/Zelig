@@ -241,10 +241,18 @@ test_that('REQUIRE TEST Binary QIs and ATT effects and BY argument', {
     expect_true(is.null(rocplot(zb2.out, zb3.out)))
 })
 
-# REQUIRE TEST for names field -------------------------------------------------
+# REQUIRE TEST for getnames method----------------------------------------------
 test_that('REQUIRE TEST for names field', {
     z <- zls$new()
     z$zelig(Fertility ~ Education, data = swiss)
-    z$getnames()
+    expect_is(z$getnames(), class = 'character')
     expect_false(is.null(names(z)))
+})
+
+# REQUIRE TEST for getresiduals method -----------------------------------------
+test_that('REQUIRE TEST for getresiduals method', {
+  z <- zls$new()
+  z$zelig(Fertility ~ Education, data = swiss)
+  expect_is(z$getresiduals(), class = 'list')
+  expect_false(is.null(residuals(z)))
 })

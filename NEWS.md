@@ -7,6 +7,8 @@ Zelig version 5.0-16
 
 - Added `names` method to return Zelig object field names. #216 
 
+- Added `getresiduals` to extract fitted model residuals.
+
 ## Minor changes
 
 - Internal code improvements.
