@@ -711,7 +711,7 @@ z$methods(
 # Function to simulate ATT
 
 z$methods(
-  simATT = function(simparam, data, depvar, treatment, treated){
+  simATT = function(simparam, data, depvar, treatment, treated) {
     "Simulate an Average Treatment on the Treated"
 
     localData <- data # avoids CRAN warning about deep assignment from data existing separately as argument and field
@@ -733,7 +733,13 @@ z$methods(
   }
 )
 
-
+z$methods(
+    getnames = function() {
+        "Return Zelig object field names"
+        z_names <- names(as.list(.self))
+        return(z_names)
+    }
+)
 
 
 z$methods(
@@ -975,14 +981,15 @@ z$methods(
   }
 )
 
-z$methods(from_zelig_model = function() {
-    "Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions."
-    is_uninitializedField(.self$zelig.out)
-    result <- try(.self$zelig.out$z.out, silent = TRUE)
+z$methods(
+    from_zelig_model = function() {
+        "Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions."
+        is_uninitializedField(.self$zelig.out)
+        result <- try(.self$zelig.out$z.out, silent = TRUE)
 
-    if ("try-error" %in% class(result)) {
-        stop("from_zelig_model not available for this fitted model.")
-    } else {
+        if ("try-error" %in% class(result)) {
+            stop("from_zelig_model not available for this fitted model.")
+        } else {
         if (length(result) == 1) {
             result <- result[[1]]
             result <- strip_package_name(result)
@@ -1305,7 +1312,7 @@ z$methods(
 # )
 
 
-#' Summary method for Zelig objects"
+#' Summary method for Zelig objects
 #' @param object An Object of Class Zelig
 #' @param ... Additional parameters to be passed to summary
 setMethod("summary", "Zelig",
@@ -1321,6 +1328,14 @@ setMethod("summary", "Zelig",
 setMethod("plot", "Zelig",
           function(x, ...) {
             x$graph()
+          }
+)
+
+#' Names method for Zelig objects
+#' @param x An Object of Class Zelig
+setMethod("names", "Zelig",
+          function(x) {
+            x$getnames()
           }
 )
 

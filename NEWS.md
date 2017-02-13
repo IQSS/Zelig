@@ -5,6 +5,8 @@ Zelig version 5.0-16
 
 - Zelig 5 Quickstart vignette added.
 
+- Added `names` method to return Zelig object field names. #216 
+
 - Internal code improvements. 
 
 Zelig version 5.0-15
