@@ -5,6 +5,8 @@ Zelig version 5.0-16
 
 - Extensive additions to model estimation method documentation and vignettes.
 
+- Added `names` method to return Zelig object field names. #216 
+
 ## Minor changes
 
 - Internal code improvements.

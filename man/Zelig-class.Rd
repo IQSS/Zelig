@@ -107,6 +107,8 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{getcoef()}}{Get estimated model coefficients}
 
+\item{\code{getnames()}}{Return Zelig object field names}
+
 \item{\code{getpredict()}}{Get predicted values}
 
 \item{\code{getqi(qi = "ev", xvalue = "x", subset = NULL)}}{Get quantities of interest}

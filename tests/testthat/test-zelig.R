@@ -237,7 +237,14 @@ test_that('REQUIRE TEST Binary QIs and ATT effects and BY argument', {
     out <- zb.out$getqi(qi="ATT", xvalue="TE")
     expect_equal(length(out), 1000)
 
-    # Plot ROC 
+    # Plot ROC
     expect_true(is.null(rocplot(zb2.out, zb3.out)))
 })
 
+# REQUIRE TEST for names field -------------------------------------------------
+test_that('REQUIRE TEST for names field', {
+    z <- zls$new()
+    z$zelig(Fertility ~ Education, data = swiss)
+    z$getnames()
+    expect_false(is.null(names(z)))
+})

@@ -3,7 +3,7 @@
 \docType{methods}
 \name{summary,Zelig-method}
 \alias{summary,Zelig-method}
-\title{Summary method for Zelig objects"}
+\title{Summary method for Zelig objects}
 \usage{
 \S4method{summary}{Zelig}(object, ...)
 }
@@ -13,5 +13,5 @@
 \item{...}{Additional parameters to be passed to summary}
 }
 \description{
-Summary method for Zelig objects"
+Summary method for Zelig objects
 }
