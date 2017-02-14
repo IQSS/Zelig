@@ -110,11 +110,19 @@ x.US <- setx(z.out2, country = "United States")
 x.Japan <- setx(z.out2, country = "Japan")
 ```
 
-Simulate quantities of interest and plot results:
+Simulate quantities of interest:
 
 ```{r}
 s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
+```
 
+and plot the results:
+
+```{r eval=FALSE}
+plot(s.out2)
+```
+
+```{r echo=FALSE}
 #plot(s.out2)
 ```
 
