@@ -112,12 +112,16 @@
     <p>Check if uninitializedField</p>
     
 
-    <pre><span class='fu'>is_uninitializedField</span>(<span class='no'>x</span>, <span class='kw'>fail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre><span class='fu'>is_uninitializedField</span>(<span class='no'>x</span>, <span class='kw'>msg</span> <span class='kw'>=</span> <span class='st'>"Zelig model has not been estimated."</span>,
+  <span class='kw'>fail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>x</dt>
       <dd>a zelig.out method</dd>
+      <dt>msg</dt>
+      <dd>character string with the error message to return if
+<code>fail = TRUE</code>.</dd>
       <dt>fail</dt>
       <dd>logical whether to return an error if x uninitialzed.</dd>
     </dl>

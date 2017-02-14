@@ -3,17 +3,27 @@ Zelig version 5.0-16
 
 ## Major changes
 
+- !! Breaking change !! the `get*` functions (e.g. `get_coef`) now use
+underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
+
+- Added `names` method to return Zelig object field names. #216
+
+- Added `get_residuals` to extract fitted model residuals.
+
+- Added `get_df_residuals` method to return residual degrees-of-freedom.
+Also accessible via `df.residuals`.
+
+- Added `get_model_data` method to return the data frame used to estimate the
+original model.
+
 - Extensive additions to model estimation method documentation and vignettes.
-
-- Added `names` method to return Zelig object field names. #216 
-
-- Added `getresiduals` to extract fitted model residuals.
 
 ## Minor changes
 
 - Internal code improvements.
 
 - Corrected a bug where the README.md was not included in the build.
+
 
 Zelig version 5.0-15
 ==============================

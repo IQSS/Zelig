@@ -20,7 +20,7 @@ test_that('REQUIRE TEST for to_zelig_mi', {
     mi.out <- to_zelig_mi(data.1, data.2)
     z.out <- zelig(y ~ x, model = "ls", data = mi.out)
     
-    expect_equivalent(round(as.numeric(z.out$getcoef()[[1]][2]), 3), 0.1)
+    expect_equivalent(round(as.numeric(z.out$get_coef()[[1]][2]), 3), 0.1)
 })
 
 # FAIL TESTS for to_zelig_mi ----------------------------------------------------

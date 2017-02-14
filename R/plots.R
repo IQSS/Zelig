@@ -343,7 +343,7 @@ qi.plot <- function (obj, ...) {
 
     if(is_timeseries(obj)){
         par(mfcol=c(3,1))
-        zeligACFplot(obj$getqi("acf", xvalue="x1"))
+        zeligACFplot(obj$get_qi("acf", xvalue="x1"))
         ci.plot(obj, qi="pvseries.shock")
         ci.plot(obj, qi="pvseries.innovation")
         return()
@@ -425,25 +425,25 @@ qi.plot <- function (obj, ...) {
 
     # Plot each simulation
     if(length(obj$sim.out$x$pv)>0)
-        simulations.plot(obj$getqi(qi="pv", xvalue="x"), main = titles$pv, col = color.x, line.col = "black")
+        simulations.plot(obj$get_qi(qi="pv", xvalue="x"), main = titles$pv, col = color.x, line.col = "black")
 
     if(length(obj$sim.out$x1$pv)>0)
-        simulations.plot(obj$getqi(qi="pv", xvalue="x1"), main = titles$pv1, col = color.x1, line.col = "black")
+        simulations.plot(obj$get_qi(qi="pv", xvalue="x1"), main = titles$pv1, col = color.x1, line.col = "black")
 
     if(length(obj$sim.out$x$ev)>0)
-        simulations.plot(obj$getqi(qi="ev", xvalue="x"), main = titles$ev, col = color.x, line.col = "black")
+        simulations.plot(obj$get_qi(qi="ev", xvalue="x"), main = titles$ev, col = color.x, line.col = "black")
 
     if(length(obj$sim.out$x1$ev)>0)
-        simulations.plot(obj$getqi(qi="ev", xvalue="x1"), main = titles$ev1, col = color.x1, line.col = "black")
+        simulations.plot(obj$get_qi(qi="ev", xvalue="x1"), main = titles$ev1, col = color.x1, line.col = "black")
 
     if(length(obj$sim.out$x1$fd)>0)
-        simulations.plot(obj$getqi(qi="fd", xvalue="x1"), main = titles$fd, col = color.mixed, line.col = "black")
+        simulations.plot(obj$get_qi(qi="fd", xvalue="x1"), main = titles$fd, col = color.mixed, line.col = "black")
 
     if(both.pv.exist)
-        simulations.plot(y=obj$getqi(qi="pv", xvalue="x"), y1=obj$getqi(qi="pv", xvalue="x1"), main = "Comparison of Y|X and Y|X1", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
+        simulations.plot(y=obj$get_qi(qi="pv", xvalue="x"), y1=obj$get_qi(qi="pv", xvalue="x1"), main = "Comparison of Y|X and Y|X1", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
 
     if(both.ev.exist)
-        simulations.plot(y=obj$getqi(qi="ev", xvalue="x"), y1=obj$getqi(qi="ev", xvalue="x1"), main = "Comparison of E(Y|X) and E(Y|X1)", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
+        simulations.plot(y=obj$get_qi(qi="ev", xvalue="x"), y1=obj$get_qi(qi="ev", xvalue="x1"), main = "Comparison of E(Y|X) and E(Y|X1)", col = paste(c(color.x, color.x1), "80", sep=""), line.col = "black")
 
 
     # Restore old state
@@ -564,7 +564,7 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
             cat(paste("Error: For Timeseries models, argument qi must be one of ", paste(qiseries, collapse=" or ") ,".\n", sep="") )
             return()
         }
-        ev<-t( obj$getqi(qi=qi, xvalue="x1") )   # NOTE THE NECESSARY TRANSPOSE.  Should we more clearly standardize this?
+        ev<-t( obj$get_qi(qi=qi, xvalue="x1") )   # NOTE THE NECESSARY TRANSPOSE.  Should we more clearly standardize this?
         d<-ncol(ev)
         xseq<-1:d
         ev1 <- NULL  # Maybe want to add ability to overlay another graph?

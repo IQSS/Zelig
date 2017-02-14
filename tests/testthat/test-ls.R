@@ -13,7 +13,7 @@ test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
     z5$zelig(Fertility ~ Education, data = swiss)
 
     # extract education coefficient parameter estimate and compare to reference
-    expect_equivalent(round(as.numeric(z5$getcoef()[[1]][2]), 7), -0.8623503)
+    expect_equivalent(round(as.numeric(z5$get_coef()[[1]][2]), 7), -0.8623503)
 })
 
 
@@ -63,4 +63,15 @@ test_that('REQUIRE TEST for set with ls models including factors set within zeli
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 1)
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 
                  setUS2$setx.out$x$mm[[1]][[16]])
+})
+
+# REQUIRE TEST for ls with interactions ----------------------------------------
+test_that('REQUIRE TEST for ls with interactions', {
+    states <- as.data.frame(state.x77)
+    z <- zelig(Murder ~ Income * Population, data = states, model = 'ls')
+    s1 <- setx(z, Population = 1500:1600, Income = 3098)
+    s2 <- setx(z, Population = 1500:1600, Income = 6315)
+    
+    expect_equal(length(s1$setx.out$range), 101)
+    expect_equal(length(s2$setx.out$range), 101)
 })

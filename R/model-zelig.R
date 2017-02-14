@@ -183,17 +183,17 @@ z$methods(
     title <- paste(.self$name, ": ", .self$description, sep="")
     localauthors <- ""
     if (length(.self$modelauthors) & (!identical(.self$modelauthors,""))){   # covers both empty styles: character(0) and "" --the latter being length 1.
-        localauthors<-.self$modelauthors
+      localauthors<-.self$modelauthors
     }else if (length(.self$packageauthors) & (!identical(.self$packageauthors,""))){
-        localauthors<-.self$packageauthors
+      localauthors<-.self$packageauthors
     }else{
-        localauthors<-.self$zeligauthors
+      localauthors<-.self$zeligauthors
     }
     cat("How to cite this model in Zelig:\n  ",
-    localauthors, ". ", .self$year, ".\n  ", title,
-    "\n  in ", .self$zeligauthors,
-    ",\n  \"Zelig: Everyone's Statistical Software,\" ",
-    .self$url, "\n", sep = "")
+        localauthors, ". ", .self$year, ".\n  ", title,
+        "\n  in ", .self$zeligauthors,
+        ",\n  \"Zelig: Everyone's Statistical Software,\" ",
+        .self$url, "\n", sep = "")
   }
 )
 
@@ -206,7 +206,7 @@ z$methods(
     "Construct a reference list specific to a Zelig model."
     mystyle <- style
     if (mystyle=="sphinx"){
-        mystyle <- "text"
+      mystyle <- "text"
     }
     mycites<-.self$refs
     if(!is.na(.self$packagename() )){
@@ -225,7 +225,7 @@ z$methods(
 
 z$methods(
   zelig = function(formula, data, model = NULL, ..., weights = NULL, by,
-                    bootstrap = FALSE) {
+                   bootstrap = FALSE) {
     "The zelig function estimates a variety of statistical models"
 
     fn2 <- function(fc, data) {
@@ -236,22 +236,22 @@ z$methods(
     .self$formula <- formula
     # Convert factors converted internally to the zelig call
     if (factorize(formula, check = TRUE)) {
-        localformula <- factorize(formula, data, f_out = TRUE)
-        localdata <- factorize(formula, data, d_out = TRUE)
-        .self$formula <- localformula
-        .self$data <- localdata
+      localformula <- factorize(formula, data, f_out = TRUE)
+      localdata <- factorize(formula, data, d_out = TRUE)
+      .self$formula <- localformula
+      .self$data <- localdata
     }
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
     if("formula" %in% class(.self$mcformula)){
       .self$formula <- as.formula( deparse(.self$mcformula),
-                                    env = environment(.self$formula) )
+                                   env = environment(.self$formula) )
       .self$model.call$formula <- as.formula( deparse(.self$mcformula),
-                                                env = globalenv() )
+                                              env = globalenv() )
     } else if(is.character(.self$mcformula)) {
       .self$formula <- as.formula( .self$mcformula,
-                                    env = environment(.self$formula) )
+                                   env = environment(.self$formula) )
       .self$model.call$formula <- as.formula( .self$mcformula, env = globalenv() )
     }
     if(!is.null(model)){
@@ -296,17 +296,17 @@ z$methods(
       # Check if noninteger valued weights exist and are incompatible with zelig model
       validweights <- TRUE
       if(!.self$acceptweights){           # This is a convoluted way to do this, but avoids the costly "any()" calculation if not necessary
-          if(any(iweights != ceiling(iweights))){  # any(y != ceiling(y)) tests slightly faster than all(y == ceiling(y))
-              validweights <- FALSE
-          }
+        if(any(iweights != ceiling(iweights))){  # any(y != ceiling(y)) tests slightly faster than all(y == ceiling(y))
+          validweights <- FALSE
+        }
       }
       if(!validweights){   # could also be  if((!acceptweights) & (any(iweights != ceiling(iweights))  but avoid the long any for big datasets
-          cat("The weights created by matching for this dataset have noninteger values,\n",
-             "however, the statistical model you have chosen is only compatible with integer weights.\n",
-             "Either change the matching method (such as to `optimal' matching with a 1:1 ratio)\n",
-             "or change the statistical model in Zelig.\n",
-             "We will round matching weights up to integers to proceed.\n\n")
-          .self$weights <- ceiling(iweights)
+        cat("The weights created by matching for this dataset have noninteger values,\n",
+            "however, the statistical model you have chosen is only compatible with integer weights.\n",
+            "Either change the matching method (such as to `optimal' matching with a 1:1 ratio)\n",
+            "or change the statistical model in Zelig.\n",
+            "We will round matching weights up to integers to proceed.\n\n")
+        .self$weights <- ceiling(iweights)
       } else {
         .self$weights <- iweights
       }
@@ -314,15 +314,15 @@ z$methods(
       # Set references appropriate to matching methods used
       .self$refs <- c(.self$refs, citation("MatchIt"))
       if(m.out$call$method=="cem" & ("cem" %in% installed.packages()))
-                                        .self$refs <- c(.self$refs, citation("cem"))
+        .self$refs <- c(.self$refs, citation("cem"))
       #if(m.out$call$method=="exact") .self$refs <- c(.self$refs, citation(""))
       if((m.out$call$method=="full") & ("optmatch" %in% installed.packages()))
-                                        .self$refs <- c(.self$refs, citation("optmatch"))
+        .self$refs <- c(.self$refs, citation("optmatch"))
       if(m.out$call$method=="genetic" & ("Matching" %in% installed.packages()))
-                                        .self$refs <- c(.self$refs, citation("Matching"))
+        .self$refs <- c(.self$refs, citation("Matching"))
       #if(m.out$call$method=="nearest") .self$refs <- c(.self$refs, citation(""))
       if(m.out$call$method=="optimal" & ("optmatch" %in% installed.packages()))
-                                        .self$refs <- c(.self$refs, citation("optmatch"))
+        .self$refs <- c(.self$refs, citation("optmatch"))
       #if(m.out$call$method=="subclass") .self$refs <- c(.self$refs, citation(""))
     } else {
       .self$matched  <- FALSE
@@ -354,32 +354,32 @@ z$methods(
 
       # Run some checking on weights argument, and see if is valid string or vector
       if(!is.null(weights)){
-          if(is.character(weights)){
-              if(weights %in% names(.self$data)){
-                  .self$weights <- .self$data[[weights]]  # This is a way to convert data.frame portion to type numeric (as data.frames are lists)
-              } else {
-                  warning("Variable name given for weights not found in dataset, so will be ignored.\n\n", .call=FALSE)
-                  .self$weights <- NULL  # No valid weights
-            .self$model.call$weights <- NULL
-              }
-          } else if(is.vector(weights)){
-              if(length(weights)==nrow(.self$data) & is.vector(weights)){
-                  localWeights <- weights # avoids CRAN warning about deep assignment from weights existing separately as argument and field
-                  if(min(localWeights)<0){
-                      localWeights[localWeights < 0] <- 0
-                      warning("Negative valued weights were supplied and will be replaced with zeros.", .call=FALSE)
-                  }
-                  .self$weights <- localWeights # Weights
-              } else{
-                  warning("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n", .call=FALSE)
-                  .self$weights <- NULL # No valid weights
-            .self$model.call$weights <- NULL
-              }
+        if(is.character(weights)){
+          if(weights %in% names(.self$data)){
+            .self$weights <- .self$data[[weights]]  # This is a way to convert data.frame portion to type numeric (as data.frames are lists)
           } else {
-              warning("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n", .call=FALSE)
-              .self$weights <- NULL # No valid weights
-          .self$model.call$weights <- NULL
+            warning("Variable name given for weights not found in dataset, so will be ignored.\n\n", .call=FALSE)
+            .self$weights <- NULL  # No valid weights
+            .self$model.call$weights <- NULL
           }
+        } else if(is.vector(weights)){
+          if(length(weights)==nrow(.self$data) & is.vector(weights)){
+            localWeights <- weights # avoids CRAN warning about deep assignment from weights existing separately as argument and field
+            if(min(localWeights)<0){
+              localWeights[localWeights < 0] <- 0
+              warning("Negative valued weights were supplied and will be replaced with zeros.", .call=FALSE)
+            }
+            .self$weights <- localWeights # Weights
+          } else{
+            warning("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n", .call=FALSE)
+            .self$weights <- NULL # No valid weights
+            .self$model.call$weights <- NULL
+          }
+        } else {
+          warning("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n", .call=FALSE)
+          .self$weights <- NULL # No valid weights
+          .self$model.call$weights <- NULL
+        }
       } else {
         .self$weights <- NULL  # No weights set, so weights are NULL
         .self$model.call$weights <- NULL
@@ -419,7 +419,7 @@ z$methods(
     #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>%
       group_by_(.self$by) %>%
-        do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+      do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
   }
 )
 
@@ -430,11 +430,11 @@ z$methods(
 
     .self$avg <- function(val) {
       if (is.numeric(val))
-          ifelse(is.null(fn$numeric), mean(val), fn$numeric(val))
+        ifelse(is.null(fn$numeric), mean(val), fn$numeric(val))
       else if (is.ordered(val))
-          ifelse(is.null(fn$ordered), Median(val), fn$ordered(val))
+        ifelse(is.null(fn$ordered), Median(val), fn$ordered(val))
       else
-          Mode(val)
+        Mode(val)
     }
     s <- list(...)
 
@@ -444,7 +444,7 @@ z$methods(
     } else {
       f2 <- .self$formula
     }
-      f <- update(.self$formula, 1 ~ .)
+    f <- update(.self$formula, 1 ~ .)
     # update <- na.omit(.self$data) %>% # remove missing values
 
     # compute on each slice of the dataset defined by "by"
@@ -455,7 +455,7 @@ z$methods(
                                        formula = f2,
                                        data = ., avg = .self$avg))) # fix in last argument from data=.self$data to data=.  (JH)
 
-    # compute over the entire dataset  - currently used for mi and bootstrap.  Should be opened up to user.
+      # compute over the entire dataset  - currently used for mi and bootstrap.  Should be opened up to user.
     } else {
       if(.self$bootstrap){
         flag <- .self$data$bootstrapIndex == (.self$bootstrap.num + 1) # These are the original observations
@@ -479,7 +479,7 @@ z$methods(
 
 z$methods(
   setx = function(..., fn = list(numeric = mean, ordered = Median,
-                  other = Mode)) {
+                                 other = Mode)) {
     is_uninitializedField(.self$zelig.out)
 
     .self$bsetx <- TRUE
@@ -565,7 +565,7 @@ z$methods(
 
     # Divide simulations among imputed datasets
     if(.self$mi){
-      am.m <- length(.self$getcoef())
+      am.m <- length(.self$get_coef())
       .self$num <- ceiling(.self$num/am.m)
     }
     # If bootstrapped, use distribution of estimated parameters,
@@ -590,8 +590,8 @@ z$methods(
 
     #if (is.null(.self$sim.out$x) & is.null(.self$sim.out$range))
     if (!isTRUE(is_sims_present(.self$sim.out, fail = FALSE)))
-        warning('No simulations drawn, likely due to insufficient inputs.',
-                call. = FALSE)
+      warning('No simulations drawn, likely due to insufficient inputs.',
+              call. = FALSE)
   }
 )
 
@@ -699,10 +699,10 @@ z$methods(
     ## NOTE: THIS IS GOING TO USE THE SAME simparam SET FOR EVERY SPLIT
     .self$sim.out$TE <- .self$data %>%
       group_by_(.self$by) %>%
-        do(ATT = .self$simATT(simparam=.self$simparam$simparam[[1]], data=. , depvar=depvar, treatment=treatment, treated=treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+      do(ATT = .self$simATT(simparam=.self$simparam$simparam[[1]], data=. , depvar=depvar, treatment=treatment, treated=treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
 
     if(!quietly){
-      return(.self$sim.out$TE)  # The $getqi() method may generalize, otherwise, write a $getter.
+      return(.self$sim.out$TE)  # The $get_qi() method may generalize, otherwise, write a $getter.
     }
   }
 )
@@ -734,11 +734,11 @@ z$methods(
 )
 
 z$methods(
-    getnames = function() {
-        "Return Zelig object field names"
-        z_names <- names(as.list(.self))
-        return(z_names)
-    }
+  getnames = function() {
+    "Return Zelig object field names"
+    z_names <- names(as.list(.self))
+    return(z_names)
+  }
 )
 
 
@@ -764,7 +764,7 @@ z$methods(
           slot(.self$zelig.out$z.out[[jj]],"call") <- .self$zelig.call
         } else {
           if("call" %in% names(.self$zelig.out$z.out[[jj]])){
-              .self$zelig.out$z.out[[jj]]$call <- .self$zelig.call
+            .self$zelig.out$z.out[[jj]]$call <- .self$zelig.call
           } else if ("call" %in% names(attributes(.self$zelig.out$z.out[[1]])) ){
             attr(.self$zelig.out$z.out[[1]],"call")<- .self$zelig.call
           }
@@ -774,8 +774,8 @@ z$methods(
 
       if((.self$mi) & is.null(subset)){
         cat("Model: Combined Imputations \n")
-        vcovlist <-.self$getvcov()
-        coeflist <-.self$getcoef()
+        vcovlist <-.self$get_vcov()
+        coeflist <-.self$get_coef()
         am.m<-length(coeflist)
         am.k<-length(coeflist[[1]])
         q <- matrix(unlist(coeflist), nrow=am.m, ncol=am.k, byrow=TRUE)
@@ -808,14 +808,14 @@ z$methods(
         cat("For results from individual imputed datasets, use summary(x, subset = i:j)\n")
       }else if ((.self$mi) & !is.null(subset)) {
         for(i in subset){
-            cat("Imputed Dataset ",i,sep="")
-            print(base::summary(.self$zelig.out$z.out[[i]]))
+          cat("Imputed Dataset ",i,sep="")
+          print(base::summary(.self$zelig.out$z.out[[i]]))
         }
       }else if ((.self$bootstrap) & is.null(subset)) {
         # Much reuse of Rubin's Rules from above.  Probably able to better generalize across these two cases:
         cat("Model: Combined Bootstraps \n")
-        vcovlist <-.self$getvcov()
-        coeflist <-.self$getcoef()
+        vcovlist <-.self$get_vcov()
+        coeflist <-.self$get_coef()
         am.m<-length(coeflist) - 1
         am.k<-length(coeflist[[1]])
         q <- matrix(unlist(coeflist[-(am.m+1)]), nrow=am.m, ncol=am.k, byrow=TRUE)
@@ -854,42 +854,42 @@ z$methods(
 
       }else if ((.self$bootstrap) & !is.null(subset)) {
         for(i in subset){
-            cat("Bootstrapped Dataset ",i,sep="")
-            print(base::summary(.self$zelig.out$z.out[[i]]))
+          cat("Bootstrapped Dataset ",i,sep="")
+          print(base::summary(.self$zelig.out$z.out[[i]]))
         }
       }else{
         summ <- .self$zelig.out %>%
-        do(summ = {cat("Model: \n")
-          if (length(.self$by) == 1) {
+          do(summ = {cat("Model: \n")
+            if (length(.self$by) == 1) {
               if (.self$by == "by") {
-                  cat()
+                cat()
               }
               else {
-                  print(.[.self$by])
+                print(.[.self$by])
               }
-          } else {
+            } else {
               print(.[.self$by])
-          }
-          if("S4" %in% typeof(.$z.out)){  # Need to change summary method here for some classes
+            }
+            if("S4" %in% typeof(.$z.out)){  # Need to change summary method here for some classes
               print(summary(.$z.out))
-          }else{
+            }else{
               print(base::summary(.$z.out))
-          }
-        })
+            }
+          })
       }
 
 
       if("gim.criteria" %in% names(.self$test.statistics)){
-          if(.self$test.statistics$gim.criteria){
-#               cat("According to the GIM-rule-of-thumb, your model probably has some type of specification error.\n",
-#               "We suggest you run model diagnostics and seek to fix the problem.\n",
-#               "You may also wish to run the full GIM test (which takes more time) to be sure.\n",
-#               "See http://.... for more information.\n \n")
-            cat("Statistical Warning: The GIM test suggests this model is misspecified\n",
-                "(based on comparisons between classical and robust SE's; see http://j.mp/GIMtest).\n",
-                "We suggest you run diagnostics to ascertain the cause, respecify the model\n",
-                "and run it again.\n\n")
-          }
+        if(.self$test.statistics$gim.criteria){
+          #               cat("According to the GIM-rule-of-thumb, your model probably has some type of specification error.\n",
+          #               "We suggest you run model diagnostics and seek to fix the problem.\n",
+          #               "You may also wish to run the full GIM test (which takes more time) to be sure.\n",
+          #               "See http://.... for more information.\n \n")
+          cat("Statistical Warning: The GIM test suggests this model is misspecified\n",
+              "(based on comparisons between classical and robust SE's; see http://j.mp/GIMtest).\n",
+              "We suggest you run diagnostics to ascertain the cause, respecify the model\n",
+              "and run it again.\n\n")
+        }
       }
 
       cat("Next step: Use 'setx' method\n")
@@ -911,14 +911,14 @@ z$methods(
       pstat <- function(s.out, what = "sim x") {
         simu <- s.out %>%
           do(simu = {cat("\n", what, ":\n")
-                     cat(" -----\n")
-                     cat("ev\n")
-                     print(stat(.$ev, .self$num))
-                     cat("pv\n")
-                     print(stat(.$pv, .self$num))
-                     if (!is.null(.$fd)) {
-                       cat("fd\n")
-                       print(stat(.$fd, .self$num))}
+            cat(" -----\n")
+            cat("ev\n")
+            print(stat(.$ev, .self$num))
+            cat("pv\n")
+            print(stat(.$pv, .self$num))
+            if (!is.null(.$fd)) {
+              cat("fd\n")
+              print(stat(.$fd, .self$num))}
           }
           )
       }
@@ -976,42 +976,42 @@ z$methods(
 z$methods(
   help = function() {
     "Open the model vignette from http://zeligproject.org/"
-#     vignette(class(.self)[1])
+    #     vignette(class(.self)[1])
     browseURL(.self$vignette.url)
   }
 )
 
 z$methods(
-    from_zelig_model = function() {
-        "Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions."
-        is_uninitializedField(.self$zelig.out)
-        result <- try(.self$zelig.out$z.out, silent = TRUE)
+  from_zelig_model = function() {
+    "Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions."
+    is_uninitializedField(.self$zelig.out)
+    result <- try(.self$zelig.out$z.out, silent = TRUE)
 
-        if ("try-error" %in% class(result)) {
-            stop("from_zelig_model not available for this fitted model.")
+    if ("try-error" %in% class(result)) {
+      stop("from_zelig_model not available for this fitted model.")
+    } else {
+      if (length(result) == 1) {
+        result <- result[[1]]
+        result <- strip_package_name(result)
+      } else if (length(result) > 1) {
+        if (.self$mi) {
+          message("Returning fitted model objects for each imputed data set in a list.")
+        } else if (.self$bootstrap) {
+          message("Returning fitted model objects for each bootstrapped data set in a list.")
         } else {
-        if (length(result) == 1) {
-            result <- result[[1]]
-            result <- strip_package_name(result)
-        } else if (length(result) > 1) {
-            if (.self$mi) {
-                message("Returning fitted model objects for each imputed data set in a list.")
-            } else if (.self$bootstrap) {
-                message("Returning fitted model objects for each bootstrapped data set in a list.")
-            } else {
-                message("Returning fitted model objects for each subset of the data created from the 'by' argument, in a list.")
-            }
-            result <- lapply(result, strip_package_name)
+          message("Returning fitted model objects for each subset of the data created from the 'by' argument, in a list.")
         }
-        return(result)
+        result <- lapply(result, strip_package_name)
+      }
+      return(result)
     }
-})
+  })
 
 #' Method for extracting estimated coefficients from Zelig objects
 #' @param object an object of class Zelig
 
 z$methods(
-  getcoef = function() {
+  get_coef = function() {
     "Get estimated model coefficients"
 
     is_uninitializedField(.self$zelig.out)
@@ -1024,7 +1024,7 @@ z$methods(
 )
 
 z$methods(
-  getvcov = function() {
+  get_vcov = function() {
     "Get estimated model variance-covariance matrix"
     is_uninitializedField(.self$zelig.out)
     result <- lapply(.self$zelig.out$z.out, vcov)
@@ -1036,7 +1036,7 @@ z$methods(
 )
 
 z$methods(
-  getresiduals = function() {
+  get_residuals = function() {
     "Get estimated model residuals"
 
     is_uninitializedField(.self$zelig.out)
@@ -1049,7 +1049,22 @@ z$methods(
 )
 
 z$methods(
-  getfitted = function() {
+  get_df_residual = function() {
+    "Get residual degrees-of-freedom"
+
+    is_uninitializedField(.self$zelig.out)
+    result <- try(lapply(.self$zelig.out$z.out, df.residual), silent = TRUE)
+    if ("try-error" %in% class(result))
+      stop("'df.residual' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  }
+)
+
+z$methods(
+  get_fitted = function() {
+    "Get estimated fitted values"
+
     is_uninitializedField(.self$zelig.out)
     result <- lapply(.self$zelig.out$z.out, fitted)
     if ("try-error" %in% class(result))
@@ -1060,8 +1075,10 @@ z$methods(
 )
 
 z$methods(
-  getpredict = function() {
+  get_predict = function() {
     "Get predicted values"
+
+    is_uninitializedField(.self$zelig.out)
     result <- lapply(.self$zelig.out$z.out, predict)
     if ("try-error" %in% class(result))
       stop("'predict' method' not implemented for model '", .self$name, "'")
@@ -1071,19 +1088,25 @@ z$methods(
 )
 
 z$methods(
-  getqi = function(qi = "ev", xvalue = "x", subset = NULL){
+  get_qi = function(qi = "ev", xvalue = "x", subset = NULL) {
     "Get quantities of interest"
+
+    is_sims_present(.self$sim.out)
+
     possiblexvalues <- names(.self$sim.out)
     if(!(xvalue %in% possiblexvalues)){
-      stop(paste("xvalue must be ", paste(possiblexvalues, collapse=" or ") , ".", sep=""))
+      stop(paste("xvalue must be ", paste(possiblexvalues, collapse = " or ") ,
+                 ".", sep = ""))
     }
-    possibleqivalues <- c(names(.self$sim.out[[xvalue]]), names(.self$sim.out[[xvalue]][[1]]))
+    possibleqivalues <- c(names(.self$sim.out[[xvalue]]),
+                          names(.self$sim.out[[xvalue]][[1]]))
     if(!(qi %in% possibleqivalues)){
-      stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
+      stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".",
+                                      sep = ""))
     }
     if(.self$mi){
       if(is.null(subset)){
-        am.m<-length(.self$getcoef())
+        am.m<-length(.self$get_coef())
         subset <- 1:am.m
       }
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]][subset])
@@ -1099,6 +1122,16 @@ z$methods(
     }
     return(tempqi)
   }
+)
+
+z$methods(
+    get_model_data = function() {
+        "Get data used to estimate the model"
+
+        is_uninitializedField(.self$zelig.out)
+        model_data <- .self$originaldata
+        return(model_data)
+    }
 )
 
 z$methods(
@@ -1140,11 +1173,11 @@ z$methods(
 
     data.hat <- .self$mcfun(x=x.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
     if(!is.data.frame(data.hat)){
-        data.hat <- data.frame(x.seq=x.seq, y.hat=data.hat)
+      data.hat <- data.frame(x.seq=x.seq, y.hat=data.hat)
     }
     data.sim <- .self$mcfun(x=x.sim, b0=b0, b1=b1, alpha=alpha, ..., sim=TRUE)
     if(!is.data.frame(data.sim)){
-        data.sim <- data.frame(x.sim=x.sim, y.sim=data.sim)
+      data.sim <- data.frame(x.sim=x.sim, y.sim=data.sim)
     }
 
     ## Estimate Zelig model and create numerical bounds on expected values
@@ -1157,8 +1190,8 @@ z$methods(
     if(.self$name %in% c("exp", "weibull", "lognorm")){
       .self$zelig(Surv(y.sim,event) ~ x.sim, data = data.sim)
     } else if (.self$name %in% c("relogit")) {
-        tau <- sum(data.sim$y.sim)/nsim
-          .self$zelig(y.sim ~ x.sim, tau = tau, data = data.sim)
+      tau <- sum(data.sim$y.sim)/nsim
+      .self$zelig(y.sim ~ x.sim, tau = tau, data = data.sim)
     } else {
       .self$zelig(y.sim ~ x.sim, data = data.sim)
     }
@@ -1174,34 +1207,34 @@ z$methods(
     }
 
     if(!is.data.frame(data.short.hat)){
-        data.short.hat<-data.frame(x.seq=x.short.seq, y.hat=data.short.hat)
+      data.short.hat<-data.frame(x.seq=x.short.seq, y.hat=data.short.hat)
     }
 
     history.ev <- history.pv <- matrix(NA, nrow=n.short, ncol=2)
     for(i in 1:n.short){
-        xtemp <- x.short.seq[i]
-        .self$setx(x.sim = xtemp)
-        .self$sim()
-        #temp<-sort( .self$sim.out$x$ev[[1]] )
-        temp <- .self$sim.out$range[[i]]$ev[[1]]
-        # This is for ev's that are a probability distribution across outcomes, like ordered logit/probit
-        if(ncol(temp) > 1){
-          temp <- temp %*% as.numeric(sort(unique(data.sim$y.sim)))  #as.numeric(colnames(temp))
-        }
-        temp <- sort(temp)
+      xtemp <- x.short.seq[i]
+      .self$setx(x.sim = xtemp)
+      .self$sim()
+      #temp<-sort( .self$sim.out$x$ev[[1]] )
+      temp <- .self$sim.out$range[[i]]$ev[[1]]
+      # This is for ev's that are a probability distribution across outcomes, like ordered logit/probit
+      if(ncol(temp) > 1){
+        temp <- temp %*% as.numeric(sort(unique(data.sim$y.sim)))  #as.numeric(colnames(temp))
+      }
+      temp <- sort(temp)
 
-        #calculate bounds of expected values
-        history.ev[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
-        history.ev[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
-        #temp<-sort( .self$sim.out$x$pv[[1]] )
-        temp<-sort( .self$sim.out$range[[i]]$pv[[1]] )
+      #calculate bounds of expected values
+      history.ev[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
+      history.ev[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
+      #temp<-sort( .self$sim.out$x$pv[[1]] )
+      temp<-sort( .self$sim.out$range[[i]]$pv[[1]] )
 
-        #check that ci contains true value
-        passes <- passes & (min(history.ev[i,]) <= data.short.hat$y.hat[i] ) & (max(history.ev[i,]) >= data.short.hat$y.hat[i] )
+      #check that ci contains true value
+      passes <- passes & (min(history.ev[i,]) <= data.short.hat$y.hat[i] ) & (max(history.ev[i,]) >= data.short.hat$y.hat[i] )
 
-        #calculate bounds of predicted values
-        history.pv[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
-        history.pv[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
+      #calculate bounds of predicted values
+      history.pv[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
+      history.pv[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
     }
 
     ## Plot Monte Carlo Data
@@ -1240,8 +1273,8 @@ z$methods(
       .self$data <- idata
       if(any(iweights != ceiling(iweights))){
         cat("Noninteger weights were set, but the model in Zelig is only able to use integer valued weights.\n",
-             "Each weight has been rounded up to the nearest integer.\n\n")
-        }
+            "Each weight has been rounded up to the nearest integer.\n\n")
+      }
     }
   }
 )
@@ -1253,7 +1286,7 @@ z$methods(
       iweights <- .self$weights
       if(any(iweights != ceiling(iweights))){
         cat("Noninteger weights were set, but the model in Zelig is only able to use integer valued weights.\n",
-             "A bootstrapped version of the dataset was constructed using the weights as sample probabilities.\n\n")
+            "A bootstrapped version of the dataset was constructed using the weights as sample probabilities.\n\n")
         idata <- .self$data
         n.obs <- nrow(idata)
         n.w   <- sum(iweights)
@@ -1262,8 +1295,8 @@ z$methods(
         idata <- idata[windex,]
         .self$data <- idata
       }else{
-         .self$buildDataByWeights()  # If all weights are integers, just use duplication to rebuild dataset.
-        }
+        .self$buildDataByWeights()  # If all weights are integers, just use duplication to rebuild dataset.
+      }
     }
   }
 )
@@ -1273,30 +1306,30 @@ z$methods(
 #   might possibly combine this method with $buildDataByWeights2()
 z$methods(
   buildDataByBootstrap = function() {
-      idata <- .self$data
-      n.boot <- .self$bootstrap.num
-      n.obs <- nrow(idata)
+    idata <- .self$data
+    n.boot <- .self$bootstrap.num
+    n.obs <- nrow(idata)
 
-      if(!is.null(.self$weights)){
-        iweights <- .self$weights
-        n.w   <- sum(iweights)
-        iweights <- iweights/n.w
-      }else{
-        iweights <- NULL
-      }
+    if(!is.null(.self$weights)){
+      iweights <- .self$weights
+      n.w   <- sum(iweights)
+      iweights <- iweights/n.w
+    }else{
+      iweights <- NULL
+    }
 
-      windex <- bootstrapIndex <- NULL
-      for(i in 1:n.boot){
-        windex <- c(windex, sample(x=1:n.obs, size=n.obs, replace=TRUE, prob=iweights))
-        bootstrapIndex <- c(bootstrapIndex, rep(i,n.obs))
-      }
-      # Last dataset is original data
-      idata <- rbind(idata[windex,], idata)
-      bootstrapIndex <- c(bootstrapIndex, rep(n.boot+1,n.obs))
+    windex <- bootstrapIndex <- NULL
+    for(i in 1:n.boot){
+      windex <- c(windex, sample(x=1:n.obs, size=n.obs, replace=TRUE, prob=iweights))
+      bootstrapIndex <- c(bootstrapIndex, rep(i,n.obs))
+    }
+    # Last dataset is original data
+    idata <- rbind(idata[windex,], idata)
+    bootstrapIndex <- c(bootstrapIndex, rep(n.boot+1,n.obs))
 
-      idata$bootstrapIndex <- bootstrapIndex
-      .self$data <- idata
-      .self$by <- c("bootstrapIndex", .self$by)
+    idata$bootstrapIndex <- bootstrapIndex
+    .self$data <- idata
+    .self$by <- c("bootstrapIndex", .self$by)
   }
 )
 
@@ -1360,7 +1393,7 @@ setMethod("names", "Zelig",
 #' @param ... Additional parameters to be passed to vcov
 setMethod("vcov", "Zelig",
           function(object, ...) {
-            object$getvcov()
+            object$get_vcov()
           }
 )
 
@@ -1368,7 +1401,7 @@ setMethod("vcov", "Zelig",
 #' @param object An Object of Class Zelig
 setMethod("coef", "Zelig",
           function(object) {
-            object$getcoef()
+            object$get_coef()
           }
 )
 
@@ -1376,7 +1409,15 @@ setMethod("coef", "Zelig",
 #' @param object An Object of Class Zelig
 setMethod("residuals", "Zelig",
           function(object) {
-            object$getresiduals()
+            object$get_residuals()
+          }
+)
+
+#' Method for extracting residual degrees-of-freedom from Zelig objects
+#' @param object An Object of Class Zelig
+setMethod("df.residual", "Zelig",
+          function(object) {
+            object$get_df_residual()
           }
 )
 
@@ -1385,7 +1426,7 @@ setMethod("residuals", "Zelig",
 #' @param ... Additional parameters to be passed to fitted
 setMethod("fitted", "Zelig",
           function(object, ...) {
-            object$getfitted()
+            object$get_fitted()
           }
 )
 
@@ -1394,6 +1435,6 @@ setMethod("fitted", "Zelig",
 #' @param ... Additional parameters to be passed to predict
 setMethod("predict", "Zelig",
           function(object, ...) {
-            object$getpredict()
+            object$get_predict()
           }
 )

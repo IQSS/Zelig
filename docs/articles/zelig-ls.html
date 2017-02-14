@@ -232,13 +232,13 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <div id="output-values" class="section level1">
 <h1 class="hasAnchor">
 <html><body><a href="#output-values" class="anchor"> </a></body></html>Output Values</h1>
-<p>The output of each Zelig function call contains useful information which you may view. For example, using the <code>z.out1</code> object we estimated above, then you may see the coefficients by using <code>getcoef</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">getcoef</span>() </code></pre></div>
+<p>The output of each Zelig function call contains useful information which you may view. For example, using the <code>z.out1</code> object we estimated above, then you may see the coefficients by using <code>get_coef</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">get_coef</span>() </code></pre></div>
 <pre><code>## [[1]]
 ## (Intercept)         gdp      capmob       trade 
 ##  6.18129445 -0.32360059  1.42193926  0.01985421</code></pre>
-<p>or the variance-covariance matrix with <code>getvcov</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">getvcov</span>()</code></pre></div>
+<p>or the variance-covariance matrix with <code>get_vcov</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">get_vcov</span>()</code></pre></div>
 <pre><code>## [[1]]
 ##              (Intercept)           gdp       capmob         trade
 ## (Intercept)  0.203014830 -1.582154e-02 1.679720e-02 -2.014899e-03
@@ -273,8 +273,8 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <p>Other elements available through the <code>$</code> operator are listed below.</p>
 <ul>
 <li><p>From the <code><a href="../reference/zelig.html">zelig()</a></code> output object <code>z.out</code>, you may extract:</p></li>
-<li><p><code>getresiduals</code>: residuals.</p></li>
-<li><p><code>getfitted</code>: fitted values.</p></li>
+<li><p><code>get_residuals</code>: residuals.</p></li>
+<li><p><code>get_fitted</code>: fitted values.</p></li>
 <li><p>df.residual: the residual degrees of freedom.</p></li>
 <li><p>zelig.data: the input data frame if save.data = TRUE.</p></li>
 <li><p>From summary(z.out), you may extract:</p></li>

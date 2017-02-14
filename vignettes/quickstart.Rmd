@@ -102,7 +102,7 @@ summary(z5)
 ```
 
 ```{r include=FALSE}
-edu_coef <- round(z5$getcoef()[[1]][2], digits = 4)
+edu_coef <- round(z5$get_coef()[[1]][2], digits = 4)
 ```
 
 The `r edu_coef` coefficient on education suggests a negative relationship between the education of a province and its fertility rate. More precisely, for every one percent increase in draftees educated beyond primary school, the fertility rate of the province decreases `r edu_coef * -1` units. To help us better interpret this finding, we may want other quantities of interest, such as expected values or first differences. Zelig makes this simple by automating the translation of model estimates into interpretable quantities of interest using Monte Carlo simulation methods (see King, Tomz, and Wittenberg (2000) for more information). For example, let’s say we want to examine the effect of increasing the percent of draftees educated from 5 to 15. To do so, we set our predictor value using the `setx()` method:
