@@ -45,7 +45,7 @@ zbayes$methods(
 )
 
 zbayes$methods(
-  getcoef = function() {
+  get_coef = function() {
     "Get estimated model coefficients"
     return(.self$zelig.out$z.out[[1]])
   } 

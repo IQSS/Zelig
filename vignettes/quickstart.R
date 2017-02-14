@@ -32,7 +32,7 @@ z5$zelig(Fertility ~ Education, data = swiss)
 summary(z5)
 
 ## ----include=FALSE-------------------------------------------------------
-edu_coef <- round(z5$getcoef()[[1]][2], digits = 4)
+edu_coef <- round(z5$get_coef()[[1]][2], digits = 4)
 
 ## ------------------------------------------------------------------------
 # set education to 5

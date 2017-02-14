@@ -13,7 +13,7 @@ test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
     z5$zelig(Fertility ~ Education, data = swiss)
 
     # extract education coefficient parameter estimate and compare to reference
-    expect_equivalent(round(as.numeric(z5$getcoef()[[1]][2]), 7), -0.8623503)
+    expect_equivalent(round(as.numeric(z5$get_coef()[[1]][2]), 7), -0.8623503)
 })
 
 

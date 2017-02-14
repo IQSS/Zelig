@@ -42,11 +42,11 @@ test_that('REQUIRE TEST for by estimation workflow', {
   expect_error(z5$graph(), NA)
 })
 
-# FAIL TEST for getqi when applied to an object with no simulations ------------
-test_that('FAIL TEST for getqi when applied to an object with no simulations', {
+# FAIL TEST for get_qi when applied to an object with no simulations ------------
+test_that('FAIL TEST for get_qi when applied to an object with no simulations', {
     z <- zls$new()
     z$zelig(Fertility ~ Education, data = swiss)
-    expect_error(z$getqi(), 'No simulated quantities of interest found.')
+    expect_error(z$get_qi(), 'No simulated quantities of interest found.')
 })
 
 # FAIL TEST for estimation model failure ---------------------------------------
@@ -65,10 +65,10 @@ test_that('REQUIRE TEST for sim num argument', {
   z5$setx(Education = 5)
 
   z5$sim()
-  expect_equal(length(z5$getqi()), 1000)
+  expect_equal(length(z5$get_qi()), 1000)
 
   z5$sim(num = 10) # Look into unexpected behaviour if sim order is reversed
-  expect_equal(length(z5$getqi()), 10)
+  expect_equal(length(z5$get_qi()), 10)
 })
 
 # REQUIRE TEST from_zelig_model returns expected fitted model object -----------------
@@ -113,7 +113,7 @@ test_that('REQUIRE TEST functioning simparam with by and ATT', {
   zb.out$zelig(yb ~ xx + zz, data = data, by = "rr")
 
   zb.out$ATT(treatment = "xx")
-  out <- zb.out$getqi(qi = "ATT", xvalue = "TE")
+  out <- zb.out$get_qi(qi = "ATT", xvalue = "TE")
   expect_equal(length(out), 1000)
 })
 
@@ -129,10 +129,10 @@ test_that("REQUIRE TEST getters values and dimensions and plot does not fail",
     mydata2 <- data.frame(y = y, x = x + 2)
     z.out <- zelig(y ~ x, model = "ls", data = mydata)
 
-    expect_equivalent(round(as.numeric(z.out$getcoef()[[1]]), 2), c(0, 1))
-    expect_equivalent(length(z.out$getpredict()[[1]]), n)
-    expect_equivalent(length(z.out$getfitted()[[1]]), n)
-    expect_equivalent(dim(z.out$getvcov()[[1]]), c(2, 2))
+    expect_equivalent(round(as.numeric(z.out$get_coef()[[1]]), 2), c(0, 1))
+    expect_equivalent(length(z.out$get_predict()[[1]]), n)
+    expect_equivalent(length(z.out$get_fitted()[[1]]), n)
+    expect_equivalent(dim(z.out$get_vcov()[[1]]), c(2, 2))
 
     z.out$setx(x = 0)
     z.out$setx1(x = 1)
@@ -140,25 +140,25 @@ test_that("REQUIRE TEST getters values and dimensions and plot does not fail",
     z.out$sim()
     show.sim <- summary(z.out)
 
-    expect_equivalent(length(z.out$getqi(qi = "ev", xvalue = "x")), n)
-    expect_equivalent(round(mean(z.out$getqi(qi = "ev", xvalue = "x")),
+    expect_equivalent(length(z.out$get_qi(qi = "ev", xvalue = "x")), n)
+    expect_equivalent(round(mean(z.out$get_qi(qi = "ev", xvalue = "x")),
                             2), 0)
-    expect_equivalent(length(z.out$getqi(qi = "ev", xvalue = "x1")),
+    expect_equivalent(length(z.out$get_qi(qi = "ev", xvalue = "x1")),
                       n)
-    expect_equivalent(round(mean(z.out$getqi(qi = "ev", xvalue = "x1")),
+    expect_equivalent(round(mean(z.out$get_qi(qi = "ev", xvalue = "x1")),
                             2), 1)
 
-    expect_equivalent(length(z.out$getqi(qi = "pv", xvalue = "x")), n)
-    expect_equivalent(round(mean(z.out$getqi(qi = "pv", xvalue = "x")),
+    expect_equivalent(length(z.out$get_qi(qi = "pv", xvalue = "x")), n)
+    expect_equivalent(round(mean(z.out$get_qi(qi = "pv", xvalue = "x")),
                             2), 0)
-    expect_equivalent(length(z.out$getqi(qi = "pv", xvalue = "x1")),
+    expect_equivalent(length(z.out$get_qi(qi = "pv", xvalue = "x1")),
                       n)
-    expect_equivalent(round(mean(z.out$getqi(qi = "pv", xvalue = "x1")),
+    expect_equivalent(round(mean(z.out$get_qi(qi = "pv", xvalue = "x1")),
                             2), 1)
 
-    expect_equivalent(length(z.out$getqi(qi = "fd", xvalue = "x1")),
+    expect_equivalent(length(z.out$get_qi(qi = "fd", xvalue = "x1")),
                       n)
-    expect_equivalent(round(mean(z.out$getqi(qi = "fd", xvalue = "x1")), 2), 1)
+    expect_equivalent(round(mean(z.out$get_qi(qi = "fd", xvalue = "x1")), 2), 1)
 
     expect_false(show.setx[[1]])
     expect_false(show.sim[[1]])
@@ -175,7 +175,7 @@ test_that("REQUIRE TEST getters values and dimensions and plot does not fail",
 
     set.seed(123)
     boot.out <- zelig(y ~ x, model = "ls", bootstrap = 20, data = mydata)
-    expect_equivalent(round(as.numeric(boot.out$getcoef()[[1]]), 2),
+    expect_equivalent(round(as.numeric(boot.out$get_coef()[[1]]), 2),
                       c(0, 1))
 
     show.boot <- summary(boot.out, bagging = TRUE)
@@ -187,9 +187,9 @@ test_that("REQUIRE TEST getters values and dimensions and plot does not fail",
 
     set.seed(123)
     mi.out <- zelig(y ~ x, model = "ls", data = mi(mydata, mydata2))
-    expect_equivalent(round(as.numeric(mi.out$getcoef()[[1]]), 2), c(0,
+    expect_equivalent(round(as.numeric(mi.out$get_coef()[[1]]), 2), c(0,
                                                                      1))
-    expect_equivalent(round(as.numeric(mi.out$getcoef()[[2]]), 2), c(-2,
+    expect_equivalent(round(as.numeric(mi.out$get_coef()[[2]]), 2), c(-2,
                                                                      1))
     expect_equivalent(length(mi.out$toJSON()), 1)
 
@@ -237,7 +237,7 @@ test_that('REQUIRE TEST Binary QIs and ATT effects and BY argument', {
   zb.out$ATT(treatment = "xx")
 
   # Getter to extract ATT
-  out <- zb.out$getqi(qi="ATT", xvalue="TE")
+  out <- zb.out$get_qi(qi="ATT", xvalue="TE")
   expect_equal(length(out), 1000)
 
   # Plot ROC
@@ -252,11 +252,11 @@ test_that('REQUIRE TEST for names field', {
   expect_false(is.null(names(z)))
 })
 
-# REQUIRE TEST for getresiduals method -----------------------------------------
-test_that('REQUIRE TEST for getresiduals method', {
+# REQUIRE TEST for get_residuals method -----------------------------------------
+test_that('REQUIRE TEST for get_residuals method', {
   z <- zls$new()
   z$zelig(Fertility ~ Education, data = swiss)
-  expect_is(z$getresiduals(), class = 'list')
+  expect_is(z$get_residuals(), class = 'list')
   expect_false(is.null(residuals(z)))
 })
 

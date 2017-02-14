@@ -1,6 +1,11 @@
 Zelig version 5.0-16
 ==============================
 
+## Major changes
+
+- !! Breaking change !! the `get*` functions (e.g. `getcoef`) now use 
+underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
+
 ## Minor changes
 
 - Zelig 5 Quickstart vignette added.

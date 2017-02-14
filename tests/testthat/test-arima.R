@@ -7,7 +7,7 @@ test_that('REQUIRE TEST arima successful estimation', {
     data(seatshare)
     ts <- zarima$new()
 
-    ## NEEDS a better test, possibly once getcoef has been implemented for arima
+    ## NEEDS a better test, possibly once get_coef has been implemented for arima
     expect_error(
     ts$zelig(unemp ~ leftseat, order = c(1,0,1), ts = "year", cs = "country",
               data = seatshare),
@@ -53,27 +53,27 @@ test_that('REQUIRE TEST arima models', {
     # check ar model
     zj <- zar$new()
     zj$zelig(y~x + z , data=mydata, ts="t")
-    expect_equivalent(length(zj$getcoef()[[1]]), 4)
+    expect_equivalent(length(zj$get_coef()[[1]]), 4)
 
     # check ma model
     zj <- zma$new()
     zj$zelig(y~x + z , data=mydata, ts="t")
-    expect_equivalent(length(zj$getcoef()[[1]]), 4)
+    expect_equivalent(length(zj$get_coef()[[1]]), 4)
 
     # check ar-2, ma-1 model
     zj <- zarima$new()
     zj$zelig(y~x + z , order=c(2,0,1), data=mydata, ts="t")
-    expect_equivalent(length(zj$getcoef()[[1]]), 6)
+    expect_equivalent(length(zj$get_coef()[[1]]), 6)
 
     # check integration
     zj <- zarima$new()
     zj$zelig(y~x + z , order=c(2,1,1), data=mydata, ts="t")
-    expect_equivalent(length(zj$getcoef()[[1]]), 5)
+    expect_equivalent(length(zj$get_coef()[[1]]), 5)
 
     # check obervations out of time order
     zj <- zarima$new()
     zj$zelig(y~x + z -1, order=c(2,0,1), data=mydata2, ts="t")
-    expect_equivalent(length(zj$getcoef()[[1]]), 5)
+    expect_equivalent(length(zj$get_coef()[[1]]), 5)
 
     zj$setx()
     zj$setx1(x=2)

@@ -35,7 +35,7 @@ zls$methods(
     # Automated Background Test Statistics and Criteria
     rse <- lapply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
     rse.se <- sqrt(diag(rse[[1]]))                 # Needs to work with "by" argument
-    est.se <- sqrt(diag(.self$getvcov()[[1]]))
+    est.se <- sqrt(diag(.self$get_vcov()[[1]]))
     quickGim <- any( est.se > 1.5*rse.se | rse.se > 1.5*est.se )
     .self$test.statistics<- list(robust.se = rse, gim.criteria = quickGim)
   }

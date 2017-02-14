@@ -4,7 +4,7 @@ test_that('ls wrapper continuous covar -- quickstart (Zelig 4 syntax)', {
     z4 <- zelig(Fertility ~ Education, data = swiss, model = 'ls', cite = FALSE)
   
     # extract education coefficient parameter estimate and compare to reference
-    expect_equivalent(round(as.numeric(z4$getcoef()[[1]][2]), 7), -0.8623503)
+    expect_equivalent(round(as.numeric(z4$get_coef()[[1]][2]), 7), -0.8623503)
 })
 
 # Test missing model argument error---------------------------------------------
@@ -46,11 +46,11 @@ test_that('REQUIRE TEST sim wraper minimal working', {
     set_x <- setx(z5, Education = 5)
   
     zsimwrap <- sim(z5, x = set_x, num = 10)
-    expect_equal(length(zsimwrap$getqi()), 10)
+    expect_equal(length(zsimwrap$get_qi()), 10)
     
     z5$setx(Education = 5)
     zsimwrap <- sim(z5, num = 10)
-    expect_equal(length(zsimwrap$getqi()), 10)
+    expect_equal(length(zsimwrap$get_qi()), 10)
 })
 
 # REQUIRE TEST from_zelig_model returns expected fitted model object -----------------

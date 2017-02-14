@@ -565,7 +565,7 @@ z$methods(
 
     # Divide simulations among imputed datasets
     if(.self$mi){
-      am.m <- length(.self$getcoef())
+      am.m <- length(.self$get_coef())
       .self$num <- ceiling(.self$num/am.m)
     }
     # If bootstrapped, use distribution of estimated parameters,
@@ -702,7 +702,7 @@ z$methods(
       do(ATT = .self$simATT(simparam=.self$simparam$simparam[[1]], data=. , depvar=depvar, treatment=treatment, treated=treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
 
     if(!quietly){
-      return(.self$sim.out$TE)  # The $getqi() method may generalize, otherwise, write a $getter.
+      return(.self$sim.out$TE)  # The $get_qi() method may generalize, otherwise, write a $getter.
     }
   }
 )
@@ -774,8 +774,8 @@ z$methods(
 
       if((.self$mi) & is.null(subset)){
         cat("Model: Combined Imputations \n")
-        vcovlist <-.self$getvcov()
-        coeflist <-.self$getcoef()
+        vcovlist <-.self$get_vcov()
+        coeflist <-.self$get_coef()
         am.m<-length(coeflist)
         am.k<-length(coeflist[[1]])
         q <- matrix(unlist(coeflist), nrow=am.m, ncol=am.k, byrow=TRUE)
@@ -814,8 +814,8 @@ z$methods(
       }else if ((.self$bootstrap) & is.null(subset)) {
         # Much reuse of Rubin's Rules from above.  Probably able to better generalize across these two cases:
         cat("Model: Combined Bootstraps \n")
-        vcovlist <-.self$getvcov()
-        coeflist <-.self$getcoef()
+        vcovlist <-.self$get_vcov()
+        coeflist <-.self$get_coef()
         am.m<-length(coeflist) - 1
         am.k<-length(coeflist[[1]])
         q <- matrix(unlist(coeflist[-(am.m+1)]), nrow=am.m, ncol=am.k, byrow=TRUE)
@@ -1011,7 +1011,7 @@ z$methods(
 #' @param object an object of class Zelig
 
 z$methods(
-  getcoef = function() {
+  get_coef = function() {
     "Get estimated model coefficients"
 
     is_uninitializedField(.self$zelig.out)
@@ -1024,7 +1024,7 @@ z$methods(
 )
 
 z$methods(
-  getvcov = function() {
+  get_vcov = function() {
     "Get estimated model variance-covariance matrix"
     is_uninitializedField(.self$zelig.out)
     result <- lapply(.self$zelig.out$z.out, vcov)
@@ -1036,7 +1036,7 @@ z$methods(
 )
 
 z$methods(
-  getresiduals = function() {
+  get_residuals = function() {
     "Get estimated model residuals"
 
     is_uninitializedField(.self$zelig.out)
@@ -1062,7 +1062,7 @@ z$methods(
 )
 
 z$methods(
-  getfitted = function() {
+  get_fitted = function() {
     "Get estimated fitted values"
 
     is_uninitializedField(.self$zelig.out)
@@ -1075,7 +1075,7 @@ z$methods(
 )
 
 z$methods(
-  getpredict = function() {
+  get_predict = function() {
     "Get predicted values"
 
     is_uninitializedField(.self$zelig.out)
@@ -1088,7 +1088,7 @@ z$methods(
 )
 
 z$methods(
-  getqi = function(qi = "ev", xvalue = "x", subset = NULL) {
+  get_qi = function(qi = "ev", xvalue = "x", subset = NULL) {
     "Get quantities of interest"
 
     is_sims_present(.self$sim.out)
@@ -1106,7 +1106,7 @@ z$methods(
     }
     if(.self$mi){
       if(is.null(subset)){
-        am.m<-length(.self$getcoef())
+        am.m<-length(.self$get_coef())
         subset <- 1:am.m
       }
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]][subset])
@@ -1393,7 +1393,7 @@ setMethod("names", "Zelig",
 #' @param ... Additional parameters to be passed to vcov
 setMethod("vcov", "Zelig",
           function(object, ...) {
-            object$getvcov()
+            object$get_vcov()
           }
 )
 
@@ -1401,7 +1401,7 @@ setMethod("vcov", "Zelig",
 #' @param object An Object of Class Zelig
 setMethod("coef", "Zelig",
           function(object) {
-            object$getcoef()
+            object$get_coef()
           }
 )
 
@@ -1409,7 +1409,7 @@ setMethod("coef", "Zelig",
 #' @param object An Object of Class Zelig
 setMethod("residuals", "Zelig",
           function(object) {
-            object$getresiduals()
+            object$get_residuals()
           }
 )
 
@@ -1426,7 +1426,7 @@ setMethod("df.residual", "Zelig",
 #' @param ... Additional parameters to be passed to fitted
 setMethod("fitted", "Zelig",
           function(object, ...) {
-            object$getfitted()
+            object$get_fitted()
           }
 )
 
@@ -1435,6 +1435,6 @@ setMethod("fitted", "Zelig",
 #' @param ... Additional parameters to be passed to predict
 setMethod("predict", "Zelig",
           function(object, ...) {
-            object$getpredict()
+            object$get_predict()
           }
 )
