@@ -734,7 +734,7 @@ z$methods(
 )
 
 z$methods(
-  getnames = function() {
+  get_names = function() {
     "Return Zelig object field names"
     z_names <- names(as.list(.self))
     return(z_names)
@@ -1022,6 +1022,39 @@ z$methods(
       return(result)
   }
 )
+
+#' Method for extracting p-values from Zelig objects
+#' @param object an object of class Zelig
+
+z$methods(
+  get_pvalue = function() {
+    "Get estimated model p-values"
+
+    is_uninitializedField(.self$zelig.out)
+    result <- try(lapply(.self$zelig.out$z.out, p_pull), silent = TRUE)
+    if ("try-error" %in% class(result))
+      stop("'get_pvalue' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  }
+)
+
+#' Method for extracting standard errors from Zelig objects
+#' @param object an object of class Zelig
+
+z$methods(
+  get_se = function() {
+    "Get estimated model standard errors"
+    
+    is_uninitializedField(.self$zelig.out)
+    result <- try(lapply(.self$zelig.out$z.out, se_pull), silent = TRUE)
+    if ("try-error" %in% class(result))
+      stop("'get_se' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  }
+)
+
 
 z$methods(
   get_vcov = function() {
@@ -1384,7 +1417,7 @@ setMethod("plot", "Zelig",
 #' @param x An Object of Class Zelig
 setMethod("names", "Zelig",
           function(x) {
-            x$getnames()
+            x$get_names()
           }
 )
 

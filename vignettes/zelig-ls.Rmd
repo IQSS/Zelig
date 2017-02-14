@@ -191,13 +191,15 @@ or as we saw before using the wrapper, e.g. `summary(z.out1)`.
 -  From the `zelig()` output object `z.out`, you may use the following 
 'getter' functions to extract:
 
-   -  `get_residuals`: residuals.
+  - `get_pvalue` and `get_se`: p-values and standard errors, respectively.
 
-   -  `get_fitted`: fitted values.
+  -  `get_residuals`: residuals.
 
-   -  `get_df_residual`: the residual degrees of freedom.
+  -  `get_fitted`: fitted values.
 
-   -  `get_model_data`: the input data frame.
+  -  `get_df_residual`: the residual degrees of freedom.
+
+  -  `get_model_data`: the input data frame.
 
 -  You can extract the entire original fitted model object with 
 `from_zelig_model`. For example:
@@ -208,25 +210,25 @@ ls.original <- from_zelig_model(z.out1)
 
 You can then use `summary` and the component selector `$` to extract:
 
-   -  `coefficients`: the parameter estimates with their associated
+  -  `coefficients`: the parameter estimates with their associated
       standard errors, $p$-values, and $t$-statistics.
 
       $$\hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i$$
 
-   -  `sigma`: the square root of the estimate variance of the random
+  -  `sigma`: the square root of the estimate variance of the random
       error $e$:
 
       $$\hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}$$
 
-   -  `r.squared`: the fraction of the variance explained by the model:
+  -  `r.squared`: the fraction of the variance explained by the model:
 
       $$R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
                   \bar{y})^2}$$
 
-   -  `adj.r.squared`: the above $R^2$ statistic, penalizing for an
+  -  `adj.r.squared`: the above $R^2$ statistic, penalizing for an
       increased number of explanatory variables.
 
-   -  `cov.unscaled`: a $k \times k$ matrix of unscaled covariances.
+  -  `cov.unscaled`: a $k \times k$ matrix of unscaled covariances.
    
 For example:
 
