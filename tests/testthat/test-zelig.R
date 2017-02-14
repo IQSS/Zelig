@@ -39,8 +39,14 @@ test_that('REQUIRE TEST for by estimation workflow', {
   z5$setrange(Education = 5:15)
   z5$sim()
 
-  z5$graph()
+  expect_error(z5$graph(), NA)
+})
 
+# FAIL TEST for getqi when applied to an object with no simulations ------------
+test_that('FAIL TEST for getqi when applied to an object with no simulations', {
+    z <- zls$new()
+    z$zelig(Fertility ~ Education, data = swiss)
+    expect_error(z$getqi(), 'No simulated quantities of interest found.')
 })
 
 # FAIL TEST for estimation model failure ---------------------------------------
@@ -113,88 +119,85 @@ test_that('REQUIRE TEST functioning simparam with by and ATT', {
 
 # REQUIRE TEST getters values and dimensions and plot does not fail-------------
 test_that("REQUIRE TEST getters values and dimensions and plot does not fail",
-          {
-            set.seed(123)
-            n <- 1000
-            myseq <- 1:n
-            x <- myseq/n
-            y <- x + (-1)^(myseq) * 0.1
-            mydata <- data.frame(y = y, x = x)
-            mydata2 <- data.frame(y = y, x = x + 2)
-            z.out <- zelig(y ~ x, model = "ls", data = mydata)
+{
+    set.seed(123)
+    n <- 1000
+    myseq <- 1:n
+    x <- myseq/n
+    y <- x + (-1)^(myseq) * 0.1
+    mydata <- data.frame(y = y, x = x)
+    mydata2 <- data.frame(y = y, x = x + 2)
+    z.out <- zelig(y ~ x, model = "ls", data = mydata)
 
-            expect_equivalent(round(as.numeric(z.out$getcoef()[[1]]), 2), c(0,
-                                                                            1))
-            expect_equivalent(length(z.out$getpredict()[[1]]), n)
-            expect_equivalent(length(z.out$getfitted()[[1]]), n)
-            expect_equivalent(dim(z.out$getvcov()[[1]]), c(2, 2))
+    expect_equivalent(round(as.numeric(z.out$getcoef()[[1]]), 2), c(0, 1))
+    expect_equivalent(length(z.out$getpredict()[[1]]), n)
+    expect_equivalent(length(z.out$getfitted()[[1]]), n)
+    expect_equivalent(dim(z.out$getvcov()[[1]]), c(2, 2))
 
-            z.out$setx(x = 0)
-            z.out$setx1(x = 1)
-            show.setx <- summary(z.out)
-            z.out$sim()
-            show.sim <- summary(z.out)
+    z.out$setx(x = 0)
+    z.out$setx1(x = 1)
+    show.setx <- summary(z.out)
+    z.out$sim()
+    show.sim <- summary(z.out)
 
-            expect_equivalent(length(z.out$getqi(qi = "ev", xvalue = "x")), n)
-            expect_equivalent(round(mean(z.out$getqi(qi = "ev", xvalue = "x")),
-                                    2), 0)
-            expect_equivalent(length(z.out$getqi(qi = "ev", xvalue = "x1")),
-                              n)
-            expect_equivalent(round(mean(z.out$getqi(qi = "ev", xvalue = "x1")),
-                                    2), 1)
+    expect_equivalent(length(z.out$getqi(qi = "ev", xvalue = "x")), n)
+    expect_equivalent(round(mean(z.out$getqi(qi = "ev", xvalue = "x")),
+                            2), 0)
+    expect_equivalent(length(z.out$getqi(qi = "ev", xvalue = "x1")),
+                      n)
+    expect_equivalent(round(mean(z.out$getqi(qi = "ev", xvalue = "x1")),
+                            2), 1)
 
-            expect_equivalent(length(z.out$getqi(qi = "pv", xvalue = "x")), n)
-            expect_equivalent(round(mean(z.out$getqi(qi = "pv", xvalue = "x")),
-                                    2), 0)
-            expect_equivalent(length(z.out$getqi(qi = "pv", xvalue = "x1")),
-                              n)
-            expect_equivalent(round(mean(z.out$getqi(qi = "pv", xvalue = "x1")),
-                                    2), 1)
+    expect_equivalent(length(z.out$getqi(qi = "pv", xvalue = "x")), n)
+    expect_equivalent(round(mean(z.out$getqi(qi = "pv", xvalue = "x")),
+                            2), 0)
+    expect_equivalent(length(z.out$getqi(qi = "pv", xvalue = "x1")),
+                      n)
+    expect_equivalent(round(mean(z.out$getqi(qi = "pv", xvalue = "x1")),
+                            2), 1)
 
-            expect_equivalent(length(z.out$getqi(qi = "fd", xvalue = "x1")),
-                              n)
-            expect_equivalent(round(mean(z.out$getqi(qi = "fd", xvalue = "x1")),
-                                    2), 1)
+    expect_equivalent(length(z.out$getqi(qi = "fd", xvalue = "x1")),
+                      n)
+    expect_equivalent(round(mean(z.out$getqi(qi = "fd", xvalue = "x1")), 2), 1)
 
-            expect_false(show.setx[[1]])
-            expect_false(show.sim[[1]])
-            expect_true(is.null(plot(z.out)))
+    expect_false(show.setx[[1]])
+    expect_false(show.sim[[1]])
+    expect_true(is.null(plot(z.out)))
 
-            xseq <- seq(from = 0, to = 1, length = 10)
-            z.out$setrange(x = xseq)
-            z.out$sim()
+    xseq <- seq(from = 0, to = 1, length = 10)
+    z.out$setrange(x = xseq)
+    z.out$sim()
 
-            expect_true(is.null(plot(z.out)))
+    expect_true(is.null(plot(z.out)))
 
-            myref <- capture.output(z.out$references())
-            expect_equivalent(substr(myref[1], 1, 11), "R Core Team")
+    myref <- capture.output(z.out$references())
+    expect_equivalent(substr(myref[1], 1, 11), "R Core Team")
 
-            set.seed(123)
-            boot.out <- zelig(y ~ x, model = "ls", bootstrap = 20, data = mydata)
-            expect_equivalent(round(as.numeric(boot.out$getcoef()[[1]]), 2),
-                              c(0, 1))
+    set.seed(123)
+    boot.out <- zelig(y ~ x, model = "ls", bootstrap = 20, data = mydata)
+    expect_equivalent(round(as.numeric(boot.out$getcoef()[[1]]), 2),
+                      c(0, 1))
 
-            show.boot <- summary(boot.out, bagging = TRUE)
-            expect_false(show.boot[[1]])
+    show.boot <- summary(boot.out, bagging = TRUE)
+    expect_false(show.boot[[1]])
 
-            show.boot <- summary(boot.out, subset=2:3)
-            expect_false(show.boot[[1]])
+    show.boot <- summary(boot.out, subset=2:3)
+    expect_false(show.boot[[1]])
 
 
-            set.seed(123)
-            mi.out <- zelig(y ~ x, model = "ls", data = mi(mydata, mydata2))
-            expect_equivalent(round(as.numeric(mi.out$getcoef()[[1]]), 2), c(0,
-                                                                             1))
-            expect_equivalent(round(as.numeric(mi.out$getcoef()[[2]]), 2), c(-2,
-                                                                             1))
-            expect_equivalent(length(mi.out$toJSON()), 1)
+    set.seed(123)
+    mi.out <- zelig(y ~ x, model = "ls", data = mi(mydata, mydata2))
+    expect_equivalent(round(as.numeric(mi.out$getcoef()[[1]]), 2), c(0,
+                                                                     1))
+    expect_equivalent(round(as.numeric(mi.out$getcoef()[[2]]), 2), c(-2,
+                                                                     1))
+    expect_equivalent(length(mi.out$toJSON()), 1)
 
-            show.mi <- summary(mi.out)
-            expect_false(show.mi[[1]])
-            show.mi.subset <- summary(mi.out, subset = 1)
-            expect_false(show.mi.subset[[1]])
-
-          })
+    show.mi <- summary(mi.out)
+    expect_false(show.mi[[1]])
+    show.mi.subset <- summary(mi.out, subset = 1)
+    expect_false(show.mi.subset[[1]])
+})
 
 # REQUIRE TEST Binary QI's and ATT effects and BY argument-------------
 test_that('REQUIRE TEST Binary QIs and ATT effects and BY argument', {
@@ -263,4 +266,11 @@ test_that('REQUIRE TEST for get_df_residual method', {
   z$zelig(Fertility ~ Education, data = swiss)
   expect_equal(length(z$get_df_residual()), 1)
   expect_equal(length(df.residual(z)), 1)
+})
+
+# REQUIRE TEST for get_model_data method ---------------------------------------
+test_that('REQUIRE TEST for get_model_data method', {
+  z <- zls$new()
+  z$zelig(Fertility ~ Education, data = swiss)
+  expect_is(z$get_model_data(), class = 'data.frame')
 })

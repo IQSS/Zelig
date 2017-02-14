@@ -1063,6 +1063,8 @@ z$methods(
 
 z$methods(
   getfitted = function() {
+    "Get estimated fitted values"
+
     is_uninitializedField(.self$zelig.out)
     result <- lapply(.self$zelig.out$z.out, fitted)
     if ("try-error" %in% class(result))
@@ -1075,6 +1077,8 @@ z$methods(
 z$methods(
   getpredict = function() {
     "Get predicted values"
+
+    is_uninitializedField(.self$zelig.out)
     result <- lapply(.self$zelig.out$z.out, predict)
     if ("try-error" %in% class(result))
       stop("'predict' method' not implemented for model '", .self$name, "'")
@@ -1084,15 +1088,21 @@ z$methods(
 )
 
 z$methods(
-  getqi = function(qi = "ev", xvalue = "x", subset = NULL){
+  getqi = function(qi = "ev", xvalue = "x", subset = NULL) {
     "Get quantities of interest"
+
+    is_sims_present(.self$sim.out)
+
     possiblexvalues <- names(.self$sim.out)
     if(!(xvalue %in% possiblexvalues)){
-      stop(paste("xvalue must be ", paste(possiblexvalues, collapse=" or ") , ".", sep=""))
+      stop(paste("xvalue must be ", paste(possiblexvalues, collapse = " or ") ,
+                 ".", sep = ""))
     }
-    possibleqivalues <- c(names(.self$sim.out[[xvalue]]), names(.self$sim.out[[xvalue]][[1]]))
+    possibleqivalues <- c(names(.self$sim.out[[xvalue]]),
+                          names(.self$sim.out[[xvalue]][[1]]))
     if(!(qi %in% possibleqivalues)){
-      stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".", sep=""))
+      stop(paste("qi must be ", paste(possibleqivalues, collapse=" or ") , ".",
+                                      sep = ""))
     }
     if(.self$mi){
       if(is.null(subset)){
@@ -1112,6 +1122,16 @@ z$methods(
     }
     return(tempqi)
   }
+)
+
+z$methods(
+    get_model_data = function() {
+        "Get data used to estimate the model"
+
+        is_uninitializedField(.self$zelig.out)
+        model_data <- .self$originaldata
+        return(model_data)
+    }
 )
 
 z$methods(

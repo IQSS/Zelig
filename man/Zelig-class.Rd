@@ -107,7 +107,11 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{get_df_residual()}}{Get residual degrees-of-freedom}
 
+\item{\code{get_model_data()}}{Get data used to estimate the model}
+
 \item{\code{getcoef()}}{Get estimated model coefficients}
+
+\item{\code{getfitted()}}{Get estimated fitted values}
 
 \item{\code{getnames()}}{Return Zelig object field names}
 

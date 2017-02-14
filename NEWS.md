@@ -7,6 +7,12 @@ Zelig version 5.0-16
 
 - Added `names` method to return Zelig object field names. #216 
 
+- Added `get_df_residuals` method to return residual degrees-of-freedom. 
+Also accessible via `df.residuals`.
+
+- Added `get_model_data` method to return the data frame used to estimate the 
+original model.
+
 - Internal code improvements. 
 
 Zelig version 5.0-15
