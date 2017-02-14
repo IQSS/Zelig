@@ -13,6 +13,8 @@ Zelig version 5.0-16
 
 - Internal code improvements.
 
+- Corrected a bug where the README.md was not included in the build.
+
 Zelig version 5.0-15
 ==============================
 

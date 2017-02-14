@@ -88,7 +88,7 @@
       <h1>Least Squares Regression for Continuous Dependent Variables with <code>ls</code>
 </h1>
             
-            <h4 class="date">2017-02-13</h4>
+            <h4 class="date">2017-02-14</h4>
           </div>
 
     
@@ -109,6 +109,7 @@ z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
 <p>For more details about the difference between Zelig’s reference classes and compatibility wrappers see the <a href="articles/quickstart.html">Quickstart Vignette</a>.</p>
+<p>The following examples typically use the compatibility wrappers.</p>
 </div>
 <div id="examples" class="section level1">
 <h1 class="hasAnchor">
@@ -174,8 +175,8 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 ##         mean        sd        50%      2.5%      97.5%
 ## 1 -0.8308671 0.2301398 -0.8326477 -1.266883 -0.3755664</code></pre>
 <p>Plot the simulated distributions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#plot(s.out1)</span>
-<span class="co">#s.out1$graph()</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
+<p><img src="zelig-ls_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 </div>
 <div id="using-categorical-variables-including-fixed-effects" class="section level2">
 <h2 class="hasAnchor">
@@ -191,10 +192,11 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 <p>Set values for the explanatory variables, using the default mean/mode values, with country set to the United States and Japan, respectively:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.US &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2, <span class="dt">country =</span> <span class="st">"United States"</span>)
 x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2, <span class="dt">country =</span> <span class="st">"Japan"</span>)</code></pre></div>
-<p>Simulate quantities of interest and plot results:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out2, <span class="dt">x =</span> x.US, <span class="dt">x1 =</span> x.Japan)
-
-<span class="co">#plot(s.out2)</span></code></pre></div>
+<p>Simulate quantities of interest:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out2, <span class="dt">x =</span> x.US, <span class="dt">x1 =</span> x.Japan)</code></pre></div>
+<p>and plot the results:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out2)</code></pre></div>
+<p><img src="zelig-ls_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 </div>
 </div>
 <div id="model-definition" class="section level1">
@@ -235,7 +237,7 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <pre><code>## [[1]]
 ## (Intercept)         gdp      capmob       trade 
 ##  6.18129445 -0.32360059  1.42193926  0.01985421</code></pre>
-<p>or the variance-covariance matrix:</p>
+<p>or the variance-covariance matrix with <code>getvcov</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">getvcov</span>()</code></pre></div>
 <pre><code>## [[1]]
 ##              (Intercept)           gdp       capmob         trade
@@ -271,9 +273,8 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <p>Other elements available through the <code>$</code> operator are listed below.</p>
 <ul>
 <li><p>From the <code><a href="../reference/zelig.html">zelig()</a></code> output object <code>z.out</code>, you may extract:</p></li>
-<li><p>coefficients: parameter estimates for the explanatory variables.</p></li>
-<li><p>residuals: the working residuals in the final iteration of the IWLS fit.</p></li>
-<li><p>fitted.values: fitted values.</p></li>
+<li><p><code>getresiduals</code>: residuals.</p></li>
+<li><p><code>getfitted</code>: fitted values.</p></li>
 <li><p>df.residual: the residual degrees of freedom.</p></li>
 <li><p>zelig.data: the input data frame if save.data = TRUE.</p></li>
 <li><p>From summary(z.out), you may extract:</p></li>

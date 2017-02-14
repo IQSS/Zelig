@@ -41,6 +41,8 @@ s.out <- sim(z.out, x = x.out)
 For more details about the difference between Zelig's reference classes and 
 compatibility wrappers see the [Quickstart Vignette](articles/quickstart.html).
 
+The following examples typically use the compatibility wrappers.
+
 # Examples
 
 ## Simple first differences
@@ -84,9 +86,8 @@ summary(s.out1)
 
 Plot the simulated distributions:
 
-```{r}
-#plot(s.out1)
-#s.out1$graph()
+```{r fig.height=11, fig.width=7}
+plot(s.out1)
 ```
 
 ## Using categorical variables, including fixed effects
@@ -118,12 +119,8 @@ s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
 
 and plot the results:
 
-```{r eval=FALSE}
+```{r fig.height=11, fig.width=7}
 plot(s.out2)
-```
-
-```{r echo=FALSE}
-#plot(s.out2)
 ```
 
 # Model Definition
@@ -189,7 +186,7 @@ For a default summary of information use either
 z.out1$summarize()
 ```
 
-Or as we saw before using the wrapper:
+or as we saw before using the wrapper:
 
 ```{r, eval=FALSE}
 summary(z.out1) 
@@ -199,8 +196,7 @@ Other elements available through the `$` operator are listed below.
 
 -  From the `zelig()` output object `z.out`, you may extract:
 
-   -  `getresiduals`: the working residuals in the final iteration of the
-      IWLS fit.
+   -  `getresiduals`: residuals.
 
    -  `getfitted`: fitted values.
 
