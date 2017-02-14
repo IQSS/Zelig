@@ -268,32 +268,38 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 ## F-statistic: 46.61 on 3 and 346 DF,  p-value: &lt; 2.2e-16
 ## 
 ## Next step: Use 'setx' method</code></pre>
-<p>or as we saw before using the wrapper:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out1) </code></pre></div>
-<p>Other elements available through the <code>$</code> operator are listed below.</p>
+<p>or as we saw before using the wrapper, e.g. <code>summary(z.out1)</code>.</p>
 <ul>
-<li><p>From the <code><a href="../reference/zelig.html">zelig()</a></code> output object <code>z.out</code>, you may extract:</p></li>
+<li><p>From the <code><a href="../reference/zelig.html">zelig()</a></code> output object <code>z.out</code>, you may use the following ‘getter’ functions to extract:</p></li>
 <li><p><code>get_residuals</code>: residuals.</p></li>
 <li><p><code>get_fitted</code>: fitted values.</p></li>
-<li><p>df.residual: the residual degrees of freedom.</p></li>
-<li><p>zelig.data: the input data frame if save.data = TRUE.</p></li>
-<li><p>From summary(z.out), you may extract:</p></li>
+<li><p><code>get_df_residual</code>: the residual degrees of freedom.</p></li>
+<li><p><code>get_model_data</code>: the input data frame.</p></li>
+<li><p>You can extract the entire original fitted model object with <code>from_zelig_model</code>. For example:</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ls.original &lt;-<span class="st"> </span><span class="kw"><a href="../reference/from_zelig_model.html">from_zelig_model</a></span>(z.out1)</code></pre></div>
+<p>You can then use <code>summary</code> and the component selector <code>$</code> to extract:</p>
+<ul>
 <li>
-<p>coefficients: the parameter estimates with their associated standard errors, :math:<code>p</code>-values, and :math:<code>t</code>-statistics.</p>
-<p>.. math::  ; = ; (_{i=1}^n x_i’ x_i)^{-1} x_i y_i</p>
+<p><code>coefficients</code>: the parameter estimates with their associated standard errors, <span class="math inline">\(p\)</span>-values, and <span class="math inline">\(t\)</span>-statistics.</p>
+<p><span class="math display">\[\hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i\]</span></p>
 </li>
 <li>
-<p>sigma: the square root of the estimate variance of the random error :math:<code>e</code>:</p>
-<p>.. math::  ; = ; </p>
+<p><code>sigma</code>: the square root of the estimate variance of the random error <span class="math inline">\(e\)</span>:</p>
+<p><span class="math display">\[\hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}\]</span></p>
 </li>
 <li>
-<p>r.squared: the fraction of the variance explained by the model.</p>
+<p><code>r.squared</code>: the fraction of the variance explained by the model:</p>
 <p><span class="math display">\[R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
               \bar{y})^2}\]</span></p>
 </li>
-<li><p>adj.r.squared: the above :math:<code>R^2</code> statistic, penalizing for an increased number of explanatory variables.</p></li>
-<li><p>cov.unscaled: a :math:<code>k \times k</code> matrix of unscaled covariances.</p></li>
+<li><p><code>adj.r.squared</code>: the above <span class="math inline">\(R^2\)</span> statistic, penalizing for an increased number of explanatory variables.</p></li>
+<li><p><code>cov.unscaled</code>: a <span class="math inline">\(k \times k\)</span> matrix of unscaled covariances.</p></li>
 </ul>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ls.original &lt;-<span class="st"> </span><span class="kw"><a href="../reference/from_zelig_model.html">from_zelig_model</a></span>(z.out1)
+<span class="kw">summary</span>(ls.original)$adj.r.squared</code></pre></div>
+<pre><code>## [1] 0.2816635</code></pre>
 </div>
 </div>
   </div>

@@ -186,42 +186,51 @@ For a default summary of information use either
 z.out1$summarize()
 ```
 
-or as we saw before using the wrapper:
+or as we saw before using the wrapper, e.g. `summary(z.out1)`. 
 
-```{r, eval=FALSE}
-summary(z.out1) 
-```
-
-Other elements available through the `$` operator are listed below.
-
--  From the `zelig()` output object `z.out`, you may extract:
+-  From the `zelig()` output object `z.out`, you may use the following 
+'getter' functions to extract:
 
    -  `get_residuals`: residuals.
 
    -  `get_fitted`: fitted values.
 
-   -  df.residual: the residual degrees of freedom.
+   -  `get_df_residual`: the residual degrees of freedom.
 
-   -  zelig.data: the input data frame if save.data = TRUE.
+   -  `get_model_data`: the input data frame.
 
--  From summary(z.out), you may extract:
+-  You can extract the entire original fitted model object with 
+`from_zelig_model`. For example:
 
-   -  coefficients: the parameter estimates with their associated
-      standard errors, :math:`p`-values, and :math:`t`-statistics.
+```{r eval=FALSE}
+ls.original <- from_zelig_model(z.out1)
+```
 
-      .. math:: \hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i
+You can then use `summary` and the component selector `$` to extract:
 
-   -  sigma: the square root of the estimate variance of the random
-      error :math:`e`:
+   -  `coefficients`: the parameter estimates with their associated
+      standard errors, $p$-values, and $t$-statistics.
 
-      .. math:: \hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}
+      $$\hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i$$
 
-   -  r.squared: the fraction of the variance explained by the model.
+   -  `sigma`: the square root of the estimate variance of the random
+      error $e$:
+
+      $$\hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}$$
+
+   -  `r.squared`: the fraction of the variance explained by the model:
 
       $$R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
                   \bar{y})^2}$$
 
-   -  adj.r.squared: the above :math:`R^2` statistic, penalizing for an
+   -  `adj.r.squared`: the above $R^2$ statistic, penalizing for an
       increased number of explanatory variables.
 
-   -  cov.unscaled: a :math:`k \times k` matrix of unscaled covariances.
+   -  `cov.unscaled`: a $k \times k$ matrix of unscaled covariances.
+   
+For example:
+
+```{r}
+ls.original <- from_zelig_model(z.out1)
+summary(ls.original)$adj.r.squared
+```
