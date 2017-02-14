@@ -64,3 +64,14 @@ test_that('REQUIRE TEST for set with ls models including factors set within zeli
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 
                  setUS2$setx.out$x$mm[[1]][[16]])
 })
+
+# REQUIRE TEST for ls with interactions ----------------------------------------
+test_that('REQUIRE TEST for ls with interactions', {
+    states <- as.data.frame(state.x77)
+    z <- zelig(Murder ~ Income * Population, data = states, model = 'ls')
+    s1 <- setx(z, Population = 1500:1600, Income = 3098)
+    s2 <- setx(z, Population = 1500:1600, Income = 6315)
+    
+    expect_equal(length(s1$setx.out$range), 101)
+    expect_equal(length(s2$setx.out$range), 101)
+})
