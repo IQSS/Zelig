@@ -371,3 +371,12 @@ p_pull <- function(x) {
     return(p_values)
 }
 
+#' Extract standard errors from a fitted model object
+#' @param x a fitted Zelig object
+#' @internal
+
+se_pull <- function(x) {
+  p_values <- summary(x)$coefficients[, "Std. Error"]
+  return(p_values)
+}
+

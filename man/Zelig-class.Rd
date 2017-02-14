@@ -123,6 +123,8 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{get_residuals()}}{Get estimated model residuals}
 
+\item{\code{get_se()}}{Get estimated model standard errors}
+
 \item{\code{get_vcov()}}{Get estimated model variance-covariance matrix}
 
 \item{\code{graph()}}{Plot the quantities of interest}

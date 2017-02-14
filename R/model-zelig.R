@@ -1039,6 +1039,22 @@ z$methods(
   }
 )
 
+#' Method for extracting standard errors from Zelig objects
+#' @param object an object of class Zelig
+
+z$methods(
+  get_se = function() {
+    "Get estimated model standard errors"
+    
+    is_uninitializedField(.self$zelig.out)
+    result <- try(lapply(.self$zelig.out$z.out, se_pull), silent = TRUE)
+    if ("try-error" %in% class(result))
+      stop("'get_se' method' not implemented for model '", .self$name, "'")
+    else
+      return(result)
+  }
+)
+
 
 z$methods(
   get_vcov = function() {

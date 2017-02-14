@@ -275,9 +275,16 @@ test_that('REQUIRE TEST for get_model_data method', {
   expect_is(z$get_model_data(), class = 'data.frame')
 })
 
-# REQUIRE TEST for get_model_data method ---------------------------------------
+# REQUIRE TEST for get_pvalue method ---------------------------------------
 test_that('REQUIRE TEST for get_pvalue', {
   z <- zls$new()
   z$zelig(Fertility ~ Education, data = swiss)
   expect_is(z$get_pvalue()[[1]], class = 'numeric')
+})
+
+# REQUIRE TEST for get_se method ---------------------------------------
+test_that('REQUIRE TEST for get_se', {
+  z <- zls$new()
+  z$zelig(Fertility ~ Education, data = swiss)
+  expect_is(z$get_se()[[1]], class = 'numeric')
 })
