@@ -75,3 +75,11 @@ test_that('REQUIRE TEST for ls with interactions', {
     expect_equal(length(s1$setx.out$range), 101)
     expect_equal(length(s2$setx.out$range), 101)
 })
+
+# REQUIRE TEST for ls with unrecognised variable name --------------------------
+test_that('REQUIRE TEST for ls with unrecognised variable name', {
+  states <- as.data.frame(state.x77)
+  z <- zelig(Murder ~ Income * Population, data = states, model = 'ls')
+  expect_error(setx(z, population = 1500:1600, Income = 3098),
+               "Variable 'population' not in data set.")
+})

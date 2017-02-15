@@ -133,7 +133,7 @@ reduce = function(dataset, s, formula, data, avg = avg) {
     if (!all(complete.cases(m))) {
       w <- paste("Variable '", names(s[is.na(m)]),
                  "' not in data set.\n", sep = "")
-      warning(w)
+      stop(w, call. = FALSE)
     }
     for (i in seq(n[ma]))
       ldata[n[ma]][i][[1]] <- setval(dataset[n[ma]][i][[1]],
