@@ -39,7 +39,7 @@ plot(s.out1)
 
 ## ------------------------------------------------------------------------
 z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country), model = "ls", 
-                data = macro)
+                data = macro, cite = FALSE)
 
 ## ------------------------------------------------------------------------
 x.US <- setx(z.out2, country = "United States")

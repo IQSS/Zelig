@@ -2,7 +2,6 @@ templates:
   params:
     bootswatch: paper
 
-
 navbar:
   title: "Zelig Project"
   type: inverse
@@ -42,7 +41,6 @@ reference:
       - sim
       - graph
       - plot
-      
   - title: "Estimation Methods" 
     desc: >
       Methods for finding parameter estimates

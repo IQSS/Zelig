@@ -96,9 +96,9 @@
 <div class="contents">
 <p><em>Built using Zelig version 5.0.16</em></p>
 <p>Use least squares regression analysis to estimate the best linear predictor for the specified dependent variables.</p>
-<div id="syntax" class="section level1">
-<h1 class="hasAnchor">
-<html><body><a href="#syntax" class="anchor"> </a></body></html>Syntax</h1>
+<div id="syntax" class="section level2">
+<h2 class="hasAnchor">
+<html><body><a href="#syntax" class="anchor"> </a></body></html>Syntax</h2>
 <p>With Zelig 5 reference classes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls$<span class="kw">new</span>()
 z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X ~<span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
@@ -111,12 +111,12 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>For more details about the difference between Zelig’s reference classes and compatibility wrappers see the <a href="articles/quickstart.html">Quickstart Vignette</a>.</p>
 <p>The following examples typically use the compatibility wrappers.</p>
 </div>
-<div id="examples" class="section level1">
-<h1 class="hasAnchor">
-<html><body><a href="#examples" class="anchor"> </a></body></html>Examples</h1>
-<div id="simple-first-differences" class="section level2">
+<div id="examples" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#simple-first-differences" class="anchor"> </a></body></html>Simple first differences</h2>
+<html><body><a href="#examples" class="anchor"> </a></body></html>Examples</h2>
+<div id="simple-first-differences" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#simple-first-differences" class="anchor"> </a></body></html>Simple first differences</h3>
 <p>Load Zelig and attach example data frame:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Zelig)
 <span class="kw">data</span>(macro)</code></pre></div>
@@ -178,17 +178,12 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <p><img src="zelig-ls_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 </div>
-<div id="using-categorical-variables-including-fixed-effects" class="section level2">
-<h2 class="hasAnchor">
-<html><body><a href="#using-categorical-variables-including-fixed-effects" class="anchor"> </a></body></html>Using categorical variables, including fixed effects</h2>
+<div id="categorical-variables-including-fixed-effects" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#categorical-variables-including-fixed-effects" class="anchor"> </a></body></html>Categorical variables, including fixed effects</h3>
 <p>Estimate a model with fixed effects for each country (see for help with dummy variables). Note that you do not need to create dummy variables, as the program will automatically parse the unique values in the selected variable into discrete levels.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem ~<span class="st"> </span>gdp +<span class="st"> </span>trade +<span class="st"> </span>capmob +<span class="st"> </span><span class="kw">as.factor</span>(country), <span class="dt">model =</span> <span class="st">"ls"</span>, 
-                <span class="dt">data =</span> macro)</code></pre></div>
-<pre><code>## How to cite this model in Zelig:
-##   R Core Team. 2007.
-##   ls: Least Squares Regression for Continuous Dependent Variables
-##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
+                <span class="dt">data =</span> macro, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Set values for the explanatory variables, using the default mean/mode values, with country set to the United States and Japan, respectively:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.US &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2, <span class="dt">country =</span> <span class="st">"United States"</span>)
 x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2, <span class="dt">country =</span> <span class="st">"Japan"</span>)</code></pre></div>
@@ -199,9 +194,9 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <p><img src="zelig-ls_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 </div>
 </div>
-<div id="model-definition" class="section level1">
-<h1 class="hasAnchor">
-<html><body><a href="#model-definition" class="anchor"> </a></body></html>Model Definition</h1>
+<div id="model-definition" class="section level2">
+<h2 class="hasAnchor">
+<html><body><a href="#model-definition" class="anchor"> </a></body></html>Model Definition</h2>
 <ul>
 <li>The <em>stochastic component</em> is described by a density with mean <span class="math inline">\(\mu_i\)</span> and the common variance <span class="math inline">\(\sigma^2\)</span>
 </li>
@@ -214,9 +209,9 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <p>where <span class="math inline">\(x_i\)</span> is the vector of covariates, and <span class="math inline">\(\beta\)</span> is the vector of coefficients.</p>
 <p>The least squares estimator is the best linear predictor of a dependent variable given <span class="math inline">\(x_i\)</span>, and minimizes the sum of squared residuals, <span class="math inline">\(\sum_{i=1}^n (Y_i-x_i \beta)^2\)</span>.</p>
 </div>
-<div id="quantities-of-interest-definition" class="section level1">
-<h1 class="hasAnchor">
-<html><body><a href="#quantities-of-interest-definition" class="anchor"> </a></body></html>Quantities of Interest Definition</h1>
+<div id="quantities-of-interest-definition" class="section level2">
+<h2 class="hasAnchor">
+<html><body><a href="#quantities-of-interest-definition" class="anchor"> </a></body></html>Quantities of Interest Definition</h2>
 <ul>
 <li>The expected value (<code>qi$ev</code>) is the mean of simulations from the stochastic component,</li>
 </ul>
@@ -229,9 +224,9 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
             E[Y_i(t_i=0)] \right\},\]</span></p>
 <p>where <span class="math inline">\(t_i\)</span> is a binary explanatory variable defining the treatment (<span class="math inline">\(t_i=1\)</span>) and control (<span class="math inline">\(t_i=0\)</span>) groups. Variation in the simulations are due to uncertainty in simulating <span class="math inline">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of <span class="math inline">\(Y_i\)</span> for observations in the treatment group, under the assumption that everything stays the same except that the treatment indicator is switched to :math: <span class="math inline">\(t_i=0\)</span>.</p>
 </div>
-<div id="output-values" class="section level1">
-<h1 class="hasAnchor">
-<html><body><a href="#output-values" class="anchor"> </a></body></html>Output Values</h1>
+<div id="output-values" class="section level2">
+<h2 class="hasAnchor">
+<html><body><a href="#output-values" class="anchor"> </a></body></html>Output Values</h2>
 <p>The output of each Zelig function call contains useful information which you may view. For example, using the <code>z.out1</code> object we estimated above, then you may see the coefficients by using <code>get_coef</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1$<span class="kw">get_coef</span>() </code></pre></div>
 <pre><code>## [[1]]
@@ -310,12 +305,7 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
-      <li>
-<a href="#examples">Examples</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#simple-first-differences">Simple first differences</a></li>
-      <li><a href="#using-categorical-variables-including-fixed-effects">Using categorical variables, including fixed effects</a></li>
-      </ul>
-</li>
+      <li><a href="#examples">Examples</a></li>
       <li><a href="#model-definition">Model Definition</a></li>
       <li><a href="#quantities-of-interest-definition">Quantities of Interest Definition</a></li>
       <li><a href="#output-values">Output Values</a></li>
@@ -327,7 +317,7 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 
 
       <footer><div class="copyright">
-  <p>Developed by Christine. Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, Olivia Lau.</p>
+  <p>Developed by Christine. Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, Olivia Lau, IQSS Harvard University.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,6 +6,7 @@ Everyone's Statistical Software
 [![AppVeyor (Windows) Build Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
 
+
 > **NOTE: This site is in BETA.** For the current official Zelig site see: <http://zeligproject.org>
 
 Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of [R](https://www.r-project.org/), with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three functions and consistent documentation for every method. Zelig uses R code from many researchers, making it "everyone's statistical software". We hope it becomes everyone's statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach.

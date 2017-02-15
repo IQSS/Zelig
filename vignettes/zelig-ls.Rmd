@@ -19,7 +19,7 @@ knitr::opts_knit$set(
 Use least squares regression analysis to estimate the best linear
 predictor for the specified dependent variables.
 
-# Syntax
+## Syntax
 
 With Zelig 5 reference classes:
 
@@ -43,9 +43,9 @@ compatibility wrappers see the [Quickstart Vignette](articles/quickstart.html).
 
 The following examples typically use the compatibility wrappers.
 
-# Examples
+## Examples
 
-## Simple first differences
+### Simple first differences
 
 Load Zelig and attach example data frame:
 
@@ -90,7 +90,7 @@ Plot the simulated distributions:
 plot(s.out1)
 ```
 
-## Using categorical variables, including fixed effects
+### Categorical variables, including fixed effects
 
 Estimate a model with fixed effects for each country (see for help
 with dummy variables). Note that you do not need to create dummy
@@ -99,7 +99,7 @@ in the selected variable into discrete levels.
 
 ```{r}
 z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country), model = "ls", 
-                data = macro)
+                data = macro, cite = FALSE)
 ```
 
 Set values for the explanatory variables, using the default mean/mode
@@ -123,7 +123,7 @@ and plot the results:
 plot(s.out2)
 ```
 
-# Model Definition
+## Model Definition
 
 -  The *stochastic component* is described by a density with mean
    $\mu_i$ and the common variance $\sigma^2$
@@ -141,7 +141,7 @@ plot(s.out2)
    dependent variable given $x_i$, and minimizes the sum of
    squared residuals, $\sum_{i=1}^n (Y_i-x_i \beta)^2$.
 
-# Quantities of Interest Definition 
+## Quantities of Interest Definition 
 
 -  The expected value (`qi$ev`) is the mean of simulations from the
    stochastic component,
@@ -164,7 +164,7 @@ plot(s.out2)
    assumption that everything stays the same except that the treatment
    indicator is switched to :math: $t_i=0$.
    
-# Output Values
+## Output Values
 
 The output of each Zelig function call contains useful information which you
 may view. For example, using the `z.out1` object we estimated above, 

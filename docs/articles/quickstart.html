@@ -100,38 +100,20 @@
 <html><body><a href="#zelig-5-workflow-overview" class="anchor"> </a></body></html>Zelig 5 workflow overview</h2>
 <p>All models in Zelig 5 can be estimated and results explored presented using a five simple steps:</p>
 <ul>
-<li><p>Initialise the Zelig object, e.g with <code>z.out &lt;- zls$new()</code> for a least squares model. Then populate the object with:</p></li>
+<li><p>Initialise the Zelig object, e.g with <code>z.out &lt;- zls$new()</code>, for a least squares model. Then populate the object with:</p></li>
 <li><p><code>zelig</code> to estimate the parameters,</p></li>
 <li><p><code>setx</code> to set fitted values for which we want to find quantities of interest,</p></li>
 <li><p><code>sim</code> to simulate the quantities of interest,</p></li>
 <li><p><code>graph</code> to plot the simulation results.</p></li>
 </ul>
-<div id="differences-from-zelig-4-and-backwards-compatability" class="section level3">
-<h3 class="hasAnchor">
-<html><body><a href="#differences-from-zelig-4-and-backwards-compatability" class="anchor"> </a></body></html>Differences from Zelig 4 and backwards compatability</h3>
-<p>Zelig 5 uses <a href="http://adv-r.had.co.nz/R5.html">reference classes</a> which work a bit differently from what you may expect in R. The big difference is that they are “mutable”, i.e. assigning values to them does not overwrite the objects previous contents.</p>
-<p>Zelig 5 does contain wrappers (largely) allowing you to use Zelig 4 syntax if you’d like. Here is an example workflow with Zelig 5:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls$<span class="kw">new</span>()
-z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X ~<span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-z5$<span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()
-z5$<span class="kw">graph</span>()</code></pre></div>
-<p>Here is the same set of operations using the Zelig 4 wrappers:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
-s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)
-<span class="kw">plot</span>(s.out)</code></pre></div>
-<p>Note that all of the output objects from the Zelig 4 wrappers are Zelig 5 reference class objects, so you can mix and match which syntax you like.</p>
 </div>
-</div>
-<div id="zelig-5-quickstart-guide" class="section level2">
+<div id="example" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#zelig-5-quickstart-guide" class="anchor"> </a></body></html>Zelig 5 Quickstart Guide</h2>
+<html><body><a href="#example" class="anchor"> </a></body></html>Example</h2>
 <p>Let’s walk through an example. This example uses the swiss dataset. It contains data on fertility and socioeconomic factors in Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). We will model the effect of education on fertility, where education is measured as the percent of draftees with education beyond primary school and fertility is measured using the common standardized fertility measure (see Muehlenbein (2010, 80-81) for details).</p>
-</div>
-<div id="installing-and-loading-zelig" class="section level2">
-<h2 class="hasAnchor">
-<html><body><a href="#installing-and-loading-zelig" class="anchor"> </a></body></html>Installing and Loading Zelig</h2>
+<div id="installing-and-loading-zelig" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#installing-and-loading-zelig" class="anchor"> </a></body></html>Installing and loading Zelig</h3>
 <p>If you haven’t already done so, open your R console and install Zelig:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'Zelig'</span>)</code></pre></div>
 <p>Alternatively you can install the development version with:</p>
@@ -139,9 +121,9 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Once Zelig is installed, load it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Zelig)</code></pre></div>
 </div>
-<div id="building-models" class="section level2">
-<h2 class="hasAnchor">
-<html><body><a href="#building-models" class="anchor"> </a></body></html>Building Models</h2>
+<div id="building-models" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#building-models" class="anchor"> </a></body></html>Building models</h3>
 <p>Let’s assume we want to estimate the effect of education on fertility. Since fertility is a continuous variable, least squares is an appropriate model choice. We first create a Zelig least squares object:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize Zelig5 least squares object</span>
 z5 &lt;-<span class="st"> </span>zls$<span class="kw">new</span>()</code></pre></div>
@@ -216,9 +198,9 @@ z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()
 ## 1 -8.576471 1.492872 -8.586621 -11.68687 -5.740413</code></pre>
 <p>At this point, we’ve estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The <code>summary()</code> method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences–the difference in expected values at the set levels of education.</p>
 </div>
-<div id="visualizations" class="section level1">
-<h1 class="hasAnchor">
-<html><body><a href="#visualizations" class="anchor"> </a></body></html>Visualizations</h1>
+<div id="visualizations" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#visualizations" class="anchor"> </a></body></html>Visualizations</h3>
 <p>Zelig’s <code>graph()</code> method plots the estimated quantities of interest:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5$<span class="kw">graph</span>()</code></pre></div>
 <p><img src="quickstart_files/figure-html/example_plot_graph-1.png" width="672"></p>
@@ -236,6 +218,7 @@ z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre
 <p><img src="quickstart_files/figure-html/example_plot_ci_plot-1.png" width="480"></p>
 </div>
 </div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -243,10 +226,7 @@ z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#zelig-5-workflow-overview">Zelig 5 workflow overview</a></li>
-      <li><a href="#zelig-5-quickstart-guide">Zelig 5 Quickstart Guide</a></li>
-      <li><a href="#installing-and-loading-zelig">Installing and Loading Zelig</a></li>
-      <li><a href="#building-models">Building Models</a></li>
-      <li><a href="#visualizations">Visualizations</a></li>
+      <li><a href="#example">Example</a></li>
       </ul>
 </div>
       </div>
@@ -255,7 +235,7 @@ z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre
 
 
       <footer><div class="copyright">
-  <p>Developed by Christine. Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, Olivia Lau.</p>
+  <p>Developed by Christine. Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, Olivia Lau, IQSS Harvard University.</p>
 </div>
 
 <div class="pkgdown">
