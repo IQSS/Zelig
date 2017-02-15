@@ -19,7 +19,9 @@ navbar:
           href: "reference/index.html#section-estimation-methods"
         - text: "Interacting Outside of Zelig"
           href: "reference/index.html#section-exterior-interaction-functions"
-  right: 
+  right:
+    - text: About
+      href: "articles/about.html"
     - text: "Dev-Blog"
       icon: fa-medium
       href: https://medium.com/zelig-dev/archive
