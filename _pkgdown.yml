@@ -1,7 +1,7 @@
 templates:
   params:
-    bootswatch: readable
-    
+    bootswatch: paper
+
 
 navbar:
   title: "Zelig Project"

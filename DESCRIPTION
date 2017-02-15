@@ -47,9 +47,10 @@ Imports:
     survival,
     VGAM
 Suggests:
-    testthat,
+    R2HTML,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 Collate:
     'assertions.R'
     'model-zelig.R'
