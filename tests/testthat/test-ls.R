@@ -27,6 +27,18 @@ test_that('REQUIRE TEST ls with by', {
     z5$zelig(Fertility ~ Education, data = swiss, by = 'maj_catholic')
 })
 
+# REQUIRE TEST setx with logical covariates ------------------------------------
+test_that('', {
+    swiss$maj_catholic <- cut(swiss$Catholic, breaks = c(0, 51, 100))
+    swiss$maj_catholic_logical <- FALSE
+    swiss$maj_catholic_logical[swiss$maj_catholic == '(51,100]'] <- TRUE
+    z5l <- zls$new()
+    z5l$zelig(Fertility ~ Education + maj_catholic_logical, data = swiss)
+    z5l$setx(maj_catholic_logical = TRUE)
+    expect_is(z5l$setx.out$x, class = c("rowwise_df", "tbl_df", "tbl", 
+                                        "data.frame"))
+})
+
 # gim method tests -------------------------------------------------------------
 
 #test_that('REQUIRE TESTls gim method', {
