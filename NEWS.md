@@ -1,6 +1,3 @@
-Note: #* refer to GitHub issue number. See
-<https://github.com/IQSS/Zelig/issues/>
-
 Zelig version 5.0-16
 ==============================
 
@@ -28,9 +25,7 @@ underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
 
 - Extensive additions to model estimation method documentation and vignettes.
 
-- `setx` returns an error if it is unable to find a supplied variable name. #219
-
-- `setx` can now handle logical variables. #106
+- `setx` returns an error if it is unable to find a supplied variable name. 
 
 ## Minor changes
 
