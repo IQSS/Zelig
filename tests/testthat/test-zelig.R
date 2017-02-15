@@ -296,3 +296,15 @@ test_that('REQUIRE TEST for get_se', {
   z$zelig(Fertility ~ Education, data = swiss)
   expect_is(z$get_se()[[1]], class = 'numeric')
 })
+
+# REQUIRE TEST setx with logical covariates ------------------------------------
+test_that('REQUIRE TEST setx with logical covariates', {
+  swiss$maj_catholic <- cut(swiss$Catholic, breaks = c(0, 51, 100))
+  swiss$maj_catholic_logical <- FALSE
+  swiss$maj_catholic_logical[swiss$maj_catholic == '(51,100]'] <- TRUE
+  z5l <- zls$new()
+  z5l$zelig(Fertility ~ Education + maj_catholic_logical, data = swiss)
+  z5l$setx(maj_catholic_logical = TRUE)
+  expect_is(z5l$setx.out$x, class = c("rowwise_df", "tbl_df", "tbl", 
+                                        "data.frame"))
+})

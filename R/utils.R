@@ -96,10 +96,12 @@ setval <- function(val, newval) {
     newval
   else if (is.ordered(val))
     newval
+  else if (is.logical(val))
+    newval
   else {
     lev <- levels(val)
     if (!newval %in% lev)
-      stop("Wrong factor")
+      stop("Wrong factor", call. = FALSE)
     return(factor(newval, levels = lev))
   }
 }
