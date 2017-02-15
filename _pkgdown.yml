@@ -54,4 +54,3 @@ reference:
     contents: 
       - from_zelig_model
       - to_zelig_mi
-      - toJSON
