@@ -6,8 +6,6 @@ Everyone's Statistical Software
 [![AppVeyor (Windows) Build Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
 
-
-
 > **NOTE: This site is in BETA.** For the current official Zelig site see: <http://zeligproject.org>
 
 <img style="float:left; padding-right:20px" src="https://github.com/IQSS/Zelig/blob/master/README_files/img/zelig.png?raw=true"/>
