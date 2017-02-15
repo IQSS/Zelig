@@ -2,13 +2,14 @@ Package: Zelig
 License: GPL (>=3)
 Title: Everyone's Statistical Software
 Authors@R: c(
-    person("Christine.", "Choirat", role = "aut"),
+    person("Christine", "Choirat", role = "aut"),
     person("Christopher", "Gandrud", email = "zelig.zee@gmail.com",
     role = c("aut", "cre")),
     person("James", "Honaker", role = "aut"),
     person("Kosuke", "Imai", role = "aut"),
     person("Gary", "King", role = "aut"),
-    person("Olivia", "Lau", role = "aut")
+    person("Olivia", "Lau", role = "aut"),
+    person("IQSS", "Harvard University", role = "fnd")
     )
 Description: A framework that brings together an abundance of common
     statistical models found across packages into a unified interface, and
@@ -28,7 +29,7 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-16
-Date: 2017-02-13
+Date: 2017-02-15
 Imports:
     AER,
     Amelia,
@@ -47,9 +48,9 @@ Imports:
     survival,
     VGAM
 Suggests:
-    testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 Collate:
     'assertions.R'
     'model-zelig.R'
