@@ -101,7 +101,59 @@ We initialize the Zelig object when users enter `z5 <- zlogit\$new()` in the R c
 
 $$\tt{Zelig} \rightarrow \tt{Zelig-glm} \rightarrow \tt{Zelig-binchoice} \rightarrow \tt{Zelig-logit} $$
 
+Look at the first lines of code in each of the files opened in RStudio, and you’ll see `setRefClass()`:
 
+```{r eval=FALSE}
+zlogit <- setRefClass("Zelig-logit",
+                      contains = "Zelig-binchoice")
+```
+
+The chain of inheritance is passed using the contains argument. Starting at the end of the inheritance tree, the RC *Zelig-logit* contains, or inherits from, the RC *Zelig-binchoice*, which inherits from the RC *Zelig-glm*, 
+
+```{r, eval=FALSE}
+zbinchoice <- setRefClass("Zelig-binchoice",
+                          contains = "Zelig-glm")
+```
+
+which inherits from the RC *Zelig*:
+
+```{r, eval=FALSE}
+zglm <- setRefClass("Zelig-glm",
+                    contains = "Zelig",
+                    fields = list(family = "character",
+                                  link = "character",
+                                  linkinv = "function"))
+```
+
+In *Zelig*, we establish our most basic fields and methods, and get more specific as we move down the inheritance.
+
+When `zlogit$new()` is called, we actually call `initialize()` first at the end of the inheritance, inside *Zelig-logit*. Look inside *model-logit.R* at `initialize()`. 
+
+```{r, eval=FALSE}
+zlogit$methods(initialize = function() {
+    callSuper()
+    .self$name <- "logit"
+    .self$link <- "logit"
+    .self$description = "Logistic Regression for Dichotomous Dependent Variables"
+    .self$packageauthors <- "R Core Team"
+    .self$wrapper <- "logit"
+})
+```
+
+The first line is `callSuper()`. `callSuper()` is a method that is common to all RCs, and useful particularly for inheritance. What it does it simple: it calls the same function in the parent object, or the object that the present object inherits from. So, since *Zelig-logit* inherits from *Zelig-binchoice*, `callSuper()` in `initialize()` calls `initialize()` inside *Zelig-binchoice*, where the first function is also `callSuper()`, and so `initialize()` is called in *Zelig-glm*, where the first function is also `callSuper()`, and so `initialize()` is called in *Zelig*. *Zelig* is at the top of the tree, and so now that we have climbed up the inheritance tree, we next climb down the tree, executing all functions inside `initialize()` and after `callSuper()`, first in *Zelig*, then *Zelig-glm*, then *Zelig-binchoice*, and lastly *Zelig-logit*. 
+
+To summarize: upon executing `z5 <- zlogit$new()`, we `callSuper()` inside `initialize()`, beginning at the end of the inheritance (*Zelig-logit*) and climbing to the top (*Zelig*). Then, for each RC, everything below `callSuper()` inside `initialize()` is executed, beginning at the top of the inheritance (*Zelig*) and climbing down (*Zelig-logit*), assigning the RC’s fields as we descend. For example, in *Zelig* `.self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"`, and in *Zelig-logit*, `.self$link <- "logit"`. Doing so initializes our *Zelig* object, which now waits for `zelig()` to be called.
+
+### `zelig()`
+
+`zelig()` will help to make sense of why `initialize()` specifies the fields that it does. Let’s look at `zelig()` inside *[model-glm.R](https://github.com/IQSS/Zelig/blob/master/R/model-glm.R)*, the last RC in the inheritance to modify `zelig()`. Recall that in `initialize()`, we started at the bottom of the inheritance, and because the first line is always `callSuper()`, we climbed to the top before executing any other function in `initialize()`. Well, here we don’t `callSuper()` until later, meaning that the code above `callSuper()` is execute and then we `callSuper()` and climb to the parent object. As we descend the inheritance, the code below `callSuper()` is executed. Let’s have a look at the first lines of code in `zelig()` in *model-glm.R*:
+
+```{r eval=FALSE}
+.self$zelig.call <- match.call(expand.dots = TRUE)
+.self$model.call <- .self$zelig.call
+```
+
+[TO COMPLETE based on <http://docs.zeligproject.org/en/latest/devguide.html>]
 
 
 [^byfoot]: See the Zelig documentation for more details about `by`.

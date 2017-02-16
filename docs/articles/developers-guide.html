@@ -31,8 +31,23 @@
 <li>
   <a href="../articles/quickstart.html">Quickstart</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../articles/index.html">Vignettes</a>
+      <a href="../articles/index.html#section-zelig-overview">Overview</a>
+    </li>
+    <li>
+      <a href="../articles/index.html#section-model-details">Model Details</a>
+    </li>
+    <li>
+      <a href="../articles/index.html#section-other">Other</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -154,6 +169,40 @@ z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote ∼ 
 </h3>
 <p>We initialize the Zelig object when users enter <code>z5 &lt;- zlogit\$new()</code> in the R console. This is when all the information necessary to wrap the logit model using <code>glm()</code> is initialized, and is accomplished using the <code>initialize()</code> method. To understand how the Zelig object is initialized, let’s first explore the inheritance. When we write a RC, we can specify another RC whose fields and methods will be inherited by our RC. Recall logit’s inheritance:</p>
 <p><span class="math display">\[\tt{Zelig} \rightarrow \tt{Zelig-glm} \rightarrow \tt{Zelig-binchoice} \rightarrow \tt{Zelig-logit} \]</span></p>
+<p>Look at the first lines of code in each of the files opened in RStudio, and you’ll see <code>setRefClass()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zlogit &lt;-<span class="st"> </span><span class="kw">setRefClass</span>(<span class="st">"Zelig-logit"</span>,
+                      <span class="dt">contains =</span> <span class="st">"Zelig-binchoice"</span>)</code></pre></div>
+<p>The chain of inheritance is passed using the contains argument. Starting at the end of the inheritance tree, the RC <em>Zelig-logit</em> contains, or inherits from, the RC <em>Zelig-binchoice</em>, which inherits from the RC <em>Zelig-glm</em>,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zbinchoice &lt;-<span class="st"> </span><span class="kw">setRefClass</span>(<span class="st">"Zelig-binchoice"</span>,
+                          <span class="dt">contains =</span> <span class="st">"Zelig-glm"</span>)</code></pre></div>
+<p>which inherits from the RC <em>Zelig</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zglm &lt;-<span class="st"> </span><span class="kw">setRefClass</span>(<span class="st">"Zelig-glm"</span>,
+                    <span class="dt">contains =</span> <span class="st">"Zelig"</span>,
+                    <span class="dt">fields =</span> <span class="kw">list</span>(<span class="dt">family =</span> <span class="st">"character"</span>,
+                                  <span class="dt">link =</span> <span class="st">"character"</span>,
+                                  <span class="dt">linkinv =</span> <span class="st">"function"</span>))</code></pre></div>
+<p>In <em>Zelig</em>, we establish our most basic fields and methods, and get more specific as we move down the inheritance.</p>
+<p>When <code>zlogit$new()</code> is called, we actually call <code>initialize()</code> first at the end of the inheritance, inside <em>Zelig-logit</em>. Look inside <em>model-logit.R</em> at <code>initialize()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zlogit$<span class="kw">methods</span>(<span class="dt">initialize =</span> function() {
+    <span class="kw">callSuper</span>()
+    .self$name &lt;-<span class="st"> "logit"</span>
+    .self$link &lt;-<span class="st"> "logit"</span>
+    .self$description =<span class="st"> "Logistic Regression for Dichotomous Dependent Variables"</span>
+    .self$packageauthors &lt;-<span class="st"> "R Core Team"</span>
+    .self$wrapper &lt;-<span class="st"> "logit"</span>
+})</code></pre></div>
+<p>The first line is <code>callSuper()</code>. <code>callSuper()</code> is a method that is common to all RCs, and useful particularly for inheritance. What it does it simple: it calls the same function in the parent object, or the object that the present object inherits from. So, since <em>Zelig-logit</em> inherits from <em>Zelig-binchoice</em>, <code>callSuper()</code> in <code>initialize()</code> calls <code>initialize()</code> inside <em>Zelig-binchoice</em>, where the first function is also <code>callSuper()</code>, and so <code>initialize()</code> is called in <em>Zelig-glm</em>, where the first function is also <code>callSuper()</code>, and so <code>initialize()</code> is called in <em>Zelig</em>. <em>Zelig</em> is at the top of the tree, and so now that we have climbed up the inheritance tree, we next climb down the tree, executing all functions inside <code>initialize()</code> and after <code>callSuper()</code>, first in <em>Zelig</em>, then <em>Zelig-glm</em>, then <em>Zelig-binchoice</em>, and lastly <em>Zelig-logit</em>.</p>
+<p>To summarize: upon executing <code>z5 &lt;- zlogit$new()</code>, we <code>callSuper()</code> inside <code>initialize()</code>, beginning at the end of the inheritance (<em>Zelig-logit</em>) and climbing to the top (<em>Zelig</em>). Then, for each RC, everything below <code>callSuper()</code> inside <code>initialize()</code> is executed, beginning at the top of the inheritance (<em>Zelig</em>) and climbing down (<em>Zelig-logit</em>), assigning the RC’s fields as we descend. For example, in <em>Zelig</em> <code>.self$authors &lt;- "Kosuke Imai, Gary King, and Olivia Lau"</code>, and in <em>Zelig-logit</em>, <code>.self$link &lt;- "logit"</code>. Doing so initializes our <em>Zelig</em> object, which now waits for <code><a href="../reference/zelig.html">zelig()</a></code> to be called.</p>
+</div>
+<div id="zelig" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#zelig" class="anchor"> </a></body></html>
+<code><a href="../reference/zelig.html">zelig()</a></code>
+</h3>
+<p><code><a href="../reference/zelig.html">zelig()</a></code> will help to make sense of why <code>initialize()</code> specifies the fields that it does. Let’s look at <code><a href="../reference/zelig.html">zelig()</a></code> inside <em><a href="https://github.com/IQSS/Zelig/blob/master/R/model-glm.R">model-glm.R</a></em>, the last RC in the inheritance to modify <code><a href="../reference/zelig.html">zelig()</a></code>. Recall that in <code>initialize()</code>, we started at the bottom of the inheritance, and because the first line is always <code>callSuper()</code>, we climbed to the top before executing any other function in <code>initialize()</code>. Well, here we don’t <code>callSuper()</code> until later, meaning that the code above <code>callSuper()</code> is execute and then we <code>callSuper()</code> and climb to the parent object. As we descend the inheritance, the code below <code>callSuper()</code> is executed. Let’s have a look at the first lines of code in <code><a href="../reference/zelig.html">zelig()</a></code> in <em>model-glm.R</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.self$zelig.call &lt;-<span class="st"> </span><span class="kw">match.call</span>(<span class="dt">expand.dots =</span> <span class="ot">TRUE</span>)
+.self$model.call &lt;-<span class="st"> </span>.self$zelig.call</code></pre></div>
+<p>[TO COMPLETE based on <a href="http://docs.zeligproject.org/en/latest/devguide.html" class="uri">http://docs.zeligproject.org/en/latest/devguide.html</a>]</p>
 </div>
 </div>
 <div class="footnotes">
