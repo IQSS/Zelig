@@ -1,0 +1,107 @@
+---
+title: "Developer's Guide"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Developer's Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+*Built using Zelig version `r packageVersion('Zelig')`*
+  
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+  stop_on_error = 2L
+)
+```
+
+This is a guide for contributing to the Zelig Project by adding new statistical models into Zelig. Before getting started, familiarize yourself with R's Reference Classes (RC), as Zelig5 makes extensive use of RCs to allow for the straightforward addition of new models. Useful resources include Hadley Wickham's [chapter on Reference Classes](http://adv-r.had.co.nz/R5.html), and R's [ReferenceClasses documentation](https://stat.ethz.ch/R-manual/R-devel/library/methods/html/refClass.html). Be sure to read [King, Tomz, and Wittenberg (2000)](http://gking.harvard.edu/files/making.pdf) for the underlying algorithm that is deployed in Zelig. Finally, explore [zeligproject.org](http://zeligproject.org/) to learn more about Zelig and our plans for the future.
+
+In the abstract, Zelig is a tool for estimating and visualizing easily interpretable quantities of interest for statistical models in R. To do so, Zelig leverages R's open-source philosophy and builds on existing statistical model implementations such as those found in **stats** and **VGAM**. Consider the following R code for a typical Zelig 5 workflow:
+
+```{r eval=FALSE}
+data(turnout)
+z5 <- zlogit$new()
+z5$zelig(vote ~ age, data = turnout)
+z5$setx()
+z5$sim()
+z5$graph()
+```
+
+First, we load the data. Then, the next five lines of code are nearly identical for any model in Zelig. The one exception is the first, in which we assign a new model object to z5. `zlogit` is the RC, and the `$` component selector means we are calling a method inside that RC. Each RC is its own environment, and a method is a function that is internal to that environment. Think of the RC as a home, and the method as a room in the home. To enter a room, you must first be inside the home.
+
+`z5` is assigned the RC `zlogit`. `new()`, `zelig()`, `setx()`, `sim()`, and `graph()` are all methods inside `zlogit` and, thus, inside `z5`. Anything entered between the parenthesis are arguments passed to the method. `zelig()` is the method that calls the underlying estimation function, which for logistic regression is `glm()`. The arguments we pass to `zelig()` are, minimally, the arguments we would pass to `glm()` if we were to call it directly. `zelig()` also accepts some arguments that may not be accepted by the existing function, such as `by`.[^byfoot] `setx()` is a function that sets the predictor values at which we want to simulate. In most implementations, `setx()` is independent of the model and contributors need not be concerned with it. `sim()` is the method that simulates draws from the data. For contributors, this is where the model's link function, or the systematic component, is called. It is also where the relevant quantities of interest are specified. `graph()` visualizes the output of `sim()`, and while your model may have visualizations that you’d like to add, these are optional, as `graph()` has base visualizations that always work on the simulated estimates.
+
+In this guide, we are going to walk through an example with the logit model, as implemented by `glm()` in the [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) library to Zelig. 
+
+## Getting Started
+
+First, let's download Zelig and load the project in RStudio. This will make it easier to see how the package works in its entirety. 
+
+If you haven't already, download and install [RStudio](http://www.rstudio.com/). Then go to [GitHub and download Zelig](https://github.com/IQSS/Zelig).
+
+In RStudio, click the Files tab and navigate to the folder *Zelig-master*, which you just downloaded. Select and load *Zelig.Rproj*. In RStudio, then click the Build tab, and Build & Reload. This rebuilds the package and loads it into R.
+
+Next, from RStudio open the following files, found in *Zelig-master/R*:
+
+- *model-zelig.R*
+- *model-glm.R*
+- *model-binchoice.R*
+- *model-logit.R*
+
+If you're new to RStudio or would like to better understand what’s going on, add a print statement and rebuild the package. For example, inside *model-zelig.R*, find `zelig = function`. This is where the `zelig()` method is declared. Inside the `zelig()` method, add a line, `cat('Zelig')`. Save, and then click Build & Reload in RStudio. After entering the following code in the R console:
+
+```{r eval=FALSE}
+data(turnout)
+z5 <- zlogit$new()
+z5$zelig(vote ∼ age, data = turnout)
+```
+
+you should see `Zelig` printed in the console.
+
+## Reference Classes and Inheritance
+
+RCs have three important properties: (1) they contain fields, (2) they contain methods, and (3) they can inherit fields and methods from other RCs. See the Inheritance Tree at [zeligproject.org/models](NEED TO GET). Notice that *Zelig-logit* inherits from *Zelig-binchoice*, *Zelig-glm*, and *Zelig*. Each of these nodes in the Inheritance Tree corresponds to a file that we just opened in RStudio.
+
+To contribute a new package, you'll minimally inherit from Zelig. But, you may extend the inheritance or inherit additional classes, depending on the way your model relates to others. Inheretance should follow a logical structure. Consider logit's inheritance. *Zelig-glm* inherits from *Zelig*, and the `glm()` function can be used to estimate the following models: `gamma`, `normal`, `poisson`, `probit`, and `logit`. Look at these `poisson`, `logit`, and `probit` estimations:
+
+```{r, eval=FALSE}
+fit.poisson <- glm(vote ∼ age, data=turnout, family = poisson())
+fit.logit <- glm(vote ∼ age, data=turnout, family=binomial("logit"))
+fit.probit <- glm(vote ∼ age, data=turnout, family=binomial("probit"))
+```
+
+The `family` argument is what distinguishes these three estimations, but notice that, while `poisson`’s `family` is `poisson()`, `logit`’s and `probit`’s `family` are both `binomial()`. So, while poisson may inherit from *Zelig-glm* and stop there, `logit` and `probit` go one step further and inherit from an intermediary class called *Zelig-binchoice*, which inherits from *Zelig-glm*.
+
+## Zelig Methods
+
+A commonly used implementation of the logistic regression is the `glm()` function in stats. Load Zelig's `turnout` data with `data(turnout)`, and estimate $vote \sim age$ using `glm()`:
+
+```{r eval=FALSE}
+fit <- glm(vote ∼ age, data=turnout, family=binomial("logit"))
+```
+
+The Zelig counterpart would be:
+
+```{r eval=FALSE}
+z5 <- zlogit$new()
+z5$zelig(vote ∼ age, data = turnout)
+```
+
+You could also use the Zelig 4 wrapper:
+
+```{r eval=FALSE}
+z5 <- zelig(vote ∼ age, data = turnout, model = "logit")
+```
+
+### `new()`
+
+We initialize the Zelig object when users enter `z5 <- zlogit\$new()` in the R console. This is when all the information necessary to wrap the logit model using `glm()` is initialized, and is accomplished using the `initialize()` method. To understand how the Zelig object is initialized, let’s first explore the inheritance. When we write a RC, we can specify another RC whose fields and methods will be inherited by our RC. Recall logit’s inheritance:
+
+$$\tt{Zelig} \rightarrow \tt{Zelig-glm} \rightarrow \tt{Zelig-binchoice} \rightarrow \tt{Zelig-logit} $$
+
+
+
+
+[^byfoot]: See the Zelig documentation for more details about `by`.
