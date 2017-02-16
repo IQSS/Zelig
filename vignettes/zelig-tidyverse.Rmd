@@ -49,7 +49,7 @@ head(swiss)
 
 We could then analyse it with Zelig and plot quantities of interest using Tidyverse's pipe operator. Note the use of `data = .` this tells the pipe to enter the `swiss` data object as the value of `zelig`'s data argument:
 
-```{r}
+```
 swiss %>% 
     zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
           cite = FALSE) %>%
