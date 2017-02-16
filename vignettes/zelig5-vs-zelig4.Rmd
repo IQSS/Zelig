@@ -1,0 +1,40 @@
+---
+title: "Comparing Zelig 5 and Zelig 4 Syntax"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Zelig 5 vs Zelig 4}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+```
+
+Zelig 5 uses [reference classes](http://adv-r.had.co.nz/R5.html) which work a bit differently from what you may expect in R. The big difference is that they are "mutable", i.e. assigning values to them does not overwrite the objects previous contents. 
+
+Zelig 5 does contain wrappers (largely) allowing you to use Zelig 4 syntax if you'd like. Here is an example workflow with Zelig 5:
+
+```{r zelig-5-pseudo, eval=FALSE}
+z5 <- zls$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+z5$graph()
+```
+
+Here is the same set of operations using the Zelig 4 wrappers:
+
+```{r zelig-4-pseudo, eval=FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "ls", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+plot(s.out)
+```
+
+Note that all of the output objects from the Zelig 4 wrappers are Zelig 5 reference class objects, so you can mix and match which syntax you like.

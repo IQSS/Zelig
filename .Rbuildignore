@@ -2,10 +2,11 @@
 ^\.Rproj\.user$
 .gitignore
 images
-README.md
+README.Rmd
 .travis.yml
 ^appveyor\.yml$
 ^README\.Rmd$
 ^README_files/*
 index*
 _pkgdown.yml
+docs/*

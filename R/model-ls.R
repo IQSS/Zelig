@@ -26,7 +26,9 @@
 #' @param by an optional character string identifying a variable in `data` 
 #'   to conduct the model analysis along. This can be used to run separate 
 #'   models for different levels of a categorical variable.
-#' @param bootstrap logical whether or not to bootstrap the data set. 
+#' @param bootstrap logical whether or not to bootstrap the data set.
+#' @param cite logical whether or not to return model citation information to 
+#'   the console when the model has been estimated. 
 #'
 #' @details Use least squares regression analysis to estimate the best linear 
 #'   predictor for the specified dependent variables.

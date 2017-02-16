@@ -38,6 +38,9 @@ to conduct the model analysis along. This can be used to run separate
 models for different levels of a categorical variable.}
 
 \item{bootstrap}{logical whether or not to bootstrap the data set.}
+
+\item{cite}{logical whether or not to return model citation information to
+the console when the model has been estimated.}
 }
 \description{
 Least Squares Regression for Continuous Dependent Variables

@@ -1,21 +1,27 @@
 templates:
   params:
-    bootswatch: readable
+    bootswatch: paper
 
 navbar:
   title: "Zelig Project"
   type: inverse
   left: 
-    - text: "Reference"
+    - text: "Quickstart"
+      href: "articles/quickstart.html"
+    - text: "Vignettes"
+      href: "articles/index.html"
+    - text: "Function Reference"
       href: "reference/index.html"
       menu: 
         - text: "Workflow"
           href: "reference/index.html#section-main-zelig-workflow"
         - text: "Estimation Methods"
           href: "reference/index.html#section-estimation-methods"
-        - text: "Interationcs Outside of Zelig"
+        - text: "Interacting Outside of Zelig"
           href: "reference/index.html#section-exterior-interaction-functions"
-  right: 
+  right:
+    - text: About
+      href: "articles/about.html"
     - text: "Dev-Blog"
       icon: fa-medium
       href: https://medium.com/zelig-dev/archive
@@ -37,7 +43,6 @@ reference:
       - sim
       - graph
       - plot
-      
   - title: "Estimation Methods" 
     desc: >
       Methods for finding parameter estimates

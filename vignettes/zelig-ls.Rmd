@@ -1,0 +1,238 @@
+---
+title: "Least Squares Regression for Continuous Dependent Variables with `ls`"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Least squares regression with ls}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+```
+
+Use least squares regression analysis to estimate the best linear
+predictor for the specified dependent variables.
+
+## Syntax
+
+With Zelig 5 reference classes:
+
+```{r, eval = FALSE}
+z5 <- zls$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "ls", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+For more details about the difference between Zelig's reference classes and 
+compatibility wrappers see the [Quickstart Vignette](articles/quickstart.html).
+
+The following examples typically use the compatibility wrappers.
+
+## Examples
+
+### Simple first differences
+
+Load Zelig and attach example data frame:
+
+```{r}
+library(Zelig)
+data(macro)
+```
+
+Estimate model:
+
+```{r message=FALSE}
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro, 
+                cite = FALSE)
+```
+
+Summarize regression coefficients:
+
+```{r, eval = TRUE}
+summary(z.out1)
+```
+
+Set explanatory variables to their default (mean/mode) values, with
+high (80th percentile) and low (20th percentile) values for the trade
+variable:
+
+```{r, eval = TRUE}
+x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
+```
+
+Simulate first differences for the effect of high versus low trade on GDP:
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+
+summary(s.out1)
+```
+
+Plot the simulated distributions:
+
+```{r fig.height=11, fig.width=7}
+plot(s.out1)
+```
+
+### Categorical variables, including fixed effects
+
+Estimate a model with fixed effects for each country (see for help
+with dummy variables). Note that you do not need to create dummy
+variables, as the program will automatically parse the unique values
+in the selected variable into discrete levels.
+
+```{r}
+z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country), model = "ls", 
+                data = macro, cite = FALSE)
+```
+
+Set values for the explanatory variables, using the default mean/mode
+values, with country set to the United States and Japan,
+respectively:
+
+```{r}
+x.US <- setx(z.out2, country = "United States")
+x.Japan <- setx(z.out2, country = "Japan")
+```
+
+Simulate quantities of interest:
+
+```{r}
+s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
+```
+
+and plot the results:
+
+```{r fig.height=11, fig.width=7}
+plot(s.out2)
+```
+
+## Model Definition
+
+-  The *stochastic component* is described by a density with mean
+   $\mu_i$ and the common variance $\sigma^2$
+
+   $$Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).$$
+
+-  The *systematic component* models the conditional mean as
+
+   $$\mu_i =  x_i \beta,$$
+
+   where $x_i$ is the vector of covariates, and $\beta$ is
+   the vector of coefficients.
+
+   The least squares estimator is the best linear predictor of a
+   dependent variable given $x_i$, and minimizes the sum of
+   squared residuals, $\sum_{i=1}^n (Y_i-x_i \beta)^2$.
+
+## Quantities of Interest Definition 
+
+-  The expected value (`qi$ev`) is the mean of simulations from the
+   stochastic component,
+
+   $$E(Y) = x_i \beta,$$
+
+   given a draw of $\beta$ from its sampling distribution.
+
+-  In conditional prediction models, the average expected treatment
+   effect (`att.ev`) for the treatment group is
+
+   $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            E[Y_i(t_i=0)] \right\},$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math: $t_i=0$.
+   
+## Output Values
+
+The output of each Zelig function call contains useful information which you
+may view. For example, using the `z.out1` object we estimated above, 
+then you may see the coefficients by using `get_coef`:
+
+```{r}
+z.out1$get_coef() 
+```
+
+or the variance-covariance matrix with `get_vcov`:
+
+```{r}
+z.out1$get_vcov()
+```
+
+For a default summary of information use either 
+
+```{r}
+z.out1$summarize()
+```
+
+or as we saw before using the wrapper, e.g. `summary(z.out1)`. 
+
+-  From the `zelig()` output object `z.out`, you may use the following 
+'getter' functions to extract:
+
+  - `get_pvalue` and `get_se`: p-values and standard errors, respectively.
+
+  -  `get_residuals`: residuals.
+
+  -  `get_fitted`: fitted values.
+
+  -  `get_df_residual`: the residual degrees of freedom.
+
+  -  `get_model_data`: the input data frame.
+
+-  You can extract the entire original fitted model object with 
+`from_zelig_model`. For example:
+
+```{r eval=FALSE}
+ls.original <- from_zelig_model(z.out1)
+```
+
+You can then use `summary` and the component selector `$` to extract:
+
+  -  `coefficients`: the parameter estimates with their associated
+      standard errors, $p$-values, and $t$-statistics.
+
+      $$\hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i$$
+
+  -  `sigma`: the square root of the estimate variance of the random
+      error $e$:
+
+      $$\hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}$$
+
+  -  `r.squared`: the fraction of the variance explained by the model:
+
+      $$R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
+                  \bar{y})^2}$$
+
+  -  `adj.r.squared`: the above $R^2$ statistic, penalizing for an
+      increased number of explanatory variables.
+
+  -  `cov.unscaled`: a $k \times k$ matrix of unscaled covariances.
+   
+For example:
+
+```{r}
+ls.original <- from_zelig_model(z.out1)
+summary(ls.original)$adj.r.squared
+```

@@ -28,11 +28,6 @@ knitr::opts_knit$set(
 [![Gitter chat](https://badges.gitter.im/Zelig-dev/gitter.png)](https://gitter.im/Zelig-dev/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 [Dev-Blog](https://medium.com/zelig-dev)
 
-Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of R, with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three commands and consistent documentation for every method. Zelig uses R code from many researchers, making it "everyone’s statistical software." We hope it becomes everyone’s statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach. 
-
-Project page and publications available at: <http://zeligproject.org>.
-
-# Zelig 5
 
 The release of Zelig 5.0 expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture. Comparability wrappers are available so that you can still use pre-Zelig 5 syntax.
 
@@ -54,7 +49,26 @@ All models in Zelig 5 can be estimated and results explored presented using a fi
 
 Zelig 5 uses [reference classes](http://adv-r.had.co.nz/R5.html) which work a bit differently from what you may expect in R. The big difference is that they are "mutable", i.e. assigning values to them does not overwrite the objects previous contents. 
 
-Zelig 5 does contain wrappers (largely) allowing you to use Zelig 4 syntax if you'ld like.
+Zelig 5 does contain wrappers (largely) allowing you to use Zelig 4 syntax if you'd like. Here is an example workflow with Zelig 5:
+
+```{r zelig-5-pseudo, eval=FALSE}
+z5 <- zls$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+z5$graph()
+```
+
+Here is the same set of operations using the Zelig 4 wrappers:
+
+```{r zelig-4-pseudo, eval=FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "ls", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+plot(s.out)
+```
+
+Note that all of the output objects from the Zelig 4 wrappers are Zelig 5 reference class objects, so you can mix and match which syntax you like.
 
 ## Zelig 5 Quickstart Guide
 
@@ -153,6 +167,5 @@ z5$sim()
 Then use the `graph()` method as before:
 
 ```{r example_plot_ci_plot, fig.height=5, fig.width=5}
-
 z5$graph()
 ```

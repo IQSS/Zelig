@@ -2,13 +2,14 @@ citHeader("To cite Zelig in publications please use:")
 
 if(!exists("meta") || is.null(meta)) meta <- packageDescription("Zelig")
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
-vers <- paste("Version", meta$Version)  
+vers <- paste("Version", meta$Version)
 
 bibentry(
             bibtype="Manual",
             title = "Zelig: Everyone's Statistical Software",
             author = c(
             	person("Christine", "Choirat", email="cchoirat@iq.harvard.edu", role = "aut"),
+                person("Christopher", "Gandrud", email="gandrud@iq.harvard.edu", role = "aut"),
             	person("James", "Honaker", email="jhonaker@iq.harvard.edu", role = "aut"),
             	person("Kosuke", "Imai", role = "aut"),
                 person("Gary", "King", role = "aut"),
