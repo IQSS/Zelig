@@ -50,7 +50,8 @@ Imports:
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    tidyverse
 Collate:
     'assertions.R'
     'model-zelig.R'
