@@ -96,10 +96,12 @@ setval <- function(val, newval) {
     newval
   else if (is.ordered(val))
     newval
+  else if (is.logical(val))
+    newval
   else {
     lev <- levels(val)
     if (!newval %in% lev)
-      stop("Wrong factor")
+      stop("Wrong factor", call. = FALSE)
     return(factor(newval, levels = lev))
   }
 }
@@ -133,7 +135,7 @@ reduce = function(dataset, s, formula, data, avg = avg) {
     if (!all(complete.cases(m))) {
       w <- paste("Variable '", names(s[is.na(m)]),
                  "' not in data set.\n", sep = "")
-      warning(w)
+      stop(w, call. = FALSE)
     }
     for (i in seq(n[ma]))
       ldata[n[ma]][i][[1]] <- setval(dataset[n[ma]][i][[1]],
@@ -310,6 +312,7 @@ mi <- to_zelig_mi
 #' @param d_out logical whether to return the converted data frame. Note:
 #'   \code{f_out} must be missing
 #' @author Christopher Gandrud
+#' @internal
 
 factorize <- function(formula, data, check, f_out, d_out) {
     f <- as.character(formula)[3]
@@ -352,6 +355,7 @@ factorize <- function(formula, data, check, f_out, d_out) {
 #'
 #' Enables \code{\link{from_zelig_model}} output to work with stargazer.
 #' @param x a fitted model object result
+#' @internal
 
 strip_package_name <- function(x) {
     call_temp <- gsub('^.*(?=(::))', '', x$call[1], perl = TRUE)
@@ -359,3 +363,22 @@ strip_package_name <- function(x) {
     x$call[1] <- as.call(list(as.symbol(call_temp)))
     return(x)
 }
+
+#' Extract p-values from a fitted model object
+#' @param x a fitted Zelig object
+#' @internal
+
+p_pull <- function(x) {
+    p_values <- summary(x)$coefficients[, "Pr(>|t|)"]
+    return(p_values)
+}
+
+#' Extract standard errors from a fitted model object
+#' @param x a fitted Zelig object
+#' @internal
+
+se_pull <- function(x) {
+  p_values <- summary(x)$coefficients[, "Std. Error"]
+  return(p_values)
+}
+
