@@ -10,3 +10,4 @@ README.Rmd
 index*
 _pkgdown.yml
 docs/*
+vignettes/_static/*

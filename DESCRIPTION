@@ -9,7 +9,7 @@ Authors@R: c(
     person("Kosuke", "Imai", role = "aut"),
     person("Gary", "King", role = "aut"),
     person("Olivia", "Lau", role = "aut"),
-    person("IQSS", "Harvard University", role = "cph")
+    person("The President & Fellows of", "Harvard College", role = "cph")
     )
 Description: A framework that brings together an abundance of common
     statistical models found across packages into a unified interface, and

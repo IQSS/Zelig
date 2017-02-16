@@ -43,6 +43,7 @@ articles:
       - quickstart
       - zelig5-vs-zelig4
       - zelig-tidyverse
+      - available-models-overview
   - title: "Model Details"
     contents: 
       - zelig-ls
