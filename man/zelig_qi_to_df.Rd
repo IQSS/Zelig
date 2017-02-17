@@ -20,28 +20,43 @@ Extract simulated quantities of interest from a zelig object
 Returns simulated quantities of interest in a tidy data formatted
 \code{data.frame}. This can be useful for creating custom plots.
 
-Each row contains a simulated value and each column contains:\preformatted{- The fitted values specified in `setx`
-
-- `ev`: expected values
-
-- `pv`: predicted values
+Each row contains a simulated value and each column contains:
+\itemize{
+\item The fitted values specified in \code{setx}
+\item \code{ev}: expected values
+\item \code{pv}: predicted values
 }
 }
 \examples{
 # QIs without first difference or range, at central tendencies 
- z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
              model = "ls")
- z4 <- setx(z4)
- z4 <- sim(z4)
- zelig_qi_to_df(z4)
+z4 <- setx(z4)
+z4 <- sim(z4)
+zelig_qi_to_df(z4)
  
- # QIs for first differences
- z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+# QIs for first differences
+z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
              model = "ls")
- z4.1 <- setx(z4, Petal.Length = 2)
- z4.2 <- setx(z4, Petal.Length = 4.4)
- z4 <- sim(z4, x = z4.1, x1 = z4.2)
- zelig_qi_to_df(z4)
+z4.1 <- setx(z4, Petal.Length = 2)
+z4.2 <- setx(z4, Petal.Length = 4.4)
+z4 <- sim(z4, x = z4.1, x1 = z4.2)
+zelig_qi_to_df(z4)
+ 
+# QIs for a range of fitted values
+z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+             model = "ls")
+z4 <- setx(z4, Petal.Length = 2:4)
+z4 <- sim(z4)
+zelig_qi_to_df(z4)
+
+z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+            model = "ls")
+z4.1 <- setx(z4, Petal.Length = 2:4, Species = 'setosa')
+z4.2 <- setx(z4, Petal.Length = 2:4, Species = 'virginica')
+z4 <- sim(z4, x = z4.1, x1 = z4.2)
+
+zelig_qi_to_df(z4)
 
 }
 \author{

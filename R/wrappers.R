@@ -397,29 +397,43 @@ from_zelig_model <- function(obj) {
 #' @details Returns simulated quantities of interest in a tidy data formatted
 #'   `data.frame`. This can be useful for creating custom plots.
 #'   
-#'   Each row contains a simulated value and each column contains:
+#'  Each row contains a simulated value and each column contains:
 #'   
-#'     - The fitted values specified in `setx`
-#'     
-#'     - `ev`: expected values
-#'     
-#'     - `pv`: predicted values
+#'  - The fitted values specified in `setx`
+#'  - `ev`: expected values
+#'  - `pv`: predicted values
 #' 
 #' @examples
 #' # QIs without first difference or range, at central tendencies 
-#'  z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
-#'  z4 <- setx(z4)
-#'  z4 <- sim(z4)
-#'  zelig_qi_to_df(z4)
+#' z4 <- setx(z4)
+#' z4 <- sim(z4)
+#' zelig_qi_to_df(z4)
 #'  
-#'  # QIs for first differences
-#'  z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#' # QIs for first differences
+#' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
-#'  z4.1 <- setx(z4, Petal.Length = 2)
-#'  z4.2 <- setx(z4, Petal.Length = 4.4)
-#'  z4 <- sim(z4, x = z4.1, x1 = z4.2)
-#'  zelig_qi_to_df(z4)
+#' z4.1 <- setx(z4, Petal.Length = 2)
+#' z4.2 <- setx(z4, Petal.Length = 4.4)
+#' z4 <- sim(z4, x = z4.1, x1 = z4.2)
+#' zelig_qi_to_df(z4)
+#'  
+#' # QIs for a range of fitted values
+#' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'              model = "ls")
+#' z4 <- setx(z4, Petal.Length = 2:4)
+#' z4 <- sim(z4)
+#' zelig_qi_to_df(z4)
+#' 
+# QIs for two ranges of fitted values
+#' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'             model = "ls")
+#' z4.1 <- setx(z4, Petal.Length = 2:4, Species = 'setosa')
+#' z4.2 <- setx(z4, Petal.Length = 2:4, Species = 'virginica')
+#' z4 <- sim(z4, x = z4.1, x1 = z4.2)
+#' 
+#' zelig_qi_to_df(z4)
 #' 
 #' @source For a discussion of tidy data see 
 #' <https://vita.had.co.nz/papers/tidy-data.pdf>.
@@ -445,18 +459,12 @@ zelig_qi_to_df <- function(obj) {
         comb <- rbind(comb, comb_temp)
     }
     if (is_simsrange(obj$sim.out, fail = FALSE)) {
-      for (i in 1:nrow(obj$range)) {
-          # Extract fitted values  
-          temp_fitted <- obj$range[i, ]
-      
-          # Extract qi
-          temp_qi <- lapply(obj$sim.out$range[[i]], unlist)
-          temp_qi <- data.frame(ev = temp_qi[1], pv = temp_qi[2])
-      
-          # Combine
-          temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
-          comb <- rbind(comb, temp_df)
-        }
+        comb_temp <- extract_setrange(obj)
+        comb <- rbind(comb, comb_temp)
+    }
+    if (is_simsrange1(obj$sim.out, fail = FALSE)) {
+      comb_temp <- extract_setrange(obj, which_range = 'range1')
+      comb <- rbind(comb, comb_temp)
     }
   
     # Need range1
@@ -472,10 +480,11 @@ zelig_qi_to_df <- function(obj) {
 #' @param which_x character string either 'x' or 'x1' indicating whether
 #'   to extract the first or second set of fitted values
 #' 
-#' @importFrom dplyr select
+#' @importFrom dplyr select rename
 #' @internal
 
 extract_setx <- function(obj, which_x = 'x') {
+    `(Intercept)` <- x.by <- x1.by <- 
     temp_comb <- data.frame()
     temp_fitted <- data.frame(t(as.data.frame(unlist(obj$setx.out[which_x]))),
                               row.names = NULL)
@@ -496,4 +505,32 @@ extract_setx <- function(obj, which_x = 'x') {
     if ('x.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x.by)
     if ('x1.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x1.by)
     return(temp_comb)
+}
+
+#' Extract setrange fors return tidy formatted data frame
+#' 
+#' @param obj a zelig object containing a range of simulated quantities of 
+#'   interest
+#' @param which_range character string either 'range' or 'range1' indicating whether
+#'   to extract the first or second set of fitted values
+#' 
+#' @importFrom dplyr select
+#' @internal
+
+extract_setrange <- function(obj, which_range = 'range') {
+    comb_temp <- data.frame()
+    for (i in 1:nrow(obj[[which_range]])) {
+        # Extract fitted values  
+        temp_fitted <- as.data.frame(obj$setx.out[[which_range]][[1]]$mm[[1]],
+                                     row.names = NULL)
+    
+        # Extract qi
+        temp_qi <- lapply(obj$sim.out[[which_range]][[i]], unlist)
+        temp_qi <- data.frame(ev = temp_qi[1], pv = temp_qi[2])
+    
+        # Combine
+        temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
+        comb_temp <- rbind(comb_temp, temp_df)
+    }
+    return(comb_temp)
 }
