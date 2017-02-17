@@ -20,17 +20,27 @@ Extract simulated quantities of interest from a zelig object
 Returns simulated quantities of interest in a tidy data formatted
 \code{data.frame}. This can be useful for creating custom plots.
 
-Each row contains a simulated value and each column contains:
-- The fitted values specified in \code{setx}
-- \code{ev}: expected values
-- \code{pv}: predicted values
+Each row contains a simulated value and each column contains:\preformatted{- The fitted values specified in `setx`
+
+- `ev`: expected values
+
+- `pv`: predicted values
+}
 }
 \examples{
-    z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
-                   model = "ls")
-    z4 <- setx(z4)
-    z4 <- sim(z4)
-    zelig_qi_to_df(z4)
+# QIs without first difference or range, at central tendencies 
+ z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+             model = "ls")
+ z4 <- setx(z4)
+ z4 <- sim(z4)
+ zelig_qi_to_df(z4)
+ 
+ # QIs for first differences
+ z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+             model = "ls")
+ z4 <- setx(z4, Petal.Length = 2)
+ z4 <- setx(z4, Petal.Length = 4.4)
+ z4 <- sim(z4)
 
 }
 \author{

@@ -398,56 +398,77 @@ from_zelig_model <- function(obj) {
 #'   `data.frame`. This can be useful for creating custom plots.
 #'   
 #'   Each row contains a simulated value and each column contains:
+#'   
 #'     - The fitted values specified in `setx`
+#'     
 #'     - `ev`: expected values
+#'     
 #'     - `pv`: predicted values
 #' 
 #' @examples
-#'     z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
-#'                    model = "ls")
-#'     z4 <- setx(z4)
-#'     z4 <- sim(z4)
-#'     zelig_qi_to_df(z4)
+#' # QIs without first difference or range, at central tendencies 
+#'  z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'              model = "ls")
+#'  z4 <- setx(z4)
+#'  z4 <- sim(z4)
+#'  zelig_qi_to_df(z4)
+#'  
+#'  # QIs for first differences
+#'  z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'              model = "ls")
+#'  z4 <- setx(z4, Petal.Length = 2)
+#'  z4 <- setx(z4, Petal.Length = 4.4)
+#'  z4 <- sim(z4)
 #' 
 #' @source For a discussion of tidy data see 
 #' <https://vita.had.co.nz/papers/tidy-data.pdf>.
 #'
 #'
+#' @md
 #' @author Christopher Gandrud
 #' @export
-#' @md
 
 zelig_qi_to_df <- function(obj) {
-    message('zelig_qi_to_df is an experimental function.\nPlease report issues to: https://github.com/IQSS/Zelig/issues')
+    message('zelig_qi_to_df is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues')
   
     is_zelig(obj)
     is_sims_present(obj$sim.out)
   
-    bound <- data.frame()
+    comb <- data.frame()
     if (is_simsx(obj$sim.out, fail = FALSE)) {
-    
+        temp_fitted <- data.frame(t(as.data.frame(unlist(z4$setx.out$x))),
+                                row.names = NULL)
+        temp_names <- names(unlist(z4$get_coef()))
+        nvars <- ncol(temp_fitted)
+        names(temp_fitted)[(nvars + 1 - length(temp_names)):nvars] <- temp_names
+        for (i in 1:nrow(temp_fitted)) {
+            temp_qi <- lapply(obj$sim.out$x, unlist)
+            temp_qi <- data.frame(ev = temp_qi[1], pv = temp_qi[2])
+            
+            temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
+            comb <- rbind(comb, temp_df)
+        }
     }
   
     # NEED x1
   
     else if (is_simsrange(obj$sim.out, fail = FALSE)) {
-      for (i in 1:nrow(sims1$range)) {
+      for (i in 1:nrow(obj$range)) {
           # Extract fitted values  
-          temp_fitted <- sims1$range[i, ]
+          temp_fitted <- obj$range[i, ]
       
           # Extract qi
-          temp_qi <- lapply(sims1$sim.out$range[[i]], unlist)
-          temp_qi <- data.frame(ev = temp[1], pv = temp[2])
+          temp_qi <- lapply(obj$sim.out$range[[i]], unlist)
+          temp_qi <- data.frame(ev = temp_qi[1], pv = temp_qi[2])
       
           # Combine
           temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
-      
-          bound <- rbind(bound, temp_df)
+          comb <- rbind(comb, temp_df)
         }
     }
   
     # Need range1
-    if (nrow(bound) == 0) stop('Unable to find simulated quantities of interest.', 
+    if (nrow(comb) == 0) stop('Unable to find simulated quantities of interest.', 
                                call. = FALSE)
-    return(bound)
+    return(comb)
 }
