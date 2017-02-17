@@ -105,7 +105,7 @@
     <div class="page-header toc-ignore">
       <h1>Developer’s Guide</h1>
             
-            <h4 class="date">2017-02-16</h4>
+            <h4 class="date">2017-02-17</h4>
           </div>
 
     
@@ -145,7 +145,7 @@ z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote ∼ 
 <div id="reference-classes-and-inheritance" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#reference-classes-and-inheritance" class="anchor"> </a></body></html>Reference Classes and Inheritance</h2>
-<p>RCs have three important properties: (1) they contain fields, (2) they contain methods, and (3) they can inherit fields and methods from other RCs. See the Inheritance Tree at <a href="NEED%20TO%20GET">zeligproject.org/models</a>. Notice that <em>Zelig-logit</em> inherits from <em>Zelig-binchoice</em>, <em>Zelig-glm</em>, and <em>Zelig</em>. Each of these nodes in the Inheritance Tree corresponds to a file that we just opened in RStudio.</p>
+<p>RCs have three important properties: (1) they contain fields, (2) they contain methods, and (3) they can inherit fields and methods from other RCs. See the <a href="available-models-overview.html">Inheritance Tree</a>. Notice that <em>Zelig-logit</em> inherits from <em>Zelig-binchoice</em>, <em>Zelig-glm</em>, and <em>Zelig</em>. Each of these nodes in the Inheritance Tree corresponds to a file that we just opened in RStudio.</p>
 <p>To contribute a new package, you’ll minimally inherit from Zelig. But, you may extend the inheritance or inherit additional classes, depending on the way your model relates to others. Inheretance should follow a logical structure. Consider logit’s inheritance. <em>Zelig-glm</em> inherits from <em>Zelig</em>, and the <code>glm()</code> function can be used to estimate the following models: <code>gamma</code>, <code>normal</code>, <code>poisson</code>, <code>probit</code>, and <code>logit</code>. Look at these <code>poisson</code>, <code>logit</code>, and <code>probit</code> estimations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.poisson &lt;-<span class="st"> </span><span class="kw">glm</span>(vote ∼ age, <span class="dt">data=</span>turnout, <span class="dt">family =</span> <span class="kw">poisson</span>())
 fit.logit &lt;-<span class="st"> </span><span class="kw">glm</span>(vote ∼ age, <span class="dt">data=</span>turnout, <span class="dt">family=</span><span class="kw">binomial</span>(<span class="st">"logit"</span>))

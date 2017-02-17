@@ -62,7 +62,7 @@ you should see `Zelig` printed in the console.
 
 ## Reference Classes and Inheritance
 
-RCs have three important properties: (1) they contain fields, (2) they contain methods, and (3) they can inherit fields and methods from other RCs. See the Inheritance Tree at [zeligproject.org/models](NEED TO GET). Notice that *Zelig-logit* inherits from *Zelig-binchoice*, *Zelig-glm*, and *Zelig*. Each of these nodes in the Inheritance Tree corresponds to a file that we just opened in RStudio.
+RCs have three important properties: (1) they contain fields, (2) they contain methods, and (3) they can inherit fields and methods from other RCs. See the [Inheritance Tree](available-models-overview.html). Notice that *Zelig-logit* inherits from *Zelig-binchoice*, *Zelig-glm*, and *Zelig*. Each of these nodes in the Inheritance Tree corresponds to a file that we just opened in RStudio.
 
 To contribute a new package, you'll minimally inherit from Zelig. But, you may extend the inheritance or inherit additional classes, depending on the way your model relates to others. Inheretance should follow a logical structure. Consider logit's inheritance. *Zelig-glm* inherits from *Zelig*, and the `glm()` function can be used to estimate the following models: `gamma`, `normal`, `poisson`, `probit`, and `logit`. Look at these `poisson`, `logit`, and `probit` estimations:
 

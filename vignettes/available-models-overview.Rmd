@@ -16,6 +16,10 @@ knitr::opts_knit$set(
 )
 ```
 
+Zelig 5 supports the following models:
+
+### Zelig Inheritance Tree
+
 <style>
 .node {
   cursor: pointer;
