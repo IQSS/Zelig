@@ -14,8 +14,8 @@
 #'   dependent variable and \code{x1} and \code{x2} are the explanatory
 #'   variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
 #'   same dataset. (You may include more than two explanatory variables,
-#'   of course.)  The \code{+} symbol means ``inclusion'' not
-#'   ``addition.''  You may also include interaction terms and main
+#'   of course.) The \code{+} symbol means ``inclusion'' not
+#'   ``addition.'' You may also include interaction terms and main
 #'   effects in the form \code{x1*x2} without computing them in prior
 #'   steps; \code{I(x1*x2)} to include only the interaction term and
 #'   exclude the main effects; and quadratic terms in the form
@@ -134,7 +134,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #'   of \code{x1} to 12. In addition, you may specify one explanatory variable
 #'   as a range of values, creating one observation for every unique value in
 #'   the range of values
-#' @return The output is returned in a field to the Zelig object. For 
+#' @return The output is returned in a field to the Zelig object. For
 #'   unconditional prediction, \code{x.out} is a model matrix based
 #'   on the specified values for the explanatory variables. For multiple
 #'   analyses (i.e., when choosing the \code{by} option in \code{\link{zelig}},
@@ -142,7 +142,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #'   data frame. If you wish to calculate values over just one subset of
 #'   the data frame, the 5th subset for example, you may use:
 #'   \code{x.out <- setx(z.out[[5]])}
-#'   
+#'
 #' @examples
 #' # Unconditional prediction:
 #' data(turnout)
@@ -181,7 +181,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 
 #' Setting Explanatory Variable Values for First Differences
 #'
-#' This documentation describes the \code{setx1} Zelig 4 compatibility wrapper 
+#' This documentation describes the \code{setx1} Zelig 4 compatibility wrapper
 #' function. The wrapper is primarily useful for setting fitted values
 #' for creating first differences in piped workflows.
 #'
@@ -202,7 +202,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'   of \code{x1} to 12. In addition, you may specify one explanatory variable
 #'   as a range of values, creating one observation for every unique value in
 #'   the range of values
-#' @return The output is returned in a field to the Zelig object. For 
+#' @return The output is returned in a field to the Zelig object. For
 #'   unconditional prediction, \code{x.out} is a model matrix based
 #'   on the specified values for the explanatory variables. For multiple
 #'   analyses (i.e., when choosing the \code{by} option in \code{\link{zelig}},
@@ -210,11 +210,11 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'   data frame. If you wish to calculate values over just one subset of
 #'   the data frame, the 5th subset for example, you may use:
 #'   \code{x.out <- setx(z.out[[5]])}
-#'   
+#'
 #' @examples
 #' library(dplyr) # contains pipe operator %>%
 #' data(turnout)
-#' 
+#'
 #' # plot first differences
 #' zelig(Fertility ~ Education, data = swiss, model = 'ls') %>%
 #'       setx(z4, Education = 10) %>%
@@ -230,7 +230,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 
 setx1 <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
   is_zelig(obj)
-  
+
   x5 <- obj$copy()
   # This is the length of each argument in '...'s
   s <- list(...)
@@ -364,28 +364,4 @@ sim <- function(obj, x, x1, y = NULL, num = 1000, bootstrap = F,
 
     s5$sim(num = num)
     return(s5)
-}
-
-#' Extract the original fitted model object from a \code{zelig} estimation
-#'
-#' @param obj a zelig object with an estimated model
-#'
-#' @details Extracts the original fitted model object from a \code{zelig}
-#'   estimation. This can be useful for passing output to non-Zelig
-#'   post-estimation functions and packages such as texreg and stargazer
-#'   for creating well-formatted presentation document tables.
-#'
-#' @examples
-#' z5 <- zls$new()
-#' z5$zelig(Fertility ~ Education, data = swiss)
-#' from_zelig_model(z5)
-#'
-#' @author Christopher Gandrud
-#' @export
-
-from_zelig_model <- function(obj) {
-    is_zelig(obj)
-
-    f5 <- obj$copy()
-    return(f5$from_zelig_model())
 }
