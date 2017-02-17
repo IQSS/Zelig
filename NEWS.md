@@ -31,7 +31,7 @@ underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
 
 - Internal code improvements.
 
-- Corrected a bug where the README.md was not included in the build.
+- Corrected a bug where the README.md was not included in the CRAN build.
 
 
 Zelig version 5.0-15
