@@ -18,7 +18,7 @@ knitr::opts_knit$set(
 
 Many researchers integrate tools from the "[tidyverse](http://tidyverse.org/)" into their data workflows. The tidyverse includes a number of packages to read data into R--[readr](https://CRAN.R-project.org/package=readr)--, transform it for analysis-- [tibble](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html), [tidyr](https://CRAN.R-project.org/package=tidyr), purr, and dplyr, and visualise the results with [ggplot2](http://docs.ggplot2.org/current/). All of these packages can be loaded in R by loading the tidyverse package:
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
 ```
 
@@ -49,7 +49,10 @@ head(swiss)
 
 We could then analyse it with Zelig and plot quantities of interest using Tidyverse's pipe operator. Note the use of `data = .` this tells the pipe to enter the `swiss` data object as the value of `zelig`'s data argument:
 
-```
+```{r fig.height=5, fig.width=5, message=FALSE}
+library(Zelig)
+library(tidyverse)
+
 swiss %>% 
     zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
           cite = FALSE) %>%
@@ -58,7 +61,19 @@ swiss %>%
     plot()
 ```
 
-Note that piping does not work with Zelig 5's reference classes. 
+We could also find first differences by including `setx1` in the workflow:
+
+```{r fig.height=11, fig.width=7}
+swiss %>% 
+    zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
+          cite = FALSE) %>%
+    setx(Agriculture = 10) %>%
+    setx1(Agriculture = 90) %>%
+    sim() %>% 
+    plot()
+```
+
+Note that piping does not work with [Zelig 5's reference class syntax](zelig5-vs-zelig4.html). 
 
 ## Zelig and ggplot2 [IN DEVELOPMENT]
 

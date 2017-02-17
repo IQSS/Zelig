@@ -50,7 +50,7 @@ Depending on the class of model selected, \code{zelig} will return
   for additional output values, or simply type \code{names(z.out)}.
 }
 \description{
-The zelig command estimates a variety of statistical
+The zelig function estimates a variety of statistical
 models. Use \code{zelig} output with \code{setx} and \code{sim} to compute
 quantities of interest, such as predicted probabilities, expected values, and
 first differences, along with the associated measures of uncertainty

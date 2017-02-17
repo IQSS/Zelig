@@ -25,13 +25,15 @@ of an extensive test suite](https://medium.com/zelig-dev/testing-zelig-b41961cbf
 - [Improve Zelig's documentation](https://medium.com/zelig-dev/documenting-zelig-31e7d2f6c11b#.e5n398uu4)
 
 - Expand what Zelig can do with simulations, including returning them to users in
-standardised data frames and possibly conferting graphing functions to 
+standardised data frames and possibly converting graphing functions to 
 [ggplot2](http://docs.ggplot2.org/current/).
 
 - Improve Zelig functionality for small samples, namely diagnostics via jackknife
 variance estimator
 
 - Implement Cox Proportional Hazard models
+
+- Implement two-stage least squares regression (instrumental variable regression).
 
 - Enhance time series models
 

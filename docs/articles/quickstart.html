@@ -175,7 +175,7 @@ z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility
 z5$<span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Education =</span> <span class="dv">5</span>)
 
 <span class="co"># set education to 15</span>
-z5$<span class="kw">setx1</span>(<span class="dt">Education =</span> <span class="dv">15</span>)
+z5$<span class="kw"><a href="../reference/setx1.html">setx1</a></span>(<span class="dt">Education =</span> <span class="dv">15</span>)
 
 <span class="co"># model summary</span>
 <span class="kw">summary</span>(z5)</code></pre></div>
@@ -197,23 +197,23 @@ z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()
 ##  sim x :
 ##  -----
 ## ev
-##       mean       sd      50%     2.5%    97.5%
-## 1 75.19746 1.674015 75.10969 71.87521 78.63355
+##       mean      sd      50%    2.5%    97.5%
+## 1 75.28767 1.68543 75.28777 72.0669 78.76251
 ## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 74.93097 9.486558 74.69072 56.84173 93.80876
+## [1,] 75.35232 9.666963 75.06552 57.50528 94.91799
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##       mean       sd      50%     2.5%   97.5%
-## 1 66.62099 1.451026 66.55945 63.93163 69.3296
+## 1 66.67974 1.497063 66.65861 63.81047 69.5932
 ## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 66.96975 9.290671 67.19074 48.08172 86.02295
+## [1,] 66.59309 9.661341 67.00666 47.26608 85.04354
 ## fd
-##        mean       sd       50%      2.5%     97.5%
-## 1 -8.576471 1.492872 -8.586621 -11.68687 -5.740413</code></pre>
+##        mean       sd       50%     2.5%     97.5%
+## 1 -8.607931 1.491771 -8.655104 -11.4599 -5.570753</code></pre>
 <p>At this point, we’ve estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The <code>summary()</code> method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences–the difference in expected values at the set levels of education.</p>
 </div>
 <div id="visualizations" class="section level3">

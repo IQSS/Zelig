@@ -139,13 +139,26 @@
 ## Neuveville        76.9        43.5          17
 ## Porrentruy        76.1        35.3           9</code></pre>
 <p>We could then analyse it with Zelig and plot quantities of interest using Tidyverse’s pipe operator. Note the use of <code>data = .</code> this tells the pipe to enter the <code>swiss</code> data object as the value of <code>zelig</code>’s data argument:</p>
-<pre><code>swiss %&gt;% 
-    zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
-          cite = FALSE) %&gt;%
-    setx(Agriculture = seq(1, 90, by = 5)) %&gt;%
-    sim() %&gt;% 
-    plot()</code></pre>
-<p>Note that piping does not work with Zelig 5’s reference classes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Zelig)
+<span class="kw">library</span>(tidyverse)
+
+swiss %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility ~<span class="st"> </span>Agriculture +<span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
+          <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">90</span>, <span class="dt">by =</span> <span class="dv">5</span>)) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">plot</span>()</code></pre></div>
+<p><img src="zelig-tidyverse_files/figure-html/unnamed-chunk-3-1.png" width="480"></p>
+<p>We could also find first differences by including <code>setx1</code> in the workflow:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swiss %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility ~<span class="st"> </span>Agriculture +<span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
+          <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="dv">10</span>) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/setx1.html">setx1</a></span>(<span class="dt">Agriculture =</span> <span class="dv">90</span>) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">plot</span>()</code></pre></div>
+<p><img src="zelig-tidyverse_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<p>Note that piping does not work with <a href="zelig5-vs-zelig4.html">Zelig 5’s reference class syntax</a>.</p>
 </div>
 <div id="zelig-and-ggplot2-in-development" class="section level2">
 <h2 class="hasAnchor">
