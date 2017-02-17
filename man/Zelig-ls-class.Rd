@@ -90,7 +90,9 @@ x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
 # Simulate quantities of interest
 s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 
+\dontrun{
 # Plot first differences
 plot(s.out1)
+}
 
 }
