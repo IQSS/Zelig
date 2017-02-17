@@ -34,7 +34,7 @@ models currently support this parameter}
 }
 \value{
 The output stored in \code{s.out} varies by model. Use the
- \code{names} command to view the output stored in \code{s.out}.
+ \code{names} function to view the output stored in \code{s.out}.
  Common elements include:
  \item{x}{the \code{\link{setx}} values for the explanatory variables,
    used to calculate the quantities of interest (expected values,
@@ -44,7 +44,7 @@ The output stored in \code{s.out} varies by model. Use the
    interest, such as risk-ratios.}
  \item{call}{the options selected for \code{\link{sim}}, used to
    replicate quantities of interest. }
- \item{zelig.call}{the original command and options for
+ \item{zelig.call}{the original function and options for
    \code{\link{zelig}}, used to replicate analyses. }
  \item{num}{the number of simulations requested. }
  \item{par}{the parameters (coefficients, and additional
