@@ -389,3 +389,62 @@ from_zelig_model <- function(obj) {
     f5 <- obj$copy()
     return(f5$from_zelig_model())
 }
+
+#' Extract simulated quantities of interest from a zelig object
+#' 
+#' @param obj a zelig object with simulated quantities of interest
+#' 
+#' @details Returns simulated quantities of interest in a tidy data formatted
+#'   `data.frame`. This can be useful for creating custom plots.
+#'   
+#'   Each row contains a simulated value and each column contains:
+#'     - The fitted values specified in `setx`
+#'     - `ev`: expected values
+#'     - `pv`: predicted values
+#' 
+#' @examples
+#'     z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'                    model = "ls")
+#'     z4 <- setx(z4)
+#'     z4 <- sim(z4)
+#'     zelig_qi_to_df(z4)
+#' 
+#' @source For a discussion of tidy data see 
+#' <https://vita.had.co.nz/papers/tidy-data.pdf>.
+#'
+#'
+#' @author Christopher Gandrud
+#' @export
+#' @md
+
+zelig_qi_to_df <- function(obj) {
+    is_zelig(obj)
+    is_sims_present(obj$sim.out)
+  
+    bound <- data.frame()
+    if (is_simsx(obj$sim.out, fail = FALSE)) {
+    
+    }
+  
+    # NEED x1
+  
+    else if (is_simsrange(obj$sim.out, fail = FALSE)) {
+      for (i in 1:nrow(sims1$range)) {
+          # Extract fitted values  
+          temp_fitted <- sims1$range[i, ]
+      
+          # Extract qi
+          temp_qi <- lapply(sims1$sim.out$range[[i]], unlist)
+          temp_qi <- data.frame(ev = temp[1], pv = temp[2])
+      
+          # Combine
+          temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
+      
+          bound <- rbind(bound, temp_df)
+        }
+    }
+  
+    # Need range1
+    if (nrow(bound) == 0) stop('No quantities of interest found', call. = FALSE)
+    return(bound)
+}
