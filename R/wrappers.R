@@ -416,9 +416,10 @@ from_zelig_model <- function(obj) {
 #'  # QIs for first differences
 #'  z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
-#'  z4 <- setx(z4, Petal.Length = 2)
-#'  z4 <- setx(z4, Petal.Length = 4.4)
-#'  z4 <- sim(z4)
+#'  z4.1 <- setx(z4, Petal.Length = 2)
+#'  z4.2 <- setx(z4, Petal.Length = 4.4)
+#'  z4 <- sim(z4, x = z4.1, x1 = z4.2)
+#'  zelig_qi_to_df(z4)
 #' 
 #' @source For a discussion of tidy data see 
 #' <https://vita.had.co.nz/papers/tidy-data.pdf>.
@@ -436,23 +437,14 @@ zelig_qi_to_df <- function(obj) {
   
     comb <- data.frame()
     if (is_simsx(obj$sim.out, fail = FALSE)) {
-        temp_fitted <- data.frame(t(as.data.frame(unlist(z4$setx.out$x))),
-                                row.names = NULL)
-        temp_names <- names(unlist(z4$get_coef()))
-        nvars <- ncol(temp_fitted)
-        names(temp_fitted)[(nvars + 1 - length(temp_names)):nvars] <- temp_names
-        for (i in 1:nrow(temp_fitted)) {
-            temp_qi <- lapply(obj$sim.out$x, unlist)
-            temp_qi <- data.frame(ev = temp_qi[1], pv = temp_qi[2])
-            
-            temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
-            comb <- rbind(comb, temp_df)
-        }
+        comb_temp <- extract_setx(obj)
+        comb <- rbind(comb, comb_temp)
     }
-  
-    # NEED x1
-  
-    else if (is_simsrange(obj$sim.out, fail = FALSE)) {
+    if (is_simsx1(obj$sim.out, fail = FALSE)) {
+        comb_temp <- extract_setx(obj, which_x = 'x1')
+        comb <- rbind(comb, comb_temp)
+    }
+    if (is_simsrange(obj$sim.out, fail = FALSE)) {
       for (i in 1:nrow(obj$range)) {
           # Extract fitted values  
           temp_fitted <- obj$range[i, ]
@@ -471,4 +463,37 @@ zelig_qi_to_df <- function(obj) {
     if (nrow(comb) == 0) stop('Unable to find simulated quantities of interest.', 
                                call. = FALSE)
     return(comb)
+}
+
+
+#' Extract setx for non-range and return tidy formatted data frame
+#' 
+#' @param obj a zelig object containing simulated quantities of interest
+#' @param which_x character string either 'x' or 'x1' indicating whether
+#'   to extract the first or second set of fitted values
+#' 
+#' @importFrom dplyr select
+#' @internal
+
+extract_setx <- function(obj, which_x = 'x') {
+    temp_comb <- data.frame()
+    temp_fitted <- data.frame(t(as.data.frame(unlist(obj$setx.out[which_x]))),
+                              row.names = NULL)
+    temp_names <- names(unlist(obj$get_coef()))
+    nvars <- ncol(temp_fitted)
+    names(temp_fitted)[(nvars + 1 - length(temp_names)):nvars] <- temp_names
+    for (i in 1:nrow(temp_fitted)) {
+        if (which_x == 'x') temp_qi <- lapply(obj$sim.out$x, unlist)
+        else temp_qi <- lapply(obj$sim.out$x1, unlist)
+        temp_qi <- data.frame(ev = temp_qi[1], pv = temp_qi[2])
+    
+        temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
+        temp_comb <- rbind(temp_comb, temp_df)
+    }
+    temp_comb$x <- which_x
+    temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
+    if ('(Intercept)' %in% names(temp_comb)) temp_comb <- dplyr::select(temp_comb, -`(Intercept)`)
+    if ('x.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x.by)
+    if ('x1.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x1.by)
+    return(temp_comb)
 }

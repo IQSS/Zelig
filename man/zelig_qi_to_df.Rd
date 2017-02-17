@@ -38,9 +38,10 @@ Each row contains a simulated value and each column contains:\preformatted{- The
  # QIs for first differences
  z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
              model = "ls")
- z4 <- setx(z4, Petal.Length = 2)
- z4 <- setx(z4, Petal.Length = 4.4)
- z4 <- sim(z4)
+ z4.1 <- setx(z4, Petal.Length = 2)
+ z4.2 <- setx(z4, Petal.Length = 4.4)
+ z4 <- sim(z4, x = z4.1, x1 = z4.2)
+ zelig_qi_to_df(z4)
 
 }
 \author{
