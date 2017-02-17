@@ -418,6 +418,8 @@ from_zelig_model <- function(obj) {
 #' @md
 
 zelig_qi_to_df <- function(obj) {
+    message('zelig_qi_to_df is an experimental function.\nPlease report issues to: https://github.com/IQSS/Zelig/issues')
+  
     is_zelig(obj)
     is_sims_present(obj$sim.out)
   
@@ -445,6 +447,7 @@ zelig_qi_to_df <- function(obj) {
     }
   
     # Need range1
-    if (nrow(bound) == 0) stop('No quantities of interest found', call. = FALSE)
+    if (nrow(bound) == 0) stop('Unable to find simulated quantities of interest.', 
+                               call. = FALSE)
     return(bound)
 }
