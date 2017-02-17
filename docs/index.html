@@ -31,8 +31,23 @@
 <li>
   <a href="articles/quickstart.html">Quickstart</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="articles/index.html">Vignettes</a>
+      <a href="articles/index.html#section-zelig-overview">Overview</a>
+    </li>
+    <li>
+      <a href="articles/index.html#section-model-details">Model Details</a>
+    </li>
+    <li>
+      <a href="articles/index.html#section-other">Other</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -101,17 +116,26 @@
 </blockquote>
 <p><img style="float:left; padding-right:20px" src="https://github.com/IQSS/Zelig/blob/master/README_files/img/zelig.png?raw=true"></p>
 <p>Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of <a href="https://www.r-project.org/">R</a>, with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three functions and consistent documentation for every method. Zelig uses R code from many researchers, making it “everyone’s statistical software”. We hope it becomes everyone’s statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach.</p>
-<p><strong>Get started</strong> with the <a href="articles/quickstart.html">Quickstart Guide</a>.</p>
+<p><br><br></p>
+<p align="center">
+<a href="articles/quickstart.html" class="btn btn-warning">Get Started</a>
+</p>
+<p><br></p>
 <div id="details" class="section level2">
 <h2 class="hasAnchor">
 <a href="#details" class="anchor"> </a>Details</h2>
-<p>Zelig includes many specific methods, based on likelihood, frequentist, Bayesian, robust Bayesian, nonparametric, and population and superpopulation theories of inference. Zelig adds considerable infrastructure to improve the use of existing methods. It translates hard-to-interpret coefficients into meaningful quantities of interest, along with the uncertainty estimates (generalizing <a href="http://gking.harvard.edu/publications/clarify-software-interpreting-and-presenting-statistical-results">Clarify</a> for Stata); automates graphics and numerical summaries for all models; evaluates counterfactuals (incorporating <a href="http://gking.harvard.edu/whatif">WhatIf</a>); combines multiply imputed data sets to impute missing data and correct for measurement error (via <a href="http://gking.harvard.edu/amelia">Amelia</a>); automates bootstrapping for all models; allows for matching for causal inference to reduce model dependence (via <a href="http://gking.harvard.edu/publications/matchit-nonparametric-preprocessing-parametric-causal-inference">MatchIt</a> and <a href="http://gking.harvard.edu/cem">cem</a>); and generates replication data files (for <a href="http://dataverse.org/">Dataverse</a> to satisfy community replication standards).</p>
+<p>Zelig includes many methods, based on likelihood, frequentist, Bayesian, robust Bayesian, nonparametric, and population and superpopulation theories of inference.</p>
+<figure><a href="articles/available-models-overview.html"><img src="https://github.com/IQSS/Zelig/blob/pkgdown/README_files/img/zelig_models_thumb.png?raw=true"><figcaption>
+Explore models supported in Zelig 5
+</figcaption><p></p></a>
+</figure><p>Zelig adds considerable infrastructure to improve the use of existing methods. It translates hard-to-interpret coefficients into meaningful quantities of interest, along with the uncertainty estimates (generalizing <a href="http://gking.harvard.edu/publications/clarify-software-interpreting-and-presenting-statistical-results">Clarify</a> for Stata); automates graphics and numerical summaries for all models.</p>
+<p>Zelig can also combine multiply imputed data sets to impute missing data and correct for measurement error (via <a href="http://gking.harvard.edu/amelia">Amelia</a> and <a href="reference/to_zelig_mi.html">other multiple imputation functions</a>); automates bootstrapping for all models; allows for matching for causal inference to reduce model dependence (via <a href="http://gking.harvard.edu/publications/matchit-nonparametric-preprocessing-parametric-causal-inference">MatchIt</a> and <a href="http://gking.harvard.edu/cem">cem</a>); and generates replication data files (for <a href="http://dataverse.org/">Dataverse</a> to satisfy community replication standards).</p>
 </div>
 <div id="get-involved" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-involved" class="anchor"> </a>Get involved!</h2>
 <p>We love to get feedback on how to improve Zelig.</p>
-<p><i class="fa fa-comment-o" aria-hidden="true"></i> If you have questions and suggestions improvements, we’d love to hear from you! You can get in touch via: <a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>, <a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, or <a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat <i class="fa fa-comments-o" aria-hidden="true"></i></a>.</p>
+<p><i class="fa fa-comment-o" aria-hidden="true"></i> If you have questions and suggestions improvements, we’d love to hear from you! You can get in touch via: <a href="https://github.com/IQSS/Zelig/issues">GitHub<i class="fa fa-github" aria-hidden="true"></i></a>, <a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups<i class="fa fa-google" aria-hidden="true"></i></a>, or <a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat<i class="fa fa-comments-o" aria-hidden="true"></i></a>.</p>
 <p><i class="fa fa-code" aria-hidden="true"></i> You can even make your R packages usable from Zelig by writinga few simple bridge functions. Checkout the <a href="articles/developers-guide.html">Developer’s Guide</a> for details.</p>
 <!------ Gitter Chat Window -------------------------------->
 <style type="text/css">

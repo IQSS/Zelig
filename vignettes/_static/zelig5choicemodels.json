@@ -1,0 +1,163 @@
+{
+    "zelig5choicemodels": {
+        "blogit": {
+            "name": [
+                "blogit"
+            ],
+            "description": [
+                "Bivariate Logit Regression for Dichotomous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/en/latest/zeligchoice-blogit.html"
+            ],
+            "wrapper": [
+                "blogit"
+            ],
+            "tree": [
+                "Zelig-blogit",
+                "Zelig-bbinchoice"
+            ]
+        },
+        "bprobit": {
+            "name": [
+                "bprobit"
+            ],
+            "description": [
+                "Bivariate Probit Regression for Dichotomous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/en/latest/zeligchoice-bprobit.html"
+            ],
+            "wrapper": [
+                "bprobit"
+            ],
+            "tree": [
+                "Zelig-bprobit",
+                "Zelig-bbinchoice"
+            ]
+        },
+        "mlogit": {
+            "name": [
+                "mlogit"
+            ],
+            "description": [
+                "Multinomial Logistic Regression for Dependent Variables with Unordered Categorical Values"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/en/latest/zeligchoice-mlogit.html"
+            ],
+            "wrapper": [
+                "mlogit"
+            ],
+            "tree": [
+                "Zelig-mlogit"
+            ]
+        },
+        "ologit": {
+            "name": [
+                "ologit"
+            ],
+            "description": [
+                "Ordinal Logit Regression for Ordered Categorical Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/en/latest/zeligchoice-ologit.html"
+            ],
+            "wrapper": [
+                "ologit"
+            ],
+            "tree": [
+                "Zelig-ologit",
+                "Zelig-obinchoice"
+            ]
+        },
+        "oprobit": {
+            "name": [
+                "oprobit"
+            ],
+            "description": [
+                "Ordinal Probit Regression for Ordered Categorical Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/en/latest/zeligchoice-oprobit.html"
+            ],
+            "wrapper": [
+                "oprobit"
+            ],
+            "tree": [
+                "Zelig-oprobit",
+                "Zelig-obinchoice"
+            ]
+        }
+    }
+}

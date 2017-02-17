@@ -12,11 +12,30 @@ Everyone's Statistical Software
 
 Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of [R](https://www.r-project.org/), with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three functions and consistent documentation for every method. Zelig uses R code from many researchers, making it "everyone's statistical software". We hope it becomes everyone's statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach.
 
-**Get started** with the [Quickstart Guide](articles/quickstart.html).
+<br>
+<br>
+
+<p align="center">
+  <a href="articles/quickstart.html" class="btn btn-warning">Get Started</a>
+</p>
+
+<br>
 
 ## Details
 
-Zelig includes many specific methods, based on likelihood, frequentist, Bayesian, robust Bayesian, nonparametric, and population and superpopulation theories of inference. Zelig adds considerable infrastructure to improve the use of existing methods. It translates hard-to-interpret coefficients into meaningful quantities of interest, along with the uncertainty estimates (generalizing [Clarify](http://gking.harvard.edu/publications/clarify-software-interpreting-and-presenting-statistical-results) for Stata); automates graphics and numerical summaries for all models; evaluates counterfactuals (incorporating [WhatIf](http://gking.harvard.edu/whatif)); combines multiply imputed data sets to impute missing data and correct for measurement error (via [Amelia](http://gking.harvard.edu/amelia)); automates bootstrapping for all models; allows for matching for causal inference to reduce model dependence (via [MatchIt](http://gking.harvard.edu/publications/matchit-nonparametric-preprocessing-parametric-causal-inference) and [cem](http://gking.harvard.edu/cem)); and generates replication data files (for [Dataverse](http://dataverse.org/) to satisfy community replication standards). 
+Zelig includes many methods, based on likelihood, frequentist, Bayesian, robust Bayesian, nonparametric, and population and superpopulation theories of inference. 
+
+<figure>
+  <a href="articles/available-models-overview.html"><img src="https://github.com/IQSS/Zelig/blob/pkgdown/README_files/img/zelig_models_thumb.png?raw=true">
+  <figcaption>Explore models supported in Zelig 5</figcaption>
+  </a>
+
+</figure>
+
+Zelig adds considerable infrastructure to improve the use of existing methods. It translates hard-to-interpret coefficients into meaningful quantities of interest, along with the uncertainty estimates (generalizing [Clarify](http://gking.harvard.edu/publications/clarify-software-interpreting-and-presenting-statistical-results) for Stata); automates graphics and numerical summaries for all models. 
+
+
+Zelig can also combine multiply imputed data sets to impute missing data and correct for measurement error (via [Amelia](http://gking.harvard.edu/amelia) and [other multiple imputation functions](reference/to_zelig_mi.html)); automates bootstrapping for all models; allows for matching for causal inference to reduce model dependence (via [MatchIt](http://gking.harvard.edu/publications/matchit-nonparametric-preprocessing-parametric-causal-inference) and [cem](http://gking.harvard.edu/cem)); and generates replication data files (for [Dataverse](http://dataverse.org/) to satisfy community replication standards). 
 
 ## Get involved!
 
@@ -24,13 +43,15 @@ We love to get feedback on how to improve Zelig.
 
 <i class="fa fa-comment-o" aria-hidden="true"></i> If you have questions and 
 suggestions improvements, we'd love to hear from you! You can get in touch via: 
-<a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>, 
-<a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, or 
-<a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat <i class="fa fa-comments-o" aria-hidden="true"></i></a>. 
+<a href="https://github.com/IQSS/Zelig/issues">GitHub<i class="fa fa-github" aria-hidden="true"></i></a>, 
+<a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups<i class="fa fa-google" aria-hidden="true"></i></a>, or 
+<a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat<i class="fa fa-comments-o" aria-hidden="true"></i></a>. 
 
 <i class="fa fa-code" aria-hidden="true"></i> You can even make your R packages 
 usable from Zelig by writinga few simple bridge functions. Checkout the 
 [Developer's Guide](articles/developers-guide.html) for details.
+
+
 
 
 <!------ Gitter Chat Window -------------------------------->

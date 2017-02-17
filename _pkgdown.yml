@@ -10,6 +10,13 @@ navbar:
       href: "articles/quickstart.html"
     - text: "Vignettes"
       href: "articles/index.html"
+      menu: 
+        - text: "Overview"
+          href: "articles/index.html#section-zelig-overview"
+        - text: "Model Details"
+          href: "articles/index.html#section-model-details"
+        - text: "Other"
+          href: "articles/index.html#section-other"
     - text: "Function Reference"
       href: "reference/index.html"
       menu: 
@@ -29,6 +36,21 @@ navbar:
       href: https://twitter.com/zeligproject
     - icon: fa-github fa-2x
       href: https://github.com/IQSS/Zelig
+      
+articles:
+  - title: "Zelig Overview"
+    contents:
+      - quickstart
+      - zelig5-vs-zelig4
+      - zelig-tidyverse
+      - available-models-overview
+  - title: "Model Details"
+    contents: 
+      - zelig-ls
+  - title: "Other"
+    contents: 
+      - about
+      - developers-guide
       
 reference: 
   - title: "Main Zelig Workflow"

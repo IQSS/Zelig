@@ -51,8 +51,23 @@
         <li>
   <a href="../articles/quickstart.html">Quickstart</a>
 </li>
-<li>
-  <a href="../articles/index.html">Vignettes</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/index.html#section-zelig-overview">Overview</a>
+    </li>
+    <li>
+      <a href="../articles/index.html#section-model-details">Model Details</a>
+    </li>
+    <li>
+      <a href="../articles/index.html#section-other">Other</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -112,7 +127,7 @@
     </div>
 
     
-    <p>The zelig command estimates a variety of statistical
+    <p>The zelig function estimates a variety of statistical
 models. Use <code>zelig</code> output with <code>setx</code> and <code>sim</code> to compute
 quantities of interest, such as predicted probabilities, expected values, and
 first differences, along with the associated measures of uncertainty

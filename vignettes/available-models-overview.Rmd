@@ -1,0 +1,273 @@
+---
+title: "Available Zelig Models Overview"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Zelig Models Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+*Built using Zelig version `r packageVersion('Zelig')`*
+  
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+  stop_on_error = 2L
+)
+```
+
+Zelig 5 supports the following models:
+
+### Zelig Inheritance Tree
+
+<style>
+.node {
+  cursor: pointer;
+}
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.node text {
+  font: 12px sans-serif;
+}
+.node tip-text{
+  font: 20px sans-serif;
+}
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+</style>
+<div id="modelsModalWrap">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+var margin = {top: 0, right: 0, bottom: 0, left: 40},
+    width = document.documentElement.clientWidth; // or a number, or set to some div
+    height = document.documentElement.clientHeight;
+    
+var i = 0,
+    duration = 750,
+    root;
+var tree = d3.layout.tree()
+    .size([height, width]);
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+var svg = d3.select("#modelsModalWrap").append("div").append("svg")
+    .attr("width", "1170" )
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var nodes = [];
+var links = [];
+var k = 0;
+var dups = [];
+var big_tree = [];
+var models = [];
+var model_index = [];
+var urls = {};
+d3.select(self.frameElement).style("height", "800px");
+BigTree("_static/zelig5models.json", "Core", "zelig5models", function(){
+        BigTree("_static/zelig5choicemodels.json", "Choice", "zelig5choicemodels", function() {
+                for (var j = big_tree.length; j--;){
+                    if (dups.indexOf(big_tree[j]) == -1){
+                        dups.push(big_tree[j]);
+                        models.push({"name": big_tree[j], "children":[]});
+                        model_index.push(big_tree[j])
+                    }  else{continue;}
+                
+                    if (big_tree[j] == "Zelig"){
+                        continue;
+                    }
+                
+                    var tgt = model_index.indexOf(big_tree[j]);
+                    var src = model_index.indexOf(big_tree[j+1]);
+                    models[src].children.push(models[tgt]);
+                }
+                //     console.log(models);
+                
+                var flare = ({"name": "Zelig", "children":models[0].children.reverse()});
+                root = flare;
+                // console.log(flare);
+                root.x0 = height / 2;
+                root.y0 = 0;
+                
+                function collapse(d) {
+                    if (d.children) {
+                        d._children = d.children;
+                        d._children.forEach(collapse);
+                        d.children = null;
+                    }
+                }
+                
+                // root.children.forEach(collapse);
+                update(root);
+                });
+        });
+   
+// 
+// 
+function BigTree(url, name, level, callback) {
+    d3.json(url, function(z5models) {
+            data = z5models;
+            for (var key in data[level]) {
+                var model = data[level][key];
+                var reverse_tree = model.tree;
+                urls[data[level][key].tree[0]] = data[level][key]["vignette.url"][0];
+                for (var i = 0; i <= reverse_tree.length; i++){
+                    if(i==reverse_tree.length) {
+                        big_tree.push(name, "Zelig");
+                        continue;
+                    } else if(reverse_tree[i-1]=="Zelig-bayes" | reverse_tree[i-1]=="Zelig-gee") {
+                        continue; // skip current branch if the next branch is Zelig-bayes or Zelig-gee, as this indicates the current branch is the "shortcut" class with multiple inheritance
+                    }
+                    big_tree.push(reverse_tree[i]);
+                }
+            }
+            callback();
+            });
+}
+function update(source) {
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse(),
+      links = tree.links(nodes);
+  // console.log(nodes);
+  // console.log(links);
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 180; });
+  // Update the nodes…
+  var node = svg.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+     // .on("mouseover", mouseover)
+    //  .on("mouseout", mouseout)
+      .on("click", click);
+  nodeEnter.append("circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+  nodeEnter.append("text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+  nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+  // Update the links…
+  var link = svg.selectAll("path.link")
+      .data(links, function(d) { return d.target.id; });
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      });
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+// Toggle children and redirect to model vignettes on click.
+function click(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else if (d._children) {
+    d.children = d._children;
+    d._children = null;
+  } else {
+      var vignette = urls[d.name];
+      var v1 = vignette.substr(0,28);
+      var v3 = vignette.substr(29,100);
+      var v2 = "/";
+      var vignette = v1 + v2 + v3;
+      if(vignette.substr(vignette.length-8) == "gee.html") {
+          vignette = vignette.substr(0,vignette.length-8) + vignette.substr(vignette.length-8);
+      }
+      else if(vignette.substr(vignette.length-10) == "bayes.html") {
+          vignette = vignette.substr(0,vignette.length-10) + vignette.substr(vignette.length-10);
+      }
+      window.open(vignette, "_top");
+  }
+  update(d);
+}
+function collapse(d) {
+  if (d.children) {
+    d._children = d.children;
+    d._children.forEach(collapse);
+    d.children = null;
+  }
+}
+function mouseover(d) {
+  if(d.children || d._children){
+    // 
+  } else {
+    d3.select(this)
+    .append("text")
+        .attr("class", "hover")
+        .attr('transform', function(d){ 
+            return 'translate(5,-10)';
+        })
+        .text("Click model for docs");
+    }
+}
+// Toggle children on click.
+function mouseout(d) {
+    d3.select(this).select("text.hover").remove();
+}
+var findNodeIndex = function(nodeName) {
+  for (var i in nodes) {
+    if(nodes[i]["name"] === nodeName) {return nodes[i]["id"];}
+  };
+}
+var findNode = function(nodeName) {
+    for (var i in nodes) {if (nodes[i]["name"] === nodeName) return nodes[i]};
+}
+// functions called by buttons
+function forceSwitch() {
+    forcetoggle = !forcetoggle;
+}
+function newtab() {
+    var win = window.open("http://datascience.iq.harvard.edu/zelig");
+    win.focus();
+}
+</script>
+
+</div>

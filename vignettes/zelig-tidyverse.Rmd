@@ -1,0 +1,84 @@
+---
+title: "Zelig and the Tidyverse"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Zelig and the Tidyverse}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+```
+
+Many researchers integrate tools from the "[tidyverse](http://tidyverse.org/)" into their data workflows. The tidyverse includes a number of packages to read data into R--[readr](https://CRAN.R-project.org/package=readr)--, transform it for analysis-- [tibble](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html), [tidyr](https://CRAN.R-project.org/package=tidyr), purr, and dplyr, and visualise the results with [ggplot2](http://docs.ggplot2.org/current/). All of these packages can be loaded in R by loading the tidyverse package:
+
+```{r message=FALSE}
+library(tidyverse)
+```
+
+Zelig can be easily slotted into this workflow for model estimation and identifying quantities of interest. Most Zelig estimation models require underlying data to be in the  "tidy" format that the tidyverse creates. Zelig's  three step workflow can be organized very well using [pipes](http://r4ds.had.co.nz/pipes.html) (`%>%`) that the tidyverse advocates. Using pipes with Zelig will make your code more legible and computationally efficient.
+
+## What is "tidy data"
+
+"Tidy" data is defined as having three qualities [(Wickham 2014, 4)](https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf):
+
+1. Each variable forms a column.
+
+2. Each observation forms a row.
+
+3. Each type of observational unit forms a table.
+
+Data formatted in this way is ideal for most Zelig models. 
+
+## Example
+
+This example shows one way to integrate the Tidyverse and Zelig into one workflow.
+
+Imagine we used the Tidyverse to create a data set in tidy format that we want to analyse with Zelig:
+
+```{r, echo=FALSE}
+swiss <- swiss[, c('Fertility', 'Agriculture', 'Examination')]
+head(swiss)
+```
+
+We could then analyse it with Zelig and plot quantities of interest using Tidyverse's pipe operator. Note the use of `data = .` this tells the pipe to enter the `swiss` data object as the value of `zelig`'s data argument:
+
+```{r fig.height=5, fig.width=5, message=FALSE}
+library(Zelig)
+library(tidyverse)
+
+swiss %>% 
+    zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
+          cite = FALSE) %>%
+    setx(Agriculture = seq(1, 90, by = 5)) %>%
+    sim() %>% 
+    plot()
+```
+
+We could also find first differences by including `setx1` in the workflow:
+
+```{r fig.height=11, fig.width=7}
+swiss %>% 
+    zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
+          cite = FALSE) %>%
+    setx(Agriculture = 10) %>%
+    setx1(Agriculture = 90) %>%
+    sim() %>% 
+    plot()
+```
+
+Note that piping does not work with [Zelig 5's reference class syntax](zelig5-vs-zelig4.html). 
+
+## Zelig and ggplot2 [IN DEVELOPMENT]
+
+Zelig's in-house plots are built using base R plotting functionality. Many researchers now rely heavily on ggplot2 to visualise their results. 
+
+One thing we are working on is a new function--`zelig_qi_to_df`--which will take quantities of interest simulated by `sim` and return them in a data frame following tidy data principles. This output could be easily plotted with ggplot2. 
+
+We are also considering in the future whether to generate Zelig's default plots with ggplot2.

@@ -27,11 +27,13 @@ underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
 
 - `setx` returns an error if it is unable to find a supplied variable name. 
 
+- `setx1` wrapper added to facilitate piped workflows for first differences.
+
 ## Minor changes
 
 - Internal code improvements.
 
-- Corrected a bug where the README.md was not included in the build.
+- Corrected a bug where the README.md was not included in the CRAN build.
 
 
 Zelig version 5.0-15

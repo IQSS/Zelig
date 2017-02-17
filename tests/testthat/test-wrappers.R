@@ -23,14 +23,25 @@ test_that('non-supported model type error', {
   )
 })
 
-# Test wrapper setx-------------------------------------------------------------
+# REQUIRE TEST wrapper setx ----------------------------------------------------
 
-test_that('setx wrapper test x', {
+test_that('REQUIRE TEST wrapper setx', {
     z4 <- zelig(Fertility ~ Education, data = swiss, model = 'ls')
   
     z4_set <- setx(z4)
     z4_set_vector <- round(as.vector(unlist(z4_set$setx.out)))
     expect_equivalent(z4_set_vector, c(1, 1, 11))
+})
+
+# REQUIRE TEST wrapper setx1 ----------------------------------------------------
+
+test_that('REQUIRE TEST wrapper setx1', {
+zpipe <- zelig(Fertility ~ Education, data = swiss, model = 'ls') %>%
+                setx(z4, Education = 10) %>%
+                setx1(z4, Education = 30) %>%
+                sim() 
+    expect_equal(length(zpipe$sim.out), 2)
+
 })
 
 # FAIL TEST non-zelig objects --------------------------------------------------
