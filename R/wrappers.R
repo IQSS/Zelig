@@ -14,8 +14,8 @@
 #'   dependent variable and \code{x1} and \code{x2} are the explanatory
 #'   variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
 #'   same dataset. (You may include more than two explanatory variables,
-#'   of course.)  The \code{+} symbol means ``inclusion'' not
-#'   ``addition.''  You may also include interaction terms and main
+#'   of course.) The \code{+} symbol means ``inclusion'' not
+#'   ``addition.'' You may also include interaction terms and main
 #'   effects in the form \code{x1*x2} without computing them in prior
 #'   steps; \code{I(x1*x2)} to include only the interaction term and
 #'   exclude the main effects; and quadratic terms in the form
@@ -399,34 +399,44 @@ from_zelig_model <- function(obj) {
 #'   
 #'  Each row contains a simulated value and each column contains:
 #'   
-#'  - The fitted values specified in `setx`
-#'  - `ev`: expected values
-#'  - `pv`: predicted values
+#'  - The fitted values specified in `setx` including a `by` column if 
+#'    `by` was used in the \code{\link{zelig}} call.
+#'  - `expected_value`
+#'  - `expected_value`
 #' 
 #' @examples
-#' # QIs without first difference or range, at central tendencies 
+#' #### QIs without first difference or range, from covariates fitted at 
+#' ## central tendencies 
 #' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
 #' z4 <- setx(z4)
 #' z4 <- sim(z4)
 #' zelig_qi_to_df(z4)
 #'  
-#' # QIs for first differences
+#' #### QIs for first differences
 #' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
 #' z4.1 <- setx(z4, Petal.Length = 2)
 #' z4.2 <- setx(z4, Petal.Length = 4.4)
 #' z4 <- sim(z4, x = z4.1, x1 = z4.2)
 #' zelig_qi_to_df(z4)
+#' 
+#' #### QIs for first differences, estimated by Species
+#' z4 <- zelig(Petal.Width ~ Petal.Length, by = 'Species', data = iris,
+#'              model = "ls")
+#' z4.1 <- setx(z4, Petal.Length = 2)
+#' z4.2 <- setx(z4, Petal.Length = 4.4)
+#' z4 <- sim(z4, x = z4.1, x1 = z4.2)
+#' zelig_qi_to_df(z4)
 #'  
-#' # QIs for a range of fitted values
+#' #### QIs for a range of fitted values
 #' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
 #' z4 <- setx(z4, Petal.Length = 2:4)
 #' z4 <- sim(z4)
 #' zelig_qi_to_df(z4)
 #' 
-# QIs for two ranges of fitted values
+#' #### QIs for two ranges of fitted values
 #' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'             model = "ls")
 #' z4.1 <- setx(z4, Petal.Length = 2:4, Species = 'setosa')
@@ -484,26 +494,34 @@ zelig_qi_to_df <- function(obj) {
 #' @internal
 
 extract_setx <- function(obj, which_x = 'x') {
-    `(Intercept)` <- x.by <- x1.by <- 
+
     temp_comb <- data.frame()
-    temp_fitted <- data.frame(t(as.data.frame(unlist(obj$setx.out[which_x]))),
-                              row.names = NULL)
-    temp_names <- names(unlist(obj$get_coef()))
-    nvars <- ncol(temp_fitted)
-    names(temp_fitted)[(nvars + 1 - length(temp_names)):nvars] <- temp_names
-    for (i in 1:nrow(temp_fitted)) {
-        if (which_x == 'x') temp_qi <- lapply(obj$sim.out$x, unlist)
-        else temp_qi <- lapply(obj$sim.out$x1, unlist)
-        temp_qi <- data.frame(ev = temp_qi[1], pv = temp_qi[2])
+    # Extract fitted values  
+    temp_fitted <- as.data.frame(obj$setx.out[[which_x]]$mm[[1]],
+                                 row.names = NULL)
+    # Fitted values when estimated by 
+    by_length <- nrow(obj$setx.out[[which_x]])
+    if (by_length > 1) {
+        temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)), by_length), ]
+        temp_fitted <- data.frame(by = obj$setx.out[[which_x]][[1]], 
+                                  temp_fitted, row.names = NULL)
+    }
+    temp_fitted <- rm_intercept(temp_fitted)
     
-        temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
+    temp_ev <- lapply(obj$sim.out[[which_x]]$ev, unlist)
+    temp_pv <- lapply(obj$sim.out[[which_x]]$pv, unlist)
+    for (i in 1:nrow(temp_fitted)) {
+        temp_qi <- data.frame(temp_ev[[i]], temp_pv[[i]])
+        names(temp_qi) <- c('expected_value', 'predicted_value')
+
+        temp_df <- cbind(temp_fitted[i, ], temp_qi, row.names = NULL)
         temp_comb <- rbind(temp_comb, temp_df)
     }
     temp_comb$x <- which_x
     temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
-    if ('(Intercept)' %in% names(temp_comb)) temp_comb <- dplyr::select(temp_comb, -`(Intercept)`)
-    if ('x.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x.by)
-    if ('x1.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x1.by)
+    
+ #   if ('x.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x.by)
+ #  if ('x1.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x1.by)
     return(temp_comb)
 }
 

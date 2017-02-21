@@ -22,34 +22,45 @@ Returns simulated quantities of interest in a tidy data formatted
 
 Each row contains a simulated value and each column contains:
 \itemize{
-\item The fitted values specified in \code{setx}
-\item \code{ev}: expected values
-\item \code{pv}: predicted values
+\item The fitted values specified in \code{setx} including a \code{by} column if
+\code{by} was used in the \code{\link{zelig}} call.
+\item \code{expected_value}
+\item \code{expected_value}
 }
 }
 \examples{
-# QIs without first difference or range, at central tendencies 
+#### QIs without first difference or range, from covariates fitted at 
+## central tendencies 
 z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
              model = "ls")
 z4 <- setx(z4)
 z4 <- sim(z4)
 zelig_qi_to_df(z4)
  
-# QIs for first differences
+#### QIs for first differences
 z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
              model = "ls")
 z4.1 <- setx(z4, Petal.Length = 2)
 z4.2 <- setx(z4, Petal.Length = 4.4)
 z4 <- sim(z4, x = z4.1, x1 = z4.2)
 zelig_qi_to_df(z4)
+
+#### QIs for first differences, estimated by Species
+z4 <- zelig(Petal.Width ~ Petal.Length, by = 'Species', data = iris,
+             model = "ls")
+z4.1 <- setx(z4, Petal.Length = 2)
+z4.2 <- setx(z4, Petal.Length = 4.4)
+z4 <- sim(z4, x = z4.1, x1 = z4.2)
+zelig_qi_to_df(z4)
  
-# QIs for a range of fitted values
+#### QIs for a range of fitted values
 z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
              model = "ls")
 z4 <- setx(z4, Petal.Length = 2:4)
 z4 <- sim(z4)
 zelig_qi_to_df(z4)
 
+#### QIs for two ranges of fitted values
 z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
             model = "ls")
 z4.1 <- setx(z4, Petal.Length = 2:4, Species = 'setosa')
