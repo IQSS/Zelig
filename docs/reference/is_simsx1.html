@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Estimating a Statistical Model — zelig • Zelig</title>
+<title>Check if simulations for individual values for x1 are present
+ — is_simsx1 • Zelig</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -123,70 +124,25 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Estimating a Statistical Model</h1>
+    <h1>Check if simulations for individual values for x1 are present
+</h1>
     </div>
 
     
-    <p>The zelig function estimates a variety of statistical
-models. Use <code>zelig</code> output with <code>setx</code> and <code>sim</code> to compute
-quantities of interest, such as predicted probabilities, expected values, and
-first differences, along with the associated measures of uncertainty
-(standard errors and confidence intervals).</p>
+    <p>Check if simulations for individual values for x1 are present
+  in sim.out</p>
     
 
-    <pre><span class='fu'>zelig</span>(<span class='no'>formula</span>, <span class='no'>model</span>, <span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre><span class='fu'>is_simsx1</span>(<span class='no'>x</span>, <span class='kw'>fail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>formula</dt>
-      <dd>a symbolic representation of the model to be
-estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
-dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
-variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
-same dataset. (You may include more than two explanatory variables,
-of course.) The <code>+</code> symbol means ``inclusion&#39;&#39; not
-``addition.&#39;&#39; You may also include interaction terms and main
-effects in the form <code>x1*x2</code> without computing them in prior
-steps; <code>I(x1*x2)</code> to include only the interaction term and
-exclude the main effects; and quadratic terms in the form
-<code>I(x1^2)</code></dd>
-      <dt>model</dt>
-      <dd>the name of a statistical model.
-For a list of supported models visit:
-<a href = 'http://docs.zeligproject.org/en/latest/'>http://docs.zeligproject.org/en/latest/</a>.</dd>
-      <dt>data</dt>
-      <dd>the name of a data frame containing the variables
-referenced in the formula, or a list of multiply imputed data frames
-each having the same variable names and row numbers (created by
-<code>mi</code>)</dd>
-      <dt>...</dt>
-      <dd>additional arguments passed to <code>zelig</code>,
-depending on the model to be estimated</dd>
-      <dt>by</dt>
-      <dd>a factor variable contained in <code>data</code>. Zelig will subset
-the data frame based on the levels in the <code>by</code> variable, and
-estimate a model for each subset. This a particularly powerful option
-which will allow you to save a considerable amount of effort. For
-example, to run the same model on all fifty states, you could type:
-<code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = &#39;ls&#39;, by = &#39;state&#39;)</code>
-You may also use <code>by</code> to run models using MatchIt subclass</dd>
-      <dt>cite</dt>
-      <dd>If is set to &#39;TRUE&#39; (default), the model citation will be</dd>
+      <dt>x</dt>
+      <dd>a sim.out method</dd>
+      <dt>fail</dt>
+      <dd>logical whether to return an error if simulation range is not
+present.</dd>
     </dl>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Depending on the class of model selected, <code>zelig</code> will return
-  an object with elements including <code>coefficients</code>, <code>residuals</code>,
-  and <code>formula</code> which may be summarized using
-  <code>summary(z.out)</code> or individually extracted using, for example,
-  <code>z.out\$coefficients</code>. See the specific models listed above
-  for additional output values, or simply type <code>names(z.out)</code>.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This documentation describes the <code>zelig</code> Zelig 4 compatibility wrapper
-function.</p>
     
 
   </div>
@@ -194,16 +150,7 @@ function.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-          </ul>
-
-    <h2>Author</h2>
-    
-Matt Owen, Kosuke Imai, Olivia Lau, and Gary King
-Maintainer: Christopher Gandrud
+                </ul>
 
   </div>
 </div>

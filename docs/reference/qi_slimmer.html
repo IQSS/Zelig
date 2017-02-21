@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Estimating a Statistical Model — zelig • Zelig</title>
+<title>Find the median and a central interval of simulated quantity of interest
+ — qi_slimmer • Zelig</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -123,87 +124,63 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Estimating a Statistical Model</h1>
+    <h1>Find the median and a central interval of simulated quantity of interest
+</h1>
     </div>
 
     
-    <p>The zelig function estimates a variety of statistical
-models. Use <code>zelig</code> output with <code>setx</code> and <code>sim</code> to compute
-quantities of interest, such as predicted probabilities, expected values, and
-first differences, along with the associated measures of uncertainty
-(standard errors and confidence intervals).</p>
+    <p>Find the median and a central interval of simulated quantity of interest
+distributions</p>
     
 
-    <pre><span class='fu'>zelig</span>(<span class='no'>formula</span>, <span class='no'>model</span>, <span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre><span class='fu'>qi_slimmer</span>(<span class='no'>df</span>, <span class='kw'>qi_type</span> <span class='kw'>=</span> <span class='st'>"ev"</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>formula</dt>
-      <dd>a symbolic representation of the model to be
-estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
-dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
-variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
-same dataset. (You may include more than two explanatory variables,
-of course.) The <code>+</code> symbol means ``inclusion&#39;&#39; not
-``addition.&#39;&#39; You may also include interaction terms and main
-effects in the form <code>x1*x2</code> without computing them in prior
-steps; <code>I(x1*x2)</code> to include only the interaction term and
-exclude the main effects; and quadratic terms in the form
-<code>I(x1^2)</code></dd>
-      <dt>model</dt>
-      <dd>the name of a statistical model.
-For a list of supported models visit:
-<a href = 'http://docs.zeligproject.org/en/latest/'>http://docs.zeligproject.org/en/latest/</a>.</dd>
-      <dt>data</dt>
-      <dd>the name of a data frame containing the variables
-referenced in the formula, or a list of multiply imputed data frames
-each having the same variable names and row numbers (created by
-<code>mi</code>)</dd>
-      <dt>...</dt>
-      <dd>additional arguments passed to <code>zelig</code>,
-depending on the model to be estimated</dd>
-      <dt>by</dt>
-      <dd>a factor variable contained in <code>data</code>. Zelig will subset
-the data frame based on the levels in the <code>by</code> variable, and
-estimate a model for each subset. This a particularly powerful option
-which will allow you to save a considerable amount of effort. For
-example, to run the same model on all fifty states, you could type:
-<code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = &#39;ls&#39;, by = &#39;state&#39;)</code>
-You may also use <code>by</code> to run models using MatchIt subclass</dd>
-      <dt>cite</dt>
-      <dd>If is set to &#39;TRUE&#39; (default), the model citation will be</dd>
+      <dt>df</dt>
+      <dd>a tidy-formatted data frame of simulated quantities of interest
+created by <code><a href='zelig_qi_to_df.html'>zelig_qi_to_df</a></code>.</dd>
+      <dt>qi_type</dt>
+      <dd>character string either <code>ev</code> or <code>pv</code> for returning the
+central intervals for the expected value or predicted value, respectively.</dd>
+      <dt>ci</dt>
+      <dd>numeric. The central interval to return, expressed on the <code>(0, 100]</code>
+or the equivalent <code>(0, 1]</code> interval.</dd>
     </dl>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Depending on the class of model selected, <code>zelig</code> will return
-  an object with elements including <code>coefficients</code>, <code>residuals</code>,
-  and <code>formula</code> which may be summarized using
-  <code>summary(z.out)</code> or individually extracted using, for example,
-  <code>z.out\$coefficients</code>. See the specific models listed above
-  for additional output values, or simply type <code>names(z.out)</code>.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This documentation describes the <code>zelig</code> Zelig 4 compatibility wrapper
-function.</p>
+    <p><code><a href='zelig_qi_to_df.html'>zelig_qi_to_df</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='no'>qi.central.interval</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>Petal.Width</span> ~ <span class='no'>Petal.Length</span> + <span class='no'>Species</span>,
+             <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ls"</span>) <span class='kw'>%&gt;%</span>
+             <span class='fu'><a href='setx.html'>setx</a></span>(<span class='kw'>Petal.Length</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='kw'>Species</span> <span class='kw'>=</span> <span class='st'>"setosa"</span>) <span class='kw'>%&gt;%</span>
+             <span class='fu'><a href='sim.html'>sim</a></span>() <span class='kw'>%&gt;%</span>
+             <span class='fu'><a href='zelig_qi_to_df.html'>zelig_qi_to_df</a></span>() <span class='kw'>%&gt;%</span>
+             <span class='fu'>qi_slimmer</span>()</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   R Core Team. 2007.
+#&gt;   ls: Least Squares Regression for Continuous Dependent Variables
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   &quot;Zelig: Everyone&#39;s Statistical Software,&quot; http://zeligproject.org/</div><div class='output co'>#&gt; <span class='message'>zelig_qi_to_df is an experimental function.</span>
+#&gt; <span class='message'>  Please report issues to: https://github.com/IQSS/Zelig/issues</span></div><div class='output co'>#&gt; <span class='message'>Slimming Expected Values . . .</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-          </ul>
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     
-Matt Owen, Kosuke Imai, Olivia Lau, and Gary King
-Maintainer: Christopher Gandrud
+Christopher Gandrud
 
   </div>
 </div>

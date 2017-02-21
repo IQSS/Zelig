@@ -105,7 +105,7 @@
     <div class="page-header toc-ignore">
       <h1>Zelig and the Tidyverse</h1>
             
-            <h4 class="date">2017-02-17</h4>
+            <h4 class="date">2017-02-21</h4>
           </div>
 
     
@@ -126,9 +126,9 @@
 </ol>
 <p>Data formatted in this way is ideal for most Zelig models.</p>
 </div>
-<div id="example" class="section level2">
+<div id="analyzing-tidy-data-with-pipes" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#example" class="anchor"> </a></body></html>Example</h2>
+<html><body><a href="#analyzing-tidy-data-with-pipes" class="anchor"> </a></body></html>Analyzing tidy data with pipes</h2>
 <p>This example shows one way to integrate the Tidyverse and Zelig into one workflow.</p>
 <p>Imagine we used the Tidyverse to create a data set in tidy format that we want to analyse with Zelig:</p>
 <pre><code>##              Fertility Agriculture Examination
@@ -160,12 +160,60 @@ swiss %&gt;%<span class="st"> </span>
 <p><img src="zelig-tidyverse_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>Note that piping does not work with <a href="zelig5-vs-zelig4.html">Zelig 5’s reference class syntax</a>.</p>
 </div>
-<div id="zelig-and-ggplot2-in-development" class="section level2">
+<div id="zelig-and-ggplot2" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#zelig-and-ggplot2-in-development" class="anchor"> </a></body></html>Zelig and ggplot2 [IN DEVELOPMENT]</h2>
-<p>Zelig’s in-house plots are built using base R plotting functionality. Many researchers now rely heavily on ggplot2 to visualise their results.</p>
-<p>One thing we are working on is a new function–<code>zelig_qi_to_df</code>–which will take quantities of interest simulated by <code>sim</code> and return them in a data frame following tidy data principles. This output could be easily plotted with ggplot2.</p>
-<p>We are also considering in the future whether to generate Zelig’s default plots with ggplot2.</p>
+<html><body><a href="#zelig-and-ggplot2" class="anchor"> </a></body></html>Zelig and ggplot2</h2>
+<p>Zelig’s in-house plots are built using base R plotting functionality. You may want to take the quantities of interest simulated by Zelig and create custom plots with other tools, such as ggplot2.</p>
+<p>The function <code>zelig_qi_to_df</code> extracts quantities of interest simulated by <code>sim</code> and returns them in a data frame formatted to follow tidy data principles. This output could be easily plotted with ggplot2.</p>
+<p>Using the example analysis from before:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sims.full &lt;-<span class="st"> </span>swiss %&gt;%<span class="st"> </span>
+<span class="st">                </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility ~<span class="st"> </span>Agriculture +<span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
+                      <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
+<span class="st">                </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">90</span>, <span class="dt">by =</span> <span class="dv">5</span>)) %&gt;%
+<span class="st">                </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%
+<span class="st">                </span><span class="kw"><a href="../reference/zelig_qi_to_df.html">zelig_qi_to_df</a></span>()
+
+<span class="kw">head</span>(sims.full)</code></pre></div>
+<pre><code>##   x Agriculture Examination expected_value predicted_value
+## 1 x           1    16.48936       84.00574        79.82021
+## 2 x           1    16.48936       73.08617        78.50654
+## 3 x           1    16.48936       70.35042        75.76874
+## 4 x           1    16.48936       80.27739        90.41597
+## 5 x           1    16.48936       75.50518        73.32123
+## 6 x           1    16.48936       74.67167        80.02266</code></pre>
+<p>Each row contains information for an individual “observation”, i.e. a quantity of interest calculated from one draw of the model parameters from the multivariate normal distribution.</p>
+<p>The first three columns of the object returned by <code>zelig_qi_to_df</code> in this case contain information that identifies the scenario that the quantity of interest is from. For example, the first row is from a scenario where <code>Agriculture</code> is fitted at <code>1</code> and <code>Examination</code> is fitted at the sample mean <code>16.48936</code>. The <code>x</code> column identifies if the values were fitted as <code>x</code> or <code>x1</code>–a contrasting scenario used to find first differences.</p>
+<p>The final two columns contain the expected and predicted value of the quantity of interest, respectively.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>Typically when we plot simulated quantities of interest, we would be interested in showing the central interval of the simualted distribution. This involves finding the central interval for each simulation scenario for some range, e.g. the central 95% of simulations. Zelig now includes a helper function <code>qi_slimmer</code> that takes the output of <code>zelig_qi_to_df</code> and finds the desired central interval for each scenario. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sims.slimmed &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qi_slimmer.html">qi_slimmer</a></span>(sims.full)</code></pre></div>
+<pre><code>## Slimming Expected Values . . .</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sims.slimmed)</code></pre></div>
+<pre><code>##   x Agriculture Examination   qi_min qi_median   qi_max
+## 1 x           1    16.48936 65.75518  75.21336 84.37720
+## 2 x          11    16.48936 66.44972  74.22790 81.54949
+## 3 x          16    16.48936 66.82196  73.74735 80.31115
+## 4 x          21    16.48936 67.26946  73.21621 78.95559
+## 5 x          26    16.48936 67.52224  72.69393 77.76690
+## 6 x          31    16.48936 67.74711  72.22681 76.47064</code></pre>
+<p>Now we have one row for each scenario. This contains the columns <code>qi_min</code>, <code>qi_median</code>, and <code>qi_max</code> for the central interval of the simulations from each scenario. By default <code>qi_min</code> and <code>qi_max</code> contain central interval bounds at the lower 2.5 and upper 97.5 percentiles, respectively. <code>qi_median</code> contains the simulated distribution’s median. The interval can be changed with the <code>ci</code> argument. You can choose expected value (<code>ev</code>) or predicted value (<code>pv</code>) with the <code>qi_type</code> argument.</p>
+<p>Now we have everything to make a ggplot2 plot summarizing the simulated quantity of interest:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sims.slimmed, <span class="kw">aes</span>(Agriculture, qi_median)) +
+<span class="st">    </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> qi_min, <span class="dt">ymax =</span> qi_max), <span class="dt">alpha =</span> <span class="fl">0.3</span>) +
+<span class="st">    </span><span class="kw">geom_line</span>() +<span class="st"> </span>
+<span class="st">    </span><span class="kw">ylab</span>(<span class="st">'Expected Fertility'</span>) +
+<span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="zelig-tidyverse_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<div id="get-in-touch" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#get-in-touch" class="anchor"> </a></body></html>Get in touch</h3>
+<p>We are also considering in the future whether to generate Zelig’s default plots with ggplot2. We’ld love to hear your thoughts: <a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>, <a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, or <a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat <i class="fa fa-comments-o" aria-hidden="true"></i></a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>“Depending on the issue being studied, the expected or mean value of the dependent variable may be more inter- esting than a predicted value. The difference is subtle but important. A predicted value contains both fundamental and estimation uncertainty, whereas an expected value averages over the fundamental variability arising from sheer randomness in the world, leaving only the estima- tion uncertainty caused by not having an infinite num- ber of observations. Thus, predicted values have a larger variance than expected values, even though the average should be nearly the same in both cases.” From <a href="http://www.jstor.org.ezp-prod1.hul.harvard.edu/stable/2669316">King, Tomz, and Wittenberg (2000, 350)</a><a href="#fnref1">↩</a></p></li>
+</ol>
 </div>
 </div>
   </div>
@@ -175,8 +223,8 @@ swiss %&gt;%<span class="st"> </span>
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#what-is-tidy-data">What is “tidy data”</a></li>
-      <li><a href="#example">Example</a></li>
-      <li><a href="#zelig-and-ggplot2-in-development">Zelig and ggplot2 [IN DEVELOPMENT]</a></li>
+      <li><a href="#analyzing-tidy-data-with-pipes">Analyzing tidy data with pipes</a></li>
+      <li><a href="#zelig-and-ggplot2">Zelig and ggplot2</a></li>
       </ul>
 </div>
       </div>

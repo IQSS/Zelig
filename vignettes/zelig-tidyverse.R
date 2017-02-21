@@ -40,3 +40,15 @@ sims.full <- swiss %>%
 
 head(sims.full)
 
+## ------------------------------------------------------------------------
+sims.slimmed <- qi_slimmer(sims.full)
+
+head(sims.slimmed)
+
+## ------------------------------------------------------------------------
+ggplot(sims.slimmed, aes(Agriculture, qi_median)) +
+    geom_ribbon(aes(ymin = qi_min, ymax = qi_max), alpha = 0.3) +
+    geom_line() + 
+    ylab('Expected Fertility') +
+    theme_bw()
+
