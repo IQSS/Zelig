@@ -7,11 +7,11 @@
 extract_setrange(obj, which_range = "range")
 }
 \arguments{
-\item{obj}{a zelig object containing a range of simulated quantities of 
+\item{obj}{a zelig object containing a range of simulated quantities of
 interest}
 
-\item{which_range}{character string either 'range' or 'range1' indicating whether
-to extract the first or second set of fitted values}
+\item{which_range}{character string either \code{'range'} or \code{'range1'}
+indicating whether to extract the first or second set of fitted values}
 }
 \description{
 Extract setrange fors return tidy formatted data frame

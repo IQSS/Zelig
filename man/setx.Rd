@@ -30,7 +30,7 @@ as a range of values, creating one observation for every unique value in
 the range of values}
 }
 \value{
-The output is returned in a field to the Zelig object. For 
+The output is returned in a field to the Zelig object. For
   unconditional prediction, \code{x.out} is a model matrix based
   on the specified values for the explanatory variables. For multiple
   analyses (i.e., when choosing the \code{by} option in \code{\link{zelig}},

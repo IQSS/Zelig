@@ -384,7 +384,7 @@ se_pull <- function(x) {
 
 #' Drop intercept columns from a data frame of fitted values
 #' 
-#' @param df a data frame of fitted values
+#' @param x a data frame
 #' @internal
 
 rm_intercept <- function(x) {

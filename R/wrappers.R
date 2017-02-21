@@ -134,7 +134,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #'   of \code{x1} to 12. In addition, you may specify one explanatory variable
 #'   as a range of values, creating one observation for every unique value in
 #'   the range of values
-#' @return The output is returned in a field to the Zelig object. For 
+#' @return The output is returned in a field to the Zelig object. For
 #'   unconditional prediction, \code{x.out} is a model matrix based
 #'   on the specified values for the explanatory variables. For multiple
 #'   analyses (i.e., when choosing the \code{by} option in \code{\link{zelig}},
@@ -142,7 +142,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #'   data frame. If you wish to calculate values over just one subset of
 #'   the data frame, the 5th subset for example, you may use:
 #'   \code{x.out <- setx(z.out[[5]])}
-#'   
+#'
 #' @examples
 #' # Unconditional prediction:
 #' data(turnout)
@@ -181,7 +181,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 
 #' Setting Explanatory Variable Values for First Differences
 #'
-#' This documentation describes the \code{setx1} Zelig 4 compatibility wrapper 
+#' This documentation describes the \code{setx1} Zelig 4 compatibility wrapper
 #' function. The wrapper is primarily useful for setting fitted values
 #' for creating first differences in piped workflows.
 #'
@@ -202,7 +202,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'   of \code{x1} to 12. In addition, you may specify one explanatory variable
 #'   as a range of values, creating one observation for every unique value in
 #'   the range of values
-#' @return The output is returned in a field to the Zelig object. For 
+#' @return The output is returned in a field to the Zelig object. For
 #'   unconditional prediction, \code{x.out} is a model matrix based
 #'   on the specified values for the explanatory variables. For multiple
 #'   analyses (i.e., when choosing the \code{by} option in \code{\link{zelig}},
@@ -210,11 +210,11 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'   data frame. If you wish to calculate values over just one subset of
 #'   the data frame, the 5th subset for example, you may use:
 #'   \code{x.out <- setx(z.out[[5]])}
-#'   
+#'
 #' @examples
 #' library(dplyr) # contains pipe operator %>%
 #' data(turnout)
-#' 
+#'
 #' # plot first differences
 #' zelig(Fertility ~ Education, data = swiss, model = 'ls') %>%
 #'       setx(z4, Education = 10) %>%
@@ -230,7 +230,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 
 setx1 <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
   is_zelig(obj)
-  
+
   x5 <- obj$copy()
   # This is the length of each argument in '...'s
   s <- list(...)
@@ -391,28 +391,30 @@ from_zelig_model <- function(obj) {
 }
 
 #' Extract simulated quantities of interest from a zelig object
-#' 
+#'
 #' @param obj a zelig object with simulated quantities of interest
-#' 
+#'
 #' @details Returns simulated quantities of interest in a tidy data formatted
 #'   `data.frame`. This can be useful for creating custom plots.
-#'   
+#'
 #'  Each row contains a simulated value and each column contains:
-#'   
-#'  - The fitted values specified in `setx` including a `by` column if 
-#'    `by` was used in the \code{\link{zelig}} call.
+#'
+#'  - `x` whether the simulations are from the base `x` `setx` or the 
+#'      contrasting `x1` for finding first differences.
+#'  - The fitted values specified in `setx` including a `by` column if
+#'     `by` was used in the \code{\link{zelig}} call.
 #'  - `expected_value`
 #'  - `expected_value`
-#' 
+#'
 #' @examples
-#' #### QIs without first difference or range, from covariates fitted at 
-#' ## central tendencies 
+#' #### QIs without first difference or range, from covariates fitted at
+#' ## central tendencies
 #' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
 #' z4 <- setx(z4)
 #' z4 <- sim(z4)
 #' zelig_qi_to_df(z4)
-#'  
+#'
 #' #### QIs for first differences
 #' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
@@ -420,32 +422,39 @@ from_zelig_model <- function(obj) {
 #' z4.2 <- setx(z4, Petal.Length = 4.4)
 #' z4 <- sim(z4, x = z4.1, x1 = z4.2)
 #' zelig_qi_to_df(z4)
-#' 
+#'
 #' #### QIs for first differences, estimated by Species
-#' z4 <- zelig(Petal.Width ~ Petal.Length, by = 'Species', data = iris,
+#' z4 <- zelig(Petal.Width ~ Petal.Length, by = "Species", data = iris,
 #'              model = "ls")
 #' z4.1 <- setx(z4, Petal.Length = 2)
 #' z4.2 <- setx(z4, Petal.Length = 4.4)
 #' z4 <- sim(z4, x = z4.1, x1 = z4.2)
 #' zelig_qi_to_df(z4)
-#'  
+#'
 #' #### QIs for a range of fitted values
 #' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
 #' z4 <- setx(z4, Petal.Length = 2:4)
 #' z4 <- sim(z4)
 #' zelig_qi_to_df(z4)
-#' 
+#'
+#' #### QIs for a range of fitted values, estimated by Species
+#' z4 <- zelig(Petal.Width ~ Petal.Length, by = "Species", data = iris,
+#'             model = "ls")
+#' z4 <- setx(z4, Petal.Length = 2:4)
+#' z4 <- sim(z4)
+#' zelig_qi_to_df(z4)
+#'
 #' #### QIs for two ranges of fitted values
 #' z4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'             model = "ls")
 #' z4.1 <- setx(z4, Petal.Length = 2:4, Species = 'setosa')
 #' z4.2 <- setx(z4, Petal.Length = 2:4, Species = 'virginica')
 #' z4 <- sim(z4, x = z4.1, x1 = z4.2)
-#' 
+#'
 #' zelig_qi_to_df(z4)
-#' 
-#' @source For a discussion of tidy data see 
+#'
+#' @source For a discussion of tidy data see
 #' <https://vita.had.co.nz/papers/tidy-data.pdf>.
 #'
 #'
@@ -455,10 +464,10 @@ from_zelig_model <- function(obj) {
 
 zelig_qi_to_df <- function(obj) {
     message('zelig_qi_to_df is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues')
-  
+
     is_zelig(obj)
     is_sims_present(obj$sim.out)
-  
+
     comb <- data.frame()
     if (is_simsx(obj$sim.out, fail = FALSE)) {
         comb_temp <- extract_setx(obj)
@@ -476,40 +485,43 @@ zelig_qi_to_df <- function(obj) {
       comb_temp <- extract_setrange(obj, which_range = 'range1')
       comb <- rbind(comb, comb_temp)
     }
-  
+
     # Need range1
-    if (nrow(comb) == 0) stop('Unable to find simulated quantities of interest.', 
+    if (nrow(comb) == 0) stop('Unable to find simulated quantities of interest.',
                                call. = FALSE)
     return(comb)
 }
 
 
 #' Extract setx for non-range and return tidy formatted data frame
-#' 
+#'
 #' @param obj a zelig object containing simulated quantities of interest
-#' @param which_x character string either 'x' or 'x1' indicating whether
+#' @param which_x character string either `'x'` or `'x1'` indicating whether
 #'   to extract the first or second set of fitted values
-#' 
+#'
 #' @importFrom dplyr select rename
+#' @md
 #' @internal
 
 extract_setx <- function(obj, which_x = 'x') {
 
     temp_comb <- data.frame()
-    # Extract fitted values  
-    temp_fitted <- as.data.frame(obj$setx.out[[which_x]]$mm[[1]],
+    all_fitted <- obj$setx.out[[which_x]]
+    all_sims <- obj$sim.out[[which_x]]
+    
+    temp_fitted <- as.data.frame(all_fitted$mm[[1]],
                                  row.names = NULL)
-    # Fitted values when estimated by 
-    by_length <- nrow(obj$setx.out[[which_x]])
+
+    by_length <- nrow(all_fitted)
     if (by_length > 1) {
         temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)), by_length), ]
-        temp_fitted <- data.frame(by = obj$setx.out[[which_x]][[1]], 
+        temp_fitted <- data.frame(by = all_fitted[[1]],
                                   temp_fitted, row.names = NULL)
     }
     temp_fitted <- rm_intercept(temp_fitted)
-    
-    temp_ev <- lapply(obj$sim.out[[which_x]]$ev, unlist)
-    temp_pv <- lapply(obj$sim.out[[which_x]]$pv, unlist)
+
+    temp_ev <- lapply(all_sims$ev, unlist)
+    temp_pv <- lapply(all_sims$pv, unlist)
     for (i in 1:nrow(temp_fitted)) {
         temp_qi <- data.frame(temp_ev[[i]], temp_pv[[i]])
         names(temp_qi) <- c('expected_value', 'predicted_value')
@@ -519,36 +531,55 @@ extract_setx <- function(obj, which_x = 'x') {
     }
     temp_comb$x <- which_x
     temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
-    
- #   if ('x.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x.by)
- #  if ('x1.by' %in% names(temp_comb)) temp_comb <- dplyr::rename(temp_comb, by = x1.by)
+
     return(temp_comb)
 }
 
 #' Extract setrange fors return tidy formatted data frame
-#' 
-#' @param obj a zelig object containing a range of simulated quantities of 
+#'
+#' @param obj a zelig object containing a range of simulated quantities of
 #'   interest
-#' @param which_range character string either 'range' or 'range1' indicating whether
-#'   to extract the first or second set of fitted values
-#' 
+#' @param which_range character string either `'range'` or `'range1'` 
+#'   indicating whether to extract the first or second set of fitted values
+#'
 #' @importFrom dplyr select
+#' @md
 #' @internal
 
 extract_setrange <- function(obj, which_range = 'range') {
-    comb_temp <- data.frame()
-    for (i in 1:nrow(obj[[which_range]])) {
-        # Extract fitted values  
-        temp_fitted <- as.data.frame(obj$setx.out[[which_range]][[1]]$mm[[1]],
-                                     row.names = NULL)
+  
+    temp_comb <- data.frame()
+    all_fitted <- obj$setx.out[[which_range]]
+    all_sims <- obj$sim.out[[which_range]]
     
-        # Extract qi
-        temp_qi <- lapply(obj$sim.out[[which_range]][[i]], unlist)
-        temp_qi <- data.frame(ev = temp_qi[1], pv = temp_qi[2])
-    
-        # Combine
-        temp_df <- cbind(temp_fitted, temp_qi, row.names = NULL)
-        comb_temp <- rbind(comb_temp, temp_df)
+    for (i in 1:length(all_fitted)) {
+        temp_fitted <- as.data.frame(all_fitted[[i]]$mm[[1]], row.names = NULL)
+      
+        by_length <- nrow(all_fitted[[i]])
+        if (by_length > 1) {
+            temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)), 
+                                           by_length), ]
+            temp_fitted <- data.frame(by = all_fitted[[i]][[1]], temp_fitted, 
+                                  row.names = NULL)
+        }
+        temp_fitted <- rm_intercept(temp_fitted)
+      
+      
+        temp_ev <- lapply(all_sims[[i]]$ev, unlist)
+        temp_pv <- lapply(all_sims[[i]]$pv, unlist)
+        
+        temp_comb_1_range <- data.frame()
+        for (u in 1:nrow(temp_fitted)) {
+            temp_qi <- data.frame(temp_ev[[u]], temp_pv[[u]])
+            names(temp_qi) <- c('expected_value', 'predicted_value')
+            temp_df <- cbind(temp_fitted[u, ], temp_qi, row.names = NULL)
+            temp_comb_1_range <- rbind(temp_comb_1_range, temp_df)
+        }
+        temp_comb <- rbind(temp_comb, temp_comb_1_range)
     }
-    return(comb_temp)
+    if (which_range == 'range') temp_comb$x <- 'x'
+    else temp_comb$x <- 'x1'
+    temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
+  
+    return(temp_comb)
 }

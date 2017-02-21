@@ -7,7 +7,7 @@
 rm_intercept(x)
 }
 \arguments{
-\item{df}{a data frame of fitted values}
+\item{x}{a data frame of fitted values}
 }
 \description{
 Drop intercept columns from a data frame of fitted values

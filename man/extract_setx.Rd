@@ -9,7 +9,7 @@ extract_setx(obj, which_x = "x")
 \arguments{
 \item{obj}{a zelig object containing simulated quantities of interest}
 
-\item{which_x}{character string either 'x' or 'x1' indicating whether
+\item{which_x}{character string either \code{'x'} or \code{'x1'} indicating whether
 to extract the first or second set of fitted values}
 }
 \description{
