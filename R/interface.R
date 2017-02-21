@@ -17,7 +17,7 @@
 
 from_zelig_model <- function(obj) {
   is_zelig(obj)
-  
+
   f5 <- obj$copy()
   return(f5$from_zelig_model())
 }
@@ -31,7 +31,7 @@ from_zelig_model <- function(obj) {
 #'
 #'  Each row contains a simulated value and each column contains:
 #'
-#'  - `x` whether the simulations are from the base `x` `setx` or the 
+#'  - `x` whether the simulations are from the base `x` `setx` or the
 #'      contrasting `x1` for finding first differences.
 #'  - The fitted values specified in `setx` including a `by` column if
 #'     `by` was used in the \code{\link{zelig}} call.
@@ -96,10 +96,10 @@ from_zelig_model <- function(obj) {
 
 zelig_qi_to_df <- function(obj) {
   message('zelig_qi_to_df is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues')
-  
+
   is_zelig(obj)
   is_sims_present(obj$sim.out)
-  
+
   comb <- data.frame()
   if (is_simsx(obj$sim.out, fail = FALSE)) {
     comb_temp <- extract_setx(obj)
@@ -117,7 +117,7 @@ zelig_qi_to_df <- function(obj) {
     comb_temp <- extract_setrange(obj, which_range = 'range1')
     comb <- rbind(comb, comb_temp)
   }
-  
+
   # Need range1
   if (nrow(comb) == 0) stop('Unable to find simulated quantities of interest.',
                             call. = FALSE)
@@ -130,7 +130,7 @@ zelig_qi_to_df <- function(obj) {
 #' @param obj a zelig object containing simulated quantities of interest
 #' @param which_x character string either `'x'` or `'x1'` indicating whether
 #'   to extract the first or second set of fitted values
-#'   
+#'
 #' @seealso \code{\link{zelig_qi_to_df}}
 #' @author Christopher Gandrud
 #'
@@ -138,14 +138,14 @@ zelig_qi_to_df <- function(obj) {
 #' @internal
 
 extract_setx <- function(obj, which_x = 'x') {
-  
+
   temp_comb <- data.frame()
   all_fitted <- obj$setx.out[[which_x]]
   all_sims <- obj$sim.out[[which_x]]
-  
+
   temp_fitted <- as.data.frame(all_fitted$mm[[1]],
                                row.names = NULL)
-  
+
   by_length <- nrow(all_fitted)
   if (by_length > 1) {
     temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)), by_length), ]
@@ -153,19 +153,19 @@ extract_setx <- function(obj, which_x = 'x') {
                               temp_fitted, row.names = NULL)
   }
   temp_fitted <- rm_intercept(temp_fitted)
-  
+
   temp_ev <- lapply(all_sims$ev, unlist)
   temp_pv <- lapply(all_sims$pv, unlist)
   for (i in 1:nrow(temp_fitted)) {
     temp_qi <- data.frame(temp_ev[[i]], temp_pv[[i]])
     names(temp_qi) <- c('expected_value', 'predicted_value')
-    
+
     temp_df <- cbind(temp_fitted[i, ], temp_qi, row.names = NULL)
     temp_comb <- rbind(temp_comb, temp_df)
   }
   temp_comb$x <- which_x
   temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
-  
+
   return(temp_comb)
 }
 
@@ -173,9 +173,9 @@ extract_setx <- function(obj, which_x = 'x') {
 #'
 #' @param obj a zelig object containing a range of simulated quantities of
 #'   interest
-#' @param which_range character string either `'range'` or `'range1'` 
+#' @param which_range character string either `'range'` or `'range1'`
 #'   indicating whether to extract the first or second set of fitted values
-#' 
+#'
 #' @seealso \code{\link{zelig_qi_to_df}}
 #' @author Christopher Gandrud
 #'
@@ -183,27 +183,27 @@ extract_setx <- function(obj, which_x = 'x') {
 #' @internal
 
 extract_setrange <- function(obj, which_range = 'range') {
-  
+
   temp_comb <- data.frame()
   all_fitted <- obj$setx.out[[which_range]]
   all_sims <- obj$sim.out[[which_range]]
-  
+
   for (i in 1:length(all_fitted)) {
     temp_fitted <- as.data.frame(all_fitted[[i]]$mm[[1]], row.names = NULL)
-    
+
     by_length <- nrow(all_fitted[[i]])
     if (by_length > 1) {
-      temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)), 
+      temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)),
                                      by_length), ]
-      temp_fitted <- data.frame(by = all_fitted[[i]][[1]], temp_fitted, 
+      temp_fitted <- data.frame(by = all_fitted[[i]][[1]], temp_fitted,
                                 row.names = NULL)
     }
     temp_fitted <- rm_intercept(temp_fitted)
-    
-    
+
+
     temp_ev <- lapply(all_sims[[i]]$ev, unlist)
     temp_pv <- lapply(all_sims[[i]]$pv, unlist)
-    
+
     temp_comb_1_range <- data.frame()
     for (u in 1:nrow(temp_fitted)) {
       temp_qi <- data.frame(temp_ev[[u]], temp_pv[[u]])
@@ -216,37 +216,37 @@ extract_setrange <- function(obj, which_range = 'range') {
   if (which_range == 'range') temp_comb$x <- 'x'
   else temp_comb$x <- 'x1'
   temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
-  
+
   return(temp_comb)
 }
 
 #' Find the median and a central interval of simulated quantity of interest
-#' distributions 
-#' 
-#' @param df a tidy-formatted data frame of simulated quantities of interest 
+#' distributions
+#'
+#' @param df a tidy-formatted data frame of simulated quantities of interest
 #'   created by \code{\link{zelig_qi_to_df}}.
-#' @param qi_type character string either `ev` or `pv` for returning the 
+#' @param qi_type character string either `ev` or `pv` for returning the
 #'   central intervals for the expected value or predicted value, respectively.
 #' @param ci numeric. The central interval to return, expressed on the `(0, 100]`
 #' or the equivalent `(0, 1]` interval.
-#' 
+#'
 #' @details A tidy-formatted data frame with the following columns:
-#'   
+#'
 #'   - The values fitted with \code{\link{setx}
-#'   
+#'
 #'   - `qi_min`: the minimum value of the central interval specified with `ci`
-#'   - `qi_median`: the median of the simulated quantity of interest distribution 
+#'   - `qi_median`: the median of the simulated quantity of interest distribution
 #'   -`qi_max`: the maximum value of the central interval specified with `ci`
 #'
-#' @examples 
+#' @examples
 #' library(dplyr)
-#' qi.central.interval <- zelig(Petal.Width ~ Petal.Length + Species, 
+#' qi.central.interval <- zelig(Petal.Width ~ Petal.Length + Species,
 #'              data = iris, model = "ls") %>%
 #'              setx(Petal.Length = 2:4, Species = "setosa") %>%
 #'              sim() %>%
-#'              zelig_qi_to_df() %>% 
+#'              zelig_qi_to_df() %>%
 #'              qi_slimmer()
-#' 
+#'
 #' @importFrom dplyr bind_rows %>%
 #' @seealso \code{\link{zelig_qi_to_df}}
 #' @author Christopher Gandrud
@@ -254,45 +254,45 @@ extract_setrange <- function(obj, which_range = 'range') {
 
 qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
     qi__ <- scenario__ <- NULL
-    
+
     ci <- ci_check(ci)
     lower <- (1 - ci)/2
     upper <- 1 - lower
-    
-    if (!(qi_type %in% c('ev', 'pv'))) 
+
+    if (!(qi_type %in% c('ev', 'pv')))
         stop('qi_type must be either "ev" or "pv". ', call. = FALSE)
     if (qi_type == 'ev') qi_drop <- 'predicted_value'
     else qi_drop <- 'expected_value'
-    
+
     if (qi_type == 'ev') qi_var <- 'expected_value'
     else qi_var <- 'predicted_value'
-    
+
     if (qi_type == 'ev') qi_msg <- 'Expected Values'
     else qi_msg <- 'Predicted Values'
     message(sprintf('Slimming %s . . .', qi_msg))
-    
-    names_df <- names(df) 
+
+    names_df <- names(df)
     df <- df[, !(names(df) %in% qi_drop)] # drop non-requested qi_type
-    
+
     names(df)[names(df) == qi_var] <- 'qi__'
     df$scenario__ <- interaction(df[, !(names(df) %in% 'qi__')], drop = TRUE)
-    
+
     qi_list <- split(df, df[['scenario__']])
     qi_list <- lapply(seq_along(qi_list), function(x){
         lower_bound <- quantile(qi_list[[x]][, 'qi__'], prob = lower)
         upper_bound <- quantile(qi_list[[x]][, 'qi__'], prob = upper)
         subset(qi_list[[x]], qi__ >= lower_bound & qi__ <= upper_bound)
     })
-    
+
     df_slimmed <- data.frame(bind_rows(qi_list))
-    
+
     df_out <- df_slimmed %>% group_by(scenario__) %>%
         summarise(qi_min = min(qi__),
                   qi_median = median(qi__),
                   qi_max = max(qi__)
         ) %>%
         data.frame
-    
+
     scenarios_df <- df[!duplicated(df$scenario__), !(names(df) %in% 'qi__')] %>%
                       data.frame(row.names = NULL)
     df_out <- merge(scenarios_df, df_out, by = 'scenario__')
@@ -303,7 +303,7 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
 #' Convert \code{ci} interval from percent to proportion and check if valid
 #' @param x numeric. The central interval to return, expressed on the `(0, 100]`
 #' or the equivalent `(0, 1]` interval.
-#' 
+#'
 #' @md
 #' @internal
 

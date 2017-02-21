@@ -23,11 +23,11 @@ distributions
 }
 \examples{
 library(dplyr)
-qi.central.interval <- zelig(Petal.Width ~ Petal.Length + Species, 
+qi.central.interval <- zelig(Petal.Width ~ Petal.Length + Species,
              data = iris, model = "ls") \%>\%
              setx(Petal.Length = 2:4, Species = "setosa") \%>\%
              sim() \%>\%
-             zelig_qi_to_df() \%>\% 
+             zelig_qi_to_df() \%>\%
              qi_slimmer()
 
 }
