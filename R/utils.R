@@ -382,3 +382,17 @@ se_pull <- function(x) {
   return(p_values)
 }
 
+#' Drop intercept columns from a data frame of fitted values
+#' 
+#' @param x a data frame
+#' @internal
+
+rm_intercept <- function(x) {
+    intercept_names <- c('(Intercept)', 'X.Intercept.')
+    names_x <- names(x)
+    if (any(intercept_names %in% names(x))) {
+        keep <- !(names(x) %in% intercept_names)
+        x <- x[, names_x[keep]]
+    }
+    return(x)
+}
