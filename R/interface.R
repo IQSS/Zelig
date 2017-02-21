@@ -258,7 +258,7 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
     ci <- ci_check(ci)
     lower <- (1 - ci)/2
     upper <- 1 - lower
-
+    
     if (!(qi_type %in% c('ev', 'pv')))
         stop('qi_type must be either "ev" or "pv". ', call. = FALSE)
     if (qi_type == 'ev') qi_drop <- 'predicted_value'
@@ -295,8 +295,9 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
 
     scenarios_df <- df[!duplicated(df$scenario__), !(names(df) %in% 'qi__')] %>%
                       data.frame(row.names = NULL)
-    df_out <- merge(scenarios_df, df_out, by = 'scenario__')
+    df_out <- merge(scenarios_df, df_out, by = 'scenario__', sort = FALSE)
     df_out$scenario__ <- NULL
+    
     return(df_out)
 }
 
