@@ -52,7 +52,7 @@ Suggests:
     rmarkdown,
     testthat,
     tidyverse
-Collate:
+Collate: 
     'assertions.R'
     'model-zelig.R'
     'model-timeseries.R'
@@ -92,6 +92,7 @@ Collate:
     'model-ls.R'
     'utils.R'
     'create-json.R'
+    'interface.R'
     'model-survey.R'
     'model-binchoice-survey.R'
     'model-gamma-survey.R'
