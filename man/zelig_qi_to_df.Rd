@@ -22,7 +22,7 @@ A simulated quantities of interest in a tidy data formatted
 
 Each row contains a simulated value and each column contains:
 \itemize{
-\item \code{x} whether the simulations are from the base \code{x} \code{setx} or the
+\item \code{setx_value} whether the simulations are from the base \code{x} \code{setx} or the
 contrasting \code{x1} for finding first differences.
 \item The fitted values specified in \code{setx} including a \code{by} column if
 \code{by} was used in the \code{\link{zelig}} call.
