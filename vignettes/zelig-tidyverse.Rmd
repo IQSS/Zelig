@@ -96,7 +96,7 @@ head(sims.full)
 
 Each row contains information for an individual "observation", i.e. a quantity of interest calculated from one draw of the model parameters from the multivariate normal distribution.
 
-The first three columns of the object returned by `zelig_qi_to_df` in this case contain information that identifies the scenario that the quantity of interest is from. For example, the first row is from a scenario where `Agriculture` is fitted at `1` and `Examination` is fitted at the sample mean `r mean(swiss$Examination)`. The `x` column identifies if the values were fitted as `x` or `x1`--a contrasting scenario used to find first differences.
+The first three columns of the object returned by `zelig_qi_to_df` in this case contain information that identifies the scenario that the quantity of interest is from. For example, the first row is from a scenario where `Agriculture` is fitted at `1` and `Examination` is fitted at the sample mean `r mean(swiss$Examination)`. The `setx_value` column identifies if the values were fitted by a `setx` call as `x` or `x1`--a contrasting scenario used to find first differences.
 
 The final two columns contain the expected and predicted value of the quantity of interest, respectively.[^expect_vs_predicted]
 
@@ -108,13 +108,13 @@ sims.slimmed <- qi_slimmer(sims.full)
 head(sims.slimmed)
 ```
 
-Now we have one row for each scenario. This contains the columns `qi_min`, `qi_median`, and `qi_max` for the central interval of the simulations from each scenario. By default `qi_min` and `qi_max` contain central interval bounds at the lower 2.5 and upper 97.5 percentiles, respectively. `qi_median` contains the simulated distribution's median. The interval can be changed with the `ci` argument. You can choose expected value (`ev`) or predicted value (`pv`) with the `qi_type` argument.
+Now we have one row for each scenario. This contains the columns `qi_ci_min`, `qi_ci_median`, and `qi_ci_max` for the central interval of the simulations from each scenario. By default `qi_ci_min` and `qi_ci_max` contain central interval bounds at the lower 2.5 and upper 97.5 percentiles, respectively. `qi_ci_median` contains the simulated distribution's median. The interval can be changed with the `ci` argument. You can choose expected value (`ev`) or predicted value (`pv`) with the `qi_ci_type` argument.
 
 Now we have everything to make a ggplot2 plot summarizing the simulated quantity of interest:
 
 ```{r}
-ggplot(sims.slimmed, aes(Agriculture, qi_median)) +
-    geom_ribbon(aes(ymin = qi_min, ymax = qi_max), alpha = 0.3) +
+ggplot(sims.slimmed, aes(Agriculture, qi_ci_median)) +
+    geom_ribbon(aes(ymin = qi_ci_min, ymax = qi_ci_max), alpha = 0.3) +
     geom_line() + 
     ylab('Expected Fertility') +
     theme_bw()
