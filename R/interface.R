@@ -31,7 +31,7 @@ from_zelig_model <- function(obj) {
 #'
 #'  Each row contains a simulated value and each column contains:
 #'
-#'  - `x` whether the simulations are from the base `x` `setx` or the
+#'  - `setx_value` whether the simulations are from the base `x` `setx` or the
 #'      contrasting `x1` for finding first differences.
 #'  - The fitted values specified in `setx` including a `by` column if
 #'     `by` was used in the \code{\link{zelig}} call.
@@ -163,7 +163,7 @@ extract_setx <- function(obj, which_x = 'x') {
     temp_df <- cbind(temp_fitted[i, ], temp_qi, row.names = NULL)
     temp_comb <- rbind(temp_comb, temp_df)
   }
-  temp_comb$x <- which_x
+  temp_comb$setx_value <- which_x
   temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
 
   return(temp_comb)
@@ -213,8 +213,8 @@ extract_setrange <- function(obj, which_range = 'range') {
     }
     temp_comb <- rbind(temp_comb, temp_comb_1_range)
   }
-  if (which_range == 'range') temp_comb$x <- 'x'
-  else temp_comb$x <- 'x1'
+  if (which_range == 'range') temp_comb$setx_value <- 'x'
+  else temp_comb$setx_value <- 'x1'
   temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
 
   return(temp_comb)
@@ -233,10 +233,9 @@ extract_setrange <- function(obj, which_range = 'range') {
 #' @details A tidy-formatted data frame with the following columns:
 #'
 #'   - The values fitted with \code{\link{setx}
-#'
-#'   - `qi_min`: the minimum value of the central interval specified with `ci`
-#'   - `qi_median`: the median of the simulated quantity of interest distribution
-#'   -`qi_max`: the maximum value of the central interval specified with `ci`
+#'   - `qi_ci_min`: the minimum value of the central interval specified with `ci`
+#'   - `qi_ci_median`: the median of the simulated quantity of interest distribution
+#'   - `qi_ci_max`: the maximum value of the central interval specified with `ci`
 #'
 #' @examples
 #' library(dplyr)
@@ -254,6 +253,12 @@ extract_setrange <- function(obj, which_range = 'range') {
 
 qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
     qi__ <- scenario__ <- NULL
+    
+    if (!is.data.frame(df)) 
+        stop('df must be a data frame created by zelig_qi_to_df.', call. = FALSE)
+    if (!all(c('expected_value', 'predicted_value') %in% names(df)))
+        stop('The data frame does not appear to have been created by zelig_qi_to_df.',
+             call. = FALSE)
 
     ci <- ci_check(ci)
     lower <- (1 - ci)/2
@@ -287,9 +292,9 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
     df_slimmed <- data.frame(bind_rows(qi_list))
 
     df_out <- df_slimmed %>% group_by(scenario__) %>%
-        summarise(qi_min = min(qi__),
-                  qi_median = median(qi__),
-                  qi_max = max(qi__)
+        summarise(qi_ci_min = min(qi__),
+                  qi_ci_median = median(qi__),
+                  qi_ci_max = max(qi__)
         ) %>%
         data.frame
 
@@ -309,10 +314,10 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
 #' @internal
 
 ci_check <- function(x) {
-  if (x > 1 & x <= 100) x <- x / 100
-  if (x <= 0 | x > 1) {
-    stop(sprintf("%s will not produce a valid central interval.", x),
-         call. = FALSE)
-  }
-  return(x)
+    if (x > 1 & x <= 100) x <- x / 100
+    if (x <= 0 | x > 1) {
+        stop(sprintf("%s will not produce a valid central interval.", x),
+              call. = FALSE)
+    }
+    return(x)
 }

@@ -50,7 +50,7 @@ test_that('REQUIRE TEST zelig_qi_to_df setx, setrange, by', {
     z.5 <- sim(z.5)
     z5_extracted <- zelig_qi_to_df(z.5)
     expect_equal(nrow(z5_extracted), 9000)
-    expect_equal(names(z5_extracted), c('x', 'by', 'Petal.Length', 
+    expect_equal(names(z5_extracted), c('setx_value', 'by', 'Petal.Length', 
                                         'expected_value', 'predicted_value'))
 
     #### QIs for two ranges of fitted values
