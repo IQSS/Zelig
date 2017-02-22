@@ -105,7 +105,7 @@
     <div class="page-header toc-ignore">
       <h1>Zelig and the Tidyverse</h1>
             
-            <h4 class="date">2017-02-21</h4>
+            <h4 class="date">2017-02-22</h4>
           </div>
 
     
@@ -138,7 +138,7 @@
 ## Moutier           85.8        36.5          12
 ## Neuveville        76.9        43.5          17
 ## Porrentruy        76.1        35.3           9</code></pre>
-<p>We could then analyse it with Zelig and plot quantities of interest using Tidyverse’s pipe operator. Note the use of <code>data = .</code> this tells the pipe to enter the <code>swiss</code> data object as the value of <code>zelig</code>’s data argument:</p>
+<p>We could then analyse it with Zelig and plot quantities of interest using Tidyverse’s pipe operator. Note the use of <code>data = .</code>. This tells the pipe to enter the <code>swiss</code> data object as the value of <code>zelig</code>’s data argument:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Zelig)
 <span class="kw">library</span>(tidyverse)
 
@@ -182,9 +182,9 @@ swiss %&gt;%<span class="st"> </span>
 ## 5 x           1    16.48936       75.50518        73.32123
 ## 6 x           1    16.48936       74.67167        80.02266</code></pre>
 <p>Each row contains information for an individual “observation”, i.e. a quantity of interest calculated from one draw of the model parameters from the multivariate normal distribution.</p>
-<p>The first three columns of the object returned by <code>zelig_qi_to_df</code> in this case contain information that identifies the scenario that the quantity of interest is from. For example, the first row is from a scenario where <code>Agriculture</code> is fitted at <code>1</code> and <code>Examination</code> is fitted at the sample mean <code>16.48936</code>. The <code>x</code> column identifies if the values were fitted as <code>x</code> or <code>x1</code>–a contrasting scenario used to find first differences.</p>
+<p>The first three columns of the object returned by <code>zelig_qi_to_df</code> in this case contain information that identifies the scenario that the quantity of interest is from. For example, the first row is from a scenario where <code>Agriculture</code> is fitted at <code>1</code> and <code>Examination</code> is fitted at the sample mean 16.4893617. The <code>x</code> column identifies if the values were fitted as <code>x</code> or <code>x1</code>–a contrasting scenario used to find first differences.</p>
 <p>The final two columns contain the expected and predicted value of the quantity of interest, respectively.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
-<p>Typically when we plot simulated quantities of interest, we would be interested in showing the central interval of the simualted distribution. This involves finding the central interval for each simulation scenario for some range, e.g. the central 95% of simulations. Zelig now includes a helper function <code>qi_slimmer</code> that takes the output of <code>zelig_qi_to_df</code> and finds the desired central interval for each scenario. For example:</p>
+<p>Typically when we plot simulated quantities of interest, we would be interested in showing the central interval of the simulated distribution. This involves finding the central interval for each simulation scenario for some range, e.g. the central 95% of simulations. Zelig now includes a helper function <code>qi_slimmer</code> that takes the output of <code>zelig_qi_to_df</code> and finds the desired central interval for each scenario. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sims.slimmed &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qi_slimmer.html">qi_slimmer</a></span>(sims.full)</code></pre></div>
 <pre><code>## Slimming Expected Values . . .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sims.slimmed)</code></pre></div>
@@ -206,13 +206,13 @@ swiss %&gt;%<span class="st"> </span>
 <div id="get-in-touch" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#get-in-touch" class="anchor"> </a></body></html>Get in touch</h3>
-<p>We are also considering in the future whether to generate Zelig’s default plots with ggplot2. We’ld love to hear your thoughts: <a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>, <a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, or <a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat <i class="fa fa-comments-o" aria-hidden="true"></i></a>.</p>
+<p>We are also considering in the future whether to generate Zelig’s default plots with ggplot2. We’d love to hear your thoughts: <a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>, <a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, or <a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat <i class="fa fa-comments-o" aria-hidden="true"></i></a>.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p>“Depending on the issue being studied, the expected or mean value of the dependent variable may be more inter- esting than a predicted value. The difference is subtle but important. A predicted value contains both fundamental and estimation uncertainty, whereas an expected value averages over the fundamental variability arising from sheer randomness in the world, leaving only the estima- tion uncertainty caused by not having an infinite num- ber of observations. Thus, predicted values have a larger variance than expected values, even though the average should be nearly the same in both cases.” From <a href="http://www.jstor.org.ezp-prod1.hul.harvard.edu/stable/2669316">King, Tomz, and Wittenberg (2000, 350)</a><a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>“Depending on the issue being studied, the expected or mean value of the dependent variable may be more interesting than a predicted value. The difference is subtle but important. A predicted value contains both fundamental and estimation uncertainty, whereas an expected value averages over the fundamental variability arising from sheer randomness in the world, leaving only the estimation uncertainty caused by not having an infinite number of observations. Thus, predicted values have a larger variance than expected values, even though the average should be nearly the same in both cases.” From <a href="http://www.jstor.org.ezp-prod1.hul.harvard.edu/stable/2669316">King, Tomz, and Wittenberg (2000, 350)</a><a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
 </div>
