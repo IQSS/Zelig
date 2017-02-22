@@ -65,6 +65,20 @@ test_that('REQUIRE TEST for set with ls models including factors set within zeli
                  setUS2$setx.out$x$mm[[1]][[16]])
 })
 
+# REQUIRE TEST for set with ls models including natural logs set within zelig call --
+test_that('REQUIRE TEST for set with ls models including natural logs set within zelig call', {
+  z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls')
+  setd1 <- setx(z1, dist = log(15))
+  
+  cars$dist <- log(cars$dist)
+  z2 <- zelig(speed ~ dist, data = cars, model = 'ls')
+  setd2 <- setx(z1, dist = log(15))
+  
+  expect_equal(round(setd1$setx.out$x$mm[[1]][[2]], digits = 5), 2.70805)
+  expect_equal(setd1$setx.out$x$mm[[1]][[2]], 
+               setd2$setx.out$x$mm[[1]][[2]])
+})
+
 # REQUIRE TEST for ls with interactions ----------------------------------------
 test_that('REQUIRE TEST for ls with interactions', {
     states <- as.data.frame(state.x77)

@@ -234,10 +234,21 @@ z$methods(
     }
 
     .self$formula <- formula
+    
     # Convert factors converted internally to the zelig call
-    if (factorize(formula, check = TRUE)) {
-      localformula <- factorize(formula, data, f_out = TRUE)
-      localdata <- factorize(formula, data, d_out = TRUE)
+    if (transformer(formula, FUN = 'as.factor', check = TRUE)) {
+      localformula <- transformer(formula, data, FUN = 'as.factor', 
+                                  f_out = TRUE)
+      localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
+      .self$formula <- localformula
+      .self$data <- localdata
+    }
+    
+    # Convert natural logs converted internally to the zelig call
+    if (transformer(formula, FUN = 'log', check = TRUE)) {
+      localformula <- transformer(formula, data, FUN = 'log', 
+                                  f_out = TRUE)
+      localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
       .self$formula <- localformula
       .self$data <- localdata
     }
