@@ -23,11 +23,17 @@ underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
     + `get_pvalue` and `get_se` methods to return estimated model p-values and
   standard errors. #147
 
+- `zelig_qi_to_df` function for extracting simulated quantities of interest
+from a Zelig object and returning them as a tidy-formatted data frame.
+
 - Extensive additions to model estimation method documentation and vignettes.
 
 - `setx` returns an error if it is unable to find a supplied variable name. 
 
 - `setx1` wrapper added to facilitate piped workflows for first differences.
+
+- `zelig` can handle independent variables that are transformed using the 
+natural logarithm inside of the call. #225
 
 ## Minor changes
 
@@ -77,8 +83,9 @@ Zelig version 5.0-14
 - The Zelig 4 `sim` wrapper now intelligently looks for fitted values from the
 reference class object if not supplied via the \code{x} argument.
 
-- New `to_zelig_mi` utility function for combining multiply imputed datasets for
-passing to `zelig`. `mi` will also work to enable backwards compatibility. #178
+- New `to_zelig_mi` utility function for combining multiply imputed data sets 
+for passing to `zelig`. `mi` will also work to enable backwards compatibility. 
+#178
 
 - Initial development on a new testing architecture and more tests for
 `model-*`, Zelig 4 wrappers, `ci.plot`, and the Zelig workflow.

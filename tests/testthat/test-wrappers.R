@@ -50,7 +50,7 @@ test_that('setx and sim non-zelig object fail', {
     expect_error(sim('TEST'), 'Not a Zelig object.')
 })
 
-# REQUIRE TEST sim wraper minimal working --------------------------------------
+# REQUIRE TEST sim wrapper minimal working --------------------------------------
 test_that('REQUIRE TEST sim wraper minimal working', {
     z5 <- zls$new()
     z5 <- zelig(Fertility ~ Education, data = swiss, model = 'ls')
@@ -62,11 +62,4 @@ test_that('REQUIRE TEST sim wraper minimal working', {
     z5$setx(Education = 5)
     zsimwrap <- sim(z5, num = 10)
     expect_equal(length(zsimwrap$get_qi()), 10)
-})
-
-# REQUIRE TEST from_zelig_model returns expected fitted model object -----------------
-test_that('REQUIRE TEST from_zelig_model returns expected fitted model object', {
-    z5 <- zls$new()
-    z5$zelig(Fertility ~ Education, data = swiss)
-    expect_is(from_zelig_model(z5), class = 'lm')
 })

@@ -30,7 +30,7 @@ as a range of values, creating one observation for every unique value in
 the range of values}
 }
 \value{
-The output is returned in a field to the Zelig object. For 
+The output is returned in a field to the Zelig object. For
   unconditional prediction, \code{x.out} is a model matrix based
   on the specified values for the explanatory variables. For multiple
   analyses (i.e., when choosing the \code{by} option in \code{\link{zelig}},
@@ -40,7 +40,7 @@ The output is returned in a field to the Zelig object. For
   \code{x.out <- setx(z.out[[5]])}
 }
 \description{
-This documentation describes the \code{setx1} Zelig 4 compatibility wrapper 
+This documentation describes the \code{setx1} Zelig 4 compatibility wrapper
 function. The wrapper is primarily useful for setting fitted values
 for creating first differences in piped workflows.
 }

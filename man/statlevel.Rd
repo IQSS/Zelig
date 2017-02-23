@@ -12,7 +12,7 @@ statlevel(qi, num)
 \item{num}{number of simulations}
 }
 \value{
-a formatted qi
+a formatted quantity of interest
 }
 \description{
 Describe Here
