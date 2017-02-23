@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comparing Zelig 5 and Zelig 4 Syntax • Zelig</title>
+<title>Transforming Covariates • Zelig</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -103,7 +103,7 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Comparing Zelig 5 and Zelig 4 Syntax</h1>
+      <h1>Transforming Covariates</h1>
             
             <h4 class="date">2017-02-23</h4>
           </div>
@@ -112,19 +112,11 @@
     
 <div class="contents">
 <p><em>Built using Zelig version 5.0.16</em></p>
-<p>Zelig 5 uses <a href="http://adv-r.had.co.nz/R5.html">reference classes</a> which work a bit differently from what you may expect in R. The big difference is that they are “mutable”, i.e. assigning values to them does not overwrite the objects previous contents.</p>
-<p>Zelig 5 does contain wrappers (largely) allowing you to use Zelig 4 syntax if you’d like. Here is an example workflow with Zelig 5:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls$<span class="kw">new</span>()
-z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X ~<span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-z5$<span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()
-z5$<span class="kw">graph</span>()</code></pre></div>
-<p>Here is the same set of operations using the Zelig 4 wrappers:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
-s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)
-<span class="kw">plot</span>(s.out)</code></pre></div>
-<p>Note that all of the output objects from the Zelig 4 wrappers are Zelig 5 reference class objects, so you can mix and match which syntax you like.</p>
+<p>For convienience, you may wish to transform one or more of your covariates within the <code>zelig</code> model estimation call. For example, imagine we want to natural log transform the variable <code>dist</code> in a linear regression:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Zelig)
+
+z1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed ~<span class="st"> </span><span class="kw">log</span>(dist), <span class="dt">data =</span> cars, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Then we want to find quantities of interest when the <code>dist</code> variable is</p>
 </div>
   </div>
 
