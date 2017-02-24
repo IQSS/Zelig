@@ -554,7 +554,6 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
     }
     ci<-sort(ci)
 
-
     ## Timeseries:
     if(is_timeseries(obj)){
         #xmatrix<-              ## Do we need to know the x in which the shock/innovation occcured?  For secondary graphs, titles, legends?
@@ -586,23 +585,24 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
 
     ## Everything Else:
     }else{
-        d<-length(obj$sim.out$range)
+        d <- length(obj$sim.out$range)
 
-        if (d<1) {
+        if (d < 1) {
             return()  # Should add warning
         }
-
-        xmatrix<-matrix(NA,nrow=d, ncol=length( obj$setx.out$range[[1]]$mm[[1]] ))    # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
-        for(i in 1:d){
-            xmatrix[i,]<-as.matrix( obj$setx.out$range[[i]]$mm[[1]] )   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        num_cols <- length(obj$setx.out$range[[1]]$mm[[1]] )
+        xmatrix <- matrix(NA,nrow = d, ncol = num_cols)    # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
+        for (i in 1:d){
+            xmatrix[i,] <- matrix(obj$setx.out$range[[i]]$mm[[1]], 
+                                  ncol = num_cols)   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         }
-
+        
         if (d == 1 && is.null(var)) {
             warning("Must specify the `var` parameter when plotting the confidence interval of an unvarying model. Plotting nothing.")
             return(invisible(FALSE))
         }
 
-        xvarnames<-names(as.data.frame( obj$setx.out$range[[1]]$mm[[1]]))  # MUST BE A BETTER WAY/PATH TO GET NAMES
+        xvarnames <- names(as.data.frame( obj$setx.out$range[[1]]$mm[[1]]))  # MUST BE A BETTER WAY/PATH TO GET NAMES
 
         if(is.character(var)){
             if( !(var %in% xvarnames   ) ){
@@ -610,23 +610,27 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
                 return(invisible(FALSE))
             }
         }
-
+        
         if (is.null(var)) {
-            each.var <- apply(xmatrix,2,sd)
-            flag <- each.var>0
-            min.var<-min(each.var[flag])
-            var.seq<-1:ncol(xmatrix)
-            position<-var.seq[each.var==min.var]
+            # Determine x-axis variable based on variable with unique fitted values equal to the number of scenarios
+            length_unique <- function(x) length(unique(x))
+            var.unique <- apply(xmatrix, 2, length_unique)
+            var.seq <- 1:ncol(xmatrix)
+            position <- var.seq[var.unique == d]
+            if (length(position) > 1) {
+                position <- position[1] # arbitrarily pick the first variable if more than one
+                message(sprintf('%s chosen as the x-axis variable. Use the var argument to specify a different variable.', xvarnames[position]))
+            }
         } else {
             if(is.numeric(var)){
-                position<-var
+                position <- var
             }else if(is.character(var)){
-                position<-grep(var,xvarnames )
+                position <- grep(var,xvarnames)
             }
         }
-        position<-min(position)
-        xseq<-xmatrix[,position]
-        xname<-xvarnames[position]
+        position <- min(position)
+        xseq <- xmatrix[,position]
+        xname <- xvarnames[position]
         # Define xlabel
         if (is.null(xlab))
         xlab <- paste("Range of",xname)

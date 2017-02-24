@@ -25,6 +25,12 @@ test_that('REQUIRE TEST ls with by', {
 
     z5 <- zls$new()
     z5$zelig(Fertility ~ Education, data = swiss, by = 'maj_catholic')
+
+    z5$setx()    
+    summary(z5)
+    z5$sim()
+    sims_df <- zelig_qi_to_df(z5)
+    expect_equal(length(unique(sims_df$by)), 2)
 })
 
 # gim method tests -------------------------------------------------------------
@@ -40,6 +46,7 @@ test_that('REQUIRE TEST for sim with models including factor levels', {
     z.out <- zelig(Petal.Width ~ Petal.Length + Species, data = iris, 
                    model = "ls")
     x.out1 <- setx(z.out, Petal.Length = 1:10)
+    expect_error(summary(x.out1), NA)
     sims1 <- sim(z.out, x.out1)
     expect_equal(length(sims1$sim.out$range), 10)
     

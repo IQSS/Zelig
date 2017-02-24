@@ -1,18 +1,18 @@
 #' Compute the Statistical Mode of a Vector
 #' @aliases Mode mode
 #' @param x a vector of numeric, factor, or ordered values
-#' @return the statistical mode of the vector. If two modes exist, one is
-#'   randomly selected (by design)
+#' @return the statistical mode of the vector. If more than one mode exists, 
+#'  the last one in the factor order is arbitrarily chosen (by design)
 #' @export
-#' @author Matt Owen \email{mowen@@iq.harvard.edu}
+#' @author Christopher Gandrud and Matt Owen
 
 Mode <- function (x) {
     # build a table of values of x
     tab <- table(as.factor(x))
-    # find the mode, then if there's more than one, select one randomly
-    v <- sample(names(which(tab == max(tab))), size = 1)
-    # if it came in as a factor, we need to re-cast it
-    # as a factor, with the same exact levels
+    # find the mode, if there is more than one arbitrarily pick the last
+    max_tab <- names(which(tab == max(tab)))
+    v <- max_tab[length(max_tab)]
+    # if it came in as a factor, we need to re-cast it as a factor, with the same exact levels
     if (is.factor(x))
         return(factor(v, levels = levels(x)))
     # re-cast as any other data-type
@@ -28,7 +28,8 @@ Mode <- function (x) {
 #' @param na.rm ignored
 #' @return the median of the vector
 #' @export
-#' @author Matt Owen \email{mowen@@iq.harvard.edu}
+#' @author Matt Owen
+
 Median <- function (x, na.rm=NULL) {
   v <- ifelse(is.numeric(x),
               median(x),
@@ -47,7 +48,8 @@ Median <- function (x, na.rm=NULL) {
 #' @param levels a vector of levels
 #' @param ... parameters for table
 #' @return a table
-#' @author Matt Owen \email{mowen@@iq.harvard.edu}
+#' @author Matt Owen 
+
 table.levels <- function (x, levels, ...) {
   # if levels are not explicitly set, then
   # search inside of x
@@ -65,6 +67,7 @@ table.levels <- function (x, levels, ...) {
 #' @param val a vector of values
 #' @return a mean (if numeric) or a median (if ordered) or mode (otherwise)
 #' @export
+
 avg <- function(val) {
   if (is.numeric(val))
     mean(val)
