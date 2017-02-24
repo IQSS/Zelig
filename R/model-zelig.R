@@ -905,18 +905,39 @@ z$methods(
 
       cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
-      niceprint<-function(obj, name){
+      niceprint <- function(obj, name){
         if(!is.null(obj[[1]])){
-          cat(name,":\n", sep="")
-          screenoutput<-obj[[1]]
-          attr(screenoutput,"assign")<-NULL
-          print(screenoutput, digits=max(3, getOption("digits") - 3))
+          cat(name, ":\n", sep = "")
+          if (is.data.frame(obj)) 
+              screenoutput <- obj
+          else
+              screenoutput <- obj[[1]]
+          attr(screenoutput,"assign") <- NULL
+          print(screenoutput, digits = max(3, getOption("digits") - 3))
         }
       }
+      range_out <- function(x, which_range = 'range') {
+        if (!is.null(x$setx.out[[which_range]])) {
+            xvarnames <- names(as.data.frame(x$setx.out[[which_range]][[1]]$mm[[1]]))
+            d <- length(x$setx.out[[which_range]])
+            num_cols <- length(x$setx.out[[which_range]][[1]]$mm[[1]] )
+            xmatrix <- matrix(NA, nrow = d, ncol = num_cols)
+            for (i in 1:d){
+                xmatrix[i,] <- matrix(x$setx.out[[which_range]][[i]]$mm[[1]], 
+                                      ncol = num_cols)
+            }
+            xdf <- data.frame(xmatrix)
+            names(xdf) <- xvarnames
+            return(xdf)
+          }
+      }
+      
       niceprint(obj=.self$setx.out$x$mm, name="setx")
       niceprint(obj=.self$setx.out$x1$mm, name="setx1")
-      niceprint(obj=.self$setx.out$range[[1]]$mm, name="range")
-      niceprint(obj=.self$setx.out$range1[[1]]$mm, name="range1")
+      niceprint(obj = range_out(.self), name = "range")
+      niceprint(obj = range_out(.self, 'range1'), name = "range1")
+     # niceprint(obj=.self$setx.out$range[[1]]$mm, name="range")
+     #  niceprint(obj=.self$setx.out$range1[[1]]$mm, name="range1")
       cat("\nNext step: Use 'sim' method\n")
     } else { # sim.out
       pstat <- function(s.out, what = "sim x") {

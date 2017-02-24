@@ -35,9 +35,20 @@ from a Zelig object and returning them as a tidy-formatted data frame.
 - `zelig` can handle independent variables that are transformed using the 
 natural logarithm inside of the call. #225
 
-## Minor changes
+## Minor changes and bug fixes
 
 - Internal code improvements.
+
+- Corrected an issue where `plot` would tend to choose a factor level as the 
+x-axis variable when plotting a range of simulations. #226
+
+- If a factor level variable's fitted value is not specified in `setx` and
+it is multi-modal, the last factor in the factor list is arbitarily chosen. 
+This replaces previous behavior where the level was randomly chosen, causing
+unuseful quantity of interest range plots. #226
+
+- Corrected a bug where `summary` for ranges of `setx` would only show the 
+first scenario. Now all scenarios are shown. #226
 
 - Corrected a bug where the README.md was not included in the CRAN build.
 
