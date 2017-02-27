@@ -26,5 +26,5 @@ entires with zero as a value, which is not
 the default for standard tables
 }
 \author{
-Matt Owen \email{mowen@iq.harvard.edu}
+Matt Owen
 }

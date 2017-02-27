@@ -20,11 +20,15 @@ test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
 # REQUIRE TEST ls with by -------------------------------------------------------
 
 test_that('REQUIRE TEST ls with by', {
-    # Majority Catholic dummy
-    swiss$maj_catholic <- cut(swiss$Catholic, breaks = c(0, 51, 100))
-
-    z5 <- zls$new()
-    z5$zelig(Fertility ~ Education, data = swiss, by = 'maj_catholic')
+  # Majority Catholic dummy
+  swiss$maj_catholic <- cut(swiss$Catholic, breaks = c(0, 51, 100))
+  
+  z5by <- zls$new()
+  z5by$zelig(Fertility ~ Education, data = swiss, by = 'maj_catholic')
+  z5by$setx()    
+#  z5by$sim()
+#  sims_df <- zelig_qi_to_df(z5)
+  #    expect_equal(length(unique(sims_df$by)), 2)
 })
 
 # gim method tests -------------------------------------------------------------
