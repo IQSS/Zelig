@@ -1,9 +1,13 @@
+> All changes to Zelig are documented here. GitHub issue numbers are given after
+each change note when relevant. See <https://github.com/IQSS/Zelig/issues>
+
+
 Zelig version 5.0-16
 ==============================
 
 ## Major changes
 
-- !! Breaking change !! the `get*` functions (e.g. `get_coef`) now use
+- !! Breaking change !! the `get*` functions (e.g. `getcoef`) now use
 underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
 
 - Added a number of new "getter" methods for extracting estimation elements:
