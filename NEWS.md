@@ -97,8 +97,7 @@ Zelig version 5.0-14
 reference class object if not supplied via the \code{x} argument.
 
 - New `to_zelig_mi` utility function for combining multiply imputed data sets 
-for passing to `zelig`. `mi` will also work to enable backwards compatibility. 
-#178
+for passing to `zelig`. `mi` will also work to enable backwards compatibility. #178
 
 - Initial development on a new testing architecture and more tests for
 `model-*`, Zelig 4 wrappers, `ci.plot`, and the Zelig workflow.
