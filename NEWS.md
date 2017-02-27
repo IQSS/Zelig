@@ -28,9 +28,7 @@ underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
   standard errors. #147
 
 - `zelig_qi_to_df` function for extracting simulated quantities of interest
-from a Zelig object and returning them as a tidy-formatted data frame.
-
-- Extensive additions to model estimation method documentation and vignettes.
+from a Zelig object and returning them as a tidy-formatted data frame. #189
 
 - `setx` returns an error if it is unable to find a supplied variable name. 
 
