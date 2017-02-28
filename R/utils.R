@@ -263,7 +263,7 @@ expand_grid_setrange <- function(x) {
 #'   \code{zelig}.
 #' @note This function creates a list of \code{data.frame} objects, which
 #'   resembles the storage of imputed data sets in the \code{amelia} object.
-#' @param ... a set of \code{data.frame}'s
+#' @param ... a set of \code{data.frame}'s or a single list of \code{data.frame}'s
 #' @return an \code{mi} object composed of a list of data frames.
 #' @author Matt Owen, James Honaker, and Christopher Gandrud
 #' @export
@@ -287,9 +287,16 @@ to_zelig_mi <- function (...) {
 
     # Get arguments as list
     imputations <- list(...)
-    names(imputations) <- paste("imp", 1:length(imputations), sep = "")
 
-      # Ensure that everything is data.frame
+    # If user passes a list of data.frames rather than several data.frames as separate arguments
+    if((class(imputations[[1]]) == 'list') & (length(imputations) == 1)){
+        imputations = imputations[[1]]
+    }   
+
+    # Labelling
+    names(imputations) <- paste0("imp", 1:length(imputations))
+
+    # Ensure that everything is data.frame
     for (k in length(imputations):1) {
         if (!is.data.frame(imputations[[k]])){
             imputations[[k]] <- NULL
