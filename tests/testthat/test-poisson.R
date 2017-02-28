@@ -1,5 +1,6 @@
 # REQUIRE TEST Monte Carlo poisson ---------------------------------------------
 test_that('REQUIRE TEST Monte Carlo poisson', {
+    set.seed("123")
     z <- zpoisson$new()
     test.poisson <- z$mcunit(minx = 0, plot = FALSE)
     expect_true(test.poisson)

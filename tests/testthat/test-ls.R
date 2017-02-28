@@ -71,6 +71,7 @@ test_that('REQUIRE TEST for set with ls models including factors set within zeli
 
 # REQUIRE TEST for set with ls models including natural logs set within zelig call --
 test_that('REQUIRE TEST for set with ls models including natural logs set within zelig call', {
+#  z1 <- zelig(speed ~ log(dist, base = 10), data = cars, model = 'ls')
   z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls')
   setd1 <- setx(z1, dist = log(15))
   
