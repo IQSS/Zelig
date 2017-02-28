@@ -7,7 +7,7 @@
 to_zelig_mi(...)
 }
 \arguments{
-\item{...}{a set of \code{data.frame}'s}
+\item{...}{a set of \code{data.frame}'s or a single list of \code{data.frame}'s}
 }
 \value{
 an \code{mi} object composed of a list of data frames.

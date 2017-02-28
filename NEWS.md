@@ -1,5 +1,7 @@
 > All changes to Zelig are documented here. GitHub issue numbers are given after
-each change note when relevant. See <https://github.com/IQSS/Zelig/issues>
+each change note when relevant. See <https://github.com/IQSS/Zelig/issues>/. 
+External contributors are referenced with their GitHub usernames when 
+applicable.
 
 
 Zelig version 5.0-16
@@ -25,7 +27,7 @@ underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
   original model.
 
     + `get_pvalue` and `get_se` methods to return estimated model p-values and
-  standard errors. #147
+  standard errors. Thank you to @vincentarelbundock for contributions. #147
 
 - `zelig_qi_to_df` function for extracting simulated quantities of interest
 from a Zelig object and returning them as a tidy-formatted data frame. #189
@@ -39,8 +41,6 @@ natural logarithm inside of the call. #225
 
 ## Minor changes and bug fixes
 
-- Internal code improvements.
-
 - Corrected an issue where `plot` would tend to choose a factor level as the 
 x-axis variable when plotting a range of simulations. #226
 
@@ -53,6 +53,11 @@ unuseful quantity of interest range plots. #226
 first scenario. Now all scenarios are shown. #226
 
 - Corrected a bug where the README.md was not included in the CRAN build.
+
+- `to_zelig_mi` now can accept a list of data frames. Thanks to 
+@vincentarelbundock.
+
+- Internal code improvements.
 
 
 Zelig version 5.0-15
