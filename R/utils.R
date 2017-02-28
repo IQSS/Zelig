@@ -404,7 +404,12 @@ strip_package_name <- function(x) {
 #' @internal
 
 p_pull <- function(x) {
-    p_values <- summary(x)$coefficients[, "Pr(>|t|)"]
+    p_values <- summary(x)$coefficients
+    if('Pr(>|t|)' %in% colnames(p_values)){
+        p_values <- p_values[, 'Pr(>|t|)']
+    }else{
+        p_values <- p_values[, 'Pr(>|z|)']
+    }
     return(p_values)
 }
 
@@ -413,8 +418,8 @@ p_pull <- function(x) {
 #' @internal
 
 se_pull <- function(x) {
-  p_values <- summary(x)$coefficients[, "Std. Error"]
-  return(p_values)
+  se <- summary(x)$coefficients[, "Std. Error"]
+  return(se)
 }
 
 #' Drop intercept columns from a data frame of fitted values
