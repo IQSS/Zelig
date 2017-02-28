@@ -87,7 +87,7 @@ from_zelig_model <- function(obj) {
 #' zelig_qi_to_df(z.6)
 #'
 #' @source For a discussion of tidy data see
-#' <https://vita.had.co.nz/papers/tidy-data.pdf>.
+#' <https://www.jstatsoft.org/article/view/v059i10>.
 #'
 #' @seealso \code{\link{qi_slimmer}}
 #' @md
