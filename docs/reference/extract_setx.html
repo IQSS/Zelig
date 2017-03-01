@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate the reduced dataset to be used in  — reduce • Zelig</title>
+<title>Extract setx for non-range and return tidy formatted data frame — extract_setx • Zelig</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -123,35 +123,27 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate the reduced dataset to be used in </h1>
+    <h1>Extract setx for non-range and return tidy formatted data frame</h1>
     </div>
 
     
-    <p>#&#39; This method is used internally</p>
+    <p>Extract setx for non-range and return tidy formatted data frame</p>
     
 
-    <pre><span class='fu'>reduce</span>(<span class='no'>dataset</span>, <span class='no'>s</span>, <span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>avg</span> <span class='kw'>=</span> <span class='no'>avg</span>)</pre>
+    <pre><span class='fu'>extract_setx</span>(<span class='no'>obj</span>, <span class='kw'>which_x</span> <span class='kw'>=</span> <span class='st'>"x"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>dataset</dt>
-      <dd>Zelig object data, possibly split to deal with <code>by</code>
-argument</dd>
-      <dt>s</dt>
-      <dd>list of variables and their tentative <code>setx</code> values</dd>
-      <dt>formula</dt>
-      <dd>a simplified version of the Zelig object formula (typically
-with 1 on the lhs)</dd>
-      <dt>data</dt>
-      <dd>Zelig object data</dd>
-      <dt>avg</dt>
-      <dd>function of data transformations</dd>
+      <dt>obj</dt>
+      <dd>a zelig object containing simulated quantities of interest</dd>
+      <dt>which_x</dt>
+      <dd>character string either <code>&#39;x&#39;</code> or <code>&#39;x1&#39;</code> indicating whether
+to extract the first or second set of fitted values</dd>
     </dl>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>a list of all the model variables either at their central tendancy or
-  their <code>setx</code> value</p>
+    <p><code><a href='zelig_qi_to_df.html'>zelig_qi_to_df</a></code></p>
     
 
   </div>
@@ -160,12 +152,12 @@ with 1 on the lhs)</dd>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
     <h2>Author</h2>
     
-Christine Choirat and Christopher Gandrud
+Christopher Gandrud
 
   </div>
 </div>

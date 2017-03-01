@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate the reduced dataset to be used in  — reduce • Zelig</title>
+<title>Check if simulations for individual values for x1 are present
+ — is_simsx1 • Zelig</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -123,35 +124,25 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate the reduced dataset to be used in </h1>
+    <h1>Check if simulations for individual values for x1 are present
+</h1>
     </div>
 
     
-    <p>#&#39; This method is used internally</p>
+    <p>Check if simulations for individual values for x1 are present
+  in sim.out</p>
     
 
-    <pre><span class='fu'>reduce</span>(<span class='no'>dataset</span>, <span class='no'>s</span>, <span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>avg</span> <span class='kw'>=</span> <span class='no'>avg</span>)</pre>
+    <pre><span class='fu'>is_simsx1</span>(<span class='no'>x</span>, <span class='kw'>fail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>dataset</dt>
-      <dd>Zelig object data, possibly split to deal with <code>by</code>
-argument</dd>
-      <dt>s</dt>
-      <dd>list of variables and their tentative <code>setx</code> values</dd>
-      <dt>formula</dt>
-      <dd>a simplified version of the Zelig object formula (typically
-with 1 on the lhs)</dd>
-      <dt>data</dt>
-      <dd>Zelig object data</dd>
-      <dt>avg</dt>
-      <dd>function of data transformations</dd>
+      <dt>x</dt>
+      <dd>a sim.out method</dd>
+      <dt>fail</dt>
+      <dd>logical whether to return an error if simulation range is not
+present.</dd>
     </dl>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a list of all the model variables either at their central tendancy or
-  their <code>setx</code> value</p>
     
 
   </div>
@@ -159,13 +150,7 @@ with 1 on the lhs)</dd>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
-
-    <h2>Author</h2>
-    
-Christine Choirat and Christopher Gandrud
+                </ul>
 
   </div>
 </div>

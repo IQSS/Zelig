@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate the reduced dataset to be used in  — reduce • Zelig</title>
+<title>Find the median and a central interval of simulated quantity of interest
+ — qi_slimmer • Zelig</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -123,49 +124,67 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate the reduced dataset to be used in </h1>
+    <h1>Find the median and a central interval of simulated quantity of interest
+</h1>
     </div>
 
     
-    <p>#&#39; This method is used internally</p>
+    <p>Find the median and a central interval of simulated quantity of interest
+distributions</p>
     
 
-    <pre><span class='fu'>reduce</span>(<span class='no'>dataset</span>, <span class='no'>s</span>, <span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>avg</span> <span class='kw'>=</span> <span class='no'>avg</span>)</pre>
+    <pre><span class='fu'>qi_slimmer</span>(<span class='no'>df</span>, <span class='kw'>qi_type</span> <span class='kw'>=</span> <span class='st'>"ev"</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>dataset</dt>
-      <dd>Zelig object data, possibly split to deal with <code>by</code>
-argument</dd>
-      <dt>s</dt>
-      <dd>list of variables and their tentative <code>setx</code> values</dd>
-      <dt>formula</dt>
-      <dd>a simplified version of the Zelig object formula (typically
-with 1 on the lhs)</dd>
-      <dt>data</dt>
-      <dd>Zelig object data</dd>
-      <dt>avg</dt>
-      <dd>function of data transformations</dd>
+      <dt>df</dt>
+      <dd>a tidy-formatted data frame of simulated quantities of interest
+created by <code><a href='zelig_qi_to_df.html'>zelig_qi_to_df</a></code>.</dd>
+      <dt>qi_type</dt>
+      <dd>character string either <code>ev</code> or <code>pv</code> for returning the
+central intervals for the expected value or predicted value, respectively.</dd>
+      <dt>ci</dt>
+      <dd>numeric. The central interval to return, expressed on the <code>(0, 100]</code>
+or the equivalent <code>(0, 1]</code> interval.</dd>
     </dl>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>a list of all the model variables either at their central tendancy or
-  their <code>setx</code> value</p>
+    <p><code><a href='zelig_qi_to_df.html'>zelig_qi_to_df</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='no'>qi.central.interval</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>Petal.Width</span> ~ <span class='no'>Petal.Length</span> + <span class='no'>Species</span>,
+             <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ls"</span>) <span class='kw'>%&gt;%</span>
+             <span class='fu'><a href='setx.html'>setx</a></span>(<span class='kw'>Petal.Length</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='kw'>Species</span> <span class='kw'>=</span> <span class='st'>"setosa"</span>) <span class='kw'>%&gt;%</span>
+             <span class='fu'><a href='sim.html'>sim</a></span>() <span class='kw'>%&gt;%</span>
+             <span class='fu'><a href='zelig_qi_to_df.html'>zelig_qi_to_df</a></span>() <span class='kw'>%&gt;%</span>
+             <span class='fu'>qi_slimmer</span>()</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   R Core Team. 2007.
+#&gt;   ls: Least Squares Regression for Continuous Dependent Variables
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   &quot;Zelig: Everyone&#39;s Statistical Software,&quot; http://zeligproject.org/</div><div class='output co'>#&gt; <span class='message'>zelig_qi_to_df is an experimental function.</span>
+#&gt; <span class='message'>  Please report issues to: https://github.com/IQSS/Zelig/issues</span></div><div class='output co'>#&gt; <span class='message'>Slimming Expected Values . . .</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-          </ul>
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     
-Christine Choirat and Christopher Gandrud
+Christopher Gandrud
 
   </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate the reduced dataset to be used in  — reduce • Zelig</title>
+<title>Conduct variable transformations called inside a  — transformer • Zelig</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -123,35 +123,32 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate the reduced dataset to be used in </h1>
+    <h1>Conduct variable transformations called inside a </h1>
     </div>
 
     
-    <p>#&#39; This method is used internally</p>
+    <p>Conduct variable transformations called inside a <code>zelig</code> call</p>
     
 
-    <pre><span class='fu'>reduce</span>(<span class='no'>dataset</span>, <span class='no'>s</span>, <span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>avg</span> <span class='kw'>=</span> <span class='no'>avg</span>)</pre>
+    <pre><span class='fu'>transformer</span>(<span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>"log"</span>, <span class='no'>check</span>, <span class='no'>f_out</span>, <span class='no'>d_out</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>dataset</dt>
-      <dd>Zelig object data, possibly split to deal with <code>by</code>
-argument</dd>
-      <dt>s</dt>
-      <dd>list of variables and their tentative <code>setx</code> values</dd>
       <dt>formula</dt>
-      <dd>a simplified version of the Zelig object formula (typically
-with 1 on the lhs)</dd>
+      <dd>model formulae</dd>
       <dt>data</dt>
-      <dd>Zelig object data</dd>
-      <dt>avg</dt>
-      <dd>function of data transformations</dd>
+      <dd>data frame used in <code>formula</code></dd>
+      <dt>FUN</dt>
+      <dd>character string of the transformation function</dd>
+      <dt>check</dt>
+      <dd>logical whether to just check if a formula contains an
+internally called transformation and return <code>TRUE</code> or <code>FALSE</code></dd>
+      <dt>f_out</dt>
+      <dd>logical whether to return the converted formula</dd>
+      <dt>d_out</dt>
+      <dd>logical whether to return the converted data frame. Note:
+<code>f_out</code> must be missing</dd>
     </dl>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a list of all the model variables either at their central tendancy or
-  their <code>setx</code> value</p>
     
 
   </div>
@@ -159,13 +156,11 @@ with 1 on the lhs)</dd>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
     <h2>Author</h2>
     
-Christine Choirat and Christopher Gandrud
+Christopher Gandrud
 
   </div>
 </div>
