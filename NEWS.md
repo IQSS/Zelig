@@ -9,7 +9,10 @@ Zelig version 5.0-17
 
 ## Major changes
 
-
+- New function `combine_coef_se` takes as input a `zelig` model estimated 
+using multiply imputed data or bootstrapping and returns a list of coefficients,
+standard errors, z-values, and p-values combined across the estimations. Thanks
+to @vincentarelbundock for prompting. #229 
 
 
 
@@ -61,7 +64,7 @@ natural logarithm inside of the call. #225
 x-axis variable when plotting a range of simulations. #226
 
 - If a factor level variable's fitted value is not specified in `setx` and
-it is multi-modal, the last factor in the factor list is arbitarily chosen. 
+it is multi-modal, the last factor in the factor list is arbitrarily chosen. 
 This replaces previous behavior where the level was randomly chosen, causing
 unuseful quantity of interest range plots. #226
 
