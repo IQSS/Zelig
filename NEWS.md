@@ -4,6 +4,22 @@ External contributors are referenced with their GitHub usernames when
 applicable.
 
 
+Zelig version 5.0-17
+==============================
+
+## Major changes
+
+
+
+
+
+## Minor changes and bug fixes
+
+
+
+
+
+
 Zelig version 5.0-16
 ==============================
 
