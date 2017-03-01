@@ -5,7 +5,7 @@
 \title{Extract simulated quantities of interest from a zelig object}
 \source{
 For a discussion of tidy data see
-\url{https://vita.had.co.nz/papers/tidy-data.pdf}.
+\url{https://www.jstatsoft.org/article/view/v059i10}.
 }
 \usage{
 zelig_qi_to_df(obj)

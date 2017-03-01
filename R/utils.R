@@ -1,18 +1,18 @@
 #' Compute the Statistical Mode of a Vector
 #' @aliases Mode mode
 #' @param x a vector of numeric, factor, or ordered values
-#' @return the statistical mode of the vector. If two modes exist, one is
-#'   randomly selected (by design)
+#' @return the statistical mode of the vector. If more than one mode exists, 
+#'  the last one in the factor order is arbitrarily chosen (by design)
 #' @export
-#' @author Matt Owen \email{mowen@@iq.harvard.edu}
+#' @author Christopher Gandrud and Matt Owen
 
 Mode <- function (x) {
     # build a table of values of x
     tab <- table(as.factor(x))
-    # find the mode, then if there's more than one, select one randomly
-    v <- sample(names(which(tab == max(tab))), size = 1)
-    # if it came in as a factor, we need to re-cast it
-    # as a factor, with the same exact levels
+    # find the mode, if there is more than one arbitrarily pick the last
+    max_tab <- names(which(tab == max(tab)))
+    v <- max_tab[length(max_tab)]
+    # if it came in as a factor, we need to re-cast it as a factor, with the same exact levels
     if (is.factor(x))
         return(factor(v, levels = levels(x)))
     # re-cast as any other data-type
@@ -28,7 +28,8 @@ Mode <- function (x) {
 #' @param na.rm ignored
 #' @return the median of the vector
 #' @export
-#' @author Matt Owen \email{mowen@@iq.harvard.edu}
+#' @author Matt Owen
+
 Median <- function (x, na.rm=NULL) {
   v <- ifelse(is.numeric(x),
               median(x),
@@ -47,7 +48,8 @@ Median <- function (x, na.rm=NULL) {
 #' @param levels a vector of levels
 #' @param ... parameters for table
 #' @return a table
-#' @author Matt Owen \email{mowen@@iq.harvard.edu}
+#' @author Matt Owen 
+
 table.levels <- function (x, levels, ...) {
   # if levels are not explicitly set, then
   # search inside of x
@@ -65,6 +67,7 @@ table.levels <- function (x, levels, ...) {
 #' @param val a vector of values
 #' @return a mean (if numeric) or a median (if ordered) or mode (otherwise)
 #' @export
+
 avg <- function(val) {
   if (is.numeric(val))
     mean(val)
@@ -260,7 +263,7 @@ expand_grid_setrange <- function(x) {
 #'   \code{zelig}.
 #' @note This function creates a list of \code{data.frame} objects, which
 #'   resembles the storage of imputed data sets in the \code{amelia} object.
-#' @param ... a set of \code{data.frame}'s
+#' @param ... a set of \code{data.frame}'s or a single list of \code{data.frame}'s
 #' @return an \code{mi} object composed of a list of data frames.
 #' @author Matt Owen, James Honaker, and Christopher Gandrud
 #' @export
@@ -284,9 +287,16 @@ to_zelig_mi <- function (...) {
 
     # Get arguments as list
     imputations <- list(...)
-    names(imputations) <- paste("imp", 1:length(imputations), sep = "")
 
-      # Ensure that everything is data.frame
+    # If user passes a list of data.frames rather than several data.frames as separate arguments
+    if((class(imputations[[1]]) == 'list') & (length(imputations) == 1)){
+        imputations = imputations[[1]]
+    }   
+
+    # Labelling
+    names(imputations) <- paste0("imp", 1:length(imputations))
+
+    # Ensure that everything is data.frame
     for (k in length(imputations):1) {
         if (!is.data.frame(imputations[[k]])){
             imputations[[k]] <- NULL
@@ -394,7 +404,12 @@ strip_package_name <- function(x) {
 #' @internal
 
 p_pull <- function(x) {
-    p_values <- summary(x)$coefficients[, "Pr(>|t|)"]
+    p_values <- summary(x)$coefficients
+    if('Pr(>|t|)' %in% colnames(p_values)){
+        p_values <- p_values[, 'Pr(>|t|)']
+    }else{
+        p_values <- p_values[, 'Pr(>|z|)']
+    }
     return(p_values)
 }
 
@@ -403,8 +418,8 @@ p_pull <- function(x) {
 #' @internal
 
 se_pull <- function(x) {
-  p_values <- summary(x)$coefficients[, "Std. Error"]
-  return(p_values)
+  se <- summary(x)$coefficients[, "Std. Error"]
+  return(se)
 }
 
 #' Drop intercept columns from a data frame of fitted values

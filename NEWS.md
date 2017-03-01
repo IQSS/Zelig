@@ -1,9 +1,31 @@
+> All changes to Zelig are documented here. GitHub issue numbers are given after
+each change note when relevant. See <https://github.com/IQSS/Zelig/issues>/. 
+External contributors are referenced with their GitHub usernames when 
+applicable.
+
+
+Zelig version 5.0-17
+==============================
+
+## Major changes
+
+
+
+
+
+## Minor changes and bug fixes
+
+
+
+
+
+
 Zelig version 5.0-16
 ==============================
 
 ## Major changes
 
-- !! Breaking change !! the `get*` functions (e.g. `get_coef`) now use
+- !! Breaking change !! the `get*` functions (e.g. `getcoef`) now use
 underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
 
 - Added a number of new "getter" methods for extracting estimation elements:
@@ -21,12 +43,10 @@ underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
   original model.
 
     + `get_pvalue` and `get_se` methods to return estimated model p-values and
-  standard errors. #147
+  standard errors. Thank you to @vincentarelbundock for contributions. #147
 
 - `zelig_qi_to_df` function for extracting simulated quantities of interest
-from a Zelig object and returning them as a tidy-formatted data frame.
-
-- Extensive additions to model estimation method documentation and vignettes.
+from a Zelig object and returning them as a tidy-formatted data frame. #189
 
 - `setx` returns an error if it is unable to find a supplied variable name. 
 
@@ -35,11 +55,25 @@ from a Zelig object and returning them as a tidy-formatted data frame.
 - `zelig` can handle independent variables that are transformed using the 
 natural logarithm inside of the call. #225
 
-## Minor changes
+## Minor changes and bug fixes
 
-- Internal code improvements.
+- Corrected an issue where `plot` would tend to choose a factor level as the 
+x-axis variable when plotting a range of simulations. #226
+
+- If a factor level variable's fitted value is not specified in `setx` and
+it is multi-modal, the last factor in the factor list is arbitarily chosen. 
+This replaces previous behavior where the level was randomly chosen, causing
+unuseful quantity of interest range plots. #226
+
+- Corrected a bug where `summary` for ranges of `setx` would only show the 
+first scenario. Now all scenarios are shown. #226
 
 - Corrected a bug where the README.md was not included in the CRAN build.
+
+- `to_zelig_mi` now can accept a list of data frames. Thanks to 
+@vincentarelbundock.
+
+- Internal code improvements.
 
 
 Zelig version 5.0-15
@@ -84,8 +118,7 @@ Zelig version 5.0-14
 reference class object if not supplied via the \code{x} argument.
 
 - New `to_zelig_mi` utility function for combining multiply imputed data sets 
-for passing to `zelig`. `mi` will also work to enable backwards compatibility. 
-#178
+for passing to `zelig`. `mi` will also work to enable backwards compatibility. #178
 
 - Initial development on a new testing architecture and more tests for
 `model-*`, Zelig 4 wrappers, `ci.plot`, and the Zelig workflow.

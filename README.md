@@ -179,15 +179,24 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
+<<<<<<< HEAD
     ##       mean       sd     50%     2.5%    97.5%
     ## 1 75.32481 1.625278 75.3772 72.10529 78.58166
     ## pv
     ##          mean       sd     50%    2.5%    97.5%
     ## [1,] 75.17561 9.129404 75.1028 58.0158 94.00581
+=======
+    ##       mean       sd      50%    2.5%   97.5%
+    ## 1 75.38221 1.659304 75.42198 72.0131 78.6433
+    ## pv
+    ##         mean      sd      50%     2.5%    97.5%
+    ## [1,] 74.9095 9.81625 74.79512 57.09842 93.70146
+>>>>>>> aa1fb1be66dacddf30b8cc1cee2a2cc6bd0e0a24
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
+<<<<<<< HEAD
     ##       mean       sd      50%    2.5%    97.5%
     ## 1 66.64944 1.475948 66.62884 63.8392 69.56921
     ## pv
@@ -196,6 +205,16 @@ After setting our predictor value, we simulate using the `sim()` method:
     ## fd
     ##        mean       sd     50%      2.5%     97.5%
     ## 1 -8.675366 1.495635 -8.6493 -11.63771 -5.777093
+=======
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 66.75359 1.468152 66.76786 63.85479 69.57543
+    ## pv
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 66.74161 9.628595 66.93027 48.35818 84.25896
+    ## fd
+    ##        mean       sd       50%      2.5%     97.5%
+    ## 1 -8.628618 1.463135 -8.618177 -11.40652 -5.596616
+>>>>>>> aa1fb1be66dacddf30b8cc1cee2a2cc6bd0e0a24
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
