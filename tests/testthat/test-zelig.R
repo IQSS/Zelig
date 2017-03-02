@@ -4,8 +4,8 @@
 # FAIL TEST sim workflow -------------------------------------------------------
 test_that('FAIL TEST sim method warning if insufficient inputs', {
   z5 <- zls$new()
-  expect_warning(z5$zelig(Fertility ~ Education, model="ls", data = swiss),
-                 'Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.\n')
+  expect_output(z5$zelig(Fertility ~ Education, model="ls", data = swiss),
+                 'Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.')
 
   expect_warning(z5$sim(),
                  'No simulations drawn, likely due to insufficient inputs.')
