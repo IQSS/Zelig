@@ -4,7 +4,8 @@
 # FAIL TEST sim workflow -------------------------------------------------------
 test_that('FAIL TEST sim method warning if insufficient inputs', {
   z5 <- zls$new()
-  z5$zelig(Fertility ~ Education, data = swiss)
+  expect_output(z5$zelig(Fertility ~ Education, model="ls", data = swiss),
+                 'Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.')
 
   expect_warning(z5$sim(),
                  'No simulations drawn, likely due to insufficient inputs.')
@@ -300,3 +301,4 @@ test_that('REQUIRE TEST setx with logical covariates', {
   expect_is(z5l$setx.out$x, class = c("rowwise_df", "tbl_df", "tbl", 
                                         "data.frame"))
 })
+
