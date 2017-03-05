@@ -16,11 +16,13 @@ to @vincentarelbundock for prompting. #229
 
 
 
-## Minor changes and bug fixes
+## Minor changes
 
 
+## Bug fixes
 
-
+- Resolve a bug where appropriate `plot`s were not created for `mlogitbayes`.
+#206
 
 
 Zelig version 5.0-16
