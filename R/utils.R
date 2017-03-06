@@ -431,7 +431,8 @@ rm_intercept <- function(x) {
     names_x <- names(x)
     if (any(intercept_names %in% names(x))) {
         keep <- !(names(x) %in% intercept_names)
-        x <- x[, names_x[keep]]
+        x <- data.frame(x[, names_x[keep]])
+        names(x) <- names_x[keep]
     }
     return(x)
 }
