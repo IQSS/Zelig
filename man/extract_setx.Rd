@@ -4,13 +4,15 @@
 \alias{extract_setx}
 \title{Extract setx for non-range and return tidy formatted data frame}
 \usage{
-extract_setx(obj, which_x = "x")
+extract_setx(obj, which_x = "x", only_setx = FALSE)
 }
 \arguments{
 \item{obj}{a zelig object containing simulated quantities of interest}
 
 \item{which_x}{character string either \code{'x'} or \code{'x1'} indicating whether
 to extract the first or second set of fitted values}
+
+\item{only_setx}{logical whether or not to only extract `setx`` values.}
 }
 \description{
 Extract setx for non-range and return tidy formatted data frame

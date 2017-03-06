@@ -36,7 +36,7 @@ from_zelig_model <- function(obj) {
 #'  - The fitted values specified in `setx` including a `by` column if
 #'     `by` was used in the \code{\link{zelig}} call.
 #'  - `expected_value`
-#'  - `expected_value`
+#'  - `predicted_value`
 #'
 #' @examples
 #' #### QIs without first difference or range, from covariates fitted at
@@ -124,12 +124,95 @@ zelig_qi_to_df <- function(obj) {
   return(comb)
 }
 
+#' Extracted fitted values from a Zelig object with `setx` values
+#'
+#' @param obj a zelig object with simulated quantities of interest
+#'
+#' @details Fitted (`setx`) values in a tidy data formatted
+#'   `data.frame`. This was designed to enable the WhatIf package's
+#'   `whatif` function to extract "counterfactuals".
+#'
+#' @examples
+#' #### QIs without first difference or range, from covariates fitted at
+#' ## central tendencies
+#' z.1 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'              model = "ls")
+#' z.1 <- setx(z.1)
+#' zelig_setx_to_df(z.1)
+#'
+#' #### QIs for first differences
+#' z.2 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'              model = "ls")
+#' z.2 <- setx(z.2, Petal.Length = 2)
+#' z.2 <- setx1(z.2, Petal.Length = 4.4)
+#' zelig_setx_to_df(z.2)
+#'
+#' #### QIs for first differences, estimated by Species
+#' z.3 <- zelig(Petal.Width ~ Petal.Length, by = "Species", data = iris,
+#'              model = "ls")
+#' z.3 <- setx(z.3, Petal.Length = 2)
+#' z.3 <- setx1(z.3, Petal.Length = 4.4)
+#' zelig_setx_to_df(z.3)
+#'
+#' #### QIs for a range of fitted values
+#' z.4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'              model = "ls")
+#' z.4 <- setx(z.4, Petal.Length = 2:4)
+#' zelig_setx_to_df(z.4)
+#'
+#' #### QIs for a range of fitted values, estimated by Species
+#' z.5 <- zelig(Petal.Width ~ Petal.Length, by = "Species", data = iris,
+#'              model = "ls")
+#' z.5 <- setx(z.5, Petal.Length = 2:4)
+#' zelig_setx_to_df(z.5)
+#'
+#' #### QIs for two ranges of fitted values
+#' z.6 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
+#'              model = "ls")
+#' z.6 <- setx(z.6, Petal.Length = 2:4, Species = "setosa")
+#' z.6 <- setx1(z.6, Petal.Length = 2:4, Species = "virginica")
+#' zelig_setx_to_df(z.6)
+#'
+#' @md
+#' @author Christopher Gandrud
+#' @export
+
+zelig_setx_to_df <- function(obj) {
+
+    is_zelig(obj)
+
+    comb <- data.frame()
+    if (!is.null(obj$setx.out$x)) {
+        comb_temp <- extract_setx(obj, only_setx = TRUE)
+        comb <- rbind(comb, comb_temp)
+    }
+    if (!is.null(obj$setx.out$x1)) {
+        comb_temp <- extract_setx(obj, which_x = 'x1', only_setx = TRUE)
+        comb <- rbind(comb, comb_temp)
+    }
+    if (!is.null(obj$setx.out$range)) {
+        comb_temp <- extract_setrange(obj, only_setx = TRUE)
+        comb <- rbind(comb, comb_temp)
+    }
+    if (!is.null(obj$setx.out$range1)) {
+        comb_temp <- extract_setrange(obj, which_range = 'range1',
+                                      only_setx = TRUE)
+        comb <- rbind(comb, comb_temp)
+    }
+
+    # Need range1
+    if (nrow(comb) == 0) stop('Unable to find simulated quantities of interest.',
+                              call. = FALSE)
+    return(comb)
+}
+
 
 #' Extract setx for non-range and return tidy formatted data frame
 #'
 #' @param obj a zelig object containing simulated quantities of interest
 #' @param which_x character string either `'x'` or `'x1'` indicating whether
 #'   to extract the first or second set of fitted values
+#' @param only_setx logical whether or not to only extract `setx`` values.
 #'
 #' @seealso \code{\link{zelig_qi_to_df}}
 #' @author Christopher Gandrud
@@ -137,36 +220,40 @@ zelig_qi_to_df <- function(obj) {
 #' @md
 #' @internal
 
-extract_setx <- function(obj, which_x = 'x') {
+extract_setx <- function(obj, which_x = 'x', only_setx = FALSE) {
 
-  temp_comb <- data.frame()
-  all_fitted <- obj$setx.out[[which_x]]
-  all_sims <- obj$sim.out[[which_x]]
+    temp_comb <- data.frame()
+    all_fitted <- obj$setx.out[[which_x]]
+    if (!only_setx) all_sims <- obj$sim.out[[which_x]]
 
-  temp_fitted <- as.data.frame(all_fitted$mm[[1]],
-                               row.names = NULL)
+    temp_fitted <- as.data.frame(all_fitted$mm[[1]],
+                                row.names = NULL)
 
-  by_length <- nrow(all_fitted)
-  if (by_length > 1) {
-    temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)), by_length), ]
-    temp_fitted <- data.frame(by = all_fitted[[1]],
-                              temp_fitted, row.names = NULL)
-  }
-  temp_fitted <- rm_intercept(temp_fitted)
+    by_length <- nrow(all_fitted)
+    if (by_length > 1) {
+        temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)), by_length), ]
+        temp_fitted <- data.frame(by = all_fitted[[1]],
+                                    temp_fitted, row.names = NULL)
+    }
+    temp_fitted <- rm_intercept(temp_fitted)
 
-  temp_ev <- lapply(all_sims$ev, unlist)
-  temp_pv <- lapply(all_sims$pv, unlist)
-  for (i in 1:nrow(temp_fitted)) {
-    temp_qi <- data.frame(temp_ev[[i]], temp_pv[[i]])
-    names(temp_qi) <- c('expected_value', 'predicted_value')
+    if (!only_setx) {
+        temp_ev <- lapply(all_sims$ev, unlist)
+         temp_pv <- lapply(all_sims$pv, unlist)
+         for (i in 1:nrow(temp_fitted)) {
+            temp_qi <- data.frame(temp_ev[[i]], temp_pv[[i]])
+            names(temp_qi) <- c('expected_value', 'predicted_value')
 
-    temp_df <- cbind(temp_fitted[i, ], temp_qi, row.names = NULL)
-    temp_comb <- rbind(temp_comb, temp_df)
-  }
-  temp_comb$setx_value <- which_x
-  temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
+            temp_df <- cbind(temp_fitted[i, ], temp_qi, row.names = NULL)
+            temp_comb <- rbind(temp_comb, temp_df)
+        }
+        temp_comb$setx_value <- which_x
+        temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
 
-  return(temp_comb)
+        return(temp_comb)
+    }
+    else if (only_setx) return(temp_fitted)
+
 }
 
 #' Extract setrange to return as tidy formatted data frame
@@ -175,6 +262,7 @@ extract_setx <- function(obj, which_x = 'x') {
 #'   interest
 #' @param which_range character string either `'range'` or `'range1'`
 #'   indicating whether to extract the first or second set of fitted values
+#' @param only_setx logical whether or not to only extract `setx`` values.
 #'
 #' @seealso \code{\link{zelig_qi_to_df}}
 #' @author Christopher Gandrud
@@ -182,42 +270,47 @@ extract_setx <- function(obj, which_x = 'x') {
 #' @md
 #' @internal
 
-extract_setrange <- function(obj, which_range = 'range') {
+extract_setrange <- function(obj, which_range = 'range', only_setx = FALSE) {
 
-  temp_comb <- data.frame()
-  all_fitted <- obj$setx.out[[which_range]]
-  all_sims <- obj$sim.out[[which_range]]
+    temp_comb <- data.frame()
+    all_fitted <- obj$setx.out[[which_range]]
+    if (!only_setx) all_sims <- obj$sim.out[[which_range]]
 
-  for (i in 1:length(all_fitted)) {
-    temp_fitted <- as.data.frame(all_fitted[[i]]$mm[[1]], row.names = NULL)
+    for (i in 1:length(all_fitted)) {
+        temp_fitted <- as.data.frame(all_fitted[[i]]$mm[[1]], row.names = NULL)
 
-    by_length <- nrow(all_fitted[[i]])
-    if (by_length > 1) {
-      temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)),
+        by_length <- nrow(all_fitted[[i]])
+        if (by_length > 1) {
+            temp_fitted <- temp_fitted[rep(seq_len(nrow(temp_fitted)),
                                      by_length), ]
-      temp_fitted <- data.frame(by = all_fitted[[i]][[1]], temp_fitted,
-                                row.names = NULL)
+            temp_fitted <- data.frame(by = all_fitted[[i]][[1]], temp_fitted,
+                                        row.names = NULL)
+        }
+        temp_fitted <- rm_intercept(temp_fitted)
+
+        if (!only_setx) {
+            temp_ev <- lapply(all_sims[[i]]$ev, unlist)
+            temp_pv <- lapply(all_sims[[i]]$pv, unlist)
+
+            temp_comb_1_range <- data.frame()
+            for (u in 1:nrow(temp_fitted)) {
+                temp_qi <- data.frame(temp_ev[[u]], temp_pv[[u]])
+                names(temp_qi) <- c('expected_value', 'predicted_value')
+                temp_df <- cbind(temp_fitted[u, ], temp_qi, row.names = NULL)
+                temp_comb_1_range <- rbind(temp_comb_1_range, temp_df)
+            }
+            temp_comb <- rbind(temp_comb, temp_comb_1_range)
+        }
+        else if (only_setx) {
+            temp_comb <- rbind(temp_comb, temp_fitted)
+        }
     }
-    temp_fitted <- rm_intercept(temp_fitted)
-
-
-    temp_ev <- lapply(all_sims[[i]]$ev, unlist)
-    temp_pv <- lapply(all_sims[[i]]$pv, unlist)
-
-    temp_comb_1_range <- data.frame()
-    for (u in 1:nrow(temp_fitted)) {
-      temp_qi <- data.frame(temp_ev[[u]], temp_pv[[u]])
-      names(temp_qi) <- c('expected_value', 'predicted_value')
-      temp_df <- cbind(temp_fitted[u, ], temp_qi, row.names = NULL)
-      temp_comb_1_range <- rbind(temp_comb_1_range, temp_df)
+    if (!only_setx) {
+        if (which_range == 'range') temp_comb$setx_value <- 'x'
+        else temp_comb$setx_value <- 'x1'
+        temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
     }
-    temp_comb <- rbind(temp_comb, temp_comb_1_range)
-  }
-  if (which_range == 'range') temp_comb$setx_value <- 'x'
-  else temp_comb$setx_value <- 'x1'
-  temp_comb <- temp_comb[, c(ncol(temp_comb), 1:(ncol(temp_comb)-1))]
-
-  return(temp_comb)
+    return(temp_comb)
 }
 
 #' Find the median and a central interval of simulated quantity of interest
@@ -253,8 +346,8 @@ extract_setrange <- function(obj, which_range = 'range') {
 
 qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
     qi__ <- scenario__ <- NULL
-    
-    if (!is.data.frame(df)) 
+
+    if (!is.data.frame(df))
         stop('df must be a data frame created by zelig_qi_to_df.', call. = FALSE)
     if (!all(c('expected_value', 'predicted_value') %in% names(df)))
         stop('The data frame does not appear to have been created by zelig_qi_to_df.',
@@ -263,7 +356,7 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
     ci <- ci_check(ci)
     lower <- (1 - ci)/2
     upper <- 1 - lower
-    
+
     if (!(qi_type %in% c('ev', 'pv')))
         stop('qi_type must be either "ev" or "pv". ', call. = FALSE)
     if (qi_type == 'ev') qi_drop <- 'predicted_value'
@@ -302,7 +395,7 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
                       data.frame(row.names = NULL)
     df_out <- merge(scenarios_df, df_out, by = 'scenario__', sort = FALSE)
     df_out$scenario__ <- NULL
-    
+
     return(df_out)
 }
 

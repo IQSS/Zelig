@@ -27,7 +27,7 @@ contrasting \code{x1} for finding first differences.
 \item The fitted values specified in \code{setx} including a \code{by} column if
 \code{by} was used in the \code{\link{zelig}} call.
 \item \code{expected_value}
-\item \code{expected_value}
+\item \code{predicted_value}
 }
 }
 \examples{

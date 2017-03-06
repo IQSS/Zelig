@@ -15,8 +15,10 @@ standard errors, z-values, and p-values combined across the estimations. Thanks
 to @vincentarelbundock for prompting. #229 
 
 
-
 ## Minor changes
+
+- Added `zelig_setx_to_df` for extracted fitted values created by `setx`.
+Originally intended to re-enable WhatIf integration. #236
 
 
 ## Bug fixes
