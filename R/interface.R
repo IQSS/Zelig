@@ -201,7 +201,7 @@ zelig_setx_to_df <- function(obj) {
     }
 
     # Need range1
-    if (nrow(comb) == 0) stop('Unable to find simulated quantities of interest.',
+    if (nrow(comb) == 0) stop('Unable to find fitted (setx) values.',
                               call. = FALSE)
     return(comb)
 }
