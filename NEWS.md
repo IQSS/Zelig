@@ -17,9 +17,14 @@ to @vincentarelbundock for prompting. #229
 
 ## Minor changes
 
+The following changes were primarily to re-established Zelig integration with
+WhatIf.
+
 - Added `zelig_setx_to_df` for extracted fitted values created by `setx`.
 Originally intended to re-enable WhatIf integration. #236
 
+- Fitted factor level variable values are returned in a single column (not
+by parameter level) by `zelig_qi_to_df`.
 
 ## Bug fixes
 

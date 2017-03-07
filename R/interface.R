@@ -236,6 +236,7 @@ extract_setx <- function(obj, which_x = 'x', only_setx = FALSE) {
                                     temp_fitted, row.names = NULL)
     }
     temp_fitted <- rm_intercept(temp_fitted)
+    temp_fitted <- factor_coef_combine(obj, temp_fitted)
 
     if (!only_setx) {
         temp_ev <- lapply(all_sims$ev, unlist)
@@ -287,6 +288,7 @@ extract_setrange <- function(obj, which_range = 'range', only_setx = FALSE) {
                                         row.names = NULL)
         }
         temp_fitted <- rm_intercept(temp_fitted)
+        temp_fitted <- factor_coef_combine(obj, temp_fitted)
 
         if (!only_setx) {
             temp_ev <- lapply(all_sims[[i]]$ev, unlist)
@@ -313,6 +315,46 @@ extract_setrange <- function(obj, which_range = 'range', only_setx = FALSE) {
     return(temp_comb)
 }
 
+#' Return individual factor coefficient fitted values to single factor variable
+#'
+#' @param obj a zelig object with an estimated model
+#' @param fitted a data frame with values fitted by \code{setx}. Note
+#' created internally by \code{\link{extract_setx}} and
+#'   \code{\link{extract_setrange}}
+#'
+#' @author Christopher Gandrud
+#' @internal
+
+factor_coef_combine <- function(obj, fitted) {
+
+    is_zelig(obj)
+
+    original_data <- obj$zelig.out$z.out[[1]]$model
+    factor_vars <- sapply(original_data, is.factor)
+    if (any(factor_vars)) {
+        for (i in names(original_data)[factor_vars]) {
+            if (!(i %in% names(fitted))) {
+                matches_name <- names(fitted)[grepl(sprintf('^%s*', i),
+                                                    names(fitted))]
+                var_levels <- levels(original_data[, i])
+                fitted[, i] <- NA
+                for (u in matches_name) {
+                    label_value <- gsub(sprintf('^%s', i), '', u)
+                    fitted[, i][fitted[, u] == 1] <- label_value
+                }
+                ref_level <- var_levels[!(var_levels %in%
+                                              gsub(sprintf('^%s', i), '',
+                                                   matches_name))]
+                fitted[, i][is.na(fitted[, i])] <- ref_level
+                fitted[, i] <- factor(fitted[, i], levels = var_levels)
+                fitted <- fitted[, !(names(fitted) %in% matches_name)]
+            }
+        }
+    }
+    return(fitted)
+}
+
+
 #' Find the median and a central interval of simulated quantity of interest
 #' distributions
 #'
@@ -320,15 +362,18 @@ extract_setrange <- function(obj, which_range = 'range', only_setx = FALSE) {
 #'   created by \code{\link{zelig_qi_to_df}}.
 #' @param qi_type character string either `ev` or `pv` for returning the
 #'   central intervals for the expected value or predicted value, respectively.
-#' @param ci numeric. The central interval to return, expressed on the `(0, 100]`
-#' or the equivalent `(0, 1]` interval.
+#' @param ci numeric. The central interval to return, expressed on the
+#' `(0, 100]` or the equivalent `(0, 1]` interval.
 #'
 #' @details A tidy-formatted data frame with the following columns:
 #'
 #'   - The values fitted with \code{\link{setx}
-#'   - `qi_ci_min`: the minimum value of the central interval specified with `ci`
-#'   - `qi_ci_median`: the median of the simulated quantity of interest distribution
-#'   - `qi_ci_max`: the maximum value of the central interval specified with `ci`
+#'   - `qi_ci_min`: the minimum value of the central interval specified with
+#'   `ci`
+#'   - `qi_ci_median`: the median of the simulated quantity of interest
+#'   distribution
+#'   - `qi_ci_max`: the maximum value of the central interval specified with
+#'   `ci`
 #'
 #' @examples
 #' library(dplyr)

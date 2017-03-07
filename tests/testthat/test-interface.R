@@ -13,7 +13,7 @@ test_that('REQUIRE TEST zelig_qi_to_df setx, setrange, by', {
     z.1 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
                  model = "ls")
     z.1 <- setx(z.1)
-    expect_equal(ncol(zelig_setx_to_df(z.1)), 3)
+    expect_equal(names(zelig_setx_to_df(z.1)), c('Petal.Length', 'Species'))
     z.1 <- sim(z.1)
     expect_equal(nrow(zelig_qi_to_df(z.1)), 1000)
 
@@ -25,7 +25,8 @@ test_that('REQUIRE TEST zelig_qi_to_df setx, setrange, by', {
     z.2 <- sim(z.2, x = z.2a, x1 = z.2a)
     z2_extracted <- zelig_qi_to_df(z.2)
     expect_equal(nrow(z2_extracted), 2000)
-    expect_equal(ncol(z2_extracted), 6)
+    expect_equal(names(z2_extracted), c("setx_value", "Petal.Length", "Species",
+                                        "expected_value", "predicted_value"))
 
     #### QIs for first differences, estimated by Species
     z.3 <- zelig(Petal.Width ~ Petal.Length, by = "Species", data = iris,
