@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{expand_grid_setrange}
 \alias{expand_grid_setrange}
-\title{Convenience function for setrange and setrange}
+\title{Convenience function for setrange and setrange1}
 \usage{
 expand_grid_setrange(x)
 }
@@ -10,6 +10,6 @@ expand_grid_setrange(x)
 \item{x}{data passed to setrange or setrange1}
 }
 \description{
-Convenience function for setrange and setrange
+Convenience function for setrange and setrange1
 }
 \keyword{internal}
