@@ -45,7 +45,7 @@ from_zelig_model <- function(obj) {
 #'              model = "ls")
 #' z.1 <- setx(z.1)
 #' z.1 <- sim(z.1)
-#' zelig_qi_to_df(z.1)
+#' head(zelig_qi_to_df(z.1))
 #'
 #' #### QIs for first differences
 #' z.2 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
@@ -53,7 +53,7 @@ from_zelig_model <- function(obj) {
 #' z.2a <- setx(z.2, Petal.Length = 2)
 #' z.2b <- setx(z.2, Petal.Length = 4.4)
 #' z.2 <- sim(z.2, x = z.2a, x1 = z.2a)
-#' zelig_qi_to_df(z.2)
+#' head(zelig_qi_to_df(z.2))
 #'
 #' #### QIs for first differences, estimated by Species
 #' z.3 <- zelig(Petal.Width ~ Petal.Length, by = "Species", data = iris,
@@ -61,21 +61,21 @@ from_zelig_model <- function(obj) {
 #' z.3a <- setx(z.3, Petal.Length = 2)
 #' z.3b <- setx(z.3, Petal.Length = 4.4)
 #' z.3 <- sim(z.3, x = z.3a, x1 = z.3a)
-#' zelig_qi_to_df(z.3)
+#' head(zelig_qi_to_df(z.3))
 #'
 #' #### QIs for a range of fitted values
 #' z.4 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
 #'              model = "ls")
 #' z.4 <- setx(z.4, Petal.Length = 2:4)
 #' z.4 <- sim(z.4)
-#' zelig_qi_to_df(z.4)
+#' head(zelig_qi_to_df(z.4))
 #'
 #' #### QIs for a range of fitted values, estimated by Species
 #' z.5 <- zelig(Petal.Width ~ Petal.Length, by = "Species", data = iris,
 #'             model = "ls")
 #' z.5 <- setx(z.5, Petal.Length = 2:4)
 #' z.5 <- sim(z.5)
-#' zelig_qi_to_df(z.5)
+#' head(zelig_qi_to_df(z.5))
 #'
 #' #### QIs for two ranges of fitted values
 #' z.6 <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
@@ -84,7 +84,7 @@ from_zelig_model <- function(obj) {
 #' z.6b <- setx(z.6, Petal.Length = 2:4, Species = "virginica")
 #' z.6 <- sim(z.6, x = z.6a, x1 = z.6b)
 #'
-#' zelig_qi_to_df(z.6)
+#' head(zelig_qi_to_df(z.6))
 #'
 #' @source For a discussion of tidy data see
 #' <https://www.jstatsoft.org/article/view/v059i10>.

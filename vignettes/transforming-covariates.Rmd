@@ -1,0 +1,27 @@
+---
+title: "Transforming Covariates"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Transforming Covariates}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+```
+
+For convienience, you may wish to transform one or more of your covariates within the `zelig` model estimation call. For example, imagine we want to natural log transform the variable `dist` in a linear regression:
+
+```{r}
+library(Zelig)
+
+z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls', cite = FALSE)
+```
+
+Then we want to find quantities of interest when the `dist` variable is 

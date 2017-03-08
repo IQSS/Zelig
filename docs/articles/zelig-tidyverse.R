@@ -30,3 +30,28 @@ swiss %>%
     sim() %>% 
     plot()
 
+<<<<<<< HEAD
+=======
+## ----message=FALSE-------------------------------------------------------
+sims.full <- swiss %>% 
+                zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
+                      cite = FALSE) %>%
+                setx(Agriculture = seq(1, 90, by = 5)) %>%
+                sim() %>%
+                zelig_qi_to_df()
+
+head(sims.full)
+
+## ------------------------------------------------------------------------
+sims.slimmed <- qi_slimmer(sims.full)
+
+head(sims.slimmed)
+
+## ------------------------------------------------------------------------
+ggplot(sims.slimmed, aes(Agriculture, qi_median)) +
+    geom_ribbon(aes(ymin = qi_min, ymax = qi_max), alpha = 0.3) +
+    geom_line() + 
+    ylab('Expected Fertility') +
+    theme_bw()
+
+>>>>>>> 841ef17d733f4ac24a17d534a0c633f1a0b58150

@@ -6,7 +6,7 @@ Everyone's Statistical Software
 [![AppVeyor (Windows) Build Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
 
-> **NOTE: This site is in BETA.** For the current official Zelig site see: <http://zeligproject.org>
+> <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i> **NOTE: This site is in BETA and is INCOMPLETE.** For the current official Zelig site see: <http://zeligproject.org> 
 
 <img style="float:left; padding-right:20px" src="https://github.com/IQSS/Zelig/blob/master/README_files/img/zelig.png?raw=true"/>
 
@@ -16,7 +16,7 @@ Zelig is an easy-to-use, free, open source, general purpose statistics program f
 <br>
 
 <p align="center">
-  <a href="articles/quickstart.html" class="btn btn-warning">Get Started</a>
+  <a href="articles/quickstart.html" class="btn btn-warning">Get Started!</a>
 </p>
 
 <br>
@@ -43,9 +43,9 @@ We love to get feedback on how to improve Zelig.
 
 <i class="fa fa-comment-o" aria-hidden="true"></i> If you have questions and 
 suggestions improvements, we'd love to hear from you! You can get in touch via: 
-<a href="https://github.com/IQSS/Zelig/issues">GitHub<i class="fa fa-github" aria-hidden="true"></i></a>, 
-<a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups<i class="fa fa-google" aria-hidden="true"></i></a>, or 
-<a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat<i class="fa fa-comments-o" aria-hidden="true"></i></a>. 
+<a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>, 
+<a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, or 
+<a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat <i class="fa fa-comments-o" aria-hidden="true"></i></a>. 
 
 <i class="fa fa-code" aria-hidden="true"></i> You can even make your R packages 
 usable from Zelig by writinga few simple bridge functions. Checkout the 
