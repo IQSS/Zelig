@@ -933,14 +933,14 @@ z$methods(
 )
 
 z$methods(
-  graph = function() {
+  graph = function(...) {
     "Plot the quantities of interest"
 
     is_uninitializedField(.self$zelig.out)
     is_sims_present(.self$sim.out)
 
-    if (is_simsx(.self$sim.out, fail = FALSE)) qi.plot(.self)
-    if (is_simsrange(.self$sim.out, fail = FALSE)) ci.plot(.self)
+    if (is_simsx(.self$sim.out, fail = FALSE)) qi.plot(.self, ...)
+    if (is_simsrange(.self$sim.out, fail = FALSE)) ci.plot(.self, ...)
   }
 )
 
@@ -1394,7 +1394,7 @@ setMethod("summary", "Zelig",
 #' @param ... Additional parameters to be passed to plot
 setMethod("plot", "Zelig",
           function(x, ...) {
-            x$graph()
+            x$graph(...)
           }
 )
 

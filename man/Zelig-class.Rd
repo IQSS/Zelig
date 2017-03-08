@@ -127,7 +127,7 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{get_vcov()}}{Get estimated model variance-covariance matrix}
 
-\item{\code{graph()}}{Plot the quantities of interest}
+\item{\code{graph(...)}}{Plot the quantities of interest}
 
 \item{\code{help()}}{Open the model vignette from http://zeligproject.org/}
 

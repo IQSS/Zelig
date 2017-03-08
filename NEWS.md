@@ -31,6 +31,8 @@ by parameter level) by `zelig_qi_to_df`.
 - Resolve a bug where appropriate `plot`s were not created for `mlogitbayes`.
 #206
 
+- Arguments (such as `xlab`) can now be passed to `plot`. #237
+
 
 Zelig version 5.0-16
 ==============================
