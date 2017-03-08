@@ -30,8 +30,7 @@ of the `zelig` call. #238
 
 ## Minor changes and bug fixes
 
-- Resolve a bug where appropriate `plot`s were not created for `mlogitbayes`.
-#206
+- Resolve a bug where appropriate `plot`s were not created for `mlogitbayes`. #206
 
 - Arguments (such as `xlab`) can now be passed to `plot`. #237
 
