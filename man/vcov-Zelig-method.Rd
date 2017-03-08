@@ -5,12 +5,10 @@
 \alias{vcov,Zelig-method}
 \title{Variance-covariance method for Zelig objects}
 \usage{
-\S4method{vcov}{Zelig}(object, ...)
+\S4method{vcov}{Zelig}(object)
 }
 \arguments{
 \item{object}{An Object of Class Zelig}
-
-\item{...}{Additional parameters to be passed to vcov}
 }
 \description{
 Variance-covariance method for Zelig objects

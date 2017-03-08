@@ -105,7 +105,7 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{from_zelig_model()}}{Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions.}
 
-\item{\code{get_coef()}}{Get estimated model coefficients}
+\item{\code{get_coef(nonlist = FALSE)}}{Get estimated model coefficients}
 
 \item{\code{get_df_residual()}}{Get residual degrees-of-freedom}
 

@@ -35,6 +35,9 @@ of the `zelig` call. #238
 
 - Arguments (such as `xlab`) can now be passed to `plot`. #237
 
+- Resolved a bug where `coef`, `coefficients`, `vcov`, `fitted`, and `predict`
+returned errors. Thanks to @vincentarelbundock for initially reporting. #231
+
 
 Zelig version 5.0-16
 ==============================
