@@ -1,5 +1,5 @@
 > All changes to Zelig are documented here. GitHub issue numbers are given after
-each change note when relevant. See <https://github.com/IQSS/Zelig/issues>/. 
+each change note when relevant. See <https://github.com/IQSS/Zelig/issues>. 
 External contributors are referenced with their GitHub usernames when 
 applicable.
 
