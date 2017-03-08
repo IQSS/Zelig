@@ -16,12 +16,25 @@ knitr::opts_knit$set(
 )
 ```
 
+> NOTE: this vignette is under construction.
+
 For convienience, you may wish to transform one or more of your covariates within the `zelig` model estimation call. For example, imagine we want to natural log transform the variable `dist` in a linear regression:
 
 ```{r}
 library(Zelig)
+library(dplyr)
 
-z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls', cite = FALSE)
+z.log <- zelig(speed ~ log(dist), data = cars, model = 'ls', cite = FALSE)
 ```
 
-Then we want to find quantities of interest when the `dist` variable is 
+Then we want to find quantities of interest when the `dist` variable is 26 to
+56 (the first to third quartile). To do this we added the logged fitted values 
+to `setx`, simulate quantites of interest, and plot the results:
+
+```{r}
+setx(z.log, dist = log(26:56)) %>%
+    sim() %>%
+    ci.plot(xlab = 'dist (log)') 
+```
+
+

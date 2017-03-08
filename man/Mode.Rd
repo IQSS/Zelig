@@ -11,7 +11,7 @@ Mode(x)
 \item{x}{a vector of numeric, factor, or ordered values}
 }
 \value{
-the statistical mode of the vector. If more than one mode exists, 
+the statistical mode of the vector. If more than one mode exists,
  the last one in the factor order is arbitrarily chosen (by design)
 }
 \description{

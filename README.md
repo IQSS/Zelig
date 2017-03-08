@@ -116,24 +116,24 @@ arguments: equation and data:
     # model summary
     summary(z5)
 
-    ## Model:
-    ##
+    ## Model: 
+    ## 
     ## Call:
     ## z5$zelig(formula = Fertility ~ Education, data = swiss)
-    ##
+    ## 
     ## Residuals:
-    ##     Min      1Q  Median      3Q     Max
-    ## -17.036  -6.711  -1.011   9.526  19.689
-    ##
+    ##     Min      1Q  Median      3Q     Max 
+    ## -17.036  -6.711  -1.011   9.526  19.689 
+    ## 
     ## Coefficients:
     ##             Estimate Std. Error t value Pr(>|t|)
     ## (Intercept)  79.6101     2.1041  37.836  < 2e-16
     ## Education    -0.8624     0.1448  -5.954 3.66e-07
-    ##
+    ## 
     ## Residual standard error: 9.446 on 45 degrees of freedom
-    ## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282
+    ## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
     ## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
-    ##
+    ## 
     ## Next step: Use 'setx' method
 
 The -0.8624 coefficient on education suggests a negative relationship
@@ -164,7 +164,7 @@ predictor value using the `setx()` method:
     ## setx1:
     ##   (Intercept) Education
     ## 1           1        15
-    ##
+    ## 
     ## Next step: Use 'sim' method
 
 After setting our predictor value, we simulate using the `sim()` method:
@@ -175,27 +175,27 @@ After setting our predictor value, we simulate using the `sim()` method:
     # model summary
     summary(z5)
 
-    ##
+    ## 
     ##  sim x :
     ##  -----
     ## ev
-    ##      mean      sd      50%     2.5%    97.5%
-    ## 1 75.3219 1.71582 75.30593 71.93463 78.74311
+    ##       mean      sd      50%     2.5%    97.5%
+    ## 1 75.33887 1.62542 75.34131 72.18134 78.66395
     ## pv
-    ##          mean       sd     50%     2.5%    97.5%
-    ## [1,] 74.81721 9.817975 74.9319 56.05222 93.82933
-    ##
+    ##         mean       sd      50%     2.5%   97.5%
+    ## [1,] 75.6122 9.502956 75.80868 56.80029 93.4634
+    ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.70882 1.548815 66.65152 63.79434 69.78168
+    ## 1 66.73751 1.477545 66.72636 63.90576 69.59867
     ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.81842 9.877156 66.95339 47.35293 86.73854
+    ##          mean      sd      50%   2.5%    97.5%
+    ## [1,] 66.54003 9.95062 66.62069 47.183 86.39465
     ## fd
     ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.613081 1.482952 -8.607104 -11.71647 -5.725205
+    ## 1 -8.601363 1.443553 -8.578843 -11.43621 -5.799012
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`

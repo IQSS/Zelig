@@ -6,7 +6,7 @@ Everyone's Statistical Software
 [![AppVeyor (Windows) Build Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
 
-> <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i> **NOTE: This site is in BETA and is INCOMPLETE.** For the current official Zelig site see: <http://zeligproject.org> 
+> <i class="fa fa-exclamation-triangle fa-1x" aria-hidden="true"></i> **NOTE: This site is in BETA and is INCOMPLETE.** For the current official Zelig site see: <http://zeligproject.org> 
 
 <img style="float:left; padding-right:20px" src="https://github.com/IQSS/Zelig/blob/master/README_files/img/zelig.png?raw=true"/>
 
@@ -35,7 +35,7 @@ Zelig includes many methods, based on likelihood, frequentist, Bayesian, robust 
 Zelig adds considerable infrastructure to improve the use of existing methods. It translates hard-to-interpret coefficients into meaningful quantities of interest, along with the uncertainty estimates (generalizing [Clarify](http://gking.harvard.edu/publications/clarify-software-interpreting-and-presenting-statistical-results) for Stata); automates graphics and numerical summaries for all models. 
 
 
-Zelig can also combine multiply imputed data sets to impute missing data and correct for measurement error (via [Amelia](http://gking.harvard.edu/amelia) and [other multiple imputation functions](reference/to_zelig_mi.html)); automates bootstrapping for all models; allows for matching for causal inference to reduce model dependence (via [MatchIt](http://gking.harvard.edu/publications/matchit-nonparametric-preprocessing-parametric-causal-inference) and [cem](http://gking.harvard.edu/cem)); and generates replication data files (for [Dataverse](http://dataverse.org/) to satisfy community replication standards). 
+Zelig can also evaluate counterfactuals (via [WhatIf](http://gking.harvard.edu/whatif)); combine multiply imputed data sets to impute missing data and correct for measurement error (via [Amelia](http://gking.harvard.edu/amelia) and [other multiple imputation functions](reference/to_zelig_mi.html)); automates bootstrapping for all models; allows for matching for causal inference to reduce model dependence (via [MatchIt](http://gking.harvard.edu/publications/matchit-nonparametric-preprocessing-parametric-causal-inference) and [cem](http://gking.harvard.edu/cem));  and generates replication data files (for [Dataverse](http://dataverse.org/) to satisfy community replication standards). 
 
 ## Get involved!
 

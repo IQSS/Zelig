@@ -130,7 +130,7 @@
     <p>Extract setx for non-range and return tidy formatted data frame</p>
     
 
-    <pre><span class='fu'>extract_setx</span>(<span class='no'>obj</span>, <span class='kw'>which_x</span> <span class='kw'>=</span> <span class='st'>"x"</span>)</pre>
+    <pre><span class='fu'>extract_setx</span>(<span class='no'>obj</span>, <span class='kw'>which_x</span> <span class='kw'>=</span> <span class='st'>"x"</span>, <span class='kw'>only_setx</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -139,6 +139,8 @@
       <dt>which_x</dt>
       <dd>character string either <code>&#39;x&#39;</code> or <code>&#39;x1&#39;</code> indicating whether
 to extract the first or second set of fitted values</dd>
+      <dt>only_setx</dt>
+      <dd>logical whether or not to only extract `setx`` values.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

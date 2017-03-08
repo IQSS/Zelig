@@ -1,7 +1,7 @@
 #' Compute the Statistical Mode of a Vector
 #' @aliases Mode mode
 #' @param x a vector of numeric, factor, or ordered values
-#' @return the statistical mode of the vector. If more than one mode exists, 
+#' @return the statistical mode of the vector. If more than one mode exists,
 #'  the last one in the factor order is arbitrarily chosen (by design)
 #' @export
 #' @author Christopher Gandrud and Matt Owen
@@ -48,7 +48,7 @@ Median <- function (x, na.rm=NULL) {
 #' @param levels a vector of levels
 #' @param ... parameters for table
 #' @return a table
-#' @author Matt Owen 
+#' @author Matt Owen
 
 table.levels <- function (x, levels, ...) {
   # if levels are not explicitly set, then
@@ -131,13 +131,10 @@ setval <- function(val, newval) {
 reduce = function(dataset, s, formula, data, avg = avg) {
     pred <- try(terms(fit <- lm(formula, data), "predvars"), silent = TRUE)
     if ("try-error" %in% class(pred)) # exp and weibull
-        pred <- try(terms(fit <- survreg(formula, data), "predvars"), silent = TRUE)
+        pred <- try(terms(fit <- survreg(formula, data), "predvars"),
+                    silent = TRUE)
 
-# browser()
     dataset <- model.frame(fit)
-    test <- dataset
-
-
 
     ldata <- lapply(dataset, avg)
     if (length(s) > 0) {
@@ -265,8 +262,9 @@ expand_grid_setrange <- function(x) {
 #'   resembles the storage of imputed data sets in the \code{amelia} object.
 #' @param ... a set of \code{data.frame}'s or a single list of \code{data.frame}'s
 #' @return an \code{mi} object composed of a list of data frames.
+#'
 #' @author Matt Owen, James Honaker, and Christopher Gandrud
-#' @export
+#'
 #' @examples
 #' # create datasets
 #' n <- 100
@@ -282,6 +280,7 @@ expand_grid_setrange <- function(x) {
 #'
 #' # pass object in place of data argument
 #' z.out <- zelig(y ~ x, model = "ls", data = mi.out)
+#' @export
 
 to_zelig_mi <- function (...) {
 
@@ -291,7 +290,7 @@ to_zelig_mi <- function (...) {
     # If user passes a list of data.frames rather than several data.frames as separate arguments
     if((class(imputations[[1]]) == 'list') & (length(imputations) == 1)){
         imputations = imputations[[1]]
-    }   
+    }
 
     # Labelling
     names(imputations) <- paste0("imp", 1:length(imputations))
@@ -405,9 +404,9 @@ strip_package_name <- function(x) {
 
 p_pull <- function(x) {
     p_values <- summary(x)$coefficients
-    if('Pr(>|t|)' %in% colnames(p_values)){
+    if ('Pr(>|t|)' %in% colnames(p_values)) {
         p_values <- p_values[, 'Pr(>|t|)']
-    }else{
+    } else {
         p_values <- p_values[, 'Pr(>|z|)']
     }
     return(p_values)
@@ -418,8 +417,8 @@ p_pull <- function(x) {
 #' @internal
 
 se_pull <- function(x) {
-  se <- summary(x)$coefficients[, "Std. Error"]
-  return(se)
+    se <- summary(x)$coefficients[, "Std. Error"]
+    return(se)
 }
 
 #' Drop intercept columns from a data frame of fitted values
@@ -432,7 +431,113 @@ rm_intercept <- function(x) {
     names_x <- names(x)
     if (any(intercept_names %in% names(x))) {
         keep <- !(names(x) %in% intercept_names)
-        x <- x[, names_x[keep]]
+        x <- data.frame(x[, names_x[keep]])
+        names(x) <- names_x[keep]
     }
     return(x)
+}
+
+
+#' Combines estimated coefficients and associated statistics
+#' from models estimated with multiply imputed data sets or bootstrapped
+#'
+#' @param obj a zelig object with an estimated model
+#' @param bagging logical whether or not to bag the bootstrapped coefficients
+#' @param messages logical whether or not to return messages for what is being
+#'   returned
+#'
+#' @return If the model uses multiply imputed or bootstrapped data then a
+#'  list of combined coefficients (\code{coef}), standard errors (\code{se}),
+#'  z values (\code{zvalue}), p-values (\code{p}) is returned. Rubin's Rules
+#'  are used to combine output from multiply imputed data.
+#'  An error is returned if no imputations were included or there wasn't
+#'  bootstrapping. Please use \code{get_coef}, \code{get_se}, and
+#'  \code{get_pvalue} methods instead in cases where there are no imputations or
+#'  bootstrap.
+#'
+#' @examples
+#' set.seed(123)
+#'
+#' ## Multiple imputation example
+#' # Create fake imputed data
+#' n <- 100
+#' x1 <- runif(n)
+#' x2 <- runif(n)
+#' y <- rnorm(n)
+#' data.1 <- data.frame(y = y, x = x1)
+#' data.2 <- data.frame(y = y, x = x2)
+#'
+#' # Estimate model
+#' mi.out <- to_zelig_mi(data.1, data.2)
+#' z.out.mi <- zelig(y ~ x, model = "ls", data = mi.out)
+#'
+#' # Combine and extract coefficients and standard errors
+#' combine_coef_se(z.out.mi)
+#'
+#' ## Bootstrap example
+#' z.out.boot <- zelig(y ~ x, model = "ls", data = data.1, bootstrap = 20)
+#' combine_coef_se(z.out.boot)
+#'
+#' @author Christopher Gandrud and James Honaker
+#' @source Partially based on \code{\link{mi.meld}} from Amelia.
+#'
+#' @export
+
+combine_coef_se <- function(obj, bagging = FALSE, messages = TRUE)
+{
+    is_zelig(obj)
+    is_uninitializedField(obj$zelig.out)
+
+    if (obj$mi || obj$bootstrap) {
+        coeflist <- obj$get_coef()
+        vcovlist <- obj$get_vcov()
+        coef_names <- names(coeflist[[1]])
+
+        am.m <- length(coeflist)
+        if (obj$bootstrap & !obj$mi) am.m <- am.m - 1
+        am.k <- length(coeflist[[1]])
+        if (obj$bootstrap & !obj$mi)
+            q <- matrix(unlist(coeflist[-(am.m + 1)]), nrow = am.m,
+                        ncol = am.k, byrow = TRUE)
+        else if (obj$mi) {
+            q <- matrix(unlist(coeflist), nrow = am.m, ncol = am.k,
+                        byrow = TRUE)
+            se <- matrix(NA, nrow = am.m, ncol = am.k)
+            for(i in 1:am.m){
+                se[i, ] <- sqrt(diag(vcovlist[[i]]))
+            }
+        }
+        ones <- matrix(1, nrow = 1, ncol = am.m)
+        comb_q <- (ones %*% q)/am.m
+        if (obj$mi) ave.se2 <- (ones %*% (se^2)) / am.m
+        diff <- q - matrix(1, nrow = am.m, ncol = 1) %*% comb_q
+        sq2 <- (ones %*% (diff^2))/(am.m - 1)
+        if (obj$mi) {
+            if (messages) message('Combining imputations. . .')
+            comb_se <- sqrt(ave.se2 + sq2 * (1 + 1/am.m))
+            coef <- as.vector(comb_q)
+            se <- as.vector(comb_se)
+        }
+
+        else if (obj$bootstrap  & !obj$mi) {
+            if (messages) message('Combining bootstraps . . .')
+            comb_se <- sqrt(sq2 * (1 + 1/am.m))
+            if (bagging) {
+                coef <- as.vector(comb_q)
+            } else {
+                coef <- coeflist[[am.m + 1]]
+            }
+            se <- as.vector(comb_se)
+        }
+
+        zvalue <- coef / se
+        pr_z <- 2 * (1 - pnorm(abs(zvalue)))
+
+        out <- list(coef = coef, se = se, zvalue = zvalue, p = pr_z)
+        for (i in seq(out)) names(out[[i]]) <- coef_names
+        return(out)
+    }
+    else if (!(obj$mi || obj$bootstrap))
+        stop('No multiply imputed or bootstrapped estimates found. So no need to combine.',
+            call. = FALSE)
 }
