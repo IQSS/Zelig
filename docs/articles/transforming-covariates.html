@@ -112,15 +112,58 @@
     
 <div class="contents">
 <p><em>Built using Zelig version 5.0.17</em></p>
+<blockquote>
+<p>NOTE: this vignette is under construction.</p>
+</blockquote>
 <p>For convienience, you may wish to transform one or more of your covariates within the <code>zelig</code> model estimation call. For example, imagine we want to natural log transform the variable <code>dist</code> in a linear regression:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Zelig)
+<span class="kw">library</span>(dplyr)
 
-z1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed ~<span class="st"> </span><span class="kw">log</span>(dist), <span class="dt">data =</span> cars, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p>Then we want to find quantities of interest when the <code>dist</code> variable is</p>
+z.log &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed ~<span class="st"> </span><span class="kw">log</span>(dist), <span class="dt">data =</span> cars, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Then we want to find quantities of interest when the <code>dist</code> variable is 26 to 56 (the first to third quartile). To do this we added the logged fitted values to <code>setx</code>, simulate quantites of interest, and plot the results:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.log, <span class="dt">dist =</span> <span class="kw">log</span>(<span class="dv">26</span>:<span class="dv">56</span>)) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%
+<span class="st">    </span><span class="kw">plot</span>(<span class="dt">xlab =</span> <span class="st">'dist (log)'</span>) </code></pre></div>
+<p><img src="transforming-covariates_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
+<div id="in-development" class="section level1">
+<h1 class="hasAnchor">
+<html><body><a href="#in-development" class="anchor"> </a></body></html>In development</h1>
+<p>The ability to transform covariates in the <code>zelig</code> model formula and then set/simulate quantities of interest is currently in development. <code>zelig</code> only supports <code>log</code> and <code>as.factor</code>. Interactions are created in the <code>zelig</code> call are also evaluated correctly without additional considerations in <code>setx</code>. We aim to introduce more transformations in the future.</p>
+<p>In the meantime. You can transform the covariates outside of the <code>zelig</code> model estimation call. For example, we could start by creating a second order polynomial of the <code>dist</code> variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars.poly &lt;-<span class="st"> </span><span class="kw">cbind</span>(cars, <span class="kw">I</span>(cars$dist^<span class="dv">2</span>))
+<span class="kw">names</span>(cars.poly)[<span class="dv">3</span>] &lt;-<span class="st"> 'dist_2'</span>
+
+<span class="kw">head</span>(cars.poly)</code></pre></div>
+<pre><code>##   speed dist dist_2
+## 1     4    2      4
+## 2     4   10    100
+## 3     7    4     16
+## 4     7   22    484
+## 5     8   16    256
+## 6     9   10    100</code></pre>
+<p>Now include this in the <code>zelig</code> call and <code>setx for both the base and second order  polynomial version of the</code>dist` variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dist_range &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">5</span>
+qis &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed ~<span class="st"> </span>dist +<span class="st"> </span>dist_2, <span class="dt">data =</span> cars.poly, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">dist =</span> dist_range, <span class="dt">dist_2 =</span> dist_range^<span class="dv">2</span>) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/zelig_qi_to_df.html">zelig_qi_to_df</a></span>() %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/qi_slimmer.html">qi_slimmer</a></span>() </code></pre></div>
+<pre><code>## zelig_qi_to_df is an experimental function.
+##   Please report issues to: https://github.com/IQSS/Zelig/issues</code></pre>
+<pre><code>## Slimming Expected Values . . .</code></pre>
+<p>Note that we used <code>zelig_qi_to_df</code> and <code>qi_slimmer</code> to extract the central simulation interval of the quantites of interest.</p>
+<p>We can plot these values with ggplot2:</p>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#in-development">In development</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

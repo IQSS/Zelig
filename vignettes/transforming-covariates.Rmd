@@ -34,7 +34,51 @@ to `setx`, simulate quantites of interest, and plot the results:
 ```{r}
 setx(z.log, dist = log(26:56)) %>%
     sim() %>%
-    ci.plot(xlab = 'dist (log)') 
+    plot(xlab = 'dist (log)') 
 ```
 
+## In development 
+
+The ability to transform covariates in the `zelig` model formula and then set/simulate 
+quantities of interest is currently in development. `zelig` only supports `log` and `as.factor`. 
+Interactions are created in the `zelig` call are also evaluated correctly without additional considerations
+in `setx`. We aim to introduce more transformations in the future. 
+
+## Currently unsupported transformations
+
+In the meantime. You can transform the covariates outside of the `zelig` model estimation call.
+For example, we could start by creating a second order polynomial of the `dist`
+variable:
+
+```{r}
+cars.poly <- cbind(cars, I(cars$dist^2))
+names(cars.poly)[3] <- 'dist_2'
+
+head(cars.poly)
+```
+
+Now include this in the `zelig` call and `setx for both the base and second order 
+polynomial version of the `dist` variable:
+
+```{r, message=FALSE}
+dist_range <- 26:56
+qis <- zelig(speed ~ dist + dist_2, data = cars.poly, model = 'ls', cite = FALSE) %>%
+    setx(dist = dist_range, dist_2 = dist_range^2) %>%
+    sim() %>%
+    zelig_qi_to_df() %>%
+    qi_slimmer() 
+```
+
+Note that we used `zelig_qi_to_df` and `qi_slimmer` to extract the central simulation
+interval of the quantites of interest.
+
+We can plot these values with ggplot2:
+
+```{r}
+ggplot(qis, aes(dist, qi_ci_median)) +
+    geom_ribbon(aes(ymin = qi_ci_min, ymax = qi_ci_max), alpha = 0.3) +
+    geom_line() + 
+    ylab('Expected speed') + xlab('Distance') +
+    theme_bw()
+```
 
