@@ -442,7 +442,7 @@ se_pull <- function(x) {
 #' @internal
 
 rm_intercept <- function(x) {
-    intercept_names <- c('(Intercept)', 'X.Intercept.')
+    intercept_names <- c('(Intercept)', 'X.Intercept.', '(Intercept).*')
     names_x <- names(x)
     if (any(intercept_names %in% names(x))) {
         keep <- !(names(x) %in% intercept_names)

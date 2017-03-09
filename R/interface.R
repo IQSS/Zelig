@@ -329,25 +329,27 @@ factor_coef_combine <- function(obj, fitted) {
 
     is_zelig(obj)
 
-    original_data <- obj$zelig.out$z.out[[1]]$model
-    factor_vars <- sapply(original_data, is.factor)
-    if (any(factor_vars)) {
-        for (i in names(original_data)[factor_vars]) {
-            if (!(i %in% names(fitted))) {
-                matches_name <- names(fitted)[grepl(sprintf('^%s*', i),
-                                                    names(fitted))]
-                var_levels <- levels(original_data[, i])
-                fitted[, i] <- NA
-                for (u in matches_name) {
-                    label_value <- gsub(sprintf('^%s', i), '', u)
-                    fitted[, i][fitted[, u] == 1] <- label_value
+    if (class(obj$zelig.out$z.out[[1]]) != 'mcmc') { # find a more general solution
+        original_data <- obj$zelig.out$z.out[[1]]$model
+        factor_vars <- sapply(original_data, is.factor)
+        if (any(factor_vars)) {
+            for (i in names(original_data)[factor_vars]) {
+                if (!(i %in% names(fitted))) {
+                    matches_name <- names(fitted)[grepl(sprintf('^%s*', i),
+                                                        names(fitted))]
+                    var_levels <- levels(original_data[, i])
+                    fitted[, i] <- NA
+                    for (u in matches_name) {
+                        label_value <- gsub(sprintf('^%s', i), '', u)
+                        fitted[, i][fitted[, u] == 1] <- label_value
+                    }
+                    ref_level <- var_levels[!(var_levels %in%
+                                                  gsub(sprintf('^%s', i), '',
+                                                       matches_name))]
+                    fitted[, i][is.na(fitted[, i])] <- ref_level
+                    fitted[, i] <- factor(fitted[, i], levels = var_levels)
+                    fitted <- fitted[, !(names(fitted) %in% matches_name)]
                 }
-                ref_level <- var_levels[!(var_levels %in%
-                                              gsub(sprintf('^%s', i), '',
-                                                   matches_name))]
-                fitted[, i][is.na(fitted[, i])] <- ref_level
-                fitted[, i] <- factor(fitted[, i], levels = var_levels)
-                fitted <- fitted[, !(names(fitted) %in% matches_name)]
             }
         }
     }
