@@ -38,9 +38,9 @@ from_zelig_model <- function(obj) {
 #'  - `expected_value`
 #'  - `predicted_value`
 #'
-#'  For multinomial reponse models, a separate column is givenfor the expected
-#'    probability of each outcome as well as a column of the predicted
-#'    outcomes.
+#'  For multinomial reponse models, a separate column is given for the expected
+#'    probability of each outcome in the form `expected_*`. Additionally, there
+#'    a is column of the predicted outcomes (`predicted_value`).
 #'
 #' @examples
 #' #### QIs without first difference or range, from covariates fitted at
@@ -409,9 +409,15 @@ factor_coef_combine <- function(obj, fitted) {
 qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
     qi__ <- scenario__ <- NULL
 
+    if (qi_type == 'ev') qi_type <- 'expected_value'
+    if (qi_type == 'pv') qi_type <- 'predicted_value'
+
     if (!is.data.frame(df))
-        stop('df must be a data frame created by zelig_qi_to_df.', call. = FALSE)
-    if (!all(c('expected_value', 'predicted_value') %in% names(df)))
+        stop('df must be a data frame created by zelig_qi_to_df.',
+             call. = FALSE)
+
+    names_df <- names(df)
+    if (!any(c('expected_value', 'predicted_value') %in% names_df))
         stop('The data frame does not appear to have been created by zelig_qi_to_df.',
              call. = FALSE)
 
@@ -419,44 +425,80 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
     lower <- (1 - ci)/2
     upper <- 1 - lower
 
-    if (!(qi_type %in% c('ev', 'pv')))
-        stop('qi_type must be either "ev" or "pv". ', call. = FALSE)
-    if (qi_type == 'ev') qi_drop <- 'predicted_value'
-    else qi_drop <- 'expected_value'
+    if (length(qi_type) != 1)
+        stop('Only one qi_type allowed per function call.', call. = FALSE)
 
-    if (qi_type == 'ev') qi_var <- 'expected_value'
-    else qi_var <- 'predicted_value'
+    qi_stripped <- gsub('_.*', '', qi_type)
+    if (!(qi_stripped %in% c('expected', 'predicted')))
+        stop('qi_type must be one of "ev", "pv", "expected_*" or "predicted_*". ',
+             call. = FALSE)
 
-    if (qi_type == 'ev') qi_msg <- 'Expected Values'
+    qi_df_location <- grep(qi_stripped, names_df)
+    qi_length <- length(qi_df_location)
+
+    if (qi_length > 1 & qi_type %in% c('ev', 'expected_value')) {
+        message(sprintf('\nMore than one %s values found. Returning slimmed expected values for the first outcome.\nIf another is desired please enter its name in qi_type.\n',
+                        qi_stripped))
+        qi_var <- names_df[qi_df_location[1]]
+    }
+    else qi_var <- qi_type
+
+    if (qi_stripped %in% 'expected'& length(qi_df_location) == 1)
+        qi_drop <- 'predicted'
+    else if ((qi_stripped %in% 'expected') & length(qi_df_location) > 1) {
+        other_expected <- names_df[qi_df_location]
+        other_expected <- other_expected[!(other_expected %in% qi_var)]
+        qi_drop <- c(other_expected, 'predicted_value')
+    }
+    else qi_drop <- 'expected'
+
+    if (qi_stripped %in% 'expected') qi_msg <- 'Expected Values'
     else qi_msg <- 'Predicted Values'
     message(sprintf('Slimming %s . . .', qi_msg))
 
-    names_df <- names(df)
-    df <- df[, !(names(df) %in% qi_drop)] # drop non-requested qi_type
+    # drop non-requested qi_type
+    if (length(qi_drop) == 1)
+        df <- df[, !(gsub('_.*', '', names_df) %in% qi_drop)]
+    else if (length(qi_drop) > 1)
+        df <- df[!(names_df %in% qi_drop)]
 
     names(df)[names(df) == qi_var] <- 'qi__'
     df$scenario__ <- interaction(df[, !(names(df) %in% 'qi__')], drop = TRUE)
 
     qi_list <- split(df, df[['scenario__']])
-    qi_list <- lapply(seq_along(qi_list), function(x){
-        lower_bound <- quantile(qi_list[[x]][, 'qi__'], prob = lower)
-        upper_bound <- quantile(qi_list[[x]][, 'qi__'], prob = upper)
-        subset(qi_list[[x]], qi__ >= lower_bound & qi__ <= upper_bound)
+    qi_list <- lapply(seq_along(qi_list), function(x) {
+        if (!is.factor(qi_list[[x]][, 'qi__'])) {
+            lower_bound <- quantile(qi_list[[x]][, 'qi__'], prob = lower)
+            upper_bound <- quantile(qi_list[[x]][, 'qi__'], prob = upper)
+            subset(qi_list[[x]], qi__ >= lower_bound & qi__ <= upper_bound)
+        }
+        else if (is.factor(qi_list[[x]][, 'qi__'])) { # Categorical outcomes
+            prop_outcome <- as.data.frame.matrix(
+                                t(table(qi_list[[x]][, 'qi__']) /
+                                              nrow(qi_list[[x]])))
+            names(prop_outcome) <- sprintf('predicted_proportion_(Y=%s)',
+                                           1:ncol(prop_outcome))
+            cbind(qi_list[[x]][1, ], prop_outcome)
+        }
     })
-
     df_slimmed <- data.frame(bind_rows(qi_list))
+    names(df_slimmed) <- names(qi_list[[1]])
 
-    df_out <- df_slimmed %>% group_by(scenario__) %>%
-        summarise(qi_ci_min = min(qi__),
-                  qi_ci_median = median(qi__),
-                  qi_ci_max = max(qi__)
-        ) %>%
-        data.frame
+    if (!is.factor(df_slimmed$qi__)) {
+        df_out <- df_slimmed %>% group_by(scenario__) %>%
+            summarise(qi_ci_min = min(qi__),
+                      qi_ci_median = median(qi__),
+                      qi_ci_max = max(qi__)
+            ) %>%
+            data.frame
+        scenarios_df <- df[!duplicated(df$scenario__), !(names(df) %in% 'qi__')] %>%
+            data.frame(row.names = NULL)
+        df_out <- merge(scenarios_df, df_out, by = 'scenario__', sort = FALSE)
+    }
+    else df_out <- df_slimmed
 
-    scenarios_df <- df[!duplicated(df$scenario__), !(names(df) %in% 'qi__')] %>%
-                      data.frame(row.names = NULL)
-    df_out <- merge(scenarios_df, df_out, by = 'scenario__', sort = FALSE)
     df_out$scenario__ <- NULL
+    df_out$qi__ <- NULL
 
     return(df_out)
 }

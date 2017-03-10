@@ -14,13 +14,13 @@ using multiply imputed data or bootstrapping and returns a list of coefficients,
 standard errors, z-values, and p-values combined across the estimations. Thanks
 to @vincentarelbundock for prompting. #229 
 
-- The following changes were primarily to re-established Zelig integration with
-WhatIf. #236
+- The following changes were primarily made to re-established Zelig integration 
+with WhatIf. #236
 
-  + Added `zelig_setx_to_df` for extracted fitted values created by `setx`.
+    + Added `zelig_setx_to_df` for extracted fitted values created by `setx`.
 Originally intended to re-enable WhatIf integration.
 
-  + Fitted factor level variable values are returned in a single column (not
+    + Fitted factor level variable values are returned in a single column (not
 by parameter level) by `zelig_qi_to_df`.
 
 - `setrange` (including `setx` used with a range of fitted values) now creates
@@ -33,6 +33,9 @@ of the `zelig` call. #238
 - Resolve a bug where appropriate `plot`s were not created for `mlogitbayes`. #206
 
 - Arguments (such as `xlab`) can now be passed to `plot`. #237
+
+- `zelig_qi_to_df` and `qi_slimmer` bug with multinomial response models 
+resolved. #235
 
 - Resolved a bug where `coef`, `coefficients`, `vcov`, `fitted`, and `predict`
 returned errors. Thanks to @vincentarelbundock for initially reporting. #231

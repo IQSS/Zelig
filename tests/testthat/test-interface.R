@@ -90,5 +90,14 @@ test_that('REQUIRE TEST zelig_qi_to_df multinomial outcome', {
                             "expected_P(Y=3)", "predicted_value")
     expect_equal(names(sims1_setx), expected_col_names)
     expect_equal(names(sims1_setrange), expected_col_names)
+
+    slimmed_setx <- qi_slimmer(sims1_setx, qi_type = "expected_P(Y=2)")
+    expect_lt(slimmed_setx$qi_ci_median, 0.25)
+    slimmed_setrange <- qi_slimmer(sims1_setrange, qi_type = "predicted_value")
+    expected_sr_colnames <- c("setx_value", "pristr", "othcok", "othsocok",
+                              "predicted_proportion_(Y=1)",
+                              "predicted_proportion_(Y=2)",
+                              "predicted_proportion_(Y=3)")
+    expect_equal(names(slimmed_setrange), expected_sr_colnames)
 })
 
