@@ -29,6 +29,10 @@ contrasting \code{x1} for finding first differences.
 \item \code{expected_value}
 \item \code{predicted_value}
 }
+
+For multinomial reponse models, a separate column is givenfor the expected
+probability of each outcome as well as a column of the predicted
+outcomes.
 }
 \examples{
 #### QIs without first difference or range, from covariates fitted at

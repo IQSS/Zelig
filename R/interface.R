@@ -38,6 +38,10 @@ from_zelig_model <- function(obj) {
 #'  - `expected_value`
 #'  - `predicted_value`
 #'
+#'  For multinomial reponse models, a separate column is givenfor the expected
+#'    probability of each outcome as well as a column of the predicted
+#'    outcomes.
+#'
 #' @examples
 #' #### QIs without first difference or range, from covariates fitted at
 #' ## central tendencies
@@ -240,10 +244,15 @@ extract_setx <- function(obj, which_x = 'x', only_setx = FALSE) {
 
     if (!only_setx) {
         temp_ev <- lapply(all_sims$ev, unlist)
-         temp_pv <- lapply(all_sims$pv, unlist)
-         for (i in 1:nrow(temp_fitted)) {
+        temp_pv <- lapply(all_sims$pv, unlist)
+
+        for (i in 1:nrow(temp_fitted)) {
             temp_qi <- data.frame(temp_ev[[i]], temp_pv[[i]])
-            names(temp_qi) <- c('expected_value', 'predicted_value')
+            if (ncol(temp_qi) == 2)
+                names(temp_qi) <- c('expected_value', 'predicted_value')
+            else if (ncol(temp_qi) > 2 & is.factor(temp_pv[[i]]))
+                names(temp_qi) <- c(sprintf('expected_%s', colnames(temp_ev[[i]])),
+                                    'predicted_value')
 
             temp_df <- cbind(temp_fitted[i, ], temp_qi, row.names = NULL)
             temp_comb <- rbind(temp_comb, temp_df)
@@ -297,7 +306,13 @@ extract_setrange <- function(obj, which_range = 'range', only_setx = FALSE) {
             temp_comb_1_range <- data.frame()
             for (u in 1:nrow(temp_fitted)) {
                 temp_qi <- data.frame(temp_ev[[u]], temp_pv[[u]])
-                names(temp_qi) <- c('expected_value', 'predicted_value')
+
+                if (ncol(temp_qi) == 2)
+                    names(temp_qi) <- c('expected_value', 'predicted_value')
+                else if (ncol(temp_qi) > 2 & is.factor(temp_pv[[u]]))
+                    names(temp_qi) <- c(sprintf('expected_%s', colnames(temp_ev[[u]])),
+                                        'predicted_value')
+
                 temp_df <- cbind(temp_fitted[u, ], temp_qi, row.names = NULL)
                 temp_comb_1_range <- rbind(temp_comb_1_range, temp_df)
             }
