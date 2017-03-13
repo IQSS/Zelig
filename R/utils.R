@@ -457,15 +457,17 @@ rm_intercept <- function(x) {
 #' from models estimated with multiply imputed data sets or bootstrapped
 #'
 #' @param obj a zelig object with an estimated model
+#' @param out_type either \code{"matrix"} or \code{"list"} specifying
+#'   whether the results should be returned as a matrix or a list.
 #' @param bagging logical whether or not to bag the bootstrapped coefficients
 #' @param messages logical whether or not to return messages for what is being
 #'   returned
 #'
 #' @return If the model uses multiply imputed or bootstrapped data then a
-#'  list of combined coefficients (\code{coef}), standard errors (\code{se}),
-#'  z values (\code{zvalue}), p-values (\code{p}) is returned. Rubin's Rules
-#'  are used to combine output from multiply imputed data.
-#'  An error is returned if no imputations were included or there wasn't
+#'  matrix (default) or list of combined coefficients (\code{coef}), standard
+#'  errors (\code{se}), z values (\code{zvalue}), p-values (\code{p}) is
+#'  returned. Rubin's Rules are used to combine output from multiply imputed
+#'  data. An error is returned if no imputations were included or there wasn't
 #'  bootstrapping. Please use \code{get_coef}, \code{get_se}, and
 #'  \code{get_pvalue} methods instead in cases where there are no imputations or
 #'  bootstrap.
@@ -498,10 +500,13 @@ rm_intercept <- function(x) {
 #'
 #' @export
 
-combine_coef_se <- function(obj, bagging = FALSE, messages = TRUE)
+combine_coef_se <- function(obj, out_type = 'matrix', bagging = FALSE,
+                            messages = TRUE)
 {
     is_zelig(obj)
     is_uninitializedField(obj$zelig.out)
+    if (!(out_type %in% c('matrix', 'list')))
+        stop('out_type must be either "matrix" or "list"', call. = FALSE)
 
     if (obj$mi || obj$bootstrap) {
         coeflist <- obj$get_coef()
@@ -548,8 +553,15 @@ combine_coef_se <- function(obj, bagging = FALSE, messages = TRUE)
         zvalue <- coef / se
         pr_z <- 2 * (1 - pnorm(abs(zvalue)))
 
-        out <- list(coef = coef, se = se, zvalue = zvalue, p = pr_z)
-        for (i in seq(out)) names(out[[i]]) <- coef_names
+        if (out_type == 'matrix') {
+            out <- cbind(coef, se, zvalue, pr_z)
+            colnames(out) <- c("Estimate", "Std.Error", "z value", "Pr(>|z|)")
+            rownames(out) <- coef_names
+        }
+        else if (out_type == 'list') {
+            out <- list(coef = coef, se = se, zvalue = zvalue, p = pr_z)
+            for (i in seq(out)) names(out[[i]]) <- coef_names
+        }
         return(out)
     }
     else if (!(obj$mi || obj$bootstrap))

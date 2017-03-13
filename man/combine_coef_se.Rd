@@ -8,10 +8,14 @@ from models estimated with multiply imputed data sets or bootstrapped}
 Partially based on \code{\link{mi.meld}} from Amelia.
 }
 \usage{
-combine_coef_se(obj, bagging = FALSE, messages = TRUE)
+combine_coef_se(obj, out_type = "matrix", bagging = FALSE,
+  messages = TRUE)
 }
 \arguments{
 \item{obj}{a zelig object with an estimated model}
+
+\item{out_type}{either \code{"matrix"} or \code{"list"} specifying
+whether the results should be returned as a matrix or a list.}
 
 \item{bagging}{logical whether or not to bag the bootstrapped coefficients}
 
@@ -20,10 +24,10 @@ returned}
 }
 \value{
 If the model uses multiply imputed or bootstrapped data then a
- list of combined coefficients (\code{coef}), standard errors (\code{se}),
- z values (\code{zvalue}), p-values (\code{p}) is returned. Rubin's Rules
- are used to combine output from multiply imputed data.
- An error is returned if no imputations were included or there wasn't
+ matrix (default) or list of combined coefficients (\code{coef}), standard
+ errors (\code{se}), z values (\code{zvalue}), p-values (\code{p}) is
+ returned. Rubin's Rules are used to combine output from multiply imputed
+ data. An error is returned if no imputations were included or there wasn't
  bootstrapping. Please use \code{get_coef}, \code{get_se}, and
  \code{get_pvalue} methods instead in cases where there are no imputations or
  bootstrap.

@@ -30,8 +30,7 @@ outside of the `zelig` call. #238
 
 ## Minor changes and bug fixes
 
-- Resolve a bug where appropriate `plot`s were not created for `mlogitbayes`. 
-#206
+- Resolve a bug where appropriate `plot`s were not created for `mlogitbayes`. #206
 
 - Arguments (such as `xlab`) can now be passed to `plot`. #237
 
@@ -40,6 +39,9 @@ resolved. #235
 
 - Resolved a bug where `coef`, `coefficients`, `vcov`, `fitted`, and `predict`
 returned errors. Thanks to @vincentarelbundock for initially reporting. #231
+
+- Reduced number of digits show from `summary` for fitted model objects.
+
 
 
 Zelig version 5.0-16
@@ -137,7 +139,7 @@ Zelig version 5.0-14
 - `mode` has been deprecated. Please use `Mode`. #152
 
 - The Zelig 4 `sim` wrapper now intelligently looks for fitted values from the
-reference class object if not supplied via the \code{x} argument.
+reference class object if not supplied via the x argument.
 
 - New `to_zelig_mi` utility function for combining multiply imputed data sets 
 for passing to `zelig`. `mi` will also work to enable backwards compatibility. #178

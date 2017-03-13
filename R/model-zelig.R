@@ -758,7 +758,6 @@ z$methods(
     "Display a Zelig object"
 
     is_uninitializedField(.self$zelig.out)
-
     .self$signif.stars <- signif.stars
     .self$signif.stars.default <- getOption("show.signif.stars")
     options(show.signif.stars = .self$signif.stars)
@@ -785,28 +784,15 @@ z$methods(
 
     if((.self$mi || .self$bootstrap)  & is.null(subset)){
         if (.self$mi)
-            cat("Model: Combined Imputations \n")
+            cat("Model: Combined Imputations \n\n")
         else
-            cat("Model: Combined Bootstraps \n")
+            cat("Model: Combined Bootstraps \n\n")
 
-        coef_se <- combine_coef_se(.self, bagging = bagging, messages = FALSE)
-        Estimate <- as.vector(coef_se['coef'][[1]])
-        Std.Error <- as.vector(coef_se['se'][[1]])
-        Z.Value <- as.vector(coef_se['zvalue'][[1]])
-        Pr.z <- as.vector(coef_se['p'][[1]])
-
-        stars <- rep("", length(Estimate))
-        stars[Pr.z < 0.05] <- "."
-        stars[Pr.z < 0.01] <- "*"
-        stars[Pr.z < 0.001] <- "**"
-        stars[Pr.z < 0.0001] <- "***"
-
-        results <- data.frame(Estimate, Std.Error, Z.Value, Pr.z, stars,
-                              row.names = names(coef_se[[1]]))
-        names(results) <- c("Estimate", "Std.Error", "z value", "Pr(>|z|)", "")
-        print(results, digits = max(3, getOption("digits") - 3))
-        cat("---\nSignif. codes:  '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n")
+        mi_combined <- combine_coef_se(.self, messages = FALSE)
+        printCoefmat(mi_combined, P.values = TRUE, has.Pvalue = TRUE,
+                     digits = max(2, getOption("digits") - 4))
         cat("\n")
+
         if (.self$mi)
             cat("For results from individual imputed datasets, use summary(x, subset = i:j)\n")
         else
@@ -866,7 +852,7 @@ z$methods(
           else
               screenoutput <- obj[[1]]
           attr(screenoutput,"assign") <- NULL
-          print(screenoutput, digits = max(3, getOption("digits") - 3))
+          print(screenoutput, digits = max(2, getOption("digits") - 4))
         }
       }
       range_out <- function(x, which_range = 'range') {
