@@ -29,7 +29,7 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-17
-Date: 2017-03-01
+Date: 2017-03-13
 Imports:
     AER,
     Amelia,

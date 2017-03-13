@@ -933,14 +933,14 @@ z$methods(
 )
 
 z$methods(
-  graph = function() {
+  graph = function(...) {
     "Plot the quantities of interest"
 
     is_uninitializedField(.self$zelig.out)
     is_sims_present(.self$sim.out)
 
-    if (is_simsx(.self$sim.out, fail = FALSE)) qi.plot(.self)
-    if (is_simsrange(.self$sim.out, fail = FALSE)) ci.plot(.self)
+    if (is_simsx(.self$sim.out, fail = FALSE)) qi.plot(.self, ...)
+    if (is_simsrange(.self$sim.out, fail = FALSE)) ci.plot(.self, ...)
   }
 )
 
@@ -993,19 +993,38 @@ z$methods(
   })
 
 #' Method for extracting estimated coefficients from Zelig objects
-#' @param object an object of class Zelig
+#' @param nonlist logical whethe to \code{unlist} the result if there are only
+#'   one set of coefficients. Enables backwards compatibility.
 
 z$methods(
-  get_coef = function() {
+  get_coef = function(nonlist = FALSE) {
     "Get estimated model coefficients"
 
     is_uninitializedField(.self$zelig.out)
     result <- try(lapply(.self$zelig.out$z.out, coef), silent = TRUE)
     if ("try-error" %in% class(result))
       stop("'coef' method' not implemented for model '", .self$name, "'")
-    else
-      return(result)
+    else {
+        if (nonlist & length(result) == 1) result <- unlist(result)
+        return(result)
+    }
   }
+)
+
+#' Method for extracting estimated variance covariance matrix from Zelig objects
+#' @param nonlist logical whethe to \code{unlist} the result if there are only
+#'   one set of coefficients. Enables backwards compatibility.
+
+z$methods(
+    get_vcov = function() {
+        "Get estimated model variance-covariance matrix"
+        is_uninitializedField(.self$zelig.out)
+        result <- lapply(.self$zelig.out$z.out, vcov)
+        if ("try-error" %in% class(result))
+            stop("'vcov' method' not implemented for model '", .self$name, "'")
+        else
+            return(result)
+    }
 )
 
 #' Method for extracting p-values from Zelig objects
@@ -1035,19 +1054,6 @@ z$methods(
     result <- try(lapply(.self$zelig.out$z.out, se_pull), silent = TRUE)
     if ("try-error" %in% class(result))
       stop("'get_se' method' not implemented for model '", .self$name, "'")
-    else
-      return(result)
-  }
-)
-
-
-z$methods(
-  get_vcov = function() {
-    "Get estimated model variance-covariance matrix"
-    is_uninitializedField(.self$zelig.out)
-    result <- lapply(.self$zelig.out$z.out, vcov)
-    if ("try-error" %in% class(result))
-      stop("'vcov' method' not implemented for model '", .self$name, "'")
     else
       return(result)
   }
@@ -1394,7 +1400,7 @@ setMethod("summary", "Zelig",
 #' @param ... Additional parameters to be passed to plot
 setMethod("plot", "Zelig",
           function(x, ...) {
-            x$graph()
+            x$graph(...)
           }
 )
 
@@ -1406,20 +1412,32 @@ setMethod("names", "Zelig",
           }
 )
 
+setGeneric("vcov")
 #' Variance-covariance method for Zelig objects
 #' @param object An Object of Class Zelig
-#' @param ... Additional parameters to be passed to vcov
+
 setMethod("vcov", "Zelig",
-          function(object, ...) {
+          function(object) {
             object$get_vcov()
           }
 )
 
 #' Method for extracting estimated coefficients from Zelig objects
 #' @param object An Object of Class Zelig
+
+setMethod("coefficients", "Zelig",
+          function(object) {
+              object$get_coef(nonlist = TRUE)
+          }
+)
+
+setGeneric("coef")
+#' Method for extracting estimated coefficients from Zelig objects
+#' @param object An Object of Class Zelig
+
 setMethod("coef", "Zelig",
           function(object) {
-            object$get_coef()
+            object$get_coef(nonlist = TRUE)
           }
 )
 
@@ -1439,20 +1457,22 @@ setMethod("df.residual", "Zelig",
           }
 )
 
+setGeneric("fitted")
 #' Method for extracting estimated fitted values from Zelig objects
 #' @param object An Object of Class Zelig
 #' @param ... Additional parameters to be passed to fitted
 setMethod("fitted", "Zelig",
           function(object, ...) {
-            object$get_fitted()
+            object$get_fitted(...)
           }
 )
 
+setGeneric("predict")
 #' Method for getting predicted values from Zelig objects
 #' @param object An Object of Class Zelig
 #' @param ... Additional parameters to be passed to predict
 setMethod("predict", "Zelig",
           function(object, ...) {
-            object$get_predict()
+            object$get_predict(...)
           }
 )

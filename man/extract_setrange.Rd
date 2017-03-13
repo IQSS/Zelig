@@ -4,7 +4,7 @@
 \alias{extract_setrange}
 \title{Extract setrange to return as tidy formatted data frame}
 \usage{
-extract_setrange(obj, which_range = "range")
+extract_setrange(obj, which_range = "range", only_setx = FALSE)
 }
 \arguments{
 \item{obj}{a zelig object containing a range of simulated quantities of
@@ -12,6 +12,8 @@ interest}
 
 \item{which_range}{character string either \code{'range'} or \code{'range1'}
 indicating whether to extract the first or second set of fitted values}
+
+\item{only_setx}{logical whether or not to only extract `setx`` values.}
 }
 \description{
 Extract setrange to return as tidy formatted data frame

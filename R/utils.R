@@ -241,13 +241,28 @@ zelig_mutate <- function (.data, ...)
     .data
 }
 
-#' Convenience function for setrange and setrange
+#' Convenience function for setrange and setrange1
 #'
 #' @param x data passed to setrange or setrange1
 #' @keywords internal
 
 expand_grid_setrange <- function(x) {
-    m <- expand.grid(x)
+#    m <- expand.grid(x)
+    set_lengths <- unlist(lapply(x, length))
+    unique_set_lengths <- unique(as.vector(set_lengths))
+
+    m <- data.frame()
+    for (i in unique_set_lengths) {
+        temp_df <- data.frame(row.names = 1:i)
+        for (u in 1:length(x)) {
+            if (length(x[[u]]) == i) {
+                temp_df <- cbind(temp_df, x[[u]])
+                names(temp_df)[ncol(temp_df)] <- names(x)[u]
+            }
+        }
+        if (nrow(m) == 0) m <- temp_df
+        else m <- merge(m, temp_df)
+    }
     if (nrow(m) == 1)
         warning('Only one fitted observation provided to setrange.\nConsider using setx instead.',
                 call. = FALSE)
@@ -427,11 +442,12 @@ se_pull <- function(x) {
 #' @internal
 
 rm_intercept <- function(x) {
-    intercept_names <- c('(Intercept)', 'X.Intercept.')
+    intercept_names <- c('(Intercept)', 'X.Intercept.', '(Intercept).*')
     names_x <- names(x)
     if (any(intercept_names %in% names(x))) {
         keep <- !(names(x) %in% intercept_names)
-        x <- x[, names_x[keep]]
+        x <- data.frame(x[, names_x[keep]])
+        names(x) <- names_x[keep]
     }
     return(x)
 }

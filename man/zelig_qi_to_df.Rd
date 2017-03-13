@@ -27,8 +27,12 @@ contrasting \code{x1} for finding first differences.
 \item The fitted values specified in \code{setx} including a \code{by} column if
 \code{by} was used in the \code{\link{zelig}} call.
 \item \code{expected_value}
-\item \code{expected_value}
+\item \code{predicted_value}
 }
+
+For multinomial reponse models, a separate column is given for the expected
+probability of each outcome in the form \code{expected_*}. Additionally, there
+a is column of the predicted outcomes (\code{predicted_value}).
 }
 \examples{
 #### QIs without first difference or range, from covariates fitted at

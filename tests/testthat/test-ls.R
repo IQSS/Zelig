@@ -22,10 +22,10 @@ test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
 test_that('REQUIRE TEST ls with by', {
   # Majority Catholic dummy
   swiss$maj_catholic <- cut(swiss$Catholic, breaks = c(0, 51, 100))
-  
+
   z5by <- zls$new()
   z5by$zelig(Fertility ~ Education, data = swiss, by = 'maj_catholic')
-  z5by$setx()    
+  z5by$setx()
 #  z5by$sim()
 #  sims_df <- zelig_qi_to_df(z5)
   #    expect_equal(length(unique(sims_df$by)), 2)
@@ -41,12 +41,12 @@ test_that('REQUIRE TEST ls with by', {
 # REQUIRE TEST for sim with ls models including factor levels ---------------------
 test_that('REQUIRE TEST for sim with models including factor levels', {
     expect_is(iris$Species, 'factor')
-    z.out <- zelig(Petal.Width ~ Petal.Length + Species, data = iris, 
+    z.out <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
                    model = "ls")
     x.out1 <- setx(z.out, Petal.Length = 1:10)
     sims1 <- sim(z.out, x.out1)
     expect_equal(length(sims1$sim.out$range), 10)
-    
+
     x.out2 <- setx(z.out, Petal.Length = 1:10, fn = list(numeric = Median))
     sims2 <- sim(z.out, x.out2)
     expect_equal(length(sims2$sim.out$range), 10)
@@ -55,17 +55,17 @@ test_that('REQUIRE TEST for sim with models including factor levels', {
 # REQUIRE TEST for set with ls models including factors set within zelig call --
 test_that('REQUIRE TEST for set with ls models including factors set within zelig call', {
     data(macro)
-    z1 <- zelig(unem ~ gdp + trade + capmob + as.factor(country), 
+    z1 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
              model = "ls", data = macro)
     setUS1 <- setx(z1, country = "United States")
-  
+
     macro$country <- as.factor(macro$country)
-    z2 <- zelig(unem ~ gdp + trade + capmob + country, 
+    z2 <- zelig(unem ~ gdp + trade + capmob + country,
                 model = "ls", data = macro)
     setUS2 <- setx(z2, country = "United States")
-  
+
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 1)
-    expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 
+    expect_equal(setUS1$setx.out$x$mm[[1]][[16]],
                  setUS2$setx.out$x$mm[[1]][[16]])
 })
 
@@ -74,13 +74,13 @@ test_that('REQUIRE TEST for set with ls models including natural logs set within
 #  z1 <- zelig(speed ~ log(dist, base = 10), data = cars, model = 'ls')
   z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls')
   setd1 <- setx(z1, dist = log(15))
-  
+
   cars$dist <- log(cars$dist)
   z2 <- zelig(speed ~ dist, data = cars, model = 'ls')
   setd2 <- setx(z1, dist = log(15))
-  
+
   expect_equal(round(setd1$setx.out$x$mm[[1]][[2]], digits = 5), 2.70805)
-  expect_equal(setd1$setx.out$x$mm[[1]][[2]], 
+  expect_equal(setd1$setx.out$x$mm[[1]][[2]],
                setd2$setx.out$x$mm[[1]][[2]])
 })
 
@@ -90,7 +90,7 @@ test_that('REQUIRE TEST for ls with interactions', {
     z <- zelig(Murder ~ Income * Population, data = states, model = 'ls')
     s1 <- setx(z, Population = 1500:1600, Income = 3098)
     s2 <- setx(z, Population = 1500:1600, Income = 6315)
-    
+
     expect_equal(length(s1$setx.out$range), 101)
     expect_equal(length(s2$setx.out$range), 101)
 })
@@ -101,4 +101,17 @@ test_that('REQUIRE TEST for ls with unrecognised variable name', {
   z <- zelig(Murder ~ Income * Population, data = states, model = 'ls')
   expect_error(setx(z, population = 1500:1600, Income = 3098),
                "Variable 'population' not in data set.")
+})
+
+# REQUIRE TEST for ls setrange with equal length ranges ------------------------
+test_that('REQUIRE TEST for ls setrange with equal length ranges', {
+    iris.poly <- cbind(iris, I(iris$Petal.Length^2))
+    names(iris.poly)[ncol(iris.poly)] <- 'pl_2'
+
+    pl_range <- 1:7
+    z.cars <- zelig(Sepal.Length ~ Petal.Length + pl_2 + Species,
+                      data = iris.poly, model = 'ls', cite = FALSE)
+    z.cars <- setx(z.cars, Species = 'virginica', Petal.Length = pl_range,
+                   pl_2 = pl_range^2)
+    expect_equal(nrow(zelig_setx_to_df(z.cars)), length(pl_range))
 })

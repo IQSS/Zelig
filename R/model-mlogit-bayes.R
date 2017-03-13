@@ -55,6 +55,7 @@ zmlogitbayes$methods(
       pv <- apply(temp, 2, as.character)
       pv <- as.factor(pv)
     }
+    ev <- ev[, , 1]
     return(list(ev = ev, pv = pv))
   }
 )
