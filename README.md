@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![zelig-logo](README_files/img/zelig.png)](http://zeligproject.org)
+[![zelig-logo](man/figures/zelig.png)](http://zeligproject.org)
 
 <!--- Badges ----->
 **Release:** [![CRAN
@@ -179,23 +179,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##      mean       sd      50%     2.5%    97.5%
-    ## 1 75.2888 1.586298 75.22004 72.20159 78.20523
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 75.36997 1.650294 75.30099 72.31297 78.65929
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.26338 9.560771 74.69245 57.34326 94.23264
+    ## [1,] 75.24528 9.544411 75.37412 56.41196 93.44682
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##      mean       sd      50%    2.5%    97.5%
-    ## 1 66.6376 1.479519 66.68145 63.6632 69.44812
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 66.71956 1.450892 66.71837 63.91693 69.52701
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.53433 9.601661 66.68754 46.48515 84.79195
+    ## [1,] 66.47671 9.096596 66.25873 48.29963 83.88586
     ## fd
-    ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.651203 1.409564 -8.641817 -11.36574 -6.008429
+    ##        mean       sd       50%      2.5%    97.5%
+    ## 1 -8.650416 1.432889 -8.662048 -11.40429 -5.99384
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
