@@ -179,23 +179,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 75.31088 1.603508 75.27013 72.28245 78.69988
+    ##      mean       sd      50%     2.5%    97.5%
+    ## 1 75.2888 1.586298 75.22004 72.20159 78.20523
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.24848 9.287465 75.37531 57.04465 92.80978
+    ## [1,] 75.26338 9.560771 74.69245 57.34326 94.23264
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean       sd      50%     2.5%   97.5%
-    ## 1 66.66557 1.493453 66.71342 63.75284 69.4476
+    ##      mean       sd      50%    2.5%    97.5%
+    ## 1 66.6376 1.479519 66.68145 63.6632 69.44812
     ## pv
-    ##          mean       sd     50%    2.5%    97.5%
-    ## [1,] 66.66138 9.868177 66.7948 47.3323 85.96712
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 66.53433 9.601661 66.68754 46.48515 84.79195
     ## fd
     ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.645306 1.551218 -8.657472 -11.68301 -5.700525
+    ## 1 -8.651203 1.409564 -8.641817 -11.36574 -6.008429
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
@@ -211,7 +211,7 @@ Zelig’s `graph()` method plots the estimated quantities of interest:
 
     z5$graph()
 
-![](README_files/figure-markdown_strict/example_plot_graph-1.png)
+![](man/figures/example_plot_graph-1.png)
 
 We can also simulate and plot simulations from ranges of simulated
 values. For example, first use the `setrange` method to set a range of
@@ -230,4 +230,4 @@ Then use the `graph()` method as before:
 
     z5$graph()
 
-![](README_files/figure-markdown_strict/example_plot_ci_plot-1.png)
+![](man/figures/example_plot_ci_plot-1.png)

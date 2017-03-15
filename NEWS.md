@@ -1,7 +1,18 @@
 > All changes to Zelig are documented here. GitHub issue numbers are given after
-each change note when relevant. See <https://github.com/IQSS/Zelig/issues>. 
-External contributors are referenced with their GitHub usernames when 
+each change note when relevant. See <https://github.com/IQSS/Zelig/issues>.
+External contributors are referenced with their GitHub usernames when
 applicable.
+
+
+Zelig version 5.0-18
+==============================
+
+## Major changes
+
+
+## Minor changes and bug fixes
+
+- Reorganise README files for to meet new CRAN requirements.
 
 
 Zelig version 5.0-17
@@ -9,12 +20,12 @@ Zelig version 5.0-17
 
 ## Major changes
 
-- New function `combine_coef_se` takes as input a `zelig` model estimated 
+- New function `combine_coef_se` takes as input a `zelig` model estimated
 using multiply imputed data or bootstrapping and returns a list of coefficients,
 standard errors, z-values, and p-values combined across the estimations. Thanks
-to @vincentarelbundock for prompting. #229 
+to @vincentarelbundock for prompting. #229
 
-- The following changes were primarily made to re-established Zelig integration 
+- The following changes were primarily made to re-established Zelig integration
 with WhatIf. #236
 
     + Added `zelig_setx_to_df` for extracted fitted values created by `setx`.
@@ -24,8 +35,8 @@ Originally intended to re-enable WhatIf integration.
 by parameter level) by `zelig_qi_to_df`.
 
 - `setrange` (including `setx` used with a range of fitted values) now creates
-scenarios based on matches of equal length set ranges. This enables `setx` to 
-work with polynomials, splines, etc. (currently only when these are created 
+scenarios based on matches of equal length set ranges. This enables `setx` to
+work with polynomials, splines, etc. (currently only when these are created
 outside of the `zelig` call. #238
 
 ## Minor changes and bug fixes
@@ -34,7 +45,7 @@ outside of the `zelig` call. #238
 
 - Arguments (such as `xlab`) can now be passed to `plot`. #237
 
-- `zelig_qi_to_df` and `qi_slimmer` bug with multinomial response models 
+- `zelig_qi_to_df` and `qi_slimmer` bug with multinomial response models
 resolved. #235
 
 - Resolved a bug where `coef`, `coefficients`, `vcov`, `fitted`, and `predict`
@@ -72,29 +83,29 @@ underscores `_` to delimit words in the function names (e.g. `get_coef`). #214
 - `zelig_qi_to_df` function for extracting simulated quantities of interest
 from a Zelig object and returning them as a tidy-formatted data frame. #189
 
-- `setx` returns an error if it is unable to find a supplied variable name. 
+- `setx` returns an error if it is unable to find a supplied variable name.
 
 - `setx1` wrapper added to facilitate piped workflows for first differences.
 
-- `zelig` can handle independent variables that are transformed using the 
+- `zelig` can handle independent variables that are transformed using the
 natural logarithm inside of the call. #225
 
 ## Minor changes and bug fixes
 
-- Corrected an issue where `plot` would tend to choose a factor level as the 
+- Corrected an issue where `plot` would tend to choose a factor level as the
 x-axis variable when plotting a range of simulations. #226
 
 - If a factor level variable's fitted value is not specified in `setx` and
-it is multi-modal, the last factor in the factor list is arbitrarily chosen. 
+it is multi-modal, the last factor in the factor list is arbitrarily chosen.
 This replaces previous behavior where the level was randomly chosen, causing
 unuseful quantity of interest range plots. #226
 
-- Corrected a bug where `summary` for ranges of `setx` would only show the 
+- Corrected a bug where `summary` for ranges of `setx` would only show the
 first scenario. Now all scenarios are shown. #226
 
 - Corrected a bug where the README.md was not included in the CRAN build.
 
-- `to_zelig_mi` now can accept a list of data frames. Thanks to 
+- `to_zelig_mi` now can accept a list of data frames. Thanks to
 @vincentarelbundock.
 
 - Internal code improvements.
@@ -141,7 +152,7 @@ Zelig version 5.0-14
 - The Zelig 4 `sim` wrapper now intelligently looks for fitted values from the
 reference class object if not supplied via the x argument.
 
-- New `to_zelig_mi` utility function for combining multiply imputed data sets 
+- New `to_zelig_mi` utility function for combining multiply imputed data sets
 for passing to `zelig`. `mi` will also work to enable backwards compatibility. #178
 
 - Initial development on a new testing architecture and more tests for
