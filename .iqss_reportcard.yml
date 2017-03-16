@@ -1,0 +1,26 @@
+# Created by IQSSdevtools (0.0.0.9000). Do not edit by hand. 
+
+ Documentation:
+  readme: yes
+  news: yes
+  bugreports: yes
+  vignettes: yes
+  pkgdown_website: no
+License:
+  gpl3_license: yes
+Version_Control:
+  git: yes
+  github: yes
+Testing:
+  uses_testthat: yes
+  uses_travis: yes
+  uses_appveyor: yes
+  no_check_warnings: yes
+  no_check_errors: yes
+  no_check_notes: yes
+  test_coverage: 86
+Background:
+  package_name: Zelig
+  package_version: 5.0-18
+  package_commit_sha: 5b134b230e22178e21e7c71ef519fb68391fc1c7
+  check_time: 2017-03-16 13:14:39
