@@ -235,23 +235,23 @@ z$methods(
 
     .self$formula <- as.Formula(formula)
 
-    # Convert factors converted internally to the zelig call
-    if (transformer(formula, FUN = 'as.factor', check = TRUE)) {
-      localformula <- transformer(formula, data, FUN = 'as.factor',
-                                  f_out = TRUE)
-      localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
-      .self$formula <- localformula
-      .self$data <- localdata
-    }
+#    # Convert factors converted internally to the zelig call
+#    if (transformer(formula, FUN = 'as.factor', check = TRUE)) {
+#      localformula <- transformer(formula, data, FUN = 'as.factor',
+#                                  f_out = TRUE)
+#      localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
+#      .self$formula <- localformula
+#      .self$data <- localdata
+#    }
 
-    # Convert natural logs converted internally to the zelig call
-    if (transformer(formula, FUN = 'log', check = TRUE)) {
-      localformula <- transformer(formula, data, FUN = 'log',
-                                  f_out = TRUE)
-      localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
-      .self$formula <- localformula
-      .self$data <- localdata
-    }
+#    # Convert natural logs converted internally to the zelig call
+#    if (transformer(formula, FUN = 'log', check = TRUE)) {
+#      localformula <- transformer(formula, data, FUN = 'log',
+#                                  f_out = TRUE)
+#      localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
+#      .self$formula <- localformula
+#      .self$data <- localdata
+#    }
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
@@ -429,8 +429,8 @@ z$methods(
     .self$data <- tbl_df(.self$data)
     #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>%
-      group_by_(.self$by) %>%
-      do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+        group_by_(.self$by) %>%
+        do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
   }
 )
 

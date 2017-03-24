@@ -90,6 +90,7 @@ Collate:
     'model-lognorm.R'
     'model-exp.R'
     'model-negbinom.R'
+    'model-ivreg.R'
     'model-ls.R'
     'utils.R'
     'create-json.R'

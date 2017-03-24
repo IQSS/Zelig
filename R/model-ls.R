@@ -44,9 +44,10 @@ zls$methods(
 zls$methods(
   param = function(z.out, method="mvn") {
     if(identical(method,"mvn")){
-      return(list(simparam=mvrnorm(.self$num, coef(z.out), vcov(z.out)), simalpha=rep( summary(z.out)$sigma, .self$num) )  )
+      return(list(simparam = mvrnorm(.self$num, coef(z.out), vcov(z.out)),
+                  simalpha = rep( summary(z.out)$sigma, .self$num) )  )
     } else if(identical(method,"point")){
-      return(list(simparam=t(as.matrix(coef(z.out))), simalpha=summary(z.out)$sigma))
+      return(list(simparam = t(as.matrix(coef(z.out))), simalpha=summary(z.out)$sigma))
     } else {
       stop("param called with method argument of undefined type.")
     }

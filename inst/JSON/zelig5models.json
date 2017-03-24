@@ -13,6 +13,19 @@
       "wrapper": ["ls"],
       "tree": ["Zelig-ls"]
     },
+    "ivreg": {
+      "name": ["ivreg"],
+      "description": ["Instrumental-Variable Regression"],
+      "outcome": {
+        "modelingType": ["continous"]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-ivreg.html"],
+      "wrapper": ["ivreg"],
+      "tree": ["Zelig-ivreg"]
+    },
     "logit": {
       "name": ["logit"],
       "description": ["Logistic Regression for Dichotomous Dependent Variables"],
@@ -167,7 +180,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-logitgee.html"],
       "wrapper": ["logit.gee"],
-      "tree": ["Zelig-logit-gee", "Zelig-binchoice-gee", "Zelig-gee"]
+      "tree": ["Zelig-logit-gee", "Zelig-binchoice-gee", "Zelig-gee", "Zelig-binchoice"]
     },
     "probitgee": {
       "name": ["probit-gee"],
@@ -180,7 +193,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-probitgee.html"],
       "wrapper": ["probit.gee"],
-      "tree": ["Zelig-probit-gee", "Zelig-binchoice-gee", "Zelig-gee"]
+      "tree": ["Zelig-probit-gee", "Zelig-binchoice-gee", "Zelig-gee", "Zelig-binchoice"]
     },
     "gammagee": {
       "name": ["gamma-gee"],
@@ -193,7 +206,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-gammagee.html"],
       "wrapper": ["gamma.gee"],
-      "tree": ["Zelig-gamma-gee", "Zelig-gee"]
+      "tree": ["Zelig-gamma-gee", "Zelig-gee", "Zelig-gamma"]
     },
     "normalgee": {
       "name": ["normal-gee"],
@@ -206,7 +219,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-normalgee.html"],
       "wrapper": ["normal.gee"],
-      "tree": ["Zelig-normal-gee", "Zelig-gee"]
+      "tree": ["Zelig-normal-gee", "Zelig-gee", "Zelig-normal"]
     },
     "poissongee": {
       "name": ["poisson-gee"],
@@ -219,7 +232,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-poissongee.html"],
       "wrapper": ["poisson.gee"],
-      "tree": ["Zelig-poisson-gee", "Zelig-gee"]
+      "tree": ["Zelig-poisson-gee", "Zelig-gee", "Zelig-poisson"]
     },
     "factorbayes": {
       "name": ["factor-bayes"],
@@ -245,7 +258,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-logitbayes.html"],
       "wrapper": ["logit.bayes"],
-      "tree": ["Zelig-logit-bayes", "Zelig-bayes"]
+      "tree": ["Zelig-logit-bayes", "Zelig-bayes", "Zelig-logit"]
     },
     "mlogitbayes": {
       "name": ["mlogit-bayes"],
@@ -271,7 +284,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-normalbayes.html"],
       "wrapper": ["normal.bayes"],
-      "tree": ["Zelig-normal-bayes", "Zelig-bayes"]
+      "tree": ["Zelig-normal-bayes", "Zelig-bayes", "Zelig-normal"]
     },
     "oprobitbayes": {
       "name": ["oprobit-bayes"],
@@ -297,7 +310,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-poissonbayes.html"],
       "wrapper": ["poisson.bayes"],
-      "tree": ["Zelig-poisson-bayes", "Zelig-bayes"]
+      "tree": ["Zelig-poisson-bayes", "Zelig-bayes", "Zelig-poisson"]
     },
     "probitbayes": {
       "name": ["probit-bayes"],
@@ -310,7 +323,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-probitbayes.html"],
       "wrapper": ["probit.bayes"],
-      "tree": ["Zelig-probit-bayes", "Zelig-bayes"]
+      "tree": ["Zelig-probit-bayes", "Zelig-bayes", "Zelig-probit"]
     },
     "tobitbayes": {
       "name": ["tobit-bayes"],
@@ -323,7 +336,7 @@
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-tobitbayes.html"],
       "wrapper": ["tobit.bayes"],
-      "tree": ["Zelig-tobit-bayes", "Zelig-bayes"]
+      "tree": ["Zelig-tobit-bayes", "Zelig-bayes", "Zelig-tobit"]
     },
     "weibull": {
       "name": ["weibull"],
@@ -347,9 +360,9 @@
       "explanatory": {
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
-      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-logitsurvey.html"],
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-logit-survey.html"],
       "wrapper": ["logit.survey"],
-      "tree": ["Zelig-logit-survey", "Zelig-binchoice-survey", "Zelig-survey"]
+      "tree": ["Zelig-logit-survey", "Zelig-binchoice-survey", "Zelig-survey", "Zelig-binchoice"]
     },
     "probitsurvey": {
       "name": ["probit-survey"],
@@ -360,9 +373,9 @@
       "explanatory": {
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
-      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-probitsurvey.html"],
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-probit-survey.html"],
       "wrapper": ["probit.survey"],
-      "tree": ["Zelig-probit-survey", "Zelig-binchoice-survey", "Zelig-survey"]
+      "tree": ["Zelig-probit-survey", "Zelig-binchoice-survey", "Zelig-survey", "Zelig-binchoice"]
     },
     "normalsurvey": {
       "name": ["normal-survey"],
@@ -373,7 +386,7 @@
       "explanatory": {
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
-      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-normalsurvey.html"],
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-normal-survey.html"],
       "wrapper": ["normal.survey"],
       "tree": ["Zelig-normal-survey", "Zelig-survey"]
     },
@@ -386,9 +399,9 @@
       "explanatory": {
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
-      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-gammasurvey.html"],
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-gamma-survey.html"],
       "wrapper": ["gamma.survey"],
-      "tree": ["Zelig-gamma-survey", "Zelig-survey"]
+      "tree": ["Zelig-gamma-survey", "Zelig-survey", "Zelig-gamma"]
     },
     "poissonsurvey": {
       "name": ["poisson-survey"],
@@ -399,9 +412,9 @@
       "explanatory": {
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
-      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-poissonsurvey.html"],
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-poisson-survey.html"],
       "wrapper": ["poisson.survey"],
-      "tree": ["Zelig-poisson-survey", "Zelig-survey"]
+      "tree": ["Zelig-poisson-survey", "Zelig-survey", "Zelig-poisson"]
     },
     "arima": {
       "name": ["arima"],
@@ -413,7 +426,7 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-arima.html"],
-      "wrapper": ["arima"],
+      "wrapper": ["timeseries"],
       "tree": ["Zelig-arima", "Zelig-timeseries"]
     },
     "ma": {
@@ -426,9 +439,9 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-ma.html"],
-      "wrapper": ["ma"],
+      "wrapper": ["timeseries"],
       "tree": ["Zelig-ma", "Zelig-timeseries"]
-    },    
+    },
     "ar": {
       "name": ["ar"],
       "description": ["Time-Series Model with Autoregressive Disturbance"],
@@ -439,7 +452,7 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-ar.html"],
-      "wrapper": ["ar"],
+      "wrapper": ["timeseries"],
       "tree": ["Zelig-ar", "Zelig-timeseries"]
     }
   }

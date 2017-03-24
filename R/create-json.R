@@ -2,6 +2,7 @@
 #' @include model-zelig.R
 #' @include model-ls.R
 #' @include model-glm.R
+#' @include model-ivreg.R
 #' @include model-binchoice.R
 #' @include model-logit.R
 #' @include model-probit.R
@@ -38,13 +39,16 @@
 
 #library(jsonlite)
 
-createJSON <- function(movefile=TRUE){
+createJSON <- function(movefile = TRUE){
 
   z5ls <- zls$new()
   z5ls$toJSON()
 
   z5logit <- zlogit$new()
   z5logit$toJSON()
+
+  z5ivreg <- zivreg$new()
+  z5ivreg$toJSON()
 
   z5probit <- zprobit$new()
   z5probit$toJSON()
@@ -132,7 +136,7 @@ createJSON <- function(movefile=TRUE){
 
   z5poissonsurvey <- zpoissonsurvey$new()
   z5poissonsurvey$toJSON()
-  
+
   z5arima <- zarima$new()
   z5arima$toJSON()
 
@@ -142,7 +146,9 @@ createJSON <- function(movefile=TRUE){
   z5ma <- zma$new()
   z5ma$toJSON()
 
-  zeligmodels <- list(zelig5models = list("ls" = z5ls$ljson,
+  zeligmodels <- list(zelig5models = list(
+                    "ls" = z5ls$ljson,
+                    "ivreg" = z5ivreg$ljson,
                     "logit" = z5logit$ljson,
                     "probit" = z5probit$ljson,
                     "poisson" = z5poisson$ljson,
@@ -173,7 +179,7 @@ createJSON <- function(movefile=TRUE){
                     "normalsurvey" = z5normalsurvey$ljson,
                     "gammasurvey" = z5gammasurvey$ljson,
                     "poissonsurvey" = z5poissonsurvey$ljson,
-                    "arima" = z5arima$ljson, 
+                    "arima" = z5arima$ljson,
                     "ma" = z5ma$ljson,
                     "ar" = z5ar$ljson))
 
@@ -183,6 +189,6 @@ createJSON <- function(movefile=TRUE){
     file.rename(from = file.path("zelig5models.json"), to = file.path("inst", "JSON","zelig5models.json"))
     file.remove(file.path("zelig5models.json"))
   }
-  
+
   return(TRUE)
 }
