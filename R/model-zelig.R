@@ -233,7 +233,7 @@ z$methods(
       return(fc)
     }
 
-    .self$formula <- formula
+    .self$formula <- as.Formula(formula)
 
     # Convert factors converted internally to the zelig call
     if (transformer(formula, FUN = 'as.factor', check = TRUE)) {
@@ -256,14 +256,14 @@ z$methods(
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
     if("formula" %in% class(.self$mcformula)){
-      .self$formula <- as.formula( deparse(.self$mcformula),
+      .self$formula <- as.Formula( deparse(.self$mcformula),
                                    env = environment(.self$formula) )
-      .self$model.call$formula <- as.formula( deparse(.self$mcformula),
+      .self$model.call$formula <- as.Formula( deparse(.self$mcformula),
                                               env = globalenv() )
     } else if(is.character(.self$mcformula)) {
-      .self$formula <- as.formula( .self$mcformula,
+      .self$formula <- as.Formula( .self$mcformula,
                                    env = environment(.self$formula) )
-      .self$model.call$formula <- as.formula( .self$mcformula, env = globalenv() )
+      .self$model.call$formula <- as.Formula( .self$mcformula, env = globalenv() )
     }
     if(!is.null(model)){
       cat("Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.\n")

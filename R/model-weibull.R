@@ -92,7 +92,7 @@ zweibull$methods(
 
 zweibull$methods(
   mcfun = function(x, b0=0, b1=1, alpha=1, sim=TRUE){
-    .self$mcformula <- as.formula("Surv(y.sim, event) ~ x.sim")
+    .self$mcformula <- as.Formula("Surv(y.sim, event) ~ x.sim")
     
     
     mylambda <-exp(b0 + b1 * x)

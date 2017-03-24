@@ -27,7 +27,7 @@ zsurvey$methods(zelig = function(formula, data, ids = ~1, probs = NULL,
 
     recastString2Formula <- function(a) {
         if (is.character(a)) {
-            a <- as.formula(paste("~", a))
+            a <- as.Formula(paste("~", a))
         }
         return(a)
     }

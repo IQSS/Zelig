@@ -382,7 +382,7 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
             f_comb <- paste(f_split, collapse = ' ')
             dv <- gsub('\\(\\)', '', formula[2])
             f_new <- paste(dv, '~', f_comb, collapse = ' ')
-            f_out <- as.formula(f_new)
+            f_out <- as.Formula(f_new)
             return(f_out)
         }
         else if (d_out) {

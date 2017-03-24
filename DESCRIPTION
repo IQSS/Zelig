@@ -29,12 +29,13 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.0-18
-Date: 2017-03-15
+Date: 2017-03-22
 Imports:
     AER,
     Amelia,
     coda,
     dplyr (>= 0.3.0.2),
+    Formula,
     geepack,
     jsonlite,
     sandwich,

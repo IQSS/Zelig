@@ -8,10 +8,12 @@ importFrom("quantreg", "rq", "summary.rq", "bandwidth.rq")
 importFrom("grDevices", "col2rgb", "heat.colors", "rgb")
 importFrom("graphics", "abline", "axis", "barplot", "box", "image",
              "layout", "lines", "par", "polygon", "text")
-importFrom("stats", "as.formula", "binomial", "complete.cases", "density",
+importFrom("stats", "binomial", "complete.cases", "density",
            "glm", "lm", "lm.influence", "median", "model.frame",
              "model.matrix", "model.response", "na.omit", "quantile",
              "sd", "terms", "update", "ARMAacf", "rnorm", "pnorm")
+
+importFrom("Formula", "as.Formula")
 
 importClassesFrom("VGAM", "vglm")
 importMethodsFrom("VGAM", "coef", "fitted", "predict", "vcov")
@@ -56,4 +58,3 @@ exportClasses(
      "Zelig-ar",
      "Zelig-ma"
 )
-

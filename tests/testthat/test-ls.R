@@ -20,15 +20,15 @@ test_that('REQUIRE TEST ls continuous covar -- quickstart (Zelig 5 syntax)', {
 # REQUIRE TEST ls with by -------------------------------------------------------
 
 test_that('REQUIRE TEST ls with by', {
-  # Majority Catholic dummy
-  swiss$maj_catholic <- cut(swiss$Catholic, breaks = c(0, 51, 100))
+    # Majority Catholic dummy
+    swiss$maj_catholic <- cut(swiss$Catholic, breaks = c(0, 51, 100))
 
-  z5by <- zls$new()
-  z5by$zelig(Fertility ~ Education, data = swiss, by = 'maj_catholic')
-  z5by$setx()
-#  z5by$sim()
-#  sims_df <- zelig_qi_to_df(z5)
-  #    expect_equal(length(unique(sims_df$by)), 2)
+    z5by <- zls$new()
+    z5by$zelig(Fertility ~ Education, data = swiss, by = 'maj_catholic')
+    z5by$setx()
+    z5by$sim()
+    sims_df <- zelig_qi_to_df(z5by)
+    expect_equal(length(unique(sims_df$by)), 2)
 })
 
 # gim method tests -------------------------------------------------------------
@@ -104,14 +104,22 @@ test_that('REQUIRE TEST for ls with unrecognised variable name', {
 })
 
 # REQUIRE TEST for ls setrange with equal length ranges ------------------------
-test_that('REQUIRE TEST for ls setrange with equal length ranges', {
+test_that('REQUIRE TEST for ls setrange with equal length ranges and polynomials', {
     iris.poly <- cbind(iris, I(iris$Petal.Length^2))
     names(iris.poly)[ncol(iris.poly)] <- 'pl_2'
-
     pl_range <- 1:7
-    z.cars <- zelig(Sepal.Length ~ Petal.Length + pl_2 + Species,
+
+    # Polynomial found outside of formula
+    z.cars1 <- zelig(Sepal.Length ~ Petal.Length + pl_2 + Species,
                       data = iris.poly, model = 'ls', cite = FALSE)
-    z.cars <- setx(z.cars, Species = 'virginica', Petal.Length = pl_range,
+    z.cars1 <- setx(z.cars1, Species = 'virginica', Petal.Length = pl_range,
                    pl_2 = pl_range^2)
-    expect_equal(nrow(zelig_setx_to_df(z.cars)), length(pl_range))
+    expect_equal(nrow(zelig_setx_to_df(z.cars1)), length(pl_range))
+
+    # Polynomial found in formula
+    z.cars2 <- zelig(Sepal.Length ~ Petal.Length + I(Petal.Length^2) + Species,
+                      data = iris.poly, model = 'ls', cite = FALSE)
+    z.cars2 <- setx(z.cars2, Species = 'virginica', Petal.Length = pl_range)
+    expect_equal(nrow(zelig_setx_to_df(z.cars2)), length(pl_range))
+    expect_equal(zelig_setx_to_df(z.cars1)[[2]], zelig_setx_to_df(z.cars2)[[2]])
 })
