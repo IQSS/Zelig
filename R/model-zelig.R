@@ -234,7 +234,7 @@ z$methods(
     }
 
     .self$formula <- as.Formula(formula)
-
+browser()
 #    # Convert factors converted internally to the zelig call
 #    if (transformer(formula, FUN = 'as.factor', check = TRUE)) {
 #      localformula <- transformer(formula, data, FUN = 'as.factor',

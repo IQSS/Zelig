@@ -4,11 +4,17 @@ External contributors are referenced with their GitHub usernames when
 applicable.
 
 
-Zelig version 5.0-18
+Zelig version 5.1-0
 ==============================
 
 ## Major changes
 
+- Introduce a new model type for instrumental-variable regression: `ivreg` 
+based on the `ivreg` from the AER package. #223
+
+- Use the Formula package for formulas. This will enable a common syntax for
+multiple equations, though currently in Core Zelig it is only 
+enhances `ivreg`. #241
 
 ## Minor changes and bug fixes
 
