@@ -12,3 +12,4 @@ rm_intercept(x)
 \description{
 Drop intercept columns from a data frame of fitted values
 }
+\keyword{internal}

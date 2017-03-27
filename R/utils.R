@@ -352,7 +352,7 @@ mi <- to_zelig_mi
 #'   \code{f_out} must be missing
 #'
 #' @author Christopher Gandrud
-#' @internal
+#' @keywords internal
 
 transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
 
@@ -404,7 +404,7 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
 #'
 #' Enables \code{\link{from_zelig_model}} output to work with stargazer.
 #' @param x a fitted model object result
-#' @internal
+#' @keywords internal
 
 strip_package_name <- function(x) {
     call_temp <- gsub('^.*(?=(::))', '', x$call[1], perl = TRUE)
@@ -415,7 +415,7 @@ strip_package_name <- function(x) {
 
 #' Extract p-values from a fitted model object
 #' @param x a fitted Zelig object
-#' @internal
+#' @keywords internal
 
 p_pull <- function(x) {
     p_values <- summary(x)$coefficients
@@ -429,7 +429,7 @@ p_pull <- function(x) {
 
 #' Extract standard errors from a fitted model object
 #' @param x a fitted Zelig object
-#' @internal
+#' @keywords internal
 
 se_pull <- function(x) {
     se <- summary(x)$coefficients[, "Std. Error"]
@@ -439,7 +439,7 @@ se_pull <- function(x) {
 #' Drop intercept columns from a data frame of fitted values
 #'
 #' @param x a data frame
-#' @internal
+#' @keywords internal
 
 rm_intercept <- function(x) {
     intercept_names <- c('(Intercept)', 'X.Intercept.', '(Intercept).*')

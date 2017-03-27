@@ -4,8 +4,64 @@
 #' equivalent to direct instrumental-variables estimation when the number of
 #' instruments is equal to the number of predictors.
 #'
-#' [FILL IN PARAMS]
+#' @param formula specification(s) of the regression relationship
+#' @param instruments the instruments. Either `instruments` is missing and
+#'   formula has three parts as in `y ~ x1 + x2 | z1 + z2 + z3` (recommended) or
+#'   formula is `y ~ x1 + x2` and instruments is a one-sided formula
+#' `~ z1 + z2 + z3`. Using `instruments` is not recommended with `zelig`.
+#' @param an optional list. See the `contrasts.arg` of
+#'   \code{\link{model.matrix.default}}.
+#' @param model,x,y logicals. If `TRUE` the corresponding components of the fit
+#' (the model frame, the model matrices , the response) are returned.
+#' @param ... further arguments passed to methods. See also \code{\link{zelig}}.
 #'
+#' @details Regressors and instruments for `ivreg` are most easily specified in
+#'   a formula with two parts on the right-hand side, e.g.,
+#'   `y ~ x1 + x2 | z1 + z2 + z3`, where `x1` and `x2` are the regressors and
+#'   `z1`, `z2`, and `z3` are the instruments. Note that exogenous regressors
+#'   have to be included as instruments for themselves. For example, if there is
+#'   one exogenous regressor `ex` and one endogenous regressor `en` with
+#'   instrument `in`, the appropriate formula would be `y ~ ex + en | ex + in`.
+#'   Equivalently, this can be specified as `y ~ ex + en | . - en + in`, i.e.,
+#'   by providing an update formula with a `.` in the second part of the
+#'   formula. The latter is typically more convenient, if there is a large
+#'   number of exogenous regressors.
+#'
+#' @examples
+#' library(AER) # for sandwich vcov
+#' library(dplyr) # for the pipe operator %>%
+#'
+#' # load and transform data
+#' data("CigarettesSW")
+#' CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
+#' CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
+#' CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+#'
+#' # estimate model
+#' z.out1 <- zelig(log(packs) ~ log(rprice) + log(rincome) |
+#'             log(rincome) + tdiff + I(tax/cpi),
+#'             data = CigarettesSW, subset = year == "1995",
+#'             model = "ivreg")
+#' summary(z.out1)
+#' from_zelig_model(z.out1) %>% summary(vcov = sandwich, df = Inf,
+#'                                      diagnostics = TRUE)
+#' # simulate and plot quantities of interest
+#' z.out1 %>% setx() %>% sim() %>% plot()
+#'
+#' # ANOVA
+#' z.out2 <- zelig(log(packs) ~ log(rprice) |
+#'                 tdiff, data = CigarettesSW, subset = year == "1995",
+#'                 model = "ivreg")
+#' anova(from_zelig_model(z.out1), from_zelig_model(z.out2))
+#'
+#' @source `ivreg` is from Christian Kleiber and Achim Zeileis (2008). Applied
+#' Econometrics with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL
+#' <https://CRAN.R-project.org/package=AER>
+#'
+#' @seealso \code{\link{zelig}},
+#' Greene, W. H. (1993) *Econometric Analysis*, 2nd ed., Macmillan.
+#'
+#' @md
 #' @import methods
 #' @export Zelig-ivreg
 #' @exportClass Zelig-ivreg

@@ -26,7 +26,8 @@ zls$methods(
 )
 
 zls$methods(
-  zelig = function(formula, data, ..., weights = NULL, by = NULL, bootstrap = FALSE) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL,
+      bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     callSuper(formula = formula, data = data, ...,
@@ -47,7 +48,8 @@ zls$methods(
       return(list(simparam = mvrnorm(.self$num, coef(z.out), vcov(z.out)),
                   simalpha = rep( summary(z.out)$sigma, .self$num) )  )
     } else if(identical(method,"point")){
-      return(list(simparam = t(as.matrix(coef(z.out))), simalpha=summary(z.out)$sigma))
+      return(list(simparam = t(as.matrix(coef(z.out))),
+             simalpha=summary(z.out)$sigma))
     } else {
       stop("param called with method argument of undefined type.")
     }
@@ -57,7 +59,8 @@ zls$methods(
 zls$methods(
   qi = function(simparam, mm) {
     ev <- simparam$simparam %*% t(mm)
-    pv <- as.matrix(rnorm(n=length(ev), mean=ev, sd=simparam$simalpha), nrow=length(ev), ncol=1)
+    pv <- as.matrix(rnorm(n=length(ev), mean=ev, sd=simparam$simalpha),
+                    nrow=length(ev), ncol=1)
     return(list(ev = ev, pv = pv))
   }
 )

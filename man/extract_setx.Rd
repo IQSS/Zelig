@@ -23,3 +23,4 @@ Extract setx for non-range and return tidy formatted data frame
 \author{
 Christopher Gandrud
 }
+\keyword{internal}

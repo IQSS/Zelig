@@ -94,6 +94,7 @@ Collate:
     'model-ls.R'
     'utils.R'
     'create-json.R'
+    'datasets.R'
     'interface.R'
     'model-survey.R'
     'model-binchoice-survey.R'

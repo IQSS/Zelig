@@ -212,14 +212,14 @@ z$methods(
     if(!is.na(.self$packagename() )){
       mycites<-c(mycites, citation(.self$packagename()))  # Concatentate model specific Zelig references with package references
     }
-    mycites<-mycites[!duplicated(mycites)]                            # Remove duplicates (many packages have duplicate references in their lists)
-    s<-capture.output(print(mycites, style = mystyle))
+    mycites <- mycites[!duplicated(mycites)]                            # Remove duplicates (many packages have duplicate references in their lists)
+    s <- capture.output(print(mycites, style = mystyle))
     if(style == "sphinx"){                          # format the "text" style conventions for sphinx markdown for building docs for zeligproject.org
       s<-gsub("\\*","\\*\\*",s, perl=TRUE)
       s<-gsub("_","\\*",s, perl=TRUE)
       s<-gsub("\\*\\(","\\* \\(",s, perl=TRUE)
     }
-    cat(s, sep="\n")
+    cat(s, sep = "\n")
   }
 )
 
@@ -234,24 +234,24 @@ z$methods(
     }
 
     .self$formula <- as.Formula(formula)
-browser()
-#    # Convert factors converted internally to the zelig call
-#    if (transformer(formula, FUN = 'as.factor', check = TRUE)) {
-#      localformula <- transformer(formula, data, FUN = 'as.factor',
-#                                  f_out = TRUE)
-#      localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
-#      .self$formula <- localformula
-#      .self$data <- localdata
-#    }
 
-#    # Convert natural logs converted internally to the zelig call
-#    if (transformer(formula, FUN = 'log', check = TRUE)) {
-#      localformula <- transformer(formula, data, FUN = 'log',
-#                                  f_out = TRUE)
-#      localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
-#      .self$formula <- localformula
-#      .self$data <- localdata
-#    }
+    # Convert factors converted internally to the zelig call
+    if (transformer(formula, FUN = 'as.factor', check = TRUE)) {
+      localformula <- transformer(formula, data, FUN = 'as.factor',
+                                  f_out = TRUE)
+      localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
+      .self$formula <- localformula
+      .self$data <- localdata
+    }
+
+    # Convert natural logs converted internally to the zelig call
+    if (transformer(formula, FUN = 'log', check = TRUE)) {
+      localformula <- transformer(formula, data, FUN = 'log',
+                                  f_out = TRUE)
+      localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
+      .self$formula <- localformula
+      .self$data <- localdata
+    }
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue

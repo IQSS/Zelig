@@ -13,3 +13,4 @@ or the equivalent \code{(0, 1]} interval.}
 \description{
 Convert \code{ci} interval from percent to proportion and check if valid
 }
+\keyword{internal}

@@ -12,3 +12,4 @@ se_pull(x)
 \description{
 Extract standard errors from a fitted model object
 }
+\keyword{internal}

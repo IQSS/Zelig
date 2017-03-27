@@ -12,3 +12,4 @@ p_pull(x)
 \description{
 Extract p-values from a fitted model object
 }
+\keyword{internal}
