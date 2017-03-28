@@ -125,9 +125,11 @@ zivreg$methods(
     }
 )
 
-#zivreg$methods(
-#  mcfun = function(x, b0 = 0, b1 = 1, alpha = 1, sim = TRUE){
-#    y <- b0 + b1*x + sim * rnorm(n = length(x), sd = alpha)
-#    return(y)
-#  }
-#)
+zivreg$methods(
+    mcfun = function(z, h, b0 = 0, b1 = 1, alpha = 1, sim = TRUE){
+        x <- b0 + 2*z + 3*h + sim * rnorm(n = length(z), sd = alpha + 1)
+        y <- b0 + b1*x + sim * rnorm(n = length(z), sd = alpha)
+        yx <- list(y, x)
+        return(yx)
+    }
+)

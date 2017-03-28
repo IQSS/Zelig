@@ -4,7 +4,7 @@
 #' @import methods
 #' @export Zelig-logit-bayes
 #' @exportClass Zelig-logit-bayes
-#' 
+#'
 #' @include model-zelig.R
 #' @include model-bayes.R
 #' @include model-logit.R
@@ -31,12 +31,12 @@ zlogitbayes$methods(
 )
 
 zlogitbayes$methods(
-  mcfun = function(x, b0=0, b1=1, ..., sim=TRUE){
+  mcfun = function(x, b0 = 0, b1 = 1, ..., sim = TRUE){
     mu <- 1/(1 + exp(-b0 - b1 * x))
-    if(sim){
-        y <- rbinom(n=length(x), size=1, prob=mu)
+    if(sim) {
+        y <- rbinom(n = length(x), size = 1, prob = mu)
         return(y)
-    }else{
+    } else {
         return(mu)
     }
   }

@@ -1,9 +1,9 @@
 # REQUIRE TEST ivreg Monte Carlo -----------------------------------------------
-#test_that("REQUIRE Test ivreg Monte Carlo", {
-#    z <- zivreg$new()
-#    test.ls <- z$mcunit(plot = FALSE)
-#    expect_true(test.ls)
-#})
+test_that("REQUIRE Test ivreg Monte Carlo", {
+    z <- zivreg$new()
+    test.ivreg <- z$mcunit(plot = FALSE)
+    expect_true(test.ivreg)
+})
 
 # REQUIRE TEST ivreg AER example with log transformations ----------------------
 test_that("REQUIRE TEST ivreg AER example with log transformations", {
@@ -22,9 +22,9 @@ test_that("REQUIRE TEST ivreg AER example with log transformations", {
 
     # Zelig wrapped
     ziv.out <- zelig(log(packs) ~ log(rprice) + log(rincome) |
-                log(rincome) + tdiff + I(tax/cpi),
-                data = CigarettesSW1995,
-                model = 'ivreg')
+                    log(rincome) + tdiff + I(tax/cpi),
+                    data = CigarettesSW1995,
+                    model = 'ivreg')
     expect_equal(coef(fm), coef(ziv.out))
     expect_equivalent(vcov(fm), vcov(ziv.out)[[1]])
 })
