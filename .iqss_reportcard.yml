@@ -24,6 +24,8 @@ Testing:
 Background:
   package_name: Zelig
   package_version: 5.0-18
-  package_commit_sha: d5a8dcf0c9655ea187d2533fa977919be90612f6
+  package_language: R
+  package_commit_sha: ee4f8c9ad433a75b039e38c51a95b31d6707fcf8
+  iqss_bestpractices_version: 0.0.0.9000
   iqssdevtools_version: 0.0.0.9000
-  check_time: 2017-03-20 09:28:43
+  check_time: 2017-03-28 17:29:53
