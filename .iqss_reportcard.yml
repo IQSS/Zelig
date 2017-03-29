@@ -2,10 +2,13 @@
 
  Documentation:
   readme: yes
+  roxygen: no
   news: yes
   bugreports: yes
   vignettes: yes
-  pkgdown_website: no
+  website:
+    openscholar: no
+    pkgdown_website: no
 License:
   gpl3_license: yes
 Version_Control:
@@ -25,7 +28,7 @@ Background:
   package_name: Zelig
   package_version: 5.0-18
   package_language: R
-  package_commit_sha: ee4f8c9ad433a75b039e38c51a95b31d6707fcf8
+  package_commit_sha: e51feceaa484f8c9e9c6f206b38542fafd438e15
   iqss_bestpractices_version: 0.0.0.9000
   iqssdevtools_version: 0.0.0.9000
-  check_time: 2017-03-28 17:29:53
+  check_time: 2017-03-29 12:03:23
