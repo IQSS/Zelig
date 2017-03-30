@@ -310,7 +310,7 @@ to_zelig_mi <- function (...) {
     # Labelling
     names(imputations) <- paste0("imp", 1:length(imputations))
 
-    # Ensure that everything is data.frame
+    # Ensure that everything is a data.frame
     for (k in length(imputations):1) {
         if (!is.data.frame(imputations[[k]])){
             imputations[[k]] <- NULL
