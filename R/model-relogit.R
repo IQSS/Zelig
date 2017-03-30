@@ -54,7 +54,8 @@ zrelogit$methods(
 )
 
 zrelogit$methods(
-  zelig = function(formula, ..., tau = NULL, bias.correct = NULL, case.control = NULL, data, by = NULL, bootstrap = FALSE) {
+  zelig = function(formula, ..., tau = NULL, bias.correct = NULL,
+                   case.control = NULL, data, by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     # Catch NULL case.control
@@ -113,7 +114,7 @@ relogit <- function(formula,
            "or case.control = \"weighting\"")
     if (length(ck2) == 0)
       weighting <- FALSE
-    else 
+    else
       weighting <- TRUE
   }
   else
@@ -134,7 +135,8 @@ relogit <- function(formula,
   else {
     mf[[1]] <- glm
     mf$family <- binomial(link = "logit")
-    y2 <- model.response(model.frame(mf$formula, data))
+
+    y2 <- model.response(model.frame(mf$formula, data = data))
     if (is.matrix(y2))
       y <- y2[,1]
     else
@@ -155,7 +157,7 @@ relogit <- function(formula,
       pihat <- fitted(res)
       if (is.null(tau)) # w_i = 1
         wi <- rep(1, length(y))
-      else if (weighting) 
+      else if (weighting)
         res$weighting <- TRUE
       else {
         w1 <- tau/ybar
@@ -176,11 +178,11 @@ relogit <- function(formula,
     }
     else
       res$bias.correct <- FALSE
-    ## prior correction 
-    if (!is.null(tau) & !weighting){      
-      if (tau <= 0 || tau >= 1) 
-        stop("\ntau needs to be between 0 and 1.\n") 
-      res$coefficients["(Intercept)"] <- res$coefficients["(Intercept)"] - 
+    ## prior correction
+    if (!is.null(tau) & !weighting){
+      if (tau <= 0 || tau >= 1)
+        stop("\ntau needs to be between 0 and 1.\n")
+      res$coefficients["(Intercept)"] <- res$coefficients["(Intercept)"] -
         log(((1 - tau) / tau) * (ybar / (1 - ybar)))
       res$prior.correct <- TRUE
       res$weighting <- FALSE
@@ -189,8 +191,8 @@ relogit <- function(formula,
       res$prior.correct <- FALSE
     if (is.null(res$weighting))
       res$weighting <- FALSE
-    
-    res$linear.predictors <- t(res$coefficients) %*% t(X) 
+
+    res$linear.predictors <- t(res$coefficients) %*% t(X)
     res$fitted.values <- 1 / (1 + exp(-res$linear.predictors))
     res$zelig <- "Relogit"
     class(res) <- c("Relogit", "glm")

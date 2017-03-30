@@ -259,7 +259,9 @@ z$methods(
       .self$data <- localdata
     }
 
-    .self$model.call$formula <- match.call(zelig, .self$formula)
+    # Hack due to cbind() for response. Should be addressed with Formula
+    if (!("relogit" %in% .self$wrapper))
+        .self$model.call$formula <- match.call(zelig, .self$formula)
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
@@ -429,7 +431,7 @@ z$methods(
       names(.self$data)[1] <- "by"
       .self$by <- "by"
     }
-browser()
+
     #cat("zelig.call:\n")
     #print(.self$zelig.call)
     #cat("model.call:\n")
