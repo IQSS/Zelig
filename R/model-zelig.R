@@ -439,13 +439,18 @@ z$methods(
     "Setting Explanatory Variable Values"
     is_uninitializedField(.self$zelig.out)
 
+    # Find variable transformations in formula call
+    coef_names <- names(rm_intercept(unlist(.self$get_coef())))
+
+
+
     .self$avg <- function(val) {
-      if (is.numeric(val))
-        ifelse(is.null(fn$numeric), mean(val), fn$numeric(val))
-      else if (is.ordered(val))
-        ifelse(is.null(fn$ordered), Median(val), fn$ordered(val))
-      else
-        Mode(val)
+        if (is.numeric(val))
+            ifelse(is.null(fn$numeric), mean(val), fn$numeric(val))
+        else if (is.ordered(val))
+            ifelse(is.null(fn$ordered), Median(val), fn$ordered(val))
+        else
+            Mode(val)
     }
     s <- list(...)
 

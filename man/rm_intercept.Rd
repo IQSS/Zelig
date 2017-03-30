@@ -2,13 +2,16 @@
 % Please edit documentation in R/utils.R
 \name{rm_intercept}
 \alias{rm_intercept}
-\title{Drop intercept columns from a data frame of fitted values}
+\title{Drop intercept columns or values from a data frame or named vector,
+  respectively}
 \usage{
 rm_intercept(x)
 }
 \arguments{
-\item{x}{a data frame}
+\item{x}{a data frame or named vector}
 }
 \description{
-Drop intercept columns from a data frame of fitted values
+Drop intercept columns or values from a data frame or named vector,
+  respectively
 }
+\keyword{internal}

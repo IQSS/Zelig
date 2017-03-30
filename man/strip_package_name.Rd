@@ -12,3 +12,4 @@ strip_package_name(x)
 \description{
 Enables \code{\link{from_zelig_model}} output to work with stargazer.
 }
+\keyword{internal}

@@ -27,3 +27,4 @@ Conduct variable transformations called inside a \code{zelig} call
 \author{
 Christopher Gandrud
 }
+\keyword{internal}

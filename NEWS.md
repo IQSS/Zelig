@@ -4,11 +4,12 @@ External contributors are referenced with their GitHub usernames when
 applicable.
 
 
-Zelig version 5.0-18
+Zelig version 5.0-1
 ==============================
 
 ## Major changes
 
+- Arbitrary `log` transformations are now supported in `zelig` calls. #225
 
 ## Minor changes and bug fixes
 

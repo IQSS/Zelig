@@ -71,17 +71,27 @@ test_that('REQUIRE TEST for set with ls models including factors set within zeli
 
 # REQUIRE TEST for set with ls models including natural logs set within zelig call --
 test_that('REQUIRE TEST for set with ls models including natural logs set within zelig call', {
-#  z1 <- zelig(speed ~ log(dist, base = 10), data = cars, model = 'ls')
-  z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls')
-  setd1 <- setx(z1, dist = log(15))
+    z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls')
+    setd1 <- setx(z1, dist = log(15))
 
-  cars$dist <- log(cars$dist)
-  z2 <- zelig(speed ~ dist, data = cars, model = 'ls')
-  setd2 <- setx(z1, dist = log(15))
+    cars$dist <- log(cars$dist)
+    z2 <- zelig(speed ~ dist, data = cars, model = 'ls')
+    setd2 <- setx(z2, dist = log(15))
 
-  expect_equal(round(setd1$setx.out$x$mm[[1]][[2]], digits = 5), 2.70805)
-  expect_equal(setd1$setx.out$x$mm[[1]][[2]],
+    expect_equal(round(setd1$setx.out$x$mm[[1]][[2]], digits = 5), 2.70805)
+    expect_equal(setd1$setx.out$x$mm[[1]][[2]],
                setd2$setx.out$x$mm[[1]][[2]])
+
+    z3.1 <- zelig(Sepal.Length ~ log10(Petal.Length) + log(Sepal.Width),
+              model = 'ls', data = iris, cite = FALSE)
+    z3.2 <- zelig(Sepal.Length ~ log(Petal.Length, base = 10) +
+                      log(Sepal.Width),
+              model = 'ls', data = iris, cite = FALSE)
+    expect_equal(unname(coef(z3.1)), unname(coef(z3.2)))
+
+    setz3 <- setx(z3.1)
+#    expect_equal(as.vector(round(unlist(setz3$setx.out$x), digits = 2)),
+#                c(1, 1, 1.47, 1.12))
 })
 
 # REQUIRE TEST for ls with interactions ----------------------------------------
