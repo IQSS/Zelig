@@ -128,7 +128,7 @@ test_that('REQUIRE TEST for ls setrange with equal length ranges and polynomials
 
     # Polynomial found in formula
     z.cars2 <- zelig(Sepal.Length ~ Petal.Length + I(Petal.Length^2) + Species,
-                      data = iris.poly, model = 'ls', cite = FALSE)
+                      data = iris, model = 'ls', cite = FALSE)
     z.cars2 <- setx(z.cars2, Species = 'virginica', Petal.Length = pl_range)
     expect_equal(nrow(zelig_setx_to_df(z.cars2)), length(pl_range))
     expect_equal(zelig_setx_to_df(z.cars1)[[2]], zelig_setx_to_df(z.cars2)[[2]])

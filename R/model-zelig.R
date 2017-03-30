@@ -234,12 +234,13 @@ z$methods(
     }
 
     # Without dots for single and multiple equations
-    if (length(length(formula)) == 1)
-        .self$formula <- as.Formula(terms(formula, data = data))
-    else if (length(length(formula)) > 1)
-        .self$formula <- as.Formula(attr(terms(formula, data = data),
+    temp_formula <- as.Formula(formula)
+    if (sum(length(temp_formula)) == 2)
+        .self$formula <- as.Formula(terms(temp_formula, data = data))
+    else if (sum(length(temp_formula)) > 2)
+        .self$formula <- as.Formula(attr(terms(temp_formula, data = data),
                                                 "Formula_without_dot"))
-
+# NO DOTS MULTIPLE
     # Convert factors converted internally to the zelig call
     if (transformer(.self$formula, FUN = 'as.factor', check = TRUE)) {
       localformula <- transformer(formula, data, FUN = 'as.factor',
@@ -257,6 +258,8 @@ z$methods(
       .self$formula <- localformula
       .self$data <- localdata
     }
+
+    .self$model.call$formula <- match.call(zelig, .self$formula)
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
@@ -345,10 +348,10 @@ z$methods(
     }
     # Multiply Imputed datasets from Amelia or mi utility
     # Notice imputed objects ignore weights currently, which is reasonable as the Amelia package ignores weights
-    if (("amelia" %in% class(data)) | ("mi" %in% class(data))){
-      if ("amelia" %in% class(data)){
+    if (("amelia" %in% class(data)) | ("mi" %in% class(data))) {
+      if ("amelia" %in% class(data)) {
         idata <- data$imputations
-      }else{
+      } else {
         idata <- data
       }
 
@@ -431,11 +434,12 @@ z$methods(
     #print(.self$zelig.call)
     #cat("model.call:\n")
     #print(.self$model.call)
+
     .self$data <- tbl_df(.self$data)
-    #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
+    #.self$zelig.out <- eval(fn2(.self$model.call, data = data)) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>%
-      group_by_(.self$by) %>%
-      do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+        group_by_(.self$by) %>%
+        do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
   }
 )
 
