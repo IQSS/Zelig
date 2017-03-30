@@ -1,6 +1,7 @@
 # REQUIRE TEST normal.gee with . formula ---------------------------------------
 test_that('REQUIRE TEST normal.gee with . formula', {
     # test initially created by @andreashandel
+    library(dplyr)
 
     # make some fake cluster ID
     mtcars$myid = sample(1:10, size = nrow(mtcars), replace = TRUE)
