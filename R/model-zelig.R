@@ -429,7 +429,7 @@ z$methods(
       names(.self$data)[1] <- "by"
       .self$by <- "by"
     }
-
+browser()
     #cat("zelig.call:\n")
     #print(.self$zelig.call)
     #cat("model.call:\n")
