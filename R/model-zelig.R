@@ -233,10 +233,15 @@ z$methods(
       return(fc)
     }
 
-    .self$formula <- as.Formula(formula)
+    # Without dots for single and multiple equations
+    if (length(length(formula)) == 1)
+        .self$formula <- as.Formula(terms(formula, data = data))
+    else if (length(length(formula)) > 1)
+        .self$formula <- as.Formula(attr(terms(formula, data = data),
+                                                "Formula_without_dot"))
 
     # Convert factors converted internally to the zelig call
-    if (transformer(formula, FUN = 'as.factor', check = TRUE)) {
+    if (transformer(.self$formula, FUN = 'as.factor', check = TRUE)) {
       localformula <- transformer(formula, data, FUN = 'as.factor',
                                   f_out = TRUE)
       localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
@@ -244,8 +249,8 @@ z$methods(
       .self$data <- localdata
     }
 
-    # Convert natural logs converted internally to the zelig call
-    if (transformer(formula, FUN = 'log', check = TRUE)) {
+    # Convert logs converted internally to the zelig call
+    if (transformer(.self$formula, FUN = 'log', check = TRUE)) {
       localformula <- transformer(formula, data, FUN = 'log',
                                   f_out = TRUE)
       localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)

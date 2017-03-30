@@ -133,3 +133,10 @@ test_that('REQUIRE TEST for ls setrange with equal length ranges and polynomials
     expect_equal(nrow(zelig_setx_to_df(z.cars2)), length(pl_range))
     expect_equal(zelig_setx_to_df(z.cars1)[[2]], zelig_setx_to_df(z.cars2)[[2]])
 })
+
+# REQUIRE TEST for . formulas --------------------------------------------------
+test_that('REQUIRE TEST for . formulas', {
+    z1 <- zelig(speed ~ ., data = cars, model = 'ls')
+    zset <- setx(z1, dist = 5)
+    expect_equal(names(coef(z1)), c("(Intercept)", "dist"))
+})
