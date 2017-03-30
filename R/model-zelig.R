@@ -168,33 +168,34 @@ z$methods(
 )
 
 z$methods(
-  packagename = function() {
-    "Automatically retrieve wrapped package name"
-    # If this becomes "quote(mypackage::myfunction) then
-    # regmatches(.self$fn,regexpr("(?<=\\()(.*?)(?=\\::)",.self$fn, perl=TRUE))
-    # would extract "mypackage"
-    return(as.character(.self$fn)[2])
-  }
+    packagename = function() {
+        "Automatically retrieve wrapped package name"
+        # If this becomes "quote(mypackage::myfunction) then
+        # regmatches(.self$fn,regexpr("(?<=\\()(.*?)(?=\\::)",.self$fn, perl=TRUE))
+        # would extract "mypackage"
+        return(as.character(.self$fn)[2])
+    }
 )
 
 z$methods(
-  cite = function() {
-    "Provide citation information about Zelig and Zelig model, and about wrapped package and wrapped model"
-    title <- paste(.self$name, ": ", .self$description, sep="")
-    localauthors <- ""
-    if (length(.self$modelauthors) & (!identical(.self$modelauthors,""))){   # covers both empty styles: character(0) and "" --the latter being length 1.
-      localauthors<-.self$modelauthors
-    }else if (length(.self$packageauthors) & (!identical(.self$packageauthors,""))){
-      localauthors<-.self$packageauthors
-    }else{
-      localauthors<-.self$zeligauthors
+    cite = function() {
+        "Provide citation information about Zelig and Zelig model, and about wrapped package and wrapped model"
+        title <- paste(.self$name, ": ", .self$description, sep="")
+        localauthors <- ""
+        if (length(.self$modelauthors) & (!identical(.self$modelauthors,""))){
+            # covers both empty styles: character(0) and "" --the latter being length 1.
+            localauthors<-.self$modelauthors
+        } else if (length(.self$packageauthors) & (!identical(.self$packageauthors,""))){
+            localauthors<-.self$packageauthors
+        } else {
+            localauthors<-.self$zeligauthors
+        }
+        cat("How to cite this model in Zelig:\n  ",
+            localauthors, ". ", .self$year, ".\n  ", title,
+            "\n  in ", .self$zeligauthors,
+            ",\n  \"Zelig: Everyone's Statistical Software,\" ",
+            .self$url, "\n", sep = "")
     }
-    cat("How to cite this model in Zelig:\n  ",
-        localauthors, ". ", .self$year, ".\n  ", title,
-        "\n  in ", .self$zeligauthors,
-        ",\n  \"Zelig: Everyone's Statistical Software,\" ",
-        .self$url, "\n", sep = "")
-  }
 )
 
 # Construct a reference list specific to a Zelig model
@@ -202,26 +203,31 @@ z$methods(
 # The "sphinx" style reformats "text" style with some markdown substitutions
 
 z$methods(
-  references = function(style="sphinx") {
-    "Construct a reference list specific to a Zelig model."
-    mystyle <- style
-    if (mystyle=="sphinx"){
-      mystyle <- "text"
+    references = function(style="sphinx") {
+        "Construct a reference list specific to a Zelig model."
+        mystyle <- style
+        if (mystyle=="sphinx"){
+            mystyle <- "text"
+        }
+        mycites<-.self$refs
+        if(!is.na(.self$packagename() )) {
+            mycites <- c(mycites, citation(.self$packagename()))
+            # Concatentate model specific Zelig references with package references
+        }
+        mycites<-mycites[!duplicated(mycites)]
+        # Remove duplicates (many packages have duplicate references in their lists)
+        s <- capture.output(print(mycites, style = mystyle))
+        if(style == "sphinx"){
+            # format the "text" style conventions for sphinx markdown for
+            # building docs for zeligproject.org
+            s<-gsub("\\*","\\*\\*",s, perl=TRUE)
+            s<-gsub("_","\\*",s, perl=TRUE)
+            s<-gsub("\\*\\(","\\* \\(",s, perl=TRUE)
+        }
+        cat(s, sep="\n")
     }
-    mycites<-.self$refs
-    if(!is.na(.self$packagename() )){
-      mycites<-c(mycites, citation(.self$packagename()))  # Concatentate model specific Zelig references with package references
-    }
-    mycites<-mycites[!duplicated(mycites)]                            # Remove duplicates (many packages have duplicate references in their lists)
-    s<-capture.output(print(mycites, style = mystyle))
-    if(style == "sphinx"){                          # format the "text" style conventions for sphinx markdown for building docs for zeligproject.org
-      s<-gsub("\\*","\\*\\*",s, perl=TRUE)
-      s<-gsub("_","\\*",s, perl=TRUE)
-      s<-gsub("\\*\\(","\\* \\(",s, perl=TRUE)
-    }
-    cat(s, sep="\n")
-  }
 )
+
 
 z$methods(
   zelig = function(formula, data, model = NULL, ..., weights = NULL, by,
@@ -233,173 +239,203 @@ z$methods(
       return(fc)
     }
 
-    # Without dots for single and multiple equations
-    if (length(length(formula)) == 1)
-        .self$formula <- as.Formula(terms(formula, data = data))
-    else if (length(length(formula)) > 1)
-        .self$formula <- as.Formula(attr(terms(formula, data = data),
-                                                "Formula_without_dot"))
-
-    # Convert factors converted internally to the zelig call
-    if (transformer(.self$formula, FUN = 'as.factor', check = TRUE)) {
-      localformula <- transformer(formula, data, FUN = 'as.factor',
-                                  f_out = TRUE)
-      localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
-      .self$formula <- localformula
-      .self$data <- localdata
+    # Prepare data for possible transformations
+    if ("amelia" %in% class(data)) {
+        localdata <- data$imputations
+        is_matched <- FALSE
+    }
+    else if ("matchit" %in% class(data)) {
+        is_matched <- TRUE
+        localdata <- MatchIt::match.data(data)
+        iweights <- localdata$weights
+    }
+    else {
+        localdata <- data
+        is_matched <- FALSE
     }
 
-    # Convert logs converted internally to the zelig call
-    if (transformer(.self$formula, FUN = 'log', check = TRUE)) {
-      localformula <- transformer(formula, data, FUN = 'log',
-                                  f_out = TRUE)
-      localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
-      .self$formula <- localformula
-      .self$data <- localdata
+    # Without dots for single and multiple equations#
+    temp_formula <- as.Formula(formula)
+    if (sum(length(temp_formula)) <= 2)
+        .self$formula <- as.Formula(terms(temp_formula, data = localdata))
+    else if (sum(length(temp_formula)) > 2)
+        .self$formula <- as.Formula(attr(terms(temp_formula, data = localdata),
+                                                "Formula_without_dot"))
+
+    # Convert factors and logs converted internally to the zelig call
+    form_factors <- transformer(.self$formula, FUN = 'factor', check = TRUE)
+    form_logs <- transformer(.self$formula, FUN = 'log', check = TRUE)
+    if (any(c(form_factors, form_logs))) {
+        if (form_factors) {
+            localformula <- transformer(formula, data = localdata,
+                                        FUN = 'factor', f_out = TRUE)
+            localdata <- transformer(formula, data = localdata,
+                                     FUN = 'factor', d_out = TRUE)
+            .self$formula <- localformula
+            .self$data <- localdata
+        }
+        if (form_logs) {
+            localformula <- transformer(formula, data = localdata, FUN = 'log',
+                                        f_out = TRUE)
+            localdata <- transformer(formula, data = localdata, FUN = 'log',
+                                     d_out = TRUE)
+            .self$formula <- localformula
+            .self$data <- localdata
+        }
+    }
+
+    if (!("relogit" %in% .self$wrapper))
+        .self$model.call$formula <- match.call(zelig, .self$formula)
+    else if ("relogit" %in% .self$wrapper) {
+        .self$modcall_formula_transformer()
     }
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
     if("formula" %in% class(.self$mcformula)){
-      .self$formula <- as.Formula( deparse(.self$mcformula),
-                                   env = environment(.self$formula) )
-      .self$model.call$formula <- as.Formula( deparse(.self$mcformula),
-                                              env = globalenv() )
+        .self$formula <- as.Formula( deparse(.self$mcformula),
+                                    env = environment(.self$formula) )
+        .self$model.call$formula <- as.Formula( deparse(.self$mcformula),
+                                               env = globalenv() )
     } else if(is.character(.self$mcformula)) {
-      .self$formula <- as.Formula( .self$mcformula,
-                                   env = environment(.self$formula) )
-      .self$model.call$formula <- as.Formula( .self$mcformula, env = globalenv() )
+        .self$formula <- as.Formula( .self$mcformula,
+                                    env = environment(.self$formula) )
+        .self$model.call$formula <- as.Formula( .self$mcformula,
+                                                env = globalenv() )
     }
     if(!is.null(model)){
-      cat("Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.\n")
-      flag <- !(names(.self$model.call) == "model")
-      .self$model.call <- .self$model.call[flag]
-      flag <- !(names(.self$zelig.call) == "model")
-      .self$zelig.call <- .self$zelig.call[flag]
+        cat("Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.\n")
+        flag <- !(names(.self$model.call) == "model")
+        .self$model.call <- .self$model.call[flag]
+        flag <- !(names(.self$zelig.call) == "model")
+        .self$zelig.call <- .self$zelig.call[flag]
     }
 
     .self$by <- by
-    .self$originaldata <- data
+    .self$originaldata <- localdata
     .self$originalweights <- weights
     datareformed <- FALSE
 
     if(is.numeric(bootstrap)){
-      .self$bootstrap <- TRUE
-      .self$bootstrap.num <- bootstrap
+        .self$bootstrap <- TRUE
+        .self$bootstrap.num <- bootstrap
     } else if(is.logical(bootstrap)){
-      .self$bootstrap <- bootstrap
+        .self$bootstrap <- bootstrap
     }
     # Remove bootstrap argument from model call
     .self$model.call$bootstrap <- NULL
     # Check if bootstrap possible by checking whether param method has method argument available
     if(.self$bootstrap){
-      if(!("method" %in% names(formals(.self$param)))){
-        stop("The bootstrap does not appear to be implemented for this Zelig model. Check that the param() method allows point predictions.")
-      }
-      .self$setforeveryby <- FALSE  # compute covariates in set() at the dataset-level
+        if(!("method" %in% names(formals(.self$param)))){
+            stop("The bootstrap does not appear to be implemented for this Zelig model. Check that the param() method allows point predictions.")
+        }
+        .self$setforeveryby <- FALSE  # compute covariates in set() at the dataset-level
     }
 
 
     # Matched datasets from MatchIt
-    if ("matchit" %in% class(data)){
-      idata <- MatchIt::match.data(data)
-      iweights <- idata$weights
+    if (is_matched){
+        .self$matched <- TRUE
+        .self$data <- localdata
+        datareformed <- TRUE
 
-      .self$matched <- TRUE
-      .self$data <- idata
-      datareformed <- TRUE
-
-      # Check if noninteger valued weights exist and are incompatible with zelig model
-      validweights <- TRUE
-      if(!.self$acceptweights){           # This is a convoluted way to do this, but avoids the costly "any()" calculation if not necessary
-        if(any(iweights != ceiling(iweights))){  # any(y != ceiling(y)) tests slightly faster than all(y == ceiling(y))
-          validweights <- FALSE
+        # Check if noninteger valued weights exist and are incompatible with zelig model
+        validweights <- TRUE
+        if(!.self$acceptweights){           # This is a convoluted way to do this, but avoids the costly "any()" calculation if not necessary
+            if(any(iweights != ceiling(iweights))){  # any(y != ceiling(y)) tests slightly faster than all(y == ceiling(y))
+                validweights <- FALSE
+            }
         }
-      }
-      if(!validweights){   # could also be  if((!acceptweights) & (any(iweights != ceiling(iweights))  but avoid the long any for big datasets
-        cat("The weights created by matching for this dataset have noninteger values,\n",
-            "however, the statistical model you have chosen is only compatible with integer weights.\n",
-            "Either change the matching method (such as to `optimal' matching with a 1:1 ratio)\n",
-            "or change the statistical model in Zelig.\n",
-            "We will round matching weights up to integers to proceed.\n\n")
-        .self$weights <- ceiling(iweights)
-      } else {
-        .self$weights <- iweights
-      }
+        if(!validweights){   # could also be  if((!acceptweights) & (any(iweights != ceiling(iweights))  but avoid the long any for big datasets
+            cat("The weights created by matching for this dataset have noninteger values,\n",
+                "however, the statistical model you have chosen is only compatible with integer weights.\n",
+                "Either change the matching method (such as to `optimal' matching with a 1:1 ratio)\n",
+                "or change the statistical model in Zelig.\n",
+                "We will round matching weights up to integers to proceed.\n\n")
+            .self$weights <- ceiling(iweights)
+        } else {
+            .self$weights <- iweights
+        }
 
-      # Set references appropriate to matching methods used
-      .self$refs <- c(.self$refs, citation("MatchIt"))
-      if(m.out$call$method=="cem" & ("cem" %in% installed.packages()))
-        .self$refs <- c(.self$refs, citation("cem"))
-      #if(m.out$call$method=="exact") .self$refs <- c(.self$refs, citation(""))
-      if((m.out$call$method=="full") & ("optmatch" %in% installed.packages()))
-        .self$refs <- c(.self$refs, citation("optmatch"))
-      if(m.out$call$method=="genetic" & ("Matching" %in% installed.packages()))
-        .self$refs <- c(.self$refs, citation("Matching"))
-      #if(m.out$call$method=="nearest") .self$refs <- c(.self$refs, citation(""))
-      if(m.out$call$method=="optimal" & ("optmatch" %in% installed.packages()))
-        .self$refs <- c(.self$refs, citation("optmatch"))
-      #if(m.out$call$method=="subclass") .self$refs <- c(.self$refs, citation(""))
+        # Set references appropriate to matching methods used
+        .self$refs <- c(.self$refs, citation("MatchIt"))
+        if(m.out$call$method=="cem" & ("cem" %in% installed.packages()))
+            .self$refs <- c(.self$refs, citation("cem"))
+            #if(m.out$call$method=="exact") .self$refs <- c(.self$refs, citation(""))
+        if((m.out$call$method=="full") & ("optmatch" %in% installed.packages()))
+            .self$refs <- c(.self$refs, citation("optmatch"))
+        if(m.out$call$method=="genetic" & ("Matching" %in% installed.packages()))
+            .self$refs <- c(.self$refs, citation("Matching"))
+        #if(m.out$call$method=="nearest") .self$refs <- c(.self$refs, citation(""))
+        if(m.out$call$method=="optimal" & ("optmatch" %in% installed.packages()))
+            .self$refs <- c(.self$refs, citation("optmatch"))
+            #if(m.out$call$method=="subclass") .self$refs <- c(.self$refs, citation(""))
     } else {
-      .self$matched  <- FALSE
+        .self$matched  <- FALSE
     }
-    # Multiply Imputed datasets from Amelia or mi utility
-    # Notice imputed objects ignore weights currently, which is reasonable as the Amelia package ignores weights
-    if (("amelia" %in% class(data)) | ("mi" %in% class(data))){
-      if ("amelia" %in% class(data)){
-        idata <- data$imputations
-      }else{
-        idata <- data
-      }
 
-      .self$data <- bind_rows(lapply(seq(length(idata)),
-                                     function(imputationNumber)
-                                       cbind(imputationNumber, idata[[imputationNumber]])))
-      .self$weights <- NULL  # This should be considered or addressed
-      datareformed <- TRUE
-      .self$by <- c("imputationNumber", by)
-      .self$mi <- TRUE
-      .self$setforeveryby <- FALSE  # compute covariates in set() at on the entire stacked dataset
-      .self$refs <- c(.self$refs, citation("Amelia"))
+    # Multiply Imputed datasets from Amelia or mi utility
+    # Notice imputed objects ignore weights currently,
+    # which is reasonable as the Amelia package ignores weights
+    if (("amelia" %in% class(localdata)) | ("mi" %in% class(localdata))) {
+        idata <- localdata
+        .self$data <- bind_rows(lapply(seq(length(idata)),
+                                    function(imputationNumber)
+                                        cbind(imputationNumber,
+                                            idata[[imputationNumber]])))
+        .self$weights <- NULL  # This should be considered or addressed
+        datareformed <- TRUE
+        .self$by <- c("imputationNumber", by)
+        .self$mi <- TRUE
+        .self$setforeveryby <- FALSE  # compute covariates in set() at on the entire stacked dataset
+        .self$refs <- c(.self$refs, citation("Amelia"))
     } else {
-      .self$mi <- FALSE
+        .self$mi <- FALSE
     }
 
     if (!datareformed){
-      .self$data <- data  # If none of the above package integrations have already reformed the data from another object, use the supplied data
+        .self$data <- localdata
+        # If none of the above package integrations have already reformed the
+        # data from another object, use the supplied data
 
-      # Run some checking on weights argument, and see if is valid string or vector
-      if(!is.null(weights)){
-        if(is.character(weights)){
-          if(weights %in% names(.self$data)){
-            .self$weights <- .self$data[[weights]]  # This is a way to convert data.frame portion to type numeric (as data.frames are lists)
-          } else {
-            warning("Variable name given for weights not found in dataset, so will be ignored.\n\n", .call=FALSE)
-            .self$weights <- NULL  # No valid weights
-            .self$model.call$weights <- NULL
-          }
-        } else if(is.vector(weights)){
-          if(length(weights)==nrow(.self$data) & is.vector(weights)){
-            localWeights <- weights # avoids CRAN warning about deep assignment from weights existing separately as argument and field
-            if(min(localWeights)<0){
-              localWeights[localWeights < 0] <- 0
-              warning("Negative valued weights were supplied and will be replaced with zeros.", .call=FALSE)
+        # Run some checking on weights argument, and see if is valid string or vector
+        if(!is.null(weights)){
+            if(is.character(weights)){
+                if(weights %in% names(.self$data)){
+                    .self$weights <- .self$data[[weights]]  # This is a way to convert data.frame portion to type numeric (as data.frames are lists)
+                    } else {
+                        warning("Variable name given for weights not found in dataset, so will be ignored.\n\n",
+                            call. = FALSE)
+                        .self$weights <- NULL  # No valid weights
+                        .self$model.call$weights <- NULL
+                    }
             }
-            .self$weights <- localWeights # Weights
-          } else{
-            warning("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n", .call=FALSE)
-            .self$weights <- NULL # No valid weights
-            .self$model.call$weights <- NULL
-          }
+            else if(is.vector(weights)){
+                if (length(weights) == nrow(.self$data) & is.vector(weights)){
+                    localWeights <- weights
+                    # avoids CRAN warning about deep assignment from weights existing separately as argument and field
+                    if(min(localWeights) < 0) {
+                        localWeights[localWeights < 0] <- 0
+                        warning("Negative valued weights were supplied and will be replaced with zeros.",
+                            call. = FALSE)
+                    }
+                .self$weights <- localWeights # Weights
+                } else {
+                    warning("Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.\n\n",
+                        call. = FALSE)
+                    .self$weights <- NULL # No valid weights
+                    .self$model.call$weights <- NULL
+                }
+            } else {
+                warning("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n",
+                    call. = FALSE)
+                .self$weights <- NULL # No valid weights
+                .self$model.call$weights <- NULL
+            }
         } else {
-          warning("Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.\n\n", .call=FALSE)
-          .self$weights <- NULL # No valid weights
-          .self$model.call$weights <- NULL
+            .self$weights <- NULL  # No weights set, so weights are NULL
+            .self$model.call$weights <- NULL
         }
-      } else {
-        .self$weights <- NULL  # No weights set, so weights are NULL
-        .self$model.call$weights <- NULL
-      }
     }
 
     # If the Zelig model does not not accept weights, but weights are provided, we rebuild the data
@@ -407,36 +443,41 @@ z$methods(
     #   or by duplicating rows proportional to the ceiling of their weight
     # Otherwise we pass the weights to the model call
     if(!is.null(.self$weights)){
-      if ((!.self$acceptweights)){
-        .self$buildDataByWeights2()   # Could use alternative method $buildDataByWeights() for duplication approach.  Maybe set as argument?\
-        .self$model.call$weights <- NULL
-      } else {
-        .self$model.call$weights <- .self$weights   # NEED TO CHECK THIS IS THE NAME FOR ALL MODELS, or add more generic field containing the name for the weights argument
-      }
+        if ((!.self$acceptweights)){
+            .self$buildDataByWeights2()
+            # Could use alternative method $buildDataByWeights() for duplication
+            # approach.  Maybe set as argument?\
+            .self$model.call$weights <- NULL
+        } else {
+            .self$model.call$weights <- .self$weights
+            # NEED TO CHECK THIS IS THE NAME FOR ALL MODELS, or add more generic
+            # field containing the name for the weights argument
+        }
     }
 
     if (.self$bootstrap){
-      .self$buildDataByBootstrap()
+        .self$buildDataByBootstrap()
     }
 
     .self$model.call[[1]] <- .self$fn
     .self$model.call$by <- NULL
     if (is.null(.self$by)) {
-      .self$data <- cbind(1, .self$data)
-      names(.self$data)[1] <- "by"
-      .self$by <- "by"
+        .self$data <- cbind(1, .self$data)
+        names(.self$data)[1] <- "by"
+        .self$by <- "by"
     }
 
     #cat("zelig.call:\n")
     #print(.self$zelig.call)
     #cat("model.call:\n")
     #print(.self$model.call)
+
     .self$data <- tbl_df(.self$data)
-    #.self$zelig.out <- eval(fn2(.self$model.call, quote(as.data.frame(.)))) # shortened test version that bypasses "by"
+    #.self$zelig.out <- eval(fn2(.self$model.call, data = data)) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>%
-      group_by_(.self$by) %>%
-      do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
-  }
+        group_by_(.self$by) %>%
+        do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+    }
 )
 
 z$methods(
@@ -445,9 +486,7 @@ z$methods(
     is_uninitializedField(.self$zelig.out)
 
     # Find variable transformations in formula call
-    coef_names <- names(rm_intercept(unlist(.self$get_coef())))
-
-
+#    coef_names <- names(rm_intercept(unlist(.self$get_coef())))
 
     .self$avg <- function(val) {
         if (is.numeric(val))

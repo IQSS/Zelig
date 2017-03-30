@@ -28,6 +28,12 @@ test_that('REQUIRE TEST for to_zelig_mi', {
     z.out.mi.boot <- zelig(y ~ x, model = "ls", data = mi.out, bootstrap = 20)
     expect_equal(round(as.numeric(combine_coef_se(z.out.mi.boot)[[1]][1]), 3),
                     -0.094)
+
+    expect_error(z.out.log <- zelig(y ~ log(x), model = "ls", data = mi.out),
+                 NA)
+
+    expect_error(z.out.log10 <- zelig(y ~ log(x, base = 10), model = "ls",
+                                      data = mi.out), NA)
 })
 
 # REQUIRE TEST for combine_coef_se for bootstrapped ----------------------------

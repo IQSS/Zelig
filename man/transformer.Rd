@@ -11,7 +11,8 @@ transformer(formula, data, FUN = "log", check, f_out, d_out)
 
 \item{data}{data frame used in \code{formula}}
 
-\item{FUN}{character string of the transformation function}
+\item{FUN}{character string of the transformation function. Currently
+supports \code{factor} and \code{log}.}
 
 \item{check}{logical whether to just check if a formula contains an
 internally called transformation and return \code{TRUE} or \code{FALSE}}
