@@ -235,12 +235,12 @@ z$methods(
 
     # Without dots for single and multiple equations
     temp_formula <- as.Formula(formula)
-    if (sum(length(temp_formula)) == 2)
+    if (sum(length(temp_formula)) <= 2)
         .self$formula <- as.Formula(terms(temp_formula, data = data))
     else if (sum(length(temp_formula)) > 2)
         .self$formula <- as.Formula(attr(terms(temp_formula, data = data),
                                                 "Formula_without_dot"))
-# NO DOTS MULTIPLE
+
     # Convert factors converted internally to the zelig call
     if (transformer(.self$formula, FUN = 'as.factor', check = TRUE)) {
       localformula <- transformer(formula, data, FUN = 'as.factor',
@@ -449,9 +449,7 @@ z$methods(
     is_uninitializedField(.self$zelig.out)
 
     # Find variable transformations in formula call
-    coef_names <- names(rm_intercept(unlist(.self$get_coef())))
-
-
+#    coef_names <- names(rm_intercept(unlist(.self$get_coef())))
 
     .self$avg <- function(val) {
         if (is.numeric(val))
