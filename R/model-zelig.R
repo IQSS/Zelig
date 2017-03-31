@@ -252,9 +252,11 @@ z$methods(
             .self$formula <- localformula
             .self$data <- localdata
         }
+        else
+            localdata <- data
         if (form_logs) {
-            localformula <- transformer(formula, data, FUN = 'log', f_out = TRUE)
-            localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
+            localformula <- transformer(formula, localdata, FUN = 'log', f_out = TRUE)
+            localdata <- transformer(formula, localdata, FUN = 'log', d_out = TRUE)
             .self$formula <- localformula
             .self$data <- localdata
         }
@@ -267,7 +269,6 @@ z$methods(
     else if ("relogit" %in% .self$wrapper) {
         .self$modcall_formula_transformer()
     }
-
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
@@ -356,11 +357,11 @@ z$methods(
     }
     # Multiply Imputed datasets from Amelia or mi utility
     # Notice imputed objects ignore weights currently, which is reasonable as the Amelia package ignores weights
-    if (("amelia" %in% class(data)) | ("mi" %in% class(data))) {
-      if ("amelia" %in% class(data)) {
+    if (("amelia" %in% class(localdata)) | ("mi" %in% class(localdata))) {
+      if ("amelia" %in% class(localdata)) {
         idata <- data$imputations
       } else {
-        idata <- data
+        idata <- localdata
       }
 
       .self$data <- bind_rows(lapply(seq(length(idata)),

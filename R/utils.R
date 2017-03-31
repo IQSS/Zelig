@@ -376,8 +376,11 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
         to_transform_plain <- gsub('\\)', '', to_transform_plain)
         to_transform_plain <- trimws(gsub(',.*', '', to_transform_plain))
 
-        if (!all(to_transform_plain %in% names(data)))
-            stop('Unable to find variable to transform.')
+        if (!is.list(data))
+            not_in_data <- !all(to_transform_plain %in% names(data))
+        else (is.list(data))
+            not_in_data <- !all(to_transform_plain %in% names(data[[1]]))
+        if (not_in_data) stop('Unable to find variable to transform.')
 
         if (!missing(f_out)) {
             f_split[to_transform] <- to_transform_plain
@@ -395,18 +398,41 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
             for (i in seq_along(transformer_args_str)) {
                 args_temp <- unlist(strsplit(gsub(' ', '' ,
                                                 transformer_args_str[i]), ','))
-                args_temp[1] <- sprintf('data[, "%s"]', args_temp[1])
+                if (!is.list(data))
+                    args_temp[1] <- sprintf('data[, "%s"]', args_temp[1])
+                else if (is.list(data))
+                    args_temp[1] <- sprintf('data[[h]][, "%s"]', args_temp[1])
                 arg_names <- gsub('\\=.*', '', args_temp)
                 arg_names[1] <- 'x'
                 args_temp <- gsub('.*\\=', '', args_temp)
 
                 args_temp_list <- list()
-                for (u in seq_along(args_temp))
-                    args_temp_list[[u]] <- eval(parse(text = args_temp[u]))
-                names(args_temp_list) <- arg_names
-                data[, to_transform_plain[i]] <- do.call(
+                for (u in seq_along(args_temp)) {
+                    if (!is.list(data)) {
+                        args_temp_list[[u]] <- eval(parse(text = args_temp[u]))
+                        names(args_temp_list) <- arg_names
+                    }
+                    else if (is.list(data)) {
+                        temp_list <- list()
+                        for (h in seq_along(data)) {
+                            temp_list[[u]] <- eval(parse(text = args_temp[u]))
+                            names(temp_list) <- arg_names
+                            args_temp_list[[h]] <- temp_list
+                        }
+                    }
+                }
+                if (!is.list(data))
+                    data[, to_transform_plain[i]] <- do.call(
                                                     what = transformer_fun[i],
                                                     args = args_temp_list)
+                else if (is.list(data)) {
+
+                    for (j in seq_along(data)) {
+                        data[[j]][, to_transform_plain[i]] <- do.call(
+                                                    what = transformer_fun[i],
+                                                    args = args_temp_list[[j]])
+                    }
+                }
             }
             return(data)
         }
