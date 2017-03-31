@@ -234,34 +234,38 @@ z$methods(
     }
 
     # Without dots for single and multiple equations
-    temp_formula <- as.Formula(formula)
-    if (sum(length(temp_formula)) <= 2)
-        .self$formula <- as.Formula(terms(temp_formula, data = data))
-    else if (sum(length(temp_formula)) > 2)
-        .self$formula <- as.Formula(attr(terms(temp_formula, data = data),
-                                                "Formula_without_dot"))
+    #  # Hack due to cbind() for response. Should be addressed with Formula  #  #
+    if (!("relogit" %in% .self$wrapper)) {
+        temp_formula <- as.Formula(formula)
+        if (sum(length(temp_formula)) <= 2)
+            .self$formula <- as.Formula(terms(temp_formula, data = data))
+        else if (sum(length(temp_formula)) > 2)
+            .self$formula <- as.Formula(attr(terms(temp_formula, data = data),
+                                                    "Formula_without_dot"))
 
-    # Convert factors converted internally to the zelig call
-    if (transformer(.self$formula, FUN = 'as.factor', check = TRUE)) {
-      localformula <- transformer(formula, data, FUN = 'as.factor',
-                                  f_out = TRUE)
-      localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
-      .self$formula <- localformula
-      .self$data <- localdata
-    }
+        # Convert factors converted internally to the zelig call
+        if (transformer(.self$formula, FUN = 'as.factor', check = TRUE)) {
+            localformula <- transformer(formula, data, FUN = 'as.factor',
+                                      f_out = TRUE)
+            localdata <- transformer(formula, data, FUN = 'as.factor',
+                                     d_out = TRUE)
+            .self$formula <- localformula
+            .self$data <- localdata
+        }
 
-    # Convert logs converted internally to the zelig call
-    if (transformer(.self$formula, FUN = 'log', check = TRUE)) {
-      localformula <- transformer(formula, data, FUN = 'log',
-                                  f_out = TRUE)
-      localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
-      .self$formula <- localformula
-      .self$data <- localdata
-    }
+        # Convert logs converted internally to the zelig call
+        if (transformer(.self$formula, FUN = 'log', check = TRUE)) {
+            localformula <- transformer(formula, data, FUN = 'log',
+                                        f_out = TRUE)
+            localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
+            .self$formula <- localformula
+            .self$data <- localdata
+        }
 
-    # Hack due to cbind() for response. Should be addressed with Formula
-    if (!("relogit" %in% .self$wrapper))
         .self$model.call$formula <- match.call(zelig, .self$formula)
+    }
+    else
+            .self$formula <- formula
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue

@@ -72,7 +72,8 @@ zrelogit$methods(
     .self$model.call$case.control <- case.control
     .self$model.call$bias.correct <- bias.correct
     .self$model.call$tau <- tau
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by, bootstrap = bootstrap)
+    callSuper(formula = formula, data = data, ..., weights = NULL, by = by,
+              bootstrap = bootstrap)
   }
 )
 
@@ -136,7 +137,7 @@ relogit <- function(formula,
     mf[[1]] <- glm
     mf$family <- binomial(link = "logit")
 
-    y2 <- model.response(model.frame(mf$formula, data = data))
+    y2 <- model.response(model.frame(mf$formula, data))
     if (is.matrix(y2))
       y <- y2[,1]
     else
