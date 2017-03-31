@@ -67,14 +67,26 @@ zrelogit$methods(
     # Construct formula. Relogit models have the structure:
     #   cbind(y, 1-y) ~ x1 + x2 + x3 + ... + xN
     # Where y is the response.
-    form <- update(formula, cbind(., 1 - .) ~ .)
-    .self$model.call$formula <- form
+#    form <- update(formula, cbind(., 1 - .) ~ .)
+#    .self$model.call$formula <- form
     .self$model.call$case.control <- case.control
     .self$model.call$bias.correct <- bias.correct
     .self$model.call$tau <- tau
     callSuper(formula = formula, data = data, ..., weights = NULL, by = by,
               bootstrap = bootstrap)
   }
+)
+
+zrelogit$methods(
+    modcall_formula_transformer = function() {
+        "Transform model call formula."
+
+        # Construct formula. Relogit models have the structure:
+        #   cbind(y, 1-y) ~ x1 + x2 + x3 + ... + xN
+        # Where y is the response.
+        relogit_form <- update(.self$formula, cbind(., 1 - .) ~ .)
+        .self$model.call$formula <- relogit_form
+    }
 )
 
 zrelogit$methods(

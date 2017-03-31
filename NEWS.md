@@ -9,9 +9,9 @@ Zelig version 5.0-1
 
 ## Major changes
 
-- `zelig` calls now support `update`ing formulas (#244) and `.` syntax for 
-inserting all variables from `data` on the right-hand side of the formula 
-#87. Not currently applicable to `relogit` models.
+- `zelig` calls now support `update`ing formulas (#244) and `.` syntax for
+inserting all variables from `data` on the right-hand side of the formula
+#87. See also #247.
 
 - Arbitrary `log` transformations are now supported in `zelig` calls. #225
 

@@ -233,39 +233,41 @@ z$methods(
       return(fc)
     }
 
-    # Without dots for single and multiple equations
-    #  # Hack due to cbind() for response. Should be addressed with Formula  #  #
-    if (!("relogit" %in% .self$wrapper)) {
-        temp_formula <- as.Formula(formula)
-        if (sum(length(temp_formula)) <= 2)
-            .self$formula <- as.Formula(terms(temp_formula, data = data))
-        else if (sum(length(temp_formula)) > 2)
-            .self$formula <- as.Formula(attr(terms(temp_formula, data = data),
-                                                    "Formula_without_dot"))
+    # Without dots for single and multiple equations#
+    temp_formula <- as.Formula(formula)
+    if (sum(length(temp_formula)) <= 2)
+        .self$formula <- as.Formula(terms(temp_formula, data = data))
+    else if (sum(length(temp_formula)) > 2)
+        .self$formula <- as.Formula(attr(terms(temp_formula, data = data),
+                                                "Formula_without_dot"))
 
-        # Convert factors converted internally to the zelig call
-        if (transformer(.self$formula, FUN = 'as.factor', check = TRUE)) {
+    # Convert factors and logs converted internally to the zelig call
+    form_factors <- transformer(.self$formula, FUN = 'as.factor', check = TRUE)
+    form_logs <- transformer(.self$formula, FUN = 'log', check = TRUE)
+    if (any(c(form_factors, form_logs))) {
+        if (form_factors) {
             localformula <- transformer(formula, data, FUN = 'as.factor',
-                                      f_out = TRUE)
-            localdata <- transformer(formula, data, FUN = 'as.factor',
-                                     d_out = TRUE)
+                                        f_out = TRUE)
+            localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
             .self$formula <- localformula
             .self$data <- localdata
         }
-
-        # Convert logs converted internally to the zelig call
-        if (transformer(.self$formula, FUN = 'log', check = TRUE)) {
-            localformula <- transformer(formula, data, FUN = 'log',
-                                        f_out = TRUE)
+        if (form_logs) {
+            localformula <- transformer(formula, data, FUN = 'log', f_out = TRUE)
             localdata <- transformer(formula, data, FUN = 'log', d_out = TRUE)
             .self$formula <- localformula
             .self$data <- localdata
         }
-
-        .self$model.call$formula <- match.call(zelig, .self$formula)
     }
     else
-            .self$formula <- formula
+        localdata <- data
+
+    if (!("relogit" %in% .self$wrapper))
+        .self$model.call$formula <- match.call(zelig, .self$formula)
+    else if ("relogit" %in% .self$wrapper) {
+        .self$modcall_formula_transformer()
+    }
+
 
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
@@ -288,7 +290,7 @@ z$methods(
     }
 
     .self$by <- by
-    .self$originaldata <- data
+    .self$originaldata <- localdata
     .self$originalweights <- weights
     datareformed <- FALSE
 
@@ -375,7 +377,7 @@ z$methods(
     }
 
     if (!datareformed){
-      .self$data <- data  # If none of the above package integrations have already reformed the data from another object, use the supplied data
+      .self$data <- localdata  # If none of the above package integrations have already reformed the data from another object, use the supplied data
 
       # Run some checking on weights argument, and see if is valid string or vector
       if(!is.null(weights)){
@@ -383,7 +385,8 @@ z$methods(
           if(weights %in% names(.self$data)){
             .self$weights <- .self$data[[weights]]  # This is a way to convert data.frame portion to type numeric (as data.frames are lists)
           } else {
-            warning("Variable name given for weights not found in dataset, so will be ignored.\n\n", .call=FALSE)
+            warning("Variable name given for weights not found in dataset, so will be ignored.\n\n",
+                    .call = FALSE)
             .self$weights <- NULL  # No valid weights
             .self$model.call$weights <- NULL
           }

@@ -8,6 +8,7 @@ test_that('REQUIRE TEST tobit Monte Carlo', {
 
 # REQUIRE TEST update tobit formula --------------------------------------------
 test_that('REQUIRE TEST update tobit formula', {
+    data(tobin)
     z5<-ztobit$new()
     z5$zelig(durable ~ age + quant, data = tobin)
 
