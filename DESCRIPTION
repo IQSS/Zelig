@@ -50,10 +50,11 @@ Imports:
     VGAM
 Suggests:
     knitr,
+    optmatch,
     rmarkdown,
     testthat,
     tidyverse
-Collate: 
+Collate:
     'assertions.R'
     'model-zelig.R'
     'model-timeseries.R'

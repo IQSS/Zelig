@@ -234,10 +234,20 @@ z$methods(
       return(fc)
     }
 
-    if ("amelia" %in% class(data))
+    # Prepare data for possible transformations
+    if ("amelia" %in% class(data)) {
         localdata <- data$imputations
-    else
+        is_matched <- FALSE
+    }
+    else if ("matchit" %in% class(data)) {
+        is_matched <- TRUE
+        localdata <- MatchIt::match.data(data)
+        iweights <- localdata$weights
+    }
+    else {
         localdata <- data
+        is_matched <- FALSE
+    }
 
     # Without dots for single and multiple equations#
     temp_formula <- as.Formula(formula)
@@ -319,12 +329,12 @@ z$methods(
 
 
     # Matched datasets from MatchIt
-    if ("matchit" %in% class(data)){
-      idata <- MatchIt::match.data(data)
-      iweights <- idata$weights
+    if (is_matched){
+    #  idata <- MatchIt::match.data(data)
+    #  iweights <- idata$weights
 
       .self$matched <- TRUE
-      .self$data <- idata
+      .self$data <- localdata
       datareformed <- TRUE
 
       # Check if noninteger valued weights exist and are incompatible with zelig model

@@ -1,6 +1,7 @@
 library(Amelia)
 library(dplyr)
 library(geepack)
+library(MatchIt)
 library(survey)
 library(testthat)
 library(Zelig)

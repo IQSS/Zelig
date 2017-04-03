@@ -11,7 +11,7 @@ Zelig version 5.0-1
 
 - `zelig` calls now support `update`ing formulas (#244) and `.` syntax for
 inserting all variables from `data` on the right-hand side of the formula
-#87. See also #247. Currently does not work with matched data.
+#87. See also #247.
 
 - Arbitrary `log` transformations are now supported in `zelig` calls. #225
 
