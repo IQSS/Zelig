@@ -344,7 +344,8 @@ mi <- to_zelig_mi
 #'
 #' @param formula model formulae
 #' @param data data frame used in \code{formula}
-#' @param FUN character string of the transformation function
+#' @param FUN character string of the transformation function. Currently
+#'   supports \code{factor} and \code{log}.
 #' @param check logical whether to just check if a formula contains an
 #'   internally called transformation and return \code{TRUE} or \code{FALSE}
 #' @param f_out logical whether to return the converted formula
@@ -380,6 +381,8 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
 
     if (length(to_transform) > 0) {
         to_transform_raw <- trimws(f_split[to_transform])
+        if (FUN == 'factor')
+            to_transform_raw <- gsub('^as\\.', '', to_transform_raw)
         to_transform_plain_args <- gsub(FUN_str, '', to_transform_raw)
         to_transform_plain <- gsub(',\\(.*)', '', to_transform_plain_args)
         to_transform_plain <- gsub('\\)', '', to_transform_plain)

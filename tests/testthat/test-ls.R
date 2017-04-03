@@ -59,19 +59,23 @@ test_that('REQUIRE TEST for set with ls models including factors set within zeli
              model = "ls", data = macro)
     setUS1 <- setx(z1, country = "United States")
 
-    macro$country <- as.factor(macro$country)
-    z2 <- zelig(unem ~ gdp + trade + capmob + country,
+    lcountry <- length(unique(macro$country))
+    z2 <- zelig(unem ~ gdp + trade + capmob + factor(country,
+                                                    labels=letters[1:lcountry]),
                 model = "ls", data = macro)
     setUS2 <- setx(z2, country = "United States")
 
+
+    macro$country <- as.factor(macro$country)
+    z3 <- zelig(unem ~ gdp + trade + capmob + country,
+                model = "ls", data = macro)
+    setUS3 <- setx(z3, country = "United States")
+
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 1)
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]],
-                 setUS2$setx.out$x$mm[[1]][[16]])
+                 setUS3$setx.out$x$mm[[1]][[16]])
 
-    z3 <- zelig(unem ~ gdp + trade + capmob + as.factor(country,
-                                                        exclude="United States"),
-                model = "ls", data = macro)
-    setUS1 <- setx(z1, country = "United States")
+
 })
 
 # REQUIRE TEST for set with ls models including natural logs set within zelig call --

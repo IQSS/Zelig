@@ -15,6 +15,9 @@ inserting all variables from `data` on the right-hand side of the formula
 
 - Arbitrary `log` transformations are now supported in `zelig` calls. #225
 
+- Arbitrary `as.factor` and `factor` transformations are now supported in 
+`zelig` calls.
+
 ## Minor changes and bug fixes
 
 - Reorganise README files for to meet new CRAN requirements.

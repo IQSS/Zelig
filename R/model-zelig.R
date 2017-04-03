@@ -248,14 +248,14 @@ z$methods(
                                                 "Formula_without_dot"))
 
     # Convert factors and logs converted internally to the zelig call
-    form_factors <- transformer(.self$formula, FUN = 'as.factor', check = TRUE)
+    form_factors <- transformer(.self$formula, FUN = 'factor', check = TRUE)
     form_logs <- transformer(.self$formula, FUN = 'log', check = TRUE)
     if (any(c(form_factors, form_logs))) {
         if (form_factors) {
             localformula <- transformer(formula, data = localdata,
-                                        FUN = 'as.factor', f_out = TRUE)
+                                        FUN = 'factor', f_out = TRUE)
             localdata <- transformer(formula, data = localdata,
-                                     FUN = 'as.factor', d_out = TRUE)
+                                     FUN = 'factor', d_out = TRUE)
             .self$formula <- localformula
             .self$data <- localdata
         }
