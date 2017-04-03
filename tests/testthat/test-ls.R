@@ -31,14 +31,14 @@ test_that('REQUIRE TEST ls with by', {
     expect_equal(length(unique(sims_df$by)), 2)
 })
 
-# gim method tests -------------------------------------------------------------
+# REQUIRE TEST gim method ------------------------------------------------------
 
 #test_that('REQUIRE TESTls gim method', {
     #z5$gim()
 #})
 
 
-# REQUIRE TEST for sim with ls models including factor levels ---------------------
+# REQUIRE TEST for sim with ls models including factor levels ------------------
 test_that('REQUIRE TEST for sim with models including factor levels', {
     expect_is(iris$Species, 'factor')
     z.out <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
@@ -52,7 +52,7 @@ test_that('REQUIRE TEST for sim with models including factor levels', {
     expect_equal(length(sims2$sim.out$range), 10)
 })
 
-# REQUIRE TEST for set with ls models including factors set within zelig call --
+# REQUIRE TEST for set with ls models including factors set within zelig call ----
 test_that('REQUIRE TEST for set with ls models including factors set within zelig call', {
     data(macro)
     z1 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
@@ -67,6 +67,11 @@ test_that('REQUIRE TEST for set with ls models including factors set within zeli
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 1)
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]],
                  setUS2$setx.out$x$mm[[1]][[16]])
+
+    z3 <- zelig(unem ~ gdp + trade + capmob + as.factor(country,
+                                                        exclude="United States"),
+                model = "ls", data = macro)
+    setUS1 <- setx(z1, country = "United States")
 })
 
 # REQUIRE TEST for set with ls models including natural logs set within zelig call --

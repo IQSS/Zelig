@@ -168,33 +168,34 @@ z$methods(
 )
 
 z$methods(
-  packagename = function() {
-    "Automatically retrieve wrapped package name"
-    # If this becomes "quote(mypackage::myfunction) then
-    # regmatches(.self$fn,regexpr("(?<=\\()(.*?)(?=\\::)",.self$fn, perl=TRUE))
-    # would extract "mypackage"
-    return(as.character(.self$fn)[2])
-  }
+    packagename = function() {
+        "Automatically retrieve wrapped package name"
+        # If this becomes "quote(mypackage::myfunction) then
+        # regmatches(.self$fn,regexpr("(?<=\\()(.*?)(?=\\::)",.self$fn, perl=TRUE))
+        # would extract "mypackage"
+        return(as.character(.self$fn)[2])
+    }
 )
 
 z$methods(
-  cite = function() {
-    "Provide citation information about Zelig and Zelig model, and about wrapped package and wrapped model"
-    title <- paste(.self$name, ": ", .self$description, sep="")
-    localauthors <- ""
-    if (length(.self$modelauthors) & (!identical(.self$modelauthors,""))){   # covers both empty styles: character(0) and "" --the latter being length 1.
-      localauthors<-.self$modelauthors
-    }else if (length(.self$packageauthors) & (!identical(.self$packageauthors,""))){
-      localauthors<-.self$packageauthors
-    }else{
-      localauthors<-.self$zeligauthors
+    cite = function() {
+        "Provide citation information about Zelig and Zelig model, and about wrapped package and wrapped model"
+        title <- paste(.self$name, ": ", .self$description, sep="")
+        localauthors <- ""
+        if (length(.self$modelauthors) & (!identical(.self$modelauthors,""))){
+            # covers both empty styles: character(0) and "" --the latter being length 1.
+            localauthors<-.self$modelauthors
+        } else if (length(.self$packageauthors) & (!identical(.self$packageauthors,""))){
+            localauthors<-.self$packageauthors
+        } else {
+            localauthors<-.self$zeligauthors
+        }
+        cat("How to cite this model in Zelig:\n  ",
+            localauthors, ". ", .self$year, ".\n  ", title,
+            "\n  in ", .self$zeligauthors,
+            ",\n  \"Zelig: Everyone's Statistical Software,\" ",
+            .self$url, "\n", sep = "")
     }
-    cat("How to cite this model in Zelig:\n  ",
-        localauthors, ". ", .self$year, ".\n  ", title,
-        "\n  in ", .self$zeligauthors,
-        ",\n  \"Zelig: Everyone's Statistical Software,\" ",
-        .self$url, "\n", sep = "")
-  }
 )
 
 # Construct a reference list specific to a Zelig model
@@ -202,25 +203,25 @@ z$methods(
 # The "sphinx" style reformats "text" style with some markdown substitutions
 
 z$methods(
-  references = function(style="sphinx") {
-    "Construct a reference list specific to a Zelig model."
-    mystyle <- style
-    if (mystyle=="sphinx"){
-      mystyle <- "text"
+    references = function(style="sphinx") {
+        "Construct a reference list specific to a Zelig model."
+        mystyle <- style
+        if (mystyle=="sphinx"){
+            mystyle <- "text"
+        }
+        mycites<-.self$refs
+        if(!is.na(.self$packagename() )) {
+            mycites<-c(mycites, citation(.self$packagename()))  # Concatentate model specific Zelig references with package references
+        }
+        mycites<-mycites[!duplicated(mycites)]                            # Remove duplicates (many packages have duplicate references in their lists)
+        s <- capture.output(print(mycites, style = mystyle))
+        if(style == "sphinx"){                          # format the "text" style conventions for sphinx markdown for building docs for zeligproject.org
+            s<-gsub("\\*","\\*\\*",s, perl=TRUE)
+            s<-gsub("_","\\*",s, perl=TRUE)
+            s<-gsub("\\*\\(","\\* \\(",s, perl=TRUE)
+        }
+        cat(s, sep="\n")
     }
-    mycites<-.self$refs
-    if(!is.na(.self$packagename() )){
-      mycites<-c(mycites, citation(.self$packagename()))  # Concatentate model specific Zelig references with package references
-    }
-    mycites<-mycites[!duplicated(mycites)]                            # Remove duplicates (many packages have duplicate references in their lists)
-    s<-capture.output(print(mycites, style = mystyle))
-    if(style == "sphinx"){                          # format the "text" style conventions for sphinx markdown for building docs for zeligproject.org
-      s<-gsub("\\*","\\*\\*",s, perl=TRUE)
-      s<-gsub("_","\\*",s, perl=TRUE)
-      s<-gsub("\\*\\(","\\* \\(",s, perl=TRUE)
-    }
-    cat(s, sep="\n")
-  }
 )
 
 z$methods(
@@ -233,12 +234,17 @@ z$methods(
       return(fc)
     }
 
+    if ("amelia" %in% class(data))
+        localdata <- data$imputations
+    else
+        localdata <- data
+
     # Without dots for single and multiple equations#
     temp_formula <- as.Formula(formula)
     if (sum(length(temp_formula)) <= 2)
-        .self$formula <- as.Formula(terms(temp_formula, data = data))
+        .self$formula <- as.Formula(terms(temp_formula, data = localdata))
     else if (sum(length(temp_formula)) > 2)
-        .self$formula <- as.Formula(attr(terms(temp_formula, data = data),
+        .self$formula <- as.Formula(attr(terms(temp_formula, data = localdata),
                                                 "Formula_without_dot"))
 
     # Convert factors and logs converted internally to the zelig call
@@ -246,23 +252,22 @@ z$methods(
     form_logs <- transformer(.self$formula, FUN = 'log', check = TRUE)
     if (any(c(form_factors, form_logs))) {
         if (form_factors) {
-            localformula <- transformer(formula, data, FUN = 'as.factor',
-                                        f_out = TRUE)
-            localdata <- transformer(formula, data, FUN = 'as.factor', d_out = TRUE)
+            localformula <- transformer(formula, data = localdata,
+                                        FUN = 'as.factor', f_out = TRUE)
+            localdata <- transformer(formula, data = localdata,
+                                     FUN = 'as.factor', d_out = TRUE)
             .self$formula <- localformula
             .self$data <- localdata
         }
-        else
-            localdata <- data
         if (form_logs) {
-            localformula <- transformer(formula, localdata, FUN = 'log', f_out = TRUE)
-            localdata <- transformer(formula, localdata, FUN = 'log', d_out = TRUE)
+            localformula <- transformer(formula, data = localdata, FUN = 'log',
+                                        f_out = TRUE)
+            localdata <- transformer(formula, data = localdata, FUN = 'log',
+                                     d_out = TRUE)
             .self$formula <- localformula
             .self$data <- localdata
         }
     }
-    else
-        localdata <- data
 
     if (!("relogit" %in% .self$wrapper))
         .self$model.call$formula <- match.call(zelig, .self$formula)
@@ -273,14 +278,15 @@ z$methods(
     # Overwrite formula with mc unit test formula into correct environment, if it exists
     # Requires fixing R scoping issue
     if("formula" %in% class(.self$mcformula)){
-      .self$formula <- as.Formula( deparse(.self$mcformula),
+        .self$formula <- as.Formula( deparse(.self$mcformula),
                                    env = environment(.self$formula) )
-      .self$model.call$formula <- as.Formula( deparse(.self$mcformula),
+        .self$model.call$formula <- as.Formula( deparse(.self$mcformula),
                                               env = globalenv() )
     } else if(is.character(.self$mcformula)) {
-      .self$formula <- as.Formula( .self$mcformula,
-                                   env = environment(.self$formula) )
-      .self$model.call$formula <- as.Formula( .self$mcformula, env = globalenv() )
+        .self$formula <- as.Formula( .self$mcformula,
+                                    env = environment(.self$formula) )
+        .self$model.call$formula <- as.Formula( .self$mcformula,
+                                                env = globalenv() )
     }
     if(!is.null(model)){
       cat("Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.\n")
@@ -348,33 +354,29 @@ z$methods(
         .self$refs <- c(.self$refs, citation("optmatch"))
       if(m.out$call$method=="genetic" & ("Matching" %in% installed.packages()))
         .self$refs <- c(.self$refs, citation("Matching"))
-      #if(m.out$call$method=="nearest") .self$refs <- c(.self$refs, citation(""))
+        #if(m.out$call$method=="nearest") .self$refs <- c(.self$refs, citation(""))
       if(m.out$call$method=="optimal" & ("optmatch" %in% installed.packages()))
         .self$refs <- c(.self$refs, citation("optmatch"))
-      #if(m.out$call$method=="subclass") .self$refs <- c(.self$refs, citation(""))
+        #if(m.out$call$method=="subclass") .self$refs <- c(.self$refs, citation(""))
     } else {
-      .self$matched  <- FALSE
+        .self$matched  <- FALSE
     }
     # Multiply Imputed datasets from Amelia or mi utility
     # Notice imputed objects ignore weights currently, which is reasonable as the Amelia package ignores weights
     if (("amelia" %in% class(localdata)) | ("mi" %in% class(localdata))) {
-      if ("amelia" %in% class(localdata)) {
-        idata <- data$imputations
-      } else {
         idata <- localdata
-      }
-
-      .self$data <- bind_rows(lapply(seq(length(idata)),
-                                     function(imputationNumber)
-                                       cbind(imputationNumber, idata[[imputationNumber]])))
-      .self$weights <- NULL  # This should be considered or addressed
-      datareformed <- TRUE
-      .self$by <- c("imputationNumber", by)
-      .self$mi <- TRUE
-      .self$setforeveryby <- FALSE  # compute covariates in set() at on the entire stacked dataset
-      .self$refs <- c(.self$refs, citation("Amelia"))
+        .self$data <- bind_rows(lapply(seq(length(idata)),
+                                    function(imputationNumber)
+                                        cbind(imputationNumber,
+                                            idata[[imputationNumber]])))
+        .self$weights <- NULL  # This should be considered or addressed
+        datareformed <- TRUE
+        .self$by <- c("imputationNumber", by)
+        .self$mi <- TRUE
+        .self$setforeveryby <- FALSE  # compute covariates in set() at on the entire stacked dataset
+        .self$refs <- c(.self$refs, citation("Amelia"))
     } else {
-      .self$mi <- FALSE
+        .self$mi <- FALSE
     }
 
     if (!datareformed){
