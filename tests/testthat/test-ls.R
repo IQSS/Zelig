@@ -31,14 +31,14 @@ test_that('REQUIRE TEST ls with by', {
     expect_equal(length(unique(sims_df$by)), 2)
 })
 
-# gim method tests -------------------------------------------------------------
+# REQUIRE TEST gim method ------------------------------------------------------
 
 #test_that('REQUIRE TESTls gim method', {
     #z5$gim()
 #})
 
 
-# REQUIRE TEST for sim with ls models including factor levels ---------------------
+# REQUIRE TEST for sim with ls models including factor levels ------------------
 test_that('REQUIRE TEST for sim with models including factor levels', {
     expect_is(iris$Species, 'factor')
     z.out <- zelig(Petal.Width ~ Petal.Length + Species, data = iris,
@@ -52,36 +52,54 @@ test_that('REQUIRE TEST for sim with models including factor levels', {
     expect_equal(length(sims2$sim.out$range), 10)
 })
 
-# REQUIRE TEST for set with ls models including factors set within zelig call --
+# REQUIRE TEST for set with ls models including factors set within zelig call ----
 test_that('REQUIRE TEST for set with ls models including factors set within zelig call', {
     data(macro)
     z1 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
              model = "ls", data = macro)
     setUS1 <- setx(z1, country = "United States")
 
-    macro$country <- as.factor(macro$country)
-    z2 <- zelig(unem ~ gdp + trade + capmob + country,
+    z2 <- zelig(unem ~ gdp + trade + capmob + factor(country,
+                                                    labels=letters[1:14]),
                 model = "ls", data = macro)
-    setUS2 <- setx(z2, country = "United States")
+    setUS2 <- setx(z2, country = "m")
+
+    macro$country <- as.factor(macro$country)
+    z3 <- zelig(unem ~ gdp + trade + capmob + country,
+                model = "ls", data = macro)
+    setUS3 <- setx(z3, country = "United States")
 
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]], 1)
+    expect_equal(setUS2$setx.out$x$mm[[1]][[16]], 1)
     expect_equal(setUS1$setx.out$x$mm[[1]][[16]],
-                 setUS2$setx.out$x$mm[[1]][[16]])
+                 setUS3$setx.out$x$mm[[1]][[16]])
+    expect_equal(setUS2$setx.out$x$mm[[1]][[16]],
+                 setUS3$setx.out$x$mm[[1]][[16]])
 })
 
 # REQUIRE TEST for set with ls models including natural logs set within zelig call --
 test_that('REQUIRE TEST for set with ls models including natural logs set within zelig call', {
-#  z1 <- zelig(speed ~ log(dist, base = 10), data = cars, model = 'ls')
-  z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls')
-  setd1 <- setx(z1, dist = log(15))
+    z1 <- zelig(speed ~ log(dist), data = cars, model = 'ls')
+    setd1 <- setx(z1, dist = log(15))
 
-  cars$dist <- log(cars$dist)
-  z2 <- zelig(speed ~ dist, data = cars, model = 'ls')
-  setd2 <- setx(z1, dist = log(15))
+    cars$dist <- log(cars$dist)
+    z2 <- zelig(speed ~ dist, data = cars, model = 'ls')
+    setd2 <- setx(z2, dist = log(15))
 
-  expect_equal(round(setd1$setx.out$x$mm[[1]][[2]], digits = 5), 2.70805)
-  expect_equal(setd1$setx.out$x$mm[[1]][[2]],
+    expect_equal(round(setd1$setx.out$x$mm[[1]][[2]], digits = 5), 2.70805)
+    expect_equal(setd1$setx.out$x$mm[[1]][[2]],
                setd2$setx.out$x$mm[[1]][[2]])
+
+    z3.1 <- zelig(Sepal.Length ~ log10(Petal.Length) + log(Sepal.Width),
+              model = 'ls', data = iris, cite = FALSE)
+    z3.2 <- zelig(Sepal.Length ~ log(Petal.Length, base = 10) +
+                      log(Sepal.Width),
+              model = 'ls', data = iris, cite = FALSE)
+    expect_equal(unname(coef(z3.1)), unname(coef(z3.2)))
+
+    setz3 <- setx(z3.1)
+#    expect_equal(as.vector(round(unlist(setz3$setx.out$x), digits = 2)),
+#                c(1, 1, 1.47, 1.12))
 })
 
 # REQUIRE TEST for ls with interactions ----------------------------------------
@@ -118,8 +136,15 @@ test_that('REQUIRE TEST for ls setrange with equal length ranges and polynomials
 
     # Polynomial found in formula
     z.cars2 <- zelig(Sepal.Length ~ Petal.Length + I(Petal.Length^2) + Species,
-                      data = iris.poly, model = 'ls', cite = FALSE)
+                      data = iris, model = 'ls', cite = FALSE)
     z.cars2 <- setx(z.cars2, Species = 'virginica', Petal.Length = pl_range)
     expect_equal(nrow(zelig_setx_to_df(z.cars2)), length(pl_range))
     expect_equal(zelig_setx_to_df(z.cars1)[[2]], zelig_setx_to_df(z.cars2)[[2]])
+})
+
+# REQUIRE TEST for . formulas --------------------------------------------------
+test_that('REQUIRE TEST for . formulas', {
+    z1 <- zelig(speed ~ ., data = cars, model = 'ls')
+    zset <- setx(z1, dist = 5)
+    expect_equal(names(coef(z1)), c("(Intercept)", "dist"))
 })

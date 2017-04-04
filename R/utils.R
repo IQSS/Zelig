@@ -310,7 +310,7 @@ to_zelig_mi <- function (...) {
     # Labelling
     names(imputations) <- paste0("imp", 1:length(imputations))
 
-    # Ensure that everything is data.frame
+    # Ensure that everything is a data.frame
     for (k in length(imputations):1) {
         if (!is.data.frame(imputations[[k]])){
             imputations[[k]] <- NULL
@@ -344,7 +344,8 @@ mi <- to_zelig_mi
 #'
 #' @param formula model formulae
 #' @param data data frame used in \code{formula}
-#' @param FUN character string of the transformation function
+#' @param FUN character string of the transformation function. Currently
+#'   supports \code{factor} and \code{log}.
 #' @param check logical whether to just check if a formula contains an
 #'   internally called transformation and return \code{TRUE} or \code{FALSE}
 #' @param f_out logical whether to return the converted formula
@@ -356,12 +357,21 @@ mi <- to_zelig_mi
 
 transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
 
+    if (!missing(data)) {
+        if (is.data.frame(data))
+            is_df <- TRUE
+        else if (!is.data.frame(data) & is.list(data))
+            is_df <- FALSE
+        else
+            stop('data must be either a data.frame or a list', call. = FALSE)
+    }
+
     if (FUN == 'as.factor') FUN_temp <- 'as\\.factor'
     else FUN_temp <- FUN
-    FUN_str <- sprintf('%s\\(', FUN_temp)
+    FUN_str <- sprintf('%s.*\\(', FUN_temp)
 
     f <- as.character(formula)[3]
-    f_split <- unlist(strsplit(f, split = ' '))
+    f_split <- unlist(strsplit(f, split = '\\+'))
     to_transform <- grep(pattern = FUN_str, f_split)
 
     if (!missing(check)) {
@@ -370,25 +380,74 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
     }
 
     if (length(to_transform) > 0) {
-        to_transform_raw <- f_split[to_transform]
-        to_transform_plain <- gsub(FUN_str, '', to_transform_raw)
+        to_transform_raw <- trimws(f_split[to_transform])
+        if (FUN == 'factor')
+            to_transform_raw <- gsub('^as\\.', '', to_transform_raw)
+        to_transform_plain_args <- gsub(FUN_str, '', to_transform_raw)
+        to_transform_plain <- gsub(',\\(.*)', '', to_transform_plain_args)
         to_transform_plain <- gsub('\\)', '', to_transform_plain)
+        to_transform_plain <- trimws(gsub(',.*', '', to_transform_plain))
 
-        if (!all(to_transform_plain %in% names(data)))
-            stop('Unable to find variable to transform.')
+        if (is_df)
+            not_in_data <- !all(to_transform_plain %in% names(data))
+        else if (!isTRUE(is_df))
+            not_in_data <- !all(to_transform_plain %in% names(data[[1]]))
+        if (not_in_data) stop('Unable to find variable to transform.')
 
         if (!missing(f_out)) {
             f_split[to_transform] <- to_transform_plain
-            f_comb <- paste(f_split, collapse = ' ')
-            dv <- gsub('\\(\\)', '', formula[2])
-            f_new <- paste(dv, '~', f_comb, collapse = ' ')
+            rhs <- paste(f_split, collapse = ' + ')
+            lhs <- gsub('\\(\\)', '', formula[2])
+            f_new <- paste(lhs, '~', rhs)
             f_out <- as.Formula(f_new)
             return(f_out)
         }
-        else if (d_out) {
-            for (i in to_transform_plain)
-              data[, i] <- eval(parse(text = sprintf('%s(data[, i])',
-                                                     FUN)))
+        else if (!missing(d_out)) {
+
+            transformer_fun <- trimws(gsub('\\(.*', '', to_transform_raw))
+
+            transformer_args_str <- gsub('\\)', '', to_transform_plain_args)
+            transformer_args_list <- list()
+            for (i in seq_along(transformer_args_str)) {
+                args_temp <- unlist(strsplit(gsub(' ', '' ,
+                                                transformer_args_str[i]), ','))
+                if (is_df)
+                    args_temp[1] <- sprintf('data[, "%s"]', args_temp[1])
+                else if (!isTRUE(is_df))
+                    args_temp[1] <- sprintf('data[[h]][, "%s"]', args_temp[1])
+                arg_names <- gsub('\\=.*', '', args_temp)
+                arg_names[1] <- 'x'
+                args_temp <- gsub('.*\\=', '', args_temp)
+
+                args_temp_list <- list()
+                if (is_df) {
+                    for (u in seq_along(args_temp))
+                        args_temp_list[[u]] <- eval(parse(text = args_temp[u]))
+                }
+                else if (!isTRUE(is_df)) {
+                    for (h in seq_along(data)) {
+                        temp_list <- list()
+                        for (u in seq_along(args_temp)) {
+                            temp_list[[u]] <- eval(parse(text = args_temp[u]))
+                            names(temp_list)[u] <- arg_names[u]
+                        }
+                        args_temp_list[[h]] <- temp_list
+                    }
+                }
+                if (is_df) {
+                    names(args_temp_list) <- arg_names
+                    data[, to_transform_plain[i]] <- do.call(
+                                                    what = transformer_fun[i],
+                                                    args = args_temp_list)
+                }
+                else if (!isTRUE(is_df)) {
+                    for (j in seq_along(data)) {
+                        data[[j]][, to_transform_plain[i]] <- do.call(
+                                                    what = transformer_fun[i],
+                                                    args = args_temp_list[[j]])
+                    }
+                }
+            }
             return(data)
         }
     }
@@ -397,7 +456,6 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
         else if (d_out) return(data)
     }
 }
-
 
 
 #' Remove package names from fitted model object calls.
@@ -436,9 +494,10 @@ se_pull <- function(x) {
     return(se)
 }
 
-#' Drop intercept columns from a data frame of fitted values
+#' Drop intercept columns or values from a data frame or named vector,
+#'   respectively
 #'
-#' @param x a data frame
+#' @param x a data frame or named vector
 #' @keywords internal
 
 rm_intercept <- function(x) {
@@ -446,7 +505,10 @@ rm_intercept <- function(x) {
     names_x <- names(x)
     if (any(intercept_names %in% names(x))) {
         keep <- !(names(x) %in% intercept_names)
-        x <- data.frame(x[, names_x[keep]])
+        if (is.data.frame(x))
+            x <- data.frame(x[, names_x[keep]])
+        else if (is.vector(x))
+            x <- x[keep]
         names(x) <- names_x[keep]
     }
     return(x)
