@@ -366,13 +366,26 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
             stop('data must be either a data.frame or a list', call. = FALSE)
     }
 
-    if (FUN == 'as.factor') FUN_temp <- 'as\\.factor'
-    else FUN_temp <- FUN
+    FUN_temp <- FUN
     FUN_str <- sprintf('%s.*\\(', FUN_temp)
 
-    f <- as.character(formula)[3]
-    f_split <- unlist(strsplit(f, split = '\\+'))
-    to_transform <- grep(pattern = FUN_str, f_split)
+    formula <- as.Formula(formula)
+    formula_length <- length(formula)
+    lhs_multi <- formula_length[2]
+
+    if (is.na(lhs_multi)) {
+        formula_sub <- as.character(formula)[3]
+        f_split <- unlist(strsplit(formula_sub, split = '\\+'))
+        to_transform <- grep(pattern = FUN_str, f_split)
+    }
+    else if (!is.na(lhs_multi)) {
+        # only transforms variables in the first equation on the left-hand side
+        f_attr <- attributes(formula)
+        formula_sub <- as.character(f_attr$rhs[[1]])
+        f_split <- formula_sub[!(formula_sub %in% c("+", "*"))]
+        to_transform <- grep(pattern = FUN_str, f_split)
+    }
+
 
     if (!missing(check)) {
         if (length(to_transform) > 0) return(TRUE)
@@ -395,12 +408,22 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
         if (not_in_data) stop('Unable to find variable to transform.')
 
         if (!missing(f_out)) {
+browser()
             f_split[to_transform] <- to_transform_plain
             rhs <- paste(f_split, collapse = ' + ')
-            lhs <- gsub('\\(\\)', '', formula[2])
-            f_new <- paste(lhs, '~', rhs)
-            f_out <- as.Formula(f_new)
-            return(f_out)
+
+            if (is.na(lhs_multi)) {
+                lhs <- gsub('\\(\\)', '', formula[2])
+                f_new <- paste(lhs, '~', rhs)
+                f_out <- as.Formula(f_new)
+                return(f_out)
+            }
+            else if (!is.na(lhs_multi)) {
+                attributes(formula)$rhs[[1]] <- call(rhs)
+                ### Incomplete ###
+
+            }
+
         }
         else if (!missing(d_out)) {
 

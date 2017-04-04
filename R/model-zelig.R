@@ -254,13 +254,19 @@ z$methods(
         is_matched <- FALSE
     }
 
-    # Without dots for single and multiple equations#
+    # Without dots for single and multiple equations
     temp_formula <- as.Formula(formula)
     if (sum(length(temp_formula)) <= 2)
         .self$formula <- as.Formula(terms(temp_formula, data = localdata))
-    else if (sum(length(temp_formula)) > 2)
-        .self$formula <- as.Formula(attr(terms(temp_formula, data = localdata),
-                                                "Formula_without_dot"))
+    else if (sum(length(temp_formula)) > 2) {
+        f_dots <- attr(terms(temp_formula, data = localdata), "Formula_without_dot")
+        if (!is.null(f_dots))
+           # .self$formula <- as.Formula(f_dots)
+           stop('formula expansion not currently supported for formulas with multiple equations.\nPlease directly specify the variables in the formula call.',
+                call. = FALSE)
+        else
+            .self$formula <- as.Formula(formula)
+    }
 
     # Convert factors and logs converted internally to the zelig call
     form_factors <- transformer(.self$formula, FUN = 'factor', check = TRUE)
