@@ -39,9 +39,10 @@ zquantile$methods(
     localData <- data
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
+
     if (!is.null(.self$model.call$tau)) {
         .self$tau <- eval(.self$model.call$tau)
-        if (length(.self$tau)) {
+        if (length(.self$tau) > 1) {
             localDataata <- bind_rows(lapply(eval(.self$tau),
                                       function(tau) cbind(tau, localData)))
         localBy <- cbind("tau", localBy)
@@ -49,6 +50,7 @@ zquantile$methods(
     }
     else
         .self$tau <- 0.5
+
     callSuper(formula = formula, data = localData, ..., weights = weights,
               by = localBy, bootstrap = bootstrap)
 
