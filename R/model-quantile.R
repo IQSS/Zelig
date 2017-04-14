@@ -31,7 +31,8 @@ zquantile$methods(
 )
 
 zquantile$methods(
-  zelig = function(formula, data, ..., weights = NULL, by = NULL, bootstrap = FALSE) {
+  zelig = function(formula, data, ..., weights = NULL, by = NULL,
+                   bootstrap = FALSE) {
 
     # avoids CRAN warning about deep assignment from formula existing separately as argument and field
     localBy <- by
@@ -45,23 +46,28 @@ zquantile$methods(
         if (length(.self$tau) > 1) {
             localData <- bind_rows(lapply(eval(.self$tau),
                                       function(tau) cbind(tau, localData)))
-            localBy <- cbind("tau", localBy)
+          #  localBy <- cbind("tau", localBy)
         }
     }
     else
         .self$tau <- 0.5
 
     callSuper(formula = formula, data = localData, ..., weights = weights,
-              by = localBy, bootstrap = bootstrap)
+              tau = tau, by = localBy, bootstrap = bootstrap)
 
-    rse <- lapply(.self$zelig.out$z.out, (function(x)
-                    quantreg::summary.rq(x, se = "nid", cov = TRUE)$cov))
-    .self$test.statistics<- list(robust.se = rse)
-  }
-)
+#    rse <- lapply(.self$zelig.out$z.out, (function(x)
+#                    quantreg::summary.rq(x, se = "nid", cov = TRUE)$cov))
+
+#    rse <- lapply(.self$zelig.out$z.out,
+#        (function(x) {
+#            full <- quantreg::summary.rq(x, se = "nid", cov = TRUE)$cov
+#        })
+#    )
+#    .self$test.statistics<- list(robust.se = rse)
+})
 
 zquantile$methods(
-  param = function(z.out, method="mvn") {
+  param = function(z.out, method = "mvn") {
     object <- z.out
     if(identical(method,"mvn")){
         rq.sum <- summary.rq(object, cov = TRUE, se = object$se)
