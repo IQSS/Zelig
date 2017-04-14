@@ -43,9 +43,9 @@ zquantile$methods(
     if (!is.null(.self$model.call$tau)) {
         .self$tau <- eval(.self$model.call$tau)
         if (length(.self$tau) > 1) {
-            localDataata <- bind_rows(lapply(eval(.self$tau),
+            localData <- bind_rows(lapply(eval(.self$tau),
                                       function(tau) cbind(tau, localData)))
-        localBy <- cbind("tau", localBy)
+            localBy <- cbind("tau", localBy)
         }
     }
     else
