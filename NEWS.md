@@ -22,6 +22,9 @@ inserting all variables from `data` on the right-hand side of the formula
 
 - Reorganise README files for to meet new CRAN requirements.
 
+- Switch `bind_rows` for `rbind_all` in `zquantile` as the latter is depricated.
+#255
+
 
 Zelig version 5.0-17
 ==============================

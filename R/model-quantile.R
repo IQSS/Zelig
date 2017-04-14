@@ -33,21 +33,24 @@ zquantile$methods(
 zquantile$methods(
   zelig = function(formula, data, ..., weights = NULL, by = NULL, bootstrap = FALSE) {
 
-    localBy <- by # avoids CRAN warning about deep assignment from formula existing separately as argument and field
-    localData <- data # avoids CRAN warning about deep assignment from formula existing separately as argument and field
+    # avoids CRAN warning about deep assignment from formula existing separately as argument and field
+    localBy <- by
+    # avoids CRAN warning about deep assignment from formula existing separately as argument and field
+    localData <- data
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
     if (!is.null(.self$model.call$tau)) {
-      .self$tau <- eval(.self$model.call$tau)
-      if (length(.self$tau)) {
-        localDataata <- rbind_all(lapply(eval(.self$tau),
-                                 function(tau) cbind(tau, localData)))
+        .self$tau <- eval(.self$model.call$tau)
+        if (length(.self$tau)) {
+            localDataata <- bind_rows(lapply(eval(.self$tau),
+                                      function(tau) cbind(tau, localData)))
         localBy <- cbind("tau", localBy)
-      }
+        }
     }
     else
-      .self$tau <- 0.5
-    callSuper(formula = formula, data = localData, ..., weights = weights, by = localBy, bootstrap = bootstrap)
+        .self$tau <- 0.5
+    callSuper(formula = formula, data = localData, ..., weights = weights,
+              by = localBy, bootstrap = bootstrap)
 
     rse <- lapply(.self$zelig.out$z.out, (function(x)
                     quantreg::summary.rq(x, se = "nid", cov = TRUE)$cov))
@@ -59,13 +62,12 @@ zquantile$methods(
   param = function(z.out, method="mvn") {
     object <- z.out
     if(identical(method,"mvn")){
-      rq.sum <- summary.rq(object, cov = TRUE, se = object$se)
-      return(mvrnorm(n = .self$num, mu = object$coef, Sigma = rq.sum$cov))
-    }else if(identical(method,"point")){
-      return(t(as.matrix(object$coef)))
+        rq.sum <- summary.rq(object, cov = TRUE, se = object$se)
+        return(mvrnorm(n = .self$num, mu = object$coef, Sigma = rq.sum$cov))
+    } else if(identical(method,"point")){
+        return(t(as.matrix(object$coef)))
     }
-  }
-)
+})
 
 zquantile$methods(
   qi = function(simparam, mm) {
