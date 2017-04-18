@@ -365,3 +365,22 @@ sim <- function(obj, x, x1, y = NULL, num = 1000, bootstrap = F,
     s5$sim(num = num)
     return(s5)
 }
+
+#' Extract quantities of interest from a Zelig simulation
+#'
+#' @param object An Object of Class Zelig
+#' @param qi character string with the name of quantity of interest desired:
+#'   `"ev"` for expected values, `"pv"` for predicted values or
+#'   `"fd"` for first differences.
+#' @param xvalue chracter string stating which of the set values of `x`` should
+#'    be used for getting the quantity of interest.
+#' @param subset subset for multiply imputed data (only relevant if multiply
+#'    imputed data is supplied in the original call.)
+#' @author Christopher Gandrud
+#' @md
+#' @exmport
+
+qi <- function(object, qi = "ev", xvalue = "x", subset = NULL) {
+    out <- object$get_qi(qi = qi, xvalue = xvalue, subset = subset)
+    return(out)
+}

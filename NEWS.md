@@ -21,6 +21,8 @@ inserting all variables from `data` on the right-hand side of the formula
 - Restored quantile regression (`model = "rq"). Currently only supports one
 `tau` at a time. #255
 
+- Added `qi` wrapper for `get_qi`.
+
 ## Minor changes and bug fixes
 
 - Reorganize README files to meet new CRAN requirements.

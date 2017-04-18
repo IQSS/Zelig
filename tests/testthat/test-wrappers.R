@@ -2,7 +2,7 @@
 
 test_that('ls wrapper continuous covar -- quickstart (Zelig 4 syntax)', {
     z4 <- zelig(Fertility ~ Education, data = swiss, model = 'ls', cite = FALSE)
-  
+
     # extract education coefficient parameter estimate and compare to reference
     expect_equivalent(round(as.numeric(z4$get_coef()[[1]][2]), 7), -0.8623503)
 })
@@ -27,7 +27,7 @@ test_that('non-supported model type error', {
 
 test_that('REQUIRE TEST wrapper setx', {
     z4 <- zelig(Fertility ~ Education, data = swiss, model = 'ls')
-  
+
     z4_set <- setx(z4)
     z4_set_vector <- round(as.vector(unlist(z4_set$setx.out)))
     expect_equivalent(z4_set_vector, c(1, 1, 11))
@@ -39,7 +39,7 @@ test_that('REQUIRE TEST wrapper setx1', {
 zpipe <- zelig(Fertility ~ Education, data = swiss, model = 'ls') %>%
                 setx(z4, Education = 10) %>%
                 setx1(z4, Education = 30) %>%
-                sim() 
+                sim()
     expect_equal(length(zpipe$sim.out), 2)
 
 })
@@ -55,10 +55,11 @@ test_that('REQUIRE TEST sim wraper minimal working', {
     z5 <- zls$new()
     z5 <- zelig(Fertility ~ Education, data = swiss, model = 'ls')
     set_x <- setx(z5, Education = 5)
-  
+
     zsimwrap <- sim(z5, x = set_x, num = 10)
     expect_equal(length(zsimwrap$get_qi()), 10)
-    
+    expect_equal(length(zsimwrap$get_qi()), length(qi(zsimwrap)))
+
     z5$setx(Education = 5)
     zsimwrap <- sim(z5, num = 10)
     expect_equal(length(zsimwrap$get_qi()), 10)

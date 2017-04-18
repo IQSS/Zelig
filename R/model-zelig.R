@@ -1165,7 +1165,7 @@ z$methods(
     }
     if(.self$mi){
       if(is.null(subset)){
-        am.m<-length(.self$get_coef())
+        am.m <- length(.self$get_coef())
         subset <- 1:am.m
       }
       tempqi <- do.call(rbind, .self$sim.out[[xvalue]][[qi]][subset])
