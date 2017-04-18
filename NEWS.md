@@ -18,9 +18,12 @@ inserting all variables from `data` on the right-hand side of the formula
 - Arbitrary `as.factor` and `factor` transformations are now supported in 
 `zelig` calls.
 
+- Restored quantile regression (`model = "rq"). Currently only supports one
+`tau` at a time. #255
+
 ## Minor changes and bug fixes
 
-- Reorganise README files for to meet new CRAN requirements.
+- Reorganize README files to meet new CRAN requirements.
 
 - Switch `bind_rows` for `rbind_all` in `zquantile` as the latter is depricated.
 #255
