@@ -30,6 +30,8 @@ URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.1-0
 Date: 2017-04-18
+Depends:
+	survival
 Imports:
     AER,
     Amelia,
@@ -46,7 +48,6 @@ Imports:
     methods,
     quantreg,
     survey,
-    survival,
     VGAM
 Suggests:
     knitr,
