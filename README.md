@@ -8,13 +8,14 @@ Version](http://www.r-pkg.org/badges/version/Zelig)](http://cran.r-project.org/p
 Downloads](http://cranlogs.r-pkg.org/badges/last-month/Zelig) ![CRAN
 Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/Zelig)
 
-**Development:** [![Travis (LINUX) Build
+**Development:** [![Project Status: Active - The project has reached a
+stable, usable state and is being actively
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Travis (LINUX) Build
 Status](https://travis-ci.org/IQSS/Zelig.svg?branch=master)](https://travis-ci.org/IQSS/Zelig)
 [![AppVeyor (Windows) Build
 Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
-[![Pull requests waiting for
-review](https://badge.waffle.io/iqss/zelig.svg?label=development)](https://waffle.io/iqss/zelig)
 [![Gitter
 chat](https://badges.gitter.im/Zelig-dev/gitter.png)](https://gitter.im/Zelig-dev/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 [Dev-Blog](https://medium.com/zelig-dev)
@@ -179,23 +180,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 75.36997 1.650294 75.30099 72.31297 78.65929
+    ##       mean      sd      50%     2.5%    97.5%
+    ## 1 75.33214 1.60921 75.33061 72.16067 78.53098
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.24528 9.544411 75.37412 56.41196 93.44682
+    ## [1,] 75.60004 9.523896 75.42738 55.92581 93.93229
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.71956 1.450892 66.71837 63.91693 69.52701
+    ##      mean       sd      50%     2.5%   97.5%
+    ## 1 66.7442 1.461883 66.73193 63.96141 69.6926
     ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.47671 9.096596 66.25873 48.29963 83.88586
+    ##          mean       sd    50%    2.5%    97.5%
+    ## [1,] 66.46776 9.445496 66.538 48.6202 85.34469
     ## fd
-    ##        mean       sd       50%      2.5%    97.5%
-    ## 1 -8.650416 1.432889 -8.662048 -11.40429 -5.99384
+    ##        mean       sd       50%      2.5%     97.5%
+    ## 1 -8.587938 1.418749 -8.580537 -11.43373 -5.889501
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
