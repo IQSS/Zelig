@@ -29,9 +29,9 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.1-0
-Date: 2017-04-18
+Date: 2017-04-20
 Depends:
-	survival
+    survival
 Imports:
     AER,
     Amelia,
