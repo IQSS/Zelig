@@ -4,7 +4,7 @@ External contributors are referenced with their GitHub usernames when
 applicable.
 
 
-Zelig version 5.0-1
+Zelig version 5.1-0
 ==============================
 
 ## Major changes
@@ -18,7 +18,7 @@ inserting all variables from `data` on the right-hand side of the formula
 -   Arbitrary `as.factor` and `factor` transformations are now supported in
 `zelig` calls.
 
--   Restored quantile regression (`model = "rq"). Currently only supports one
+-   Restored quantile regression (`model = "rq"`). Currently only supports one
 `tau` at a time. #255
 
 -   Added `qi` wrapper for `get_qi`.
