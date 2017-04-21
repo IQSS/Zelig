@@ -50,6 +50,15 @@ test_that('FAIL TEST for get_qi when applied to an object with no simulations', 
     expect_error(z$get_qi(), 'No simulated quantities of interest found.')
 })
 
+# FAIL TEST for get_qi when unsupported qi supplied ----------------------------
+test_that('FAIL TEST for get_qi when unsupported qi supplied', {
+    z5 <- zls$new()
+    z5$zelig(Fertility ~ Education, data = swiss)
+    z5$setrange(Education = 5:15)
+    z5$sim()
+    expect_error(z5$get_qi(qi = "fa", xvalue = "range"), 'qi must be ev or pv.')
+})
+
 # FAIL TEST for estimation model failure ---------------------------------------
 test_that('FAIL TEST for estimation model failure', {
   no_vary_df <- data.frame(y = rep(1, 10), x = rep(2, 10))
