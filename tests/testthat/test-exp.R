@@ -10,7 +10,6 @@ test_that('REQUIRE TEST exp Monte Carlo', {
 # REQUIRE TEST (minimal) documentation example -------------------------------------------
 
 test_that('REQUIRE TEST (minimal) documentation example', {
-    library(survival)
     data(coalition)
     z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model = "exp",
                    data = coalition)
