@@ -56,6 +56,11 @@ zrelogit$methods(
 zrelogit$methods(
   zelig = function(formula, ..., tau = NULL, bias.correct = NULL,
                    case.control = NULL, data, by = NULL, bootstrap = FALSE) {
+     if (!is.null(tau)) {
+         if (tau <= 0)
+             stop("tau is the population proportion of 1's for the response variable.\nIt must be > 0.",
+                  call. = FALSE)
+     }
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     # Catch NULL case.control

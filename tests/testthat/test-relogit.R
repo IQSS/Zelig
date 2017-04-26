@@ -34,3 +34,12 @@ test_that('REQUIRE TEST relogit vignette example', {
 
     expect_false(coef(x.outlog)['power'] == coef(z.out1)['power'])
 })
+
+# FAIL TEST relogit with tau <= 0 ----------------------------------------------
+
+test_that('FAIL TEST relogit with tau <= 0', {
+    data(mid)
+    expect_error(zelig(conflict ~ major + contig + power + maxdem + mindem + years,
+                    data = mid, model = "relogit", tau = -0.1),
+                 "tau is the population proportion of 1's for the response variable.\nIt must be > 0.")
+})

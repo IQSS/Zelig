@@ -30,6 +30,7 @@ inserting all variables from `data` on the right-hand side of the formula
 - Switch `bind_rows` for `rbind_all` in `zquantile` as the latter is depricated.
 #255
 
+- Additional unit tests.
 
 Zelig version 5.0-17
 ==============================
