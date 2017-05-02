@@ -30,8 +30,8 @@ inserting all variables from `data` on the right-hand side of the formula
 -   Switch `bind_rows` for `rbind_all` in `zquantile` as the latter is depricated.
 #255
 
--   Depends on the survival package in order to enable `setx` for exp models
-without explicitly loading survival. #254
+-   Depends on the survival package in order to enable `setx` for exponential 
+models without explicitly loading survival. #254
 
 - Additional unit tests.
 
