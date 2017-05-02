@@ -33,6 +33,8 @@ inserting all variables from `data` on the right-hand side of the formula
 -   Depends on the survival package in order to enable `setx` for exponential 
 models without explicitly loading survival. #254
 
+-   `relogit` now only accepts one `tau` per call. Fixed to address #257. 
+
 - Additional unit tests.
 
 Zelig version 5.0-17
