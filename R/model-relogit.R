@@ -56,6 +56,11 @@ zrelogit$methods(
 zrelogit$methods(
   zelig = function(formula, ..., tau = NULL, bias.correct = NULL,
                    case.control = NULL, data, by = NULL, bootstrap = FALSE) {
+     if (!is.null(tau)) {
+         if (any(tau <= 0))
+             stop("tau is the population proportion of 1's for the response variable.\nIt must be > 0.",
+                  call. = FALSE)
+     }
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- .self$zelig.call
     # Catch NULL case.control
@@ -132,18 +137,20 @@ relogit <- function(formula,
   }
   else
     weighting <- FALSE
-  if (length(tau) > 2)
-    stop("tau must be a vector of length less than or equal to 2")
-  else if (length(tau) == 2) {
-    mf[[1]] <- relogit
-    res <- list()
-    mf$tau <- min(tau)
-    res$lower.estimate <- eval(as.call(mf), parent.frame())
-    mf$tau <- max(tau)
-    res$upper.estimate <- eval(as.call(mf), parent.frame())
-    res$formula <- formula
-    class(res) <- c("Relogit2", "Relogit")
-    return(res)
+  if (length(tau) >= 2) {
+    stop("tau must be a vector of length less than or equal to 1. For multiple taus, estimate models individually.")
+#  else if (length(tau) == 2) {
+
+# The following is not currently supported due to issue with summary
+#    mf[[1]] <- relogit
+#    res <- list()
+#    mf$tau <- min(tau)
+#    res$lower.estimate <- eval(as.call(mf), parent.frame())
+#    mf$tau <- max(tau)
+#    res$upper.estimate <- eval(as.call(mf), parent.frame())
+#    res$formula <- formula
+#    class(res) <- c("Relogit2", "Relogit")
+#    return(res)
   }
   else {
     mf[[1]] <- glm
