@@ -408,7 +408,6 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
         if (not_in_data) stop('Unable to find variable to transform.')
 
         if (!missing(f_out)) {
-browser()
             f_split[to_transform] <- to_transform_plain
             rhs <- paste(f_split, collapse = ' + ')
 

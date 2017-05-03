@@ -9,8 +9,8 @@
 #'   formula has three parts as in `y ~ x1 + x2 | z1 + z2 + z3` (recommended) or
 #'   formula is `y ~ x1 + x2` and instruments is a one-sided formula
 #' `~ z1 + z2 + z3`. Using `instruments` is not recommended with `zelig`.
-#' @param an optional list. See the `contrasts.arg` of
-#'   \code{\link{model.matrix.default}}.
+# @param an optional list. See the `contrasts.arg` of
+#   \code{\link{model.matrix.default}}.
 #' @param model,x,y logicals. If `TRUE` the corresponding components of the fit
 #' (the model frame, the model matrices , the response) are returned.
 #' @param ... further arguments passed to methods. See also \code{\link{zelig}}.
@@ -37,11 +37,16 @@
 #' CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
 #' CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
 #'
+#' # log second stage independent variables, as logging internally for ivreg is not
+#' # currently supported
+#' # CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
+#' CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
+#'
 #' # estimate model
-#' z.out1 <- zelig(log(packs) ~ log(rprice) + log(rincome) |
-#'             log(rincome) + tdiff + I(tax/cpi),
-#'             data = CigarettesSW, subset = year == "1995",
-#'             model = "ivreg")
+#' z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |
+#'                     log_rincome + tdiff + I(tax/cpi),
+#'                     data = CigarettesSW, subset = year == "1995",
+#'                     model = "ivreg")
 #' summary(z.out1)
 #' from_zelig_model(z.out1) %>% summary(vcov = sandwich, df = Inf,
 #'                                      diagnostics = TRUE)
@@ -49,7 +54,7 @@
 #' z.out1 %>% setx() %>% sim() %>% plot()
 #'
 #' # ANOVA
-#' z.out2 <- zelig(log(packs) ~ log(rprice) |
+#' z.out2 <- zelig(log(packs) ~ log_rprice |
 #'                 tdiff, data = CigarettesSW, subset = year == "1995",
 #'                 model = "ivreg")
 #' anova(from_zelig_model(z.out1), from_zelig_model(z.out2))
@@ -125,11 +130,11 @@ zivreg$methods(
     }
 )
 
-zivreg$methods(
-    mcfun = function(z, h, b0 = 0, b1 = 1, alpha = 1, sim = TRUE){
-        x <- b0 + 2*z + 3*h + sim * rnorm(n = length(z), sd = alpha + 1)
-        y <- b0 + b1*x + sim * rnorm(n = length(z), sd = alpha)
-        yx <- list(y, x)
-        return(yx)
-    }
-)
+#zivreg$methods(
+#    mcfun = function(z, h, b0 = 0, b1 = 1, alpha = 1, sim = TRUE){
+#        x <- b0 + 2*z + 3*h + sim * rnorm(n = length(z), sd = alpha + 1)
+#        y <- b0 + b1*x + sim * rnorm(n = length(z), sd = alpha)
+#        yx <- list(y, x)
+#        return(yx)
+#    }
+#)

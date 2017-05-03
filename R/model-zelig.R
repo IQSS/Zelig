@@ -281,6 +281,9 @@ z$methods(
             .self$data <- localdata
         }
         if (form_logs) {
+            if (.self$name == 'ivreg')
+                stop('logging values in the zelig call is not currently supported for ivreg models.',
+                     call. = FALSE)
             localformula <- transformer(formula, data = localdata, FUN = 'log',
                                         f_out = TRUE)
             localdata <- transformer(formula, data = localdata, FUN = 'log',
@@ -1229,7 +1232,6 @@ z$methods(
 z$methods(
   mcunit = function(nsim = 500, minx = -2, maxx = 2, b0 = 0, b1 = 1, alpha = 1,
                     ci = 0.95, plot = TRUE, ...){
-browser()
     passes <- TRUE
     n.short <- 10      # number of p
     alpha.ci <- 1 - ci   # alpha values for ci bounds, not speed parameter
