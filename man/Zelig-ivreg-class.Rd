@@ -58,9 +58,9 @@ CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
 CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
 CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
 
-# log second stage independent variables, as logging internally for ivreg is not
-# currently supported
-# CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
+# log second stage independent variables, as logging internally for ivreg is
+# not currently supported
+CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
 CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
 
 # estimate model
