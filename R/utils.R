@@ -31,13 +31,13 @@ Mode <- function (x) {
 #' @author Matt Owen
 
 Median <- function (x, na.rm=NULL) {
-  v <- ifelse(is.numeric(x),
-              median(x),
-              levels(x)[ceiling(median(as.numeric(x)))]
-  )
-  if (is.ordered(x))
-    v <- factor(v, levels(x))
-  v
+    v <- ifelse(is.numeric(x),
+                median(x),
+                levels(x)[ceiling(median(as.numeric(x)))]
+    )
+    if (is.ordered(x))
+        v <- factor(v, levels(x))
+    v
 }
 
 #' Create a table, but ensure that the correct
@@ -51,16 +51,16 @@ Median <- function (x, na.rm=NULL) {
 #' @author Matt Owen
 
 table.levels <- function (x, levels, ...) {
-  # if levels are not explicitly set, then
-  # search inside of x
-  if (missing(levels)) {
-    levels <- attr(x, 'levels')
-    table(factor(x, levels=levels), ...)
-  }
-  # otherwise just do the normal thing
-  else {
-    table(factor(x, levels=levels), ...)
-  }
+    # if levels are not explicitly set, then
+    # search inside of x
+    if (missing(levels)) {
+        levels <- attr(x, 'levels')
+        table(factor(x, levels=levels), ...)
+    }
+    # otherwise just do the normal thing
+    else {
+        table(factor(x, levels=levels), ...)
+    }
 }
 
 #' Compute central tendancy as approrpriate to data type
@@ -69,12 +69,12 @@ table.levels <- function (x, levels, ...) {
 #' @export
 
 avg <- function(val) {
-  if (is.numeric(val))
-    mean(val)
-  else if (is.ordered(val))
-    Median(val)
-  else
-    Mode(val)
+    if (is.numeric(val))
+        mean(val)
+    else if (is.ordered(val))
+        Median(val)
+    else
+        Mode(val)
 }
 
 #' Set new value of a factor variable, checking for existing levels
@@ -83,10 +83,10 @@ avg <- function(val) {
 #' @return a factor variable with a value \code{val} and the same levels
 #' @keywords internal
 setfactor <- function (fv, v) {
-  lev <- levels(fv)
-  if (!v %in% lev)
-    stop("Wrong factor")
-  return(factor(v, levels = lev))
+    lev <- levels(fv)
+    if (!v %in% lev)
+        stop("Wrong factor")
+    return(factor(v, levels = lev))
 }
 
 #' Set new value of a variable as approrpriate to data type
@@ -95,18 +95,18 @@ setfactor <- function (fv, v) {
 #' @return a variable of the same type with a value \code{val}
 #' @keywords internal
 setval <- function(val, newval) {
-  if (is.numeric(val))
-    newval
-  else if (is.ordered(val))
-    newval
-  else if (is.logical(val))
-    newval
-  else {
-    lev <- levels(val)
-    if (!newval %in% lev)
-      stop("Wrong factor", call. = FALSE)
-    return(factor(newval, levels = lev))
-  }
+    if (is.numeric(val))
+        newval
+    else if (is.ordered(val))
+        newval
+    else if (is.logical(val))
+        newval
+    else {
+        lev <- levels(val)
+        if (!newval %in% lev)
+            stop("Wrong factor", call. = FALSE)
+        return(factor(newval, levels = lev))
+    }
 }
 
 
@@ -144,7 +144,7 @@ reduce = function(dataset, s, formula, data, avg = avg) {
         ma <- m[!is.na(m)]
         if (!all(complete.cases(m))) {
             w <- paste("Variable '", names(s[is.na(m)]), "' not in data set.\n",
-                     sep = "")
+                       sep = "")
             stop(w, call. = FALSE)
         }
         for (i in seq(n[ma])) {
@@ -163,13 +163,13 @@ reduce = function(dataset, s, formula, data, avg = avg) {
 #' @keywords internal
 #' @author Christine Choirat
 statmat <- function(qi) {
-  m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm = TRUE))
-  n <- matrix(apply(qi, 2, mean, na.rm = TRUE))
-  colnames(n) <- "mean"
-  o <- matrix(apply(qi, 2, sd, na.rm = TRUE))
-  colnames(o) <- "sd"
-  p <- cbind(n, o, m)
-  return(p)
+    m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm = TRUE))
+    n <- matrix(apply(qi, 2, mean, na.rm = TRUE))
+    colnames(n) <- "mean"
+    o <- matrix(apply(qi, 2, sd, na.rm = TRUE))
+    colnames(o) <- "sd"
+    p <- cbind(n, o, m)
+    return(p)
 }
 
 #' Describe Here
@@ -198,10 +198,10 @@ statlevel <- function(qi, num) {
 #' @keywords internal
 #' @author Christine Choirat
 stat <- function(qi, num) {
-  if (is.null(attr(qi, "levels")))
-    return(statmat(qi))
-  else
-    return(statlevel(qi, num))
+    if (is.null(attr(qi, "levels")))
+        return(statmat(qi))
+    else
+        return(statlevel(qi, num))
 }
 
 #' Generate Formulae that Consider Clustering
@@ -212,15 +212,15 @@ stat <- function(qi, num) {
 #' @param cluster a vector
 #' @return a formula object describing clustering
 cluster.formula <- function (formula, cluster) {
-  # Convert LHS of formula to a string
-  lhs <- deparse(formula[[2]])
-  cluster.part <- if (is.null(cluster))
-    # NULL values require
-    sprintf("cluster(1:nrow(%s))", lhs)
-  else
-    # Otherwise we trust user input
-    sprintf("cluster(%s)", cluster)
-  update(formula, paste(". ~ .", cluster.part, sep = " + "))
+    # Convert LHS of formula to a string
+    lhs <- deparse(formula[[2]])
+    cluster.part <- if (is.null(cluster))
+        # NULL values require
+        sprintf("cluster(1:nrow(%s))", lhs)
+    else
+        # Otherwise we trust user input
+        sprintf("cluster(%s)", cluster)
+    update(formula, paste(". ~ .", cluster.part, sep = " + "))
 }
 
 
@@ -247,7 +247,7 @@ zelig_mutate <- function (.data, ...)
 #' @keywords internal
 
 expand_grid_setrange <- function(x) {
-#    m <- expand.grid(x)
+    #    m <- expand.grid(x)
     set_lengths <- unlist(lapply(x, length))
     unique_set_lengths <- unique(as.vector(set_lengths))
 
@@ -320,11 +320,11 @@ to_zelig_mi <- function (...) {
 
     if(length(imputations) < 1){
         stop("The resulting object contains no data.frames, and as such is not a valid multiple imputation object.",
-        call. = FALSE)
-      }
+             call. = FALSE)
+    }
     if(length(imputations) < 2){
         stop("The resulting object contains only one data.frame, and as such is not a valid multiple imputation object.",
-        call. = FALSE)
+             call. = FALSE)
     }
     class(imputations) <-c("mi", "list")
 
@@ -366,26 +366,13 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
             stop('data must be either a data.frame or a list', call. = FALSE)
     }
 
-    FUN_temp <- FUN
+    if (FUN == 'as.factor') FUN_temp <- 'as\\.factor'
+    else FUN_temp <- FUN
     FUN_str <- sprintf('%s.*\\(', FUN_temp)
 
-    formula <- as.Formula(formula)
-    formula_length <- length(formula)
-    lhs_multi <- formula_length[2]
-
-    if (is.na(lhs_multi)) {
-        formula_sub <- as.character(formula)[3]
-        f_split <- unlist(strsplit(formula_sub, split = '\\+'))
-        to_transform <- grep(pattern = FUN_str, f_split)
-    }
-    else if (!is.na(lhs_multi)) {
-        # only transforms variables in the first equation on the left-hand side
-        f_attr <- attributes(formula)
-        formula_sub <- as.character(f_attr$rhs[[1]])
-        f_split <- formula_sub[!(formula_sub %in% c("+", "*"))]
-        to_transform <- grep(pattern = FUN_str, f_split)
-    }
-
+    f <- as.character(formula)[3]
+    f_split <- unlist(strsplit(f, split = '\\+'))
+    to_transform <- grep(pattern = FUN_str, f_split)
 
     if (!missing(check)) {
         if (length(to_transform) > 0) return(TRUE)
@@ -410,19 +397,10 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
         if (!missing(f_out)) {
             f_split[to_transform] <- to_transform_plain
             rhs <- paste(f_split, collapse = ' + ')
-
-            if (is.na(lhs_multi)) {
-                lhs <- gsub('\\(\\)', '', formula[2])
-                f_new <- paste(lhs, '~', rhs)
-                f_out <- as.Formula(f_new)
-                return(f_out)
-            }
-            else if (!is.na(lhs_multi)) {
-                attributes(formula)$rhs[[1]] <- call(rhs)
-                ### Incomplete ###
-
-            }
-
+            lhs <- gsub('\\(\\)', '', formula[2])
+            f_new <- paste(lhs, '~', rhs)
+            f_out <- as.Formula(f_new)
+            return(f_out)
         }
         else if (!missing(d_out)) {
 
@@ -432,7 +410,7 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
             transformer_args_list <- list()
             for (i in seq_along(transformer_args_str)) {
                 args_temp <- unlist(strsplit(gsub(' ', '' ,
-                                                transformer_args_str[i]), ','))
+                                                  transformer_args_str[i]), ','))
                 if (is_df)
                     args_temp[1] <- sprintf('data[, "%s"]', args_temp[1])
                 else if (!isTRUE(is_df))
@@ -459,14 +437,14 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
                 if (is_df) {
                     names(args_temp_list) <- arg_names
                     data[, to_transform_plain[i]] <- do.call(
-                                                    what = transformer_fun[i],
-                                                    args = args_temp_list)
+                        what = transformer_fun[i],
+                        args = args_temp_list)
                 }
                 else if (!isTRUE(is_df)) {
                     for (j in seq_along(data)) {
                         data[[j]][, to_transform_plain[i]] <- do.call(
-                                                    what = transformer_fun[i],
-                                                    args = args_temp_list[[j]])
+                            what = transformer_fun[i],
+                            args = args_temp_list[[j]])
                     }
                 }
             }
@@ -650,5 +628,5 @@ combine_coef_se <- function(obj, out_type = 'matrix', bagging = FALSE,
     }
     else if (!(obj$mi || obj$bootstrap))
         stop('No multiply imputed or bootstrapped estimates found. So no need to combine.',
-            call. = FALSE)
+             call. = FALSE)
 }
