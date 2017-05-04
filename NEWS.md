@@ -20,7 +20,8 @@ enhances `ivreg`. #241
 inserting all variables from `data` on the right-hand side of the formula
 #87. See also #247.
 
--   Arbitrary `log` transformations are now supported in `zelig` calls. #225
+-   Arbitrary `log` transformations are now supported in `zelig` calls 
+(exept for `ivreg` regressors). #225
 
 -   Arbitrary `as.factor` and `factor` transformations are now supported in
 `zelig` calls.
@@ -28,7 +29,9 @@ inserting all variables from `data` on the right-hand side of the formula
 -   Restored quantile regression (`model = "rq"`). Currently only supports one
 `tau` at a time. #255
 
--   Added `qi` wrapper for `get_qi`.
+-   Added `get_qi` wrapper for `get_qi` method.
+
+-   Added `ATT` wrapper for `ATT` method.
 
 ## Minor changes and bug fixes
 
@@ -40,7 +43,8 @@ inserting all variables from `data` on the right-hand side of the formula
 -   Depends on the survival package in order to enable `setx` for exponential
 models without explicitly loading survival. #254
 
--   `relogit` now only accepts one `tau` per call. Fixed to address #257.
+-   `relogit` now only accepts one `tau` per call (similar to `quantile`). Fixed 
+to address #257.
 
 - Additional unit tests.
 

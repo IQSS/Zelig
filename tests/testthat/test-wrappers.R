@@ -58,9 +58,27 @@ test_that('REQUIRE TEST sim wraper minimal working', {
 
     zsimwrap <- sim(z5, x = set_x, num = 10)
     expect_equal(length(zsimwrap$get_qi()), 10)
-    expect_equal(length(zsimwrap$get_qi()), length(qi(zsimwrap)))
+    expect_equal(length(zsimwrap$get_qi()), length(get_qi(zsimwrap)))
 
     z5$setx(Education = 5)
     zsimwrap <- sim(z5, num = 10)
     expect_equal(length(zsimwrap$get_qi()), 10)
+})
+
+# REQUIRE TEST ATT wrapper -----------------------------------------------------
+test_that('REQUIRE TEST ATT wrapper', {
+    data(sanction)
+    # no wrapper
+    zqi.out <- zelig(num ~ target + coop + mil, model = "poisson", data = sanction)
+    zqi.out$ATT(treatment = "mil")
+    my.att <- zqi.out$get_qi(qi = "ATT", xvalue = "TE")
+
+    # with wrapper
+    library(dplyr)
+
+    z.att <- zelig(num ~ target + coop + mil, model = "poisson",
+                   data = sanction) %>%
+             ATT(treatment = "mil") %>%
+             get_qi(qi = "ATT", xvalue = "TE")
+    expect_equal(length(my.att), length(z.att))
 })

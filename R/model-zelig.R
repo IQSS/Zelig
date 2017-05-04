@@ -728,7 +728,7 @@ z$methods(
 
 
 z$methods(
-  ATT = function(treatment, treated=1, quietly=TRUE, num=NULL) {
+  ATT = function(treatment, treated = 1, quietly = TRUE, num = NULL) {
     "Generic Method for Computing Simulated (Sample) Average Treatment Effects on the Treated"
 
     ## Checks on user provided arguments
@@ -768,7 +768,9 @@ z$methods(
     ## NOTE: THIS IS GOING TO USE THE SAME simparam SET FOR EVERY SPLIT
     .self$sim.out$TE <- .self$data %>%
       group_by_(.self$by) %>%
-      do(ATT = .self$simATT(simparam=.self$simparam$simparam[[1]], data=. , depvar=depvar, treatment=treatment, treated=treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+      do(ATT = .self$simATT(simparam = .self$simparam$simparam[[1]], data = . ,
+                            depvar = depvar, treatment = treatment,
+                            treated = treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
 
     if(!quietly){
       return(.self$sim.out$TE)  # The $get_qi() method may generalize, otherwise, write a $getter.
