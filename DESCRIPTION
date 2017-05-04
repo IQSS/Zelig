@@ -29,7 +29,7 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.1-0.90000
-Date: 2017-04-21
+Date: 2017-05-02
 Depends:
     survival
 Imports:
@@ -92,9 +92,11 @@ Collate:
     'model-lognorm.R'
     'model-exp.R'
     'model-negbinom.R'
+    'model-ivreg.R'
     'model-ls.R'
     'utils.R'
     'create-json.R'
+    'datasets.R'
     'interface.R'
     'model-survey.R'
     'model-binchoice-survey.R'

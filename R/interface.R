@@ -222,7 +222,7 @@ zelig_setx_to_df <- function(obj) {
 #' @author Christopher Gandrud
 #'
 #' @md
-#' @internal
+#' @keywords internal
 
 extract_setx <- function(obj, which_x = 'x', only_setx = FALSE) {
 
@@ -278,7 +278,7 @@ extract_setx <- function(obj, which_x = 'x', only_setx = FALSE) {
 #' @author Christopher Gandrud
 #'
 #' @md
-#' @internal
+#' @keywords internal
 
 extract_setrange <- function(obj, which_range = 'range', only_setx = FALSE) {
 
@@ -338,7 +338,7 @@ extract_setrange <- function(obj, which_range = 'range', only_setx = FALSE) {
 #'   \code{\link{extract_setrange}}
 #'
 #' @author Christopher Gandrud
-#' @internal
+#' @keywords internal
 
 factor_coef_combine <- function(obj, fitted) {
 
@@ -384,7 +384,7 @@ factor_coef_combine <- function(obj, fitted) {
 #'
 #' @details A tidy-formatted data frame with the following columns:
 #'
-#'   - The values fitted with \code{\link{setx}
+#'   - The values fitted with \code{\link{setx}}
 #'   - `qi_ci_min`: the minimum value of the central interval specified with
 #'   `ci`
 #'   - `qi_ci_median`: the median of the simulated quantity of interest
@@ -508,7 +508,7 @@ qi_slimmer <- function(df, qi_type = 'ev', ci = 0.95) {
 #' or the equivalent `(0, 1]` interval.
 #'
 #' @md
-#' @internal
+#' @keywords internal
 
 ci_check <- function(x) {
     if (x > 1 & x <= 100) x <- x / 100

@@ -254,13 +254,19 @@ z$methods(
         is_matched <- FALSE
     }
 
-    # Without dots for single and multiple equations#
+    # Without dots for single and multiple equations
     temp_formula <- as.Formula(formula)
     if (sum(length(temp_formula)) <= 2)
         .self$formula <- as.Formula(terms(temp_formula, data = localdata))
-    else if (sum(length(temp_formula)) > 2)
-        .self$formula <- as.Formula(attr(terms(temp_formula, data = localdata),
-                                                "Formula_without_dot"))
+    else if (sum(length(temp_formula)) > 2) {
+        f_dots <- attr(terms(temp_formula, data = localdata), "Formula_without_dot")
+        if (!is.null(f_dots))
+           # .self$formula <- as.Formula(f_dots)
+           stop('formula expansion not currently supported for formulas with multiple equations.\nPlease directly specify the variables in the formula call.',
+                call. = FALSE)
+        else
+            .self$formula <- as.Formula(formula)
+    }
 
     # Convert factors and logs converted internally to the zelig call
     form_factors <- transformer(.self$formula, FUN = 'factor', check = TRUE)
@@ -275,6 +281,9 @@ z$methods(
             .self$data <- localdata
         }
         if (form_logs) {
+            if (.self$name == 'ivreg')
+                stop('logging values in the zelig call is not currently supported for ivreg models.',
+                     call. = FALSE)
             localformula <- transformer(formula, data = localdata, FUN = 'log',
                                         f_out = TRUE)
             localdata <- transformer(formula, data = localdata, FUN = 'log',
@@ -1223,20 +1232,56 @@ z$methods(
 z$methods(
   mcunit = function(nsim = 500, minx = -2, maxx = 2, b0 = 0, b1 = 1, alpha = 1,
                     ci = 0.95, plot = TRUE, ...){
-
     passes <- TRUE
     n.short <- 10      # number of p
     alpha.ci <- 1 - ci   # alpha values for ci bounds, not speed parameter
-    x.sim <- runif(n=nsim, min=minx, max=maxx)
-    x.seq <- seq(from=minx, to=maxx, length = nsim)
-
-    data.hat <- .self$mcfun(x=x.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
-    if(!is.data.frame(data.hat)){
-      data.hat <- data.frame(x.seq=x.seq, y.hat=data.hat)
+    if (.self$name %in% "ivreg") {
+        z.sim <- runif(n = nsim, min = minx, max = maxx)
+        z.seq <- seq(from = minx, to = maxx, length = nsim)
+        h.sim <- runif(n = nsim, min = minx, max = maxx)
+        h.seq <- seq(from = minx, to = maxx, length = nsim)
     }
-    data.sim <- .self$mcfun(x=x.sim, b0=b0, b1=b1, alpha=alpha, ..., sim=TRUE)
+    else {
+        x.sim <- runif(n = nsim, min = minx, max = maxx)
+        x.seq <- seq(from = minx, to = maxx, length = nsim)
+    }
+
+
+    if (.self$name %in% "ivreg") {
+        data.hat <- .self$mcfun(z = z.seq, h = h.seq,
+                                b0 = b0, b1 = b1, alpha = alpha,
+                                ..., sim = FALSE)
+        x.seq <- unlist(data.hat[2])
+        data.hat <- unlist(data.hat[1])
+    }
+    else
+        data.hat <- .self$mcfun(x = x.seq, b0 = b0, b1 = b1, alpha = alpha,
+                                 ..., sim = FALSE)
+    if(!is.data.frame(data.hat)){
+        if (.self$name %in% "ivreg") {
+            data.hat <- data.frame(x.seq = x.seq, z.seq = z.seq, h.seq = h.seq,
+                                   y.hat = data.hat)
+        }
+        else
+            data.hat <- data.frame(x.seq = x.seq, y.hat = data.hat)
+    }
+    if (.self$name %in% "ivreg") {
+        data.sim <- .self$mcfun(z = z.sim, h = h.sim,
+                                b0 = b0, b1 = b1, alpha = alpha, ...,
+                                sim = TRUE)
+        x.sim <- unlist(data.hat[2])
+        data.sim <- unlist(data.hat[1])
+    }
+    else
+        data.sim <- .self$mcfun(x = x.sim, b0 = b0, b1 = b1, alpha = alpha, ...,
+                                sim = TRUE)
     if(!is.data.frame(data.sim)){
-      data.sim <- data.frame(x.sim=x.sim, y.sim=data.sim)
+        if (.self$name %in% "ivreg") {
+            data.sim <- data.frame(x.sim = x.sim, z.sim = z.sim, h.sim = h.sim,
+                                   y.sim = data.sim)
+        }
+        else
+            data.sim <- data.frame(x.sim = x.sim, y.sim = data.sim)
     }
 
     ## Estimate Zelig model and create numerical bounds on expected values
@@ -1247,53 +1292,59 @@ z$methods(
     ## Instead, remove formula field and set by hard code
     .self$mcformula <- NULL
     if(.self$name %in% c("exp", "weibull", "lognorm")){
-      .self$zelig(Surv(y.sim,event) ~ x.sim, data = data.sim)
+        .self$zelig(Surv(y.sim, event) ~ x.sim, data = data.sim)
     } else if (.self$name %in% c("relogit")) {
-      tau <- sum(data.sim$y.sim)/nsim
-      .self$zelig(y.sim ~ x.sim, tau = tau, data = data.sim)
-    } else {
+        tau <- sum(data.sim$y.sim)/nsim
+        .self$zelig(y.sim ~ x.sim, tau = tau, data = data.sim)
+    } else if (.self$name %in% "ivreg") {
+        .self$zelig(y.sim ~ x.sim | z.sim + h.sim, data = data.sim)
+    }
+    else {
       .self$zelig(y.sim ~ x.sim, data = data.sim)
     }
 
-    x.short.seq<-seq(from = minx, to = maxx, length = n.short)
+    x.short.seq <- seq(from = minx, to = maxx, length = n.short)
     .self$setrange(x.sim = x.short.seq)
     .self$sim()
 
     if (.self$name %in% c("relogit")) {
-      data.short.hat <- .self$mcfun(x=x.short.seq, b0=b0, b1=b1, alpha=alpha, keepall=TRUE, ..., sim=FALSE)
+      data.short.hat <- .self$mcfun(x = x.short.seq, b0 = b0, b1 = b1,
+          alpha = alpha, keepall = TRUE, ..., sim = FALSE)
     } else {
-      data.short.hat <- .self$mcfun(x=x.short.seq, b0=b0, b1=b1, alpha=alpha, ..., sim=FALSE)
+      data.short.hat <- .self$mcfun(x = x.short.seq, b0 = b0, b1 = b1,
+          alpha = alpha, ..., sim = FALSE)
     }
 
     if(!is.data.frame(data.short.hat)){
-      data.short.hat<-data.frame(x.seq=x.short.seq, y.hat=data.short.hat)
+      data.short.hat <- data.frame(x.seq = x.short.seq, y.hat = data.short.hat)
     }
 
-    history.ev <- history.pv <- matrix(NA, nrow=n.short, ncol=2)
+    history.ev <- history.pv <- matrix(NA, nrow = n.short, ncol = 2)
     for(i in 1:n.short){
-      xtemp <- x.short.seq[i]
-      .self$setx(x.sim = xtemp)
-      .self$sim()
-      #temp<-sort( .self$sim.out$x$ev[[1]] )
-      temp <- .self$sim.out$range[[i]]$ev[[1]]
-      # This is for ev's that are a probability distribution across outcomes, like ordered logit/probit
-      if(ncol(temp) > 1){
-        temp <- temp %*% as.numeric(sort(unique(data.sim$y.sim)))  #as.numeric(colnames(temp))
-      }
-      temp <- sort(temp)
+        xtemp <- x.short.seq[i]
+        .self$setx(x.sim = xtemp)
+        .self$sim()
+        #temp<-sort( .self$sim.out$x$ev[[1]] )
+        temp <- .self$sim.out$range[[i]]$ev[[1]]
+        # This is for ev's that are a probability distribution across outcomes, like ordered logit/probit
+        if(ncol(temp) > 1){
+            temp <- temp %*% as.numeric(sort(unique(data.sim$y.sim)))  #as.numeric(colnames(temp))
+        }
+        temp <- sort(temp)
 
-      #calculate bounds of expected values
-      history.ev[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
-      history.ev[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
-      #temp<-sort( .self$sim.out$x$pv[[1]] )
-      temp<-sort( .self$sim.out$range[[i]]$pv[[1]] )
+        # calculate bounds of expected values
+        history.ev[i,1] <- temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
+        history.ev[i,2] <- temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
+        #temp<-sort( .self$sim.out$x$pv[[1]] )
+        temp <- sort( .self$sim.out$range[[i]]$pv[[1]] )
 
-      #check that ci contains true value
-      passes <- passes & (min(history.ev[i,]) <= data.short.hat$y.hat[i] ) & (max(history.ev[i,]) >= data.short.hat$y.hat[i] )
+        # check that ci contains true value
+        passes <- passes & (min(history.ev[i,]) <= data.short.hat$y.hat[i] ) &
+                           (max(history.ev[i,]) >= data.short.hat$y.hat[i] )
 
-      #calculate bounds of predicted values
-      history.pv[i,1]<-temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
-      history.pv[i,2]<-temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
+        #calculate bounds of predicted values
+        history.pv[i,1] <- temp[max(round(length(temp)*(alpha.ci/2)),1) ]     # Lower ci bound
+        history.pv[i,2] <- temp[round(length(temp)*(1 - (alpha.ci/2)))]       # Upper ci bound
     }
 
     ## Plot Monte Carlo Data

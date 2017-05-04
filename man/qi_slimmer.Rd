@@ -21,6 +21,18 @@ central intervals for the expected value or predicted value, respectively.}
 Find the median and a central interval of simulated quantity of interest
 distributions
 }
+\details{
+A tidy-formatted data frame with the following columns:
+\itemize{
+\item The values fitted with \code{\link{setx}}
+\item \code{qi_ci_min}: the minimum value of the central interval specified with
+\code{ci}
+\item \code{qi_ci_median}: the median of the simulated quantity of interest
+distribution
+\item \code{qi_ci_max}: the maximum value of the central interval specified with
+\code{ci}
+}
+}
 \examples{
 library(dplyr)
 qi.central.interval <- zelig(Petal.Width ~ Petal.Length + Species,

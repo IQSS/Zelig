@@ -3,7 +3,7 @@ import(sandwich, methods, survival, jsonlite, dplyr,
 
 importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm", "gamma.shape")
 importFrom("VGAM", "vglm")
-importFrom("AER", "tobit")
+importFrom("AER", "tobit", "ivreg")
 importFrom("quantreg", "rq", "summary.rq", "bandwidth.rq")
 importFrom("grDevices", "col2rgb", "heat.colors", "rgb")
 importFrom("graphics", "abline", "axis", "barplot", "box", "image",
@@ -26,6 +26,7 @@ exportClasses(
      "Zelig",
      "Zelig-ls",
      "Zelig-glm",
+     "Zelig-ivreg",
      "Zelig-binchoice",
      "Zelig-logit",
      "Zelig-probit",

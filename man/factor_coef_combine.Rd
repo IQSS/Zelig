@@ -19,3 +19,4 @@ Return individual factor coefficient fitted values to single factor variable
 \author{
 Christopher Gandrud
 }
+\keyword{internal}

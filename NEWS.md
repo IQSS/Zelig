@@ -9,6 +9,13 @@ Zelig version 5.1-0
 
 ## Major changes
 
+-   Introduce a new model type for instrumental-variable regression: `ivreg`
+based on the `ivreg` from the AER package. #223
+
+-   Use the Formula package for formulas. This will enable a common syntax for
+multiple equations, though currently in Core Zelig it is only
+enhances `ivreg`. #241
+
 -   `zelig` calls now support `update`ing formulas (#244) and `.` syntax for
 inserting all variables from `data` on the right-hand side of the formula
 #87. See also #247.
@@ -30,9 +37,12 @@ inserting all variables from `data` on the right-hand side of the formula
 -   Switch `bind_rows` for `rbind_all` in `zquantile` as the latter is depricated.
 #255
 
--   Depends on the survival package in order to enable `setx` for exp models
-without explicitly loading survival. #254
+-   Depends on the survival package in order to enable `setx` for exponential
+models without explicitly loading survival. #254
 
+-   `relogit` now only accepts one `tau` per call. Fixed to address #257.
+
+- Additional unit tests.
 
 Zelig version 5.0-17
 ==============================

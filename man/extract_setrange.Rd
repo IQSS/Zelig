@@ -24,3 +24,4 @@ Extract setrange to return as tidy formatted data frame
 \author{
 Christopher Gandrud
 }
+\keyword{internal}
