@@ -8,7 +8,7 @@
   vignettes: yes
   website:
     openscholar: no
-    pkgdown_website: no
+    pkgdown_website: yes
 License:
   gpl3_license: yes
 Version_Control:
@@ -20,7 +20,7 @@ Testing:
   uses_appveyor: yes
   build_check:
     build_check_completed: yes
-    no_check_warnings: yes
+    no_check_warnings: no
     no_check_errors: yes
     no_check_notes: no
   test_coverage: 90
@@ -28,7 +28,7 @@ Background:
   package_name: Zelig
   package_version: 5.1-0.90000
   package_language: R
-  package_commit_sha: 6b20356ea3672e1683087904ecdfefbf90528461
+  package_commit_sha: 69c74fbf0b0f38b609134ee98984c6b8225397b4
   iqss_bestpractices_version: 0.0.0.9000
   iqssdevtools_version: 0.0.0.9000
-  check_time: 2017-05-08 11:47:09
+  check_time: 2017-05-08 13:54:37

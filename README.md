@@ -94,25 +94,8 @@ function with three two arguments: equation, model type, and data:
     # model summary
     summary(z5_1)
 
-    ## Model: 
-    ## 
-    ## Call:
-    ## z5$zelig(formula = Fertility ~ Education, data = swiss)
-    ## 
-    ## Residuals:
-    ##     Min      1Q  Median      3Q     Max 
-    ## -17.036  -6.711  -1.011   9.526  19.689 
-    ## 
-    ## Coefficients:
-    ##             Estimate Std. Error t value Pr(>|t|)
-    ## (Intercept)  79.6101     2.1041  37.836  < 2e-16
-    ## Education    -0.8624     0.1448  -5.954 3.66e-07
-    ## 
-    ## Residual standard error: 9.446 on 45 degrees of freedom
-    ## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
-    ## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
-    ## 
-    ## Next step: Use 'setx' method
+    ##   Length    Class     Mode 
+    ##        1 Zelig-ls       S4
 
 The NA coefficient on education suggests a negative relationship between
 the education of a province and its fertility rate. More precisely, for
@@ -134,14 +117,8 @@ educated from 5 to 15. To do so, we set our predictor value using the
     # model summary
     summary(z5_1)
 
-    ## setx:
-    ##   (Intercept) Education
-    ## 1           1         5
-    ## setx1:
-    ##   (Intercept) Education
-    ## 1           1        15
-    ## 
-    ## Next step: Use 'sim' method
+    ##   Length    Class     Mode 
+    ##        1 Zelig-ls       S4
 
 After setting our predictor value, we simulate using the `sim()` method:
 
@@ -151,27 +128,8 @@ After setting our predictor value, we simulate using the `sim()` method:
     # model summary
     summary(z5_1)
 
-    ## 
-    ##  sim x :
-    ##  -----
-    ## ev
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 75.23814 1.636489 75.25249 72.07204 78.51565
-    ## pv
-    ##         mean       sd      50%     2.5%    97.5%
-    ## [1,] 74.7525 9.336545 74.85367 56.46302 92.90153
-    ## 
-    ##  sim x1 :
-    ##  -----
-    ## ev
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.60888 1.479171 66.61972 63.89878 69.52708
-    ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.22548 9.512409 66.15593 45.80759 84.66063
-    ## fd
-    ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.629258 1.488922 -8.560663 -11.44462 -5.816963
+    ##   Length    Class     Mode 
+    ##        1 Zelig-ls       S4
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`

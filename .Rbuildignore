@@ -2,10 +2,15 @@
 ^\.Rproj\.user$
 .gitignore
 images
-README.md
+README.Rmd
 .travis.yml
 ^appveyor\.yml$
 ^README\.Rmd$
 ^README_files/*
+index*
+_pkgdown.yml
+docs/*
+vignettes/_static/*
 ^\.iqss_reportcard\.yml$
-^docs$
+check_build_zelig.R
+vignettes/*
