@@ -1,0 +1,68 @@
+---
+title: "About Zelig"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{About}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_knit$set(
+  stop_on_error = 2L
+)
+```
+
+## Contact 
+
+We love to get feedback on how to improve Zelig.
+
+<i class="fa fa-comment-o" aria-hidden="true"></i> If you have questions and 
+suggestions improvements, we'd love to hear from you! You can get in touch via: 
+
+- <a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>,
+
+- <a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, 
+
+- <a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat <i class="fa fa-comments-o" aria-hidden="true"></i></a>. 
+
+<i class="fa fa-code" aria-hidden="true"></i> You can even make your R packages 
+usable from Zelig by writinga few simple bridge functions. Checkout the 
+[Developer's Guide](articles/developers-guide.html) for details.
+
+## Team
+
+The Zelig project is based at the [Institute for Quantitative Social Science 
+at Harvard University](http://www.iq.harvard.edu/).
+
+- Principal Investigator: [Gary King](http://gking.harvard.edu/)
+
+- Zelig Core Team: [Christine Choirat](http://scholar.harvard.edu/cchoirat), 
+[Christopher Gandrud](http://www.iq.harvard.edu/people/christopher-gandrud), 
+[James Honaker](http://hona.kr/), [Ista Zahn](http://www.iq.harvard.edu/people/ista-zahn)
+
+- Original Authors: [Kosuke Imai](http://imai.princeton.edu/), 
+[Gary King](http://gking.harvard.edu/), [Olivia Lau](http://www.olivialau.org/)
+
+- Supervisor: [Mercè Crosas](http://www.iq.harvard.edu/people/merce-crosas)
+
+## Citation
+
+```{r echo=FALSE, background='ffffff', comment=''}
+citation('Zelig')
+```
+
+We also thank all contributors to the Zelig project, including: Vito D’Orazio, 
+Jennifer McGrath, Muhammed Y. Idris, Ista Zhan, Justin Grimmer, Jason Wittenberg, 
+Badri Narayan Bhaskar, Skyler J. Cranmer, Ben Goodrich, Ying Lu, Patrick Lam, 
+Nicholas Carnes, Alexander D’Amour, Delia Bailey, Ferdinand Alimadhi, 
+Elena Villalon, Matt Owen.
+
+## Our Name
+
+<img style="float:left; padding-right:20px" src="http://static.projects.iq.harvard.edu/files/styles/os_files_medium/public/zelig/files/zelig.jpeg?m=1422475972&itok=3vCGTOgl"/>
+
+**Zelig (noun) /ˈzɛlɪɡ/** : An entity with chameleon like characteristics, able to change appearance and form to fit appropriately in any circumstance.
+
+Leonard Zelig was born in Brooklyn, New York at the turn of the century into a Jewish immigrant family. He gained notoriety and celebrity status during the 1920s due to his supernatural ability to look and act like whomever was around him. F. Scott Fitzgerald penned in his memoirs of meeting Leonard Zellman, a charming and impeccably dressed aristocrat, at an affluent garden party in Long Island. Lou Zelig turned up soon after at the New York Yankees spring training camp in Florida. Later, he was seen as a member of Al Capone’s Cosa Nostra and a black jazz musician in Chicago. Leonard inspired Woody Allen’s 1983 fictionalized documentary film, Zelig, about this "chameleon man"" who changed his appearance and persona to comfortably blend into his surroundings and integrate himself into important historical events. Similarly, Zelig: Everyone's Statistical Software is intended to fit in every situation, and to work for every model and approach.

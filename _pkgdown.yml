@@ -1,0 +1,142 @@
+template:
+  params:
+    bootswatch: paper
+
+navbar:
+  title: "Zelig Project"
+  type: inverse
+  left:
+    - text: "Quickstart"
+      href: "articles/quickstart.html"
+    - text: "Vignettes"
+      href: "articles/index.html"
+      menu:
+        - text: "Zelig Overview"
+          href: "articles/index.html#section-zelig-overview"
+        - text: "Zelig Model Details"
+          href: "articles/index.html#section-core-zelig-model-details"
+        - text: "Other"
+          href: "articles/index.html#section-other"
+    - text: "Function Reference"
+      href: "reference/index.html"
+      menu:
+        - text: "Workflow"
+          href: "reference/index.html#section-main-zelig-workflow"
+        - text: "Estimation Methods"
+          href: "reference/index.html#section-estimation-methods"
+        - text: "Interacting Outside of Zelig"
+          href: "reference/index.html#section-exterior-interaction-functions"
+  right:
+    - text: "About"
+      menu:
+        - text: "Contact/Development Team/Citation"
+          href: "articles/about.html"
+        - text: "Development Roadmap"
+          href: "articles/roadmap.html"
+        - text: "Zelig Adoption Metrics"
+          href: "https://iqss.github.io/rpackagemetrics/"
+        - text: "Statistical Software Devepment Reportcard"
+          href: "https://raw.githubusercontent.com/IQSS/Zelig/master/.iqss_reportcard.yml"
+    - text: "Dev-Blog"
+      icon: fa-medium
+      href: https://medium.com/zelig-dev/archive
+    - icon: fa-twitter fa-2x
+      href: https://twitter.com/zeligproject
+    - icon: fa-github fa-2x
+      href: https://github.com/IQSS/Zelig
+
+articles:
+  - title: "Zelig Overview"
+    contents:
+      - available_models_overview
+      - bootstraps
+      - diagnostics
+      - getters
+      - quickstart
+      - transforming_covariates
+      - using_Zelig_with_Amelia
+      - using_Zelig_with_MatchIt
+      - weights
+      - zelig5_vs_zelig4
+      - zelig_tidyverse
+  - title: "Core Zelig Model Details"
+    contents:
+      - zelig_ar
+      - zelig_arima
+      - zelig_exp
+      - zelig_factorbayes
+      - zelig_gamma
+      - zelig_gammagee
+      - zelig_gammasurvey
+      - zelig_ivreg
+      - zelig_logit
+      - zelig_logitbayes
+      - zelig_logitgee
+      - zelig_logitsurvey
+      - zelig_lognorm
+      - zelig_ls
+      - zelig_ma
+      - zelig_mlogitbayes
+      - zelig_negbin
+      - zelig_normal
+      - zelig_normalbayes
+      - zelig_normalgee
+      - zelig_normalsurvey
+      - zelig_oprobitbayes
+      - zelig_poisson
+      - zelig_poissonbayes
+      - zelig_poissonsurvey
+      - zelig_probit
+      - zelig_probitbayes
+      - zelig_probitgee
+      - zelig_probitsurvey
+      - zelig_quantile
+      - zelig_relogit
+      - zelig_tobit
+      - zelig_tobitbayes
+      - zelig_weibull
+  - title: "Zelig Choice Model Details"
+    contents:
+      - zeligchoice_blogit
+      - zeligchoice_bprobit
+      - zeligchoice_mlogit
+      - zeligchoice_ologit
+      - zeligchoice_oprobit
+  - title: "Zelig Ecological Inference (EI) Model Details"
+    contents:
+      - zeligei_eidynamic
+      - zeligei_eihier
+      - zeligei_eiml
+      - zeligei_eirxc
+#  - title: "Zelig Generalized Additive Model Details"
+#    contents:
+#        - zeliggam_logitgam
+  - title: "Other"
+    contents:
+      - about
+      - developers_guide
+
+reference:
+  - title: "Main Zelig Workflow"
+    desc: >
+      The main functions Zelig's estimate, set fitted values, simulate, and plot
+      workflow
+    contents:
+      - zelig
+      - setx
+      - sim
+  - title: "Estimation Methods (under development)"
+    desc: >
+      Methods for finding parameter estimates
+    contents:
+      - zls
+      - zlogit
+      - zivreg
+  - title: "Exterior Interaction Functions"
+    desc: >
+      Functions for helping Zelig interact with the non-Zelig R world
+    contents:
+      - from_zelig_model
+      - to_zelig_mi
+      - zelig_qi_to_df
+      - qi_slimmer

@@ -1,0 +1,200 @@
+---
+title: "Poisson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-poisson}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Poisson Regression for Event Count Dependent Variables with `poisson`.
+
+Use the Poisson regression model if the observations of your dependent
+variable represents the number of independent events that occur during a
+fixed period of time (see the negative binomial model, , for
+over-dispersed event counts.) For a Bayesian implementation of this
+model, see .
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zpoisson$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "poisson", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Example
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+Load sample data:
+
+```{r, eval = TRUE}
+data(sanction)
+```
+
+Estimate Poisson model:
+
+```{r, eval = TRUE}
+z.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
+```
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Set values for the explanatory variables to their default mean values, while changing the $coop$ variable across its range:
+
+```{r, eval = TRUE}
+x.low <- setx(z.out, coop = 1)
+x.high <- setx1(z.out, coop = 4)
+```
+
+Simulate fitted values:
+
+```{r, eval = TRUE}
+s.out <- sim(z.out, x = x.low, x1=x.high)
+summary(s.out)
+```
+
+```{r Zelig-poisson, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-poisson"}
+plot(s.out)
+```
+
+Model
+------
+
+Let $Y_i$ be the number of independent events that occur during a
+fixed time period. This variable can take any non-negative integer.
+
+-  The Poisson distribution has *stochastic component*
+
+
+$$
+    Y_i \; \sim \; \textrm{Poisson}(\lambda_i),
+$$
+
+   where $\lambda_i$ is the mean and variance parameter.
+
+-  The *systematic component* is
+
+
+$$
+    \lambda_i \; = \; \exp(x_i \beta),
+$$
+
+   where $x_i$ is the vector of explanatory variables, and
+   $\beta$ is the vector of coefficients.
+
+Quantities of Interest
+------
+
+-  The expected value (qi$ev) is the mean of simulations from the
+   stochastic component,
+
+
+$$
+    E(Y) = \lambda_i =  \exp(x_i
+        \beta),
+$$
+
+   given draws of $\beta$ from its sampling distribution.
+
+-  The predicted value (qi$pr) is a random draw from the poisson
+   distribution defined by mean $\lambda_i$.
+
+-  The first difference in the expected values (qi$fd) is given by:
+
+
+$$
+    \textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $\widehat{Y_i(t_i=0)}$, the counterfactual predicted value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The poisson model is part of the stats package by the R Core Team. Advanced users may
+wish to refer to `help(glm)` and `help(family)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zpoisson$new()
+z5$references()
+```

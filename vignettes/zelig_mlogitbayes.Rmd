@@ -1,0 +1,341 @@
+---
+title: "Multinomial Logistic Bayes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-mlogitbayes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Bayesian Multinomial Logistic Regression
+
+Use Bayesian multinomial logistic regression to model unordered
+categorical variables. The dependent variable may be in the format of
+either character strings or integer values. The model is estimated via a
+random walk Metropolis algorithm or a slice sampler. See for the
+maximum-likelihood estimation of this model.
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zmlogitbayes$new()
+z5$zelig(Y ~ X1 + X2, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "mlogit.bayes", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Additional Inputs
+------
+
+zelig() accepts the following arguments for mlogit.bayes:
+
+-  `baseline`: either a character string or numeric value (equal to
+   one of the observed values in the dependent variable) specifying a
+   baseline category. The default value is `NA` which sets the
+   baseline to the first alphabetical or numerical unique value of the
+   dependent variable.
+
+The model accepts the following additional arguments to monitor the
+Markov chains:
+
+-  `burnin`: number of the initial MCMC iterations to be discarded
+   (defaults to 1,000).
+
+-  `mcmc`: number of the MCMC iterations after burnin (defaults to
+   10,000).
+
+-  `thin`: thinning interval for the Markov chain. Only every
+   `thin`-th draw from the Markov chain is kept. The value of `mcmc`
+   must be divisible by this value. The default value is 1.
+
+-  `mcmc.method`: either “MH” or “slice”, specifying whether to use
+   Metropolis Algorithm or slice sampler. The default value is `MH`.
+
+-  `tune`: tuning parameter for the Metropolis-Hasting step, either a
+   scalar or a numeric vector (for $k$ coefficients, enter a
+   $k$ vector). The tuning parameter should be set such that the
+   acceptance rate is satisfactory (between 0.2 and 0.5). The default
+   value is 1.1.
+
+-  `verbose`: defaults to `FALSE`. If `TRUE`, the progress of the
+   sampler (every $10\%$) is printed to the screen.
+
+-  `seed`: seed for the random number generator. The default is `NA`
+   which corresponds to a random seed of 12345.
+
+-  `beta.start`: starting values for the Markov chain, either a scalar
+   or a vector (for $k$ coefficients, enter a $k$ vector).
+   The default is `NA` where the maximum likelihood estimates are used
+   as the starting values.
+
+Use the following arguments to specify the priors for the model:
+
+-  `b0`: prior mean for the coefficients, either a scalar or vector.
+   If a scalar, that value will be the prior mean for all the
+   coefficients. The default is 0.
+
+-  `B0`: prior precision parameter for the coefficients, either a
+   square matrix with the dimensions equal to the number of coefficients
+   or a scalar. If a scalar, that value times an identity matrix will be
+   the prior precision parameter. The default is 0 which leads to an
+   improper prior.
+
+Zelig users may wish to refer to `help(MCMCmnl)` for more information.
+
+Examples
+------
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressPackageStartupMessages(suppressWarnings(library(Zelig)))
+set.seed(1234)
+```
+
+### Basic Example
+
+Attaching the sample dataset:
+
+```{r, eval = TRUE}
+data(mexico)
+```
+
+Estimating multinomial logistics regression using `mlogit.bayes`:
+
+```{r, eval = TRUE}
+z.out <- zelig(vote88 ~ pristr + othcok + othsocok,
+               model = "mlogit.bayes", data = mexico,
+               verbose = FALSE)
+```
+
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section [Diagnostics for Zelig Models](diagnostics.html) for examples of the output with interpretation:
+
+```{r, eval = FALSE}
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
+```
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Setting values for the explanatory variables to their sample
+averages:
+
+```{r, eval = FALSE}
+x.out <- setx(z.out)
+```
+
+Simulating quantities of interest from the posterior distribution
+given `x.out`.
+
+```{r, eval = FALSE}
+s.out1 <- sim(z.out, x = x.out)
+summary(s.out1)
+```
+
+```{r Zelig-mlogitbayes1, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Multinomial Logit Bayes"}
+plot(s.out1)
+```
+
+### Simulating First Differences
+
+Estimating the first difference (and risk ratio) in the
+probabilities of voting different candidates when `pristr` (the
+strength of the PRI) is set to be weak (equal to 1) versus strong
+(equal to 3) while all the other variables held at their default
+values.
+
+```{r, eval = FALSE}
+x.weak <- setx(z.out, pristr = 1)
+x.strong <- setx(z.out, pristr = 3)
+s.out2 <- sim(z.out, x = x.strong, x1 = x.weak)
+summary(s.out2)
+```
+
+```{r Zelig-mlogitbayes2, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Multinomial Logit Bayes"}
+plot(s.out2)
+```
+
+Model
+------
+
+Let $Y_{i}$ be the (unordered) categorical dependent variable for
+observation $i$ which takes an integer values
+$j=1, \ldots, J$.
+
+-  The *stochastic component* is given by:
+
+
+$$
+    \begin{aligned}
+        Y_{i} &\sim& \textrm{Multinomial}(Y_i \mid \pi_{ij}),
+    \end{aligned}
+$$
+
+   where $\pi_{ij}=\Pr(Y_i=j)$ for $j=1, \ldots, J$.
+
+-  The *systematic component* is given by
+
+
+$$
+    \begin{aligned}
+        \pi_{ij}=\frac{\exp(x_i\beta_j)}{\sum_{k=1}^J \exp(x_i\beta_k)},
+      \textrm{ for } j=1,\ldots, J-1,
+    \end{aligned}
+$$
+
+   where $x_{i}$ is the vector of $k$ explanatory variables
+   for observation $i$ and $\beta_j$ is the vector of
+   coefficient for category $j$. Category $J$ is assumed to
+   be the baseline category.
+
+-  The *prior* for $\beta$ is given by
+
+
+$$
+    \begin{aligned}
+        \beta_j \sim \textrm{Normal}_k\left(  b_{0},B_{0}^{-1}\right)
+      \textrm{ for } j = 1, \ldots, J-1,
+    \end{aligned}
+$$
+
+   where $b_{0}$ is the vector of means for the $k$
+   explanatory variables and $B_{0}$ is the $k \times k$
+   precision matrix (the inverse of a variance-covariance matrix).
+
+Quantities of Interest
+------
+
+-  The expected values (`qi$ev`) for the multinomial logistics
+   regression model are the predicted probability of belonging to each
+   category:
+
+
+$$
+    \begin{aligned}
+        \Pr(Y_i=j)=\pi_{ij}=\frac{\exp(x_i \beta_j)}{\sum_{k=1}^J \exp(x_J
+      \beta_k)}, \quad \textrm{ for } j=1,\ldots, J-1,
+     \end{aligned}
+$$
+
+   and
+
+$$
+    \begin{aligned}
+        \Pr(Y_i=J)=1-\sum_{j=1}^{J-1}\Pr(Y_i=j)
+    \end{aligned}
+$$
+
+   given the posterior draws of $\beta_j$ for all categories from
+   the MCMC iterations.
+
+-  The predicted values (`qi$pr`) are the draws of $Y_i$ from a
+   multinomial distribution whose parameters are the expected
+   values(\ `qi$ev`) computed based on the posterior draws of
+   $\beta$ from the MCMC iterations.
+
+-  The first difference (`qi$fd`) in category $j$ for the
+   multinomial logistic model is defined as
+
+
+$$
+    \begin{aligned}
+        \text{FD}_j=\Pr(Y_i=j\mid X_{1})-\Pr(Y_i=j\mid X).
+    \end{aligned}
+$$
+
+-  The risk ratio (`qi$rr`) in category $j$ is defined as
+
+
+$$
+    \begin{aligned}
+        \text{RR}_j=\Pr(Y_i=j\mid X_{1})\ /\ \Pr(Y_i=j\mid X).
+    \end{aligned}
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (`qi$att.ev`) for the treatment group in category $j$
+   is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{n_j}\sum_{i:t_{i}=1}^{n_j}[Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)]],
+    \end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups, and
+   $n_j$ is the number of treated observations in category
+   $j$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (`qi$att.pr`) for the treatment group in category $j$
+   is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{n_j}\sum_{i:t_{i}=1}^{n_j}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],
+    \end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups, and
+   $n_j$ is the number of treated observations in category
+   $j$.
+
+Output Values
+------
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run:
+
+```{r, eval = FALSE}
+    z.out <- zelig(y ~ x, model = "mlogit.bayes", data)
+```
+
+then you may examine the available information in `z.out` by using
+`names(z.out)`, see the draws from the posterior distribution of the
+`coefficients` by using `z.out$coefficients`, and view a default
+summary of information through `summary(z.out)`. Other elements
+available through the `$` operator are listed below.
+
+See also
+------
+
+Bayesian logistic regression is part of the MCMCpack library by Andrew
+D. Martin and Kevin M. Quinn . The convergence diagnostics are part of
+the CODA library by Martyn Plummer, Nicky Best, Kate Cowles, Karen Vines, Deepayan Sarkar, Russell Almond.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zmlogitbayes$new()
+z5$references()
+```

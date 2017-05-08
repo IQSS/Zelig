@@ -1,0 +1,103 @@
+---
+title: "Maximum Likelihood Ecological Inference"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zeligei-eiml}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Ecological Inference Model by Maximum Likelihood with `eiml` in ZeligEI.
+
+Syntax
+------
+
+The EI models accept several different formula syntaxes.  If $C1$ and $C2$ are the column totals, and $R1$ and $R2$ are the row totals, and $N=R1_i + R2_i = C1_i + C2_i$ is the total in unit $i$, then the formula can be expressed with just one row and one column, with the totals provided separately as:
+
+```{r, eval = FALSE}
+z.out <- zelig(C1 ~ R1, N = N, data = data)
+```
+
+The argument `N` can be either a numeric vector of the total in each *i*-th unit, or the character name of a variable in the dataset that contains these values.
+
+Or with both rows and columns coupled together, and omitting the totals:
+
+```{r, eval = FALSE}
+z.out <- zelig(cbind(C1,C2) ~ cbind(R1,R2), data = data)
+```
+
+Additionally, if `C1`, `C2`, `R1`, `R2` are percentages rather than counts, then either formula method above is acceptable, however, `N` must always be provided.
+
+First load packages:
+
+```{r, eval = TRUE, message=FALSE}
+library(zeligverse)
+```
+
+Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:
+
+```{r, eval = FALSE}
+z5 <- zeiml$new()
+z5$zelig(C1 ~ R1, N = myN, weights = w, data = myData)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers this looks like:
+
+```{r, eval = FALSE}
+z.out <- zelig(C1 ~ R1, N=N, model = "eiml", weights = w, data = myData)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+set.seed(1234)
+```
+
+We'll use a dataset from the `ei` package, of black and non-black turnout in 141 precincts.
+
+```{r, eval = TRUE}
+library("ei", quietly=TRUE)
+data(sample)
+```
+
+Here is the model estimated in Zelig.
+```{r, eval = TRUE}
+z.out <- zeiml$new()
+z.out$zelig(t ~ x, N = "n", data = sample)
+summary(z.out)
+```
+
+
+See also
+------
+
+This model is part of the ei package by Gary King and Molly Roberts. Advanced users may wish to refer to
+`help(ei)` in the ei package.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+
+z5 <- zeiml$new()
+z5$references()
+```

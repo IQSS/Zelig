@@ -1,0 +1,133 @@
+---
+title: "Wakefield's Hierarchical Ecological Inference"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zeligei-eihier}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Wakefield's Hierarchical Ecological Inference Model with `eihier` in ZeligEI.
+
+Syntax
+------
+
+The EI models accept several different formula syntaxes.  If $C1$ and $C2$ are the column totals, and $R1$ and $R2$ are the row totals, and $N=R1_i + R2_i = C1_i + C2_i$ is the total in unit $i$, then the formula can be expressed with just one row and one column, with the totals provided separately as:
+
+```{r, eval = FALSE}
+z.out <- zelig(C1 ~ R1, N = N, data = data)
+```
+
+The argument `N` can be either a numeric vector of the total in each *i*-th unit, or the character name of a variable in the dataset that contains these values.
+
+Or with both rows and columns coupled together, and omitting the totals:
+
+```{r, eval = FALSE}
+z.out <- zelig(cbind(C1, C2) ~ cbind(R1, R2), data = data)
+```
+
+Additionally, if `C1`, `C2`, `R1`, `R2` are percentages rather than counts, then either formula method above is acceptable, however, `N` must always be provided.
+
+First load packages:
+
+```{r, eval = TRUE, message=FALSE}
+library(zeligverse)
+```
+
+Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:
+
+```{r, eval = FALSE}
+z5 <- zeihier$new()
+z5$zelig(C1 ~ R1, N = myN, weights = w, data = myData)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers this looks like:
+
+```{r, eval = FALSE}
+z.out <- zelig(C1 ~ R1, N = N, model = "eihier", weights = w,
+               data = myData)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+### Additional Inputs
+
+In addition, Zelig accepts the following additional inputs for `eihier` to monitor the convergence of the Markov chain:
+
+* `burnin`: number of the initial MCMC iterations to be discarded (defaults to 5,000).
+* `mcmc`: number of the MCMC iterations after burnin (defaults to 50,000).
+* `thin`: thinning interval for the Markov chain. Only every `thin`-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
+* `verbose`: defaults to FALSE. If TRUE, the progress of the sampler (every 10%) is printed to the screen.
+* `seed`: seed for the random number generator. The default is NA which corresponds to a random seed of 12345.
+
+The model also accepts the following additional arguments to specify prior parameters used in the model:
+
+* `m0`: prior mean of $\mu_0$ (defaults to 0).
+* `M0`: prior variance of $\mu_0$ (defaults to 2.287656).
+* `m1`: prior mean of $\mu_1$ (defaults to 0).
+* `M1`: prior variance of $\mu_1$ (defaults to 2.287656).
+* `a0`: $a0/2$ is the shape parameter for the Inverse Gamma prior on $\sigma_{02}$. The default is 0.825.
+* `b0`: $b0/2$ is the scale parameter for the Inverse Gamma prior on $\sigma_{02}$. The default is 0.0105.
+* `a1`: $a1/2$ is the shape parameter for the Inverse Gamma prior on $\sigma_{12}$. The default is 0.825.
+* `b1`: $b1/2$ is the scale parameter for the Inverse Gamma prior on $\sigma_{12}$. The default is 0.0105.
+
+Users may wish to refer to `help(MCMCdynamicEI)` for more options.
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+set.seed(1234)
+```
+
+We'll use a dataset from the `ei` package, of black and non-black turnout in 141 precincts.
+
+```{r, eval = TRUE}
+library("ei", quietly=TRUE)
+data(sample)
+```
+
+Here is the model estimated in Zelig.
+```{r, eval = TRUE}
+z.out <- zeihier$new()
+z.out$zelig(t ~ x, N = "n", data = sample)
+summary(z.out)
+```
+
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section [Diagnostics for Zelig Models](diagnostics.html) for examples of the output with interpretation:
+
+```{r, eval = FALSE}
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
+```
+
+See also
+------
+
+The Wakefield hierarchical model is part of the MCMCpack package by Andrew Martin, Kevin Quinn, and Jong Hee Park. Advanced users may wish to refer to
+`help(MCMChierEI)` in the MCMCpack package.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zeihier$new()
+z5$references()
+```

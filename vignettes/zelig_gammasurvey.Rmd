@@ -1,0 +1,289 @@
+---
+title: "Gamma Survey"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-gammasurvey}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+
+
+Gamma Regression for Continuous, Positive Dependent Variables with `gamma.survey`.
+
+Use the gamma regression model if you have a positive-valued dependent
+variable such as the number of years a parliamentary cabinet endures, or
+the seconds you can stay airborne while jumping. The gamma distribution
+assumes that all waiting times are complete by the end of the study
+(censoring is not allowed).
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zgammasurvey$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "gamma.survey", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+```
+
+Examples
+------
+
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+### Example 1: User has Existing Sample Weights
+
+Attach sample data and variable names:
+
+```{r, eval = TRUE}
+data(api, package="survey")
+```
+
+In this example, we will estimate a model using
+the percentages of students who receive subsidized
+lunch and an indicator for whether schooling is
+year-round to predict California public schools'
+academic performance index scores:
+
+```{r, eval = TRUE}
+z.out1 <- zelig(api00 ~ meals + yr.rnd, model = "gamma.survey",
+                weights = ~pw, data = apistrat)
+summary(z.out1)
+```
+
+Set explanatory variables to their default (mean/mode) values, and set
+a high (80th percentile) and low (20th percentile) value for "meals,"
+the percentage of students who receive subsidized meals:
+
+```{r, eval = TRUE}
+x.low <- setx(z.out1, meals= quantile(apistrat$meals, 0.2))
+x.high <- setx(z.out1, meals= quantile(apistrat$meals, 0.8))
+```
+
+Generate first differences for the effect of high versus low "meals"
+on academic performance:
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out1, x=x.high, x1=x.low)
+summary(s.out1)
+```
+
+Generate a second set of fitted values and a plot:
+
+```{r Zelig-gammasurvey, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Gamma Survey"}
+plot(s.out1)
+```
+
+### Example 2: User has Details about Complex Survey Design (but not sample weights)
+
+Suppose that the survey house that provided
+the dataset excluded probability weights
+but made other details about the survey
+design available.  We can still estimate
+a model without probability weights that takes
+instead variables that identify each the stratum
+and/or cluster from which each observation was
+selected and the size of the finite sample from
+which each observation was selected.
+
+```{r, eval = TRUE}
+z.out2 <- zelig(api00 ~ meals + yr.rnd, model = "gamma.survey",
+                strata=~stype, fpc=~fpc, data = apistrat)
+summary(z.out2)
+```
+
+Note that these results are identical to the results obtained
+when pre-existing sampling weights were used.  When sampling
+weights are omitted, Zelig estimates them automatically for
+"gamma.survey" models based on the user-defined description
+of sampling designs.  If no description is present, the default
+assumption is equal probability sampling.
+
+The methods `setx()`` and `sim()` can then be run on `z.out2` in the same fashion
+described in Example 1.
+
+### Example 3: User has Replicate Weights
+
+Suppose that the survey house that published
+these data withheld details about the survey
+design and instead published replication weights.
+
+For the purpose of illustration, create a set of
+jk1 replicate weights:
+
+```{r, eval = TRUE}
+library("survey")
+jk1reps <- jk1weights(psu=apistrat$dnum)
+```
+
+Estimate the model regressing api00 on the "meals"
+"yr.rnd" variables.
+
+```{r, eval = TRUE}
+z.out3 <- zelig(api00 ~ meals + yr.rnd, model = "gamma.survey",
+      data = apistrat, repweights=jk1reps$weights,
+      type="JK1")
+summary(z.out3)
+```
+
+Set the explanatory variable "meals" at high and low values
+
+```{r, eval = TRUE}
+x.low <- setx(z.out3, meals= quantile(apistrat$meals, 0.2))
+x.high <- setx(z.out3, meals= quantile(apistrat$meals, 0.8))
+```
+
+Generate first differences for the effect of the high
+versus low concentrations of poverty on school performance
+
+```{r, eval = TRUE}
+s.out3 <- sim(z.out3, x=x.high, x1=x.low)
+summary(s.out3)
+```
+
+Generate a second set of fitted values and a plot:
+
+```{r, eval = TRUE}
+plot(s.out3)
+```
+
+The user should also refer to the gamma model demo, since
+gamma.survey models can take many of the same options as
+gamma models.
+
+
+Model
+------
+
+-  The Gamma distribution with scale parameter $\alpha$ has a
+   *stochastic component*:
+
+
+$$
+    \begin{aligned}
+        Y &\sim& \textrm{Gamma}(y_i \mid \lambda_i, \alpha) \\
+      f(y)  &=& \frac{1}{\alpha^{\lambda_i} \, \Gamma \lambda_i} \, y_i^{\lambda_i
+        - 1} \exp -\left\{ \frac{y_i}{\alpha} \right\}\end{aligned}
+
+   | for $\alpha, \lambda_i, y_i > 0$.
+
+-  The *systematic component* is given by
+
+
+$$
+    \lambda_i = \frac{1}{x_i \beta}
+$$
+
+Quantities of Interest
+------
+
+-  The expected values (qi$ev) are simulations of the mean of the
+   stochastic component given draws of $\alpha$ and $\beta$
+   from their posteriors:
+
+
+$$
+    E(Y) = \alpha \lambda_i.
+$$
+
+-  The predicted values (qi$pr) are draws from the gamma distribution
+   for each given set of parameters $(\alpha, \lambda_i)$.
+
+-  If x1 is specified, sim() also returns the differences in the
+   expected values (qi$fd),
+
+
+$$
+    E(Y \mid x_1) -
+        E(Y \mid x)
+$$
+
+   .
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $\widehat{Y_i(t_i=0)}$, the counterfactual predicted value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The gammasurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may
+wish to refer to `help(glm)` and `help(family)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zgammasurvey$new()
+z5$references()
+```

@@ -1,0 +1,57 @@
+---
+title: "Zelig Development Roadmap"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Development Roadmap}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+  ```{r setup, include=FALSE}
+knitr::opts_knit$set(
+  stop_on_error = 2L
+)
+```
+
+The core focus of the Zelig team in the near future is on a series of releases
+that:
+
+- Substantially improve Zelig's [robustness and stability through the development
+of an extensive test suite](https://medium.com/zelig-dev/testing-zelig-b41961cbfab8#.1cfq1andn)
+
+- [Improve Zelig's documentation](https://medium.com/zelig-dev/documenting-zelig-31e7d2f6c11b#.e5n398uu4)
+
+- Expand what Zelig can do with simulations, including returning them to users in
+standardised data frames and possibly converting graphing functions to
+[ggplot2](http://docs.ggplot2.org/current/).
+
+- Improve Zelig integration with [Amelia](http://gking.harvard.edu/amelia),
+[MatchIt](http://gking.harvard.edu/publications/matchit-nonparametric-preprocessing-parametric-causal-inference),
+and [WhatIf](http://gking.harvard.edu/whatif) packages
+
+- Improve Zelig functionality for small samples, namely diagnostics via jackknife
+variance estimator
+
+- Implement Cox Proportional Hazard models
+
+- Enhance time series models
+
+- Introduce Functionality for research on privacy protected data
+
+- Increase <a href="https://iqss.github.io/rpackagemetrics/">adoption <i class="fa fa-line-chart" aria-hidden="true"></i></a> and build a user
+community
+
+These are on-going projects related to Zelig, which will be released
+periodically as part as related Zelig packages, outside Zelig core:
+
+- Ecological Inference models: [A new Zelig related package](https://github.com/IQSS/ZeligEI)
+
+- Hierarchical models: A new Zelig related package for multilevel models
+
+- GAM: A new Zelig related package
+
+- Improved replication utilities for Zelig results
+
+For more details about on-going development projects, checkout the
+<a href="https://medium.com/zelig-dev/archive"><i class="fa fa-medium" aria-hidden="true"></i> Development Blog</a>.

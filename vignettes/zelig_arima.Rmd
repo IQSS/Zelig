@@ -1,0 +1,120 @@
+---
+title: "ARIMA"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-arima}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Autoregressive and Moving-Average Models with Integration for Time-Series Data
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zarima$new()
+z5$zelig(Y ~ X1 + X2, order = c(1,0,0), data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, order = c(1,0,0), model = "arima", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+### Additional Inputs
+
+In addition, Zelig accepts the following additional inputs for `arima` to specify variables that provide the time index and any cross-sectional element if there are multiple time-series in the same dataset:
+
+-   `ts`: Name of a variable that denotes the time element of the data.  As a variable name, this should be in quotes.  If this is not provided, Zelig will assume that the data is already ordered by time, but if provided, the dataset will be sorted by this variable before estimation.
+
+-   `cs`: Name of a variable that denotes the cross-sectional element of the data, for example, country name in a dataset with time-series across different countries.  As a variable name, this should be in quotes.  If this is not provided, Zelig will assume that all observations come from the same unit over time, and should be pooled, but if provided, individual models will be run in each cross-section.  If `cs` is given as an argument, `ts` must also be provided.
+
+Examples
+------
+
+### Single Series
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+Attach sample data, which has left party seat share and unemployment across time in several countries.  We will subset to just those observations from the United Kingdom:
+
+```{r, eval = TRUE}
+data(seatshare)
+subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
+```
+
+Estimate model:
+
+```{r, eval = TRUE}
+ts.out <- zarima$new()
+ts.out$zelig(unemp ~ leftseat, order = c(1,0,1), data = subset)
+```
+
+Summarize estimated model parameters:
+
+```{r, eval = TRUE}
+summary(ts.out)
+```
+
+Next we simulate what happens when leftseat share drops from a moderately high level of 75 percent, to a rather low level of 25 percent:
+
+```{r, eval = TRUE}
+ts.out$setx(leftseat = 0.75)
+ts.out$setx1(leftseat = 0.25)
+ts.out$sim()
+```
+
+```{r Zelig-arima, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for ARIMA models"}
+plot(ts.out)
+```
+
+### Multiple Series
+
+The dataset contains similar series for 11 different OECD countries, and we could run the same model on each country's data.  Here we need to specify the `ts` and `cs` arguments to identify the names of variables that give the time and cross-section of each observation in the dataset
+
+```{r, eval = TRUE}
+ts.out2 <- zarima$new()
+ts.out2$zelig(unemp ~ leftseat, order = c(1,0,1), ts = "year",
+              cs = "country", data = seatshare)
+summary(ts.out2)
+```
+
+
+
+See Also
+------
+
+The estimator used for ARIMA models is part of the stats package by William N. Venables and Brian D. Ripley .In addition, advanced users may wish to refer to `help(arima)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zarima$new()
+z5$references()
+```

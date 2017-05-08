@@ -29,7 +29,7 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.1-0.90000
-Date: 2017-05-02
+Date: 2017-05-08
 Depends:
     survival
 Imports:
@@ -50,11 +50,17 @@ Imports:
     survey,
     VGAM
 Suggests:
+    ei,
+    eiPack,
     knitr,
+    networkD3,
     optmatch,
     rmarkdown,
     testthat,
-    tidyverse
+    tidyverse,
+    ZeligChoice,
+    ZeligEI,
+    zeligverse
 Collate:
     'assertions.R'
     'model-zelig.R'

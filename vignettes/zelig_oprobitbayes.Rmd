@@ -1,0 +1,383 @@
+---
+title: "Ordered Bayesian Probit"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-oprobitbayes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Bayesian Ordered Probit Regression with `oprobit.bayes`.
+
+Use the ordinal probit regression model if your dependent variables are
+ordered and categorical. They may take either integer values or
+character strings. The model is estimated using a Gibbs sampler with
+data augmentation. For a maximum-likelihood implementation of this
+models, see $probit$.
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zoprobitbayes$new()
+z5$zelig(Y ~ X1 + X2, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "oprobit.bayes", weights = w,
+               data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Additional Inputs
+------
+
+zelig() accepts the following arguments to monitor the Markov chain:
+
+-  `burnin`: number of the initial MCMC iterations to be discarded
+   (defaults to 1,000).
+
+-  `mcmc`: number of the MCMC iterations after burnin (defaults
+   10,000).
+
+-  `thin`: thinning interval for the Markov chain. Only every
+   `thin`-th draw from the Markov chain is kept. The value of `mcmc`
+   must be divisible by this value. The default value is 1.
+
+-  `tune`: tuning parameter for the Metropolis-Hasting step. The
+   default value is `NA` which corresponds to 0.05 divided by the
+   number of categories in the response variable.
+
+-  `verbose`: defaults to FALSE If `TRUE`, the progress of the
+   sampler (every $10\%$) is printed to the screen.
+
+-  `seed`: seed for the random number generator. The default is `NA`
+   which corresponds to a random seed 12345.
+
+-  `beta.start`: starting values for the Markov chain, either a scalar
+   or vector with length equal to the number of estimated coefficients.
+   The default is `NA`, which uses the maximum likelihood estimates as
+   the starting values.
+
+Use the following parameters to specify the model’s priors:
+
+-  `b0`: prior mean for the coefficients, either a numeric vector or a
+   scalar. If a scalar value, that value will be the prior mean for all
+   the coefficients. The default is 0.
+
+-  `B0`: prior precision parameter for the coefficients, either a
+   square matrix (with dimensions equal to the number of coefficients)
+   or a scalar. If a scalar value, that value times an identity matrix
+   will be the prior precision parameter. The default is 0 which leads
+   to an improper prior.
+
+Zelig users may wish to refer to `help(MCMCoprobit)` for more
+information.
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+### Basic Example
+
+Attaching the sample dataset:
+
+```{r, eval = TRUE}
+data(sanction)
+```
+
+Creating an ordered dependent variable:
+
+```{r, eval = TRUE}
+sanction$ncost <- factor(sanction$ncost, ordered = TRUE,
+                         levels = c("net gain", "little effect", "modest loss",
+                             "major loss"))
+```
+
+Estimating ordered probit regression using `oprobit.bayes`:
+
+```{r, eval = TRUE}
+z.out <- zelig(ncost ~ mil + coop, model = "oprobit.bayes",
+               data = sanction, verbose = FALSE)
+```
+
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section [Diagnostics for Zelig Models](diagnostics.html) for examples of the output with interpretation:
+
+```{r, eval = FALSE}
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
+```
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Setting values for the explanatory variables to their sample averages:
+
+```{r, eval = TRUE}
+x.out <- setx(z.out)
+```
+
+Simulating quantities of interest from the posterior distribution given: `x.out`.
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out, x = x.out)
+summary(s.out1)
+```
+
+```{r, eval = TRUE}
+plot(s.out1)
+```
+
+### Simulating First Differences
+
+Estimating the first difference (and risk ratio) in the probabilities
+of incurring different level of cost when there is no military action
+versus military action while all the other variables held at their default values.
+
+```{r, eval = TRUE}
+x.high <- setx(z.out, mil = 0)
+x.low <- setx(z.out, mil = 1)
+```
+
+```{r, eval = TRUE}
+s.out2 <- sim(z.out, x = x.high, x1 = x.low)
+summary(s.out2)
+```
+
+```{r, eval = TRUE}
+plot(s.out2)
+```
+
+Model
+------
+
+Let $Y_{i}$ be the ordered categorical dependent variable for
+observation $i$ which takes an integer value
+$j=1, \ldots, J$.
+
+-  The *stochastic component* is described by an unobserved continuous
+   variable, $Y_i^*$,
+
+
+$$
+    \begin{aligned}
+        Y_{i}^*  \sim \textrm{Normal}(\mu_i, 1).\end{aligned}
+$$
+
+   Instead of $Y_i^*$, we observe categorical variable
+   $Y_i$,
+
+
+$$
+    \begin{aligned}
+        Y_i = j \quad \textrm{ if } \tau_{j-1} \le Y_i^* \le \tau_j \textrm{
+      for } j=1,\ldots, J.
+\end{aligned}
+$$
+
+   where $\tau_j$ for $j=0,\ldots, J$ are the threshold
+   parameters with the following constraints, $\tau_l < \tau_m$
+   for $l < m$, and $\tau_0 = -\infty, \tau_J = \infty$.
+
+   The probability of observing $Y_i$ equal to category $j$
+   is,
+
+
+$$
+    \begin{aligned}
+        \Pr(Y_i=j) &=& \Phi(\tau_j \mid \mu_i)-\Phi(\tau_{j-1} \mid \mu_i)
+      \textrm{ for } j=1,\ldots, J
+    \end{aligned}
+$$
+
+   where $\Phi(\cdot \mid \mu_i)$ is the cumulative distribution
+   function of the Normal distribution with mean $\mu_i$ and
+   variance 1.
+
+-  The *systematic component* is given by
+
+
+$$
+    \begin{aligned}
+        \mu_{i}= x_i \beta,
+    \end{aligned}
+$$
+
+   where $x_{i}$ is the vector of $k$ explanatory variables
+   for observation $i$ and $\beta$ is the vector of
+   coefficients.
+
+-  The *prior* for $\beta$ is given by
+
+
+$$
+    \begin{aligned}
+        \beta \sim \textrm{Normal}_k\left(  b_{0},B_{0}^{-1}\right)
+    \end{aligned}
+$$
+
+   where $b_{0}$ is the vector of means for the $k$
+   explanatory variables and $B_{0}$ is the $k \times k$
+   precision matrix (the inverse of a variance-covariance matrix).
+
+Quantities of Interest
+------
+
+-  The expected values (`qi$ev`) for the ordered probit model are the
+   predicted probability of belonging to each category:
+
+$$
+    \begin{aligned}
+        \Pr(Y_i=j)= \Phi(\tau_j \mid x_i \beta)-\Phi(\tau_{j-1} \mid x_i \beta),
+    \end{aligned}
+$$
+
+   given the posterior draws of $\beta$ and threshold parameters
+   $\tau$ from the MCMC iterations.
+
+-  The predicted values (`qi$pr`) are the observed values of
+   $Y_i$ given the observation scheme and the posterior draws of
+   $\beta$ and cut points $\tau$ from the MCMC iterations.
+
+-  The first difference (`qi$fd`) in category $j$ for the
+   ordered probit model is defined as
+
+
+$$
+    \begin{aligned}
+        \text{FD}_j=\Pr(Y_i=j\mid X_{1})-\Pr(Y_i=j\mid X).
+    \end{aligned}
+$$
+
+-  The risk ratio (`qi$rr`) in category $j$ is defined as
+
+
+$$
+    \begin{aligned}
+        \text{RR}_j=\Pr(Y_i=j\mid X_{1})\ /\ \Pr(Y_i=j\mid X).
+    \end{aligned}
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (`qi$att.ev`) for the treatment group in category $j$
+   is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{n_j}\sum_{i:t_{i}=1}^{n_j} \{
+      Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)] \},
+    \end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups, and
+   $n_j$ is the number of observations in the treatment group that
+   belong to category $j$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (`qi$att.pr`) for the treatment group in category $j$
+   is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{n_j}\sum_{i:t_{i}=1}^{n_j}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],
+    \end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups, and
+   $n_j$ is the number of observations in the treatment group that
+   belong to category $j$.
+
+Output Values
+------
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run:
+
+```{r, eval=FALSE}
+z.out <- zelig(y ~ x, model = "oprobit.bayes", data)
+```
+
+then you may examine the available information in `z.out` by using
+`names(z.out)`, see the draws from the posterior distribution of the
+`coefficients` by using `z.out$coefficients`, and view a default
+summary of information through `summary(z.out)`. Other elements
+available through the `$` operator are listed below.
+
+-  From the `zelig()` output object `z.out`, you may extract:
+
+   -  `coefficients`: draws from the posterior distributions of the
+      estimated coefficients $\beta$ and threshold parameters
+      $\tau$. Note, element $\tau_1$ is normalized to 0 and
+      is not returned in the `coefficients` object.
+
+   -  `zelig.data`: the input data frame if save.data = TRUE.
+
+   -  `seed`: the random seed used in the model.
+
+-  From the `sim()` output object `s.out`:
+
+   -  `qi$ev`: the simulated expected values (probabilities) of each
+      of the $J$ categories for the specified values of `x`.
+
+   -  `qi$pr`: the simulated predicted values (observed values) for
+      the specified values of `x`.
+
+   -  `qi$fd`: the simulated first difference in the expected values
+      of each of the $J$ categories for the values specified in
+      `x` and `x1`.
+
+   -  `qi$rr`: the simulated risk ratio for the expected values of
+      each of the $J$ categories simulated from `x` and `x1`.
+
+   -  `qi$att.ev`: the simulated average expected treatment effect for
+      the treated from conditional prediction models.
+
+   -  `qi$att.pr`: the simulated average predicted treatment effect
+      for the treated from conditional prediction models.
+
+See also
+------
+
+Bayesian ordinal probit regression is part of the MCMCpack library by
+Andrew D. Martin and Kevin M. Quinn . The convergence diagnostics are
+part of the CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and
+Karen Vines.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zoprobitbayes$new()
+z5$references()
+```

@@ -22,13 +22,13 @@ Testing:
     build_check_completed: yes
     no_check_warnings: yes
     no_check_errors: yes
-    no_check_notes: yes
-  test_coverage: 86
+    no_check_notes: no
+  test_coverage: 90
 Background:
   package_name: Zelig
-  package_version: 5.0-18
+  package_version: 5.1-0.90000
   package_language: R
-  package_commit_sha: e51feceaa484f8c9e9c6f206b38542fafd438e15
+  package_commit_sha: 6b20356ea3672e1683087904ecdfefbf90528461
   iqss_bestpractices_version: 0.0.0.9000
   iqssdevtools_version: 0.0.0.9000
-  check_time: 2017-03-29 12:03:23
+  check_time: 2017-05-08 11:47:09

@@ -1,4 +1,6 @@
-R/.Rapp.history
+vignettes/*html
+vignettes/*R
+docs/articles/*RR/.Rapp.history
 .Rproj.user
 .Rhistory
 .DS_Store

@@ -1,0 +1,204 @@
+---
+title: "Gamma Regression"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-gamma}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Gamma Regression for Continuous, Positive Dependent Variables with `gamma`.
+
+Use the gamma regression model if you have a positive-valued dependent
+variable such as the number of years a parliamentary cabinet endures, or
+the seconds you can stay airborne while jumping. The gamma distribution
+assumes that all waiting times are complete by the end of the study
+(censoring is not allowed).
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zgamma$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "gamma", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+```
+
+Example
+------
+
+Attach the sample data:
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+```{r, eval = TRUE}
+data(coalition)
+```
+
+Estimate the model:
+
+```{r, eval = TRUE}
+z.out <- zelig(duration ~ fract + numst2, model = "gamma", data = coalition)
+```
+
+View the regression output:
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+```{r, eval = TRUE}
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2 = 1)
+```
+
+Simulate expected values (qi$ev) and first differences (qi$fd):
+
+```{r, eval = TRUE}
+s.out <- sim(z.out, x = x.low, x1 = x.high)
+```
+
+```{r, eval = TRUE}
+summary(s.out)
+```
+
+```{r Zelig-gamma, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-gamma"}
+plot(s.out)
+```
+
+Model
+------
+
+-   The Gamma distribution with scale parameter $\alpha$ has a
+   *stochastic component*:
+
+$$
+    \begin{aligned}
+        Y &\sim& \textrm{Gamma}(y_i \mid \lambda_i, \alpha) \\
+      f(y)  &=& \frac{1}{\alpha^{\lambda_i} \, \Gamma \lambda_i} \, y_i^{\lambda_i
+        - 1} \exp -\left\{ \frac{y_i}{\alpha} \right\}\end{aligned}
+
+   | for $\alpha, \lambda_i, y_i > 0$.
+
+-   The *systematic component* is given by
+
+$$
+    \lambda_i = \frac{1}{x_i \beta}
+$$
+
+Quantities of Interest
+------
+
+-   The expected values (qi$ev) are simulations of the mean of the
+   stochastic component given draws of $\alpha$ and $\beta$
+   from their posteriors:
+
+
+$$
+    E(Y) = \alpha \lambda_i.
+$$
+
+-   The predicted values (qi$pr) are draws from the gamma distribution
+   for each given set of parameters $(\alpha, \lambda_i)$.
+
+-   If x1 is specified, sim() also returns the differences in the
+   expected values (qi$fd),
+
+
+$$
+    E(Y \mid x_1) -
+        E(Y \mid x)
+$$
+
+   .
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $\widehat{Y_i(t_i=0)}$, the counterfactual predicted value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The gamma model is part of the stats package by the R Core Team. Advanced users may
+wish to refer to `help(glm)` and `help(family)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zgamma$new()
+z5$references()
+```

@@ -1,0 +1,97 @@
+---
+title: "Weights"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{weights}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Weights are often added to statistical models to adjust the observed sample distribution in the data to an underlying population of interest.  For example, some types of observations may have been intentionally oversampled, and need to be downweighted for population inferences, or weights may have been created by a matching procedure to create a dataset with treatment and control groups that resemble randomized designs and achieve balance in covariates.
+
+The weights argument, can be a vector of weight values, or a name of a variable in the dataset.
+
+Not all the R implementations of statistical models that Zelig uses have been written to accept weights or use them in estimation.  When weights have been supplied by the user, but weights are not written into the package for that model, Zelig is still able to use the weights by one of two procedures:
+
+-   If the supplied weights are all integer values, then Zelig rebuilds a new version of the dataset by duplicating observations according to their weight (and removing observations with zero weight).
+
+-   If the weights are continuously valued, Zelig bootstraps the supplied dataset, using the relative weights as bootstrap probabilities.
+
+Examples
+--------
+
+Here we are building a simulated dataset where in the first fifty observations y has a positive relationship with x and in the next fifty observations a negative relationship.
+
+```{r, eval = TRUE}
+x <- runif(90)
+y <- c( 2*x[1:45], -3*x[46:90] ) + rnorm(90)
+z <- as.numeric(y>0)
+w1 <- c(rep(1.8, 45), rep(0.2,45))
+mydata <- data.frame(z,y,x,w1)
+
+w2 <- rep(c(1.8,0.2), 45)
+```
+
+In the first example below, we are passing the name of a variable included in the dataset.  We see the weights are correctly implemented as we are more heavily weighting the first 50 observations, where there is a positive relationship, and positive relationship is seen in the regression.
+
+```{r, eval = TRUE}
+library(Zelig)
+
+z1.out <- zelig(y ~ x, cite = FALSE, model = "ls", weights = "w1",
+                data = mydata)
+summary(z1.out)
+```
+
+In our second example, the weights are provided as a separate vector of the same length as the dataset.  These weights give weight to both relationships present when we constructed the data, and we see the estimated relationship is now negative.
+
+```{r, eval = TRUE}
+z2.out <- zelig(y ~ x, cite = FALSE, model = "ls", weights = w2,
+                data = mydata)
+summary(z2.out)
+```
+
+Some checking of the supplied weights are conducted, and warnings or error messages will be given to the user if, for example, the supplied weights are of the wrong length, or the variable name supplied is not present in the dataset.  Negative weights are treated as zero weights.  Here we use the object oriented approach to building the Zelig object.
+
+```{r, eval = TRUE}
+z3.out <- zelig(y ~ x, weights = "noSuchName", data = mydata, model="ls")
+
+z4.out <- zelig(y ~ x, weights = w2[1:10], data = mydata, model="ls")
+```
+
+Here we use a model where sampling weights are not accepted by the underlying package, so Zelig gives a warning message that bootstrapping will be conducted to construct a dataset.
+
+```{r, eval = TRUE}
+continuous.weights <- rep(x = c(0.6, 1, 1.4), times = 30)
+z5.out <- zelig(z ~ x, model = "logit", weights = continuous.weights,
+                data = mydata)
+```
+
+But when the weights happen to be integer valued, then Zelig can construct a dataset by a combination of duplicating and deleting observations.
+
+```{r, eval = TRUE}
+integer.weights <- rep(x = c(0, 1, 2), times = 30)
+z6.out <- zelig(z ~ x, model = "logit", weights = integer.weights,
+                data = mydata)
+```
+
+
+Using Matching Weights from MatchIt
+-----------------------------------
+
+Weights that are creating using the matching mechanisms in the [MatchIt](http://gking.harvard.edu/matchit) package will be automatically employed in Zelig analyses if the output object from MatchIt is passed to Zelig as the data argument.  For more detail, see [Using Zelig with MatchIt](using_Zelig_with_Amelia.html).

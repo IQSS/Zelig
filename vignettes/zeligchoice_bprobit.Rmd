@@ -1,0 +1,352 @@
+---
+title: "Bivariate Probit"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zeligchoice-bprobit}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Bivariate Probit Regression for Two Dichotomous Dependent Variables with `bprobit` from ZeligChoice.
+
+Use the bivariate probit regression model if you have two binary
+dependent variables $(Y_1, Y_2)$, and wish to model them jointly
+as a function of some explanatory variables. Each pair of dependent
+variables $(Y_{i1}, Y_{i2})$ has four potential outcomes,
+$(Y_{i1}=1,
+Y_{i2}=1)$, $(Y_{i1}=1, Y_{i2}=0)$, $(Y_{i1}=0, Y_{i2}=1)$,
+and $(Y_{i1}=0, Y_{i2}=0)$. The joint probability for each of
+these four outcomes is modeled with three systematic components: the
+marginal Pr\ $(Y_{i1} = 1)$ and Pr\ $(Y_{i2} = 1)$, and the
+correlation parameter $\rho$ for the two marginal distributions.
+Each of these systematic components may be modeled as functions of
+(possibly different) sets of explanatory variables.
+
+Syntax
+------
+
+First load packages:
+
+```{r, eval = TRUE, message=FALSE}
+library(zeligverse)
+```
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zbprobit$new()
+z5$zelig(cbind(Y1, Y2) ~ X1 + X2 + X3, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(cbind(Y1, Y2) ~ X1 + X2 + X3,
+               model = "bprobit", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+```
+
+Input Values
+------
+
+In every bivariate probit specification, there are three equations which
+correspond to each dependent variable ($Y_1$, $Y_2$), and
+the correlation parameter $\rho$. Since the correlation parameter
+does not correspond to one of the dependent variables, the model
+estimates $\rho$ as a constant by default. Hence, only two
+formulas (for $\mu_1$ and $\mu_2$) are required. If the
+explanatory variables for $\mu_1$ and $\mu_2$ are the same
+and effects are estimated separately for each parameter, you may use the
+following short hand:
+
+```{r, eval = FALSE}
+fml <- list(cbind(Y1,Y2) ~ X1 + X2)
+```
+
+which has the same meaning as:
+
+```{r, eval = FALSE}
+fml <- list(mu1 = Y1 ~ X1 + X2, + mu2 = Y2 ~ X1 + X2)
+```
+
+**Anticipated feature, not currently enabled:**
+
+You may use the function `tag()` to constrain variables across equations.
+The `tag()` function takes a variable and a label for the effect
+parameter. Below, the constrained effect of x3 in both equations is
+called the age parameter:
+
+```{r, eval = FALSE}
+fml <- list(mu1 = y1 ~ x1 + tag(x3, “age”), + mu2 = y2 ~ x2 +
+tag(x3, “age”))
+```
+
+You may also constrain different variables across different equations to
+have the same effect.
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+set.seed(1234)
+```
+
+### Basic Example [basic.bp]
+
+Load the data and estimate the model:
+
+```{r, eval = TRUE}
+data(sanction)
+```
+
+```{r, eval = TRUE}
+z.out1 <- zelig(cbind(import, export) ~ coop + cost + target,
+                model = "bprobit", data = sanction)
+summary(z.out1)
+```
+
+By default, `zelig()` estimates two effect parameters for each
+explanatory variable in addition to the correlation coefficient; this
+formulation is parametrically independent (estimating unconstrained
+effects for each explanatory variable), but stochastically dependent
+because the models share a correlation parameter. Generate baseline
+values for the explanatory variables (with cost set to 1, net gain to
+sender) and alternative values (with cost set to 4, major loss to
+sender):
+
+```{r, eval = TRUE}
+x.low <- setx(z.out1, cost = 1)
+x.high <- setx(z.out1, cost = 4)
+```
+
+Simulate fitted values and first differences:
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out1, x = x.low, x1 = x.high)
+```
+
+```{r, eval = TRUE}
+summary(s.out1)
+```
+
+```{r Zelig-bprobit1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Bivariate Probit"}
+plot(s.out1)
+```
+
+
+
+Model
+------
+
+For each observation, define two binary dependent variables, $Y_1$
+and $Y_2$, each of which take the value of either 0 or 1 (in the
+following, we suppress the observation index $i$). We model the
+joint outcome $(Y_1$, $Y_2)$ using two marginal
+probabilities for each dependent variable, and the correlation
+parameter, which describes how the two dependent variables are related.
+
+-  The *stochastic component* is described by two latent (unobserved)
+   continuous variables which follow the bivariate Normal distribution:
+
+
+$$
+    \begin{aligned}
+        \left ( \begin{array}{c}
+            Y_1^* \\
+            Y_2^*
+          \end{array}
+        \right ) &\sim &
+        N_2 \left \{ \left (
+            \begin{array}{c}
+              \mu_1 \\ \mu_2
+            \end{array} \right ), \left( \begin{array}{cc}
+                       1 & \rho \\
+                       \rho & 1
+                       \end{array} \right) \right\},
+    \end{aligned}
+$$
+
+   where $\mu_j$ is a mean for $Y_j^*$ and $\rho$ is a
+   scalar correlation parameter. The following observation mechanism
+   links the observed dependent variables, $Y_j$, with these
+   latent variables
+
+
+$$
+    \begin{aligned}
+        Y_j & = & \left \{ \begin{array}{cc}
+                         1 & {\rm if} \; Y_j^* \ge 0, \\
+                         0 & {\rm otherwise.}
+                         \end{array}
+                         \right.
+    \end{aligned}
+$$
+
+-  The *systemic components* for each observation are
+
+
+$$
+    \begin{aligned}
+        \mu_j & = & x_{j} \beta_j \quad {\rm for} \quad j=1,2, \\
+          \rho & = & \frac{\exp(x_3 \beta_3) - 1}{\exp(x_3 \beta_3) + 1}.
+    \end{aligned}
+$$
+
+Quantities of Interest
+------
+
+For $n$ simulations, expected values form an $n \times 4$
+matrix.
+
+-  The expected values (`qi$ev`) for the binomial probit model are the
+   predicted joint probabilities. Simulations of $\beta_1$,
+   $\beta_2$, and $\beta_3$ (drawn form their sampling
+   distributions) are substituted into the systematic components, to
+   find simulations of the predicted joint probabilities
+   $\pi_{rs}=\Pr(Y_1=r, Y_2=s)$:
+
+
+$$
+    \begin{aligned}
+        \pi_{11} &= \Pr(Y_1^* \geq 0 , Y_2^* \geq 0) &= \int_0^{\infty}
+      \int_0^{\infty} \phi_2 (\mu_1, \mu_2, \rho) \, dY_2^*\, dY_1^* \\
+      \pi_{10} &= \Pr(Y_1^* \geq 0 , Y_2^* < 0)  &= \int_0^{\infty}
+      \int_{-\infty}^{0} \phi_2 (\mu_1, \mu_2, \rho) \, dY_2^*\, dY_1^*\\
+      \pi_{01} &= \Pr(Y_1^* < 0 , Y_2^* \geq 0)  &= \int_{-\infty}^{0}
+      \int_0^{\infty} \phi_2 (\mu_1, \mu_2, \rho) \, dY_2^*\, dY_1^*\\
+      \pi_{11} &= \Pr(Y_1^* < 0 , Y_2^* < 0)  &= \int_{-\infty}^{0}
+      \int_{-\infty}^{0} \phi_2 (\mu_1, \mu_2, \rho) \, dY_2^*\, dY_1^*\\
+    \end{aligned}
+$$
+
+   where $r$ and $s$ may take a value of either 0 or 1,
+   $\phi_2$ is the bivariate Normal density.
+
+-  The predicted values (`qi$pr`) are draws from the multinomial
+   distribution given the expected joint probabilities.
+
+-  The first difference (`qi$fd`) in each of the predicted joint
+   probabilities are given by
+
+
+$$
+    \textrm{FD}_{rs} = \Pr(Y_1=r, Y_2=s \mid x_1)-\Pr(Y_1=r, Y_2=s
+        \mid x).
+$$
+
+-  The risk ratio (qi$rr) for each of the predicted joint probabilities
+   are given by
+
+
+$$
+    \textrm{RR}_{rs} = \frac{\Pr(Y_1=r, Y_2=s \mid x_1)}{\Pr(Y_1=r, Y_2=s \mid x)}.
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_{ij}(t_i=1) -
+        E[Y_{ij}(t_i=0)] \right\} \textrm{ for } j = 1,2,
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_{ij}(t_i=0)]$, the counterfactual expected value of
+   $Y_{ij}$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_{ij}(t_i=1) -
+        \widehat{Y_{ij}(t_i=0)}\right\} \textrm{ for } j = 1,2,
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $\widehat{Y_{ij}(t_i=0)}$, the counterfactual predicted value
+   of $Y_{ij}$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+`z.out <- zelig(y ~ x, model = bprobit, data)`, then you may examine
+the available information in `z.out` by using `names(z.out)`, see
+the coefficients by using z.out$coefficients, and obtain a default
+summary of information through `summary(z.out)`. Other elements
+available through the $ operator are listed below.
+
+-  From the `zelig()` output object z.out, you may extract:
+
+   -  coefficients: the named vector of coefficients.
+
+   -  fitted.values: an $n \times 4$ matrix of the in-sample
+      fitted values.
+
+   -  predictors: an $n \times 3$ matrix of the linear predictors
+      $x_j \beta_j$.
+
+   -  residuals: an $n \times 3$ matrix of the residuals.
+
+   -  df.residual: the residual degrees of freedom.
+
+   -  df.total: the total degrees of freedom.
+
+   -  rss: the residual sum of squares.
+
+   -  y: an $n \times 2$ matrix of the dependent variables.
+
+   -  zelig.data: the input data frame if `save.data = TRUE`.
+
+-  From `summary(z.out)`, you may extract:
+
+   -  `coef3`: a table of the coefficients with their associated standard
+      errors and $t$-statistics.
+
+   -  `cov.unscaled`: the variance-covariance matrix.
+
+   -  `pearson.resid`: an $n \times 3$ matrix of the Pearson
+      residuals.
+
+See also
+------
+
+The bivariate probit function is part of the VGAM package by Thomas
+Yee. In addition, advanced users may wish to refer to `help(vglm)`
+in the VGAM library.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zbprobit$new()
+z5$references()
+```

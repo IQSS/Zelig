@@ -1,0 +1,285 @@
+---
+title: "Weibull"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-weibull}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Weibull Regression for Duration Dependent Variables with `weibull`.
+
+Choose the Weibull regression model if the values in your dependent
+variable are duration observations. The Weibull model relaxes the
+exponential model’s assumption of constant hazard, and allows the
+hazard rate to increase or decrease monotonically with respect to
+elapsed time.
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zweibull$new()
+z5$zelig(Surv(Y, C) ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Surv(Y, C) ~ X, model = "weibull", weights = w,
+               data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Weibull models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length $n$. For each
+observation $i$ in 1, …, $n$, the value $y_i$ is the
+duration (lifetime, for example), and the associated $c_i$ is a
+binary variable such that $c_i = 1$ if the duration is not
+censored (*e.g.*, the subject dies during the study) or $c_i = 0$
+if the duration is censored (*e.g.*, the subject is still alive at the
+end of the study). If $c_i$ is omitted, all Y are assumed to be
+completed; that is, time defaults to 1 for all observations.
+
+Input Values
+------
+
+In addition to the standard inputs, zelig() takes the following
+additional options for weibull regression:
+
+-  robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+   errors based on sandwich estimators (see and ) based on the options
+   in cluster.
+
+-  cluster: if robust = TRUE, you may select a variable to define groups
+   of correlated observations. Let x3 be a variable that consists of
+   either discrete numeric values, character strings, or factors that
+   define strata. Then
+
+```{r, eval = FALSE}
+z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3",
+               model = "exp", data = mydata)
+```
+
+means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If $robust = TRUE$ but cluster is not specified, zelig() assumes that each observation falls into its own cluster.
+
+Example
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+Attach the sample data:
+
+```{r, eval = TRUE}
+data(coalition)
+```
+
+Estimate the model:
+
+```{r, eval = TRUE}
+z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2,
+               model = "weibull", data = coalition)
+```
+
+View the regression output:
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+```{r, eval = TRUE}
+x.low <- setx(z.out, numst2 = 0)
+x.high <- setx(z.out, numst2 = 1)
+```
+
+Simulate expected values and first differences:
+
+```{r, eval = TRUE}
+s.out <- sim(z.out, x = x.low, x1 = x.high)
+```
+
+```{r, eval = TRUE}
+summary(s.out)
+```
+
+```{r Zelig-weibull, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-weibull"}
+plot(s.out)
+```
+
+Model
+------
+
+Let $Y_i^*$ be the survival time for observation $i$. This
+variable might be censored for some observations at a fixed time
+$y_c$ such that the fully observed dependent variable,
+$Y_i$, is defined as
+
+$$
+    Y_i = \left\{ \begin{array}{ll}
+        Y_i^* & \textrm{if }Y_i^* \leq y_c \\
+         y_c & \textrm{if }Y_i^* > y_c
+       \end{array} \right.
+$$
+
+-  The *stochastic component* is described by the distribution of the
+   partially observed variable $Y^*$. We assume $Y_i^*$
+   follows the Weibull distribution whose density function is given by
+
+
+$$
+    f(y_i^*\mid \lambda_i, \alpha) = \frac{\alpha}{\lambda_i^\alpha}
+        y_i^{* \alpha-1} \exp \left\{ -\left( \frac{y_i^*}{\lambda_i}
+      \right)^{\alpha} \right\}
+$$
+
+   for $y_i^* \ge 0$, the scale parameter $\lambda_i > 0$,
+   and the shape parameter $\alpha > 0$. The mean of this
+   distribution is $\lambda_i \Gamma(1 + 1 / \alpha)$. When $\alpha = 1$, the distribution
+   reduces to the exponential distribution (see Section [exp]). (Note
+   that the output from zelig() parameterizes scale $ = 1 / \alpha$.)
+
+   In addition, survival models like the Weibull have three additional
+   properties. The hazard function $h(t)$ measures the probability
+   of not surviving past time $t$ given survival up to $t$.
+   In general, the hazard function is equal to $f(t)/S(t)$ where
+   the survival function $S(t) = 1 - \int_{0}^t f(s) ds$
+   represents the fraction still surviving at time $t$. The
+   cumulative hazard function $H(t)$ describes the probability of
+   dying before time $t$. In general,
+   $H(t)= \int_{0}^{t} h(s) ds = -\log S(t)$. In the case of the
+   Weibull model,
+
+
+$$
+    \begin{aligned}
+        h(t) &=& \frac{\alpha}{\lambda_i^{\alpha}} t^{\alpha - 1}  \\
+      S(t) &=&  \exp \left\{ -\left( \frac{t}{\lambda_i} \right)^{\alpha} \right\} \\
+      H(t) &=& \left( \frac{t}{\lambda_i} \right)^{\alpha}
+    \end{aligned}
+$$
+   For the Weibull model, the hazard function $h(t)$ can increase
+   or decrease monotonically over time.
+
+-  The *systematic component* $\lambda_i$ is modeled as
+
+
+$$
+    \lambda_i = \exp(x_i \beta),
+$$
+
+   where $x_i$ is the vector of explanatory variables, and
+   $\beta$ is the vector of coefficients.
+
+Quantities of Interest
+------
+
+-  The expected values (qi$ev) for the Weibull model are simulations of
+   the expected duration:
+
+
+$$
+    E(Y) = \lambda_i \, \Gamma (1 + \alpha^{-1}),
+$$
+
+   given draws of $\beta$ and $\alpha$ from their sampling
+   distributions.
+
+-  The predicted value (qi$pr) is drawn from a distribution defined by
+   $(\lambda_i, \alpha)$.
+
+-  The first difference (qi$fd) in expected value is
+
+
+$$
+    \textrm{FD} = E(Y \mid x_1) - E(Y \mid x).
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups. When
+   $Y_i(t_i=1)$ is censored rather than observed, we replace it
+   with a simulation from the model given available knowledge of the
+   censoring process. Variation in the simulations are due to
+   uncertainty in simulating $E[Y_i(t_i=0)]$, the counterfactual
+   expected value of $Y_i$ for observations in the treatment
+   group, under the assumption that everything stays the same except
+   that the treatment indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups. When
+   $Y_i(t_i=1)$ is censored rather than observed, we replace it
+   with a simulation from the model given available knowledge of the
+   censoring process. Variation in the simulations are due to
+   uncertainty in simulating $\widehat{Y_i(t_i=0)}$, the
+   counterfactual predicted value of $Y_i$ for observations in the
+   treatment group, under the assumption that everything stays the same
+   except that the treatment indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The Weibull model is part of the survival library by Terry Therneau,
+ported to R by Thomas Lumley. Advanced users may wish to refer to
+`help(survfit)` in the survival library.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zweibull$new()
+z5$references()
+```

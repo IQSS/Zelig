@@ -1,0 +1,318 @@
+---
+title: "Poisson Bayes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-poissonbayes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Bayesian Poisson Regression with `poisson.bayes`.
+
+Use the Poisson regression model if the observations of your dependent
+variable represents the number of independent events that occur during
+a fixed period of time. The model is fit using a random walk
+Metropolis algorithm.  For a maximum-likelihood estimation of this
+model see [poisson](zelig_poisson.html).
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zpoissonbayes$new()
+z5$zelig(Y ~ X1 + X2, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "poisson.bayes",
+               weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Additional Inputs
+------
+
+Use the following argument to monitor the Markov chain:
+
+-  `burnin`: number of the initial MCMC iterations to be discarded
+   (defaults to 1,000).
+
+-  `mcmc`: number of the MCMC iterations after burnin (defaults to
+   10,000).
+
+-  `thin`: thinning interval for the Markov chain. Only every
+   `thin`-th draw from the Markov chain is kept. The value of `mcmc`
+   must be divisible by this value. The default value is 1.
+
+-  `tune`: Metropolis tuning parameter, either a positive scalar or a
+   vector of length $k$, where $k$ is the number of
+   coefficients. The tuning parameter should be set such that the
+   acceptance rate of the Metropolis algorithm is satisfactory
+   (typically between 0.20 and 0.5). The default value is 1.1.
+
+-  `verbose`: default to FALSE. If `TRUE`, the progress of the
+   sampler (every $10\%$) is printed to the screen.
+
+-  `seed`: seed for the random number generator. The default is `NA`
+   which corresponds to a random seed of 12345.
+
+-  `beta.start`: starting values for the Markov chain, either a scalar
+   or vector with length equal to the number of estimated coefficients.
+   The default is `NA`, such that the maximum likelihood estimates are
+   used as the starting values.
+
+Use the following parameters to specify the model’s priors:
+
+-  `b0`: prior mean for the coefficients, either a numeric vector or a
+   scalar. If a scalar, that value will be the prior mean for all the
+   coefficients. The default is 0.
+
+-  `B0`: prior precision parameter for the coefficients, either a
+   square matrix (with the dimensions equal to the number of the
+   coefficients) or a scalar. If a scalar, that value times an identity
+   matrix will be the prior precision parameter. The default is 0, which
+   leads to an improper prior.
+
+Zelig users may wish to refer to `help(MCMCpoisson)` for more
+information.
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+### Basic Example
+
+Attaching the sample dataset:
+
+```{r, eval = TRUE}
+data(sanction)
+```
+
+Estimating the Poisson regression using `poisson.bayes`:
+
+```{r, eval = TRUE}
+z.out <- zelig(num ~ target + coop, model = "poisson.bayes",
+               data = sanction, verbose = FALSE)
+```
+
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section [Diagnostics for Zelig Models](diagnostics.html) for examples of the output with interpretation:
+
+```{r, eval = FALSE}
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
+```
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Setting values for the explanatory variables to their sample averages:
+
+```{r, eval = TRUE}
+x.out <- setx(z.out)
+```
+
+Simulating quantities of interest from the posterior distribution given `x.out`.
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out, x = x.out)
+```
+
+```{r, eval = TRUE}
+summary(s.out1)
+```
+
+### Simulating First Differences
+
+Estimating the first difference in the number of countries imposing
+sanctions when the number of targets is set to be its maximum versus its minimum :
+
+```{r, eval = TRUE}
+x.max <- setx(z.out, target = max(sanction$target))
+x.min <- setx(z.out, target = min(sanction$target))
+```
+
+```{r, eval = TRUE}
+s.out2 <- sim(z.out, x = x.max, x1 = x.min)
+summary(s.out2)
+```
+
+Model
+------
+
+Let $Y_{i}$ be the number of independent events that occur during
+a fixed time period.
+
+-  The *stochastic component* is given by
+
+
+$$
+    \begin{aligned}
+        Y_{i}  &  \sim & \textrm{Poisson}(\lambda_i)
+    \end{aligned}
+$$
+
+   where $\lambda_i$ is the mean and variance parameter.
+
+-  The *systematic component* is given by
+
+
+$$
+    \begin{aligned}
+        \lambda_{i}= \exp(x_{i} \beta)
+    \end{aligned}
+$$
+
+   where $x_{i}$ is the vector of $k$ explanatory variables
+   for observation $i$ and $\beta$ is the vector of
+   coefficients.
+
+-  The *prior* for $\beta$ is given by
+
+
+$$
+    \begin{aligned}
+        \beta \sim \textrm{Normal}_k \left(  b_{0},B_{0}^{-1}\right)
+    \end{aligned}
+$$
+
+   where $b_{0}$ is the vector of means for the $k$
+   explanatory variables and $B_{0}$ is the $k \times k$
+   precision matrix (the inverse of a variance-covariance matrix).
+
+Quantities of Interest
+------
+
+-  The expected values (`qi$ev`) for the Poisson model are calculated
+   as following:
+
+
+$$
+    \begin{aligned}
+        E(Y\mid X) = \lambda_i = \exp(x_i \beta),
+    \end{aligned}
+$$
+
+   given the posterior draws of $\beta$ based on the MCMC
+   iterations.
+
+-  The predicted values (`qi$pr`) are draws from the Poisson
+   distribution with parameter $\lambda_i$.
+
+-  The first difference (`qi$fd`) for the Poisson model is defined as
+
+
+$$
+    \begin{aligned}
+        \text{FD}=E(Y\mid X_{1})-E(Y\mid X).
+    \end{aligned}
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (`qi$att.ev`) for the treatment group is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{\sum_{i=1}^n t_{i}}\sum_{i:t_{i}=1}\{Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)]\},
+    \end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (`qi$att.pr`) for the treatment group is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{\sum_{i=1}^n t_{i}}\sum_{i:t_{i}=1}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],
+    \end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups.
+
+Output Values
+------
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run:
+
+```{r, eval = FALSE}
+z.out <- zelig(y ~ x, model = "poisson.bayes", data)
+```
+
+you may examine the available information in `z.out` by using
+`names(z.out)`, see the draws from the posterior distribution of the
+`coefficients` by using `z.out$coefficients`, and view a default
+summary of information through `summary(z.out)`. Other elements
+available through the `$` operator are listed below.
+
+-  From the `zelig()` output object `z.out`, you may extract:
+
+   -  `coefficients`: draws from the posterior distributions of the
+      estimated parameters.
+
+   -  `zelig.data`: the input data frame if save.data = TRUE.
+
+   -  `seed`: the random seed used in the model.
+
+-  From the `sim()` output object `s.out`:
+
+   -  `qi$ev`: the simulated expected values for the specified values
+      of `x`.
+
+   -  `qi$pr`: the simulated predicted values for the specified values
+      of `x`.
+
+   -  `qi$fd`: the simulated first difference in the expected values
+      for the values specified in `x` and `x1`.
+
+   -  `qi$att.ev`: the simulated average expected treatment effect for
+      the treated from conditional prediction models.
+
+   -  `qi$att.pr`: the simulated average predicted treatment effect
+      for the treated from conditional prediction models.
+
+See also
+------
+
+Bayesian poisson regression is part of the MCMCpack library by Andrew D.
+Martin and Kevin M. Quinn . The convergence diagnostics are part of the
+CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zpoissonbayes$new()
+z5$references()
+```

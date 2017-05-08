@@ -1,0 +1,290 @@
+---
+title: "Normal Survey Regression"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-normalsurvey}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Normal Regression for Continuous Dependent Variables with Survey Weights with `normal.survey`.
+
+The Normal regression model is a close variant of the more standard
+least squares regression model (see ). Both models specify a continuous
+dependent variable as a linear function of a set of explanatory
+variables. The Normal model reports maximum likelihood (rather than
+least squares) estimates. The two models differ only in their estimate
+for the stochastic parameter $\sigma$.
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- znormalsurvey$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "normal.survey", weights = w,
+               data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+### Example 1: User has Existing Sample Weights
+
+Attach sample data and variable names:
+
+```{r, eval = TRUE}
+data(api, package = "survey")
+```
+
+In this example, we will estimate a model using
+the percentages of students who receive subsidized
+lunch and an indicator for whether schooling is
+year-round to predict California public schools'
+academic performance index scores:
+
+```{r, eval = TRUE}
+z.out1 <- zelig(api00 ~ meals + yr.rnd, model = "normal.survey",
+                weights=~pw, data = apistrat)
+summary(z.out1)
+```
+
+Set explanatory variables to their default (mean/mode) values, and set
+a high (80th percentile) and low (20th percentile) value for "meals,"
+the percentage of students who receive subsidized meals:
+
+```{r, eval = TRUE}
+x.low <- setx(z.out1, meals= quantile(apistrat$meals, 0.2))
+x.high <- setx(z.out1, meals= quantile(apistrat$meals, 0.8))
+```
+
+Generate first differences for the effect of high versus low "meals"
+on academic performance:
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+summary(s.out1)
+```
+
+Generate a second set of fitted values and a plot:
+
+```{r Zelig-normalsurvey1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal Survey Model"}
+plot(s.out1)
+```
+
+### Example 2: User has Details about Complex Survey Design (but not sample weights)
+
+Suppose that the survey house that provided
+the dataset excluded probability weights
+but made other details about the survey
+design available.  We can still estimate
+a model without probability weights that takes
+instead variables that identify each the stratum
+and/or cluster from which each observation was
+selected and the size of the finite sample from
+which each observation was selected.
+
+```{r, eval = TRUE}
+z.out2 <- zelig(api00 ~ meals + yr.rnd, model = "normal.survey",
+                strata = ~stype, fpc = ~fpc, data = apistrat)
+summary(z.out2)
+```
+
+Note that these results are identical to the results obtained
+when pre-existing sampling weights were used.  When sampling
+weights are omitted, Zelig estimates them automatically for
+"normal.survey" models based on the user-defined description
+of sampling designs.  If no description is present, the default
+assumption is equal probability sampling.
+
+The methods setx() and sim() can then be run on z.out2 in the same fashion
+described in Example 1.
+
+### Example 3: User has Replicate Weights #####
+
+Load data for a model using the number of out-of-hospital
+cardiac arrests to predict the number of patients who arrive
+alive in hospitals:
+
+```{r, eval = TRUE}
+data(scd, package = "survey")
+```
+
+Create four Balanced Repeated Replicate (BRR) weights:
+
+```{r, eval = TRUE}
+BRRrep <- 2*cbind(c(1,0,1,0,1,0), c(1,0,0,1,0,1),
+                c(0,1,1,0,0,1), c(0,1,0,1,1,0))
+```
+
+Estimate the model using Zelig:
+
+```{r, eval = TRUE}
+z.out3 <- zelig(formula=alive ~ arrests , model = "normal.survey",
+                repweights = BRRrep, type = "BRR",
+                data = scd, na.action = NULL)
+summary(z.out3)
+```
+
+Set the explanatory variable at its minimum and maximum
+
+```{r, eval = TRUE}
+x.min <- setx(z.out3, arrests = min(scd$alive))
+x.max <- setx(z.out3, arrests = max(scd$alive))
+```
+
+Generate first differences for the effect of the minimum
+versus the maximum number of cardiac arrests on the number
+of people who arrive alive:
+
+```{r, eval = TRUE}
+s.out3 <- sim(z.out3, x=x.max, x1=x.min)
+summary(s.out3)
+```
+
+Generate a second set of fitted values and a plot:
+
+```{r Zelig-normalsurvey3, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal Survey Model"}
+plot(s.out3)
+```
+
+The user should also refer to the normal model demo, since
+normal.survey models can take many of the same options as
+normal models.
+
+Model
+------
+
+Let $Y_i$ be the continuous dependent variable for observation
+$i$.
+
+-  The *stochastic component* is described by a univariate normal model
+   with a vector of means $\mu_i$ and scalar variance
+   $\sigma^2$:
+
+
+$$
+    Y_i \; \sim \; \textrm{Normal}(\mu_i, \sigma^2).
+$$
+
+-  The *systematic component* is
+
+
+$$
+    \mu_i \;= \; x_i \beta,
+$$
+
+   where $x_i$ is the vector of $k$ explanatory variables
+   and $\beta$ is the vector of coefficients.
+
+Quantities of Interest
+------
+
+-  The expected value (qi$ev) is the mean of simulations from the the
+   stochastic component,
+
+
+$$
+    E(Y) = \mu_i = x_i \beta,
+$$
+
+   given a draw of $\beta$ from its posterior.
+
+-  The predicted value (qi$pr) is drawn from the distribution defined by
+   the set of parameters $(\mu_i, \sigma)$.
+
+-  The first difference (qi$fd) is:
+
+
+$$
+    \textrm{FD}\; = \;E(Y \mid x_1) -  E(Y \mid x)
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $\widehat{Y_i(t_i=0)}$, the counterfactual predicted value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The normalsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may
+wish to refer to `help(glm)` and `help(family)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- znormalsurvey$new()
+z5$references()
+```

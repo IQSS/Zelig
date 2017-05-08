@@ -1,0 +1,304 @@
+---
+title: "Ordered Logistic Regression"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zeligchoice-ologit}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Ordinal Logistic Regression for Ordered Categorical Dependent Variables with `ologit` in ZeligChoice.
+
+Use the ordinal logit regression model if your dependent variable is
+ordered and categorical, either in the form of integer values or
+character strings.
+
+Syntax
+------
+
+First load packages:
+
+```{r, eval = TRUE, message=FALSE}
+library(zeligverse)
+```
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zologit$new()
+z5$zelig(as.factor(Y) ~ X1 + X2, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(as.factor(Y) ~ X1 + X23,
+               model = "ologit", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+```
+
+If `Y` takes discrete integer values, the `as.factor()` command will order
+automatically order the values. If Y takes on values composed of
+character strings, such as “strongly agree”, “agree”, and “disagree”,
+`as.factor()` will order the values in the order in which they appear in
+`Y`. You will need to replace your dependent variable with a factored
+variable prior to estimating the model through `zelig()`. See below for more details.
+
+Example
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+set.seed(1234)
+```
+
+### Creating An Ordered Dependent Variable
+
+Load the sample data:
+
+```{r, eval = TRUE}
+data(sanction)
+```
+
+Create an ordered dependent variable:
+
+```{r, eval = TRUE}
+sanction$ncost <- factor(sanction$ncost, ordered = TRUE,
+                         levels = c("net gain", "little effect", "modest loss", "major loss"))
+```
+
+Estimate the model:
+
+```{r, eval = TRUE}
+z.out <- zelig(ncost ~ mil + coop, model = "ologit",
+               data = sanction)
+```
+
+Summarize estimated paramters:
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Set the explanatory variables to their observed values:
+
+```{r, eval = TRUE}
+x.out <- setx(z.out)
+```
+
+Simulate fitted values given x.out and view the results:
+
+```{r, eval = TRUE}
+s.out <- sim(z.out, x = x.out)
+```
+
+```{r, eval = TRUE}
+summary(s.out)
+```
+
+```{r Zelig-ologit1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Ordered Logit"}
+plot(s.out)
+```
+
+### First Differences
+
+Using the sample data `sanction`, estimate the empirical model and returning the coefficients:
+
+```{r, eval = TRUE}
+z.out <- zelig(as.factor(cost) ~ mil + coop, model = "ologit",
+               data = sanction)
+```
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Set the explanatory variables to their means, with coop set to 1 (the lowest value) in the baseline case and set
+to 4 (the highest value) in the alternative case:
+
+```{r, eval = TRUE}
+x.low <- setx(z.out, coop = 1)
+x.high <- setx(z.out, coop = 4)
+```
+
+Generate simulated fitted values and first differences, and view the results:
+
+```{r, eval = TRUE}
+s.out2 <- sim(z.out, x = x.low, x1 = x.high)
+summary(s.out2)
+```
+
+```{r Zelig-ologit2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Ordered Logit"}
+plot(s.out2)
+```
+
+Model
+------
+
+Let $Y_i$ be the ordered categorical dependent variable for
+observation $i$ that takes one of the integer values from
+$1$ to $J$ where $J$ is the total number of
+categories.
+
+-  The *stochastic component* begins with an unobserved continuous
+   variable, $Y^*_i$, which follows the standard logistic
+   distribution with a parameter $\mu_i$,
+
+
+$$
+    Y_i^* \; \sim \; \textrm{Logit}(y_i^* \mid \mu_i),
+$$
+
+   to which we add an observation mechanism
+
+
+$$
+    Y_i \; = \; j \quad {\rm if} \quad \tau_{j-1} \le Y_i^* \le \tau_j
+        \quad {\rm for} \quad j=1,\dots,J.
+$$
+
+   where $\tau_l$ (for $l=0,\dots,J$) are the threshold
+   parameters with [\tau_l]( \tau_m[ for all $l](m$ and
+   $\tau_0=-\infty$ and $\tau_J=\infty$.
+
+-  The *systematic component* has the following form, given the
+   parameters $\tau_j$ and $\beta$, and the explanatory
+   variables $x_i$:
+
+
+$$
+    \Pr(Y \le j) \; = \; \Pr(Y^* \le \tau_j) \; = \frac{\exp(\tau_j -
+        x_i \beta)}{1+\exp(\tau_j -x_i \beta)},
+$$
+
+   which implies:
+
+
+$$
+    \pi_{j}  \; = \; \frac{\exp(\tau_j - x_i \beta)}{1 + \exp(\tau_j -
+        x_i \beta)} - \frac{\exp(\tau_{j-1} - x_i \beta)}{1 +
+            \exp(\tau_{j-1} - x_i \beta)}.
+$$
+
+Quantities of Interest
+------
+
+-  The expected values (qi$ev) for the ordinal logit model are
+   simulations of the predicted probabilities for each category:
+
+
+$$
+    E(Y = j) \; = \; \pi_{j} \; = \; \frac{\exp(\tau_j - x_i \beta)}
+        {1 + \exp(\tau_j - x_i \beta)} - \frac{\exp(\tau_{j-1} - x_i \beta)}{1 +
+       \exp(\tau_{j-1} - x_i \beta)},
+$$
+
+   given a draw of $\beta$ from its sampling distribution.
+
+-  The predicted value (qi$pr) is drawn from the logit distribution
+   described by $\mu_i$, and observed as one of $J$ discrete
+   outcomes.
+
+-  The difference in each of the predicted probabilities (qi$fd) is
+   given by
+
+
+$$
+    \Pr(Y=j \mid x_1) \;-\; \Pr(Y=j \mid x) \quad {\rm for} \quad
+        j=1,\dots,J.
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{n_j}\sum_{i:t_i=1}^{n_j} \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups, and
+   $n_j$ is the number of treated observations in category
+   $j$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{n_j}\sum_{i:t_i=1}^{n_j} \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups, and
+   $n_j$ is the number of treated observations in category
+   $j$.
+
+Output Values
+------
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+`z.out <- zelig(y ~ x, model = ologit, data)`, then you may examine
+the available information in `z.out` by using `names(z.out)`, see
+the coefficients by using z.out$coefficients, and a default summary of
+information through `summary(z.out)`. Other elements available through
+the $ operator are listed below.
+
+-  From the zelig() output object z.out, you may extract:
+
+   -  coefficients: parameter estimates for the explanatory variables.
+
+   -  zeta: a vector containing the estimated class boundaries
+      $\tau_j$.
+
+   -  deviance: the residual deviance.
+
+   -  fitted.values: the $n \times J$ matrix of in-sample fitted
+      values.
+
+   -  df.residual: the residual degrees of freedom.
+
+   -  edf: the effective degrees of freedom.
+
+   -  Hessian: the Hessian matrix.
+
+   -  zelig.data: the input data frame if save.data = TRUE.
+
+-  From summary(z.out), you may extract:
+
+   -  coefficients: the parameter estimates with their associated
+      standard errors, and $t$-statistics.
+
+See also
+------
+
+The ordinal logit model is part of the MASS package by William N.
+Venable and Brian D. Ripley. Advanced users may wish to refer to
+`help(polr)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zologit$new()
+z5$references()
+```

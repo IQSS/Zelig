@@ -1,0 +1,305 @@
+---
+title: "Probit Regression for Dependent Variables with Survey Weights"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-probitsurvey}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Probit Regression for Dichotomous Dependent Variables with Survey Weights with `probit.survey`.
+
+Use probit regression to model binary dependent variables specified as a
+function of a set of explanatory variables.
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- zprobitsurvey$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "probit.survey", weights = w,
+               data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+```
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+### Example 1: User has Existing Sample Weights
+
+Our example dataset comes from the survey package:
+
+```{r, eval = TRUE}
+data(api, package = "survey")
+```
+
+In this example, we will estimate a model using
+the percentages of students who receive subsidized
+lunch and the percentage who are new to a school
+to predict whether each California public school
+attends classes year round.  We first make a numeric
+version of the variable in the example dataset, which
+you may not need to do in another dataset.
+
+```{r, eval = TRUE}
+apistrat$yr.rnd.numeric <- as.numeric(apistrat$yr.rnd=="Yes")
+z.out1 <- zelig(yr.rnd.numeric ~ meals + mobility,
+                model = "probit.survey", weights = apistrat$pw,
+                data = apistrat)
+summary(z.out1)
+```
+
+Set explanatory variables to their default (mean/mode) values, and set
+a high (80th percentile) and low (20th percentile) value for "meals,"
+the percentage of students who receive subsidized meals:
+
+```{r, eval = TRUE}
+x.low <- setx(z.out1, meals = quantile(apistrat$meals, 0.2))
+x.high <- setx(z.out1, meals = quantile(apistrat$meals, 0.8))
+```
+
+Generate first differences for the effect of high versus low "meals"
+on the probability that a school will hold classes year round:
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out1, x=x.low, x1=x.high)
+summary(s.out1)
+```
+
+Generate a second set of fitted values and a plot:
+
+```{r Zelig-probitsurvey1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Probit Survey Model"}
+plot(s.out1)
+```
+
+### Example 2: User has Details about Complex Survey Design (but not sample weights)
+
+Suppose that the survey house that provided
+the dataset excluded probability weights
+but made other details about the survey
+design available.  We can still estimate
+a model without probability weights that takes
+instead variables that identify each the stratum
+and/or cluster from which each observation was
+selected and the size of the finite sample from
+which each observation was selected.
+
+```{r, eval = TRUE}
+z.out2 <- zelig(yr.rnd.numeric ~ meals + mobility, model = "probit.survey", strata=~stype, fpc=~fpc, data = apistrat)
+summary(z.out2)
+```
+
+The coefficient estimates from this model are identical to
+point estimates in the previous example, but the standard errors
+are smaller.  When sampling weights are omitted, Zelig estimates
+them automatically for "normal.survey" models based on the
+user-defined description of sampling designs.  In addition,
+when user-defined descriptions of the sampling design are
+entered as inputs, variance estimates are better and standard
+errors are consequently smaller.
+
+The methods `setx()` and `sim()` can then be run on `z.out2` in the same fashion
+described in Example 1.
+
+
+### Example 3: User has Replicate Weights
+
+Load data for a model using the number of out-of-hospital
+cardiac arrests and the number of patients who arrive
+alive in hospitals to predict whether each hospital
+has been sued (an indicator variable artificially created
+here for the purpose of illustration).
+
+```{r, eval = TRUE}
+data(scd, package = "survey")
+scd$sued <- as.vector(c(0,0,0,1,1,1))
+```
+
+Again, for the purpose of illustration, create four Balanced
+Repeated Replicate (BRR) weights:
+
+```{r, eval = TRUE}
+BRRrep <- 2*cbind(c(1,0,1,0,1,0), c(1,0,0,1,0,1),
+                  c(0,1,1,0,0,1), c(0,1,0,1,1,0))
+```
+
+Estimate the model using Zelig:
+
+```{r, eval = TRUE}
+z.out3 <- zelig(formula=sued ~ arrests + alive ,
+                model = "probit.survey",
+                repweights = BRRrep, type = "BRR", data = scd)
+summary(z.out3)
+```
+
+Set the explanatory variables at their means and set
+arrests at its 20th and 80th quartiles
+
+```{r, eval = TRUE}
+x.low <- setx(z.out3, arrests = quantile(scd$arrests, .2))
+x.high <- setx(z.out3, arrests = quantile(scd$arrests,.8))
+```
+
+Generate first differences for the effect of the minimum
+versus the maximum number of individuals who arrive
+alive on the probability that a hospital will be sued:
+
+```{r, eval = TRUE}
+s.out3 <- sim(z.out3, x = x.high, x1 = x.low)
+summary(s.out3)
+```
+
+Generate a second set of fitted values and a plot:
+
+```{r Zelig-probitsurvey3, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Probit Survey Model"}
+plot(s.out3)
+```
+
+The user should also refer to the probit model demo, since probit.survey models can take many of the same options as probit models.
+
+
+
+Model
+------
+
+Let $Y_i$ be the observed binary dependent variable for
+observation $i$ which takes the value of either 0 or 1.
+
+-  The *stochastic component* is given by
+
+
+$$
+    Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),
+$$
+
+   where $\pi_i=\Pr(Y_i=1)$.
+
+-  The *systematic component* is
+
+
+$$
+    \pi_i \; = \; \Phi (x_i \beta)
+$$
+
+   where $\Phi(\mu)$ is the cumulative distribution function of
+   the Normal distribution with mean 0 and unit variance.
+
+Quantities of Interest
+------
+
+-  The expected value (qi$ev) is a simulation of predicted probability
+   of success
+
+
+$$
+    E(Y) = \pi_i = \Phi(x_i
+        \beta),
+$$
+
+   given a draw of $\beta$ from its sampling distribution.
+
+-  The predicted value (qi$pr) is a draw from a Bernoulli distribution
+   with mean $\pi_i$.
+
+-  The first difference (qi$fd) in expected values is defined as
+
+
+$$
+    \textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).
+$$
+
+-  The risk ratio (qi$rr) is defined as
+
+
+$$
+    \textrm{RR} = \Pr(Y = 1 \mid x_1) / \Pr(Y = 1 \mid x).
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $\widehat{Y_i(t_i=0)}$, the counterfactual predicted value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The probitsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may
+wish to refer to `help(glm)` and `help(family)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zprobitsurvey$new()
+z5$references()
+```

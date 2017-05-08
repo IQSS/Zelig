@@ -1,0 +1,211 @@
+---
+title: "Normal Linear Regression"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-normal}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Normal Regression for Continuous Dependent Variables with `normal`.
+
+The Normal regression model is a close variant of the more standard
+[least squares regression model](zelig_ls.html). Both models specify a continuous dependent variable as a linear function of a set of explanatory
+variables. The Normal model reports maximum likelihood (rather than
+least squares) estimates. The two models differ only in their estimate
+for the stochastic parameter $\sigma$.
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- znormal$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "normal", weights = w,
+               data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+### Basic Example with First Differences
+
+Attach sample data:
+
+```{r, eval = TRUE}
+data(macro)
+```
+
+Estimate model:
+
+```{r, eval = TRUE}
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "normal",
+                data = macro)
+```
+
+Summarize of regression coefficients:
+
+```{r, eval = TRUE}
+summary(z.out1)
+```
+
+Set explanatory variables to their default (mean/mode) values, with
+high (80th percentile) and low (20th percentile) values for trade:
+
+```{r, eval = TRUE}
+x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
+```
+
+Generate first differences for the effect of high versus low trade on GDP:
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+```
+
+```{r, eval = TRUE}
+summary(s.out1)
+```
+
+A visual summary of quantities of interest:
+
+```{r Zelig-normal, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-normal"}
+plot(s.out1)
+```
+
+Model
+------
+
+Let $Y_i$ be the continuous dependent variable for observation
+$i$.
+
+-  The *stochastic component* is described by a univariate normal model
+   with a vector of means $\mu_i$ and scalar variance
+   $\sigma^2$:
+
+
+$$
+    Y_i \; \sim \; \textrm{Normal}(\mu_i, \sigma^2).
+$$
+
+-  The *systematic component* is
+
+
+$$
+    \mu_i \;= \; x_i \beta,
+$$
+
+   where $x_i$ is the vector of $k$ explanatory variables
+   and $\beta$ is the vector of coefficients.
+
+Quantities of Interest
+------
+
+-  The expected value (qi$ev) is the mean of simulations from the the
+   stochastic component,
+
+
+$$
+    E(Y) = \mu_i = x_i \beta,
+$$
+
+   given a draw of $\beta$ from its posterior.
+
+-  The predicted value (qi$pr) is drawn from the distribution defined by
+   the set of parameters $(\mu_i, \sigma)$.
+
+-  The first difference (qi$fd) is:
+
+
+$$
+    \textrm{FD}\; = \;E(Y \mid x_1) -  E(Y \mid x)
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $\widehat{Y_i(t_i=0)}$, the counterfactual predicted value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The normal model is part of the stats package by the R Core Team. Advanced users may
+wish to refer to `help(glm)` and `help(family)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- znormal$new()
+z5$references()
+```

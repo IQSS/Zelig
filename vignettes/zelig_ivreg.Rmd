@@ -1,0 +1,110 @@
+---
+title: "Instrumental Variable (2 Stage Least Squares) Regression"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-ivreg}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+```
+
+Instrumental Variable Regression (2 Stage Least Squares) for Continuous
+Dependent Variables with `ivreg`.
+
+Syntax
+------
+
+With Zelig 5 reference classes:
+
+```{r, eval = FALSE}
+z5 <- zls$new()
+z5$zelig(Y ~ X1 + X2 | Z1 + Z2 + Z3, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+Note that `|` separates the regressors (e.g. `X1` and `X2`) from the instruments
+(e.g. `Z1`, `Z2`, `Z3`).
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2 | Z1 + Z2 + Z3, model = "ivreg", weights = w,
+               data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Examples
+--------
+
+Load Zelig and other packages used in the example:
+
+```{r, message=FALSE}
+library(Zelig)
+library(dplyr) # for the pipe operator %>%
+```
+
+Before estimating the model, let's attach the example data and make some
+transformations to it. Notably, `zivreg` does not currently support logging
+regressors in the `zelig` call. To get around this, we simply find the logged
+values before estimating the model:
+
+```{r}
+# load and transform data
+data("CigarettesSW")
+CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
+CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
+CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+
+# log second stage independent variables, as logging internally for ivreg is
+# not currently supported
+CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
+CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
+```
+
+Now we can estimate the model and summarize the coefficients:
+
+```{r}
+z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |
+                    log_rincome + tdiff + I(tax/cpi),
+                    data = CigarettesSW, subset = year == "1995",
+                    model = "ivreg")
+
+summary(z.out1)
+```
+
+We can then simulate and plot the expected value of the log of the `packs`
+response variable across the range of the observed `rprice` regressor values:
+
+```{r}
+z.out1 %>% setx(log_rprice = range(log(CigarettesSW$rprice))) %>%
+    sim() %>%
+    plot()
+```
+
+To conduct standard diagnostic tests on the estimated model using functionality
+in the [AER](https://CRAN.R-project.org/package=AER) package, exatract the
+fitted model object with the `from_zelig_model()` function.
+
+
+See also
+--------
+
+`ivreg` is from Christian Kleiber and Achim Zeileis (2008). Applied Econometrics
+with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL <https://CRAN.R-project.org/package=AER>. For more information use
+`?AER::ivreg`.
+
+Greene, W. H. (1993) Econometric Analysis, 2nd ed., Macmillan.

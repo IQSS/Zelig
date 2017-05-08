@@ -1,0 +1,222 @@
+---
+title: "Negative Binomial"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-negbin}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+
+
+Negative Binomial Regression for Event Count Dependent Variables with `negbin`.
+
+Use the negative binomial regression if you have a count of events for
+each observation of your dependent variable. The negative binomial model
+is frequently used to estimate over-dispersed event count models.
+
+Syntax
+------
+
+With reference classes:
+
+```{r, eval = FALSE}
+z5 <- znegbin$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "negbin", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Example
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+Load sample data:
+
+```{r, eval = TRUE}
+data(sanction)
+```
+
+Estimate the model:
+
+```{r, eval = TRUE}
+z.out <- zelig(num ~ target + coop, model = "negbin", data = sanction)
+```
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Set values for the explanatory variables to their default mean values:
+
+```{r, eval = TRUE}
+x.out <- setx(z.out)
+```
+
+Simulate fitted values:
+
+```{r, eval = TRUE}
+s.out <- sim(z.out, x = x.out)
+```
+
+```{r, eval = TRUE}
+summary(s.out)
+```
+
+```{r Zelig-negbin, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-negbin"}
+plot(s.out)
+```
+
+Model
+------
+
+Let $Y_i$ be the number of independent events that occur during a
+fixed time period. This variable can take any non-negative integer
+value.
+
+-  The negative binomial distribution is derived by letting the mean of
+   the Poisson distribution vary according to a fixed parameter
+   $\zeta$ given by the Gamma distribution. The *stochastic
+   component* is given by
+
+
+$$
+    \begin{aligned}
+        Y_i \mid \zeta_i & \sim & \textrm{Poisson}(\zeta_i \mu_i),\\
+           \zeta_i & \sim & \frac{1}{\theta}\textrm{Gamma}(\theta).
+         \end{aligned}
+
+   The marginal distribution of $Y_i$ is then the negative
+   binomial with mean $\mu_i$ and variance
+   $\mu_i + \mu_i^2/\theta$:
+
+
+$$
+    \begin{aligned}
+        Y_i & \sim & \textrm{NegBin}(\mu_i, \theta), \\
+             & = & \frac{\Gamma (\theta + y_i)}{y! \, \Gamma(\theta)}
+                   \frac{\mu_i^{y_i} \, \theta^{\theta}}{(\mu_i + \theta)^{\theta + y_i}},
+         \end{aligned}
+
+   where $\theta$ is the systematic parameter of the Gamma
+   distribution modeling $\zeta_i$.
+
+-  The *systematic component* is given by
+
+
+$$
+    \mu_i = \exp(x_i \beta)
+$$
+
+   where $x_i$ is the vector of $k$ explanatory variables
+   and $\beta$ is the vector of coefficients.
+
+Quantities of Interest
+------
+
+-  The expected values (qi$ev) are simulations of the mean of the
+   stochastic component. Thus,
+
+
+$$
+    E(Y) = \mu_i = \exp(x_i
+        \beta),
+$$
+
+   given simulations of $\beta$.
+
+-  The predicted value (qi$pr) drawn from the distribution defined by
+   the set of parameters $(\mu_i, \theta)$.
+
+-  The first difference (qi$fd) is
+
+
+$$
+    \textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+        \widehat{Y_i(t_i=0)} \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $\widehat{Y_i(t_i=0)}$, the counterfactual predicted value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to $t_i=0$.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The negative binomial model is part of the MASS package by William N.
+Venable and Brian D. Ripley . Advanced users may wish to refer to
+`help(glm.nb)`.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- znegbin$new()
+z5$references()
+```

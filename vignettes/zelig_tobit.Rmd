@@ -1,0 +1,251 @@
+---
+title: "Tobit"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-tobit}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Linear Regression for a Left-Censored Dependent Variable with `tobit`.
+
+Tobit regression estimates a linear regression model for a left-censored
+dependent variable, where the dependent variable is censored from below.
+While the classical tobit model has values censored at 0, you may select
+another censoring point. For other linear regression models with fully
+observed dependent variables, see [Bayesian regression](zelig_normalbayes.html), [maximum
+likelihood normal regression](zelig_normal.html), and [least squares](zelig_ls.html).
+
+Syntax
+------
+
+```{r, eval = FALSE}
+z5 <- ztobit$new()
+z5$zelig(Y ~ X1 + X2, below = 0, above = Inf, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+```
+
+With the Zelig 4 compatibility wrappers:
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, below = 0, above = Inf, model = "tobit", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Inputs
+------
+
+zelig() accepts the following arguments to specify how the dependent
+variable is censored.
+
+-  `below`: (defaults to 0) The point at which the dependent variable
+   is censored from below. If any values in the dependent variable are
+   observed to be less than the censoring point, it is assumed that that
+   particular observation is censored from below at the observed value.
+   (See for a Bayesian implementation that supports both left and right
+   censoring.)
+
+-  robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+   errors based on sandwich estimators (see and ) and the options
+   selected in cluster.
+
+-  cluster: if robust = TRUE, you may select a variable to define groups
+   of correlated observations. Let x3 be a variable that consists of
+   either discrete numeric values, character strings, or factors that
+   define strata. Then
+
+```{r, eval=FALSE}
+z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3",
+                        model = "tobit", data = mydata)
+```
+   means that the observations can be correlated within the strata
+   defined by the variable x3, and that robust standard errors should be
+   calculated according to those clusters. If robust = TRUE but cluster
+   is not specified, zelig() assumes that each observation falls into
+   its own cluster.
+
+Zelig users may wish to refer to `help(survreg)` for more information.
+
+Examples
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+### Basic Example
+
+Attaching the sample dataset:
+
+```{r, eval = TRUE}
+data(tobin)
+```
+
+Estimating linear regression using `tobit`:
+
+```{r, eval = TRUE}
+z.out <- zelig(durable ~ age + quant, model = "tobit", data = tobin)
+```
+
+Summarize estimated paramters:
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Setting values for the explanatory variables to their sample averages:
+
+```{r, eval = TRUE}
+x.out <- setx(z.out)
+```
+
+Simulating quantities of interest from the posterior distribution given `x.out`.
+
+```{r, eval = TRUE}
+s.out1 <- sim(z.out, x = x.out)
+```
+
+```{r, eval = TRUE}
+summary(s.out1)
+```
+
+### Simulating First Differences
+
+Set explanatory variables to their default(mean/mode) values, with
+high (80th percentile) and low (20th percentile) liquidity ratio
+(`quant`):
+
+```{r, eval = TRUE}
+x.high <- setx(z.out, quant = quantile(tobin$quant, prob = 0.8))
+x.low <- setx(z.out, quant = quantile(tobin$quant, prob = 0.2))
+```
+
+Estimating the first difference for the effect of high versus low
+liquidity ratio on duration(\ `durable`):
+
+```{r, eval = TRUE}
+s.out2 <- sim(z.out, x = x.high, x1 = x.low)
+```
+
+```{r, eval = TRUE}
+summary(s.out2)
+```
+
+```{r Zelig-tobit, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-tobit"}
+plot(s.out1)
+```
+
+Model
+------
+
+-  Let $Y_i^*$ be a latent dependent variable which is distributed
+   with *stochastic* component
+
+
+$$
+    \begin{aligned}
+        Y_i^* & \sim & \textrm{Normal}(\mu_i, \sigma^2) \\\end{aligned}
+$$
+
+   where $\mu_i$ is a vector means and $\sigma^2$ is a
+   scalar variance parameter. $Y_i^*$ is not directly observed,
+   however. Rather we observed $Y_i$ which is defined as:
+
+
+$$
+    Y_i = \left\{
+        \begin{array}{lcl}
+      Y_i^*  &\textrm{if} & c <Y_i^* \\
+      c    &\textrm{if} & c \ge Y_i^*
+      \end{array}\right.
+$$
+
+   where $c$ is the lower bound below which $Y_i^*$ is
+   censored.
+
+-  The *systematic component* is given by
+
+
+$$
+    \begin{aligned}
+        \mu_{i} &=& x_{i} \beta,\end{aligned}
+$$
+
+   where $x_{i}$ is the vector of $k$ explanatory variables
+   for observation $i$ and $\beta$ is the vector of
+   coefficients.
+
+Quantities of Interest
+------
+
+-  The expected values (`qi$ev`) for the tobit regression model are
+   the same as the expected value of $Y*$:
+
+
+$$
+    E(Y^* | X) = \mu_{i} = x_{i} \beta
+$$
+
+-  The first difference (`qi$fd`) for the tobit regression model is
+   defined as
+
+
+$$
+    \begin{aligned}
+        \text{FD}=E(Y^* \mid x_{1}) - E(Y^* \mid x).\end{aligned}
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (`qi$att.ev`) for the treatment group is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{\sum t_{i}}\sum_{i:t_{i}=1}[E[Y^*_{i}(t_{i}=1)]-E[Y^*_{i}(t_{i}=0)]],\end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups.
+
+Output Values
+------
+
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.
+
+In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+
+See also
+------
+
+The tobit function is part of the survival library by Terry Therneau,
+ported to R by Thomas Lumley. Advanced users may wish to refer to
+`help(survfit)` in the survival library.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- ztobit$new()
+z5$references()
+```
