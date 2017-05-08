@@ -30,7 +30,8 @@ zexp$methods(
 )
 
 zexp$methods(
-  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data, weights = NULL, by = NULL, bootstrap = FALSE) {
+  zelig = function(formula, ..., robust = FALSE, cluster = NULL, data,
+                   weights = NULL, by = NULL, bootstrap = FALSE) {
 
     localFormula <- formula # avoids CRAN warning about deep assignment from formula existing separately as argument and field
     .self$zelig.call <- match.call(expand.dots = TRUE)
@@ -44,8 +45,8 @@ zexp$methods(
     .self$model.call$model <- FALSE
     callSuper(formula = localFormula, data = data, ..., robust = robust,
               cluster = cluster,  weights = weights, by = by, bootstrap = bootstrap)
-    rse<- lapply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
-    .self$test.statistics<- list(robust.se = rse)
+    rse <- lapply(.self$zelig.out$z.out, (function(x) vcovHC(x, type = "HC0")))
+    .self$test.statistics <- list(robust.se = rse)
   }
 )
 

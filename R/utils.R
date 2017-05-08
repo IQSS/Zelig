@@ -630,3 +630,14 @@ combine_coef_se <- function(obj, out_type = 'matrix', bagging = FALSE,
         stop('No multiply imputed or bootstrapped estimates found. So no need to combine.',
              call. = FALSE)
 }
+
+#' Find vcov for GEE models
+#'
+#' @param obj a \code{geeglm} class object.
+
+vcov_gee <- function(obj) {
+    if (!("geeglm" %in% class(obj)))
+        stop('Not a geeglm class object', call. = FALSE)
+    out <- obj$geese$vbeta
+    return(out)
+}

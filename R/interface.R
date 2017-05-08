@@ -344,7 +344,7 @@ factor_coef_combine <- function(obj, fitted) {
 
     is_zelig(obj)
 
-    if (class(obj$zelig.out$z.out[[1]]) != 'mcmc') { # find a more general solution
+    if (!('mcmc' %in% class(obj$zelig.out$z.out[[1]]))) { # find a more general solution
         original_data <- obj$zelig.out$z.out[[1]]$model
         factor_vars <- sapply(original_data, is.factor)
         if (any(factor_vars)) {

@@ -33,7 +33,16 @@ inserting all variables from `data` on the right-hand side of the formula
 
 -   Added `ATT` wrapper for `ATT` method.
 
+-   `gee` models can now be estimated with multiply imputed data. #263 
+
 ## Minor changes and bug fixes
+
+-   `zelig` returns an error if `weights` are specified in a model estimated 
+with multiply imputed data. (not possible before, but uninformative error 
+returned)
+
+-   Code improvement to `factor_coef_combine` so it does not return a warning
+for model types with more than 1 declared class.
 
 -   Reorganize README files to meet new CRAN requirements.
 

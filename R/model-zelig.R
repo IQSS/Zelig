@@ -392,12 +392,21 @@ z$methods(
                                     function(imputationNumber)
                                         cbind(imputationNumber,
                                             idata[[imputationNumber]])))
+        if (!is.null(weights))
+            stop('weights are currently not available with imputed data.',
+                    call. = FALSE)
         .self$weights <- NULL  # This should be considered or addressed
         datareformed <- TRUE
         .self$by <- c("imputationNumber", by)
         .self$mi <- TRUE
         .self$setforeveryby <- FALSE  # compute covariates in set() at on the entire stacked dataset
         .self$refs <- c(.self$refs, citation("Amelia"))
+
+        if (.self$fn == "geepack::geeglm" & is.character(.self$model.call$id)) {
+            .self$model.call$id <- subset(.self$data,
+                              imputationNumber == 1)[, .self$model.call$id]
+        }
+
     } else {
         .self$mi <- FALSE
     }
@@ -480,7 +489,6 @@ z$methods(
     #print(.self$zelig.call)
     #cat("model.call:\n")
     #print(.self$model.call)
-
     .self$data <- tbl_df(.self$data)
     #.self$zelig.out <- eval(fn2(.self$model.call, data = data)) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>%
@@ -1065,7 +1073,11 @@ z$methods(
     get_vcov = function() {
         "Get estimated model variance-covariance matrix"
         is_uninitializedField(.self$zelig.out)
-        result <- lapply(.self$zelig.out$z.out, vcov)
+
+        if ("geeglm" %in% class(.self$zelig.out$z.out[[1]]))
+            result <- lapply(.self$zelig.out$z.out, vcov_gee)
+        else
+            result <- lapply(.self$zelig.out$z.out, vcov)
         if ("try-error" %in% class(result))
             stop("'vcov' method' not implemented for model '", .self$name, "'")
         else

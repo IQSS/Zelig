@@ -4,7 +4,7 @@
 #' @import methods
 #' @export Zelig-normal-gee
 #' @exportClass Zelig-normal-gee
-#'  
+#'
 #' @include model-zelig.R
 #' @include model-gee.R
 #' @include model-normal.R
