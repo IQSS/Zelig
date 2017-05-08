@@ -4,7 +4,7 @@
 #' @import methods
 #' @export Zelig-factor-bayes
 #' @exportClass Zelig-factor-bayes
-#' 
+#'
 #' @include model-zelig.R
 
 zfactorbayes <- setRefClass("Zelig-factor-bayes",
@@ -25,11 +25,11 @@ zfactorbayes$methods(
 )
 
 zfactorbayes$methods(
-  zelig = function(formula, 
+  zelig = function(formula,
                    factors = 2,
-                   burnin = 1000, mcmc = 20000, 
-                   verbose = 0, 
-                   ..., 
+                   burnin = 1000, mcmc = 20000,
+                   verbose = 0,
+                   ...,
                    data,
                    by = NULL,
                    bootstrap = FALSE) {
@@ -76,11 +76,11 @@ zfactorbayes$methods(
             year = 1992,
             publisher = "Clarendon Press",
             address = "Oxford, UK",
-            editor = c(person("JM", "Bernado"), person("JO", "Berger"), person("AP", "Dawid"), person("AFM", "Smith")) 
+            editor = c(person("JM", "Bernado"), person("JO", "Berger"), person("AP", "Dawid"), person("AFM", "Smith"))
             )
     .self$refs<-c(.self$refs,ref1)
     return(diag)
-  } 
+  }
 )
 
 zfactorbayes$methods(
@@ -105,7 +105,7 @@ zfactorbayes$methods(
             pages = "1109--44")
     .self$refs<-c(.self$refs,ref1)
     return(diag)
-  } 
+  }
 )
 
 zfactorbayes$methods(
@@ -136,10 +136,9 @@ zfactorbayes$methods(
             year = 1995,
             publisher = "Chapman and Hall",
             address = "London, UK",
-            editor = c(person("WR", "Gilks"), person("DJ", "Spiegelhalter"), person("S", "Richardson")) 
+            editor = c(person("WR", "Gilks"), person("DJ", "Spiegelhalter"), person("S", "Richardson"))
             )
     .self$refs<-c(.self$refs,ref1,ref2)
     return(diag)
-  } 
+  }
 )
-

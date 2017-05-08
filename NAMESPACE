@@ -1,5 +1,5 @@
 import(sandwich, methods, survival, jsonlite, dplyr,
-       geepack, MCMCpack, coda, Amelia, MatchIt, maxLik, survey)
+       geepack, coda, Amelia, MatchIt, maxLik, survey)
 
 importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm", "gamma.shape")
 importFrom("VGAM", "vglm")
@@ -12,6 +12,8 @@ importFrom("stats", "binomial", "complete.cases", "density",
            "glm", "lm", "lm.influence", "median", "model.frame",
              "model.matrix", "model.response", "na.omit", "quantile",
              "sd", "terms", "update", "ARMAacf", "rnorm", "pnorm")
+importFrom("MCMCpack", "MCMCfactanal", "MCMClogit", "MCMCmnl", "MCMCregress",
+           "MCMCoprobit", "MCMCpoisson", "MCMCprobit", "MCMCtobit")
 
 importFrom("Formula", "as.Formula")
 
