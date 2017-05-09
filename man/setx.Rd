@@ -60,7 +60,7 @@ s.out <- sim(z.out, x = x.out)
 }
 \seealso{
 The full Zelig manual may be accessed online at
-  \url{http://docs.zeligproject.org/en/latest/}
+  \url{http://docs.zeligproject.org/articles/}
 }
 \author{
 Matt Owen, Olivia Lau and Kosuke Imai

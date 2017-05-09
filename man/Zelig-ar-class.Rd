@@ -6,6 +6,6 @@
 \alias{zar}
 \title{Time-Series Model with Autoregressive Disturbance}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-ar.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-ar.html}
 }
 

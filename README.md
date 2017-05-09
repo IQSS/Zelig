@@ -174,7 +174,7 @@ Getting help
 ============
 
 The primary documentation for Zelig is available at:
-<http://docs.zeligproject.org/en/latest/>.
+<http://docs.zeligproject.org/articles/>.
 
 Within R, you can access function help using the normal `?` function,
 e.g.:

@@ -6,7 +6,7 @@
 \alias{zlognorm}
 \title{Log-Normal Regression for Duration Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-lognorm.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-lognorm.html}
 }
 \section{Methods}{
 

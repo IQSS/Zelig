@@ -147,7 +147,7 @@ z5_2 <- plot(z5_2)
 
 # Getting help
 
-The primary documentation for Zelig is available at: <http://docs.zeligproject.org/en/latest/>.
+The primary documentation for Zelig is available at: <http://docs.zeligproject.org/articles/>.
 
 Within R, you can access function help using the normal `?` function, e.g.:
 

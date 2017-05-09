@@ -21,7 +21,7 @@ exclude the main effects; and quadratic terms in the form
 
 \item{model}{the name of a statistical model.
 For a list of supported models visit:
-\url{http://docs.zeligproject.org/en/latest/}.}
+\url{http://docs.zeligproject.org/articles/}.}
 
 \item{data}{the name of a data frame containing the variables
 referenced in the formula, or a list of multiply imputed data frames

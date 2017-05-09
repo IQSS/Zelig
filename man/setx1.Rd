@@ -58,7 +58,7 @@ zelig(Fertility ~ Education, data = swiss, model = 'ls') \%>\%
 }
 \seealso{
 The full Zelig manual may be accessed online at
-  \url{http://docs.zeligproject.org/en/latest/}
+  \url{http://docs.zeligproject.org/articles/}
 }
 \author{
 Christopher Gandrud, Matt Owen, Olivia Lau, Kosuke Imai

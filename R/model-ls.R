@@ -1,6 +1,6 @@
 #' Least Squares Regression for Continuous Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-ls.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-ls.html}
 #' @import methods
 #' @export Zelig-ls
 #' @exportClass Zelig-ls

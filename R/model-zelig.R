@@ -124,7 +124,7 @@ z$methods(
     .self$refs <- bibentry()
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
     .self$url <- "http://zeligproject.org/"
-    .self$url.docs <- "http://docs.zeligproject.org/en/latest/"
+    .self$url.docs <- "http://docs.zeligproject.org/articles/"
     .self$setx.out <- list()
     .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
                               ev1 = "Expected Values: E(Y|X1)",

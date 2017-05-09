@@ -1,6 +1,6 @@
 #' Autoregressive and Moving-Average Models with Integration for Time-Series Data
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-arima.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-arima.html}
 #' @import methods
 #' @export Zelig-arima
 #' @exportClass Zelig-arima

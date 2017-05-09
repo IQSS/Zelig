@@ -1,6 +1,6 @@
 #' Rare Events Logistic Regression for Dichotomous Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-relogit.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-relogit.html}
 #' @import methods
 #' @export Zelig-relogit
 #' @exportClass Zelig-relogit

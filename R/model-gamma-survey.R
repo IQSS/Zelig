@@ -1,6 +1,6 @@
 #' Gamma Regression with Survey Weights
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-gammasurvey.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-gammasurvey.html}
 #' @import methods
 #' @export Zelig-gamma
 #' @exportClass Zelig-gamma

@@ -6,6 +6,6 @@
 \alias{zpoissonbayes}
 \title{Bayesian Poisson Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-poissonbayes.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-poissonbayes.html}
 }
 

@@ -22,7 +22,7 @@
 #'   \code{I(x1^2)}
 #' @param model the name of a statistical model.
 #'   For a list of supported models visit:
-#'   \url{http://docs.zeligproject.org/en/latest/}.
+#'   \url{http://docs.zeligproject.org/articles/}.
 #' @param data the name of a data frame containing the variables
 #'   referenced in the formula, or a list of multiply imputed data frames
 #'   each having the same variable names and row numbers (created by
@@ -152,7 +152,7 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 #'
 #' @author Matt Owen, Olivia Lau and Kosuke Imai
 #' @seealso The full Zelig manual may be accessed online at
-#'   \url{http://docs.zeligproject.org/en/latest/}
+#'   \url{http://docs.zeligproject.org/articles/}
 #' @keywords file
 #' @export
 
@@ -224,7 +224,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
 #'
 #' @author Christopher Gandrud, Matt Owen, Olivia Lau, Kosuke Imai
 #' @seealso The full Zelig manual may be accessed online at
-#'   \url{http://docs.zeligproject.org/en/latest/}
+#'   \url{http://docs.zeligproject.org/articles/}
 #' @keywords file
 #' @export
 

@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Zelig Quickstart Guide</h1>
             
-            <h4 class="date">2017-05-08</h4>
+            <h4 class="date">2017-05-09</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.0.90000</em></p>
+<p><em>Built using Zelig version 5.1.0</em></p>
 <div id="zelig-workflow-overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zelig-workflow-overview" class="anchor"></a>Zelig workflow overview</h2>
@@ -217,23 +217,23 @@ z5_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a h
 ##  sim x :
 ##  -----
 ## ev
-##      mean       sd      50%     2.5%    97.5%
-## 1 75.3426 1.702067 75.27241 72.25894 78.80362
+##       mean       sd      50%     2.5%    97.5%
+## 1 75.25231 1.638473 75.28327 71.89179 78.26378
 ## pv
-##          mean       sd      50%     2.5%    97.5%
-## [1,] 75.34105 9.541724 75.36845 57.32297 94.28962
+##          mean       sd    50%    2.5%    97.5%
+## [1,] 75.05696 9.677225 75.312 55.6301 92.81746
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##       mean       sd      50%     2.5%    97.5%
-## 1 66.69374 1.557087 66.74415 63.62646 69.64617
+## 1 66.70205 1.527828 66.74112 63.62849 69.68694
 ## pv
-##          mean       sd      50%     2.5%    97.5%
-## [1,] 66.55921 9.524134 66.66921 47.86885 86.53162
+##          mean       sd     50%     2.5%    97.5%
+## [1,] 67.00025 9.721936 67.4027 48.22798 86.56761
 ## fd
-##        mean       sd      50%      2.5%     97.5%
-## 1 -8.648863 1.452506 -8.65035 -11.55105 -5.913616</code></pre>
+##        mean       sd       50%     2.5%     97.5%
+## 1 -8.550267 1.444805 -8.514637 -11.2362 -5.740598</code></pre>
 <p>At this point, we’ve estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The <code>summary()</code> method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences–the difference in expected values at the set levels of education.</p>
 </div>
 <div id="visualizations" class="section level1">
@@ -261,7 +261,7 @@ z5_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a h
 <div id="getting-help" class="section level1">
 <h1 class="hasAnchor">
 <a href="#getting-help" class="anchor"></a>Getting help</h1>
-<p>The primary documentation for Zelig is available at: <a href="http://docs.zeligproject.org/en/latest/" class="uri">http://docs.zeligproject.org/en/latest/</a>.</p>
+<p>The primary documentation for Zelig is available at: <a href="http://docs.zeligproject.org/articles/" class="uri">http://docs.zeligproject.org/articles/</a>.</p>
 <p>Within R, you can access function help using the normal <code>?</code> function, e.g.:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><a href="../reference/setx.html">?setx</a></code></pre></div>
 <p>If you are looking for details on particlar estimation model methods, you can also use the <code>?</code> function. Simply place a <code>z</code> before the model name. For example, to access details about the <code>logit</code> model use:</p>

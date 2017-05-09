@@ -6,6 +6,6 @@
 \alias{zpoissongee}
 \title{Generalized Estimating Equation for Poisson Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-poissongee.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-poissongee.html}
 }
 

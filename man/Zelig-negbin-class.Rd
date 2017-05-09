@@ -6,7 +6,7 @@
 \alias{znegbin}
 \title{Negative Binomial Regression for Event Count Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-negbin.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-negbin.html}
 }
 \section{Methods}{
 

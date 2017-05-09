@@ -6,6 +6,6 @@
 \alias{znormalsurvey}
 \title{Normal Regression for Continuous Dependent Variables with Survey Weights}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-normalsurvey.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-normalsurvey.html}
 }
 

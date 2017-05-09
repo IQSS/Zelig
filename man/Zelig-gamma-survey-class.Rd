@@ -6,6 +6,6 @@
 \alias{zgammasurvey}
 \title{Gamma Regression with Survey Weights}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-gammasurvey.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-gammasurvey.html}
 }
 

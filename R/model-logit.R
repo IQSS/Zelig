@@ -1,6 +1,6 @@
 #' Logistic Regression for Dichotomous Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-logit.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-logit.html}
 #' @import methods
 #' @export Zelig-logit
 #' @exportClass Zelig-logit

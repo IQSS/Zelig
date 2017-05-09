@@ -1,6 +1,6 @@
 #' Bayesian Tobit Regression
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-tobitbayes.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-tobitbayes.html}
 #' @import methods
 #' @export Zelig-tobit-bayes
 #' @exportClass Zelig-tobit-bayes

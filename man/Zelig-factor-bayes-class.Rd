@@ -6,7 +6,7 @@
 \alias{zfactorbayes}
 \title{Bayesian Factor Analysis}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-factorbayes.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-factorbayes.html}
 }
 \section{Methods}{
 

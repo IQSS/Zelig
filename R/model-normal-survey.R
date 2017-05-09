@@ -1,6 +1,6 @@
 #' Normal Regression for Continuous Dependent Variables with Survey Weights
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-normalsurvey.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-normalsurvey.html}
 #' @import methods
 #' @export Zelig-normal
 #' @exportClass Zelig-normal

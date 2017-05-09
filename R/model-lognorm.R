@@ -1,6 +1,6 @@
 #' Log-Normal Regression for Duration Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-lognorm.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-lognorm.html}
 #' @import methods
 #' @export Zelig-lognorm
 #' @exportClass Zelig-lognorm

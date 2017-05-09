@@ -6,6 +6,6 @@
 \alias{zoprobitbayes}
 \title{Bayesian Ordered Probit Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-oprobitbayes.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-oprobitbayes.html}
 }
 

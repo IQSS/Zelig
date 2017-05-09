@@ -6,6 +6,6 @@
 \alias{zpoissonsurvey}
 \title{Poisson Regression with Survey Weights}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-poissonsurvey.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-poissonsurvey.html}
 }
 

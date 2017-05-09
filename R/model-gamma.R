@@ -1,6 +1,6 @@
 #' Gamma Regression for Continuous, Positive Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-gamma.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-gamma.html}
 #' @import methods
 #' @export Zelig-gamma
 #' @exportClass Zelig-gamma

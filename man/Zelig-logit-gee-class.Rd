@@ -6,6 +6,6 @@
 \alias{zlogitgee}
 \title{Generalized Estimating Equation for Logit Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-logitgee.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-logitgee.html}
 }
 

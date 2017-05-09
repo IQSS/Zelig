@@ -1,6 +1,6 @@
 #' Negative Binomial Regression for Event Count Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-negbin.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-negbin.html}
 #' @import methods
 #' @export Zelig-negbin
 #' @exportClass Zelig-negbin

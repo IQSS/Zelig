@@ -6,7 +6,7 @@
 \alias{zweibull}
 \title{Weibull Regression for Duration Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-weibull.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-weibull.html}
 }
 \section{Methods}{
 

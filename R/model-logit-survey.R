@@ -1,6 +1,6 @@
 #' Logit Regression with Survey Weights
 #'
-#' Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-logitsurvey.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-logitsurvey.html}
 #' @import methods
 #' @export Zelig-logit-survey
 #' @exportClass Zelig-logit-survey

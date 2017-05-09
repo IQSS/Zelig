@@ -6,7 +6,7 @@
 \alias{zquantile}
 \title{Quantile Regression for Continuous Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/en/latest/zelig-quantile.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig-quantile.html}
 }
 \section{Methods}{
 
