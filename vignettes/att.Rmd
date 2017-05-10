@@ -1,0 +1,63 @@
+---
+title: "Average Treatment Effects on the Treated (ATT)"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{att}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE, eval=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+```
+---
+
+
+Average Treatment Effects on the Treated
+----------------------------------------
+
+Average Treatment Effects on the Treated (ATT) quantities of interest can be generated with the `ATT()` method/function, for any `zelig` model that can construct expected values. Once you have simulated the ATT, they can be retrieved with the QI 
+[getters](getters.html) function: `get_qi()`. For example: 
+
+```{r message=FALSE}
+library(zeligverse)
+library(dplyr) # load %>% pipe operator
+
+# load data and estimate model
+data(sanction)
+zqi.out <- zelig(num ~ target + coop + mil, 
+                 model = "poisson", data = sanction, cite = FALSE)
+
+z.att <- zqi.out %>%
+             ATT(treatment = "mil", treat = 1) %>% 
+             get_qi(qi = "ATT", xvalue = "TE")
+
+# summarize the results
+hist(z.att, xlab ="Averege Treatment Effect of mil on the Treated")
+```
+
+In this example the treatment was the `mil` variable with the value 1. `xvalue = "TE"` specifies
+that we would like the treatment effect.
+
+Background
+==========
+
+Assume there is a set of treatments $\mathbb{T} \in \{0,1\}$, e.g. `mil = 0` and `mil = 1`. For each unit $i$ there are corresponding potential outcomes $Y_i(0)$ and 
+$Y_i(1)$.
+
+
+See Also
+========
+
+Imbens, Guido W. and Donald B. Rubin. 2015. Causal inference for Statistics, 
+Social and Biomedical Science. Cambridge: Cambridge University Press.
