@@ -38,7 +38,8 @@ library(Zelig)
 
 # load data and estimate model
 data(sanction)
-zqi.out <- zelig(num ~ target + coop + mil, model = "poisson", data = sanction)
+zqi.out <- zelig(num ~ target + coop + mil, 
+                 model = "poisson", data = sanction, cite = FALSE)
 
 # get coefficients with Zelig 5 reference class method
 zqi.out$get_coef()
@@ -89,7 +90,7 @@ my.pv.lowcoop <- get_qi(zqi.out, qi ="pv", xvalue = "x")
 Average Treatment Effects on the Treated
 ----------------------------------------
 
-Average Treatment Effects on the Treated (ATT) quantities of interest can be generated with the `ATT()` method/function, for any `zelig` model that can construct expected values. These can similarly be retrieved with `get_qi()`
+Average treatment effects on the treated (ATT) are a quantity of interest that can be generated with the `ATT()` method/function, for any `zelig` model that can construct expected values. These can similarly be retrieved with `get_qi()`
 
 ```{r}
 library(dplyr) # load %>% pipe operator
@@ -97,3 +98,5 @@ z.att <- zqi.out %>%
              ATT(treatment = "mil") %>%
              get_qi(qi = "ATT", xvalue = "TE")
 ```
+
+For more information see the [ATT Article](att.html).

@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Getter Functions</h1>
             
-            <h4 class="date">2017-05-08</h4>
+            <h4 class="date">2017-05-10</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.0.90000</em></p>
+<p><em>Built using Zelig version 5.1.1.90000</em></p>
 <hr>
 <p>Zelig has a number of utilities available to easily extract items of interest from all the results stored in the Zelig object. These are called “getters”.</p>
 <div id="getters-in-zelig-5-vs-standard-r-syntax" class="section level2">
@@ -140,13 +140,10 @@
 
 <span class="co"># load data and estimate model</span>
 <span class="kw">data</span>(sanction)
-zqi.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num <span class="op">~</span><span class="st"> </span>target <span class="op">+</span><span class="st"> </span>coop <span class="op">+</span><span class="st"> </span>mil, <span class="dt">model =</span> <span class="st">"poisson"</span>, <span class="dt">data =</span> sanction)</code></pre></div>
-<pre><code>## How to cite this model in Zelig:
-##   R Core Team. 2007.
-##   poisson: Poisson Regression for Event Count Dependent Variables
-##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get coefficients with Zelig 5 reference class method</span>
+zqi.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num <span class="op">~</span><span class="st"> </span>target <span class="op">+</span><span class="st"> </span>coop <span class="op">+</span><span class="st"> </span>mil, 
+                 <span class="dt">model =</span> <span class="st">"poisson"</span>, <span class="dt">data =</span> sanction, <span class="dt">cite =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># get coefficients with Zelig 5 reference class method</span>
 zqi.out<span class="op">$</span><span class="kw">get_coef</span>()</code></pre></div>
 <pre><code>## [[1]]
 ## (Intercept)      target        coop         mil 
@@ -213,11 +210,12 @@ my.fd &lt;-<span class="st"> </span>zqi.out<span class="op">$</span><span class=
 <div id="average-treatment-effects-on-the-treated" class="section level2">
 <h2 class="hasAnchor">
 <a href="#average-treatment-effects-on-the-treated" class="anchor"></a>Average Treatment Effects on the Treated</h2>
-<p>Average Treatment Effects on the Treated (ATT) quantities of interest can be generated with the <code><a href="../reference/ATT.html">ATT()</a></code> method/function, for any <code>zelig</code> model that can construct expected values. These can similarly be retrieved with <code><a href="../reference/get_qi.html">get_qi()</a></code></p>
+<p>Average treatment effects on the treated (ATT) are a quantity of interest that can be generated with the <code><a href="../reference/ATT.html">ATT()</a></code> method/function, for any <code>zelig</code> model that can construct expected values. These can similarly be retrieved with <code><a href="../reference/get_qi.html">get_qi()</a></code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr) <span class="co"># load %&gt;% pipe operator</span>
 z.att &lt;-<span class="st"> </span>zqi.out <span class="op">%&gt;%</span>
 <span class="st">             </span><span class="kw"><a href="../reference/ATT.html">ATT</a></span>(<span class="dt">treatment =</span> <span class="st">"mil"</span>) <span class="op">%&gt;%</span>
 <span class="st">             </span><span class="kw"><a href="../reference/get_qi.html">get_qi</a></span>(<span class="dt">qi =</span> <span class="st">"ATT"</span>, <span class="dt">xvalue =</span> <span class="st">"TE"</span>)</code></pre></div>
+<p>For more information see the <a href="att.html">ATT Article</a>.</p>
 </div>
 </div>
   </div>
