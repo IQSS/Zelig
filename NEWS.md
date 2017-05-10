@@ -7,8 +7,12 @@ applicable.
 Zelig version 5.1-1
 ==============================
 
+## Major changes
 
 
+## Minor changes
+
+-   Average Treatment Effect on the Treated (ATT) vignette added to the online documentation <http://docs.zeligproject.org/articles/att.html>
 
 
 Zelig version 5.1-0

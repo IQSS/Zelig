@@ -48,6 +48,7 @@ navbar:
 articles:
   - title: "Zelig Overview"
     contents:
+      - att
       - available_models_overview
       - bootstraps
       - diagnostics
