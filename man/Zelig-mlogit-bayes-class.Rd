@@ -6,6 +6,6 @@
 \alias{zmlogitbayes}
 \title{Bayesian Multinomial Logistic Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-mlogitbayes.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_mlogitbayes.html}
 }
 

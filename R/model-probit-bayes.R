@@ -1,6 +1,6 @@
 #' Bayesian Probit Regression
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-probitbayes.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_probitbayes.html}
 #' @import methods
 #' @export Zelig-probit-bayes
 #' @exportClass Zelig-probit-bayes

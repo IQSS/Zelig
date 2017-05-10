@@ -6,7 +6,7 @@
 \alias{zrelogit}
 \title{Rare Events Logistic Regression for Dichotomous Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-relogit.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_relogit.html}
 }
 \section{Methods}{
 

@@ -1,6 +1,6 @@
 #' Generalized Estimating Equation for Poisson Regression
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-poissongee.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_poissongee.html}
 #' @import methods
 #' @export Zelig-poisson-gee
 #' @exportClass Zelig-poisson-gee

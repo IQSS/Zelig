@@ -6,7 +6,7 @@
 \alias{zls}
 \title{Least Squares Regression for Continuous Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-ls.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_ls.html}
 }
 \section{Methods}{
 

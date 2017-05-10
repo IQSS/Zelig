@@ -1,6 +1,6 @@
 #' Probit Regression for Dichotomous Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-probit.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_probit.html}
 #' @import methods
 #' @export Zelig-probit
 #' @exportClass Zelig-probit

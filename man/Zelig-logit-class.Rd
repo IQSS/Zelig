@@ -6,6 +6,6 @@
 \alias{zlogit}
 \title{Logistic Regression for Dichotomous Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-logit.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_logit.html}
 }
 

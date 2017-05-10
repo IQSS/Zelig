@@ -6,6 +6,6 @@
 \alias{zprobitsurvey}
 \title{Probit Regression with Survey Weights}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-probitsurvey.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_probitsurvey.html}
 }
 

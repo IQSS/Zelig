@@ -6,6 +6,6 @@
 \alias{zpoisson}
 \title{Poisson Regression for Event Count Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-poisson.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_poisson.html}
 }
 

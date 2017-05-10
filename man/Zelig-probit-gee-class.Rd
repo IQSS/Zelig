@@ -6,6 +6,6 @@
 \alias{zprobitgee}
 \title{Generalized Estimating Equation for Probit Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-probitgee.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_probitgee.html}
 }
 

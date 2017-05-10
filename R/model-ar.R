@@ -1,6 +1,6 @@
 #' Time-Series Model with Autoregressive Disturbance
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-ar.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_ar.html}
 #' @import methods
 #' @export Zelig-ar
 #' @exportClass Zelig-ar

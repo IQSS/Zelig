@@ -1,6 +1,6 @@
 #' Exponential Regression for Duration Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-exp.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_exp.html}
 #' @import methods
 #' @export Zelig-exp
 #' @exportClass Zelig-exp

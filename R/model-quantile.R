@@ -1,6 +1,6 @@
 #' Quantile Regression for Continuous Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-quantile.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_quantile.html}
 #' @import methods
 #' @export Zelig-quantile
 #' @exportClass Zelig-quantile

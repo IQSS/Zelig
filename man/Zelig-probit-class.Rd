@@ -6,6 +6,6 @@
 \alias{zprobit}
 \title{Probit Regression for Dichotomous Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-probit.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_probit.html}
 }
 

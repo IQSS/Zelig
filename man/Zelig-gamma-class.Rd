@@ -6,6 +6,6 @@
 \alias{zgamma}
 \title{Gamma Regression for Continuous, Positive Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-gamma.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_gamma.html}
 }
 

@@ -6,6 +6,6 @@
 \alias{znormalbayes}
 \title{Bayesian Normal Linear Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-normalbayes.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_normalbayes.html}
 }
 

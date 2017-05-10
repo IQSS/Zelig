@@ -6,6 +6,6 @@
 \alias{zgammagee}
 \title{Generalized Estimating Equation for Gamma Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-gammagee.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_gammagee.html}
 }
 

@@ -6,7 +6,7 @@
 \alias{zexp}
 \title{Exponential Regression for Duration Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-exp.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_exp.html}
 }
 \section{Methods}{
 

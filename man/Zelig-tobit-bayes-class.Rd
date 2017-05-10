@@ -6,6 +6,6 @@
 \alias{ztobitbayes}
 \title{Bayesian Tobit Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-tobitbayes.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_tobitbayes.html}
 }
 

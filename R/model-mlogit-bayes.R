@@ -1,6 +1,6 @@
 #' Bayesian Multinomial Logistic Regression
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-mlogitbayes.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_mlogitbayes.html}
 #' @import methods
 #' @export Zelig-mlogit-bayes
 #' @exportClass Zelig-mlogit-bayes

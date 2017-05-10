@@ -1,6 +1,6 @@
 #' Linear Regression for a Left-Censored Dependent Variable
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-tobit.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_tobit.html}
 #' @import methods
 #' @export Zelig-tobit
 #' @exportClass Zelig-tobit

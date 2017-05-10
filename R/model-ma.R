@@ -1,6 +1,6 @@
 #' Time-Series Model with Moving Average
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-ma.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_ma.html}
 #' @import methods
 #' @export Zelig-ma
 #' @exportClass Zelig-ma

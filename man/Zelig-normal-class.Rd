@@ -6,6 +6,6 @@
 \alias{znormal}
 \title{Normal Regression for Continuous Dependent Variables}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-normal.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_normal.html}
 }
 

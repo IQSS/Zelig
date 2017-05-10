@@ -1,6 +1,6 @@
 #' Generalized Estimating Equation for Probit Regression
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-probitgee.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_probitgee.html}
 #' @import methods
 #' @export Zelig-probit-gee
 #' @exportClass Zelig-probit-gee

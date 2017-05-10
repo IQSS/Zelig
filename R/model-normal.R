@@ -1,6 +1,6 @@
 #' Normal Regression for Continuous Dependent Variables
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-normal.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_normal.html}
 #' @import methods
 #' @export Zelig-normal
 #' @exportClass Zelig-normal

@@ -6,6 +6,6 @@
 \alias{zlogitsurvey}
 \title{Logit Regression with Survey Weights}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-logitsurvey.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_logitsurvey.html}
 }
 

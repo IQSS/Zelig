@@ -1,6 +1,6 @@
 #' Generalized Estimating Equation for Gamma Regression
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-gammagee.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_gammagee.html}
 #' @import methods
 #' @export Zelig-gamma
 #' @exportClass Zelig-gamma

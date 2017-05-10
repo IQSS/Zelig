@@ -6,6 +6,6 @@
 \alias{zarima}
 \title{Autoregressive and Moving-Average Models with Integration for Time-Series Data}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-arima.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_arima.html}
 }
 

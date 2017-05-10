@@ -6,6 +6,6 @@
 \alias{zma}
 \title{Time-Series Model with Moving Average}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-ma.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_ma.html}
 }
 

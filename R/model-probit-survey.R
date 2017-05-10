@@ -1,6 +1,6 @@
 #' Probit Regression with Survey Weights
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-probitsurvey.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_probitsurvey.html}
 #' @import methods
 #' @export Zelig-probit-survey
 #' @exportClass Zelig-probit-survey

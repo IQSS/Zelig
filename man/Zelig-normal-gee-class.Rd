@@ -6,6 +6,6 @@
 \alias{znormalgee}
 \title{Generalized Estimating Equation for Normal Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-normalgee.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_normalgee.html}
 }
 

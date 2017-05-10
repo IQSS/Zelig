@@ -6,6 +6,6 @@
 \alias{zlogitbayes}
 \title{Bayesian Logit Regression}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig-logitbayes.html}
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_logitbayes.html}
 }
 

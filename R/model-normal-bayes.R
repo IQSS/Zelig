@@ -1,6 +1,6 @@
 #' Bayesian Normal Linear Regression
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-normalbayes.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_normalbayes.html}
 #' @import methods
 #' @export Zelig-normal-bayes
 #' @exportClass Zelig-normal-bayes

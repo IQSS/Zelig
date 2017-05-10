@@ -1,6 +1,6 @@
 #' Bayesian Poisson Regression
 #'
-#' Vignette: \url{http://docs.zeligproject.org/articles/zelig-poissonbayes.html}
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_poissonbayes.html}
 #' @import methods
 #' @export Zelig-poisson-bayes
 #' @exportClass Zelig-poisson-bayes
