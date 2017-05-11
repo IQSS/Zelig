@@ -86,6 +86,7 @@ articles:
       - zelig_oprobitbayes
       - zelig_poisson
       - zelig_poissonbayes
+      - zelig_poissongee
       - zelig_poissonsurvey
       - zelig_probit
       - zelig_probitbayes

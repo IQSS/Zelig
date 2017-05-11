@@ -24,11 +24,13 @@ formula is \code{y ~ x1 + x2} and instruments is a one-sided formula
 \item{...}{further arguments passed to methods. See also \code{\link{zelig}}.}
 }
 \description{
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_ivreg.html}
+}
+\details{
 Fit instrumental-variable regression by two-stage least squares. This is
 equivalent to direct instrumental-variables estimation when the number of
 instruments is equal to the number of predictors.
-}
-\details{
+
 Regressors and instruments for \code{ivreg} are most easily specified in
 a formula with two parts on the right-hand side, e.g.,
 \code{y ~ x1 + x2 | z1 + z2 + z3}, where \code{x1} and \code{x2} are the regressors and

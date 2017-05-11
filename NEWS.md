@@ -7,13 +7,12 @@ applicable.
 Zelig version 5.1-1
 ==============================
 
-## Major changes
-
-
 ## Minor changes
 
--   Average Treatment Effect on the Treated (ATT) vignette added to the online 
+-   Average Treatment Effect on the Treated (ATT) vignette added to the online
 documentation <http://docs.zeligproject.org/articles/att.html>
+
+- Corrected vignette URLs.
 
 
 Zelig version 5.1-0
@@ -32,7 +31,7 @@ enhances `ivreg`. #241
 inserting all variables from `data` on the right-hand side of the formula
 #87. See also #247.
 
--   Arbitrary `log` transformations are now supported in `zelig` calls 
+-   Arbitrary `log` transformations are now supported in `zelig` calls
 (exept for `ivreg` regressors). #225
 
 -   Arbitrary `as.factor` and `factor` transformations are now supported in
@@ -45,12 +44,12 @@ inserting all variables from `data` on the right-hand side of the formula
 
 -   Added `ATT` wrapper for `ATT` method.
 
--   `gee` models can now be estimated with multiply imputed data. #263 
+-   `gee` models can now be estimated with multiply imputed data. #263
 
 ## Minor changes and bug fixes
 
--   `zelig` returns an error if `weights` are specified in a model estimated 
-with multiply imputed data. (not possible before, but uninformative error 
+-   `zelig` returns an error if `weights` are specified in a model estimated
+with multiply imputed data. (not possible before, but uninformative error
 returned)
 
 -   Code improvement to `factor_coef_combine` so it does not return a warning
@@ -64,7 +63,7 @@ for model types with more than 1 declared class.
 -   Depends on the survival package in order to enable `setx` for exponential
 models without explicitly loading survival. #254
 
--   `relogit` now only accepts one `tau` per call (similar to `quantile`). Fixed 
+-   `relogit` now only accepts one `tau` per call (similar to `quantile`). Fixed
 to address #257.
 
 - Additional unit tests.

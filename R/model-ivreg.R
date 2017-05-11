@@ -1,5 +1,7 @@
 #' Instrumental-Variable Regression
 #'
+#' Vignette: \url{http://docs.zeligproject.org/articles/zelig_ivreg.html}
+#'
 #' Fit instrumental-variable regression by two-stage least squares. This is
 #' equivalent to direct instrumental-variables estimation when the number of
 #' instruments is equal to the number of predictors.
