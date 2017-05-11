@@ -147,9 +147,7 @@
     </div>
 
     
-    <p>Fit instrumental-variable regression by two-stage least squares. This is
-equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of predictors.</p>
+    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_ivreg.html'>http://docs.zeligproject.org/articles/zelig_ivreg.html</a></p>
     
 
     
@@ -186,7 +184,10 @@ Econometrics with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Regressors and instruments for <code>ivreg</code> are most easily specified in
+    <p>Fit instrumental-variable regression by two-stage least squares. This is
+equivalent to direct instrumental-variables estimation when the number of
+instruments is equal to the number of predictors.</p>
+<p>Regressors and instruments for <code>ivreg</code> are most easily specified in
 a formula with two parts on the right-hand side, e.g.,
 <code>y ~ x1 + x2 | z1 + z2 + z3</code>, where <code>x1</code> and <code>x2</code> are the regressors and
 <code>z1</code>, <code>z2</code>, and <code>z3</code> are the instruments. Note that exogenous regressors
@@ -213,13 +214,8 @@ Greene, W. H. (1993) <em>Econometric Analysis</em>, 2nd ed., Macmillan.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>AER</span>) <span class='co'># for sandwich vcov</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘car’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:dplyr’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lmtest</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: sandwich</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>) <span class='co'># for the pipe operator %&gt;%</span>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>AER</span>) <span class='co'># for sandwich vcov</span>
+<span class='fu'>library</span>(<span class='no'>dplyr</span>) <span class='co'># for the pipe operator %&gt;%</span>
 
 <span class='co'># load and transform data</span>
 <span class='fu'>data</span>(<span class='st'>"CigarettesSW"</span>)
