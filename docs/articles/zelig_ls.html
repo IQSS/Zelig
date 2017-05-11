@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Least Squares Regression</h1>
             
-            <h4 class="date">2017-05-08</h4>
+            <h4 class="date">2017-05-11</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.0.90000</em></p>
+<p><em>Built using Zelig version 5.1.2</em></p>
 <p>Least Squares Regression for Continuous Dependent Variables with <code>ls</code>.</p>
 <p>Use least squares regression analysis to estimate the best linear predictor for the specified dependent variables.</p>
 <div id="syntax" class="section level2">
@@ -195,22 +195,22 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 ##  -----
 ## ev
 ##       mean        sd      50%    2.5%    97.5%
-## 1 5.437038 0.1918739 5.434361 5.05894 5.793909
+## 1 5.444651 0.1891256 5.448085 5.07077 5.816347
 ## pv
-##          mean       sd     50%       2.5%    97.5%
-## [1,] 5.258434 2.754302 5.26788 -0.1325272 10.71661
+##          mean       sd      50%       2.5%    97.5%
+## [1,] 5.379459 2.675122 5.479632 -0.1173274 10.36655
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##       mean       sd      50%     2.5%    97.5%
-## 1 4.605113 0.181569 4.611487 4.233438 4.955577
+##       mean        sd      50%     2.5%    97.5%
+## 1 4.598829 0.1860013 4.608399 4.235037 4.952847
 ## pv
-##          mean       sd      50%       2.5%    97.5%
-## [1,] 4.495129 2.791205 4.388957 -0.8336183 9.983413
+##          mean      sd      50%       2.5%    97.5%
+## [1,] 4.565069 2.72741 4.501472 -0.9393922 10.00955
 ## fd
-##         mean        sd        50%      2.5%     97.5%
-## 1 -0.8319242 0.2232405 -0.8334276 -1.255972 -0.375236</code></pre>
+##         mean        sd        50%      2.5%      97.5%
+## 1 -0.8458219 0.2374534 -0.8508734 -1.296222 -0.3832138</code></pre>
 <p>Plot the simulated distributions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <p><img src="zelig_ls_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
@@ -238,11 +238,15 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <li>The <em>stochastic component</em> is described by a density with mean <span class="math inline">\(\mu_i\)</span> and the common variance <span class="math inline">\(\sigma^2\)</span>
 </li>
 </ul>
-<p><span class="math display">\[Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).\]</span></p>
+<p><span class="math display">\[
+    Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).
+\]</span></p>
 <ul>
 <li>The <em>systematic component</em> models the conditional mean as</li>
 </ul>
-<p><span class="math display">\[\mu_i =  x_i \beta,\]</span></p>
+<p><span class="math display">\[
+   \mu_i =  x_i \beta,
+\]</span></p>
 <p>where <span class="math inline">\(x_i\)</span> is the vector of covariates, and <span class="math inline">\(\beta\)</span> is the vector of coefficients.</p>
 <p>The least squares estimator is the best linear predictor of a dependent variable given <span class="math inline">\(x_i\)</span>, and minimizes the sum of squared residuals, <span class="math inline">\(\sum_{i=1}^n (Y_i-x_i \beta)^2\)</span>.</p>
 </div>
@@ -252,13 +256,17 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <ul>
 <li>The expected value (<code>qi$ev</code>) is the mean of simulations from the stochastic component,</li>
 </ul>
-<p><span class="math display">\[E(Y) = x_i \beta,\]</span></p>
+<p><span class="math display">\[
+   E(Y) = x_i \beta,
+\]</span></p>
 <p>given a draw of <span class="math inline">\(\beta\)</span> from its sampling distribution.</p>
 <ul>
 <li>In conditional prediction models, the average expected treatment effect (<code>att.ev</code>) for the treatment group is</li>
 </ul>
-<p><span class="math display">\[\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-            E[Y_i(t_i=0)] \right\},\]</span></p>
+<p><span class="math display">\[
+   \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+           E[Y_i(t_i=0)] \right\},
+\]</span></p>
 <p>where <span class="math inline">\(t_i\)</span> is a binary explanatory variable defining the treatment (<span class="math inline">\(t_i=1\)</span>) and control (<span class="math inline">\(t_i=0\)</span>) groups. Variation in the simulations are due to uncertainty in simulating <span class="math inline">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of <span class="math inline">\(Y_i\)</span> for observations in the treatment group, under the assumption that everything stays the same except that the treatment indicator is switched to :math: <span class="math inline">\(t_i=0\)</span>.</p>
 </div>
 <div id="output-values" class="section level2">

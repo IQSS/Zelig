@@ -1,5 +1,5 @@
 ---
-title: "Instrumental Variable (2 Stage Least Squares) Regression"
+title: "Instrumental Variable (Two-Stage Least Squares) Regression"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -20,8 +20,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-Instrumental Variable Regression (2 Stage Least Squares) for Continuous
+Instrumental Variable Regression (via 2 Stage Least Squares) for Continuous
 Dependent Variables with `ivreg`.
+
+Instrumental variable regression is used when the correlation between the independent variables and the dependent variable does not reflect the true relationship because the independent variables are correlated with the error term. This can happen because of ommitted variables, reverse causation, and measurement error. Such variables are often referred to as "endogenous" (as opposed to "exogenous" variables that are not correlated with the error term). It may be possible to use instruments--other variables that cause changes in the endogenous variables, but not the dependent variable--to recover the endogenous variabless effects on the independent variable. 
 
 Syntax
 ------
@@ -36,7 +38,7 @@ z5$sim()
 ```
 
 Note that `|` separates the regressors (e.g. `X1` and `X2`) from the instruments
-(e.g. `Z1`, `Z2`, `Z3`).
+(e.g. `Z1`, `Z2`, `Z3`). Exogenous regressors have to be included as instruments for themselves
 
 With the Zelig 4 compatibility wrappers:
 
@@ -99,6 +101,63 @@ To conduct standard diagnostic tests on the estimated model using functionality
 in the [AER](https://CRAN.R-project.org/package=AER) package, exatract the
 fitted model object with the `from_zelig_model()` function.
 
+Model Definition
+----------------
+
+*One stage (ordinary) least squares* is given by:
+
+-  The *stochastic component* which is described by a density with mean
+   $\mu_i$ and the common variance $\sigma^2$
+
+$$
+    Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).
+$$
+
+-  The *systematic component* modelling the conditional mean as
+
+$$
+   \mu_i =  x_i \beta,
+$$
+
+   where $x_i$ is the vector of covariates, and $\beta$ is
+   the vector of coefficients.
+
+   The least squares estimator is the best linear predictor of a
+   dependent variable given $x_i$, and minimizes the sum of
+   squared residuals, $\sum_{i=1}^n (Y_i-x_i \beta)^2$.
+
+In *two-stage least squares* uses these components twice to uncover the effect of the endogenous variables on the continuous dependent variable.
+
+In the first stage, each endogenous variable is estimated with least squares regressions that include all of the exogenous variables (the instruments and any other exogenous variables used to estimate the dependent variable). The predicted values of the endogenous variables from these models (and the exogenous, non-instrumental variables) are then used in the second stage regression. 
+
+
+Quantities of Interest Definition
+----------------------------------
+
+-  The expected value (`qi$ev`) is the mean of simulations from the
+   stochastic component of the *second stage*,
+
+$$
+    E(Y) = x_i \beta,
+$$
+
+   given a draw of $\beta$ from its sampling distribution.
+
+-  In conditional prediction models, the average expected treatment
+   effect (`att.ev`) for the treatment group is
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math: $t_i=0$.
 
 See also
 --------

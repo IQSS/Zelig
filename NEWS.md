@@ -3,6 +3,12 @@ each change note when relevant. See <https://github.com/IQSS/Zelig/issues>.
 External contributors are referenced with their GitHub usernames when
 applicable.
 
+Zelig version 5.1-2
+==============================
+
+## Minor changes
+
+-   Improved `ivreg` documentation.
 
 Zelig version 5.1-1
 ==============================
@@ -12,7 +18,7 @@ Zelig version 5.1-1
 -   Average Treatment Effect on the Treated (ATT) vignette added to the online
 documentation <http://docs.zeligproject.org/articles/att.html>
 
-- Corrected vignette URLs.
+-   Corrected vignette URLs.
 
 
 Zelig version 5.1-0

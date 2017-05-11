@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instrumental Variable (2 Stage Least Squares) Regression • Zelig</title>
+<title>Instrumental Variable (Two-Stage Least Squares) Regression • Zelig</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -121,16 +121,17 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Instrumental Variable (2 Stage Least Squares) Regression</h1>
+      <h1>Instrumental Variable (Two-Stage Least Squares) Regression</h1>
             
-            <h4 class="date">2017-05-08</h4>
+            <h4 class="date">2017-05-11</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.0.90000</em></p>
-<p>Instrumental Variable Regression (2 Stage Least Squares) for Continuous Dependent Variables with <code>ivreg</code>.</p>
+<p><em>Built using Zelig version 5.1.2</em></p>
+<p>Instrumental Variable Regression (via 2 Stage Least Squares) for Continuous Dependent Variables with <code>ivreg</code>.</p>
+<p>Instrumental variable regression is used when the correlation between the independent variables and the dependent variable does not reflect the true relationship because the independent variables are correlated with the error term. This can happen because of ommitted variables, reverse causation, and measurement error. Such variables are often referred to as “endogenous” (as opposed to “exogenous” variables that are not correlated with the error term). It may be possible to use instruments–other variables that cause changes in the endogenous variables, but not the dependent variable–to recover the endogenous variabless effects on the independent variable.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
@@ -139,7 +140,7 @@
 z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2 <span class="op">|</span><span class="st"> </span>Z1 <span class="op">+</span><span class="st"> </span>Z2 <span class="op">+</span><span class="st"> </span>Z3, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
 z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre></div>
-<p>Note that <code>|</code> separates the regressors (e.g. <code>X1</code> and <code>X2</code>) from the instruments (e.g. <code>Z1</code>, <code>Z2</code>, <code>Z3</code>).</p>
+<p>Note that <code>|</code> separates the regressors (e.g. <code>X1</code> and <code>X2</code>) from the instruments (e.g. <code>Z1</code>, <code>Z2</code>, <code>Z3</code>). Exogenous regressors have to be included as instruments for themselves</p>
 <p>With the Zelig 4 compatibility wrappers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2 <span class="op">|</span><span class="st"> </span>Z1 <span class="op">+</span><span class="st"> </span>Z2 <span class="op">+</span><span class="st"> </span>Z3, <span class="dt">model =</span> <span class="st">"ivreg"</span>, <span class="dt">weights =</span> w,
                <span class="dt">data =</span> mydata)
@@ -203,6 +204,47 @@ CigarettesSW<span class="op">$</span>log_rincome &lt;-<span class="st"> </span><
 <p><img src="zelig_ivreg_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 <p>To conduct standard diagnostic tests on the estimated model using functionality in the <a href="https://CRAN.R-project.org/package=AER">AER</a> package, exatract the fitted model object with the <code><a href="../reference/from_zelig_model.html">from_zelig_model()</a></code> function.</p>
 </div>
+<div id="model-definition" class="section level2">
+<h2 class="hasAnchor">
+<a href="#model-definition" class="anchor"></a>Model Definition</h2>
+<p><em>One stage (ordinary) least squares</em> is given by:</p>
+<ul>
+<li>The <em>stochastic component</em> which is described by a density with mean <span class="math inline">\(\mu_i\)</span> and the common variance <span class="math inline">\(\sigma^2\)</span>
+</li>
+</ul>
+<p><span class="math display">\[
+    Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).
+\]</span></p>
+<ul>
+<li>The <em>systematic component</em> modelling the conditional mean as</li>
+</ul>
+<p><span class="math display">\[
+   \mu_i =  x_i \beta,
+\]</span></p>
+<p>where <span class="math inline">\(x_i\)</span> is the vector of covariates, and <span class="math inline">\(\beta\)</span> is the vector of coefficients.</p>
+<p>The least squares estimator is the best linear predictor of a dependent variable given <span class="math inline">\(x_i\)</span>, and minimizes the sum of squared residuals, <span class="math inline">\(\sum_{i=1}^n (Y_i-x_i \beta)^2\)</span>.</p>
+<p>In <em>two-stage least squares</em> uses these components twice to uncover the effect of the endogenous variables on the continuous dependent variable.</p>
+<p>In the first stage, each endogenous variable is estimated with least squares regressions that include all of the exogenous variables (the instruments and any other exogenous variables used to estimate the dependent variable). The predicted values of the endogenous variables from these models (and the exogenous, non-instrumental variables) are then used in the second stage regression.</p>
+</div>
+<div id="quantities-of-interest-definition" class="section level2">
+<h2 class="hasAnchor">
+<a href="#quantities-of-interest-definition" class="anchor"></a>Quantities of Interest Definition</h2>
+<ul>
+<li>The expected value (<code>qi$ev</code>) is the mean of simulations from the stochastic component of the <em>second stage</em>,</li>
+</ul>
+<p><span class="math display">\[
+    E(Y) = x_i \beta,
+\]</span></p>
+<p>given a draw of <span class="math inline">\(\beta\)</span> from its sampling distribution.</p>
+<ul>
+<li>In conditional prediction models, the average expected treatment effect (<code>att.ev</code>) for the treatment group is</li>
+</ul>
+<p><span class="math display">\[
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            E[Y_i(t_i=0)] \right\},
+\]</span></p>
+<p>where <span class="math inline">\(t_i\)</span> is a binary explanatory variable defining the treatment (<span class="math inline">\(t_i=1\)</span>) and control (<span class="math inline">\(t_i=0\)</span>) groups. Variation in the simulations are due to uncertainty in simulating <span class="math inline">\(E[Y_i(t_i=0)]\)</span>, the counterfactual expected value of <span class="math inline">\(Y_i\)</span> for observations in the treatment group, under the assumption that everything stays the same except that the treatment indicator is switched to :math: <span class="math inline">\(t_i=0\)</span>.</p>
+</div>
 <div id="see-also" class="section level2">
 <h2 class="hasAnchor">
 <a href="#see-also" class="anchor"></a>See also</h2>
@@ -218,6 +260,8 @@ CigarettesSW<span class="op">$</span>log_rincome &lt;-<span class="st"> </span><
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#examples">Examples</a></li>
+      <li><a href="#model-definition">Model Definition</a></li>
+      <li><a href="#quantities-of-interest-definition">Quantities of Interest Definition</a></li>
       <li><a href="#see-also">See also</a></li>
       </ul>
 </div>

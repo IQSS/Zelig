@@ -134,11 +134,15 @@ plot(s.out2)
 -  The *stochastic component* is described by a density with mean
    $\mu_i$ and the common variance $\sigma^2$
 
-   $$Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).$$
+$$
+    Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).
+$$
 
 -  The *systematic component* models the conditional mean as
 
-   $$\mu_i =  x_i \beta,$$
+$$
+   \mu_i =  x_i \beta,
+$$
 
    where $x_i$ is the vector of covariates, and $\beta$ is
    the vector of coefficients.
@@ -152,15 +156,19 @@ plot(s.out2)
 -  The expected value (`qi$ev`) is the mean of simulations from the
    stochastic component,
 
-   $$E(Y) = x_i \beta,$$
+$$
+   E(Y) = x_i \beta,
+$$
 
-   given a draw of $\beta$ from its sampling distribution.
+  given a draw of $\beta$ from its sampling distribution.
 
 -  In conditional prediction models, the average expected treatment
-   effect (`att.ev`) for the treatment group is
+  effect (`att.ev`) for the treatment group is
 
-   $$\frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-            E[Y_i(t_i=0)] \right\},$$
+$$
+   \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+           E[Y_i(t_i=0)] \right\},
+$$
 
    where $t_i$ is a binary explanatory variable defining the
    treatment ($t_i=1$) and control ($t_i=0$) groups.
