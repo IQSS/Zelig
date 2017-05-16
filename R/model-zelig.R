@@ -1023,28 +1023,29 @@ z$methods(
 z$methods(
   from_zelig_model = function() {
     "Extract the original fitted model object from a zelig call. Note only works for models using directly wrapped functions."
+
     is_uninitializedField(.self$zelig.out)
     result <- try(.self$zelig.out$z.out, silent = TRUE)
 
     if ("try-error" %in% class(result)) {
-      stop("from_zelig_model not available for this fitted model.")
+        stop("from_zelig_model not available for this fitted model.")
     } else {
-      if (length(result) == 1) {
-        result <- result[[1]]
-        result <- strip_package_name(result)
-      } else if (length(result) > 1) {
-        if (.self$mi) {
-          message("Returning fitted model objects for each imputed data set in a list.")
-        } else if (.self$bootstrap) {
-          message("Returning fitted model objects for each bootstrapped data set in a list.")
-        } else {
-          message("Returning fitted model objects for each subset of the data created from the 'by' argument, in a list.")
+        if (length(result) == 1) {
+            result <- result[[1]]
+            result <- strip_package_name(result)
+        } else if (length(result) > 1) {
+            if (.self$mi) {
+                message("Returning fitted model objects for each imputed data set in a list.")
+            } else if (.self$bootstrap) {
+            message("Returning fitted model objects for each bootstrapped data set in a list.")
+            } else {
+                message("Returning fitted model objects for each subset of the data created from the 'by' argument, in a list.")
+            }
+            result <- lapply(result, strip_package_name)
         }
-        result <- lapply(result, strip_package_name)
-      }
-      return(result)
+        return(result)
     }
-  })
+})
 
 #' Method for extracting estimated coefficients from Zelig objects
 #' @param nonlist logical whethe to \code{unlist} the result if there are only

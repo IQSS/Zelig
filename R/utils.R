@@ -465,9 +465,15 @@ transformer <- function(formula, data, FUN = 'log', check, f_out, d_out) {
 #' @keywords internal
 
 strip_package_name <- function(x) {
-    call_temp <- gsub('^.*(?=(::))', '', x$call[1], perl = TRUE)
+    if ("vglm" %in% class(x)) # maybe generalise to all s4?
+        call_temp <- gsub('^.*(?=(::))', '', x@call[1], perl = TRUE)
+    else
+        call_temp <- gsub('^.*(?=(::))', '', x$call[1], perl = TRUE)
     call_temp <- gsub('::', '', call_temp, perl = TRUE)
-    x$call[1] <- as.call(list(as.symbol(call_temp)))
+    if ("vglm" %in% class(x))
+        x@call[1] <- as.call(list(as.symbol(call_temp)))
+    else
+        x$call[1] <- as.call(list(as.symbol(call_temp)))
     return(x)
 }
 
