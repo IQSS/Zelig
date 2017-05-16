@@ -28,7 +28,7 @@ Description: A framework that brings together an abundance of common
     and visualize complex models.
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
-Version: 5.1-2.90000
+Version: 5.1-1.90000
 Date: 2017-05-12
 Depends:
     survival

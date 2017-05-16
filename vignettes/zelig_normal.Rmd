@@ -26,7 +26,8 @@ options(cite = FALSE)
 Normal Regression for Continuous Dependent Variables with `normal`.
 
 The Normal regression model is a close variant of the more standard
-[least squares regression model](zelig_ls.html). Both models specify a continuous dependent variable as a linear function of a set of explanatory
+[least squares regression model](zelig_ls.html). Both models specify a
+continuous dependent variable as a linear function of a set of explanatory
 variables. The Normal model reports maximum likelihood (rather than
 least squares) estimates. The two models differ only in their estimate
 for the stochastic parameter $\sigma$.
@@ -192,12 +193,15 @@ Output Values
 ------
 
 The Zelig object stores fields containing everything needed to
-rerun the Zelig output, and all the results and simulations as they are generated.
-In addition to the summary commands demonstrated above, some simply utility
-functions (known as *getters*) provide easy access to the raw fields most
-commonly of use for further investigation.
+rerun the Zelig output, and all the results and simulations as they are
+generated. In addition to the summary commands demonstrated above, some simply
+utility functions (known as *[getters](getters.html)*) provide easy access to
+the raw fields most commonly of use for further investigation.
 
-In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+If the `zelig()` call output object is `z.out`, then `coef(z.out)` returns
+the estimated coefficients, `vcov(z.out)` returns the estimated covariance
+matrix, and `predict(z.out)` provides predicted values for all observations
+in the dataset from the analysis.
 
 See also
 ------
