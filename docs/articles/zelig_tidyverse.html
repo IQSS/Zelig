@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Zelig and the Tidyverse</h1>
             
-            <h4 class="date">2017-05-08</h4>
+            <h4 class="date">2017-05-16</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.0.90000</em></p>
+<p><em>Built using Zelig version 5.1.1.90000</em></p>
 <p>Many researchers integrate tools from the “<a href="http://tidyverse.org/">tidyverse</a>” into their data workflows. The tidyverse includes a number of packages to read data into R–<a href="https://CRAN.R-project.org/package=readr">readr</a>–, transform it for analysis– <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html">tibble</a>, <a href="https://CRAN.R-project.org/package=tidyr">tidyr</a>, purr, and dplyr, and visualise the results with <a href="http://docs.ggplot2.org/current/">ggplot2</a>. All of these packages can be loaded in R by loading the tidyverse package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 <p>Zelig can be easily slotted into this workflow for model estimation and identifying quantities of interest. Most Zelig estimation models require underlying data to be in the “tidy” format that the tidyverse creates. Zelig’s three step workflow can be organized very well using <a href="http://r4ds.had.co.nz/pipes.html">pipes</a> (<code>%&gt;%</code>) that the tidyverse advocates. Using pipes with Zelig will make your code more legible and computationally efficient.</p>
@@ -193,12 +193,12 @@ swiss <span class="op">%&gt;%</span><span class="st"> </span>
 
 <span class="kw">head</span>(sims.full)</code></pre></div>
 <pre><code>##   setx_value Agriculture Examination expected_value predicted_value
-## 1          x           1    16.48936       72.62273        64.78612
-## 2          x           1    16.48936       82.37456        92.34354
-## 3          x           1    16.48936       74.63696        79.01043
-## 4          x           1    16.48936       75.27546        76.96809
-## 5          x           1    16.48936       68.14327        75.14543
-## 6          x           1    16.48936       76.75484        81.65338</code></pre>
+## 1          x           1    16.48936       71.65719        96.63858
+## 2          x           1    16.48936       71.54450        75.21329
+## 3          x           1    16.48936       75.92062        82.59615
+## 4          x           1    16.48936       71.56164        82.30959
+## 5          x           1    16.48936       79.99016        83.92978
+## 6          x           1    16.48936       71.79916        85.51566</code></pre>
 <p>Each row contains information for an individual “observation”, i.e. a quantity of interest calculated from one draw of the model parameters from the multivariate normal distribution.</p>
 <p>The first three columns of the object returned by <code>zelig_qi_to_df</code> in this case contain information that identifies the scenario that the quantity of interest is from. For example, the first row is from a scenario where <code>Agriculture</code> is fitted at <code>1</code> and <code>Examination</code> is fitted at the sample mean 16.4893617. The <code>setx_value</code> column identifies if the values were fitted by a <code>setx</code> call as <code>x</code> or <code>x1</code>–a contrasting scenario used to find first differences.</p>
 <p>The final two columns contain the expected and predicted value of the quantity of interest, respectively.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
@@ -207,12 +207,12 @@ swiss <span class="op">%&gt;%</span><span class="st"> </span>
 <pre><code>## Slimming Expected Values . . .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sims.slimmed)</code></pre></div>
 <pre><code>##   setx_value Agriculture Examination qi_ci_min qi_ci_median qi_ci_max
-## 1          x           1    16.48936  66.32880     74.92602  83.86418
-## 2          x           6    16.48936  66.62032     74.42744  82.49599
-## 3          x          11    16.48936  66.78033     73.95759  81.29320
-## 4          x          16    16.48936  66.83436     73.45555  79.93818
-## 5          x          21    16.48936  67.12791     72.91579  78.64887
-## 6          x          26    16.48936  67.42148     72.44340  77.54308</code></pre>
+## 1          x           1    16.48936  66.02544     75.01131  83.43776
+## 2          x           6    16.48936  66.32536     74.53576  82.30486
+## 3          x          11    16.48936  66.67411     74.09623  81.09512
+## 4          x          16    16.48936  67.12180     73.59255  79.86009
+## 5          x          21    16.48936  67.42424     73.03005  78.62598
+## 6          x          26    16.48936  67.60669     72.51803  77.35060</code></pre>
 <p>Now we have one row for each scenario. This contains the columns <code>qi_ci_min</code>, <code>qi_ci_median</code>, and <code>qi_ci_max</code> for the central interval of the simulations from each scenario. By default <code>qi_ci_min</code> and <code>qi_ci_max</code> contain central interval bounds at the lower 2.5 and upper 97.5 percentiles, respectively. <code>qi_ci_median</code> contains the simulated distribution’s median. The interval can be changed with the <code>ci</code> argument. You can choose expected value (<code>ev</code>) or predicted value (<code>pv</code>) with the <code>qi_ci_type</code> argument.</p>
 <p>Now we have everything to make a ggplot2 plot summarizing the simulated quantity of interest:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sims.slimmed, <span class="kw">aes</span>(Agriculture, qi_ci_median)) <span class="op">+</span>

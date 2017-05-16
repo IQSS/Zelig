@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Normal Linear Regression</h1>
             
-            <h4 class="date">2017-05-08</h4>
+            <h4 class="date">2017-05-16</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.0.90000</em></p>
+<p><em>Built using Zelig version 5.1.1.90000</em></p>
 <hr>
 <p>Normal Regression for Continuous Dependent Variables with <code>normal</code>.</p>
 <p>The Normal regression model is a close variant of the more standard <a href="zelig_ls.html">least squares regression model</a>. Both models specify a continuous dependent variable as a linear function of a set of explanatory variables. The Normal model reports maximum likelihood (rather than least squares) estimates. The two models differ only in their estimate for the stochastic parameter <span class="math inline">\(\sigma\)</span>.</p>
@@ -281,8 +281,8 @@ Graphs of Quantities of Interest for Zelig-normal
 <div id="output-values" class="section level2">
 <h2 class="hasAnchor">
 <a href="#output-values" class="anchor"></a>Output Values</h2>
-<p>The Zelig object stores fields containing everything needed to rerun the Zelig output, and all the results and simulations as they are generated. In addition to the summary commands demonstrated above, some simply utility functions (known as <em>getters</em>) provide easy access to the raw fields most commonly of use for further investigation.</p>
-<p>In the example above <code>z.out$get_coef()</code> returns the estimated coefficients, <code>z.out$get_vcov()</code> returns the estimated covariance matrix, and <code>z.out$get_predict()</code> provides predicted values for all observations in the dataset from the analysis.</p>
+<p>The Zelig object stores fields containing everything needed to rerun the Zelig output, and all the results and simulations as they are generated. In addition to the summary commands demonstrated above, some simply utility functions (known as <em><a href="getters.html">getters</a></em>) provide easy access to the raw fields most commonly of use for further investigation.</p>
+<p>If the <code><a href="../reference/zelig.html">zelig()</a></code> call output object is <code>z.out</code>, then <code>coef(z.out)</code> returns the estimated coefficients, <code>vcov(z.out)</code> returns the estimated covariance matrix, and <code>predict(z.out)</code> provides predicted values for all observations in the dataset from the analysis.</p>
 </div>
 <div id="see-also" class="section level2">
 <h2 class="hasAnchor">

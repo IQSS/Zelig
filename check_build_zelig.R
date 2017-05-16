@@ -10,4 +10,5 @@ if(!('IQSSdevtools' %in% installed.packages()[, 1]))
 #-- Vignettes are used to construct the website, but do to CRAN file size
 #--   constraints are not included with the package source build.
 library(IQSSdevtools)
-build_iqss_package(rdocs_args = "rd", build_args = "--no-build-vignettes")
+build_iqss_package(rdocs_args = "rd", build_args = "--no-build-vignettes",
+                   website_lazy = TRUE)

@@ -214,8 +214,13 @@ Greene, W. H. (1993) <em>Econometric Analysis</em>, 2nd ed., Macmillan.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>AER</span>) <span class='co'># for sandwich vcov</span>
-<span class='fu'>library</span>(<span class='no'>dplyr</span>) <span class='co'># for the pipe operator %&gt;%</span>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>AER</span>) <span class='co'># for sandwich vcov</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘car’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:dplyr’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lmtest</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: sandwich</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>) <span class='co'># for the pipe operator %&gt;%</span>
 
 <span class='co'># load and transform data</span>
 <span class='fu'>data</span>(<span class='st'>"CigarettesSW"</span>)

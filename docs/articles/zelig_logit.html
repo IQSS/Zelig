@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Logistic Regression</h1>
             
-            <h4 class="date">2017-05-08</h4>
+            <h4 class="date">2017-05-16</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.0.90000</em></p>
+<p><em>Built using Zelig version 5.1.1.90000</em></p>
 <p>Logistic Regression for Dichotomous Dependent Variables with <code>logit</code>.</p>
 <p>Logistic regression specifies a dichotomous dependent variable as a function of a set of explanatory variables.</p>
 <div id="syntax" class="section level2">
@@ -194,10 +194,10 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##  -----
 ## ev
 ##           mean         sd       50%      2.5%     97.5%
-## [1,] 0.7477537 0.01192065 0.7477424 0.7223895 0.7695346
+## [1,] 0.7483788 0.01168328 0.7483048 0.7250524 0.7705699
 ## pv
 ##          0     1
-## [1,] 0.259 0.741</code></pre>
+## [1,] 0.297 0.703</code></pre>
 <p>Show the results graphically:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <p><img src="zelig_logit_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
@@ -217,23 +217,23 @@ s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.
 ##  sim x :
 ##  -----
 ## ev
-##           mean         sd       50%      2.5%     97.5%
-## [1,] 0.8230078 0.01042091 0.8231237 0.8018114 0.8425071
+##           mean         sd      50%     2.5%     97.5%
+## [1,] 0.8227084 0.01078394 0.823134 0.800052 0.8430849
 ## pv
 ##          0     1
-## [1,] 0.159 0.841
+## [1,] 0.148 0.852
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##           mean         sd       50%      2.5%     97.5%
-## [1,] 0.7096065 0.01344032 0.7098966 0.6814582 0.7357728
+##          mean         sd       50%      2.5%     97.5%
+## [1,] 0.709247 0.01276539 0.7094861 0.6835513 0.7345809
 ## pv
-##          0     1
-## [1,] 0.274 0.726
+##         0    1
+## [1,] 0.29 0.71
 ## fd
 ##            mean         sd        50%       2.5%       97.5%
-## [1,] -0.1134013 0.01199419 -0.1127254 -0.1382782 -0.09051157</code></pre>
+## [1,] -0.1134614 0.01096017 -0.1138615 -0.1352564 -0.09194671</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out2)</code></pre></div>
 <p><img src="zelig_logit_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>

@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Poisson GEE</h1>
             
-            <h4 class="date">2017-05-11</h4>
+            <h4 class="date">2017-05-16</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1</em></p>
+<p><em>Built using Zelig version 5.1.1.90000</em></p>
 <hr>
 <p>Generalized Estimating Equation for Poisson Regression with <code>poisson.gee</code>.</p>
 <p>The GEE poisson estimates the same model as the standard poisson regression (appropriate when your dependent variable represents the number of independent events that occur during a fixed period of time). Unlike in poisson regression, GEE poisson allows for dependence within clusters, such as in longitudinal data, although its use is not limited to just panel data. The user must first specify a “working” correlation matrix for the clusters, which models the dependence of each observation with other observations in the same cluster. The “working” correlation matrix is a <span class="math inline">\(T \times T\)</span> matrix of correlations, where <span class="math inline">\(T\)</span> is the size of the largest cluster and the elements of the matrix are correlations between within-cluster observations. The appeal of GEE models is that it gives consistent estimates of the parameters and consistent estimates of the standard errors can be obtained using a robust “sandwich” estimator even if the “working” correlation matrix is incorrectly specified. If the “working” correlation matrix is correctly specified, GEE models will give more efficient estimates of the parameters. GEE models measure population-averaged effects as opposed to cluster-specific effects.</p>
@@ -205,11 +205,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##  sim x :
 ##  -----
 ## ev
-##       mean     sd   50%  2.5% 97.5%
-## [1,] 3.326 0.8358 3.254 1.978 5.125
+##       mean     sd  50%  2.5% 97.5%
+## [1,] 3.369 0.8856 3.25 1.977   5.4
 ## pv
 ##       mean    sd 50% 2.5% 97.5%
-## [1,] 3.319 2.021   3    0     8</code></pre>
+## [1,] 3.352 2.011   3    0     8</code></pre>
 <p>Generate a plot of quantities of interest:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out)</code></pre></div>
 <div class="figure">
