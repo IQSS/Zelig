@@ -9,11 +9,11 @@ Zelig version 5.1-2
 ## Major changes
 
 -   `get_se` and `get_pvalue` function wrappers created for `get_se` and
-`get_pvalue` methods, respectively.
+`get_pvalue` methods, respectively. #269
 
 -   If `combine_coef_se` is given a model estimated without multiply imputed 
 data or bootstraps an error is no longer returned. Instead a list of the 
-models' coefficients, standard errors, and p-values is returned.
+models' coefficients, standard errors, and p-values is returned. #268
 
 ## Minor changes and bug fixes
 
