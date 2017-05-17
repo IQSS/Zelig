@@ -366,6 +366,30 @@ sim <- function(obj, x, x1, y = NULL, num = 1000, bootstrap = F,
     return(s5)
 }
 
+#' Extract standard errors from a Zelig estimated model
+#'
+#' @param object an object of class Zelig
+#' @author Christopher Gandrud
+#' @export
+
+get_se <- function(object) {
+    is_zelig(object)
+    out <- object$get_se()
+    return(out)
+}
+
+#' Extract p-values from a Zelig estimated model
+#'
+#' @param object an object of class Zelig
+#' @author Christopher Gandrud
+#' @export
+
+get_pvalue <- function(object) {
+    is_zelig(object)
+    out <- object$get_pvalue()
+    return(out)
+}
+
 #' Extract quantities of interest from a Zelig simulation
 #'
 #' @param object an object of class Zelig
@@ -378,7 +402,7 @@ sim <- function(obj, x, x1, y = NULL, num = 1000, bootstrap = F,
 #'    imputed data is supplied in the original call.)
 #' @author Christopher Gandrud
 #' @md
-#' @exmport
+#' @export
 
 get_qi <- function(object, qi = "ev", xvalue = "x", subset = NULL) {
     is_zelig(object)

@@ -290,6 +290,7 @@ test_that('REQUIRE TEST for get_pvalue', {
   z <- zls$new()
   z$zelig(Fertility ~ Education, data = swiss)
   expect_is(z$get_pvalue()[[1]], class = 'numeric')
+  expect_equal(z$get_pvalue()[[1]], get_pvalue(z)[[1]])
 })
 
 # REQUIRE TEST for get_se method ---------------------------------------
@@ -297,6 +298,7 @@ test_that('REQUIRE TEST for get_se', {
   z <- zls$new()
   z$zelig(Fertility ~ Education, data = swiss)
   expect_is(z$get_se()[[1]], class = 'numeric')
+  expect_equal(z$get_se()[[1]], get_se(z)[[1]])
 })
 
 # REQUIRE TEST setx with logical covariates ------------------------------------

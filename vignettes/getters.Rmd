@@ -64,10 +64,10 @@ As of Zelig 5.1-1 there are the following getters:
 |                      | `get_model_data`   |
 | `names()`            | `get_names`        |
 | `predict()`          | `get_predicted`    |
-|                      | `get_pvalue`       |
+| `get_pvalue`         | `get_pvalue`       |
 | `qi_slimmer()`       |                    |
 | `residuals()`        | `get_residuals`    |
-|                      | `get_se`           |
+| `get_se()`           | `get_se`           |
 | `vcov()`             | `get_vcov`         |
 | `zelig_qi_to_df()`   |                    |
 

@@ -641,9 +641,15 @@ combine_coef_se <- function(obj, out_type = 'matrix', bagging = FALSE,
         }
         return(out)
     }
-    else if (!(obj$mi || obj$bootstrap))
-        stop('No multiply imputed or bootstrapped estimates found. So no need to combine.',
-             call. = FALSE)
+    else if (!(obj$mi || obj$bootstrap)) {
+    message('No multiply imputed or bootstrapped estimates found.\nReturning untransformed list of coefficients and standard errors.')
+        out <- list(coef = coef(obj),
+                          se = get_se(obj),
+                          pvalue = get_pvalue(obj)
+                          )
+
+        return(out)
+    }
 }
 
 #' Find vcov for GEE models
