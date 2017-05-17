@@ -9,7 +9,9 @@ Zelig version 5.1-2
 ## Minor changes and bug fixes
 
 -   Resolved a bug where `from_zelig_model` would not extract fitted model 
-objects for models estiamted using VGAM. #265
+objects for models estiamted using `vglm`. #265
+
+-   `get_pvalue` and `get_se` now work for models estimated using `vglm`. #267
 
 -   Improved `ivreg`, `mlogit`, and getter (#266) documentation.
 

@@ -482,12 +482,18 @@ strip_package_name <- function(x) {
 #' @keywords internal
 
 p_pull <- function(x) {
-    p_values <- summary(x)$coefficients
-    if ('Pr(>|t|)' %in% colnames(p_values)) {
-        p_values <- p_values[, 'Pr(>|t|)']
-    } else {
-        p_values <- p_values[, 'Pr(>|z|)']
+    if ("vglm" %in% class(x)) { # maybe generalise to all s4?
+        p_values <- summary(x)@coef3[, 'Pr(>|z|)']
     }
+    else {
+        p_values <- summary(x)$coefficients
+        if ('Pr(>|t|)' %in% colnames(p_values)) {
+            p_values <- p_values[, 'Pr(>|t|)']
+        } else {
+            p_values <- p_values[, 'Pr(>|z|)']
+        }
+    }
+
     return(p_values)
 }
 
@@ -496,7 +502,10 @@ p_pull <- function(x) {
 #' @keywords internal
 
 se_pull <- function(x) {
-    se <- summary(x)$coefficients[, "Std. Error"]
+    if ("vglm" %in% class(x)) # maybe generalise to all s4?
+        se <- summary(x)@coef3[, "Std. Error"]
+    else
+        se <- summary(x)$coefficients[, "Std. Error"]
     return(se)
 }
 
