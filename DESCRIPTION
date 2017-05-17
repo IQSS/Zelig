@@ -29,7 +29,7 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.1-1.90000
-Date: 2017-05-16
+Date: 2017-05-17
 Depends:
     survival
 Imports:

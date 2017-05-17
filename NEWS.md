@@ -11,7 +11,7 @@ Zelig version 5.1-2
 -   Resolved a bug where `from_zelig_model` would not extract fitted model 
 objects for models estiamted using VGAM. #265
 
--   Improved `ivreg` and `mlogit` documentation.
+-   Improved `ivreg`, `mlogit`, and getter (#266) documentation.
 
 Zelig version 5.1-1
 ==============================

@@ -38,7 +38,7 @@ library(Zelig)
 
 # load data and estimate model
 data(sanction)
-zqi.out <- zelig(num ~ target + coop + mil, 
+zqi.out <- zelig(num ~ target + coop + mil,
                  model = "poisson", data = sanction, cite = FALSE)
 
 # get coefficients with Zelig 5 reference class method
@@ -47,6 +47,31 @@ zqi.out$get_coef()
 # get coefficients with R coef method
 coef(zqi.out)
 ```
+
+List of getters
+---------------
+
+As of Zelig 5.1-1 there are the following getters:
+
+| R method/function    | Zelig 5 method     |
+| -------------------- | ------------------ |
+| `coef()`             | `get_coef`         |
+| `combine_coef_se()`  |                    |
+| `df.residual()`      | `get_df_residual`  |
+| `fitted()`           | `get_fitted`       |
+| `from_zelig_model()` | `from_zelig_model` |
+| `get_qi()`           | `get_qi`           |
+|                      | `get_model_data`   |
+| `names()`            | `get_names`        |
+| `predict()`          | `get_predicted`    |
+|                      | `get_pvalue`       |
+| `qi_slimmer()`       |                    |
+| `residuals()`        | `get_residuals`    |
+|                      | `get_se`           |
+| `vcov()`             | `get_vcov`         |
+| `zelig_qi_to_df()`   |                    |
+
+
 
 Getting quantities of interest
 ------------------------------
