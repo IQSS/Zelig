@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Getter Functions</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-05-17</h4>
           </div>
 
     
@@ -140,7 +140,7 @@
 
 <span class="co"># load data and estimate model</span>
 <span class="kw">data</span>(sanction)
-zqi.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num <span class="op">~</span><span class="st"> </span>target <span class="op">+</span><span class="st"> </span>coop <span class="op">+</span><span class="st"> </span>mil, 
+zqi.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num <span class="op">~</span><span class="st"> </span>target <span class="op">+</span><span class="st"> </span>coop <span class="op">+</span><span class="st"> </span>mil,
                  <span class="dt">model =</span> <span class="st">"poisson"</span>, <span class="dt">data =</span> sanction, <span class="dt">cite =</span> <span class="ot">FALSE</span>)
 
 <span class="co"># get coefficients with Zelig 5 reference class method</span>
@@ -152,6 +152,79 @@ zqi.out<span class="op">$</span><span class="kw">get_coef</span>()</code></pre><
 <span class="kw">coef</span>(zqi.out)</code></pre></div>
 <pre><code>## (Intercept)      target        coop         mil 
 ## -0.91568588 -0.04129327  1.24000401 -0.73499112</code></pre>
+</div>
+<div id="list-of-getters" class="section level2">
+<h2 class="hasAnchor">
+<a href="#list-of-getters" class="anchor"></a>List of getters</h2>
+<p>As of Zelig 5.1-1 there are the following getters:</p>
+<table class="table">
+<thead><tr class="header">
+<th>R method/function</th>
+<th>Zelig 5 method</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>coef()</code></td>
+<td><code>get_coef</code></td>
+</tr>
+<tr class="even">
+<td><code><a href="../reference/combine_coef_se.html">combine_coef_se()</a></code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>df.residual()</code></td>
+<td><code>get_df_residual</code></td>
+</tr>
+<tr class="even">
+<td><code>fitted()</code></td>
+<td><code>get_fitted</code></td>
+</tr>
+<tr class="odd">
+<td><code><a href="../reference/from_zelig_model.html">from_zelig_model()</a></code></td>
+<td><code>from_zelig_model</code></td>
+</tr>
+<tr class="even">
+<td><code><a href="../reference/get_qi.html">get_qi()</a></code></td>
+<td><code>get_qi</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>get_model_data</code></td>
+</tr>
+<tr class="even">
+<td><code>names()</code></td>
+<td><code>get_names</code></td>
+</tr>
+<tr class="odd">
+<td><code>predict()</code></td>
+<td><code>get_predicted</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>get_pvalue</code></td>
+</tr>
+<tr class="odd">
+<td><code><a href="../reference/qi_slimmer.html">qi_slimmer()</a></code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>residuals()</code></td>
+<td><code>get_residuals</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>get_se</code></td>
+</tr>
+<tr class="even">
+<td><code>vcov()</code></td>
+<td><code>get_vcov</code></td>
+</tr>
+<tr class="odd">
+<td><code><a href="../reference/zelig_qi_to_df.html">zelig_qi_to_df()</a></code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="getting-quantities-of-interest" class="section level2">
 <h2 class="hasAnchor">
@@ -225,6 +298,7 @@ z.att &lt;-<span class="st"> </span>zqi.out <span class="op">%&gt;%</span>
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#getters-in-zelig-5-vs-standard-r-syntax">Getters in Zelig 5 vs standard R syntax</a></li>
+      <li><a href="#list-of-getters">List of getters</a></li>
       <li><a href="#getting-quantities-of-interest">Getting quantities of interest</a></li>
       <li><a href="#average-treatment-effects-on-the-treated">Average Treatment Effects on the Treated</a></li>
       </ul>
