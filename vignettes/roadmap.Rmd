@@ -37,7 +37,7 @@ variance estimator
 
 - Enhance time series models
 
-- Introduce Functionality for research on privacy protected data
+- Introduce functionality for research on privacy protected data
 
 - Increase <a href="https://iqss.github.io/rpackagemetrics/">adoption <i class="fa fa-line-chart" aria-hidden="true"></i></a> and build a user
 community
