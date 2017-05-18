@@ -71,7 +71,7 @@ arguments: equation, model type, and data:
 data(swiss)
 
 # estimate ls model
-z5_1 <- zelig(Fertility ~ Education, model = "ls", data = swiss)
+z5_1 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
 
 # model summary
 summary(z5_1)
@@ -130,7 +130,7 @@ We can also simulate and plot simulations from ranges of simulated values:
 
 ```{r}
 
-z5_2 <- zelig(Fertility ~ Education, model = "ls", data = swiss)
+z5_2 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
 
 # set Education to range from 5 to 15 at single integer increments
 z5_2 <- setx(z5_2, Education = 5:15)

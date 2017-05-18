@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Zelig Quickstart Guide</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-05-18</h4>
           </div>
 
     
@@ -165,13 +165,9 @@
 <span class="kw">data</span>(swiss)
 
 <span class="co"># estimate ls model</span>
-z5_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> swiss)</code></pre></div>
-<pre><code>## How to cite this model in Zelig:
-##   R Core Team. 2007.
-##   ls: Least Squares Regression for Continuous Dependent Variables
-##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># model summary</span>
+z5_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> swiss, <span class="dt">cite =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># model summary</span>
 <span class="kw">summary</span>(z5_<span class="dv">1</span>)</code></pre></div>
 <pre><code>## Model: 
 ## 
@@ -217,23 +213,23 @@ z5_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a h
 ##  sim x :
 ##  -----
 ## ev
-##       mean       sd      50%    2.5%    97.5%
-## 1 75.29269 1.600475 75.28576 72.0508 78.38422
+##       mean      sd      50%     2.5%    97.5%
+## 1 75.22693 1.62936 75.21347 71.92193 78.27923
 ## pv
-##          mean      sd      50%     2.5%    97.5%
-## [1,] 74.99256 9.45496 75.25922 56.36209 94.63061
+##          mean       sd      50%    2.5%    97.5%
+## [1,] 75.16337 9.555522 74.59566 55.6935 92.85408
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##       mean       sd      50%     2.5%    97.5%
-## 1 66.62074 1.479666 66.63877 63.81907 69.40242
+## 1 66.60575 1.461868 66.60466 63.75123 69.46946
 ## pv
-##          mean       sd      50%     2.5%    97.5%
-## [1,] 66.93846 9.433898 66.92825 48.53777 85.29552
+##         mean       sd      50%     2.5%   97.5%
+## [1,] 66.8313 9.596639 66.86412 47.09064 84.2792
 ## fd
 ##        mean       sd       50%      2.5%     97.5%
-## 1 -8.671949 1.425339 -8.662772 -11.40687 -6.064222</code></pre>
+## 1 -8.621182 1.443253 -8.616732 -11.41701 -5.740284</code></pre>
 <p>At this point, we’ve estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The <code>summary()</code> method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences–the difference in expected values at the set levels of education.</p>
 </div>
 <div id="visualizations" class="section level1">
@@ -243,13 +239,9 @@ z5_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a h
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(z5_<span class="dv">1</span>)</code></pre></div>
 <p><img src="quickstart_files/figure-html/example_plot_graph-1.png" width="672"></p>
 <p>We can also simulate and plot simulations from ranges of simulated values:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> swiss)</code></pre></div>
-<pre><code>## How to cite this model in Zelig:
-##   R Core Team. 2007.
-##   ls: Least Squares Regression for Continuous Dependent Variables
-##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set Education to range from 5 to 15 at single integer increments</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> swiss, <span class="dt">cite =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># set Education to range from 5 to 15 at single integer increments</span>
 z5_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z5_<span class="dv">2</span>, <span class="dt">Education =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">15</span>)
 
 <span class="co"># run simulations and estimate quantities of interest</span>

@@ -83,19 +83,30 @@ function with three two arguments: equation, model type, and data:
     data(swiss)
 
     # estimate ls model
-    z5_1 <- zelig(Fertility ~ Education, model = "ls", data = swiss)
-
-    ## How to cite this model in Zelig:
-    ##   R Core Team. 2007.
-    ##   ls: Least Squares Regression for Continuous Dependent Variables
-    ##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-    ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/
+    z5_1 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
 
     # model summary
     summary(z5_1)
 
-    ##   Length    Class     Mode 
-    ##        1 Zelig-ls       S4
+    ## Model: 
+    ## 
+    ## Call:
+    ## z5$zelig(formula = Fertility ~ Education, data = swiss)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -17.036  -6.711  -1.011   9.526  19.689 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)
+    ## (Intercept)  79.6101     2.1041  37.836  < 2e-16
+    ## Education    -0.8624     0.1448  -5.954 3.66e-07
+    ## 
+    ## Residual standard error: 9.446 on 45 degrees of freedom
+    ## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
+    ## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
+    ## 
+    ## Next step: Use 'setx' method
 
 The NA coefficient on education suggests a negative relationship between
 the education of a province and its fertility rate. More precisely, for
@@ -117,8 +128,14 @@ educated from 5 to 15. To do so, we set our predictor value using the
     # model summary
     summary(z5_1)
 
-    ##   Length    Class     Mode 
-    ##        1 Zelig-ls       S4
+    ## setx:
+    ##   (Intercept) Education
+    ## 1           1         5
+    ## setx1:
+    ##   (Intercept) Education
+    ## 1           1        15
+    ## 
+    ## Next step: Use 'sim' method
 
 After setting our predictor value, we simulate using the `sim()` method:
 
@@ -128,8 +145,27 @@ After setting our predictor value, we simulate using the `sim()` method:
     # model summary
     summary(z5_1)
 
-    ##   Length    Class     Mode 
-    ##        1 Zelig-ls       S4
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##      mean       sd      50%     2.5%    97.5%
+    ## 1 75.2361 1.647454 75.21341 71.98292 78.56192
+    ## pv
+    ##          mean      sd      50%     2.5%    97.5%
+    ## [1,] 75.32647 9.93109 75.28549 55.52913 93.75793
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 66.65153 1.510361 66.65971 63.58143 69.63157
+    ## pv
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 66.37808 9.948372 66.13238 47.06571 85.34356
+    ## fd
+    ##        mean       sd       50%      2.5%     97.5%
+    ## 1 -8.584562 1.492263 -8.518099 -11.62224 -5.684232
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
@@ -150,13 +186,7 @@ Zelig’s `plot()` function plots the estimated quantities of interest:
 We can also simulate and plot simulations from ranges of simulated
 values:
 
-    z5_2 <- zelig(Fertility ~ Education, model = "ls", data = swiss)
-
-    ## How to cite this model in Zelig:
-    ##   R Core Team. 2007.
-    ##   ls: Least Squares Regression for Continuous Dependent Variables
-    ##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-    ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/
+    z5_2 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
 
     # set Education to range from 5 to 15 at single integer increments
     z5_2 <- setx(z5_2, Education = 5:15)
