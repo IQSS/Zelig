@@ -109,7 +109,7 @@ You can use the `get_qi()` function as an alternative to the `get_qi` method.
 For example:
 
 ```{r}
-my.pv.lowcoop <- get_qi(zqi.out, qi ="pv", xvalue = "x")
+my.pv.lowcoop <- get_qi(zqi.out, qi =  "pv", xvalue = "x")
 ```
 
 Average Treatment Effects on the Treated
