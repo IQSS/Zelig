@@ -101,7 +101,8 @@ summary(z5_1)
 ```
 
 ```{r include=FALSE}
-edu_coef <- round(coef(z5_1)[[1]][2], digits = 4)
+edu_coef <- round(coef(z5_1)[[2]], digits = 2)
+if (is.na(edu_coef)) stop()
 ```
 
 The `r edu_coef` coefficient on education suggests a negative relationship

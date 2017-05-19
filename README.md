@@ -108,18 +108,18 @@ function with three two arguments: equation, model type, and data:
     ## 
     ## Next step: Use 'setx' method
 
-The NA coefficient on education suggests a negative relationship between
-the education of a province and its fertility rate. More precisely, for
-every one percent increase in draftees educated beyond primary school,
-the fertility rate of the province decreases NA units. To help us better
-interpret this finding, we may want other quantities of interest, such
-as expected values or first differences. Zelig makes this simple by
-automating the translation of model estimates into interpretable
-quantities of interest using Monte Carlo simulation methods (see King,
-Tomz, and Wittenberg (2000) for more information). For example, let’s
-say we want to examine the effect of increasing the percent of draftees
-educated from 5 to 15. To do so, we set our predictor value using the
-`setx()` and `setx1()` functions:
+The -0.86 coefficient on education suggests a negative relationship
+between the education of a province and its fertility rate. More
+precisely, for every one percent increase in draftees educated beyond
+primary school, the fertility rate of the province decreases 0.86 units.
+To help us better interpret this finding, we may want other quantities
+of interest, such as expected values or first differences. Zelig makes
+this simple by automating the translation of model estimates into
+interpretable quantities of interest using Monte Carlo simulation
+methods (see King, Tomz, and Wittenberg (2000) for more information).
+For example, let’s say we want to examine the effect of increasing the
+percent of draftees educated from 5 to 15. To do so, we set our
+predictor value using the `setx()` and `setx1()` functions:
 
     # set education to 5 and 15
     z5_1 <- setx(z5_1, Education = 5)
@@ -149,23 +149,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##      mean       sd      50%     2.5%    97.5%
-    ## 1 75.2361 1.647454 75.21341 71.98292 78.56192
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 75.30528 1.592106 75.28616 72.17505 78.45465
     ## pv
-    ##          mean      sd      50%     2.5%    97.5%
-    ## [1,] 75.32647 9.93109 75.28549 55.52913 93.75793
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 75.03425 9.681353 75.01386 56.13516 94.44648
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.65153 1.510361 66.65971 63.58143 69.63157
+    ## 1 66.73817 1.457957 66.70305 63.83892 69.67548
     ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.37808 9.948372 66.13238 47.06571 85.34356
+    ##         mean      sd      50%     2.5%    97.5%
+    ## [1,] 66.8796 9.45335 66.91755 47.58283 84.61031
     ## fd
     ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.584562 1.492263 -8.518099 -11.62224 -5.684232
+    ## 1 -8.567109 1.434091 -8.568679 -11.48032 -5.836187
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
