@@ -281,7 +281,7 @@ See also
 ------
 
 The gammasurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may
-wish to refer to `help(glm)` and `help(family)`.
+wish to refer to `help(svyglm)` and `help(family)`.
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zgammasurvey$new()

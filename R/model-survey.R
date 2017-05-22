@@ -93,6 +93,7 @@ zsurvey$methods(zelig = function(formula, data, ids = ~1, probs = NULL,
                                 formula = .self$zelig.call$formula,
                                 design = design))  # fn will be set again by super, but initialized here for clarity
     .self$model.call$family <- call(.self$family, .self$link)
+
     callSuper(formula = formula, data = data, weights = localWeights, ...,
               by = by, bootstrap = bootstrap)
 })

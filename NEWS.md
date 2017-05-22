@@ -17,6 +17,9 @@ models' coefficients, standard errors, and p-values is returned. #268
 
 ## Minor changes and bug fixes
 
+-   Resolved a bug where `weights` were not being passed to `svydesign`
+in survey models. #258
+
 -   Resolved a bug where `from_zelig_model` would not extract fitted model 
 objects for models estiamted using `vglm`. #265
 

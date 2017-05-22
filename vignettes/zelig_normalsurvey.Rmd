@@ -26,7 +26,7 @@ options(cite = FALSE)
 Normal Regression for Continuous Dependent Variables with Survey Weights with `normal.survey`.
 
 The Normal regression model is a close variant of the more standard
-least squares regression model (see [Normal Regress](zelig_normal.html)). 
+least squares regression model (see [Normal Regress](zelig_normal.html)).
 Both models specify a continuous
 dependent variable as a linear function of a set of explanatory
 variables. The Normal model reports maximum likelihood (rather than
@@ -75,7 +75,7 @@ In this example, we will estimate a model using
 the percentages of students who receive subsidized
 lunch (`meals`) and an indicator for whether schooling is
 year-round (`yr.rnd`) to predict California public schools'
-academic performance index scores (`api00`). Sampling weights are stored in a 
+academic performance index scores (`api00`). Sampling weights are stored in a
 variable called `pw`.
 
 ```{r, eval = TRUE}
@@ -284,7 +284,7 @@ See also
 ------
 
 The normalsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may
-wish to refer to `help(glm)` and `help(family)`.
+wish to refer to `help(svyglm)` and `help(family)`.
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- znormalsurvey$new()

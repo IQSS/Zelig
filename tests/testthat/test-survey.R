@@ -28,14 +28,15 @@ test_that('REQUIRE TEST survey weights correctly passed', {
 # REQUIRE TEST repweights ------------------------------------------------------
 
 test_that('REQUIRE TEST repweights', {
+    ### ----- NEED TO THINK OF A BETTER TEST ------ ##
     data(scd, package = "survey")
 
     BRRrep <- 2*cbind(c(1,0,1,0,1,0), c(1,0,0,1,0,1),
                       c(0,1,1,0,0,1), c(0,1,0,1,1,0))
 
-#    z.out3 <- zelig(formula=alive ~ arrests , model = "normal.survey",
-#                    repweights = BRRrep, type = "BRR",
-#                    data = scd, na.action = NULL)
+    z.outREP <- zelig(alive ~ arrests , model = "normal.survey",
+                    repweights = BRRrep, type = "BRR",
+                    data = scd, na.action = NULL)
 })
 
 
