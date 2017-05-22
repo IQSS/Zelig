@@ -26,7 +26,8 @@ options(cite = FALSE)
 Normal Regression for Continuous Dependent Variables with Survey Weights with `normal.survey`.
 
 The Normal regression model is a close variant of the more standard
-least squares regression model (see ). Both models specify a continuous
+least squares regression model (see [Normal Regress](zelig_normal.html)). 
+Both models specify a continuous
 dependent variable as a linear function of a set of explanatory
 variables. The Normal model reports maximum likelihood (rather than
 least squares) estimates. The two models differ only in their estimate
@@ -72,13 +73,14 @@ data(api, package = "survey")
 
 In this example, we will estimate a model using
 the percentages of students who receive subsidized
-lunch and an indicator for whether schooling is
-year-round to predict California public schools'
-academic performance index scores:
+lunch (`meals`) and an indicator for whether schooling is
+year-round (`yr.rnd`) to predict California public schools'
+academic performance index scores (`api00`). Sampling weights are stored in a 
+variable called `pw`.
 
 ```{r, eval = TRUE}
 z.out1 <- zelig(api00 ~ meals + yr.rnd, model = "normal.survey",
-                weights=~pw, data = apistrat)
+                weights = ~pw, data = apistrat)
 summary(z.out1)
 ```
 
@@ -130,8 +132,8 @@ weights are omitted, Zelig estimates them automatically for
 of sampling designs.  If no description is present, the default
 assumption is equal probability sampling.
 
-The methods setx() and sim() can then be run on z.out2 in the same fashion
-described in Example 1.
+The methods `setx()` and `sim()` can then be run on `z.out2` in the same fashion
+described above.
 
 ### Example 3: User has Replicate Weights #####
 

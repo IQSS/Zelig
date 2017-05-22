@@ -36,7 +36,7 @@ znormalsurvey$methods(
   param = function(z.out, method="mvn") {
     degrees.freedom <- z.out$df.residual
     sig2 <- base::summary(z.out)$dispersion # not to call class summary method
-    simalpha <- sqrt(degrees.freedom * sig2 
+    simalpha <- sqrt(degrees.freedom * sig2
                      / rchisq(.self$num, degrees.freedom))
 
     if(identical(method,"mvn")){
