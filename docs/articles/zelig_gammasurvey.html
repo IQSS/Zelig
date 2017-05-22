@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Gamma Survey</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-05-22</h4>
           </div>
 
     
@@ -157,7 +157,6 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>In this example, we will estimate a model using the percentages of students who receive subsidized lunch and an indicator for whether schooling is year-round to predict California public schools’ academic performance index scores:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(api00 <span class="op">~</span><span class="st"> </span>meals <span class="op">+</span><span class="st"> </span>yr.rnd, <span class="dt">model =</span> <span class="st">"gamma.survey"</span>,
                 <span class="dt">weights =</span> <span class="op">~</span>pw, <span class="dt">data =</span> apistrat)</code></pre></div>
-<pre><code>## Warning: Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.</code></pre>
 <pre><code>## How to cite this model in Zelig:
 ##   Nicholas Carnes. 2017.
 ##   gamma-survey: Gamma Regression with Survey Weights
@@ -175,11 +174,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 1.162e-03  1.645e-05   70.66   &lt;2e-16
-## meals       7.859e-06  4.363e-07   18.01   &lt;2e-16
-## yr.rndYes   2.807e-05  4.456e-05    0.63    0.529
+## (Intercept) 1.128e-03  1.560e-05  72.314   &lt;2e-16
+## meals       7.928e-06  4.391e-07  18.056   &lt;2e-16
+## yr.rndYes   5.113e-05  4.449e-05   1.149    0.252
 ## 
-## (Dispersion parameter for Gamma family taken to be 0.01251498)
+## (Dispersion parameter for Gamma family taken to be 0.3836199)
 ## 
 ## Number of Fisher Scoring iterations: 4
 ## 
@@ -194,23 +193,23 @@ x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx
 ##  sim x :
 ##  -----
 ## ev
-##          mean       sd      50%     2.5%   97.5%
-## [1,] 572.9882 7.590812 573.0584 558.7091 588.147
+##          mean       sd      50%     2.5%    97.5%
+## [1,] 582.7601 7.921319 582.6495 568.0145 598.4627
 ## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 571.2371 63.46556 569.7145 450.9827 699.9748
+## [1,] 580.7022 372.2473 499.5856 101.8357 1529.045
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##         mean       sd      50%     2.5%    97.5%
-## [1,] 766.822 7.037657 766.6942 752.9023 780.7117
-## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 766.3199 89.52293 762.2232 605.8467 947.5068
+## [1,] 786.7721 6.821552 786.6617 773.1634 800.1334
+## pv
+##          mean       sd     50%     2.5%    97.5%
+## [1,] 778.3914 505.7795 675.047 124.1773 1958.094
 ## fd
-##          mean      sd      50%     2.5%    97.5%
-## [1,] 193.8338 9.67774 193.6547 174.5175 212.2267</code></pre>
+##         mean       sd      50%     2.5%    97.5%
+## [1,] 204.012 9.939606 203.8514 184.0507 223.0171</code></pre>
 <p>Generate a second set of fitted values and a plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <div class="figure">
@@ -310,23 +309,23 @@ x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx
 ##  sim x :
 ##  -----
 ## ev
-##          mean      sd      50%     2.5%    97.5%
-## [1,] 557.5092 7.82784 557.5356 542.6838 573.5134
+##          mean     sd     50%     2.5%    97.5%
+## [1,] 557.7079 7.9431 557.529 542.4628 573.5257
 ## pv
-##          mean       sd      50%     2.5%    97.5%
-## [1,] 557.1642 69.00516 553.7461 427.6548 701.4656
+##          mean      sd      50%     2.5%    97.5%
+## [1,] 555.9965 69.3922 553.1337 425.1246 700.4409
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##          mean       sd     50%     2.5%    97.5%
-## [1,] 739.8227 7.723049 739.909 725.2179 755.3492
+##          mean       sd      50%     2.5%    97.5%
+## [1,] 739.7963 7.695778 739.8023 725.4739 755.3309
 ## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 739.4973 88.68498 738.1387 573.5824 916.5185
+## [1,] 742.6941 88.52467 740.4528 571.1378 921.2419
 ## fd
-##          mean       sd      50%     2.5%   97.5%
-## [1,] 182.3135 10.45998 182.1638 162.0031 201.874</code></pre>
+##          mean       sd      50%     2.5%    97.5%
+## [1,] 182.0884 10.23062 181.9744 162.3653 201.8603</code></pre>
 <p>Generate a second set of fitted values and a plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out3)</code></pre></div>
 <p><img src="zelig_gammasurvey_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
@@ -396,7 +395,7 @@ $$
 <div id="see-also" class="section level2">
 <h2 class="hasAnchor">
 <a href="#see-also" class="anchor"></a>See also</h2>
-<p>The gammasurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may wish to refer to <code>help(glm)</code> and <code>help(family)</code>.</p>
+<p>The gammasurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may wish to refer to <code>help(svyglm)</code> and <code>help(family)</code>.</p>
 <p>Lumley T (2016). “survey: analysis of complex survey samples.” R package version 3.31-5.</p>
 <p>Lumley T (2004). “Analysis of Complex Survey Samples.” <em>Journal of Statistical Software</em>, <strong>9</strong> (1), pp. 1-19. R package verson 2.2.</p>
 </div>

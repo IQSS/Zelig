@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Normal Survey Regression</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-05-22</h4>
           </div>
 
     
@@ -132,7 +132,7 @@
 <p><em>Built using Zelig version 5.1.1.90000</em></p>
 <hr>
 <p>Normal Regression for Continuous Dependent Variables with Survey Weights with <code>normal.survey</code>.</p>
-<p>The Normal regression model is a close variant of the more standard least squares regression model (see ). Both models specify a continuous dependent variable as a linear function of a set of explanatory variables. The Normal model reports maximum likelihood (rather than least squares) estimates. The two models differ only in their estimate for the stochastic parameter <span class="math inline">\(\sigma\)</span>.</p>
+<p>The Normal regression model is a close variant of the more standard least squares regression model (see <a href="zelig_normal.html">Normal Regress</a>). Both models specify a continuous dependent variable as a linear function of a set of explanatory variables. The Normal model reports maximum likelihood (rather than least squares) estimates. The two models differ only in their estimate for the stochastic parameter <span class="math inline">\(\sigma\)</span>.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
@@ -155,10 +155,9 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <a href="#example-1-user-has-existing-sample-weights" class="anchor"></a>Example 1: User has Existing Sample Weights</h3>
 <p>Attach sample data and variable names:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(api, <span class="dt">package =</span> <span class="st">"survey"</span>)</code></pre></div>
-<p>In this example, we will estimate a model using the percentages of students who receive subsidized lunch and an indicator for whether schooling is year-round to predict California public schools’ academic performance index scores:</p>
+<p>In this example, we will estimate a model using the percentages of students who receive subsidized lunch (<code>meals</code>) and an indicator for whether schooling is year-round (<code>yr.rnd</code>) to predict California public schools’ academic performance index scores (<code>api00</code>). Sampling weights are stored in a variable called <code>pw</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(api00 <span class="op">~</span><span class="st"> </span>meals <span class="op">+</span><span class="st"> </span>yr.rnd, <span class="dt">model =</span> <span class="st">"normal.survey"</span>,
-                <span class="dt">weights=</span><span class="op">~</span>pw, <span class="dt">data =</span> apistrat)</code></pre></div>
-<pre><code>## Warning: Supplied weights argument is not a vector or a variable name in the dataset, and will be ignored.</code></pre>
+                <span class="dt">weights =</span> <span class="op">~</span>pw, <span class="dt">data =</span> apistrat)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Nicholas Carnes. 2017.
 ##   normal-survey: Normal Regression for Continuous Dependent Variables with Survey Weights
@@ -176,11 +175,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 825.1058     9.3912  87.859   &lt;2e-16
-## meals        -3.3581     0.1698 -19.781   &lt;2e-16
-## yr.rndYes    -6.3855    15.4044  -0.415    0.679
+## (Intercept) 846.0409     8.9836  94.176   &lt;2e-16
+## meals        -3.4882     0.1678 -20.783   &lt;2e-16
+## yr.rndYes   -15.4566    15.6413  -0.988    0.324
 ## 
-## (Dispersion parameter for gaussian family taken to be 5225.087)
+## (Dispersion parameter for gaussian family taken to be 155138.3)
 ## 
 ## Number of Fisher Scoring iterations: 2
 ## 
@@ -195,23 +194,23 @@ x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx
 ##  sim x :
 ##  -----
 ## ev
-##          mean       sd      50%     2.5%    97.5%
-## [1,] 576.0741 7.212141 576.0612 561.5907 590.8942
+##          mean      sd      50%     2.5%    97.5%
+## [1,] 587.3657 7.32722 587.2933 572.4778 602.4199
 ## pv
-##          mean       sd      50%    2.5%    97.5%
-## [1,] 579.6753 69.44799 580.0193 444.056 712.7222
+##          mean       sd      50%      2.5%    97.5%
+## [1,] 606.9886 376.4908 611.1407 -123.9886 1307.963
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##          mean      sd      50%     2.5%    97.5%
-## [1,] 764.4627 7.03601 764.5055 750.5694 778.5018
+##          mean       sd      50%     2.5%    97.5%
+## [1,] 783.0764 6.718347 783.2417 770.1292 796.5756
 ## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 765.1266 72.34414 762.6121 628.5771 909.8353
+## [1,] 786.6935 390.9711 777.5449 48.42074 1567.279
 ## fd
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 188.3887 9.346978 188.5047 170.1059 206.7381</code></pre>
+## [1,] 195.7107 9.248029 195.8242 178.0784 213.7883</code></pre>
 <p>Generate a second set of fitted values and a plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <div class="figure">
@@ -254,7 +253,7 @@ Graphs of Quantities of Interest for Normal Survey Model
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>Note that these results are identical to the results obtained when pre-existing sampling weights were used. When sampling weights are omitted, Zelig estimates them automatically for “normal.survey” models based on the user-defined description of sampling designs. If no description is present, the default assumption is equal probability sampling.</p>
-<p>The methods setx() and sim() can then be run on z.out2 in the same fashion described in Example 1.</p>
+<p>The methods <code><a href="../reference/setx.html">setx()</a></code> and <code><a href="../reference/sim.html">sim()</a></code> can then be run on <code>z.out2</code> in the same fashion described above.</p>
 </div>
 <div id="example-3-user-has-replicate-weights" class="section level3">
 <h3 class="hasAnchor">
@@ -396,7 +395,7 @@ Graphs of Quantities of Interest for Normal Survey Model
 <div id="see-also" class="section level2">
 <h2 class="hasAnchor">
 <a href="#see-also" class="anchor"></a>See also</h2>
-<p>The normalsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may wish to refer to <code>help(glm)</code> and <code>help(family)</code>.</p>
+<p>The normalsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may wish to refer to <code>help(svyglm)</code> and <code>help(family)</code>.</p>
 <p>Lumley T (2016). “survey: analysis of complex survey samples.” R package version 3.31-5.</p>
 <p>Lumley T (2004). “Analysis of Complex Survey Samples.” <em>Journal of Statistical Software</em>, <strong>9</strong> (1), pp. 1-19. R package verson 2.2.</p>
 </div>
