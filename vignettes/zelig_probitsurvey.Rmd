@@ -296,7 +296,7 @@ In the example above `z.out$get_coef()` returns the estimated coefficients, `z.o
 See also
 ------
 
-The probitsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may
+The probitsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on `glm` package. Advanced users may
 wish to refer to `help(svyglm)` and `help(family)`.
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
