@@ -214,13 +214,8 @@ Greene, W. H. (1993) <em>Econometric Analysis</em>, 2nd ed., Macmillan.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>AER</span>) <span class='co'># for sandwich vcov</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘car’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:dplyr’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lmtest</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: sandwich</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>) <span class='co'># for the pipe operator %&gt;%</span>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>AER</span>) <span class='co'># for sandwich vcov</span>
+<span class='fu'>library</span>(<span class='no'>dplyr</span>) <span class='co'># for the pipe operator %&gt;%</span>
 
 <span class='co'># load and transform data</span>
 <span class='fu'>data</span>(<span class='st'>"CigarettesSW"</span>)
@@ -236,14 +231,75 @@ Greene, W. H. (1993) <em>Econometric Analysis</em>, 2nd ed., Macmillan.</p>
 <span class='co'># estimate model</span>
 <span class='no'>z.out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='fu'>log</span>(<span class='no'>packs</span>) ~ <span class='no'>log_rprice</span> + <span class='no'>log_rincome</span> <span class='kw'>|</span>
                     <span class='no'>log_rincome</span> + <span class='no'>tdiff</span> + <span class='fu'>I</span>(<span class='no'>tax</span>/<span class='no'>cpi</span>),
-                    <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='no'>year</span> <span class='kw'>==</span> <span class='st'>"1995"</span>,
-                    <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(substitute(subset), data, env): object 'year' not found</span></div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(z.out1): object 'z.out1' not found</span></div><div class='input'><span class='fu'><a href='from_zelig_model.html'>from_zelig_model</a></span>(<span class='no'>z.out1</span>) <span class='kw'>%&gt;%</span> <span class='fu'>summary</span>(<span class='kw'>vcov</span> <span class='kw'>=</span> <span class='no'>sandwich</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
-                                     <span class='kw'>diagnostics</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in inherits(x, "Zelig"): object 'z.out1' not found</span></div><div class='input'><span class='co'># simulate and plot quantities of interest</span>
-<span class='no'>z.out1</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='setx.html'>setx</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='sim.html'>sim</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>()</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'z.out1' not found</span></div><div class='input'>
+                    <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>,
+                    <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   Christian Kleiber and Achim Zeileis. 2008.
+#&gt;   ivreg: Instrumental-Variable Regression
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out1</span>)</div><div class='output co'>#&gt; Model: 
+#&gt; 
+#&gt; Call:
+#&gt; z5$zelig(formula = formula, data = data, by = by)
+#&gt; 
+#&gt; Residuals:
+#&gt;      Min       1Q   Median       3Q      Max 
+#&gt; -0.61378 -0.07232  0.01435  0.09486  0.37504 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error t value Pr(&gt;|t|)
+#&gt; (Intercept)   9.7365     0.5687  17.122  &lt; 2e-16
+#&gt; log_rprice   -1.2291     0.1552  -7.922 4.94e-12
+#&gt; log_rincome   0.2568     0.1434   1.791   0.0765
+#&gt; 
+#&gt; Residual standard error: 0.1654 on 93 degrees of freedom
+#&gt; Multiple R-Squared: 0.5486,	Adjusted R-squared: 0.5389 
+#&gt; Wald test: 39.93 on 2 and 93 DF,  p-value: 3.025e-13 
+#&gt; 
+#&gt; Next step: Use 'setx' method</div><div class='input'><span class='fu'><a href='from_zelig_model.html'>from_zelig_model</a></span>(<span class='no'>z.out1</span>) <span class='kw'>%&gt;%</span> <span class='fu'>summary</span>(<span class='kw'>vcov</span> <span class='kw'>=</span> <span class='no'>sandwich</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+                                     <span class='kw'>diagnostics</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; `z5$zelig`(formula = formula, data = data, by = by)
+#&gt; 
+#&gt; Residuals:
+#&gt;      Min       1Q   Median       3Q      Max 
+#&gt; -0.61378 -0.07232  0.01435  0.09486  0.37504 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    
+#&gt; (Intercept)   9.7365     0.5060  19.243  &lt; 2e-16 ***
+#&gt; log_rprice   -1.2291     0.1522  -8.078 6.59e-16 ***
+#&gt; log_rincome   0.2568     0.1503   1.709   0.0874 .  
+#&gt; 
+#&gt; Diagnostic tests:
+#&gt;                  df1 df2 statistic p-value    
+#&gt; Weak instruments   2  92   145.502  &lt;2e-16 ***
+#&gt; Wu-Hausman         1  92     2.204   0.141    
+#&gt; Sargan             1  NA     0.018   0.893    
+#&gt; ---
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#&gt; 
+#&gt; Residual standard error: 0.1654 on Inf degrees of freedom
+#&gt; Multiple R-Squared: 0.5486,	Adjusted R-squared: 0.5389 
+#&gt; Wald test: 101.5 on 2 DF,  p-value: &lt; 2.2e-16 
+#&gt; </div><div class='input'><span class='co'># simulate and plot quantities of interest</span>
+<span class='no'>z.out1</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='setx.html'>setx</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='sim.html'>sim</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>()</div><img src='Zelig-ivreg-class-8.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'># ANOVA</span>
 <span class='no'>z.out2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='fu'>log</span>(<span class='no'>packs</span>) ~ <span class='no'>log_rprice</span> <span class='kw'>|</span>
-                <span class='no'>tdiff</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='no'>year</span> <span class='kw'>==</span> <span class='st'>"1995"</span>,
-                <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(substitute(subset), data, env): object 'year' not found</span></div><div class='input'><span class='fu'>anova</span>(<span class='fu'><a href='from_zelig_model.html'>from_zelig_model</a></span>(<span class='no'>z.out1</span>), <span class='fu'><a href='from_zelig_model.html'>from_zelig_model</a></span>(<span class='no'>z.out2</span>))</div><div class='output co'>#&gt; <span class='error'>Error in inherits(x, "Zelig"): object 'z.out1' not found</span></div><div class='input'>
+                <span class='no'>tdiff</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>,
+                <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   Christian Kleiber and Achim Zeileis. 2008.
+#&gt;   ivreg: Instrumental-Variable Regression
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>anova</span>(<span class='fu'><a href='from_zelig_model.html'>from_zelig_model</a></span>(<span class='no'>z.out1</span>), <span class='fu'><a href='from_zelig_model.html'>from_zelig_model</a></span>(<span class='no'>z.out2</span>))</div><div class='output co'>#&gt; Analysis of Variance Table
+#&gt; 
+#&gt; Model 1: log(packs) ~ log_rprice + log_rincome | log_rincome + tdiff + 
+#&gt;     I(tax/cpi)
+#&gt; Model 2: log(packs) ~ log_rprice | tdiff
+#&gt;   Res.Df    RSS Df Sum of Sq     F  Pr(&gt;F)  
+#&gt; 1     93 2.5456                             
+#&gt; 2     94 2.6785 -1  -0.13293 3.208 0.07653 .
+#&gt; ---
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

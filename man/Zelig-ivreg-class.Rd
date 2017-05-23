@@ -68,7 +68,7 @@ CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
 # estimate model
 z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |
                     log_rincome + tdiff + I(tax/cpi),
-                    data = CigarettesSW, subset = year == "1995",
+                    data = CigarettesSW,
                     model = "ivreg")
 summary(z.out1)
 from_zelig_model(z.out1) \%>\% summary(vcov = sandwich, df = Inf,
@@ -78,7 +78,7 @@ z.out1 \%>\% setx() \%>\% sim() \%>\% plot()
 
 # ANOVA
 z.out2 <- zelig(log(packs) ~ log_rprice |
-                tdiff, data = CigarettesSW, subset = year == "1995",
+                tdiff, data = CigarettesSW,
                 model = "ivreg")
 anova(from_zelig_model(z.out1), from_zelig_model(z.out2))
 
