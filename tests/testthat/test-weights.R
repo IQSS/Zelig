@@ -11,7 +11,8 @@ test_that('REQUIRE TEST weighting', {
 
 	w2 <- rep(c(1.8,0.2), 45)
 
-	z1.out <- zelig( y ~ x, cite=FALSE, model="ls", weights="w1", data=mydata)
+	z1.out <- zelig( y ~ x, cite = FALSE, model = "ls", weights = "w1",
+	                 data = mydata)
 	expect_equivalent(length(z1.out$get_coef()[[1]]),2)
 
 	z2.out <- zelig( y ~ x, cite=FALSE, model="ls", weights=w2, data=mydata)

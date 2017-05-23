@@ -54,7 +54,7 @@ In the first example below, we are passing the name of a variable included in th
 library(Zelig)
 
 z1.out <- zelig(y ~ x, model = "ls", weights = "w1",
-                data = mydata, cite = FALSE,)
+                data = mydata, cite = FALSE)
 summary(z1.out)
 ```
 
