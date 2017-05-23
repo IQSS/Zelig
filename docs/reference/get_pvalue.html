@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • Zelig</title>
+<title>Extract p-values from a Zelig estimated model — get_pvalue • Zelig</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,7 +36,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -141,132 +141,38 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;5.1-1.90000</small>
-      </h1>
+    <h1>Extract p-values from a Zelig estimated model</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Extract p-values from a Zelig estimated model</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>get_pvalue</span>(<span class='no'>object</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>an object of class Zelig</p></td>
+    </tr>
+    </table>
+    
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-main-zelig-workflow" class="hasAnchor"><a href="#section-main-zelig-workflow" class="anchor"></a>Main Zelig Workflow</h2>
-            <p class="section-desc"><p>The main functions Zelig’s estimate, set fitted values, simulate, and plot workflow</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="zelig.html">zelig</a></code> </p>
-          </td>
-          <td><p>Estimating a Statistical Model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="setx.html">setx</a></code> </p>
-          </td>
-          <td><p>Setting Explanatory Variable Values</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sim.html">sim</a></code> </p>
-          </td>
-          <td><p>Generic Method for Computing and Organizing Simulated Quantities of Interest</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-estimation-methods-under-development-" class="hasAnchor"><a href="#section-estimation-methods-under-development-" class="anchor"></a>Estimation Methods (under development)</h2>
-            <p class="section-desc"><p>Methods for finding parameter estimates</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Zelig-ls-class.html">Zelig-ls-class</a></code> </p>
-          </td>
-          <td><p>Least Squares Regression for Continuous Dependent Variables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Zelig-logit-class.html">Zelig-logit-class</a></code> </p>
-          </td>
-          <td><p>Logistic Regression for Dichotomous Dependent Variables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Zelig-ivreg-class.html">Zelig-ivreg-class</a></code> </p>
-          </td>
-          <td><p>Instrumental-Variable Regression</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-exterior-interaction-functions" class="hasAnchor"><a href="#section-exterior-interaction-functions" class="anchor"></a>Exterior Interaction Functions</h2>
-            <p class="section-desc"><p>Functions for helping Zelig interact with the non-Zelig R world</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="from_zelig_model.html">from_zelig_model</a></code> </p>
-          </td>
-          <td><p>Extract the original fitted model object from a <code>zelig</code> estimation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_zelig_mi.html">to_zelig_mi</a></code> </p>
-          </td>
-          <td><p>Bundle Multiply Imputed Data Sets into an Object for Zelig</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="zelig_qi_to_df.html">zelig_qi_to_df</a></code> </p>
-          </td>
-          <td><p>Extract simulated quantities of interest from a zelig object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="qi_slimmer.html">qi_slimmer</a></code> </p>
-          </td>
-          <td><p>Find the median and a central interval of simulated quantity of interest
-distributions</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_se.html">get_se</a></code> </p>
-          </td>
-          <td><p>Extract standard errors from a Zelig estimated model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="combine_coef_se.html">combine_coef_se</a></code> </p>
-          </td>
-          <td><p>Combines estimated coefficients and associated statistics
-from models estimated with multiply imputed data sets or bootstrapped</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-main-zelig-workflow">Main Zelig Workflow</a></li>
-      <li><a href="#section-estimation-methods-under-development-">Estimation Methods (under development)</a></li>
-      <li><a href="#section-exterior-interaction-functions">Exterior Interaction Functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
+
+    <h2>Author</h2>
+    
+Christopher Gandrud
+
   </div>
 </div>
 
