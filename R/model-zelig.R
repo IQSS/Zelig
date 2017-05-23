@@ -230,8 +230,8 @@ z$methods(
 
 
 z$methods(
-  zelig = function(formula, data, model = NULL, ..., weights = NULL, by,
-                   bootstrap = FALSE) {
+  zelig = function(formula, data, model = NULL, ...,
+                   weights = NULL, by, bootstrap = FALSE) {
     "The zelig function estimates a variety of statistical models"
 
     fn2 <- function(fc, data) {
@@ -493,7 +493,8 @@ z$methods(
     #.self$zelig.out <- eval(fn2(.self$model.call, data = data)) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>%
         group_by_(.self$by) %>%
-        do(z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
+        do(z.out = eval(fn2(.self$model.call,
+            quote(as.data.frame(.)))))
     }
 )
 
@@ -1439,13 +1440,14 @@ z$methods(
       iweights <- .self$weights
       n.w   <- sum(iweights)
       iweights <- iweights/n.w
-    }else{
+    } else {
       iweights <- NULL
     }
 
     windex <- bootstrapIndex <- NULL
-    for(i in 1:n.boot){
-      windex <- c(windex, sample(x=1:n.obs, size=n.obs, replace=TRUE, prob=iweights))
+    for(i in 1:n.boot) {
+      windex <- c(windex, sample(x=1:n.obs, size=n.obs,
+                  replace = TRUE, prob = iweights))
       bootstrapIndex <- c(bootstrapIndex, rep(i,n.obs))
     }
     # Last dataset is original data

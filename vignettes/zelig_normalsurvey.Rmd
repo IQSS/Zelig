@@ -89,8 +89,8 @@ a high (80th percentile) and low (20th percentile) value for "meals,"
 the percentage of students who receive subsidized meals:
 
 ```{r, eval = TRUE}
-x.low <- setx(z.out1, meals= quantile(apistrat$meals, 0.2))
-x.high <- setx(z.out1, meals= quantile(apistrat$meals, 0.8))
+x.low <- setx(z.out1, meals = quantile(apistrat$meals, 0.2))
+x.high <- setx(z.out1, meals = quantile(apistrat$meals, 0.8))
 ```
 
 Generate first differences for the effect of high versus low "meals"
