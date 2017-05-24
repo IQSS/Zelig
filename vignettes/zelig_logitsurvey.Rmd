@@ -1,5 +1,5 @@
 ---
-title: "Logit Survey"
+title: "Logistic Regression for Survey Weighted Data"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
