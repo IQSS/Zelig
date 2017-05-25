@@ -67,6 +67,13 @@ Summarize estimated paramters:
 summary(z.out1)
 ```
 
+For `logit` models you can also include the argument `odds_ratios = TRUE` in the
+`summary` call to return odds ratios estimates ($\mathrm{exp}(\beta)$):
+
+```{r}
+summary(z.out1, odds_ratios = TRUE)
+```
+
 Set values for the explanatory variables:
 
 ```{r}

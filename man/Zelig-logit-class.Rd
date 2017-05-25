@@ -8,4 +8,9 @@
 \description{
 Vignette: \url{http://docs.zeligproject.org/articles/zelig_logit.html}
 }
+\section{Methods}{
+
+\describe{
+\item{\code{show(signif.stars = FALSE, subset = NULL, bagging = FALSE)}}{Display a Zelig object}
+}}
 

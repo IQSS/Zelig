@@ -32,4 +32,26 @@ zlogit$methods(mcfun = function(x, b0 = 0, b1 = 1, ..., sim = TRUE) {
     } else {
         return(mu)
     }
-})
+  }
+)
+
+
+zlogit$methods(
+    show = function(odds_ratios = FALSE, ...) {
+    if (odds_ratios & !.self$mi & !.self$bootstrap) {
+        summ <- .self$zelig.out %>%
+            do(summ = {cat("Model: \n")
+                ## Replace coefficients with odds-ratios
+                .z.out.summary = base::summary(.$z.out)
+                .z.out.summary$coefficients[, c(1, 2)] <- exp(.z.out.summary$coefficients[, c(1, 2)])
+                colnames(.z.out.summary$coefficients)[c(1, 2)] <- paste(colnames(.z.out.summary$coefficients)[c(1, 2)],
+                     '(OR)')
+                print(.z.out.summary)
+            })
+    }
+    else {
+        callSuper(...)
+    }
+        #print(base::summary(.self$zelig.out))
+    }
+)
