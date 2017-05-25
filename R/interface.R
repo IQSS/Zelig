@@ -1,3 +1,37 @@
+#' Coerce a non-Zelig fitted model object to a Zelig class object
+#'
+#' @param obj a fitted model object fitted using \code{lm}. MORE INTENDED
+#'
+#' @export
+
+to_zelig <- function(obj) {
+    if ("lm" %in% class(obj))
+        new_obj <- zls$new()
+    else
+        stop("Not a Zelig object and not convertible to one.", call. = FALSE)
+
+    new_obj$mi <- FALSE
+    new_obj$bootstrap <- FALSE
+    new_obj$matched  <- FALSE
+    new_obj$mi <- FALSE
+    new_obj$data <- cbind(1, obj$model)
+    names(new_obj$data)[1] <- "by"
+    new_obj$by <- "by"
+    new_obj$data <- tbl_df(new_obj$data)
+    new_obj$formula <- as.Formula(obj$call$formula)
+    new_obj$weights <- NULL
+    new_obj$zelig.call <- obj$call
+    new_obj$model.call <- obj$call
+    new_obj$model.call$weights <- NULL
+
+    new_obj$zelig.out <- new_obj$data %>%
+        group_by_(new_obj$by) %>% do(z.out = obj)
+
+    #new_obj$zelig.out <- tibble::as_tibble(list(by = 1, z.out = obj))
+
+    return(new_obj)
+}
+
 #' Extract the original fitted model object from a \code{zelig} estimation
 #'
 #' @param obj a zelig object with an estimated model

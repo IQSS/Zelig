@@ -148,3 +148,10 @@ test_that('REQUIRE TEST for . formulas', {
     zset <- setx(z1, dist = 5)
     expect_equal(names(coef(z1)), c("(Intercept)", "dist"))
 })
+
+# REQUIRE TEST for to_zelig within setx ----------------------------------------
+test_that('REQUIRE TEST for to_zelig within setx', {
+    m1 <- lm(speed ~ dist, data = cars)
+    zset <- setx(m1, dist = 5)
+    expect_equal(zset$setx.out$x$mm[[1]][2], 5)
+})

@@ -158,7 +158,9 @@ zelig <- function(formula, model, data, ..., by = NULL, cite = TRUE) {
 
 setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
     # .Deprecated('\nz$new() \nz$zelig(...) \nz$setx() or z$setx1 or z$setrange')
-    is_zelig(obj)
+
+    if(!is_zelig(obj, fail = FALSE))
+        obj <- to_zelig(obj)
 
     x5 <- obj$copy()
     # This is the length of each argument in '...'s

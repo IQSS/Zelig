@@ -46,7 +46,7 @@ zpipe <- zelig(Fertility ~ Education, data = swiss, model = 'ls') %>%
 
 # FAIL TEST non-zelig objects --------------------------------------------------
 test_that('setx and sim non-zelig object fail', {
-    expect_error(setx('TEST'), 'Not a Zelig object.')
+    expect_error(setx('TEST'), 'Not a Zelig object and not convertible to one.')
     expect_error(sim('TEST'), 'Not a Zelig object.')
 })
 
