@@ -25,7 +25,7 @@ test_that('REQUIRE TEST poisson example', {
 # REQUIRE TEST poisson to_zelig -------------------------------------------------
 test_that('REQUIRE TEST poisson example', {
     data(sanction)
-    m1 <- glm(num ~ target + coop, family = poisson(link = "log"),
+    m1 <- glm(num ~ target + coop, family = poisson("log"),
               data = sanction)
     zset <- setx(m1, target = 2)
     expect_equal(zset$setx.out$x$mm[[1]][2], 2)

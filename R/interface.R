@@ -17,16 +17,16 @@ to_zelig <- function(obj) {
     if (all("lm" == obj_class))
         new_obj <- zls$new()
     else if ("glm" %in% obj_class){
-        fit_family <- obj$call$family
-        if (fit_family == 'binomial(link = "identity")')
+        fit_family <- obj$call$family %>% as.character
+        if (all(c("gaussian", "identity") %in% fit_family))
             new_obj <- zls$new()
-        else if (fit_family == 'binomial(link = "logit")')
+        else if (all(c("binomial", "logit") %in% fit_family))
             new_obj <- zlogit$new()
-        else if (fit_family == 'binomial(link = "probit")')
+        else if (all(c("binomial", "probit") %in% fit_family))
             new_obj <- zprobit$new()
-        else if (fit_family == 'poisson(link = "log")')
+        else if (all(c("poisson", "log") %in% fit_family))
             new_obj <- zpoisson$new()
-        else if (fit_family == 'Gamma(link = "inverse")')
+        else if (all(c("Gamma", "inverse") %in% fit_family))
             new_obj <- zgamma$new()
         else
             stop(not_found_msg, call. = FALSE)
