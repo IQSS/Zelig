@@ -1,19 +1,33 @@
 #' Coerce a non-Zelig fitted model object to a Zelig class object
 #'
-#' @param obj a fitted model object fitted using \code{lm}. MORE INTENDED
+#' @param obj a fitted model object fitted using \code{lm} and many using
+#'    \code{glm}. Note: more intended in future Zelig releases.
 #'
+#' @author Christopher Gandrud
+#' @importFrom dplyr group_by_ %>% do
 #' @export
 
 to_zelig <- function(obj) {
-    # attempt to determine model type
+    message('to_zelig is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues')
+
+    # attempt to determine model type and initialize model
     obj_class <- class(obj)
+
     not_found_msg <- "Not a Zelig object and not convertible to one."
     if (all("lm" == obj_class))
         new_obj <- zls$new()
     else if ("glm" %in% obj_class){
         fit_family <- obj$call$family
-        if (fit_family == 'binomial(link = "logit")')
+        if (fit_family == 'binomial(link = "identity")')
+            new_obj <- zls$new()
+        else if (fit_family == 'binomial(link = "logit")')
             new_obj <- zlogit$new()
+        else if (fit_family == 'binomial(link = "probit")')
+            new_obj <- zprobit$new()
+        else if (fit_family == 'poisson(link = "log")')
+            new_obj <- zpoisson$new()
+        else if (fit_family == 'Gamma(link = "inverse")')
+            new_obj <- zgamma$new()
         else
             stop(not_found_msg, call. = FALSE)
     }
@@ -143,7 +157,6 @@ from_zelig_model <- function(obj) {
 #' @export
 
 zelig_qi_to_df <- function(obj) {
-  message('zelig_qi_to_df is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues')
 
   is_zelig(obj)
   is_sims_present(obj$sim.out)

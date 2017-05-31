@@ -7,8 +7,12 @@
 to_zelig(obj)
 }
 \arguments{
-\item{obj}{a fitted model object fitted using \code{lm}. MORE INTENDED}
+\item{obj}{a fitted model object fitted using \code{lm} and many using
+\code{glm}. Note: more intended in future Zelig releases.}
 }
 \description{
 Coerce a non-Zelig fitted model object to a Zelig class object
+}
+\author{
+Christopher Gandrud
 }

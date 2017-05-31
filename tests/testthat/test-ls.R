@@ -155,4 +155,9 @@ test_that('REQUIRE TEST for to_zelig within setx', {
     zset <- setx(m1, dist = 5)
     expect_equal(zset$setx.out$x$mm[[1]][2], 5)
     plot(sim(zset))
+
+    m2 <- glm(speed ~ dist, data = cars, family = gaussian(link = "identity"))
+    zset <- setx(m1, dist = 5)
+    expect_equal(zset$setx.out$x$mm[[1]][2], 5)
+    plot(sim(zset))
 })
