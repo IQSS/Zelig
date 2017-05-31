@@ -87,7 +87,7 @@ x.low <- setx(z.out, numst2 = 0)
 x.high <- setx(z.out, numst2 = 1)
 ```
 
-Simulate expected values (qi$ev) and first differences (qi$fd):
+Simulate expected values (`qi$ev`) and first differences (`qi$fd`):
 
 ```{r, eval = TRUE}
 s.out <- sim(z.out, x = x.low, x1 = x.high)
