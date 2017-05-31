@@ -154,4 +154,5 @@ test_that('REQUIRE TEST for to_zelig within setx', {
     m1 <- lm(speed ~ dist, data = cars)
     zset <- setx(m1, dist = 5)
     expect_equal(zset$setx.out$x$mm[[1]][2], 5)
+    plot(sim(zset))
 })

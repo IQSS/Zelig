@@ -5,10 +5,20 @@
 #' @export
 
 to_zelig <- function(obj) {
-    if ("lm" %in% class(obj))
+    # attempt to determine model type
+    obj_class <- class(obj)
+    not_found_msg <- "Not a Zelig object and not convertible to one."
+    if (all("lm" == obj_class))
         new_obj <- zls$new()
+    else if ("glm" %in% obj_class){
+        fit_family <- obj$call$family
+        if (fit_family == 'binomial(link = "logit")')
+            new_obj <- zlogit$new()
+        else
+            stop(not_found_msg, call. = FALSE)
+    }
     else
-        stop("Not a Zelig object and not convertible to one.", call. = FALSE)
+        stop(not_found_msg, call. = FALSE)
 
     new_obj$mi <- FALSE
     new_obj$bootstrap <- FALSE

@@ -610,7 +610,6 @@ z$methods(
 
 z$methods(
   param = function(z.out, method = "mvn") {
-browser()
     if(identical(method,"mvn")){
       return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
     } else if(identical(method,"point")){
