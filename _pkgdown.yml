@@ -142,5 +142,4 @@ reference:
       - to_zelig_mi
       - zelig_qi_to_df
       - qi_slimmer
-      - get_se
       - combine_coef_se

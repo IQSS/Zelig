@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Weights</h1>
             
-            <h4 class="date">2017-05-23</h4>
+            <h4 class="date">2017-06-01</h4>
           </div>
 
     
@@ -162,16 +162,16 @@ w2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c<
 ## 
 ## Weighted Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -2.1291 -1.1346 -0.5846  0.3151  3.0878 
+## -3.3601 -1.1665 -0.4339  0.2418  3.4678 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)   0.3903     0.2633   1.482    0.142
-## x             0.3717     0.4476   0.830    0.409
+## (Intercept)  0.09193    0.24889   0.369   0.7127
+## x            0.87354    0.45692   1.912   0.0592
 ## 
-## Residual standard error: 1.218 on 88 degrees of freedom
-## Multiple R-squared:  0.007776,   Adjusted R-squared:  -0.003499 
-## F-statistic: 0.6897 on 1 and 88 DF,  p-value: 0.4085
+## Residual standard error: 1.373 on 88 degrees of freedom
+## Multiple R-squared:  0.03988,    Adjusted R-squared:  0.02897 
+## F-statistic: 3.655 on 1 and 88 DF,  p-value: 0.05915
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>In our second example, the weights are provided as a separate vector of the same length as the dataset. These weights give weight to both relationships present when we constructed the data, and we see the estimated relationship is now negative.</p>
@@ -185,16 +185,16 @@ w2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c<
 ## 
 ## Weighted Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -4.3034 -0.7618  0.0192  1.0980  3.6688 
+## -5.4621 -1.0169  0.0147  0.8931  5.2704 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)   0.4763     0.3791   1.257  0.21220
-## x            -1.8118     0.6288  -2.881  0.00497
+## (Intercept)  -0.3517     0.3380  -1.040    0.301
+## x            -0.1833     0.5600  -0.327    0.744
 ## 
-## Residual standard error: 1.687 on 88 degrees of freedom
-## Multiple R-squared:  0.08622,    Adjusted R-squared:  0.07583 
-## F-statistic: 8.303 on 1 and 88 DF,  p-value: 0.004972
+## Residual standard error: 1.637 on 88 degrees of freedom
+## Multiple R-squared:  0.001216,   Adjusted R-squared:  -0.01013 
+## F-statistic: 0.1072 on 1 and 88 DF,  p-value: 0.7442
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>Some checking of the supplied weights are conducted, and warnings or error messages will be given to the user if, for example, the supplied weights are of the wrong length, or the variable name supplied is not present in the dataset. Negative weights are treated as zero weights. Here we use the object oriented approach to building the Zelig object.</p>
