@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Exponential Regression</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-02</h4>
           </div>
 
     
@@ -232,12 +232,12 @@ Graphs of Quantities of Interest for Zelig-exp
 <h2 class="hasAnchor">
 <a href="#model" class="anchor"></a>Model</h2>
 <p>Let <span class="math inline">\(Y_i^*\)</span> be the survival time for observation <span class="math inline">\(i\)</span>. This variable might be censored for some observations at a fixed time <span class="math inline">\(y_c\)</span> such that the fully observed dependent variable, <span class="math inline">\(Y_i\)</span>, is defined as</p>
-$$ Y_i = {
-<span class="math display">\[\begin{array}{ll}
+<p><span class="math display">\[
+    Y_i = \left\{ \begin{array}{ll}
         Y_i^* &amp; \textrm{if }Y_i^* \leq y_c \\
          y_c &amp; \textrm{if }Y_i^* &gt; y_c \\
-       \end{array}\]</span>
-<p>.</p>
+       \end{array} \right.
+\]</span></p>
 <ul>
 <li>The <em>stochastic component</em> is described by the distribution of the partially observed variable <span class="math inline">\(Y^*\)</span>. We assume <span class="math inline">\(Y_i^*\)</span> follows the exponential distribution whose density function is given by</li>
 </ul>
@@ -246,11 +246,12 @@ $$ Y_i = {
 \]</span></p>
 <p>for <span class="math inline">\(y_i^*\ge 0\)</span> and <span class="math inline">\(\lambda_i&gt;0\)</span>. The mean of this distribution is <span class="math inline">\(\lambda_i\)</span>.</p>
 <p>In addition, survival models like the exponential have three additional properties. The hazard function <span class="math inline">\(h(t)\)</span> measures the probability of not surviving past time <span class="math inline">\(t\)</span> given survival up to <span class="math inline">\(t\)</span>. In general, the hazard function is equal to <span class="math inline">\(f(t)/S(t)\)</span> where the survival function <span class="math inline">\(S(t) = 1 - \int_{0}^t f(s) ds\)</span> represents the fraction still surviving at time <span class="math inline">\(t\)</span>. The cumulative hazard function <span class="math inline">\(H(t)\)</span> describes the probability of dying before time <span class="math inline">\(t\)</span>. In general, <span class="math inline">\(H(t)= \int_{0}^{t} h(s) ds = -\log S(t)\)</span>. In the case of the exponential model,</p>
-$$
-<span class="math display">\[\begin{aligned}
+<p><span class="math display">\[
+    \begin{aligned}
         h(t) &amp;=&amp; \frac{1}{\lambda_i} \\
       S(t) &amp;=&amp; \exp\left( -\frac{t}{\lambda_i} \right) \\
-      H(t) &amp;=&amp; \frac{t}{\lambda_i}\end{aligned}\]</span>
+      H(t) &amp;=&amp; \frac{t}{\lambda_i}\end{aligned}
+\]</span></p>
 <p>For the exponential model, the hazard function <span class="math inline">\(h(t)\)</span> is constant over time. The Weibull model and lognormal models allow the hazard function to vary as a function of elapsed time (see and respectively).</p>
 <ul>
 <li>The <em>systematic component</em> <span class="math inline">\(\lambda_i\)</span> is modeled as</li>
