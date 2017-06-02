@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Wakefield’s Hierarchical Ecological Inference</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-02</h4>
           </div>
 
     
@@ -145,14 +145,10 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
 <p>Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zeihier<span class="op">$</span><span class="kw">new</span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 <span class="op">~</span><span class="st"> </span>R1, <span class="dt">N =</span> myN, <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)
-z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre></div>
+z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 <span class="op">~</span><span class="st"> </span>R1, <span class="dt">N =</span> myN, <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)</code></pre></div>
 <p>With the Zelig 4 compatibility wrappers this looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 <span class="op">~</span><span class="st"> </span>R1, <span class="dt">N =</span> N, <span class="dt">model =</span> <span class="st">"eihier"</span>, <span class="dt">weights =</span> w,
-               <span class="dt">data =</span> myData)
-x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
-s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
+               <span class="dt">data =</span> myData)</code></pre></div>
 <div id="additional-inputs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#additional-inputs" class="anchor"></a>Additional Inputs</h3>
@@ -523,9 +519,7 @@ z.out<span class="op">$</span><span class="kw"><a href="../reference/zelig.html"
 ## mu0       -3.313e+00 -2.4790924 -2.101369 -1.744849 -1.085484
 ## mu1       -2.825e-01  0.2992824  0.595197  0.892894  1.495586
 ## sigma^2.0  4.344e+00  7.2267889 10.002835 14.686608 36.034381
-## sigma^2.1  4.293e+00  6.9004834  9.024008 12.000977 21.360369
-## 
-## Next step: Use 'setx' method</code></pre>
+## sigma^2.1  4.293e+00  6.9004834  9.024008 12.000977 21.360369</code></pre>
 <p>You can check for convergence before summarizing the estimates with three diagnostic tests. See the section <a href="diagnostics.html">Diagnostics for Zelig Models</a> for examples of the output with interpretation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()
 z.out<span class="op">$</span><span class="kw">heidel.diag</span>()

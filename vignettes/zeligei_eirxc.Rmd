@@ -54,8 +54,6 @@ Here is an example of all the syntax for the analysis using the first syntax met
 z5 <- zeirxc$new()
 z5$zelig(cbind(C1, C2, C3) ~ cbind(R1, R2, R3), N = myN,
         weights = w, data = myData)
-z5$setx()
-z5$sim()
 ```
 
 With the Zelig 4 compatibility wrappers this looks like:
@@ -63,8 +61,6 @@ With the Zelig 4 compatibility wrappers this looks like:
 ```{r, eval = FALSE}
 z.out <- zelig(cbind(C1, C2, C3) ~ cbind(R1, R2, R3), N = myN,
                model = "rxc", weights = w, data = myData)
-x.out <- setx(z.out)
-s.out <- sim(z.out, x = x.out)
 ```
 
 Examples

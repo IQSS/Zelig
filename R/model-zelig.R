@@ -502,6 +502,7 @@ z$methods(
   set = function(..., fn = list(numeric = mean, ordered = Median)) {
     "Setting Explanatory Variable Values"
     is_uninitializedField(.self$zelig.out)
+    is_zeligei(.self)
 
     # Find variable transformations in formula call
 #    coef_names <- names(rm_intercept(unlist(.self$get_coef())))
@@ -559,6 +560,7 @@ z$methods(
   setx = function(..., fn = list(numeric = mean, ordered = Median,
                                  other = Mode)) {
     is_uninitializedField(.self$zelig.out)
+    is_zeligei(.self)
 
     .self$bsetx <- TRUE
     .self$setx.out$x  <- .self$set(..., fn = fn)
@@ -566,14 +568,16 @@ z$methods(
 )
 
 z$methods(
-  setx1 = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
+  setx1 = function(..., fn = list(numeric = mean, ordered = Median,
+                                  other = Mode)) {
     .self$bsetx1 <- TRUE
     .self$setx.out$x1 <- .self$set(...)
   }
 )
 
 z$methods(
-  setrange = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
+  setrange = function(..., fn = list(numeric = mean, ordered = Median,
+                                     other = Mode)) {
     is_uninitializedField(.self$zelig.out)
 
     .self$bsetrange <- TRUE
@@ -591,7 +595,8 @@ z$methods(
 )
 
 z$methods(
-  setrange1 = function(..., fn = list(numeric = mean, ordered = Median, other = Mode)) {
+  setrange1 = function(..., fn = list(numeric = mean, ordered = Median,
+                                      other = Mode)) {
     .self$bsetrange1 <- TRUE
     rng <- list()
     s <- list(...)
@@ -623,6 +628,7 @@ z$methods(
     "Generic Method for Computing and Organizing Simulated Quantities of Interest"
     is_zelig(.self)
     is_uninitializedField(.self$zelig.out)
+    is_zeligei(.self)
 
     ## If num is defined by user, it overrides the value stored in the .self$num field.
     ## If num is not defined by user, but is also not yet defined in .self$num, then it defaults to 1000.
@@ -911,7 +917,7 @@ z$methods(
         }
       }
 
-      cat("Next step: Use 'setx' method\n")
+      if (!is_zeligei(.self, fail = FALSE)) cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
       niceprint <- function(obj, name){
         if(!is.null(obj[[1]])){
