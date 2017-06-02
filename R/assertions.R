@@ -152,3 +152,23 @@ is_timeseries <- function(x, msg = 'Not a timeseries object.', fail = FALSE) {
             stop(msg, call. = FALSE)
     } else return(passes)
 }
+
+#' Check if an object was created with ZeligEI
+#'
+#' @param x a zelig object
+#' @param msg character string with the error message to return if
+#'   \code{fail = TRUE}.
+#' @param fail logical whether to return an error if \code{x} is not a timeseries.
+
+is_zeligei <- function(x, msg = "Function is not relevant for ZeligEI objects.",
+                       fail = TRUE) {
+    is_zelig(x)
+    passes <- FALSE
+
+    pkgs <- attr(class(x), "package")
+    if ("ZeligEI" %in% pkgs) passes <- TRUE
+    if (isTRUE(fail)) {
+        if (isTRUE(passes))
+            stop(msg, call. = FALSE)
+    } else return(passes)
+}

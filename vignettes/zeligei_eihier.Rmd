@@ -55,8 +55,6 @@ Here is an example of all the syntax for the analysis using the first syntax met
 ```{r, eval = FALSE}
 z5 <- zeihier$new()
 z5$zelig(C1 ~ R1, N = myN, weights = w, data = myData)
-z5$setx()
-z5$sim()
 ```
 
 With the Zelig 4 compatibility wrappers this looks like:
@@ -64,8 +62,6 @@ With the Zelig 4 compatibility wrappers this looks like:
 ```{r, eval = FALSE}
 z.out <- zelig(C1 ~ R1, N = N, model = "eihier", weights = w,
                data = myData)
-x.out <- setx(z.out)
-s.out <- sim(z.out, x = x.out)
 ```
 
 ### Additional Inputs
