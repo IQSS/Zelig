@@ -18,5 +18,6 @@ test_that('REQUIRE TEST gamma example', {
     data(coalition)
     m1 <- glm(duration ~ fract + numst2, family = Gamma(link="inverse"),
                    data = coalition)
+    expect_message(setx(m1), 'Assuming zgamma to convert to Zelig.')
     expect_error(plot(sim(setx(m1))), NA)
 })

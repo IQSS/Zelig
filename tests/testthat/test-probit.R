@@ -17,7 +17,7 @@ test_that("REQUIRE TEST probit example", {
 # REQUIRE TEST probit to_zelig ------------------------------------------------
 test_that('REQUIRE TEST probit example', {
     data(turnout)
-    m1 <- glm(vote ~ race + educate, family = binomial(link = "probit"),
+    m1 <- glm(vote ~ race + educate, family = binomial("probit"),
               data = turnout)
     m1.out <- setx(m1)
     m1.out <- sim(m1.out)

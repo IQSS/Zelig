@@ -1,3 +1,18 @@
+#' Instructions for how to convert non-Zelig fitted model objects to Zelig.
+#' Used in to_zelig
+model_lookup_df <- data.frame(
+    rbind(
+        c(class = "lm", family = "gaussian", link = "identity", zclass = "zls"),
+        c(class = "glm", family = "gaussian", link = "identity", zlcass = "zls"),
+        c(class = "glm", family = "binomial", link = "logit", zclass = "zlogit"),
+        c(class = "glm", family = "binomial", link = "probit", zclass = "zprobit"),
+        c(class = "glm", family = "poisson",  link = "log", zclass = "zpoisson"),
+        c(class = "glm", family = "Gamma", link = "inverse", zclass = "zgamma"),
+        c(class = "svyglm", family = "gaussian", link = "identity", zclass = "znormalsurvey"),
+        c(class = "svyglm", family = "binomial", link = "logit", zclass = "zlogitsurvey"),
+        c(class = "svyglm", family = "quasibinomial", link = "logit", zclass = "zlogitsurvey")),
+    stringsAsFactors = FALSE)
+
 #' Coerce a non-Zelig fitted model object to a Zelig class object
 #'
 #' @param obj a fitted model object fitted using \code{lm} and many using
@@ -8,32 +23,24 @@
 #' @export
 
 to_zelig <- function(obj) {
-    message('to_zelig is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues')
+    message('to_zelig is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues\n')
+    not_found_msg <- "Not a Zelig object and not convertible to one."
 
     # attempt to determine model type and initialize model
-    obj_class <- class(obj)
+    try_na <- function(x) tryCatch(x, error = function(c)
+                                   stop(not_found_msg, call. = FALSE))
 
-    not_found_msg <- "Not a Zelig object and not convertible to one."
-    if (all("lm" == obj_class))
-        new_obj <- zls$new()
-    else if ("glm" %in% obj_class){
-        fit_family <- obj$call$family %>% as.character
-        if (all(c("gaussian", "identity") %in% fit_family))
-            new_obj <- zls$new()
-        else if (all(c("binomial", "logit") %in% fit_family))
-            new_obj <- zlogit$new()
-        else if (all(c("binomial", "probit") %in% fit_family))
-            new_obj <- zprobit$new()
-        else if (all(c("poisson", "log") %in% fit_family))
-            new_obj <- zpoisson$new()
-        else if (all(c("Gamma", "inverse") %in% fit_family))
-            new_obj <- zgamma$new()
-        else
-            stop(not_found_msg, call. = FALSE)
-    }
-    else
-        stop(not_found_msg, call. = FALSE)
+    model_info <- data.frame(
+                            class = try_na(class(obj)[1]),
+                            family = try_na(family(obj)$family),
+                            link = try_na(family(obj)$link),
+                            stringsAsFactors = FALSE
+                            )
+    zmodel <- merge(model_info, model_lookup_df)$zclass
+    if(length(zmodel) != 1) stop(not_found_msg, call. = FALSE)
+    message(sprintf("Assuming %s to convert to Zelig.", zmodel))
 
+    new_obj <- eval(parse(text = sprintf("%s$new()", zmodel)))
     new_obj$mi <- FALSE
     new_obj$bootstrap <- FALSE
     new_obj$matched  <- FALSE

@@ -662,3 +662,4 @@ vcov_gee <- function(obj) {
     out <- obj$geese$vbeta
     return(out)
 }
+
