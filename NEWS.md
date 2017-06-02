@@ -19,6 +19,8 @@ models' coefficients, standard errors, and p-values is returned. #268
 `TRUE` odds ratio estimates are returned rather than coefficient estimates.
 Thanks to Adam Obeng. PR/#270.
 
+- `setx` and `sim` fail informatively when passed ZeligEI objects. #271
+
 ## Minor changes and bug fixes
 
 -   Resolved a bug where `weights` were not being passed to `svydesign`
