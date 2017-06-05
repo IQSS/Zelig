@@ -8,6 +8,8 @@ branches:
 
 r_github_packages:
     - jimhester/covr
+    - IQSS/ZeligChoice
+    - IQSS/ZeligEI
 
 after_success:
     - Rscript -e 'covr::codecov()'
