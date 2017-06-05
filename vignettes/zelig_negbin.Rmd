@@ -34,15 +34,6 @@ is frequently used to estimate over-dispersed event count models.
 Syntax
 ------
 
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- znegbin$new()
-z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
-z5$setx()
-z5$sim()
-```
-
 With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}
