@@ -12,10 +12,10 @@ Zelig version 5.1-2
 `get_pvalue` methods, respectively. #269
 
 -   If `combine_coef_se` is given a model estimated without multiply imputed 
-data or bootstraps an error is no longer returned. Instead a list of the 
-models' coefficients, standard errors, and p-values is returned. #268
+data or bootstraps, an error is no longer returned. Instead a list of the 
+models' untransformed coefficients, standard errors, and p-values is returned. #268
 
--   `summary` for `logt` models now accepts the argument `odds_ratios`. When
+-   `summary` for `logit` models now accepts the argument `odds_ratios`. When
 `TRUE` odds ratio estimates are returned rather than coefficient estimates.
 Thanks to Adam Obeng. PR/#270.
 
