@@ -34,15 +34,6 @@ models, see $probit$.
 Syntax
 ------
 
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- zoprobitbayes$new()
-z5$zelig(Y ~ X1 + X2, weights = w, data = mydata)
-z5$setx()
-z5$sim()
-```
-
 With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}
