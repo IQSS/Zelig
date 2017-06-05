@@ -38,15 +38,6 @@ First load packages:
 library(zeligverse)
 ```
 
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- zoprobit$new()
-z5$zelig(as.factor(Y) ~ X1 + X2, data = mydata)
-z5$setx()
-z5$sim()
-```
-
 With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}
