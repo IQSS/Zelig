@@ -38,8 +38,6 @@ First load packages:
 library(zeligverse)
 ```
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(as.factor(Y) ~ X1 + X23,
                model = "oprobit", data = mydata)

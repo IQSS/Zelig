@@ -36,8 +36,6 @@ for the stochastic parameter $\sigma$.
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "normal.survey", weights = w,
                data = mydata)

@@ -34,8 +34,6 @@ is frequently used to estimate over-dispersed event count models.
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "negbin", weights = w, data = mydata)
 x.out <- setx(z.out)
