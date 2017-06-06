@@ -47,7 +47,6 @@ First load packages:
 library(zeligverse)
 ```
 
-With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}
 z.out <- zelig(cbind(Y1, Y2) ~ X1 + X2 + X3,

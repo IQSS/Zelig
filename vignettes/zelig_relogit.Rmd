@@ -38,8 +38,6 @@ prior correction for case-control sampling designs.
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "relogit", tau = NULL,
                case.control = c("prior", "weighting"),

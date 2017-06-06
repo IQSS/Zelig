@@ -34,8 +34,6 @@ regression, maximum likelihood normal regression, or least squares.
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, below = 0, above = Inf,
                model = "tobit.bayes", weights = w, data = mydata)

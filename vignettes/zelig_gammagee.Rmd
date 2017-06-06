@@ -50,9 +50,6 @@ cluster-specific effects.
 Syntax
 ------
 
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "gamma.gee",
                id = "X3", weights = w, data = mydata)
