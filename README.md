@@ -39,9 +39,10 @@ using four simple functions:
 
 Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html).
 These enable a different way of working with Zelig that is detailed in
-[a separate vignette](docs/articles/zelig5_vs_zelig5.html). Examples
-throughout the package documentation use both the ways of interacting
-with Zelig.
+[a separate
+vignette](http://docs.zeligproject.org/articles/zelig5_vs_zelig4.html).
+Examples throughout the package documentation use both the ways of
+interacting with Zelig.
 
 Zelig Quickstart Guide
 ----------------------
@@ -150,22 +151,22 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 75.30528 1.592106 75.28616 72.17505 78.45465
+    ## 1 75.33897 1.649117 75.41165 71.88531 78.34824
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.03425 9.681353 75.01386 56.13516 94.44648
+    ## [1,] 75.54047 9.736265 75.61539 56.14845 94.40682
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.73817 1.457957 66.70305 63.83892 69.67548
+    ## 1 66.65942 1.498199 66.59908 63.79291 69.69437
     ## pv
-    ##         mean      sd      50%     2.5%    97.5%
-    ## [1,] 66.8796 9.45335 66.91755 47.58283 84.61031
+    ##          mean      sd      50%     2.5%    97.5%
+    ## [1,] 66.31128 9.73417 66.17831 46.90474 85.37004
     ## fd
     ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.567109 1.434091 -8.568679 -11.48032 -5.836187
+    ## 1 -8.679545 1.435875 -8.681897 -11.55255 -5.802556
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
