@@ -168,7 +168,7 @@ z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
                a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
 ```
 
-Checking for convergence before summarizing the estimates.  See the section [Diagnostics for Zelig Models](diagnostic.html) for examples of the output with interpretation:
+Checking for convergence before summarizing the estimates.  See the section [Diagnostics for Zelig Models](diagnostics.html) for examples of the output with interpretation:
 
 ```{r, eval = TRUE}
 z.out$geweke.diag()

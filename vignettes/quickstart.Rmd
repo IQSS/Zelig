@@ -31,7 +31,7 @@ All models in Zelig can be estimated and results explored presented using four s
 #### Zelig 5 reference classes
 
 Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html). These
-enable a different way of working with Zelig that is detailed in [a separate vignette](zelig5_vs_zelig5.html). Examples throughout the package documentation
+enable a different way of working with Zelig that is detailed in [a separate vignette](zelig5_vs_zelig4.html). Examples throughout the package documentation
 use both the ways of interacting with Zelig.
 
 Let’s walk through an example. This example uses the swiss dataset. It contains
