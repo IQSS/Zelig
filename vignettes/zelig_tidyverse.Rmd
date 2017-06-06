@@ -74,7 +74,7 @@ swiss %>%
     plot()
 ```
 
-Note that piping does not work with [Zelig 5's reference class syntax](zelig5-vs-zelig4.html). 
+Note that piping does not work with [Zelig 5's reference class syntax](zelig5_vs_zelig4.html). 
 
 ## Zelig and ggplot2
 
