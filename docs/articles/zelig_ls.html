@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Least Squares Regression</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-06</h4>
           </div>
 
     
@@ -135,11 +135,6 @@
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<p>With Zelig 5 reference classes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls<span class="op">$</span><span class="kw">new</span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X <span class="op">~</span><span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre></div>
 <p>With the Zelig 4 compatibility wrappers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
@@ -195,25 +190,25 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 ##  -----
 ## ev
 ##       mean        sd      50%     2.5%    97.5%
-## 1 5.429376 0.1959631 5.429208 5.043454 5.810514
+## 1 5.431973 0.1869131 5.430751 5.088196 5.798064
 ## pv
 ##          mean       sd      50%       2.5%    97.5%
-## [1,] 5.406423 2.726949 5.443015 0.06013879 10.61608
+## [1,] 5.467592 2.692446 5.409216 0.08244061 10.61921
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##       mean        sd      50%     2.5%    97.5%
-## 1 4.598626 0.1858975 4.596775 4.237403 4.959269
+## 1 4.601547 0.1806391 4.603683 4.260526 4.933739
 ## pv
-##          mean       sd      50%       2.5%    97.5%
-## [1,] 4.607256 2.683871 4.586372 -0.7330664 9.882107
+##         mean       sd      50%       2.5%   97.5%
+## [1,] 4.60397 2.735845 4.567535 -0.4539401 10.2838
 ## fd
-##         mean       sd        50%      2.5%      97.5%
-## 1 -0.8307507 0.244709 -0.8438597 -1.308821 -0.3348032</code></pre>
+##        mean        sd        50%      2.5%      97.5%
+## 1 -0.830426 0.2246132 -0.8328681 -1.296609 -0.3645703</code></pre>
 <p>Plot the simulated distributions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
-<p><img src="zelig_ls_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<p><img src="zelig_ls_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 </div>
 <div id="categorical-variables-including-fixed-effects" class="section level3">
 <h3 class="hasAnchor">
@@ -228,7 +223,7 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out2, <span class="dt">x =</span> x.US, <span class="dt">x1 =</span> x.Japan)</code></pre></div>
 <p>and plot the results:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out2)</code></pre></div>
-<p><img src="zelig_ls_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+<p><img src="zelig_ls_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
 </div>
 <div id="model-definition" class="section level2">
