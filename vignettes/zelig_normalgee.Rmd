@@ -46,14 +46,7 @@ population-averaged effects as opposed to cluster-specific effects (See
 Syntax
 ------
 
-With reference classes:
 
-```{r, eval = FALSE}
-z5 <- znormalgee$new()
-z5$zelig(Y ~ X1 + X2, id = "X3", weights = w, data = mydat)
-z5$setx()
-z5$sim()
-```
 
 With the Zelig 4 compatibility wrappers:
 

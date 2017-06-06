@@ -33,12 +33,6 @@ implementation or for the ordinary least squares variation.
 Syntax
 ------
 
-```{r, eval = FALSE}
-z5 <- znormalbayes$new()
-z5$zelig(Y ~ X1 + X2, weights = w, data = mydat)
-z5$setx()
-z5$sim()
-```
 
 With the Zelig 4 compatibility wrappers:
 

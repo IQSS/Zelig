@@ -36,13 +36,6 @@ model ().-->
 Syntax
 ------
 
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- zfactorbayes$new()
-z5$zelig(cbind(Y1 ,Y2, Y3) ~ NULL, factors = 2,
-         model = "factor.bayes", weights = w, data = mydata)
-```
 
 With the Zelig 4 compatibility wrappers:
 

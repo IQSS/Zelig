@@ -47,15 +47,6 @@ First load packages:
 library(zeligverse)
 ```
 
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- zblogit$new()
-z5$zelig(cbind(Y1, Y2) ~ X1 + X2 + X3, data = mydata)
-z5$setx()
-z5$sim()
-```
-
 With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}

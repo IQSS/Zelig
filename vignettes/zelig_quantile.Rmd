@@ -32,13 +32,6 @@ of the population.
 Syntax
 ------
 
-```{r, eval = FALSE}
-z5 <- zquantile$new()
-z5$zelig(Y ~ X1 + X2, weights = w, data = mydata, tau = 0.5)
-z5$setx()
-z5$sim()
-```
-
 With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}
