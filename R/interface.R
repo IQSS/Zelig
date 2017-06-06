@@ -18,7 +18,16 @@ model_lookup_df <- data.frame(
 #' @param obj a fitted model object fitted using \code{lm} and many using
 #'    \code{glm}. Note: more intended in future Zelig releases.
 #'
-#' @author Christopher Gandrud
+#' @examples
+#' library(dplyr)
+#' lm.out <- lm(Fertility ~ Education, data = swiss)
+#'
+#' z.out <- to_zelig(lm.out)
+#'
+#' # to_zelig called from within setx
+#' setx(z.out) %>% sim() %>% plot()
+#'
+#' @author Christopher Gandrud and Ista Zhan
 #' @importFrom dplyr group_by_ %>% do
 #' @export
 

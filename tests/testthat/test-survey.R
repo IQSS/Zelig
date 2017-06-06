@@ -20,13 +20,9 @@ test_that('REQUIRE TEST survey weights correctly passed', {
                         family = gaussian("identity"))
 
     expect_equal(coef(z.out1), coef(z.out2), coef(z.out3), coef(model_glm))
-
-
-
 })
 
 # REQUIRE TEST repweights ------------------------------------------------------
-
 test_that('REQUIRE TEST repweights', {
     ### ----- NEED TO THINK OF A BETTER TEST ------ ##
     data(scd, package = "survey")

@@ -25,6 +25,9 @@ zsurvey$methods(zelig = function(formula, data, ids = ~1, probs = NULL,
                                 by = NULL, bootstrap = FALSE) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
 
+    warning("Not all features are available in Zelig Survey.\nConsider using surveyglm and setx directly.\nFor details see: <http://docs.zeligproject.org/articles/to_zelig.html>.",
+            call. = FALSE)
+
     recastString2Formula <- function(a) {
         if (is.character(a)) {
             a <- as.Formula(paste("~", a))

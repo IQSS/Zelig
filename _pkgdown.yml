@@ -54,6 +54,7 @@ articles:
       - diagnostics
       - getters
       - quickstart
+      - to_zelig
       - transforming_covariates
       - using_Zelig_with_Amelia
       - using_Zelig_with_MatchIt
@@ -140,6 +141,7 @@ reference:
     contents:
       - from_zelig_model
       - to_zelig_mi
+      - to_zelig
       - zelig_qi_to_df
       - qi_slimmer
       - get_se

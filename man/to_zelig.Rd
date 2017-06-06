@@ -13,6 +13,16 @@ to_zelig(obj)
 \description{
 Coerce a non-Zelig fitted model object to a Zelig class object
 }
+\examples{
+library(dplyr)
+lm.out <- lm(Fertility ~ Education, data = swiss)
+
+z.out <- to_zelig(lm.out)
+
+# to_zelig called from within setx
+setx(z.out) \%>\% sim() \%>\% plot()
+
+}
 \author{
-Christopher Gandrud
+Christopher Gandrud and Ista Zhan
 }
