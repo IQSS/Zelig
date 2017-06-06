@@ -33,10 +33,6 @@ the hazard rate to increase and decrease.
 Syntax
 ------
 
-
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Surv(Y, C) ~ X, model = "lognorm", weights = w, data = mydata)
 x.out <- setx(z.out)

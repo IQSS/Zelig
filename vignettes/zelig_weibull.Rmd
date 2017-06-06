@@ -34,8 +34,6 @@ elapsed time.
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Surv(Y, C) ~ X, model = "weibull", weights = w,
                data = mydata)

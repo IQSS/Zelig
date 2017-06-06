@@ -28,18 +28,15 @@ Instrumental variable regression is used when the correlation between the indepe
 Syntax
 ------
 
-
-Note that `|` separates the regressors (e.g. `X1` and `X2`) from the instruments
-(e.g. `Z1`, `Z2`, `Z3`). Exogenous regressors have to be included as instruments for themselves
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2 | Z1 + Z2 + Z3, model = "ivreg", weights = w,
                data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 ```
+
+Note that `|` separates the regressors (e.g. `X1` and `X2`) from the instruments
+(e.g. `Z1`, `Z2`, `Z3`). Exogenous regressors have to be included as instruments for themselves.
 
 Examples
 --------

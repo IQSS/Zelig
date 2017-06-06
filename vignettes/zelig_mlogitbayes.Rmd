@@ -34,9 +34,6 @@ maximum-likelihood estimation of this model.
 Syntax
 ------
 
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "mlogit.bayes", weights = w, data = mydata)
 x.out <- setx(z.out)

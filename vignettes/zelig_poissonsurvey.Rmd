@@ -34,8 +34,6 @@ model, see [Zelig Poisson Bayes](zelig_poissonbayes.html).
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "poisson.survey",
                weights = w, data = mydata)

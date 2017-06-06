@@ -27,9 +27,6 @@ predictor for the specified dependent variables.
 
 ## Syntax
 
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "ls", weights = w, data = mydata)
 x.out <- setx(z.out)

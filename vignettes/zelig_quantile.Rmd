@@ -32,8 +32,6 @@ of the population.
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "rq", weights = w,
                data = mydata, tau = 0.5)

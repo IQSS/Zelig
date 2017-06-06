@@ -35,8 +35,6 @@ likelihood normal regression](zelig_normal.html), and [least squares](zelig_ls.h
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, below = 0, above = Inf, model = "tobit", weights = w, data = mydata)
 x.out <- setx(z.out)

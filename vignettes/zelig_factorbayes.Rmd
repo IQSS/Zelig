@@ -36,9 +36,6 @@ model ().-->
 Syntax
 ------
 
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(cbind(Y1 ,Y2, Y3) ~ NULL, factors = 2,
                model = "factor.bayes", weights = w, data = mydata)
