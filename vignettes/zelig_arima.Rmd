@@ -28,15 +28,6 @@ Autoregressive and Moving-Average Models with Integration for Time-Series Data
 Syntax
 ------
 
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- zarima$new()
-z5$zelig(Y ~ X1 + X2, order = c(1,0,0), data = mydata)
-z5$setx()
-z5$sim()
-```
-
 With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}
@@ -106,8 +97,6 @@ ts.out2$zelig(unemp ~ leftseat, order = c(1,0,1), ts = "year",
               cs = "country", data = seatshare)
 summary(ts.out2)
 ```
-
-
 
 See Also
 ------

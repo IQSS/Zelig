@@ -69,7 +69,8 @@ test_that('REQUIRE TEST sim wraper minimal working', {
 test_that('REQUIRE TEST ATT wrapper', {
     data(sanction)
     # no wrapper
-    zqi.out <- zelig(num ~ target + coop + mil, model = "poisson", data = sanction)
+    zqi.out <- zelig(num ~ target + coop + mil, model = "poisson",
+                     data = sanction)
     zqi.out$ATT(treatment = "mil")
     my.att <- zqi.out$get_qi(qi = "ATT", xvalue = "TE")
 

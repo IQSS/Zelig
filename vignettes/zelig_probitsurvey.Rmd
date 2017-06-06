@@ -23,22 +23,14 @@ options(cite = FALSE)
 ```
 ---
 
-Probit Regression for Dichotomous Dependent Variables with Survey Weights with `probit.survey`.
+Probit Regression for Dichotomous Dependent Variables with Survey Weights with 
+`probit.survey`.
 
 Use probit regression to model binary dependent variables specified as a
 function of a set of explanatory variables.
 
 Syntax
 ------
-
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- zprobitsurvey$new()
-z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
-z5$setx()
-z5$sim()
-```
 
 With the Zelig 4 compatibility wrappers:
 
@@ -291,12 +283,16 @@ In addition to the summary commands demonstrated above, some simply utility
 functions (known as *getters*) provide easy access to the raw fields most
 commonly of use for further investigation.
 
-In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
+In the example above `z.out$get_coef()` returns the estimated coefficients, 
+`z.out$get_vcov()` returns the estimated covariance matrix, and 
+`z.out$get_predict()` provides predicted values for all observations in the 
+dataset from the analysis.
 
 See also
 ------
 
-The probitsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on `glm` package. Advanced users may
+The probitsurvey model is part of the survey package by Thomas Lumley, which in 
+turn depends heavily on `glm` package. Advanced users may
 wish to refer to `help(svyglm)` and `help(family)`.
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}

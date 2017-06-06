@@ -17,17 +17,23 @@ only works for models fitted with `lm` many `glm` models. #189
 `get_pvalue` methods, respectively. #269
 
 -   If `combine_coef_se` is given a model estimated without multiply imputed 
-data or bootstraps an error is no longer returned. Instead a list of the 
-models' coefficients, standard errors, and p-values is returned. #268
+data or bootstraps, an error is no longer returned. Instead a list of the 
+models' untransformed coefficients, standard errors, and p-values is returned. #268
 
--   `summary` for `logt` models now accepts the argument `odds_ratios`. When
+-   `summary` for `logit` models now accepts the argument `odds_ratios`. When
 `TRUE` odds ratio estimates are returned rather than coefficient estimates.
 Thanks to Adam Obeng. PR/#270.
+
+- `setx` and `sim` fail informatively when passed ZeligEI objects. #271
 
 ## Minor changes and bug fixes
 
 -   Resolved a bug where `weights` were not being passed to `svydesign`
 in survey models. #258
+
+-   Due to limited functionality and instability, zelig survey estimations 
+no return a warining and a link to documentation on how to use `to_survey`
+via `setx` to bipass `zelig`. #273
 
 -   Resolved a bug where `from_zelig_model` would not extract fitted model 
 objects for models estiamted using `vglm`. #265

@@ -33,14 +33,7 @@ the hazard rate to increase and decrease.
 Syntax
 ------
 
-With reference classes:
 
-```{r, eval = FALSE}
-z5 <- zlognorm$new()
-z5$zelig(Surv(Y, C) ~ X, weights = w, data = mydata)
-z5$setx()
-z5$sim()
-```
 
 With the Zelig 4 compatibility wrappers:
 

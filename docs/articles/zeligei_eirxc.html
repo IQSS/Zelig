@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Multinomial Dirichlet model for Ecological Inference</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-02</h4>
           </div>
 
     
@@ -145,14 +145,10 @@
 <p>Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zeirxc<span class="op">$</span><span class="kw">new</span>()
 z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(C1, C2, C3) <span class="op">~</span><span class="st"> </span><span class="kw">cbind</span>(R1, R2, R3), <span class="dt">N =</span> myN,
-        <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)
-z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre></div>
+        <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)</code></pre></div>
 <p>With the Zelig 4 compatibility wrappers this looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(C1, C2, C3) <span class="op">~</span><span class="st"> </span><span class="kw">cbind</span>(R1, R2, R3), <span class="dt">N =</span> myN,
-               <span class="dt">model =</span> <span class="st">"rxc"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)
-x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
-s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
+               <span class="dt">model =</span> <span class="st">"rxc"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)</code></pre></div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
@@ -208,8 +204,7 @@ z.out<span class="op">$</span><span class="kw"><a href="../reference/zelig.html"
 ## natam.rep   1240    118       1020   1476
 ## black.non   4971    801       3792   6347
 ## white.non  41682    889      40120  43024
-## natam.non   1156    169        840   1482
-## Next step: Use 'setx' method</code></pre>
+## natam.non   1156    169        840   1482</code></pre>
 <p>You can check for convergence before summarizing the estimates with three diagnostic tests. See the section <a href="diagnostics.html">Diagnostics for Zelig Models</a> for more examples of these tests, and interpretation of their meaning. For brevity we only show the first set of parameters, the <span class="math inline">\(\alpha\)</span>’s, as there are twice as many <span class="math inline">\(\beta\)</span>’s as there are precincts:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gd &lt;-<span class="st"> </span>z.out<span class="op">$</span><span class="kw">geweke.diag</span>()
 <span class="kw">print</span>(gd[[<span class="dv">1</span>]])</code></pre></div>

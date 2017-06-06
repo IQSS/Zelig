@@ -46,15 +46,7 @@ population-averaged effects as opposed to cluster-specific effects.
 Syntax
 ------
 
-With reference classes:
 
-```{r, eval = FALSE}
-z5 <- zlogitgee$new()
-z5$zelig(Y ~ X1 + X2, model = "logit.gee",
-         id = "X3", weights = w, data = mydata)
-z5$setx()
-z5$sim()
-```
 
 With the Zelig 4 compatibility wrappers:
 

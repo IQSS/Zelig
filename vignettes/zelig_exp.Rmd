@@ -34,15 +34,6 @@ were collected).
 Syntax
 ------
 
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- zexp$new()
-z5$zelig(Surv(Y, C) ~ X, weights = w, data = mydata)
-z5$setx()
-z5$sim()
-```
-
 With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}
@@ -155,12 +146,12 @@ $$
         Y_i^* & \textrm{if }Y_i^* \leq y_c \\
          y_c & \textrm{if }Y_i^* > y_c \\
        \end{array} \right.
+$$
 
 -  The *stochastic component* is described by the distribution of the
    partially observed variable $Y^*$. We assume $Y_i^*$
    follows the exponential distribution whose density function is given
    by
-
 
 $$
     f(y_i^*\mid \lambda_i) = \frac{1}{\lambda_i} \exp\left(-\frac{y_i^*}{\lambda_i}\right)
@@ -187,6 +178,7 @@ $$
         h(t) &=& \frac{1}{\lambda_i} \\
       S(t) &=& \exp\left( -\frac{t}{\lambda_i} \right) \\
       H(t) &=& \frac{t}{\lambda_i}\end{aligned}
+$$
 
    For the exponential model, the hazard function $h(t)$ is
    constant over time. The Weibull model and lognormal models allow the
@@ -282,7 +274,7 @@ commonly of use for further investigation.
 
 In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
 
-See also
+See also 
 ------
 
 The exponential function is part of the survival library by Terry

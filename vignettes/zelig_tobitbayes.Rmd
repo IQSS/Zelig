@@ -34,15 +34,6 @@ regression, maximum likelihood normal regression, or least squares.
 Syntax
 ------
 
-With reference classes:
-
-```{r, eval = FALSE}
-z5 <- ztobitbayes$new()
-z5$zelig((Y ~ X1 + X2, below = 0, above = Inf, weights = w, data = mydata)
-z5$setx()
-z5$sim()
-```
-
 With the Zelig 4 compatibility wrappers:
 
 ```{r, eval = FALSE}
