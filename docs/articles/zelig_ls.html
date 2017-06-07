@@ -135,7 +135,6 @@
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -189,23 +188,23 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 ##  sim x :
 ##  -----
 ## ev
-##       mean        sd      50%     2.5%    97.5%
-## 1 5.431973 0.1869131 5.430751 5.088196 5.798064
+##      mean        sd      50%     2.5%    97.5%
+## 1 5.43178 0.1978673 5.428434 5.046103 5.809784
 ## pv
-##          mean       sd      50%       2.5%    97.5%
-## [1,] 5.467592 2.692446 5.409216 0.08244061 10.61921
+##          mean     sd      50%       2.5%    97.5%
+## [1,] 5.404528 2.7709 5.435286 -0.1197461 10.84955
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##       mean        sd      50%     2.5%    97.5%
-## 1 4.601547 0.1806391 4.603683 4.260526 4.933739
+## 1 4.607632 0.1951025 4.604422 4.223774 4.975568
 ## pv
-##         mean       sd      50%       2.5%   97.5%
-## [1,] 4.60397 2.735845 4.567535 -0.4539401 10.2838
+##          mean       sd      50%       2.5%  97.5%
+## [1,] 4.723561 2.746511 4.716273 -0.6273022 10.184
 ## fd
-##        mean        sd        50%      2.5%      97.5%
-## 1 -0.830426 0.2246132 -0.8328681 -1.296609 -0.3645703</code></pre>
+##         mean       sd        50%      2.5%      97.5%
+## 1 -0.8241487 0.245078 -0.8248128 -1.280464 -0.3635115</code></pre>
 <p>Plot the simulated distributions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <p><img src="zelig_ls_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>

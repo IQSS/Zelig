@@ -136,7 +136,6 @@
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"poisson.gee"</span>,
                <span class="dt">id =</span> <span class="st">"X3"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
@@ -199,11 +198,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##  sim x :
 ##  -----
 ## ev
-##       mean    sd   50%  2.5% 97.5%
-## [1,] 3.319 0.848 3.225 1.925 5.246
+##       mean     sd   50%  2.5% 97.5%
+## [1,] 3.326 0.8358 3.254 1.978 5.125
 ## pv
 ##       mean    sd 50% 2.5% 97.5%
-## [1,] 3.312 1.973   3    0     8</code></pre>
+## [1,] 3.319 2.021   3    0     8</code></pre>
 <p>Generate a plot of quantities of interest:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out)</code></pre></div>
 <div class="figure">

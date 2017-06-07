@@ -1,0 +1,165 @@
+---
+title: "Zelig Quickstart Guide"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Zelig Quickstart Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+```
+
+## Zelig workflow overview
+
+All models in Zelig can be estimated and results explored presented using four simple functions:
+
+1. `zelig` to estimate the parameters,
+
+2. `setx` to set fitted values for which we want to find quantities of interest,
+
+3. `sim` to simulate the quantities of interest,
+
+4. `plot` to plot the simulation results.
+
+#### Zelig 5 reference classes
+
+Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html). These
+enable a different way of working with Zelig that is detailed in [a separate vignette](zelig5_vs_zelig4.html). Examples throughout the package documentation
+use both the ways of interacting with Zelig.
+
+Let’s walk through an example. This example uses the swiss dataset. It contains
+data on fertility and socioeconomic factors in Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). We will model the effect of education on fertility, where education is measured as the percent of draftees with education beyond primary school and fertility is measured using the common standardized fertility measure (see Muehlenbein (2010, 80-81) for details).
+
+## Installing and Loading Zelig
+
+If you haven't already done so, open your R console and install Zelig. We
+recommend installing Zelig with the zeligverse package. This installs core
+Zelig and ancillary packages at once.
+
+```{r eval=FALSE}
+install.packages('zeligverse')
+```
+
+Alternatively you can install the development version of Zelig with:
+
+```{r eval=FALSE}
+devtools::install_github('IQSS/Zelig')
+```
+
+Once Zelig is installed, load it:
+
+```{r message=FALSE}
+library(zeligverse)
+```
+
+## Building Models
+
+Let’s assume we want to estimate the effect of education on fertility. Since
+fertility is a continuous variable, least squares (`ls`) is an appropriate model
+choice. To estimate our model, we call the `zelig()` function with three two
+arguments: equation, model type, and data:
+
+```{r}
+# load data
+data(swiss)
+
+# estimate ls model
+z5_1 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
+
+# model summary
+summary(z5_1)
+```
+
+```{r include=FALSE}
+edu_coef <- round(coef(z5_1)[[2]], digits = 2)
+if (is.na(edu_coef)) stop()
+```
+
+The `r edu_coef` coefficient on education suggests a negative relationship
+between the education of a province and its fertility rate. More precisely,
+for every one percent increase in draftees educated beyond primary school, the
+fertility rate of the province decreases `r edu_coef * -1` units. To help us
+better interpret this finding, we may want other quantities of interest, such as
+expected values or first differences. Zelig makes this simple by automating the
+translation of model estimates into interpretable quantities of interest using
+Monte Carlo simulation methods (see King, Tomz, and Wittenberg (2000) for more
+information). For example, let’s say we want to examine the effect of increasing
+the percent of draftees educated from 5 to 15. To do so, we set our predictor
+value using the `setx()` and `setx1()` functions:
+
+```{r}
+# set education to 5 and 15
+z5_1 <- setx(z5_1, Education = 5)
+z5_1 <- setx1(z5_1, Education = 15)
+
+# model summary
+summary(z5_1)
+```
+
+After setting our predictor value, we simulate using the `sim()` method:
+
+```{r}
+# run simulations and estimate quantities of interest
+z5_1 <- sim(z5_1)
+
+# model summary
+summary(z5_1)
+```
+
+At this point, we’ve estimated a model, set the predictor value, and estimated
+easily interpretable quantities of interest. The `summary()` method shows us our
+quantities of interest, namely, our expected and predicted values at each level
+of education, as well as our first differences–the difference in expected values
+at the set levels of education.
+
+# Visualizations
+
+Zelig’s `plot()` function plots the estimated quantities of interest:
+
+```{r example_plot_graph, fig.height=11, fig.width=7}
+plot(z5_1)
+```
+
+We can also simulate and plot simulations from ranges of simulated values:
+
+```{r}
+
+z5_2 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
+
+# set Education to range from 5 to 15 at single integer increments
+z5_2 <- setx(z5_2, Education = 5:15)
+
+# run simulations and estimate quantities of interest
+z5_2 <- sim(z5_2)
+```
+
+Then use the `plot()` function as before:
+
+```{r example_plot_ci_plot, fig.height=5, fig.width=5}
+z5_2 <- plot(z5_2)
+```
+
+# Getting help
+
+The primary documentation for Zelig is available at: <http://docs.zeligproject.org/articles/>.
+
+Within R, you can access function help using the normal `?` function, e.g.:
+
+```{r, eval=FALSE}
+?setx
+```
+
+If you are looking for details on particlar estimation model methods, you can
+also use the `?` function. Simply place a `z` before the model name. For
+example, to access details about the `logit` model use:
+
+```{r, eval=FALSE}
+?zlogit
+```

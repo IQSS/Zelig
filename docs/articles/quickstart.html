@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Zelig Quickstart Guide</h1>
             
-            <h4 class="date">2017-06-01</h4>
+            <h4 class="date">2017-06-06</h4>
           </div>
 
     
@@ -143,7 +143,7 @@
 <div id="zelig-5-reference-classes" class="section level4">
 <h4 class="hasAnchor">
 <a href="#zelig-5-reference-classes" class="anchor"></a>Zelig 5 reference classes</h4>
-<p>Zelig 5 introduced <a href="http://adv-r.had.co.nz/R5.html">reference classes</a>. These enable a different way of working with Zelig that is detailed in <a href="zelig5_vs_zelig5.html">a separate vignette</a>. Examples throughout the package documentation use both the ways of interacting with Zelig.</p>
+<p>Zelig 5 introduced <a href="http://adv-r.had.co.nz/R5.html">reference classes</a>. These enable a different way of working with Zelig that is detailed in <a href="zelig5_vs_zelig4.html">a separate vignette</a>. Examples throughout the package documentation use both the ways of interacting with Zelig.</p>
 <p>Let’s walk through an example. This example uses the swiss dataset. It contains data on fertility and socioeconomic factors in Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). We will model the effect of education on fertility, where education is measured as the percent of draftees with education beyond primary school and fertility is measured using the common standardized fertility measure (see Muehlenbein (2010, 80-81) for details).</p>
 </div>
 </div>
@@ -214,22 +214,22 @@ z5_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a h
 ##  -----
 ## ev
 ##       mean       sd      50%     2.5%    97.5%
-## 1 75.24172 1.643212 75.25999 71.96014 78.29489
+## 1 75.22306 1.620734 75.22394 71.91346 78.28431
 ## pv
-##          mean       sd      50%     2.5%    97.5%
-## [1,] 75.04329 9.735691 75.18789 54.49858 93.23761
+##          mean       sd      50%     2.5%   97.5%
+## [1,] 75.59027 9.672546 75.76088 56.74299 93.9824
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##       mean       sd      50%     2.5%    97.5%
-## 1 66.67031 1.499326 66.65095 63.74205 69.44414
+##       mean      sd      50%     2.5%    97.5%
+## 1 66.59504 1.45309 66.63107 63.78163 69.39158
 ## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 66.38599 9.379746 66.55542 47.34787 84.74058
+## [1,] 67.03148 9.960612 66.81451 47.80345 86.24308
 ## fd
 ##        mean       sd       50%      2.5%     97.5%
-## 1 -8.571411 1.413617 -8.611567 -11.40884 -5.766214</code></pre>
+## 1 -8.628022 1.446242 -8.635077 -11.42714 -5.665773</code></pre>
 <p>At this point, we’ve estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The <code>summary()</code> method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences–the difference in expected values at the set levels of education.</p>
 </div>
 <div id="visualizations" class="section level1">
