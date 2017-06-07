@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Ordered Probit</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-06-07</h4>
           </div>
 
     
@@ -138,7 +138,6 @@
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
-<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(Y) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X23,
                <span class="dt">model =</span> <span class="st">"oprobit"</span>, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
@@ -254,31 +253,31 @@ x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx
 ##  -----
 ## ev
 ##         mean         sd         50%         2.5%     97.5%
-## 1 0.54288771 0.06995501 0.544590497 4.060535e-01 0.6760732
-## 2 0.38533851 0.05486318 0.387455513 2.751589e-01 0.4914237
-## 3 0.04906135 0.03981788 0.039689976 6.689526e-04 0.1353234
-## 4 0.02271243 0.03949684 0.005320679 1.816885e-07 0.1396465
+## 1 0.54581652 0.06695650 0.545403490 4.145315e-01 0.6737913
+## 2 0.38416586 0.05439789 0.386254031 2.742495e-01 0.4858626
+## 3 0.04814683 0.03856104 0.041657582 4.977618e-04 0.1368289
+## 4 0.02187079 0.03845022 0.005317447 1.249611e-07 0.1472082
 ## pv
 ##       mean        sd 50% 2.5% 97.5%
-## [1,] 1.604 0.7291884   1    1     4
+## [1,] 1.592 0.7362595   1    1     4
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##         mean         sd        50%        2.5%     97.5%
-## 1 0.05960423 0.04225302 0.05071894 0.009402278 0.1636072
-## 2 0.43117362 0.15968637 0.41145130 0.186182597 0.7965273
-## 3 0.28071653 0.08856474 0.27822507 0.125526756 0.4539383
-## 4 0.22850562 0.16013422 0.20569121 0.003117053 0.5673259
+## 1 0.06324964 0.04732220 0.04941605 0.010076245 0.1880392
+## 2 0.43716981 0.15825999 0.40954091 0.192463011 0.8152036
+## 3 0.27892325 0.08864833 0.27569472 0.121860636 0.4628185
+## 4 0.22065730 0.15142488 0.20735825 0.002403449 0.5450715
 ## pv
-##       mean        sd 50% 2.5% 97.5%
-## [1,] 2.718 0.8850194   3    1     4
+##       mean       sd 50% 2.5% 97.5%
+## [1,] 2.681 0.894449   3    1     4
 ## fd
-##          mean         sd        50%         2.5%      97.5%
-## 1 -0.48328348 0.08469796 -0.4878318 -0.637184262 -0.3021362
-## 2  0.04583511 0.15772277  0.0202039 -0.197729742  0.4108002
-## 3  0.23165518 0.10383812  0.2350871  0.036711423  0.4283876
-## 4  0.20579319 0.13453007  0.1956972  0.003116364  0.4723950</code></pre>
+##          mean         sd         50%         2.5%      97.5%
+## 1 -0.48256688 0.08723319 -0.48766671 -0.637363392 -0.2998063
+## 2  0.05300394 0.15580350  0.01694573 -0.170566877  0.4558931
+## 3  0.23077642 0.10190709  0.23498731  0.038221102  0.4294310
+## 4  0.19878651 0.12744828  0.19358495  0.002403338  0.4631196</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out2)</code></pre></div>
 <div class="figure">
 <img src="zeligchoice_oprobit_files/figure-html/Zelig-oprobit2-1.png" alt="Graphs of Quantities of Interest for Ordered Probit" width="672"><p class="caption">

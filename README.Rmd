@@ -47,8 +47,7 @@ All models in Zelig can be estimated and results explored presented using four s
 #### Zelig 5 reference classes
 
 Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html). These
-enable a different way of working with Zelig that is detailed in [a separate vignette](http://docs.zeligproject.org/articles/zelig5_vs_zelig4.html). Examples throughout the package
-documentation use both the ways of interacting with Zelig.
+enable a different way of working with Zelig that is detailed in [a separate vignette](http://docs.zeligproject.org/articles/zelig5_vs_zelig4.html).Directly using the reference class architecture is optional. 
 
 ## Zelig Quickstart Guide
 
@@ -179,7 +178,7 @@ Within R, you can access function help using the normal `?` function, e.g.:
 ?setx
 ```
 
-If you are looking for details on particlar estimation model methods, you can
+If you are looking for details on particular estimation model methods, you can
 also use the `?` function. Simply place a `z` before the model name. For
 example, to access details about the `logit` model use:
 

@@ -11,7 +11,8 @@ Zelig version 5.1-2
 -   !EXPERIMENTAL! interface function `to_zelig` allows users to convert fitted model
 objects fitted outside of Zelig to a Zelig object. The function is called 
 within the `setx` wrapper if a non-Zelig object is supplied. Currently 
-only works for models fitted with `lm` many `glm` models. #189
+only works for models fitted with `lm` and many estimated with `glm` and
+`svyglm`. #189
 
 -   `get_se` and `get_pvalue` function wrappers created for `get_se` and
 `get_pvalue` methods, respectively. #269
