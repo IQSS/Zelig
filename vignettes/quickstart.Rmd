@@ -31,8 +31,8 @@ All models in Zelig can be estimated and results explored presented using four s
 #### Zelig 5 reference classes
 
 Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html). These
-enable a different way of working with Zelig that is detailed in [a separate vignette](zelig5_vs_zelig4.html). Directlyusing the reference class 
-architecture is optional.
+enable a different way of working with Zelig that is detailed in [a separate vignette](zelig5_vs_zelig4.html). 
+Directly using the reference class architecture is optional.
 
 # Examples
 
