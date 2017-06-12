@@ -228,6 +228,8 @@ z$methods(
     }
 )
 
+#' Zelig method
+#' @param formula TEST
 
 z$methods(
   zelig = function(formula, data, model = NULL, ...,
