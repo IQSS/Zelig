@@ -16,6 +16,8 @@ Zelig version 5.1-3
 
 -   `vcov` now works with `rq` quantile regression models.
 
+-   Roxygen documentation improvements.
+
 
 Zelig version 5.1-2
 ==============================

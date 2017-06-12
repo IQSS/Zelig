@@ -3,7 +3,8 @@
 test_that('REQUIRE TEST Bayes Diagnostics', {
     set.seed("123")
     data(macro)
-    expect_error(zelig(unem ~ gdp + capmob + trade, model = "normal.bayes", bootstrap=100, data = macro),
+    expect_error(zelig(unem ~ gdp + capmob + trade, model = "normal.bayes",
+                       bootstrap = 100, data = macro),
                  "Error: The bootstrap is not available for Markov chain Monte Carlo (MCMC) models.", fixed=TRUE)
     z <- zelig(unem ~ gdp + capmob + trade, model = "normal.bayes", data = macro, verbose = FALSE)
     geweke.test <- z$geweke.diag()
