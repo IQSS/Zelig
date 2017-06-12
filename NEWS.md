@@ -3,6 +3,20 @@ each change note when relevant. See <https://github.com/IQSS/Zelig/issues>.
 External contributors are referenced with their GitHub usernames when
 applicable.
 
+Zelig version 5.1-3
+==============================
+
+## Major changes
+
+
+
+## Minor changes and bug fixes
+
+-   `zquantile` with Amelia imputed data now working. #277
+
+-   `vcov` now works with `rq` quantile regression models.
+
+
 Zelig version 5.1-2
 ==============================
 

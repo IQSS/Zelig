@@ -663,3 +663,13 @@ vcov_gee <- function(obj) {
     return(out)
 }
 
+#' Find vcov for quantile regression models
+#'
+#' @param obj a \code{rq} class object.
+
+vcov_rq <- function(obj) {
+    if (!("rq" %in% class(obj)))
+        stop('Not an rq class object', call. = FALSE)
+    out <- summary(obj, cov = TRUE)$cov
+    return(out)
+}

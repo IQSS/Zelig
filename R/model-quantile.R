@@ -61,12 +61,10 @@ zquantile$methods(
     rq_summaries <- lapply(.self$zelig.out$z.out, (function(x)
                             summary(x, se = "nid", cov = TRUE)))
 
-    rse <- lapply(rq_summaries, (function(x)
-                if (length(rq_summaries) > 1)
-                    lapply(x, function(y) y$cov)
-                else x$cov
-        ))
-
+    if (length(rq_summaries) > 1) {
+        rse <- lapply(rq_summaries, function(y) y$cov)
+    }
+    else rse <- rq_summaries$cov
 #    rse <- lapply(.self$zelig.out$z.out, (function(x)
 #        quantreg::summary.rq(x, se = "nid", cov = TRUE)$cov))
 
