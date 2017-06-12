@@ -33,11 +33,11 @@ Thanks to Adam Obeng. PR/#270.
 in survey models. #258
 
 -   Due to limited functionality and instability, zelig survey estimations 
-no return a warining and a link to documentation on how to use `to_survey`
+no return a warning and a link to documentation on how to use `to_survey`
 via `setx` to bipass `zelig`. #273
 
 -   Resolved a bug where `from_zelig_model` would not extract fitted model 
-objects for models estiamted using `vglm`. #265
+objects for models estimated using `vglm`. #265
 
 -   `get_pvalue` and `get_se` now work for models estimated using `vglm`. #267
 
