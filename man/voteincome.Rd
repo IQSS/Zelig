@@ -4,11 +4,11 @@
 
 \title{Sample Turnout and Demographic Data from the 2000 Current Population Survey}
 \description{
- This data set contains turnout and demographic data from a sample of respondents to the 2000 Current Population Survey (CPS). The states represented are South Carolina and Arkansas. The data represent only a sample and results from this example should not be used in publication. 
+ This data set contains turnout and demographic data from a sample of respondents to the 2000 Current Population Survey (CPS). The states represented are South Carolina and Arkansas. The data represent only a sample and results from this example should not be used in publication.
 }
 \usage{data(voteincome)}
 \format{
-  A data frame containing 7 variables ("state", "year", "vote", "income", "education", "age", "female") and 1500 observations.  
+  A data frame containing 7 variables ("state", "year", "vote", "income", "education", "age", "female") and 1500 observations.
   \describe{
     \item{\code{state}}{a factor variable with levels equal to "AR" (Arkansas) and "SC" (South Carolina)}
     \item{\code{year}}{an integer vector}
