@@ -43,7 +43,6 @@
 #'   For more information see:
 #'   \url{http://docs.zeligproject.org/articles/bootstraps.html}.
 #' }
-
 #'
 #' @return Depending on the class of model selected, \code{zelig} will return
 #'   an object with elements including \code{coefficients}, \code{residuals},

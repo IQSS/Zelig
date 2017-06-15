@@ -83,10 +83,8 @@ Use the following parameters to specify the model’s priors:
 \itemize{
     \item b0: prior mean for the coefficients, either a numeric vector or a scalar. If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.
     \item B0: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.
-}
-Use the following arguments to specify optional output for the model:
-\itemize{
-    \item bayes.resid: defaults to FALSE. If TRUE, the latent Bayesian residuals for all observations are returned. Alternatively, users can specify a vector of observations for which the latent residuals should be returned.
+    \item c0: c0/2 is the shape parameter for the Inverse Gamma prior on the variance of the disturbance terms.
+    \item d0: d0/2 is the scale parameter for the Inverse Gamma prior on the variance of the disturbance terms.
 }
 }
 \section{Methods}{
