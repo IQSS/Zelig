@@ -69,7 +69,7 @@ Additional parameters avaialable to many models include:
   \item seed: seed for the random number generator. The default is \code{NA} which corresponds to a random seed of 12345.
   \item beta.start: starting values for the Markov chain, either a scalar or vector with length equal to the number of estimated coefficients. The default is \code{NA}, such that the maximum likelihood estimates are used as the starting values.
 }
-Use the following parameters to specify the model’s priors:
+Use the following parameters to specify the model's priors:
 \itemize{
     \item b0: prior mean for the coefficients, either a numeric vector or a scalar. If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.
     \item B0: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.

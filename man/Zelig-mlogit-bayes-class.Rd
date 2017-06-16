@@ -70,7 +70,7 @@ Additional parameters avaialable to many models include:
   \url{http://docs.zeligproject.org/articles/weights.html}.
   \item burnin: number of the initial MCMC iterations to be discarded (defaults to 1,000).
   \item mcmc: number of the MCMC iterations after burnin (defaults to 10,000).
-  \item mcmc.method: either “MH” or “slice”, specifying whether to use Metropolis Algorithm
+  \item mcmc.method: either "MH" or "slice", specifying whether to use Metropolis Algorithm
   or slice sampler. The default value is MH.
   \item thin: thinning interval for the Markov chain. Only every thin-th draw from the Markov
   chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
@@ -85,7 +85,7 @@ Additional parameters avaialable to many models include:
   length equal to the number of estimated coefficients. The default is \code{NA}, such
   that the maximum likelihood estimates are used as the starting values.
 }
-Use the following parameters to specify the model’s priors:
+Use the following parameters to specify the model's priors:
 \itemize{
     \item b0: prior mean for the coefficients, either a numeric vector or a scalar. If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.
     \item B0: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.

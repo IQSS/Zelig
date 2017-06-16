@@ -55,15 +55,15 @@
 #'     progress of the sampler (every 10%10%) is printed to the screen.
 #'     \item seed: seed for the random number generator. The default is NA which
 #'     corresponds to a random seed 12345.
-#'     \item Lambda.start: starting values of the factor loading matrix Λ, either a
+#'     \item Lambda.start: starting values of the factor loading matrix \eqn{\Lambda}, either a
 #'     scalar (all unconstrained loadings are set to that value), or a matrix with
 #'     compatible dimensions. The default is NA, where the start value are set to
-#'     be 0 for unconstrained factor loadings, and 0.5 or −− 0.5 for constrained
+#'     be 0 for unconstrained factor loadings, and 0.5 or - 0.5 for constrained
 #'     factor loadings (depending on the nature of the constraints).
 #'     \item Psi.start: starting values for the uniquenesses, either a scalar
-#'     (the starting values for all diagonal elements of Ψ are set to be this value),
+#'     (the starting values for all diagonal elements of \eqn{\Psi} are set to be this value),
 #'     or a vector with length equal to the number of manifest variables. In the latter
-#'     case, the starting values of the diagonal elements of Ψ take the values of
+#'     case, the starting values of the diagonal elements of \eqn{\Psi} take the values of
 #'     Psi.start. The default value is NA where the starting values of the all the
 #'     uniquenesses are set to be 0.5.
 #'     \item store.lambda: defaults to TRUE, which stores the posterior draws of the factor loadings.
@@ -75,10 +75,10 @@
 #' The model also accepts the following additional arguments to specify prior parameters:
 #' \itemize{
 #'     \item l0: mean of the Normal prior for the factor loadings, either a scalar or a
-#'     matrix with the same dimensions as ΛΛ. If a scalar value, that value will be the
+#'     matrix with the same dimensions as \eqn{\Lambda}. If a scalar value, that value will be the
 #'     prior mean for all the factor loadings. Defaults to 0.
 #'     \item L0: precision parameter of the Normal prior for the factor loadings, either
-#'     a scalar or a matrix with the same dimensions as ΛΛ. If L0 takes a scalar value,
+#'     a scalar or a matrix with the same dimensions as \eqn{\Lambda}. If L0 takes a scalar value,
 #'     then the precision matrix will be a diagonal matrix with the diagonal elements
 #'     set to that value. The default value is 0, which leads to an improper prior.
 #'     \item a0: the shape parameter of the Inverse Gamma prior for the uniquenesses
