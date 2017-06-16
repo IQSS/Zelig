@@ -28,8 +28,12 @@ Time-Series Model with Moving Average with `ma`.
 Syntax
 ------
 
+Currently, only the Zelig 5 reference class syntax is available for `ma` 
+models:
+
 ```{r, eval = FALSE}
-z.out <- zelig(Y ~ X1 + X2, model = "ma", weights = w, data = mydata)
-x.out <- setx(z.out)
-s.out <- sim(z.out, x = x.out)
+z.out <- zma$new()
+z.out$zelig(Y ~ X1 + X2, data = mydata)
+x.out$setx(z.out)
+s.out$sim(z.out)
 ```

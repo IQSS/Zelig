@@ -123,25 +123,27 @@
     <div class="page-header toc-ignore">
       <h1>ARIMA</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-06-16</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Autoregressive and Moving-Average Models with Integration for Time-Series Data</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">model =</span> <span class="st">"arima"</span>, <span class="dt">data =</span> mydata)
-x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
-s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
+<p>Currently, only the Zelig 5 reference class syntax is available for <code>arima</code> models:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span>zarima<span class="op">$</span><span class="kw">new</span>()
+z.out<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">data =</span> mydata)
+x.out<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
+s.out<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out)</code></pre></div>
 <div id="additional-inputs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#additional-inputs" class="anchor"></a>Additional Inputs</h3>
-<p>In addition, Zelig accepts the following additional inputs for <code>arima</code> to specify variables that provide the time index and any cross-sectional element if there are multiple time-series in the same dataset:</p>
+<p>Zelig accepts the following additional inputs for <code>arima</code> to specify variables that provide the time index and any cross-sectional element if there are multiple time-series in the same dataset:</p>
 <ul>
 <li><p><code>ts</code>: Name of a variable that denotes the time element of the data. As a variable name, this should be in quotes. If this is not provided, Zelig will assume that the data is already ordered by time, but if provided, the dataset will be sorted by this variable before estimation.</p></li>
 <li><p><code>cs</code>: Name of a variable that denotes the cross-sectional element of the data, for example, country name in a dataset with time-series across different countries. As a variable name, this should be in quotes. If this is not provided, Zelig will assume that all observations come from the same unit over time, and should be pooled, but if provided, individual models will be run in each cross-section. If <code>cs</code> is given as an argument, <code>ts</code> must also be provided.</p></li>
@@ -159,7 +161,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 subset &lt;-<span class="st"> </span>seatshare[seatshare<span class="op">$</span>country <span class="op">==</span><span class="st"> "UNITED KINGDOM"</span>,]</code></pre></div>
 <p>Estimate model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ts.out &lt;-<span class="st"> </span>zarima<span class="op">$</span><span class="kw">new</span>()
-ts.out<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unemp <span class="op">~</span><span class="st"> </span>leftseat, <span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">data =</span> subset)</code></pre></div>
+ts.out<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unemp <span class="op">~</span><span class="st"> </span>leftseat, <span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">data =</span> subset)</code></pre></div>
 <p>Summarize estimated model parameters:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(ts.out)</code></pre></div>
 <pre><code>## Model: 
