@@ -49,8 +49,10 @@ ordered by time.}
 \item{cs}{Name of a variable that denotes the cross-sectional element of the data, for example,
 country name in a dataset with time-series across different countries. As a variable name,
 this should be in quotes. If this is not provided, Zelig will assume that all observations
-come from the same unit over time, and should be pooled, but if provided, individual models will be run in each cross-section.
-If \code{cs} is given as an argument, \code{ts} must also be provided.}
+come from the same unit over time, and should be pooled, but if provided, individual models will
+be run in each cross-section.
+If \code{cs} is given as an argument, \code{ts} must also be provided. Additionally, \code{by}
+must be \code{NULL}.}
 
 \item{order}{A vector of length 3 passed in as \code{c(p,d,q)} where p represents the order of the
 autoregressive model, d represents the number of differences taken in the model, and q represents
@@ -74,7 +76,7 @@ Currently only the Reference class syntax for time series
 
 Additional parameters avaialable to this model include:
 \itemize{
-  \item weights: vector of weight values or a name of a variable in the dataset
+  \item \code{weights}: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   \url{http://docs.zeligproject.org/articles/weights.html}.
 }

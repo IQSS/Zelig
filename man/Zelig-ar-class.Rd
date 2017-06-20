@@ -41,6 +41,22 @@ subclasses.}
 
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
+
+\item{ts}{The name of the variable containing the time indicator. This should be passed in as
+a string. If this variable is not provided, Zelig will assume that the data is already
+ordered by time.}
+
+\item{cs}{Name of a variable that denotes the cross-sectional element of the data, for example,
+country name in a dataset with time-series across different countries. As a variable name,
+this should be in quotes. If this is not provided, Zelig will assume that all observations
+come from the same unit over time, and should be pooled, but if provided, individual models will
+be run in each cross-section.
+If \code{cs} is given as an argument, \code{ts} must also be provided. Additionally, \code{by}
+must be \code{NULL}.}
+
+\item{order}{A vector of length 3 passed in as \code{c(p,d,q)} where p represents the order of the
+autoregressive model, d represents the number of differences taken in the model, and q represents
+the order of the moving average model.}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return
@@ -56,19 +72,24 @@ Depending on the class of model selected, \code{zelig} will return
 Time-Series Model with Autoregressive Disturbance
 }
 \details{
-Additional parameters avaialable to many models include:
+Currently only the Reference class syntax for time series
+
+Additional parameters avaialable to this model include:
 \itemize{
   \item \code{weights}: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   \url{http://docs.zeligproject.org/articles/weights.html}.
-  \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
-  robustly estimate uncertainty around model parameters due to sampling error.
-  If an integer is supplied, the number of boostraps to run.
-  For more information see:
-  \url{http://docs.zeligproject.org/articles/bootstraps.html}.
 }
 }
 
+\examples{
+data(seatshare)
+subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
+ts.out <- zar$new()
+ts.out$zelig(formula = unemp ~ leftseat, order = c(1,0,1), ts = "year", data = subset)
+summary(ts.out)
+
+}
 \seealso{
 Vignette: \url{http://docs.zeligproject.org/articles/zelig_ar.html}
 }
