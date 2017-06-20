@@ -47,7 +47,7 @@
 #'
 #' Additional parameters avaialable to this model include:
 #' \itemize{
-#'   \item weights: vector of weight values or a name of a variable in the dataset
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
 #' }

@@ -33,10 +33,10 @@
 #' @details
 #' Additional parameters avaialable to many models include:
 #' \itemize{
-#'   \item weights: vector of weight values or a name of a variable in the dataset
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
-#'   \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+#'   \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
 #'   robustly estimate uncertainty around model parameters due to sampling error.
 #'   If an integer is supplied, the number of boostraps to run.
 #'   For more information see:
@@ -45,7 +45,7 @@
 #' @return Depending on the class of model selected, \code{zelig} will return
 #'   an object with elements including \code{coefficients}, \code{residuals},
 #'   and \code{formula} which may be summarized using
-#'   \code{summary(z.out)} or individually extracted using, for example,
+#'   \code {summary(z.out)} or individually extracted using, for example,
 #'   \code{coef(z.out)}. See
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
