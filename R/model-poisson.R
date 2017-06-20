@@ -30,7 +30,7 @@
 #'@param cite If is set to 'TRUE' (default), the model citation will be printed
 #'   to the console.
 #'@param id: where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate
-#'@param corstr: character string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”
+#'@param corstr: character string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"
 #'@param geeglm: See geeglm in package geepack for other function arguments
 #'
 #' @details

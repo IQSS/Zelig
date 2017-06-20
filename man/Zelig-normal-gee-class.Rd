@@ -47,13 +47,20 @@ estimator.}
 
 \item{corstr}{defaults to "independence". It can take on the following arguments:}
 
-\item{Independence}{(corstr = independence): cor(yit,yit')=0, for all t,t'
-with t not equal to t'. It assumes that there is no correlation within the clusters and the model
-becomes equivalent to standard normal regression. The "working" correlation matrix is the
-identity matrix.}
+\item{Independence}{(corstr = independence): cor(yit,yit')=0, for all t,t' with t not equal to t'.
+It assumes that there is no correlation within the clusters and the model becomes equivalent
+ to standard normal regression. The "working" correlation matrix is the identity matrix.}
 
-\item{Fixed}{corstr = fixed): If selected, the user must define the "working"
-correlation matrix with the R argument rather than estimating it from the model.}
+\item{Fixed}{corstr = fixed): If selected, the user must define the "working" correlation
+matrix with the R argument rather than estimating it from the model.}
+
+\item{id:}{where id is a variable which identifies the clusters. The data should be sorted by
+id and should be ordered within each cluster when appropriate}
+
+\item{corstr:}{character string specifying the correlation structure: "independence",
+"exchangeable", "ar1", "unstructured" and "userdefined"}
+
+\item{geeglm:}{See geeglm in package geepack for other function arguments}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return
@@ -85,8 +92,7 @@ Additional parameters avaialable to many models include:
 \examples{
 library(Zelig)
 data(macro)
-z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country",
-              data = macro, corstr = "AR-M")
+z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country", data = macro, corstr = "AR-M")
 summary(z.out)
 }
 \seealso{
