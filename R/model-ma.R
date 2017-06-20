@@ -1,6 +1,7 @@
 #' Time-Series Model with Moving Average
 #'
 #'
+#'
 #' @param formula a symbolic representation of the model to be
 #'   estimated, in the form \code{y \~\, x1 + x2}, where \code{y} is the
 #'   dependent variable and \code{x1} and \code{x2} are the explanatory
@@ -31,18 +32,27 @@
 #'   subclasses.
 #' @param cite If is set to 'TRUE' (default), the model citation will be printed
 #'   to the console.
-#'
+#' @param ts The name of the variable containing the time indicator. This should be passed in as
+#'     a string. If this variable is not provided, Zelig will assume that the data is already
+#'     ordered by time.
+#' @param cs Name of a variable that denotes the cross-sectional element of the data, for example,
+#'  country name in a dataset with time-series across different countries. As a variable name,
+#'  this should be in quotes. If this is not provided, Zelig will assume that all observations
+#'  come from the same unit over time, and should be pooled, but if provided, individual models will
+#'  be run in each cross-section.
+#'  If \code{cs} is given as an argument, \code{ts} must also be provided. Additionally, \code{by}
+#'  must be \code{NULL}.
+#' @param order A vector of length 3 passed in as \code{c(p,d,q)} where p represents the order of the
+#'     autoregressive model, d represents the number of differences taken in the model, and q represents
+#'     the order of the moving average model.
 #' @details
-#' Additional parameters avaialable to many models include:
+#' Currently only the Reference class syntax for time series
+#'
+#' Additional parameters avaialable to this model include:
 #' \itemize{
-#'   \item weights: vector of weight values or a name of a variable in the dataset
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
-#'   \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
-#'   robustly estimate uncertainty around model parameters due to sampling error.
-#'   If an integer is supplied, the number of boostraps to run.
-#'   For more information see:
-#'   \url{http://docs.zeligproject.org/articles/bootstraps.html}.
 #' }
 #'
 #' @return Depending on the class of model selected, \code{zelig} will return
@@ -53,7 +63,12 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
-#'
+#' @examples
+#' data(seatshare)
+#' subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
+#' ts.out <- zma$new()
+#' ts.out$zelig(formula = unemp ~ leftseat,  ts = "year", data = subset)
+#' summary(ts.out)
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_ma.html}
 #' @import methods
