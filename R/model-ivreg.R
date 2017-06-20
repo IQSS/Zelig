@@ -53,21 +53,21 @@
 #'
 #'
 #'
-#'@examples
-#'library(Zelig)
-#'library(dplyr) # for the pipe operator %>%
-#'load and transform data
-#'data("CigarettesSW")
-#'CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
-#'CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
-#'CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
-#'log second stage independent variables, as logging internally for ivreg is
-#'not currently supported
-#'CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
-#'CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
-#'z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |
-#'log_rincome + tdiff + I(tax/cpi),data = CigarettesSW, subset = year == "1995",model = "ivreg")
-#'summary(z.out1)
+#' @examples
+#' library(Zelig)
+#' library(dplyr) # for the pipe operator %>%
+#' # load and transform data
+#' data("CigarettesSW")
+#' CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
+#' CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
+#' CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+#' # log second stage independent variables, as logging internally for ivreg is
+#' # not currently supported
+#' CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
+#' CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
+#' z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |
+#' log_rincome + tdiff + I(tax/cpi),data = CigarettesSW, subset = year == "1995",model = "ivreg")
+#' summary(z.out1)
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_ivreg.html}
 #' Fit instrumental-variable regression by two-stage least squares. This is
 #' equivalent to direct instrumental-variables estimation when the number of

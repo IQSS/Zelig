@@ -106,13 +106,13 @@ number of exogenous regressors.
 \examples{
 library(Zelig)
 library(dplyr) # for the pipe operator \%>\%
-load and transform data
+# load and transform data
 data("CigarettesSW")
 CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
 CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
 CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
-log second stage independent variables, as logging internally for ivreg is
-not currently supported
+# log second stage independent variables, as logging internally for ivreg is
+# not currently supported
 CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
 CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
 z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |

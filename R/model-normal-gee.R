@@ -50,15 +50,21 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
-#'@param robust defaults to TRUE. If TRUE, consistent standard errors are estimated using a “sandwich” estimator.
-#'@param corstr defaults to “independence”. It can take on the following arguments:
-#'@param Independence (corstr = independence): cor(yit,yit′)=0cor(yit,yit′)=0, ∀t,t′∀t,t′ with t≠t′t≠t′. It assumes that there is no correlation within the clusters and the model becomes equivalent to standard normal regression. The “working” correlation matrix is the identity matrix.
-#'@param Fixed corstr = fixed): If selected, the user must define the “working” correlation matrix with the R argument rather than estimating it from the model.
+#'@param robust defaults to TRUE. If TRUE, consistent standard errors are estimated using a "sandwich"
+#' estimator.
+#'@param corstr defaults to "independence". It can take on the following arguments:
+#'@param Independence (corstr = independence): cor(yit,yit')=0, for all t,t'
+#'with t not equal to t'. It assumes that there is no correlation within the clusters and the model
+#'becomes equivalent to standard normal regression. The "working" correlation matrix is the
+#'identity matrix.
+#'@param Fixed corstr = fixed): If selected, the user must define the "working"
+#'correlation matrix with the R argument rather than estimating it from the model.
 #'
 #' @examples
 #' library(Zelig)
 #' data(macro)
-#' z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country", data = macro, corstr = "AR-M")
+#' z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country",
+#'               data = macro, corstr = "AR-M")
 #' summary(z.out)
 
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_normalgee.html}

@@ -84,8 +84,8 @@ Additional parameters avaialable to this model include:
 data(seatshare)
 subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
 ts.out <- zarima$new()
-ts1.out$zelig(formula = unemp ~ leftseat, order = c(1,0,1), ts = "year", data = subset)
-summary(ts1.out)
+ts.out$zelig(formula = unemp ~ leftseat, order = c(1,0,1), ts = "year", data = subset)
+summary(ts.out)
 
 }
 \seealso{
