@@ -32,7 +32,7 @@
 #'
 #' @details
 #' Additional parameters avaialable to many models include:
-#' \itemize{
+#' \itemize {
 #'   \item weights: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
