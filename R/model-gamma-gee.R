@@ -32,7 +32,7 @@
 #'
 #' @details
 #' Additional parameters avaialable to many models include:
-#' \itemize {
+#' \itemize{
 #'   \item weights: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
@@ -50,7 +50,8 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
-#'@param corstr:character string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”
+#'@param corstr:character string specifying the correlation structure: "independence",
+#'     "exchangeable", "ar1", "unstructured" and "userdefined"
 #'@param See geeglm in package geepack for other function arguments.
 #'@param id: where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate
 #'@param corstr: character string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”
@@ -61,7 +62,8 @@
 #' data(coalition)
 #' coalition$cluster <- c(rep(c(1:62), 5),rep(c(63), 4))
 #' sorted.coalition <- coalition[order(coalition$cluster),]
-#' z.out <- zelig(duration ~ fract + numst2, model = "gamma.gee",id = "cluster", data = sorted.coalition,corstr = "exchangeable")
+#' z.out <- zelig(duration ~ fract + numst2, model = "gamma.gee",id = "cluster",
+#'                data = sorted.coalition,corstr = "exchangeable")
 #' summary(z.out)
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_gammagee.html}

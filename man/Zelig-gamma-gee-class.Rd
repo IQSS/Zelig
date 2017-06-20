@@ -42,7 +42,8 @@ subclasses.}
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
 
-\item{corstr:character}{string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”}
+\item{corstr:character}{string specifying the correlation structure: "independence",
+"exchangeable", "ar1", "unstructured" and "userdefined"}
 
 \item{See}{geeglm in package geepack for other function arguments.}
 }
@@ -61,7 +62,7 @@ Generalized Estimating Equation for Gamma Regression
 }
 \details{
 Additional parameters avaialable to many models include:
-\itemize {
+\itemize{
   \item weights: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   \url{http://docs.zeligproject.org/articles/weights.html}.
@@ -78,7 +79,8 @@ library(Zelig)
 data(coalition)
 coalition$cluster <- c(rep(c(1:62), 5),rep(c(63), 4))
 sorted.coalition <- coalition[order(coalition$cluster),]
-z.out <- zelig(duration ~ fract + numst2, model = "gamma.gee",id = "cluster", data = sorted.coalition,corstr = "exchangeable")
+z.out <- zelig(duration ~ fract + numst2, model = "gamma.gee",id = "cluster",
+               data = sorted.coalition,corstr = "exchangeable")
 summary(z.out)
 
 }

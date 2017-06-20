@@ -42,13 +42,18 @@ subclasses.}
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
 
-\item{robust}{defaults to TRUE. If TRUE, consistent standard errors are estimated using a “sandwich” estimator.}
+\item{robust}{defaults to TRUE. If TRUE, consistent standard errors are estimated using a "sandwich"
+estimator.}
 
-\item{corstr}{defaults to “independence”. It can take on the following arguments:}
+\item{corstr}{defaults to "independence". It can take on the following arguments:}
 
-\item{Independence}{(corstr = independence): cor(yit,yit′)=0cor(yit,yit′)=0, ∀t,t′∀t,t′ with t≠t′t≠t′. It assumes that there is no correlation within the clusters and the model becomes equivalent to standard normal regression. The “working” correlation matrix is the identity matrix.}
+\item{Independence}{(corstr = independence): cor(yit,yit')=0, for all t,t'
+with t not equal to t'. It assumes that there is no correlation within the clusters and the model
+becomes equivalent to standard normal regression. The "working" correlation matrix is the
+identity matrix.}
 
-\item{Fixed}{corstr = fixed): If selected, the user must define the “working” correlation matrix with the R argument rather than estimating it from the model.}
+\item{Fixed}{corstr = fixed): If selected, the user must define the "working"
+correlation matrix with the R argument rather than estimating it from the model.}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return
@@ -80,7 +85,8 @@ Additional parameters avaialable to many models include:
 \examples{
 library(Zelig)
 data(macro)
-z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country", data = macro, corstr = "AR-M")
+z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country",
+              data = macro, corstr = "AR-M")
 summary(z.out)
 }
 \seealso{

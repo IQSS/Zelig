@@ -60,12 +60,12 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
-#'@examples
+#' @examples
 #' data(seatshare)
 #' subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
 #' ts.out <- zarima$new()
-#' ts1.out$zelig(formula = unemp ~ leftseat, order = c(1,0,1), ts = "year", data = subset)
-#' summary(ts1.out)
+#' ts.out$zelig(formula = unemp ~ leftseat, order = c(1,0,1), ts = "year", data = subset)
+#' summary(ts.out)
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_arima.html}
 #' @import methods
