@@ -52,6 +52,9 @@
 #'   model objects using \code{\link{from_zelig_model}}.
 #'@param corstr:character string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”
 #'@param See geeglm in package geepack for other function arguments.
+#'@param id: where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate
+#'@param corstr: character string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”
+#'@param geeglm: See geeglm in package geepack for other function arguments
 #'
 #'@examples
 #' library(Zelig)

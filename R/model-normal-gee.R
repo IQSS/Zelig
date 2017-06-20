@@ -54,6 +54,9 @@
 #'@param corstr defaults to “independence”. It can take on the following arguments:
 #'@param Independence (corstr = independence): cor(yit,yit′)=0cor(yit,yit′)=0, ∀t,t′∀t,t′ with t≠t′t≠t′. It assumes that there is no correlation within the clusters and the model becomes equivalent to standard normal regression. The “working” correlation matrix is the identity matrix.
 #'@param Fixed corstr = fixed): If selected, the user must define the “working” correlation matrix with the R argument rather than estimating it from the model.
+#'@param id: where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate
+#'@param corstr: character string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”
+#'@param geeglm: See geeglm in package geepack for other function arguments
 #'
 #' @examples
 #' library(Zelig)
