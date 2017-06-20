@@ -183,12 +183,12 @@ createJSON <- function(movefile = TRUE){
                     "ma" = z5ma$ljson,
                     "ar" = z5ar$ljson))
 
-  cat(toJSON(zeligmodels, pretty = TRUE), "\n", file = file.path("zelig5models.json"))
+  cat(toJSON(zeligmodels, pretty = TRUE), "\n",
+      file = file.path("zelig5models.json"))
 
   if (movefile){
-    file.rename(from = file.path("zelig5models.json"), to = file.path("inst", "JSON","zelig5models.json"))
-    file.remove(file.path("zelig5models.json"))
+    file.rename(from = file.path("zelig5models.json"),
+                to = file.path("inst", "JSON", "zelig5models.json"))
   }
-
   return(TRUE)
 }

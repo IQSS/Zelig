@@ -32,7 +32,7 @@
 #' @details
 #' In addition, zelig() accepts the following additional arguments for model specification:
 #' \itemize{
-#'      \item lambda.constraints: list containing the equality or
+#'      \item \code{lambda.constraints}: list containing the equality or
 #'      inequality constraints on the factor loadings. Choose from one of the following forms:
 #'      \item `varname = list()``: by default, no constraints are imposed.
 #'      \item varname = list(d, c): constrains the dth loading for the
@@ -74,7 +74,7 @@
 #'
 #' The model also accepts the following additional arguments to specify prior parameters:
 #' \itemize{
-#'     \item l0: mean of the Normal prior for the factor loadings, either a scalar or a
+#'     \item \code{l0}: mean of the Normal prior for the factor loadings, either a scalar or a
 #'     matrix with the same dimensions as \eqn{\Lambda}. If a scalar value, that value will be the
 #'     prior mean for all the factor loadings. Defaults to 0.
 #'     \item L0: precision parameter of the Normal prior for the factor loadings, either
@@ -82,7 +82,7 @@
 #'     then the precision matrix will be a diagonal matrix with the diagonal elements
 #'     set to that value. The default value is 0, which leads to an improper prior.
 #'     \item a0: the shape parameter of the Inverse Gamma prior for the uniquenesses
-#'     is a0/2. It can take a scalar value or a vector. The default value is 0.001.
+#'     is \code{a0}/2. It can take a scalar value or a vector. The default value is 0.001.
 #'     \item b0: the scale parameter of the Inverse Gamma prior for the uniquenesses
 #'     is b0/2. It can take a scalar value or a vector. The default value is 0.001.
 #' }

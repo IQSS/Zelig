@@ -76,8 +76,11 @@ Additional parameters avaialable to many models include:
 }}
 
 \examples{
+library(Zelig)
 data(macro)
-z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro,
+cite = FALSE)
+summary(z.out1)
 
 }
 \seealso{

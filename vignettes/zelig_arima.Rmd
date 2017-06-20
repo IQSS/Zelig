@@ -28,15 +28,19 @@ Autoregressive and Moving-Average Models with Integration for Time-Series Data
 Syntax
 ------
 
+Currently, only the Zelig 5 reference class syntax is available for `arima` 
+models:
+
 ```{r, eval = FALSE}
-z.out <- zelig(Y ~ X1 + X2, order = c(1,0,0), model = "arima", data = mydata)
-x.out <- setx(z.out)
-s.out <- sim(z.out, x = x.out)
+z.out <- zarima$new()
+z.out$zelig(Y ~ X1 + X2, order = c(1, 0, 0), data = mydata)
+x.out$setx(z.out)
+s.out$sim(z.out)
 ```
 
 ### Additional Inputs
 
-In addition, Zelig accepts the following additional inputs for `arima` to specify variables that provide the time index and any cross-sectional element if there are multiple time-series in the same dataset:
+Zelig accepts the following additional inputs for `arima` to specify variables that provide the time index and any cross-sectional element if there are multiple time-series in the same dataset:
 
 -   `ts`: Name of a variable that denotes the time element of the data.  As a variable name, this should be in quotes.  If this is not provided, Zelig will assume that the data is already ordered by time, but if provided, the dataset will be sorted by this variable before estimation.
 
@@ -64,7 +68,7 @@ Estimate model:
 
 ```{r, eval = TRUE}
 ts.out <- zarima$new()
-ts.out$zelig(unemp ~ leftseat, order = c(1,0,1), data = subset)
+ts.out$zelig(unemp ~ leftseat, order = c(1, 0, 1), data = subset)
 ```
 
 Summarize estimated model parameters:

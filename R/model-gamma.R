@@ -64,9 +64,6 @@
 #'
 #' @include model-zelig.R
 #' @include model-glm.R
-#' @include
-
-
 zgamma <- setRefClass("Zelig-gamma",
                       contains = "Zelig-glm")
 
