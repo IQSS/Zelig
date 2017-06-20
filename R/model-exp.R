@@ -45,7 +45,7 @@
 #' @return Depending on the class of model selected, \code{zelig} will return
 #'   an object with elements including \code{coefficients}, \code{residuals},
 #'   and \code{formula} which may be summarized using
-#'   \code {summary(z.out)} or individually extracted using, for example,
+#'   \code{summary(z.out)} or individually extracted using, for example,
 #'   \code{coef(z.out)}. See
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
