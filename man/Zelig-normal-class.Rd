@@ -5,7 +5,13 @@
 \alias{Zelig-normal-class}
 \alias{znormal}
 \title{Normal Regression for Continuous Dependent Variables}
+\arguments{
+\item{formula}{a model fitting formula}
+}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig_normal.html}
+Normal Regression for Continuous Dependent Variables
 }
 
+\seealso{
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_normal.html}
+}

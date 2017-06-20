@@ -46,10 +46,6 @@ population-averaged effects as opposed to cluster-specific effects (See
 Syntax
 ------
 
-
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "normal.gee",
                        id = "X3", weights = w, data = mydata)

@@ -39,9 +39,9 @@ using four simple functions:
 
 Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html).
 These enable a different way of working with Zelig that is detailed in
-[a separate vignette](docs/articles/zelig5_vs_zelig5.html). Examples
-throughout the package documentation use both the ways of interacting
-with Zelig.
+[a separate
+vignette](http://docs.zeligproject.org/articles/zelig5_vs_zelig4.html).Directly
+using the reference class architecture is optional.
 
 Zelig Quickstart Guide
 ----------------------
@@ -149,23 +149,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean       sd      50%     2.5%    97.5%
-    ## 1 75.30528 1.592106 75.28616 72.17505 78.45465
+    ##       mean      sd      50%     2.5%    97.5%
+    ## 1 75.26968 1.63758 75.26433 71.94417 78.37313
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.03425 9.681353 75.01386 56.13516 94.44648
+    ## [1,] 75.30607 9.550589 75.39573 56.35069 94.72933
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.73817 1.457957 66.70305 63.83892 69.67548
+    ## 1 66.65888 1.528937 66.61505 63.75947 69.71423
     ## pv
-    ##         mean      sd      50%     2.5%    97.5%
-    ## [1,] 66.8796 9.45335 66.91755 47.58283 84.61031
+    ##          mean       sd      50%     2.5%    97.5%
+    ## [1,] 66.28331 9.275512 66.53786 48.03818 83.93964
     ## fd
     ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.567109 1.434091 -8.568679 -11.48032 -5.836187
+    ## 1 -8.610797 1.455565 -8.618433 -11.44455 -5.799213
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`
@@ -211,7 +211,7 @@ e.g.:
 
     ?setx
 
-If you are looking for details on particlar estimation model methods,
+If you are looking for details on particular estimation model methods,
 you can also use the `?` function. Simply place a `z` before the model
 name. For example, to access details about the `logit` model use:
 

@@ -56,6 +56,7 @@
 #' z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro,
 #' cite = FALSE)
 #' summary(z.out1)
+#'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_ls.html}
 #' @import methods
 #' @export Zelig-ls

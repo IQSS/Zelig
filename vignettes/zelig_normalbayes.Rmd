@@ -33,9 +33,6 @@ implementation or for the ordinary least squares variation.
 Syntax
 ------
 
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "normal.bayes", weights = w,
                data = mydata)

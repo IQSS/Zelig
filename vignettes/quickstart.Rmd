@@ -31,8 +31,10 @@ All models in Zelig can be estimated and results explored presented using four s
 #### Zelig 5 reference classes
 
 Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html). These
-enable a different way of working with Zelig that is detailed in [a separate vignette](zelig5_vs_zelig4.html). Examples throughout the package documentation
-use both the ways of interacting with Zelig.
+enable a different way of working with Zelig that is detailed in [a separate vignette](zelig5_vs_zelig4.html). 
+Directly using the reference class architecture is optional.
+
+# Examples
 
 Let’s walk through an example. This example uses the swiss dataset. It contains
 data on fertility and socioeconomic factors in Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). We will model the effect of education on fertility, where education is measured as the percent of draftees with education beyond primary school and fertility is measured using the common standardized fertility measure (see Muehlenbein (2010, 80-81) for details).

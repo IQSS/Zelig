@@ -6,7 +6,7 @@
 \alias{ztobit}
 \title{Linear Regression for a Left-Censored Dependent Variable}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig_tobit.html}
+Linear Regression for a Left-Censored Dependent Variable
 }
 \section{Methods}{
 
@@ -15,3 +15,6 @@ Vignette: \url{http://docs.zeligproject.org/articles/zelig_tobit.html}
   bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 
+\seealso{
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_tobit.html}
+}

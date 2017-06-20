@@ -228,6 +228,8 @@ z$methods(
     }
 )
 
+#' Zelig method
+#' @param formula TEST
 
 z$methods(
   zelig = function(formula, data, model = NULL, ...,
@@ -257,7 +259,8 @@ z$methods(
     # Without dots for single and multiple equations
     temp_formula <- as.Formula(formula)
     if (sum(length(temp_formula)) <= 2)
-        .self$formula <- as.Formula(terms(temp_formula, data = localdata))
+        .self$formula <- as.Formula(terms(temp_formula,
+                                    data = localdata))
     else if (sum(length(temp_formula)) > 2) {
         f_dots <- attr(terms(temp_formula, data = localdata), "Formula_without_dot")
         if (!is.null(f_dots))
@@ -284,10 +287,10 @@ z$methods(
             if (.self$name == 'ivreg')
                 stop('logging values in the zelig call is not currently supported for ivreg models.',
                      call. = FALSE)
-            localformula <- transformer(formula, data = localdata, FUN = 'log',
-                                        f_out = TRUE)
-            localdata <- transformer(formula, data = localdata, FUN = 'log',
-                                     d_out = TRUE)
+            localformula <- transformer(formula, data = localdata,
+                                        FUN = 'log', f_out = TRUE)
+            localdata <- transformer(formula, data = localdata,
+                                     FUN = 'log', d_out = TRUE)
             .self$formula <- localformula
             .self$data <- localdata
         }
@@ -518,11 +521,12 @@ z$methods(
     s <- list(...)
 
     # This eliminates warning messages when factor rhs passed to lm() model in reduce() utility function
-    if(.self$category=="multinomial"){  # Perhaps find more robust way to test if dep.var. is factor
+    if(.self$category == "multinomial"){  # Perhaps find more robust way to test if dep.var. is factor
       f2 <- update(.self$formula, as.numeric(.) ~ .)
     } else {
       f2 <- .self$formula
     }
+
     f <- update(.self$formula, 1 ~ .)
     # update <- na.omit(.self$data) %>% # remove missing values
 
@@ -612,7 +616,7 @@ z$methods(
 )
 
 z$methods(
-  param = function(z.out, method="mvn") {
+  param = function(z.out, method = "mvn") {
     if(identical(method,"mvn")){
       return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
     } else if(identical(method,"point")){
@@ -1084,8 +1088,11 @@ z$methods(
 
         if ("geeglm" %in% class(.self$zelig.out$z.out[[1]]))
             result <- lapply(.self$zelig.out$z.out, vcov_gee)
+        else if ("rq" %in% class(.self$zelig.out$z.out[[1]]))
+            result <- lapply(.self$zelig.out$z.out, vcov_rq)
         else
             result <- lapply(.self$zelig.out$z.out, vcov)
+
         if ("try-error" %in% class(result))
             stop("'vcov' method' not implemented for model '", .self$name, "'")
         else

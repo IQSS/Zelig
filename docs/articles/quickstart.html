@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Zelig Quickstart Guide</h1>
             
-            <h4 class="date">2017-06-01</h4>
+            <h4 class="date">2017-06-07</h4>
           </div>
 
     
@@ -143,10 +143,13 @@
 <div id="zelig-5-reference-classes" class="section level4">
 <h4 class="hasAnchor">
 <a href="#zelig-5-reference-classes" class="anchor"></a>Zelig 5 reference classes</h4>
-<p>Zelig 5 introduced <a href="http://adv-r.had.co.nz/R5.html">reference classes</a>. These enable a different way of working with Zelig that is detailed in <a href="zelig5_vs_zelig5.html">a separate vignette</a>. Examples throughout the package documentation use both the ways of interacting with Zelig.</p>
+<p>Zelig 5 introduced <a href="http://adv-r.had.co.nz/R5.html">reference classes</a>. These enable a different way of working with Zelig that is detailed in <a href="zelig5_vs_zelig4.html">a separate vignette</a>. Directlyusing the reference class architecture is optional.</p>
+</div>
+</div>
+<div id="examples" class="section level1">
+<h1 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h1>
 <p>Let’s walk through an example. This example uses the swiss dataset. It contains data on fertility and socioeconomic factors in Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). We will model the effect of education on fertility, where education is measured as the percent of draftees with education beyond primary school and fertility is measured using the common standardized fertility measure (see Muehlenbein (2010, 80-81) for details).</p>
-</div>
-</div>
 <div id="installing-and-loading-zelig" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-and-loading-zelig" class="anchor"></a>Installing and Loading Zelig</h2>
@@ -214,23 +217,24 @@ z5_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a h
 ##  -----
 ## ev
 ##       mean       sd      50%     2.5%    97.5%
-## 1 75.24172 1.643212 75.25999 71.96014 78.29489
+## 1 75.29341 1.610432 75.22922 72.33173 78.44749
 ## pv
-##          mean       sd      50%     2.5%    97.5%
-## [1,] 75.04329 9.735691 75.18789 54.49858 93.23761
+##         mean       sd      50%     2.5%    97.5%
+## [1,] 75.5754 9.426014 75.34182 58.18348 94.71067
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##       mean       sd      50%     2.5%    97.5%
-## 1 66.67031 1.499326 66.65095 63.74205 69.44414
+##      mean       sd      50%     2.5%    97.5%
+## 1 66.5779 1.510487 66.60971 63.62094 69.58567
 ## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 66.38599 9.379746 66.55542 47.34787 84.74058
+## [1,] 66.43159 9.459826 66.53182 48.92943 84.65102
 ## fd
-##        mean       sd       50%      2.5%     97.5%
-## 1 -8.571411 1.413617 -8.611567 -11.40884 -5.766214</code></pre>
+##        mean       sd       50%     2.5%     97.5%
+## 1 -8.715502 1.483011 -8.770645 -11.5115 -5.799865</code></pre>
 <p>At this point, we’ve estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The <code>summary()</code> method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences–the difference in expected values at the set levels of education.</p>
+</div>
 </div>
 <div id="visualizations" class="section level1">
 <h1 class="hasAnchor">
@@ -267,8 +271,12 @@ z5_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a h
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#zelig-workflow-overview">Zelig workflow overview</a></li>
-      <li><a href="#installing-and-loading-zelig">Installing and Loading Zelig</a></li>
+      <li>
+<a href="#examples">Examples</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#installing-and-loading-zelig">Installing and Loading Zelig</a></li>
       <li><a href="#building-models">Building Models</a></li>
+      </ul>
+</li>
       <li><a href="#visualizations">Visualizations</a></li>
       <li><a href="#getting-help">Getting help</a></li>
       </ul>

@@ -17,37 +17,41 @@ of course.) The \code{+} symbol means ``inclusion'' not
 effects in the form \code{x1*x2} without computing them in prior
 steps; \code{I(x1*x2)} to include only the interaction term and
 exclude the main effects; and quadratic terms in the form
-\code{I(x1^2)}}
+\code{I(x1^2)}.}
 
-\item{model}{the name of a statistical model.
-For a list of supported models visit:
+\item{model}{the name of a statistical model to estimate.
+For a list of supported models and their documentation see:
 \url{http://docs.zeligproject.org/articles/}.}
 
 \item{data}{the name of a data frame containing the variables
-referenced in the formula, or a list of multiply imputed data frames
+referenced in the formula or a list of multiply imputed data frames
 each having the same variable names and row numbers (created by
-\code{mi})}
+\code{Amelia} or \code{\link{to_zelig_mi}}).}
 
 \item{...}{additional arguments passed to \code{zelig},
-depending on the model to be estimated}
+relevant for the model to be estimated.}
 
-\item{by}{a factor variable contained in \code{data}. Zelig will subset
+\item{by}{a factor variable contained in \code{data}. If supplied,
+\code{zelig} will subset
 the data frame based on the levels in the \code{by} variable, and
-estimate a model for each subset. This a particularly powerful option
-which will allow you to save a considerable amount of effort. For
-example, to run the same model on all fifty states, you could type:
-\code{z.out <- zelig(y ~ x1 + x2, data = mydata, model = 'ls', by = 'state')}
-You may also use \code{by} to run models using MatchIt subclass}
+estimate a model for each subset. This can save a considerable amount of
+effort. For example, to run the same model on all fifty states, you could
+use: \code{z.out <- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
+by = 'state')} You may also use \code{by} to run models using MatchIt
+subclasses.}
 
-\item{cite}{If is set to 'TRUE' (default), the model citation will be}
+\item{cite}{If is set to 'TRUE' (default), the model citation will be printed
+to the console.}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return
   an object with elements including \code{coefficients}, \code{residuals},
   and \code{formula} which may be summarized using
   \code{summary(z.out)} or individually extracted using, for example,
-  \code{z.out\$coefficients}. See the specific models listed above
-  for additional output values, or simply type \code{names(z.out)}.
+  \code{coef(z.out)}. See
+  \url{http://docs.zeligproject.org/articles/getters.html} for a list of
+  functions to extract model components. You can also extract whole fitted
+  model objects using \code{\link{from_zelig_model}}.
 }
 \description{
 The zelig function estimates a variety of statistical
@@ -59,9 +63,23 @@ first differences, along with the associated measures of uncertainty
 \details{
 This documentation describes the \code{zelig} Zelig 4 compatibility wrapper
 function.
+
+
+Additional parameters avaialable to many models include:
+\itemize{
+  \item weights: vector of weight values or a name of a variable in the dataset
+  by which to weight the model. For more information see:
+  \url{http://docs.zeligproject.org/articles/weights.html}.
+  \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+  robustly estimate uncertainty around model parameters due to sampling error.
+  If an integer is supplied, the number of boostraps to run.
+  For more information see:
+  \url{http://docs.zeligproject.org/articles/bootstraps.html}.
+}
+}
+\seealso{
+\url{http://docs.zeligproject.org/articles/}
 }
 \author{
 Matt Owen, Kosuke Imai, Olivia Lau, and Gary King
-Maintainer: Christopher Gandrud
 }
-\keyword{package}

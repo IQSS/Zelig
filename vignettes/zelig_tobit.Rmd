@@ -36,15 +36,6 @@ Syntax
 ------
 
 ```{r, eval = FALSE}
-z5 <- ztobit$new()
-z5$zelig(Y ~ X1 + X2, below = 0, above = Inf, weights = w, data = mydata)
-z5$setx()
-z5$sim()
-```
-
-With the Zelig 4 compatibility wrappers:
-
-```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, below = 0, above = Inf, model = "tobit", weights = w, data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)

@@ -36,11 +36,6 @@ assumes that all waiting times are complete by the end of the study
 Syntax
 ------
 
-With reference classes:
-
-
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "gamma.survey", weights = w, data = mydata)
 x.out <- setx(z.out)

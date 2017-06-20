@@ -20,13 +20,27 @@ test_that('REQUIRE TEST survey weights correctly passed', {
                         family = gaussian("identity"))
 
     expect_equal(coef(z.out1), coef(z.out2), coef(z.out3), coef(model_glm))
-
-
-
 })
 
-# REQUIRE TEST repweights ------------------------------------------------------
+# REQUIRE TEST survey weights correctly passed  --------------------------------
 
+test_that('REQUIRE TEST survey glm with no weights', {
+    data(api, package = "survey")
+
+    z.out1_no_weights <- zelig(api00 ~ meals + yr.rnd, model = "normal.survey",
+                    id = ~dnum, data = apiclus1, fpc = ~fpc)
+
+    api_design_no_weights <- svydesign(id = ~dnum, data = apiclus1, fpc = ~fpc,
+                                       weights = ~pw )
+    model_glm_no_weights <- svyglm(api00 ~ meals + yr.rnd,
+                                   api_design_no_weights,
+                                   family = gaussian("identity"))
+
+    expect_equal(coef(z.out1_no_weights), coef(model_glm_no_weights))
+})
+
+
+# REQUIRE TEST repweights ------------------------------------------------------
 test_that('REQUIRE TEST repweights', {
     ### ----- NEED TO THINK OF A BETTER TEST ------ ##
     data(scd, package = "survey")
@@ -38,5 +52,3 @@ test_that('REQUIRE TEST repweights', {
                     repweights = BRRrep, type = "BRR",
                     data = scd, na.action = NULL)
 })
-
-

@@ -3,10 +3,32 @@ each change note when relevant. See <https://github.com/IQSS/Zelig/issues>.
 External contributors are referenced with their GitHub usernames when
 applicable.
 
+Zelig version 5.1-3
+==============================
+
+## Major changes
+
+
+
+## Minor changes and bug fixes
+
+-   `zquantile` with Amelia imputed data now working. #277
+
+-   `vcov` now works with `rq` quantile regression models.
+
+-   Roxygen documentation improvements.
+
+
 Zelig version 5.1-2
 ==============================
 
 ## Major changes
+
+-   !EXPERIMENTAL! interface function `to_zelig` allows users to convert fitted model
+objects fitted outside of Zelig to a Zelig object. The function is called 
+within the `setx` wrapper if a non-Zelig object is supplied. Currently 
+only works for models fitted with `lm` and many estimated with `glm` and
+`svyglm`. #189
 
 -   `get_se` and `get_pvalue` function wrappers created for `get_se` and
 `get_pvalue` methods, respectively. #269
@@ -26,8 +48,12 @@ Thanks to Adam Obeng. PR/#270.
 -   Resolved a bug where `weights` were not being passed to `svydesign`
 in survey models. #258
 
+-   Due to limited functionality and instability, zelig survey estimations 
+no return a warning and a link to documentation on how to use `to_survey`
+via `setx` to bipass `zelig`. #273
+
 -   Resolved a bug where `from_zelig_model` would not extract fitted model 
-objects for models estiamted using `vglm`. #265
+objects for models estimated using `vglm`. #265
 
 -   `get_pvalue` and `get_se` now work for models estimated using `vglm`. #267
 

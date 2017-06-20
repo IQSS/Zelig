@@ -34,8 +34,6 @@ were collected).
 Syntax
 ------
 
-With the Zelig 4 compatibility wrappers:
-
 ```{r, eval = FALSE}
 z.out <- zelig(Surv(Y, C) ~ X, model = "exp", weights = w, data = mydata)
 x.out <- setx(z.out)

@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Least Squares Regression</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-06</h4>
           </div>
 
     
@@ -135,12 +135,6 @@
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<p>With Zelig 5 reference classes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls<span class="op">$</span><span class="kw">new</span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X <span class="op">~</span><span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre></div>
-<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -194,26 +188,26 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 ##  sim x :
 ##  -----
 ## ev
-##       mean        sd      50%     2.5%    97.5%
-## 1 5.429376 0.1959631 5.429208 5.043454 5.810514
+##      mean        sd      50%     2.5%    97.5%
+## 1 5.43178 0.1978673 5.428434 5.046103 5.809784
 ## pv
-##          mean       sd      50%       2.5%    97.5%
-## [1,] 5.406423 2.726949 5.443015 0.06013879 10.61608
+##          mean     sd      50%       2.5%    97.5%
+## [1,] 5.404528 2.7709 5.435286 -0.1197461 10.84955
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##       mean        sd      50%     2.5%    97.5%
-## 1 4.598626 0.1858975 4.596775 4.237403 4.959269
+## 1 4.607632 0.1951025 4.604422 4.223774 4.975568
 ## pv
-##          mean       sd      50%       2.5%    97.5%
-## [1,] 4.607256 2.683871 4.586372 -0.7330664 9.882107
+##          mean       sd      50%       2.5%  97.5%
+## [1,] 4.723561 2.746511 4.716273 -0.6273022 10.184
 ## fd
 ##         mean       sd        50%      2.5%      97.5%
-## 1 -0.8307507 0.244709 -0.8438597 -1.308821 -0.3348032</code></pre>
+## 1 -0.8241487 0.245078 -0.8248128 -1.280464 -0.3635115</code></pre>
 <p>Plot the simulated distributions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
-<p><img src="zelig_ls_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<p><img src="zelig_ls_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 </div>
 <div id="categorical-variables-including-fixed-effects" class="section level3">
 <h3 class="hasAnchor">
@@ -228,7 +222,7 @@ x.Japan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out2, <span class="dt">x =</span> x.US, <span class="dt">x1 =</span> x.Japan)</code></pre></div>
 <p>and plot the results:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out2)</code></pre></div>
-<p><img src="zelig_ls_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+<p><img src="zelig_ls_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
 </div>
 <div id="model-definition" class="section level2">

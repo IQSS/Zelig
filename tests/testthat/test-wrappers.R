@@ -46,7 +46,7 @@ zpipe <- zelig(Fertility ~ Education, data = swiss, model = 'ls') %>%
 
 # FAIL TEST non-zelig objects --------------------------------------------------
 test_that('setx and sim non-zelig object fail', {
-    expect_error(setx('TEST'), 'Not a Zelig object.')
+    expect_error(setx('TEST'), 'Not a Zelig object and not convertible to one.')
     expect_error(sim('TEST'), 'Not a Zelig object.')
 })
 
@@ -82,19 +82,4 @@ test_that('REQUIRE TEST ATT wrapper', {
              ATT(treatment = "mil") %>%
              get_qi(qi = "ATT", xvalue = "TE")
     expect_equal(length(my.att), length(z.att))
-})
-
-# FAIL TEST setx and sim should fail with ZeligEI ------------------------------
-test_that('FAIL TEST setx and sim should fail with ZeligEI', {
-    library("eiPack", quietly = TRUE)
-    data(senc)
-    z.out <- zeirxc$new()
-    z.out$zelig(cbind(dem, rep, non) ~ cbind(black, white, natam),
-                N = "total", data = senc)
-
-    expect_error(z.out$setx(), 'Function is not relevant for ZeligEI objects.')
-    expect_error(setx(z.out), 'Function is not relevant for ZeligEI objects.')
-
-    expect_error(z.out$sim(), 'Function is not relevant for ZeligEI objects.')
-    expect_error(sim(z.out), 'Function is not relevant for ZeligEI objects.')
 })

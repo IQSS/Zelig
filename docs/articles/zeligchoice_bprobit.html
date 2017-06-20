@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Bivariate Probit</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-07</h4>
           </div>
 
     
@@ -138,12 +138,6 @@
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
-<p>With reference classes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zbprobit<span class="op">$</span><span class="kw">new</span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1, Y2) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span>X3, <span class="dt">data =</span> mydata)
-z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre></div>
-<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1, Y2) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span>X3,
                <span class="dt">model =</span> <span class="st">"bprobit"</span>, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
@@ -221,43 +215,43 @@ x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx
 ##  sim x :
 ##  -----
 ## ev
-##                       mean          sd         50%         2.5%      97.5%
-## Pr(Y1=0, Y2=0) 0.764414729 0.081132438 0.777455707 5.840602e-01 0.89361936
-## Pr(Y1=0, Y2=1) 0.165326310 0.071943019 0.157151653 5.831875e-02 0.34341225
-## Pr(Y1=1, Y2=0) 0.062336183 0.043134762 0.050826223 1.036291e-02 0.17478426
-## Pr(Y1=1, Y2=1) 0.007922778 0.009676822 0.004710452 9.152771e-05 0.03701662
+##                       mean         sd        50%         2.5%      97.5%
+## Pr(Y1=0, Y2=0) 0.762386525 0.07679550 0.76783545 5.997855e-01 0.89468824
+## Pr(Y1=0, Y2=1) 0.167662399 0.07032585 0.15781375 6.062703e-02 0.32925054
+## Pr(Y1=1, Y2=0) 0.061850272 0.04074757 0.05111769 1.247609e-02 0.16570777
+## Pr(Y1=1, Y2=1) 0.008100804 0.00953522 0.00472529 9.763599e-05 0.03627008
 ## pv
 ##                  0     1
-## (Y1=0, Y2=0) 0.212 0.788
+## (Y1=0, Y2=0) 0.225 0.775
 ## (Y1=0, Y2=1) 0.859 0.141
-## (Y1=1, Y2=0) 0.937 0.063
-## (Y1=1, Y2=1) 0.992 0.008
+## (Y1=1, Y2=0) 0.925 0.075
+## (Y1=1, Y2=1) 0.991 0.009
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##                        mean           sd          50%         2.5%
-## Pr(Y1=0, Y2=0) 1.609406e-05 0.0001060622 1.699806e-08 1.568586e-11
-## Pr(Y1=0, Y2=1) 1.477314e-02 0.0360107035 2.171428e-03 5.111826e-06
-## Pr(Y1=1, Y2=0) 3.348953e-03 0.0139152116 1.875177e-04 4.215531e-08
-## Pr(Y1=1, Y2=1) 9.818618e-01 0.0379522763 9.956782e-01 8.845988e-01
+## Pr(Y1=0, Y2=0) 1.556271e-05 0.0001336974 1.821113e-08 1.235491e-11
+## Pr(Y1=0, Y2=1) 1.522373e-02 0.0420443562 2.226794e-03 6.215381e-06
+## Pr(Y1=1, Y2=0) 3.445724e-03 0.0117359206 1.740343e-04 7.434415e-08
+## Pr(Y1=1, Y2=1) 9.813150e-01 0.0429574663 9.953963e-01 8.509895e-01
 ##                       97.5%
-## Pr(Y1=0, Y2=0) 0.0001209118
-## Pr(Y1=0, Y2=1) 0.1069029540
-## Pr(Y1=1, Y2=0) 0.0248877996
-## Pr(Y1=1, Y2=1) 0.9999419810
+## Pr(Y1=0, Y2=0) 0.0001208601
+## Pr(Y1=0, Y2=1) 0.1463620527
+## Pr(Y1=1, Y2=0) 0.0343084714
+## Pr(Y1=1, Y2=1) 0.9999440283
 ## pv
 ##                  0     1
 ## (Y1=0, Y2=0) 1.000 0.000
-## (Y1=0, Y2=1) 0.989 0.011
-## (Y1=1, Y2=0) 0.999 0.001
+## (Y1=0, Y2=1) 0.991 0.009
+## (Y1=1, Y2=0) 0.997 0.003
 ## (Y1=1, Y2=1) 0.012 0.988
 ## fd
 ##                       mean         sd         50%       2.5%        97.5%
-## Pr(Y1=0, Y2=0) -0.76439863 0.08114943 -0.77745517 -0.8936194 -0.584056187
-## Pr(Y1=0, Y2=1) -0.15055317 0.08233919 -0.14431943 -0.3309139 -0.021439946
-## Pr(Y1=1, Y2=0) -0.05898723 0.04643810 -0.04941808 -0.1714881 -0.002845955
-## Pr(Y1=1, Y2=1)  0.97393904 0.04223666  0.98879594  0.8695511  0.999339537</code></pre>
+## Pr(Y1=0, Y2=0) -0.76237096 0.07681039 -0.76783545 -0.8946882 -0.599783613
+## Pr(Y1=0, Y2=1) -0.15243866 0.08431210 -0.14584938 -0.3292384  0.008149883
+## Pr(Y1=1, Y2=0) -0.05840455 0.04326760 -0.04939311 -0.1656268  0.006672630
+## Pr(Y1=1, Y2=1)  0.97321417 0.04644202  0.98784932  0.8362132  0.999532251</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <div class="figure">
 <img src="zeligchoice_bprobit_files/figure-html/Zelig-bprobit1-1.png" alt="Graphs of Quantities of Interest for Bivariate Probit" width="672"><p class="caption">

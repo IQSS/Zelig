@@ -1,3 +1,77 @@
+#' Instructions for how to convert non-Zelig fitted model objects to Zelig.
+#' Used in to_zelig
+model_lookup_df <- data.frame(
+    rbind(
+        c(class = "lm", family = "gaussian", link = "identity", zclass = "zls"),
+        c(class = "glm", family = "gaussian", link = "identity", zlcass = "zls"),
+        c(class = "glm", family = "binomial", link = "logit", zclass = "zlogit"),
+        c(class = "glm", family = "binomial", link = "probit", zclass = "zprobit"),
+        c(class = "glm", family = "poisson",  link = "log", zclass = "zpoisson"),
+        c(class = "glm", family = "Gamma", link = "inverse", zclass = "zgamma"),
+        c(class = "svyglm", family = "gaussian", link = "identity", zclass = "znormalsurvey"),
+        c(class = "svyglm", family = "binomial", link = "logit", zclass = "zlogitsurvey"),
+        c(class = "svyglm", family = "quasibinomial", link = "logit", zclass = "zlogitsurvey")),
+    stringsAsFactors = FALSE)
+
+#' Coerce a non-Zelig fitted model object to a Zelig class object
+#'
+#' @param obj a fitted model object fitted using \code{lm} and many using
+#'    \code{glm}. Note: more intended in future Zelig releases.
+#'
+#' @examples
+#' library(dplyr)
+#' lm.out <- lm(Fertility ~ Education, data = swiss)
+#'
+#' z.out <- to_zelig(lm.out)
+#'
+#' # to_zelig called from within setx
+#' setx(z.out) %>% sim() %>% plot()
+#'
+#' @author Christopher Gandrud and Ista Zhan
+#' @importFrom dplyr group_by_ %>% do
+#' @export
+
+to_zelig <- function(obj) {
+    message('to_zelig is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues\n')
+    not_found_msg <- "Not a Zelig object and not convertible to one."
+
+    # attempt to determine model type and initialize model
+    try_na <- function(x) tryCatch(x, error = function(c)
+                                   stop(not_found_msg, call. = FALSE))
+
+    model_info <- data.frame(
+                            class = try_na(class(obj)[1]),
+                            family = try_na(family(obj)$family),
+                            link = try_na(family(obj)$link),
+                            stringsAsFactors = FALSE
+                            )
+    zmodel <- merge(model_info, model_lookup_df)$zclass
+    if(length(zmodel) != 1) stop(not_found_msg, call. = FALSE)
+    message(sprintf("Assuming %s to convert to Zelig.", zmodel))
+
+    new_obj <- eval(parse(text = sprintf("%s$new()", zmodel)))
+    new_obj$mi <- FALSE
+    new_obj$bootstrap <- FALSE
+    new_obj$matched  <- FALSE
+    new_obj$mi <- FALSE
+    new_obj$data <- cbind(1, obj$model)
+    names(new_obj$data)[1] <- "by"
+    new_obj$by <- "by"
+    new_obj$data <- tbl_df(new_obj$data)
+    new_obj$formula <- as.Formula(obj$call$formula)
+    new_obj$weights <- NULL
+    new_obj$zelig.call <- obj$call
+    new_obj$model.call <- obj$call
+    new_obj$model.call$weights <- NULL
+
+    new_obj$zelig.out <- new_obj$data %>%
+        group_by_(new_obj$by) %>% do(z.out = obj)
+
+    #new_obj$zelig.out <- tibble::as_tibble(list(by = 1, z.out = obj))
+
+    return(new_obj)
+}
+
 #' Extract the original fitted model object from a \code{zelig} estimation
 #'
 #' @param obj a zelig object with an estimated model
@@ -99,7 +173,6 @@ from_zelig_model <- function(obj) {
 #' @export
 
 zelig_qi_to_df <- function(obj) {
-  message('zelig_qi_to_df is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues')
 
   is_zelig(obj)
   is_sims_present(obj$sim.out)

@@ -101,3 +101,11 @@ test_that('REQUIRE TEST zelig_qi_to_df multinomial outcome', {
     expect_equal(names(slimmed_setrange), expected_sr_colnames)
 })
 
+# FAIL TEST to_zelig failure with unsupported model ----------------------------
+test_that('FAIL TEST to_zelig failure with unsupported model', {
+    x <- rnorm(100)
+    y <- rpois(100, exp(1 + x))
+    m1 <- glm(y ~ x, family = quasi(variance = "mu", link = "log"))
+    expect_error(setx(m1), "Not a Zelig object and not convertible to one.")
+    expect_error(setx(x), "Not a Zelig object and not convertible to one.")
+})

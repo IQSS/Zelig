@@ -30,3 +30,15 @@ test_that("REQUIRE TEST quantile regression doc example", {
                  'tau argument only accepts 1 value.\nZelig is using only the first value.')
 })
 
+# REQUIRE TEST quantile regression with Amelia imputed data --------------------
+test_that('REQUIRE TEST quantile regression with Amelia imputed data',{
+    library(Amelia)
+    library(dplyr)
+
+    data(africa)
+    a.out <- amelia(x = africa, cs = "country", ts = "year", logs = "gdp_pc")
+    z.out <- zelig(gdp_pc ~ trade + civlib, model = "rq", data = a.out)
+
+    expect_error(z.out %>% setx %>% sim %>% plot, NA)
+})
+

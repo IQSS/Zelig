@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Probit Regression for Dependent Variables with Survey Weights</h1>
             
-            <h4 class="date">2017-06-01</h4>
+            <h4 class="date">2017-06-06</h4>
           </div>
 
     
@@ -136,12 +136,6 @@
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<p>With reference classes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zprobitsurvey<span class="op">$</span><span class="kw">new</span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X <span class="op">~</span><span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()</code></pre></div>
-<p>With the Zelig 4 compatibility wrappers:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"probit.survey"</span>, <span class="dt">weights =</span> w,
                <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
@@ -160,6 +154,9 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(yr.rnd.numeric <span class="op">~</span><span class="st"> </span>meals <span class="op">+</span><span class="st"> </span>mobility,
                 <span class="dt">model =</span> <span class="st">"probit.survey"</span>, <span class="dt">weights =</span> apistrat<span class="op">$</span>pw,
                 <span class="dt">data =</span> apistrat)</code></pre></div>
+<pre><code>## Warning: Not all features are available in Zelig Survey.
+## Consider using surveyglm and setx directly.
+## For details see: &lt;http://docs.zeligproject.org/articles/to_zelig.html&gt;.</code></pre>
 <pre><code>## Warning in eval(family$initialize): non-integer #successes in a binomial
 ## glm!</code></pre>
 <pre><code>## How to cite this model in Zelig:
@@ -229,6 +226,9 @@ Graphs of Quantities of Interest for Probit Survey Model
 <a href="#example-2-user-has-details-about-complex-survey-design-but-not-sample-weights" class="anchor"></a>Example 2: User has Details about Complex Survey Design (but not sample weights)</h3>
 <p>Suppose that the survey house that provided the dataset excluded probability weights but made other details about the survey design available. We can still estimate a model without probability weights that takes instead variables that identify each the stratum and/or cluster from which each observation was selected and the size of the finite sample from which each observation was selected.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(yr.rnd.numeric <span class="op">~</span><span class="st"> </span>meals <span class="op">+</span><span class="st"> </span>mobility, <span class="dt">model =</span> <span class="st">"probit.survey"</span>, <span class="dt">strata=</span><span class="op">~</span>stype, <span class="dt">fpc=</span><span class="op">~</span>fpc, <span class="dt">data =</span> apistrat)</code></pre></div>
+<pre><code>## Warning: Not all features are available in Zelig Survey.
+## Consider using surveyglm and setx directly.
+## For details see: &lt;http://docs.zeligproject.org/articles/to_zelig.html&gt;.</code></pre>
 <pre><code>## Warning in eval(family$initialize): non-integer #successes in a binomial
 ## glm!</code></pre>
 <pre><code>## How to cite this model in Zelig:
@@ -274,6 +274,9 @@ scd<span class="op">$</span>sued &lt;-<span class="st"> </span><span class="kw">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="dt">formula=</span>sued <span class="op">~</span><span class="st"> </span>arrests <span class="op">+</span><span class="st"> </span>alive ,
                 <span class="dt">model =</span> <span class="st">"probit.survey"</span>,
                 <span class="dt">repweights =</span> BRRrep, <span class="dt">type =</span> <span class="st">"BRR"</span>, <span class="dt">data =</span> scd)</code></pre></div>
+<pre><code>## Warning: Not all features are available in Zelig Survey.
+## Consider using surveyglm and setx directly.
+## For details see: &lt;http://docs.zeligproject.org/articles/to_zelig.html&gt;.</code></pre>
 <pre><code>## Warning in svrepdesign.default(data = data, repweights = repweights, type =
 ## type, : No sampling weights provided: equal probability assumed</code></pre>
 <pre><code>## Warning in eval(family$initialize): non-integer #successes in a binomial
