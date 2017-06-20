@@ -97,3 +97,22 @@ test_that('REQUIRE TEST arima models', {
     expect_true(is.null(plot(zj)))
 
 })
+
+# FAILURE TEST cs ts by with timeseries ----------------------------------------
+test_that("FAILURE TEST cs ts by with timeseries", {
+    data(seatshare)
+    ts <- zarima$new()
+
+    expect_error(
+        ts$zelig(unemp ~ leftseat, order = c(1,0,1), ts = "year",
+                 cs = "country", by = "TEST",
+                 data = seatshare),
+        "cs and by are equivalent for this model. Only one needs to be specified."
+        )
+
+    expect_error(
+        ts$zelig(unemp ~ leftseat, order = c(1,0,1), cs = "country",
+                 data = seatshare),
+        "ts must be specified if cs is specified."
+    )
+})
