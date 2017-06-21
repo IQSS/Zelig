@@ -86,7 +86,7 @@ library(Zelig)
 data(coalition)
 library(survival)
 z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model = "exp",
-data = coalition)
+               data = coalition)
 summary(z.out)
 
 }

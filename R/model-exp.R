@@ -31,7 +31,7 @@
 #'   to the console.
 #'
 #' @details
-#' Additional parameters avaialable to many models include:
+#' Additional parameters avaialable to this model include:
 #' \itemize{
 #'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
@@ -60,7 +60,7 @@
 #' data(coalition)
 #' library(survival)
 #' z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model = "exp",
-#' data = coalition)
+#'                data = coalition)
 #' summary(z.out)
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_exp.html}

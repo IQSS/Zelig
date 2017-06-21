@@ -36,23 +36,23 @@
 #' z.out <- zelig(num ~ target + coop, model = "poisson.bayes",data = sanction, verbose = FALSE)
 #'
 #' @details
-#' Additional parameters avaialable to many models include:
+#' Additional parameters avaialable to this model include:
 #' \itemize{
-#'   \item weights: vector of weight values or a name of a variable in the dataset
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
-#'   \item burnin: number of the initial MCMC iterations to be discarded (defaults to 1,000).
-#'   \item mcmc: number of the MCMC iterations after burnin (defaults to 10,000).
-#'   \item tune: Metropolis tuning parameter, either a positive scalar or a vector of length kk, where kk is the number of coefficients. The tuning parameter should be set such that the acceptance rate of the Metropolis algorithm is satisfactory (typically between 0.20 and 0.5). The default value is 1.1.
-#'   \item thin: thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
-#'   \item verbose: defaults to FALSE. If TRUE, the progress of the sampler (every 10\%) is printed to the screen.
-#'   \item seed: seed for the random number generator. The default is \code{NA} which corresponds to a random seed of 12345.
-#'   \item beta.start: starting values for the Markov chain, either a scalar or vector with length equal to the number of estimated coefficients. The default is \code{NA}, such that the maximum likelihood estimates are used as the starting values.
+#'   \item \code{burnin}: number of the initial MCMC iterations to be discarded (defaults to 1,000).
+#'   \item \code{mcmc}: number of the MCMC iterations after burnin (defaults to 10,000).
+#'   \item \code{tune}: Metropolis tuning parameter, either a positive scalar or a vector of length kk, where kk is the number of coefficients. The tuning parameter should be set such that the acceptance rate of the Metropolis algorithm is satisfactory (typically between 0.20 and 0.5). The default value is 1.1.
+#'   \item \code{thin}: thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
+#'   \item \code{verbose}: defaults to FALSE. If TRUE, the progress of the sampler (every 10\%) is printed to the screen.
+#'   \item \code{seed}: seed for the random number generator. The default is \code{NA} which corresponds to a random seed of 12345.
+#'   \item \code{beta.start}: starting values for the Markov chain, either a scalar or vector with length equal to the number of estimated coefficients. The default is \code{NA}, such that the maximum likelihood estimates are used as the starting values.
 #' }
 #' Use the following parameters to specify the model's priors:
 #' \itemize{
-#'     \item b0: prior mean for the coefficients, either a numeric vector or a scalar. If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.
-#'     \item B0: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.
+#'     \item \code{b0}: prior mean for the coefficients, either a numeric vector or a scalar. If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.
+#'     \item \code{B0}: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.
 #' }
 #' @return Depending on the class of model selected, \code{zelig} will return
 #'   an object with elements including \code{coefficients}, \code{residuals},

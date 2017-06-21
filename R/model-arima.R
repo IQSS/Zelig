@@ -45,14 +45,9 @@
 #'     autoregressive model, d represents the number of differences taken in the model, and q represents
 #'     the order of the moving average model.
 #' @details
-#' Currently only the Reference class syntax for time series
+#' Currently only the Reference class syntax for time series. This model does not accept
+#' Bootstraps or weights.
 #'
-#' Additional parameters avaialable to this model include:
-#' \itemize{
-#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
-#'   by which to weight the model. For more information see:
-#'   \url{http://docs.zeligproject.org/articles/weights.html}.
-#' }
 #'
 #' @return Depending on the class of model selected, \code{zelig} will return
 #'   an object with elements including \code{coefficients}, \code{residuals},

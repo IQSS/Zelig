@@ -5,3 +5,4 @@ docs/articles/*RR/.Rapp.history
 .Rhistory
 .DS_Store
 inst/doc
+.RData

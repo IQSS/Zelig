@@ -10,16 +10,16 @@
 #'   steps; \code{I(x1*x2)} to include only the interaction term and
 #'   exclude the main effects; and quadratic terms in the form
 #'   \code{I(x1^2)}.
-#'@param model the name of a statistical model to estimate.
+#' @param model the name of a statistical model to estimate.
 #'   For a list of supported models and their documentation see:
 #'   \url{http://docs.zeligproject.org/articles/}.
-#'@param data the name of a data frame containing the variables
+#' @param data the name of a data frame containing the variables
 #'   referenced in the formula or a list of multiply imputed data frames
 #'   each having the same variable names and row numbers (created by
 #'   \code{Amelia} or \code{\link{to_zelig_mi}}).
-#'@param ... additional arguments passed to \code{zelig},
+#' @param ... additional arguments passed to \code{zelig},
 #'   relevant for the model to be estimated.
-#'@param by a factor variable contained in \code{data}. If supplied,
+#' @param by a factor variable contained in \code{data}. If supplied,
 #'   \code{zelig} will subset
 #'   the data frame based on the levels in the \code{by} variable, and
 #'   estimate a model for each subset. This can save a considerable amount of
@@ -27,16 +27,20 @@
 #'   use: \code{z.out <- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
 #'   by = 'state')} You may also use \code{by} to run models using MatchIt
 #'   subclasses.
-#'@param cite If is set to 'TRUE' (default), the model citation will be printed
+#' @param cite If is set to 'TRUE' (default), the model citation will be printed
 #'   to the console.
-#'
+#' @param id: where id is a variable which identifies the clusters. The data should be sorted
+#' by \code{id} and should be ordered within each cluster when appropriate
+#' @param corstr: character string specifying the correlation structure:
+#'  "independence", "exchangeable", "ar1", "unstructured" and "userdefined"
+#' @param geeglm: See geeglm in package geepack for other function arguments
 #' @details
-#' Additional parameters avaialable to many models include:
+#' Additional parameters avaialable to this model include:
 #' \itemize{
-#'   \item weights: vector of weight values or a name of a variable in the dataset
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
-#'   \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+#'   \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
 #'   robustly estimate uncertainty around model parameters due to sampling error.
 #'   If an integer is supplied, the number of boostraps to run.
 #'   For more information see:
@@ -50,9 +54,6 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
-#'@param id: where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate
-#'@param corstr: character string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"
-#'@param geeglm: See geeglm in package geepack for other function arguments
 #'
 #'@examples
 #'

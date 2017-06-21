@@ -30,27 +30,7 @@
 #'   subclasses.
 #'@param cite If is set to 'TRUE' (default), the model citation will be printed
 #'  to the console.
-#' @details
-#' Additional parameters avaialable to many models include:
-#' \itemize{
-#'   \item weights: vector of weight values or a name of a variable in the dataset
-#'   by which to weight the model. For more information see:
-#'   \url{http://docs.zeligproject.org/articles/weights.html}.
-#'   \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
-#'   robustly estimate uncertainty around model parameters due to sampling error.
-#'   If an integer is supplied, the number of boostraps to run.
-#'   For more information see:
-#'   \url{http://docs.zeligproject.org/articles/bootstraps.html}.
-#' }
-#' @return Depending on the class of model selected, \code{zelig} will return
-#'   an object with elements including \code{coefficients}, \code{residuals},
-#'   and \code{formula} which may be summarized using
-#'   \code{summary(z.out)} or individually extracted using, for example,
-#'   \code{coef(z.out)}. See
-#'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
-#'   functions to extract model components. You can also extract whole fitted
-#'   model objects using \code{\link{from_zelig_model}}.
-#'@param robust defaults to TRUE. If TRUE, consistent standard errors are estimated using a "sandwich"
+#' @param robust defaults to TRUE. If TRUE, consistent standard errors are estimated using a "sandwich"
 #' estimator.
 #'@param corstr defaults to "independence". It can take on the following arguments:
 #'@param Independence (corstr = independence): cor(yit,yit')=0, for all t,t' with t not equal to t'.
@@ -63,6 +43,22 @@
 #'@param corstr: character string specifying the correlation structure: "independence",
 #'"exchangeable", "ar1", "unstructured" and "userdefined"
 #'@param geeglm: See geeglm in package geepack for other function arguments
+#' @details
+#' Additional parameters avaialable to this model include:
+#' \itemize{
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
+#'   by which to weight the model. For more information see:
+#'   \url{http://docs.zeligproject.org/articles/weights.html}.
+#' }
+#' @return Depending on the class of model selected, \code{zelig} will return
+#'   an object with elements including \code{coefficients}, \code{residuals},
+#'   and \code{formula} which may be summarized using
+#'   \code{summary(z.out)} or individually extracted using, for example,
+#'   \code{coef(z.out)}. See
+#'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
+#'   functions to extract model components. You can also extract whole fitted
+#'   model objects using \code{\link{from_zelig_model}}.
+#'
 #'
 #' @examples
 #' library(Zelig)

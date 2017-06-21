@@ -44,7 +44,7 @@ to the console.}
 
 \item{id:}{where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate}
 
-\item{corstr:}{character string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”}
+\item{corstr:}{character string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"}
 
 \item{geeglm:}{See geeglm in package geepack for other function arguments}
 }
