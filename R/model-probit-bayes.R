@@ -34,7 +34,7 @@
 #' @examples
 #' data(turnout)
 #' z.out <- zelig(vote ~ race + educate, model = "probit.bayes",data = turnout, verbose = FALSE)
-#'
+#' summary(z.out)
 #' @details
 #' Additional parameters avaialable to this model include:
 #' \itemize{
