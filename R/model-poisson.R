@@ -34,7 +34,7 @@
 #'@param geeglm: See geeglm in package geepack for other function arguments
 #'
 #' @details
-#' Additional parameters avaialable to many models include:
+#' Additional parameters avaialable to this model include:
 #' \itemize{
 #'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:

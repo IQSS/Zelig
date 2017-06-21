@@ -31,7 +31,7 @@
 #'   to the console.
 #'
 #' @details
-#' Additional parameters avaialable to many models include:
+#' Additional parameters avaialable to this model include:
 #' \itemize{
 #'   \item weights: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
