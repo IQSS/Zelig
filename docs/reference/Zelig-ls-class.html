@@ -217,11 +217,11 @@ to the console.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Additional parameters avaialable to many models include:</p><ul>
-<li><p>weights: vector of weight values or a name of a variable in the dataset
+    <p>Additional parameters avaialable to this model include:</p><ul>
+<li><p><code>weights</code>: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   <a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
-<li><p>bootstrap: logical or numeric. If <code>FALSE</code> don't use bootstraps to
+<li><p><code>bootstrap</code>: logical or numeric. If <code>FALSE</code> don't use bootstraps to
   robustly estimate uncertainty around model parameters due to sampling error.
   If an integer is supplied, the number of boostraps to run.
   For more information see:
@@ -242,12 +242,31 @@ to the console.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>macro</span>)
-<span class='no'>z.out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unem</span> ~ <span class='no'>gdp</span> + <span class='no'>capmob</span> + <span class='no'>trade</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ls"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>macro</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
-#&gt;   R Core Team. 2007.
-#&gt;   ls: Least Squares Regression for Continuous Dependent Variables
-#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>Zelig</span>)
+<span class='fu'>data</span>(<span class='no'>macro</span>)
+<span class='no'>z.out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unem</span> ~ <span class='no'>gdp</span> + <span class='no'>capmob</span> + <span class='no'>trade</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ls"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>macro</span>,
+<span class='kw'>cite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>summary</span>(<span class='no'>z.out1</span>)</div><div class='output co'>#&gt; Model: 
+#&gt; 
+#&gt; Call:
+#&gt; z5$zelig(formula = unem ~ gdp + capmob + trade, data = macro)
+#&gt; 
+#&gt; Residuals:
+#&gt;    Min     1Q Median     3Q    Max 
+#&gt; -5.301 -2.077 -0.319  1.979  7.772 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error t value             Pr(&gt;|t|)
+#&gt; (Intercept)  6.18129    0.45057   13.72 &lt; 0.0000000000000002
+#&gt; gdp         -0.32360    0.06282   -5.15  0.00000043551827645
+#&gt; capmob       1.42194    0.16644    8.54  0.00000000000000042
+#&gt; trade        0.01985    0.00561    3.54              0.00045
+#&gt; 
+#&gt; Residual standard error: 2.75 on 346 degrees of freedom
+#&gt; Multiple R-squared:  0.288,	Adjusted R-squared:  0.282 
+#&gt; F-statistic: 46.6 on 3 and 346 DF,  p-value: &lt;0.0000000000000002
+#&gt; 
+#&gt; Next step: Use 'setx' method</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

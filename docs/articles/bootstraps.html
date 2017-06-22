@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Bootstraps</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Bootstrapping is often used to obtain a robust estimate of the uncertainty of a parameter due to sampling error.</p>
 <ul>
@@ -149,7 +149,7 @@
 <p>Attach sample data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(macro)</code></pre></div>
 <p>Estimate the model, setting the number of bootstrapped datasets to construct:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem <span class="op">~</span><span class="st"> </span>gdp <span class="op">+</span><span class="st"> </span>capmob <span class="op">+</span><span class="st"> </span>trade,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem ~<span class="st"> </span>gdp +<span class="st"> </span>capmob +<span class="st"> </span>trade,
                <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> macro, <span class="dt">bootstrap =</span> <span class="dv">500</span>)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   R Core Team. 2007.
@@ -181,7 +181,7 @@
 ## For results from individual bootstrapped datasets, use summary(x, subset = i:j)
 ## Next step: Use 'setx' method</code></pre>
 <p>If we want to inspect particular individual results, the subset argument is available:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out, <span class="dt">subset =</span> <span class="dv">13</span><span class="op">:</span><span class="dv">15</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out, <span class="dt">subset =</span> <span class="dv">13</span>:<span class="dv">15</span>)</code></pre></div>
 <pre><code>## Bootstrapped Dataset 13
 ## Call:
 ## z5$zelig(formula = unem ~ gdp + capmob + trade, data = macro, 
@@ -244,7 +244,7 @@
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>If <span class="math inline">\(B\)</span> bootstraps were obtained, the first <span class="math inline">\(B\)</span> results are those models on the bootstrapped data, and the <span class="math inline">\(B+1\)</span> <em>-th</em> result is the model estimated on the original data. The value of <span class="math inline">\(B\)</span> is stored in a field in the Zelig object, named <code>bootstrap.num</code>. In our running example this was 500:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out, <span class="dt">subset =</span> (z.out<span class="op">$</span>bootstrap.num <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out, <span class="dt">subset =</span> (z.out$bootstrap.num +<span class="st"> </span><span class="dv">1</span>))</code></pre></div>
 <pre><code>## Bootstrapped Dataset 501
 ## Call:
 ## z5$zelig(formula = unem ~ gdp + capmob + trade, data = macro, 

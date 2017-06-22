@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Exponential Regression</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Exponential Regression for Duration Dependent Variables with <code>exp</code>.</p>
 <p>Use the exponential duration regression model if you have a dependent variable representing a duration (time until an event). The model assumes a constant hazard rate for all events. The dependent variable may be censored (for observations have not yet been completed when data were collected).</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">Surv</span>(Y, C) <span class="op">~</span><span class="st"> </span>X, <span class="dt">model =</span> <span class="st">"exp"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">Surv</span>(Y, C) ~<span class="st"> </span>X, <span class="dt">model =</span> <span class="st">"exp"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
 <p>Exponential models require that the dependent variable be in the form <code>Surv(Y, C)</code>, where Y and C are vectors of length <span class="math inline">\(n\)</span>. For each observation <span class="math inline">\(i\)</span> in 1, …, <span class="math inline">\(n\)</span>, the value <span class="math inline">\(y_i\)</span> is the duration (lifetime, for example), and the associated <span class="math inline">\(c_i\)</span> is a binary variable such that <span class="math inline">\(c_i = 1\)</span> if the duration is not censored (<em>e.g.</em>, the subject dies during the study) or <span class="math inline">\(c_i = 0\)</span> if the duration is censored (<em>e.g.</em>, the subject is still alive at the end of the study and is know to live at least as long as <span class="math inline">\(y_i\)</span>). If <span class="math inline">\(c_i\)</span> is omitted, all Y are assumed to be completed; that is, time defaults to 1 for all observations.</p>
@@ -149,7 +149,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <li><p>robust: defaults to FALSE. If TRUE, <code><a href="../reference/zelig.html">zelig()</a></code> computes robust standard errors based on sandwich estimators and the options selected in cluster.</p></li>
 <li><p>cluster: if robust = TRUE, you may select a variable to define groups of correlated observations. Let x3 be a variable that consists of either discrete numeric values, character strings, or factors that define strata. Then</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">robust =</span> <span class="ot">TRUE</span>, <span class="dt">cluster =</span> <span class="st">"x3"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">robust =</span> <span class="ot">TRUE</span>, <span class="dt">cluster =</span> <span class="st">"x3"</span>,
                <span class="dt">model =</span> <span class="st">"exp"</span>, <span class="dt">data =</span> mydata)</code></pre></div>
 <p>means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If robust = TRUE but cluster is not specified, zelig() assumes that each observation falls into its own cluster.</p>
 </div>
@@ -160,7 +160,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(coalition)
 <span class="kw">library</span>(survival)</code></pre></div>
 <p>Estimate the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">Surv</span>(duration, ciep12) <span class="op">~</span><span class="st"> </span>fract <span class="op">+</span><span class="st"> </span>numst2, <span class="dt">model =</span> <span class="st">"exp"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">Surv</span>(duration, ciep12) ~<span class="st"> </span>fract +<span class="st"> </span>numst2, <span class="dt">model =</span> <span class="st">"exp"</span>,
                <span class="dt">data =</span> coalition)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Terry M. Therneau, and Thomas Lumley. 2011.

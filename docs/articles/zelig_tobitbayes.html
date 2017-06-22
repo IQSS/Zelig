@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Tobit Bayes</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Bayesian Tobit Regression with <code>tobit.bayes</code>.</p>
 <p>Bayesian tobit regression estimates a linear regression model with a censored dependent variable using a Gibbs sampler. The dependent variable may be censored from below and/or from above. For other linear regression models with fully observed dependent variables, see Bayesian regression, maximum likelihood normal regression, or least squares.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">below =</span> <span class="dv">0</span>, <span class="dt">above =</span> <span class="ot">Inf</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">below =</span> <span class="dv">0</span>, <span class="dt">above =</span> <span class="ot">Inf</span>,
                <span class="dt">model =</span> <span class="st">"tobit.bayes"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -180,7 +180,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Attaching the sample dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(tobin)</code></pre></div>
 <p>Estimating linear regression using <code>tobit.bayes</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(durable <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>quant, <span class="dt">model =</span> <span class="st">"tobit.bayes"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(durable ~<span class="st"> </span>age +<span class="st"> </span>quant, <span class="dt">model =</span> <span class="st">"tobit.bayes"</span>,
                <span class="dt">data =</span> tobin, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Ben Goodrich, and Ying Lu. 2013.
@@ -188,9 +188,9 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
 ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
 <p>You can check for convergence before summarizing the estimates with three diagnostic tests. See the section <a href="diagnostics.html">Diagnostics for Zelig Models</a> for examples of the output with interpretation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()
-z.out<span class="op">$</span><span class="kw">heidel.diag</span>()
-z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">geweke.diag</span>()
+z.out$<span class="kw">heidel.diag</span>()
+z.out$<span class="kw">raftery.diag</span>()</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out)</code></pre></div>
 <pre><code>## Model: 
 ## 
@@ -236,8 +236,8 @@ z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre
 <h3 class="hasAnchor">
 <a href="#simulating-first-differences" class="anchor"></a>Simulating First Differences</h3>
 <p>Set explanatory variables to their default(mean/mode) values, with high (80th percentile) and low (20th percentile) liquidity ratio (<code>quant</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out, <span class="dt">quant =</span> <span class="kw">quantile</span>(tobin<span class="op">$</span>quant, <span class="dt">prob =</span> <span class="fl">0.8</span>))
-x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out, <span class="dt">quant =</span> <span class="kw">quantile</span>(tobin<span class="op">$</span>quant, <span class="dt">prob =</span> <span class="fl">0.2</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out, <span class="dt">quant =</span> <span class="kw">quantile</span>(tobin$quant, <span class="dt">prob =</span> <span class="fl">0.8</span>))
+x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out, <span class="dt">quant =</span> <span class="kw">quantile</span>(tobin$quant, <span class="dt">prob =</span> <span class="fl">0.2</span>))</code></pre></div>
 <p>Estimating the first difference for the effect of high versus low liquidity ratio on duration(<code>durable</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.high, <span class="dt">x1 =</span> x.low)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s.out2)</code></pre></div>

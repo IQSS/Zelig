@@ -147,16 +147,139 @@
     </div>
 
     
+    <p>Time-Series Model with Autoregressive Disturbance</p>
+    
+
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>formula</th>
+      <td><p>a symbolic representation of the model to be
+estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
+variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
+same dataset. (You may include more than two explanatory variables,
+of course.) The <code>+</code> symbol means ``inclusion'' not
+``addition.'' You may also include interaction terms and main
+effects in the form <code>x1*x2</code> without computing them in prior
+steps; <code>I(x1*x2)</code> to include only the interaction term and
+exclude the main effects; and quadratic terms in the form
+<code>I(x1^2)</code>.</p></td>
+    </tr>
+    <tr>
+      <th>model</th>
+      <td><p>the name of a statistical model to estimate.
+For a list of supported models and their documentation see:
+<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>the name of a data frame containing the variables
+referenced in the formula or a list of multiply imputed data frames
+each having the same variable names and row numbers (created by
+<code>Amelia</code> or <code><a href='to_zelig_mi.html'>to_zelig_mi</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed to <code>zelig</code>,
+relevant for the model to be estimated.</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>a factor variable contained in <code>data</code>. If supplied,
+<code>zelig</code> will subset
+the data frame based on the levels in the <code>by</code> variable, and
+estimate a model for each subset. This can save a considerable amount of
+effort. For example, to run the same model on all fifty states, you could
+use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
+by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+subclasses.</p></td>
+    </tr>
+    <tr>
+      <th>cite</th>
+      <td><p>If is set to 'TRUE' (default), the model citation will be printed
+to the console.</p></td>
+    </tr>
+    <tr>
+      <th>ts</th>
+      <td><p>The name of the variable containing the time indicator. This should be passed in as
+a string. If this variable is not provided, Zelig will assume that the data is already
+ordered by time.</p></td>
+    </tr>
+    <tr>
+      <th>cs</th>
+      <td><p>Name of a variable that denotes the cross-sectional element of the data, for example,
+country name in a dataset with time-series across different countries. As a variable name,
+this should be in quotes. If this is not provided, Zelig will assume that all observations
+come from the same unit over time, and should be pooled, but if provided, individual models will
+be run in each cross-section.
+If <code>cs</code> is given as an argument, <code>ts</code> must also be provided. Additionally, <code>by</code>
+must be <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>order</th>
+      <td><p>A vector of length 3 passed in as <code>c(p,d,q)</code> where p represents the order of the
+autoregressive model, d represents the number of differences taken in the model, and q represents
+the order of the moving average model.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Depending on the class of model selected, <code>zelig</code> will return
+  an object with elements including <code>coefficients</code>, <code>residuals</code>,
+  and <code>formula</code> which may be summarized using
+  <code>summary(z.out)</code> or individually extracted using, for example,
+  <code>coef(z.out)</code>. See
+  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  functions to extract model components. You can also extract whole fitted
+  model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Currently only the Reference class syntax for time series. This model does not accept
+Bootstraps or weights.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
     <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_ar.html'>http://docs.zeligproject.org/articles/zelig_ar.html</a></p>
     
 
-        
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>seatshare</span>)
+<span class='no'>subset</span> <span class='kw'>&lt;-</span> <span class='no'>seatshare</span>[<span class='no'>seatshare</span>$<span class='no'>country</span> <span class='kw'>==</span> <span class='st'>"UNITED KINGDOM"</span>,]
+<span class='no'>ts.out</span> <span class='kw'>&lt;-</span> <span class='no'>zar</span>$<span class='fu'>new</span>()
+<span class='no'>ts.out</span>$<span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>unemp</span> ~ <span class='no'>leftseat</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='kw'>ts</span> <span class='kw'>=</span> <span class='st'>"year"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>subset</span>)
+<span class='fu'>summary</span>(<span class='no'>ts.out</span>)</div><div class='output co'>#&gt; Model: 
+#&gt; 
+#&gt; Call:
+#&gt; ts.out$zelig(formula = unemp ~ leftseat, data = subset, order = c(1, 0, 0), 
+#&gt;     ts = "year")
+#&gt; 
+#&gt; Coefficients:
+#&gt;         ar1  intercept  leftseat
+#&gt;       0.941       5.95     -3.25
+#&gt; s.e.  0.044       2.65      3.29
+#&gt; 
+#&gt; sigma^2 estimated as 1.05:  log likelihood = -57.3,  aic = 123
+#&gt; Next step: Use 'setx' method</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Logit Bayes</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Bayesian Logit Regression with <code>logit.bayes</code>.</p>
 <p>Use the logit regression model for model binary dependent variables specified as a function of a set of explanatory variables. The model is estimated using a Gibbs sampler. For other models suitable for binary response variables, see Bayesian logistic regression, maximum likelihood logit regression, and maximum likelihood logit regression.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"logit.bayes"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"logit.bayes"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
 </div>
@@ -173,7 +173,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Attaching the sample dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(turnout)</code></pre></div>
 <p>Estimating the logit regression using <code>logit.bayes</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote <span class="op">~</span><span class="st"> </span>race <span class="op">+</span><span class="st"> </span>educate, <span class="dt">model =</span> <span class="st">"logit.bayes"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote ~<span class="st"> </span>race +<span class="st"> </span>educate, <span class="dt">model =</span> <span class="st">"logit.bayes"</span>,
                <span class="dt">data =</span> turnout, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Ben Goodrich, and Ying Lu. 2013.
@@ -181,9 +181,9 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
 ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
 <p>You can check for convergence before summarizing the estimates with three diagnostic tests. See the section :ref:[Diagnostics for Zelig Models](diagnostics&gt;$ for examples of the output with interpretation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()
-z.out<span class="op">$</span><span class="kw">heidel.diag</span>()
-z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">geweke.diag</span>()
+z.out$<span class="kw">heidel.diag</span>()
+z.out$<span class="kw">raftery.diag</span>()</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out)</code></pre></div>
 <pre><code>## Model: 
 ## 
@@ -227,8 +227,8 @@ z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre
 <h3 class="hasAnchor">
 <a href="#simulating-first-differences" class="anchor"></a>Simulating First Differences</h3>
 <p>Estimating the first difference (and risk ratio) in individual’s probability of voting when education is set to be low (25th percentile) versus high (75th percentile) while all the other variables are held at their default values:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout<span class="op">$</span>educate, <span class="dt">prob =</span> <span class="fl">0.75</span>))
-x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout<span class="op">$</span>educate, <span class="dt">prob =</span> <span class="fl">0.25</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout$educate, <span class="dt">prob =</span> <span class="fl">0.75</span>))
+x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout$educate, <span class="dt">prob =</span> <span class="fl">0.25</span>))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.high, <span class="dt">x1 =</span> x.low)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s.out2)</code></pre></div>
 <pre><code>## 
@@ -261,14 +261,8 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 <ul>
 <li>The <em>stochastic component</em> is given by</li>
 </ul>
-$$
-<span class="math display">\[\begin{aligned}
-        Y_{i}  &amp;  \sim &amp; \textrm{Bernoulli}(\pi_{i})\\
-      &amp;  = &amp; \pi_{i}^{Y_{i}}(1-\pi_{i})^{1-Y_{i}},\end{aligned}\]</span>
-<p>where <span class="math inline">\(\pi_{i}=\Pr(Y_{i}=1)\)</span>.</p>
-<ul>
-<li>The <em>systematic component</em> is given by</li>
-</ul>
+<p>$$ \begin{aligned} Y_{i} &amp; &amp; (<em>{i})\ &amp; = &amp; </em>{i}^{Y_{i}}(1-<em>{i})^{1-Y</em>{i}},\end{aligned}</p>
+<p>where <span class="math inline">\(\pi_{i}=\Pr(Y_{i}=1)\)</span>. $$ - The <em>systematic component</em> is given by</p>
 <p><span class="math display">\[
     \begin{aligned}
         \pi_{i}= \Phi(x_i \beta),\end{aligned}
@@ -330,7 +324,7 @@ $$
 <h2 class="hasAnchor">
 <a href="#output-values" class="anchor"></a>Output Values</h2>
 <p>The output of each Zelig command contains useful information which you may view. For example, if you run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"logit.bayes"</span>, data)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y ~<span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"logit.bayes"</span>, data)</code></pre></div>
 <p>then you may examine the available information in <code>z.out</code> by using <code>names(z.out)</code>, see the draws from the posterior distribution of the <code>coefficients</code> by using <code>z.out$coefficients</code>, and view a default summary of information through <code>summary(z.out)</code>. Other elements available through the <code>$</code> operator are listed below.</p>
 <ul>
 <li><p>From the <code><a href="../reference/zelig.html">zelig()</a></code> output object <code>z.out</code>, you may extract:</p></li>

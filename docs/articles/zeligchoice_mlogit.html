@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Mutlinomial Logit</h1>
             
-            <h4 class="date">2017-06-07</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Multinomial Logistic Regression for Dependent Variables with Unordered Categorical Values with <code>mlogit</code> in ZeligChoice.</p>
 <p>Use the multinomial logit distribution to model unordered categorical variables. The dependent variable may be in the format of either character strings or integer values. See <a href="zelig_mlogitbayes.html">Multinomial Bayesian Logistic Regression</a> for a Bayesian version of this model.</p>
@@ -138,7 +138,7 @@
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(Y) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X23,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(Y) ~<span class="st"> </span>X1 +<span class="st"> </span>X23,
                <span class="dt">model =</span> <span class="st">"mlogit"</span>, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out, <span class="dt">x1 =</span> <span class="ot">NULL</span>)</code></pre></div>
@@ -150,7 +150,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Load the sample data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mexico)</code></pre></div>
 <p>Estimate the empirical model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(vote88) <span class="op">~</span><span class="st"> </span>pristr <span class="op">+</span><span class="st"> </span>othcok <span class="op">+</span><span class="st"> </span>othsocok,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(vote88) ~<span class="st"> </span>pristr +<span class="st"> </span>othcok +<span class="st"> </span>othsocok,
                 <span class="dt">model =</span> <span class="st">"mlogit"</span>, <span class="dt">data =</span> mexico, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Summarize estimated paramters:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out1)</code></pre></div>
@@ -200,28 +200,28 @@ x.strong &lt;-<span class="st"> </span><span class="kw"><a href="../reference/se
 ##  -----
 ## ev
 ##              mean         sd       50%      2.5%     97.5%
-## Pr(Y=1) 0.7125607 0.02126999 0.7135892 0.6700842 0.7537237
-## Pr(Y=2) 0.1288215 0.01480180 0.1277746 0.1026277 0.1603835
-## Pr(Y=3) 0.1586178 0.01644167 0.1583075 0.1286804 0.1927543
+## Pr(Y=1) 0.7137171 0.02121709 0.7148260 0.6698681 0.7523307
+## Pr(Y=2) 0.1279323 0.01481314 0.1265921 0.1012425 0.1603710
+## Pr(Y=3) 0.1583506 0.01640347 0.1577557 0.1282349 0.1930260
 ## pv
-##        1     2     3
-## [1,] 0.7 0.137 0.163
+##          1    2     3
+## [1,] 0.708 0.13 0.162
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##              mean         sd       50%      2.5%     97.5%
-## Pr(Y=1) 0.4031843 0.02184860 0.4033209 0.3613922 0.4468739
-## Pr(Y=2) 0.3040039 0.02187937 0.3037288 0.2645768 0.3488399
-## Pr(Y=3) 0.2928118 0.02102680 0.2918071 0.2537728 0.3357307
+## Pr(Y=1) 0.4020947 0.02168978 0.4026562 0.3588900 0.4435801
+## Pr(Y=2) 0.3047343 0.02171671 0.3046546 0.2649331 0.3502902
+## Pr(Y=3) 0.2931709 0.02108525 0.2924453 0.2535155 0.3371851
 ## pv
 ##          1     2     3
-## [1,] 0.408 0.283 0.309
+## [1,] 0.408 0.286 0.306
 ## fd
 ##               mean         sd        50%        2.5%      97.5%
-## Pr(Y=1) -0.3093764 0.03330788 -0.3098321 -0.37300500 -0.2447529
-## Pr(Y=2)  0.1751824 0.02784848  0.1755189  0.12114315  0.2301688
-## Pr(Y=3)  0.1341940 0.02792288  0.1345650  0.08144286  0.1892681</code></pre>
+## Pr(Y=1) -0.3116224 0.03304717 -0.3118691 -0.37344811 -0.2472307
+## Pr(Y=2)  0.1768021 0.02755320  0.1768372  0.12427162  0.2313190
+## Pr(Y=3)  0.1348203 0.02795229  0.1346020  0.07819363  0.1882271</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out.mlogit)</code></pre></div>
 <div class="figure">
 <img src="zeligchoice_mlogit_files/figure-html/Zelig-mlogit1-1.png" alt="Graphs of Quantities of Interest for Multinomial Logit" width="672"><p class="caption">
