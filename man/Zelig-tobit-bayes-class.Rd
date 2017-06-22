@@ -49,6 +49,10 @@ The default value is 0.}
 \item{above:}{point at which the dependent variable is censored from above.
 If the dependent variable is only censored from below, set \code{above = Inf}.
 The default value is \code{Inf}.}
+
+\item{below:}{point at which the dependent variable is censored from below. If the dependent variable is only censored from above, set below = -Inf. The default value is 0.}
+
+\item{above:}{point at which the dependent variable is censored from above. If the dependent variable is only censored from below, set above = Inf. The default value is Inf.}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return
@@ -64,7 +68,7 @@ Depending on the class of model selected, \code{zelig} will return
 Bayesian Tobit Regression
 }
 \details{
-Additional parameters avaialable to many models include:
+Additional parameters avaialable to this model include:
 \itemize{
   \item weights: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:

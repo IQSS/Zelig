@@ -61,6 +61,12 @@ id and should be ordered within each cluster when appropriate}
 "exchangeable", "ar1", "unstructured" and "userdefined"}
 
 \item{geeglm:}{See geeglm in package geepack for other function arguments}
+
+\item{Unstructured}{(corstr = unstructured): cor(yit,yit′)=αtt′cor(yit,yit′)=αtt′, ∀t,t′∀t,t′ with t≠t′t≠t′. No constraints are placed on the correlations, which are then estimated from the data.}
+
+\item{Mv:}{defaults to 1. It specifies the number of periods of correlation and only needs to be specified when corstr is stat\_M\_dep, non\_stat\_M\_dep, or AR-M.}
+
+\item{R:}{defaults to NULL. It specifies a user-defined correlation matrix rather than estimating it from the data. The argument is used only when corstr is “fixed”. The input is a T×TT×T matrix of correlations, where TT is the size of the largest cluster.}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return
@@ -76,7 +82,7 @@ Depending on the class of model selected, \code{zelig} will return
 Generalized Estimating Equation for Normal Regression
 }
 \details{
-Additional parameters avaialable to many models include:
+Additional parameters avaialable to this model include:
 \itemize{
   \item weights: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:

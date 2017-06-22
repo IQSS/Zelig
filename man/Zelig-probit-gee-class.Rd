@@ -42,13 +42,13 @@ subclasses.}
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
 
-\item{corstr:character}{string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”}
+\item{corstr:character}{string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"}
 
 \item{See}{geeglm in package geepack for other function arguments.}
 
 \item{id:}{where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate}
 
-\item{corstr:}{character string specifying the correlation structure: “independence”, “exchangeable”, “ar1”, “unstructured” and “userdefined”}
+\item{corstr:}{character string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"}
 
 \item{geeglm:}{See geeglm in package geepack for other function arguments}
 }
@@ -66,7 +66,7 @@ Depending on the class of model selected, \code{zelig} will return
 Generalized Estimating Equation for Probit Regression
 }
 \details{
-Additional parameters avaialable to many models include:
+Additional parameters avaialable to this model include:
 \itemize{
   \item weights: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
@@ -83,7 +83,6 @@ Additional parameters avaialable to many models include:
 data(turnout)
 turnout$cluster <- rep(c(1:200), 10)
 sorted.turnout <- turnout[order(turnout$cluster),]
-
 z.out1 <- zelig(vote ~ race + educate, model = "probit.gee",
 id = "cluster", data = sorted.turnout)
 summary(z.out1)

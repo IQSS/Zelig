@@ -57,6 +57,8 @@ Depending on the class of model selected, \code{zelig} will return
   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
   functions to extract model components. You can also extract whole fitted
   model objects using \code{\link{from_zelig_model}}.
+
+In addition to the standard inputs, zelig() takes the following additional options for lognormal regression:
 }
 \description{
 Log-Normal Regression for Duration Dependent Variables
