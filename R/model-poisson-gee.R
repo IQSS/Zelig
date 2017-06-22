@@ -55,6 +55,14 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
+<<<<<<< HEAD
+#'
+#' Use the following arguments to specify the structure of the “working” correlations within clusters:
+#'@param id: where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate
+#'@param corstr: character string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"
+#'@param geeglm: See geeglm in package geepack for other function arguments
+=======
+>>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362
 #'
 #'
 #'@examples

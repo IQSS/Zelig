@@ -129,9 +129,31 @@ Additional parameters avaialable to this model include:
 data(swiss)
 names(swiss) <- c("Fert", "Agr", "Exam", "Educ", "Cath", "InfMort")
 z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+<<<<<<< HEAD
+model = "factor.bayes", data = swiss,
+factors = 2, verbose = FALSE,
+a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
+
+z.out$geweke.diag()
+z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+model = "factor.bayes", data = swiss, factors = 2,
+lambda.constraints =
+   list(Exam = list(1,"+"),
+        Exam = list(2,"-"),
+        Educ = c(2, 0),
+        InfMort = c(1, 0)),
+verbose = FALSE, a0 = 1, b0 = 0.15,
+burnin = 500, mcmc = 5000)
+
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
+summary(z.out)
+=======
                model = "factor.bayes", data = swiss,
                factors = 2, verbose = FALSE,
                a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
+>>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362
 
 }
 \seealso{

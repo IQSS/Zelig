@@ -1,5 +1,5 @@
 #' Linear Regression for a Left-Censored Dependent Variable
-#'@param formula a symbolic representation of the model to be
+#' @param formula a symbolic representation of the model to be
 #'   estimated, in the form \code{y \~\, x1 + x2}, where \code{y} is the
 #'   dependent variable and \code{x1} and \code{x2} are the explanatory
 #'   variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
@@ -10,16 +10,16 @@
 #'   steps; \code{I(x1*x2)} to include only the interaction term and
 #'   exclude the main effects; and quadratic terms in the form
 #'   \code{I(x1^2)}.
-#'@param model the name of a statistical model to estimate.
+#' @param model the name of a statistical model to estimate.
 #'   For a list of supported models and their documentation see:
 #'   \url{http://docs.zeligproject.org/articles/}.
-#'@param data the name of a data frame containing the variables
+#' @param data the name of a data frame containing the variables
 #'   referenced in the formula or a list of multiply imputed data frames
 #'   each having the same variable names and row numbers (created by
 #'   \code{Amelia} or \code{\link{to_zelig_mi}}).
-#'@param ... additional arguments passed to \code{zelig},
+#' @param ... additional arguments passed to \code{zelig},
 #'   relevant for the model to be estimated.
-#'@param by a factor variable contained in \code{data}. If supplied,
+#' @param by a factor variable contained in \code{data}. If supplied,
 #'   \code{zelig} will subset
 #'   the data frame based on the levels in the \code{by} variable, and
 #'   estimate a model for each subset. This can save a considerable amount of
@@ -27,7 +27,7 @@
 #'   use: \code{z.out <- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
 #'   by = 'state')} You may also use \code{by} to run models using MatchIt
 #'   subclasses.
-#'@param cite If is set to 'TRUE' (default), the model citation will be printed
+#' @param cite If is set to 'TRUE' (default), the model citation will be printed
 #'   to the console.
 #'@param below (defaults to 0) The point at which the dependent variable is censored from below.
 #'  If any values in the dependent variable are observed to be less than the censoring point,
@@ -65,6 +65,15 @@
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
 #'
+<<<<<<< HEAD
+#' @param below (defaults to 0) The point at which the dependent variable is censored from below. If any values in the dependent variable are observed to be less than the censoring point, it is assumed that that particular observation is censored from below at the observed value. (See for a Bayesian implementation that supports both left and right censoring.)
+#' @param robust defaults to FALSE. If TRUE, zelig() computes robust standard errors based on sandwich estimators (see and ) and the options selected in cluster.
+#' @param if robust = TRUE, you may select a variable to define groups of correlated observations. Let x3 be a variable that consists of either discrete numeric values, character strings, or factors that define strata. Then
+#'   z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", model = "tobit", data = mydata)
+#'   means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If robust = TRUE but cluster is not specified, zelig() assumes that each observation falls into its own cluster.
+#'
+=======
+>>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362
 #' @examples
 #' library(Zelig)
 #' data(tobin)

@@ -42,11 +42,9 @@ subclasses.}
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
 
-\item{id:}{where id is a variable which identifies the clusters. The data should be sorted
-by \code{id} and should be ordered within each cluster when appropriate}
+\item{id:}{where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate}
 
-\item{corstr:}{character string specifying the correlation structure:
-"independence", "exchangeable", "ar1", "unstructured" and "userdefined"}
+\item{corstr:}{character string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"}
 
 \item{geeglm:}{See geeglm in package geepack for other function arguments}
 }
@@ -59,17 +57,19 @@ Depending on the class of model selected, \code{zelig} will return
   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
   functions to extract model components. You can also extract whole fitted
   model objects using \code{\link{from_zelig_model}}.
+
+ Use the following arguments to specify the structure of the “working” correlations within clusters:
 }
 \description{
 Generalized Estimating Equation for Logit Regression
 }
 \details{
-Additional parameters avaialable to this model include:
+Additional parameters avaialable to many models include:
 \itemize{
-  \item \code{weights}: vector of weight values or a name of a variable in the dataset
+  \item weights: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   \url{http://docs.zeligproject.org/articles/weights.html}.
-  \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
+  \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
   robustly estimate uncertainty around model parameters due to sampling error.
   If an integer is supplied, the number of boostraps to run.
   For more information see:
