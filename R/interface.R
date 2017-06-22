@@ -1,18 +1,3 @@
-#' Instructions for how to convert non-Zelig fitted model objects to Zelig.
-#' Used in to_zelig
-model_lookup_df <- data.frame(
-    rbind(
-        c(class = "lm", family = "gaussian", link = "identity", zclass = "zls"),
-        c(class = "glm", family = "gaussian", link = "identity", zlcass = "zls"),
-        c(class = "glm", family = "binomial", link = "logit", zclass = "zlogit"),
-        c(class = "glm", family = "binomial", link = "probit", zclass = "zprobit"),
-        c(class = "glm", family = "poisson",  link = "log", zclass = "zpoisson"),
-        c(class = "glm", family = "Gamma", link = "inverse", zclass = "zgamma"),
-        c(class = "svyglm", family = "gaussian", link = "identity", zclass = "znormalsurvey"),
-        c(class = "svyglm", family = "binomial", link = "logit", zclass = "zlogitsurvey"),
-        c(class = "svyglm", family = "quasibinomial", link = "logit", zclass = "zlogitsurvey")),
-    stringsAsFactors = FALSE)
-
 #' Coerce a non-Zelig fitted model object to a Zelig class object
 #'
 #' @param obj a fitted model object fitted using \code{lm} and many using

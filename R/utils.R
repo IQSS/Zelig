@@ -269,6 +269,47 @@ expand_grid_setrange <- function(x) {
     return(m)
 }
 
+
+
+#' Instructions for how to convert non-Zelig fitted model objects to Zelig.
+#' Used in to_zelig
+
+model_lookup_df <- data.frame(
+    rbind(
+        c(class = "lm", family = "gaussian", link = "identity", zclass = "ls"),
+        c(class = "glm", family = "gaussian", link = "identity", zlcass = "ls"),
+        c(class = "glm", family = "binomial", link = "logit", zclass = "logit"),
+        c(class = "glm", family = "binomial", link = "probit", zclass = "probit"),
+        c(class = "glm", family = "poisson",  link = "log", zclass = "poisson"),
+        c(class = "glm", family = "Gamma", link = "inverse", zclass = "gamma"),
+        c(class = "svyglm", family = "gaussian", link = "identity", zclass = "znormal.survey"),
+        c(class = "svyglm", family = "binomial", link = "logit", zclass = "logit.survey"),
+        c(class = "svyglm", family = "quasibinomial", link = "logit", zclass = "logit.survey")),
+    stringsAsFactors = FALSE)
+
+#' Convenience function to find zelig class corresponding to a model fit.
+#'
+#' @param obj A model fit object.
+#' @keywords internal
+model_matcher <- function(obj) {
+    # attempt to determine model type and initialize model
+    try_na <- function(x) tryCatch(x, error = function(c)
+        stop(not_found_msg, call. = FALSE))
+    
+    model_info <- data.frame(
+        class = try_na(class(obj)[1]),
+        family = try_na(family(obj)$family),
+        link = try_na(family(obj)$link),
+        stringsAsFactors = FALSE
+    )
+    zmodel <- merge(model_info, model_lookup_df)$zclass
+    if(length(zmodel) != 1) stop(not_found_msg, call. = FALSE)
+    message(sprintf("Assuming %s to convert to Zelig.", zmodel))
+    
+    zmodel
+}
+
+
 #' Bundle Multiply Imputed Data Sets into an Object for Zelig
 #'
 #' This object prepares multiply imputed data sets so they can be used by

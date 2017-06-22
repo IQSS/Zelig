@@ -73,13 +73,31 @@ zelig <- function(formula,
                   data,
                   ...,
                   by = NULL,
-                  cite = TRUE) {
+                  cite = TRUE,
+                  refit = NULL) {
     # .Deprecated('\nz$new() \nz$zelig(...)') Check if required model argument is
     # specified
     if (missing(model))
         stop("Estimation model type not specified.\nSelect estimation model type with the model argument.",
-            call. = FALSE)
+             call. = FALSE)
 
+    if (!is.character(model)) {
+        if(missing(refit)) refit <- FALSE
+        if (c("list") %in% class(model)) {
+            data <- to_zelig_mi(lapply(model, model.frame))
+            model.chr <- model_matcher(model[[1]])
+            formula <- stats::formula(model[[1]])
+        } else {
+            data <- model.frame(model)
+            model.chr <- model_matcher(model)
+            formula <- stats::formula(model)
+            model <- list(model)
+        }
+    } else {
+        model.chr <- model
+        model <- NULL
+    }
+    
     # Zelig Core
     zeligmodels <- system.file(file.path("JSON", "zelig5models.json"),
                                package = "Zelig")
@@ -101,21 +119,21 @@ zelig <- function(formula,
         models <- c(models, jsonlite::fromJSON(txt = readLines(zeligammodels))$zelig5gammodels)
     # Zelig Multilevel
     zeligmixedmodels <- system.file(file.path("JSON", "zelig5mixedmodels.json"),
-        package = "ZeligMultilevel")
+                                    package = "ZeligMultilevel")
     if (zeligmixedmodels != "")
         models <- c(models, jsonlite::fromJSON(txt = readLines(zeligmixedmodels))$zelig5mixedmodels)
     # Aggregating all available models
     models4 <- list()
     for (i in seq(models)) {
         models4[[models[[i]]$wrapper]] <- names(models)[i]
-    }
+    }        
+    model.init <- sprintf("z%s$new()", models4[[model.chr]])
 
-    model.init <- sprintf("z%s$new()", models4[[model]])
     if (length(model.init) == 0)
         stop(sprintf("%s is not a supported model type.", model), call. = FALSE)
     z5 <- try(eval(parse(text = model.init)), silent = TRUE)
     if ("try-error" %in% class(z5))
-        stop("Model '", model, "' not found")
+        stop("Model '", model.chr, "' not found")
     ## End: Zelig 5 models
     mf <- match.call()
     mf$model <- NULL
@@ -123,7 +141,7 @@ zelig <- function(formula,
     mf[[1]] <- quote(z5$zelig)
     mf <- try(eval(mf, environment()), silent = TRUE)
     if ("try-error" %in% class(mf))
-        z5$zelig(formula = formula, data = data, ..., by = by)
+        z5$zelig(formula = formula, data = data, ..., by = by, refit = refit, model = model)
     if (cite)
         z5$cite()
     return(z5)
@@ -183,7 +201,7 @@ setx <- function(obj, fn = NULL, data = NULL, cond = FALSE, ...) {
     # .Deprecated('\nz$new() \nz$zelig(...) \nz$setx() or z$setx1 or z$setrange')
 
     if(!is_zelig(obj, fail = FALSE))
-        obj <- to_zelig(obj)
+        obj <- zelig(model = obj)
 
     x5 <- obj$copy()
     # This is the length of each argument in '...'s

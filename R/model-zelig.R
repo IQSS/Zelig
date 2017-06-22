@@ -233,9 +233,11 @@ z$methods(
 
 z$methods(
   zelig = function(formula, data, model = NULL, ...,
-                   weights = NULL, by, bootstrap = FALSE) {
+                   weights = NULL, by, bootstrap = FALSE, refit = NULL) {
     "The zelig function estimates a variety of statistical models"
 
+    if(missing(refit)) refit <- TRUE
+    
     fn2 <- function(fc, data) {
       fc$data <- data
       return(fc)
@@ -315,7 +317,7 @@ z$methods(
         .self$model.call$formula <- as.Formula( .self$mcformula,
                                                 env = globalenv() )
     }
-    if(!is.null(model)){
+    if(is.character(model) && !is.null(model)){
         cat("Argument model is only valid for the Zelig wrapper, but not the Zelig method, and will be ignored.\n")
         flag <- !(names(.self$model.call) == "model")
         .self$model.call <- .self$model.call[flag]
@@ -494,11 +496,17 @@ z$methods(
     #print(.self$model.call)
     .self$data <- tbl_df(.self$data)
     #.self$zelig.out <- eval(fn2(.self$model.call, data = data)) # shortened test version that bypasses "by"
-    .self$zelig.out <- .self$data %>%
-        group_by_(.self$by) %>%
-        do(z.out = eval(fn2(.self$model.call,
-            quote(as.data.frame(.)))))
+    if(refit) {
+        .self$zelig.out <- .self$data %>%
+            group_by_(.self$by) %>%
+            do(z.out = eval(fn2(.self$model.call,
+                                quote(as.data.frame(.)))))
+    } else {
+        .self$zelig.out <- setNames(data.frame(unique(.self$data[[.self$by]])), .self$by)
+        .self$zelig.out$z.out <- model
+        .self$zelig.out <- dplyr::rowwise(.self$zelig.out)
     }
+  }
 )
 
 z$methods(
