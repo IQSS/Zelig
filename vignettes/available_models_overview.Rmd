@@ -51,6 +51,7 @@ zelig_core <- list(name = "Zelig",
                                         list(name = "logit bayes"),
                                         list(name = "mlogit bayes"),
                                         list(name = "normal bayes"),
+                                        list(name = "ordered probit"),
                                         list(name = "poisson bayes"),
                                         list(name = "probit bayes"),
                                         list(name = "tobit bayes")
@@ -70,7 +71,12 @@ zelig_core <- list(name = "Zelig",
                                     children = list(
                                         list(name = "gamma"),
                                         list(name = "normal"),
-                                        list(name = "poisson")
+                                        list(name = "poisson"),
+                                        list(name = "binchoice",
+                                            children = list(
+                                                list(name = "logit"),
+                                                list(name = "probit")
+                                              ))
                                         )),
                                 list(name = "ls"),
                                 list(name = "ivreg")
@@ -106,7 +112,8 @@ zelig_core <- list(name = "Zelig",
                             ))
                    ))
 
-diagonalNetwork(zelig_core, fontSize = 15, fontFamily = 'sans-serif', nodeStroke = 'd16103')
+diagonalNetwork(zelig_core, fontSize = 15, fontFamily = 'sans-serif', 
+            nodeStroke = 'd16103')
 ```
 
 **Note:** additional multilevel and generalized additive models are available in
