@@ -36,15 +36,7 @@
 #' @param above: point at which the dependent variable is censored from above.
 #'      If the dependent variable is only censored from below, set \code{above = Inf}.
 #'      The default value is \code{Inf}.
-#'
-#' @examples
-#' data(turnout)
-#' z.out <- zelig(vote ~ race + educate, model = "tobit.bayes",data = turnout, verbose = FALSE)
-#'
 #' @details
-#'
-#'
-#'
 #' Additional parameters avaialable to this model include:
 #' \itemize{
 #'   \item weights: vector of weight values or a name of a variable in the dataset
@@ -85,7 +77,12 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
+#' @param below: point at which the dependent variable is censored from below. If the dependent variable is only censored from above, set below = -Inf. The default value is 0.
+#' @param above: point at which the dependent variable is censored from above. If the dependent variable is only censored from below, set above = Inf. The default value is Inf.
 #'
+#' @examples
+#' data(turnout)
+#' z.out <- zelig(vote ~ race + educate, model = "tobit.bayes",data = turnout, verbose = FALSE)
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_tobitbayes.html}
 #' @import methods

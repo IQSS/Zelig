@@ -50,6 +50,8 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
+#'
+#' In addition to the standard inputs, zelig() takes the following additional options for lognormal regression:
 #'@param robust defaults to FALSE. If TRUE, zelig() computes robust standard errors based on sandwich estimators (see and ) based on the options in cluster.
 #'@param cluster  if robust = TRUE, you may select a variable to define groups of correlated observations. Let x3 be a variable that consists of either discrete numeric values, character strings, or factors that define strata. Then
 #'z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", model = "exp", data = mydata)

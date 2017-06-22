@@ -63,6 +63,9 @@
 #'@param corstr: character string specifying the correlation structure: "independence",
 #'"exchangeable", "ar1", "unstructured" and "userdefined"
 #'@param geeglm: See geeglm in package geepack for other function arguments
+#'@param Unstructured (corstr = unstructured): cor(yit,yit′)=αtt′cor(yit,yit′)=αtt′, ∀t,t′∀t,t′ with t≠t′t≠t′. No constraints are placed on the correlations, which are then estimated from the data.
+#'@param Mv: defaults to 1. It specifies the number of periods of correlation and only needs to be specified when corstr is stat\_M\_dep, non\_stat\_M\_dep, or AR-M.
+#'@param R: defaults to NULL. It specifies a user-defined correlation matrix rather than estimating it from the data. The argument is used only when corstr is “fixed”. The input is a T×TT×T matrix of correlations, where TT is the size of the largest cluster.
 #'
 #' @examples
 #' library(Zelig)

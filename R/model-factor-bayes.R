@@ -1,6 +1,5 @@
 #' Bayesian Factor Analysis
 #'
-#'
 #' @param formula a symbolic representation of the model to be
 #'   estimated, in the form \code{\~\ Y1 + Y2 + Y3}, where Y1, Y2, and Y3 are variables
 #'   of interest in factor analysis (manifest variables), assumed to be
@@ -108,6 +107,29 @@
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
 #'
+#' @examples
+#' data(swiss)
+#' names(swiss) <- c("Fert", "Agr", "Exam", "Educ", "Cath", "InfMort")
+#' z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+#' model = "factor.bayes", data = swiss,
+#' factors = 2, verbose = FALSE,
+#' a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
+#'
+#' z.out$geweke.diag()
+#' z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+#'model = "factor.bayes", data = swiss, factors = 2,
+#'lambda.constraints =
+#'    list(Exam = list(1,"+"),
+#'         Exam = list(2,"-"),
+#'         Educ = c(2, 0),
+#'         InfMort = c(1, 0)),
+#' verbose = FALSE, a0 = 1, b0 = 0.15,
+#' burnin = 500, mcmc = 5000)
+#'
+#' z.out$geweke.diag()
+#' z.out$heidel.diag()
+#' z.out$raftery.diag()
+#' summary(z.out)
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_factorbayes.html}
 #' @import methods
