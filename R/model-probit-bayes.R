@@ -72,7 +72,7 @@
 #'@param B0: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.
 #'@param bayes.resid: defaults to FALSE. If TRUE, the latent Bayesian residuals for all observations are returned. Alternatively, users can specify a vector of observations for which the latent residuals should be returned.
 #'
-#' Zelig users may wish to refer to help(MCMCprobit) for more information.
+#'
 #'
 #' @examples
 #' data(turnout)
