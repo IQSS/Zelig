@@ -147,7 +147,7 @@ $$
     \begin{aligned}
         Y_{i} &\sim& f(y_{i} \mid \lambda_{i})\\
       Y_{it} &\sim& g(y_{it} \mid \lambda_{it})\end{aligned}
-
+$$
    where $f$ and $g$ are unspecified distributions with
    means $\lambda_{i}$ and $\lambda_{it}$. GEE models make
    no distributional assumptions and only require three specifications:

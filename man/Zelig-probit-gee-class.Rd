@@ -42,13 +42,24 @@ subclasses.}
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
 
+<<<<<<< HEAD
 \item{corstr:character}{string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"}
+=======
+\item{corstr:character}{string specifying the correlation structure: "independence",
+"exchangeable", "ar1", "unstructured" and "userdefined"}
+>>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362
 
 \item{See}{geeglm in package geepack for other function arguments.}
 
-\item{id:}{where id is a variable which identifies the clusters. The data should be sorted by id and should be ordered within each cluster when appropriate}
+\item{id:}{where id is a variable which identifies the clusters. The data should be
+sorted by id and should be ordered within each cluster when appropriate}
 
+<<<<<<< HEAD
 \item{corstr:}{character string specifying the correlation structure: "independence", "exchangeable", "ar1", "unstructured" and "userdefined"}
+=======
+\item{corstr:}{character string specifying the correlation structure: "independence",
+"exchangeable", "ar1", "unstructured" and "userdefined"}
+>>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362
 
 \item{geeglm:}{See geeglm in package geepack for other function arguments}
 }
@@ -68,10 +79,10 @@ Generalized Estimating Equation for Probit Regression
 \details{
 Additional parameters avaialable to this model include:
 \itemize{
-  \item weights: vector of weight values or a name of a variable in the dataset
+  \item \code{weights}: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   \url{http://docs.zeligproject.org/articles/weights.html}.
-  \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+  \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
   robustly estimate uncertainty around model parameters due to sampling error.
   If an integer is supplied, the number of boostraps to run.
   For more information see:

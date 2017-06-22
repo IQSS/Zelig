@@ -237,7 +237,7 @@ $$
     \begin{aligned}
         \Lambda_{ij} \sim \textrm{Normal}(l_{0_{ij}}, L_{0_{ij}}^{-1})
       \textrm{ for } i=1,\ldots, k; \quad j=1,\ldots, d. \end{aligned}
-
+$$
 -  The independent conjugate *prior* for each $\Psi_{ii}$ is given
    by
 
@@ -246,7 +246,7 @@ $$
     \begin{aligned}
         \Psi_{ii} \sim \textrm{InverseGamma}(\frac{a_0}{2}, \frac{b_0}{2}), \textrm{ for }
       i = 1, \ldots, k.\end{aligned}
-
+$$
 -  The *prior* for $\phi_i$ is
 
 
@@ -255,7 +255,7 @@ $$
         \phi_i &\sim& \textrm{Normal}(0, I_d), \textrm{ for } i = 1, \ldots, n.\end{aligned}
 $$
 
-   where $I_d$ is a $ d\times d $ identity matrix.
+   where $I_d$ is a $d\times d$ identity matrix.
 
 Output Values
 ------

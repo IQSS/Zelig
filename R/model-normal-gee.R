@@ -30,17 +30,25 @@
 #'   subclasses.
 #'@param cite If is set to 'TRUE' (default), the model citation will be printed
 #'  to the console.
+#' @param robust defaults to TRUE. If TRUE, consistent standard errors are estimated using a "sandwich"
+#' estimator.
+#'@param corstr defaults to "independence". It can take on the following arguments:
+#'@param Independence (corstr = independence): cor(yit,yit')=0, for all t,t' with t not equal to t'.
+#' It assumes that there is no correlation within the clusters and the model becomes equivalent
+#'  to standard normal regression. The "working" correlation matrix is the identity matrix.
+#'@param Fixed corstr = fixed): If selected, the user must define the "working" correlation
+#'matrix with the R argument rather than estimating it from the model.
+#'@param id: where id is a variable which identifies the clusters. The data should be sorted by
+#'id and should be ordered within each cluster when appropriate
+#'@param corstr: character string specifying the correlation structure: "independence",
+#'"exchangeable", "ar1", "unstructured" and "userdefined"
+#'@param geeglm: See geeglm in package geepack for other function arguments
 #' @details
 #' Additional parameters avaialable to this model include:
 #' \itemize{
-#'   \item weights: vector of weight values or a name of a variable in the dataset
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
-#'   \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
-#'   robustly estimate uncertainty around model parameters due to sampling error.
-#'   If an integer is supplied, the number of boostraps to run.
-#'   For more information see:
-#'   \url{http://docs.zeligproject.org/articles/bootstraps.html}.
 #' }
 #' @return Depending on the class of model selected, \code{zelig} will return
 #'   an object with elements including \code{coefficients}, \code{residuals},
@@ -50,6 +58,7 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
+<<<<<<< HEAD
 #'@param robust defaults to TRUE. If TRUE, consistent standard errors are estimated using a "sandwich"
 #' estimator.
 #'@param corstr defaults to "independence". It can take on the following arguments:
@@ -66,6 +75,9 @@
 #'@param Unstructured (corstr = unstructured): cor(yit,yit′)=αtt′cor(yit,yit′)=αtt′, ∀t,t′∀t,t′ with t≠t′t≠t′. No constraints are placed on the correlations, which are then estimated from the data.
 #'@param Mv: defaults to 1. It specifies the number of periods of correlation and only needs to be specified when corstr is stat\_M\_dep, non\_stat\_M\_dep, or AR-M.
 #'@param R: defaults to NULL. It specifies a user-defined correlation matrix rather than estimating it from the data. The argument is used only when corstr is “fixed”. The input is a T×TT×T matrix of correlations, where TT is the size of the largest cluster.
+=======
+#'
+>>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362
 #'
 #' @examples
 #' library(Zelig)

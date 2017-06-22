@@ -31,12 +31,25 @@
 #'   to the console.
 #'
 #' @details
+#' The relogit procedure supports four optional arguments in addition to the
+#' standard arguments for zelig(). You may additionally use:
+#' \itemize{
+#'     \item \code{tau}: a vector containing either one or two values for \code{tau},
+#'     the true population fraction of ones. Use, for example, tau = c(0.05, 0.1) to specify
+#'     that the lower bound on tau is 0.05 and the upper bound is 0.1. If left unspecified, only
+#'     finite-sample bias correction is performed, not case-control correction.
+#'     \item \code{case.control}: if tau is specified, choose a method to correct for case-control
+#'     sampling design: "prior" (default) or "weighting".
+#'     \item \code{bias.correct}: a logical value of \code{TRUE} (default) or \code{FALSE}
+#'     indicating whether the intercept should be corrected for finite sample (rare events) bias.
+#' }
+#'
 #' Additional parameters avaialable to many models include:
 #' \itemize{
-#'   \item weights: vector of weight values or a name of a variable in the dataset
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
-#'   \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+#'   \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
 #'   robustly estimate uncertainty around model parameters due to sampling error.
 #'   If an integer is supplied, the number of boostraps to run.
 #'   For more information see:

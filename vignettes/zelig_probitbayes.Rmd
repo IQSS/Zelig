@@ -173,7 +173,7 @@ $$
     \begin{aligned}
         Y_{i}  &  \sim & \textrm{Bernoulli}(\pi_{i})\\
       &  = & \pi_{i}^{Y_{i}}(1-\pi_{i})^{1-Y_{i}},\end{aligned}
-
+$$
    where $\pi_{i}=\Pr(Y_{i}=1)$.
 
 -  The *systematic component* is given by

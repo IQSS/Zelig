@@ -5,5 +5,9 @@ docs/articles/*RR/.Rapp.history
 .Rhistory
 .DS_Store
 inst/doc
+<<<<<<< HEAD
 londonLemon.csv
 DESCRIPTION
+=======
+.RData
+>>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362

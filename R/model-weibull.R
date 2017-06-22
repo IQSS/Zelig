@@ -36,20 +36,21 @@
 #' In addition to the standard inputs, zelig() takes the following
 #' additional options for weibull regression:
 #' \itemize{
-#'     \item robust: defaults to FALSE. If TRUE, zelig() computes
-#'     robust standard errors based on sandwich estimators
-#'     (see and ) based on the options in cluster.
-#'     \item cluster: if \code{robust = TRUE}, you may select a variable
+#'     \item \code{robust}: defaults to FALSE. If TRUE, zelig() computes
+#'     robust standard errors based on sandwich estimators based on the options in cluster.
+#'     \item \code{cluste}r: if \code{robust = TRUE}, you may select a variable
 #'     to define groups of correlated observations. Let x3 be a variable
 #'     that consists of either discrete numeric values, character strings,
 #'      or factors that define strata. Then
 #'              \code{z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3",
 #'                model = "exp", data = mydata)}
 #'     means that the observations can be correlated within the strata defined
-#'     by the variable x3, and that robust standard errors should be calculated according to those clusters. If robust=TRUErobust=TRUE but cluster is not specified, zelig() assumes that each observation falls into its own cluster.
+#'     by the variable x3, and that robust standard errors should be calculated according to
+#'     those clusters. If robust=TRUErobust=TRUE but cluster is not specified, zelig() assumes
+#'     that each observation falls into its own cluster.
 #' }
 #'
-#' Additional parameters avaialable to many models include:
+#' Additional parameters avaialable to this model include:
 #' \itemize{
 #'   \item weights: vector of weight values or a name of a variable in the dataset
 #'   by which to weight the model. For more information see:
