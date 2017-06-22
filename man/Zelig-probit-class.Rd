@@ -68,18 +68,6 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 plot(s.out)
 
-<<<<<<< HEAD
-\examples{
-data(turnout)
-z.out <- zelig(vote ~ race + educate, model = "probit", data = turnout)
-summary(z.out)
-x.out <- setx(z.out)
-s.out <- sim(z.out, x = x.out)
-summary(s.out)
-plot(s.out)
-
-=======
->>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362
 }
 \seealso{
 Vignette: \url{http://docs.zeligproject.org/articles/zelig_probit.html}

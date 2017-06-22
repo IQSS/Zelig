@@ -65,15 +65,6 @@
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
 #'
-<<<<<<< HEAD
-#' @param below (defaults to 0) The point at which the dependent variable is censored from below. If any values in the dependent variable are observed to be less than the censoring point, it is assumed that that particular observation is censored from below at the observed value. (See for a Bayesian implementation that supports both left and right censoring.)
-#' @param robust defaults to FALSE. If TRUE, zelig() computes robust standard errors based on sandwich estimators (see and ) and the options selected in cluster.
-#' @param if robust = TRUE, you may select a variable to define groups of correlated observations. Let x3 be a variable that consists of either discrete numeric values, character strings, or factors that define strata. Then
-#'   z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", model = "tobit", data = mydata)
-#'   means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If robust = TRUE but cluster is not specified, zelig() assumes that each observation falls into its own cluster.
-#'
-=======
->>>>>>> 9ad438e1cdcde529470f3a6f0c5918e088ac5362
 #' @examples
 #' library(Zelig)
 #' data(tobin)

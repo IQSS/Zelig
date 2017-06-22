@@ -39,19 +39,30 @@
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
 #'   \item \code{burnin}: number of the initial MCMC iterations to be discarded (defaults to 1,000).
 #'   \item \code{mcmc}: number of the MCMC iterations after burnin (defaults to 10,000).
-#'   \item \code{thin}: thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
-#'   \item \code{verbose}: defaults to FALSE. If TRUE, the progress of the sampler (every 10\%) is printed to the screen.
-#'   \item \code{seed}: seed for the random number generator. The default is \code{NA} which corresponds to a random seed of 12345.
-#'   \item \code{beta.start}: starting values for the Markov chain, either a scalar or vector with length equal to the number of estimated coefficients. The default is \code{NA}, such that the maximum likelihood estimates are used as the starting values.
+#'   \item \code{thin}: thinning interval for the Markov chain. Only every thin-th draw from the
+#'   Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
+#'   \item \code{verbose}: defaults to FALSE. If TRUE, the progress of the sampler (every 10\%) is
+#'   printed to the screen.
+#'   \item \code{seed}: seed for the random number generator. The default is \code{NA} which
+#'   corresponds to a random seed of 12345.
+#'   \item \code{beta.start}: starting values for the Markov chain, either a scalar or vector with
+#'   length equal to the number of estimated coefficients. The default is \code{NA}, such that the
+#'   maximum likelihood estimates are used as the starting values.
 #' }
 #' Use the following parameters to specify the model's priors:
 #' \itemize{
-#'     \item \code{b0}: prior mean for the coefficients, either a numeric vector or a scalar. If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.
-#'     \item \code{B0}: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.
+#'     \item \code{b0}: prior mean for the coefficients, either a numeric vector or a scalar.
+#'     If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.
+#'     \item \code{B0}: prior precision parameter for the coefficients, either a square matrix (with
+#'     the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that
+#'     value times an identity matrix will be the prior precision parameter. The default is 0, which
+#'     leads to an improper prior.
 #' }
 #' Use the following arguments to specify optional output for the model:
 #' \itemize{
-#'     \item \code{bayes.resid}: defaults to FALSE. If TRUE, the latent Bayesian residuals for all observations are returned. Alternatively, users can specify a vector of observations for which the latent residuals should be returned.
+#'     \item \code{bayes.resid}: defaults to FALSE. If TRUE, the latent Bayesian residuals for all
+#'     observations are returned. Alternatively, users can specify a vector of observations for
+#'     which the latent residuals should be returned.
 #' }
 #' @return Depending on the class of model selected, \code{zelig} will return
 #'   an object with elements including \code{coefficients}, \code{residuals},
@@ -61,17 +72,6 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
-#'@param burnin: number of the initial MCMC iterations to be discarded (defaults to 1,000).
-#'@param mcmc: number of the MCMC iterations after burnin (defaults to 10,000).
-#'@param thin: thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
-#'@param verbose: defaults to FALSE. If TRUE, the progress of the sampler (every 10%10%) is printed to the screen.
-#'@param seed: seed for the random number generator. The default is NA which corresponds to a random seed of 12345.
-#'@param  beta.start: starting values for the Markov chain, either a scalar or vector with length equal to the number of estimated coefficients. The default is NA, such that the maximum likelihood estimates are used as the starting values.
-#' Use the following parameters to specify the model’s priors:
-#'@param b0: prior mean for the coefficients, either a numeric vector or a scalar. If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.
-#'@param B0: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.
-#'@param bayes.resid: defaults to FALSE. If TRUE, the latent Bayesian residuals for all observations are returned. Alternatively, users can specify a vector of observations for which the latent residuals should be returned.
-#'
 #'
 #'
 #' @examples

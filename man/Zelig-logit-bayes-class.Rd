@@ -40,30 +40,7 @@ by = 'state')} You may also use \code{by} to run models using MatchIt
 subclasses.}
 
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
-  to the console.
-Using the following arguments to monitor the Markov chains:}
-
-\item{burnin:}{number of the initial MCMC iterations to be discarded (defaults to 1,000).}
-
-\item{mcmc:}{number of the MCMC iterations after burnin (defaults to 10,000).}
-
-\item{thin:}{thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.}
-
-\item{verbose:}{defaults to FALSE. If TRUE, the progress of the sampler (every 10%10%) is printed to the screen.}
-
-\item{seed:}{seed for the random number generator. The default is NA which corresponds to a random seed of 12345.}
-
-\item{beta.start:}{starting values for the Markov chain, either a scalar or vector with length equal to the number of estimated coefficients. The default is NA, such that the maximum likelihood estimates are used as the starting values.
-
-Use the following parameters to specify the model’s priors:}
-
-\item{b0:}{prior mean for the coefficients, either a numeric vector or a scalar. If a scalar value, that value will be the prior mean for all the coefficients. The default is 0.}
-
-\item{B0:}{prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar value, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.}
-
-\item{bayes.resid:}{defaults to FALSE. If TRUE, the latent Bayesian residuals for all observations are returned. Alternatively, users can specify a vector of observations for which the latent residuals should be returned.
-
-Zelig users may wish to refer to help(MCMClogit) for more information.}
+to the console.}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return

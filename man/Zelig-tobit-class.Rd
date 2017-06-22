@@ -42,13 +42,21 @@ subclasses.}
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
 
-\item{below}{(defaults to 0) The point at which the dependent variable is censored from below. If any values in the dependent variable are observed to be less than the censoring point, it is assumed that that particular observation is censored from below at the observed value. (See for a Bayesian implementation that supports both left and right censoring.)}
+\item{below}{(defaults to 0) The point at which the dependent variable is censored from below.
+If any values in the dependent variable are observed to be less than the censoring point,
+it is assumed that that particular observation is censored from below at the observed value.
+(See for a Bayesian implementation that supports both left and right censoring.)}
 
-\item{robust}{defaults to FALSE. If TRUE, zelig() computes robust standard errors based on sandwich estimators (see and ) and the options selected in cluster.}
+\item{robust}{defaults to FALSE. If TRUE, \code{zelig()} computes robust standard errors based on
+sandwich estimators and the options selected in cluster.}
 
-\item{if}{robust = TRUE, you may select a variable to define groups of correlated observations. Let x3 be a variable that consists of either discrete numeric values, character strings, or factors that define strata. Then
-z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", model = "tobit", data = mydata)
-means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If robust = TRUE but cluster is not specified, zelig() assumes that each observation falls into its own cluster.}
+\item{cluster}{if robust = TRUE, you may select a variable to define groups of correlated
+observations. Let x3 be a variable that consists of either discrete numeric values, character
+strings, or factors that define strata. Then z.out <- zelig(y ~ x1 + x2, robust = TRUE,
+cluster = "x3", model = "tobit", data = mydata)means that the observations can be correlated
+within the strata defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster is not specified,
+zelig() assumes that each observation falls into its own cluster.}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return
@@ -66,10 +74,10 @@ Linear Regression for a Left-Censored Dependent Variable
 \details{
 Additional parameters avaialable to this model include:
 \itemize{
-  \item weights: vector of weight values or a name of a variable in the dataset
+  \item \code{weights}: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   \url{http://docs.zeligproject.org/articles/weights.html}.
-  \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+  \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
   robustly estimate uncertainty around model parameters due to sampling error.
   If an integer is supplied, the number of boostraps to run.
   For more information see:

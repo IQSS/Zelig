@@ -30,24 +30,6 @@
 #'   subclasses.
 #' @param cite If is set to 'TRUE' (default), the model citation will be printed
 #'   to the console.
-#'
-#' zelig() accepts the following arguments for mlogit.bayes:
-#'
-#' @param baseline: either a character string or numeric value (equal to one of the observed values in the dependent variable) specifying a baseline category. The default value is NA which sets the baseline to the first alphabetical or numerical unique value of the dependent variable.
-#' @param burnin: number of the initial MCMC iterations to be discarded (defaults to 1,000).
-#' @param mcmc: number of the MCMC iterations after burnin (defaults to 10,000).
-#' @param thin: thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
-#' @param mcmc.method: either “MH” or “slice”, specifying whether to use Metropolis Algorithm or slice sampler. The default value is MH.
-#' @param tune: tuning parameter for the Metropolis-Hasting step, either a scalar or a numeric vector (for kk coefficients, enter a kk vector). The tuning parameter should be set such that the acceptance rate is satisfactory (between 0.2 and 0.5). The default value is 1.1.
-#' @param verbose: defaults to FALSE. If TRUE, the progress of the sampler (every 10%10%) is printed to the screen.
-#' @param seed: seed for the random number generator. The default is NA which corresponds to a random seed of 12345.
-#' @param beta.start: starting values for the Markov chain, either a scalar or a vector (for kk coefficients, enter a kk vector). The default is NA where the maximum likelihood estimates are used as the starting values.
-#'
-#' Use the following arguments to specify the priors for the model:
-#'
-#' @param b0: prior mean for the coefficients, either a scalar or vector. If a scalar, that value will be the prior mean for all the coefficients. The default is 0.
-#' @param B0: prior precision parameter for the coefficients, either a square matrix with the dimensions equal to the number of coefficients or a scalar. If a scalar, that value times an identity matrix will be the prior precision parameter. The default is 0 which leads to an improper prior.
-#'
 #' @examples
 #' data(mexico)
 #' z.out <- zelig(vote88 ~ pristr + othcok + othsocok,model = "mlogit.bayes",

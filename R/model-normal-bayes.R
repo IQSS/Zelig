@@ -63,22 +63,6 @@
 #'   \url{http://docs.zeligproject.org/articles/getters.html} for a list of
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
-#'
-#' Use the following arguments to monitor the convergence of the Markov chain:
-#' @param burnin: number of the initial MCMC iterations to be discarded (defaults to 1,000).
-#' @param mcmc: number of the MCMC iterations after burnin (defaults to 10,000).
-#' @param thin: thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
-#' @param verbose: defaults to FALSE. If TRUE, the progress of the sampler (every 10%10%) is printed to the screen.
-#' @param seed: seed for the random number generator. The default is NA, which corresponds to a random seed of 12345.
-#' @param beta.start: starting values for the Markov chain, either a scalar or vector with length equal to the number of estimated coefficients. The default is NA, which uses the least squares estimates as the starting values.
-#'
-#' Use the following arguments to specify the model’s priors:
-#'
-#' @param b0: prior mean for the coefficients, either a numeric vector or a scalar. If a scalar, that value will be the prior mean for all the coefficients. The default is 0.
-#' @param B0: prior precision parameter for the coefficients, either a square matrix (with the dimensions equal to the number of the coefficients) or a scalar. If a scalar, that value times an identity matrix will be the prior precision parameter. The default is 0, which leads to an improper prior.
-#' @param c0: c0/2 is the shape parameter for the Inverse Gamma prior on the variance of the disturbance terms.
-#' @param d0: d0/2 is the scale parameter for the Inverse Gamma prior on the variance of the disturbance terms.
-#'
 #' @examples
 #'
 #' data(macro)

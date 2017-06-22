@@ -77,7 +77,7 @@ for quantile regression:
         estimate of the sparsity.
         \item \code{"ker"} which uses a kernel estimate of the sandwich as proposed by Powell(1990).
     }
-    \item ...: additional options passed to rq when fitting the model. See documentation for rq in the quantreg package for more information.
+    \item \code{...}: additional options passed to rq when fitting the model. See documentation for rq in the quantreg package for more information.
 }
 Additional parameters avaialable to this model include:
 \itemize{
