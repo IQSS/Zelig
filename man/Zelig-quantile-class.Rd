@@ -56,12 +56,35 @@ Depending on the class of model selected, \code{zelig} will return
 Quantile Regression for Continuous Dependent Variables
 }
 \details{
-Additional parameters avaialable to many models include:
+In addition to the standard inputs, zelig() takes the following additional options
+for quantile regression:
 \itemize{
-  \item weights: vector of weight values or a name of a variable in the dataset
+    \item \code{tau}: defaults to 0.5. Specifies the conditional quantile(s) that will be
+    estimated. 0.5 corresponds to estimating the conditional median, 0.25 and 0.75 correspond
+    to the conditional quartiles, etc. tau vectors with length greater than 1 are not currently
+    supported. If tau is set outside of the interval [0,1], zelig returns the solution for all
+    possible conditional quantiles given the data, but does not support inference on this fit
+    (setx and sim will fail).
+    \item \code{se}: a string value that defaults to "nid". Specifies the method by which
+    the covariance matrix of coefficients is estimated during the sim stage of analysis. \code{se}
+    can take the following values, which are passed to the \code{summary.rq} function from the
+    \code{quantreg} package. These descriptions are copied from the \code{summary.rq} documentation.
+    \itemize{
+        \item \code{"iid"} which presumes that the errors are iid and computes an estimate of
+        the asymptotic covariance matrix as in KB(1978).
+        \item \code{"nid"} which presumes local (in tau) linearity (in x) of the the
+        conditional quantile functions and computes a Huber sandwich estimate using a local
+        estimate of the sparsity.
+        \item \code{"ker"} which uses a kernel estimate of the sandwich as proposed by Powell(1990).
+    }
+    \item ...: additional options passed to rq when fitting the model. See documentation for rq in the quantreg package for more information.
+}
+Additional parameters avaialable to this model include:
+\itemize{
+  \item \code{weights}: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   \url{http://docs.zeligproject.org/articles/weights.html}.
-  \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+  \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
   robustly estimate uncertainty around model parameters due to sampling error.
   If an integer is supplied, the number of boostraps to run.
   For more information see:

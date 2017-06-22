@@ -125,6 +125,15 @@ Additional parameters avaialable to this model include:
   bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 
+\examples{
+data(swiss)
+names(swiss) <- c("Fert", "Agr", "Exam", "Educ", "Cath", "InfMort")
+z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+               model = "factor.bayes", data = swiss,
+               factors = 2, verbose = FALSE,
+               a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
+
+}
 \seealso{
 Vignette: \url{http://docs.zeligproject.org/articles/zelig_factorbayes.html}
 }

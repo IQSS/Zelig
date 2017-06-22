@@ -72,14 +72,8 @@ Depending on the class of model selected, \code{zelig} will return
 Autoregressive and Moving-Average Models with Integration for Time-Series Data
 }
 \details{
-Currently only the Reference class syntax for time series
-
-Additional parameters avaialable to this model include:
-\itemize{
-  \item \code{weights}: vector of weight values or a name of a variable in the dataset
-  by which to weight the model. For more information see:
-  \url{http://docs.zeligproject.org/articles/weights.html}.
-}
+Currently only the Reference class syntax for time series. This model does not accept
+Bootstraps or weights.
 }
 
 \examples{

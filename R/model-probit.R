@@ -38,6 +38,19 @@
 #' summary(s.out)
 #' plot(s.out)
 #'
+#' @details
+#' Additional parameters avaialable to this model include:
+#' \itemize{
+#'   \item \code{weights}: vector of weight values or a name of a variable in the dataset
+#'   by which to weight the model. For more information see:
+#'   \url{http://docs.zeligproject.org/articles/weights.html}.
+#'   \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
+#'   robustly estimate uncertainty around model parameters due to sampling error.
+#'   If an integer is supplied, the number of boostraps to run.
+#'   For more information see:
+#'   \url{http://docs.zeligproject.org/articles/bootstraps.html}.
+#' }
+#'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_probit.html}
 #' @import methods
 #' @export Zelig-probit
