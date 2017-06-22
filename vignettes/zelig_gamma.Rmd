@@ -101,7 +101,7 @@ $$
         Y &\sim& \textrm{Gamma}(y_i \mid \lambda_i, \alpha) \\
       f(y)  &=& \frac{1}{\alpha^{\lambda_i} \, \Gamma \lambda_i} \, y_i^{\lambda_i
         - 1} \exp -\left\{ \frac{y_i}{\alpha} \right\}\end{aligned}
-
+$$
    | for $\alpha, \lambda_i, y_i > 0$.
 
 -   The *systematic component* is given by

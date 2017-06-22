@@ -103,7 +103,7 @@ $$
         Y_i \mid \zeta_i & \sim & \textrm{Poisson}(\zeta_i \mu_i),\\
            \zeta_i & \sim & \frac{1}{\theta}\textrm{Gamma}(\theta).
          \end{aligned}
-
+$$
    The marginal distribution of $Y_i$ is then the negative
    binomial with mean $\mu_i$ and variance
    $\mu_i + \mu_i^2/\theta$:
@@ -115,7 +115,7 @@ $$
              & = & \frac{\Gamma (\theta + y_i)}{y! \, \Gamma(\theta)}
                    \frac{\mu_i^{y_i} \, \theta^{\theta}}{(\mu_i + \theta)^{\theta + y_i}},
          \end{aligned}
-
+$$
    where $\theta$ is the systematic parameter of the Gamma
    distribution modeling $\zeta_i$.
 
