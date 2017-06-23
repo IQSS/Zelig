@@ -31,7 +31,7 @@
 #'   to the console.
 #'
 #' @details
-#' In addition to the standard inputs, zelig() takes the following additional options
+#' In addition to the standard inputs, \code{zelig} takes the following additional options
 #' for quantile regression:
 #' \itemize{
 #'     \item \code{tau}: defaults to 0.5. Specifies the conditional quantile(s) that will be
