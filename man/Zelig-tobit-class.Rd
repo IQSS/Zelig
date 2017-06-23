@@ -44,8 +44,11 @@ to the console.}
 
 \item{below}{(defaults to 0) The point at which the dependent variable is censored from below.
 If any values in the dependent variable are observed to be less than the censoring point,
-it is assumed that that particular observation is censored from below at the observed value.
-(See for a Bayesian implementation that supports both left and right censoring.)}
+it is assumed that that particular observation is censored from below at the observed value.}
+
+\item{above}{(defaults to 0) The point at which the dependent variable is censored from above
+If any values in the dependent variable are observed to be more than the censoring point,
+it is assumed that that particular observation is censored from above at the observed value.}
 
 \item{robust}{defaults to FALSE. If TRUE, \code{zelig()} computes robust standard errors based on
 sandwich estimators and the options selected in cluster.}

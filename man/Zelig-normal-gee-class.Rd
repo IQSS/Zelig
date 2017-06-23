@@ -94,7 +94,8 @@ Additional parameters avaialable to this model include:
 \examples{
 library(Zelig)
 data(macro)
-z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country", data = macro, corstr = "AR-M")
+z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country",
+        data = macro, corstr = "AR-M")
 summary(z.out)
 }
 \seealso{

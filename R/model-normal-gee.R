@@ -67,7 +67,8 @@
 #' @examples
 #' library(Zelig)
 #' data(macro)
-#' z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country", data = macro, corstr = "AR-M")
+#' z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country",
+#'         data = macro, corstr = "AR-M")
 #' summary(z.out)
 
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_normalgee.html}
