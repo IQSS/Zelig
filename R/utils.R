@@ -282,7 +282,7 @@ model_lookup_df <- data.frame(
         c(class = "glm", family = "binomial", link = "probit", zclass = "probit"),
         c(class = "glm", family = "poisson",  link = "log", zclass = "poisson"),
         c(class = "glm", family = "Gamma", link = "inverse", zclass = "gamma"),
-        c(class = "svyglm", family = "gaussian", link = "identity", zclass = "znormal.survey"),
+        c(class = "svyglm", family = "gaussian", link = "identity", zclass = "normal.survey"),
         c(class = "svyglm", family = "binomial", link = "logit", zclass = "logit.survey"),
         c(class = "svyglm", family = "quasibinomial", link = "logit", zclass = "logit.survey")),
     stringsAsFactors = FALSE)
@@ -292,6 +292,8 @@ model_lookup_df <- data.frame(
 #' @param obj A model fit object.
 #' @keywords internal
 model_matcher <- function(obj) {
+    not_found_msg <- "Not a Zelig object and not convertible to one."
+
     # attempt to determine model type and initialize model
     try_na <- function(x) tryCatch(x, error = function(c)
         stop(not_found_msg, call. = FALSE))
