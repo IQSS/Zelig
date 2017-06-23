@@ -53,6 +53,7 @@ Suggests:
     ei,
     eiPack,
     knitr,
+    mitools,
     networkD3,
     optmatch,
     rmarkdown,
