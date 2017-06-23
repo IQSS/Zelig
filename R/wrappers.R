@@ -147,6 +147,39 @@ zelig <- function(formula,
     return(z5)
 }
 
+
+#' Coerce a non-Zelig fitted model object to a Zelig class object
+#'
+#' @param obj a fitted model object fitted using \code{lm} and many using
+#'    \code{glm}. Note: more intended in future Zelig releases.
+#' @param ... other arguments passed to \code{zelig}.
+#'
+#' @examples
+#' library(dplyr)
+#' lm.out <- lm(Fertility ~ Education, data = swiss)
+#'
+#' z.out <- to_zelig(lm.out)
+#'
+#' # to_zelig called from within setx
+#' setx(z.out) %>% sim() %>% plot()
+#'
+#' if (require(mitools)) {
+#'    data(africa, package = "Amelia")
+#'    a.imp <- amelia(x = africa, cs = "country", ts = "year", logs = "gdp_pc")$imputations
+#'    mod.out <- with(imputationList(a.imp), lm(gdp_pc ~ trade + civlib))
+#'    to_zelig(mod.out)
+#' }
+#'
+#' @author Christopher Gandrud and Ista Zhan
+#' @importFrom dplyr group_by_ %>% do
+#' @export
+#' 
+to_zelig <- function(obj, ...) {
+    message('to_zelig is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues\n')
+    zelig(model = obj, ...)
+}
+
+
 #' Setting Explanatory Variable Values
 #'
 #' The \code{setx} function uses the variables identified in
