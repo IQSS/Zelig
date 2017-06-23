@@ -32,7 +32,9 @@
 #'@param below (defaults to 0) The point at which the dependent variable is censored from below.
 #'  If any values in the dependent variable are observed to be less than the censoring point,
 #'  it is assumed that that particular observation is censored from below at the observed value.
-#'  (See for a Bayesian implementation that supports both left and right censoring.)
+#'@param above (defaults to 0) The point at which the dependent variable is censored from above
+#'  If any values in the dependent variable are observed to be more than the censoring point,
+#'  it is assumed that that particular observation is censored from above at the observed value.
 #'@param robust defaults to FALSE. If TRUE, \code{zelig()} computes robust standard errors based on
 #'  sandwich estimators and the options selected in cluster.
 #'@param cluster if robust = TRUE, you may select a variable to define groups of correlated
@@ -71,7 +73,7 @@
 #' z.out <- zelig(durable ~ age + quant, model = "tobit", data = tobin)
 #' summary(z.out)
 #'
-#' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_tobit.html}
+#' @seealso  Vignette: \url{http://docs.zeligproject.org/articles/zelig_tobit.html}
 #' @import methods
 #' @export Zelig-tobit
 #' @exportClass Zelig-tobit
