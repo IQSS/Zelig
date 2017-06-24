@@ -44,17 +44,17 @@ s.out <- sim(z.out, x = x.out)
 Inputs
 ------
 
-zelig() accepts the following arguments to specify how the dependent
+`zelig()` accepts the following arguments to specify how the dependent
 variable is censored.
 
 -  `below`: (defaults to 0) The point at which the dependent variable
    is censored from below. If any values in the dependent variable are
    observed to be less than the censoring point, it is assumed that that
    particular observation is censored from below at the observed value.
-   (See for a Bayesian implementation that supports both left and right
+   (See also the [Bayesian implementation](zelig_tobitbayes.html) which supports both left and right
    censoring.)
 
--  robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+-  `robust`: defaults to FALSE. If TRUE, zelig() computes robust standard
    errors based on sandwich estimators (see and ) and the options
    selected in cluster.
 
