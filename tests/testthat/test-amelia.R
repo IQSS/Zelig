@@ -23,6 +23,8 @@ test_that('REQUIRE TEST for Amelia integration, log-transformation', {
 })
 
 test_that('REQUIRE TEST for mutliple imputation support in to_zelig', {
+    library(Amelia)
+    library(mitools)
     data(africa, package = "Amelia")
     a.out <- amelia(x = africa, cs = "country", ts = "year", logs = "gdp_pc")
     mod.out <- with(imputationList(a.out$imputations), lm(gdp_pc ~ trade + civlib))
