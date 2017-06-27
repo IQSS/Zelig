@@ -167,7 +167,7 @@ zelig <- function(formula,
 #'
 #' if (require(mitools)) {
 #'    data(africa, package = "Amelia")
-#'    a.imp <- amelia(x = africa, cs = "country", ts = "year", logs = "gdp_pc")$imputations
+#'    a.imp <- Amelia::amelia(x = africa, cs = "country", ts = "year", logs = "gdp_pc")$imputations
 #'    mod.out <- with(imputationList(a.imp), lm(gdp_pc ~ trade + civlib))
 #'    to_zelig(mod.out)
 #' }
