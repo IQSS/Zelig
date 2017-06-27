@@ -130,9 +130,8 @@ zelig <- function(formula,
         models4[[models[[i]]$wrapper]] <- names(models)[i]
     }
     model.init <- sprintf("z%s$new()", models4[[model.chr]])
-
     if (length(model.init) == 0)
-        stop(sprintf("%s is not a supported model type.", model), call. = FALSE)
+        stop(sprintf("%s is not a supported model type.", model.chr), call. = FALSE)
     z5 <- try(eval(parse(text = model.init)), silent = TRUE)
     if ("try-error" %in% class(z5))
         stop("Model '", model.chr, "' not found")
