@@ -86,12 +86,12 @@ zelig <- function(formula,
             refit <- FALSE
         }
         if (c("list") %in% class(model)) {
+            model.chr <- model_matcher(model[[1]])            
             data <- to_zelig_mi(lapply(model, model.frame))
-            model.chr <- model_matcher(model[[1]])
             formula <- stats::formula(model[[1]])
         } else {
-            data <- model.frame(model)
             model.chr <- model_matcher(model)
+            data <- model.frame(model)
             formula <- stats::formula(model)
             model <- list(model)
         }
