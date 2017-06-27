@@ -82,7 +82,9 @@ zelig <- function(formula,
              call. = FALSE)
 
     if (!is.character(model)) {
-        if(missing(refit)) refit <- FALSE
+        if(is.null(refit) || missing(refit)) {
+            refit <- FALSE
+        }
         if (c("list") %in% class(model)) {
             data <- to_zelig_mi(lapply(model, model.frame))
             model.chr <- model_matcher(model[[1]])
@@ -97,7 +99,7 @@ zelig <- function(formula,
         model.chr <- model
         model <- NULL
     }
-    
+
     # Zelig Core
     zeligmodels <- system.file(file.path("JSON", "zelig5models.json"),
                                package = "Zelig")
@@ -126,7 +128,7 @@ zelig <- function(formula,
     models4 <- list()
     for (i in seq(models)) {
         models4[[models[[i]]$wrapper]] <- names(models)[i]
-    }        
+    }
     model.init <- sprintf("z%s$new()", models4[[model.chr]])
 
     if (length(model.init) == 0)
@@ -173,7 +175,7 @@ zelig <- function(formula,
 #' @author Christopher Gandrud and Ista Zhan
 #' @importFrom dplyr group_by_ %>% do
 #' @export
-#' 
+#'
 to_zelig <- function(obj, ...) {
     message('to_zelig is an experimental function.\n  Please report issues to: https://github.com/IQSS/Zelig/issues\n')
     zelig(model = obj, ...)

@@ -236,7 +236,9 @@ z$methods(
                    weights = NULL, by, bootstrap = FALSE, refit = NULL) {
     "The zelig function estimates a variety of statistical models"
 
-    if(missing(refit)) refit <- TRUE
+    if(is.null(refit) || missing(refit)) {
+        refit <- TRUE
+    }
     
     fn2 <- function(fc, data) {
       fc$data <- data
@@ -497,6 +499,8 @@ z$methods(
     .self$data <- tbl_df(.self$data)
     #.self$zelig.out <- eval(fn2(.self$model.call, data = data)) # shortened test version that bypasses "by"
     if(refit) {
+        .self$model.call$refit <- NULL
+        .self$model.call$model <- NULL
         .self$zelig.out <- .self$data %>%
             group_by_(.self$by) %>%
             do(z.out = eval(fn2(.self$model.call,
