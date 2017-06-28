@@ -5,6 +5,7 @@ library(mitools)
 library(survey)
 library(testthat)
 library(zeligverse)
+library(mitools)
 
 set.seed(123)
 test_check("Zelig")
