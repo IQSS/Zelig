@@ -39,6 +39,7 @@
 #'   subclasses.
 #' @param cite If is set to 'TRUE' (default), the model citation will be printed
 #'   to the console.
+#' @param refit If TRUE refit the model using zelig.
 #'
 #' @details
 #' Additional parameters avaialable to many models include:

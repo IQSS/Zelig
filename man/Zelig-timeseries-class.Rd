@@ -16,6 +16,6 @@ Time-series models in Zelig
 \item{\code{sim(num = NULL)}}{Generic Method for Computing and Organizing Simulated Quantities of Interest}
 
 \item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
+  bootstrap = FALSE, refit = NULL)}}{The zelig function estimates a variety of statistical models}
 }}
 

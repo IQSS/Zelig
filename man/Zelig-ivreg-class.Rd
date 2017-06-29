@@ -47,7 +47,7 @@ number of exogenous regressors.
 
 \describe{
 \item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
+  bootstrap = FALSE, refit = NULL)}}{The zelig function estimates a variety of statistical models}
 }}
 
 \examples{

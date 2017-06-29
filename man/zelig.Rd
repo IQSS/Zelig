@@ -4,7 +4,7 @@
 \alias{zelig}
 \title{Estimating a Statistical Model}
 \usage{
-zelig(formula, model, data, ..., by = NULL, cite = TRUE)
+zelig(formula, model, data, ..., by = NULL, cite = TRUE, refit = NULL)
 }
 \arguments{
 \item{formula}{a symbolic representation of the model to be
@@ -42,6 +42,8 @@ subclasses.}
 
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
+
+\item{refit}{If TRUE refit the model using zelig.}
 }
 \value{
 Depending on the class of model selected, \code{zelig} will return

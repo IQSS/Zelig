@@ -14,6 +14,6 @@ Vignette: \url{http://docs.zeligproject.org/articles/zelig_relogit.html}
 \item{\code{modcall_formula_transformer()}}{Transform model call formula.}
 
 \item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
+  bootstrap = FALSE, refit = NULL)}}{The zelig function estimates a variety of statistical models}
 }}
 
