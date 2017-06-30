@@ -79,8 +79,7 @@ Bootstraps or weights.
 \examples{
 data(seatshare)
 subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
-ts.out <- zar$new()
-ts.out$zelig(formula = unemp ~ leftseat, order = c(1,0,1), ts = "year", data = subset)
+ts.out <- zelig(formula = unemp ~ leftseat, model = "ar", ts = "year", data = subset)
 summary(ts.out)
 
 }

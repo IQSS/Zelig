@@ -61,8 +61,7 @@
 #' @examples
 #' data(seatshare)
 #' subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
-#' ts.out <- zarima$new()
-#' ts.out$zelig(formula = unemp ~ leftseat, order = c(1,0,1), ts = "year", data = subset)
+#' ts.out <- zelig(formula = unemp ~ leftseat, model = "arima", ts = "year", data = subset)
 #' summary(ts.out)
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_arima.html}
