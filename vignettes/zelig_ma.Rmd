@@ -25,6 +25,8 @@ options(cite = FALSE)
 
 Time-Series Model with Moving Average with `ma`.
 
+Warning: Simulation is not currently implemented for timeseries models.
+
 Syntax
 ------
 

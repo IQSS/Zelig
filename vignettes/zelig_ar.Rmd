@@ -25,6 +25,8 @@ options(cite = FALSE)
 
 Time-Series Model with Autoregressive Disturbance with `ar`.
 
+Warning: Simulation is not currently implemented for timeseries models.
+
 Syntax
 ------
 

@@ -69,7 +69,7 @@ Depending on the class of model selected, \code{zelig} will return
   model objects using \code{\link{from_zelig_model}}.
 }
 \description{
-Time-Series Model with Moving Average
+Warning: Simulation is not currently implemented for timeseries models.
 }
 \details{
 Currently only the Reference class syntax for time series. This model does not accept

@@ -1,6 +1,6 @@
 #' Time-Series Model with Autoregressive Disturbance
 #'
-#'
+#' Warning: Simulation is not currently implemented for timeseries models.
 #'
 #' @param formula a symbolic representation of the model to be
 #'   estimated, in the form \code{y \~\, x1 + x2}, where \code{y} is the

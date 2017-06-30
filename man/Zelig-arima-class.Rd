@@ -69,7 +69,7 @@ Depending on the class of model selected, \code{zelig} will return
   model objects using \code{\link{from_zelig_model}}.
 }
 \description{
-Autoregressive and Moving-Average Models with Integration for Time-Series Data
+Warning: Simulation is not currently implemented for timeseries models.
 }
 \details{
 Currently only the Reference class syntax for time series. This model does not accept

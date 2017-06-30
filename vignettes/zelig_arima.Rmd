@@ -25,6 +25,8 @@ options(cite = FALSE)
 
 Autoregressive and Moving-Average Models with Integration for Time-Series Data
 
+Warning: Simulation is not currently implemented for timeseries models.
+
 Syntax
 ------
 
