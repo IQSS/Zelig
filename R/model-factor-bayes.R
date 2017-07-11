@@ -1,7 +1,7 @@
 #' Bayesian Factor Analysis
 #'
 #' @param formula a symbolic representation of the model to be
-#'   estimated, in the form \code{\~\ Y1 + Y2 + Y3}, where Y1, Y2, and Y3 are variables
+#'   estimated, in the form \code{~ Y1 + Y2 + Y3}, where Y1, Y2, and Y3 are variables
 #'   of interest in factor analysis (manifest variables), assumed to be
 #'   normally distributed. The model requires a minimum of three manifest
 #'   variables contained in the

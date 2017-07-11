@@ -7,7 +7,7 @@
 \title{Autoregressive and Moving-Average Models with Integration for Time-Series Data}
 \arguments{
 \item{formula}{a symbolic representation of the model to be
-estimated, in the form \code{y \~\, x1 + x2}, where \code{y} is the
+estimated, in the form \code{y ~ x1 + x2}, where \code{y} is the
 dependent variable and \code{x1} and \code{x2} are the explanatory
 variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
 same dataset. (You may include more than two explanatory variables,
@@ -69,7 +69,8 @@ Depending on the class of model selected, \code{zelig} will return
   model objects using \code{\link{from_zelig_model}}.
 }
 \description{
-Warning: Simulation is not currently implemented for timeseries models.
+Warning: \code{summary} does not work with timeseries models after
+simulation.
 }
 \details{
 Currently only the Reference class syntax for time series. This model does not accept

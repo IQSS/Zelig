@@ -7,7 +7,7 @@
 \title{Log-Normal Regression for Duration Dependent Variables}
 \arguments{
 \item{formula}{a symbolic representation of the model to be
-estimated, in the form \code{y \~\, x1 + x2}, where \code{y} is the
+estimated, in the form \code{y ~ x1 + x2}, where \code{y} is the
 dependent variable and \code{x1} and \code{x2} are the explanatory
 variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
 same dataset. (You may include more than two explanatory variables,
