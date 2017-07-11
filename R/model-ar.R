@@ -6,10 +6,10 @@
 #' @exportClass Zelig-ar
 #'
 #' @include model-zelig.R
-#' @include model-timeseries.R
-  
+#' @include model-arima.R
+
 zar <- setRefClass("Zelig-ar",
-                       contains = "Zelig-timeseries")
+                       contains = "Zelig-arima")
 
 zar$methods(
   initialize = function() {

@@ -61,13 +61,13 @@ Suggests:
     ZeligChoice,
     ZeligEI,
     zeligverse
-Collate:
+Collate: 
     'assertions.R'
     'model-zelig.R'
     'model-timeseries.R'
     'model-ma.R'
-    'model-ar.R'
     'model-arima.R'
+    'model-ar.R'
     'model-weibull.R'
     'model-tobit.R'
     'model-bayes.R'
