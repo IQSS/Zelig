@@ -17,7 +17,7 @@ same dataset. The \code{+} symbol means ``inclusion'' not
 \item{factors}{number of the factors to be fitted (defaults to 2).}
 
 \item{model}{the name of a statistical model to estimate.
-For a list of supported models and their documentation see:
+For a list of other supported models and their documentation see:
 \url{http://docs.zeligproject.org/articles/}.}
 
 \item{data}{the name of a data frame containing the variables
@@ -32,9 +32,7 @@ relevant for the model to be estimated.}
 \code{zelig} will subset
 the data frame based on the levels in the \code{by} variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: \code{z.out <- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-by = 'state')} You may also use \code{by} to run models using MatchIt
+effort. You may also use \code{by} to run models using MatchIt
 subclasses.}
 
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed

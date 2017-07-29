@@ -29,7 +29,7 @@ Description: A framework that brings together an abundance of common
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
 Version: 5.1-2.9000
-Date: 2017-06-13
+Date: 2017-07-29
 Depends:
     survival
 Imports:
@@ -113,4 +113,4 @@ Collate:
     'model-probit-survey.R'
     'plots.R'
     'wrappers.R'
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.0.1
