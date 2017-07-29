@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -157,7 +158,7 @@
     <tr>
       <th>formula</th>
       <td><p>a symbolic representation of the model to be
-estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+estimated, in the form <code>y ~ x1 + x2</code>, where <code>y</code> is the
 dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
 variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
 same dataset. (You may include more than two explanatory variables,
@@ -172,7 +173,7 @@ exclude the main effects; and quadratic terms in the form
       <th>model</th>
       <td><p>the name of a statistical model to estimate.
 For a list of other supported models and their documentation see:
-<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+<a href='http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -192,9 +193,7 @@ relevant for the model to be estimated.</p></td>
 <code>zelig</code> will subset
 the data frame based on the levels in the <code>by</code> variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+effort. You may also use <code>by</code> to run models using MatchIt
 subclasses.</p></td>
     </tr>
     <tr>
@@ -236,6 +235,17 @@ id and should be ordered within each cluster when appropriate</p></td>
       <th>geeglm:</th>
       <td><p>See geeglm in package geepack for other function arguments</p></td>
     </tr>
+    <tr>
+      <th>Mv:</th>
+      <td><p>defaults to 1. It specifies the number of periods of correlation and
+only needs to be specified when <code>corstr</code> is stat_M_dep, non_stat_M_dep, or AR-M.</p></td>
+    </tr>
+    <tr>
+      <th>R:</th>
+      <td><p>defaults to NULL. It specifies a user-defined correlation matrix rather than
+estimating it from the data. The argument is used only when corstr is "fixed". The input is a TxT
+matrix of correlations, where T is the size of the largest cluster.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -245,7 +255,7 @@ id and should be ordered within each cluster when appropriate</p></td>
   and <code>formula</code> which may be summarized using
   <code>summary(z.out)</code> or individually extracted using, for example,
   <code>coef(z.out)</code>. See
-  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  <a href='http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
   functions to extract model components. You can also extract whole fitted
   model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
     
@@ -254,44 +264,26 @@ id and should be ordered within each cluster when appropriate</p></td>
     <p>Additional parameters avaialable to this model include:</p><ul>
 <li><p><code>weights</code>: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
-  <a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
+  <a href='http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_normalgee.html'>http://docs.zeligproject.org/articles/zelig_normalgee.html</a></p>
+    <p>Vignette: <a href='http://docs.zeligproject.org/articles/zelig_normalgee.html'>http://docs.zeligproject.org/articles/zelig_normalgee.html</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>Zelig</span>)
 <span class='fu'>data</span>(<span class='no'>macro</span>)
-<span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unem</span> ~ <span class='no'>gdp</span> + <span class='no'>capmob</span> + <span class='no'>trade</span>, <span class='kw'>model</span> <span class='kw'>=</span><span class='st'>"normal.gee"</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"country"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>macro</span>, <span class='kw'>corstr</span> <span class='kw'>=</span> <span class='st'>"AR-M"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; How to cite this model in Zelig:
-#&gt;   Patrick Lam. 2011.
-#&gt;   normal-gee: General Estimating Equation for Normal Regression
-#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out</span>)</div><div class='output co'>#&gt; Model: 
+<span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unem</span> ~ <span class='no'>gdp</span> + <span class='no'>capmob</span> + <span class='no'>trade</span>, <span class='kw'>model</span> <span class='kw'>=</span><span class='st'>"normal.gee"</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"country"</span>,
+        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>macro</span>, <span class='kw'>corstr</span> <span class='kw'>=</span> <span class='st'>"AR-M"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in unem ~ gdp + capmob + trade: unused arguments (formula = unem, id = gdp + capmob + trade)</span></div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out</span>)</div><div class='output co'>#&gt; Model: Combined Bootstraps 
 #&gt; 
-#&gt; Call:
-#&gt; z5$zelig(formula = unem ~ gdp + capmob + trade, id = "country", 
-#&gt;     corstr = "AR-M", data = macro)
+#&gt;             Estimate Std.Error z value Pr(&gt;|z|)
+#&gt; (Intercept)   -0.968     0.597   -1.62     0.10
+#&gt; target        -0.021     0.372   -0.06     0.95
+#&gt; coop           1.211     0.281    4.31  1.6e-05
 #&gt; 
-#&gt;  Coefficients:
-#&gt;             Estimate Std.err  Wald   Pr(&gt;|W|)
-#&gt; (Intercept)  -1.4180  1.5288  0.86      0.354
-#&gt; gdp          -0.1215  0.0666  3.33      0.068
-#&gt; capmob        0.8974  0.5026  3.19      0.074
-#&gt; trade         0.1333  0.0261 26.01 0.00000034
-#&gt; 
-#&gt; Estimated Scale Parameters:
-#&gt;             Estimate Std.err
-#&gt; (Intercept)     16.6    4.05
-#&gt; 
-#&gt; Correlation: Structure = exchangeable ar1 unstructured userdefined fixed</div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt;   Link = identity 
-#&gt; 
-#&gt; Estimated Correlation Parameters:
-#&gt;       Estimate Std.err
-#&gt; alpha    0.812  0.0429
-#&gt; Number of clusters:   14   Maximum cluster size: 25 
+#&gt; For results from individual bootstrapped datasets, use summary(x, subset = i:j)
 #&gt; Next step: Use 'setx' method</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

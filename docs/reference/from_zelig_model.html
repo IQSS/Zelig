@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -171,15 +172,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>z5</span> <span class='kw'>&lt;-</span> <span class='no'>zls</span>$<span class='fu'>new</span>()
-<span class='no'>z5</span>$<span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>Fertility</span> ~ <span class='no'>Education</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>swiss</span>)
-<span class='fu'>from_zelig_model</span>(<span class='no'>z5</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; lm(formula = Fertility ~ Education, data = as.data.frame(.))
-#&gt; 
-#&gt; Coefficients:
-#&gt; (Intercept)    Education  
-#&gt;      79.610       -0.862  
-#&gt; </div><div class='input'>
+<span class='no'>z5</span>$<span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>Fertility</span> ~ <span class='no'>Education</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>swiss</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Fertility ~ Education: unused arguments (formula = Fertility, data = Education)</span></div><div class='input'><span class='fu'>from_zelig_model</span>(<span class='no'>z5</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Zelig model has not been estimated.</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

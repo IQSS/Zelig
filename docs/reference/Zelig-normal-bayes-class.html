@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -157,7 +158,7 @@
     <tr>
       <th>formula</th>
       <td><p>a symbolic representation of the model to be
-estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+estimated, in the form <code>y ~ x1 + x2</code>, where <code>y</code> is the
 dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
 variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
 same dataset. (You may include more than two explanatory variables,
@@ -172,7 +173,7 @@ exclude the main effects; and quadratic terms in the form
       <th>model</th>
       <td><p>the name of a statistical model to estimate.
 For a list of other supported models and their documentation see:
-<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+<a href='http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -192,9 +193,7 @@ relevant for the model to be estimated.</p></td>
 <code>zelig</code> will subset
 the data frame based on the levels in the <code>by</code> variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+effort. You may also use <code>by</code> to run models using MatchIt
 subclasses.</p></td>
     </tr>
     <tr>
@@ -211,17 +210,16 @@ to the console.</p></td>
   and <code>formula</code> which may be summarized using
   <code>summary(z.out)</code> or individually extracted using, for example,
   <code>coef(z.out)</code>. See
-  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  <a href='http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
   functions to extract model components. You can also extract whole fitted
   model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
-<p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_normalbayes.html'>http://docs.zeligproject.org/articles/zelig_normalbayes.html</a></p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Additional parameters avaialable to many models include:</p><ul>
 <li><p><code>weights</code>: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
-  <a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
+  <a href='http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
 <li><p><code>burnin</code>: number of the initial MCMC iterations to be discarded (defaults to 1,000).</p></li>
 <li><p><code>mcmc</code>: number of the MCMC iterations after burnin (defaults to 10,000).</p></li>
 <li><p><code>thin</code>: thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.</p></li>
@@ -235,14 +233,940 @@ to the console.</p></td>
 <li><p><code>d0</code>: d0/2 is the scale parameter for the Inverse Gamma prior on the variance of the disturbance terms.</p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Vignette: <a href='http://docs.zeligproject.org/articles/zelig_normalbayes.html'>http://docs.zeligproject.org/articles/zelig_normalbayes.html</a></p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>macro</span>)
-<span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unem</span> ~ <span class='no'>gdp</span> + <span class='no'>capmob</span> + <span class='no'>trade</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"normal.bayes"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>macro</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
-#&gt;   Ben Goodrich, and Ying Lu. 2013.
-#&gt;   normal-bayes: Bayesian Normal Linear Regression
-#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'>
+<span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unem</span> ~ <span class='no'>gdp</span> + <span class='no'>capmob</span> + <span class='no'>trade</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"normal.bayes"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>macro</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in unem ~ gdp + capmob + trade: unused arguments (formula = unem, burnin = gdp + capmob + trade)</span></div><div class='input'>
+
+<span class='fu'>data</span>(<span class='no'>macro</span>)
+<span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unem</span> ~ <span class='no'>gdp</span> + <span class='no'>capmob</span> + <span class='no'>trade</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"normal.bayes"</span>,
+<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>macro</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in unem ~ gdp + capmob + trade: unused arguments (formula = unem, burnin = gdp + capmob + trade)</span></div><div class='input'>
+<span class='no'>z.out</span>$<span class='fu'>geweke.diag</span>()</div><div class='output co'>#&gt; <span class='error'>Error in envRefInferField(x, what, getClass(class(x)), selfEnv): ‘geweke.diag’ is not a valid field or method name for reference class “Zelig-poisson-gee”</span></div><div class='input'><span class='no'>z.out</span>$<span class='fu'>heidel.diag</span>()</div><div class='output co'>#&gt; <span class='error'>Error in envRefInferField(x, what, getClass(class(x)), selfEnv): ‘heidel.diag’ is not a valid field or method name for reference class “Zelig-poisson-gee”</span></div><div class='input'><span class='no'>z.out</span>$<span class='fu'>raftery.diag</span>()</div><div class='output co'>#&gt; <span class='error'>Error in envRefInferField(x, what, getClass(class(x)), selfEnv): ‘raftery.diag’ is not a valid field or method name for reference class “Zelig-poisson-gee”</span></div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out</span>)</div><div class='output co'>#&gt; Model: Combined Bootstraps 
+#&gt; 
+#&gt;             Estimate Std.Error z value Pr(&gt;|z|)
+#&gt; (Intercept)   -0.968     0.597   -1.62     0.10
+#&gt; target        -0.021     0.372   -0.06     0.95
+#&gt; coop           1.211     0.281    4.31  1.6e-05
+#&gt; 
+#&gt; For results from individual bootstrapped datasets, use summary(x, subset = i:j)
+#&gt; Next step: Use 'setx' method</div><div class='input'>
+<span class='no'>x.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.out</span>)
+<span class='no'>s.out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sim.html'>sim</a></span>(<span class='no'>z.out</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x.out</span>)
+<span class='fu'>summary</span>(<span class='no'>s.out1</span>)</div><div class='output co'>#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.332102 NA 4.332102 4.332102 4.332102
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 1.97043 NA 1.97043 1.97043 1.97043
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.296973 NA 3.296973 3.296973 3.296973
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.084593 NA 2.084593 2.084593 2.084593
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.217542 NA 3.217542 3.217542 3.217542
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.669734 NA 3.669734 3.669734 3.669734
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 5.516118 NA 5.516118 5.516118 5.516118
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    9 NA   9    9     9
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.230983 NA 2.230983 2.230983 2.230983
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.489463 NA 2.489463 2.489463 2.489463
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.636914 NA 2.636914 2.636914 2.636914
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.001593 NA 2.001593 2.001593 2.001593
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    0 NA   0    0     0
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.532979 NA 2.532979 2.532979 2.532979
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.199614 NA 3.199614 3.199614 3.199614
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    6 NA   6    6     6
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.075514 NA 4.075514 4.075514 4.075514
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.151776 NA 3.151776 3.151776 3.151776
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.562178 NA 3.562178 3.562178 3.562178
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.118902 NA 3.118902 3.118902 3.118902
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    0 NA   0    0     0
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.975514 NA 3.975514 3.975514 3.975514
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.285862 NA 2.285862 2.285862 2.285862
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.327347 NA 3.327347 3.327347 3.327347
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 2.18682 NA 2.18682 2.18682 2.18682
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.344674 NA 3.344674 3.344674 3.344674
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    7 NA   7    7     7
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 1.87734 NA 1.87734 1.87734 1.87734
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.249022 NA 2.249022 2.249022 2.249022
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.657202 NA 2.657202 2.657202 2.657202
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.194507 NA 4.194507 4.194507 4.194507
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.405083 NA 2.405083 2.405083 2.405083
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.559143 NA 3.559143 3.559143 3.559143
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.723499 NA 4.723499 4.723499 4.723499
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    6 NA   6    6     6
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.588085 NA 4.588085 4.588085 4.588085
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    6 NA   6    6     6
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.748192 NA 2.748192 2.748192 2.748192
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    6 NA   6    6     6
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.581386 NA 3.581386 3.581386 3.581386
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.318897 NA 2.318897 2.318897 2.318897
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.131688 NA 2.131688 2.131688 2.131688
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.322489 NA 3.322489 3.322489 3.322489
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.771724 NA 2.771724 2.771724 2.771724
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.685284 NA 3.685284 3.685284 3.685284
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    5 NA   5    5     5
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.780446 NA 2.780446 2.780446 2.780446
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.002036 NA 3.002036 3.002036 3.002036
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 2.90744 NA 2.90744 2.90744 2.90744
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.362482 NA 2.362482 2.362482 2.362482
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.041708 NA 3.041708 3.041708 3.041708
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 1.977014 NA 1.977014 1.977014 1.977014
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.658043 NA 3.658043 3.658043 3.658043
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.849384 NA 2.849384 2.849384 2.849384
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.006105 NA 3.006105 3.006105 3.006105
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.459903 NA 2.459903 2.459903 2.459903
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.619417 NA 3.619417 3.619417 3.619417
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.034024 NA 2.034024 2.034024 2.034024
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    0 NA   0    0     0
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.373157 NA 3.373157 3.373157 3.373157
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.555447 NA 3.555447 3.555447 3.555447
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 1.865954 NA 1.865954 1.865954 1.865954
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.591145 NA 2.591145 2.591145 2.591145
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    6 NA   6    6     6
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.776477 NA 3.776477 3.776477 3.776477
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.516915 NA 2.516915 2.516915 2.516915
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.215279 NA 3.215279 3.215279 3.215279
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 2.00689 NA 2.00689 2.00689 2.00689
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 2.71886 NA 2.71886 2.71886 2.71886
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.810741 NA 3.810741 3.810741 3.810741
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    5 NA   5    5     5
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.789979 NA 2.789979 2.789979 2.789979
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 5.162309 NA 5.162309 5.162309 5.162309
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    8 NA   8    8     8
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.744038 NA 2.744038 2.744038 2.744038
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.333788 NA 4.333788 4.333788 4.333788
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.988718 NA 2.988718 2.988718 2.988718
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.439173 NA 2.439173 2.439173 2.439173
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.498351 NA 2.498351 2.498351 2.498351
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 1.658848 NA 1.658848 1.658848 1.658848
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.220384 NA 3.220384 3.220384 3.220384
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    0 NA   0    0     0
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.832487 NA 4.832487 4.832487 4.832487
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 1.935266 NA 1.935266 1.935266 1.935266
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.556883 NA 3.556883 3.556883 3.556883
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.931971 NA 2.931971 2.931971 2.931971
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.021517 NA 2.021517 2.021517 2.021517
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.628223 NA 2.628223 2.628223 2.628223
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.757878 NA 3.757878 3.757878 3.757878
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    7 NA   7    7     7
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.119692 NA 4.119692 4.119692 4.119692
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    9 NA   9    9     9
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.072636 NA 4.072636 4.072636 4.072636
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.591744 NA 2.591744 2.591744 2.591744
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.560402 NA 3.560402 3.560402 3.560402
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 2.02493 NA 2.02493 2.02493 2.02493
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    1 NA   1    1     1
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 1.345474 NA 1.345474 1.345474 1.345474
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.717981 NA 2.717981 2.717981 2.717981
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 1.985536 NA 1.985536 1.985536 1.985536
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    0 NA   0    0     0
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.522221 NA 4.522221 4.522221 4.522221
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    5 NA   5    5     5
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.957808 NA 2.957808 2.957808 2.957808
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.374666 NA 3.374666 3.374666 3.374666
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.530743 NA 2.530743 2.530743 2.530743
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 2.65524 NA 2.65524 2.65524 2.65524
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 3.12328 NA 3.12328 3.12328 3.12328
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    0 NA   0    0     0
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 2.608664 NA 2.608664 2.608664 2.608664
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    2 NA   2    2     2
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 3.05297 NA 3.05297 3.05297 3.05297
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.166336 NA 3.166336 3.166336 3.166336
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.921547 NA 3.921547 3.921547 3.921547
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;         mean sd     50%    2.5%   97.5%
+#&gt; [1,] 2.69116 NA 2.69116 2.69116 2.69116
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 1.792611 NA 1.792611 1.792611 1.792611
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    0 NA   0    0     0
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.191611 NA 3.191611 3.191611 3.191611
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 1.561542 NA 1.561542 1.561542 1.561542
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    5 NA   5    5     5
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.013065 NA 4.013065 4.013065 4.013065
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    3 NA   3    3     3
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.074691 NA 3.074691 3.074691 3.074691
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    4 NA   4    4     4
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 4.978287 NA 4.978287 4.978287 4.978287
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    7 NA   7    7     7
+#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;          mean sd      50%     2.5%    97.5%
+#&gt; [1,] 3.241566 NA 3.241566 3.241566 3.241566
+#&gt; pv
+#&gt;      mean sd 50% 2.5% 97.5%
+#&gt; [1,]    5 NA   5    5     5</div><div class='input'>
+<span class='no'>x.high</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.out</span>, <span class='kw'>trade</span> <span class='kw'>=</span> <span class='fu'>quantile</span>(<span class='no'>macro</span>$<span class='no'>trade</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.8</span>))</div><div class='output co'>#&gt; <span class='error'>Error: Variable 'trade' not in data set.</span></div><div class='input'><span class='no'>x.low</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.out</span>, <span class='kw'>trade</span> <span class='kw'>=</span> <span class='fu'>quantile</span>(<span class='no'>macro</span>$<span class='no'>trade</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.2</span>))</div><div class='output co'>#&gt; <span class='error'>Error: Variable 'trade' not in data set.</span></div><div class='input'>
+<span class='no'>s.out2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sim.html'>sim</a></span>(<span class='no'>z.out</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x.high</span>, <span class='kw'>x1</span> <span class='kw'>=</span> <span class='no'>x.low</span>)</div><div class='output co'>#&gt; <span class='error'>Error in sim(z.out, x = x.high, x1 = x.low): object 'x.high' not found</span></div><div class='input'><span class='fu'>summary</span>(<span class='no'>s.out2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(s.out2): object 's.out2' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -253,6 +1177,8 @@ to the console.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

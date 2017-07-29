@@ -24,7 +24,8 @@ a Zelig model estimation — ATT • Zelig</title>
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -179,16 +180,16 @@ treatment and non-treated groups.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
-<span class='fu'>data</span>(<span class='no'>sanction</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'>data</span>(<span class='no'>sanction</span>)
 <span class='no'>z.att</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>num</span> ~ <span class='no'>target</span> + <span class='no'>coop</span> + <span class='no'>mil</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"poisson"</span>,
                  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sanction</span>) <span class='kw'>%&gt;%</span>
              <span class='fu'>ATT</span>(<span class='kw'>treatment</span> <span class='kw'>=</span> <span class='st'>"mil"</span>) <span class='kw'>%&gt;%</span>
-             <span class='fu'><a href='get_qi.html'>get_qi</a></span>(<span class='kw'>qi</span> <span class='kw'>=</span> <span class='st'>"ATT"</span>, <span class='kw'>xvalue</span> <span class='kw'>=</span> <span class='st'>"TE"</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
-#&gt;   R Core Team. 2007.
-#&gt;   poisson: Poisson Regression for Event Count Dependent Variables
-#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'>
+             <span class='fu'><a href='get_qi.html'>get_qi</a></span>(<span class='kw'>qi</span> <span class='kw'>=</span> <span class='st'>"ATT"</span>, <span class='kw'>xvalue</span> <span class='kw'>=</span> <span class='st'>"TE"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in num ~ target + coop + mil: unused arguments (formula = num, data = target + coop + mil)</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

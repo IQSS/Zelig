@@ -61,7 +61,7 @@ Suggests:
     ZeligChoice,
     ZeligEI,
     zeligverse
-Collate: 
+Collate:
     'assertions.R'
     'model-zelig.R'
     'model-timeseries.R'

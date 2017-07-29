@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -157,7 +158,7 @@
     <tr>
       <th>formula</th>
       <td><p>a symbolic representation of the model to be
-estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+estimated, in the form <code>y ~ x1 + x2</code>, where <code>y</code> is the
 dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
 variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
 same dataset. (You may include more than two explanatory variables,
@@ -171,7 +172,7 @@ exclude the main effects; and quadratic terms in the form
       <th>model</th>
       <td><p>the name of a statistical model to estimate.
 For a list of other supported models and their documentation see:
-<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+<a href='http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -191,9 +192,7 @@ relevant for the model to be estimated.</p></td>
 <code>zelig</code> will subset
 the data frame based on the levels in the <code>by</code> variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-  by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+effort. You may also use <code>by</code> to run models using MatchIt
 subclasses.</p></td>
     </tr>
     <tr>
@@ -227,7 +226,7 @@ formula is <code>y ~ x1 + x2</code> and instruments is a one-sided formula
 
     <p><code>ivreg</code> is from Christian Kleiber and Achim Zeileis (2008). Applied
 Econometrics with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL
-<a href = 'https://CRAN.R-project.org/package=AER'>https://CRAN.R-project.org/package=AER</a></p>
+<a href='https://CRAN.R-project.org/package=AER'>https://CRAN.R-project.org/package=AER</a></p>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -236,7 +235,7 @@ an object with elements including <code>coefficients</code>, <code>residuals</co
 and <code>formula</code> which may be summarized using
 <code>summary(z.out)</code> or individually extracted using, for example,
 <code>coef(z.out)</code>. See
-<a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+<a href='http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
 functions to extract model components. You can also extract whole fitted
 model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
     
@@ -245,12 +244,12 @@ model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></
     <p>Additional parameters avaialable to many models include:</p><ul>
 <li><p>weights: vector of weight values or a name of a variable in the dataset
 by which to weight the model. For more information see:
-<a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
+<a href='http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
 <li><p>bootstrap: logical or numeric. If <code>FALSE</code> don't use bootstraps to
 robustly estimate uncertainty around model parameters due to sampling error.
 If an integer is supplied, the number of boostraps to run.
 For more information see:
-<a href = 'http://docs.zeligproject.org/articles/bootstraps.html'>http://docs.zeligproject.org/articles/bootstraps.html</a>.</p></li>
+<a href='http://docs.zeligproject.org/articles/bootstraps.html'>http://docs.zeligproject.org/articles/bootstraps.html</a>.</p></li>
 </ul>
     <p>Regressors and instruments for <code>ivreg</code> are most easily specified in
 a formula with two parts on the right-hand side, e.g.,
@@ -268,13 +267,13 @@ number of exogenous regressors.</p>
 
     
     <dl class='dl-horizontal'>
-<dt><code>zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)</code></dt><dd><p>The zelig function estimates a variety of statistical models</p></dd>
+<dt><code><a href='zelig.html'>zelig(formula, data, model = NULL, ..., weights = NULL, by,
+  bootstrap = FALSE)</a></code></dt><dd><p>The zelig function estimates a variety of statistical models</p></dd>
 </dl>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_ivreg.html'>http://docs.zeligproject.org/articles/zelig_ivreg.html</a>
+    <p>Vignette: <a href='http://docs.zeligproject.org/articles/zelig_ivreg.html'>http://docs.zeligproject.org/articles/zelig_ivreg.html</a>
 Fit instrumental-variable regression by two-stage least squares. This is
 equivalent to direct instrumental-variables estimation when the number of
 instruments is equal to the number of predictors.
@@ -295,17 +294,14 @@ Greene, W. H. (1993) <em>Econometric Analysis</em>, 2nd ed., Macmillan.</p>
 <span class='no'>CigarettesSW</span>$<span class='no'>log_rprice</span> <span class='kw'>&lt;-</span> <span class='fu'>log</span>(<span class='no'>CigarettesSW</span>$<span class='no'>rprice</span>)
 <span class='no'>CigarettesSW</span>$<span class='no'>log_rincome</span> <span class='kw'>&lt;-</span> <span class='fu'>log</span>(<span class='no'>CigarettesSW</span>$<span class='no'>rincome</span>)
 <span class='no'>z.out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='fu'>log</span>(<span class='no'>packs</span>) ~ <span class='no'>log_rprice</span> + <span class='no'>log_rincome</span> <span class='kw'>|</span>
-<span class='no'>log_rincome</span> + <span class='no'>tdiff</span> + <span class='fu'>I</span>(<span class='no'>tax</span>/<span class='no'>cpi</span>),<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='no'>year</span> <span class='kw'>==</span> <span class='st'>"1995"</span>,<span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(substitute(subset), data, env): object 'year' not found</span></div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out1</span>)</div><div class='output co'>#&gt; Model: Combined Bootstraps 
-#&gt; 
-#&gt;             Estimate Std.Error z value Pr(&gt;|z|)
-#&gt; (Intercept)    -1.22        NA      NA       NA
-#&gt; racewhite       0.50        NA      NA       NA
-#&gt; educate         0.16        NA      NA       NA
-#&gt; 
-#&gt; For results from individual bootstrapped datasets, use summary(x, subset = i:j)
-#&gt; Next step: Use 'setx' method</div><div class='input'><span class='fu'>library</span>(<span class='no'>Zelig</span>)
-<span class='fu'>library</span>(<span class='no'>AER</span>) <span class='co'># for sandwich vcov</span>
-<span class='fu'>library</span>(<span class='no'>dplyr</span>) <span class='co'># for the pipe operator %&gt;%</span>
+<span class='no'>log_rincome</span> + <span class='no'>tdiff</span> + <span class='fu'>I</span>(<span class='no'>tax</span>/<span class='no'>cpi</span>),<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='no'>year</span> <span class='kw'>==</span> <span class='st'>"1995"</span>,<span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in log(packs) ~ log_rprice + log_rincome | log_rincome + tdiff +     I(tax/cpi): unused arguments (formula = log(packs), data = log_rprice + log_rincome | log_rincome + tdiff + I(tax/cpi))</span></div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(z.out1): object 'z.out1' not found</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>Zelig</span>)
+<span class='fu'>library</span>(<span class='no'>AER</span>) <span class='co'># for sandwich vcov</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘car’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:dplyr’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lmtest</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: sandwich</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>) <span class='co'># for the pipe operator %&gt;%</span>
 
 <span class='co'># load and transform data</span>
 <span class='fu'>data</span>(<span class='st'>"CigarettesSW"</span>)
@@ -322,30 +318,7 @@ Greene, W. H. (1993) <em>Econometric Analysis</em>, 2nd ed., Macmillan.</p>
 <span class='no'>z.out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='fu'>log</span>(<span class='no'>packs</span>) ~ <span class='no'>log_rprice</span> + <span class='no'>log_rincome</span> <span class='kw'>|</span>
                     <span class='no'>log_rincome</span> + <span class='no'>tdiff</span> + <span class='fu'>I</span>(<span class='no'>tax</span>/<span class='no'>cpi</span>),
                     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>,
-                    <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
-#&gt;   Christian Kleiber and Achim Zeileis. 2008.
-#&gt;   ivreg: Instrumental-Variable Regression
-#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out1</span>)</div><div class='output co'>#&gt; Model: 
-#&gt; 
-#&gt; Call:
-#&gt; z5$zelig(formula = formula, data = data, by = by)
-#&gt; 
-#&gt; Residuals:
-#&gt;     Min      1Q  Median      3Q     Max 
-#&gt; -0.6138 -0.0723  0.0144  0.0949  0.3750 
-#&gt; 
-#&gt; Coefficients:
-#&gt;             Estimate Std. Error t value             Pr(&gt;|t|)
-#&gt; (Intercept)    9.736      0.569   17.12 &lt; 0.0000000000000002
-#&gt; log_rprice    -1.229      0.155   -7.92      0.0000000000049
-#&gt; log_rincome    0.257      0.143    1.79                0.077
-#&gt; 
-#&gt; Residual standard error: 0.165 on 93 degrees of freedom
-#&gt; Multiple R-Squared: 0.549,	Adjusted R-squared: 0.539 
-#&gt; Wald test: 39.9 on 2 and 93 DF,  p-value: 0.000000000000302 
-#&gt; 
-#&gt; Next step: Use 'setx' method</div><div class='input'>
+                    <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in log(packs) ~ log_rprice + log_rincome | log_rincome + tdiff +     I(tax/cpi): unused arguments (formula = log(packs), data = log_rprice + log_rincome | log_rincome + tdiff + I(tax/cpi))</span></div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(z.out1): object 'z.out1' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -17,6 +17,9 @@ Zelig version 5.1-3
 
 -   `vcov` now works with `rq` quantile regression models.
 
+-   More informative error handling for conflicting `timeseries` model 
+arguments. #283
+
 -   Roxygen documentation improvements.
 
 
