@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Multinomial Logistic Bayes</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Bayesian Multinomial Logistic Regression</p>
 <p>Use Bayesian multinomial logistic regression to model unordered categorical variables. The dependent variable may be in the format of either character strings or integer values. The model is estimated via a random walk Metropolis algorithm or a slice sampler. See for the maximum-likelihood estimation of this model.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"mlogit.bayes"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"mlogit.bayes"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
 </div>
@@ -175,7 +175,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Attaching the sample dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mexico)</code></pre></div>
 <p>Estimating multinomial logistics regression using <code>mlogit.bayes</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote88 <span class="op">~</span><span class="st"> </span>pristr <span class="op">+</span><span class="st"> </span>othcok <span class="op">+</span><span class="st"> </span>othsocok,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote88 ~<span class="st"> </span>pristr +<span class="st"> </span>othcok +<span class="st"> </span>othsocok,
                <span class="dt">model =</span> <span class="st">"mlogit.bayes"</span>, <span class="dt">data =</span> mexico,
                <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## Calculating MLEs and large sample var-cov matrix.
@@ -191,9 +191,9 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
 ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
 <p>You can check for convergence before summarizing the estimates with three diagnostic tests. See the section <a href="diagnostics.html">Diagnostics for Zelig Models</a> for examples of the output with interpretation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()
-z.out<span class="op">$</span><span class="kw">heidel.diag</span>()
-z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">geweke.diag</span>()
+z.out$<span class="kw">heidel.diag</span>()
+z.out$<span class="kw">raftery.diag</span>()</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out)</code></pre></div>
 <pre><code>## Model: 
 ## 
@@ -339,7 +339,7 @@ s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.
 <h2 class="hasAnchor">
 <a href="#output-values" class="anchor"></a>Output Values</h2>
 <p>The output of each Zelig command contains useful information which you may view. For example, if you run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"mlogit.bayes"</span>, data)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y ~<span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"mlogit.bayes"</span>, data)</code></pre></div>
 <p>then you may examine the available information in <code>z.out</code> by using <code>names(z.out)</code>, see the draws from the posterior distribution of the <code>coefficients</code> by using <code>z.out$coefficients</code>, and view a default summary of information through <code>summary(z.out)</code>. Other elements available through the <code>$</code> operator are listed below.</p>
 </div>
 <div id="see-also" class="section level2">

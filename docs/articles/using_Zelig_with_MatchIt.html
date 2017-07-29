@@ -123,22 +123,22 @@
     <div class="page-header toc-ignore">
       <h1>Using Zelig with MatchIt</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p><code><a href="../reference/zelig.html">zelig()</a></code> accept matched datasets from the <a href="http://gking.harvard.edu/matchit">MatchIt</a> package as the <code>data</code> argument.</p>
 <p>First, using the MatchIt package, we attaching the <code>lalonde</code> example dataset, and run matching:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"MatchIt"</span>)
 <span class="kw">data</span>(lalonde)
-m.out &lt;-<span class="st"> </span><span class="kw">matchit</span>(treat <span class="op">~</span><span class="st"> </span>educ <span class="op">+</span><span class="st"> </span>black <span class="op">+</span><span class="st"> </span>hispan, <span class="dt">data =</span> lalonde,
+m.out &lt;-<span class="st"> </span><span class="kw">matchit</span>(treat ~<span class="st"> </span>educ +<span class="st"> </span>black +<span class="st"> </span>hispan, <span class="dt">data =</span> lalonde,
                  <span class="dt">method =</span> <span class="st">"optimal"</span>)</code></pre></div>
 <p>Then we can use the output object from the MatchIt package directly in the data argument for Zelig:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(educ <span class="op">~</span><span class="st"> </span>treat, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> m.out)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(educ ~<span class="st"> </span>treat, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> m.out)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   R Core Team. 2007.
 ##   ls: Least Squares Regression for Continuous Dependent Variables
@@ -146,7 +146,7 @@ m.out &lt;-<span class="st"> </span><span class="kw">matchit</span>(treat <span 
 ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
 <p>Zelig will automatically extract the dataset and the weights from the MatchIt object and use them in analysis. For more details on how weights are used in Zelig across models, see the weights section.</p>
 <p>From the MatchIt object, it knows what matching method was used, and adds appropriate citations to the reference list accordingly, in addition to the other references it builds from models and utilities in Zelig:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(z.out<span class="op">$</span><span class="kw">references</span>())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(z.out$<span class="kw">references</span>())</code></pre></div>
 <pre><code>## Ho DE, Imai K, King G and Stuart EA (2011). "MatchIt:
 ## Nonparametric Preprocessing for Parametric Causal Inference."
 ## *Journal of Statistical Software*, **42** (8), pp. 1-28. &lt;URL:

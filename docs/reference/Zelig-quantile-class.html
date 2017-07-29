@@ -147,10 +147,107 @@
     </div>
 
     
-    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_quantile.html'>http://docs.zeligproject.org/articles/zelig_quantile.html</a></p>
+    <p>Quantile Regression for Continuous Dependent Variables</p>
     
 
-        
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>formula</th>
+      <td><p>a symbolic representation of the model to be
+estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
+variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
+same dataset. (You may include more than two explanatory variables,
+of course.) The <code>+</code> symbol means ``inclusion'' not
+``addition.'' You may also include interaction terms and main
+effects in the form <code>x1*x2</code> without computing them in prior
+steps; <code>I(x1*x2)</code> to include only the interaction term and
+exclude the main effects; and quadratic terms in the form
+<code>I(x1^2)</code>.</p></td>
+    </tr>
+    <tr>
+      <th>model</th>
+      <td><p>the name of a statistical model to estimate.
+For a list of other supported models and their documentation see:
+<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>the name of a data frame containing the variables
+referenced in the formula or a list of multiply imputed data frames
+each having the same variable names and row numbers (created by
+<code>Amelia</code> or <code><a href='to_zelig_mi.html'>to_zelig_mi</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed to <code>zelig</code>,
+relevant for the model to be estimated.</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>a factor variable contained in <code>data</code>. If supplied,
+<code>zelig</code> will subset
+the data frame based on the levels in the <code>by</code> variable, and
+estimate a model for each subset. This can save a considerable amount of
+effort. For example, to run the same model on all fifty states, you could
+use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
+by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+subclasses.</p></td>
+    </tr>
+    <tr>
+      <th>cite</th>
+      <td><p>If is set to 'TRUE' (default), the model citation will be printed
+to the console.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Depending on the class of model selected, <code>zelig</code> will return
+  an object with elements including <code>coefficients</code>, <code>residuals</code>,
+  and <code>formula</code> which may be summarized using
+  <code>summary(z.out)</code> or individually extracted using, for example,
+  <code>coef(z.out)</code>. See
+  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  functions to extract model components. You can also extract whole fitted
+  model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>In addition to the standard inputs, zelig() takes the following additional options
+for quantile regression:</p><ul>
+<li><p><code>tau</code>: defaults to 0.5. Specifies the conditional quantile(s) that will be
+    estimated. 0.5 corresponds to estimating the conditional median, 0.25 and 0.75 correspond
+    to the conditional quartiles, etc. tau vectors with length greater than 1 are not currently
+    supported. If tau is set outside of the interval [0,1], zelig returns the solution for all
+    possible conditional quantiles given the data, but does not support inference on this fit
+    (setx and sim will fail).</p></li>
+<li><p><code>se</code>: a string value that defaults to "nid". Specifies the method by which
+    the covariance matrix of coefficients is estimated during the sim stage of analysis. <code>se</code>
+    can take the following values, which are passed to the <code>summary.rq</code> function from the
+    <code>quantreg</code> package. These descriptions are copied from the <code>summary.rq</code> documentation.</p><ul>
+<li><p><code>"iid"</code> which presumes that the errors are iid and computes an estimate of
+        the asymptotic covariance matrix as in KB(1978).</p></li>
+<li><p><code>"nid"</code> which presumes local (in tau) linearity (in x) of the the
+        conditional quantile functions and computes a Huber sandwich estimate using a local
+        estimate of the sparsity.</p></li>
+<li><p><code>"ker"</code> which uses a kernel estimate of the sandwich as proposed by Powell(1990).</p></li>
+</ul></li>
+<li><p>...: additional options passed to rq when fitting the model. See documentation for rq in the quantreg package for more information.</p></li>
+</ul><p>Additional parameters avaialable to this model include:</p><ul>
+<li><p><code>weights</code>: vector of weight values or a name of a variable in the dataset
+  by which to weight the model. For more information see:
+  <a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
+<li><p><code>bootstrap</code>: logical or numeric. If <code>FALSE</code> don't use bootstraps to
+  robustly estimate uncertainty around model parameters due to sampling error.
+  If an integer is supplied, the number of boostraps to run.
+  For more information see:
+  <a href = 'http://docs.zeligproject.org/articles/bootstraps.html'>http://docs.zeligproject.org/articles/bootstraps.html</a>.</p></li>
+</ul>
+    
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
@@ -159,14 +256,50 @@
   bootstrap = FALSE)</code></dt><dd><p>The zelig function estimates a variety of statistical models</p></dd>
 </dl>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_quantile.html'>http://docs.zeligproject.org/articles/zelig_quantile.html</a></p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>Zelig</span>)
+<span class='fu'>data</span>(<span class='no'>stackloss</span>)
+<span class='no'>z.out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>stack.loss</span> ~ <span class='no'>Air.Flow</span> + <span class='no'>Water.Temp</span> + <span class='no'>Acid.Conc.</span>,
+<span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"rq"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>stackloss</span>,<span class='kw'>tau</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   Alexander D'Amour. 2008.
+#&gt;   quantile: Quantile Regression for Continuous Dependent Variables
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out1</span>)</div><div class='output co'>#&gt; Model: 
+#&gt; 
+#&gt; Call: z5$zelig(formula = stack.loss ~ Air.Flow + Water.Temp + Acid.Conc., 
+#&gt;     data = stackloss, tau = 0.5)
+#&gt; 
+#&gt; tau: [1] 0.5
+#&gt; 
+#&gt; Coefficients:
+#&gt;             coefficients lower bd upper bd
+#&gt; (Intercept) -39.6899     -41.6197 -29.6775
+#&gt; Air.Flow      0.8319       0.5128   1.1412
+#&gt; Water.Temp    0.5739       0.3218   1.4109
+#&gt; Acid.Conc.   -0.0609      -0.2135  -0.0289
+#&gt; Next step: Use 'setx' method</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#methods">Methods</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

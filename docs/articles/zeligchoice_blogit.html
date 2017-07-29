@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Bivariate Logistic Regression</h1>
             
-            <h4 class="date">2017-06-07</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Bivariate Logistic Regression for Two Dichotomous Dependent Variables with <code>blogit</code> from ZeligChoice.</p>
 <p>Use the bivariate logistic regression model if you have two binary dependent variables <span class="math inline">\((Y_1, Y_2)\)</span>, and wish to model them jointly as a function of some explanatory variables. Each pair of dependent variables <span class="math inline">\((Y_{i1}, Y_{i2})\)</span> has four potential outcomes, <span class="math inline">\((Y_{i1}=1, Y_{i2}=1)\)</span>, <span class="math inline">\((Y_{i1}=1, Y_{i2}=0)\)</span>, <span class="math inline">\((Y_{i1}=0, Y_{i2}=1)\)</span>, and <span class="math inline">\((Y_{i1}=0, Y_{i2}=0)\)</span>. The joint probability for each of these four outcomes is modeled with three systematic components: the marginal Pr <span class="math inline">\((Y_{i1} = 1)\)</span> and Pr <span class="math inline">\((Y_{i2} = 1)\)</span>, and the odds ratio <span class="math inline">\(\psi\)</span>, which describes the dependence of one marginal on the other. Each of these systematic components may be modeled as functions of (possibly different) sets of explanatory variables.</p>
@@ -138,7 +138,7 @@
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1, Y2) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span>X3,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1, Y2) ~<span class="st"> </span>X1 +<span class="st"> </span>X2 +<span class="st"> </span>X3,
                <span class="dt">model =</span> <span class="st">"blogit"</span>, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out, <span class="dt">x1 =</span> <span class="ot">NULL</span>)</code></pre></div>
@@ -147,11 +147,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <h2 class="hasAnchor">
 <a href="#input-values" class="anchor"></a>Input Values</h2>
 <p>In every bivariate logit specification, there are three equations which correspond to each dependent variable (<span class="math inline">\(Y_1\)</span>, <span class="math inline">\(Y_2\)</span>), and <span class="math inline">\(\psi\)</span>, the odds ratio. You should provide a list of formulas for each equation or, you may use <code>cbind()</code> if the right hand side is the same for both equations</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formulae &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">cbind</span>(Y1, Y2),   X1 <span class="op">+</span><span class="st"> </span>X2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formulae &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">cbind</span>(Y1, Y2),   X1 +<span class="st"> </span>X2)</code></pre></div>
 <p>which means that all the explanatory variables in equations 1 and 2 (corresponding to <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span>) are included, but only an intercept is estimated (all explanatory variables are omitted) for equation 3 (<span class="math inline">\(\psi\)</span>).</p>
 <p><strong>Anticipated feature, not currently enabled:</strong></p>
 <p>You may use the function <code>tag()</code> to constrain variables across equations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formulae &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mu1 =</span> y1   x1 <span class="op">+</span><span class="st"> </span><span class="kw">tag</span>(x3, <span class="st">"x3"</span>), <span class="dt">mu2 =</span> y2 <span class="op">~</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">tag</span>(x3, <span class="st">"x3"</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formulae &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mu1 =</span> y1   x1 +<span class="st"> </span><span class="kw">tag</span>(x3, <span class="st">"x3"</span>), <span class="dt">mu2 =</span> y2 ~<span class="st"> </span>x2 +<span class="st"> </span><span class="kw">tag</span>(x3, <span class="st">"x3"</span>))</code></pre></div>
 <p>where <code>tag()</code> is a special function that constrains variables to have the same effect across equations. Thus, the coefficient for x3 in equation mu1 is constrained to be equal to the coefficient for x3 in equation mu2.</p>
 </div>
 <div id="examples" class="section level2">
@@ -162,7 +162,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <a href="#basic-example" class="anchor"></a>Basic Example</h3>
 <p>Load the data and estimate the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(sanction)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(import, export) <span class="op">~</span><span class="st"> </span>coop <span class="op">+</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>target,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(import, export) ~<span class="st"> </span>coop +<span class="st"> </span>cost +<span class="st"> </span>target,
                 <span class="dt">model =</span> <span class="st">"blogit"</span>, <span class="dt">data =</span> sanction)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Thomas W. Yee. 2007.

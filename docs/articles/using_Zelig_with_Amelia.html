@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Using Zelig with Amelia</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p><code><a href="../reference/zelig.html">zelig()</a></code> accepts multiply imputed data output objects from the <a href="http://gking.harvard.edu/amelia">Amelia</a> package as the <code>data</code> argument.</p>
 <p>First, using the Amelia package, we multiply impute a dataset with missing values:</p>
@@ -163,7 +163,7 @@ a.out &lt;-<span class="st"> </span><span class="kw">amelia</span>(<span class="
 ## 
 ##   1  2  3</code></pre>
 <p>Then we can use the output object from the Amelia package directly in the data argument for Zelig:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(gdp_pc <span class="op">~</span><span class="st"> </span>trade <span class="op">+</span><span class="st"> </span>civlib, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> a.out)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(gdp_pc ~<span class="st"> </span>trade +<span class="st"> </span>civlib, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> a.out)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   R Core Team. 2007.
 ##   ls: Least Squares Regression for Continuous Dependent Variables
@@ -181,7 +181,7 @@ a.out &lt;-<span class="st"> </span><span class="kw">amelia</span>(<span class="
 ## For results from individual imputed datasets, use summary(x, subset = i:j)
 ## Next step: Use 'setx' method</code></pre>
 <p>To see the result from an individual imputed dataset, we use the subset argument as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out, <span class="dt">subset =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out, <span class="dt">subset =</span> <span class="dv">2</span>:<span class="dv">3</span>)</code></pre></div>
 <pre><code>## Imputed Dataset 2
 ## Call:
 ## z5$zelig(formula = gdp_pc ~ trade + civlib, data = a.out)
@@ -220,8 +220,8 @@ a.out &lt;-<span class="st"> </span><span class="kw">amelia</span>(<span class="
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>When quantities of interest are plotted, such as expected and predicted values and first differenences, these are correctly pooled across those from each of the m imputed datasets:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z.out<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw"><a href="../reference/setx.html">setx</a></span>()
+z.out$<span class="kw"><a href="../reference/sim.html">sim</a></span>()
 <span class="kw">plot</span>(z.out)</code></pre></div>
 <p><img src="using_Zelig_with_Amelia_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 <div id="other-multiply-imputed-data" class="section level2">

@@ -25,10 +25,12 @@ options(cite = FALSE)
 
 Time-Series Model with Moving Average with `ma`.
 
+Warning: Simulation is not currently implemented for timeseries models.
+
 Syntax
 ------
 
-Currently, only the Zelig 5 reference class syntax is available for `ma` 
+Currently, only the Zelig 5 reference class syntax is available for `ma`
 models:
 
 ```{r, eval = FALSE}

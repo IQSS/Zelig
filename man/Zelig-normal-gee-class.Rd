@@ -5,7 +5,97 @@
 \alias{Zelig-normal-gee-class}
 \alias{znormalgee}
 \title{Generalized Estimating Equation for Normal Regression}
+\arguments{
+\item{formula}{a symbolic representation of the model to be
+estimated, in the form \code{y ~ x1 + x2}, where \code{y} is the
+dependent variable and \code{x1} and \code{x2} are the explanatory
+variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
+same dataset. (You may include more than two explanatory variables,
+of course.) The \code{+} symbol means ``inclusion'' not
+``addition.'' You may also include interaction terms and main
+effects in the form \code{x1*x2} without computing them in prior
+steps; \code{I(x1*x2)} to include only the interaction term and
+exclude the main effects; and quadratic terms in the form
+\code{I(x1^2)}.}
+
+\item{model}{the name of a statistical model to estimate.
+For a list of other supported models and their documentation see:
+\url{http://docs.zeligproject.org/articles/}.}
+
+\item{data}{the name of a data frame containing the variables
+referenced in the formula or a list of multiply imputed data frames
+each having the same variable names and row numbers (created by
+\code{Amelia} or \code{\link{to_zelig_mi}}).}
+
+\item{...}{additional arguments passed to \code{zelig},
+relevant for the model to be estimated.}
+
+\item{by}{a factor variable contained in \code{data}. If supplied,
+\code{zelig} will subset
+the data frame based on the levels in the \code{by} variable, and
+estimate a model for each subset. This can save a considerable amount of
+effort. You may also use \code{by} to run models using MatchIt
+subclasses.}
+
+\item{cite}{If is set to 'TRUE' (default), the model citation will be printed
+to the console.}
+
+\item{robust}{defaults to TRUE. If TRUE, consistent standard errors are estimated using a "sandwich"
+estimator.}
+
+\item{corstr}{defaults to "independence". It can take on the following arguments:}
+
+\item{Independence}{(corstr = independence): cor(yit,yit')=0, for all t,t' with t not equal to t'.
+It assumes that there is no correlation within the clusters and the model becomes equivalent
+ to standard normal regression. The "working" correlation matrix is the identity matrix.}
+
+\item{Fixed}{corstr = fixed): If selected, the user must define the "working" correlation
+matrix with the R argument rather than estimating it from the model.}
+
+\item{id:}{where id is a variable which identifies the clusters. The data should be sorted by
+id and should be ordered within each cluster when appropriate}
+
+\item{corstr:}{character string specifying the correlation structure: "independence",
+"exchangeable", "ar1", "unstructured" and "userdefined"}
+
+\item{geeglm:}{See geeglm in package geepack for other function arguments}
+
+\item{Mv:}{defaults to 1. It specifies the number of periods of correlation and
+only needs to be specified when \code{corstr} is stat_M_dep, non_stat_M_dep, or AR-M.}
+
+\item{R:}{defaults to NULL. It specifies a user-defined correlation matrix rather than
+estimating it from the data. The argument is used only when corstr is "fixed". The input is a TxT
+matrix of correlations, where T is the size of the largest cluster.}
+}
+\value{
+Depending on the class of model selected, \code{zelig} will return
+  an object with elements including \code{coefficients}, \code{residuals},
+  and \code{formula} which may be summarized using
+  \code{summary(z.out)} or individually extracted using, for example,
+  \code{coef(z.out)}. See
+  \url{http://docs.zeligproject.org/articles/getters.html} for a list of
+  functions to extract model components. You can also extract whole fitted
+  model objects using \code{\link{from_zelig_model}}.
+}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig_normalgee.html}
+Generalized Estimating Equation for Normal Regression
+}
+\details{
+Additional parameters avaialable to this model include:
+\itemize{
+  \item \code{weights}: vector of weight values or a name of a variable in the dataset
+  by which to weight the model. For more information see:
+  \url{http://docs.zeligproject.org/articles/weights.html}.
+}
 }
 
+\examples{
+library(Zelig)
+data(macro)
+z.out <- zelig(unem ~ gdp + capmob + trade, model ="normal.gee", id = "country",
+        data = macro, corstr = "AR-M")
+summary(z.out)
+}
+\seealso{
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_normalgee.html}
+}

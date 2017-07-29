@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Average Treatment Effects on the Treated (ATT)</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <div id="average-treatment-effects-on-the-treated" class="section level2">
 <h2 class="hasAnchor">
@@ -141,12 +141,12 @@
 
 <span class="co"># load data and estimate model</span>
 <span class="kw">data</span>(sanction)
-zqi.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num <span class="op">~</span><span class="st"> </span>target <span class="op">+</span><span class="st"> </span>coop <span class="op">+</span><span class="st"> </span>mil, 
+zqi.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num ~<span class="st"> </span>target +<span class="st"> </span>coop +<span class="st"> </span>mil, 
                  <span class="dt">model =</span> <span class="st">"poisson"</span>, <span class="dt">data =</span> sanction, <span class="dt">cite =</span> <span class="ot">FALSE</span>)
 
 <span class="co"># find the ATT where the treatement is mil = 1</span>
-z.att &lt;-<span class="st"> </span>zqi.out <span class="op">%&gt;%</span>
-<span class="st">             </span><span class="kw"><a href="../reference/ATT.html">ATT</a></span>(<span class="dt">treatment =</span> <span class="st">"mil"</span>, <span class="dt">treat =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+z.att &lt;-<span class="st"> </span>zqi.out %&gt;%
+<span class="st">             </span><span class="kw"><a href="../reference/ATT.html">ATT</a></span>(<span class="dt">treatment =</span> <span class="st">"mil"</span>, <span class="dt">treat =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
 <span class="st">             </span><span class="kw"><a href="../reference/get_qi.html">get_qi</a></span>(<span class="dt">qi =</span> <span class="st">"ATT"</span>, <span class="dt">xvalue =</span> <span class="st">"TE"</span>)
 
 <span class="co"># summarize the results</span>

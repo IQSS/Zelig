@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Negative Binomial</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Negative Binomial Regression for Event Count Dependent Variables with <code>negbin</code>.</p>
 <p>Use the negative binomial regression if you have a count of events for each observation of your dependent variable. The negative binomial model is frequently used to estimate over-dispersed event count models.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"negbin"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"negbin"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
 </div>
@@ -146,7 +146,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Load sample data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(sanction)</code></pre></div>
 <p>Estimate the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num <span class="op">~</span><span class="st"> </span>target <span class="op">+</span><span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"negbin"</span>, <span class="dt">data =</span> sanction)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num ~<span class="st"> </span>target +<span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"negbin"</span>, <span class="dt">data =</span> sanction)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   William N. Venables, and Brian D. Ripley. 2008.
 ##   negbin: Negative Binomial Regression for Event Count Dependent Variables
@@ -210,19 +210,19 @@ Graphs of Quantities of Interest for Zelig-negbin
 <ul>
 <li>The negative binomial distribution is derived by letting the mean of the Poisson distribution vary according to a fixed parameter <span class="math inline">\(\zeta\)</span> given by the Gamma distribution. The <em>stochastic component</em> is given by</li>
 </ul>
-$$
-<span class="math display">\[\begin{aligned}
+<p><span class="math display">\[
+    \begin{aligned}
         Y_i \mid \zeta_i &amp; \sim &amp; \textrm{Poisson}(\zeta_i \mu_i),\\
            \zeta_i &amp; \sim &amp; \frac{1}{\theta}\textrm{Gamma}(\theta).
-         \end{aligned}\]</span>
-<p>The marginal distribution of <span class="math inline">\(Y_i\)</span> is then the negative binomial with mean <span class="math inline">\(\mu_i\)</span> and variance <span class="math inline">\(\mu_i + \mu_i^2/\theta\)</span>:</p>
-$$
-<span class="math display">\[\begin{aligned}
+         \end{aligned}
+\]</span> The marginal distribution of <span class="math inline">\(Y_i\)</span> is then the negative binomial with mean <span class="math inline">\(\mu_i\)</span> and variance <span class="math inline">\(\mu_i + \mu_i^2/\theta\)</span>:</p>
+<p><span class="math display">\[
+    \begin{aligned}
         Y_i &amp; \sim &amp; \textrm{NegBin}(\mu_i, \theta), \\
              &amp; = &amp; \frac{\Gamma (\theta + y_i)}{y! \, \Gamma(\theta)}
                    \frac{\mu_i^{y_i} \, \theta^{\theta}}{(\mu_i + \theta)^{\theta + y_i}},
-         \end{aligned}\]</span>
-<p>where <span class="math inline">\(\theta\)</span> is the systematic parameter of the Gamma distribution modeling <span class="math inline">\(\zeta_i\)</span>.</p>
+         \end{aligned}
+\]</span> where <span class="math inline">\(\theta\)</span> is the systematic parameter of the Gamma distribution modeling <span class="math inline">\(\zeta_i\)</span>.</p>
 <ul>
 <li>The <em>systematic component</em> is given by</li>
 </ul>

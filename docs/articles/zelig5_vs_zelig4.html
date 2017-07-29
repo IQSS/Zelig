@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Comparing Zelig 5 and Zelig 4 Syntax</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <p>The release of Zelig 5.0 expands the set of models available, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture. Comparability wrappers are available so that you can still use pre-Zelig 5 syntax.</p>
 <p>Zelig 5 uses <a href="http://adv-r.had.co.nz/R5.html">reference classes</a> which work a bit differently from what you may expect in R. The big difference is that they are “mutable”, i.e. assigning values to them does not overwrite the objects previous contents.</p>
 <div id="zelig-5-workflow-overview" class="section level2">
@@ -144,17 +144,17 @@
 <li><p><code>graph</code> to plot the simulation results.</p></li>
 </ul>
 <p>Here is an example workflow with Zelig 5:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls<span class="op">$</span><span class="kw">new</span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X <span class="op">~</span><span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()
-z5<span class="op">$</span><span class="kw">graph</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls$<span class="kw">new</span>()
+z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X ~<span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+z5$<span class="kw"><a href="../reference/setx.html">setx</a></span>()
+z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()
+z5$<span class="kw">graph</span>()</code></pre></div>
 </div>
 <div id="wrappers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wrappers" class="anchor"></a>Wrappers</h2>
 <p>Here is the same set of operations as above using the Zelig 4 wrappers:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)
 <span class="kw">plot</span>(s.out)</code></pre></div>

@@ -11,6 +11,39 @@ Econometrics with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL
 \url{https://CRAN.R-project.org/package=AER}
 }
 \arguments{
+\item{formula}{a symbolic representation of the model to be
+estimated, in the form \code{y ~ x1 + x2}, where \code{y} is the
+dependent variable and \code{x1} and \code{x2} are the explanatory
+variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
+same dataset. (You may include more than two explanatory variables,
+of course.) The \code{+} symbol means \code{inclusion'' not}addition.'' You may also include interaction terms and main
+effects in the form \code{x1*x2} without computing them in prior
+steps; \code{I(x1*x2)} to include only the interaction term and
+exclude the main effects; and quadratic terms in the form
+\code{I(x1^2)}.}
+
+\item{model}{the name of a statistical model to estimate.
+For a list of other supported models and their documentation see:
+\url{http://docs.zeligproject.org/articles/}.}
+
+\item{data}{the name of a data frame containing the variables
+referenced in the formula or a list of multiply imputed data frames
+each having the same variable names and row numbers (created by
+\code{Amelia} or \code{\link{to_zelig_mi}}).}
+
+\item{...}{additional arguments passed to \code{zelig},
+relevant for the model to be estimated.}
+
+\item{by}{a factor variable contained in \code{data}. If supplied,
+\code{zelig} will subset
+the data frame based on the levels in the \code{by} variable, and
+estimate a model for each subset. This can save a considerable amount of
+effort. You may also use \code{by} to run models using MatchIt
+subclasses.}
+
+\item{cite}{If is set to 'TRUE' (default), the model citation will be printed
+to the console.}
+
 \item{formula}{specification(s) of the regression relationship}
 
 \item{instruments}{the instruments. Either \code{instruments} is missing and
@@ -23,13 +56,31 @@ formula is \code{y ~ x1 + x2} and instruments is a one-sided formula
 
 \item{...}{further arguments passed to methods. See also \code{\link{zelig}}.}
 }
+\value{
+Depending on the class of model selected, \code{zelig} will return
+an object with elements including \code{coefficients}, \code{residuals},
+and \code{formula} which may be summarized using
+\code{summary(z.out)} or individually extracted using, for example,
+\code{coef(z.out)}. See
+\url{http://docs.zeligproject.org/articles/getters.html} for a list of
+functions to extract model components. You can also extract whole fitted
+model objects using \code{\link{from_zelig_model}}.
+}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig_ivreg.html}
+Instrumental-Variable Regression
 }
 \details{
-Fit instrumental-variable regression by two-stage least squares. This is
-equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of predictors.
+Additional parameters avaialable to many models include:
+\itemize{
+\item weights: vector of weight values or a name of a variable in the dataset
+by which to weight the model. For more information see:
+\url{http://docs.zeligproject.org/articles/weights.html}.
+\item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+robustly estimate uncertainty around model parameters due to sampling error.
+If an integer is supplied, the number of boostraps to run.
+For more information see:
+\url{http://docs.zeligproject.org/articles/bootstraps.html}.
+}
 
 Regressors and instruments for \code{ivreg} are most easily specified in
 a formula with two parts on the right-hand side, e.g.,
@@ -51,6 +102,21 @@ number of exogenous regressors.
 }}
 
 \examples{
+library(Zelig)
+library(dplyr) # for the pipe operator \%>\%
+# load and transform data
+data("CigarettesSW")
+CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
+CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
+CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+# log second stage independent variables, as logging internally for ivreg is
+# not currently supported
+CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
+CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
+z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |
+log_rincome + tdiff + I(tax/cpi),data = CigarettesSW, subset = year == "1995",model = "ivreg")
+summary(z.out1)
+library(Zelig)
 library(AER) # for sandwich vcov
 library(dplyr) # for the pipe operator \%>\%
 
@@ -71,19 +137,14 @@ z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |
                     data = CigarettesSW,
                     model = "ivreg")
 summary(z.out1)
-from_zelig_model(z.out1) \%>\% summary(vcov = sandwich, df = Inf,
-                                     diagnostics = TRUE)
-# simulate and plot quantities of interest
-z.out1 \%>\% setx() \%>\% sim() \%>\% plot()
-
-# ANOVA
-z.out2 <- zelig(log(packs) ~ log_rprice |
-                tdiff, data = CigarettesSW,
-                model = "ivreg")
-anova(from_zelig_model(z.out1), from_zelig_model(z.out2))
 
 }
 \seealso{
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_ivreg.html}
+Fit instrumental-variable regression by two-stage least squares. This is
+equivalent to direct instrumental-variables estimation when the number of
+instruments is equal to the number of predictors.
+
 \code{\link{zelig}},
 Greene, W. H. (1993) \emph{Econometric Analysis}, 2nd ed., Macmillan.
 }

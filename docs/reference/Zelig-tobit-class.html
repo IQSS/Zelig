@@ -147,10 +147,101 @@
     </div>
 
     
-    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_tobit.html'>http://docs.zeligproject.org/articles/zelig_tobit.html</a></p>
+    <p>Linear Regression for a Left-Censored Dependent Variable</p>
     
 
-        
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>formula</th>
+      <td><p>a symbolic representation of the model to be
+estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
+variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
+same dataset. (You may include more than two explanatory variables,
+of course.) The <code>+</code> symbol means ``inclusion'' not
+``addition.'' You may also include interaction terms and main
+effects in the form <code>x1*x2</code> without computing them in prior
+steps; <code>I(x1*x2)</code> to include only the interaction term and
+exclude the main effects; and quadratic terms in the form
+<code>I(x1^2)</code>.</p></td>
+    </tr>
+    <tr>
+      <th>model</th>
+      <td><p>the name of a statistical model to estimate.
+For a list of other supported models and their documentation see:
+<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>the name of a data frame containing the variables
+referenced in the formula or a list of multiply imputed data frames
+each having the same variable names and row numbers (created by
+<code>Amelia</code> or <code><a href='to_zelig_mi.html'>to_zelig_mi</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed to <code>zelig</code>,
+relevant for the model to be estimated.</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>a factor variable contained in <code>data</code>. If supplied,
+<code>zelig</code> will subset
+the data frame based on the levels in the <code>by</code> variable, and
+estimate a model for each subset. This can save a considerable amount of
+effort. For example, to run the same model on all fifty states, you could
+use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
+by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+subclasses.</p></td>
+    </tr>
+    <tr>
+      <th>cite</th>
+      <td><p>If is set to 'TRUE' (default), the model citation will be printed
+to the console.</p></td>
+    </tr>
+    <tr>
+      <th>below</th>
+      <td><p>(defaults to 0) The point at which the dependent variable is censored from below. If any values in the dependent variable are observed to be less than the censoring point, it is assumed that that particular observation is censored from below at the observed value. (See for a Bayesian implementation that supports both left and right censoring.)</p></td>
+    </tr>
+    <tr>
+      <th>robust</th>
+      <td><p>defaults to FALSE. If TRUE, zelig() computes robust standard errors based on sandwich estimators (see and ) and the options selected in cluster.</p></td>
+    </tr>
+    <tr>
+      <th>if</th>
+      <td><p>robust = TRUE, you may select a variable to define groups of correlated observations. Let x3 be a variable that consists of either discrete numeric values, character strings, or factors that define strata. Then
+z.out &lt;- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", model = "tobit", data = mydata)
+means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If robust = TRUE but cluster is not specified, zelig() assumes that each observation falls into its own cluster.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Depending on the class of model selected, <code>zelig</code> will return
+  an object with elements including <code>coefficients</code>, <code>residuals</code>,
+  and <code>formula</code> which may be summarized using
+  <code>summary(z.out)</code> or individually extracted using, for example,
+  <code>coef(z.out)</code>. See
+  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  functions to extract model components. You can also extract whole fitted
+  model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Additional parameters avaialable to this model include:</p><ul>
+<li><p>weights: vector of weight values or a name of a variable in the dataset
+  by which to weight the model. For more information see:
+  <a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
+<li><p>bootstrap: logical or numeric. If <code>FALSE</code> don't use bootstraps to
+  robustly estimate uncertainty around model parameters due to sampling error.
+  If an integer is supplied, the number of boostraps to run.
+  For more information see:
+  <a href = 'http://docs.zeligproject.org/articles/bootstraps.html'>http://docs.zeligproject.org/articles/bootstraps.html</a>.</p></li>
+</ul>
+    
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
@@ -159,14 +250,59 @@
   bootstrap = FALSE)</code></dt><dd><p>The zelig function estimates a variety of statistical models</p></dd>
 </dl>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_tobit.html'>http://docs.zeligproject.org/articles/zelig_tobit.html</a></p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>Zelig</span>)
+<span class='fu'>data</span>(<span class='no'>tobin</span>)
+<span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>durable</span> ~ <span class='no'>age</span> + <span class='no'>quant</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"tobit"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>tobin</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   Christian Kleiber, and Achim Zeileis. 2011.
+#&gt;   tobit: Linear regression for Left-Censored Dependent Variable
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out</span>)</div><div class='output co'>#&gt; Model: 
+#&gt; 
+#&gt; Call:
+#&gt; z5$zelig(formula = durable ~ age + quant, data = tobin)
+#&gt; 
+#&gt; Observations:
+#&gt;          Total  Left-censored     Uncensored Right-censored 
+#&gt;             20             13              7              0 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error z value    Pr(&gt;|z|)
+#&gt; (Intercept)  15.1449    16.0795    0.94        0.35
+#&gt; age          -0.1291     0.2186   -0.59        0.55
+#&gt; quant        -0.0455     0.0583   -0.78        0.43
+#&gt; Log(scale)    1.7179     0.3103    5.54 0.000000031
+#&gt; 
+#&gt; Scale: 5.57 
+#&gt; 
+#&gt; Gaussian distribution
+#&gt; Number of Newton-Raphson Iterations: 3 
+#&gt; Log-likelihood: -28.9 on 4 Df
+#&gt; Wald-statistic: 1.12 on 2 Df, p-value: 0.6 
+#&gt; 
+#&gt; Next step: Use 'setx' method</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#methods">Methods</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

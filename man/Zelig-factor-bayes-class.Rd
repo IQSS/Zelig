@@ -5,8 +5,116 @@
 \alias{Zelig-factor-bayes-class}
 \alias{zfactorbayes}
 \title{Bayesian Factor Analysis}
+\arguments{
+\item{formula}{a symbolic representation of the model to be
+estimated, in the form \code{~ Y1 + Y2 + Y3}, where Y1, Y2, and Y3 are variables
+of interest in factor analysis (manifest variables), assumed to be
+normally distributed. The model requires a minimum of three manifest
+variables contained in the
+same dataset. The \code{+} symbol means ``inclusion'' not
+``addition.''}
+
+\item{factors}{number of the factors to be fitted (defaults to 2).}
+
+\item{model}{the name of a statistical model to estimate.
+For a list of other supported models and their documentation see:
+\url{http://docs.zeligproject.org/articles/}.}
+
+\item{data}{the name of a data frame containing the variables
+referenced in the formula or a list of multiply imputed data frames
+each having the same variable names and row numbers (created by
+\code{Amelia} or \code{\link{to_zelig_mi}}).}
+
+\item{...}{additional arguments passed to \code{zelig},
+relevant for the model to be estimated.}
+
+\item{by}{a factor variable contained in \code{data}. If supplied,
+\code{zelig} will subset
+the data frame based on the levels in the \code{by} variable, and
+estimate a model for each subset. This can save a considerable amount of
+effort. You may also use \code{by} to run models using MatchIt
+subclasses.}
+
+\item{cite}{If is set to 'TRUE' (default), the model citation will be printed
+to the console.}
+}
+\value{
+Depending on the class of model selected, \code{zelig} will return
+  an object with elements including \code{coefficients}, \code{residuals},
+  and \code{formula} which may be summarized using
+  \code{summary(z.out)} or individually extracted using, for example,
+  \code{coef(z.out)}. See
+  \url{http://docs.zeligproject.org/articles/getters.html} for a list of
+  functions to extract model components. You can also extract whole fitted
+  model objects using \code{\link{from_zelig_model}}.
+}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig_factorbayes.html}
+Bayesian Factor Analysis
+}
+\details{
+In addition, \code{zelig()} accepts the following additional arguments for model specification:
+\itemize{
+     \item \code{lambda.constraints}: list containing the equality or
+     inequality constraints on the factor loadings. Choose from one of the following forms:
+     \item \code{varname = list()}: by default, no constraints are imposed.
+     \item \code{varname = list(d, c)}: constrains the dth loading for the
+           variable named varname to be equal to c.
+     \item \code{varname = list(d, +)}: constrains the dth loading for the variable named varname to be positive;
+     \item \code{varname = list(d, -)}: constrains the dth loading for the variable named varname to be negative.
+     \item \code{std.var}: defaults to \code{FALSE} (manifest variables are rescaled to
+     zero mean, but retain observed variance). If \code{TRUE}, the manifest
+     variables are rescaled to be mean zero and unit variance.
+}
+
+In addition, \code{zelig()} accepts the following additional inputs for \code{bayes.factor}:
+\itemize{
+    \item \code{burnin}: number of the initial MCMC iterations to be discarded (defaults to 1,000).
+    \item \code{mcmc}: number of the MCMC iterations after burnin (defaults to 20,000).
+    \item \code{thin}: thinning interval for the Markov chain. Only every thin-th
+        draw from the Markov chain is kept. The value of mcmc must be divisible
+        by this value. The default value is 1.
+    \item \code{verbose}: defaults to FALSE. If TRUE, the
+    progress of the sampler (every 10%10%) is printed to the screen.
+    \item \code{seed}: seed for the random number generator. The default is NA which
+    corresponds to a random seed 12345.
+    \item \code{Lambda.start}: starting values of the factor loading matrix \eqn{\Lambda}, either a
+    scalar (all unconstrained loadings are set to that value), or a matrix with
+    compatible dimensions. The default is NA, where the start value are set to
+    be 0 for unconstrained factor loadings, and 0.5 or - 0.5 for constrained
+    factor loadings (depending on the nature of the constraints).
+    \item \code{Psi.start}: starting values for the uniquenesses, either a scalar
+    (the starting values for all diagonal elements of \eqn{\Psi} are set to be this value),
+    or a vector with length equal to the number of manifest variables. In the latter
+    case, the starting values of the diagonal elements of \eqn{\Psi} take the values of
+    Psi.start. The default value is NA where the starting values of the all the
+    uniquenesses are set to be 0.5.
+    \item \code{store.lambda}: defaults to TRUE, which stores the posterior draws of the factor loadings.
+    \item \code{store.scores}: defaults to FALSE. If TRUE, stores the posterior draws of the
+    factor scores. (Storing factor scores may take large amount of memory for a large
+    number of draws or observations.)
+}
+
+The model also accepts the following additional arguments to specify prior parameters:
+\itemize{
+    \item \code{l0}: mean of the Normal prior for the factor loadings, either a scalar or a
+    matrix with the same dimensions as \eqn{\Lambda}. If a scalar value, that value will be the
+    prior mean for all the factor loadings. Defaults to 0.
+    \item \code{L0}: precision parameter of the Normal prior for the factor loadings, either
+    a scalar or a matrix with the same dimensions as \eqn{\Lambda}. If \code{L0} takes a scalar value,
+    then the precision matrix will be a diagonal matrix with the diagonal elements
+    set to that value. The default value is 0, which leads to an improper prior.
+    \item \code{a0}: the shape parameter of the Inverse Gamma prior for the uniquenesses
+    is \code{a0}/2. It can take a scalar value or a vector. The default value is 0.001.
+    \item \code{b0}: the scale parameter of the Inverse Gamma prior for the uniquenesses
+    is \code{b0}/2. It can take a scalar value or a vector. The default value is 0.001.
+}
+
+Additional parameters avaialable to this model include:
+\itemize{
+  \item \code{weights}: vector of weight values or a name of a variable in the dataset
+  by which to weight the model. For more information see:
+  \url{http://docs.zeligproject.org/articles/weights.html}.
+}
 }
 \section{Methods}{
 
@@ -15,3 +123,31 @@ Vignette: \url{http://docs.zeligproject.org/articles/zelig_factorbayes.html}
   bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 
+\examples{
+data(swiss)
+names(swiss) <- c("Fert", "Agr", "Exam", "Educ", "Cath", "InfMort")
+z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+model = "factor.bayes", data = swiss,
+factors = 2, verbose = FALSE,
+a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
+
+z.out$geweke.diag()
+z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+model = "factor.bayes", data = swiss, factors = 2,
+lambda.constraints =
+   list(Exam = list(1,"+"),
+        Exam = list(2,"-"),
+        Educ = c(2, 0),
+        InfMort = c(1, 0)),
+verbose = FALSE, a0 = 1, b0 = 0.15,
+burnin = 500, mcmc = 5000)
+
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
+summary(z.out)
+
+}
+\seealso{
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_factorbayes.html}
+}

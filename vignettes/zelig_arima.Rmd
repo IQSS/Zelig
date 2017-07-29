@@ -25,10 +25,12 @@ options(cite = FALSE)
 
 Autoregressive and Moving-Average Models with Integration for Time-Series Data
 
+Warning: Simulation is not currently implemented for timeseries models.
+
 Syntax
 ------
 
-Currently, only the Zelig 5 reference class syntax is available for `arima` 
+Currently, only the Zelig 5 reference class syntax is available for `arima`
 models:
 
 ```{r, eval = FALSE}
@@ -80,9 +82,9 @@ summary(ts.out)
 Next we simulate what happens when leftseat share drops from a moderately high level of 75 percent, to a rather low level of 25 percent:
 
 ```{r, eval = TRUE}
-ts.out$setx(leftseat = 0.75)
-ts.out$setx1(leftseat = 0.25)
-ts.out$sim()
+setx(ts.out, leftseat = 0.75)
+setx1(ts.out, leftseat = 0.25)
+sim(ts.out)
 ```
 
 ```{r Zelig-arima, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for ARIMA models"}
@@ -94,8 +96,7 @@ plot(ts.out)
 The dataset contains similar series for 11 different OECD countries, and we could run the same model on each country's data.  Here we need to specify the `ts` and `cs` arguments to identify the names of variables that give the time and cross-section of each observation in the dataset
 
 ```{r, eval = TRUE}
-ts.out2 <- zarima$new()
-ts.out2$zelig(unemp ~ leftseat, order = c(1,0,1), ts = "year",
+ts.out2 <- zelig(unemp ~ leftseat, model="arima", order = c(1,0,1), ts = "year",
               cs = "country", data = seatshare)
 summary(ts.out2)
 ```

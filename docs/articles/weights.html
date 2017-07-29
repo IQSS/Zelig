@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Weights</h1>
             
-            <h4 class="date">2017-06-01</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Weights are often added to statistical models to adjust the observed sample distribution in the data to an underlying population of interest. For example, some types of observations may have been intentionally oversampled, and need to be downweighted for population inferences, or weights may have been created by a matching procedure to create a dataset with treatment and control groups that resemble randomized designs and achieve balance in covariates.</p>
 <p>The weights argument, can be a vector of weight values, or a name of a variable in the dataset.</p>
@@ -143,8 +143,8 @@
 <a href="#examples" class="anchor"></a>Examples</h2>
 <p>Here we are building a simulated dataset where in the first fifty observations <span class="math inline">\(y\)</span> has a positive relationship with <span class="math inline">\(x\)</span>. In the next fifty observations there is a negative relationship.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">90</span>)
-y &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="dv">2</span><span class="op">*</span>x[<span class="dv">1</span><span class="op">:</span><span class="dv">45</span>], <span class="op">-</span><span class="dv">3</span><span class="op">*</span>x[<span class="dv">46</span><span class="op">:</span><span class="dv">90</span>] ) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">90</span>)
-z &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(y<span class="op">&gt;</span><span class="dv">0</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="dv">2</span>*x[<span class="dv">1</span>:<span class="dv">45</span>], -<span class="dv">3</span>*x[<span class="dv">46</span>:<span class="dv">90</span>] ) +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">90</span>)
+z &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(y&gt;<span class="dv">0</span>)
 w1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="fl">1.8</span>, <span class="dv">45</span>), <span class="kw">rep</span>(<span class="fl">0.2</span>,<span class="dv">45</span>))
 mydata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(z,y,x,w1)
 
@@ -152,7 +152,7 @@ w2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c<
 <p>In the first example below, we are passing the name of a variable included in the dataset. We see the weights are correctly implemented as we are more heavily weighting the first 50 observations, where there is a positive relationship, and positive relationship is seen in the regression.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Zelig)</code></pre></div>
 <pre><code>## Loading required package: survival</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z1.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> <span class="st">"w1"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z1.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y ~<span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> <span class="st">"w1"</span>,
                 <span class="dt">data =</span> mydata, <span class="dt">cite =</span> <span class="ot">FALSE</span>)
 <span class="kw">summary</span>(z1.out)</code></pre></div>
 <pre><code>## Model: 
@@ -162,20 +162,20 @@ w2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c<
 ## 
 ## Weighted Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -3.3601 -1.1665 -0.4339  0.2418  3.4678 
+## -2.9546 -1.2858 -0.5578  0.3509  3.3713 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  0.09193    0.24889   0.369   0.7127
-## x            0.87354    0.45692   1.912   0.0592
+## (Intercept)   0.2825     0.2887   0.979   0.3304
+## x             1.0368     0.4929   2.104   0.0383
 ## 
-## Residual standard error: 1.373 on 88 degrees of freedom
-## Multiple R-squared:  0.03988,    Adjusted R-squared:  0.02897 
-## F-statistic: 3.655 on 1 and 88 DF,  p-value: 0.05915
+## Residual standard error: 1.442 on 88 degrees of freedom
+## Multiple R-squared:  0.04788,    Adjusted R-squared:  0.03706 
+## F-statistic: 4.425 on 1 and 88 DF,  p-value: 0.03827
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>In our second example, the weights are provided as a separate vector of the same length as the dataset. These weights give weight to both relationships present when we constructed the data, and we see the estimated relationship is now negative.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z2.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w2,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z2.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y ~<span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w2,
                 <span class="dt">data =</span> mydata, <span class="dt">cite =</span> <span class="ot">FALSE</span>)
 <span class="kw">summary</span>(z2.out)</code></pre></div>
 <pre><code>## Model: 
@@ -185,34 +185,34 @@ w2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c<
 ## 
 ## Weighted Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -5.4621 -1.0169  0.0147  0.8931  5.2704 
+## -5.6856 -0.9001 -0.2961  1.1816  5.7265 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  -0.3517     0.3380  -1.040    0.301
-## x            -0.1833     0.5600  -0.327    0.744
+## (Intercept)   0.9447     0.4607   2.050  0.04330
+## x            -2.2143     0.7428  -2.981  0.00371
 ## 
-## Residual standard error: 1.637 on 88 degrees of freedom
-## Multiple R-squared:  0.001216,   Adjusted R-squared:  -0.01013 
-## F-statistic: 0.1072 on 1 and 88 DF,  p-value: 0.7442
+## Residual standard error: 2.014 on 88 degrees of freedom
+## Multiple R-squared:  0.09172,    Adjusted R-squared:  0.0814 
+## F-statistic: 8.887 on 1 and 88 DF,  p-value: 0.003715
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>Some checking of the supplied weights are conducted, and warnings or error messages will be given to the user if, for example, the supplied weights are of the wrong length, or the variable name supplied is not present in the dataset. Negative weights are treated as zero weights. Here we use the object oriented approach to building the Zelig object.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z3.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">weights =</span> <span class="st">"noSuchName"</span>, <span class="dt">data =</span> mydata, <span class="dt">model =</span> <span class="st">"ls"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z3.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y ~<span class="st"> </span>x, <span class="dt">weights =</span> <span class="st">"noSuchName"</span>, <span class="dt">data =</span> mydata, <span class="dt">model =</span> <span class="st">"ls"</span>,
                 <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## Warning: Variable name given for weights not found in dataset, so will be ignored.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z4.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">weights =</span> w2[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">data =</span> mydata, <span class="dt">model =</span> <span class="st">"ls"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z4.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y ~<span class="st"> </span>x, <span class="dt">weights =</span> w2[<span class="dv">1</span>:<span class="dv">10</span>], <span class="dt">data =</span> mydata, <span class="dt">model =</span> <span class="st">"ls"</span>,
                 <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## Warning: Length of vector given for weights is not equal to number of observations in dataset, and will be ignored.</code></pre>
 <p>Here we use a model where sampling weights are not accepted by the underlying package, so Zelig gives a warning message that bootstrapping will be conducted to construct a dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">continuous.weights &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="dv">1</span>, <span class="fl">1.4</span>), <span class="dt">times =</span> <span class="dv">30</span>)
-z5.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(z <span class="op">~</span><span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">weights =</span> continuous.weights,
+z5.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(z ~<span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">weights =</span> continuous.weights,
                 <span class="dt">data =</span> mydata, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## Noninteger weights were set, but the model in Zelig is only able to use integer valued weights.
 ##  A bootstrapped version of the dataset was constructed using the weights as sample probabilities.</code></pre>
 <p>But when the weights happen to be integer valued, then Zelig can construct a dataset by a combination of duplicating and deleting observations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">integer.weights &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">times =</span> <span class="dv">30</span>)
-z6.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(z <span class="op">~</span><span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">weights =</span> integer.weights,
+z6.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(z ~<span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">weights =</span> integer.weights,
                 <span class="dt">data =</span> mydata, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
 </div>
 <div id="using-matching-weights-from-matchit" class="section level2">
