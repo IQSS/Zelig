@@ -8,7 +8,8 @@ Zelig version 5.1-3
 
 ## Major changes
 
-
+-   Added object documentation for all Zelig model types. Access with 
+`?zMODLE_NAME`. For example, for the logistic regression model use `zlogit`. 
 
 ## Minor changes and bug fixes
 
