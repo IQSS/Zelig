@@ -124,6 +124,7 @@ Additional parameters avaialable to this model include:
 }}
 
 \examples{
+\dontrun{
 data(swiss)
 names(swiss) <- c("Fert", "Agr", "Exam", "Educ", "Cath", "InfMort")
 z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
@@ -146,6 +147,7 @@ z.out$geweke.diag()
 z.out$heidel.diag()
 z.out$raftery.diag()
 summary(z.out)
+}
 
 }
 \seealso{

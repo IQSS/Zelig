@@ -8,7 +8,7 @@ Zelig version 5.1-3
 
 ## Major changes
 
-
+-   Roxygen documentation improvements.
 
 ## Minor changes and bug fixes
 
@@ -19,7 +19,8 @@ Zelig version 5.1-3
 -   More informative error handling for conflicting `timeseries` model 
 arguments. #283
 
--   Roxygen documentation improvements.
+-   Resolved and issue with `relogit` that produced a warning when the fitted 
+model object was passed to `predict`. #291 
 
 
 Zelig version 5.1-2

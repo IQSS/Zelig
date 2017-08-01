@@ -284,7 +284,7 @@ relogit <- function(formula,
     res$linear.predictors <- t(res$coefficients) %*% t(X)
     res$fitted.values <- 1 / (1 + exp(-res$linear.predictors))
     res$zelig <- "Relogit"
-    class(res) <- c("Relogit", "glm")
+    class(res) <- c("Relogit", "glm", "lm")
     return(res)
   }
 }

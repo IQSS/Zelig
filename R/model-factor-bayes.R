@@ -100,6 +100,7 @@
 #'   functions to extract model components. You can also extract whole fitted
 #'   model objects using \code{\link{from_zelig_model}}.
 #' @examples
+#' \dontrun{
 #' data(swiss)
 #' names(swiss) <- c("Fert", "Agr", "Exam", "Educ", "Cath", "InfMort")
 #' z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
@@ -122,6 +123,7 @@
 #' z.out$heidel.diag()
 #' z.out$raftery.diag()
 #' summary(z.out)
+#' }
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_factorbayes.html}
 #' @import methods
