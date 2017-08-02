@@ -5,7 +5,7 @@ branches:
     - master
     - /^test.*$/
     - pkgdown
-
+    
 r_github_packages:
     - jimhester/covr
     - IQSS/ZeligChoice
