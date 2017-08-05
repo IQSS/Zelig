@@ -17,4 +17,4 @@ if(!('IQSSdevtools' %in% installed.packages()[, 1])) {
 #--   constraints are not included with the package source build.
 library(IQSSdevtools)
 build_iqss_package(rdocs_args = "rd", build_args = "--no-build-vignettes",
-                   website_lazy = TRUE)
+                   website_lazy = TRUE, git_commit = FALSE)

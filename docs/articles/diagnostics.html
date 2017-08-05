@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Diagnostics for MCMC convergence</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
@@ -133,7 +133,7 @@
 <hr>
 <p>Zelig has three available diagnostic tests for MCMC models. Here is an example of their use. First we attach the sample dataset and estimate a linear regression using the MCMC <code>normal.bayes</code> model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(macro)
-z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem ~<span class="st"> </span>gdp +<span class="st"> </span>capmob +<span class="st"> </span>trade, <span class="dt">model =</span> <span class="st">"normal.bayes"</span>,
+z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem <span class="op">~</span><span class="st"> </span>gdp <span class="op">+</span><span class="st"> </span>capmob <span class="op">+</span><span class="st"> </span>trade, <span class="dt">model =</span> <span class="st">"normal.bayes"</span>,
                <span class="dt">data =</span> macro, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Ben Goodrich, and Ying Lu. 2013.
@@ -145,7 +145,7 @@ z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig
 <h3 class="hasAnchor">
 <a href="#geweke-diagnostic" class="anchor"></a>Geweke Diagnostic</h3>
 <p>The Geweke diagnostic tests the null hypothesis that the Markov chain is in the stationary distribution and produces z-statistics for each estimated parameter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">geweke.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()</code></pre></div>
 <pre><code>## 
 ## Fraction in 1st window = 0.1
 ## Fraction in 2nd window = 0.5 
@@ -157,7 +157,7 @@ z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig
 <h3 class="hasAnchor">
 <a href="#heidelberger-welch-diagnostic" class="anchor"></a>Heidelberger-Welch Diagnostic</h3>
 <p>The Heidelberger and Welch diagnostic first tests the null hypothesis that the Markov Chain is in the stationary distribution and produces <em>p</em>-values for each estimated parameter. Calling this diagnostic also produces output that indicates whether the mean of a marginal posterior distribution can be estimated with sufficient precision, assuming that the Markov Chain is in the stationary distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">heidel.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">heidel.diag</span>()</code></pre></div>
 <pre><code>##                                           
 ##             Stationarity start     p-value
 ##             test         iteration        
@@ -179,7 +179,7 @@ z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig
 <h3 class="hasAnchor">
 <a href="#raftery-lewis-diagnostic" class="anchor"></a>Raftery-Lewis Diagnostic</h3>
 <p>The Raftery and Lewis diagnostic indicates how long the Markov Chain should run before considering draws from the marginal posterior distributions sufficiently representative of the stationary distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">raftery.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre></div>
 <pre><code>## 
 ## Quantile (q) = 0.025
 ## Accuracy (r) = +/- 0.005
@@ -209,7 +209,8 @@ z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#see-also">See also</a></li>
       </ul>

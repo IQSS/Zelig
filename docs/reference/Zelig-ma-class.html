@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -147,7 +148,8 @@
     </div>
 
     
-    <p>Warning: Simulation is not currently implemented for timeseries models.</p>
+    <p>Warning: <code>summary</code> does not work with timeseries models after
+simulation.</p>
     
 
     
@@ -157,7 +159,7 @@
     <tr>
       <th>formula</th>
       <td><p>a symbolic representation of the model to be
-estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+estimated, in the form <code>y ~ x1 + x2</code>, where <code>y</code> is the
 dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
 variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
 same dataset. (You may include more than two explanatory variables,
@@ -172,7 +174,7 @@ exclude the main effects; and quadratic terms in the form
       <th>model</th>
       <td><p>the name of a statistical model to estimate.
 For a list of other supported models and their documentation see:
-<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+<a href='http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -192,9 +194,7 @@ relevant for the model to be estimated.</p></td>
 <code>zelig</code> will subset
 the data frame based on the levels in the <code>by</code> variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+effort. You may also use <code>by</code> to run models using MatchIt
 subclasses.</p></td>
     </tr>
     <tr>
@@ -233,7 +233,7 @@ the order of the moving average model.</p></td>
   and <code>formula</code> which may be summarized using
   <code>summary(z.out)</code> or individually extracted using, for example,
   <code>coef(z.out)</code>. See
-  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  <a href='http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
   functions to extract model components. You can also extract whole fitted
   model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
     
@@ -244,18 +244,20 @@ Bootstraps or weights.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_ma.html'>http://docs.zeligproject.org/articles/zelig_ma.html</a></p>
+    <p>Vignette: <a href='http://docs.zeligproject.org/articles/zelig_ma.html'>http://docs.zeligproject.org/articles/zelig_ma.html</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>seatshare</span>)
 <span class='no'>subset</span> <span class='kw'>&lt;-</span> <span class='no'>seatshare</span>[<span class='no'>seatshare</span>$<span class='no'>country</span> <span class='kw'>==</span> <span class='st'>"UNITED KINGDOM"</span>,]
-<span class='no'>ts.out</span> <span class='kw'>&lt;-</span> <span class='no'>zma</span>$<span class='fu'>new</span>()
-<span class='no'>ts.out</span>$<span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>unemp</span> ~ <span class='no'>leftseat</span>,  <span class='kw'>ts</span> <span class='kw'>=</span> <span class='st'>"year"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>subset</span>)
-<span class='fu'>summary</span>(<span class='no'>ts.out</span>)</div><div class='output co'>#&gt; Model: 
+<span class='no'>ts.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>unemp</span> ~ <span class='no'>leftseat</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ma"</span>, <span class='kw'>ts</span> <span class='kw'>=</span> <span class='st'>"year"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>subset</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   James Honaker. 2017.
+#&gt;   ma: Time-Series Model with Moving Average
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>ts.out</span>)</div><div class='output co'>#&gt; Model: 
 #&gt; 
 #&gt; Call:
-#&gt; ts.out$zelig(formula = unemp ~ leftseat, data = subset, ts = "year", order = c(0, 
+#&gt; z5$zelig(formula = formula, data = data, ts = "year", by = by, order = c(0, 
 #&gt; 0, 1))
 #&gt; 
 #&gt; Coefficients:

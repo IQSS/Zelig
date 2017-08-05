@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -172,7 +173,7 @@ exclude the main effects; and quadratic terms in the form
       <th>model</th>
       <td><p>the name of a statistical model to estimate.
 For a list of other supported models and their documentation see:
-<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+<a href='http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -192,9 +193,7 @@ relevant for the model to be estimated.</p></td>
 <code>zelig</code> will subset
 the data frame based on the levels in the <code>by</code> variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+effort. You may also use <code>by</code> to run models using MatchIt
 subclasses.</p></td>
     </tr>
     <tr>
@@ -211,7 +210,7 @@ to the console.</p></td>
   and <code>formula</code> which may be summarized using
   <code>summary(z.out)</code> or individually extracted using, for example,
   <code>coef(z.out)</code>. See
-  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  <a href='http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
   functions to extract model components. You can also extract whole fitted
   model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
     
@@ -220,17 +219,17 @@ to the console.</p></td>
     <p>Additional parameters avaialable to this model include:</p><ul>
 <li><p><code>weights</code>: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
-  <a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
+  <a href='http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
 <li><p><code>bootstrap</code>: logical or numeric. If <code>FALSE</code> don't use bootstraps to
   robustly estimate uncertainty around model parameters due to sampling error.
   If an integer is supplied, the number of boostraps to run.
   For more information see:
-  <a href = 'http://docs.zeligproject.org/articles/bootstraps.html'>http://docs.zeligproject.org/articles/bootstraps.html</a>.</p></li>
+  <a href='http://docs.zeligproject.org/articles/bootstraps.html'>http://docs.zeligproject.org/articles/bootstraps.html</a>.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_normalsurvey.html'>http://docs.zeligproject.org/articles/zelig_normalsurvey.html</a></p>
+    <p>Vignette: <a href='http://docs.zeligproject.org/articles/zelig_normalsurvey.html'>http://docs.zeligproject.org/articles/zelig_normalsurvey.html</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -252,10 +251,10 @@ to the console.</p></td>
 #&gt;     fpc = fpc, nest = nest, check.strata = check.strata, weights = localWeights)
 #&gt; 
 #&gt; Coefficients:
-#&gt;             Estimate Std. Error t value            Pr(&gt;|t|)
-#&gt; (Intercept)  796.693     10.049   79.28 &lt;0.0000000000000002
-#&gt; meals         -3.212      0.176  -18.22 &lt;0.0000000000000002
-#&gt; yr.rndYes      6.362     15.576    0.41                0.68
+#&gt;             Estimate Std. Error t value Pr(&gt;|t|)
+#&gt; (Intercept)  796.693     10.049   79.28   &lt;2e-16
+#&gt; meals         -3.212      0.176  -18.22   &lt;2e-16
+#&gt; yr.rndYes      6.362     15.576    0.41     0.68
 #&gt; 
 #&gt; (Dispersion parameter for gaussian family taken to be 6087)
 #&gt; 

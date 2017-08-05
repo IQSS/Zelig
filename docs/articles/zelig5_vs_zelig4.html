@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Comparing Zelig 5 and Zelig 4 Syntax</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
@@ -144,17 +144,17 @@
 <li><p><code>graph</code> to plot the simulation results.</p></li>
 </ul>
 <p>Here is an example workflow with Zelig 5:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls$<span class="kw">new</span>()
-z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X ~<span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
-z5$<span class="kw"><a href="../reference/setx.html">setx</a></span>()
-z5$<span class="kw"><a href="../reference/sim.html">sim</a></span>()
-z5$<span class="kw">graph</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zls<span class="op">$</span><span class="kw">new</span>()
+z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X <span class="op">~</span><span class="st"> </span>X, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+z5<span class="op">$</span><span class="kw"><a href="../reference/setx.html">setx</a></span>()
+z5<span class="op">$</span><span class="kw"><a href="../reference/sim.html">sim</a></span>()
+z5<span class="op">$</span><span class="kw">graph</span>()</code></pre></div>
 </div>
 <div id="wrappers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wrappers" class="anchor"></a>Wrappers</h2>
 <p>Here is the same set of operations as above using the Zelig 4 wrappers:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)
 <span class="kw">plot</span>(s.out)</code></pre></div>
@@ -166,7 +166,8 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#zelig-5-workflow-overview">Zelig 5 workflow overview</a></li>
       <li><a href="#wrappers">Wrappers</a></li>

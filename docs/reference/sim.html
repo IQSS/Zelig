@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -148,8 +149,8 @@
 
     
     <p>Simulate quantities of interest from the estimated model
-output from <code>zelig()</code> given specified values of explanatory
-variables established in <code>setx()</code>. For classical <em>maximum
+output from <code><a href='zelig.html'>zelig()</a></code> given specified values of explanatory
+variables established in <code><a href='setx.html'>setx()</a></code>. For classical <em>maximum
 likelihood</em> models, <code>sim()</code> uses asymptotic normal
 approximation to the log-likelihood. For <em>Bayesian models</em>,
 Zelig simulates quantities of interest from the posterior density,
@@ -214,16 +215,16 @@ models currently support this parameter</p></td>
     <p>The output stored in <code>s.out</code> varies by model. Use the
  <code>names</code> function to view the output stored in <code>s.out</code>.
  Common elements include:</p>
-<dt>x</dt><dd><p>the <code>setx</code> values for the explanatory variables,
+<dt>x</dt><dd><p>the <code><a href='setx.html'>setx</a></code> values for the explanatory variables,
    used to calculate the quantities of interest (expected values,
    predicted values, etc.).</p></dd>
- <dt>x1</dt><dd><p>the optional <code>setx</code> object used to simulate
+ <dt>x1</dt><dd><p>the optional <code><a href='setx.html'>setx</a></code> object used to simulate
    first differences, and other model-specific quantities of
    interest, such as risk-ratios.</p></dd>
  <dt>call</dt><dd><p>the options selected for <code>sim</code>, used to
    replicate quantities of interest.</p></dd>
  <dt>zelig.call</dt><dd><p>the original function and options for
-   <code>zelig</code>, used to replicate analyses.</p></dd>
+   <code><a href='zelig.html'>zelig</a></code>, used to replicate analyses.</p></dd>
  <dt>num</dt><dd><p>the number of simulations requested.</p></dd>
  <dt>par</dt><dd><p>the parameters (coefficients, and additional
    model-specific parameters). You may wish to use the same set of
