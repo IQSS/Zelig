@@ -30,8 +30,6 @@ zelig_core <- list(name = "Zelig",
                             children = list(
                                 list(name = "timeseries",
                                      children = list(
-                                         list(name = "ar"),
-                                         list(name = "ma"),
                                          list(name = "arima")
                                      )),
                                 list(name = "survey",

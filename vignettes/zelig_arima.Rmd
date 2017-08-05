@@ -28,8 +28,8 @@ Autoregressive and Moving-Average Models with Integration for Time-Series Data
 Syntax
 ------
 
-Currently, only the Zelig 5 reference class syntax is available for `arima`
-models:
+Currently, **only the Zelig 5 reference class syntax is available for `arima`
+models**, e.g.:
 
 ```{r, eval = FALSE}
 z.out <- zarima$new()
@@ -80,9 +80,9 @@ summary(ts.out)
 Next we simulate what happens when leftseat share drops from a moderately high level of 75 percent, to a rather low level of 25 percent:
 
 ```{r, eval = TRUE}
-setx(ts.out, leftseat = 0.75)
-setx1(ts.out, leftseat = 0.25)
-sim(ts.out)
+ts.out$setx(leftseat = 0.75)
+ts.out$setx1(leftseat = 0.25)
+ts.out$sim()
 ```
 
 ```{r Zelig-arima, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for ARIMA models"}
