@@ -256,7 +256,7 @@ relogit <- function(formula,
       }
       W <- pihat * (1 - pihat) * wi
       ##Qdiag <- diag(X%*%solve(t(X)%*%diag(W)%*%X)%*%t(X))
-      Qdiag <- lm.influence(lm(y ~ X - 1, weights = W))$hat / W
+      Qdiag <- lm.influence(lm(y ~ X - 1, weights = W), do.coef = FALSE)$hat / W
       if (is.null(tau)) # w_1=1 since tau=ybar
         xi <- 0.5 * Qdiag * (2 * pihat - 1)
       else
