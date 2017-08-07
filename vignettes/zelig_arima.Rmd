@@ -79,15 +79,29 @@ summary(ts.out)
 
 Next we simulate what happens when leftseat share drops from a moderately high level of 75 percent, to a rather low level of 25 percent:
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 setx(ts.out, leftseat = 0.75)
 setx1(ts.out, leftseat = 0.25)
 sim(ts.out)
 ```
 
 ```{r Zelig-arima, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for ARIMA models"}
-plot(ts.out)
+##plot(ts.out)
 ```
+
+### AR and MA Models
+
+AR (Autoregressive) and MA (Moving Average) models are commonly used in time series analysis. As both AR and MA models are special cases of ARIMA models they are not implemented as separate models within Zelig. Specification of AR and MA models can be accomplished by changing the value of the `order` parameter within the ARIMA model.
+
+#### AR
+```{r, eval=FALSE}
+ts.out <- zelig(unemp ~ leftseat, model = "arima", order = c(1, 0, 0), data = subset)
+```
+#### MA
+```{r, eval=FALSE}
+ts.out <- zelig(unemp ~ leftseat, model = "arima", order = c(0, 0, 1), data = subset)
+```
+
 
 ### Multiple Series
 
