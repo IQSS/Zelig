@@ -3,6 +3,13 @@ each change note when relevant. See <https://github.com/IQSS/Zelig/issues>.
 External contributors are referenced with their GitHub usernames when
 applicable.
 
+Zelig version 5.1-4
+==============================
+
+## Major changes
+
+-   Speed improvements made to `relogit`. Thanks to @retrography. #88
+
 Zelig version 5.1-3
 ==============================
 
