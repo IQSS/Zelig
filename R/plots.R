@@ -21,7 +21,7 @@
 #' @param axisnames a character-vector, specifying the names of the axes
 #' @return nothing
 #' @author James Honaker
-simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, line.col=NULL, axisnames=TRUE) {
+simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL, line.col=NULL, axisnames=TRUE) {
 
     binarytest <- function(j){
       if(!is.null(attr(j,"levels"))) return(identical( sort(levels(j)),c(0,1)))
@@ -49,6 +49,14 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
                 # Create a sequence of names
                 nameseq <- paste("Y=", min(y):max(y), sep="")
 
+                # Asign default axis labels
+                if (is.null(ylab)) {
+                    ylab <- "Frequency"
+                }
+                if (is.null(xlab)) {
+                    xlab <- "Y Value"
+                }
+
                 # Set the heights of the barplots.
                 # Note that tablar requires that all out values are greater than zero.
                 # So, we subtract the min value (ensuring everything is at least zero)
@@ -74,12 +82,28 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
                 all.names <- names(y)
             }
 
+            # Assign Default Axis Labels
+            if (is.null(ylab)) {
+                ylab <- "Frequency"
+            }
+            if (is.null(xlab)) {
+                xlab <- "Value"
+            }
+
             # Barplot with (potentially) some zero columns
             output <- barplot( apply(y,2,sum)/n.y, xlab=xlab, ylab=ylab, main=main, col=col[1],
                 axisnames=axisnames, names.arg=all.names)
 
         # Continuous Values
         } else if(is.numeric(y)){
+            # Assign Default Graph Labels
+            if (is.null(ylab)) {
+                ylab <- "Probability Density"
+            }
+            if (is.null(xlab)) {
+                xlab <- "Y Value"
+            }
+
             if(ncol(as.matrix(y))>1){
                 ncoly <- ncol(y)
                 hold.dens <- list()
@@ -124,6 +148,7 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
                 }
 
             }else{
+
                 den.y <- density(y)
                 output <- plot(den.y, xlab=xlab, ylab=ylab, main=main, col=line.col[1])
                 if(!identical(col[1],"n")){
@@ -145,7 +170,8 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
             }
 
             yseq<-min(c(y,y1)):max(c(y,y1))
-            nameseq<- paste("Y=",yseq,sep="")
+            nameseqX <- paste("Y|X=",yseq,sep="")
+            nameseqX1 <- paste("Y|X1=",yseq,sep="")
             n.y<-length(yseq)
 
             colors<-rev(heat.colors(n.y^2))
@@ -176,24 +202,28 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
                 }
             }
 
-            axis(side=1,labels=nameseq, at=seq(0,1,length=n.y), cex.axis=1, las=1)
-            axis(side=2,labels=nameseq, at=seq(0,1,length=n.y), cex.axis=1, las=3)
+            axis(side=1,labels=nameseqX, at=seq(0,1,length=n.y), cex.axis=1, las=1)
+            axis(side=2,labels=nameseqX1, at=seq(0,1,length=n.y), cex.axis=1, las=3)
             box()
             par(pty=old.pty,mai=old.mai)
         ##  Two Vectors of 1's and 0's
         }else if( ncol(as.matrix(y))>1 & binarytest(y) & ncol(as.matrix(y1))>1 & binarytest(y1)   )  {
+
 
             # Everything in this section assumes ncol(y)==ncol(y1)
 
             # Precedence is names > colnames > 1:n
             if(is.null(names(y))){
                 if(is.null(colnames(y) )){
-                    nameseq <- 1:n.y
+                    nameseqX <- 1:n.y
+                    nameseqX1 <- 1:n.y1
                 }else{
-                    nameseq <- colnames(y)
+                    nameseqX <- colnames(y)
+                    nameseqX1 <- colnames(y1)
                 }
             }else{
-                nameseq <- names(y)
+                nameseqX <- names(y)
+                nameseqX1 <- names(y1)
             }
 
             n.y <- ncol(y)
@@ -220,7 +250,7 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
             par(pty="s")
             par(mai=c(0.3,0.3,0.3,0.1))
 
-            image(z=comp, axes=FALSE, col=colors, zlim=c(min(comp),max(comp)),main=main )
+            image(z=comp, axes=TRUE, col=colors, zlim=c(min(comp),max(comp)),main=main, xlab = xlab, ylab = ylab)
 
             locations.x<-seq(from=0,to=1,length=nrow(comp))
             locations.y<-locations.x
@@ -231,13 +261,21 @@ simulations.plot <-function(y, y1=NULL, xlab="", ylab="", main="", col=NULL, lin
                 }
             }
 
-            axis(side=1,labels=nameseq, at=seq(0,1,length=n.y), cex.axis=1, las=1)
-            axis(side=2,labels=nameseq, at=seq(0,1,length=n.y), cex.axis=1, las=3)
+            axis(side=1,labels=nameseqX, at=seq(0,1,length=n.y), cex.axis=1, las=1)
+            axis(side=2,labels=nameseqX1, at=seq(0,1,length=n.y), cex.axis=1, las=3)
             box()
             par(pty=old.pty,mai=old.mai)
 
         ## Numeric - Plot two densities on top of each other
         }else if(is.numeric(y) & is.numeric(y1)){
+            ## Assign Default Axis Titles
+            if (is.null(ylab)) {
+                ylab <- "Probability Density"
+            }
+            if (is.null(xlab)) {
+                xlab <- "Value"
+            }
+
 
             if(is.null(col)){
                 semi.col.x <-rgb(142,229,238,150,maxColorValue=255)
@@ -593,10 +631,10 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
         num_cols <- length(obj$setx.out$range[[1]]$mm[[1]] )
         xmatrix <- matrix(NA,nrow = d, ncol = num_cols)    # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         for (i in 1:d){
-            xmatrix[i,] <- matrix(obj$setx.out$range[[i]]$mm[[1]], 
+            xmatrix[i,] <- matrix(obj$setx.out$range[[i]]$mm[[1]],
                                   ncol = num_cols)   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         }
-        
+
         if (d == 1 && is.null(var)) {
             warning("Must specify the `var` parameter when plotting the confidence interval of an unvarying model. Plotting nothing.")
             return(invisible(FALSE))
@@ -610,7 +648,7 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
                 return(invisible(FALSE))
             }
         }
-        
+
         if (is.null(var)) {
             # Determine x-axis variable based on variable with unique fitted values equal to the number of scenarios
             length_unique <- function(x) length(unique(x))
