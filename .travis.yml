@@ -1,5 +1,7 @@
 language: r
 cache: packages
+sudo: false
+latex: false
 branches:
     only:
     - master
