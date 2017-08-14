@@ -25,13 +25,13 @@ ztimeseries$methods(
                               fd  = "First Differences: E(Y|X1) - E(Y|X)",
                               acf = "Autocorrelation Function",
                               ev.shortrun = "Expected Values Immediately Resulting from Shock",
-                              ev.longrun = "Long Run Expected Values after Innovation",
+                              ev.longrun = "Long Run Expected Values after Persistant Shift",
                               pv.shortrun = "Predicted Values Immediately Resulting from Shock",
                               pv.longrun = "Long Run Predicted Values after Innovation",
                               evseries.shock = "Expected Values Over Time from Shock",
-                              evseries.innovation ="Expected Values Over Time from Innovation",
+                              evseries.innovation ="Expected Values Over Time from Persistant Shift",
                               pvseries.shock = "Predicted Values Over Time from Shock",
-                              pvseries.innovation ="Predicted Values Over Time from Innovation")
+                              pvseries.innovation ="Predicted Values Over Time from Persistant Shift")
   }
 )
 
@@ -103,7 +103,7 @@ ztimeseries$methods(
     d <- zelig_mutate(d, mm = .self$setx.out$x$mm)
     d <- zelig_mutate(d, mm1 = .self$setx.out$x1$mm)
 
-#      return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun, 
+#      return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun,
 #                pvseries.shock=yseries$y.shock, pvseries.innovation=yseries$y.innovation,
 #                evseries.shock=yseries$ev.shock, evseries.innovation=yseries$ev.innovation))
 
@@ -126,13 +126,13 @@ ztimeseries$methods(
 ztimeseries$methods(
   sim = function(num = 1000) {
     "Timeseries Method for Computing and Organizing Simulated Quantities of Interest"
-    if (length(.self$num) == 0) 
+    if (length(.self$num) == 0)
       .self$num <- num
     .self$simparam <- .self$zelig.out %>%
       do(simparam = .self$param(.$z.out))
 
-    # NOTE difference here from standard Zelig approach.  
-    # Normally these are done in sequence, but now we do one or the other.  
+    # NOTE difference here from standard Zelig approach.
+    # Normally these are done in sequence, but now we do one or the other.
     if (.self$bsetx1){
       .self$simx1()
     }else{
@@ -141,14 +141,14 @@ ztimeseries$methods(
   }
 )
 
-# There is no fitting summary function for objects of class Arima.  
+# There is no fitting summary function for objects of class Arima.
 # So this passes the object through to print, and z$summary() is essentially print(summary(x)).
 
 #' Summary of an object of class Arima
 #' @method summary Arima
-#' @param object An object of class Arima 
+#' @param object An object of class Arima
 #' @param ... Additional parameters
-#' @return The original object 
+#' @return The original object
 #' @export
 
 
