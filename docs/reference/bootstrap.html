@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • Zelig</title>
+<title>Bootstrap model coefficients — bootstrap • Zelig</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -142,132 +142,85 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;5.1-2.9000</small>
-      </h1>
+    <h1>Bootstrap model coefficients</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Bootstrap model coefficients</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>bootstrap</span>(<span class='no'>obj</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>obj</th>
+      <td><p>a fitted model object fitted using <code>lm</code> and many using
+<code>glm</code>. Note: more intended in future Zelig releases.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other arguments passed to <code>zelig</code>.</p></td>
+    </tr>
+    </table>
+    
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-main-zelig-workflow" class="hasAnchor"><a href="#section-main-zelig-workflow" class="anchor"></a>Main Zelig Workflow</h2>
-            <p class="section-desc"><p>The main functions Zelig’s estimate, set fitted values, simulate, and plot workflow</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="zelig.html">zelig</a></code> </p>
-          </td>
-          <td><p>Estimating a Statistical Model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="setx.html">setx</a></code> </p>
-          </td>
-          <td><p>Setting Explanatory Variable Values</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sim.html">sim</a></code> </p>
-          </td>
-          <td><p>Generic Method for Computing and Organizing Simulated Quantities of Interest</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-estimation-methods-under-development-" class="hasAnchor"><a href="#section-estimation-methods-under-development-" class="anchor"></a>Estimation Methods (under development)</h2>
-            <p class="section-desc"><p>Methods for finding parameter estimates</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p></p>
-          </td>
-          <td><p>Least Squares Regression for Continuous Dependent Variables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p></p>
-          </td>
-          <td><p>Logistic Regression for Dichotomous Dependent Variables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p></p>
-          </td>
-          <td><p>Instrumental-Variable Regression</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-exterior-interaction-functions" class="hasAnchor"><a href="#section-exterior-interaction-functions" class="anchor"></a>Exterior Interaction Functions</h2>
-            <p class="section-desc"><p>Functions for helping Zelig interact with the non-Zelig R world</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="from_zelig_model.html">from_zelig_model</a></code> </p>
-          </td>
-          <td><p>Extract the original fitted model object from a <code>zelig</code> estimation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_zelig_mi.html">to_zelig_mi</a></code> </p>
-          </td>
-          <td><p>Bundle Multiply Imputed Data Sets into an Object for Zelig</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_zelig.html">to_zelig</a></code> </p>
-          </td>
-          <td><p>Coerce a non-Zelig fitted model object to a Zelig class object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="zelig_qi_to_df.html">zelig_qi_to_df</a></code> </p>
-          </td>
-          <td><p>Extract simulated quantities of interest from a zelig object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="qi_slimmer.html">qi_slimmer</a></code> </p>
-          </td>
-          <td><p>Find the median and a central interval of simulated quantity of interest
-distributions</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="combine_coef_se.html">combine_coef_se</a></code> </p>
-          </td>
-          <td><p>Combines estimated coefficients and associated statistics
-from models estimated with multiply imputed data sets or bootstrapped</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>set.seed</span>(<span class='fl'>10</span>)
+<span class='no'>lm.out</span> <span class='kw'>&lt;-</span> <span class='fu'>bootstrap</span>(<span class='fu'>lm</span>(<span class='no'>Fertility</span> ~ <span class='no'>Education</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>swiss</span>))</div><div class='output co'>#&gt; <span class='message'>Assuming ls to convert to Zelig.</span></div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   R Core Team. 2007.
+#&gt;   ls: Least Squares Regression for Continuous Dependent Variables
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>lm.out</span>)</div><div class='output co'>#&gt; Model: Combined Bootstraps 
+#&gt; 
+#&gt;             Estimate Std.Error z value Pr(&gt;|z|)
+#&gt; (Intercept)   79.610     2.113    37.7  &lt; 2e-16
+#&gt; Education     -0.862     0.149    -5.8  6.7e-09
+#&gt; 
+#&gt; For results from individual bootstrapped datasets, use summary(x, subset = i:j)
+#&gt; Statistical Warning: The GIM test suggests this model is misspecified
+#&gt;  (based on comparisons between classical and robust SE's; see http://j.mp/GIMtest).
+#&gt;  We suggest you run diagnostics to ascertain the cause, respecify the model
+#&gt;  and run it again.
+#&gt; 
+#&gt; Next step: Use 'setx' method</div><div class='input'>
+<span class='fu'>set.seed</span>(<span class='fl'>10</span>)
+<span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>Fertility</span> ~ <span class='no'>Education</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>swiss</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ls"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   R Core Team. 2007.
+#&gt;   ls: Least Squares Regression for Continuous Dependent Variables
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out</span>)</div><div class='output co'>#&gt; Model: Combined Bootstraps 
+#&gt; 
+#&gt;             Estimate Std.Error z value Pr(&gt;|z|)
+#&gt; (Intercept)   79.610     2.113    37.7  &lt; 2e-16
+#&gt; Education     -0.862     0.149    -5.8  6.7e-09
+#&gt; 
+#&gt; For results from individual bootstrapped datasets, use summary(x, subset = i:j)
+#&gt; Statistical Warning: The GIM test suggests this model is misspecified
+#&gt;  (based on comparisons between classical and robust SE's; see http://j.mp/GIMtest).
+#&gt;  We suggest you run diagnostics to ascertain the cause, respecify the model
+#&gt;  and run it again.
+#&gt; 
+#&gt; Next step: Use 'setx' method</div><div class='input'>
+<span class='fu'>all.equal</span>(<span class='fu'>coef</span>(<span class='no'>lm.out</span>), <span class='fu'>coef</span>(<span class='no'>z.out</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-main-zelig-workflow">Main Zelig Workflow</a></li>
-      <li><a href="#section-estimation-methods-under-development-">Estimation Methods (under development)</a></li>
-      <li><a href="#section-exterior-interaction-functions">Exterior Interaction Functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Christopher Gandrud and Ista Zahn
+
   </div>
 </div>
 
