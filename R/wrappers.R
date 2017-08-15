@@ -181,6 +181,32 @@ to_zelig <- function(obj, ...) {
     zelig(model = obj, ...)
 }
 
+#' Bootstrap model coefficients
+#'
+#' @param obj a fitted model object fitted using \code{lm} and many using
+#'    \code{glm}. Note: more intended in future Zelig releases.
+#' @param ... other arguments passed to \code{zelig}.
+#'
+#' @examples
+#'
+#' set.seed(10)
+#' lm.out <- bootstrap(lm(Fertility ~ Education, data = swiss))
+#' summary(lm.out)
+#' 
+#' set.seed(10)
+#' z.out <- zelig(Fertility ~ Education, data = swiss, model = "ls", bootstrap = TRUE)
+#' summary(z.out)
+#'
+#' all.equal(coef(lm.out), coef(z.out))
+#' 
+#' @author Christopher Gandrud and Ista Zahn
+#' @export
+#'
+bootstrap <- function(obj, ...) {
+    zelig(model = obj, refit = TRUE, bootstrap = TRUE, ...)
+}
+
+
 
 #' Setting Explanatory Variable Values
 #'
