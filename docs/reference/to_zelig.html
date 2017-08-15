@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -150,7 +151,7 @@
     <p>Coerce a non-Zelig fitted model object to a Zelig class object</p>
     
 
-    <pre class="usage"><span class='fu'>to_zelig</span>(<span class='no'>obj</span>)</pre>
+    <pre class="usage"><span class='fu'>to_zelig</span>(<span class='no'>obj</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -160,23 +161,63 @@
       <td><p>a fitted model object fitted using <code>lm</code> and many using
 <code>glm</code>. Note: more intended in future Zelig releases.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other arguments passed to <code>zelig</code>.</p></td>
+    </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:testthat’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    matches</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='no'>lm.out</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>Fertility</span> ~ <span class='no'>Education</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>swiss</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='no'>lm.out</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>Fertility</span> ~ <span class='no'>Education</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>swiss</span>)
 
 <span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'>to_zelig</span>(<span class='no'>lm.out</span>)</div><div class='output co'>#&gt; <span class='message'>to_zelig is an experimental function.</span>
-#&gt; <span class='message'>  Please report issues to: https://github.com/IQSS/Zelig/issues</span></div><div class='output co'>#&gt; <span class='message'>Assuming zls to convert to Zelig.</span></div><div class='input'>
+#&gt; <span class='message'>  Please report issues to: https://github.com/IQSS/Zelig/issues</span></div><div class='output co'>#&gt; <span class='message'>Assuming ls to convert to Zelig.</span></div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   R Core Team. 2007.
+#&gt;   ls: Least Squares Regression for Continuous Dependent Variables
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'>
 <span class='co'># to_zelig called from within setx</span>
-<span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.out</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='sim.html'>sim</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>()</div><img src='to_zelig-10.png' alt='' width='540' height='400' /><div class='input'>
+<span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.out</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='sim.html'>sim</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>()</div><div class='img'><img src='to_zelig-10.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='kw'>if</span> (<span class='fu'>require</span>(<span class='no'>mitools</span>)) {
+   <span class='fu'>data</span>(<span class='no'>africa</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"Amelia"</span>)
+   <span class='no'>a.imp</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>Amelia</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/Amelia/topics/amelia'>amelia</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>africa</span>, <span class='kw'>cs</span> <span class='kw'>=</span> <span class='st'>"country"</span>, <span class='kw'>ts</span> <span class='kw'>=</span> <span class='st'>"year"</span>, <span class='kw'>logs</span> <span class='kw'>=</span> <span class='st'>"gdp_pc"</span>)$<span class='no'>imputations</span>
+   <span class='no'>mod.out</span> <span class='kw'>&lt;-</span> <span class='fu'>with</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/mitools/topics/imputationList'>imputationList</a></span>(<span class='no'>a.imp</span>), <span class='fu'>lm</span>(<span class='no'>gdp_pc</span> ~ <span class='no'>trade</span> + <span class='no'>civlib</span>))
+   <span class='fu'>to_zelig</span>(<span class='no'>mod.out</span>)
+}</div><div class='output co'>#&gt; -- Imputation 1 --
+#&gt; 
+#&gt;   1  2  3
+#&gt; 
+#&gt; -- Imputation 2 --
+#&gt; 
+#&gt;   1  2  3
+#&gt; 
+#&gt; -- Imputation 3 --
+#&gt; 
+#&gt;   1  2  3
+#&gt; 
+#&gt; -- Imputation 4 --
+#&gt; 
+#&gt;   1  2  3
+#&gt; 
+#&gt; -- Imputation 5 --
+#&gt; 
+#&gt;   1  2  3
+#&gt; </div><div class='output co'>#&gt; <span class='message'>to_zelig is an experimental function.</span>
+#&gt; <span class='message'>  Please report issues to: https://github.com/IQSS/Zelig/issues</span></div><div class='output co'>#&gt; <span class='message'>Assuming ls to convert to Zelig.</span></div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   R Core Team. 2007.
+#&gt;   ls: Least Squares Regression for Continuous Dependent Variables
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='output co'>#&gt; Model: Combined Imputations 
+#&gt; 
+#&gt;             Estimate Std.Error z value Pr(&gt;|z|)
+#&gt; (Intercept)   121.03     98.57    1.23  0.21950
+#&gt; trade          18.03      1.26   14.33  &lt; 2e-16
+#&gt; civlib       -632.37    187.02   -3.38  0.00072
+#&gt; 
+#&gt; For results from individual imputed datasets, use summary(x, subset = i:j)
+#&gt; Next step: Use 'setx' method</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
