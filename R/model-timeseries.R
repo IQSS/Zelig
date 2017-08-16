@@ -58,6 +58,12 @@ ztimeseries$methods(
     } else if(identical(.self$name,"ma")){
       order <- c(0,0,1)
       .self$zelig.call$order <- order
+    } else {
+        dots <- list(...)
+        if (!is.null(dots$order)) {
+            order <- dots$order
+        }
+        .self$zelig.call$order <- order
     }
     .self$model.call <- .self$zelig.call
 
