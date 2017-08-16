@@ -98,10 +98,10 @@ simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL,
         } else if(is.numeric(y)){
             # Assign Default Graph Labels
             if (is.null(ylab)) {
-                ylab <- "Probability Density"
+                ylab <- "Density"
             }
             if (is.null(xlab)) {
-                xlab <- "Y Value"
+                xlab <- "Expected Value"
             }
 
             if(ncol(as.matrix(y))>1){
