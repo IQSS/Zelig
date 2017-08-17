@@ -170,8 +170,8 @@ simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL,
             }
 
             yseq<-min(c(y,y1)):max(c(y,y1))
-            nameseqX <- paste("Y|X=",yseq,sep="")
-            nameseqX1 <- paste("Y|X1=",yseq,sep="")
+            nameseqX <- paste("(Y|X)=",yseq,sep="")
+            nameseqX1 <- paste("(Y|X1)=",yseq,sep="")
             n.y<-length(yseq)
 
             colors<-rev(heat.colors(n.y^2))
@@ -215,7 +215,7 @@ simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL,
             # Precedence is names > colnames > 1:n
             if(is.null(names(y))){
                 if(is.null(colnames(y) )){
-                    n.y1 <- n.y
+                    n.y1 <- ncol(y1)
                     nameseqX <- 1:n.y
                     nameseqX1 <- 1:n.y1
                 }else{
@@ -251,7 +251,7 @@ simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL,
             par(pty="s")
             par(mai=c(0.3,0.3,0.3,0.1))
 
-            image(z=comp, axes=TRUE, col=colors, zlim=c(min(comp),max(comp)),main=main, xlab = xlab, ylab = ylab)
+            image(z=comp, axes=FALSE, col=colors, zlim=c(min(comp),max(comp)),main=main, xlab = xlab, ylab = ylab)
 
             locations.x<-seq(from=0,to=1,length=nrow(comp))
             locations.y<-locations.x
@@ -271,7 +271,7 @@ simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL,
         }else if(is.numeric(y) & is.numeric(y1)){
             ## Assign Default Axis Titles
             if (is.null(ylab)) {
-                ylab <- "Probability Density"
+                ylab <- "Density"
             }
             if (is.null(xlab)) {
                 xlab <- "Value"
