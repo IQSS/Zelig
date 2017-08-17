@@ -215,6 +215,7 @@ simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL,
             # Precedence is names > colnames > 1:n
             if(is.null(names(y))){
                 if(is.null(colnames(y) )){
+                    n.y1 <- n.y
                     nameseqX <- 1:n.y
                     nameseqX1 <- 1:n.y1
                 }else{
