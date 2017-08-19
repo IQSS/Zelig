@@ -28,8 +28,6 @@ knitr::opts_chunk$set(
 [![Travis (LINUX) Build Status](https://travis-ci.org/IQSS/Zelig.svg?branch=master)](https://travis-ci.org/IQSS/Zelig)
 [![AppVeyor (Windows) Build Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
-[![Gitter
-chat](https://badges.gitter.im/Zelig-dev/gitter.png)](https://gitter.im/Zelig-dev/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 [Dev-Blog](https://medium.com/zelig-dev)
 
 ## Zelig workflow overview
@@ -47,7 +45,8 @@ All models in Zelig can be estimated and results explored presented using four s
 #### Zelig 5 reference classes
 
 Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html). These
-enable a different way of working with Zelig that is detailed in [a separate vignette](http://docs.zeligproject.org/articles/zelig5_vs_zelig4.html). Directly using the reference class architecture is optional. 
+enable a different way of working with Zelig that is detailed in [a separate vignette](http://docs.zeligproject.org/articles/zelig5_vs_zelig4.html). Directly using the reference class architecture is optional. They are not used in the examples 
+below.
 
 ## Zelig Quickstart Guide
 

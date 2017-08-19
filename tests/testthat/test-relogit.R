@@ -48,7 +48,17 @@ test_that('FAIL TEST relogit with tau <= 0', {
 # REQUIRE TEST relogit with tau range ------------------------------------------
 test_that('REQUIRE TEST relogit with tau range', {
     data(mid)
-    expect_error(z.out <- zelig(conflict ~ major + contig + power + maxdem + mindem + years,
+    expect_error(z.out <- zelig(conflict ~ major + contig + power + maxdem +
+                                    mindem + years,
                     data = mid, model = "relogit", tau = c(0.002, 0.005)),
                  "tau must be a vector of length less than or equal to 1. For multiple taus, estimate models individually.")
+})
+
+# REQUIRE TEST relogit works with predict --------------------------------------
+test_that("REQUIRE TEST relogit works with predict", {
+    data(mid)
+    x <- zelig(conflict ~ major, data = mid, model = "relogit",
+               tau = 1042/303772)
+    x <- from_zelig_model(x)
+    expect_warning(predict(x, newdata = mid[1, ]), NA)
 })

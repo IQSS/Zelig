@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -157,7 +158,7 @@
     <tr>
       <th>formula</th>
       <td><p>a symbolic representation of the model to be
-estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+estimated, in the form <code>y ~ x1 + x2</code>, where <code>y</code> is the
 dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
 variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
 same dataset. (You may include more than two explanatory variables,
@@ -171,8 +172,8 @@ exclude the main effects; and quadratic terms in the form
     <tr>
       <th>model</th>
       <td><p>the name of a statistical model to estimate.
-For a list of supported models and their documentation see:
-<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+For a list of other supported models and their documentation see:
+<a href='http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -192,9 +193,7 @@ relevant for the model to be estimated.</p></td>
 <code>zelig</code> will subset
 the data frame based on the levels in the <code>by</code> variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+effort. You may also use <code>by</code> to run models using MatchIt
 subclasses.</p></td>
     </tr>
     <tr>
@@ -214,6 +213,14 @@ The default value is 0.</p></td>
 If the dependent variable is only censored from below, set <code>above = Inf</code>.
 The default value is <code>Inf</code>.</p></td>
     </tr>
+    <tr>
+      <th>below:</th>
+      <td><p>point at which the dependent variable is censored from below. If the dependent variable is only censored from above, set below = -Inf. The default value is 0.</p></td>
+    </tr>
+    <tr>
+      <th>above:</th>
+      <td><p>point at which the dependent variable is censored from above. If the dependent variable is only censored from below, set above = Inf. The default value is Inf.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -223,45 +230,45 @@ The default value is <code>Inf</code>.</p></td>
   and <code>formula</code> which may be summarized using
   <code>summary(z.out)</code> or individually extracted using, for example,
   <code>coef(z.out)</code>. See
-  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  <a href='http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
   functions to extract model components. You can also extract whole fitted
   model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Additional parameters avaialable to this model include:</p><ul>
-<li><p>weights: vector of weight values or a name of a variable in the dataset
+<li><p><code>weights</code>: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
-  <a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
-<li><p>burnin: number of the initial MCMC iterations to be discarded (defaults to 1,000).</p></li>
-<li><p>mcmc: number of the MCMC iterations after burnin (defaults to 10,000).</p></li>
-<li><p>thin: thinning interval for the Markov chain. Only every thin-th
+  <a href='http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
+<li><p><code>burnin</code>: number of the initial MCMC iterations to be discarded (defaults to 1,000).</p></li>
+<li><p><code>mcmc</code>: number of the MCMC iterations after burnin (defaults to 10,000).</p></li>
+<li><p><code>thin</code>: thinning interval for the Markov chain. Only every thin-th
   draw from the Markov chain is kept. The value of mcmc must be divisible by this value.
   The default value is 1.</p></li>
-<li><p>verbose: defaults to FALSE. If TRUE, the progress of the sampler (every 10%)
+<li><p><code>verbose</code>: defaults to FALSE. If TRUE, the progress of the sampler (every 10%)
   is printed to the screen.</p></li>
-<li><p>seed: seed for the random number generator. The default is <code>NA</code> which
+<li><p><code>seed</code>: seed for the random number generator. The default is <code>NA</code> which
   corresponds to a random seed of 12345.</p></li>
-<li><p>beta.start: starting values for the Markov chain, either a scalar or
+<li><p><code>beta.start</code>: starting values for the Markov chain, either a scalar or
   vector with length equal to the number of estimated coefficients. The default is
   <code>NA</code>, such that the maximum likelihood estimates are used as the starting values.</p></li>
 </ul><p>Use the following parameters to specify the model's priors:</p><ul>
-<li><p>b0: prior mean for the coefficients, either a numeric vector or a scalar.
+<li><p><code>b0</code>: prior mean for the coefficients, either a numeric vector or a scalar.
     If a scalar value, that value will be the prior mean for all the coefficients.
     The default is 0.</p></li>
-<li><p>B0: prior precision parameter for the coefficients, either a square matrix
+<li><p><code>B0</code>: prior precision parameter for the coefficients, either a square matrix
     (with the dimensions equal to the number of the coefficients) or a scalar.
     If a scalar value, that value times an identity matrix will be the prior precision parameter.
     The default is 0, which leads to an improper prior.</p></li>
-<li><p>c0: c0/2 is the shape parameter for the Inverse Gamma prior on the variance of the
+<li><p><code>c0</code>: <code>c0</code>/2 is the shape parameter for the Inverse Gamma prior on the variance of the
     disturbance terms.</p></li>
-<li><p>d0: d0/2 is the scale parameter for the Inverse Gamma prior on the variance of the
+<li><p><code>d0</code>: <code>d0</code>/2 is the scale parameter for the Inverse Gamma prior on the variance of the
     disturbance terms.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_tobitbayes.html'>http://docs.zeligproject.org/articles/zelig_tobitbayes.html</a></p>
+    <p>Vignette: <a href='http://docs.zeligproject.org/articles/zelig_tobitbayes.html'>http://docs.zeligproject.org/articles/zelig_tobitbayes.html</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

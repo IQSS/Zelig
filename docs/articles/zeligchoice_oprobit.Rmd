@@ -1,0 +1,300 @@
+---
+title: "Ordered Probit"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zeligchoice-oprobit}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+Ordinal Probit Regression for Ordered Categorical Dependent Variables with `oprobit` in ZeligChoice.
+
+Use the ordinal probit regression model if your dependent variables are
+ordered and categorical. They may take on either integer values or
+character strings. For a Bayesian implementation of this model, see .
+
+Syntax
+------
+
+First load packages:
+
+```{r, eval = TRUE, message=FALSE}
+library(zeligverse)
+```
+
+```{r, eval = FALSE}
+z.out <- zelig(as.factor(Y) ~ X1 + X23,
+               model = "oprobit", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+```
+
+If `Y` takes discrete integer values, the `as.factor()` function will order
+it automatically. If `Y` takes on values composed of character strings,
+such as “strongly agree”, “agree”, and “disagree”, `as.factor()`` will
+order the values in the order in which they appear in Y. You will need
+to replace your dependent variable with a factored variable prior to
+estimating the model through `zelig()`. See below for more information on
+creating ordered factors.
+
+Example
+------
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+set.seed(1234)
+```
+
+### Creating An Ordered Dependent Variable
+
+Load the sample data:
+
+```{r, eval = TRUE}
+data(sanction)
+```
+
+Create an ordered dependent variable:
+
+```{r, eval = TRUE}
+sanction$ncost <- factor(sanction$ncost, ordered = TRUE,
+                         levels = c("net gain", "little effect", "modest lost", "major loss"))
+```
+
+Estimate the model:
+
+```{r, eval = TRUE}
+z.out <- zelig(ncost ~ mil + coop, model = "oprobit", data = sanction)
+```
+
+Summarize estimated paramters:
+
+```{r, eval = TRUE}
+summary(z.out)
+```
+
+Set the explanatory variables to their observed values:
+
+```{r, eval = TRUE}
+x.out <- setx(z.out)
+```
+
+Simulate fitted values given x.out and view the results:
+
+```{r, eval = TRUE}
+s.out <- sim(z.out, x = x.out)
+summary(s.out)
+```
+
+```{r Zelig-oprobit1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Ordered Probit"}
+plot(s.out)
+```
+
+### First Differences
+
+Using the sample data `sanction`, let us estimate the empirical model and return the coefficients:
+
+```{r, eval = TRUE}
+z.out <- zelig(as.factor(cost) ~ mil + coop, model = "oprobit",
+               data = sanction)
+summary(z.out)
+```
+
+Set the explanatory variables to their means, with `coop` set to `1` (the lowest value) in the baseline case and set
+to `4` (the highest value) in the alternative case:
+
+```{r, eval = TRUE}
+x.low <- setx(z.out, coop = 1)
+x.high <- setx(z.out, coop = 4)
+```
+
+Generate simulated fitted values and first differences, and view the results:
+
+```{r, eval = TRUE}
+s.out2 <- sim(z.out, x = x.low, x1 = x.high)
+summary(s.out2)
+```
+
+```{r Zelig-oprobit2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Ordered Probit"}
+plot(s.out2)
+```
+
+Model
+------
+
+Let $Y_i$ be the ordered categorical dependent variable for
+observation $i$ that takes one of the integer values from
+$1$ to $J$ where $J$ is the total number of
+categories.
+
+-  The *stochastic component* is described by an unobserved continuous
+   variable, $Y^*_i$, which follows the normal distribution with
+   mean $\mu_i$ and unit variance
+
+
+$$
+    Y_i^* \; \sim \; N(\mu_i, 1).
+$$
+
+   The observation mechanism is
+
+
+$$
+    Y_i \; = \; j \quad {\rm if} \quad \tau_{j-1} \le Y_i^* \le \tau_j
+        \quad {\rm for} \quad j=1,\dots,J.
+$$
+
+   where $\tau_k$ for $k=0,\dots,J$ is the threshold
+   parameter with the following constraints; [\tau_l]( \tau_m$ for
+   all [l](m$ and $\tau_0=-\infty$ and $\tau_J=\infty$.
+
+   Given this observation mechanism, the probability for each category,
+   is given by
+
+
+$$
+    \Pr(Y_i = j) \; = \; \Phi(\tau_{j} \mid \mu_i) - \Phi(\tau_{j-1} \mid
+        \mu_i) \quad {\rm for} \quad j=1,\dots,J
+$$
+
+   where $\Phi(\mu_i)$ is the cumulative distribution function for
+   the Normal distribution with mean $\mu_i$ and unit variance.
+
+-  The *systematic component* is given by
+
+
+$$
+    \mu_i \; = \; x_i \beta
+$$
+
+   where $x_i$ is the vector of explanatory variables and
+   $\beta$ is the vector of coefficients.
+
+Quantities of Interest
+------
+
+-  The expected values (qi$ev) for the ordinal probit model are
+   simulations of the predicted probabilities for each category:
+
+
+$$
+    E(Y_i = j) \; = \; \Pr(Y_i = j) \; = \; \Phi(\tau_{j} \mid \mu_i)
+        - \Phi(\tau_{j-1} \mid  \mu_i) \quad {\rm for} \quad j=1,\dots,J,
+$$
+
+   given draws of $\beta$ from its posterior.
+
+-  The predicted value (qi$pr) is the observed value of $Y_i$
+   given the underlying standard normal distribution described by
+   $\mu_i$.
+
+-  The difference in each of the predicted probabilities (qi$fd) is
+   given by
+
+
+$$
+    \Pr(Y=j \mid x_1) \;-\; \Pr(Y=j \mid x) \quad {\rm for} \quad
+        j=1,\dots,J.
+$$
+
+-  In conditional prediction models, the average expected treatment
+   effect (`qi$att.ev`) for the treatment group in category $j$
+   is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{n_j}\sum_{i:t_{i}=1}^{n_j}[Y_{i}(t_{i}=1)-E[Y_{i}(t_{i}=0)]],\end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups, and
+   $n_j$ is the number of treated observations in category
+   $j$.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (`qi$att.pr`) for the treatment group in category $j$
+   is
+
+
+$$
+    \begin{aligned}
+        \frac{1}{n_j}\sum_{i:t_{i}=1}^{n_j}[Y_{i}(t_{i}=1)-\widehat{Y_{i}(t_{i}=0)}],\end{aligned}
+$$
+
+   where $t_{i}$ is a binary explanatory variable defining the
+   treatment ($t_{i}=1$) and control ($t_{i}=0$) groups, and
+   $n_j$ is the number of treated observations in category
+   $j$.
+
+Output Values
+------
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+`z.out <- zelig(y ~ x, model = oprobit, data)`, then you may examine
+the available information in `z.out` by using `names(z.out)`, see
+the coefficients by using z.out$coefficients, and a default summary of
+information through `summary(z.out)`. Other elements available through
+the $ operator are listed below.
+
+-  From the `zelig()` output object `z.out`, you may extract:
+
+   -  coefficients: the named vector of coefficients.
+
+   -  fitted.values: an $n \times J$ matrix of the in-sample
+      fitted values.
+
+   -  predictors: an $n \times (J-1)$ matrix of the linear
+      predictors $x_i \beta_j$.
+
+   -  residuals: an $n \times (J-1)$ matrix of the residuals.
+
+   -  zeta: a vector containing the estimated class boundaries.
+
+   -  df.residual: the residual degrees of freedom.
+
+   -  df.total: the total degrees of freedom.
+
+   -  rss: the residual sum of squares.
+
+   -  y: an $n \times J$ matrix of the dependent variables.
+
+   -  zelig.data: the input data frame if save.data = TRUE.
+
+-  From `summary(z.out)``, you may extract:
+
+   -  coef3: a table of the coefficients with their associated standard
+      errors and $t$-statistics.
+
+   -  cov.unscaled: the variance-covariance matrix.
+
+   -  pearson.resid: an $n \times (m-1)$ matrix of the Pearson
+      residuals.
+
+See also
+------
+
+The ordinal probit function is part of the VGAM package by Thomas Yee.
+In addition, advanced users may wish to refer to `help(vglm)` in the
+VGAM library.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z5 <- zoprobit$new()
+z5$references()
+```

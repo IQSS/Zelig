@@ -1,8 +1,14 @@
 # Check and build Zelig
 
-# Ensure that IQSSDevtools is installed
-if(!('IQSSdevtools' %in% installed.packages()[, 1]))
+# Ensure that pkgdown and IQSSDevtools is installed
+if(!('pkgdown' %in% installed.packages()[, 1])) {
+    devtools::install_github('hadley/pkgdown')
+}
+
+if(!('IQSSdevtools' %in% installed.packages()[, 1])) {
     devtools::install_github('IQSS/IQSSdevtools')
+}
+
 
 # Check and build package and website
 #-- Roxygen is only used for user documentation, not collating and building
@@ -11,4 +17,4 @@ if(!('IQSSdevtools' %in% installed.packages()[, 1]))
 #--   constraints are not included with the package source build.
 library(IQSSdevtools)
 build_iqss_package(rdocs_args = "rd", build_args = "--no-build-vignettes",
-                   website_lazy = TRUE)
+                   website_lazy = TRUE, git_commit = FALSE)

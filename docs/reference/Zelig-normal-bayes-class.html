@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -157,7 +158,7 @@
     <tr>
       <th>formula</th>
       <td><p>a symbolic representation of the model to be
-estimated, in the form <code>y \~\, x1 + x2</code>, where <code>y</code> is the
+estimated, in the form <code>y ~ x1 + x2</code>, where <code>y</code> is the
 dependent variable and <code>x1</code> and <code>x2</code> are the explanatory
 variables, and <code>y</code>, <code>x1</code>, and <code>x2</code> are contained in the
 same dataset. (You may include more than two explanatory variables,
@@ -171,8 +172,8 @@ exclude the main effects; and quadratic terms in the form
     <tr>
       <th>model</th>
       <td><p>the name of a statistical model to estimate.
-For a list of supported models and their documentation see:
-<a href = 'http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
+For a list of other supported models and their documentation see:
+<a href='http://docs.zeligproject.org/articles/'>http://docs.zeligproject.org/articles/</a>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -192,9 +193,7 @@ relevant for the model to be estimated.</p></td>
 <code>zelig</code> will subset
 the data frame based on the levels in the <code>by</code> variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: <code>z.out &lt;- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-by = 'state')</code> You may also use <code>by</code> to run models using MatchIt
+effort. You may also use <code>by</code> to run models using MatchIt
 subclasses.</p></td>
     </tr>
     <tr>
@@ -211,17 +210,16 @@ to the console.</p></td>
   and <code>formula</code> which may be summarized using
   <code>summary(z.out)</code> or individually extracted using, for example,
   <code>coef(z.out)</code>. See
-  <a href = 'http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
+  <a href='http://docs.zeligproject.org/articles/getters.html'>http://docs.zeligproject.org/articles/getters.html</a> for a list of
   functions to extract model components. You can also extract whole fitted
   model objects using <code><a href='from_zelig_model.html'>from_zelig_model</a></code>.</p>
-<p>Vignette: <a href = 'http://docs.zeligproject.org/articles/zelig_normalbayes.html'>http://docs.zeligproject.org/articles/zelig_normalbayes.html</a></p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Additional parameters avaialable to many models include:</p><ul>
 <li><p><code>weights</code>: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
-  <a href = 'http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
+  <a href='http://docs.zeligproject.org/articles/weights.html'>http://docs.zeligproject.org/articles/weights.html</a>.</p></li>
 <li><p><code>burnin</code>: number of the initial MCMC iterations to be discarded (defaults to 1,000).</p></li>
 <li><p><code>mcmc</code>: number of the MCMC iterations after burnin (defaults to 10,000).</p></li>
 <li><p><code>thin</code>: thinning interval for the Markov chain. Only every thin-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.</p></li>
@@ -235,6 +233,10 @@ to the console.</p></td>
 <li><p><code>d0</code>: d0/2 is the scale parameter for the Inverse Gamma prior on the variance of the disturbance terms.</p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Vignette: <a href='http://docs.zeligproject.org/articles/zelig_normalbayes.html'>http://docs.zeligproject.org/articles/zelig_normalbayes.html</a></p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>macro</span>)
@@ -243,6 +245,110 @@ to the console.</p></td>
 #&gt;   normal-bayes: Bayesian Normal Linear Regression
 #&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
 #&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'>
+
+<span class='fu'>data</span>(<span class='no'>macro</span>)
+<span class='no'>z.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unem</span> ~ <span class='no'>gdp</span> + <span class='no'>capmob</span> + <span class='no'>trade</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"normal.bayes"</span>,
+<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>macro</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
+#&gt;   Ben Goodrich, and Ying Lu. 2013.
+#&gt;   normal-bayes: Bayesian Normal Linear Regression
+#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'>
+<span class='no'>z.out</span>$<span class='fu'>geweke.diag</span>()</div><div class='output co'>#&gt; 
+#&gt; Fraction in 1st window = 0.1
+#&gt; Fraction in 2nd window = 0.5 
+#&gt; 
+#&gt; (Intercept)         gdp      capmob       trade      sigma2 
+#&gt;      -0.118      -0.313      -0.589       0.516      -1.696 
+#&gt; </div><div class='input'><span class='no'>z.out</span>$<span class='fu'>heidel.diag</span>()</div><div class='output co'>#&gt;                                           
+#&gt;             Stationarity start     p-value
+#&gt;             test         iteration        
+#&gt; (Intercept) passed       1         0.756  
+#&gt; gdp         passed       1         0.963  
+#&gt; capmob      passed       1         0.355  
+#&gt; trade       passed       1         0.339  
+#&gt; sigma2      passed       1         0.626  
+#&gt;                                        
+#&gt;             Halfwidth Mean    Halfwidth
+#&gt;             test                       
+#&gt; (Intercept) passed     6.1773 0.008849 
+#&gt; gdp         passed    -0.3240 0.001244 
+#&gt; capmob      passed     1.4207 0.003246 
+#&gt; trade       passed     0.0199 0.000105 
+#&gt; sigma2      passed     7.5834 0.011691 </div><div class='input'><span class='no'>z.out</span>$<span class='fu'>raftery.diag</span>()</div><div class='output co'>#&gt; 
+#&gt; Quantile (q) = 0.025
+#&gt; Accuracy (r) = +/- 0.005
+#&gt; Probability (s) = 0.95 
+#&gt;                                                    
+#&gt;              Burn-in  Total Lower bound  Dependence
+#&gt;              (M)      (N)   (Nmin)       factor (I)
+#&gt;  (Intercept) 2        3834  3746         1.020     
+#&gt;  gdp         2        3650  3746         0.974     
+#&gt;  capmob      2        3771  3746         1.010     
+#&gt;  trade       2        3680  3746         0.982     
+#&gt;  sigma2      2        3710  3746         0.990     
+#&gt; </div><div class='input'><span class='fu'>summary</span>(<span class='no'>z.out</span>)</div><div class='output co'>#&gt; Model: 
+#&gt; 
+#&gt; Iterations = 1001:11000
+#&gt; Thinning interval = 1 
+#&gt; Number of chains = 1 
+#&gt; Sample size per chain = 10000 
+#&gt; 
+#&gt; 1. Empirical mean and standard deviation for each variable,
+#&gt;    plus standard error of the mean:
+#&gt; 
+#&gt;                Mean      SD Naive SE Time-series SE
+#&gt; (Intercept)  6.1773 0.45148 4.51e-03       4.51e-03
+#&gt; gdp         -0.3240 0.06349 6.35e-04       6.35e-04
+#&gt; capmob       1.4207 0.16562 1.66e-03       1.66e-03
+#&gt; trade        0.0199 0.00561 5.61e-05       5.37e-05
+#&gt; sigma2       7.5834 0.57846 5.78e-03       5.96e-03
+#&gt; 
+#&gt; 2. Quantiles for each variable:
+#&gt; 
+#&gt;                 2.5%     25%    50%     75%   97.5%
+#&gt; (Intercept)  5.30927  5.8707  6.180  6.4779  7.0878
+#&gt; gdp         -0.45044 -0.3669 -0.324 -0.2812 -0.2012
+#&gt; capmob       1.09273  1.3105  1.422  1.5335  1.7461
+#&gt; trade        0.00873  0.0162  0.020  0.0237  0.0308
+#&gt; sigma2       6.53464  7.1766  7.553  7.9552  8.7957
+#&gt; 
+#&gt; Next step: Use 'setx' method</div><div class='input'>
+<span class='no'>x.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.out</span>)
+<span class='no'>s.out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sim.html'>sim</a></span>(<span class='no'>z.out</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x.out</span>)
+<span class='fu'>summary</span>(<span class='no'>s.out1</span>)</div><div class='output co'>#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;   mean    sd  50% 2.5% 97.5%
+#&gt; 1 4.99 0.148 4.99 4.71  5.28
+#&gt; pv
+#&gt;      mean   sd  50%  2.5% 97.5%
+#&gt; [1,] 5.03 2.73 5.05 -0.35  10.3</div><div class='input'>
+<span class='no'>x.high</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.out</span>, <span class='kw'>trade</span> <span class='kw'>=</span> <span class='fu'>quantile</span>(<span class='no'>macro</span>$<span class='no'>trade</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.8</span>))
+<span class='no'>x.low</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.out</span>, <span class='kw'>trade</span> <span class='kw'>=</span> <span class='fu'>quantile</span>(<span class='no'>macro</span>$<span class='no'>trade</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.2</span>))
+
+<span class='no'>s.out2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sim.html'>sim</a></span>(<span class='no'>z.out</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x.high</span>, <span class='kw'>x1</span> <span class='kw'>=</span> <span class='no'>x.low</span>)
+<span class='fu'>summary</span>(<span class='no'>s.out2</span>)</div><div class='output co'>#&gt; 
+#&gt;  sim x :
+#&gt;  -----
+#&gt; ev
+#&gt;   mean    sd  50% 2.5% 97.5%
+#&gt; 1 5.43 0.192 5.43 5.06  5.81
+#&gt; pv
+#&gt;      mean   sd 50%   2.5% 97.5%
+#&gt; [1,] 5.42 2.77 5.4 0.0106  10.8
+#&gt; 
+#&gt;  sim x1 :
+#&gt;  -----
+#&gt; ev
+#&gt;   mean    sd 50% 2.5% 97.5%
+#&gt; 1  4.6 0.185 4.6 4.24  4.97
+#&gt; pv
+#&gt;      mean   sd 50%   2.5% 97.5%
+#&gt; [1,] 4.58 2.76 4.6 -0.825  9.97
+#&gt; fd
+#&gt;     mean    sd    50%  2.5%  97.5%
+#&gt; 1 -0.833 0.235 -0.836 -1.29 -0.365</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -253,6 +359,8 @@ to the console.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

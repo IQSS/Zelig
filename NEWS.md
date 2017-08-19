@@ -3,12 +3,19 @@ each change note when relevant. See <https://github.com/IQSS/Zelig/issues>.
 External contributors are referenced with their GitHub usernames when
 applicable.
 
+Zelig version 5.1-4
+==============================
+
+## Major changes
+
+-   Speed improvements made to `relogit`. Thanks to @retrography. #88
+
 Zelig version 5.1-3
 ==============================
 
 ## Major changes
 
-
+-   Roxygen documentation improvements.
 
 ## Minor changes and bug fixes
 
@@ -16,7 +23,11 @@ Zelig version 5.1-3
 
 -   `vcov` now works with `rq` quantile regression models.
 
--   Roxygen documentation improvements.
+-   More informative error handling for conflicting `timeseries` model 
+arguments. #283
+
+-   Resolved and issue with `relogit` that produced a warning when the fitted 
+model object was passed to `predict`. #291 
 
 
 Zelig version 5.1-2

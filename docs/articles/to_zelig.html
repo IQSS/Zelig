@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Quantities of Interest for Non-Zelig Models</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
@@ -143,12 +143,12 @@
 <span class="kw">data</span>(api)
 
 <span class="co"># Fit model with surveyglm</span>
-dstrat &lt;-<span class="st"> </span><span class="kw">svydesign</span>(<span class="dt">id =</span> ~<span class="dv">1</span>, <span class="dt">strata =</span> ~stype, <span class="dt">weights =</span> ~pw, <span class="dt">data =</span> apistrat,
-                    <span class="dt">fpc =</span> ~fpc)
-m1 &lt;-<span class="st"> </span><span class="kw">svyglm</span>(api00 ~<span class="st"> </span>ell +<span class="st"> </span>meals +<span class="st"> </span>mobility, <span class="dt">design =</span> dstrat)
+dstrat &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/survey/topics/svydesign">svydesign</a></span>(<span class="dt">id =</span> <span class="op">~</span><span class="dv">1</span>, <span class="dt">strata =</span> <span class="op">~</span>stype, <span class="dt">weights =</span> <span class="op">~</span>pw, <span class="dt">data =</span> apistrat,
+                    <span class="dt">fpc =</span> <span class="op">~</span>fpc)
+m1 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/survey/topics/svyglm">svyglm</a></span>(api00 <span class="op">~</span><span class="st"> </span>ell <span class="op">+</span><span class="st"> </span>meals <span class="op">+</span><span class="st"> </span>mobility, <span class="dt">design =</span> dstrat)
 
 <span class="co"># Set fitted values, simulate quantities of interest, &amp; plot with Zelig</span>
-m1 %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>() %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%<span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
+m1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="to_zelig_files/figure-html/unnamed-chunk-1-1.png" width="672"></p>
 </div>
 <div id="supported-model-types" class="section level2">
@@ -225,7 +225,8 @@ m1 %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/setx.ht
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#example">Example</a></li>
       <li><a href="#supported-model-types">Supported model types</a></li>

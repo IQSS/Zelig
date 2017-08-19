@@ -80,8 +80,13 @@ Bootstraps or weights.
 \examples{
 data(seatshare)
 subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
-ts.out <- zelig(formula = unemp ~ leftseat, model = "arima", ts = "year", data = subset)
-summary(ts.out)
+ts.out <- zarima$new()
+ts.out$zelig(unemp ~ leftseat, order = c(1, 0, 1), data = subset)
+
+# Set fitted values and simulate quantities of interest
+ts.out$setx(leftseat = 0.75)
+ts.out$setx1(leftseat = 0.25)
+ts.out$sim()
 
 }
 \seealso{

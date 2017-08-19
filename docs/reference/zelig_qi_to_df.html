@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -164,7 +165,7 @@
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>For a discussion of tidy data see
-<a href = 'https://www.jstatsoft.org/article/view/v059i10'>https://www.jstatsoft.org/article/view/v059i10</a>.</p>
+<a href='https://www.jstatsoft.org/article/view/v059i10'>https://www.jstatsoft.org/article/view/v059i10</a>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -198,12 +199,12 @@ a is column of the predicted outcomes (<code>predicted_value</code>).</p>
 #&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='no'>z.1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.1</span>)
 <span class='no'>z.1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sim.html'>sim</a></span>(<span class='no'>z.1</span>)
 <span class='fu'>head</span>(<span class='fu'>zelig_qi_to_df</span>(<span class='no'>z.1</span>))</div><div class='output co'>#&gt;   setx_value Petal.Length   Species expected_value predicted_value
-#&gt; 1          x         3.76 virginica           1.64            1.94
-#&gt; 2          x         3.76 virginica           1.64            1.57
-#&gt; 3          x         3.76 virginica           1.72            1.43
-#&gt; 4          x         3.76 virginica           1.64            1.59
-#&gt; 5          x         3.76 virginica           1.60            1.57
-#&gt; 6          x         3.76 virginica           1.65            1.52</div><div class='input'>
+#&gt; 1          x         3.76 virginica           1.63            1.93
+#&gt; 2          x         3.76 virginica           1.63            1.56
+#&gt; 3          x         3.76 virginica           1.76            1.48
+#&gt; 4          x         3.76 virginica           1.60            1.55
+#&gt; 5          x         3.76 virginica           1.59            1.56
+#&gt; 6          x         3.76 virginica           1.58            1.45</div><div class='input'>
 <span class='co'>#### QIs for first differences</span>
 <span class='no'>z.2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>Petal.Width</span> ~ <span class='no'>Petal.Length</span> + <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
              <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ls"</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
@@ -214,12 +215,12 @@ a is column of the predicted outcomes (<code>predicted_value</code>).</p>
 <span class='no'>z.2b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.2</span>, <span class='kw'>Petal.Length</span> <span class='kw'>=</span> <span class='fl'>4.4</span>)
 <span class='no'>z.2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sim.html'>sim</a></span>(<span class='no'>z.2</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>z.2a</span>, <span class='kw'>x1</span> <span class='kw'>=</span> <span class='no'>z.2a</span>)
 <span class='fu'>head</span>(<span class='fu'>zelig_qi_to_df</span>(<span class='no'>z.2</span>))</div><div class='output co'>#&gt;   setx_value Petal.Length   Species expected_value predicted_value
-#&gt; 1          x            2 virginica           1.30            1.24
-#&gt; 2          x            2 virginica           1.17            1.34
-#&gt; 3          x            2 virginica           1.28            1.20
-#&gt; 4          x            2 virginica           1.09            1.36
-#&gt; 5          x            2 virginica           1.06            1.09
-#&gt; 6          x            2 virginica           1.43            1.64</div><div class='input'>
+#&gt; 1          x            2 virginica           1.32            1.26
+#&gt; 2          x            2 virginica           1.15            1.32
+#&gt; 3          x            2 virginica           1.30            1.22
+#&gt; 4          x            2 virginica           1.08            1.35
+#&gt; 5          x            2 virginica           1.06            1.10
+#&gt; 6          x            2 virginica           1.43            1.63</div><div class='input'>
 <span class='co'>#### QIs for first differences, estimated by Species</span>
 <span class='no'>z.3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>Petal.Width</span> ~ <span class='no'>Petal.Length</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"Species"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
              <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ls"</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
@@ -245,11 +246,11 @@ a is column of the predicted outcomes (<code>predicted_value</code>).</p>
 #&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='no'>z.4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setx.html'>setx</a></span>(<span class='no'>z.4</span>, <span class='kw'>Petal.Length</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>)
 <span class='no'>z.4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sim.html'>sim</a></span>(<span class='no'>z.4</span>)
 <span class='fu'>head</span>(<span class='fu'>zelig_qi_to_df</span>(<span class='no'>z.4</span>))</div><div class='output co'>#&gt;   setx_value Petal.Length   Species expected_value predicted_value
-#&gt; 1          x            2 virginica           1.15            1.20
-#&gt; 2          x            2 virginica           1.16            1.05
-#&gt; 3          x            2 virginica           1.42            1.26
-#&gt; 4          x            2 virginica           1.21            1.25
-#&gt; 5          x            2 virginica           1.02            1.08
+#&gt; 1          x            2 virginica           1.14            1.19
+#&gt; 2          x            2 virginica           1.17            1.07
+#&gt; 3          x            2 virginica           1.43            1.28
+#&gt; 4          x            2 virginica           1.20            1.24
+#&gt; 5          x            2 virginica           1.02            1.07
 #&gt; 6          x            2 virginica           1.27            1.45</div><div class='input'>
 <span class='co'>#### QIs for a range of fitted values, estimated by Species</span>
 <span class='no'>z.5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>Petal.Width</span> ~ <span class='no'>Petal.Length</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"Species"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
@@ -277,12 +278,12 @@ a is column of the predicted outcomes (<code>predicted_value</code>).</p>
 <span class='no'>z.6</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sim.html'>sim</a></span>(<span class='no'>z.6</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>z.6a</span>, <span class='kw'>x1</span> <span class='kw'>=</span> <span class='no'>z.6b</span>)
 
 <span class='fu'>head</span>(<span class='fu'>zelig_qi_to_df</span>(<span class='no'>z.6</span>))</div><div class='output co'>#&gt;   setx_value Petal.Length Species expected_value predicted_value
-#&gt; 1          x            2  setosa          0.385           0.245
-#&gt; 2          x            2  setosa          0.388           0.491
-#&gt; 3          x            2  setosa          0.394           0.595
-#&gt; 4          x            2  setosa          0.394           0.452
-#&gt; 5          x            2  setosa          0.320           0.351
-#&gt; 6          x            2  setosa          0.395           0.640</div><div class='input'>
+#&gt; 1          x            2  setosa          0.383           0.243
+#&gt; 2          x            2  setosa          0.391           0.494
+#&gt; 3          x            2  setosa          0.373           0.574
+#&gt; 4          x            2  setosa          0.379           0.438
+#&gt; 5          x            2  setosa          0.318           0.349
+#&gt; 6          x            2  setosa          0.409           0.655</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

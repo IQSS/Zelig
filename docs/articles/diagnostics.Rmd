@@ -1,0 +1,77 @@
+---
+title: "Diagnostics for MCMC convergence"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{diagnostics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+
+options(cite = FALSE)
+```
+---
+
+```{r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+Zelig has three available diagnostic tests for MCMC models.  Here is an example of their use.
+First we attach the sample dataset and estimate a linear regression using the MCMC `normal.bayes` model:
+
+```{r, eval = TRUE}
+data(macro)
+z.out <- zelig(unem ~ gdp + capmob + trade, model = "normal.bayes",
+               data = macro, verbose = FALSE)
+```
+
+You can check for convergence before summarizing the estimates with three diagnostic tests.
+
+### Geweke Diagnostic
+
+The Geweke diagnostic tests the null hypothesis that the Markov chain is in the stationary distribution and produces z-statistics for each estimated parameter.
+
+```{r, eval = TRUE}
+z.out$geweke.diag()
+```
+
+### Heidelberger-Welch Diagnostic
+
+The Heidelberger and Welch diagnostic first tests the null hypothesis that the Markov Chain is in the stationary distribution and produces *p*-values for each estimated parameter. Calling this diagnostic also produces output that indicates whether the mean of a marginal posterior distribution can be estimated with sufficient precision, assuming that the Markov Chain is in the stationary distribution.
+
+```{r, eval = TRUE}
+z.out$heidel.diag()
+```
+
+### Raftery-Lewis Diagnostic
+
+The Raftery and Lewis diagnostic indicates how long the Markov Chain should run before considering draws from the marginal posterior distributions sufficiently representative of the stationary distribution.
+
+```{r, eval = TRUE}
+z.out$raftery.diag()
+```
+
+See also
+------
+
+The convergence diagnostics are part of the
+CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+Bayesian normal regression is part of the MCMCpack library by Andrew D.
+Martin and Kevin M. Quinn.
+
+```{r, eval = TRUE, echo=FALSE, results = "asis"}
+z.out$references()
+```
