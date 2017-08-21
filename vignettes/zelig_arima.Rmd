@@ -77,7 +77,7 @@ Summarize estimated model parameters:
 summary(ts.out)
 ```
 
-Next we simulate what happens when leftseat share drops from a moderately high level of 75 percent, to a rather low level of 25 percent:
+Next we simulate what happens when leftseat share drops from a moderately high level of 75 percent, to a rather low level of 25 percent. Note that the `setx` and `setx1` methods both must be called in order to be able to successfully plot the results of timeseries simulation:
 
 ```{r, eval = TRUE}
 ts.out$setx(leftseat = 0.75)
