@@ -123,7 +123,7 @@
     <div class="page-header toc-ignore">
       <h1>Transforming Covariates</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
@@ -137,20 +137,20 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)
 <span class="kw">library</span>(dplyr)
 
-z.log &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed ~<span class="st"> </span><span class="kw">log</span>(dist), <span class="dt">data =</span> cars, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
+z.log &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(dist), <span class="dt">data =</span> cars, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Then we want to find quantities of interest when the <code>dist</code> variable is 26 to 56 (the first to third quartile). To do this we added the logged fitted values to <code>setx</code>, simulate quantities of interest, and plot the results:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.log, <span class="dt">dist =</span> <span class="kw">log</span>(<span class="dv">26</span>:<span class="dv">56</span>)) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.log, <span class="dt">dist =</span> <span class="kw">log</span>(<span class="dv">26</span><span class="op">:</span><span class="dv">56</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">plot</span>(<span class="dt">xlab =</span> <span class="st">'dist (log)'</span>)</code></pre></div>
 <p><img src="transforming_covariates_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
 <p>We could also estimate the model with <code>dist</code> as a polynomial. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find range of polynomial values</span>
-dist_range &lt;-<span class="st"> </span><span class="kw">min</span>(cars$dist):<span class="kw">max</span>(cars$dist)
+dist_range &lt;-<span class="st"> </span><span class="kw">min</span>(cars<span class="op">$</span>dist)<span class="op">:</span><span class="kw">max</span>(cars<span class="op">$</span>dist)
 
-<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed ~<span class="st"> </span>dist +<span class="st"> </span><span class="kw">I</span>(dist^<span class="dv">2</span>), <span class="dt">data =</span> cars, <span class="dt">model =</span> <span class="st">'ls'</span>,
-      <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">dist =</span> dist_range) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%
+<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed <span class="op">~</span><span class="st"> </span>dist <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(dist<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> cars, <span class="dt">model =</span> <span class="st">'ls'</span>,
+      <span class="dt">cite =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">dist =</span> dist_range) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="transforming_covariates_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 </div>
@@ -159,18 +159,18 @@ dist_range &lt;-<span class="st"> </span><span class="kw">min</span>(cars$dist):
 <a href="#splines" class="anchor"></a>Splines</h2>
 <p>The ability to transform covariates with splines in the <code>zelig</code> model formula and then set/simulate quantities of interest is currently in development. In the meantime. You can transform the covariates outside of the <code>zelig</code> model estimation call. For example, we can include splines for <code>dist</code> in the following way:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(splines)
-cars.splines &lt;-<span class="st"> </span><span class="kw">cbind</span>(cars, <span class="kw">bs</span>(cars$dist))
-<span class="kw">names</span>(cars.splines)[<span class="dv">3</span>:<span class="dv">5</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'dist_bs_1'</span>, <span class="st">'dist_bs_2'</span>, <span class="st">'dist_bs_3'</span>)
+cars.splines &lt;-<span class="st"> </span><span class="kw">cbind</span>(cars, <span class="kw"><a href="http://www.rdocumentation.org/packages/splines/topics/bs">bs</a></span>(cars<span class="op">$</span>dist))
+<span class="kw">names</span>(cars.splines)[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'dist_bs_1'</span>, <span class="st">'dist_bs_2'</span>, <span class="st">'dist_bs_3'</span>)
 
-<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed ~<span class="st"> </span>dist_bs_1 +<span class="st"> </span>dist_bs_2 +<span class="st"> </span>dist_bs_3, <span class="dt">data =</span> cars.splines,
-      <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">dist_bs_1 =</span> <span class="kw">c</span>(<span class="kw">min</span>(cars.splines$dist_bs_1), <span class="kw">median</span>(cars.splines$dist_bs_1),
-                       <span class="kw">max</span>(cars.splines$dist_bs_2)),
-         <span class="dt">dist_bs_2 =</span> <span class="kw">c</span>(<span class="kw">min</span>(cars.splines$dist_bs_2), <span class="kw">median</span>(cars.splines$dist_bs_2),
-                       <span class="kw">max</span>(cars.splines$dist_bs_2)),
-         <span class="dt">dist_bs_3 =</span> <span class="kw">c</span>(<span class="kw">min</span>(cars.splines$dist_bs_3), <span class="kw">median</span>(cars.splines$dist_bs_3),
-                       <span class="kw">max</span>(cars.splines$dist_bs_3))) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%
+<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed <span class="op">~</span><span class="st"> </span>dist_bs_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>dist_bs_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span>dist_bs_<span class="dv">3</span>, <span class="dt">data =</span> cars.splines,
+      <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">cite =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">dist_bs_1 =</span> <span class="kw">c</span>(<span class="kw">min</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">1</span>), <span class="kw">median</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">1</span>),
+                       <span class="kw">max</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">2</span>)),
+         <span class="dt">dist_bs_2 =</span> <span class="kw">c</span>(<span class="kw">min</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">2</span>), <span class="kw">median</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">2</span>),
+                       <span class="kw">max</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">2</span>)),
+         <span class="dt">dist_bs_3 =</span> <span class="kw">c</span>(<span class="kw">min</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">3</span>), <span class="kw">median</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">3</span>),
+                       <span class="kw">max</span>(cars.splines<span class="op">$</span>dist_bs_<span class="dv">3</span>))) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="transforming_covariates_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>Note that this example was for syntax illustration purposes only. You probably want to use a more continuous range of values for the splines. Make sure that you have an equal number of fitted values for each component of the spline and that these are all in the same order.</p>
@@ -180,7 +180,8 @@ cars.splines &lt;-<span class="st"> </span><span class="kw">cbind</span>(cars, <
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#supported-transformations"> Supported transformations</a></li>
       <li><a href="#splines">Splines</a></li>

@@ -11,7 +11,7 @@
 #'   exclude the main effects; and quadratic terms in the form
 #'   \code{I(x1^2)}.
 #'@param model the name of a statistical model to estimate.
-#'   For a list of supported models and their documentation see:
+#'   For a list of other supported models and their documentation see:
 #'   \url{http://docs.zeligproject.org/articles/}.
 #'@param data the name of a data frame containing the variables
 #'   referenced in the formula or a list of multiply imputed data frames
@@ -23,9 +23,7 @@
 #'   \code{zelig} will subset
 #'   the data frame based on the levels in the \code{by} variable, and
 #'   estimate a model for each subset. This can save a considerable amount of
-#'   effort. For example, to run the same model on all fifty states, you could
-#'   use: \code{z.out <- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-#'   by = 'state')} You may also use \code{by} to run models using MatchIt
+#'   effort. You may also use \code{by} to run models using MatchIt
 #'   subclasses.
 #'@param cite If is set to 'TRUE' (default), the model citation will be printed
 #'   to the console.
@@ -258,7 +256,7 @@ relogit <- function(formula,
       }
       W <- pihat * (1 - pihat) * wi
       ##Qdiag <- diag(X%*%solve(t(X)%*%diag(W)%*%X)%*%t(X))
-      Qdiag <- lm.influence(lm(y ~ X - 1, weights = W))$hat / W
+      Qdiag <- lm.influence(lm(y ~ X - 1, weights = W), do.coef = FALSE)$hat / W
       if (is.null(tau)) # w_1=1 since tau=ybar
         xi <- 0.5 * Qdiag * (2 * pihat - 1)
       else
@@ -286,7 +284,7 @@ relogit <- function(formula,
     res$linear.predictors <- t(res$coefficients) %*% t(X)
     res$fitted.values <- 1 / (1 + exp(-res$linear.predictors))
     res$zelig <- "Relogit"
-    class(res) <- c("Relogit", "glm")
+    class(res) <- c("Relogit", "glm", "lm")
     return(res)
   }
 }

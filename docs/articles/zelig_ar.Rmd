@@ -25,7 +25,7 @@ options(cite = FALSE)
 
 Time-Series Model with Autoregressive Disturbance with `ar`.
 
-Warning: Simulation is not currently implemented for timeseries models.
+Warning: Simulation is not currently implemented for `ar` models.
 
 Syntax
 ------
@@ -33,9 +33,9 @@ Currently, only the Zelig 5 reference class syntax is available for `ar`
 models:
 
 ```{r, eval = FALSE}
-z.out <- zelig(Y ~ X1 + X2, model="ar", data = mydata)
+z.out <- zelig(Y ~ X1 + X2, model = "ar", data = mydata)
 setx(z.out)
-sim(z.out) # Not yet implemented
+# sim(z.out) # Not yet implemented
 ```
 
 ### Additional Inputs
@@ -67,7 +67,7 @@ subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
 Estimate model:
 
 ```{r, eval = TRUE}
-ts.out <- zelig(unemp ~ leftseat, model="ar", data = subset)
+ts.out <- zelig(unemp ~ leftseat, model = "ar", data = subset)
 ```
 
 Summarize estimated model parameters:
@@ -76,16 +76,18 @@ Summarize estimated model parameters:
 summary(ts.out)
 ```
 
+
+<!----
 Next we simulate what happens when leftseat share drops from a moderately high level of 75 percent, to a rather low level of 25 percent:
 
 ```{r, eval = TRUE}
 setx(ts.out, leftseat = 0.75)
 setx1(ts.out, leftseat = 0.25)
-sim(ts.out)
+# sim(ts.out)
 ```
 
 ```{r Zelig-ar, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for AR models"}
-plot(ts.out)
+# plot(ts.out)
 ```
 
 ### Multiple Series
@@ -97,6 +99,8 @@ ts.out2 <- zelig(unemp ~ leftseat, model = "ar", ts = "year",
               cs = "country", data = seatshare)
 summary(ts.out2)
 ```
+
+---->
 
 See Also
 ------

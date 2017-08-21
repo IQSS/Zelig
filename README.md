@@ -16,8 +16,6 @@ Status](https://travis-ci.org/IQSS/Zelig.svg?branch=master)](https://travis-ci.o
 [![AppVeyor (Windows) Build
 Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
 [![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
-[![Gitter
-chat](https://badges.gitter.im/Zelig-dev/gitter.png)](https://gitter.im/Zelig-dev/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 [Dev-Blog](https://medium.com/zelig-dev)
 
 Zelig workflow overview
@@ -40,8 +38,9 @@ using four simple functions:
 Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html).
 These enable a different way of working with Zelig that is detailed in
 [a separate
-vignette](http://docs.zeligproject.org/articles/zelig5_vs_zelig4.html).Directly
-using the reference class architecture is optional.
+vignette](http://docs.zeligproject.org/articles/zelig5_vs_zelig4.html).
+Directly using the reference class architecture is optional. They are
+not used in the examples below.
 
 Zelig Quickstart Guide
 ----------------------
@@ -149,23 +148,23 @@ After setting our predictor value, we simulate using the `sim()` method:
     ##  sim x :
     ##  -----
     ## ev
-    ##       mean      sd      50%     2.5%    97.5%
-    ## 1 75.26968 1.63758 75.26433 71.94417 78.37313
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 75.30616 1.658283 75.28057 72.12486 78.48007
     ## pv
-    ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 75.30607 9.550589 75.39573 56.35069 94.72933
+    ##          mean       sd      50%     2.5%   97.5%
+    ## [1,] 75.28028 9.707597 75.60282 57.11199 94.3199
     ## 
     ##  sim x1 :
     ##  -----
     ## ev
     ##       mean       sd      50%     2.5%    97.5%
-    ## 1 66.65888 1.528937 66.61505 63.75947 69.71423
+    ## 1 66.66467 1.515977 66.63699 63.66668 69.64761
     ## pv
     ##          mean       sd      50%     2.5%    97.5%
-    ## [1,] 66.28331 9.275512 66.53786 48.03818 83.93964
+    ## [1,] 66.02916 9.441273 66.32583 47.19223 82.98039
     ## fd
     ##        mean       sd       50%      2.5%     97.5%
-    ## 1 -8.610797 1.455565 -8.618433 -11.44455 -5.799213
+    ## 1 -8.641488 1.442774 -8.656953 -11.43863 -5.898305
 
 At this point, we’ve estimated a model, set the predictor value, and
 estimated easily interpretable quantities of interest. The `summary()`

@@ -1,0 +1,55 @@
+---
+title: "Using Zelig with MatchIt"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+ %\VignetteIndexEntry{using-Zelig-with-MatchIt}
+ %\VignetteEngine{knitr::rmarkdown}
+ %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion("Zelig")`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+    stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7,
+    eval = TRUE
+)
+
+options(cite = FALSE)
+```
+---
+
+`zelig()` accept matched datasets from the [MatchIt](http://gking.harvard.edu/matchit) package as the `data` argument.
+
+```{r, echo = FALSE}
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+```
+
+First, using the MatchIt package, we attaching the `lalonde` example dataset, and run matching:
+
+```{r, warning=FALSE}
+library("MatchIt")
+data(lalonde)
+m.out <- matchit(treat ~ educ + black + hispan, data = lalonde,
+                 method = "optimal")
+```
+
+Then we can use the output object from the MatchIt package directly in the data argument for Zelig:
+
+```{r}
+z.out <- zelig(educ ~ treat, model = "ls", data = m.out)
+```
+
+Zelig will automatically extract the dataset and the weights from the MatchIt object and use them in analysis. For more details on how weights are used in Zelig across models, see the weights section.
+
+From the MatchIt object, it knows what matching method was used, and adds appropriate citations to the reference list accordingly, in addition to the other references it builds from models and utilities in Zelig:
+
+```{r}
+print(z.out$references())
+```

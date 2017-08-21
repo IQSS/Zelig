@@ -1,11 +1,13 @@
 language: r
 cache: packages
+sudo: false
+latex: false
 branches:
     only:
     - master
     - /^test.*$/
     - pkgdown
-
+    
 r_github_packages:
     - jimhester/covr
     - IQSS/ZeligChoice

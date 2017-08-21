@@ -30,11 +30,12 @@ Warning: Simulation is not currently implemented for timeseries models.
 Syntax
 ------
 
-Currently, only the Zelig 5 reference class syntax is available for `ma` 
+Currently, only the Zelig 5 reference class syntax is available for `ma`
 models:
 
 ```{r, eval = FALSE}
-z.out <- zelig(Y ~ X1 + X2, model="ma". data = mydata)
-setx(z.out)
-sim(z.out) # Currently not implemented
+z.out <- zma$new()
+z.out$zelig(Y ~ X1 + X2, data = mydata)
+x.out$setx(z.out)
+s.out$sim(z.out)
 ```

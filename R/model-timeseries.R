@@ -36,19 +36,27 @@ ztimeseries$methods(
 )
 
 ztimeseries$methods(
-  zelig = function(formula, data, order=c(1,0,0), ts=NULL, cs=NULL, ..., weights=NULL, by=NULL, bootstrap = FALSE){
+  zelig = function(formula, data, order = c(1, 0, 0), ts = NULL, cs = NULL, ...,
+                   weights = NULL, by = NULL, bootstrap = FALSE){
 
     localBy <- by     # avoids CRAN warning about deep assignment from by existing separately as argument and field
     localData <- data # avoids CRAN warning about deep assignment from data existing separately as argument and field
     if(!identical(bootstrap,FALSE)){
       stop("Error: The bootstrap is not implemented for time-series models")
     }
+    if (!is.null(cs) && is.null(ts))
+        stop("ts must be specified if cs is specified.", call. = FALSE)
+    if (!is.null(cs) && !is.null(by)) {
+            stop("cs and by are equivalent for this model. Only one needs to be specified.",
+                 call. = FALSE)
+    }
+
     .self$zelig.call <- match.call(expand.dots = TRUE)
     if(identical(.self$name,"ar")){
-      order<-c(1,0,0)
+      order <- c(1,0,0)
       .self$zelig.call$order <- order
     } else if(identical(.self$name,"ma")){
-      order<-c(0,0,1)
+      order <- c(0,0,1)
       .self$zelig.call$order <- order
     }
     .self$model.call <- .self$zelig.call
@@ -56,9 +64,9 @@ ztimeseries$methods(
     ## Sort dataset by time and cross-section
     ## Should add checks that ts, cs, are valid, and consider how to interact with by.
     ## This follows handling from Amelia::prep.r, which also has code to deal with lags, should we add those.
-    if(!identical(ts,NULL)){
+    if(!is.null(ts)){
       .self$model.call$ts <- NULL
-      if (!identical(cs,NULL)) {
+      if (!is.null(cs)) {
         .self$model.call$cs <- NULL
         tsarg<-list(localData[,cs],localData[,ts])
         localBy <- cs  # Use by architecture to deal with cross-sections in time-series models that do not support such.  Currently overrides.
@@ -66,12 +74,13 @@ ztimeseries$methods(
         tsarg<-list(localData[,ts])
       }
 
-      tssort<-do.call("order",tsarg)
-      localData<-localData[tssort,]
+      tssort <- do.call("order",tsarg)
+      localData <- localData[tssort,]
     }
 
     ## ts and cs are used to reorganize dataset, and do not get further passed on to Super
-    callSuper(formula = formula, data = localData, order=order, ..., weights = weights, by = localBy, bootstrap = FALSE)
+    callSuper(formula = formula, data = localData, order=order, ...,
+              weights = weights, by = localBy, bootstrap = FALSE)
   }
 )
 

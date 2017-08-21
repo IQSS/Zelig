@@ -1,0 +1,122 @@
+---
+title: "Available Zelig Models"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Zelig Models Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+  stop_on_error = 2L
+)
+
+```
+
+### Zelig Inheritance Tree
+
+Zelig 5 supports the following models:
+
+```{r echo=FALSE}
+library(networkD3)
+
+zelig_core <- list(name = "Zelig",
+                   children = list(
+                       list(name = "Core",
+                            children = list(
+                                list(name = "timeseries",
+                                     children = list(
+                                         list(name = "ar"),
+                                         list(name = "ma"),
+                                         list(name = "arima")
+                                     )),
+                                list(name = "survey",
+                                    children = list(
+                                         list(name = "poisson"),
+                                         list(name = "gamma"),
+                                         list(name = "normal"),
+                                         list(name = "binchoice",
+                                              children = list(
+                                                  list(name = "probit"),
+                                                  list(name = "logit")
+                                              ))
+                                     )),
+                                list(name = "wiebull"),
+                                list(name = "bayes",
+                                    children = list(
+                                        list(name = "logit bayes"),
+                                        list(name = "mlogit bayes"),
+                                        list(name = "normal bayes"),
+                                        list(name = "ordered probit"),
+                                        list(name = "poisson bayes"),
+                                        list(name = "probit bayes"),
+                                        list(name = "tobit bayes")
+                                        )),
+                                list(name = "factorbayes"),
+                                list(name = "gee",
+                                    children = list(
+                                        list(name = "gamma gee")
+                                        )),
+                                list(name = "relogit"),
+                                list(name = "quantile"),
+                                list(name = "tobit"),
+                                list(name = "lognorm"),
+                                list(name = "exp"),
+                                list(name = "negbin"),
+                                list(name = "glm",
+                                    children = list(
+                                        list(name = "gamma"),
+                                        list(name = "normal"),
+                                        list(name = "poisson"),
+                                        list(name = "binchoice",
+                                            children = list(
+                                                list(name = "logit"),
+                                                list(name = "probit")
+                                              ))
+                                        )),
+                                list(name = "ls"),
+                                list(name = "ivreg")
+                            )),
+                       list(name = "Choice",
+                            children = list(
+                                list(name = "obinchoice",
+                                    children = list(
+                                        list(name = "ologit"),
+                                        list(name = "oprobit")
+                                )),
+                                list(name = "bbinchoice",
+                                    children = list(
+                                        list(name = "blogit"),
+                                        list(name = "bprobit")
+                                )),
+                                list(name = "mlogit")
+                            )),
+#                       list(name = "GAM",
+#                            children = list(
+#                                list(name = "binchoice GAM",
+#                                    children = list(
+#                                        list(name = "probit"),
+#                                        list(name = "logit")
+#                            ))
+#                        )),
+                       list(name = "EI",
+                            children = list(
+                                list(name = "dynamic"),
+                                list(name = "hierarchical"),
+                                list(name = "maximum likelihood"),
+                                list(name = "multinomial dirichlet")
+                            ))
+                   ))
+
+diagonalNetwork(zelig_core, fontSize = 15, fontFamily = 'sans-serif', 
+            nodeStroke = 'd16103')
+```
+
+**Note:** additional multilevel and generalized additive models are available in
+[ZeligMultilevel](https://github.com/IQSS/ZeligMultilevel) and
+[ZeligGAM](https://github.com/IQSS/ZeligGAM) respectively.
+However, these are unstable packages and should be used with caution.

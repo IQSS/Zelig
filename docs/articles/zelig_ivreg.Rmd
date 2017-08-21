@@ -1,0 +1,158 @@
+---
+title: "Instrumental Variable (Two-Stage Least Squares) Regression"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zelig-ivreg}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+*Built using Zelig version `r packageVersion('Zelig')`*
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+knitr::opts_chunk$set(
+    fig.height = 11,
+    fig.width = 7
+)
+```
+
+Instrumental Variable Regression (via 2 Stage Least Squares) for Continuous
+Dependent Variables with `ivreg`.
+
+Instrumental variable regression is used when the correlation between the independent variables and the dependent variable does not reflect the true relationship because the independent variables are correlated with the error term. This can happen because of ommitted variables, reverse causation, and measurement error. Such variables are often referred to as "endogenous" (as opposed to "exogenous" variables that are not correlated with the error term). It may be possible to use instruments--other variables that cause changes in the endogenous variables, but not the dependent variable--to recover the endogenous variabless effects on the independent variable. 
+
+Syntax
+------
+
+```{r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2 | Z1 + Z2 + Z3, model = "ivreg", weights = w,
+               data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+```
+
+Note that `|` separates the regressors (e.g. `X1` and `X2`) from the instruments
+(e.g. `Z1`, `Z2`, `Z3`). Exogenous regressors have to be included as instruments for themselves.
+
+Examples
+--------
+
+Load Zelig and other packages used in the example:
+
+```{r, message=FALSE}
+library(Zelig)
+library(dplyr) # for the pipe operator %>%
+```
+
+Before estimating the model, let's attach the example data and make some
+transformations to it. Notably, `zivreg` does not currently support logging
+regressors in the `zelig` call. To get around this, we simply find the logged
+values before estimating the model:
+
+```{r}
+# load and transform data
+data("CigarettesSW")
+CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
+CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
+CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+
+# log second stage independent variables, as logging internally for ivreg is
+# not currently supported
+CigarettesSW$log_rprice <- log(CigarettesSW$rprice)
+CigarettesSW$log_rincome <- log(CigarettesSW$rincome)
+```
+
+Now we can estimate the model and summarize the coefficients:
+
+```{r}
+z.out1 <- zelig(log(packs) ~ log_rprice + log_rincome |
+                    log_rincome + tdiff + I(tax/cpi),
+                    data = CigarettesSW, subset = year == "1995",
+                    model = "ivreg")
+
+summary(z.out1)
+```
+
+We can then simulate and plot the expected value of the log of the `packs`
+response variable across the range of the observed `rprice` regressor values:
+
+```{r}
+z.out1 %>% setx(log_rprice = range(log(CigarettesSW$rprice))) %>%
+    sim() %>%
+    plot()
+```
+
+To conduct standard diagnostic tests on the estimated model using functionality
+in the [AER](https://CRAN.R-project.org/package=AER) package, exatract the
+fitted model object with the `from_zelig_model()` function.
+
+Model Definition
+----------------
+
+*One stage (ordinary) least squares* is given by:
+
+-  The *stochastic component* which is described by a density with mean
+   $\mu_i$ and the common variance $\sigma^2$
+
+$$
+    Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).
+$$
+
+-  The *systematic component* modelling the conditional mean as
+
+$$
+   \mu_i =  x_i \beta,
+$$
+
+   where $x_i$ is the vector of covariates, and $\beta$ is
+   the vector of coefficients.
+
+   The least squares estimator is the best linear predictor of a
+   dependent variable given $x_i$, and minimizes the sum of
+   squared residuals, $\sum_{i=1}^n (Y_i-x_i \beta)^2$.
+
+In *two-stage least squares* uses these components twice to uncover the effect of the endogenous variables on the continuous dependent variable.
+
+In the first stage, each endogenous variable is estimated with least squares regressions that include all of the exogenous variables (the instruments and any other exogenous variables used to estimate the dependent variable). The predicted values of the endogenous variables from these models (and the exogenous, non-instrumental variables) are then used in the second stage regression. 
+
+
+Quantities of Interest Definition
+----------------------------------
+
+-  The expected value (`qi$ev`) is the mean of simulations from the
+   stochastic component of the *second stage*,
+
+$$
+    E(Y) = x_i \beta,
+$$
+
+   given a draw of $\beta$ from its sampling distribution.
+
+-  In conditional prediction models, the average expected treatment
+   effect (`att.ev`) for the treatment group is
+
+$$
+    \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            E[Y_i(t_i=0)] \right\},
+$$
+
+   where $t_i$ is a binary explanatory variable defining the
+   treatment ($t_i=1$) and control ($t_i=0$) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   $E[Y_i(t_i=0)]$, the counterfactual expected value of
+   $Y_i$ for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math: $t_i=0$.
+
+See also
+--------
+
+`ivreg` is from Christian Kleiber and Achim Zeileis (2008). Applied Econometrics
+with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL <https://CRAN.R-project.org/package=AER>. For more information use
+`?AER::ivreg`.
+
+Greene, W. H. (1993) Econometric Analysis, 2nd ed., Macmillan.
