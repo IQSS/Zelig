@@ -101,7 +101,11 @@ simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL,
                 ylab <- "Density"
             }
             if (is.null(xlab)) {
-                xlab <- "Expected Value"
+                if (main == "First Differences: E(Y|X1) - E(Y|X)") {
+                    xlab <- "Difference in Outcome"
+                } else {
+                    xlab <- "Outcome"
+                }
             }
 
             if(ncol(as.matrix(y))>1){
@@ -274,7 +278,12 @@ simulations.plot <-function(y, y1=NULL, xlab=NULL, ylab=NULL, main="", col=NULL,
                 ylab <- "Density"
             }
             if (is.null(xlab)) {
-                xlab <- "Value"
+                if (main == "First Differences: E(Y|X1) - E(Y|X)") {
+                    xlab <- "Difference in Outcome"
+                } else {
+                    xlab <- "Outcome"
+                }
+
             }
 
 
