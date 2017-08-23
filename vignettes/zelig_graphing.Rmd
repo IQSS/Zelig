@@ -21,6 +21,18 @@ knitr::opts_chunk$set(
 options(cite = FALSE)
 ```
 
+## Graphing Syntax:
+
+
+```{r, eval=FALSE}
+z.out <- zelig(Y ~ X, data=your.data, model="your choice", ...) # Run your model
+x.out <- setx(z.out, X = value) # counterfactual for simulation
+x.out <- setx1(x.out, X = other.value) # Optional Counterfactual: For time series and first differences
+s.out <- sim(x.out) # Simulation required for plotting
+plot(s.out) # Graph your simulation
+```
+
+
 ## General Overview
 
 Graphing in Zelig works in concert with the simulation and counterfactual analysis functionality included in Zelig. Zelig provides a number graphs to represent the results of the simulations. However, as simulation is not univerally part of the standard statistical workflow, interpretation of some the graphs produced by Zelig is not always straightforward.  
@@ -35,7 +47,7 @@ The majority of graphs produced by the Zelig `plot` function are estimates of th
 
 An example of a Zelig generated distribution plot from a Poisson model.
 
-#### Histograms
+#### Histograms:
 
 Zelig's histograms represent the relative frequencies of outputs based on user input counterfactuals and the simulated model parameters. The are output when a model's dependent variable has discrete, rather than continuous, output.
 
@@ -43,7 +55,7 @@ Zelig's histograms represent the relative frequencies of outputs based on user i
 
 An example of a Zelig generated histogram from a Poisson model.
 
-#### Discrete Value Comparisons
+#### Discrete Value Comparisons:
 
 When comparing the results of counterfactuals for discrete valued models, Zelig outputs Contingency Tables of the following type. They visually represent a heatmap of the model output for the two generated counterfactuals.
 
@@ -55,18 +67,23 @@ Contingency Table generated from a Logistic Regression Model
 
 Contingency Table generated from a Poisson Regression Model
 
-#### Time Series
+#### Time Series:
 
-Time Series models in Zelig produce a different series of graphics then the other forms of models. The
+Time Series models in Zelig produce a different series of graphics then the other forms of models. In order to be able to utilize the plotting features of Zelig Time series models, the  `setx1` method must have been called prior to running `sim` on the model.
 
 <img src="Correlelogram.png" height="300"/>
 
-<img src="Shift trend.png" height="300"/>
+The autocorrelation graph, showing the correlation between current values and past values of the model outcome.
 
 <img src="Shock trend.png" height="300"/>
 
-## Graphing Syntax
+A graph showing the trend in the outcome variable if the underlying variables change to the values set in `setx1` from their means or the values specified in `setx` for a single period.
 
-### Customizing Zelig Graphs
+<img src="Shift trend.png" height="300"/>
+
+A graph showing the trend in the outcome variable if the underlying variables persistently change to the values set in `setx1` from their means or the values specified in `setx`.
+
+
+<!--- ### Customizing Zelig Graphs --->
 
 
