@@ -62,7 +62,7 @@ zarima$methods(
     t2 <- 2*acf.length
 
 
-    if(.self$bsetx1){             # could also check if mm1 is NULL
+    if((.self$bsetx1)||(.self$bsetx && !.self$bsetx1)){             # could also check if mm1 is NULL
       # zeligARMAbreakforecaster() calls zeligARMAlongrun() internally
       #  return(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov)
       yseries <- zeligARMAbreakforecaster(y.init=NULL, x=mm, x1=mm1, simparam=simparam, order=myorder, sd=sd, t1=t1, t2=t2)

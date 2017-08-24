@@ -343,7 +343,13 @@ qi.plot <- function (obj, ...) {
 
     if(is_timeseries(obj)){
         par(mfcol=c(3,1))
-        zeligACFplot(obj$get_qi("acf", xvalue="x1"))
+        if(obj$bsetx & !obj$bsetx1) {
+            ## If only setx and not setx1 were called on the object
+            zeligACFplot(obj$get_qi("acf", xvalue="x"))
+        }
+        else{
+            zeligACFplot(obj$get_qi("acf", xvalue="x1"))
+        }
         ci.plot(obj, qi="pvseries.shock")
         ci.plot(obj, qi="pvseries.innovation")
         return()
@@ -563,7 +569,12 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
             cat(paste("Error: For Timeseries models, argument qi must be one of ", paste(qiseries, collapse=" or ") ,".\n", sep="") )
             return()
         }
-        ev<-t( obj$get_qi(qi=qi, xvalue="x1") )   # NOTE THE NECESSARY TRANSPOSE.  Should we more clearly standardize this?
+        if (obj$bsetx & !obj$bsetx1) {
+            ## If setx has been called and setx1 has not been called
+            ev<-t( obj$get_qi(qi=qi, xvalue="x") ) # NOTE THE NECESSARY TRANSPOSE.  Should we more clearly standardize this?
+        } else {
+            ev<-t( obj$get_qi(qi=qi, xvalue="x1") )   # NOTE THE NECESSARY TRANSPOSE.  Should we more clearly standardize this?
+        }
         d<-ncol(ev)
         xseq<-1:d
         ev1 <- NULL  # Maybe want to add ability to overlay another graph?
@@ -593,10 +604,10 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
         num_cols <- length(obj$setx.out$range[[1]]$mm[[1]] )
         xmatrix <- matrix(NA,nrow = d, ncol = num_cols)    # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         for (i in 1:d){
-            xmatrix[i,] <- matrix(obj$setx.out$range[[i]]$mm[[1]], 
+            xmatrix[i,] <- matrix(obj$setx.out$range[[i]]$mm[[1]],
                                   ncol = num_cols)   # THAT IS A LONG PATH THAT MAYBE SHOULD BE CHANGED
         }
-        
+
         if (d == 1 && is.null(var)) {
             warning("Must specify the `var` parameter when plotting the confidence interval of an unvarying model. Plotting nothing.")
             return(invisible(FALSE))
@@ -610,7 +621,7 @@ ci.plot <- function(obj, qi = "ev", var = NULL, ..., main = NULL, sub = NULL,
                 return(invisible(FALSE))
             }
         }
-        
+
         if (is.null(var)) {
             # Determine x-axis variable based on variable with unique fitted values equal to the number of scenarios
             length_unique <- function(x) length(unique(x))
