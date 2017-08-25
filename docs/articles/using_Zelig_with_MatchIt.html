@@ -123,19 +123,19 @@
     <div class="page-header toc-ignore">
       <h1>Using Zelig with MatchIt</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p><code><a href="../reference/zelig.html">zelig()</a></code> accept matched datasets from the <a href="http://gking.harvard.edu/matchit">MatchIt</a> package as the <code>data</code> argument.</p>
 <p>First, using the MatchIt package, we attaching the <code>lalonde</code> example dataset, and run matching:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"MatchIt"</span>)
 <span class="kw">data</span>(lalonde)
-m.out &lt;-<span class="st"> </span><span class="kw">matchit</span>(treat <span class="op">~</span><span class="st"> </span>educ <span class="op">+</span><span class="st"> </span>black <span class="op">+</span><span class="st"> </span>hispan, <span class="dt">data =</span> lalonde,
+m.out &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MatchIt/topics/matchit">matchit</a></span>(treat <span class="op">~</span><span class="st"> </span>educ <span class="op">+</span><span class="st"> </span>black <span class="op">+</span><span class="st"> </span>hispan, <span class="dt">data =</span> lalonde,
                  <span class="dt">method =</span> <span class="st">"optimal"</span>)</code></pre></div>
 <p>Then we can use the output object from the MatchIt package directly in the data argument for Zelig:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(educ <span class="op">~</span><span class="st"> </span>treat, <span class="dt">model =</span> <span class="st">"ls"</span>, <span class="dt">data =</span> m.out)</code></pre></div>

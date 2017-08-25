@@ -5,7 +5,90 @@
 \alias{Zelig-arima-class}
 \alias{zarima}
 \title{Autoregressive and Moving-Average Models with Integration for Time-Series Data}
+\arguments{
+\item{formula}{a symbolic representation of the model to be
+estimated, in the form \code{y ~ x1 + x2}, where \code{y} is the
+dependent variable and \code{x1} and \code{x2} are the explanatory
+variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
+same dataset. (You may include more than two explanatory variables,
+of course.) The \code{+} symbol means ``inclusion'' not
+``addition.'' You may also include interaction terms and main
+effects in the form \code{x1*x2} without computing them in prior
+steps; \code{I(x1*x2)} to include only the interaction term and
+exclude the main effects; and quadratic terms in the form
+\code{I(x1^2)}.}
+
+\item{model}{the name of a statistical model to estimate.
+For a list of supported models and their documentation see:
+\url{http://docs.zeligproject.org/articles/}.}
+
+\item{data}{the name of a data frame containing the variables
+referenced in the formula or a list of multiply imputed data frames
+each having the same variable names and row numbers (created by
+\code{Amelia} or \code{\link{to_zelig_mi}}).}
+
+\item{...}{additional arguments passed to \code{zelig},
+relevant for the model to be estimated.}
+
+\item{by}{a factor variable contained in \code{data}. If supplied,
+\code{zelig} will subset
+the data frame based on the levels in the \code{by} variable, and
+estimate a model for each subset. This can save a considerable amount of
+effort. For example, to run the same model on all fifty states, you could
+use: \code{z.out <- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
+by = 'state')} You may also use \code{by} to run models using MatchIt
+subclasses.}
+
+\item{cite}{If is set to 'TRUE' (default), the model citation will be printed
+to the console.}
+
+\item{ts}{The name of the variable containing the time indicator. This should be passed in as
+a string. If this variable is not provided, Zelig will assume that the data is already
+ordered by time.}
+
+\item{cs}{Name of a variable that denotes the cross-sectional element of the data, for example,
+country name in a dataset with time-series across different countries. As a variable name,
+this should be in quotes. If this is not provided, Zelig will assume that all observations
+come from the same unit over time, and should be pooled, but if provided, individual models will
+be run in each cross-section.
+If \code{cs} is given as an argument, \code{ts} must also be provided. Additionally, \code{by}
+must be \code{NULL}.}
+
+\item{order}{A vector of length 3 passed in as \code{c(p,d,q)} where p represents the order of the
+autoregressive model, d represents the number of differences taken in the model, and q represents
+the order of the moving average model.}
+}
+\value{
+Depending on the class of model selected, \code{zelig} will return
+  an object with elements including \code{coefficients}, \code{residuals},
+  and \code{formula} which may be summarized using
+  \code{summary(z.out)} or individually extracted using, for example,
+  \code{coef(z.out)}. See
+  \url{http://docs.zeligproject.org/articles/getters.html} for a list of
+  functions to extract model components. You can also extract whole fitted
+  model objects using \code{\link{from_zelig_model}}.
+}
 \description{
-Vignette: \url{http://docs.zeligproject.org/articles/zelig_arima.html}
+Warning: \code{summary} does not work with timeseries models after
+simulation.
+}
+\details{
+Currently only the Reference class syntax for time series. This model does not accept
+Bootstraps or weights.
 }
 
+\examples{
+data(seatshare)
+subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
+ts.out <- zarima$new()
+ts.out$zelig(unemp ~ leftseat, order = c(1, 0, 1), data = subset)
+
+# Set fitted values and simulate quantities of interest
+ts.out$setx(leftseat = 0.75)
+ts.out$setx1(leftseat = 0.25)
+ts.out$sim()
+
+}
+\seealso{
+Vignette: \url{http://docs.zeligproject.org/articles/zelig_arima.html}
+}

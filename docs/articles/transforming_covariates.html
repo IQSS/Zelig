@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Transforming Covariates</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <div id="supported-transformations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#supported-transformations" class="anchor"></a> Supported transformations</h2>
@@ -159,7 +159,7 @@ dist_range &lt;-<span class="st"> </span><span class="kw">min</span>(cars<span c
 <a href="#splines" class="anchor"></a>Splines</h2>
 <p>The ability to transform covariates with splines in the <code>zelig</code> model formula and then set/simulate quantities of interest is currently in development. In the meantime. You can transform the covariates outside of the <code>zelig</code> model estimation call. For example, we can include splines for <code>dist</code> in the following way:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(splines)
-cars.splines &lt;-<span class="st"> </span><span class="kw">cbind</span>(cars, <span class="kw">bs</span>(cars<span class="op">$</span>dist))
+cars.splines &lt;-<span class="st"> </span><span class="kw">cbind</span>(cars, <span class="kw"><a href="http://www.rdocumentation.org/packages/splines/topics/bs">bs</a></span>(cars<span class="op">$</span>dist))
 <span class="kw">names</span>(cars.splines)[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'dist_bs_1'</span>, <span class="st">'dist_bs_2'</span>, <span class="st">'dist_bs_3'</span>)
 
 <span class="kw"><a href="../reference/zelig.html">zelig</a></span>(speed <span class="op">~</span><span class="st"> </span>dist_bs_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>dist_bs_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span>dist_bs_<span class="dv">3</span>, <span class="dt">data =</span> cars.splines,
@@ -180,7 +180,8 @@ cars.splines &lt;-<span class="st"> </span><span class="kw">cbind</span>(cars, <
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#supported-transformations"> Supported transformations</a></li>
       <li><a href="#splines">Splines</a></li>

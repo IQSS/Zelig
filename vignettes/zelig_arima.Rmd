@@ -28,8 +28,8 @@ Autoregressive and Moving-Average Models with Integration for Time-Series Data
 Syntax
 ------
 
-Currently, only the Zelig 5 reference class syntax is available for `arima` 
-models:
+Currently, **only the Zelig 5 reference class syntax is available for `arima`
+models**, e.g.:
 
 ```{r, eval = FALSE}
 z.out <- zarima$new()
@@ -88,13 +88,26 @@ ts.out <- sim(ts.out)
 plot(ts.out)
 ```
 
+### AR and MA Models
+
+AR (Autoregressive) and MA (Moving Average) models are commonly used in time series analysis. As both AR and MA models are special cases of ARIMA models they are not implemented as separate models within Zelig. Specification of AR and MA models can be accomplished by changing the value of the `order` parameter within the ARIMA model.
+
+#### AR
+```{r, eval=FALSE}
+ts.out <- zelig(unemp ~ leftseat, model = "arima", order = c(1, 0, 0), data = subset)
+```
+#### MA
+```{r, eval=FALSE}
+ts.out <- zelig(unemp ~ leftseat, model = "arima", order = c(0, 0, 1), data = subset)
+```
+
+
 ### Multiple Series
 
 The dataset contains similar series for 11 different OECD countries, and we could run the same model on each country's data.  Here we need to specify the `ts` and `cs` arguments to identify the names of variables that give the time and cross-section of each observation in the dataset
 
 ```{r, eval = TRUE}
-ts.out2 <- zarima$new()
-ts.out2$zelig(unemp ~ leftseat, order = c(1,0,1), ts = "year",
+ts.out2 <- zelig(unemp ~ leftseat, model="arima", order = c(1,0,1), ts = "year",
               cs = "country", data = seatshare)
 summary(ts.out2)
 ```

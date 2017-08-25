@@ -2,10 +2,11 @@
 
  Documentation:
   readme: yes
-  roxygen: no
+  roxygen: yes
   news: yes
   bugreports: yes
   vignettes: yes
+  all_urls_working: no
   website:
     openscholar: no
     pkgdown_website: yes
@@ -23,12 +24,12 @@ Testing:
     no_check_warnings: yes
     no_check_errors: yes
     no_check_notes: yes
-  test_coverage: 88
+  test_coverage: 89
 Background:
   package_name: Zelig
-  package_version: 5.1-1.90000
+  package_version: 5.1-2.9000
   package_language: R
-  package_commit_sha: e4ef1d6b1a2ecc9543126d0df56efb77a3f9b564
-  iqss_bestpractices_version: 0.0.0.9000
+  package_commit_sha: 3791a8d7b87905eaa38d4bfd36f6c9fc454a4363
+  iqss_bestpractices_version: 0.0.0.9001
   iqssdevtools_version: 0.0.0.9000
-  check_time: 2017-05-16 11:07:12
+  check_time: 2017-08-05 14:06:50

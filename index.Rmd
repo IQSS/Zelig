@@ -53,7 +53,7 @@ suggestions improvements, we'd love to hear from you! You can get in touch via:
 
 <i class="fa fa-code" aria-hidden="true"></i> You can even make your R packages 
 usable from Zelig by writinga few simple bridge functions. Checkout the 
-[Developer's Guide](articles/developers-guide.html) for details.
+[Developer's Guide](articles/developers_guide.html) for details.
 
 
 

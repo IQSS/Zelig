@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Developer’s Guide</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <p>This is a guide for contributing to the Zelig Project by adding new statistical models into Zelig. Before getting started, familiarize yourself with R’s Reference Classes (RC), as Zelig5 makes extensive use of RCs to allow for the straightforward addition of new models. Useful resources include Hadley Wickham’s <a href="http://adv-r.had.co.nz/R5.html">chapter on Reference Classes</a>, and R’s <a href="https://stat.ethz.ch/R-manual/R-devel/library/methods/html/refClass.html">ReferenceClasses documentation</a>. Be sure to read <a href="http://gking.harvard.edu/files/making.pdf">King, Tomz, and Wittenberg (2000)</a> for the underlying algorithm that is deployed in Zelig. Finally, explore <a href="http://zeligproject.org/">zeligproject.org</a> to learn more about Zelig and our plans for the future.</p>
 <p>In the abstract, Zelig is a tool for estimating and visualizing easily interpretable quantities of interest for statistical models in R. To do so, Zelig leverages R’s open-source philosophy and builds on existing statistical model implementations such as those found in <strong>stats</strong> and <strong>VGAM</strong>. Consider the following R code for a typical Zelig 5 workflow:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(turnout)
@@ -240,7 +240,7 @@ t[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">qu
 <p>The first <code>eval(t)</code> returns 5, the sum of the elements <code>(1,1,3)</code>. The second <code>eval(t)</code> returns 3, the product of the elements <code>(1,1,3)</code>. In <code><a href="../reference/zelig.html">zelig()</a></code>, the element of <strong>model.call</strong> we are manipulating is at [[1]]<code>, and it is the function to be called. Or, more precisely, it is whatever precedes the first open parenthesis. So, prior to assigning</code>.self<span class="math inline">\(fn` to `.self\)</span>model.call[[1]]<code>, the function to be called is</code>z5$zelig`, and <strong>model.call</strong> looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="dt">formula =</span> vote ∼ age, <span class="dt">data =</span> turnout, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="st">"logit"</span>))</code></pre></div>
 <p>After assigning <code>.self$fn</code> to <code>model.call[[1]]</code>, model.call looks like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stats<span class="op">::</span><span class="kw">glm</span>(<span class="dt">formula =</span> vote ∼ age, <span class="dt">data =</span> turnout, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="st">"logit"</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stats<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/stats/topics/glm">glm</a></span>(<span class="dt">formula =</span> vote ∼ age, <span class="dt">data =</span> turnout, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="st">"logit"</span>))</code></pre></div>
 <p>The final line of code that we are concerned with is the final line in <code><a href="../reference/zelig.html">zelig()</a></code>, where <strong>model.call</strong> is evaluated:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">do</span>(<span class="dt">z.out =</span> <span class="kw">eval</span>(<span class="kw">fn2</span>(.self<span class="op">$</span>model.call, <span class="kw">quote</span>(.))))</code></pre></div>
 <p>Ignore <code>do()</code> and <code>fn2()</code>, these are functions that help us handle multiple datasets, and are part of Zelig’s added value that comes free. All we are doing here is evaluating <strong>model.call</strong>, which, as is seen above, is now identical to the <code>glm()</code> call. Thus, we have wrapped <code>glm()</code> and estimated a logit model in the Zelig framework.</p>
@@ -297,14 +297,15 @@ pv &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt"
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#getting-started">Getting Started</a></li>
       <li><a href="#reference-classes-and-inheritance">Reference Classes and Inheritance</a></li>
       <li><a href="#zelig-methods">Zelig Methods</a></li>
       <li><a href="#new"><code>new()</code></a></li>
-      <li><a href="#zelig"><code><a href="../reference/zelig.html">zelig()</a></code></a></li>
-      <li><a href="#sim"><code><a href="../reference/sim.html">sim()</a></code></a></li>
+      <li><a href="#zelig"><code><a href="--/reference/zelig-html">zelig()</a></code></a></li>
+      <li><a href="#sim"><code><a href="--/reference/sim-html">sim()</a></code></a></li>
       </ul>
 </div>
       </div>

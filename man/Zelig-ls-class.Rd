@@ -7,7 +7,7 @@
 \title{Least Squares Regression for Continuous Dependent Variables}
 \arguments{
 \item{formula}{a symbolic representation of the model to be
-estimated, in the form \code{y \~\, x1 + x2}, where \code{y} is the
+estimated, in the form \code{y ~ x1 + x2}, where \code{y} is the
 dependent variable and \code{x1} and \code{x2} are the explanatory
 variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
 same dataset. (You may include more than two explanatory variables,
@@ -19,7 +19,7 @@ exclude the main effects; and quadratic terms in the form
 \code{I(x1^2)}.}
 
 \item{model}{the name of a statistical model to estimate.
-For a list of supported models and their documentation see:
+For a list of other supported models and their documentation see:
 \url{http://docs.zeligproject.org/articles/}.}
 
 \item{data}{the name of a data frame containing the variables
@@ -34,9 +34,7 @@ relevant for the model to be estimated.}
 \code{zelig} will subset
 the data frame based on the levels in the \code{by} variable, and
 estimate a model for each subset. This can save a considerable amount of
-effort. For example, to run the same model on all fifty states, you could
-use: \code{z.out <- zelig(y ~ x1 + x2, data = mydata, model = 'ls',
-by = 'state')} You may also use \code{by} to run models using MatchIt
+effort. You may also use \code{by} to run models using MatchIt
 subclasses.}
 
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
@@ -56,12 +54,12 @@ Depending on the class of model selected, \code{zelig} will return
 Least Squares Regression for Continuous Dependent Variables
 }
 \details{
-Additional parameters avaialable to many models include:
+Additional parameters avaialable to this model include:
 \itemize{
-  \item weights: vector of weight values or a name of a variable in the dataset
+  \item \code{weights}: vector of weight values or a name of a variable in the dataset
   by which to weight the model. For more information see:
   \url{http://docs.zeligproject.org/articles/weights.html}.
-  \item bootstrap: logical or numeric. If \code{FALSE} don't use bootstraps to
+  \item \code{bootstrap}: logical or numeric. If \code{FALSE} don't use bootstraps to
   robustly estimate uncertainty around model parameters due to sampling error.
   If an integer is supplied, the number of boostraps to run.
   For more information see:
@@ -76,8 +74,11 @@ Additional parameters avaialable to many models include:
 }}
 
 \examples{
+library(Zelig)
 data(macro)
-z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
+z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro,
+cite = FALSE)
+summary(z.out1)
 
 }
 \seealso{

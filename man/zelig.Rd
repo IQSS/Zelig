@@ -20,7 +20,7 @@ exclude the main effects; and quadratic terms in the form
 \code{I(x1^2)}.}
 
 \item{model}{the name of a statistical model to estimate.
-For a list of supported models and their documentation see:
+For a list of other supported models and their documentation see:
 \url{http://docs.zeligproject.org/articles/}.}
 
 \item{data}{the name of a data frame containing the variables

@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Zelig Quickstart Guide</h1>
             
-            <h4 class="date">2017-06-07</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <div id="zelig-workflow-overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zelig-workflow-overview" class="anchor"></a>Zelig workflow overview</h2>
@@ -143,7 +143,7 @@
 <div id="zelig-5-reference-classes" class="section level4">
 <h4 class="hasAnchor">
 <a href="#zelig-5-reference-classes" class="anchor"></a>Zelig 5 reference classes</h4>
-<p>Zelig 5 introduced <a href="http://adv-r.had.co.nz/R5.html">reference classes</a>. These enable a different way of working with Zelig that is detailed in <a href="zelig5_vs_zelig4.html">a separate vignette</a>. Directlyusing the reference class architecture is optional.</p>
+<p>Zelig 5 introduced <a href="http://adv-r.had.co.nz/R5.html">reference classes</a>. These enable a different way of working with Zelig that is detailed in <a href="zelig5_vs_zelig4.html">a separate vignette</a>. Directly using the reference class architecture is optional.</p>
 </div>
 </div>
 <div id="examples" class="section level1">
@@ -156,7 +156,7 @@
 <p>If you haven’t already done so, open your R console and install Zelig. We recommend installing Zelig with the zeligverse package. This installs core Zelig and ancillary packages at once.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'zeligverse'</span>)</code></pre></div>
 <p>Alternatively you can install the development version of Zelig with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'IQSS/Zelig'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'IQSS/Zelig'</span>)</code></pre></div>
 <p>Once Zelig is installed, load it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
 </div>
@@ -216,23 +216,23 @@ z5_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a h
 ##  sim x :
 ##  -----
 ## ev
-##       mean       sd      50%     2.5%    97.5%
-## 1 75.29341 1.610432 75.22922 72.33173 78.44749
+##       mean       sd      50%    2.5%    97.5%
+## 1 75.30049 1.677459 75.28783 71.8435 78.47322
 ## pv
-##         mean       sd      50%     2.5%    97.5%
-## [1,] 75.5754 9.426014 75.34182 58.18348 94.71067
+##          mean      sd      50%     2.5%   97.5%
+## [1,] 75.49366 9.40715 75.22403 57.56086 93.2282
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##      mean       sd      50%     2.5%    97.5%
-## 1 66.5779 1.510487 66.60971 63.62094 69.58567
+##       mean       sd      50%     2.5%    97.5%
+## 1 66.72992 1.521452 66.75249 63.69209 69.67084
 ## pv
 ##          mean       sd      50%     2.5%    97.5%
-## [1,] 66.43159 9.459826 66.53182 48.92943 84.65102
+## [1,] 66.38674 9.322498 66.23442 49.44386 85.97241
 ## fd
-##        mean       sd       50%     2.5%     97.5%
-## 1 -8.715502 1.483011 -8.770645 -11.5115 -5.799865</code></pre>
+##        mean       sd      50%     2.5%     97.5%
+## 1 -8.570573 1.485709 -8.58589 -11.3613 -5.684735</code></pre>
 <p>At this point, we’ve estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The <code>summary()</code> method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences–the difference in expected values at the set levels of education.</p>
 </div>
 </div>
@@ -268,7 +268,8 @@ z5_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a h
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#zelig-workflow-overview">Zelig workflow overview</a></li>
       <li>

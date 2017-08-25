@@ -1,5 +1,5 @@
 ---
-title: "Rare Events Logistic"
+title: "Rare Events Logistic Regression (ReLogit)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -384,7 +384,7 @@ Differences with Stata Version
 The Stata version of ReLogit and the R implementation differ slightly in
 their coefficient estimates due to differences in the matrix inversion
 routines implemented in R and Stata. Zelig uses orthogonal-triangular
-decomposition (through lm.influence()) to compute the bias term, which
+decomposition (through `lm.influence()`) to compute the bias term, which
 is more numerically stable than standard matrix calculations.
 
 See also

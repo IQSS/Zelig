@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Using Zelig with Amelia</h1>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p><code><a href="../reference/zelig.html">zelig()</a></code> accepts multiply imputed data output objects from the <a href="http://gking.harvard.edu/amelia">Amelia</a> package as the <code>data</code> argument.</p>
 <p>First, using the Amelia package, we multiply impute a dataset with missing values:</p>
@@ -142,7 +142,7 @@
 ## ## Refer to http://gking.harvard.edu/amelia/ for more information
 ## ##</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(africa)
-a.out &lt;-<span class="st"> </span><span class="kw">amelia</span>(<span class="dt">x =</span> africa, <span class="dt">cs =</span> <span class="st">"country"</span>, <span class="dt">ts =</span> <span class="st">"year"</span>, <span class="dt">logs =</span> <span class="st">"gdp_pc"</span>)</code></pre></div>
+a.out &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/Amelia/topics/amelia">amelia</a></span>(<span class="dt">x =</span> africa, <span class="dt">cs =</span> <span class="st">"country"</span>, <span class="dt">ts =</span> <span class="st">"year"</span>, <span class="dt">logs =</span> <span class="st">"gdp_pc"</span>)</code></pre></div>
 <pre><code>## -- Imputation 1 --
 ## 
 ##   1  2  3
@@ -234,7 +234,8 @@ z.out<span class="op">$</span><span class="kw"><a href="../reference/sim.html">s
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#other-multiply-imputed-data">Other multiply imputed data</a></li>
       </ul>

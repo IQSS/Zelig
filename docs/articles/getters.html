@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Getter Functions</h1>
             
-            <h4 class="date">2017-05-18</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Zelig has a number of utilities available to easily extract items of interest from all the results stored in the Zelig object. These are called “getters”.</p>
 <div id="getters-in-zelig-5-vs-standard-r-syntax" class="section level2">
@@ -278,7 +278,7 @@ my.ev.highcoop &lt;-<span class="st"> </span>zqi.out<span class="op">$</span><sp
 my.fd &lt;-<span class="st"> </span>zqi.out<span class="op">$</span><span class="kw"><a href="../reference/get_qi.html">get_qi</a></span>(<span class="dt">qi =</span> <span class="st">"fd"</span>, <span class="dt">xvalue =</span> <span class="st">"x1"</span>)</code></pre></div>
 <p>The <code>qi</code> argument is the name of any quantity of interest simulated in the object by <code>sim</code>. Depending on the model, this will generally be “ev”, “pv”, or “fd” for expected values, predicted values, or first differences, respectively. The <code>xvalue</code> argument is the level of <code>x</code> for which that quantity of interest was simulated, either “x” or “x1”. Note that first differences, the difference between expected values with covariates at “x” and with covariates at “x1” are associated with the xvalue of “x1”.</p>
 <p>You can use the <code><a href="../reference/get_qi.html">get_qi()</a></code> function as an alternative to the <code>get_qi</code> method. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.pv.lowcoop &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_qi.html">get_qi</a></span>(zqi.out, <span class="dt">qi =</span><span class="st">"pv"</span>, <span class="dt">xvalue =</span> <span class="st">"x"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.pv.lowcoop &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_qi.html">get_qi</a></span>(zqi.out, <span class="dt">qi =</span>  <span class="st">"pv"</span>, <span class="dt">xvalue =</span> <span class="st">"x"</span>)</code></pre></div>
 </div>
 <div id="average-treatment-effects-on-the-treated" class="section level2">
 <h2 class="hasAnchor">
@@ -295,7 +295,8 @@ z.att &lt;-<span class="st"> </span>zqi.out <span class="op">%&gt;%</span>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#getters-in-zelig-5-vs-standard-r-syntax">Getters in Zelig 5 vs standard R syntax</a></li>
       <li><a href="#list-of-getters">List of getters</a></li>

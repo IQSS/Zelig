@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Weights</h1>
             
-            <h4 class="date">2017-06-01</h4>
+            <h4 class="date">2017-08-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Weights are often added to statistical models to adjust the observed sample distribution in the data to an underlying population of interest. For example, some types of observations may have been intentionally oversampled, and need to be downweighted for population inferences, or weights may have been created by a matching procedure to create a dataset with treatment and control groups that resemble randomized designs and achieve balance in covariates.</p>
 <p>The weights argument, can be a vector of weight values, or a name of a variable in the dataset.</p>
@@ -162,16 +162,16 @@ w2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c<
 ## 
 ## Weighted Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -3.3601 -1.1665 -0.4339  0.2418  3.4678 
+## -3.1511 -1.3581 -0.5041  0.6354  3.0554 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  0.09193    0.24889   0.369   0.7127
-## x            0.87354    0.45692   1.912   0.0592
+## (Intercept)  -0.6050     0.3119  -1.940   0.0556
+## x             2.6692     0.5513   4.842 5.46e-06
 ## 
-## Residual standard error: 1.373 on 88 degrees of freedom
-## Multiple R-squared:  0.03988,    Adjusted R-squared:  0.02897 
-## F-statistic: 3.655 on 1 and 88 DF,  p-value: 0.05915
+## Residual standard error: 1.456 on 88 degrees of freedom
+## Multiple R-squared:  0.2104, Adjusted R-squared:  0.2014 
+## F-statistic: 23.44 on 1 and 88 DF,  p-value: 5.462e-06
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>In our second example, the weights are provided as a separate vector of the same length as the dataset. These weights give weight to both relationships present when we constructed the data, and we see the estimated relationship is now negative.</p>
@@ -185,16 +185,16 @@ w2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c<
 ## 
 ## Weighted Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -5.4621 -1.0169  0.0147  0.8931  5.2704 
+## -5.0267 -0.9209 -0.0295  0.9044  5.1473 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  -0.3517     0.3380  -1.040    0.301
-## x            -0.1833     0.5600  -0.327    0.744
+## (Intercept)  -0.7220     0.3853  -1.874   0.0643
+## x             0.7910     0.7161   1.105   0.2724
 ## 
-## Residual standard error: 1.637 on 88 degrees of freedom
-## Multiple R-squared:  0.001216,   Adjusted R-squared:  -0.01013 
-## F-statistic: 0.1072 on 1 and 88 DF,  p-value: 0.7442
+## Residual standard error: 1.877 on 88 degrees of freedom
+## Multiple R-squared:  0.01367,    Adjusted R-squared:  0.002467 
+## F-statistic:  1.22 on 1 and 88 DF,  p-value: 0.2724
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>Some checking of the supplied weights are conducted, and warnings or error messages will be given to the user if, for example, the supplied weights are of the wrong length, or the variable name supplied is not present in the dataset. Negative weights are treated as zero weights. Here we use the object oriented approach to building the Zelig object.</p>
@@ -225,7 +225,8 @@ z6.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zeli
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#examples">Examples</a></li>
       <li><a href="#using-matching-weights-from-matchit">Using Matching Weights from MatchIt</a></li>

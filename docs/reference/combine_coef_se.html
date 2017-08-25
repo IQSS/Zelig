@@ -24,7 +24,8 @@ from models estimated with multiply imputed data sets or bootstrapped — combin
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -215,17 +216,17 @@ returned</p></td>
 #&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
 #&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'>
 <span class='co'># Combine and extract coefficients and standard errors</span>
-<span class='fu'>combine_coef_se</span>(<span class='no'>z.out.mi</span>)</div><div class='output co'>#&gt; <span class='message'>Combining imputations. . .</span></div><div class='output co'>#&gt;                Estimate Std.Error     z value  Pr(&gt;|z|)
-#&gt; (Intercept) -0.12240923 0.2139979 -0.57201129 0.5673143
-#&gt; x            0.03042057 0.3763320  0.08083441 0.9355736</div><div class='input'>
+<span class='fu'>combine_coef_se</span>(<span class='no'>z.out.mi</span>)</div><div class='output co'>#&gt; <span class='message'>Combining imputations. . .</span></div><div class='output co'>#&gt;             Estimate Std.Error z value Pr(&gt;|z|)
+#&gt; (Intercept)  -0.1224     0.214 -0.5720    0.567
+#&gt; x             0.0304     0.376  0.0808    0.936</div><div class='input'>
 <span class='co'>## Bootstrap example</span>
 <span class='no'>z.out.boot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>y</span> ~ <span class='no'>x</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"ls"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data.1</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>20</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
 #&gt;   R Core Team. 2007.
 #&gt;   ls: Least Squares Regression for Continuous Dependent Variables
 #&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>combine_coef_se</span>(<span class='no'>z.out.boot</span>)</div><div class='output co'>#&gt; <span class='message'>Combining bootstraps . . .</span></div><div class='output co'>#&gt;                Estimate Std.Error    z value  Pr(&gt;|z|)
-#&gt; (Intercept) -0.15723024 0.2369467 -0.6635679 0.5069669
-#&gt; x            0.09965409 0.3852040  0.2587048 0.7958631</div><div class='input'>
+#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>combine_coef_se</span>(<span class='no'>z.out.boot</span>)</div><div class='output co'>#&gt; <span class='message'>Combining bootstraps . . .</span></div><div class='output co'>#&gt;             Estimate Std.Error z value Pr(&gt;|z|)
+#&gt; (Intercept)  -0.1572     0.237  -0.664    0.507
+#&gt; x             0.0997     0.385   0.259    0.796</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

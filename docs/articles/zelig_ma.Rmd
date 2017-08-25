@@ -1,9 +1,9 @@
 ---
-title: "AR"
+title: "MA"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{zelig-ar}
+  %\VignetteIndexEntry{zelig-ma}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,13 +23,19 @@ options(cite = FALSE)
 ```
 ---
 
-Time-Series Model with Autoregressive Disturbance with `ar`.
+Time-Series Model with Moving Average with `ma`.
+
+Warning: Simulation is not currently implemented for timeseries models.
 
 Syntax
 ------
 
+Currently, only the Zelig 5 reference class syntax is available for `ma`
+models:
+
 ```{r, eval = FALSE}
-z.out <- zelig(Y ~ X1 + X2, model = "ar", weights = w, data = mydata)
-x.out <- setx(z.out)
-s.out <- sim(z.out, x = x.out)
+z.out <- zma$new()
+z.out$zelig(Y ~ X1 + X2, data = mydata)
+x.out$setx(z.out)
+s.out$sim(z.out)
 ```

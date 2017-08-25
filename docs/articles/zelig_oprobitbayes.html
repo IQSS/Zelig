@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Ordered Bayesian Probit</h1>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-06-22</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.1.90000</em></p>
+<p><em>Built using Zelig version 5.1.2.9000</em></p>
 <hr>
 <p>Bayesian Ordered Probit Regression with <code>oprobit.bayes</code>.</p>
 <p>Use the ordinal probit regression model if your dependent variables are ordered and categorical. They may take either integer values or character strings. The model is estimated using a Gibbs sampler with data augmentation. For a maximum-likelihood implementation of this models, see <span class="math inline">\(probit\)</span>.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"oprobit.bayes"</span>, <span class="dt">weights =</span> w,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"oprobit.bayes"</span>, <span class="dt">weights =</span> w,
                <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -170,11 +170,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Attaching the sample dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(sanction)</code></pre></div>
 <p>Creating an ordered dependent variable:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sanction<span class="op">$</span>ncost &lt;-<span class="st"> </span><span class="kw">factor</span>(sanction<span class="op">$</span>ncost, <span class="dt">ordered =</span> <span class="ot">TRUE</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sanction$ncost &lt;-<span class="st"> </span><span class="kw">factor</span>(sanction$ncost, <span class="dt">ordered =</span> <span class="ot">TRUE</span>,
                          <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">"net gain"</span>, <span class="st">"little effect"</span>, <span class="st">"modest loss"</span>,
                              <span class="st">"major loss"</span>))</code></pre></div>
 <p>Estimating ordered probit regression using <code>oprobit.bayes</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(ncost <span class="op">~</span><span class="st"> </span>mil <span class="op">+</span><span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"oprobit.bayes"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(ncost ~<span class="st"> </span>mil +<span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"oprobit.bayes"</span>,
                <span class="dt">data =</span> sanction, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## Warning in model.response(mf, "numeric"): using type = "numeric" with a
 ## factor response will be ignored</code></pre>
@@ -184,9 +184,9 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
 ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
 <p>You can check for convergence before summarizing the estimates with three diagnostic tests. See the section <a href="diagnostics.html">Diagnostics for Zelig Models</a> for examples of the output with interpretation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()
-z.out<span class="op">$</span><span class="kw">heidel.diag</span>()
-z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">geweke.diag</span>()
+z.out$<span class="kw">heidel.diag</span>()
+z.out$<span class="kw">raftery.diag</span>()</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out)</code></pre></div>
 <pre><code>## Model: 
 ## 
@@ -392,7 +392,7 @@ z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre
 <h2 class="hasAnchor">
 <a href="#output-values" class="anchor"></a>Output Values</h2>
 <p>The output of each Zelig command contains useful information which you may view. For example, if you run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"oprobit.bayes"</span>, data)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(y ~<span class="st"> </span>x, <span class="dt">model =</span> <span class="st">"oprobit.bayes"</span>, data)</code></pre></div>
 <p>then you may examine the available information in <code>z.out</code> by using <code>names(z.out)</code>, see the draws from the posterior distribution of the <code>coefficients</code> by using <code>z.out$coefficients</code>, and view a default summary of information through <code>summary(z.out)</code>. Other elements available through the <code>$</code> operator are listed below.</p>
 <ul>
 <li><p>From the <code><a href="../reference/zelig.html">zelig()</a></code> output object <code>z.out</code>, you may extract:</p></li>
