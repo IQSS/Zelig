@@ -78,7 +78,7 @@ test_that('REQUIRE TEST arima models', {
     zj$setx()
     zj$setx1(x=2)
     zj$sim()
-
+    plot(zj)
 
     # ACF plot
 
@@ -104,10 +104,12 @@ test_that("REQUIRE TEST timeseries reference class wrappers", {
     data(seatshare)
     subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
     expect_error(ts.out <- zelig(unemp ~ leftseat, data = subset, model = "arima",
-                                 order = c(2,0,1)),NA)
-    expect_error(x.out <- setx(ts.out, leftseat = 0.75),NA)
-    expect_error(x.out <- setx1(x.out, leftseat = 0.25),NA)
-    expect_error(s.out <- sim(x.out),NA)
+                                 order = c(2,0,1)), NA)
+    expect_error(x.out <- setx(ts.out, leftseat = 0.75), NA)
+    expect_error(s.out <- sim(x.out), NA)
+    expect_error(plot(s.out), NA)
+    expect_error(x.out <- setx1(x.out, leftseat = 0.25), NA)
+
 })
 
 # FAILURE TEST cs ts by with timeseries ----------------------------------------
@@ -127,4 +129,13 @@ test_that("FAILURE TEST cs ts by with timeseries", {
                  data = seatshare),
         "ts must be specified if cs is specified."
     )
+})
+
+# REQUIRE TEST wrapper with piping ---------------------------------------------
+test_that("REQUIRE TEST wrapper with piping", {
+        zelig(unemp ~ leftseat, data = subset, model = "arima",
+            order = c(2,0,1)) %>%
+        setx(leftseat = 0.75) %>%
+        sim() %>%
+        plot()
 })
