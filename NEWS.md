@@ -10,6 +10,13 @@ Zelig version 5.1-4
 
 -   Speed improvements made to `relogit`. Thanks to @retrography. #88
 
+-   Introduced Zelig 4 wrapper capabilities for `arima` models. PR/#289
+
+## Minor changes
+
+-   Resolved an issue where `arima` models would not plot if `setx1` was not 
+used. #299.
+
 Zelig version 5.1-3
 ==============================
 
