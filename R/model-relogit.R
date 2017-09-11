@@ -260,7 +260,8 @@ relogit <- function(formula,
       if (is.null(tau)) # w_1=1 since tau=ybar
         xi <- 0.5 * Qdiag * (2 * pihat - 1)
       else
-        xi <- 0.5 * Qdiag * ((1 + w0) * pihat - w0)
+        xi <- 0.5 * Qdiag * ((1 + w1) * pihat - w1) # returns ISQ (2001, eq. 11)
+        ## xi <- 0.5 * Qdiag * ((1 + w0) * pihat - w0)
       res$coefficients <- res$coefficients -
         lm(xi ~ X - 1, weights = W)$coefficients
       res$bias.correct <- TRUE
