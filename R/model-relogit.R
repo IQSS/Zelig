@@ -94,7 +94,7 @@ zrelogit$methods(
     .self$family <- "binomial"
     .self$link <- "logit"
     .self$wrapper <- "relogit"
-    ref1<-bibentry(
+    ref1 <- bibentry(
             bibtype="Article",
             title = "Logistic Regression in Rare Events Data",
             author = c(
@@ -106,7 +106,7 @@ zrelogit$methods(
             number = 2,
             year = 2001,
             pages = "137--163")
-    ref2<-bibentry(
+    ref2 <- bibentry(
             bibtype="Article",
             title = "Explaining Rare Events in International Relations",
             author = c(
@@ -134,10 +134,12 @@ zrelogit$methods(
     .self$model.call <- .self$zelig.call
     # Catch NULL case.control
     if (is.null(case.control))
-      case.control <- "prior"
+        case.control <- "prior"
+    if (case.control == "weighting") # See GitHub issue #295
+        .self$robust.se <- TRUE
     # Catch NULL bias.correct
     if (is.null(bias.correct))
-      bias.correct = TRUE
+        bias.correct = TRUE
     # Construct formula. Relogit models have the structure:
     #   cbind(y, 1-y) ~ x1 + x2 + x3 + ... + xN
     # Where y is the response.
