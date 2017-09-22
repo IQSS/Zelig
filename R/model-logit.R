@@ -57,16 +57,16 @@
 #'means that the observations can be correlated within the strata defined by the variable x3, and that robust standard errors should be calculated according to those clusters. If robust = TRUE but cluster is not specified, zelig() assumes that each observation falls into its own cluster.
 #'
 #'@examples
-#'library(Zelig)
-#'data(turnout)
-#'z.out1 <- zelig(vote ~ age + race, model = "logit", data = turnout,
-#'cite = FALSE)
-#'summary(z.out1)
-#'summary(z.out1, odds_ratios = TRUE)
-#'x.out1 <- setx(z.out1, age = 36, race = "white")
-#'s.out1 <- sim(z.out1, x = x.out1)
-#'summary(s.out1)
-#'plot(s.out1)
+#' library(Zelig)
+#' data(turnout)
+#' z.out1 <- zelig(vote ~ age + race, model = "logit", data = turnout,
+#'                 cite = FALSE)
+#' summary(z.out1)
+#' summary(z.out1, odds_ratios = TRUE)
+#' x.out1 <- setx(z.out1, age = 36, race = "white")
+#' s.out1 <- sim(z.out1, x = x.out1)
+#' summary(s.out1)
+#' plot(s.out1)
 #'
 #' @seealso Vignette: \url{http://docs.zeligproject.org/articles/zelig_logit.html}
 #' @import methods
@@ -103,14 +103,13 @@ zlogit$methods(mcfun = function(x, b0 = 0, b1 = 1, ..., sim = TRUE) {
   }
 )
 
-
 zlogit$methods(
     show = function(odds_ratios = FALSE, ...) {
     if (odds_ratios & !.self$mi & !.self$bootstrap) {
         summ <- .self$zelig.out %>%
             do(summ = {cat("Model: \n")
                 ## Replace coefficients with odds-ratios
-                .z.out.summary = base::summary(.$z.out)
+                .z.out.summary <- base::summary(.$z.out)
                 .z.out.summary$coefficients[, c(1, 2)] <- exp(.z.out.summary$coefficients[, c(1, 2)])
                 colnames(.z.out.summary$coefficients)[c(1, 2)] <- paste(colnames(.z.out.summary$coefficients)[c(1, 2)],
                      '(OR)')

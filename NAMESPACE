@@ -1,10 +1,8 @@
 import(sandwich, methods, survival, jsonlite, dplyr,
        geepack, coda, Amelia, MatchIt, maxLik, survey)
 
-importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm", "gamma.shape")
-importFrom("VGAM", "vglm")
 importFrom("AER", "tobit", "ivreg")
-importFrom("quantreg", "rq", "summary.rq", "bandwidth.rq")
+importFrom("Formula", "as.Formula")
 importFrom("grDevices", "col2rgb", "heat.colors", "rgb")
 importFrom("graphics", "abline", "axis", "barplot", "box", "image",
              "layout", "lines", "par", "polygon", "text")
@@ -12,11 +10,11 @@ importFrom("stats", "binomial", "complete.cases", "density",
            "glm", "lm", "lm.influence", "median", "model.frame",
              "model.matrix", "model.response", "na.omit", "quantile",
              "sd", "terms", "update", "ARMAacf", "rnorm", "pnorm")
+importFrom("MASS", "glm.nb", "rnegbin", "mvrnorm", "gamma.shape")
 importFrom("MCMCpack", "MCMCfactanal", "MCMClogit", "MCMCmnl", "MCMCregress",
            "MCMCoprobit", "MCMCpoisson", "MCMCprobit", "MCMCtobit")
-
-importFrom("Formula", "as.Formula")
-
+importFrom("quantreg", "rq", "summary.rq", "bandwidth.rq")
+importFrom("VGAM", "vglm")
 importClassesFrom("VGAM", "vglm")
 importMethodsFrom("VGAM", "coef", "fitted", "predict", "vcov")
 

@@ -123,6 +123,33 @@ zrelogit$methods(
 )
 
 zrelogit$methods(
+    show = function(odds_ratios = FALSE, ...) {
+    if (.self$robust.se) {
+        if (!.self$mi & !.self$bootstrap) {
+            # Replace standard errors with robust standard errors
+            cat("Model: \n")
+            f5 <- .self$copy()
+            obj <- f5$from_zelig_model()
+            summ <- summary(obj)
+            robust_model <- lmtest::coeftest(obj, vcov = sandwich::vcovHC(obj,
+                                                                         "HC1"))
+            summ$coefficients[, c(2:4)] <- robust_model[, c(2:4)]
+            colnames(summ$coefficients)[2] <- paste(colnames(summ$coefficients)[2],
+                                                    '(robust)')
+            print(summ)
+        }
+        else if (.self$mi || .self$bootstrap)
+            stop("Weighted case control correction results are not currently available for multiply imputed or bootstrapped data.",
+                call. = FALSE)
+    }
+    else {
+        callSuper(...)
+    }
+        #print(base::summary(.self$zelig.out))
+    }
+)
+
+zrelogit$methods(
   zelig = function(formula, ..., tau = NULL, bias.correct = NULL,
                    case.control = NULL, data, by = NULL, bootstrap = FALSE) {
      if (!is.null(tau)) {
@@ -137,6 +164,8 @@ zrelogit$methods(
         case.control <- "prior"
     if (case.control == "weighting") # See GitHub issue #295
         .self$robust.se <- TRUE
+    else if (length(.self$robust.se) == 0)
+        .self$robust.se <- FALSE
     # Catch NULL bias.correct
     if (is.null(bias.correct))
         bias.correct = TRUE

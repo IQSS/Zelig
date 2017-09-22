@@ -84,7 +84,7 @@ Additional parameters avaialable to this model include:
 library(Zelig)
 data(turnout)
 z.out1 <- zelig(vote ~ age + race, model = "logit", data = turnout,
-cite = FALSE)
+                cite = FALSE)
 summary(z.out1)
 summary(z.out1, odds_ratios = TRUE)
 x.out1 <- setx(z.out1, age = 36, race = "white")

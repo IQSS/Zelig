@@ -69,4 +69,7 @@ test_that("REQUIRE TEST relogit follows ISQ (2001, eq. 11)", {
                     data = mid, model = "relogit", tau = 1042/303772,
                     cite = FALSE, case.control = "weighting")
     expect_equal(round(coef(z.out1)[[2]], 6), 1.672177)
+    expect_equal(colnames(summary(z.out1)$coefficients)[2],
+                     "Std. Error (robust)")
 })
+
