@@ -84,6 +84,8 @@ Additional parameters avaialable to many models include:
 \describe{
 \item{\code{modcall_formula_transformer()}}{Transform model call formula.}
 
+\item{\code{show(signif.stars = FALSE, subset = NULL, bagging = FALSE)}}{Display a Zelig object}
+
 \item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
   bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}

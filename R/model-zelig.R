@@ -47,6 +47,7 @@
 #' @field explanatory JSON export
 #' @field mcunit.test unit testing
 #' @field with.feedback Feedback
+#' @field robust.se return robust standard errors
 
 z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         formula = "ANY", # Zelig formula
@@ -115,7 +116,11 @@ z <- setRefClass("Zelig", fields = list(fn = "ANY", # R function to call to wrap
                                         mcformula = "ANY",
 
                                         # Feedback
-                                        with.feedback = "logical"))
+                                        with.feedback = "logical",
+
+                                        # Robust standard errors
+                                        robust.se = "logical"
+                                        ))
 
 z$methods(
   initialize = function() {
@@ -859,9 +864,9 @@ z$methods(
           }
         }
       }
-      #############################################################################
+      ##########################################################################
 
-    if((.self$mi || .self$bootstrap)  & is.null(subset)){
+    if((.self$mi || .self$bootstrap) & is.null(subset)){
         if (.self$mi)
             cat("Model: Combined Imputations \n\n")
         else
@@ -921,7 +926,7 @@ z$methods(
         }
       }
 
-      if (!is_zeligei(.self, fail = FALSE)) cat("Next step: Use 'setx' method\n")
+    if (!is_zeligei(.self, fail = FALSE)) cat("Next step: Use 'setx' method\n")
     } else if (length(.self$setx.out) != 0 & length(.self$sim.out) == 0) {
       niceprint <- function(obj, name){
         if(!is.null(obj[[1]])){
@@ -1086,12 +1091,18 @@ z$methods(
         "Get estimated model variance-covariance matrix"
         is_uninitializedField(.self$zelig.out)
 
-        if ("geeglm" %in% class(.self$zelig.out$z.out[[1]]))
-            result <- lapply(.self$zelig.out$z.out, vcov_gee)
-        else if ("rq" %in% class(.self$zelig.out$z.out[[1]]))
-            result <- lapply(.self$zelig.out$z.out, vcov_rq)
-        else
-            result <- lapply(.self$zelig.out$z.out, vcov)
+        if (length(.self$robust.se) == 0) .self$robust.se <- FALSE
+
+        if (!.self$robust.se) {
+            if ("geeglm" %in% class(.self$zelig.out$z.out[[1]]))
+                result <- lapply(.self$zelig.out$z.out, vcov_gee)
+            else if ("rq" %in% class(.self$zelig.out$z.out[[1]]))
+                result <- lapply(.self$zelig.out$z.out, vcov_rq)
+            else
+                result <- lapply(.self$zelig.out$z.out, vcov)
+        }
+        else if (.self$robust.se)
+            result <- lapply(.self$zelig.out$z.out, vcovHC, "HC1")
 
         if ("try-error" %in% class(result))
             stop("'vcov' method' not implemented for model '", .self$name, "'")

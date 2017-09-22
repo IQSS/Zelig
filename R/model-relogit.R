@@ -94,7 +94,7 @@ zrelogit$methods(
     .self$family <- "binomial"
     .self$link <- "logit"
     .self$wrapper <- "relogit"
-    ref1<-bibentry(
+    ref1 <- bibentry(
             bibtype="Article",
             title = "Logistic Regression in Rare Events Data",
             author = c(
@@ -106,7 +106,7 @@ zrelogit$methods(
             number = 2,
             year = 2001,
             pages = "137--163")
-    ref2<-bibentry(
+    ref2 <- bibentry(
             bibtype="Article",
             title = "Explaining Rare Events in International Relations",
             author = c(
@@ -123,6 +123,33 @@ zrelogit$methods(
 )
 
 zrelogit$methods(
+    show = function(odds_ratios = FALSE, ...) {
+    if (.self$robust.se) {
+        if (!.self$mi & !.self$bootstrap) {
+            # Replace standard errors with robust standard errors
+            cat("Model: \n")
+            f5 <- .self$copy()
+            obj <- f5$from_zelig_model()
+            summ <- summary(obj)
+            robust_model <- lmtest::coeftest(obj, vcov = sandwich::vcovHC(obj,
+                                                                         "HC1"))
+            summ$coefficients[, c(2:4)] <- robust_model[, c(2:4)]
+            colnames(summ$coefficients)[2] <- paste(colnames(summ$coefficients)[2],
+                                                    '(robust)')
+            print(summ)
+        }
+        else if (.self$mi || .self$bootstrap)
+            stop("Weighted case control correction results are not currently available for multiply imputed or bootstrapped data.",
+                call. = FALSE)
+    }
+    else {
+        callSuper(...)
+    }
+        #print(base::summary(.self$zelig.out))
+    }
+)
+
+zrelogit$methods(
   zelig = function(formula, ..., tau = NULL, bias.correct = NULL,
                    case.control = NULL, data, by = NULL, bootstrap = FALSE) {
      if (!is.null(tau)) {
@@ -134,10 +161,14 @@ zrelogit$methods(
     .self$model.call <- .self$zelig.call
     # Catch NULL case.control
     if (is.null(case.control))
-      case.control <- "prior"
+        case.control <- "prior"
+    if (case.control == "weighting") # See GitHub issue #295
+        .self$robust.se <- TRUE
+    else if (length(.self$robust.se) == 0)
+        .self$robust.se <- FALSE
     # Catch NULL bias.correct
     if (is.null(bias.correct))
-      bias.correct = TRUE
+        bias.correct = TRUE
     # Construct formula. Relogit models have the structure:
     #   cbind(y, 1-y) ~ x1 + x2 + x3 + ... + xN
     # Where y is the response.
@@ -260,7 +291,8 @@ relogit <- function(formula,
       if (is.null(tau)) # w_1=1 since tau=ybar
         xi <- 0.5 * Qdiag * (2 * pihat - 1)
       else
-        xi <- 0.5 * Qdiag * ((1 + w0) * pihat - w0)
+        xi <- 0.5 * Qdiag * ((1 + w1) * pihat - w1) # returns ISQ (2001, eq. 11)
+        ## xi <- 0.5 * Qdiag * ((1 + w0) * pihat - w0)
       res$coefficients <- res$coefficients -
         lm(xi ~ X - 1, weights = W)$coefficients
       res$bias.correct <- TRUE

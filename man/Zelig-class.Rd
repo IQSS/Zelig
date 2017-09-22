@@ -92,6 +92,8 @@ Zelig website: \url{http://zeligproject.org/}
 \item{\code{mcunit.test}}{unit testing}
 
 \item{\code{with.feedback}}{Feedback}
+
+\item{\code{robust.se}}{return robust standard errors}
 }}
 
 \section{Methods}{
