@@ -71,5 +71,15 @@ test_that("REQUIRE TEST relogit follows ISQ (2001, eq. 11)", {
     expect_equal(round(coef(z.out1)[[2]], 6), 1.672177)
     expect_equal(colnames(summary(z.out1)$coefficients)[2],
                      "Std. Error (robust)")
+
+    vcov_z.out1 <- vcov(z.out1)
+    z.out.vcov_not_robust <- z.out1
+    z.out.vcov_not_robust$robust.se <- FALSE
+    expect_false(round(vcov_z.out1[[1]][1]) ==
+                     round(vcov(z.out.vcov_not_robust)[[1]][1]))
+
+    # Not adequately tested !!!
+    z.out1 %>% setx() %>% sim() %>% plot()
+    z.out.vcov_not_robust %>% setx() %>% sim() %>% plot()
 })
 

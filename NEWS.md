@@ -13,7 +13,6 @@ Zelig version 5.1-4
 -   Returns `relogit` weighted case control method to that described in
 King and Langche (2001, eq. 11) and used in the Stata `relogit` implementation.
 #295
-    + Note: not implemented for `sim`
 
 Zelig version 5.1-3
 ==============================

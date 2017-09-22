@@ -289,7 +289,7 @@ $$
     \end{aligned}
 $$
 
-   where $w_i$ and $w_1$ are given in the “weighting”
+   where $w_i$ and $w_1$ are given in the "weighting"
    section above.
 
 Quantities of Interest
@@ -306,7 +306,7 @@ $$
         \frac{1}{1 + \exp(-x_i \beta)},
 $$
 
-      given draws of $\beta$ from its posterior.
+   given draws of $\beta$ from its posterior.
 
    -  The predicted value (qi$pr) is a draw from a binomial distribution
       with mean equal to the simulated $\pi_i$.

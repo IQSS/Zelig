@@ -1091,12 +1091,18 @@ z$methods(
         "Get estimated model variance-covariance matrix"
         is_uninitializedField(.self$zelig.out)
 
-        if ("geeglm" %in% class(.self$zelig.out$z.out[[1]]))
-            result <- lapply(.self$zelig.out$z.out, vcov_gee)
-        else if ("rq" %in% class(.self$zelig.out$z.out[[1]]))
-            result <- lapply(.self$zelig.out$z.out, vcov_rq)
-        else
-            result <- lapply(.self$zelig.out$z.out, vcov)
+        if (length(.self$robust.se) == 0) .self$robust.se <- FALSE
+
+        if (!.self$robust.se) {
+            if ("geeglm" %in% class(.self$zelig.out$z.out[[1]]))
+                result <- lapply(.self$zelig.out$z.out, vcov_gee)
+            else if ("rq" %in% class(.self$zelig.out$z.out[[1]]))
+                result <- lapply(.self$zelig.out$z.out, vcov_rq)
+            else
+                result <- lapply(.self$zelig.out$z.out, vcov)
+        }
+        else if (.self$robust.se)
+            result <- lapply(.self$zelig.out$z.out, vcovHC, "HC1")
 
         if ("try-error" %in% class(result))
             stop("'vcov' method' not implemented for model '", .self$name, "'")
