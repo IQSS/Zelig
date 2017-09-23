@@ -79,7 +79,6 @@ test_that('REQUIRE TEST arima models', {
     zj$setx1(x=2)
     zj$sim()
 
-
     # ACF plot
 
     myorder <- eval(zj$zelig.call$order)
