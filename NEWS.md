@@ -14,6 +14,9 @@ Zelig version 5.1-4
 King and Langche (2001, eq. 11) and used in the Stata `relogit` implementation.
 #295
 
+-   Odds ratios now returned from `summary` with `relogit` models via the 
+`odds_ratios = TRUE` argument. #302 
+
 Zelig version 5.1-3
 ==============================
 

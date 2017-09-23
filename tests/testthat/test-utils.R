@@ -72,8 +72,13 @@ test_that('REQUIRE TEST for to_zelig_mi -- with list of data.frames', {
     expect_equivalent(round(as.numeric(z.out$get_coef()[[1]][2]), 3), 0.1)
 })
 
-# FAIL TESTS for to_zelig_mi ----------------------------------------------------
+# FAIL TEST for to_zelig_mi ----------------------------------------------------
 test_that('FAIL TESTS for to_zelig_mi', {
     x <- 100
     expect_error(to_zelig_mi(x))
+})
+
+# FAIL TEST for or_summary -----------------------------------------------------
+test_that("FAIL TEST for or_summary", {
+    expect_error(or_summary(1:10), "obj must be of summary.glm class.")
 })

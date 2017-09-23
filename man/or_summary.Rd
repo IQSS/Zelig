@@ -5,8 +5,18 @@
 \title{Find odds ratios for coefficients and standard errors
 for glm.summary class objects}
 \usage{
-or_summary(obj, label_mod = "(OR)")
+or_summary(obj, label_mod_coef = "(OR)", label_mod_se = "(OR)")
+}
+\arguments{
+\item{obj}{a \code{glm.summary} class object}
+
+\item{label_mod_coef}{character string for how to modify the coefficient
+label.}
+
+\item{label_mod_se}{character string for how to modify the standard error
+label.}
 }
 \description{
-obj a \code{glm.summary} class object
+Find odds ratios for coefficients and standard errors
+for glm.summary class objects
 }

@@ -677,15 +677,20 @@ vcov_rq <- function(obj) {
 #' Find odds ratios for coefficients and standard errors
 #' for glm.summary class objects
 #'
-#' obj a \code{glm.summary} class object
+#' @param obj a \code{glm.summary} class object
+#' @param label_mod_coef character string for how to modify the coefficient
+#' label.
+#' @param label_mod_se character string for how to modify the standard error
+#' label.
 
-or_summary <- function(obj, label_mod = "(OR)"){
+or_summary <- function(obj, label_mod_coef = "(OR)",
+                        label_mod_se = "(OR)"){
     if (class(obj) != "summary.glm")
-        stop("obj must be a summary.glm class object",
+        stop("obj must be of summary.glm class.",
              call. = FALSE)
 
         obj$coefficients[, c(1, 2)] <- exp(obj$coefficients[, c(1, 2)])
         colnames(obj$coefficients)[c(1, 2)] <- paste(
-                                colnames(obj$coefficients)[c(1, 2)], label_mod)
+                                colnames(obj$coefficients)[c(1, 2)], c(label_mod_coef, label_mod_se))
         return(obj)
 }

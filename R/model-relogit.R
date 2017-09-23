@@ -131,16 +131,28 @@ zrelogit$methods(
             f5 <- .self$copy()
             obj <- f5$from_zelig_model()
             summ <- summary(obj)
-            robust_model <- lmtest::coeftest(obj, vcov = sandwich::vcovHC(obj,
-                                                                         "HC1"))
+            robust_model <- lmtest::coeftest(obj,
+                                vcov = sandwich::vcovHC(obj, "HC1"))
             summ$coefficients[, c(2:4)] <- robust_model[, c(2:4)]
-            colnames(summ$coefficients)[2] <- paste(colnames(summ$coefficients)[2],
-                                                    '(robust)')
+            if (odds_ratios) {
+                summ <- or_summary(summ, label_mod_se = "(OR, robust)")
+            }
+            else
+                colnames(summ$coefficients)[2] <-
+                    paste(colnames(summ$coefficients)[2], "(robust)")
             print(summ)
         }
         else if (.self$mi || .self$bootstrap)
             stop("Weighted case control correction results are not currently available for multiply imputed or bootstrapped data.",
                 call. = FALSE)
+    }
+    else if (!.self$robust.se & odds_ratios & !.self$mi & !.self$bootstrap) {
+        cat("Model: \n")
+        f5 <- .self$copy()
+        obj <- f5$from_zelig_model()
+        summ <- summary(obj)
+        summ <- or_summary(summ)
+        print(summ)
     }
     else {
         callSuper(...)
