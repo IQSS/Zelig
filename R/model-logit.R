@@ -110,9 +110,7 @@ zlogit$methods(
             do(summ = {cat("Model: \n")
                 ## Replace coefficients with odds-ratios
                 .z.out.summary <- base::summary(.$z.out)
-                .z.out.summary$coefficients[, c(1, 2)] <- exp(.z.out.summary$coefficients[, c(1, 2)])
-                colnames(.z.out.summary$coefficients)[c(1, 2)] <- paste(colnames(.z.out.summary$coefficients)[c(1, 2)],
-                     '(OR)')
+                .z.out.summary <- or_summary(.z.out.summary)
                 print(.z.out.summary)
             })
     }
