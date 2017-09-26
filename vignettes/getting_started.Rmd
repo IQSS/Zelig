@@ -1,0 +1,263 @@
+---
+title: "Getting Started with Zelig"
+output: 
+    html_document:
+        toc: true
+        toc_float: true
+vignette: >
+  %\VignetteIndexEntry{Getting Started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(
+        stop_on_error = 2L
+)
+```
+
+Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and visualizing results from any statistical method. It includes many methods, based on likelihood, frequentist, Bayesian, robust Bayesian, nonparametric, and population and superpopulation theories of inference. Zelig translates hard-to-interpret coefficients into meaningful quantities of interest, provides uncertainty estimates, and automates graphics and numerical summaries for all models. 
+
+## Installation
+
+Install Zelig:
+
+```{r eval=FALSE}
+install.packages('Zelig')
+```
+
+Alternatively, install the development version of Zelig:
+
+```{r eval=FALSE}
+install.packages("devtools")
+devtools::install_github('IQSS/Zelig')
+```
+
+Once Zelig is installed, load it:
+
+```{r message=FALSE}
+library(Zelig)
+```
+
+## Usage
+
+All models in Zelig can be estimated and results explored presented using four simple functions:
+
+1. `zelig` to estimate the parameters
+
+2. `setx` to set fitted values for which we want to find quantities of interest
+
+3. `sim` to simulate the quantities of interest
+
+4. `plot` to plot the simulation results.
+
+## Example: Education and Fertility
+
+Suppose we wish to estimate the effect of education on fertility. The `swiss` dataset contains standardized fertility and socioeconomic indicators for each of Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). The outcome variable `Fertility` is a continuous measure based on the common standardized fertility measure, and the variable `Education` is the percent of draftees with education beyond primary school. 
+
+```{r}
+# load data
+data(swiss)
+
+# for more information about the dataset
+# ?swiss 
+
+# view the first few rows of data
+head(swiss)
+```
+
+Since fertility is a continuous variable, least squares (`ls`) is an appropriate model choice. 
+
+### Model Fitting
+
+To estimate our model, we call the `zelig()` function with three two arguments: equation, model type, and data:
+
+```{r}
+# estimate ls model
+z5_1 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
+
+# model summary
+summary(z5_1)
+```
+
+```{r include=FALSE}
+edu_coef <- round(coef(z5_1)[[2]], digits = 2)
+if (is.na(edu_coef)) stop()
+```
+
+The `r edu_coef` coefficient on education suggests a negative relationship between the education of a province and its fertility rate. More precisely, for every one percent increase in draftees educated beyond primary school, the fertility rate of the province decreases `r edu_coef * -1` units. 
+
+### Quantities of Interest
+
+To help us better interpret this finding, we may want other quantities of interest, such as expected values or first differences. Zelig makes this simple by automating the translation of model estimates into interpretable quantities of interest using Monte Carlo simulation methods (see King, Tomz, and Wittenberg (2000) for more information). 
+
+"Depending on the issue being studied, the expected or mean value of the dependent variable may be more interesting  than a predicted value. The difference is subtle but important. A predicted value contains both fundamental and estimation uncertainty, whereas an expected value averages over the fundamental variability arising from sheer randomness in the world, leaving only the estimation uncertainty caused by not having an infinite number of observations. Thus, predicted values have a larger variance than expected values, even though the average should be nearly the same in both cases." From [King, Tomz, and Wittenberg (2000, 350)](http://www.jstor.org.ezp-prod1.hul.harvard.edu/stable/2669316)
+
+Suppose we want to examine the effect of increasing the percent of draftees educated from 5 to 15. To do so, we set our predictor value using the `setx()` and `setx1()` functions:
+
+```{r}
+# set education to 5 and 15
+z5_1 <- setx(z5_1, Education = 5)
+z5_1 <- setx1(z5_1, Education = 15)
+
+# model summary
+summary(z5_1)
+```
+
+### Interpretation
+
+After setting our predictor value, we simulate using the `sim()` method:
+
+```{r}
+# run simulations and estimate quantities of interest
+z5_1 <- sim(z5_1)
+
+# model summary
+summary(z5_1)
+```
+
+NEED TO INTERPRET OUTPUT
+
+At this point, we’ve estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The `summary()` method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences–the difference in expected values at the set levels of education.
+
+### Visualization
+
+Zelig’s `plot()` function plots the estimated quantities of interest:
+
+```{r example_plot_graph, fig.height=11, fig.width=7}
+plot(z5_1)
+```
+
+We can also simulate and plot simulations from ranges of simulated values:
+
+```{r}
+
+z5_2 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
+
+# set Education to range from 5 to 15 at single integer increments
+z5_2 <- setx(z5_2, Education = 5:15)
+
+# run simulations and estimate quantities of interest
+z5_2 <- sim(z5_2)
+```
+
+Then use the `plot()` function as before:
+
+```{r example_plot_ci_plot, fig.height=5, fig.width=5}
+z5_2 <- plot(z5_2)
+```
+
+## Extensions
+
+evaluates counterfactuals (incorporating WhatIf); 
+
+combines multiply imputed data sets to impute missing data and correct for measurement error (via Amelia); 
+
+automates bootstrapping for all models; 
+
+allows for matching for causal inference to reduce model dependence (via MatchIt and cem); 
+
+and generates replication data files (for Dataverse to satisfy community replication standards). 
+
+
+### `tidyverse` Integration
+Many researchers integrate tools from the "[tidyverse](http://tidyverse.org/)" into their data workflows. Zelig can be easily slotted into this workflow for model estimation and identifying quantities of interest. Most Zelig estimation models require underlying data to be in the "tidy" format that the tidyverse creates. Zelig's three step workflow can be organized very well using [pipes](http://r4ds.had.co.nz/pipes.html) (`%>%`) that the tidyverse advocates. Using pipes with Zelig will make your code more legible and computationally efficient.
+
+"Tidy" data is defined as having three qualities [(Wickham 2014, 4)](https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf):
+
+1. Each variable forms a column.
+
+2. Each observation forms a row.
+
+3. Each type of observational unit forms a table.
+
+Data formatted in this way is ideal for most Zelig models. 
+
+This example shows one way to integrate tidyverse and Zelig into one workflow.
+
+Imagine we used the tidyverse to create a data set in tidy format that we want to analyse with Zelig:
+
+```{r, echo=FALSE}
+data(swiss)
+swiss <- swiss[, c('Fertility', 'Agriculture', 'Examination')]
+head(swiss)
+```
+
+We could then analyse it with Zelig and plot quantities of interest using Tidyverse's pipe operator. Note the use of `data = .`. This tells the pipe to enter the `swiss` data object as the value of `zelig`'s data argument:
+
+```{r fig.height=5, fig.width=5, message=FALSE}
+library(Zelig)
+library(tidyverse)
+
+swiss %>% 
+    zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
+          cite = FALSE) %>%
+    setx(Agriculture = seq(1, 90, by = 5)) %>%
+    sim() %>% 
+    plot()
+```
+
+We could also find first differences by including `setx1` in the workflow:
+
+```{r fig.height=11, fig.width=7}
+swiss %>% 
+    zelig(Fertility ~ Agriculture + Examination, model = 'ls', data = ., 
+          cite = FALSE) %>%
+    setx(Agriculture = 10) %>%
+    setx1(Agriculture = 90) %>%
+    sim() %>% 
+    plot()
+```
+
+## Citation
+
+```{r echo=FALSE, background='ffffff', comment=''}
+citation('Zelig')
+```
+
+## Getting Help
+
+We love to get feedback on how to improve Zelig.
+
+<i class="fa fa-comment-o" aria-hidden="true"></i> If you have questions and 
+suggestions improvements, we'd love to hear from you! You can get in touch via: 
+
+- <a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>,
+
+- <a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, 
+
+<i class="fa fa-code" aria-hidden="true"></i> You can even make your R packages 
+usable from Zelig by writing a few simple bridge functions. Checkout the 
+[Developer's Guide](../articles/developers_guide.html) for details.
+
+Developers can make their R packages usable from Zelig by writing a few simple bridge functions.
+
+
+## About
+
+<img style="float:left; padding-right:20px" src="http://static.projects.iq.harvard.edu/files/styles/os_files_medium/public/zelig/files/zelig.jpeg?m=1422475972&itok=3vCGTOgl"/>
+
+**Zelig (noun) /ˈzɛlɪɡ/** : An entity with chameleon like characteristics, able to change appearance and form to fit appropriately in any circumstance.
+
+Leonard Zelig was born in Brooklyn, New York at the turn of the century into a Jewish immigrant family. He gained notoriety and celebrity status during the 1920s due to his supernatural ability to look and act like whomever was around him. F. Scott Fitzgerald penned in his memoirs of meeting Leonard Zellman, a charming and impeccably dressed aristocrat, at an affluent garden party in Long Island. Lou Zelig turned up soon after at the New York Yankees spring training camp in Florida. Later, he was seen as a member of Al Capone’s Cosa Nostra and a black jazz musician in Chicago. Leonard inspired Woody Allen’s 1983 fictionalized documentary film, Zelig, about this "chameleon man"" who changed his appearance and persona to comfortably blend into his surroundings and integrate himself into important historical events. Similarly, Zelig: Everyone's Statistical Software is intended to fit in every situation, and to work for every model and approach.
+
+The [Zelig Project](http://www.zeligproject.org) is based at the [Institute for Quantitative Social Science 
+at Harvard University](http://www.iq.harvard.edu/).
+
+- Principal Investigator: [Gary King](http://gking.harvard.edu/)
+
+- Zelig Core Team: [Suso Baleato](https://www.iq.harvard.edu/people/suso-baleato), [NaLette Brodnax](https://www.iq.harvard.edu/people/nalette-brodnax), [Christine Choirat](http://scholar.harvard.edu/cchoirat), [Christopher Gandrud](https://www.iq.harvard.edu/people/christopher-gandrud), [James Honaker](http://hona.kr/), [Ista Zahn](http://www.iq.harvard.edu/people/ista-zahn)
+
+- Original Authors: [Kosuke Imai](http://imai.princeton.edu/), 
+[Gary King](http://gking.harvard.edu/), [Olivia Lau](http://www.olivialau.org/)
+
+- Supervisor: [Mercè Crosas](http://www.iq.harvard.edu/people/merce-crosas)
+
+We thank all contributors to the Zelig project, including: Vito D’Orazio, 
+Jennifer McGrath, Muhammed Y. Idris, Justin Grimmer, Jason Wittenberg, 
+Badri Narayan Bhaskar, Skyler J. Cranmer, Ben Goodrich, Ying Lu, Patrick Lam, 
+Nicholas Carnes, Alexander D’Amour, Delia Bailey, Ferdinand Alimadhi, 
+Elena Villalon, Matt Owen, Ben Sabath, and John McCool.
+
+---
+Last updated `r format(Sys.Date(), "%D")` using Zelig version `r packageVersion('Zelig')`
