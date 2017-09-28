@@ -29,7 +29,7 @@ install.packages('Zelig')
 Alternatively, install the development version of Zelig:
 
 ```{r eval=FALSE}
-install.packages("devtools")
+install.packages('devtools')
 devtools::install_github('IQSS/Zelig')
 ```
 
@@ -41,15 +41,15 @@ library(Zelig)
 
 ## Usage
 
-All models in Zelig can be estimated and results explored presented using four simple functions:
+We can estimate, explore, and visualize any Zelig model using four functions:
 
-1. `zelig` to estimate the parameters
+1. `zelig()` to estimate a statistical model
 
-2. `setx` to set fitted values for which we want to find quantities of interest
+2. `setx()` to set explanatory variable values
 
-3. `sim` to simulate the quantities of interest
+3. `sim()` to simulate the quantities of interest
 
-4. `plot` to plot the simulation results.
+4. `plot()` to visualize the simulation results
 
 ## Example: Education and Fertility
 
@@ -66,11 +66,11 @@ data(swiss)
 head(swiss)
 ```
 
-Since fertility is a continuous variable, least squares (`ls`) is an appropriate model choice. 
+Since `Fertility` is a continuous variable, least squares (`ls`) is an appropriate model choice. 
 
 ### Model Fitting
 
-To estimate our model, we call the `zelig()` function with three two arguments: equation, model type, and data:
+To estimate the model, we call the `zelig()` function with three two arguments: equation, model type, and data:
 
 ```{r}
 # estimate ls model
@@ -147,7 +147,7 @@ Then use the `plot()` function as before:
 z5_2 <- plot(z5_2)
 ```
 
-## Extensions
+## Advanced
 
 evaluates counterfactuals (incorporating WhatIf); 
 
@@ -207,6 +207,34 @@ swiss %>%
     setx1(Agriculture = 90) %>%
     sim() %>% 
     plot()
+```
+
+### Alternative Syntax
+
+Zelig 5 introduced [reference classes](http://adv-r.had.co.nz/R5.html). These
+enable a different way of working with Zelig that is detailed in [a separate vignette](zelig5_vs_zelig4.html). 
+Directly using the reference class architecture is optional.
+
+All models in Zelig 5 can be estimated and results explored presented using a five simple steps:
+
+- Initialise the Zelig object, e.g with `z.out <- zls$new()`, for a least squares model. Then populate the object with:
+
+- `zelig` to estimate the parameters,
+
+- `setx` to set fitted values for which we want to find quantities of interest,
+
+- `sim` to simulate the quantities of interest,
+
+- `graph` to plot the simulation results.
+
+Here is an example workflow with Zelig 5:
+
+```{r zelig-5-pseudo}
+z5 <- zls$new()
+z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
+z5$setx()
+z5$sim()
+z5$graph()
 ```
 
 ## Citation
