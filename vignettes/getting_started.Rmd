@@ -53,7 +53,7 @@ We can estimate, explore, and visualize any Zelig model using four functions:
 
 ## Example: Education and Fertility
 
-Suppose we wish to estimate the effect of education on fertility. The `swiss` dataset contains standardized fertility and socioeconomic indicators for each of Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). The outcome variable `Fertility` is a continuous measure based on the common standardized fertility measure, and the variable `Education` is the percent of draftees with education beyond primary school. 
+Suppose we want to estimate the effect of education on fertility. The `swiss` dataset contains standardized fertility and socioeconomic indicators for each of Switzerland’s 47 French-speaking provinces in 1888 (Mosteller and Tukey, 1977, 549-551). The outcome `Fertility` is a continuous variable based on the common standardized fertility measure, and the variable `Education` is the percent of draftees with education beyond primary school. 
 
 ```{r}
 # load data
@@ -70,14 +70,14 @@ Since `Fertility` is a continuous variable, least squares (`ls`) is an appropria
 
 ### Model Fitting
 
-To estimate the model, we call the `zelig()` function with three two arguments: equation, model type, and data:
+To estimate the model, we call the `zelig()` function with three arguments: formula, model, and data.
 
 ```{r}
 # estimate ls model
-z5_1 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
+z1 <- zelig(Fertility ~ Education, model = "ls", data = swiss, cite = FALSE)
 
 # model summary
-summary(z5_1)
+summary(z1)
 ```
 
 ```{r include=FALSE}
@@ -85,11 +85,13 @@ edu_coef <- round(coef(z5_1)[[2]], digits = 2)
 if (is.na(edu_coef)) stop()
 ```
 
-The `r edu_coef` coefficient on education suggests a negative relationship between the education of a province and its fertility rate. More precisely, for every one percent increase in draftees educated beyond primary school, the fertility rate of the province decreases `r edu_coef * -1` units. 
+The `r edu_coef` coefficient on `Education` suggests a negative relationship between the education of a province and its fertility rate. More precisely, for every one percentage-point increase in draftees educated beyond primary school, the fertility rate of the province decreases `r edu_coef * -1` units. 
 
 ### Quantities of Interest
 
-To help us better interpret this finding, we may want other quantities of interest, such as expected values or first differences. Zelig makes this simple by automating the translation of model estimates into interpretable quantities of interest using Monte Carlo simulation methods (see King, Tomz, and Wittenberg (2000) for more information). 
+To help us better interpret this finding, we may want other quantities of interest, such as expected values or first differences. 
+
+Zelig makes this simple by automating the translation of model estimates into interpretable quantities of interest using Monte Carlo simulation methods (see King, Tomz, and Wittenberg (2000) for more information). 
 
 "Depending on the issue being studied, the expected or mean value of the dependent variable may be more interesting  than a predicted value. The difference is subtle but important. A predicted value contains both fundamental and estimation uncertainty, whereas an expected value averages over the fundamental variability arising from sheer randomness in the world, leaving only the estimation uncertainty caused by not having an infinite number of observations. Thus, predicted values have a larger variance than expected values, even though the average should be nearly the same in both cases." From [King, Tomz, and Wittenberg (2000, 350)](http://www.jstor.org.ezp-prod1.hul.harvard.edu/stable/2669316)
 
