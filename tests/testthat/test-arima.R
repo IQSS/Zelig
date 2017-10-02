@@ -102,12 +102,28 @@ test_that('REQUIRE TEST arima models', {
 test_that("REQUIRE TEST timeseries reference class wrappers", {
     data(seatshare)
     subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
-    expect_error(ts.out <- zelig(unemp ~ leftseat, data = subset, model = "arima",
-                                 order = c(2,0,1)),NA)
-    expect_error(x.out <- setx(ts.out, leftseat = 0.75),NA)
-    expect_error(x.out <- setx1(x.out, leftseat = 0.25),NA)
-    expect_error(s.out <- sim(x.out),NA)
+    expect_error(ts.out <- zelig(unemp ~ leftseat, data = subset,
+                                 model = "arima", order = c(2, 0, 1)), NA)
+    expect_error(x.out <- setx(ts.out, leftseat = 0.75), NA)
+    expect_error(s.out <- sim(x.out), NA)
+    expect_error(s.out <- plot(s.out), NA)
+
+    expect_error(x.out <- setx1(x.out, leftseat = 0.25), NA)
+    expect_error(s.out <- sim(x.out), NA)
+    expect_error(s.out <- plot(s.out), NA)
 })
+
+# REQUIRE TEST to ensure that summary works with arima with sim ----------------
+test_that("REQUIRE TEST to ensure that summary works with arima with sim", {
+    data(seatshare)
+    subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
+    s.out <- zelig(unemp ~ leftseat, data = subset, model = "arima",
+                   order = c(2,0,1)) %>%
+        setx(leftseat = 0.25) %>%
+        sim()
+    expect_error(summary(s.out), NA)
+})
+
 
 # FAILURE TEST cs ts by with timeseries ----------------------------------------
 test_that("FAILURE TEST cs ts by with timeseries", {
