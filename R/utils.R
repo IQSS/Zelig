@@ -157,12 +157,14 @@ reduce = function(dataset, s, formula, data, avg = avg) {
 
 
 
-#' Describe Here
+#' Create QI summary matrix
 #' @param qi quantity of interest in the discrete case
 #' @return a formatted qi
 #' @keywords internal
 #' @author Christine Choirat
 statmat <- function(qi) {
+    if (!is.matrix(qi))
+        qi <- as.matrix(qi, ncol = 1)
     m <- t(apply(qi, 2, quantile, c(.5, .025, .975), na.rm = TRUE))
     n <- matrix(apply(qi, 2, mean, na.rm = TRUE))
     colnames(n) <- "mean"
