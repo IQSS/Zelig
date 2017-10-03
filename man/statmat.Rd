@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{statmat}
 \alias{statmat}
-\title{Describe Here}
+\title{Create QI summary matrix}
 \usage{
 statmat(qi)
 }
@@ -13,7 +13,7 @@ statmat(qi)
 a formatted qi
 }
 \description{
-Describe Here
+Create QI summary matrix
 }
 \author{
 Christine Choirat
