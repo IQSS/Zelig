@@ -97,69 +97,69 @@ zarima$methods(
 )
 
 zarima$methods(
-    qi = function(simparam, mm, mm1=NULL){
+  qi = function(simparam, mm, mm1=NULL){
 
-        myorder <- eval(.self$zelig.call$order)
-        mycoef <- coef(.self$zelig.out$z.out[[1]])
-        sd <- sqrt(.self$zelig.out$z.out[[1]]$sigma2)
+    myorder <- eval(.self$zelig.call$order)
+    mycoef <- coef(.self$zelig.out$z.out[[1]])
+    sd <- sqrt(.self$zelig.out$z.out[[1]]$sigma2)
 
-        ## Check mm and mm1.  Particularly for issues surrounding intercept.
-        rebuildMM <- function(simparam, x){
-            xnames <- colnames(x)
-            snames <- colnames(simparam)
-            ## parameter "intercept" can be spelt "(Intercept)"" in model matrix
-            if("(Intercept)" %in% xnames){
-                flag <- xnames == "(Intercept)"
-                xnames[flag] <- "intercept"
-                colnames(x)[flag]<- "intercept" # this is equivalent to: colnames(x) <- xnames
-            }
-            ## "intercept" can be included in model matrix when not an estimated parameter (for example in models with integration)
-            xnamesflag <- xnames %in% snames
-            x <- x[, xnamesflag, drop=FALSE]
-            return(x)
-        }
-
-        mm <- rebuildMM(simparam, mm)
-        if(!is.null(mm1)){
-            mm1 <- rebuildMM(simparam, mm1)
-        }
-
-
-        ## Make ACF
-        acf <- simacf(coef=mycoef, order=myorder, params=simparam, alpha=0.05)
-        acf.length <- length(acf$expected.acf)
-        t1 <- 2*acf.length
-        t2 <- 2*acf.length
-
-
-        if(.self$bsetx1){             # could also check if mm1 is NULL
-            # zeligARMAbreakforecaster() calls zeligARMAlongrun() internally
-            #  return(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov)
-            yseries <- zeligARMAbreakforecaster(y.init=NULL, x=mm, x1=mm1, simparam=simparam, order=myorder, sd=sd, t1=t1, t2=t2)
-            # maybe check nrow(yseries)=t1 + t2 ?
-
-            pv <- yseries$y.innovation[t1,]                # could use either $innovation or $shock here
-            pv.shortrun <- yseries$y.innovation[t1+1,]     # could use either $innovation or $shock here
-            pv.longrun <- yseries$y.innovation[t1+t2,]     # must use $innovation here
-
-            # Remember, these are expectations using the same simparam in each expectation.
-            ev <- yseries$ev.innovation[t1,]
-            ev.shortrun <- yseries$ev.innovation[t1+1,]
-            ev.longrun <- yseries$ev.innovation[t1+t2,]
-
-            return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun,
-                        pvseries.shock=yseries$y.shock, pvseries.innovation=yseries$y.innovation,
-                        evseries.shock=yseries$ev.shock, evseries.innovation=yseries$ev.innovation))
-
-        }else{
-            # just call zeligARMAlongrun()
-            yseries <- zeligARMAlongrun(y.init=NULL, x=mm, simparam=simparam, order=myorder, sd=sd)
-            pv <- yseries$y[1,]   # zeligARMAlongrun returns the series in reverse order to zeligARMAbreakforecaster
-            # Remember, these are expectations using the same simparam in each expectation:
-            ev <- yseries$ev[1,]
-            return(list(acf = acf, ev = ev, pv = pv))
-        }
+    ## Check mm and mm1.  Particularly for issues surrounding intercept.
+    rebuildMM <- function(simparam, x){
+      xnames <- colnames(x)
+      snames <- colnames(simparam)
+      ## parameter "intercept" can be spelt "(Intercept)"" in model matrix
+      if("(Intercept)" %in% xnames){
+        flag <- xnames == "(Intercept)"
+        xnames[flag] <- "intercept"
+        colnames(x)[flag]<- "intercept" # this is equivalent to: colnames(x) <- xnames
+      }
+      ## "intercept" can be included in model matrix when not an estimated parameter (for example in models with integration)
+      xnamesflag <- xnames %in% snames
+      x <- x[, xnamesflag, drop=FALSE]
+      return(x)
     }
+
+    mm <- rebuildMM(simparam, mm)
+    if(!is.null(mm1)){
+      mm1 <- rebuildMM(simparam, mm1)
+    }
+
+
+    ## Make ACF
+    acf <- simacf(coef=mycoef, order=myorder, params=simparam, alpha=0.05)
+    acf.length <- length(acf$expected.acf)
+    t1 <- 2*acf.length
+    t2 <- 2*acf.length
+
+
+    if((.self$bsetx1)||(.self$bsetx && !.self$bsetx1)){             # could also check if mm1 is NULL
+      # zeligARMAbreakforecaster() calls zeligARMAlongrun() internally
+      #  return(y.shock = yseries, y.innovation = y.innov, ev.shock = evseries, ev.innovation = ev.innov)
+      yseries <- zeligARMAbreakforecaster(y.init=NULL, x=mm, x1=mm1, simparam=simparam, order=myorder, sd=sd, t1=t1, t2=t2)
+      # maybe check nrow(yseries)=t1 + t2 ?
+
+      pv <- yseries$y.innovation[t1,]                # could use either $innovation or $shock here
+      pv.shortrun <- yseries$y.innovation[t1+1,]     # could use either $innovation or $shock here
+      pv.longrun <- yseries$y.innovation[t1+t2,]     # must use $innovation here
+
+      # Remember, these are expectations using the same simparam in each expectation.
+      ev <- yseries$ev.innovation[t1,]
+      ev.shortrun <- yseries$ev.innovation[t1+1,]
+      ev.longrun <- yseries$ev.innovation[t1+t2,]
+
+      return(list(acf = acf, ev = ev, pv = pv, pv.shortrun=pv.shortrun, pv.longrun=pv.longrun, ev.shortrun=ev.shortrun, ev.longrun=ev.longrun,
+                pvseries.shock=yseries$y.shock, pvseries.innovation=yseries$y.innovation,
+                evseries.shock=yseries$ev.shock, evseries.innovation=yseries$ev.innovation))
+
+    }else{
+      # just call zeligARMAlongrun()
+      yseries <- zeligARMAlongrun(y.init=NULL, x=mm, simparam=simparam, order=myorder, sd=sd)
+      pv <- yseries$y[1,]   # zeligARMAlongrun returns the series in reverse order to zeligARMAbreakforecaster
+      # Remember, these are expectations using the same simparam in each expectation:
+      ev <- yseries$ev[1,]
+      return(list(acf = acf, ev = ev, pv = pv))
+    }
+  }
 )
 
 zarima$methods(
@@ -353,7 +353,8 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
     }
 
     if(is.null(y.init)){
-        betabar <- t(apply(beta,2, mean))
+        if (!is.matrix(beta)) beta <- matrix(beta, ncol = 1)
+        betabar <- t(apply(beta, 2, mean))
         y.init <- x %*% t(beta)
     }
 
@@ -364,14 +365,16 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
     finished <- FALSE
     count <- 0
     while(!finished){
-        y <- zeligARMAnextstep(yseries=yseries[1:timepast, ], xseries=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+        y <- zeligARMAnextstep(yseries=yseries[1:timepast, ], xseries=x,
+                               wseries=wseries[1:timepast, ], beta = beta,
+                               ar = ar, i = i, ma = ma, sd = sd)
         yseries <- rbind(y$y, yseries)
         wseries <- rbind(y$w, wseries)
         evseries<- rbind(y$exp.y, evseries)
 
         #diff <- mean(abs(y.1 - y.0))  # Eventually need to determine some automated stopping rule
         count <- count+1
-        finished <- count>burnin #| (diff < tol)
+        finished <- count > burnin #| (diff < tol)
     }
 
     return(list(y.longrun=yseries, w.longrun=wseries, ev.longrun=evseries))

@@ -58,6 +58,12 @@ ztimeseries$methods(
     } else if(identical(.self$name,"ma")){
       order <- c(0,0,1)
       .self$zelig.call$order <- order
+    } else {
+        dots <- list(...)
+        if (!is.null(dots$order)) {
+            order <- dots$order
+        }
+        .self$zelig.call$order <- order
     }
     .self$model.call <- .self$zelig.call
 
@@ -98,11 +104,25 @@ ztimeseries$methods(
 
 ztimeseries$methods(
   simx = function() {
+    base_vals <- .self$set() # generate mm of all averages
+
     d <- zelig_mutate(.self$zelig.out, simparam = .self$simparam$simparam)
-    d <- zelig_mutate(d, mm = .self$setx.out$x$mm)
+    d <- zelig_mutate(d, mm = base_vals$mm)
+    d <- zelig_mutate(d, mm1 = .self$setx.out$x$mm)
+
+
     .self$sim.out$x <-  d %>%
-      do(qi = .self$qi(.$simparam, .$mm)) %>%
-      do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv)
+        do(qi = .self$qi(.$simparam, .$mm, .$mm1)) %>%
+        do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv, ev.shortrun = .$qi$ev.shortrun,
+           pv.shortrun = .$qi$pv.shortrun, ev.longrun = .$qi$ev.longrun,
+           pv.longrun = .$qi$pv.longrun, pvseries.shock = .$qi$pvseries.shock,
+           evseries.shock = .$qi$evseries.shock, pvseries.innovation = .$qi$pvseries.innovation,
+           evseries.innovation = .$qi$evseries.innovation)
+
+    d <- zelig_mutate(.self$sim.out$x, ev0 = .self$sim.out$x$ev)    # Eventually, when ev moves, then this path for ev0 changes.  (Or make movement happen after fd calculation.)
+    d <- d %>%
+        do(fd = .$ev.longrun - .$ev0)
+    .self$sim.out$x <- zelig_mutate(.self$sim.out$x, fd = d$fd) #JH
   }
 )
 
@@ -118,7 +138,11 @@ ztimeseries$methods(
 
     .self$sim.out$x1 <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm, .$mm1)) %>%
-      do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv, ev.shortrun = .$qi$ev.shortrun, pv.shortrun = .$qi$pv.shortrun, ev.longrun = .$qi$ev.longrun, pv.longrun = .$qi$pv.longrun, pvseries.shock = .$qi$pvseries.shock, evseries.shock = .$qi$evseries.shock, pvseries.innovation = .$qi$pvseries.innovation,  evseries.innovation = .$qi$evseries.innovation)
+      do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv, ev.shortrun = .$qi$ev.shortrun,
+         pv.shortrun = .$qi$pv.shortrun, ev.longrun = .$qi$ev.longrun,
+         pv.longrun = .$qi$pv.longrun, pvseries.shock = .$qi$pvseries.shock,
+         evseries.shock = .$qi$evseries.shock, pvseries.innovation = .$qi$pvseries.innovation,
+         evseries.innovation = .$qi$evseries.innovation)
       # Will eventually have to then move acf, ev, and pv from .self$setx.out$x1 to .self$setx.out$x
       # This will also effect next line:
 
