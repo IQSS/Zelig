@@ -353,7 +353,8 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
     }
 
     if(is.null(y.init)){
-        betabar <- t(apply(beta,2, mean))
+        if (!is.matrix(beta)) beta <- matrix(beta, ncol = 1)
+        betabar <- t(apply(beta, 2, mean))
         y.init <- x %*% t(beta)
     }
 
@@ -364,14 +365,16 @@ zeligARMAlongrun <- function(y.init=NULL, x, simparam, order, sd, tol=NULL, burn
     finished <- FALSE
     count <- 0
     while(!finished){
-        y <- zeligARMAnextstep(yseries=yseries[1:timepast, ], xseries=x, wseries=wseries[1:timepast, ], beta=beta, ar=ar, i=i, ma=ma, sd=sd)
+        y <- zeligARMAnextstep(yseries=yseries[1:timepast, ], xseries=x,
+                               wseries=wseries[1:timepast, ], beta = beta,
+                               ar = ar, i = i, ma = ma, sd = sd)
         yseries <- rbind(y$y, yseries)
         wseries <- rbind(y$w, wseries)
         evseries<- rbind(y$exp.y, evseries)
 
         #diff <- mean(abs(y.1 - y.0))  # Eventually need to determine some automated stopping rule
         count <- count+1
-        finished <- count>burnin #| (diff < tol)
+        finished <- count > burnin #| (diff < tol)
     }
 
     return(list(y.longrun=yseries, w.longrun=wseries, ev.longrun=evseries))

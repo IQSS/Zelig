@@ -143,3 +143,14 @@ test_that("FAILURE TEST cs ts by with timeseries", {
         "ts must be specified if cs is specified."
     )
 })
+
+# REQUIRE TEST arima with differenced first-order autoregressive ---------------
+test_that("REQUIRE TEST arima with differenced first-order autoregressive", {
+data(seatshare)
+subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
+
+s.out <- zelig(unemp ~ leftseat, data = subset, model = "arima",
+               order = c(1,1,0)) %>%
+    setx(leftseat = 0.25)
+    expect_error(sim(s.out), NA)
+})

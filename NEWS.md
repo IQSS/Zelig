@@ -16,11 +16,14 @@ with `order = c(1, 0, 0)` or `order = c(0, 0, 1)`, respectively. #287
 -   Zelig 4 compatability wrappers now work for `arima` models. Thanks to 
 @mbsabath. #280
 
--  Resolved an error when only `setx` was called with `arima` models Thanks to 
+-   Resolved an error when only `setx` was called with `arima` models Thanks to 
 @mbsabath. #299
 
 -   Resolved an error when `summary` was called after `sim` for `arima` models.
 #305
+
+-   Resolved an error when `sim` is used with differenced first-order 
+autoregressive models. #307
 
 Zelig version 5.1-4
 ==============================
