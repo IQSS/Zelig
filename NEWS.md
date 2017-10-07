@@ -6,12 +6,7 @@ applicable.
 Zelig version 5.1.5
 ==============================
 
-## Major changes
-
-- `ar` and `ma` are no longer supported model types. Please use `arima` 
-with `order = c(1, 0, 0)` or `order = c(0, 0, 1)`, respectively. #287
-
-## Bug fixes
+## Bug fixes and minor
 
 -   Zelig 4 compatability wrappers now work for `arima` models. Thanks to 
 @mbsabath. #280
@@ -24,6 +19,8 @@ with `order = c(1, 0, 0)` or `order = c(0, 0, 1)`, respectively. #287
 
 -   Resolved an error when `sim` is used with differenced first-order 
 autoregressive models. #307
+
+-   `arima` models return informative error when `data` is not found. #308
 
 Zelig version 5.1-4
 ==============================
