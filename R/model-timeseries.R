@@ -40,9 +40,15 @@ ztimeseries$methods(
                    weights = NULL, by = NULL, bootstrap = FALSE){
 
     localBy <- by     # avoids CRAN warning about deep assignment from by existing separately as argument and field
-    localData <- data # avoids CRAN warning about deep assignment from data existing separately as argument and field
-    if(!identical(bootstrap,FALSE)){
-      stop("Error: The bootstrap is not implemented for time-series models")
+
+    if (identical(class(data), "function"))
+        stop("data not found.", call. = FALSE)
+    else
+        localData <- data # avoids CRAN warning about deep assignment from data existing separately as argument and field
+
+    if(!identical(bootstrap, FALSE)){
+         stop("Error: The bootstrap is not implemented for time-series models",
+              call. = FALSE)
     }
     if (!is.null(cs) && is.null(ts))
         stop("ts must be specified if cs is specified.", call. = FALSE)

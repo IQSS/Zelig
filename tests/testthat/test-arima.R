@@ -150,7 +150,14 @@ data(seatshare)
 subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
 
 s.out <- zelig(unemp ~ leftseat, data = subset, model = "arima",
-               order = c(1,1,0)) %>%
+               order = c(1, 1, 0)) %>%
     setx(leftseat = 0.25)
     expect_error(sim(s.out), NA)
+})
+
+# FAIL TEST when data is not found (not exclusive to arima) --------------------
+test_that("FAIL TEST when data is not found (not exclusive to arima)", {
+    expect_error(zelig(formula = unemp ~ leftseat, model = "ma", ts = "year",
+                       data = subset),
+                 "data not found")
 })
