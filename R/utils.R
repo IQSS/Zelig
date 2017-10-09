@@ -691,8 +691,13 @@ or_summary <- function(obj, label_mod_coef = "(OR)",
         stop("obj must be of summary.glm class.",
              call. = FALSE)
 
-        obj$coefficients[, c(1, 2)] <- exp(obj$coefficients[, c(1, 2)])
+        obj$coefficients[, 1] <- exp(obj$coefficients[, 1])
+
+        var_diag = diag(vcov(obj))
+        obj$coefficients[, 2] <- sqrt(obj$coefficients[, 1] ^ 2 * var_diag)
+
         colnames(obj$coefficients)[c(1, 2)] <- paste(
-                                colnames(obj$coefficients)[c(1, 2)], c(label_mod_coef, label_mod_se))
+                                colnames(obj$coefficients)[c(1, 2)],
+                                c(label_mod_coef, label_mod_se))
         return(obj)
 }

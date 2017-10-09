@@ -22,6 +22,9 @@ autoregressive models. #307
 
 -   `arima` models return informative error when `data` is not found. #308
 
+-   Resolved an issue where `odds_ratios` standard errors were not correctly 
+returned for `logit` and `relogit` models. Thanks to @retrography. #302
+
 Zelig version 5.1-4
 ==============================
 
