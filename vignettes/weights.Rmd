@@ -96,4 +96,4 @@ z6.out <- zelig(z ~ x, model = "logit", weights = integer.weights,
 Using Matching Weights from MatchIt
 -----------------------------------
 
-Weights that are creating using the matching mechanisms in the [MatchIt](http://gking.harvard.edu/matchit) package will be automatically employed in Zelig analyses if the output object from MatchIt is passed to Zelig as the data argument.  For more detail, see [Using Zelig with MatchIt](using_Zelig_with_Amelia.html).
+Weights that are creating using the matching mechanisms in the [MatchIt](http://gking.harvard.edu/matchit) package will be automatically employed in Zelig analyses if the output object from MatchIt is passed to Zelig as the data argument.  For more detail, see [Using Zelig with MatchIt](using_Zelig_with_MatchIt.html).
