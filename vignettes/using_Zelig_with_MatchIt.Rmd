@@ -24,7 +24,7 @@ options(cite = FALSE)
 ```
 ---
 
-`zelig()` accept matched datasets from the [MatchIt](http://gking.harvard.edu/matchit) package as the `data` argument.
+`zelig()` accepts matched datasets from the [MatchIt](http://gking.harvard.edu/matchit) package as the `data` argument.
 
 ```{r, echo = FALSE}
 suppressWarnings(suppressMessages(library(Zelig)))
