@@ -6,7 +6,7 @@ applicable.
 Zelig version 5.1.5
 ==============================
 
-## Bug fixes and minor
+## Bug fixes
 
 -   Zelig 4 compatability wrappers now work for `arima` models. Thanks to 
 @mbsabath. #280
@@ -24,6 +24,10 @@ autoregressive models. #307
 
 -   Resolved an issue where `odds_ratios` standard errors were not correctly 
 returned for `logit` and `relogit` models. Thanks to @retrography. #302
+
+## Minor
+
+-   Compatibility with testthat 2.0.0
 
 Zelig version 5.1-4
 ==============================

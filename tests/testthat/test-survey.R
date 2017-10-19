@@ -19,7 +19,9 @@ test_that('REQUIRE TEST survey weights correctly passed', {
     model_glm <- svyglm(api00 ~ meals + yr.rnd, api_design,
                         family = gaussian("identity"))
 
-    expect_equal(coef(z.out1), coef(z.out2), coef(z.out3), coef(model_glm))
+    expect_equal(coef(z.out1), coef(z.out2))
+    expect_equal(coef(z.out1), coef(z.out3))
+    expect_equal(coef(z.out1), coef(model_glm))
 })
 
 # REQUIRE TEST survey weights correctly passed  --------------------------------
