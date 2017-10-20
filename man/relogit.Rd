@@ -10,4 +10,8 @@ relogit(formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,
 \description{
 Estimation function for rare events logit models
 }
+\details{
+This is intended as an internal function. Regular users should
+use \code{zelig} with \code{model = "relogit"}.
+}
 \keyword{internal}

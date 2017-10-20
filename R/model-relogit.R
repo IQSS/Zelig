@@ -224,7 +224,12 @@ zrelogit$methods(
 
 
 #' Estimation function for rare events logit models
+#'
+#' @details This is intended as an internal function. Regular users should
+#' use \code{zelig} with \code{model = "relogit"}.
+#'
 #' @keywords internal
+
 relogit <- function(formula,
                     data = sys.parent(),
                     tau = NULL,
