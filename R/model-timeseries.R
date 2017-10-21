@@ -119,10 +119,16 @@ ztimeseries$methods(
 
     .self$sim.out$x <-  d %>%
         do(qi = .self$qi(.$simparam, .$mm, .$mm1)) %>%
-        do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv, ev.shortrun = .$qi$ev.shortrun,
-           pv.shortrun = .$qi$pv.shortrun, ev.longrun = .$qi$ev.longrun,
-           pv.longrun = .$qi$pv.longrun, pvseries.shock = .$qi$pvseries.shock,
-           evseries.shock = .$qi$evseries.shock, pvseries.innovation = .$qi$pvseries.innovation,
+        do(acf = .$qi$acf,
+           ev = .$qi$ev,
+           pv = .$qi$pv,
+           ev.shortrun = .$qi$ev.shortrun,
+           pv.shortrun = .$qi$pv.shortrun,
+           ev.longrun = .$qi$ev.longrun,
+           pv.longrun = .$qi$pv.longrun,
+           pvseries.shock = .$qi$pvseries.shock,
+           evseries.shock = .$qi$evseries.shock,
+           pvseries.innovation = .$qi$pvseries.innovation,
            evseries.innovation = .$qi$evseries.innovation)
 
     d <- zelig_mutate(.self$sim.out$x, ev0 = .self$sim.out$x$ev)    # Eventually, when ev moves, then this path for ev0 changes.  (Or make movement happen after fd calculation.)
@@ -144,10 +150,16 @@ ztimeseries$methods(
 
     .self$sim.out$x1 <-  d %>%
       do(qi = .self$qi(.$simparam, .$mm, .$mm1)) %>%
-      do(acf = .$qi$acf, ev = .$qi$ev, pv = .$qi$pv, ev.shortrun = .$qi$ev.shortrun,
-         pv.shortrun = .$qi$pv.shortrun, ev.longrun = .$qi$ev.longrun,
-         pv.longrun = .$qi$pv.longrun, pvseries.shock = .$qi$pvseries.shock,
-         evseries.shock = .$qi$evseries.shock, pvseries.innovation = .$qi$pvseries.innovation,
+      do(acf = .$qi$acf,
+         ev = .$qi$ev,
+         pv = .$qi$pv,
+         ev.shortrun = .$qi$ev.shortrun,
+         pv.shortrun = .$qi$pv.shortrun,
+         ev.longrun = .$qi$ev.longrun,
+         pv.longrun = .$qi$pv.longrun,
+         pvseries.shock = .$qi$pvseries.shock,
+         evseries.shock = .$qi$evseries.shock,
+         pvseries.innovation = .$qi$pvseries.innovation,
          evseries.innovation = .$qi$evseries.innovation)
       # Will eventually have to then move acf, ev, and pv from .self$setx.out$x1 to .self$setx.out$x
       # This will also effect next line:
@@ -172,9 +184,9 @@ ztimeseries$methods(
 
     # NOTE difference here from standard Zelig approach.
     # Normally these are done in sequence, but now we do one or the other.
-    if (.self$bsetx1){
+    if (.self$bsetx1) {
       .self$simx1()
-    }else{
+    } else {
       .self$simx()
     }
   }
