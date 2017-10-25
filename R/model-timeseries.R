@@ -25,13 +25,13 @@ ztimeseries$methods(
                               fd  = "First Differences: E(Y|X1) - E(Y|X)",
                               acf = "Autocorrelation Function",
                               ev.shortrun = "Expected Values Immediately Resulting from Shock",
-                              ev.longrun = "Long Run Expected Values after Innovation",
+                              ev.longrun = "Long Run Expected Values after Persistant Shift",
                               pv.shortrun = "Predicted Values Immediately Resulting from Shock",
                               pv.longrun = "Long Run Predicted Values after Innovation",
                               evseries.shock = "Expected Values Over Time from Shock",
-                              evseries.innovation ="Expected Values Over Time from Innovation",
+                              evseries.innovation ="Expected Values Over Time from Persistant Shift",
                               pvseries.shock = "Predicted Values Over Time from Shock",
-                              pvseries.innovation ="Predicted Values Over Time from Innovation")
+                              pvseries.innovation ="Predicted Values Over Time from Persistant Shift")
   }
 )
 
