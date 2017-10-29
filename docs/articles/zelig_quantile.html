@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Quantile Regression</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Quantile Regression for Continuous Dependent Variables with <code>rq</code>.</p>
 <p>Use a linear programming implementation of quantile regression to estimate a linear predictor of the <span class="math inline">\(\tau\)</span> th conditional quantile of the population.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"rq"</span>, <span class="dt">weights =</span> w,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"rq"</span>, <span class="dt">weights =</span> w,
                <span class="dt">data =</span> mydata, <span class="dt">tau =</span> <span class="fl">0.5</span>)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -163,7 +163,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Attach sample data, in this case a dataset pertaining to the efficiency of plants that convert ammonia to nitric acid. The dependent variable, stack.loss, is 10 times the percentage of ammonia that escaped unconverted:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(stackloss)</code></pre></div>
 <p>Estimate model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(stack.loss ~<span class="st"> </span>Air.Flow +<span class="st"> </span>Water.Temp +<span class="st"> </span>Acid.Conc.,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(stack.loss <span class="op">~</span><span class="st"> </span>Air.Flow <span class="op">+</span><span class="st"> </span>Water.Temp <span class="op">+</span><span class="st"> </span>Acid.Conc.,
                 <span class="dt">model =</span> <span class="st">"rq"</span>, <span class="dt">data =</span> stackloss,
                 <span class="dt">tau =</span> <span class="fl">0.5</span>)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
@@ -188,8 +188,8 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ## Acid.Conc.   -0.06087     -0.21348  -0.02891
 ## Next step: Use 'setx' method</code></pre>
 <p>Set explanatory variables to their default (mean/mode) values, with high (80th percentile) and low (20th percentile) values for the water temperature variable (the variable that indiates the temperature of water in the plant’s cooling coils):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">Water.Temp =</span> <span class="kw">quantile</span>(stackloss$Water.Temp, <span class="fl">0.8</span>))
-x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">Water.Temp =</span> <span class="kw">quantile</span>(stackloss$Water.Temp, <span class="fl">0.2</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">Water.Temp =</span> <span class="kw">quantile</span>(stackloss<span class="op">$</span>Water.Temp, <span class="fl">0.8</span>))
+x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">Water.Temp =</span> <span class="kw">quantile</span>(stackloss<span class="op">$</span>Water.Temp, <span class="fl">0.2</span>))</code></pre></div>
 <p>Generate first differences for the effect of high versus low water temperature on stack loss:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out1, <span class="dt">x =</span> x.high, <span class="dt">x1 =</span> x.low)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s.out1)</code></pre></div>
@@ -197,23 +197,23 @@ x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 ##  sim x :
 ##  -----
 ## ev
-##       mean       sd      50%     2.5%    97.5%
-## 1 19.12299 1.574098 19.15791 15.92044 22.05017
+##       mean       sd      50%    2.5%    97.5%
+## 1 19.14363 1.570405 19.17741 15.9367 22.12099
 ## pv
 ##       mean       sd      50%     2.5%    97.5%
-## 1 19.08802 1.810319 19.16561 15.62636 22.65706
+## 1 19.10866 1.825049 19.14511 15.43394 22.74148
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##       mean      sd      50%     2.5%    97.5%
-## 1 15.66895 1.16528 15.68933 13.35917 17.88265
+##      mean       sd      50%     2.5%   97.5%
+## 1 15.6785 1.147777 15.69558 13.40625 17.8889
 ## pv
-##      mean       sd      50%     2.5%    97.5%
-## 1 15.6968 1.306114 15.67227 13.17701 18.23326
+##       mean       sd      50%     2.5%   97.5%
+## 1 15.70636 1.296457 15.73216 13.23153 18.2829
 ## fd
 ##        mean       sd       50%      2.5%     97.5%
-## 1 -3.454045 2.081906 -3.431186 -7.518746 0.6191666</code></pre>
+## 1 -3.465124 2.087278 -3.489512 -7.570721 0.7230336</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <div class="figure">
 <img src="zelig_quantile_files/figure-html/Zelig-quantile1-1.png" alt="Graphs of Quantities of Interest for Quantile Regression" width="672"><p class="caption">
@@ -226,7 +226,7 @@ Graphs of Quantities of Interest for Quantile Regression
 <a href="#using-dummy-variables" class="anchor"></a>Using Dummy Variables</h3>
 <p>We can estimate a model of unemployment as a function of macroeconomic indicators and fixed effects for each country (see for help with dummy variables). Note that you do not need to create dummy variables, as the program will automatically parse the unique values in the selected variable into discrete levels.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(macro)
-z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem ~<span class="st"> </span>gdp +<span class="st"> </span>trade +<span class="st"> </span>capmob +<span class="st"> </span><span class="kw">as.factor</span>(country),
+z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem <span class="op">~</span><span class="st"> </span>gdp <span class="op">+</span><span class="st"> </span>trade <span class="op">+</span><span class="st"> </span>capmob <span class="op">+</span><span class="st"> </span><span class="kw">as.factor</span>(country),
                 <span class="dt">model =</span> <span class="st">"rq"</span>, <span class="dt">tau =</span> <span class="fl">0.5</span>,
                 <span class="dt">data =</span> macro)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
@@ -273,14 +273,14 @@ Graphs of Quantities of Interest for Quantile Regression
 <a href="#estimating-multiple-quantiles" class="anchor"></a>Estimating Multiple Quantiles</h3>
 <p>Using the Engel dataset (from the <code>quantreg</code> package) on food expenditure as a function of income, we can use the “quantile” model to estimate multiple conditional quantiles:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(engel, <span class="dt">package=</span><span class="st">"quantreg"</span>)
-z.out3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(foodexp ~<span class="st"> </span>income, <span class="dt">model =</span> <span class="st">"rq"</span>,
+z.out3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(foodexp <span class="op">~</span><span class="st"> </span>income, <span class="dt">model =</span> <span class="st">"rq"</span>,
                 <span class="dt">tau =</span> <span class="kw">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="dt">by =</span> <span class="fl">0.1</span>), <span class="dt">data =</span> engel)</code></pre></div>
 <p>We can summarize the coefficient fits, or plot them to compare them to the least squares conditional mean estimator.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out3)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">summary</span>(z.out3))</code></pre></div>
 <p>Set the value of income to the top quartile and the bottom quartile of the income distribution for each fit:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.bottom &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out3, <span class="dt">income =</span> <span class="kw">quantile</span>(engel$income, <span class="fl">0.25</span>))
-x.top &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out3, <span class="dt">income =</span> <span class="kw">quantile</span>(engel$income, <span class="fl">0.75</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.bottom &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out3, <span class="dt">income =</span> <span class="kw">quantile</span>(engel<span class="op">$</span>income, <span class="fl">0.25</span>))
+x.top &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out3, <span class="dt">income =</span> <span class="kw">quantile</span>(engel<span class="op">$</span>income, <span class="fl">0.75</span>))</code></pre></div>
 <p>Simulate quantities of interest for each fit simultaneously:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out3, <span class="dt">x =</span> x.bottom, <span class="dt">x1 =</span> x.top)</code></pre></div>
 <p>Summary</p>
@@ -370,7 +370,8 @@ x.top &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#additional-inputs">Additional Inputs</a></li>

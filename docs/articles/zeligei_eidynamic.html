@@ -123,31 +123,31 @@
     <div class="page-header toc-ignore">
       <h1>Quinn’s Dynamic Ecological Inference</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Quinn’s Dynamic Ecological Inference Model with <code>eidynamic</code> in ZeligEI.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>The EI models accept several different formula syntaxes. If <span class="math inline">\(C1\)</span> and <span class="math inline">\(C2\)</span> are the column totals, and <span class="math inline">\(R1\)</span> and <span class="math inline">\(R2\)</span> are the row totals, and <span class="math inline">\(N=R1_i + R2_i = C1_i + C2_i\)</span> is the total in unit <span class="math inline">\(i\)</span>, then the formula can be expressed with just one row and one column, with the totals provided separately as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 ~<span class="st"> </span>R1, <span class="dt">N =</span> N, <span class="dt">data =</span> data)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 <span class="op">~</span><span class="st"> </span>R1, <span class="dt">N =</span> N, <span class="dt">data =</span> data)</code></pre></div>
 <p>The argument <code>N</code> can be either a numeric vector of the total in each <em>i</em>-th unit, or the character name of a variable in the dataset that contains these values.</p>
 <p>Or with both rows and columns coupled together, and omitting the totals:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>( <span class="kw">cbind</span>(C1,C2) ~<span class="st"> </span><span class="kw">cbind</span>(R1,R2), <span class="dt">data =</span> data)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>( <span class="kw">cbind</span>(C1,C2) <span class="op">~</span><span class="st"> </span><span class="kw">cbind</span>(R1,R2), <span class="dt">data =</span> data)</code></pre></div>
 <p>Additionally, if <code>C1</code>, <code>C2</code>, <code>R1</code>, <code>R2</code> are percentages rather than counts, then either formula method above is acceptable, however, <code>N</code> must always be provided.</p>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
 <p>Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zeidynamic$<span class="kw">new</span>()
-z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 ~<span class="st"> </span>R1, <span class="dt">N =</span> myN, <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zeidynamic<span class="op">$</span><span class="kw">new</span>()
+z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 <span class="op">~</span><span class="st"> </span>R1, <span class="dt">N =</span> myN, <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)</code></pre></div>
 <p>With the Zelig 4 compatibility wrappers this looks like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 ~<span class="st"> </span>R1, <span class="dt">N=</span>N, <span class="dt">model =</span> <span class="st">"eidynamic"</span>, <span class="dt">weights =</span> w,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 <span class="op">~</span><span class="st"> </span>R1, <span class="dt">N=</span>N, <span class="dt">model =</span> <span class="st">"eidynamic"</span>, <span class="dt">weights =</span> w,
                <span class="dt">data =</span> myData)</code></pre></div>
 <div id="additional-inputs" class="section level3">
 <h3 class="hasAnchor">
@@ -185,9 +185,9 @@ z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(C1 ~<span
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
 <p>You can check for convergence before summarizing the estimates with three diagnostic tests. See the section <a href="diagnostics.html">Diagnostics for Zelig Models</a> for examples of the output with interpretation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">geweke.diag</span>()
-z.out$<span class="kw">heidel.diag</span>()
-z.out$<span class="kw">raftery.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()
+z.out<span class="op">$</span><span class="kw">heidel.diag</span>()
+z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre></div>
 </div>
 <div id="see-also" class="section level2">
 <h2 class="hasAnchor">
@@ -201,7 +201,8 @@ z.out$<span class="kw">raftery.diag</span>()</code></pre></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#examples">Examples</a></li>

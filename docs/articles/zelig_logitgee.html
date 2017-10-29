@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Logit GEE</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Generalized Estimating Equation for Logit Regression with <code>logit.gee</code>.</p>
 <p>The GEE logit estimates the same model as the standard logit regression (appropriate when you have a dichotomous dependent variable and a set of explanatory variables). Unlike in logit regression, GEE logit allows for dependence within clusters, such as in longitudinal data, although its use is not limited to just panel data. The user must first specify a “working” correlation matrix for the clusters, which models the dependence of each observation with other observations in the same cluster. The “working” correlation matrix is a <span class="math inline">\(T \times T\)</span> matrix of correlations, where <span class="math inline">\(T\)</span> is the size of the largest cluster and the elements of the matrix are correlations between within-cluster observations. The appeal of GEE models is that it gives consistent estimates of the parameters and consistent estimates of the standard errors can be obtained using a robust “sandwich” estimator even if the “working” correlation matrix is incorrectly specified. If the “working” correlation matrix is correctly specified, GEE models will give more efficient estimates of the parameters. GEE models measure population-averaged effects as opposed to cluster-specific effects.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"logit.gee"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"logit.gee"</span>,
                <span class="dt">id =</span> <span class="st">"X3"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -160,10 +160,10 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Attaching the sample turnout dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(turnout)</code></pre></div>
 <p>Variable identifying clusters</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turnout$cluster &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">200</span>), <span class="dv">10</span>)
-sorted.turnout &lt;-<span class="st"> </span>turnout[<span class="kw">order</span>(turnout$cluster),]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turnout<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">200</span>), <span class="dv">10</span>)
+sorted.turnout &lt;-<span class="st"> </span>turnout[<span class="kw">order</span>(turnout<span class="op">$</span>cluster),]</code></pre></div>
 <p>Estimating parameter values:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote ~<span class="st"> </span>race +<span class="st"> </span>educate, <span class="dt">model =</span> <span class="st">"logit.gee"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote <span class="op">~</span><span class="st"> </span>race <span class="op">+</span><span class="st"> </span>educate, <span class="dt">model =</span> <span class="st">"logit.gee"</span>,
                 <span class="dt">id =</span> <span class="st">"cluster"</span>, <span class="dt">data =</span> sorted.turnout)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Patrick Lam. 2011.
@@ -213,8 +213,8 @@ Graphs of Quantities of Interest for Zelig-logitgee1
 <h3 class="hasAnchor">
 <a href="#simulating-first-differences" class="anchor"></a>Simulating First Differences</h3>
 <p>Estimating the risk difference (and risk ratio) between low education (25th percentile) and high education (75th percentile) while all the other variables held at their default values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout$educate, <span class="dt">prob =</span> <span class="fl">0.75</span>))
-x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout$educate, <span class="dt">prob =</span> <span class="fl">0.25</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout<span class="op">$</span>educate, <span class="dt">prob =</span> <span class="fl">0.75</span>))
+x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout<span class="op">$</span>educate, <span class="dt">prob =</span> <span class="fl">0.25</span>))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out1, <span class="dt">x =</span> x.high, <span class="dt">x1 =</span> x.low)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s.out2)</code></pre></div>
 <pre><code>## 
@@ -253,10 +253,10 @@ Graphs of Quantities of Interest for Zelig-logitgee2
 
 corr.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">100</span>), <span class="dt">nrow =</span> <span class="dv">10</span>, <span class="dt">ncol =</span> <span class="dv">10</span>)
 <span class="kw">diag</span>(corr.mat) &lt;-<span class="st"> </span><span class="dv">1</span>
-corr.mat &lt;-<span class="st"> </span><span class="kw">fixed2Zcor</span>(corr.mat, <span class="dt">id =</span> sorted.turnout$cluster,
-                       <span class="dt">waves =</span> sorted.turnout$race)</code></pre></div>
+corr.mat &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/geepack/topics/fixed2Zcor">fixed2Zcor</a></span>(corr.mat, <span class="dt">id =</span> sorted.turnout<span class="op">$</span>cluster,
+                       <span class="dt">waves =</span> sorted.turnout<span class="op">$</span>race)</code></pre></div>
 <p>Generating empirical estimates:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote ~<span class="st"> </span>race +<span class="st"> </span>educate, <span class="dt">model =</span> <span class="st">"logit.gee"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote <span class="op">~</span><span class="st"> </span>race <span class="op">+</span><span class="st"> </span>educate, <span class="dt">model =</span> <span class="st">"logit.gee"</span>,
                 <span class="dt">id =</span> <span class="st">"cluster"</span>, <span class="dt">data =</span> sorted.turnout,
                 <span class="dt">corstr =</span> <span class="st">"fixed"</span>, <span class="dt">zcor =</span> corr.mat)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
@@ -396,7 +396,8 @@ corr.mat &lt;-<span class="st"> </span><span class="kw">fixed2Zcor</span>(corr.m
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#additional-inputs">Additional Inputs</a></li>

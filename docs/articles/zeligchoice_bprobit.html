@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Bivariate Probit</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Bivariate Probit Regression for Two Dichotomous Dependent Variables with <code>bprobit</code> from ZeligChoice.</p>
 <p>Use the bivariate probit regression model if you have two binary dependent variables <span class="math inline">\((Y_1, Y_2)\)</span>, and wish to model them jointly as a function of some explanatory variables. Each pair of dependent variables <span class="math inline">\((Y_{i1}, Y_{i2})\)</span> has four potential outcomes, <span class="math inline">\((Y_{i1}=1, Y_{i2}=1)\)</span>, <span class="math inline">\((Y_{i1}=1, Y_{i2}=0)\)</span>, <span class="math inline">\((Y_{i1}=0, Y_{i2}=1)\)</span>, and <span class="math inline">\((Y_{i1}=0, Y_{i2}=0)\)</span>. The joint probability for each of these four outcomes is modeled with three systematic components: the marginal Pr <span class="math inline">\((Y_{i1} = 1)\)</span> and Pr <span class="math inline">\((Y_{i2} = 1)\)</span>, and the correlation parameter <span class="math inline">\(\rho\)</span> for the two marginal distributions. Each of these systematic components may be modeled as functions of (possibly different) sets of explanatory variables.</p>
@@ -138,7 +138,7 @@
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1, Y2) ~<span class="st"> </span>X1 +<span class="st"> </span>X2 +<span class="st"> </span>X3,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1, Y2) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span>X3,
                <span class="dt">model =</span> <span class="st">"bprobit"</span>, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out, <span class="dt">x1 =</span> <span class="ot">NULL</span>)</code></pre></div>
@@ -147,12 +147,12 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <h2 class="hasAnchor">
 <a href="#input-values" class="anchor"></a>Input Values</h2>
 <p>In every bivariate probit specification, there are three equations which correspond to each dependent variable (<span class="math inline">\(Y_1\)</span>, <span class="math inline">\(Y_2\)</span>), and the correlation parameter <span class="math inline">\(\rho\)</span>. Since the correlation parameter does not correspond to one of the dependent variables, the model estimates <span class="math inline">\(\rho\)</span> as a constant by default. Hence, only two formulas (for <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span>) are required. If the explanatory variables for <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span> are the same and effects are estimated separately for each parameter, you may use the following short hand:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fml &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">cbind</span>(Y1,Y2) ~<span class="st"> </span>X1 +<span class="st"> </span>X2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fml &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">cbind</span>(Y1,Y2) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2)</code></pre></div>
 <p>which has the same meaning as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fml &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mu1 =</span> Y1 ~<span class="st"> </span>X1 +<span class="st"> </span>X2, +<span class="st"> </span><span class="dt">mu2 =</span> Y2 ~<span class="st"> </span>X1 +<span class="st"> </span>X2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fml &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mu1 =</span> Y1 <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="op">+</span><span class="st"> </span><span class="dt">mu2 =</span> Y2 <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2)</code></pre></div>
 <p><strong>Anticipated feature, not currently enabled:</strong></p>
 <p>You may use the function <code>tag()</code> to constrain variables across equations. The <code>tag()</code> function takes a variable and a label for the effect parameter. Below, the constrained effect of x3 in both equations is called the age parameter:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fml &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mu1 =</span> y1 ~<span class="st"> </span>x1 +<span class="st"> </span><span class="kw">tag</span>(x3, “age”), +<span class="st"> </span><span class="dt">mu2 =</span> y2 ~<span class="st"> </span>x2 +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fml &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mu1 =</span> y1 <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">tag</span>(x3, “age”), <span class="op">+</span><span class="st"> </span><span class="dt">mu2 =</span> y2 <span class="op">~</span><span class="st"> </span>x2 <span class="op">+</span>
 <span class="kw">tag</span>(x3, “age”))</code></pre></div>
 <p>You may also constrain different variables across different equations to have the same effect.</p>
 </div>
@@ -164,7 +164,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <a href="#basic-example-basic-bp" class="anchor"></a>Basic Example [basic.bp]</h3>
 <p>Load the data and estimate the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(sanction)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(import, export) ~<span class="st"> </span>coop +<span class="st"> </span>cost +<span class="st"> </span>target,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(import, export) <span class="op">~</span><span class="st"> </span>coop <span class="op">+</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>target,
                 <span class="dt">model =</span> <span class="st">"bprobit"</span>, <span class="dt">data =</span> sanction)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Thomas W. Yee. 2007.
@@ -383,7 +383,7 @@ Graphs of Quantities of Interest for Bivariate Probit
 <p>Yee TW and Wild CJ (1996). “Vector Generalized Additive Models.” <em>Journal of Royal Statistical Society, Series B</em>, <strong>58</strong> (3), pp. 481-493.</p>
 <p>Yee TW (2010). “The VGAM Package for Categorical Data Analysis.” <em>Journal of Statistical Software</em>, <strong>32</strong> (10), pp. 1-34. &lt;URL: <a href="http://www.jstatsoft.org/v32/i10/" class="uri">http://www.jstatsoft.org/v32/i10/</a>&gt;.</p>
 <p>Yee TW and Hadi AF (2014). “Row-column interaction models, with an R implementation.” <em>Computational Statistics</em>, <strong>29</strong> (6), pp. 1427-1445.</p>
-<p>Yee TW (2017). <em>VGAM: Vector Generalized Linear and Additive Models</em>. R package version 1.0-3, &lt;URL: <a href="https://CRAN.R-project.org/package=VGAM" class="uri">https://CRAN.R-project.org/package=VGAM</a>&gt;.</p>
+<p>Yee TW (2017). <em>VGAM: Vector Generalized Linear and Additive Models</em>. R package version 1.0-4, &lt;URL: <a href="https://CRAN.R-project.org/package=VGAM" class="uri">https://CRAN.R-project.org/package=VGAM</a>&gt;.</p>
 <p>Yee TW (2013). “Two-parameter reduced-rank vector generalized linear models.” <em>Computational Statistics and Data Analysis</em>. &lt;URL: <a href="http://ees.elsevier.com/csda" class="uri">http://ees.elsevier.com/csda</a>&gt;.</p>
 <p>Yee TW, Stoklosa J and Huggins RM (2015). “The VGAM Package for Capture-Recapture Data Using the Conditional Likelihood.” <em>Journal of Statistical Software</em>, <strong>65</strong> (5), pp. 1-33. &lt;URL: <a href="http://www.jstatsoft.org/v65/i05/" class="uri">http://www.jstatsoft.org/v65/i05/</a>&gt;.</p>
 </div>
@@ -392,7 +392,8 @@ Graphs of Quantities of Interest for Bivariate Probit
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#input-values">Input Values</a></li>

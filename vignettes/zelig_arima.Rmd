@@ -23,13 +23,12 @@ options(cite = FALSE)
 ```
 ---
 
+> ++++ All Zelig time series models will be deprecated on 1 February 2018 ++++
+
 Autoregressive and Moving-Average Models with Integration for Time-Series Data
 
 Syntax
 ------
-
-Currently, **only the Zelig 5 reference class syntax is available for `arima`
-models**, e.g.:
 
 ```{r, eval = FALSE}
 z.out <- zarima$new()

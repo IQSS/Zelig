@@ -252,23 +252,12 @@ Bootstraps or weights.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>seatshare</span>)
 <span class='no'>subset</span> <span class='kw'>&lt;-</span> <span class='no'>seatshare</span>[<span class='no'>seatshare</span>$<span class='no'>country</span> <span class='kw'>==</span> <span class='st'>"UNITED KINGDOM"</span>,]
-<span class='no'>ts.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>unemp</span> ~ <span class='no'>leftseat</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"arima"</span>, <span class='kw'>ts</span> <span class='kw'>=</span> <span class='st'>"year"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>subset</span>)</div><div class='output co'>#&gt; How to cite this model in Zelig:
-#&gt;   James Honaker. 2017.
-#&gt;   arima: Autoregressive Moving-Average Models for Time-Series Data
-#&gt;   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
-#&gt;   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</div><div class='input'><span class='fu'>summary</span>(<span class='no'>ts.out</span>)</div><div class='output co'>#&gt; Model: 
-#&gt; 
-#&gt; Call:
-#&gt; z5$zelig(formula = formula, data = data, ts = "year", by = by)
-#&gt; 
-#&gt; Coefficients:
-#&gt;         ar1  intercept  leftseat
-#&gt;       0.941       5.95     -3.25
-#&gt; s.e.  0.044       2.65      3.29
-#&gt; 
-#&gt; sigma^2 estimated as 1.05:  log likelihood = -57.3,  aic = 123
-#&gt; Next step: Use 'setx' method</div><div class='input'>
-</div></pre>
+<span class='no'>ts.out</span> <span class='kw'>&lt;-</span> <span class='no'>zarima</span>$<span class='fu'>new</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: ++++ All Zelig time series models will be deprecated on 1 February 2018 ++++</span></div><div class='input'><span class='no'>ts.out</span>$<span class='fu'><a href='zelig.html'>zelig</a></span>(<span class='no'>unemp</span> ~ <span class='no'>leftseat</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>subset</span>)
+
+<span class='co'># Set fitted values and simulate quantities of interest</span>
+<span class='no'>ts.out</span>$<span class='fu'><a href='setx.html'>setx</a></span>(<span class='kw'>leftseat</span> <span class='kw'>=</span> <span class='fl'>0.75</span>)
+<span class='no'>ts.out</span>$<span class='fu'><a href='setx1.html'>setx1</a></span>(<span class='kw'>leftseat</span> <span class='kw'>=</span> <span class='fl'>0.25</span>)
+<span class='no'>ts.out</span>$<span class='fu'><a href='sim.html'>sim</a></span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

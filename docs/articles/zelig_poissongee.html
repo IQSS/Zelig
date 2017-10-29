@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Poisson GEE</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Generalized Estimating Equation for Poisson Regression with <code>poisson.gee</code>.</p>
 <p>The GEE poisson estimates the same model as the standard poisson regression (appropriate when your dependent variable represents the number of independent events that occur during a fixed period of time). Unlike in poisson regression, GEE poisson allows for dependence within clusters, such as in longitudinal data, although its use is not limited to just panel data. The user must first specify a “working” correlation matrix for the clusters, which models the dependence of each observation with other observations in the same cluster. The “working” correlation matrix is a <span class="math inline">\(T \times T\)</span> matrix of correlations, where <span class="math inline">\(T\)</span> is the size of the largest cluster and the elements of the matrix are correlations between within-cluster observations. The appeal of GEE models is that it gives consistent estimates of the parameters and consistent estimates of the standard errors can be obtained using a robust “sandwich” estimator even if the “working” correlation matrix is incorrectly specified. If the “working” correlation matrix is correctly specified, GEE models will give more efficient estimates of the parameters. GEE models measure population-averaged effects as opposed to cluster-specific effects.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"poisson.gee"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"poisson.gee"</span>,
                <span class="dt">id =</span> <span class="st">"X3"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -160,11 +160,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Attaching the sample turnout dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(sanction)</code></pre></div>
 <p>Variable identifying clusters</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sanction$cluster &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">15</span>), <span class="dv">5</span>), <span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">16</span>), <span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sanction<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="dv">5</span>), <span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">16</span>), <span class="dv">3</span>))</code></pre></div>
 <p>Sorting by cluster</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sorted.sanction &lt;-<span class="st"> </span>sanction[<span class="kw">order</span>(sanction$cluster),]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sorted.sanction &lt;-<span class="st"> </span>sanction[<span class="kw">order</span>(sanction<span class="op">$</span>cluster),]</code></pre></div>
 <p>Estimating model and presenting summary:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num ~<span class="st"> </span>target +<span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"poisson.gee"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(num <span class="op">~</span><span class="st"> </span>target <span class="op">+</span><span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"poisson.gee"</span>,
                <span class="dt">id =</span> <span class="st">"cluster"</span>, <span class="dt">data =</span> sorted.sanction)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Patrick Lam. 2011.
@@ -319,7 +319,8 @@ Graphs of Quantities of Interest for Zelig-poissongee
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#additional-inputs">Additional Inputs</a></li>

@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Factor Bayes</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Bayesian Factor Analysis with <code>factor.bayes</code>.</p>
 <p>Given some unobserved explanatory variables and observed dependent variables, the Normal theory factor analysis model estimates the latent factors. The model is implemented using a Markov Chain Monte Carlo algorithm (Gibbs sampling with data augmentation). <!--For factor analysis
@@ -139,7 +139,7 @@ model ().--></p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1 ,Y2, Y3) ~<span class="st"> </span><span class="ot">NULL</span>, <span class="dt">factors =</span> <span class="dv">2</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1 ,Y2, Y3) <span class="op">~</span><span class="st"> </span><span class="ot">NULL</span>, <span class="dt">factors =</span> <span class="dv">2</span>,
                <span class="dt">model =</span> <span class="st">"factor.bayes"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)</code></pre></div>
 </div>
 <div id="inputs" class="section level2">
@@ -191,7 +191,7 @@ model ().--></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(swiss)
 <span class="kw">names</span>(swiss) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"Fert"</span>, <span class="st">"Agr"</span>, <span class="st">"Exam"</span>, <span class="st">"Educ"</span>, <span class="st">"Cath"</span>, <span class="st">"InfMort"</span>)</code></pre></div>
 <p>Factor analysis:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(~<span class="st"> </span>Agr +<span class="st"> </span>Exam +<span class="st"> </span>Educ +<span class="st"> </span>Cath +<span class="st"> </span>InfMort,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="op">~</span><span class="st"> </span>Agr <span class="op">+</span><span class="st"> </span>Exam <span class="op">+</span><span class="st"> </span>Educ <span class="op">+</span><span class="st"> </span>Cath <span class="op">+</span><span class="st"> </span>InfMort,
                <span class="dt">model =</span> <span class="st">"factor.bayes"</span>, <span class="dt">data =</span> swiss,
                <span class="dt">factors =</span> <span class="dv">2</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
                <span class="dt">a0 =</span> <span class="dv">1</span>, <span class="dt">b0 =</span> <span class="fl">0.15</span>, <span class="dt">burnin =</span> <span class="dv">500</span>, <span class="dt">mcmc =</span> <span class="dv">5000</span>)</code></pre></div>
@@ -201,7 +201,7 @@ model ().--></p>
 ##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
 ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
 <p>Checking for convergence before summarizing the estimates. See the section <a href="diagnostics.html">Diagnostics for Zelig Models</a> for examples of the output with interpretation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">geweke.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()</code></pre></div>
 <pre><code>## 
 ## Fraction in 1st window = 0.1
 ## Fraction in 2nd window = 0.5 
@@ -215,7 +215,7 @@ model ().--></p>
 ##         PsiEduc         PsiCath      PsiInfMort 
 ##          0.3491          0.2581          0.5271</code></pre>
 <p>Since the algorithm did not converge, we now add some constraints on <span class="math inline">\(\Lambda\)</span> to optimize the algorithm:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(~<span class="st"> </span>Agr +<span class="st"> </span>Exam +<span class="st"> </span>Educ +<span class="st"> </span>Cath +<span class="st"> </span>InfMort,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="op">~</span><span class="st"> </span>Agr <span class="op">+</span><span class="st"> </span>Exam <span class="op">+</span><span class="st"> </span>Educ <span class="op">+</span><span class="st"> </span>Cath <span class="op">+</span><span class="st"> </span>InfMort,
                <span class="dt">model =</span> <span class="st">"factor.bayes"</span>, <span class="dt">data =</span> swiss, <span class="dt">factors =</span> <span class="dv">2</span>,
                <span class="dt">lambda.constraints =</span>
                    <span class="kw">list</span>(<span class="dt">Exam =</span> <span class="kw">list</span>(<span class="dv">1</span>,<span class="st">"+"</span>),
@@ -229,7 +229,7 @@ model ().--></p>
 ##   factor-bayes: Bayesian Factor Analysis
 ##   in Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau,
 ##   "Zelig: Everyone's Statistical Software," http://zeligproject.org/</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">geweke.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">geweke.diag</span>()</code></pre></div>
 <pre><code>## 
 ## Fraction in 1st window = 0.1
 ## Fraction in 2nd window = 0.5 
@@ -242,7 +242,7 @@ model ().--></p>
 ##        -1.42872         1.21346         0.73458        -0.70383 
 ##      PsiInfMort 
 ##         0.24604</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">heidel.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">heidel.diag</span>()</code></pre></div>
 <pre><code>##                                               
 ##                 Stationarity start     p-value
 ##                 test         iteration        
@@ -275,7 +275,7 @@ model ().--></p>
 ## PsiEduc         passed     0.199 0.01552  
 ## PsiCath         failed     0.209 0.02745  
 ## PsiInfMort      passed     0.996 0.00651</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out$<span class="kw">raftery.diag</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out<span class="op">$</span><span class="kw">raftery.diag</span>()</code></pre></div>
 <pre><code>## 
 ## Quantile (q) = 0.025
 ## Accuracy (r) = +/- 0.005
@@ -414,7 +414,8 @@ model ().--></p>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#inputs">Inputs</a></li>

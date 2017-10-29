@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Zelig and the Tidyverse</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <p>Many researchers integrate tools from the “<a href="http://tidyverse.org/">tidyverse</a>” into their data workflows. The tidyverse includes a number of packages to read data into R–<a href="https://CRAN.R-project.org/package=readr">readr</a>–, transform it for analysis– <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html">tibble</a>, <a href="https://CRAN.R-project.org/package=tidyr">tidyr</a>, purr, and dplyr, and visualise the results with <a href="http://docs.ggplot2.org/current/">ggplot2</a>. All of these packages can be loaded in R by loading the tidyverse package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 <p>Zelig can be easily slotted into this workflow for model estimation and identifying quantities of interest. Most Zelig estimation models require underlying data to be in the “tidy” format that the tidyverse creates. Zelig’s three step workflow can be organized very well using <a href="http://r4ds.had.co.nz/pipes.html">pipes</a> (<code>%&gt;%</code>) that the tidyverse advocates. Using pipes with Zelig will make your code more legible and computationally efficient.</p>
@@ -160,20 +160,20 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Zelig)
 <span class="kw">library</span>(tidyverse)
 
-swiss %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility ~<span class="st"> </span>Agriculture +<span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
-          <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">90</span>, <span class="dt">by =</span> <span class="dv">5</span>)) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%<span class="st"> </span>
+swiss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
+          <span class="dt">cite =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">90</span>, <span class="dt">by =</span> <span class="dv">5</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="zelig_tidyverse_files/figure-html/unnamed-chunk-3-1.png" width="480"></p>
 <p>We could also find first differences by including <code>setx1</code> in the workflow:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swiss %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility ~<span class="st"> </span>Agriculture +<span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
-          <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="dv">10</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/setx1.html">setx1</a></span>(<span class="dt">Agriculture =</span> <span class="dv">90</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swiss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
+          <span class="dt">cite =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/setx1.html">setx1</a></span>(<span class="dt">Agriculture =</span> <span class="dv">90</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="zelig_tidyverse_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>Note that piping does not work with <a href="zelig5_vs_zelig4.html">Zelig 5’s reference class syntax</a>.</p>
@@ -184,21 +184,21 @@ swiss %&gt;%<span class="st"> </span>
 <p>Zelig’s in-house plots are built using base R plotting functionality. You may want to take the quantities of interest simulated by Zelig and create custom plots with other tools, such as ggplot2.</p>
 <p>The function <code>zelig_qi_to_df</code> extracts quantities of interest simulated by <code>sim</code> and returns them in a data frame formatted to follow tidy data principles. This output could be easily plotted with ggplot2.</p>
 <p>Using the example analysis from before:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sims.full &lt;-<span class="st"> </span>swiss %&gt;%<span class="st"> </span>
-<span class="st">                </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility ~<span class="st"> </span>Agriculture +<span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
-                      <span class="dt">cite =</span> <span class="ot">FALSE</span>) %&gt;%
-<span class="st">                </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">90</span>, <span class="dt">by =</span> <span class="dv">5</span>)) %&gt;%
-<span class="st">                </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sims.full &lt;-<span class="st"> </span>swiss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Examination, <span class="dt">model =</span> <span class="st">'ls'</span>, <span class="dt">data =</span> ., 
+                      <span class="dt">cite =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">Agriculture =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">90</span>, <span class="dt">by =</span> <span class="dv">5</span>)) <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() <span class="op">%&gt;%</span>
 <span class="st">                </span><span class="kw"><a href="../reference/zelig_qi_to_df.html">zelig_qi_to_df</a></span>()
 
 <span class="kw">head</span>(sims.full)</code></pre></div>
 <pre><code>##   setx_value Agriculture Examination expected_value predicted_value
-## 1          x           1    16.48936       75.77140        62.35300
-## 2          x           1    16.48936       79.72215        78.38394
-## 3          x           1    16.48936       74.64229        81.55197
-## 4          x           1    16.48936       77.23860        77.20536
-## 5          x           1    16.48936       75.67273        69.79043
-## 6          x           1    16.48936       69.44604        60.19310</code></pre>
+## 1          x           1    16.48936       79.52943        81.78669
+## 2          x           1    16.48936       79.02154        76.65962
+## 3          x           1    16.48936       81.17413        73.50355
+## 4          x           1    16.48936       76.50860        84.55060
+## 5          x           1    16.48936       72.53544        70.23523
+## 6          x           1    16.48936       70.64250        65.17009</code></pre>
 <p>Each row contains information for an individual “observation”, i.e. a quantity of interest calculated from one draw of the model parameters from the multivariate normal distribution.</p>
 <p>The first three columns of the object returned by <code>zelig_qi_to_df</code> in this case contain information that identifies the scenario that the quantity of interest is from. For example, the first row is from a scenario where <code>Agriculture</code> is fitted at <code>1</code> and <code>Examination</code> is fitted at the sample mean 16.4893617. The <code>setx_value</code> column identifies if the values were fitted by a <code>setx</code> call as <code>x</code> or <code>x1</code>–a contrasting scenario used to find first differences.</p>
 <p>The final two columns contain the expected and predicted value of the quantity of interest, respectively.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
@@ -207,18 +207,18 @@ swiss %&gt;%<span class="st"> </span>
 <pre><code>## Slimming Expected Values . . .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sims.slimmed)</code></pre></div>
 <pre><code>##   setx_value Agriculture Examination qi_ci_min qi_ci_median qi_ci_max
-## 1          x           1    16.48936  66.24120     74.96844  83.57992
-## 2          x           6    16.48936  66.50630     74.46281  82.42179
-## 3          x          11    16.48936  66.62785     73.99225  81.16867
-## 4          x          16    16.48936  67.02502     73.50231  79.56441
-## 5          x          21    16.48936  67.32141     73.02743  78.39163
-## 6          x          26    16.48936  67.64751     72.54999  77.27419</code></pre>
+## 1          x           1    16.48936  66.28557     74.87334  83.65955
+## 2          x           6    16.48936  66.57396     74.38637  82.46757
+## 3          x          11    16.48936  66.84942     73.92589  81.21538
+## 4          x          16    16.48936  67.09725     73.46384  79.97733
+## 5          x          21    16.48936  67.44999     73.03007  78.77376
+## 6          x          26    16.48936  67.67556     72.52319  77.62708</code></pre>
 <p>Now we have one row for each scenario. This contains the columns <code>qi_ci_min</code>, <code>qi_ci_median</code>, and <code>qi_ci_max</code> for the central interval of the simulations from each scenario. By default <code>qi_ci_min</code> and <code>qi_ci_max</code> contain central interval bounds at the lower 2.5 and upper 97.5 percentiles, respectively. <code>qi_ci_median</code> contains the simulated distribution’s median. The interval can be changed with the <code>ci</code> argument. You can choose expected value (<code>ev</code>) or predicted value (<code>pv</code>) with the <code>qi_ci_type</code> argument.</p>
 <p>Now we have everything to make a ggplot2 plot summarizing the simulated quantity of interest:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sims.slimmed, <span class="kw">aes</span>(Agriculture, qi_ci_median)) +
-<span class="st">    </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> qi_ci_min, <span class="dt">ymax =</span> qi_ci_max), <span class="dt">alpha =</span> <span class="fl">0.3</span>) +
-<span class="st">    </span><span class="kw">geom_line</span>() +<span class="st"> </span>
-<span class="st">    </span><span class="kw">ylab</span>(<span class="st">'Expected Fertility'</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sims.slimmed, <span class="kw">aes</span>(Agriculture, qi_ci_median)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> qi_ci_min, <span class="dt">ymax =</span> qi_ci_max), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">ylab</span>(<span class="st">'Expected Fertility'</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
 <p><img src="zelig_tidyverse_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <div id="get-in-touch" class="section level3">
@@ -238,7 +238,8 @@ swiss %&gt;%<span class="st"> </span>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#what-is-tidy-data">What is “tidy data”</a></li>
       <li><a href="#analyzing-tidy-data-with-pipes">Analyzing tidy data with pipes</a></li>

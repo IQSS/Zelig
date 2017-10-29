@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Bivariate Logistic Regression</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Bivariate Logistic Regression for Two Dichotomous Dependent Variables with <code>blogit</code> from ZeligChoice.</p>
 <p>Use the bivariate logistic regression model if you have two binary dependent variables <span class="math inline">\((Y_1, Y_2)\)</span>, and wish to model them jointly as a function of some explanatory variables. Each pair of dependent variables <span class="math inline">\((Y_{i1}, Y_{i2})\)</span> has four potential outcomes, <span class="math inline">\((Y_{i1}=1, Y_{i2}=1)\)</span>, <span class="math inline">\((Y_{i1}=1, Y_{i2}=0)\)</span>, <span class="math inline">\((Y_{i1}=0, Y_{i2}=1)\)</span>, and <span class="math inline">\((Y_{i1}=0, Y_{i2}=0)\)</span>. The joint probability for each of these four outcomes is modeled with three systematic components: the marginal Pr <span class="math inline">\((Y_{i1} = 1)\)</span> and Pr <span class="math inline">\((Y_{i2} = 1)\)</span>, and the odds ratio <span class="math inline">\(\psi\)</span>, which describes the dependence of one marginal on the other. Each of these systematic components may be modeled as functions of (possibly different) sets of explanatory variables.</p>
@@ -138,7 +138,7 @@
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1, Y2) ~<span class="st"> </span>X1 +<span class="st"> </span>X2 +<span class="st"> </span>X3,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(Y1, Y2) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span>X3,
                <span class="dt">model =</span> <span class="st">"blogit"</span>, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out, <span class="dt">x1 =</span> <span class="ot">NULL</span>)</code></pre></div>
@@ -147,11 +147,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <h2 class="hasAnchor">
 <a href="#input-values" class="anchor"></a>Input Values</h2>
 <p>In every bivariate logit specification, there are three equations which correspond to each dependent variable (<span class="math inline">\(Y_1\)</span>, <span class="math inline">\(Y_2\)</span>), and <span class="math inline">\(\psi\)</span>, the odds ratio. You should provide a list of formulas for each equation or, you may use <code>cbind()</code> if the right hand side is the same for both equations</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formulae &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">cbind</span>(Y1, Y2),   X1 +<span class="st"> </span>X2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formulae &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">cbind</span>(Y1, Y2),   X1 <span class="op">+</span><span class="st"> </span>X2)</code></pre></div>
 <p>which means that all the explanatory variables in equations 1 and 2 (corresponding to <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span>) are included, but only an intercept is estimated (all explanatory variables are omitted) for equation 3 (<span class="math inline">\(\psi\)</span>).</p>
 <p><strong>Anticipated feature, not currently enabled:</strong></p>
 <p>You may use the function <code>tag()</code> to constrain variables across equations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formulae &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mu1 =</span> y1   x1 +<span class="st"> </span><span class="kw">tag</span>(x3, <span class="st">"x3"</span>), <span class="dt">mu2 =</span> y2 ~<span class="st"> </span>x2 +<span class="st"> </span><span class="kw">tag</span>(x3, <span class="st">"x3"</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formulae &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mu1 =</span> y1   x1 <span class="op">+</span><span class="st"> </span><span class="kw">tag</span>(x3, <span class="st">"x3"</span>), <span class="dt">mu2 =</span> y2 <span class="op">~</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">tag</span>(x3, <span class="st">"x3"</span>))</code></pre></div>
 <p>where <code>tag()</code> is a special function that constrains variables to have the same effect across equations. Thus, the coefficient for x3 in equation mu1 is constrained to be equal to the coefficient for x3 in equation mu2.</p>
 </div>
 <div id="examples" class="section level2">
@@ -162,7 +162,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <a href="#basic-example" class="anchor"></a>Basic Example</h3>
 <p>Load the data and estimate the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(sanction)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(import, export) ~<span class="st"> </span>coop +<span class="st"> </span>cost +<span class="st"> </span>target,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(import, export) <span class="op">~</span><span class="st"> </span>coop <span class="op">+</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>target,
                 <span class="dt">model =</span> <span class="st">"blogit"</span>, <span class="dt">data =</span> sanction)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Thomas W. Yee. 2007.
@@ -217,43 +217,43 @@ x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx
 ##  sim x :
 ##  -----
 ## ev
-##                       mean          sd        50%        2.5%      97.5%
-## Pr(Y1=0, Y2=0) 0.766093739 0.075317101 0.77358310 0.602784319 0.88645025
-## Pr(Y1=0, Y2=1) 0.150966892 0.067414468 0.13886736 0.048405075 0.30918751
-## Pr(Y1=1, Y2=0) 0.074055394 0.043283243 0.06410452 0.018120382 0.18385203
-## Pr(Y1=1, Y2=1) 0.008883975 0.008944314 0.00607899 0.000926747 0.03495784
+##                       mean          sd         50%         2.5%      97.5%
+## Pr(Y1=0, Y2=0) 0.764861591 0.076898592 0.772636018 0.5944076854 0.88725505
+## Pr(Y1=0, Y2=1) 0.154020913 0.070016048 0.142438021 0.0489447680 0.31276532
+## Pr(Y1=1, Y2=0) 0.072289227 0.042523632 0.063896509 0.0181190387 0.17905193
+## Pr(Y1=1, Y2=1) 0.008828269 0.008855768 0.006083191 0.0009329502 0.03424973
 ## pv
 ##                  0     1
-## (Y1=0, Y2=0) 0.229 0.771
-## (Y1=0, Y2=1) 0.863 0.137
-## (Y1=1, Y2=0) 0.918 0.082
-## (Y1=1, Y2=1) 0.990 0.010
+## (Y1=0, Y2=0) 0.228 0.772
+## (Y1=0, Y2=1) 0.862 0.138
+## (Y1=1, Y2=0) 0.922 0.078
+## (Y1=1, Y2=1) 0.988 0.012
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##                        mean          sd          50%         2.5%
-## Pr(Y1=0, Y2=0) 6.856656e-05 0.000289293 8.438768e-06 1.130919e-07
-## Pr(Y1=0, Y2=1) 2.190235e-02 0.037090302 9.189970e-03 6.227473e-04
-## Pr(Y1=1, Y2=0) 6.068223e-03 0.013777284 1.676166e-03 6.898759e-05
-## Pr(Y1=1, Y2=1) 9.719609e-01 0.038579035 9.849495e-01 8.793918e-01
+##                        mean           sd          50%         2.5%
+## Pr(Y1=0, Y2=0) 6.764547e-05 0.0002870721 8.479136e-06 1.122442e-07
+## Pr(Y1=0, Y2=1) 2.285438e-02 0.0381670056 8.975354e-03 5.498571e-04
+## Pr(Y1=1, Y2=0) 5.892645e-03 0.0157226985 1.655853e-03 6.435737e-05
+## Pr(Y1=1, Y2=1) 9.711853e-01 0.0402994376 9.849211e-01 8.690317e-01
 ##                       97.5%
-## Pr(Y1=0, Y2=0) 0.0005408712
-## Pr(Y1=0, Y2=1) 0.1141765919
-## Pr(Y1=1, Y2=0) 0.0465000275
-## Pr(Y1=1, Y2=1) 0.9983380073
+## Pr(Y1=0, Y2=0) 0.0005593426
+## Pr(Y1=0, Y2=1) 0.1159743052
+## Pr(Y1=1, Y2=0) 0.0362570809
+## Pr(Y1=1, Y2=1) 0.9983926520
 ## pv
 ##                  0     1
 ## (Y1=0, Y2=0) 1.000 0.000
-## (Y1=0, Y2=1) 0.989 0.011
-## (Y1=1, Y2=0) 0.989 0.011
-## (Y1=1, Y2=1) 0.022 0.978
+## (Y1=0, Y2=1) 0.984 0.016
+## (Y1=1, Y2=0) 0.991 0.009
+## (Y1=1, Y2=1) 0.025 0.975
 ## fd
-##                       mean         sd         50%       2.5%       97.5%
-## Pr(Y1=0, Y2=0) -0.76602517 0.07539928 -0.77345473 -0.8864501 -0.60273253
-## Pr(Y1=0, Y2=1) -0.12906454 0.08036197 -0.12107038 -0.3010280  0.01301308
-## Pr(Y1=1, Y2=0) -0.06798717 0.04695905 -0.05992501 -0.1749069 -0.00240991
-## Pr(Y1=1, Y2=1)  0.96307689 0.04264955  0.97673796  0.8552438  0.99647840</code></pre>
+##                       mean         sd         50%       2.5%        97.5%
+## Pr(Y1=0, Y2=0) -0.76479395 0.07698080 -0.77262061 -0.8872549 -0.594345342
+## Pr(Y1=0, Y2=1) -0.13116653 0.08268646 -0.12371949 -0.3046665  0.011741846
+## Pr(Y1=1, Y2=0) -0.06639658 0.04707685 -0.05916388 -0.1759960 -0.001374144
+## Pr(Y1=1, Y2=1)  0.96235706 0.04459420  0.97703091  0.8535263  0.996593467</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <div class="figure">
 <img src="zeligchoice_blogit_files/figure-html/Zelig-blogit1-1.png" alt="Graphs of Quantities of Interest for Bivariate Logit" width="672"><p class="caption">
@@ -366,7 +366,7 @@ Graphs of Quantities of Interest for Bivariate Logit
 <p>Yee TW and Wild CJ (1996). “Vector Generalized Additive Models.” <em>Journal of Royal Statistical Society, Series B</em>, <strong>58</strong> (3), pp. 481-493.</p>
 <p>Yee TW (2010). “The VGAM Package for Categorical Data Analysis.” <em>Journal of Statistical Software</em>, <strong>32</strong> (10), pp. 1-34. &lt;URL: <a href="http://www.jstatsoft.org/v32/i10/" class="uri">http://www.jstatsoft.org/v32/i10/</a>&gt;.</p>
 <p>Yee TW and Hadi AF (2014). “Row-column interaction models, with an R implementation.” <em>Computational Statistics</em>, <strong>29</strong> (6), pp. 1427-1445.</p>
-<p>Yee TW (2017). <em>VGAM: Vector Generalized Linear and Additive Models</em>. R package version 1.0-3, &lt;URL: <a href="https://CRAN.R-project.org/package=VGAM" class="uri">https://CRAN.R-project.org/package=VGAM</a>&gt;.</p>
+<p>Yee TW (2017). <em>VGAM: Vector Generalized Linear and Additive Models</em>. R package version 1.0-4, &lt;URL: <a href="https://CRAN.R-project.org/package=VGAM" class="uri">https://CRAN.R-project.org/package=VGAM</a>&gt;.</p>
 <p>Yee TW (2013). “Two-parameter reduced-rank vector generalized linear models.” <em>Computational Statistics and Data Analysis</em>. &lt;URL: <a href="http://ees.elsevier.com/csda" class="uri">http://ees.elsevier.com/csda</a>&gt;.</p>
 <p>Yee TW, Stoklosa J and Huggins RM (2015). “The VGAM Package for Capture-Recapture Data Using the Conditional Likelihood.” <em>Journal of Statistical Software</em>, <strong>65</strong> (5), pp. 1-33. &lt;URL: <a href="http://www.jstatsoft.org/v65/i05/" class="uri">http://www.jstatsoft.org/v65/i05/</a>&gt;.</p>
 </div>
@@ -376,7 +376,8 @@ Graphs of Quantities of Interest for Bivariate Logit
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#input-values">Input Values</a></li>

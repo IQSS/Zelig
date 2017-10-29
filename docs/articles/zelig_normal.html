@@ -123,20 +123,20 @@
     <div class="page-header toc-ignore">
       <h1>Normal Linear Regression</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Normal Regression for Continuous Dependent Variables with <code>normal</code>.</p>
 <p>The Normal regression model is a close variant of the more standard <a href="zelig_ls.html">least squares regression model</a>. Both models specify a continuous dependent variable as a linear function of a set of explanatory variables. The Normal model reports maximum likelihood (rather than least squares) estimates. The two models differ only in their estimate for the stochastic parameter <span class="math inline">\(\sigma\)</span>.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"normal"</span>, <span class="dt">weights =</span> w,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"normal"</span>, <span class="dt">weights =</span> w,
                <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -150,7 +150,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Attach sample data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(macro)</code></pre></div>
 <p>Estimate model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem ~<span class="st"> </span>gdp +<span class="st"> </span>capmob +<span class="st"> </span>trade, <span class="dt">model =</span> <span class="st">"normal"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(unem <span class="op">~</span><span class="st"> </span>gdp <span class="op">+</span><span class="st"> </span>capmob <span class="op">+</span><span class="st"> </span>trade, <span class="dt">model =</span> <span class="st">"normal"</span>,
                 <span class="dt">data =</span> macro)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   R Core Team. 2008.
@@ -185,8 +185,8 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>Set explanatory variables to their default (mean/mode) values, with high (80th percentile) and low (20th percentile) values for trade:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">trade =</span> <span class="kw">quantile</span>(macro$trade, <span class="fl">0.8</span>))
-x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">trade =</span> <span class="kw">quantile</span>(macro$trade, <span class="fl">0.2</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">trade =</span> <span class="kw">quantile</span>(macro<span class="op">$</span>trade, <span class="fl">0.8</span>))
+x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out1, <span class="dt">trade =</span> <span class="kw">quantile</span>(macro<span class="op">$</span>trade, <span class="fl">0.2</span>))</code></pre></div>
 <p>Generate first differences for the effect of high versus low trade on GDP:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out1, <span class="dt">x =</span> x.high, <span class="dt">x1 =</span> x.low)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(s.out1)</code></pre></div>
@@ -289,7 +289,8 @@ Graphs of Quantities of Interest for Zelig-normal
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#examples">Examples</a></li>

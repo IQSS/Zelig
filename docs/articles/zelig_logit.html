@@ -123,19 +123,19 @@
     <div class="page-header toc-ignore">
       <h1>Logistic Regression</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <p>Logistic Regression for Dichotomous Dependent Variables with <code>logit</code>.</p>
 <p>Logistic regression specifies a dichotomous dependent variable as a function of a set of explanatory variables.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out, <span class="dt">x1 =</span> <span class="ot">NULL</span>)</code></pre></div>
 </div>
@@ -150,7 +150,7 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <pre><code>## Loading required package: survival</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(turnout)</code></pre></div>
 <p>Estimating parameter values for the logistic regression:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote ~<span class="st"> </span>age +<span class="st"> </span>race, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">data =</span> turnout,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>race, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">data =</span> turnout,
                 <span class="dt">cite =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Summarize estimated paramters:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z.out1)</code></pre></div>
@@ -191,9 +191,9 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ## 
 ## Coefficients:
 ##             Estimate (OR) Std. Error (OR) z value Pr(&gt;|z|)    
-## (Intercept)         1.039           1.194   0.217 0.828325    
-## age                 1.011           1.003   3.689 0.000225 ***
-## racewhite           1.907           1.144   4.800 1.58e-06 ***
+## (Intercept)      1.039111        0.183840   0.217 0.828325    
+## age              1.011327        0.003088   3.689 0.000225 ***
+## racewhite        1.907038        0.256462   4.800 1.58e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -213,11 +213,11 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##  sim x :
 ##  -----
 ## ev
-##           mean         sd       50%      2.5%     97.5%
-## [1,] 0.7480016 0.01181577 0.7481666 0.7233089 0.7704255
+##           mean         sd       50%      2.5%    97.5%
+## [1,] 0.7480293 0.01184826 0.7480691 0.7247761 0.770409
 ## pv
 ##          0     1
-## [1,] 0.222 0.778</code></pre>
+## [1,] 0.241 0.759</code></pre>
 <p>Show the results graphically:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out1)</code></pre></div>
 <p><img src="zelig_logit_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
@@ -227,33 +227,33 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <h2 class="hasAnchor">
 <a href="#first-differences" class="anchor"></a>First differences</h2>
 <p>Estimating the risk difference (and risk ratio) between low education (25th percentile) and high education (75th percentile) while all the other variables held at their default values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote ~<span class="st"> </span>race +<span class="st"> </span>educate, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">data =</span> turnout,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(vote <span class="op">~</span><span class="st"> </span>race <span class="op">+</span><span class="st"> </span>educate, <span class="dt">model =</span> <span class="st">"logit"</span>, <span class="dt">data =</span> turnout,
                 <span class="dt">cite =</span> <span class="ot">FALSE</span>)
-x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout$educate, <span class="dt">prob =</span> <span class="fl">0.75</span>))
-x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout$educate, <span class="dt">prob =</span> <span class="fl">0.25</span>))
+x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout<span class="op">$</span>educate, <span class="dt">prob =</span> <span class="fl">0.75</span>))
+x.low &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2, <span class="dt">educate =</span> <span class="kw">quantile</span>(turnout<span class="op">$</span>educate, <span class="dt">prob =</span> <span class="fl">0.25</span>))
 s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out2, <span class="dt">x =</span> x.high, <span class="dt">x1 =</span> x.low)
 <span class="kw">summary</span>(s.out2)</code></pre></div>
 <pre><code>## 
 ##  sim x :
 ##  -----
 ## ev
-##           mean         sd       50%   2.5%     97.5%
-## [1,] 0.8226786 0.01029225 0.8225001 0.8015 0.8430421
+##           mean        sd       50%     2.5%     97.5%
+## [1,] 0.8225489 0.0102722 0.8231589 0.800891 0.8410317
 ## pv
 ##          0     1
-## [1,] 0.168 0.832
+## [1,] 0.171 0.829
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
-##           mean         sd       50%      2.5%     97.5%
-## [1,] 0.7091908 0.01337713 0.7090525 0.6832002 0.7350503
+##          mean         sd       50%      2.5%     97.5%
+## [1,] 0.709653 0.01289457 0.7100321 0.6841094 0.7339456
 ## pv
 ##          0     1
-## [1,] 0.297 0.703
+## [1,] 0.304 0.696
 ## fd
 ##            mean         sd        50%       2.5%       97.5%
-## [1,] -0.1134878 0.01172597 -0.1135099 -0.1353285 -0.09047672</code></pre>
+## [1,] -0.1128959 0.01129122 -0.1128903 -0.1350435 -0.09219569</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out2)</code></pre></div>
 <p><img src="zelig_logit_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
@@ -323,7 +323,8 @@ E(Y) =
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#examples">Examples</a></li>

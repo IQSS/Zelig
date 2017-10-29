@@ -123,13 +123,13 @@
     <div class="page-header toc-ignore">
       <h1>Ordered Probit</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Ordinal Probit Regression for Ordered Categorical Dependent Variables with <code>oprobit</code> in ZeligChoice.</p>
 <p>Use the ordinal probit regression model if your dependent variables are ordered and categorical. They may take on either integer values or character strings. For a Bayesian implementation of this model, see .</p>
@@ -138,7 +138,7 @@
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(Y) ~<span class="st"> </span>X1 +<span class="st"> </span>X23,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(Y) <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X23,
                <span class="dt">model =</span> <span class="st">"oprobit"</span>, <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out, <span class="dt">x1 =</span> <span class="ot">NULL</span>)</code></pre></div>
@@ -153,10 +153,10 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Load the sample data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(sanction)</code></pre></div>
 <p>Create an ordered dependent variable:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sanction$ncost &lt;-<span class="st"> </span><span class="kw">factor</span>(sanction$ncost, <span class="dt">ordered =</span> <span class="ot">TRUE</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sanction<span class="op">$</span>ncost &lt;-<span class="st"> </span><span class="kw">factor</span>(sanction<span class="op">$</span>ncost, <span class="dt">ordered =</span> <span class="ot">TRUE</span>,
                          <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">"net gain"</span>, <span class="st">"little effect"</span>, <span class="st">"modest lost"</span>, <span class="st">"major loss"</span>))</code></pre></div>
 <p>Estimate the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(ncost ~<span class="st"> </span>mil +<span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"oprobit"</span>, <span class="dt">data =</span> sanction)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(ncost <span class="op">~</span><span class="st"> </span>mil <span class="op">+</span><span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"oprobit"</span>, <span class="dt">data =</span> sanction)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   William N. Venables, and Brian D. Ripley. 2011.
 ##   oprobit: Ordinal Probit Regression for Ordered Categorical Dependent Variables
@@ -216,7 +216,7 @@ Graphs of Quantities of Interest for Ordered Probit
 <h3 class="hasAnchor">
 <a href="#first-differences" class="anchor"></a>First Differences</h3>
 <p>Using the sample data <code>sanction</code>, let us estimate the empirical model and return the coefficients:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(cost) ~<span class="st"> </span>mil +<span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"oprobit"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">as.factor</span>(cost) <span class="op">~</span><span class="st"> </span>mil <span class="op">+</span><span class="st"> </span>coop, <span class="dt">model =</span> <span class="st">"oprobit"</span>,
                <span class="dt">data =</span> sanction)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   William N. Venables, and Brian D. Ripley. 2011.
@@ -253,31 +253,31 @@ x.high &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx
 ##  -----
 ## ev
 ##         mean         sd         50%         2.5%     97.5%
-## 1 0.54581652 0.06695650 0.545403490 4.145315e-01 0.6737913
-## 2 0.38416586 0.05439789 0.386254031 2.742495e-01 0.4858626
-## 3 0.04814683 0.03856104 0.041657582 4.977618e-04 0.1368289
-## 4 0.02187079 0.03845022 0.005317447 1.249611e-07 0.1472082
+## 1 0.54063808 0.06781178 0.545177721 4.014215e-01 0.6686594
+## 2 0.38773365 0.05351191 0.391120436 2.776921e-01 0.4893008
+## 3 0.04890851 0.04001919 0.039261846 4.987695e-04 0.1359964
+## 4 0.02271977 0.03986492 0.005083584 1.867483e-07 0.1418396
 ## pv
 ##       mean        sd 50% 2.5% 97.5%
-## [1,] 1.592 0.7362595   1    1     4
+## [1,] 1.599 0.7407751   1    1     4
 ## 
 ##  sim x1 :
 ##  -----
 ## ev
 ##         mean         sd        50%        2.5%     97.5%
-## 1 0.06324964 0.04732220 0.04941605 0.010076245 0.1880392
-## 2 0.43716981 0.15825999 0.40954091 0.192463011 0.8152036
-## 3 0.27892325 0.08864833 0.27569472 0.121860636 0.4628185
-## 4 0.22065730 0.15142488 0.20735825 0.002403449 0.5450715
+## 1 0.05890804 0.04130743 0.05032893 0.009928432 0.1681794
+## 2 0.43483566 0.16314387 0.41333016 0.187065246 0.8175809
+## 3 0.27884079 0.08909879 0.27447653 0.121181259 0.4639010
+## 4 0.22741551 0.16052194 0.20664215 0.003761621 0.5696715
 ## pv
-##       mean       sd 50% 2.5% 97.5%
-## [1,] 2.681 0.894449   3    1     4
+##       mean        sd 50% 2.5% 97.5%
+## [1,] 2.722 0.8874139   3    1     4
 ## fd
 ##          mean         sd         50%         2.5%      97.5%
-## 1 -0.48256688 0.08723319 -0.48766671 -0.637363392 -0.2998063
-## 2  0.05300394 0.15580350  0.01694573 -0.170566877  0.4558931
-## 3  0.23077642 0.10190709  0.23498731  0.038221102  0.4294310
-## 4  0.19878651 0.12744828  0.19358495  0.002403338  0.4631196</code></pre>
+## 1 -0.48173004 0.08367226 -0.48503281 -0.633651954 -0.3075439
+## 2  0.04710202 0.15924106  0.01997809 -0.192669600  0.4199314
+## 3  0.22993228 0.10335105  0.23147091  0.038869058  0.4254108
+## 4  0.20469574 0.13486057  0.19740217  0.003761521  0.4765690</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(s.out2)</code></pre></div>
 <div class="figure">
 <img src="zeligchoice_oprobit_files/figure-html/Zelig-oprobit2-1.png" alt="Graphs of Quantities of Interest for Ordered Probit" width="672"><p class="caption">
@@ -385,7 +385,8 @@ Graphs of Quantities of Interest for Ordered Probit
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#example">Example</a></li>

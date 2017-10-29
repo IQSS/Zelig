@@ -123,19 +123,19 @@
     <div class="page-header toc-ignore">
       <h1>Instrumental Variable (Two-Stage Least Squares) Regression</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <p>Instrumental Variable Regression (via 2 Stage Least Squares) for Continuous Dependent Variables with <code>ivreg</code>.</p>
 <p>Instrumental variable regression is used when the correlation between the independent variables and the dependent variable does not reflect the true relationship because the independent variables are correlated with the error term. This can happen because of ommitted variables, reverse causation, and measurement error. Such variables are often referred to as “endogenous” (as opposed to “exogenous” variables that are not correlated with the error term). It may be possible to use instruments–other variables that cause changes in the endogenous variables, but not the dependent variable–to recover the endogenous variabless effects on the independent variable.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2 |<span class="st"> </span>Z1 +<span class="st"> </span>Z2 +<span class="st"> </span>Z3, <span class="dt">model =</span> <span class="st">"ivreg"</span>, <span class="dt">weights =</span> w,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2 <span class="op">|</span><span class="st"> </span>Z1 <span class="op">+</span><span class="st"> </span>Z2 <span class="op">+</span><span class="st"> </span>Z3, <span class="dt">model =</span> <span class="st">"ivreg"</span>, <span class="dt">weights =</span> w,
                <span class="dt">data =</span> mydata)
 x.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out)
 s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out, <span class="dt">x =</span> x.out)</code></pre></div>
@@ -150,18 +150,18 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <p>Before estimating the model, let’s attach the example data and make some transformations to it. Notably, <code>zivreg</code> does not currently support logging regressors in the <code>zelig</code> call. To get around this, we simply find the logged values before estimating the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load and transform data</span>
 <span class="kw">data</span>(<span class="st">"CigarettesSW"</span>)
-CigarettesSW$rprice &lt;-<span class="st"> </span><span class="kw">with</span>(CigarettesSW, price/cpi)
-CigarettesSW$rincome &lt;-<span class="st"> </span><span class="kw">with</span>(CigarettesSW, income/population/cpi)
-CigarettesSW$tdiff &lt;-<span class="st"> </span><span class="kw">with</span>(CigarettesSW, (taxs -<span class="st"> </span>tax)/cpi)
+CigarettesSW<span class="op">$</span>rprice &lt;-<span class="st"> </span><span class="kw">with</span>(CigarettesSW, price<span class="op">/</span>cpi)
+CigarettesSW<span class="op">$</span>rincome &lt;-<span class="st"> </span><span class="kw">with</span>(CigarettesSW, income<span class="op">/</span>population<span class="op">/</span>cpi)
+CigarettesSW<span class="op">$</span>tdiff &lt;-<span class="st"> </span><span class="kw">with</span>(CigarettesSW, (taxs <span class="op">-</span><span class="st"> </span>tax)<span class="op">/</span>cpi)
 
 <span class="co"># log second stage independent variables, as logging internally for ivreg is</span>
 <span class="co"># not currently supported</span>
-CigarettesSW$log_rprice &lt;-<span class="st"> </span><span class="kw">log</span>(CigarettesSW$rprice)
-CigarettesSW$log_rincome &lt;-<span class="st"> </span><span class="kw">log</span>(CigarettesSW$rincome)</code></pre></div>
+CigarettesSW<span class="op">$</span>log_rprice &lt;-<span class="st"> </span><span class="kw">log</span>(CigarettesSW<span class="op">$</span>rprice)
+CigarettesSW<span class="op">$</span>log_rincome &lt;-<span class="st"> </span><span class="kw">log</span>(CigarettesSW<span class="op">$</span>rincome)</code></pre></div>
 <p>Now we can estimate the model and summarize the coefficients:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">log</span>(packs) ~<span class="st"> </span>log_rprice +<span class="st"> </span>log_rincome |
-<span class="st">                    </span>log_rincome +<span class="st"> </span>tdiff +<span class="st"> </span><span class="kw">I</span>(tax/cpi),
-                    <span class="dt">data =</span> CigarettesSW, <span class="dt">subset =</span> year ==<span class="st"> "1995"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">log</span>(packs) <span class="op">~</span><span class="st"> </span>log_rprice <span class="op">+</span><span class="st"> </span>log_rincome <span class="op">|</span>
+<span class="st">                    </span>log_rincome <span class="op">+</span><span class="st"> </span>tdiff <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(tax<span class="op">/</span>cpi),
+                    <span class="dt">data =</span> CigarettesSW, <span class="dt">subset =</span> year <span class="op">==</span><span class="st"> "1995"</span>,
                     <span class="dt">model =</span> <span class="st">"ivreg"</span>)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Christian Kleiber and Achim Zeileis. 2008.
@@ -192,8 +192,8 @@ CigarettesSW$log_rincome &lt;-<span class="st"> </span><span class="kw">log</spa
 ## 
 ## Next step: Use 'setx' method</code></pre>
 <p>We can then simulate and plot the expected value of the log of the <code>packs</code> response variable across the range of the observed <code>rprice</code> regressor values:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">log_rprice =</span> <span class="kw">range</span>(<span class="kw">log</span>(CigarettesSW$rprice))) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(<span class="dt">log_rprice =</span> <span class="kw">range</span>(<span class="kw">log</span>(CigarettesSW<span class="op">$</span>rprice))) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/sim.html">sim</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="zelig_ivreg_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <p>To conduct standard diagnostic tests on the estimated model using functionality in the <a href="https://CRAN.R-project.org/package=AER">AER</a> package, exatract the fitted model object with the <code><a href="../reference/from_zelig_model.html">from_zelig_model()</a></code> function.</p>
@@ -242,7 +242,7 @@ CigarettesSW$log_rincome &lt;-<span class="st"> </span><span class="kw">log</spa
 <div id="see-also" class="section level2">
 <h2 class="hasAnchor">
 <a href="#see-also" class="anchor"></a>See also</h2>
-<p><code>ivreg</code> is from Christian Kleiber and Achim Zeileis (2008). Applied Econometrics with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL <a href="https://CRAN.R-project.org/package=AER" class="uri">https://CRAN.R-project.org/package=AER</a>. For more information use <code>?AER::ivreg</code>.</p>
+<p><code>ivreg</code> is from Christian Kleiber and Achim Zeileis (2008). Applied Econometrics with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL <a href="https://CRAN.R-project.org/package=AER" class="uri">https://CRAN.R-project.org/package=AER</a>. For more information use <code><a href="http://www.rdocumentation.org/packages/AER/topics/ivreg">?AER::ivreg</a></code>.</p>
 <p>Greene, W. H. (1993) Econometric Analysis, 2nd ed., Macmillan.</p>
 </div>
 </div>
@@ -250,7 +250,8 @@ CigarettesSW$log_rincome &lt;-<span class="st"> </span><span class="kw">log</spa
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#examples">Examples</a></li>

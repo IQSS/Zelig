@@ -123,31 +123,31 @@
     <div class="page-header toc-ignore">
       <h1>Multinomial Dirichlet model for Ecological Inference</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Multinomial Dirichlet model for Ecological Inference in RxC tables with <code>rxc</code> using ZeligEI.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
 <p>Unlike other EI models in Zelig, in the <span class="math inline">\(RxC\)</span> case, all the row and column variables need to specified. Let’s assume <span class="math inline">\(C1\)</span> through <span class="math inline">\(CC\)</span> are the column totals, and <span class="math inline">\(R1\)</span> through <span class="math inline">\(RR\)</span> are the row totals, and <span class="math inline">\(N=R1_i + R2_i + \ldots + RR_i = C1_i + C2_i + \ldots + CC_i\)</span> is the total in unit <span class="math inline">\(i\)</span>. In the case with three row variables and three column variables, the syntax is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(C1,C2,C3) ~<span class="st"> </span><span class="kw">cbind</span>(R1,R2,R3), <span class="dt">data=</span>data)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(C1,C2,C3) <span class="op">~</span><span class="st"> </span><span class="kw">cbind</span>(R1,R2,R3), <span class="dt">data=</span>data)</code></pre></div>
 <p>Additionally, if <code>C1</code>, <code>C2</code>, <code>R1</code>, <code>R2</code> are percentages rather than counts, then you must also provide <code>N</code> the unit totals as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>( <span class="kw">cbind</span>(C1,C2,C3) ~<span class="st"> </span><span class="kw">cbind</span>(R1,R2,R3), <span class="dt">N=</span>N, <span class="dt">data=</span>data)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>( <span class="kw">cbind</span>(C1,C2,C3) <span class="op">~</span><span class="st"> </span><span class="kw">cbind</span>(R1,R2,R3), <span class="dt">N=</span>N, <span class="dt">data=</span>data)</code></pre></div>
 <p>The argument <code>N</code> can be either a numeric vector of the total in each <em>i</em>-th unit, or the character name of a variable in the dataset that contains these values.</p>
 <p>First load packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeligverse)</code></pre></div>
 <p>Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zeirxc$<span class="kw">new</span>()
-z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(C1, C2, C3) ~<span class="st"> </span><span class="kw">cbind</span>(R1, R2, R3), <span class="dt">N =</span> myN,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z5 &lt;-<span class="st"> </span>zeirxc<span class="op">$</span><span class="kw">new</span>()
+z5<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(C1, C2, C3) <span class="op">~</span><span class="st"> </span><span class="kw">cbind</span>(R1, R2, R3), <span class="dt">N =</span> myN,
         <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)</code></pre></div>
 <p>With the Zelig 4 compatibility wrappers this looks like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(C1, C2, C3) ~<span class="st"> </span><span class="kw">cbind</span>(R1, R2, R3), <span class="dt">N =</span> myN,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(C1, C2, C3) <span class="op">~</span><span class="st"> </span><span class="kw">cbind</span>(R1, R2, R3), <span class="dt">N =</span> myN,
                <span class="dt">model =</span> <span class="st">"rxc"</span>, <span class="dt">weights =</span> w, <span class="dt">data =</span> myData)</code></pre></div>
 </div>
 <div id="examples" class="section level2">
@@ -157,8 +157,8 @@ z5$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span cla
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"eiPack"</span>, <span class="dt">quietly=</span><span class="ot">TRUE</span>)
 <span class="kw">data</span>(senc)</code></pre></div>
 <p>Here is the model estimated in Zelig.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span>zeirxc$<span class="kw">new</span>()
-z.out$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(dem, rep, non) ~<span class="st"> </span><span class="kw">cbind</span>(black, white, natam),
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span>zeirxc<span class="op">$</span><span class="kw">new</span>()
+z.out<span class="op">$</span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span class="kw">cbind</span>(dem, rep, non) <span class="op">~</span><span class="st"> </span><span class="kw">cbind</span>(black, white, natam),
             <span class="dt">N =</span> <span class="st">"total"</span>, <span class="dt">data =</span> senc)
 <span class="kw">summary</span>(z.out)</code></pre></div>
 <pre><code>## Model: 
@@ -204,10 +204,9 @@ z.out$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span 
 ## natam.rep   1240    118       1020   1476
 ## black.non   4971    801       3792   6347
 ## white.non  41682    889      40120  43024
-## natam.non   1156    169        840   1482
-## Next step: Use 'setx' method</code></pre>
+## natam.non   1156    169        840   1482</code></pre>
 <p>You can check for convergence before summarizing the estimates with three diagnostic tests. See the section <a href="diagnostics.html">Diagnostics for Zelig Models</a> for more examples of these tests, and interpretation of their meaning. For brevity we only show the first set of parameters, the <span class="math inline">\(\alpha\)</span>’s, as there are twice as many <span class="math inline">\(\beta\)</span>’s as there are precincts:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gd &lt;-<span class="st"> </span>z.out$<span class="kw">geweke.diag</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gd &lt;-<span class="st"> </span>z.out<span class="op">$</span><span class="kw">geweke.diag</span>()
 <span class="kw">print</span>(gd[[<span class="dv">1</span>]])</code></pre></div>
 <pre><code>## 
 ## Fraction in 1st window = 0.1
@@ -219,7 +218,7 @@ z.out$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span 
 ##          1.5115          0.3101          5.9617         -1.9623 
 ## alpha.natam.non 
 ##         -0.8079</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hd &lt;-<span class="st"> </span>z.out$<span class="kw">heidel.diag</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hd &lt;-<span class="st"> </span>z.out<span class="op">$</span><span class="kw">heidel.diag</span>()
 <span class="kw">print</span>(hd[[<span class="dv">1</span>]])</code></pre></div>
 <pre><code>##                                               
 ##                 Stationarity start     p-value
@@ -245,7 +244,7 @@ z.out$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span 
 ## alpha.black.non passed    0.454 0.0319   
 ## alpha.white.non passed    2.175 0.0365   
 ## alpha.natam.non passed    0.603 0.0443</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rd &lt;-z.out$<span class="kw">raftery.diag</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rd &lt;-z.out<span class="op">$</span><span class="kw">raftery.diag</span>()
 <span class="kw">print</span>(rd[[<span class="dv">1</span>]])</code></pre></div>
 <pre><code>## 
 ## Quantile (q) = 0.025
@@ -266,7 +265,8 @@ z.out$<span class="kw"><a href="../reference/zelig.html">zelig</a></span>(<span 
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#examples">Examples</a></li>

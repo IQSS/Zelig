@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rare Events Logistic • Zelig</title>
+<title>Rare Events Logistic Regression (ReLogit) • Zelig</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -121,22 +121,22 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Rare Events Logistic</h1>
+      <h1>Rare Events Logistic Regression (ReLogit)</h1>
             
-            <h4 class="date">2017-06-22</h4>
+            <h4 class="date">2017-10-29</h4>
           </div>
 
     
     
 <div class="contents">
-<p><em>Built using Zelig version 5.1.2.9000</em></p>
+<p><em>Built using Zelig version 5.1.4.90000</em></p>
 <hr>
 <p>Rare Events Logistic Regression for Dichotomous Dependent Variables with <code>relogit</code>.</p>
 <p>The relogit procedure estimates the same model as standard logistic regression (appropriate when you have a dichotomous dependent variable and a set of explanatory variables; see ), but the estimates are corrected for the bias that occurs when the sample is small or the observed events are rare (i.e., if the dependent variable has many more 1s than 0s or the reverse). The relogit procedure also optionally uses prior correction for case-control sampling designs.</p>
 <div id="syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#syntax" class="anchor"></a>Syntax</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y ~<span class="st"> </span>X1 +<span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"relogit"</span>, <span class="dt">tau =</span> <span class="ot">NULL</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">model =</span> <span class="st">"relogit"</span>, <span class="dt">tau =</span> <span class="ot">NULL</span>,
                <span class="dt">case.control =</span> <span class="kw">c</span>(<span class="st">"prior"</span>, <span class="st">"weighting"</span>),
                <span class="dt">bias.correct =</span> <span class="ot">TRUE</span>,
                <span class="dt">data =</span> mydata, ...)
@@ -159,8 +159,8 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 <a href="#example-1-one-tau-with-prior-correction-and-bias-correction" class="anchor"></a>Example 1: One Tau with Prior Correction and Bias Correction</h2>
 <p>Due to memory and space considerations, the data used here are a sample drawn from the full data set used in King and Zeng, 2001, The proportion of militarized interstate conflicts to the absence of disputes is <span class="math inline">\(\tau = 1,042 / 303,772 \approx 0.00343\)</span>. To estimate the model,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mid)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(conflict ~<span class="st"> </span>major +<span class="st"> </span>contig +<span class="st"> </span>power +<span class="st"> </span>maxdem +<span class="st"> </span>mindem +<span class="st"> </span>years,
-                <span class="dt">data =</span> mid, <span class="dt">model =</span> <span class="st">"relogit"</span>, <span class="dt">tau =</span> <span class="dv">1042</span>/<span class="dv">303772</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(conflict <span class="op">~</span><span class="st"> </span>major <span class="op">+</span><span class="st"> </span>contig <span class="op">+</span><span class="st"> </span>power <span class="op">+</span><span class="st"> </span>maxdem <span class="op">+</span><span class="st"> </span>mindem <span class="op">+</span><span class="st"> </span>years,
+                <span class="dt">data =</span> mid, <span class="dt">model =</span> <span class="st">"relogit"</span>, <span class="dt">tau =</span> <span class="dv">1042</span><span class="op">/</span><span class="dv">303772</span>)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau. 2017.
 ##   relogit: Rare Events Logistic Regression for Dichotomous Dependent Variables
@@ -176,17 +176,17 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -1.0674  -0.0379  -0.0233   2.1075   4.4581  
+## -1.0596  -0.0376  -0.0231   2.1085   4.4649  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error z value Pr(&gt;|z|)
-## (Intercept) -7.508360   0.179685 -41.786  &lt; 2e-16
-## major        2.431964   0.157561  15.435  &lt; 2e-16
-## contig       4.107972   0.157650  26.058  &lt; 2e-16
-## power        1.053575   0.217243   4.850 1.24e-06
-## maxdem       0.048037   0.010065   4.773 1.82e-06
-## mindem      -0.064127   0.012802  -5.009 5.46e-07
-## years       -0.062934   0.005705 -11.032  &lt; 2e-16
+## (Intercept) -7.525688   0.179685 -41.883  &lt; 2e-16
+## major        2.433432   0.157561  15.444  &lt; 2e-16
+## contig       4.112491   0.157650  26.086  &lt; 2e-16
+## power        1.053747   0.217243   4.851 1.23e-06
+## maxdem       0.048431   0.010065   4.812 1.50e-06
+## mindem      -0.065249   0.012802  -5.097 3.45e-07
+## years       -0.063359   0.005705 -11.106  &lt; 2e-16
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -206,8 +206,8 @@ s.out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.h
 ##  sim x :
 ##  -----
 ## ev
-##             mean           sd         50%       2.5%       97.5%
-## [1,] 0.002399074 0.0001570789 0.002393379 0.00212217 0.002727004
+##             mean           sd         50%        2.5%       97.5%
+## [1,] 0.002364324 0.0001550274 0.002359333 0.002093318 0.002679686
 ## pv
 ##          0     1
 ## [1,] 0.996 0.004</code></pre>
@@ -222,8 +222,8 @@ Graphs of Quantities of Interest for Rare Events Logistic Regression
 <h2 class="hasAnchor">
 <a href="#example-2-tau-with-weighting-and-bias-correction" class="anchor"></a>Example 2: Tau with Weighting and Bias Correction</h2>
 <p>Suppose that we wish to perform case control correction using weighting (rather than the default prior correction). To estimate the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(conflict ~<span class="st"> </span>major +<span class="st"> </span>contig +<span class="st"> </span>power +<span class="st"> </span>maxdem +<span class="st"> </span>mindem +<span class="st"> </span>years,
-                <span class="dt">data =</span> mid, <span class="dt">model =</span> <span class="st">"relogit"</span>, <span class="dt">tau =</span> <span class="dv">1042</span>/<span class="dv">303772</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/zelig.html">zelig</a></span>(conflict <span class="op">~</span><span class="st"> </span>major <span class="op">+</span><span class="st"> </span>contig <span class="op">+</span><span class="st"> </span>power <span class="op">+</span><span class="st"> </span>maxdem <span class="op">+</span><span class="st"> </span>mindem <span class="op">+</span><span class="st"> </span>years,
+                <span class="dt">data =</span> mid, <span class="dt">model =</span> <span class="st">"relogit"</span>, <span class="dt">tau =</span> <span class="dv">1042</span><span class="op">/</span><span class="dv">303772</span>,
                 <span class="dt">case.control =</span> <span class="st">"weighting"</span>)</code></pre></div>
 <pre><code>## How to cite this model in Zelig:
 ##   Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau. 2017.
@@ -235,23 +235,25 @@ Graphs of Quantities of Interest for Rare Events Logistic Regression
 <pre><code>## Model: 
 ## 
 ## Call:
-## z5$zelig(formula = conflict ~ major + contig + power + maxdem + 
-##     mindem + years, tau = 1042/303772, case.control = "weighting", 
-##     data = mid)
+## relogit(formula = cbind(conflict, 1 - conflict) ~ major + contig + 
+##     power + maxdem + mindem + years, data = as.data.frame(.), 
+##     tau = 0.00343020423212146, bias.correct = TRUE, case.control = "weighting")
 ## 
 ## Deviance Residuals: 
 ##      Min        1Q    Median        3Q       Max  
-## -1.36004  -0.07051  -0.03507   0.17827   0.45330  
+## -0.94933  -0.04958  -0.02173   0.19019   0.48253  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)
-## (Intercept) -5.97463    1.13971  -5.242 1.59e-07
-## major        1.69910    0.77375   2.196   0.0281
-## contig       3.87763    0.73955   5.243 1.58e-07
-## power        0.32808    1.05690   0.310   0.7562
-## maxdem       0.06009    0.05088   1.181   0.2376
-## mindem      -0.04737    0.07342  -0.645   0.5188
-## years       -0.09634    0.04709  -2.046   0.0408
+##             Estimate Std. Error (robust) z value Pr(&gt;|z|)    
+## (Intercept) -6.61889             0.31748 -20.848  &lt; 2e-16 ***
+## major        1.67218             0.27842   6.006  1.9e-09 ***
+## contig       4.01640             0.22954  17.498  &lt; 2e-16 ***
+## power        0.28836             0.41574   0.694 0.487925    
+## maxdem       0.06629             0.01925   3.444 0.000573 ***
+## mindem      -0.08143             0.02996  -2.718 0.006572 ** 
+## years       -0.11707             0.01336  -8.764  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -259,23 +261,42 @@ Graphs of Quantities of Interest for Rare Events Logistic Regression
 ## Residual deviance:  91.178  on 3119  degrees of freedom
 ## AIC: 27.041
 ## 
-## Number of Fisher Scoring iterations: 10
-## 
-## Next step: Use 'setx' method</code></pre>
+## Number of Fisher Scoring iterations: 10</code></pre>
 <p>Set the explanatory variables to their means:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/setx.html">setx</a></span>(z.out2)</code></pre></div>
 <p>Simulate quantities of interest:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.out2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim.html">sim</a></span>(z.out2, <span class="dt">x =</span> x.out2)
 <span class="kw">summary</span>(s.out2)</code></pre></div>
-<pre><code>## 
-##  sim x :
-##  -----
-## ev
-##             mean          sd         50%        2.5%      97.5%
-## [1,] 0.004938417 0.002836681 0.004190767 0.001397836 0.01220761
-## pv
-##          0     1
-## [1,] 0.993 0.007</code></pre>
+<pre><code>## Model: 
+## 
+## Call:
+## relogit(formula = cbind(conflict, 1 - conflict) ~ major + contig + 
+##     power + maxdem + mindem + years, data = as.data.frame(.), 
+##     tau = 0.00343020423212146, bias.correct = TRUE, case.control = "weighting")
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.94933  -0.04958  -0.02173   0.19019   0.48253  
+## 
+## Coefficients:
+##             Estimate Std. Error (robust) z value Pr(&gt;|z|)    
+## (Intercept) -6.61889             0.31748 -20.848  &lt; 2e-16 ***
+## major        1.67218             0.27842   6.006  1.9e-09 ***
+## contig       4.01640             0.22954  17.498  &lt; 2e-16 ***
+## power        0.28836             0.41574   0.694 0.487925    
+## maxdem       0.06629             0.01925   3.444 0.000573 ***
+## mindem      -0.08143             0.02996  -2.718 0.006572 ** 
+## years       -0.11707             0.01336  -8.764  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 143.116  on 3125  degrees of freedom
+## Residual deviance:  91.178  on 3119  degrees of freedom
+## AIC: 27.041
+## 
+## Number of Fisher Scoring iterations: 10</code></pre>
 <!--- Removed in 5.1-0 due to problems with summary
 Example 3: Two Taus with Bias Correction and Prior Correction
 ------
@@ -399,7 +420,7 @@ simulations are contained in the nominal 95% confidence interval).
     E(Y) = \pi_i =
         \frac{1}{1 + \exp(-x_i \beta)},
 \]</span></p>
-<pre><code>  given draws of $\beta$ from its posterior.</code></pre>
+<p>given draws of <span class="math inline">\(\beta\)</span> from its posterior.</p>
 <ul>
 <li><p>The predicted value (qi$pr) is a draw from a binomial distribution with mean equal to the simulated <span class="math inline">\(\pi_i\)</span>.</p></li>
 <li><p>The first difference (qi$fd) is defined as</p></li>
@@ -440,7 +461,7 @@ simulations are contained in the nominal 95% confidence interval).
 <div id="differences-with-stata-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#differences-with-stata-version" class="anchor"></a>Differences with Stata Version</h2>
-<p>The Stata version of ReLogit and the R implementation differ slightly in their coefficient estimates due to differences in the matrix inversion routines implemented in R and Stata. Zelig uses orthogonal-triangular decomposition (through lm.influence()) to compute the bias term, which is more numerically stable than standard matrix calculations.</p>
+<p>The Stata version of ReLogit and the R implementation differ slightly in their coefficient estimates due to differences in the matrix inversion routines implemented in R and Stata. Zelig uses orthogonal-triangular decomposition (through <code>lm.influence()</code>) to compute the bias term, which is more numerically stable than standard matrix calculations.</p>
 </div>
 <div id="see-also" class="section level2">
 <h2 class="hasAnchor">
@@ -453,7 +474,8 @@ simulations are contained in the nominal 95% confidence interval).
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#syntax">Syntax</a></li>
       <li><a href="#arguments">Arguments</a></li>
