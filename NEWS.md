@@ -6,7 +6,13 @@ applicable.
 Zelig version 5.1.5
 ==============================
 
+++++ All Zelig time series models will be deprecated on 1 February 2018 ++++
+
+
 ## Bug fixes
+
+-   Resolved an issue where `odds_ratios` standard errors were not correctly 
+returned for `logit` and `relogit` models. Thanks to @retrography. #302
 
 -   Zelig 4 compatability wrappers now work for `arima` models. Thanks to 
 @mbsabath. #280
@@ -21,9 +27,6 @@ Zelig version 5.1.5
 autoregressive models. #307
 
 -   `arima` models return informative error when `data` is not found. #308
-
--   Resolved an issue where `odds_ratios` standard errors were not correctly 
-returned for `logit` and `relogit` models. Thanks to @retrography. #302
 
 ## Minor
 

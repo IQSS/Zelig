@@ -161,3 +161,21 @@ test_that("FAIL TEST when data is not found (not exclusive to arima)", {
                        data = subset),
                  "data not found")
 })
+
+# REQUIRE TEST timeseries deprecation ------------------------------------------
+test_that("REQUIRE TEST timeseries deprecation", {
+    data(seatshare)
+    subset <- seatshare[seatshare$country == "UNITED KINGDOM",]
+    expect_warning(
+        ts.out <- zelig(formula = unemp ~ leftseat, order = c(1, 0, 0), ts = "year",
+                    data = subset, model = "arima"),
+        "All Zelig time series models will be deprecated on 1 February 2018"
+    )
+
+    # Error to remind maintainers to deprecate
+    if (Sys.Date() > "2018-02-01")
+        expect_error(
+            ts.out <- zelig(formula = unemp ~ leftseat, order = c(1, 0, 0),
+                            ts = "year", data = subset, model = "arima")
+        )
+})

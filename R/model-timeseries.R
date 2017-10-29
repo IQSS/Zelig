@@ -32,6 +32,8 @@ ztimeseries$methods(
                               evseries.innovation ="Expected Values Over Time from Innovation",
                               pvseries.shock = "Predicted Values Over Time from Shock",
                               pvseries.innovation ="Predicted Values Over Time from Innovation")
+    warning("++++ All Zelig time series models will be deprecated on 1 February 2018 ++++",
+            call. = FALSE)
   }
 )
 
