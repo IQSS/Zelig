@@ -295,9 +295,9 @@ In the example above `z.out$get_coef()` returns the estimated coefficients, `z.o
 See also
 ------
 
-Bayesian tobit regression is part of the MCMCpack library by Andrew D.
+Bayesian tobit regression is part of the MCMCpack packageby Andrew D.
 Martin and Kevin M. Quinn. The convergence diagnostics are part of the
-CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+CODA packageby Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- ztobitbayes$new()

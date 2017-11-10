@@ -68,8 +68,8 @@ See also
 ------
 
 The convergence diagnostics are part of the
-CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
-Bayesian normal regression is part of the MCMCpack library by Andrew D.
+CODA package by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+Bayesian normal regression is part of the MCMCpack package by Andrew D.
 Martin and Kevin M. Quinn.
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
