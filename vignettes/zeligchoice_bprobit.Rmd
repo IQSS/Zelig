@@ -333,7 +333,7 @@ See also
 
 The bivariate probit function is part of the VGAM package by Thomas
 Yee. In addition, advanced users may wish to refer to `help(vglm)`
-in the VGAM library.
+in the VGAM package
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zbprobit$new()

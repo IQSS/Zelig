@@ -297,9 +297,9 @@ available through the `$` operator are listed below.
 See also
 ------
 
-Bayesian poisson regression is part of the MCMCpack library by Andrew D.
+Bayesian poisson regression is part of the MCMCpack package by Andrew D.
 Martin and Kevin M. Quinn . The convergence diagnostics are part of the
-CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+CODA package by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zpoissonbayes$new()

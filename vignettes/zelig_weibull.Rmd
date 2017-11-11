@@ -264,9 +264,9 @@ In the example above `z.out$get_coef()` returns the estimated coefficients, `z.o
 See also
 ------
 
-The Weibull model is part of the survival library by Terry Therneau,
+The Weibull model is part of the survival package by Terry Therneau,
 ported to R by Thomas Lumley. Advanced users may wish to refer to
-`help(survfit)` in the survival library.
+`help(survfit)` in the survival package
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zweibull$new()

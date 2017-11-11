@@ -272,12 +272,12 @@ commonly of use for further investigation.
 
 In the example above `z.out$get_coef()` returns the estimated coefficients, `z.out$get_vcov()` returns the estimated covariance matrix, and `z.out$get_predict()` provides predicted values for all observations in the dataset from the analysis.
 
-See also 
+See also
 ------
 
-The exponential function is part of the survival library by Terry
+The exponential function is part of the survival package by Terry
 Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
-to `help(survfit)` in the survival library.
+to `help(survfit)` in the survival package
 
 ```{r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zexp$new()

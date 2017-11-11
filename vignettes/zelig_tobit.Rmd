@@ -232,7 +232,7 @@ In the example above `z.out$get_coef()` returns the estimated coefficients, `z.o
 See also
 ------
 
-The tobit function is part of the survival library by Terry Therneau,
+The tobit function is part of the survival package by Terry Therneau,
 ported to R by Thomas Lumley. Advanced users may wish to refer to
 `help(tobit)` in the [AER](https://CRAN.R-project.org/package=AER) package.
 

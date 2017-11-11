@@ -33,7 +33,7 @@ First, we load the data. Then, the next five lines of code are nearly identical 
 
 `z5` is assigned the RC `zlogit`. `new()`, `zelig()`, `setx()`, `sim()`, and `graph()` are all methods inside `zlogit` and, thus, inside `z5`. Anything entered between the parenthesis are arguments passed to the method. `zelig()` is the method that calls the underlying estimation function, which for logistic regression is `glm()`. The arguments we pass to `zelig()` are, minimally, the arguments we would pass to `glm()` if we were to call it directly. `zelig()` also accepts some arguments that may not be accepted by the existing function, such as `by`.[^byfoot] `setx()` is a function that sets the predictor values at which we want to simulate. In most implementations, `setx()` is independent of the model and contributors need not be concerned with it. `sim()` is the method that simulates draws from the data. For contributors, this is where the model's link function, or the systematic component, is called. It is also where the relevant quantities of interest are specified. `graph()` visualizes the output of `sim()`, and while your model may have visualizations that you’d like to add, these are optional, as `graph()` has base visualizations that always work on the simulated estimates.
 
-In this guide, we are going to walk through an example with the logit model, as implemented by `glm()` in the [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) library to Zelig.
+In this guide, we are going to walk through an example with the logit model, as implemented by `glm()` in the [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) package to Zelig.
 
 ## Getting Started
 
