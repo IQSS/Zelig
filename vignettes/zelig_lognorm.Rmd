@@ -264,7 +264,7 @@ provides predicted values for all observations in the dataset from the analysis.
 See also
 ------
 
-The exponential function is part of the survival package by by Terry
+The exponential function is part of the survival package by Terry
 Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
 to `help(survfit)` in the survival package
 
