@@ -58,7 +58,7 @@ variable is censored.
    errors based on sandwich estimators (see and ) and the options
    selected in cluster.
 
--  cluster: if robust = TRUE, you may select a variable to define groups
+-  `cluster`: if robust = TRUE, you may select a variable to define groups
    of correlated observations. Let x3 be a variable that consists of
    either discrete numeric values, character strings, or factors that
    define strata. Then
