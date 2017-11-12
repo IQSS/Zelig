@@ -54,11 +54,11 @@ variable is censored.
    (See also the [Bayesian implementation](zelig_tobitbayes.html) which supports both left and right
    censoring.)
 
--  `robust`: defaults to FALSE. If TRUE, zelig() computes robust standard
-   errors based on sandwich estimators (see and ) and the options
-   selected in cluster.
+-  `robust`: defaults to `FALSE`. If TRUE, `zelig()` computes robust standard
+   errors based on sandwich estimators and the options
+   selected in `cluster`.
 
--  `cluster`: if robust = TRUE, you may select a variable to define groups
+-  `cluster`: if `robust = TRUE`, you may select a variable to define groups
    of correlated observations. Let x3 be a variable that consists of
    either discrete numeric values, character strings, or factors that
    define strata. Then
@@ -68,9 +68,9 @@ z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3",
                         model = "tobit", data = mydata)
 ```
    means that the observations can be correlated within the strata
-   defined by the variable x3, and that robust standard errors should be
+   defined by the variable `x3`, and that robust standard errors should be
    calculated according to those clusters. If robust = TRUE but cluster
-   is not specified, zelig() assumes that each observation falls into
+   is not specified, `zelig()` assumes that each observation falls into
    its own cluster.
 
 Zelig users may wish to refer to `help(survreg)` for more information.
