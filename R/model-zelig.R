@@ -1144,11 +1144,11 @@ z$methods(
 )
 
 z$methods(
-  get_residuals = function() {
+  get_residuals = function(...) {
     "Get estimated model residuals"
 
     is_uninitializedField(.self$zelig.out)
-    result <- try(lapply(.self$zelig.out$z.out, residuals), silent = TRUE)
+    result <- try(lapply(.self$zelig.out$z.out, residuals, ...), silent = TRUE)
     if ("try-error" %in% class(result))
       stop("'residuals' method' not implemented for model '", .self$name, "'")
     else
@@ -1170,11 +1170,11 @@ z$methods(
 )
 
 z$methods(
-  get_fitted = function() {
+  get_fitted = function(...) {
     "Get estimated fitted values"
 
     is_uninitializedField(.self$zelig.out)
-    result <- lapply(.self$zelig.out$z.out, fitted)
+    result <- lapply(.self$zelig.out$z.out, fitted, ...)
     if ("try-error" %in% class(result))
       stop("'predict' method' not implemented for model '", .self$name, "'")
     else
@@ -1183,11 +1183,11 @@ z$methods(
 )
 
 z$methods(
-  get_predict = function() {
+  get_predict = function(...) {
     "Get predicted values"
 
     is_uninitializedField(.self$zelig.out)
-    result <- lapply(.self$zelig.out$z.out, predict)
+    result <- lapply(.self$zelig.out$z.out, predict, ...)
     if ("try-error" %in% class(result))
       stop("'predict' method' not implemented for model '", .self$name, "'")
     else

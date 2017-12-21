@@ -3,6 +3,13 @@ each change note when relevant. See <https://github.com/IQSS/Zelig/issues>.
 External contributors are referenced with their GitHub usernames when
 applicable.
 
+Zelig version 5.1.6
+==============================
+
+## Minor changes
+
+- `predit`, `fitted`, `residuals` now accept arguments. #320
+
 Zelig version 5.1.5
 ==============================
 

@@ -111,19 +111,19 @@ Zelig website: \url{http://zeligproject.org/}
 
 \item{\code{get_df_residual()}}{Get residual degrees-of-freedom}
 
-\item{\code{get_fitted()}}{Get estimated fitted values}
+\item{\code{get_fitted(...)}}{Get estimated fitted values}
 
 \item{\code{get_model_data()}}{Get data used to estimate the model}
 
 \item{\code{get_names()}}{Return Zelig object field names}
 
-\item{\code{get_predict()}}{Get predicted values}
+\item{\code{get_predict(...)}}{Get predicted values}
 
 \item{\code{get_pvalue()}}{Get estimated model p-values}
 
 \item{\code{get_qi(qi = "ev", xvalue = "x", subset = NULL)}}{Get quantities of interest}
 
-\item{\code{get_residuals()}}{Get estimated model residuals}
+\item{\code{get_residuals(...)}}{Get estimated model residuals}
 
 \item{\code{get_se()}}{Get estimated model standard errors}
 

@@ -106,3 +106,16 @@ test_that('REQUIRE TEST Odds Ratio summary', {
     expect_equal(colnames(sum_or_weighting2$coefficients)[2],
                  "Std. Error (OR)")
 })
+
+# REQUIRE TEST get_predict takes type = "response" ----------------------------
+test_that('REQUIRE TEST get_predict takes type = "response"', {
+    data(mid)
+    z.out1 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years,
+                    data = mid, model = "relogit", tau = 1042/303772)
+
+    prob1 <- z.out1$get_predict(type = "response")
+    expect_gt(min(sapply(prob1, min)), 0)
+
+    prob2 <- predict(z.out1, type = "response")
+    expect_gt(min(sapply(prob2, min)), 0)
+})
