@@ -6,6 +6,10 @@ applicable.
 Zelig version 5.1.6
 ==============================
 
+## Major changes
+
+- All Zelig time series models are deprecated.
+
 ## Minor changes
 
 - `predit`, `fitted`, `residuals` now accept arguments. #320
