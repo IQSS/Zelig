@@ -18,7 +18,7 @@
   }
 }
 
-\source{\url{https://ww2.amstat.org/publications/jse/v6n3/datasets.simonoff.html}}
+\source{\url{http://jse.amstat.org/v6n3/datasets.simonoff.html}}
 
 \references{Simonoff, Jeffrey S. 1998. ``Move Over, Roger Maris: Breaking Baseball's Most Famous Record.'' \emph{Journal of Statistics Education} 6(3). Data used are a subset of the data in the article.}
 

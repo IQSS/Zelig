@@ -3,14 +3,14 @@
 
 <!--- Badges ----->
 **Release:** [![CRAN
-Version](http://www.r-pkg.org/badges/version/Zelig)](http://cran.r-project.org/package=Zelig)
+Version](https://www.r-pkg.org/badges/version/Zelig)](https://CRAN.R-project.org/package=Zelig)
 ![CRAN Monthly
 Downloads](http://cranlogs.r-pkg.org/badges/last-month/Zelig) ![CRAN
 Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/Zelig)
 
 **Development:** [![Project Status: Active - The project has reached a
 stable, usable state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/)
 [![Travis (LINUX) Build
 Status](https://travis-ci.org/IQSS/Zelig.svg?branch=master)](https://travis-ci.org/IQSS/Zelig)
 [![AppVeyor (Windows) Build
