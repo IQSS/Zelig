@@ -28,8 +28,8 @@ Description: A framework that brings together an abundance of common
     and visualize complex models.
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
-Version: 5.1.6
-Date: 2018-02-27
+Version: 5.1.7
+Date: 2020-12-03
 Depends:
     survival
 Imports:
@@ -57,10 +57,7 @@ Suggests:
     optmatch,
     rmarkdown,
     testthat,
-    tidyverse,
-    ZeligChoice,
-    ZeligEI,
-    zeligverse
+    tidyverse
 Collate:
     'assertions.R'
     'model-zelig.R'
