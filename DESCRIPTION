@@ -8,7 +8,7 @@ Authors@R: c(
     person("Kosuke", "Imai", role = "aut"),
     person("Gary", "King", role = "aut"),
     person("Olivia", "Lau", role = "aut"),
-    person("Robert", "Treacy", role = c("aut", "cre")),
+    person("Robert", "Treacy", email = "zelig.zee@gmail.com", role = c("aut", "cre")),
     person("IQSS", "Harvard University", role = "cph")
     )
 Description: A framework that brings together an abundance of common
