@@ -3,9 +3,8 @@ License: GPL (>=3)
 Title: Everyone's Statistical Software
 Authors@R: c(
     person("Christine", "Choirat", role = "aut"),
-    person("Christopher", "Gandrud", email = "zelig.zee@gmail.com",
+    person("James", "Honaker", email = "jameshonaker2@gmail.com",
     role = c("aut", "cre")),
-    person("James", "Honaker", role = "aut"),
     person("Kosuke", "Imai", role = "aut"),
     person("Gary", "King", role = "aut"),
     person("Olivia", "Lau", role = "aut"),
@@ -56,8 +55,7 @@ Suggests:
     networkD3,
     optmatch,
     rmarkdown,
-    testthat,
-    tidyverse
+    testthat
 Collate:
     'assertions.R'
     'model-zelig.R'
@@ -110,4 +108,4 @@ Collate:
     'model-probit-survey.R'
     'plots.R'
     'wrappers.R'
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
