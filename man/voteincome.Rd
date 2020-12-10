@@ -22,6 +22,6 @@
 
 \source{Census Bureau Current Population Survey}
 
-\references{\url{http://www.census.gov/cps}}
+\references{\url{https://www.census.gov/programs-surveys/cps.html}}
 
 \keyword{datasets}

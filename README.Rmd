@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![zelig-logo](man/figures/zelig.png)](http://zeligproject.org)
+[![zelig-logo](man/figures/zelig.png)](https://zeligproject.org/)
 
 
 

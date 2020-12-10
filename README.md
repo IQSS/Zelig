@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![zelig-logo](man/figures/zelig.png)](http://zeligproject.org)
+[![zelig-logo](man/figures/zelig.png)](https://zeligproject.org/)
 
 <!--- Badges ----->
 **Release:** [![CRAN
@@ -10,7 +10,7 @@ Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/Zelig)
 
 **Development:** [![Project Status: Active - The project has reached a
 stable, usable state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/)
+developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![Travis (LINUX) Build
 Status](https://travis-ci.org/IQSS/Zelig.svg?branch=master)](https://travis-ci.org/IQSS/Zelig)
 [![AppVeyor (Windows) Build

@@ -16,7 +16,7 @@ bibentry(
                 ),
             year = year,
             note = vers,
-            url = "http://zeligproject.org/")
+            url = "https//zeligproject.org/")
 
 
 bibentry(
@@ -32,4 +32,4 @@ bibentry(
             number = 4,
             year = 2008,
             pages = "892-913",
-            url =  "http://j.mp/msE15c")
+            url =  "https://gking.harvard.edu/files/abs/z-abs.shtml")
