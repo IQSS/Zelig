@@ -186,8 +186,3 @@ example, to access details about the `logit` model use:
 ```
 
 
-# Building Zelig (for developers)
-
-Zelig can be fully checked and build using the code in
-[check_build_zelig.R](check_build_zelig.R). Note that this can be time consuming
-due to the extensive test coverage.

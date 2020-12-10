@@ -16,7 +16,7 @@ bibentry(
                 ),
             year = year,
             note = vers,
-            url = "https//zeligproject.org/")
+            url = "https://zeligproject.org/")
 
 
 bibentry(
