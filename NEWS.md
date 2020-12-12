@@ -3,6 +3,21 @@ each change note when relevant. See <https://github.com/IQSS/Zelig/issues>.
 External contributors are referenced with their GitHub usernames when
 applicable.
 
+Zelig version 5.1.7
+==============================
+
+## Major changes
+
+- Removed zeligverse, ZeligChoice, so as to get back up on CRAN.
+
+- New maintainer @rtreacy (inheriting same contact email).
+
+## Minor changes
+
+- Updates of documentation and external links to meet CRAN checks.
+
+- Removal of some tests.
+
 Zelig version 5.1.6
 ==============================
 
