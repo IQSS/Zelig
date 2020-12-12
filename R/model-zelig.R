@@ -1,6 +1,6 @@
 #' Zelig reference class
 #'
-#' Zelig website: \url{http://zeligproject.org/}
+#' Zelig website: \url{https://zeligproject.org/}
 #'
 #' @import methods
 #' @export Zelig
@@ -128,7 +128,7 @@ z$methods(
     .self$zeligauthors <- "Christine Choirat, Christopher Gandrud, James Honaker, Kosuke Imai, Gary King, and Olivia Lau"
     .self$refs <- bibentry()
     .self$year <- as.numeric(format(Sys.Date(), "%Y"))
-    .self$url <- "http://zeligproject.org/"
+    .self$url <- "https://zeligproject.org/"
     .self$url.docs <- "http://docs.zeligproject.org/articles/"
     .self$setx.out <- list()
     .self$setx.labels <- list(ev  = "Expected Values: E(Y|X)",
@@ -1030,7 +1030,7 @@ z$methods(
 
 z$methods(
   help = function() {
-    "Open the model vignette from http://zeligproject.org/"
+    "Open the model vignette from https://zeligproject.org/"
     #     vignette(class(.self)[1])
     browseURL(.self$vignette.url)
   }
