@@ -28,7 +28,7 @@ model_lookup_df <- data.frame(
 #' setx(z.out) %>% sim() %>% plot()
 #'
 #' @author Christopher Gandrud and Ista Zhan
-#' @importFrom dplyr group_by_ %>% do
+#' @importFrom dplyr group_by %>% do
 #' @export
 
 to_zelig <- function(obj) {
@@ -57,7 +57,7 @@ to_zelig <- function(obj) {
     new_obj$data <- cbind(1, obj$model)
     names(new_obj$data)[1] <- "by"
     new_obj$by <- "by"
-    new_obj$data <- tbl_df(new_obj$data)
+    new_obj$data <- as_tibble(new_obj$data)
     new_obj$formula <- as.Formula(obj$call$formula)
     new_obj$weights <- NULL
     new_obj$zelig.call <- obj$call
@@ -65,7 +65,7 @@ to_zelig <- function(obj) {
     new_obj$model.call$weights <- NULL
 
     new_obj$zelig.out <- new_obj$data %>%
-        group_by_(new_obj$by) %>% do(z.out = obj)
+        group_by(new_obj$by) %>% do(z.out = obj)
 
     #new_obj$zelig.out <- tibble::as_tibble(list(by = 1, z.out = obj))
 

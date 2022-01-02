@@ -497,10 +497,10 @@ z$methods(
     #print(.self$zelig.call)
     #cat("model.call:\n")
     #print(.self$model.call)
-    .self$data <- tbl_df(.self$data)
+    .self$data <- as_tibble(.self$data)
     #.self$zelig.out <- eval(fn2(.self$model.call, data = data)) # shortened test version that bypasses "by"
     .self$zelig.out <- .self$data %>%
-        group_by_(.self$by) %>%
+        group_by(.self$by) %>%
         do(z.out = eval(fn2(.self$model.call,
             quote(as.data.frame(.)))))
     }
@@ -538,7 +538,7 @@ z$methods(
     # compute on each slice of the dataset defined by "by"
     if(.self$setforeveryby){
       update <- .self$data %>%
-        group_by_(.self$by) %>%
+        group_by(.self$by) %>%
         do(mm = model.matrix(f, reduce(dataset = "MEANINGLESS ARGUMENT", s,
                                        formula = f2,
                                        data = ., avg = .self$avg))) # fix in last argument from data=.self$data to data=.  (JH)
@@ -558,7 +558,7 @@ z$methods(
                           avg = .self$avg)
       allmm <- model.matrix(f, allreduce)
       update <- .self$data %>%
-        group_by_(.self$by) %>%
+        group_by(.self$by) %>%
         do(mm = allmm)
     }
     return(update)
@@ -791,7 +791,7 @@ z$methods(
     ## Use dplyr to cycle over all splits of dataset
     ## NOTE: THIS IS GOING TO USE THE SAME simparam SET FOR EVERY SPLIT
     .self$sim.out$TE <- .self$data %>%
-      group_by_(.self$by) %>%
+      group_by(.self$by) %>%
       do(ATT = .self$simATT(simparam = .self$simparam$simparam[[1]], data = . ,
                             depvar = depvar, treatment = treatment,
                             treated = treated) )   # z.out = eval(fn2(.self$model.call, quote(as.data.frame(.)))))
