@@ -4,8 +4,16 @@
 \alias{zeligARMAbreakforecaster}
 \title{Construct Simulated Series with Internal Discontinuity in X}
 \usage{
-zeligARMAbreakforecaster(y.init = NULL, x, x1, simparam, order, sd, t1 = 5,
-  t2 = 10)
+zeligARMAbreakforecaster(
+  y.init = NULL,
+  x,
+  x1,
+  simparam,
+  order,
+  sd,
+  t1 = 5,
+  t2 = 10
+)
 }
 \description{
 Construct Simulated Series with Internal Discontinuity in X

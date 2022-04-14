@@ -1,5 +1,5 @@
 \name{turnout}
-
+\docType{data}
 \alias{turnout}
 
 \title{Turnout Data Set from the National Election Survey}

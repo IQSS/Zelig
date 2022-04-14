@@ -2,6 +2,7 @@
 #'
 #' Zelig website: \url{https://zeligproject.org/}
 #'
+#' 
 #' @import methods
 #' @export Zelig
 #' @exportClass Zelig

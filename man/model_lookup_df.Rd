@@ -5,7 +5,9 @@
 \alias{model_lookup_df}
 \title{Instructions for how to convert non-Zelig fitted model objects to Zelig.
 Used in to_zelig}
-\format{An object of class \code{data.frame} with 9 rows and 4 columns.}
+\format{
+An object of class \code{data.frame} with 9 rows and 4 columns.
+}
 \usage{
 model_lookup_df
 }

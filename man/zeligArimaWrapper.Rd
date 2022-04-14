@@ -4,8 +4,7 @@
 \alias{zeligArimaWrapper}
 \title{Estimation wrapper function for arima models, to easily fit with Zelig architecture}
 \usage{
-zeligArimaWrapper(formula, order = c(1, 0, 0), ..., include.mean = TRUE,
-  data)
+zeligArimaWrapper(formula, order = c(1, 0, 0), ..., include.mean = TRUE, data)
 }
 \description{
 Estimation wrapper function for arima models, to easily fit with Zelig architecture

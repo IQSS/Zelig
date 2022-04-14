@@ -40,14 +40,6 @@ subclasses.}
 \item{cite}{If is set to 'TRUE' (default), the model citation will be printed
 to the console.}
 
-\item{below:}{point at which the dependent variable is censored from below.
-If the dependent variable is only censored from above, set \code{below = -Inf}.
-The default value is 0.}
-
-\item{above:}{point at which the dependent variable is censored from above.
-If the dependent variable is only censored from below, set \code{above = Inf}.
-The default value is \code{Inf}.}
-
 \item{below:}{point at which the dependent variable is censored from below. If the dependent variable is only censored from above, set below = -Inf. The default value is 0.}
 
 \item{above:}{point at which the dependent variable is censored from above. If the dependent variable is only censored from below, set above = Inf. The default value is Inf.}

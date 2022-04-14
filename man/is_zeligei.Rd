@@ -4,8 +4,11 @@
 \alias{is_zeligei}
 \title{Check if an object was created with ZeligEI}
 \usage{
-is_zeligei(x, msg = "Function is not relevant for ZeligEI objects.",
-  fail = TRUE)
+is_zeligei(
+  x,
+  msg = "Function is not relevant for ZeligEI objects.",
+  fail = TRUE
+)
 }
 \arguments{
 \item{x}{a zelig object}

@@ -28,7 +28,7 @@ Description: A framework that brings together an abundance of common
     and visualize complex models.
 URL: https://cran.r-project.org/package=Zelig
 BugReports: https://github.com/IQSS/Zelig/issues
-Version: 5.1.7
+Version: 5.1.8
 Date: 2020-12-03
 Depends:
     survival
@@ -109,4 +109,5 @@ Collate:
     'model-probit-survey.R'
     'plots.R'
     'wrappers.R'
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
+Encoding: UTF-8

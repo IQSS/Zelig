@@ -69,8 +69,7 @@ Additional parameters avaialable to this model include:
 \section{Methods}{
 
 \describe{
-\item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
+\item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by, bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 
 \examples{

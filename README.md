@@ -15,7 +15,7 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.rep
 Status](https://travis-ci.org/IQSS/Zelig.svg?branch=master)](https://travis-ci.org/IQSS/Zelig)
 [![AppVeyor (Windows) Build
 Status](https://ci.appveyor.com/api/projects/status/github/IQSS/Zelig?branch=master&svg=true)](https://ci.appveyor.com/project/IQSS/Zelig)
-[![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://codecov.io/gh/IQSS/Zelig)
+[![codecov](https://codecov.io/gh/IQSS/Zelig/branch/master/graph/badge.svg)](https://app.codecov.io/gh/IQSS/Zelig)
 [Dev-Blog](https://medium.com/zelig-dev)
 
 Zelig workflow overview

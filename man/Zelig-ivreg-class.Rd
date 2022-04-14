@@ -11,17 +11,6 @@ Econometrics with R. New York: Springer-Verlag. ISBN 978-0-387-77316-2. URL
 \url{https://CRAN.R-project.org/package=AER}
 }
 \arguments{
-\item{formula}{a symbolic representation of the model to be
-estimated, in the form \code{y ~ x1 + x2}, where \code{y} is the
-dependent variable and \code{x1} and \code{x2} are the explanatory
-variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
-same dataset. (You may include more than two explanatory variables,
-of course.) The \code{+} symbol means \code{inclusion'' not}addition.'' You may also include interaction terms and main
-effects in the form \code{x1*x2} without computing them in prior
-steps; \code{I(x1*x2)} to include only the interaction term and
-exclude the main effects; and quadratic terms in the form
-\code{I(x1^2)}.}
-
 \item{model}{the name of a statistical model to estimate.
 For a list of other supported models and their documentation see:
 \url{http://docs.zeligproject.org/articles/}.}
@@ -30,9 +19,6 @@ For a list of other supported models and their documentation see:
 referenced in the formula or a list of multiply imputed data frames
 each having the same variable names and row numbers (created by
 \code{Amelia} or \code{\link{to_zelig_mi}}).}
-
-\item{...}{additional arguments passed to \code{zelig},
-relevant for the model to be estimated.}
 
 \item{by}{a factor variable contained in \code{data}. If supplied,
 \code{zelig} will subset
@@ -88,8 +74,8 @@ a formula with two parts on the right-hand side, e.g.,
 \code{z1}, \code{z2}, and \code{z3} are the instruments. Note that exogenous regressors
 have to be included as instruments for themselves. For example, if there is
 one exogenous regressor \code{ex} and one endogenous regressor \code{en} with
-instrument \code{in}, the appropriate formula would be \code{y ~ ex + en | ex + in}.
-Equivalently, this can be specified as \code{y ~ ex + en | . - en + in}, i.e.,
+instrument \verb{in}, the appropriate formula would be \verb{y ~ ex + en | ex + in}.
+Equivalently, this can be specified as \verb{y ~ ex + en | . - en + in}, i.e.,
 by providing an update formula with a \code{.} in the second part of the
 formula. The latter is typically more convenient, if there is a large
 number of exogenous regressors.
@@ -97,8 +83,7 @@ number of exogenous regressors.
 \section{Methods}{
 
 \describe{
-\item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
+\item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by, bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 
 \examples{

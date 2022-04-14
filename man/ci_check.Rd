@@ -7,8 +7,8 @@
 ci_check(x)
 }
 \arguments{
-\item{x}{numeric. The central interval to return, expressed on the \code{(0, 100]}
-or the equivalent \code{(0, 1]} interval.}
+\item{x}{numeric. The central interval to return, expressed on the \verb{(0, 100]}
+or the equivalent \verb{(0, 1]} interval.}
 }
 \description{
 Convert \code{ci} interval from percent to proportion and check if valid

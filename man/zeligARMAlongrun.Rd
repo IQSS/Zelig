@@ -4,8 +4,15 @@
 \alias{zeligARMAlongrun}
 \title{Calculate the Long Run Exquilibrium for Fixed X}
 \usage{
-zeligARMAlongrun(y.init = NULL, x, simparam, order, sd, tol = NULL,
-  burnin = 20)
+zeligARMAlongrun(
+  y.init = NULL,
+  x,
+  simparam,
+  order,
+  sd,
+  tol = NULL,
+  burnin = 20
+)
 }
 \description{
 Calculate the Long Run Exquilibrium for Fixed X

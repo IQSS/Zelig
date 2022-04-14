@@ -4,8 +4,16 @@
 \alias{zeligARMAnextstep}
 \title{Construct Simulated Next Step in Dynamic Series}
 \usage{
-zeligARMAnextstep(yseries = NULL, xseries, wseries = NULL, beta,
-  ar = NULL, i = NULL, ma = NULL, sd)
+zeligARMAnextstep(
+  yseries = NULL,
+  xseries,
+  wseries = NULL,
+  beta,
+  ar = NULL,
+  i = NULL,
+  ma = NULL,
+  sd
+)
 }
 \description{
 Construct Simulated Next Step in Dynamic Series
