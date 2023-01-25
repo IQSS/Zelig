@@ -11,14 +11,9 @@ Everyone's Statistical Software
 
 Zelig is an easy-to-use, free, open source, general purpose statistics program for estimating, interpreting, and presenting results from any statistical method. Zelig turns the power of [R](https://www.r-project.org/), with thousands of open source packages — but with free ranging syntax, diverse examples, and documentation written for different audiences — into the same three functions and consistent documentation for every method. Zelig uses R code from many researchers, making it "everyone's statistical software". We hope it becomes everyone's statistical software for applications too, as we designed it so anyone can use it or add their methods to it. We aim for Zelig to be the best way to do analysis, prepare replication files, learn new methods, or teach.
 
-<br>
-<br>
+## Important Update!
 
-<p align="center">
-  <a href="articles/quickstart.html" class="btn btn-warning">Get Started!</a>
-</p>
-
-<br>
+*Zelig is no longer being maintained, but a new package, [`clarify`](https://cran.r-project.org/package=clarify), is available to provide much of Zelig's functionality for simulation-based inference of interpretable post-estimation quantities. Please see the `clarify` [website](https://iqss.github.io/clarify/) for information on installing and using `clarify` and for performing tasks in Zelig workflow using `clarify`.*
 
 ## Details
 
