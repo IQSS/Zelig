@@ -42,28 +42,8 @@ We love to get feedback on how to improve Zelig.
 
 <i class="fa fa-comment-o" aria-hidden="true"></i> If you have questions and 
 suggestions improvements, we'd love to hear from you! You can get in touch via: 
-<a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>, 
-<a href="https://groups.google.com/forum/#!forum/zelig-statistical-software">Google Groups <i class="fa fa-google" aria-hidden="true"></i></a>, or 
-<a href="https://gitter.im/Zelig-dev/CommunityQueries">Gitter Chat <i class="fa fa-comments-o" aria-hidden="true"></i></a>. 
+<a href="https://github.com/IQSS/Zelig/issues">GitHub <i class="fa fa-github" aria-hidden="true"></i></a>. 
 
 <i class="fa fa-code" aria-hidden="true"></i> You can even make your R packages 
 usable from Zelig by writinga few simple bridge functions. Checkout the 
 [Developer's Guide](articles/developers_guide.html) for details.
-
-
-
-
-<!------ Gitter Chat Window -------------------------------->
-<style type="text/css">
-aside.gitter-chat-embed {
-  height: 91.5%;
-  top: 8.5%;
-}
-</style>
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-    room: 'Zelig-dev/CommunityQueries'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
