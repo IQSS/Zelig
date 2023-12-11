@@ -4,8 +4,14 @@
 \alias{relogit}
 \title{Estimation function for rare events logit models}
 \usage{
-relogit(formula, data = sys.parent(), tau = NULL, bias.correct = TRUE,
-  case.control = "prior", ...)
+relogit(
+  formula,
+  data = sys.parent(),
+  tau = NULL,
+  bias.correct = TRUE,
+  case.control = "prior",
+  ...
+)
 }
 \description{
 Estimation function for rare events logit models

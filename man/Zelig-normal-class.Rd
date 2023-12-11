@@ -6,18 +6,6 @@
 \alias{znormal}
 \title{Normal Regression for Continuous Dependent Variables}
 \arguments{
-\item{formula}{a symbolic representation of the model to be
-estimated, in the form \code{y ~ x1 + x2}, where \code{y} is the
-dependent variable and \code{x1} and \code{x2} are the explanatory
-variables, and \code{y}, \code{x1}, and \code{x2} are contained in the
-same dataset. (You may include more than two explanatory variables,
-of course.) The \code{+} symbol means ``inclusion'' not
-``addition.'' You may also include interaction terms and main
-effects in the form \code{x1*x2} without computing them in prior
-steps; \code{I(x1*x2)} to include only the interaction term and
-exclude the main effects; and quadratic terms in the form
-\code{I(x1^2)}.}
-
 \item{model}{the name of a statistical model to estimate.
 For a list of other supported models and their documentation see:
 \url{http://docs.zeligproject.org/articles/}.}

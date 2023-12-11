@@ -149,7 +149,6 @@ Zelig website: \url{https://zeligproject.org/}
 
 \item{\code{toJSON()}}{Convert Zelig object to JSON format}
 
-\item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by,
-  bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
+\item{\code{zelig(formula, data, model = NULL, ..., weights = NULL, by, bootstrap = FALSE)}}{The zelig function estimates a variety of statistical models}
 }}
 

@@ -48,8 +48,8 @@
 #'   \url{http://docs.zeligproject.org/articles/weights.html}.
 #'   \item \code{burnin}: number of the initial MCMC iterations to be discarded (defaults to 1,000).
 #'   \item \code{mcmc}: number of the MCMC iterations after burnin (defaults to 10,000).
-#'   \item \code{mcmc.method}: either "MH" or "slice", specifying whether to use Metropolis Algorithm
-#'   or slice sampler. The default value is MH.
+#'   \item \code{mcmc.method}: either "IndMH" or "slice", specifying whether to use Metropolis Algorithm
+#'   or slice sampler. The default value is IndMH.
 #'   \item \code{thin}: thinning interval for the Markov chain. Only every thin-th draw from the Markov
 #'   chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
 #'   \item \code{tune}: tuning parameter for the Metropolis-Hasting step, either a scalar or a numeric

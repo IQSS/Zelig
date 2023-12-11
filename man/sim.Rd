@@ -4,8 +4,17 @@
 \alias{sim}
 \title{Generic Method for Computing and Organizing Simulated Quantities of Interest}
 \usage{
-sim(obj, x, x1, y = NULL, num = 1000, bootstrap = F, bootfn = NULL,
-  cond.data = NULL, ...)
+sim(
+  obj,
+  x,
+  x1,
+  y = NULL,
+  num = 1000,
+  bootstrap = F,
+  bootfn = NULL,
+  cond.data = NULL,
+  ...
+)
 }
 \arguments{
 \item{obj}{output object from \code{zelig}}

@@ -15,7 +15,7 @@ created by \code{\link{zelig_qi_to_df}}.}
 central intervals for the expected value or predicted value, respectively.}
 
 \item{ci}{numeric. The central interval to return, expressed on the
-\code{(0, 100]} or the equivalent \code{(0, 1]} interval.}
+\verb{(0, 100]} or the equivalent \verb{(0, 1]} interval.}
 }
 \description{
 Find the median and a central interval of simulated quantity of interest

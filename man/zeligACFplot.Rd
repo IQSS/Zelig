@@ -4,10 +4,18 @@
 \alias{zeligACFplot}
 \title{Plot Autocorrelation Function from Zelig QI object}
 \usage{
-zeligACFplot(z, omitzero = FALSE, barcol = "black", epsilon = 0.1,
-  col = NULL, main = "Autocorrelation Function", xlab = "Period",
-  ylab = "Correlation of Present Shock with Future Outcomes", ylim = NULL,
-  ...)
+zeligACFplot(
+  z,
+  omitzero = FALSE,
+  barcol = "black",
+  epsilon = 0.1,
+  col = NULL,
+  main = "Autocorrelation Function",
+  xlab = "Period",
+  ylab = "Correlation of Present Shock with Future Outcomes",
+  ylim = NULL,
+  ...
+)
 }
 \description{
 Plot Autocorrelation Function from Zelig QI object

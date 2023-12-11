@@ -8,8 +8,7 @@ from models estimated with multiply imputed data sets or bootstrapped}
 Partially based on \code{\link{mi.meld}} from Amelia.
 }
 \usage{
-combine_coef_se(obj, out_type = "matrix", bagging = FALSE,
-  messages = TRUE)
+combine_coef_se(obj, out_type = "matrix", bagging = FALSE, messages = TRUE)
 }
 \arguments{
 \item{obj}{a zelig object with an estimated model}

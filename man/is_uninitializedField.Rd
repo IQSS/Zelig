@@ -4,8 +4,11 @@
 \alias{is_uninitializedField}
 \title{Check if uninitializedField}
 \usage{
-is_uninitializedField(x, msg = "Zelig model has not been estimated.",
-  fail = TRUE)
+is_uninitializedField(
+  x,
+  msg = "Zelig model has not been estimated.",
+  fail = TRUE
+)
 }
 \arguments{
 \item{x}{a zelig.out method}
